@@ -14,6 +14,7 @@ serial_test = "0.5.*"
 
 [build-dependencies]
 unify_build_utils = { path = "../unify_build_utils" }
+anyhow = "*"
 
 [dependencies]
 unify_tools = { path = "../unify_tools" }

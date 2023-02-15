@@ -11,7 +11,6 @@
  *
  *****************************************************************************/
 #include "workaround.hpp"
-#include "smartstart_management.hpp"
 #include "unity.h"
 #include "contiki_test_helper.h"
 

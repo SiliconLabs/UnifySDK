@@ -15,10 +15,11 @@ target_link_libraries(
           zigpc_datastore
           zigpc_gateway
           zigpc_zcl_util
-          uic_ota
-          uic_log
+          unify
           zigpc_config)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
 
-target_add_mock(zigpc_ota_zigbee)
+  target_add_mock(zigpc_ota_zigbee)
+endif()

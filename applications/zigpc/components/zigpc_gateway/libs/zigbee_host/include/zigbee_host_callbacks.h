@@ -300,6 +300,14 @@ struct zigbeeHostCallbacks {
                                uint16_t imageTypeId,
                                uint32_t firmwareVersion,
                                EmberAfStatus status);
+
+  void (*onBindUnbindResponse)( const EmberEUI64 sourceEui64,
+                                uint8_t sourceEndpoint,
+                                uint16_t clusterId,
+                                const EmberEUI64 destEui64,
+                                uint8_t destEndpoint,
+                                bool isBindResponse,
+                                uint8_t zdoStatus);
 };
 
 #endif  //ZIGBEE_HOST_CALLBACKS_H

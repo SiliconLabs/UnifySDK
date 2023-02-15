@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Unify Specification" name="description" />
+<meta content="Unify, Framework, UCL, Specifications" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unify Specifications &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/index.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1. Unify Architecture Overview" href="Chapter01-architecture-overview.html" />
+    <link rel="prev" title="Dev GUI User’s Guide" href="../../applications/dev_ui/dev_gui/readme_user.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-applications-overview">Unify Applications Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../UnifySDK.html#resources">Resources</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Unify Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter08-aox-application.html">8. AoX Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter09-binding.html">9. Binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter11-system-metrics.html">11. System Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unify-specifications">
+<span id="id1"></span><h1>Unify Specifications<a class="headerlink" href="#unify-specifications" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter08-aox-application.html">8. AoX Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter09-binding.html">9. Binding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter11-system-metrics.html">11. System Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

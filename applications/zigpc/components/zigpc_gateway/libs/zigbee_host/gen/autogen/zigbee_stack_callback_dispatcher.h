@@ -98,36 +98,8 @@ void emAfMessageSent(
       // Message data
       uint8_t *messageContents)
 ;
-void emAfMessageSentCallback(
-      // Outgoing message type
-      EmberOutgoingMessageType type,
-      // Index or destination of the message
-      uint16_t indexOrDestination,
-      // The aps Frame
-      EmberApsFrame *apsFrame,
-      // Message tag
-      uint8_t messageTag,
-      // Message delivery status
-      EmberStatus status,
-      // The length of the messageContents
-      uint8_t messageLength,
-      // Message data
-      uint8_t *messageContents)
-;
 #else // !EZSP_HOST
 void emAfMessageSent(
-      // Outgoing message type
-      EmberOutgoingMessageType type,
-      // Index or destination of the message
-      uint16_t indexOrDestination,
-      // The aps Frame
-      EmberApsFrame *apsFrame,
-      // message
-      EmberMessageBuffer message,
-      // Message delivery status
-      EmberStatus status)
-;
-void emAfMessageSentCallback(
       // Outgoing message type
       EmberOutgoingMessageType type,
       // Index or destination of the message
@@ -144,6 +116,20 @@ void emAfMessageSentCallback(
 
 
 // Trust Center Join
+#ifdef EZSP_HOST
+void emAfTrustCenterJoin(
+      // Joining node's id
+      EmberNodeId newNodeId,
+      // Joining node's Eui64
+      EmberEUI64 newNodeEui64,
+      // Status
+      EmberDeviceUpdate status,
+      // Policy Decision
+      EmberJoinDecision policyDecision,
+      // Parent Id of the joining node
+      EmberNodeId parentOfNewNode)
+;
+#else // !EZSP_HOST
 void emAfTrustCenterJoin(
       // Joining node's id
       EmberNodeId newNodeId,
@@ -154,6 +140,8 @@ void emAfTrustCenterJoin(
       // Parent Id of the joining node
       EmberNodeId parentOfNewNode)
 ;
+#endif // EZSP_HOST
+
 
 // Mark Buffers
 void emAfMarkBuffers(void)
@@ -531,6 +519,18 @@ void emAfCalculateSmacs(
       EmberSmacData *responderSmac)
 ;
 
+#ifdef EZSP_HOST
+// Dsa Sign
+void emAfDsaSign(
+      // The result of the DSA signing operation.
+      EmberStatus status,
+      // Message length
+      uint8_t messageLength,
+      // The message that includes the original message and the
+      // appended signature.
+      uint8_t *message)
+;
+#else // !EZSP_HOST
 // Dsa Sign
 void emAfDsaSign(
       // The result of the DSA signing operation.
@@ -539,6 +539,9 @@ void emAfDsaSign(
       // appended signature.
       EmberMessageBuffer signedMessage)
 ;
+#endif // EZSP_HOST
+
+
 
 // Dsa Verify
 void emAfDsaVerify(

@@ -7,6 +7,7 @@ var datastore_8h =
     [ "datastore_fetch_arr", "group__unify__datastore.html#ga9c7c1b82e7633e21afdaf7c3528a55ce", null ],
     [ "datastore_fetch_int", "group__unify__datastore.html#ga3d4cfb0e60a2bbe38b06cd0a18c44e32", null ],
     [ "datastore_init", "group__unify__datastore.html#gae3b9b254eca70856009a3819db29e630", null ],
+    [ "datastore_is_initialized", "group__unify__datastore.html#gab5fad841fad99187911ea6b5c1374959", null ],
     [ "datastore_start_transaction", "group__unify__datastore.html#ga5f7cc782297f053b6c719641dfac3193", null ],
     [ "datastore_store_arr", "group__unify__datastore.html#ga0f8c7d6d90714c59bbe2e96612fc3456", null ],
     [ "datastore_store_int", "group__unify__datastore.html#ga186f7732210b648fbb2f01d582a300bc", null ],

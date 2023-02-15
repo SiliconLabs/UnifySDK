@@ -27,10 +27,9 @@
 // This component
 #include "mqtt_client.hpp"
 #include "mqtt_client.h"
+#include "mqtt_client_id.h"
 #include "mqtt_wrapper.h"
 #define LOG_TAG "mqtt_client"
-
-// Boilerplate
 
 // Mosquitto specific callback declarations. Those are not in the header because
 // their signature is very much Mosquitto-specific.
@@ -191,6 +190,7 @@ void mqtt_client::poll()
 void mqtt_client::disconnect()
 {
   sl_log_debug(LOG_TAG, "Attempting graceful disconnect from broker.\n");
+
   // Flush the publishing-queue
   int messages_waiting = publishing_queue.size();
   int messages_flushed = 0;
@@ -381,6 +381,19 @@ sl_status_t mqtt_client::publish_to_broker(bool flushing)
                                             MQTT_CLIENT_QoS,
                                             next_message.retain);
   if (publish_retval == SL_STATUS_OK) {
+    std::stringstream payload_message;
+    if (next_message.message_length == 0) {
+      payload_message << "Empty payload";
+    } else if (next_message.message_length <= 20) {
+      payload_message << next_message.message;
+    } else {
+      payload_message << next_message.message.substr(0, 17) << "...";
+    }
+    sl_log_debug(LOG_TAG,
+                 "Outgoing %s publication to %s - %s",
+                 next_message.retain ? "retained" : "unretained",
+                 next_message.topic.c_str(),
+                 payload_message.str().c_str());
     publishing_queue.pop_front();
   } else {
     if (publish_retval == SL_STATUS_ERRNO) {
@@ -409,38 +422,41 @@ sl_status_t mqtt_client::publish_to_broker(bool flushing)
 
 // Subscribing
 void mqtt_client::subscribe(const std::string &topic,
-                            message_callback_t callback)
+                            const callback_info &callback)
 {
   // Check for duplicate subscriptions
-  for (const auto &pair: subscription_callbacks) {
+  for (const auto &[cb_topic, callbacks]: subscription_callbacks) {
     bool matches = false;
 
-    // First we check if the topic-string is equivalent (accounting for wild-cards).
-    if (mqtt_wrapper_topic_matches_sub(pair.first.c_str(),
-                                       topic.c_str(),
-                                       &matches)
-        == SL_STATUS_OK) {
-      if (matches) {
-        // We have a matching topic-string. Let's see if we have a pointer to
-        // the same callback-function.
-        for (const auto &cb: pair.second) {
-          if (cb == callback) {
-            sl_log_debug(
-              LOG_TAG,
-              "Equivalent pre-existing subscription. Dropping: %s.\n",
-              topic.c_str());
-            return;
-          }
-        }
-        // Here, we have a matching topic-string with different pointer to
-        // the callback-function. So, we added the callback to the internal
-        // routing without sending subscription-message to the broker.
-        if (strcmp(pair.first.c_str(), topic.c_str()) == 0) {
-          auto pr = subscription_callbacks.insert(
-            make_pair(topic, std::vector<message_callback_t>()));
-          pr.first->second.push_back(callback);
+    // Check if the topic string is an exact match:
+    if (topic == cb_topic) {
+      matches = true;
+    } else if (mqtt_wrapper_topic_matches_sub(cb_topic.c_str(),
+                                              topic.c_str(),
+                                              &matches)
+               != SL_STATUS_OK) {
+      continue;
+    }
+
+    if (matches) {
+      // We have a matching topic-string. Let's see if we have a pointer to
+      // the same callback-function.
+      for (const auto &cb: callbacks) {
+        if (cb == callback) {
+          sl_log_debug(LOG_TAG,
+                       "Equivalent pre-existing subscription. Dropping: %s.\n",
+                       topic.c_str());
           return;
         }
+      }
+      // Here, we have a matching topic-string with different pointer to
+      // the callback-function. So, we added the callback to the internal
+      // routing without sending subscription-message to the broker.
+      if (cb_topic == topic) {
+        auto pr = subscription_callbacks.insert(
+          make_pair(topic, std::vector<callback_info>()));
+        pr.first->second.push_back(callback);
+        return;
       }
     }
   }
@@ -448,7 +464,7 @@ void mqtt_client::subscribe(const std::string &topic,
   // Now we accept the new subscription
   sl_log_debug(LOG_TAG, "Subscribing to: %s\n", topic.c_str());
   auto pr = subscription_callbacks.insert(
-    make_pair(topic, std::vector<message_callback_t>()));
+    make_pair(topic, std::vector<callback_info>()));
   pr.first->second.push_back(callback);
   subscription_queue.push(topic);
   if (event_counter(MQTT_EVENT_SUBSCRIBE, nullptr) == 0) {
@@ -460,6 +476,7 @@ void mqtt_client::subscribe(const std::string &topic,
 // Re-subscribe to topics, e.g. on a reconnect if connection was lost
 void mqtt_client::resubscribe()
 {
+  sl_log_debug(LOG_TAG, "Re-subscribing to all topics.");
   for (const auto &pair: subscription_callbacks) {
     subscription_queue.push(pair.first);
   }
@@ -480,10 +497,11 @@ sl_status_t mqtt_client::subscribe_to_topic()
     return SL_STATUS_FAIL;
   }
   std::string new_topic = subscription_queue.front();
-  int subscribe_retval  = mqtt_wrapper_subscribe(mqtt_client_library_instance,
-                                                nullptr,
-                                                new_topic.c_str(),
-                                                MQTT_CLIENT_QoS);
+  sl_status_t subscribe_retval
+    = mqtt_wrapper_subscribe(mqtt_client_library_instance,
+                             nullptr,
+                             new_topic.c_str(),
+                             MQTT_CLIENT_QoS);
 
   if (subscribe_retval == SL_STATUS_OK) {
     subscription_queue.pop();
@@ -514,32 +532,23 @@ sl_status_t mqtt_client::subscribe_to_topic()
 
 // Unsubscribing
 void mqtt_client::unsubscribe(const std::string &topic,
-                              message_callback_t callback)
+                              const callback_info &callback)
+// Remove our internal callback instantly.
+
 {
   sl_log_debug(LOG_TAG, "Unsubscribing from: %s\n", topic.c_str());
-
-  // Remove our internal callback instantly.
-  std::map<std::string, std::vector<message_callback_t>>::iterator it;
-  it              = subscription_callbacks.find(topic);
-  int vector_size = static_cast<int>(subscription_callbacks[topic].size());
-  switch (vector_size) {
-    case 0:
-      break;
-    case 1:
-      subscription_callbacks.erase(it);
-      unsubscription_queue.push(topic);
-      if (event_counter(MQTT_EVENT_UNSUBSCRIBE, nullptr) == 0) {
-        // We will only send unsubscription-events if there aren't any.
-        send_event(MQTT_EVENT_UNSUBSCRIBE, nullptr);
-      }
-      break;
-    default:
-      for (int i = 0; i < vector_size; i++) {
-        if (it->second[i] == callback) {
-          it->second.erase(it->second.begin() + i);
-        }
-      }
-      break;
+  subscription_callbacks[topic].erase(
+    std::remove(subscription_callbacks[topic].begin(),
+                subscription_callbacks[topic].end(),
+                callback),
+    subscription_callbacks[topic].end());
+  if (subscription_callbacks[topic].empty()) {
+    unsubscription_queue.push(topic);
+    if (event_counter(MQTT_EVENT_UNSUBSCRIBE, nullptr) == 0) {
+      // We will only send unsubscription-events if there aren't any.
+      send_event(MQTT_EVENT_UNSUBSCRIBE, nullptr);
+    }
+    subscription_callbacks.erase(topic);
   }
 }
 
@@ -607,32 +616,44 @@ void mqtt_client::transition(mqtt_client_fsm &new_state)
 }
 
 void mqtt_client::on_connect_callback_set(
-  connection_callback_t callback_function)
+  mqtt_connection_callback_t callback_function)
 {
-  on_connect_callback = callback_function;
+  on_connect_callbacks.insert(callback_function);
 }
 
 void mqtt_client::on_disconnect_callback_set(
-  connection_callback_t callback_function)
+  mqtt_connection_callback_t callback_function)
 {
-  on_disconnect_callback = callback_function;
+  on_disconnect_callbacks.insert(callback_function);
 }
 
 void mqtt_client::before_disconnect_callback_set(
-  connection_status_callback_t callback_function)
+  mqtt_simple_callback_t callback_function)
 {
-  before_disconnect_callback = callback_function;
+  before_disconnect_callbacks.insert(callback_function);
 }
 
 void mqtt_client::after_connect_callback_set(
-  connection_status_callback_t callback_function)
+  mqtt_simple_callback_t callback_function)
 {
-  after_connect_callback = callback_function;
+  after_connect_callbacks.insert(callback_function);
 }
 
 sl_status_t mqtt_client::connect()
 {
-  int retval
+  // Will message must be set before connecting.
+  if (SL_STATUS_OK
+      != mqtt_wrapper_set_will_message(mqtt_client_library_instance,
+                                       mqtt_client_id.c_str(),
+                                       MQTT_CLIENT_QoS)) {
+    sl_log_error(LOG_TAG, "Error configuring the MQTT Will Message");
+  }
+
+  // Store the MQTT Client ID to the datastore, if available.
+  mqtt_client_store_client_id_to_datastore(mqtt_client_id.c_str());
+
+  // Now attempt to connect:
+  sl_status_t retval
     = mqtt_wrapper_connect(mqtt_client_library_instance,
                            hostname.c_str(),
                            port,
@@ -643,6 +664,7 @@ sl_status_t mqtt_client::connect()
                   "Connection to MQTT broker %s:%d established.\n",
                   hostname.c_str(),
                   port);
+      this->connected_to_broker = true;
       this->after_connect_callback_call();
       break;
     case SL_STATUS_INVALID_PARAMETER:
@@ -671,19 +693,23 @@ void mqtt_client::on_connect(int return_code)
       socket_file_descriptor
         = mqtt_wrapper_socket(mqtt_client_library_instance);
       send_event(MQTT_TRANSITION_CONNECTED, nullptr);
+      this->connected_to_broker = true;
       break;
     case 1:   // Connection refused (unacceptable protocol version)
     case 2:   // Connection refused (identifier rejected)
     case 3:   // Connection refused (broker unavailable)
     default:  // 4-255 reserved for (Mosquitto) future use.
+      this->connected_to_broker = false;
       break;
   }
   if (return_code != 0) {
     socket_file_descriptor = 0;
   }
 
-  if (on_connect_callback != nullptr) {
-    on_connect_callback(this, socket_file_descriptor);
+  std::set<mqtt_connection_callback_t> callbacks_to_invoke
+    = this->on_connect_callbacks;
+  for (auto &callback_function: callbacks_to_invoke) {
+    callback_function(this, socket_file_descriptor);
   }
 }
 
@@ -705,9 +731,12 @@ void mqtt_client::on_disconnect(int result_code)
     send_event(MQTT_TRANSITION_DISCONNECTED, nullptr);
     send_delayed_event(MQTT_EVENT_CONNECT, next_reconnect_backoff);
   }
+  this->connected_to_broker = false;
 
-  if (on_disconnect_callback != nullptr) {
-    on_disconnect_callback(this, socket_file_descriptor);
+  std::set<mqtt_connection_callback_t> callbacks_to_invoke
+    = this->on_disconnect_callbacks;
+  for (auto &callback_function: callbacks_to_invoke) {
+    callback_function(this, socket_file_descriptor);
   }
 }
 
@@ -719,31 +748,25 @@ void mqtt_client::on_message(const std::string &topic,
                              bool message_retain)
 {
   sl_log_debug(LOG_TAG,
-               "mqtt_client::on_message: %s, %s, %d\n",
+               "mqtt_client::on_message: %s - %s..., QoS: %d\n",
                topic.c_str(),
-               message.c_str(),
+               message.substr(0, 25).c_str(),
                message_qos);
   if (subscription_callbacks.empty()) {
     return;
   }
 
   bool match_topic_result;
-  std::map<std::string, std::vector<message_callback_t>>::iterator it;
-  for (it = subscription_callbacks.begin(); it != subscription_callbacks.end();
-       ++it) {
+
+  for (const auto &[cb_topic, callbacks]: subscription_callbacks) {
     match_topic_result = false;
-    mqtt_wrapper_topic_matches_sub(it->first.c_str(),
+    mqtt_wrapper_topic_matches_sub(cb_topic.c_str(),
                                    topic.c_str(),
                                    &match_topic_result);
 
     if (match_topic_result) {
-      if (subscription_callbacks[it->first.c_str()].size() == 0) {
-        return;
-      }
-      int size
-        = static_cast<int>(subscription_callbacks[it->first.c_str()].size());
-      for (int i = 0; i < size; i++) {
-        it->second[i](topic.c_str(), message.c_str(), message_length);
+      for (const callback_info &cb: callbacks) {
+        cb.callback(topic.c_str(), message.c_str(), message_length, cb.user);
       }
     }
   }
@@ -751,16 +774,30 @@ void mqtt_client::on_message(const std::string &topic,
 
 void mqtt_client::after_connect_callback_call()
 {
-  if (this->after_connect_callback != nullptr) {
-    this->after_connect_callback();
+  std::set<mqtt_simple_callback_t> callbacks_to_invoke
+    = this->after_connect_callbacks;
+  for (auto &callback_function: callbacks_to_invoke) {
+    callback_function();
   }
 }
 
 void mqtt_client::before_disconnect_callback_call()
 {
-  if (this->before_disconnect_callback != nullptr) {
-    this->before_disconnect_callback();
+  std::set<mqtt_simple_callback_t> callbacks_to_invoke
+    = this->before_disconnect_callbacks;
+  for (auto &callback_function: callbacks_to_invoke) {
+    callback_function();
   }
+}
+
+const char *mqtt_client::get_client_id() const
+{
+  return this->mqtt_client_id.c_str();
+}
+
+bool mqtt_client::is_connected_to_broker() const
+{
+  return this->connected_to_broker;
 }
 
 // C interface implementation.
@@ -869,28 +906,51 @@ void mqtt_client_unretain(mqtt_client_t instance, const char *prefix_pattern)
 void mqtt_client_unretain_by_regex(mqtt_client_t instance,
                                    const char *prefix_pattern)
 {
-  if (instance)
+  if (instance) {
     instance->unretain_by_regex(std::string(prefix_pattern));
+  }
 }
 
 void mqtt_client_subscribe(mqtt_client_t instance,
                            const char *topic,
-                           void (*callback)(const char *topic,
-                                            const char *message,
-                                            const size_t message_length))
+                           message_callback_t callback)
 {
-  if (instance)
-    instance->subscribe(std::string(topic), callback);
+  mqtt_client_subscribe_ex(instance,
+                           topic,
+                           (message_callback_ex_t)callback,
+                           nullptr);
+}
+
+void mqtt_client_subscribe_ex(mqtt_client_t instance,
+                              const char *topic,
+                              message_callback_ex_t callback,
+                              void *user)
+{
+  struct mqtt_client::callback_info info = {callback, user};
+
+  if (instance) {
+    instance->subscribe(std::string(topic), info);
+  }
 }
 
 void mqtt_client_unsubscribe(mqtt_client_t instance,
                              const char *topic,
-                             void (*callback)(const char *topic,
-                                              const char *message,
-                                              const size_t message_length))
+                             message_callback_t callback)
 {
-  if (instance)
-    instance->unsubscribe(std::string(topic), callback);
+  message_callback_ex_t cb = (message_callback_ex_t)callback;
+  mqtt_client_unsubscribe_ex(instance, topic, cb, nullptr);
+}
+
+void mqtt_client_unsubscribe_ex(mqtt_client_t instance,
+                                const char *topic,
+                                message_callback_ex_t callback,
+                                void *user)
+{
+  struct mqtt_client::callback_info info = {callback, user};
+
+  if (instance) {
+    instance->unsubscribe(std::string(topic), info);
+  }
 }
 
 void mqtt_client_on_connect_callback_set(
@@ -905,22 +965,25 @@ void mqtt_client_on_disconnect_callback_set(
   mqtt_client_t instance,
   void (*on_disconnect)(mqtt_client_t inst, const int file_descriptor))
 {
-  if (instance)
+  if (instance) {
     instance->on_disconnect_callback_set(on_disconnect);
+  }
 }
 
-void mqtt_client_before_disconnect_callback_set(mqtt_client_t instance,
-                                                void (*before_disconnect)())
+void mqtt_client_before_disconnect_callback_set(
+  mqtt_client_t instance, mqtt_simple_callback_t before_disconnect)
 {
-  if (instance)
+  if (instance) {
     instance->before_disconnect_callback_set(before_disconnect);
+  }
 }
 
-void mqtt_client_after_connect_callback_set(mqtt_client_t instance,
-                                            void (*after_connect)())
+void mqtt_client_after_connect_callback_set(
+  mqtt_client_t instance, mqtt_simple_callback_t after_connect)
 {
-  if (instance)
+  if (instance) {
     instance->after_connect_callback_set(after_connect);
+  }
 }
 
 // C interface for Mosquitto-callbacks
@@ -947,4 +1010,22 @@ void mqtt_client_on_message_callback(void *instance,
       (size_t)message->payloadlen,
       message->qos,
       message->retain);
+}
+
+const char *mqtt_client_get_client_id(const mqtt_client_t instance)
+{
+  if (instance) {
+    return instance->get_client_id();
+  } else {
+    return nullptr;
+  }
+}
+
+bool mqtt_client_is_connected_to_broker(const mqtt_client_t instance)
+{
+  if (instance) {
+    return instance->is_connected_to_broker();
+  } else {
+    return false;
+  }
 }

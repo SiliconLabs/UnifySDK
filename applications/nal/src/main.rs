@@ -20,12 +20,14 @@ mod cache;
 mod mqtt_handler;
 use crate::cache::{NALConfig, CONFIG_KEY_NAL_DB_FILE};
 use mqtt_handler::*;
+use unify_application_monitoring_sys::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
 use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 use unify_sl_status_sys::*;
 
 declare_app_name!("unify-nal");
+const FULL_APPLICATION_NAME: &str = "NAL (Name And Location Service)";
 const DB_FILE: &str = "/var/lib/uic/nal.db";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
@@ -34,7 +36,6 @@ fn main() -> std::result::Result<(), sl_status_t> {
         // error message handled by unify_config_sys
         return Ok(());
     }
-
     let nal_config =
         ok_or_exit_with_message(NALConfig::from_config(), "could not load DB configuration")?;
     ok_or_exit_with_message(run(nal_config), "mqtt_client error")
@@ -45,15 +46,12 @@ fn parse_application_arguments() -> std::result::Result<(), config_status_t> {
         .map(|arg| std::ffi::CString::new(arg).unwrap())
         .collect::<Vec<std::ffi::CString>>();
 
-    config_add_string(
-            CONFIG_KEY_NAL_DB_FILE,
-            "File name of NAL database",
-            DB_FILE,
-        )
+    config_add_string(CONFIG_KEY_NAL_DB_FILE, "File name of NAL database", DB_FILE)
         .and(config_parse(args, CONFIG_VERSION))
 }
 
 fn run(nal_config: NALConfig) -> Result<(), sl_status_t> {
+    unify_application_monitoring_set_application_name(FULL_APPLICATION_NAME);
     let mqtt_client = UnifyMqttClient::default();
     mqtt_client.initialize()?;
     let handler = MqttNALHandler::new(mqtt_client, nal_config)?;

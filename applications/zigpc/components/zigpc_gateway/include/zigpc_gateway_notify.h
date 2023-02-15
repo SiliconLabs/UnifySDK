@@ -136,6 +136,8 @@ enum zigpc_gateway_notify_event {
    *
    */
   ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_COMPLETED,
+  
+  ZIGPC_GATEWAY_NOTIFY_BIND_UNBIND_RESPONSE,
 
   ZIGPC_GATEWAY_NOTIFY_MAX,
 };
@@ -249,6 +251,12 @@ typedef struct {
   uint32_t firmware_version; /**< Image firmware version */
   zigpc_zcl_status_t status; /**< Complete status */
 } zigpc_gateway_on_ota_completed_t;
+
+typedef struct {
+    zigbee_binding_t binding;
+    bool is_bind_response;
+    uint8_t zdo_status;
+} zigpc_gateway_on_bind_unbind_reponse_t;
 
 /**
  * @brief Register an observer to be informed of ZigbeeHost updates.

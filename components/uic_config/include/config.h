@@ -171,9 +171,9 @@ config_status_t config_get_as_bool(const char *name, bool *result);
 
 /**
  * @brief Check is a config paramter exists
- * 
+ *
  * This is usefull for options which has not arguments, ie flags.
- * 
+ *
  * @param name Paramter to find
  * @return config_status_t CONFIG_STATUS_OK if paramter is found
  */

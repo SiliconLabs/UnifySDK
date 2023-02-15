@@ -47,7 +47,7 @@
 //! # use crate::unify_attribute_poll::attribute_poll_trait::AttributePollTrait;
 //! # // Initialize the Poll Engine, this shall only be done once.
 //! let attribute_poll = AttributePoll::default();
-//! # attribute_poll.initialize(PollEngineConfig{backoff: 30, default_interval: 60});
+//! # attribute_poll.initialize(PollEngineConfig{backoff: 30, default_interval: 60, poll_mark_attribute_type: 0x18});
 //! // Create "dummy" attribute for sake of the example.
 //! let my_attribute = AttributeStore::new().unwrap().from_handle(42);
 //! // Register my_attribute to be polled every 30 seconds
@@ -71,6 +71,7 @@ mod poll_queue_trait;
 pub use attribute_poll::AttributePoll;
 use attribute_poll_trait::IntervalType;
 use unify_attribute_store_sys::*;
+use unify_middleware::AttributeTypeId;
 use unify_sl_status_sys::*;
 
 /// Configuration for the PollEngine
@@ -80,4 +81,6 @@ pub struct PollEngineConfig {
     pub backoff: IntervalType,
     /// Default "ideal" poll interval
     pub default_interval: IntervalType,
+    /// Attribute Store Type for the "Poll Mark" attribute
+    pub poll_mark_attribute_type: AttributeTypeId,
 }

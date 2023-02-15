@@ -59,14 +59,6 @@ constexpr char NWK_STATUS[] = "NetworkStatus";
 }  // namespace state_key
 
 /**
- * @brief Topic regex for selecting all UNID topics except the <UNID>/State
- * topic.
- *
- */
-constexpr char TOPIC_REGEX_ALL_UNID_EXCEPT_STATE[]
-  = "^(?!ucl\\/by-unid\\/.*\\/State$).*";
-
-/**
  * @brief Default PAN Security based on APS-level Profile ID.
  *
  * The default is the Z3 Security profile.
@@ -79,6 +71,8 @@ sl_status_t zigpc_ucl::node_state::publish_state(
   zigbee_node_network_status_t network_status,
   uint32_t max_cmd_delay)
 {
+      
+  sl_log_debug(zigpc_ucl::LOG_TAG,"Publish network state information");
   sl_status_t status = SL_STATUS_OK;
 
   if (status == SL_STATUS_OK) {
@@ -92,6 +86,7 @@ sl_status_t zigpc_ucl::node_state::publish_state(
     if (node_state != NODE_STATE_TYPE_MAP.end()) {
       payload[state_key::NWK_STATUS] = node_state->second;
     } else {
+      sl_log_debug(zigpc_ucl::LOG_TAG,"Could not find desired state");
       payload[state_key::NWK_STATUS]
         = NODE_STATE_TYPE_MAP.at(ZIGBEE_NODE_STATUS_UNAVAILABLE);
     }
@@ -126,6 +121,6 @@ sl_status_t zigpc_ucl::node_state::remove_node_topics(zigbee_eui64_uint_t eui64)
 
 void zigpc_ucl::node_state::cleanup_all_node_topics(void)
 {
-  //Remove all retained topics except ucl/by-unid/<xxxxx>/State
-  uic_mqtt_unretain_by_regex(TOPIC_REGEX_ALL_UNID_EXCEPT_STATE);
+  //Remove all retained topics except ucl/by-unid/<xxxxx>/State and ucl/by-mqtt-client
+  uic_mqtt_unretain_by_regex(REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS);
 }

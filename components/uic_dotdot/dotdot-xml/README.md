@@ -1,6 +1,6 @@
 # Releases
 
-Releases are tied to a specific revision of the Zigbee Cluster Library (ZCL). These files are released from a git repo which is tagged based on the release version of the ZCL. At the time of the initial conversion, the ZCL document was at release 7. Multiple releases of the XML files may be made against a single ZCL version. the tagging mechanism is designed to handle this and follows the format zcl &lt;ZCL Version&gt;. &lt;XML Release Version&gt; where ZCL Version is the version of the ZCL document and the XML Release Version is a counter based on the source document which starts from 0. This means the initial release tag for ZCLr7 is zcl7.0. Subsequent releases of XML against ZCLr7 will be zcl7.1, zcl7.2, etc. When a new ZCL, such as ZCLr8 is released, the tags will be come zcl8.0, zcl8.1, etc.
+Releases are tied to a specific revision of the Zigbee Cluster Library (ZCL). These files are released from a git repo which is tagged based on the release version of the ZCL. At the time of the initial conversion, the ZCL document was at release 7. Multiple releases of the XML files may be made against a single ZCL version. the tagging mechanism is designed to handle this and follows the format zcl<ZCL Version>.<XML Release Version> where ZCL Version is the version of the ZCL document and the XML Release Version is a counter based on the source document which starts from 0. This means the initial release tag for ZCLr7 is zcl7.0. Subsequent releases of XML against ZCLr7 will be zcl7.1, zcl7.2, etc. When a new ZCL, such as ZCLr8 is released, the tags will be come zcl8.0, zcl8.1, etc.
 
 # Eclipse Setup
 
@@ -444,8 +444,8 @@ Tags allow for the extension of an existing command. A tag is defined as an iden
 
 # Viewing As HTML
 
-The library.xml field has a stylesheet associated which can generate a HTML representation of the ZCL Library. This can be accessed by running the following python command inside the directory. The &lt;port&gt; attribute indicates the port you want to run on.
+The library.xml field has a stylesheet associated which can generate a HTML representation of the ZCL Library. This can be accessed by running the following python command inside the directory. The <port> attribute indicates the port you want to run on.
 
-python -m SimpleHTTPServer &lt;port&gt;
+python -m SimpleHTTPServer <port>
 
 Once you've started the server, you can navigate to http://localhost/library.xml to view the library. Note that if you specify a port, you will need to modify this URI.

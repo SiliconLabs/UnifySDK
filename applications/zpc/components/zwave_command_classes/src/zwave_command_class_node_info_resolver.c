@@ -220,6 +220,34 @@ static sl_status_t resolve_secure_node_info(attribute_store_node_t node,
   return SL_STATUS_FAIL;
 }
 
+/**
+ * @brief Deletes the endpoint (if it is not ep 0) when we failed resolving a NIF
+ *
+ * @param nif_node  Attribute Store Node for the NIF
+ */
+static void on_nif_resolution_failed(attribute_store_node_t nif_node)
+{
+  sl_log_debug(LOG_TAG,
+               "NIF Get Resolution failed for Attribute ID %d",
+               nif_node);
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(nif_node,
+                                                 ATTRIBUTE_ENDPOINT_ID);
+  zwave_endpoint_id_t endpoint_id = 0;
+  attribute_store_get_reported(endpoint_node,
+                               &endpoint_id,
+                               sizeof(endpoint_id));
+
+  if (endpoint_id != 0) {
+    sl_log_debug(LOG_TAG,
+                 "Deleting Endpoint %d (Attribute ID %d) "
+                 "as we cannot resolve its NIF",
+                 endpoint_id,
+                 endpoint_node);
+    attribute_store_delete_node(endpoint_node);
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Z-Wave Controller callback functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -314,6 +342,10 @@ sl_status_t zwave_command_class_node_info_resolver_init()
   attribute_resolver_register_rule(ATTRIBUTE_ZWAVE_NIF,
                                    NULL,
                                    resolve_node_info);
+
+  // Get notified here if we give up trying to resolve a NIF.
+  attribute_resolver_set_resolution_give_up_listener(ATTRIBUTE_ZWAVE_NIF,
+                                                     &on_nif_resolution_failed);
 
   attribute_resolver_register_rule(ATTRIBUTE_ZWAVE_SECURE_NIF,
                                    NULL,

@@ -52,6 +52,7 @@ std::map<attribute_store_node_t, attribute_store_node *> id_node_map;
 
 // List of attribute store nodes that we have added/modified, that are not
 // saved yet in the datastore.
+std::set<attribute_store_node_t> node_id_never_saved;
 std::set<attribute_store_node_t> node_id_pending_save;
 // List of attribute store nodes that we have deleted from the attribute store
 std::queue<attribute_store_node_t> node_id_pending_deletion;
@@ -72,15 +73,6 @@ constexpr char DATASTORE_LAST_ASSIGNED_ID_KEY[]
 static inline void log_attribute_store_not_initialized()
 {
   sl_log_error(LOG_TAG, "Attribute Store is not initialized.");
-}
-
-/**
- * @brief Prints out that the database could not be found in the attribute store.
- */
-static inline void
-  log_attribute_store_node_not_found(attribute_store_node_t node)
-{
-  sl_log_debug(LOG_TAG, "Cannot find ID %d in the Attribute Store.", node);
 }
 
 /**
@@ -118,6 +110,7 @@ static void attribute_store_store_attribute(attribute_store_node *node)
     STORE_ROOT_ATTRIBUTE(root_node);
   } else if (attribute_store_get_auto_save_cooldown_interval() == 0) {
     STORE_ATTRIBUTE(node);
+    node_id_never_saved.erase(node->id);
   } else {
     node_id_pending_save.insert(node->id);
     attribute_store_process_restart_auto_save_cooldown_timer();
@@ -198,133 +191,87 @@ static bool attribute_store_is_value_identical(
   return false;
 }
 
-// Private variables used to pull data from the datastore
-// This cache is useful because we do not want to declare that amount of
-// memory at each recursion when loading the datastore
-namespace datastore_cache
-{
-// Received Attribute Type from the datastore
-attribute_store_type_t received_type = 0;
-// Received Attribute Parent ID from the datastore
-attribute_store_node_t received_parent_id = 0;
-// Received reported value
-uint8_t received_reported_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
-// Received reported value size
-uint8_t received_reported_value_size = 0;
-// Received desired value
-uint8_t received_desired_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
-// Received desired value size
-uint8_t received_desired_value_size = 0;
-}  // namespace datastore_cache
-
 /**
- * @brief Takes a node, loads it and all its children from
- * the datastore to the "in-memory" attribute store.
+ * @brief Loads the Attribute Store from the Datastore.
  *
- * @param node  Pointer to the in memory object where to copy the data.
- *              If set to nullptr, it will create a new object.
- * @param id    Unique ID to be found in the datastore.
+ * This function will wipe the existing attribute store tree, and if invoked
+ * while some pending saves/deletions were to be done in the datastore, the
+ * pending changes will be lost.
  *
- * @returns SL_STATUS_OK if the node and its subtree have been loaded
- * @returns SL_STATUS_FAIL if an error occurred.
- * @returns SL_STATUS_NOT_FOUND if the given node_id is not present in the datastore.
+ * @returns SL_STATUS_OK   If the Attribute Store was loaded from the datastore.
+ * @returns any other value if an error occurred.
  */
-static sl_status_t
-  attribute_store_load_node_from_datastore(attribute_store_node *node,
-                                           attribute_store_node_t id)
+static sl_status_t attribute_store_load_all_nodes_from_datastore()
 {
-  // Fetch the node first:
+  // Clear the current attribute store, do not cache the deletion as something to push down to the datastore.
+  attribute_store_delete_node(root_node->id);
+  // Efficient way of clearing a std::queue
+  std::queue<attribute_store_node_t> empty_queue;
+  std::swap(node_id_pending_deletion, empty_queue);
+
+  // Container to cache the node links. (parent-child)
+  std::vector<std::pair<attribute_store_node_t, attribute_store_node_t>>
+    node_links;
+  // Run the query:
+  datastore_attribute_t received_attribute = {};
   sl_status_t datastore_status
-    = datastore_fetch_attribute(id,
-                                &datastore_cache::received_type,
-                                &datastore_cache::received_parent_id,
-                                datastore_cache::received_reported_value,
-                                &datastore_cache::received_reported_value_size,
-                                datastore_cache::received_desired_value,
-                                &datastore_cache::received_desired_value_size);
-  // Don't do more if it did not go well
-  if (datastore_status != SL_STATUS_OK) {
-    log_attribute_store_node_not_found(id);
-    return datastore_status;
-  }
-
-  // Find the parent node pointer (will be nullptr if does not exist)
-  attribute_store_node *parent_node
-    = attribute_store_get_node_from_id(datastore_cache::received_parent_id);
-
-  if (node == nullptr) {
-    if (parent_node == nullptr) {
-      // If the parent ID is not in the tree, something is wrong
-      sl_log_error(LOG_TAG,
-                   "Cannot find parent ID %d in the attribute store. "
-                   "Aborting load from the datastore.",
-                   datastore_cache::received_parent_id);
-      return SL_STATUS_FAIL;
+    = datastore_fetch_all_attributes(&received_attribute);
+  while (datastore_status == SL_STATUS_IN_PROGRESS) {
+    attribute_store_node *node = nullptr;
+    if (ATTRIBUTE_STORE_ROOT_ID == received_attribute.id) {
+      node = root_node;
+    } else {
+      node = new attribute_store_node(nullptr,
+                                      received_attribute.type,
+                                      received_attribute.id);
     }
-    // Allocate a new node and assign values
-    node = parent_node->add_child(datastore_cache::received_type, id);
-    node->reported_value
-      = std::vector<uint8_t>(datastore_cache::received_reported_value,
-                             datastore_cache::received_reported_value
-                               + datastore_cache::received_reported_value_size);
 
-    node->desired_value
-      = std::vector<uint8_t>(datastore_cache::received_desired_value,
-                             datastore_cache::received_desired_value
-                               + datastore_cache::received_desired_value_size);
+    // Save the parent -> child links until we created all the nodes.
+    node_links.push_back({received_attribute.parent_id, received_attribute.id});
+
+    // Push the data into the node
+    node->reported_value.resize(received_attribute.reported_value_size);
+    if (received_attribute.reported_value_size > 0) {
+      node->reported_value.assign(received_attribute.reported_value,
+                                  received_attribute.reported_value
+                                    + received_attribute.reported_value_size);
+    }
+    node->desired_value.resize(received_attribute.desired_value_size);
+    if (received_attribute.desired_value_size > 0) {
+      node->desired_value.assign(received_attribute.desired_value,
+                                 received_attribute.desired_value
+                                   + received_attribute.desired_value_size);
+    }
 
     // We just created a node, keep the local map updated
     id_node_map[node->id] = node;
 
-  } else {
-    // map the received data to the pointer we received,
-    // and accept nullptr pointer for parent_node
-    node->type        = datastore_cache::received_type;
-    node->parent_node = parent_node;
-    node->reported_value.resize(datastore_cache::received_reported_value_size);
-    if (datastore_cache::received_reported_value_size > 0) {
-      node->reported_value.assign(
-        datastore_cache::received_reported_value,
-        datastore_cache::received_reported_value
-          + datastore_cache::received_reported_value_size);
-    }
-    node->desired_value.resize(datastore_cache::received_desired_value_size);
-    if (datastore_cache::received_desired_value_size > 0) {
-      node->desired_value.assign(
-        datastore_cache::received_desired_value,
-        datastore_cache::received_desired_value
-          + datastore_cache::received_desired_value_size);
-    }
-    // Should have happened when the node was created, but just make sure that
-    // we have this node in the map
-    id_node_map[node->id] = node;
+    // Get the next attribute
+    datastore_status = datastore_fetch_all_attributes(&received_attribute);
   }
 
-  // This is a recursive function, we now load all its children from the datastore
-  attribute_store_node_t child_id = 0;
-  uint32_t child_index            = 0;
-  while (SL_STATUS_OK
-         == datastore_fetch_attribute_child_id(id, child_index++, &child_id)) {
-    attribute_store_node *child_node = nullptr;
-    // Check if the child's ID was already in memory.
-    for (attribute_store_node *existing_child_node: node->child_nodes) {
-      if (existing_child_node->id == child_id) {
-        sl_log_debug(LOG_TAG,
-                     "Child node was already in memory. Reusing the pointer");
-        child_node = existing_child_node;
-        break;
-      }
+  // Attach the links into the attributes
+  for (const auto &[parent_node_id, child_node_id]: node_links) {
+    attribute_store_node *parent_node
+      = attribute_store_get_node_from_id(parent_node_id);
+    attribute_store_node *child_node
+      = attribute_store_get_node_from_id(child_node_id);
+
+    if (parent_node == nullptr) {
+      // Root node has no parent, no biggie.
+      continue;
+    } else if (child_node == nullptr) {
+      sl_log_error(LOG_TAG,
+                   "Child Node is a nullptr, something went wrong while "
+                   "loading the attribute store");
     }
 
-    // Now load the child into a new node.
-    datastore_status
-      = attribute_store_load_node_from_datastore(child_node, child_id);
-    // Don't do more if it did not go well
-    if (datastore_status != SL_STATUS_OK) {
-      log_attribute_store_node_not_found(child_id);
-      return datastore_status;
-    }
+    parent_node->child_nodes.push_back(child_node);
+    child_node->parent_node = parent_node;
   }
+
+  // Invoke callbacks on our brand new tree
+  attribute_store_refresh_node_and_children_callbacks(root_node->id);
 
   return datastore_status;
 }
@@ -389,7 +336,10 @@ static sl_status_t attribute_store_delete_pending_deletions_from_datastore()
   sl_status_t aggregated_status = SL_STATUS_OK;
   while (false == node_id_pending_deletion.empty()) {
     attribute_store_node_t node_id_to_delete = node_id_pending_deletion.front();
-    sl_status_t deletion_status = datastore_delete_attribute(node_id_to_delete);
+    sl_status_t deletion_status              = SL_STATUS_OK;
+    if (node_id_never_saved.count(node_id_to_delete) == 0) {
+      deletion_status = datastore_delete_attribute(node_id_to_delete);
+    }
     if (SL_STATUS_OK != deletion_status) {
       sl_log_error(LOG_TAG,
                    "Could not delete ID %d from the datastore.",
@@ -420,8 +370,7 @@ sl_status_t attribute_store_init(void)
     // Load the root data and all its children from the datastore, in case it's there.
     // Do not reload from SQLite if root_node was already allocated.
     sl_log_info(LOG_TAG, "Loading Attribute Store data from the datastore.");
-    if (attribute_store_load_node_from_datastore(root_node, root_node->id)
-        != SL_STATUS_OK) {
+    if (attribute_store_load_all_nodes_from_datastore() != SL_STATUS_OK) {
       sl_log_info(
         LOG_TAG,
         "Attribute Store data could not be loaded from the datastore. "
@@ -463,10 +412,6 @@ int attribute_store_teardown(void)
   // Erase our record of registered types
   attribute_store_reset_registered_attribute_types();
 
-  // Save the last assigned ID for next time
-  datastore_store_int(DATASTORE_LAST_ASSIGNED_ID_KEY,
-                      static_cast<int64_t>(last_assigned_id));
-
   // make a last save in the datastore
   attribute_store_save_to_datastore();
 
@@ -502,8 +447,15 @@ sl_status_t attribute_store_save_to_datastore()
                    "Deleting %d attributes from the datastore. ",
                    node_id_pending_deletion.size());
       res |= attribute_store_delete_pending_deletions_from_datastore();
+
+      // Save the last assigned ID:
+      datastore_store_int(DATASTORE_LAST_ASSIGNED_ID_KEY,
+                          static_cast<int64_t>(last_assigned_id));
+
       datastore_commit_transaction();
     }
+    // Mark that we have no node never saved.
+    node_id_never_saved.clear();
     // Tell the process we made a fresh back-up.
     attribute_store_process_on_attribute_store_saved();
     return res;
@@ -517,7 +469,7 @@ sl_status_t attribute_store_load_from_datastore()
 {
   if (root_node != nullptr) {
     sl_log_info(LOG_TAG, "Loading Attribute Store data from the datastore.");
-    return attribute_store_load_node_from_datastore(root_node, root_node->id);
+    return attribute_store_load_all_nodes_from_datastore();
   } else {
     log_attribute_store_not_initialized();
     return SL_STATUS_FAIL;
@@ -576,6 +528,7 @@ attribute_store_node_t
   // If it worked, save it in the datastore and invoke callbacks
   if (new_node != nullptr) {
     // Save the new node in the database:
+    node_id_never_saved.insert(new_node->id);
     attribute_store_store_attribute(new_node);
 
     // Update our local map
@@ -598,18 +551,28 @@ sl_status_t attribute_store_delete_node(attribute_store_node_t id)
     log_attribute_store_not_initialized();
     return SL_STATUS_NOT_INITIALIZED;
   }
+  if (id == ATTRIBUTE_STORE_INVALID_NODE) {
+    // Somebody's navigation/Attribute ID selection went wrong, just return
+    return SL_STATUS_OK;
+  }
 
   sl_status_t deletion_status          = SL_STATUS_OK;
   attribute_store_node *node_to_delete = attribute_store_get_node_from_id(id);
   if (node_to_delete == nullptr) {
     // Node is not found, we pretend deletion went well since it does not exist.
+    sl_log_debug(LOG_TAG,
+                 "Attempt to delete non-existing Attribute ID %d. Ignoring",
+                 id);
     return deletion_status;
   }
 
   // Prevent double deletes
   // If the node is already undergoing deletion, don't try to delete again
   if (node_to_delete->undergoing_deletion == true) {
-    return SL_STATUS_OK;
+    // Return != OK here because if a component has a callback registered that
+    // deletes a parent of a node being deleted, we get stuck in the recursion
+    // Later on.
+    return SL_STATUS_IN_PROGRESS;
   }
 
   if (node_to_delete == root_node) {
@@ -628,6 +591,10 @@ sl_status_t attribute_store_delete_node(attribute_store_node_t id)
     root_node->desired_value.resize(0);
     STORE_ROOT_ATTRIBUTE(root_node);
   } else {
+    // Set the node as read-only before we start deleting children.
+    // No more add/write operations allowed at this point
+    node_to_delete->undergoing_deletion = true;
+
     // Find the children first
     // (else datastore will not be happy, you cannot delete a node with children)
     while (node_to_delete->child_nodes.size() != 0) {
@@ -641,12 +608,13 @@ sl_status_t attribute_store_delete_node(attribute_store_node_t id)
       }
     }
 
-    // Set the node as read-only. No more write operations allowed at this point
-    node_to_delete->undergoing_deletion = true;
-
     // Do not process datastore updates for the node, and mark it for deletion
     node_id_pending_save.erase(node_to_delete->id);
-    node_id_pending_deletion.push(node_to_delete->id);
+    if (node_id_never_saved.count(node_to_delete->id)) {
+      node_id_never_saved.erase(node_to_delete->id);
+    } else {
+      node_id_pending_deletion.push(node_to_delete->id);
+    }
     if (attribute_store_get_auto_save_cooldown_interval() == 0) {
       attribute_store_delete_pending_deletions_from_datastore();
     } else {
@@ -911,6 +879,32 @@ size_t attribute_store_get_node_child_count(attribute_store_node_t id)
   return node_to_read->child_nodes.size();
 }
 
+size_t attribute_store_get_node_child_count_by_type(
+  attribute_store_node_t id, attribute_store_type_t child_type)
+{
+  if (root_node == nullptr) {
+    log_attribute_store_not_initialized();
+    return 0;
+  }
+
+  if (id == ATTRIBUTE_STORE_INVALID_NODE) {
+    return 0;
+  }
+  attribute_store_node *parent_node = attribute_store_get_node_from_id(id);
+
+  if (parent_node == nullptr) {
+    return 0;
+  }
+
+  size_t child_count = 0;
+  for (size_t i = 0; i < parent_node->child_nodes.size(); i++) {
+    if (parent_node->child_nodes[i]->type == child_type) {
+      child_count += 1;
+    }
+  }
+  return child_count;
+}
+
 size_t attribute_store_get_node_total_child_count(attribute_store_node_t node)
 {
   size_t total = 0;
@@ -952,6 +946,10 @@ bool attribute_store_node_exists(attribute_store_node_t id)
     = attribute_store_get_node_from_id(id);
 
   if (node_to_find == nullptr) {
+    return false;
+  }
+
+  if (node_to_find->undergoing_deletion == true) {
     return false;
   }
 
@@ -1075,6 +1073,10 @@ sl_status_t
 
   // Making sure all callbacks are called with updates to REPORTED_ATTRIBUTES,
   // Start from the parent and do children next
+  attribute_store_invoke_callbacks(id,
+                                   attribute_store_get_node_type(id),
+                                   REPORTED_ATTRIBUTE,
+                                   ATTRIBUTE_CREATED);
   attribute_store_invoke_callbacks(id,
                                    attribute_store_get_node_type(id),
                                    REPORTED_ATTRIBUTE,

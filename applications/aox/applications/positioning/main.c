@@ -15,6 +15,7 @@
 #include "uic_main.h"
 #include "dotdot_mqtt.h"
 #include "positioning.h"
+#include "positioning_application_monitoring.h"
 
 int main(int argc, char **argv)
 {
@@ -24,6 +25,7 @@ int main(int argc, char **argv)
      * Main application init.
      */
     {&positioning_fixt_setup, "Positioning"},
+    {&positioning_application_monitoring_init, "AoXPC ApplicationMonitoring"},
 
     /**
      * Initialize DotDot MQTT handler that serializes and deserializes
@@ -32,13 +34,11 @@ int main(int argc, char **argv)
      * this component.
      */
     {&uic_mqtt_dotdot_init, "DotDot MQTT"},
-    {NULL, "Terminator"}
-  };
+    {NULL, "Terminator"}};
 
   // Shutdown fixtures
-  uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
-    {NULL, "Terminator"}
-  };
+  uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[]
+    = {{NULL, "Terminator"}};
 
   positioning_config_init();
 

@@ -287,7 +287,7 @@ static void on_meter_reset_send_data_complete(attribute_store_node_t node,
 
   switch (event) {
     case FRAME_SENT_EVENT_OK_SUPERVISION_WORKING:
-      // Wait for more. Weird to have a working Set Default.
+      // Wait for more. Weird to have a working Reset
       return;
 
     case FRAME_SENT_EVENT_OK_SUPERVISION_NO_SUPPORT:
@@ -808,7 +808,10 @@ sl_status_t zwave_command_class_meter_control_init()
   handler.command_class              = COMMAND_CLASS_METER_V6;
   handler.version                    = METER_VERSION_V6;
   handler.command_class_name         = "Meter";
-  handler.comments                   = "";
+  handler.comments                   = "Partial control: <br>1. Meter Reset "
+                                       "Command is not supported due to "
+                                       "missing dotdot ZCL equivalent "
+                                       "functionality.";
 
   zwave_command_handler_register_handler(handler);
 

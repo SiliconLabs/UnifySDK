@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZPC Certification Information &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -75,6 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -252,6 +258,14 @@ on the UI.</p>
 <td></td>
 </tr>
 <tr>
+<td>Barrier Operator</td>
+<td>1</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
+</tr>
+<tr>
 <td>Basic</td>
 <td>2</td>
 <td></td>
@@ -361,7 +375,7 @@ on the UI.</p>
 <td></td>
 <td>x</td>
 <td>N/A</td>
-<td>Partial control: <br>1. Meter Reset Command is not supported since there were not a corresponding command on dotdot ZCl data model. <br></td>
+<td>Partial control: <br>1. Meter Reset Command is not supported due to missing dotdot ZCL equivalent functionality.</td>
 </tr>
 <tr>
 <td>Multi Channel</td>
@@ -417,6 +431,30 @@ on the UI.</p>
 <td>x</td>
 <td></td>
 <td>Network Scheme</td>
+<td></td>
+</tr>
+<tr>
+<td>Scene Activation</td>
+<td>1</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
+</tr>
+<tr>
+<td>Scene Actuator Configuration</td>
+<td>1</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>No interview performed automatically.</td>
+</tr>
+<tr>
+<td>Scene Controller Configuration</td>
+<td>1</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
 <td></td>
 </tr>
 <tr>
@@ -520,7 +558,7 @@ will be set to 1.</p>
 <section id="association-multi-channel-association-command-classes-information">
 <h3>Association / Multi Channel Association Command Classes Information<a class="headerlink" href="#association-multi-channel-association-command-classes-information" title="Permalink to this heading"></a></h3>
 <p>The ZPC supports the following Association Groups</p>
-<table class="docutils align-default">
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Grouping Identifier</p></th>
 <th class="head"><p>Maximum Number of Associations</p></th>
@@ -643,6 +681,11 @@ cluster in the table below</p></li>
 <td>SWITCH_COLOR_SET</td>
 <td>ColorControl</td>
 </tr>
+<tr>
+<td>COMMAND_CLASS_SCENE_ACTIVATION</td>
+<td>SCENE_ACTIVATION_SET</td>
+<td>Scenes</td>
+</tr>
 </tbody>
 </table>
 <p>Note that it will be allowed to establish bindings towards
@@ -674,6 +717,35 @@ these commands.</p>
 <p><img alt="Dev GUI Binding commands" src="../../_images/dev_gui_binding_cluster_commands.png" /></p>
 </section>
 </section>
+<section id="barrier-operator-command-class-information">
+<h3>Barrier Operator Command Class Information<a class="headerlink" href="#barrier-operator-command-class-information" title="Permalink to this heading"></a></h3>
+<p>The ZPC controls the Barrier Operator Command Class. It is possible to request
+a Barrier Operator node to open/close and see its last known state.</p>
+<p>It is not possible to control the state of subsystems, due to the lack of
+equivalent functionality on the UCL data model.</p>
+<section id="id3">
+<h4>Node status<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>To see the state of the Barrier Operator Command Class.
+Select the BarrierControl page from the left menu on the Dev GUI.</p>
+<p><img alt="Dev GUI BarrierControl Cluster" src="../../_images/dev_gui_barrier_control_cluster.png" /></p>
+<p>The Position attribute indicate the percentage open.</p>
+<ul class="simple">
+<li><p>0 Represents a closed barrier</p></li>
+<li><p>100 Represents a fully open barrier</p></li>
+</ul>
+<p><img alt="Dev GUI BarrierControl node State" src="../../_images/dev_gui_barrier_control_node_state.png" /></p>
+</section>
+<section id="id4">
+<h4>Sending commands<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<p>The GoToPercent command can be used to initiate opening or closing of the
+Barrier Operator Command Class.</p>
+<ul class="simple">
+<li><p>GoToPercent with value 0 will issue a Barrier Operator Set (Target Value = 0x00)</p></li>
+<li><p>GoToPercent with value &gt;0 will issue a Barrier Operator Set (Target Value = 0xFF)</p></li>
+</ul>
+<p>The Stop command has no effect.</p>
+</section>
+</section>
 <section id="basic-command-class-information">
 <h3>Basic Command Class Information<a class="headerlink" href="#basic-command-class-information" title="Permalink to this heading"></a></h3>
 <p>The ZPC controls the Basic Command Class. It is possible to set and
@@ -685,8 +757,8 @@ a Basic Get Command. If the node replies, the Basic functionality will be
 presented as an OnOff functionality.</p>
 <p>It is not possible to see if the ZPC is using Binary Switch or Basic Command
 Class.</p>
-<section id="id3">
-<h4>Node status<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<section id="id5">
+<h4>Node status<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Basic Command Class, select the OnOff page
 from the left menu on the Dev GUI.</p>
 <p><img alt="Dev GUI OnOff Cluster" src="../../_images/dev_gui_on_off_cluster.png" /></p>
@@ -694,8 +766,8 @@ from the left menu on the Dev GUI.</p>
 a single On/Off state, represented with a small light bulb.</p>
 <p><img alt="Dev GUI OnOff node State" src="../../_images/dev_gui_on_off_node_state.png" /></p>
 </section>
-<section id="id4">
-<h4>Sending commands<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<section id="id6">
+<h4>Sending commands<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
 <p>To trigger a Basic Set, select one of the 3 available commands.
 (On, Off, Toggle).</p>
 <p>These command will have an effect only if there is a difference between the
@@ -707,8 +779,8 @@ on will not trigger any command to be sent.</p>
 <h3>Battery Command Class Information<a class="headerlink" href="#battery-command-class-information" title="Permalink to this heading"></a></h3>
 <p>The ZPC controls the Battery Command Class. It is possible to
 see the current Battery state for supporting nodes.</p>
-<section id="id5">
-<h4>Node status<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<section id="id7">
+<h4>Node status<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Battery Command Class, select the Battery page
 from the left menu on the Dev GUI.</p>
 <p><img alt="Dev GUI Power Configuration Cluster" src="../../_images/dev_gui_power_configuration_cluster.png" /></p>
@@ -717,8 +789,8 @@ The Battery Low indication will be set to “true” if the battery level is les
 than 10% or if the node has reported a battery = 0xFF notification.</p>
 <p><img alt="Dev GUI Power Configuration node State" src="../../_images/dev_gui_power_configuration_node_state.png" /></p>
 </section>
-<section id="id6">
-<h4>Sending commands<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<section id="id8">
+<h4>Sending commands<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
 <p>It is not possible to send Battery Commands to supporting nodes.</p>
 </section>
 </section>
@@ -726,8 +798,8 @@ than 10% or if the node has reported a battery = 0xFF notification.</p>
 <h3>Binary Switch Command Class Information<a class="headerlink" href="#binary-switch-command-class-information" title="Permalink to this heading"></a></h3>
 <p>The ZPC controls the Binary Switch Command Class. It is possible to set and
 see the current level of a binary switch supporting node.</p>
-<section id="id7">
-<h4>Node status<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<section id="id9">
+<h4>Node status<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Binary Switch Command Class, select the OnOff page
 from the left menu on the Dev GUI.</p>
 <p><img alt="Dev GUI OnOff Cluster" src="../../_images/dev_gui_on_off_cluster.png" /></p>
@@ -735,8 +807,8 @@ from the left menu on the Dev GUI.</p>
 a single On/Off state, represented with a small light bulb.</p>
 <p><img alt="Dev GUI OnOff node State" src="../../_images/dev_gui_on_off_node_state.png" /></p>
 </section>
-<section id="id8">
-<h4>Sending commands<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<section id="id10">
+<h4>Sending commands<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
 <p>To trigger a Binary Switch Set, select one of the 3 available commands.
 (On, Off, Toggle).</p>
 <p>These command will have an effect only if there is a difference between the
@@ -748,8 +820,8 @@ on will not trigger any command to be sent.</p>
 <h3>Central Scene Command Class Information<a class="headerlink" href="#central-scene-command-class-information" title="Permalink to this heading"></a></h3>
 <p>The ZPC controls the Central Scene Command Class. It is possible to see which
 scene is active or has been activated last in supporting nodes.</p>
-<section id="id9">
-<h4>Node status<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
+<section id="id11">
+<h4>Node status<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Central Scene Command Class, select the Scenes page
 from the left menu on the Dev GUI.</p>
 <p><img alt="Dev GUI Scenes Cluster" src="../../_images/dev_gui_scenes_cluster.png" /></p>
@@ -770,15 +842,15 @@ it means that the <em>Current Scene</em> attribute represents the last active sc
 </ul>
 <p><img alt="Dev GUI Scenes Node State" src="../../_images/dev_gui_scenes_node_state.png" /></p>
 </section>
-<section id="id10">
-<h4>Sending commands<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
+<section id="id12">
+<h4>Sending commands<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h4>
 <p>It is not possible to issue Central Scene commands to supporting nodes.</p>
 </section>
 <section id="color-switch-command-class-information">
 <h4>Color Switch Command Class Information<a class="headerlink" href="#color-switch-command-class-information" title="Permalink to this heading"></a></h4>
 <p>The ZPC controls (partially) the Color Switch Command Class.</p>
-<section id="id11">
-<h5>Node status<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h5>
+<section id="id13">
+<h5>Node status<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h5>
 <p>The state of a Color Switch node can be found on ColorControl cluster page.</p>
 <p><img alt="Dev GUI ColorControl Cluster" src="../../_images/dev_gui_color_control_cluster.png" /></p>
 <p>Note that nodes will be presented on the ColorControl will also display a Level
@@ -787,9 +859,11 @@ supporting node also supports Binary Switch Command Class and/or the Multilevel 
 Command Class, but they will be emulated if the supporting node does not support
 these Command Classes.</p>
 <p>Note that the Level value depends on the OnOff value, and the Color values
-depend on the Level value.</p>
+depend on the Level value. Also note that the maximum level is 99 if the
+Level Cluster is mapped to Multilevel Switch, and 255 if the Level Cluster
+is emulated.</p>
 <p>The ColorControl cluster will operate using the
-<a class="reference external" href="https://en.wikipedia.org/wiki/HSL_and_HSV">Hue Saturation Lightness (HSL)</a>
+<a class="reference external" href="https://en.wikipedia.org/wiki/HSL_and_HSV">Hue Saturation Lightness (HSV)</a>
 system to determine colors.</p>
 <p>The lightness is taken from the Multilevel Switch value, or if the node supports
 Binary Switch Command Class, it will be calculated based on the RGB values.</p>
@@ -839,30 +913,33 @@ component value. For example, if Green is set to 255, Multilevel Switch value
 will be 99, if all color components are set to 127, Multilevel Switch value will
 be 49.
 If the highest color component is set to 64, Multilevel Switch will be set at 25, etc.</p>
-<p>When both Multilevel Switch and Color Switch are supported, the Level cluster
-value will be scaled by a factor between 1 and 2. In HSL, full brightness with a color
-component can be achieved with the CurrentLevel = 50, whereas the Multilevel
-Switch value will be set to the maximum value (99). This scaling factor only applies
-when running with the <strong>CurrentHueAndCurrentSaturation</strong> <strong>Color Mode</strong>.
-Note that if the <strong>Saturation</strong> is close to 0, the Multilevel Switch value will
-get scaled by a factor closer to 1 and as <strong>Saturation</strong> gets close to 254,
-the Multilevel Switch level value will be closer to 2.
-<a class="reference external" href="https://en.wikipedia.org/wiki/HSL_and_HSV">See the Hue Saturation Lightness (HSL) wikipedia page for more details</a></p>
 <p>Note that with <strong>Saturation</strong> set to 0, the color settings will be ambiguous,
 as any hue value will result in a white color. RGB component combination of
 equal values will trigger the Saturation to be 0.</p>
-<p>Here are a few mappings:</p>
+<p>Here are a few mappings, assuming that the ZCL MaxLevel value is 99:</p>
 <ul class="simple">
-<li><p>HSL(0,254,50) &lt;=&gt; RGB (255,0,0), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
-<li><p>HSL(85,254,50) &lt;=&gt; RGB (0,255,0), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
-<li><p>HSL(170,254,50) &lt;=&gt; RGB (0,0,255), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
-<li><p>HSL(212,254,25) &lt;=&gt; RGB (128,0,120), Multilevel Switch value = 50, Binary Switch = 0xFF</p></li>
-<li><p>HSL(214,254,50) &lt;=&gt; RGB (255,0,253), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
-<li><p>HSL(212,254,75) &lt;=&gt; RGB (253,112,255), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
+<li><p>HSV(0,254,50) &lt;=&gt; RGB (129,0,0)</p></li>
+<li><p>HSV(43,254,50) &lt;=&gt; RGB (127,129,0)</p></li>
+<li><p>HSV(149,250,99) &lt;=&gt; RGB (4,125,255)</p></li>
+<li><p>HSV(0,0,50) &lt;=&gt; RGB (129,129,129)</p></li>
+<li><p>HSV(0,254,99) &lt;=&gt; RGB (255,0,0)</p></li>
+<li><p>HSV(85,254,99) &lt;=&gt; RGB (0,255,2)</p></li>
+<li><p>HSV(170,254,99) &lt;=&gt; RGB (4,0,255)</p></li>
+</ul>
+<p>Instead, if the ZCL MaxLevel is for example 255, the following mappings would
+apply:</p>
+<ul class="simple">
+<li><p>HSV(0,254,128) &lt;=&gt; RGB (128,0,0)</p></li>
+<li><p>HSV(43,254,128) &lt;=&gt; RGB (127,128,0)</p></li>
+<li><p>HSV(149,250,255) &lt;=&gt; RGB (4,125,255)</p></li>
+<li><p>HSV(0,0,128) &lt;=&gt; RGB (128,128,128)</p></li>
+<li><p>HSV(0,254,255) &lt;=&gt; RGB (255,0,0)</p></li>
+<li><p>HSV(85,254,255) &lt;=&gt; RGB (0,255,2)</p></li>
+<li><p>HSV(170,254,255) &lt;=&gt; RGB (4,0,255)</p></li>
 </ul>
 </section>
-<section id="id12">
-<h5>Sending commands<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h5>
+<section id="id14">
+<h5>Sending commands<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h5>
 <p>It is possible to issue Color Switch Set Commands by using the
 MoveToHueAndSaturation or MoveToColorTemperature Commands.</p>
 <p>Given that the full color consists of Hue, Saturation and Lightness,
@@ -884,8 +961,8 @@ before setting the color.</p>
 <p>The ZPC controls the Configuration Command Class. It is possible to discover
 configuration parameters and set the parameter values. In addition, it is also
 possible to reset all configuration parameter values to their default values.</p>
-<section id="id13">
-<h4>Node status<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h4>
+<section id="id15">
+<h4>Node status<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Configuration Command Class, one could select
 the Configuration Parameters page on the left menu of the Dev GUI.</p>
 <p><img alt="Dev GUI Configuration Parameters Cluster" src="../../_images/dev_gui_configuration_parameters_cluster.png" /></p>
@@ -898,8 +975,8 @@ DiscoverParameters command and indicate the configuration parameter IDs
 that are expected to be supported by the supporting node.</p>
 <p><img alt="Dev GUI DiscoverParameters command" src="../../_images/dev_gui_configuration_discover_parameters_command.png" /></p>
 </section>
-<section id="id14">
-<h4>Sending commands<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h4>
+<section id="id16">
+<h4>Sending commands<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
 <p>To set the configuration parameter value, one could select SetParameter command
 and insert the configuration parameter ID and desired value. However, it is not
 possible to set the parameter to its default value using “Default” bit flag.</p>
@@ -926,8 +1003,8 @@ Failed Node operation.</p>
 the state of nodes supporting the Door Lock Command Class.</p>
 <p>It is not possible to configure the Door Lock (Door Lock Configuration Commands).</p>
 </section>
-<section id="id15">
-<h4>Node status<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
+<section id="id17">
+<h4>Node status<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h4>
 <p>To see the state of a Door Lock, open the Lock menu on the left hand side.</p>
 <p><img alt="Dev GUI Lock Cluster" src="../../_images/dev_gui_lock_cluster.png" /></p>
 <p>The state of the node will be displayed for each entry.</p>
@@ -937,8 +1014,8 @@ the state of nodes supporting the Door Lock Command Class.</p>
 </ul>
 <p><img alt="Dev GUI lock node State" src="../../_images/dev_gui_lock_node_state.png" /></p>
 </section>
-<section id="id16">
-<h4>Sending commands<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
+<section id="id18">
+<h4>Sending commands<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h4>
 <p>To trigger a Door Lock Operation Set, select either the LockDoor or UnLockDoor command.
 A pop-up will appear, asking about a PINOrRFIDCode. This parameter is for ZigBee
 nodes, and can be ignored for Z-Wave nodes. Press send without filling anything.</p>
@@ -957,8 +1034,8 @@ that some Raspberry-Pi cases are opaque and some of those do not expose those
 LEDs to the outside (e.g. with a light-pipe), so the top-cover may need to be removed in
 order to see the LEDs.</p>
 </section>
-<section id="id17">
-<h4>Node status<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h4>
+<section id="id19">
+<h4>Node status<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h4>
 <p>To see the state of a Indicator, open the Identify menu on the left hand side.</p>
 <p><img alt="Dev GUI Identify Cluster" src="../../_images/dev_gui_identify_cluster.png" /></p>
 <p>The state of each identify indicator will be displayed for each entry.
@@ -966,8 +1043,8 @@ It will only display the duration, in seconds, that the node is identifying.
 For example, a node identifying for 66 seconds will be shown as follows:</p>
 <p><img alt="Dev GUI Identify node State" src="../../_images/dev_gui_identify_node_state.png" /></p>
 </section>
-<section id="id18">
-<h4>Sending commands<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h4>
+<section id="id20">
+<h4>Sending commands<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h4>
 <p>To trigger an Identify command, select the Identify command.
 A pop-up will appear, asking about the duration. Set the value to 2 in order
 to trigger the Identify command.</p>
@@ -977,8 +1054,8 @@ to trigger the Identify command.</p>
 <h4>Meter Command Class Information<a class="headerlink" href="#meter-command-class-information" title="Permalink to this heading"></a></h4>
 <p>The ZPC controls (partially) the Meter Command Class.
 The meter values will be queried and mapped whenever possible to ZCL clusters.</p>
-<section id="id19">
-<h5>Node status<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h5>
+<section id="id21">
+<h5>Node status<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h5>
 <p>It is possible to see some of the metering data in DevGUI. Instantaneous
 and accumulated values are separated.</p>
 <section id="accumulated-values">
@@ -1018,8 +1095,8 @@ Electrical Measurement Cluster.</p>
 </ul>
 </section>
 </section>
-<section id="id20">
-<h5>Sending commands<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h5>
+<section id="id22">
+<h5>Sending commands<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h5>
 <p>It is not possible to send Meter Commands using the DevGUI. Meter values are
 probed every 6 hours if no update was received from the end nodes.</p>
 </section>
@@ -1030,16 +1107,16 @@ probed every 6 hours if no update was received from the end nodes.</p>
 The sensor values will be queried and mapped whenever possible to ZCL clusters.</p>
 <p>Not all sensor values are available on the Dev GUI and unknown values are not
 forwarded to the Dev GUI.</p>
-<section id="id21">
-<h5>Node status<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h5>
+<section id="id23">
+<h5>Node status<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h5>
 <p>Sensors values (known and unknown) are probed every 6 hours if no update was
 received from the end nodes.</p>
 <p>At the moment, the only displayed type of sensor in the DevGUI will be
 temperature sensors, shown in the Thermostat attribute page.</p>
 <p>Unknown values are not presented in the Dev GUI.</p>
 </section>
-<section id="id22">
-<h5>Sending commands<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h5>
+<section id="id24">
+<h5>Sending commands<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h5>
 <p>It is not possible to send Multilevel Sensor Commands.</p>
 </section>
 </section>
@@ -1063,8 +1140,8 @@ to the level setting.</p></li>
 </ul>
 <p><strong>Note</strong>: Multilevel Switch mapping will behave differently if Color Switch
 is supported. In this case, refer to the Color Switch Command Class information.</p>
-<section id="id23">
-<h4>Node status<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h4>
+<section id="id25">
+<h4>Node status<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Multilevel Switch Command Class, select the Level page
 from the left menu on the Dev GUI.</p>
 <p><img alt="Dev GUI level Cluster" src="../../_images/dev_gui_level_cluster.png" /></p>
@@ -1076,8 +1153,8 @@ are available:</p>
 </ul>
 <p><img alt="Dev GUI level node State" src="../../_images/dev_gui_level_node_state.png" /></p>
 </section>
-<section id="id24">
-<h4>Sending commands<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h4>
+<section id="id26">
+<h4>Sending commands<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
 <p>To trigger a Multilevel Switch Set, select the MoveToLevelWithOnOff command.
 A pop-up will appear, asking about the parameters.</p>
 <ul class="simple">
@@ -1102,8 +1179,8 @@ states/events to the ZPC.</p>
 can be reported via the Command Class, information from the command class is
 displayed in a few different places in the
 <a class="reference internal" href="../dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Dev GUI</span></a>.</p>
-<section id="id25">
-<h4>Node status<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h4>
+<section id="id27">
+<h4>Node status<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
 <p>The following event/states are visible in the Dev GUI.</p>
 <section id="occupancysensing">
 <h5>OccupancySensing<a class="headerlink" href="#occupancysensing" title="Permalink to this heading"></a></h5>
@@ -1150,10 +1227,48 @@ table, with a JSON representation:</p>
 </ul>
 </section>
 </section>
-<section id="id26">
-<h4>Sending commands<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
+<section id="id28">
+<h4>Sending commands<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h4>
 <p>It is not possible to send commands for the Notification Command Class.</p>
 </section>
+</section>
+<section id="scene-activation-command-class-information">
+<h3>Scene Activation Command Class Information<a class="headerlink" href="#scene-activation-command-class-information" title="Permalink to this heading"></a></h3>
+<p>The Scene Activation Command Class is fully controlled by the ZPC.
+Nodes supporting the Scene Activation Command Class will be presented
+in the Scenes page on the Dev GUI.</p>
+<p><img alt="Dev GUI Scenes Cluster" src="../../_images/dev_gui_scenes_cluster.png" /></p>
+<p>It will be assumed that 255 scenes are supported. Note that the UI will
+allow to activate scenes 1…255 by setting values 0…254.</p>
+<p>The <em>RecallScene</em> Command will issue a Scene Activation Set Command.</p>
+<p>TransitionTime is specified in deci-seconds. (i.e. 10 = 1 second).
+It is possible to specify the 0xFF duration for the Scene Activation Set
+Command by setting the TransitionTime to 1.
+Else the duration will match the floored value of the specified transition time.</p>
+</section>
+<section id="scene-actuator-configuration-command-class-information">
+<h3>Scene Actuator Configuration Command Class Information<a class="headerlink" href="#scene-actuator-configuration-command-class-information" title="Permalink to this heading"></a></h3>
+<p>The Scene Actuator Configuration Command Class is controlled by the ZPC.</p>
+<p>Nodes supporting the Scene Actuator Configuration Command Class will be
+presented in the Scenes page on the Dev GUI.</p>
+<p><img alt="Dev GUI Scenes Cluster" src="../../_images/dev_gui_scenes_cluster.png" /></p>
+<p>Note that no interview will be performed automatically, i.e. the
+<em>Scene Actuator Configuration Get Command</em> for each of the 255 Scene IDs
+are skipped.</p>
+<p>It is possible to instruct the ZPC to issue a
+<em>Scene Actuator Configuration Get Command</em> by using the <em>ViewScene</em> Command
+in the DevGUI. It will not be possible to see the contents of the report via
+the DevGUI.</p>
+<p>It will be assumed that 255 scenes are supported. Note that the UI will
+associate scenes 1…255 to values 0…254.</p>
+<p>It is possible to issue a <em>Scene Actuator Configuration Set Command</em> using the
+<em>StoreScene</em> Command in the DevGUI.</p>
+</section>
+<section id="scene-controller-configuration-class-information">
+<h3>Scene Controller Configuration Class Information<a class="headerlink" href="#scene-controller-configuration-class-information" title="Permalink to this heading"></a></h3>
+<p>The Scene Controller Configuration Command Class is controlled by the ZPC.</p>
+<p>No interaction with this Command Class is available via the DevGUI at the
+moment.</p>
 </section>
 <section id="security-0-security-2-command-classes-information">
 <h3>Security 0 - Security 2 Command Classes Information<a class="headerlink" href="#security-0-security-2-command-classes-information" title="Permalink to this heading"></a></h3>
@@ -1186,16 +1301,16 @@ shown in the following table:</p>
 </tr>
 </tbody>
 </table>
-<section id="id27">
-<h4>Node status<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+<section id="id29">
+<h4>Node status<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h4>
 <p>It is possible to see the highest granted key of each node in the network,
 using the DevGUI, on the node page.</p>
 <p><img alt="Dev GUI security level" src="../../_images/dev_gui_security_level.png" /></p>
 <p>The Security information will not indicate if a node operates with the Z-Wave
 or Z-Wave Long Range protocol.</p>
 </section>
-<section id="id28">
-<h4>Sending commands<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h4>
+<section id="id30">
+<h4>Sending commands<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
 <p>It is not possible to issue S0/S2 commands using the DevGUI.</p>
 </section>
 </section>
@@ -1203,8 +1318,8 @@ or Z-Wave Long Range protocol.</p>
 <h3>Thermostat Setpoint and Thermostat Mode Command Classes Information<a class="headerlink" href="#thermostat-setpoint-and-thermostat-mode-command-classes-information" title="Permalink to this heading"></a></h3>
 <p>The ZPC controls the Thermostat Setpoint and Thermostat Mode Command Classes.
 It is possible to set the mode and setpoints of supporting nodes.</p>
-<section id="id29">
-<h4>Node status<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h4>
+<section id="id31">
+<h4>Node status<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h4>
 <p>The state of Multilevel Sensor (temperature sensor), Thermostat Setpoint and
 Thermostat Mode Command Classes is aggregated in the Thermostat page
 located on the left menu in the Dev GUI.</p>
@@ -1219,8 +1334,8 @@ Class.</p></li>
 </ul>
 <p><img alt="Dev GUI Thermostat node State" src="../../_images/dev_gui_thermostat_node_state.png" /></p>
 </section>
-<section id="id30">
-<h4>Sending commands<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
+<section id="id32">
+<h4>Sending commands<a class="headerlink" href="#id32" title="Permalink to this heading"></a></h4>
 <p>There are 2 available commands for Thermostats by default:</p>
 <ul class="simple">
 <li><p>WriteAttributes (wrench icon)</p></li>
@@ -1498,7 +1613,7 @@ rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inc
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

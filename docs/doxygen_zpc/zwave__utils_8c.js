@@ -1,7 +1,6 @@
 var zwave__utils_8c =
 [
     [ "LOG_TAG", "zwave__utils_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
-    [ "STR_CASE", "zwave__utils_8c.html#aa9c745028f5403752ba3dcb66ee80fae", null ],
     [ "endpoint_exists", "group__zwave__utils.html#ga74c9b953c8b809a93f78242f85597667", null ],
     [ "is_command_in_array", "group__zwave__utils.html#ga9786ad7027d49770b17b9f7e238d3049", null ],
     [ "zwave_get_inclusion_protocol", "group__zwave__utils.html#ga2369022fa37bddd407d6106b3f0f4039", null ],

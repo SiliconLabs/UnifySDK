@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/header/header';
 import Navbar from './components/navbar/navbar';
 import { ToastContainer, toast } from 'react-toastify';
-import { AppState, LocalStorage } from './app-types';
+import { AppState, LocalStorage, CommissionableDevice } from './app-types';
 import SmartStart from './pages/smart-start/smart-start';
 import { Nodes } from './pages/nodes/nodes';
 import BaseClusters from './pages/base-clusters/base-clusters';
@@ -25,10 +25,13 @@ import ConfigurationParamsList from './pages/configuration-params/configuration-
 import ConfigurationParams from './pages/configuration-params/configuration-params/configuration-params';
 import SystemMetricsList from './pages/system-metrics/system-metrics-list/system-metrics-list';
 import SystemMetrics from './pages/system-metrics/system-metrics/system-metrics';
-import SceneList from './pages/scenes/scene-list/scene-list';
-import Scene from './pages/scenes/scene/scene';
 import Binding from './pages/binding/binding';
 import NetworkManagement from './pages/network-management/network-management';
+import AppMonitoring from './pages/app-monitoring/app-monitoring';
+import Measurements from './pages/measurements/measurements';
+import Scene from './pages/scenes/scene/scene';
+import EpScenes from './pages/scenes/ep-scenes/ep-scenes';
+import { CommissionableDevices } from './pages/commissionable-devices/commissionable-devices';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -47,7 +50,8 @@ class App extends Component<{}, AppState> {
       OTAImageList: ([] as Image[]),
       UPTI: { List: [], Trace: {} },
       SystemMetrics: {},
-      SceneList: {}
+      CommissionableDevices: ([] as CommissionableDevice[]),
+      AppMonitoringList: {}
     }
     this.changeHeader = React.createRef();
     this.changeNodes = React.createRef();
@@ -61,6 +65,7 @@ class App extends Component<{}, AppState> {
     this.changeUPTITrace = React.createRef();
     this.changeScenes = React.createRef();
     this.changeBinding = React.createRef();
+    this.changeAppMonitoring = React.createRef();
     setTimeout(() => this.initWebSocket(), 100);
     this.handleIsConnectedChange = this.handleIsConnectedChange.bind(this);
   }
@@ -77,6 +82,7 @@ class App extends Component<{}, AppState> {
   changeUPTITrace: any;
   changeScenes: any;
   changeBinding: any;
+  changeAppMonitoring: any;
   attemptsCount = 0;
 
   resetState() {
@@ -85,6 +91,7 @@ class App extends Component<{}, AppState> {
     this.handleOTAChange([]);
     this.handleGroupsChange([]);
     this.handleUPTIChange([]);
+    this.handleAppMonitoring([]);
     this.setState({ UPTI: { List: [], Trace: {} } });
   }
 
@@ -124,14 +131,16 @@ class App extends Component<{}, AppState> {
       this.changeConfParams.current.updateState(list);
     if (this.changeBinding.current)
       this.changeBinding.current.updateState(list);
-    if (this.changeScenes.current?.changeClusters?.current)
-      this.changeScenes.current.changeClusters.current.updateState(list);
   }
 
   handleSmartStartChange(list: any) {
     this.setState({ SmartStartList: list });
     if (this.changeSmartStart.current)
       this.changeSmartStart.current.search([...list]);
+  }
+
+  handleCommissionableDevices(list: any) {
+    this.setState({ CommissionableDevices: list });
   }
 
   handleUPTIChange(list: any[]) {
@@ -178,8 +187,8 @@ class App extends Component<{}, AppState> {
     this.setState({ SystemMetrics: list });
   }
 
-  handleScenesChange(list: any) {
-    this.setState({ SceneList: list });
+  handleAppMonitoring(list: any) {
+    this.setState({ AppMonitoringList: list });
   }
 
   getClusterProps(clusterType: string) {
@@ -236,8 +245,8 @@ class App extends Component<{}, AppState> {
                 <Switch>
                   <Route path='/groups' exact render={() => <Groups ref={this.changeGroups}  {...baseProps} NodeList={this.state.NodeList} GroupList={this.state.GroupList} />} />
                   <Route path='/smartstart' exact render={() => <SmartStart ref={this.changeSmartStart} {...baseProps} SmartStartList={this.state.SmartStartList} />} />
-                  <Route path='/scenes' exact render={() => <SceneList ref={this.changeScenes} {...baseProps} SceneList={this.state.SceneList} GroupList={this.state.GroupList} NodeList={this.state.NodeList} />} />
-                  <Route path='/scenes/:gid/:sid' exact render={(pr) => <Scene ref={this.changeScenes} {...baseProps} SceneList={this.state.SceneList} GroupID={pr.match.params.gid} SceneID={pr.match.params.sid} GroupList={this.state.GroupList} />} />
+                  <Route path='/scenes/:unid/:ep' exact render={(pr) => <EpScenes ref={this.changeScenes} {...baseProps} Unid={pr.match.params.unid} Ep={pr.match.params.ep} GroupList={this.state.GroupList} NodeList={this.state.NodeList}/>} />
+                  <Route path='/scenes/:unid/:ep/:gid/:sid' exact render={(pr) => <Scene ref={this.changeScenes} {...baseProps} Unid={pr.match.params.unid} Ep={pr.match.params.ep} GroupID={pr.match.params.gid} SceneID={pr.match.params.sid} GroupList={this.state.GroupList} NodeList={this.state.NodeList}/>} />
                   <Route path='/upti' exact render={() => <UPTI ref={this.changeUPTI}  {...baseProps} UPTI={this.state.UPTI} />} />
                   <Route path='/upti/:serial' render={(pr) => <UPTITrace ref={this.changeUPTITrace}
                     IsConnected={this.state.IsConnected || false} UPTI={this.state.UPTI} SerialNumber={pr.match.params.serial} SocketServer={this.state.SocketServer} />} />
@@ -248,6 +257,7 @@ class App extends Component<{}, AppState> {
                   <Route path='/systemmetrics/:mid' exact render={(pr) => <SystemMetrics IsConnected={this.state.IsConnected || false} SystemMetricsList={this.state.SystemMetrics} Mid={pr.match.params.mid} SocketServer={this.state.SocketServer} />} />
                   <Route path='/locators' exact render={() => <Locators {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/ota' exact render={() => <OTA ref={this.changeOTA}  {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/app-monitoring' exact render={() => <AppMonitoring ref={this.changeAppMonitoring}  {...baseProps} AppMonitoringList={this.state.AppMonitoringList} />} />
                   <Route path='/configurationparameters' exact render={() => <ConfigurationParamsList ref={this.changeConfParams} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/configurationparameters/:unid/:ep/:paramId' exact render={(pr) => <ConfigurationParams IsConnected={this.state.IsConnected || false} NodeList={this.state.NodeList} Unid={pr.match.params.unid} EndPoint={pr.match.params.ep} ParamId={pr.match.params.paramId} SocketServer={this.state.SocketServer} />} />
                   <Redirect from="/configurationparameters/:unid/:ep/" exact to="/configurationparameters/" />
@@ -255,6 +265,8 @@ class App extends Component<{}, AppState> {
                   <Route path='/binding' exact render={() => <Binding ref={this.changeBinding} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/nodes' exact render={() => <Nodes ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/networkmanagement' exact render={() => <NetworkManagement ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/measurements' exact render={() => <Measurements {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/commissionabledevices' exact render={() => <CommissionableDevices {...baseProps} List={this.state.CommissionableDevices} />} />
                   <Redirect from="/" exact to="/nodes" />
                   {Object.keys(ClusterTypes).map((type, index) =>
                     <Route key={index} path={NavbarItems.find(i => i.name === type)?.path} render={() =>
@@ -266,7 +278,7 @@ class App extends Component<{}, AppState> {
           </div>
         </BrowserRouter>
         <ToastContainer
-          position="bottom-right"
+          position={/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "bottom-center" : "bottom-right"}
           autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -329,7 +341,7 @@ class App extends Component<{}, AppState> {
         this.changeNodes.current && this.changeNodes.current.handleProtocolControllerState(mes.data);
         break;
       case "error":
-        toast(mes.data, { type: "error" });
+        toast(<>{mes.data.map((r: string, i: number) => { return <>{i > 0 ? <br /> : null}{r}</> })}</>, { type: "error" });
         break;
       case "state":
         this.changeNodes.current && this.changeNodes.current.updateNodeState(mes.data);
@@ -354,8 +366,9 @@ class App extends Component<{}, AppState> {
         this.handleOTAChange(mes.data.OTA);
         this.handleUPTIChange(mes.data.UPTI.List);
         this.handleUPTITraceInit(mes.data.UPTI.Trace);
-        this.handleSystemMetrics(mes.data.SystemMetrics)
-        this.handleScenesChange(mes.data.Scenes);
+        this.handleSystemMetrics(mes.data.SystemMetrics);
+        this.handleAppMonitoring(mes.data.AppMonitoringList);
+        this.handleCommissionableDevices(mes.data.CommissionableDevices);
         break;
       case "smart-start-list":
         this.handleSmartStartChange(mes.data);
@@ -375,8 +388,11 @@ class App extends Component<{}, AppState> {
       case "system-metrics":
         this.handleSystemMetrics(mes.data);
         break;
-      case "scenes-list":
-        this.handleScenesChange(mes.data);
+      case "app-monitoring":
+        this.handleAppMonitoring(mes.data);
+        break;
+      case "commissionable-device":
+        this.handleCommissionableDevices(mes.data);
         break;
     }
   }

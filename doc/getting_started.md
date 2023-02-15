@@ -23,7 +23,7 @@ services on a RPi4.
 
 ## Prerequisites
 
-- An RPi4 preinstalled with [Raspberry Pi OS Linux Version 10, Buster](https://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-14)
+- An RPi4 preinstalled with [Raspberry Pi OS Linux Version 11, Bullseye 64-bit](https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-09-26/)
 
 - At least one of the following, supported wireless radios is connected to the RPi4 via USB:
   - [Z-Wave module](https://www.silabs.com/wireless/z-wave) flashed with Z-Wave - NCP Serial API Controller.
@@ -58,9 +58,9 @@ unify_readme_user.md
 
 ## How to install packages
 
-The Unify Host SDK distribution targets the reference platform Debian Buster
+The Unify Host SDK distribution targets the reference platform Debian Bullseye
 platform. Binary Debian packages are provided with the SDK and they are
-available in a Zip file eg. unify_x.y.z_armhf.zip on
+available in a Zip file eg. unify_x.y.z_arm64.zip on
 [Unify's GitHub release page](https://github.com/SiliconLabs/UnifySDK/releases).
 
 The simplest way to install the Unify components is to use the `apt` tool.
@@ -71,7 +71,7 @@ for the package in the wrong place and fail.
 Install a specific Unify package:
 
 ```console
-pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/uic-<component>_<version>_armhf.deb
+pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/uic-<component>_<version>_arm64.deb
 ```
 
 Install all packages:

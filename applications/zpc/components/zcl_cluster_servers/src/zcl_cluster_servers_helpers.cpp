@@ -22,6 +22,7 @@
 
 // Interfaces
 #include "zwave_controller_types.h"
+#include "ucl_definitions.h"
 
 //Generic includes
 #include <string>
@@ -35,10 +36,9 @@ sl_status_t
                                         std::string &unid)
 {
   sl_status_t status = SL_STATUS_OK;
-  status |= attribute_store_read_value(endpoint_id_node,
-                                       REPORTED_ATTRIBUTE,
-                                       &endpoint_id,
-                                       sizeof(zwave_endpoint_id_t));
+  status |= attribute_store_get_reported(endpoint_id_node,
+                                         &endpoint_id,
+                                         sizeof(zwave_endpoint_id_t));
 
   unid_t received_unid = "";
   status |= attribute_store_network_helper_get_unid_from_node(endpoint_id_node,

@@ -1,0 +1,27 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "confirm": {
+          "description": "Do you want to set up Unify?"
+        }
+      },
+      "entity_setup": {
+        "data": {
+          "entity_type": "entity_type",
+          "name": "%key:common:config_flow:name%",
+          "location": "%key:common:config_flow:location%"
+        },
+        "description": "Select entity type for device"
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+    }
+  }
+}

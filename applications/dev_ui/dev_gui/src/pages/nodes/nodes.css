@@ -9,3 +9,36 @@
 .none-security {
     background-color: red;
 }
+
+.table-content {
+    display: none;
+}
+
+.mobile .card.small {
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.mobile .card.small .card-header {
+    background: #007bff14;
+    font-size: 35px;
+    line-height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.mobile .card.small .card-body {
+    background: #007bff02;
+}
+
+.mobile .table-content .small .btn {
+    font-size: 25px !important;
+}
+
+.mobile .nodes-table {
+    display: none;
+}
+
+.mobile .table-content {
+    display: block;
+}

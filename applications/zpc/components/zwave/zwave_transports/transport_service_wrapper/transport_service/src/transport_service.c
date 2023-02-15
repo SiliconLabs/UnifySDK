@@ -16,6 +16,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "transport_service.h"
+#include "zwave_tx.h"
 #include "ctimer.h"
 #include "transport_service_command_class_def.h"
 #include "zwave_controller_crc16.h"
@@ -739,7 +740,7 @@ static uint8_t send_frag_req_cmd()
   frag_req->datagramOffset2 = (offset_to_request & 0xff);
 
   /*Got to wait here some time or wait for ACK */
-  /* after sending frag req, as we need to discard fragments in 
+  /* after sending frag req, as we need to discard fragments in
    * rx_timer_expired */
   rcb.rx_data.state = 1;
 
@@ -1207,6 +1208,8 @@ static bool receive(void)
         t2_sm_post_event(EV_DIFF_SESSION);
         return false;
       }
+      // Tell the Tx Queue to take it easy, we have incoming frames.
+      zwave_tx_set_expected_frames(rcb.cmn.source, 1);
       ctimer_set(&rcb.rx_timer,
                  FRAGMENT_RX_TIMEOUT,
                  rx_timer_expired,
@@ -1339,6 +1342,11 @@ static bool receive(void)
 
       log_debug("Pending Segments: %d\n", rcb.cmn.pending_segments);
       rcb.datagram_size = datagram_size_tmp;
+      if (rcb.cmn.pending_segments > 0) {
+        zwave_tx_set_expected_frames(rcb.cmn.source, 1);
+      } else {
+        zwave_tx_set_expected_frames(rcb.cmn.source, 0);
+      }
 
       if (datagram_offset < sizeof(rcb.datagramData)
           && ((datagram_offset + rcb.cur_recvd_data_size)
@@ -1385,7 +1393,7 @@ static bool receive(void)
         return false;
       }
       if ((rcb.cmn.source != scb.current_dnode) && (rcb.current_snode != 0)) {
-        /* Check if the FRAG REQ is from the destination node where we were 
+        /* Check if the FRAG REQ is from the destination node where we were
        * sending data to */
         log_debug("Session id of Fragment request received is not same as "
                   "session_id of fragment being sent, "
@@ -1429,7 +1437,7 @@ static bool receive(void)
         return false;
       }
       if ((rcb.cmn.source != scb.current_dnode) && (rcb.current_snode != 0)) {
-        /* Check if the FRAG complete is from the destination node where we 
+        /* Check if the FRAG complete is from the destination node where we
        * were sending data to */
         log_debug("Session id of Fragment request received is not same as "
                   "session_id of fragment being sent, recvd_session_id: %d, "
@@ -1473,7 +1481,7 @@ static bool receive(void)
       }
       t2_sm_post_event(EV_RECV_FRAG_WAIT);
       scb.transmission_aborted = scb.cmn.session_id;
-      /* call transport_service_senddata_cb() here that will halt the next 
+      /* call transport_service_senddata_cb() here that will halt the next
        * fragment send
        * function
        */

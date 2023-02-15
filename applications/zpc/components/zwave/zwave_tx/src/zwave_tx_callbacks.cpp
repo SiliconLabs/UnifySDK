@@ -19,7 +19,7 @@
 #include "zwave_tx_queue.hpp"
 
 // Includes from other components
-#include "zwapi_protocol_transport.h"
+#include "zwave_helper_macros.h"
 #include "zwave_controller_internal.h"
 #include "zwave_controller_callbacks.h"
 

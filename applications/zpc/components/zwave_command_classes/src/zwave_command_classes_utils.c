@@ -123,6 +123,18 @@ sl_status_t set_reports_to_follow(attribute_store_node_t node,
                                             sizeof(reports_to_follow));
 }
 
+void set_command_status_value(attribute_store_node_t command_status_node,
+                              command_status_values_t reported,
+                              command_status_values_t desired)
+{
+  attribute_store_set_reported(command_status_node,
+                               (uint8_t *)&reported,
+                               sizeof(command_status_values_t));
+  attribute_store_set_desired(command_status_node,
+                              (uint8_t *)&desired,
+                              sizeof(command_status_values_t));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Tx helper functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -291,8 +303,8 @@ int32_t get_signed_value_from_frame_and_size(const uint8_t *frame, uint8_t size)
   int32_t extracted_value = get_unsigned_value_from_frame_and_size(frame, size);
 
   // Check if that was a negative value
-  if (extracted_value & (1 << (size * 8-1))) {
-    extracted_value |= ~((1 << (size * 8-1)) - 1);
+  if (extracted_value & (1 << (size * 8 - 1))) {
+    extracted_value |= ~((1 << (size * 8 - 1)) - 1);
   }
 
   return extracted_value;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
+import { Button, Card, Col, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
 import { Group, GroupsProps, GroupsState } from './groups-types';
 import * as FiIcons from 'react-icons/fi';
 import * as AiIcons from 'react-icons/ai';
@@ -60,10 +60,10 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
                 }
               });
               if (updatingProperties.length)
-                updatingClusters.push(`<i>${cluster}</i>:&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;[${updatingProperties.join(', <br>')}]`);
+                updatingClusters.push(`&nbsp;&nbsp;<i>${cluster}</i>:&nbsp;&nbsp;[${updatingProperties.join(', ')}]`);
             });
             if (updatingClusters.length)
-              group.UpdatingNodes.push(`<b>${node.Unid}/${endPoint}</b> <br>&nbsp;&nbsp;${updatingClusters.join('; <br>&nbsp')}`);
+              group.UpdatingNodes.push(`<b>${node.Unid}/${endPoint}</b> <br>${updatingClusters.join('<br>')}`);
           }
         });
       });
@@ -108,7 +108,8 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
     this.setState({ ProcessingGroup: item }, () => {
       this.changeConfirmDlg?.current.update(
         `Remove Group ${this.state.ProcessingGroup.GroupName || "-"}[${this.state.ProcessingGroup.GroupId}]`,
-        `Are you sure, you want to remove this group?`
+        `Are you sure, you want to remove this group?`,
+        this.confirmRemove
       );
     });
   }
@@ -135,6 +136,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
   }
 
   render() {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3>Group List</h3>
@@ -149,80 +151,128 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table striped hover>
-            <thead>
-              <tr className="">
-                <th>GroupId</th>
-                <th>Name</th>
-                <th className="wd-40px"></th>
-                <th>Nodes Count</th>
-                <th className="wd-col-2">&ensp;</th>
-              </tr>
-            </thead>
-            <tbody>
+          : (isMobile
+            ? <div className='table-content'>
               {this.state.GroupList.map((item, index) => {
                 if (item.GroupId === 0) return;
-                let waitingPopover = (
-                  <Popover id={`w${item.GroupId}`} className="popover-l">
-                    <Popover.Title as="h3">Waiting for update next properties</Popover.Title>
-                    <Popover.Content>
-                      <div className="content" dangerouslySetInnerHTML={{ __html: item.UpdatingNodes.join(', <br>') }}></div>
-                    </Popover.Content>
-                  </Popover>
-                );
-
-                let failedPopover = (
-                  <Popover id={`f${item.GroupId}`} className="popover-l">
-                    <Popover.Title as="h3">Group contains {item.FailedNodes.length} failed endpoint(s)</Popover.Title>
-                    <Popover.Content>
-                      <div className="content" dangerouslySetInnerHTML={{ __html: item.FailedNodes.join('<br>') }}></div>
-                    </Popover.Content>
-                  </Popover>
-                );
                 return (
-                  <tr key={index}>
-                    <td>{item.GroupId}</td>
-                    <td>{item.GroupName || "-"}</td>
-                    <td>
-                      <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={waitingPopover}>
-                        <Spinner hidden={!item.UpdatingNodes.length} as="span" animation="border" size="sm" variant="primary" />
-                      </OverlayTrigger>
-                    </td>
-                    <td>
-                      <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={failedPopover}>
-                        <span hidden={!item.FailedNodes.length} className="icon margin-h-5 cursor-default"><AiIcons.AiOutlineWarning color="orange" /></span>
-                      </OverlayTrigger>
-                      {item.Count}
-                    </td>
-                    <td className="text-center">
-                      <Tooltip title="Run Command">
-                        <span className={item.FailedNodes.length === item.Count ? `cursor-default disabled margin-h-5 icon` : `margin-h-5 icon`} >
-                          <FiIcons.FiCommand onClick={() => { if (item.FailedNodes.length !== item.Count) this.choiceGroupCommand(item) }} />
-                        </span>
-                      </Tooltip>
-                      <Tooltip title="View/Edit">
-                        <span className="icon">
-                          <FiIcons.FiEdit className="margin-h-5" onClick={() => this.edit(item, false)} />
-                        </span>
-                      </Tooltip>
-                      <Tooltip title="Remove">
-                        <span className="icon">
-                          <FiIcons.FiTrash2 color="#dc3545" onClick={() => this.remove(item)} />
-                        </span>
-                      </Tooltip>
-                    </td>
-                  </tr>
+                  <Card key={index} className="inline margin-v-10">
+                    <Card.Header className='flex'>
+                      <div className="col-sm-8">
+                        <i>GroupId:</i> <b>{item.GroupId}</b>
+                      </div>
+                      <div className='col-sm-4'>
+                        <Tooltip title="Remove" className='float-right'>
+                          <span className="icon">
+                            <FiIcons.FiTrash2 color="#dc3545" onClick={() => this.remove(item)} />
+                          </span>
+                        </Tooltip>
+                        <Tooltip title="View/Edit" className='float-right'>
+                          <span className="icon">
+                            <FiIcons.FiEdit className="margin-h-5" onClick={() => this.edit(item, false)} />
+                          </span>
+                        </Tooltip>
+                        <Tooltip title="Run Command" className='float-right'>
+                          <span className={item.FailedNodes.length === item.Count ? `cursor-default disabled margin-h-5 icon` : `margin-h-5 icon`} >
+                            <FiIcons.FiCommand onClick={() => { if (item.FailedNodes.length !== item.Count) this.choiceGroupCommand(item) }} />
+                          </span>
+                        </Tooltip>
+                      </div>
+                    </Card.Header>
+                    <Card.Body>
+                      <div className='col-sm-12'>
+                        <div className="col-sm-6 inline"><b><i>Name: </i></b>{item.GroupName || "-"}</div>
+                        <div className="col-sm-6 inline"><b><i>Apply after: </i></b>{item.ApplyAfter}</div>
+                        <div className="col-sm-12 inline"><b><i>Nodes Count: </i></b>{item.Count}</div>
+                        <div className="col-sm-12 inline" hidden={!item.FailedNodes.length}><b><i>Failed endpoint(s): </i></b>
+                          <span hidden={!item.FailedNodes.length} className="icon margin-h-5 cursor-default"><AiIcons.AiOutlineWarning color="orange" /></span>
+                          <div className="content padding-l-25" dangerouslySetInnerHTML={{ __html: item.FailedNodes.join('<br>') }}></div>
+                        </div>
+                        <div className="col-sm-12 inline" hidden={!item.UpdatingNodes.length}><b><i>Waiting for update: </i></b>
+                          <Spinner hidden={!item.UpdatingNodes.length} as="span" animation="border" size="sm" variant="primary" />
+                          <div className="content padding-l-25" dangerouslySetInnerHTML={{ __html: item.UpdatingNodes.join('<br>') }}></div>
+                        </div>
+                      </div>
+                    </Card.Body>
+                  </Card>
                 );
               })}
-            </tbody>
-          </Table>
+            </div>
+            : <Table striped hover>
+              <thead>
+                <tr className="">
+                  <th>GroupId</th>
+                  <th>Name</th>
+                  <th className="wd-40px"></th>
+                  <th>Nodes Count</th>
+                  <th className="wd-col-2">&ensp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.GroupList.map((item, index) => {
+                  if (item.GroupId === 0) return;
+                  let waitingPopover = (
+                    <Popover id={`w${item.GroupId}`} className="popover-l">
+                      <Popover.Title as="h3">Waiting for update next properties</Popover.Title>
+                      <Popover.Content>
+                        <div className="content padding-l-25" dangerouslySetInnerHTML={{ __html: item.UpdatingNodes.join('<br>') }}></div>
+                      </Popover.Content>
+                    </Popover>
+                  );
+
+                  let failedPopover = (
+                    <Popover id={`f${item.GroupId}`} className="popover-l">
+                      <Popover.Title as="h3">Group contains {item.FailedNodes.length} failed endpoint(s)</Popover.Title>
+                      <Popover.Content>
+                        <div className="content padding-l-25" dangerouslySetInnerHTML={{ __html: item.FailedNodes.join('<br>') }}></div>
+                      </Popover.Content>
+                    </Popover>
+                  );
+                  return (
+                    <tr key={index}>
+                      <td>{item.GroupId}</td>
+                      <td>{item.GroupName || "-"}</td>
+                      <td>
+                        <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={waitingPopover}>
+                          <Spinner hidden={!item.UpdatingNodes.length} as="span" animation="border" size="sm" variant="primary" />
+                        </OverlayTrigger>
+                      </td>
+                      <td>
+                        <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={failedPopover}>
+                          <span hidden={!item.FailedNodes.length} className="icon margin-h-5 cursor-default"><AiIcons.AiOutlineWarning color="orange" /></span>
+                        </OverlayTrigger>
+                        {item.Count}
+                      </td>
+                      <td className="text-center">
+                        <Tooltip title="Run Command">
+                          <span className={item.FailedNodes.length === item.Count ? `cursor-default disabled margin-h-5 icon` : `margin-h-5 icon`} >
+                            <FiIcons.FiCommand onClick={() => { if (item.FailedNodes.length !== item.Count) this.choiceGroupCommand(item) }} />
+                          </span>
+                        </Tooltip>
+                        <Tooltip title="View/Edit">
+                          <span className="icon">
+                            <FiIcons.FiEdit className="margin-h-5" onClick={() => this.edit(item, false)} />
+                          </span>
+                        </Tooltip>
+                        <Tooltip title="Remove">
+                          <span className="icon">
+                            <FiIcons.FiTrash2 color="#dc3545" onClick={() => this.remove(item)} />
+                          </span>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )
         }
 
         <EditGroupDlg ref={this.changeEditGroupDlg} SocketServer={this.props.SocketServer} NodeList={this.props.NodeList} />
 
         <GroupCommandDlg ref={this.changeGroupCommandDlg} SocketServer={this.props.SocketServer} />
 
-        <ConfirmDlg ConfirmAction={this.confirmRemove} ref={this.changeConfirmDlg}></ConfirmDlg>
+        <ConfirmDlg ref={this.changeConfirmDlg}></ConfirmDlg>
       </>
     )
   };

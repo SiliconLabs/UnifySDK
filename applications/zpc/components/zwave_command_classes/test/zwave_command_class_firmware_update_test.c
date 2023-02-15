@@ -22,6 +22,7 @@
 #include "datastore.h"
 #include "attribute_store.h"
 #include "zpc_attribute_store.h"
+#include "zpc_attribute_store_type_registration.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zwave_tx_scheme_selector.h"
@@ -62,11 +63,10 @@ static clock_time_t time_value = 0;
 // callbacks.
 static zwave_controller_storage_callback_t zwave_controller_storage_cb_mock = {
   .set_node_as_s2_capable = zwave_security_validation_set_node_as_s2_capable,
-  .is_node_S2_capable = zwave_security_validation_is_node_s2_capable,
-  .get_node_granted_keys     = zwave_get_node_granted_keys,
-  .get_inclusion_protocol    = zwave_get_inclusion_protocol,
-  .zwave_controller_storage_cc_version
-  = zwave_node_get_command_class_version,
+  .is_node_S2_capable     = zwave_security_validation_is_node_s2_capable,
+  .get_node_granted_keys  = zwave_get_node_granted_keys,
+  .get_inclusion_protocol = zwave_get_inclusion_protocol,
+  .zwave_controller_storage_cc_version = zwave_node_get_command_class_version,
 };
 
 static void create_firmware_file(const char *file_name, size_t file_size)
@@ -85,6 +85,7 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
   // Create 2 test files in the current directory
   create_firmware_file("test_firmware.gbl", 200);
   create_firmware_file("test_firmware_empty.gbl", 0);

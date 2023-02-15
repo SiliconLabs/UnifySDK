@@ -13,8 +13,10 @@ target_include_directories(
   PUBLIC include)
 
 target_link_libraries(zigpc_ucl PRIVATE zigpc_common zigpc_datastore
-                                        zigpc_net_mgmt uic_mqtt uic_log)
+                                        zigpc_net_mgmt unify)
 
-target_add_mock(zigpc_ucl)
+if(BUILD_TESTING)
+  target_add_mock(zigpc_ucl)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

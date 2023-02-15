@@ -87,7 +87,9 @@ class print
                             ">",
                             "or",
                             "%",
-                            "**"};
+                            "**",
+                            "<=",
+                            ">="};
     _out << op_str[x.operator_] << ' ';
     boost::apply_visitor(*this, x.operand_);
   }
@@ -97,7 +99,7 @@ class print
     _out << "( ";
     boost::apply_visitor(*this, x.first);
     _out << ' ';
-    for (auto terms: x.rest) {
+    for (const auto &terms: x.rest) {
       (*this)(terms);
       _out << ' ';
     }
@@ -120,6 +122,16 @@ class print
       _out << std::endl;
     }
     _out << "}" << std::endl;
+  }
+
+  inline void operator()(const function_invokation &f)
+  {
+    _out << f.function_name << "(";
+    for (auto &argument: f.arguments) {
+      (*this)(argument);
+      _out << ",";
+    }
+    _out << ")";
   }
 
   inline void operator()(const ast_tree ast)

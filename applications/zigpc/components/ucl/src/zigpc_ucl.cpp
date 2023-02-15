@@ -30,6 +30,7 @@
  */
 void zigpc_ucl_on_nwmgmt_init(void *event_data)
 {
+      
   if (event_data != nullptr) {
     zigpc_net_mgmt_on_network_init_t &net_init
       = *reinterpret_cast<struct zigpc_net_mgmt_on_network_init *>(event_data);

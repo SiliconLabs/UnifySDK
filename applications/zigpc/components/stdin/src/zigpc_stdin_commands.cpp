@@ -13,6 +13,7 @@
 
 #include <map>
 #include <string>
+#include <cstring>
 
 // Unify components
 #include "sl_status.h"
@@ -36,13 +37,36 @@ static sl_status_t handle_print_emberaf_info(const handle_args_t &arg)
   return SL_STATUS_OK;
 }
 
+static sl_status_t handle_emberaf_cli_command(const handle_args_t &arg)
+{
+#ifdef ZIGPC_SLI_CLI_ENABLED
+  std::string command = "";
+  if (arg.size() > 1) {
+    //arg[0] is the slcli command
+    command += arg.at(1);
+    for (size_t i = 2; i < arg.size(); i++) {
+      command += " " + arg.at(i);
+    }
+    zigpc_gateway_send_emberaf_command(command.data());
+  } else {
+    sl_log_warning(LOG_TAG, "No command sent");
+  }
+  return SL_STATUS_OK;
+#else
+sl_log_warning(LOG_TAG, "SLCLI not enabled at compile time");
+return SL_STATUS_OK;
+#endif
+
+
+}
+
 static sl_status_t handle_ds_log_device(const handle_args_t &arg)
 {
   sl_status_t status = SL_STATUS_OK;
 
   for (size_t i = 1; i < arg.size(); i++) {
     zigbee_eui64_t eui64;
-    const std::string &unid = arg[i];
+    const std::string &unid = arg.at(i);
     if (unid.size() < (ZIGBEE_EUI64_SIZE * 2)) {
       sl_log_warning(LOG_TAG, "Invalid UNID format.");
       continue;
@@ -80,6 +104,7 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
    {" :Execute EmberCLI 'info' command that prints information about the "
     "Zigbee gateway device network state, clusters, and endpoints",
     &handle_print_emberaf_info}},
+  {"embercli", {" :Execute sl_cli commands", &handle_emberaf_cli_command}},
   {"zigbee_log_nwk_key",
    {" :Log current Zigbee Network key", &handle_print_emberaf_nwk_key}},
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"metering.html#metering_attr_unitof_measure":[37,0,14],
 "metering.html#metering_attrs":[37,0],
 "metering.html#metering_cmds":[37,2],
 "metering.html#metering_force_read_attr_cmd":[37,2,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "relativity_humidity.html#relativity_humidity_attr_measured_value":[29,0,0],
 "relativity_humidity.html#relativity_humidity_attr_min_measured_value":[29,0,1],
 "relativity_humidity.html#relativity_humidity_attr_tolerance":[29,0,3],
-"relativity_humidity.html#relativity_humidity_attrs":[29,0],
-"relativity_humidity.html#relativity_humidity_cmds":[29,2]
+"relativity_humidity.html#relativity_humidity_attrs":[29,0]
 };

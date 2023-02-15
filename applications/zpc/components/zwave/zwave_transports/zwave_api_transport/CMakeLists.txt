@@ -8,12 +8,15 @@ target_include_directories(zwave_api_transport
 )
 
 target_link_libraries(zwave_api_transport
+  PUBLIC zwave_definitions
   PRIVATE
     zwave_tx_groups
-    uic_contiki
+    unify
     zwave_controller
 )
 
-target_add_mock(zwave_api_transport)
+if(BUILD_TESTING)
+  target_add_mock(zwave_api_transport)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

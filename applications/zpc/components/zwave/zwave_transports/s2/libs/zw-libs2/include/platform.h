@@ -16,8 +16,8 @@
 
 #include <stdint.h>
 #include "ZW_typedefs.h"
-#ifndef EFR32ZG
-#include "assert.h"
+#if !defined (EFR32ZG) && !defined(ZWAVE_ON_LINUX)
+#include <assert.h>
 #endif
 
 #ifdef __C51__
@@ -29,17 +29,17 @@
 
 void print16(uint8_t * pData);
 
-#define UNUSED(x) x = x; /* Hack to silence warning C280 Unreferenced local variable */
+#define UNUSED(x) x = x /* Hack to silence warning C280 Unreferenced local variable */
 
 ///* No printf on 8051 target. Comment out. This breaks includes in various modules. Use only in .c files */
 //#define SLASH /
 //#define printf  SLASH/
 
 #else /* __C51__ */
-#ifdef EFR32ZG
+#if defined (EFR32ZG) || defined(ZWAVE_ON_LINUX)
 #include "Assert.h"
 #else
-#include "assert.h"
+#include <assert.h>
 #endif
 #include <stdio.h>
 #include <string.h>

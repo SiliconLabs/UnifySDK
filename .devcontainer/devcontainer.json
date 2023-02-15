@@ -19,7 +19,7 @@
     "cmake.buildDirectory": "${workspaceRoot}/build_docker",
     "C_Cpp.default.cStandard": "c99",
     "C_Cpp.default.cppStandard": "c++11",
-    "clang-format.executable": "/usr/bin/clang-format-10"
+    "clang-format.executable": "/usr/bin/clang-format-12"
   },
   // Install extensions for vscode
   "extensions": [
@@ -32,8 +32,8 @@
   "containerUser": "user",
   "remoteUser": "user",
   "updateRemoteUserUID": true,
-  // Install clang-format-10
-  "postCreateCommand": "curl https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add - && echo \"deb http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main\" | sudo tee /etc/apt/sources.list.d/llvm.list && sudo apt-get update && sudo apt-get install -y clang-format-10 && sudo update-binfmts --enable",
+  // Install clang-format-12
+  "postCreateCommand": "curl https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add - && echo \"deb http://apt.llvm.org/bullseye/ llvm-toolchain-bullseye-12 main\" | sudo tee /etc/apt/sources.list.d/llvm.list && sudo apt-get update && sudo apt-get install -y clang-format-12 && sudo update-binfmts --enable",
   "runArgs": [
     // Uncomment when using a ptrace-based debugger like C++, Go, and Rust
     //"--cap-add=SYS_PTRACE",

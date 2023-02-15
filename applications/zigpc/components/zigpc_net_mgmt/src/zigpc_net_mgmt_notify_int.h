@@ -15,13 +15,7 @@
 #define ZIGPC_NET_MGMT_NOTIFY_INT_H
 
 #include "zigpc_common_observable.h"
-#include "zigpc_net_mgmt_fsm.h"
-
-/**
- * @brief Network Management observable instance
- *
- */
-struct zigpc_observable zigpc_net_mgmt_observable;
+#include "zigpc_net_mgmt_internal.h"
 
 /**
  * @brief Clear and reinitialize ZigPC Net Mgmt observable instance.

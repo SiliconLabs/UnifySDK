@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unify Home Assistant Integration &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/home_assistant/readme.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="unify-home-assistant-integration">
+<h1>Unify Home Assistant Integration<a class="headerlink" href="#unify-home-assistant-integration" title="Permalink to this heading"></a></h1>
+<p>The Unify Framework provides software source code and binary packages for Raspberry Pi 4 to help build an IoT gateway product. The Unify Framework enables an IoT service to control and manage end nodes in several wireless PHY radios (e.g., Z-Wave, Zigbee, and so on) supported by Silicon Labs. For information and access to the Unify Framework please refer to <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK">https://github.com/SiliconLabs/UnifySDK</a>.</p>
+<p>The Unify Home Assistant Integration enables any device on Unify Framework to be utilised by Home Assistant.
+This allows for easy use and integration of the Unify Framework exposing numerous devices running on multiple wireless protocols.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>It integrates into an existing Home Assistant environment.
+To enable the Unify bridge the components requirements must be met:</p>
+<ul class="simple">
+<li><p>MQTT-Broker</p></li>
+<li><p>Home Assistant</p></li>
+<li><p>Unify Framework with a Protocol Controller (PC) e.g. ZPC (Z-Wave), ZigPC (ZigBee).</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">this</span></code> folder to <code class="docutils literal notranslate"><span class="pre">custom_components</span></code> on your HA installation. If custom_components does not exist, create it in the root of the HA config folder, ie. same level as the <code class="docutils literal notranslate"><span class="pre">configuration.yaml</span></code> file.</p></li>
+<li><p>In the Home Assistant UI add Unify integration or MQTT intrgration and setup the MQTT integration to use the Unify MQTT server.</p></li>
+</ul>
+<p>Word of caution, it is very verbose on log level <code class="docutils literal notranslate"><span class="pre">_LOGGER.debug</span></code>.</p>
+</section>
+<section id="supported-clusters">
+<h2>Supported Clusters<a class="headerlink" href="#supported-clusters" title="Permalink to this heading"></a></h2>
+<p>Unify is based on the Zigbee Cluster Library. The clusters supported in the Unify bridge is listed below.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>ZCL Cluster</th>
+<th>Home Assistant Device</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OnOff</td>
+<td>Switch</td>
+</tr>
+<tr>
+<td>Level</td>
+<td>Light</td>
+</tr>
+<tr>
+<td>PowerConfiguration</td>
+<td>Sensor (Battery)</td>
+</tr>
+<tr>
+<td>TemperatureMeasurement</td>
+<td>Sensor (Temperature)</td>
+</tr>
+<tr>
+<td>Scene</td>
+<td>Sensor (Binary)</td>
+</tr>
+</tbody>
+</table>
+<p>In addition ZCL NameAndLocation is used to set Name of Home Assistant Devices.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

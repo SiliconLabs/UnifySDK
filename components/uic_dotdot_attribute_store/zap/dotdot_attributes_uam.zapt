@@ -1,8 +1,0 @@
-
-{{#zcl_clusters}}
-// This represents the attributes in the DotDot {{label}} cluster
-{{#zcl_attributes}}
-def {{asAttributeIdDefine parent.label label}} 0x{{attributeID this}}
-{{/zcl_attributes}}
-
-{{/zcl_clusters}}

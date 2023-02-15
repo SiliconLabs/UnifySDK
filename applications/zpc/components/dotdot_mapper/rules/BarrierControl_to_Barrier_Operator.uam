@@ -1,0 +1,50 @@
+// Z-Wave Attributes
+def zw_BARRIER_OPERATOR_STATE 0x6603
+
+// DotDot Attributes
+// This represents the attributes in the DotDot BarrierControl cluster
+def zb_MOVING_STATE 0x01030001
+def zb_SAFETY_STATUS 0x01030002
+def zb_CAPABILITIES 0x01030003
+def zb_OPEN_EVENTS 0x01030004
+def zb_CLOSE_EVENTS 0x01030005
+def zb_COMMAND_OPEN_EVENTS 0x01030006
+def zb_COMMAND_CLOSE_EVENTS 0x01030007
+def zb_OPEN_PERIOD 0x01030008
+def zb_CLOSE_PERIOD 0x01030009
+def zb_BARRIER_POSITION 0x0103000a
+
+scope 0 chain_reaction(0) clear_desired(0) {
+
+  // Create all the required ZCL attributes:
+  r'zb_SAFETY_STATUS = if(e'zw_BARRIER_OPERATOR_STATE) 0 undefined
+  r'zb_CAPABILITIES = if(e'zw_BARRIER_OPERATOR_STATE) 0 undefined
+
+  r'zb_MOVING_STATE =
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0xFF) & (d'zw_BARRIER_OPERATOR_STATE == 0x00)) 01
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0x00) & (d'zw_BARRIER_OPERATOR_STATE == 0xFF)) 02
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0xFC) & (d'zw_BARRIER_OPERATOR_STATE == 0xFF)) 00
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0xFD) & (d'zw_BARRIER_OPERATOR_STATE == 0xFF)) 02
+    if (fn_are_all_defined(r'zw_BARRIER_OPERATOR_STATE)) 0
+    undefined
+  d'zb_MOVING_STATE =
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0xFF) & (d'zw_BARRIER_OPERATOR_STATE == 0x00)) 01
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0x00) & (d'zw_BARRIER_OPERATOR_STATE == 0xFF)) 02
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0xFC) & (d'zw_BARRIER_OPERATOR_STATE == 0xFF)) 00
+    if ((r'zw_BARRIER_OPERATOR_STATE == 0xFD) & (d'zw_BARRIER_OPERATOR_STATE == 0xFF)) 02
+    if (fn_are_all_defined(r'zw_BARRIER_OPERATOR_STATE, d'zw_BARRIER_OPERATOR_STATE) & (r'zw_BARRIER_OPERATOR_STATE < d'zw_BARRIER_OPERATOR_STATE)) 2
+    if (fn_are_all_defined(r'zw_BARRIER_OPERATOR_STATE, d'zw_BARRIER_OPERATOR_STATE) & (r'zw_BARRIER_OPERATOR_STATE > d'zw_BARRIER_OPERATOR_STATE)) 1
+    if (fn_are_all_defined(r'zw_BARRIER_OPERATOR_STATE, d'zw_BARRIER_OPERATOR_STATE) & (r'zw_BARRIER_OPERATOR_STATE == d'zw_BARRIER_OPERATOR_STATE)) 0
+    undefined
+
+  r'zb_BARRIER_POSITION =
+    if (r'zw_BARRIER_OPERATOR_STATE < 0x64) r'zw_BARRIER_OPERATOR_STATE
+    if (r'zw_BARRIER_OPERATOR_STATE == 0xFF) 100
+    if ((r'zw_BARRIER_OPERATOR_STATE >= 0xFC) & (r'zw_BARRIER_OPERATOR_STATE <= 0xFE)) 0xFF undefined
+
+  // Map ZCL Desired to Z-Wave Desired.
+  d'zw_BARRIER_OPERATOR_STATE =
+    if (d'zb_BARRIER_POSITION == 0) 0
+    if (d'zb_BARRIER_POSITION > 0) 0xFF
+    undefined
+}

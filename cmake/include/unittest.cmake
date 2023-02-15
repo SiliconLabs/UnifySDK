@@ -4,7 +4,9 @@
 
 # Memcheck with Valgrind if available
 find_program(MEMORYCHECK_COMMAND valgrind)
-set(MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full --show-leak-kinds=definite,possible")
-# Enable testing if SKIP_TESTING isn't set
+set(MEMORYCHECK_COMMAND_OPTIONS
+    "--trace-children=yes --leak-check=full --show-leak-kinds=definite,possible"
+)
+
 include(CTest)
-enable_testing()
+set(CTEST_OUTPUT_ON_FAILURE ON)

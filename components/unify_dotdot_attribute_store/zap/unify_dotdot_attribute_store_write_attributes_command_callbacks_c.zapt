@@ -1,0 +1,95 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+// clang-format off
+{{zap_header}}
+// clang-format on
+// Includes from this component
+#include "unify_dotdot_attribute_store_configuration.h"
+#include "unify_dotdot_attribute_store_helpers.h"
+#include "unify_dotdot_attribute_store_write_attributes_command_callbacks.h"
+#include "unify_dotdot_defined_attribute_types.h"
+
+// Other includes
+#include "zap-types.h"
+#include "dotdot_mqtt.h"
+#include "attribute_store.h"
+#include "attribute_store_helper.h"
+
+#include "sl_log.h"
+#define LOG_TAG "unify_dotdot_attribute_store"
+
+// clang-format off
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster {{label}}
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks {{asSnakeCaseLower label}}
+static sl_status_t {{asSnakeCaseLower label}}_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  {{dotdot_prefix}}_callback_call_type_t call_type,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t attributes,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_{{asSnakeCaseLower label}}_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "{{asSnakeCaseLower label}}: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  {{#zcl_attributes}}
+  {{#if isWritable}}
+  if (true == updated_attributes.{{asSnakeCaseLower label}}) {
+     sl_log_debug(LOG_TAG, "Updating desired value for {{label}} attribute");
+    {{#if (isMonotonousArray label)}}
+    {{asAttributeSetFunction parent.label label}}(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.{{asSnakeCaseLower label}}_count, attributes.{{asSnakeCaseLower label}});
+    {{else}}
+    {{asAttributeSetFunction parent.label label}}(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.{{asSnakeCaseLower label}});
+    {{/if}}
+  }
+  {{/if}}
+  {{/zcl_attributes}}
+  return SL_STATUS_OK;
+}
+{{/if}}
+{{/zcl_clusters}}
+// clang-format on
+
+////////////////////////////////////////////////////////////////////////////////
+// Functions shared within the component
+////////////////////////////////////////////////////////////////////////////////
+sl_status_t
+  unify_dotdot_attribute_store_write_attributes_command_callbacks_init()
+{
+  // Register ForceReadAttribute callbacks on all supported clusters
+  // clang-format off
+  {{#zcl_clusters}}{{#if (supportedCluster label)}}
+  {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_write_attributes_callback(
+    &{{asSnakeCaseLower label}}_cluster_write_attributes_callback);
+  {{/if}}{{/zcl_clusters}}
+  // clang-format on
+
+  return SL_STATUS_OK;
+}

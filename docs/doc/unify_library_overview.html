@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unify Library Overview &mdash; Unify Host SDK</title>
@@ -18,10 +18,15 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How to develop a Protocol Controller" href="how_to_develop_a_protocol_controller.html" />
+    <link rel="next" title="How to write UAM files" href="how_to_write_uam_files.html" />
     <link rel="prev" title="Unify Rust Development" href="readme_rust.html" /> 
 </head>
 
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -77,6 +82,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#packaging-framework">Packaging Framework</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#coding-standard">Coding Standard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-tos">How To’s</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="how_to_write_uam_files.html">How to write UAM files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="how_to_develop_a_protocol_controller.html">How to develop a Protocol Controller</a></li>
 <li class="toctree-l4"><a class="reference internal" href="how_to_develop_an_iot_service.html">How To Make an IoT Service</a></li>
 </ul>
@@ -84,17 +90,17 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html">Api documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#component-templates">Component Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -131,7 +137,7 @@ various Unify components in terms of operation and system integration.</p>
 <li><p>Build system with docker containers</p></li>
 <li><p>Documentation framework</p></li>
 <li><p>Packaging system for distributing components and basic scripts for system
-integration with debian buster.</p></li>
+integration with Debian Bullseye.</p></li>
 <li><p>Coding standard</p></li>
 </ul>
 <p>The figure below show the meta functionality that the Unify Frameworks provides.
@@ -252,7 +258,7 @@ well as a few C/C++ headers with definitions.</p>
 <p>This represents the data model used between all entities in the Unify
 Framework. Note that the definitions in these XML files take precedence
 over examples from the
-<a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Framework Specifications</a>.</p>
+<a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specifications</span></a>.</p>
 <p>These XML files represent ZCL/Dotdot clusters and can be split into 2 ranges:</p>
 <ul class="simple">
 <li><p>[0x0000…0xFBFF]: Official ZCL Clusters.</p></li>
@@ -270,17 +276,17 @@ used in subsequent release. To create a new XML file, add it in the
 <em>uic_dotdot</em> component <em>dotdot-xml</em> folder. Assign a new unique Cluster ID from
 the reserved range, for example using the 0xFF01 value:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;zcl:cluster</span>
-  <span class="na">xmlns:zcl=</span><span class="s">&quot;http://zigbee.org/zcl/clusters&quot;</span>
-  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-  <span class="na">xmlns:type=</span><span class="s">&quot;http://zigbee.org/zcl/types&quot;</span>
-  <span class="na">xmlns:xi=</span><span class="s">&quot;http://www.w3.org/2001/XInclude&quot;</span>
-  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd&quot;</span>
-  <span class="na">id=</span><span class="s">&quot;FF01&quot;</span> <span class="na">revision=</span><span class="s">&quot;1&quot;</span> <span class="na">name=</span><span class="s">&quot;ExampleApplicationCluster&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;classification</span> <span class="na">role=</span><span class="s">&quot;application&quot;</span> <span class="na">picsCode=</span><span class="s">&quot;EAC&quot;</span> <span class="nt">/&gt;</span>
+<span class="w">  </span><span class="na">xmlns:zcl=</span><span class="s">&quot;http://zigbee.org/zcl/clusters&quot;</span>
+<span class="w">  </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">  </span><span class="na">xmlns:type=</span><span class="s">&quot;http://zigbee.org/zcl/types&quot;</span>
+<span class="w">  </span><span class="na">xmlns:xi=</span><span class="s">&quot;http://www.w3.org/2001/XInclude&quot;</span>
+<span class="w">  </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd&quot;</span>
+<span class="w">  </span><span class="na">id=</span><span class="s">&quot;FF01&quot;</span><span class="w"> </span><span class="na">revision=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ExampleApplicationCluster&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;classification</span><span class="w"> </span><span class="na">role=</span><span class="s">&quot;application&quot;</span><span class="w"> </span><span class="na">picsCode=</span><span class="s">&quot;EAC&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>Finally, add it to the list in the <code class="docutils literal notranslate"><span class="pre">library.xml</span></code> file.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>  <span class="nt">&lt;xi:include</span> <span class="na">href=</span><span class="s">&quot;ExampleApplicationCluster.xml&quot;</span> <span class="na">parse=</span><span class="s">&quot;xml&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;xi:include</span><span class="w"> </span><span class="na">href=</span><span class="s">&quot;ExampleApplicationCluster.xml&quot;</span><span class="w"> </span><span class="na">parse=</span><span class="s">&quot;xml&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>Building the Unify library will use the new XML definitions and provide
@@ -381,7 +387,7 @@ Various cmake macros has been defined for making mocks, unit tests and packages.
 </section>
 <section id="packaging-framework">
 <h2>Packaging Framework<a class="headerlink" href="#packaging-framework" title="Permalink to this heading"></a></h2>
-<p>The Packaging Framework supports debian and cmake scripts which facilitates
+<p>The Packaging Framework supports Debian and cmake scripts which facilitates
 packaging of Unify components.</p>
 </section>
 <section id="coding-standard">
@@ -394,6 +400,7 @@ packaging of Unify components.</p>
 <p>Those sections show how to use the Unify Library.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="how_to_write_uam_files.html">How to write UAM files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_to_develop_a_protocol_controller.html">How to develop a Protocol Controller</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_to_develop_an_iot_service.html">How To Make an IoT Service</a></li>
 </ul>
@@ -406,7 +413,7 @@ packaging of Unify components.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

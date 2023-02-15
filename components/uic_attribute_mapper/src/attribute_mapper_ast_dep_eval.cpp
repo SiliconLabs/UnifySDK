@@ -55,6 +55,14 @@ const dependencies_t &dep_eval::operator()(const condition &x)
   return dependencies;
 }
 
+const dependencies_t &dep_eval::operator()(const function_invokation &f)
+{
+  for (auto &argument: f.arguments) {
+    (*this)(argument);
+  }
+  return dependencies;
+}
+
 const dependencies_t &dep_eval::get_dependencies() const
 {
   return dependencies;
@@ -107,8 +115,18 @@ const dependencies_t &
 const dependencies_t &
   dep_eval_path::operator()(const std::vector<attribute_path_element> &paths)
 {
+  size_t paths_size = paths.size();
   for (const auto &p: paths) {
-    (*this)(p);
+    // Countdown to know when we are at the end of the vector
+    paths_size -= 1;
+    // If we are not at the end of the path and it is a simple attribute
+    // without subscript, do not add it to the dependencies:
+    if ((paths_size > 0) && (p.which() == 1)) {
+      // p.which() is the index of the type in the attribute_path_element
+      // value 1 means that the variant contains uint32_t value, so an attribute type directly.
+    } else {
+      (*this)(p);
+    }
   }
   return dependencies;
 }

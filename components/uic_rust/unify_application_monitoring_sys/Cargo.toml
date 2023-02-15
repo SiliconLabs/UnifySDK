@@ -1,0 +1,17 @@
+[package]
+name = "unify_application_monitoring_sys"
+version = "0.0.1"
+authors = ["Sergiy Pastukh <sepastuk@silabs.com>"]
+edition = "2021"
+license = "Copyright 2022 Silicon Laboratories Inc. www.silabs.com\nThe licensor of this software is Silicon Laboratories Inc. Your use of this\nsoftware is governed by the terms of Silicon Labs Master Software License\nAgreement (MSLA) available at\nwww.silabs.com/about-us/legal/master-software-license-agreement. This\nsoftware is distributed to you in Source Code format and is governed by the\nsections of the MSLA applicable to Source Code."
+description = "Unify application_monitoring RUST Wrapper"
+
+[lib]
+path = "src/unify_application_monitoring.rs"
+
+[dependencies]
+unify_tools = { path = "../unify_tools" }
+
+[build-dependencies]
+unify_build_utils = { path = "../unify_build_utils" }
+anyhow = "*"

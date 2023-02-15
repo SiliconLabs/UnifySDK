@@ -5,11 +5,15 @@ set(CMOCK_RUBY_EXECUTABLE
     ${RUBY_EXECUTABLE}
     CACHE INTERNAL "")
 
+set(DIR_OF_ADD_MOCK_CMAKE
+    ${CMAKE_CURRENT_LIST_DIR}
+    CACHE INTERNAL "DIR_OF_ADD_MOCK_CMAKE")
+
 # Documentation add_mock(<TARGET_NAME> header1 [header2] ... [headerN]  )
 #
 # Make a mock library using cmake given a list of header files.
 function(ADD_MOCK TARGET)
-  set(CMOCK_DIR "${CMAKE_SOURCE_DIR}/components/testframework/")
+  set(CMOCK_DIR "${DIR_OF_ADD_MOCK_CMAKE}")
 
   set(MOCK_HEADERS ${ARGV})
   # Pop the first argument of the list
@@ -32,22 +36,40 @@ function(ADD_MOCK TARGET)
   endforeach()
 
   list(REMOVE_DUPLICATES MOCK_HEADER_DIRS)
-
-  add_custom_command(
-    OUTPUT ${MOCK_SOURCE_FILES}
-    DEPENDS ${MOCK_HEADER_FILES}
-    COMMAND ${CMOCK_RUBY_EXECUTABLE} ${CMOCK_DIR}/libs/cmock/lib/cmock.rb
-            -o${CMOCK_DIR}/zwave_cmock_config.yml ${MOCK_HEADER_FILES})
-
-  # compiling as shared requires full linkage
-  # i.e. the hooks in unity2 _setup and _teardown are getting resolved at this point
-  # since they are implemented in the test, it will fail. Running mocks as non shared type
-  # suffices.
-  if (NOT APPLE)
-    set(lib_type "SHARED")
+  
+  if(NOT EXISTS ${UNIFY-TESTFRAMEWORK_LOCATION})
+    set(UNIFY-TESTFRAMEWORK_LOCATION ${DIR_OF_ADD_MOCK_CMAKE})
   endif()
 
-  add_library(${TARGET} ${lib_type} ${MOCK_SOURCE_FILES})
+  set(ZWAVE_UNITY_CONFIG ${UNIFY-TESTFRAMEWORK_LOCATION}/zwave_cmock_config.yml)
+
+  if(NOT EXISTS ${ZWAVE_UNITY_CONFIG})
+    message(
+      FATAL_ERROR
+        "Did not find zwave_cmock_config.yml at ${ZWAVE_UNITY_CONFIG}")
+  endif()
+
+  if((EXISTS ${THS-CMOCK_LOCATION}) AND (EXISTS ${THS-UNITY_LOCATION}))    
+    set(UNITY_DIR ${THS-UNITY_LOCATION})
+    add_custom_command(
+      OUTPUT ${MOCK_SOURCE_FILES}
+      DEPENDS ${MOCK_HEADER_FILES}
+      COMMAND
+        UNITY_DIR=${THS-UNITY_LOCATION} ${CMOCK_RUBY_EXECUTABLE}
+        ${THS-CMOCK_LOCATION}/lib/cmock.rb -o${ZWAVE_UNITY_CONFIG}
+        ${MOCK_HEADER_FILES})
+  else()
+    if (NOT EXISTS ${CMOCK_DIR}/libs/cmock/lib/cmock.rb)
+      message(FATAL_ERROR "Did not find cmock.rb.")
+    endif()
+    add_custom_command(
+      OUTPUT ${MOCK_SOURCE_FILES}
+      DEPENDS ${MOCK_HEADER_FILES}
+      COMMAND ${CMOCK_RUBY_EXECUTABLE} ${CMOCK_DIR}/libs/cmock/lib/cmock.rb
+              -o${CMOCK_DIR}/zwave_cmock_config.yml ${MOCK_HEADER_FILES})
+  endif()
+
+  add_library(${TARGET} ${MOCK_SOURCE_FILES})
   target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/mocks
                                               ${MOCK_HEADER_DIRS})
   target_link_libraries(${TARGET} PUBLIC cmock)
@@ -63,9 +85,12 @@ function(target_add_mock)
   # first argument is the target to make unit-test exe of.
   list(POP_FRONT ARGV TARGET)
   get_target_property(incl_dirs ${TARGET} INTERFACE_INCLUDE_DIRECTORIES)
-
   set(headers "")
   foreach(dir ${incl_dirs})
+    # strip out any includes that wrapped in BUILD_INTERFACE expressions if present
+    string(REGEX
+           REPLACE "\\s*(:?\\\$<BUILD_INTERFACE:)?([A-Za-z0-9_/\\\${}-]+)>?"
+                   "\\2" dir "${dir}")
     file(GLOB files ${dir}/*.h)
     list(APPEND headers "${files}")
   endforeach()
@@ -74,7 +99,7 @@ function(target_add_mock)
   list(APPEND headers "${ARGV}")
 
   list(LENGTH headers len)
-  if (NOT ${len} EQUAL 0)
+  if(NOT ${len} EQUAL 0)
     add_mock("${TARGET}_mock" ${headers})
     get_target_property(libs ${TARGET} LINK_LIBRARIES)
     foreach(lib ${libs})
@@ -82,13 +107,14 @@ function(target_add_mock)
       # $<TARGET_EXISTS is not robust enough, filter out files with extension.
       # we know already they are not actual cmake targets.
       string(FIND "${lib}" "." found_index REVERSE)
-      if (${found_index} EQUAL -1)
+      if(${found_index} EQUAL -1)
         target_include_directories(
           "${TARGET}_mock"
-          PUBLIC "$<$<TARGET_EXISTS:${lib}>:$<TARGET_PROPERTY:${lib},INTERFACE_INCLUDE_DIRECTORIES>>")
-        endif()
+          PUBLIC
+            "$<$<TARGET_EXISTS:${lib}>:$<TARGET_PROPERTY:${lib},INTERFACE_INCLUDE_DIRECTORIES>>"
+        )
+      endif()
     endforeach()
-    target_compile_options("${TARGET}_mock" PRIVATE "-fPIC")
   else()
     message(WARNING "Nothing to mock for ${TARGET}. no headers found")
     message(WARNING "looked in \"${incl_dirs}\"")

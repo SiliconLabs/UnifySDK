@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Unify Network Management" name="description" />
+<meta content="Network, Management" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Network Management Commands &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/Chapter03-network-management.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Scenario Mapping to Specific PHYs: Z-Wave, BLE and ZigBee" href="Chapter04-scenario-mappings.html" />
+    <link rel="prev" title="2. Dotdot ZCL in Unify Framework for Application Level Control" href="Chapter02-ZCL-in-uic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-applications-overview">Unify Applications Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../UnifySDK.html#resources">Resources</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Unify Specifications</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3. Network Management Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter08-aox-application.html">8. AoX Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter09-binding.html">9. Binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter11-system-metrics.html">11. System Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="network-management-commands">
+<span id="unify-specifications-chapter-network-management"></span><h1><span class="section-number">3. </span>Network Management Commands<a class="headerlink" href="#network-management-commands" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2><span class="section-number">3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>Depending on which PHY/protocol is used, various types of API that can operate the network
+are needed, which makes up <em>network management</em> and includes
+functions such as the following:</p>
+<ul class="simple">
+<li><p>Add/remove nodes to/from a network</p></li>
+<li><p>Security functions (OOB authentication, key exchange selections, and so on)</p></li>
+<li><p>Set up/interview the nodes so that they can be used (for example in Z-Wave,
+it includes setting an association/binding and Wake Up functionalities (poll control))</p></li>
+</ul>
+<p>The network management API must allow any PHY or protocol to set up their
+network properly, so that an application can run without taking the
+PHY into consideration.</p>
+<p>All automatic setup steps that a Protocol Controller does, should actually be
+done without asking IoT Services about how to configure the device.
+If needed or possible, an API for IoT Services can still be used to change
+some of the settings subsequently. For example, a Protocol Controller should
+set up all required bindings in a “default” fashion when including a
+new node in a network. It does not prevent the existence of an API for
+IoT Services to subsequently change bindings, but it would allow clients to
+be PHY agnostic and still be able to leverage the application possibilities.</p>
+</section>
+<section id="generic-apis-for-network-management">
+<h2><span class="section-number">3.2. </span>Generic APIs for Network Management<a class="headerlink" href="#generic-apis-for-network-management" title="Permalink to this heading"></a></h2>
+<p>Two distinct network management categories can be used by IoT Services:</p>
+<ul class="simple">
+<li><p>Network Management</p></li>
+<li><p>SmartStart List Management</p></li>
+</ul>
+<p>Additionally, the following functionality may be made available by Protocol
+Controllers:</p>
+<ul class="simple">
+<li><p>Telemetry data</p></li>
+</ul>
+<p>From an MQTT broker/client perspective, these functionalities categories are mapped
+into topics, as shown in
+<a class="reference internal" href="#table-unify-specifications-network-management-mqtt-topic-space-overview"><span class="std std-numref">Table 3.1</span></a>.</p>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-network-management-mqtt-topic-space-overview" style="width: 50%">
+<caption><span class="caption-number">Table 3.1 </span><span class="caption-text">Network Management MQTT Topic space overview</span><a class="headerlink" href="#table-unify-specifications-network-management-mqtt-topic-space-overview" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 30%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>ZCL Cluster</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/by-unid/+/ProtocolController/NetworkManagement/#</p></td>
+<td><p>Generic network management functionalities such as</p>
+<p>network creation or security setup.</p>
+</td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/ProtocolController/RFTelemetry/#</p></td>
+<td><p>RF telemetry</p></td>
+<td><p>ProtocolController/RFTelemetry (0xFC01)</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/SmartStart/+</p></td>
+<td><p>SmartStart functionality</p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="network-management">
+<h2><span class="section-number">3.3. </span>Network Management<a class="headerlink" href="#network-management" title="Permalink to this heading"></a></h2>
+<p>This functionality enables creating and managing a PAN.
+The API should be usable for any PHY. This is a list of typical
+Network Management operations:</p>
+<ul class="simple">
+<li><p>Add a new node in the network</p></li>
+<li><p>Remove a node from the network</p></li>
+<li><p>Join another network</p></li>
+<li><p>Leave the current network</p></li>
+<li><p>Reset and leave network. (set default)</p></li>
+</ul>
+<p>Some network functionalities may be uninterruptible, meaning that the
+Protocol Controller is basically busy and clients need to wait before they can
+initiate new network management operations. On the other hand, some operations
+can be aborted or transitioned to a new operation on the fly.</p>
+<p>The network management functionality must support additional APIs for security
+and commissioning, shortly after network inclusion:</p>
+<ul class="simple">
+<li><p>Security functions: decide which keys to grant /
+perform out-of-band authentication (input the DSK/PIN digits)</p></li>
+<li><p>Tell the clients when a node interview/commissioning is over and
+can be controlled. (issue a node/endpoint state topic
+(<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/State</span></code>) message (refer to the
+<a class="reference internal" href="Chapter06-service-discovery.html#unify-specifications-chapter-service-discovery"><span class="std std-ref">Service Discovery</span></a>).</p></li>
+</ul>
+<p>Not all functionalities might be available at all times, based on
+individual protocol constraints. For example, the Z-Wave Network Role
+will affect the network management capabilities. Those capabilities may
+change at runtime, so it is important that the API/commands must allow to
+make clients aware what functionalities are currently supported.</p>
+<section id="the-network-management-state-concept">
+<h3><span class="section-number">3.3.1. </span>The Network Management State Concept<a class="headerlink" href="#the-network-management-state-concept" title="Permalink to this heading"></a></h3>
+<p>Typically, network management operations are carried out by a state machine,
+which gets restricted with what it can do based on its current state.
+Therefore, the Network Management API is primarily concerned with
+reading and changing the state of the network management state machine.</p>
+<p>The state machine will at times need additional state parameters to carry
+out operations, which will indicate how to behave in certain scenarios.
+The proposed model is to have a State variable that will take any value
+among an pre-defined enumeration.</p>
+<p>A Protocol Controller will also advertise a <em>SupportedStateList</em>, that will
+advertise the list of values that the State can be changed to or transitioned
+to at the current time.</p>
+<p>When changing to a new State value, if the Protocol Controller needs
+additional parameters to continue the operation, it will publish a
+list of <em>RequestedStateParameters</em>, which is an enumeration of the variables
+needed. For example, if the Protocol Controller is moved to the
+“Remove node” state, it may publish back
+<code class="docutils literal notranslate"><span class="pre">{&quot;RequestedStateParameters&quot;</span> <span class="pre">=</span> <span class="pre">[&quot;Unid&quot;]}</span></code> to indicate that it needs the
+unid of the node to be removed from the network to be added
+in the <em>StateParameters</em> array before it can continue.</p>
+<p>A Client can push additional state parameters variables
+in an array named <em>StateParameters</em>. Examples are given in
+<a class="reference internal" href="#table-unify-specifications-network-management-state-and-other-parameters"><span class="std std-numref">Table 3.2</span></a>.</p>
+<table class="colwidths-given docutils align-left" id="table-unify-specifications-network-management-state-and-other-parameters" style="width: 50%">
+<caption><span class="caption-number">Table 3.2 </span><span class="caption-text">Network Management State and other parameters</span><a class="headerlink" href="#table-unify-specifications-network-management-state-and-other-parameters" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p><strong>Parameter</strong></p></th>
+<th class="head"><p><strong>Type</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="2"><p>State</p></td>
+<td><p>String</p></td>
+<td><p>Current state of the Network Management state machine</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>SupportedStateList</p></td>
+<td><p>array</p></td>
+<td><p>List of values to which the current network state
+(State) can move to from the current state</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>RequestedStateParameters</p></td>
+<td><p>array</p></td>
+<td><p>List of names of parameters that the ProtocolController needs
+a Client to provide in the StateParameters array. If a network
+management function is started with too little or missing mandatory
+StateParameters, this array of strings will indicate back to the
+client that it needs to provide the missing parameter and its value.</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>RequestedStateParameters</p></td>
+<td><p>JSON object</p></td>
+<td><p>JSON object containing key/value parameters, that are provided or
+advertised by the ProtocolController relating to the
+ongoing operation.</p></td>
+</tr>
+<tr class="row-even"><td><p>StateParameters</p></td>
+<td><p>ProvisioningMode</p></td>
+<td><p>string</p></td>
+<td><p>Indicates the type of connection/security that is established
+at the protocol level. It will help a client to know how to
+guide an end-user to fill the security code, preventing formatting
+mistakes from the beginning.</p></td>
+</tr>
+<tr class="row-odd"><td><p>StateParameters</p></td>
+<td><p>UserAccept</p></td>
+<td><p>boolean</p></td>
+<td><p>Posted by the client to indicate if it got a end user to accept
+the connection establishment (e.g. BLE “just work” connection). Set
+to true when the end user accepts the connection. Set to false when
+the end user refuses the connection.</p></td>
+</tr>
+<tr class="row-even"><td><p>StateParameters</p></td>
+<td><p>SecurityCode</p></td>
+<td><p>string</p></td>
+<td><p>This represents the pin code or out of band authentication input
+by the end user. A client needs to provide this information to the
+Protocol Controller to proceed with the security setup. Clients can
+help end users with the format of the SecurityCode by looking at the
+ProvisioningMode. If no provisioning mode is provided or if it is
+unknown, a client would typically show a free text field to users for
+input of the Security Code.</p></td>
+</tr>
+<tr class="row-odd"><td><p>StateParameters</p></td>
+<td><p>Unid</p></td>
+<td><p>string</p></td>
+<td><p>Unid of the node for which the network management
+operation will apply.</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>ClusterRevision</p></td>
+<td><p>number</p></td>
+<td><p>Version of the cluster/payload that the Protocol Controller is
+supporting. This field MUST be set to 1 at the moment. Future
+revisions of the Unify specification may add new functionalities and
+increment this value.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mqtt-topics-and-parameters">
+<h3><span class="section-number">3.3.2. </span>MQTT Topics and Parameters<a class="headerlink" href="#mqtt-topics-and-parameters" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-network-management-mqtt-topics" style="width: 80%">
+<caption><span class="caption-number">Table 3.3 </span><span class="caption-text">Network Management MQTT Topics</span><a class="headerlink" href="#table-unify-specifications-network-management-mqtt-topics" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/by-unid/+/ProtocolController/NetworkManagement</p></td>
+<td><p>Read/report the current network management state and its associated parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/ProtocolController/NetworkManagement/Write</p></td>
+<td><p>Attempt to change the the network management state with additional/optional state parameters</p></td>
+</tr>
+</tbody>
+</table>
+<p>The State value and additional parameters are part of the MQTT publish
+message payload. The state parameter indicates if the actual Protocol
+Controller is carrying out an operation.  This is an overview of the identified
+State values and example of additional parameters in the MQTT payload.
+This list can be expanded to fit all protocols.</p>
+<section id="state-value-examples">
+<h4><span class="section-number">3.3.2.1. </span>State value examples<a class="headerlink" href="#state-value-examples" title="Permalink to this heading"></a></h4>
+<section id="idle">
+<h5><span class="section-number">3.3.2.1.1. </span>idle<a class="headerlink" href="#idle" title="Permalink to this heading"></a></h5>
+<p>The network management state machine is idle and ready to carry operations</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;idle&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;idle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;add node&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;remove node&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;join network&quot;</span><span class="p">,</span><span class="w">  </span><span class="s2">&quot;leave network&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;reset&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="add-node">
+<h5><span class="section-number">3.3.2.1.2. </span>add node<a class="headerlink" href="#add-node" title="Permalink to this heading"></a></h5>
+<p>Include a new node into the network.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add node&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;StateParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;ProvisioningMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZWaveDSK&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;UserAccept&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;SecurityCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;26277-50093-58391-05165-27397-27368-37969-16601&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;idle&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;RequestedStateParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;UserAccept&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;AllowMultipleInclusions&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note: AllowMultipleInclusions - set to true if add node mode should remain
+active after the first node is added. State must be explicitly set to
+idle when no more node additions are desired.</p>
+</section>
+<section id="remove-node">
+<h5><span class="section-number">3.3.2.1.3. </span>remove node<a class="headerlink" href="#remove-node" title="Permalink to this heading"></a></h5>
+<p>Remove any node from the network.
+Removing a particular node can be triggered from the node State topic using
+“Remove” command as described in the “Network management for individual nodes”
+section. In this case, the “StateParameters” JSON object will indicate which
+particular node is attempted to be removed.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;remove node&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;StateParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;idle&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="join-network">
+<h5><span class="section-number">3.3.2.1.4. </span>join network<a class="headerlink" href="#join-network" title="Permalink to this heading"></a></h5>
+<p>Join a new network.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;join network&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;StateParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;ProvisioningMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZWaveDSK&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;SecurityCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;26277-50093-58391-05165-27397-27368-37969-16601&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;idle&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="leave-network">
+<h5><span class="section-number">3.3.2.1.5. </span>leave network<a class="headerlink" href="#leave-network" title="Permalink to this heading"></a></h5>
+<p>Leave the current network</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;leave network&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="network-repair">
+<h5><span class="section-number">3.3.2.1.6. </span>network repair<a class="headerlink" href="#network-repair" title="Permalink to this heading"></a></h5>
+<p>The Protocol Controller is carrying out some network repair functions,
+such as providing routes for nodes or remove bindings towards nodes
+that have left the network</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;network repair&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="network-update">
+<h5><span class="section-number">3.3.2.1.7. </span>network update<a class="headerlink" href="#network-update" title="Permalink to this heading"></a></h5>
+<p>The Protocol Controller performs a network update,
+which consists in ensuring that it knows which nodes are present in the network,
+and protocol specific information like routing/network topology.
+it can also be distributing the network topology or state to other nodes in the
+network.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;network update&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;idle&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reset">
+<h5><span class="section-number">3.3.2.1.8. </span>reset<a class="headerlink" href="#reset" title="Permalink to this heading"></a></h5>
+<p>The Protocol Controller is resetting to default (and leaving the network).
+It may get offline for a little while.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;reset&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="scan-mode">
+<h5><span class="section-number">3.3.2.1.9. </span>scan mode<a class="headerlink" href="#scan-mode" title="Permalink to this heading"></a></h5>
+<p>The Protocol Controller is looking for nodes to join the network,
+and will provide a list of candidates. No nodes are added yet.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scan mode&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;idle&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="json-schema-for-networkmanagement-topic">
+<h4><span class="section-number">3.3.2.2. </span>JSON Schema for NetworkManagement Topic<a class="headerlink" href="#json-schema-for-networkmanagement-topic" title="Permalink to this heading"></a></h4>
+<p>The NetworkManagement topic MUST follow the following JSON schema:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;NetworkManagementState&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;idle&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;add node&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;remove node&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;join network&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;leave network&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;network repair&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;network update&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;reset&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;scan mode&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;NetworkManagementRequestedStateParameter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;ProvisioningMode&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;UserAccept&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;SecurityCode&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Unid&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;AllowMultipleInclusions&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;NetworkManagementStateParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;ProvisioningMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;UserAccept&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;SecurityCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;AllowMultipleInclusions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Protocol Controller Network Management Properties&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Current state of the Protocol Controller Network management&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;State&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/NetworkManagementState&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;SupportedStateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/NetworkManagementState&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;RequestedStateParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/NetworkManagementRequestedStateParameter&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;StateParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/NetworkManagementStateParameters&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^0x[0-9a-fA-F]+&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;State&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;SupportedStateList&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-including-a-new-node">
+<h4><span class="section-number">3.3.2.3. </span>Example: Including a New Node<a class="headerlink" href="#example-including-a-new-node" title="Permalink to this heading"></a></h4>
+<p>The diagram below shows an example of an MQTT Client and Protocol
+Controller going through a Network Inclusion, initiated by somebody else
+than the MQTT Client. The “SupportedStateList” parameter that is used for
+allowed state transitions is not shown in the example below.</p>
+<p>The JSON payload of the MQTT publish message is sometimes simplified for
+readability, for example it does not contain the <em>SupportedStateList</em>
+parameter, showing allowed <em>State</em> transitions.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-084d63d1de174bfa6ac14d552fa22156fb431222.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+!pragma teoz true
+
+title Advanced Joining of a Z-Wave S2 node
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;IoT Service&quot; as client
+participant &quot;MQTT Broker&quot; as broker
+participant &quot;Protocol Controller\nunid : 5830&quot; as pc
+participant &quot;PAN Node&quot; as pan_node
+
+pc -&gt; broker: &lt;font color=#0039FB&gt;ucl/by-unid/5830/ProtocolController/NetworkManagement/Write&lt;/font&gt;
+client -&gt; broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/&lt;/font&gt;
+client -&gt; broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/ProtocolController/NetworkManagement&lt;/font&gt;
+
+pc -&gt; broker: &lt;font color=#00003C&gt;ucl/by-unid/5830/ProtocolController/NetworkManagement\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;:&quot;idle&quot;}&lt;/font&gt;
+&amp; broker -&gt; client
+
+rnote left of client: Initiates \ninclusion
+client -&gt; broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/5830/ProtocolController/NetworkManagement/Write \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;State&quot;:&quot;add node&quot;}
+&amp; broker -&gt; pc
+
+pc -&gt; broker: &lt;font color=#00003C&gt;ucl/by-unid/5830/ProtocolController/NetworkManagement\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;:&quot;add node&quot;}
+&amp; broker -&gt; client
+
+rnote over pc, pan_node: Adds the node\ninto the network
+pc -&gt; broker: &lt;font color=#00003C&gt;ucl/by-unid/46813/State\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;NetworkStatus&quot;: &quot;Online interviewing&quot;,\n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;None&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 0}
+&amp; broker -&gt; client
+
+rnote left of client: The publication on\nthe new node UNID\n confirms that a new\n node is joining
+
+rnote over pc, pan_node: Security bootstrapping\nstarts
+
+pc -&gt; client: &lt;font color=#00003C&gt;ucl/by-unid/5830/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;: &quot;add node&quot;,\n&lt;font color=#00003C&gt;&lt;b&gt;&quot;StateParameters&quot;: {&quot;ProvisioningMode&quot;: &quot;ZWaveDSK&quot;,\n&lt;font color=#00003C&gt;&lt;b&gt;&quot;SecurityCode&quot;: &quot;xxxxx-00388-61481-49494-17761-06413-32760-21616&quot;},\n&lt;font color=#00003C&gt;&lt;b&gt;&quot;RequestedStateParameters&quot;: [&quot;SecurityCode&quot;,&quot;UserAccept&quot;,&quot;AllowMultipleInclusions&quot;]}
+
+client -&gt; pc: &lt;font color=#6C2A0D&gt;ucl/by-unid/5830/ProtocolController/NetworkManagement/Write\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;State&quot;:&quot;add node&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;StateParameters&quot;:{&quot;UserAccept&quot;:true,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;SecurityCode&quot;:&quot;11111-00388-61481-49494-17761-06413-32760-21616&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;AllowMultipleInclusions&quot;:false}}
+
+rnote left of client: Client provides\nSecurity authentication
+rnote over pc, pan_node: Security bootstrapping\ncompletes
+
+pc -&gt; broker: &lt;font color=#00003C&gt;ucl/by-unid/5830/ProtocolController/NetworkManagement\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;:&quot;idle&quot;}&lt;/font&gt;
+&amp; broker -&gt; client
+
+pc -&gt; broker: &lt;font color=#00003C&gt;ucl/by-unid/46813/State\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;NetworkStatus&quot;: &quot;Online interviewing&quot;,\n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Authenticated&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 0}
+&amp; broker -&gt; client
+
+rnote left of client: Client knows that\nthe node operates securely
+
+rnote over pc, pan_node: Application level\ninterview
+
+pc -&gt; broker: &lt;font color=#00003C&gt;ucl/by-unid/46813/State\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;NetworkStatus&quot;: &quot;Online functional&quot;,\n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Authenticated&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 0}
+&amp; broker -&gt; client
+
+rnote left of client: Client knows that\nthe node can be controlled
+
+== Node is now ready to be operated ==
+== Protocol Controller can publish ZCL Cluster servers =="/>
+</p>
+</section>
+<section id="example-using-the-supportedstatelist-for-state-transitions">
+<h4><span class="section-number">3.3.2.4. </span>Example: Using the SupportedStateList for State Transitions<a class="headerlink" href="#example-using-the-supportedstatelist-for-state-transitions" title="Permalink to this heading"></a></h4>
+<p><a class="reference internal" href="#figure-network-management-using-supported-state-list-for-transitions"><span class="std std-numref">Figure 3.1</span></a>
+shows an example of an MQTT Client changing the network management state of
+a Protocol Controller.</p>
+<figure class="align-center" id="figure-network-management-using-supported-state-list-for-transitions" style="width: 80%">
+<img alt="Network Management: State transitions" src="../../_images/using_supported_state_list_for_transitions.png" />
+<figcaption>
+<p><span class="caption-number">Figure 3.1 </span><span class="caption-text">Network Management: State transitions</span><a class="headerlink" href="#figure-network-management-using-supported-state-list-for-transitions" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="network-management-for-individual-nodes">
+<h4><span class="section-number">3.3.2.5. </span>Network Management for Individual Nodes<a class="headerlink" href="#network-management-for-individual-nodes" title="Permalink to this heading"></a></h4>
+<p>Protocol Controllers may have network management functionalities that will
+affect a given node in the PAN. It is not always possible for an IoT Service
+to be sure about which Protocol Controller services which PAN node.</p>
+<p>Therefore, some of the network management functionalities will be located under
+the state of the node themselves.</p>
+<p>&gt; Topic: <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/State/SupportedCommands</span></code></p>
+<p>&gt; Topic: <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/State/Commands/&lt;CommandName&gt;</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The State is located directly under the UNID and not under endpoints.</p>
+</div>
+<p>As for most other clusters, the SupportedCommands will be an array of
+supported commands, which can be issued by IoT Services under the Commands
+topic namespace.</p>
+<p>When an IoT service issues a State Command using
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/State/Commands/&lt;CommandName&gt;</span></code>, the effect
+of the command may be published in either:</p>
+<ul class="simple">
+<li><p>The servicing ProtocolController network management state: <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ProtocolController/NetworkManagement</span></code></p></li>
+<li><p>The node state itself: <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/State</span></code></p></li>
+</ul>
+<p>Protocol Controllers SHOULD NOT update the list of SupportedCommands under a
+node state topic (<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/State/SupportedCommands</span></code>)
+based on their current NetworkManagement State.
+An IoT service publishing a command under the state of a particular node
+MAY observe no publication back, in case the corresponding Protocol Controller
+is busy carrying another action. IoT services SHOULD abstain from issuing node
+state commands if any Protocol Controller is carrying some network management
+operations.</p>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-network-management-commands-for-individual-nodes" style="width: 50%">
+<caption><span class="caption-number">Table 3.4 </span><span class="caption-text">Network management commands for individual nodes</span><a class="headerlink" href="#table-unify-specifications-network-management-commands-for-individual-nodes" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Remove</p></td>
+<td><p>This command is used to trigger a removal of a specific node from the</p>
+<p>network. The Protocol Controller MUST NOT perform removal of the node</p>
+<p>without the node’s consent.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>RemoveOffline</p></td>
+<td><p>This command is used to trigger a removal of a node which is in “Offline”</p>
+<p>state from a given network. The Protocol Controller MUST perform removal</p>
+<p>of the node without the offline node’s consent.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>DiscoverNeighbors</p></td>
+<td><p>This command is used to request a node to perform a new neighbor discovery.</p>
+<p>The information or end-result associated to this operation may not be</p>
+<p>visible to IoT Services.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Interview</p></td>
+<td><p>This command is used to instruct a Protocol Controller to interview a</p>
+<p>node, i.e. discover its capabilities and state.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The protocol controllers MUST advertise the list of SupportedCommands under a
+node state topic if they support the functionalities.</p>
+<p>For operations that are blocking other NetworkManagement operations for a
+Protocol Controller, the effect of the command MUST be reflected on the
+ProtocolController/NetworkManagement state.</p>
+</section>
+<section id="remove-command">
+<h4><span class="section-number">3.3.2.6. </span>Remove Command<a class="headerlink" href="#remove-command" title="Permalink to this heading"></a></h4>
+<p>The Protocol Controller MUST change its Network Management state to <em>remove node</em>
+when it is trying to remove a node. If it tries to remove a single node,
+The Protocol Controller MAY advertise the UNID of this particular node in the
+<em>StateParameters</em> object.</p>
+<p>For example, if a Protocol Controller supports removing a particular node,
+the MQTT publications could look like this:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-7408b1d2ce5cfbdf61062a2b11ce761ef3744aba.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Initiating a Network Management command (Remove) on a node itself (1)
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller\nunid: zw-0001&quot; as protocol_controller
+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/+/Commands/+&lt;/font&gt;
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Commands/+&lt;/font&gt;
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/zw-0001/ProtocolController\n&lt;font color=#0039FB&gt;/NetworkManagement/Write&lt;/font&gt;
+
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State/SupportedCommands&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/ProtocolController/NetworkManagement&lt;/font&gt;
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online functional&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: [&quot;Remove&quot;,&quot;RemoveOffline&quot;,&quot;Interview&quot;,&quot;DiscoverNeighbors&quot;]}&lt;/b&gt;
+
+== IoT Service wishes to initiate node removal ==
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/State/Commands/Remove
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-0001/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;: &quot;remove node&quot;, &quot;StateParameters&quot;: \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;Unid&quot;: &quot;zw-1234&quot; },&quot;SupportedStateList&quot;: [ &quot;idle&quot; ]} &lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== IoT Service wishes to interrupt node removal ==
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-0001/ProtocolController/NetworkManagement/Write \n &lt;font color=#6C2A0D&gt; &lt;b&gt;{&quot;State&quot;: &quot;idle&quot;}
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-0001/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;:  [&quot;idle&quot;, &quot;add node&quot; ,\n&lt;font color=#00003C&gt;&lt;b&gt; &quot;remove node&quot;, &quot;join network&quot;, &quot;leave network&quot;, &quot;reset&quot; ]} &lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service"/>
+</p>
+</section>
+<section id="removeoffline-command">
+<h4><span class="section-number">3.3.2.7. </span>RemoveOffline Command<a class="headerlink" href="#removeoffline-command" title="Permalink to this heading"></a></h4>
+<p>The Protocol Controller MUST change its Network Management state to <em>remove node</em>
+when it is trying to remove a node that is offline. The Protocol Controller MAY
+advertise the UNID of this particular node in the <em>StateParameters</em> object.</p>
+<p>If a Protocol Controller supports removing an offline node,
+the MQTT publications could look like this:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-80665dbfc15f5a6b0645247dabac7009a629a273.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Initiating a Network Management command (RemoveOffline) on a node itself (2)
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller\nunid: zw-0001&quot; as protocol_controller
+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/+/Commands/+&lt;/font&gt;
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Commands/+&lt;/font&gt;
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/zw-0001/ProtocolController\n&lt;font color=#0039FB&gt;/NetworkManagement/Write&lt;/font&gt;
+
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State/SupportedCommands&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/ProtocolController/NetworkManagement&lt;/font&gt;
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Offline&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;:[&quot;Remove&quot;,&quot;RemoveOffline&quot;,&quot;Interview&quot;,&quot;DiscoverNeighbors&quot;]}&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== IoT Service wishes to initiate offline node removal ==
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/State/Commands/RemoveOffline
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-0001/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;: &quot;remove node&quot;, &quot;StateParameters&quot;: \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;Unid&quot;: &quot;zw-1234&quot; },&quot;SupportedStateList&quot;: [ &quot;idle&quot; ]} &lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== IoT Service wishes to interrupt offline node removal ==
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-0001/ProtocolController/NetworkManagement/Write \n &lt;font color=#6C2A0D&gt; &lt;b&gt;{&quot;State&quot;: &quot;idle&quot;}
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-0001/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;:  [&quot;idle&quot;, &quot;add node&quot; ,\n&lt;font color=#00003C&gt;&lt;b&gt; &quot;remove node&quot;, &quot;join network&quot;, &quot;leave network&quot;, &quot;reset&quot; ]} &lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service"/>
+</p>
+</section>
+<section id="discoverneighbors-command">
+<h4><span class="section-number">3.3.2.8. </span>DiscoverNeighbors Command<a class="headerlink" href="#discoverneighbors-command" title="Permalink to this heading"></a></h4>
+<p>The effect of the command will not be reflected anywhere as the process is
+non blocking for Protocol Controller and transparent for both IOT Service
+and MQTT broker. Multiple requests of this command will be handled
+intelligently (queued or discarded) in the Protocol Controller to not
+flood the node. In the case of the DiscoverNeighbor command, the
+Protocol Controller servicing the PAN node will continue its State topic
+to show “Online”, while the new neighbor discovery is in progress on the node.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-c6deebd7a31eb402dc6c9e977347c4267134c342.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Initiating a Network Management command (DiscoverNeighbors) on a node itself (3)
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller&quot; as protocol_controller
+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/+/Commands/+&lt;/font&gt;
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Commands/+&lt;/font&gt;
+
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State/SupportedCommands&lt;/font&gt;
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online functional&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: [&quot;Remove&quot;, &quot;Remove offline node&quot;, &quot;Interview&quot;, &quot;DiscoverNeighbors&quot;]}&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== IoT Service wishes to initiate Discover Neighbors==
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/State/Commands/DiscoverNeighbors"/>
+</p>
+</section>
+<section id="interview-command">
+<h4><span class="section-number">3.3.2.9. </span>Interview Command<a class="headerlink" href="#interview-command" title="Permalink to this heading"></a></h4>
+<p>For operations that are not blocking and can be run in the background,
+the effect of the command will be reflected on the PAN node state topic
+NetworkStatus.
+It can for example change to “Unavailable” or “Online Interviewing”, until the
+node is ready to be operational again.
+For the Interview command, the ProtocolController servicing the
+PAN node will change its State topic to show “Online Interviewing”, until the
+interview is completed:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-c1d2573829e3d2c4c03cad25c0cdff202a5c2cde.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Initiating a Network Management command (Interview) on a node itself (3)
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller&quot; as protocol_controller
+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/+/Commands/+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Commands/+
+
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State/SupportedCommands
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online functional&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;:[&quot;Remove&quot;,&quot;RemoveOffline&quot;,&quot;Interview&quot;,&quot;DiscoverNeighbors&quot;]}&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/State/Commands/Interview
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online interviewing&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== When the operation is completed ==
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online functional&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service"/>
+</p>
+</section>
+</section>
+</section>
+<section id="smartstart-management">
+<h2><span class="section-number">3.4. </span>SmartStart Management<a class="headerlink" href="#smartstart-management" title="Permalink to this heading"></a></h2>
+<p>This functionality is about keeping a list of pre-provisioned devices that
+should be added to a (specific) PAN automatically when they are detected.
+Once again, this functionality should be applicable to any Protocol
+Controller, regardless of the future PHY. For this reason, it is considered
+to have a single consolidated list that is shared among all Protocol Controllers.</p>
+<p>This functionality is not necessary to get networks created, but it is a
+huge help in unifying the network setup process and should be added to
+the system as soon as possible.</p>
+<section id="smartstart-parameters">
+<h3><span class="section-number">3.4.1. </span>SmartStart Parameters<a class="headerlink" href="#smartstart-parameters" title="Permalink to this heading"></a></h3>
+<p>The SmartStart list is a list of entries with associated information that
+will enable a Protocol Controller to uniquely identify a device and include it securely.</p>
+<table class="docutils align-left" id="table-unify-specifications-smartstart-list-parameters" style="width: 95%">
+<caption><span class="caption-number">Table 3.5 </span><span class="caption-text">SmartStart list parameters</span><a class="headerlink" href="#table-unify-specifications-smartstart-list-parameters" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Parameter</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SmartStart</p>
+<p>list</p>
+</td>
+<td><p>This parameter will be a JSON Array of SmartStart entries,</p>
+<p>representing each a unique device that will join the network.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>SmartStart entry</p></td>
+<td><p>Each SmartStart entry will be represented as a JSON object</p></td>
+</tr>
+<tr class="row-even"><td><p>SmartStart entry::DSK</p></td>
+<td><p>This is the Device Specific Key, which is used both for unique
+identification of the device and secure key exchange or out-of-band
+authentication. Its format can be one of the following:
+* 8 groups of 5 decimal characters separated by hyphens
+* 16/18/22/26 groups of 2 hexadecimal characters separated by hyphens
+For example “11-22-33-44-55-66-77-88-99-00-AA-BB-CC-DD-EE-FF” for a
+16-group hexadecimal DSK. This type is often used in Zigbee nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SmartStart entry::Include</p></td>
+<td><p>This parameter is used to indicate if the device identified by the
+DSK in the SmartStart entry must be included into the network.
+MQTT Clients may want to keep a device in the SmartStart list
+even if it should not be included immediately. In this case, they
+can set this parameter to false and Protocol Controllers will not
+include the device when they detect its presence.</p></td>
+</tr>
+<tr class="row-even"><td><p>SmartStart entry::ProtocolControllerUnid</p></td>
+<td><p>This parameter is used to indicate which protocol controller is to
+include the device identified by the DSK in this SmartStart entry.
+This can be important if several Protocol Controllers sharing the
+same PHY are subscribed to the list, so that they do not both attempt
+to include the same node at the same time. This variable is optional
+to add in a SmartStart entry. An empty value
+(ProtocolControllerUnid=””) must indicate that any protocol
+controller must try to include the device.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SmartStart entry::Unid</p></td>
+<td><p>This parameter is used to advertise which unid has been assigned to
+the SmartStart entry. It must be set to an empty string or omitted
+when an MQTT client creates/add an entry to the SmartStart list.
+Once the device or node has joined the network, the Protocol
+Controller that performed the inclusion publishes back the actual
+assigned UNID of the node.</p></td>
+</tr>
+<tr class="row-even"><td><p>SmartStart entry::PreferredProtocols</p></td>
+<td><p>This parameter is a prioritized list and is used to indicate the
+preferred protocols for inclusion, the first element being the
+highest priority. During a SmartStart inclusion, the protocol
+controller will then initiate the inclusion with the protocol of
+highest priority that is supported by the node. This parameter can be
+useful in case multiple protocols are supported by the node. This
+parameter can be omitted in a JSON payload when an MQTT client
+creates/adds an entry to the SmartStart list so there will be no
+preferences on the protocols for inclusion. An empty list is
+considered as omitted.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SmartStart entry::ManualInterventionRequired</p></td>
+<td><p>This parameter is used to indicate if the device identified by the
+DSK requires a manual intervention to be included in the network.
+Protocol Controllers MUST set this to true when the node needs manual
+intervention to be included. If there are multiple Protocol
+Controllers for the same PHY connected to same Unify GW then a
+special case can arise: The end node may be included to first
+Protocol Controller while from the viewpoint of second Protocol
+Controller manual intervention is required to exclude from first
+Protocol Controller and add it to second Protocol Controller instead.
+To deal with this, a Protocol Controller MUST NOT request manual
+intervention for a node already included by another Protocol
+Controller on the same Unify GW (connected to same broker). A
+Protocol Controller MUST NOT set ManualInterventionRequired to true
+if the UNID field is non-empty (indicating that the other PC has
+included the node). A Protocol Controller MUST NOT set
+ManualInterventionRequired to true if a ProtocolControllerUnid
+different from its own is specified for the SmartStart entry. When
+the node is added to the Protocol Controllers own network, Protocol
+Controller SHOULD NOT publish this parameter. If this parameter is
+not present, the IoT Service can assume that its default value is
+false. IoT Services MUST NOT publish this parameter. IoT Services
+SHOULD use this parameter to guide the user for manual intervention
+of the device and allow it to join the network. Protocol Controllers
+MUST set it to FALSE when it could include the node successfully
+after Manual intervention.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="smartstart-commissionable-list">
+<h3><span class="section-number">3.4.2. </span>SmartStart Commissionable List<a class="headerlink" href="#smartstart-commissionable-list" title="Permalink to this heading"></a></h3>
+<p>The SmartStart Commissionable list is a list of devices discovered by IoT
+services or protocol controllers which are open for commissioning using Unify
+SmartStart or some other channel (Like Matter Commissioning). For protocols like
+Bluetooth, these could be devices discovered by Bluetooth device discovery. In
+Z-Wave, this list may contain devices that are not yet in the SmartStart list
+but have been found by a Z-Wave protocol controller. A user interface should
+have a page where the entries of this list will be shown.</p>
+<p>The topic pattern for the list is <cite>ucl/SmartStart/CommissionableDevice/&lt;UUID&gt;</cite>,
+the <cite>&lt;UUID&gt;</cite> string should be a unique string identifying the device, but this
+should not be presented to the user. The <cite>&lt;UUID&gt;</cite> string may be that QRCode or
+the DSK itself. Only the QRCode or DSK from the JSON payload should be
+presented.</p>
+<table class="docutils align-left" id="table-unify-specifications-commissionable-list-parameters" style="width: 95%">
+<caption><span class="caption-number">Table 3.6 </span><span class="caption-text">Commissionable list parameters</span><a class="headerlink" href="#table-unify-specifications-commissionable-list-parameters" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Parameter</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Commissionable</p></td>
+<td><p>This parameter will be a JSON Object, with meta information related
+to device commissioning, like a QR code or similar</p></td>
+</tr>
+<tr class="row-odd"><td><p>Commissionable::QRCode</p></td>
+<td><p>(optional String ) QR Code of the device to include, the exact format
+of the QR Code is device dependent</p></td>
+</tr>
+<tr class="row-even"><td><p>Commissionable::DSK</p></td>
+<td><p>(Optional String) Smart start list compatible DSK
+QR Code is device dependent</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mqtt-topics">
+<h3><span class="section-number">3.4.3. </span>MQTT Topics<a class="headerlink" href="#mqtt-topics" title="Permalink to this heading"></a></h3>
+<p>The MQTT topics for the SmartStart list are as follows. The list of
+parameters for each entry is an example and can be subsequently refined
+to be use case-specific.</p>
+<section id="json-schema-for-the-smartstart-provisioning-list">
+<h4><span class="section-number">3.4.3.1. </span>JSON Schema for the SmartStart provisioning list<a class="headerlink" href="#json-schema-for-the-smartstart-provisioning-list" title="Permalink to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;SmartStart Entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;DSK&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;Include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ProtocolControllerUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;PreferredProtocols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="s2">&quot;Z-Wave Long Range&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="s2">&quot;Z-Wave&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ManualInterventionRequired&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;DSK&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Include&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;ProtocolControllerUnid&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Unid&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SmartStart List&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;List of SmartStart entries&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/SmartStart Entry&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;value&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="json-schema-for-commissionable-devices">
+<h4><span class="section-number">3.4.3.2. </span>JSON Schema for Commissionable Devices<a class="headerlink" href="#json-schema-for-commissionable-devices" title="Permalink to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Comissionable Device&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;DSK&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;QRCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;DSK&quot;</span><span class="p">]},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;QRCode&quot;</span><span class="p">]}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>An overview of the topics used for the SmartStart functionality is shown in
+<a class="reference internal" href="#table-unify-specifications-network-management-mqtt-topic-space-overview"><span class="std std-numref">Table 3.1</span></a>.</p>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-smart-start-mqtt-topic-space-overview" style="width: 90%">
+<caption><span class="caption-number">Table 3.7 </span><span class="caption-text">SmartStart MQTT Topics space overview</span><a class="headerlink" href="#table-unify-specifications-smart-start-mqtt-topic-space-overview" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Parameters/payload example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/SmartStart/List</p></td>
+<td><p>Used to publish</p>
+<p>the current SmartStart</p>
+<p>list (read-only)</p>
+</td>
+<td><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;DSK&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24859-64107-46202-12845-60475-62452-54892-59867&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Include&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ProtocolControllerUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zw-3849520&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;PreferredProtocols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;Z-Wave Long Range&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Z-Wave&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;DSK&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29304-00703-03201-39471-03987-12013-63902-39874&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Include&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ProtocolControllerUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/SmartStart/List/Update</p></td>
+<td><p>Adds or modifies a SmartStart entry</p></td>
+<td><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;DSK&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24859-64107-46202-12845-60475-62452-54892-59867&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Include&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ProtocolControllerUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zw-3849520&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5896549&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;PreferredProtocols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Z-Wave&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Z-Wave Long Range&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If an entry is updated, all omitted variables from
+the SmartStart entry object stay unchanged in the list.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>ucl/SmartStart/List/Remove</p></td>
+<td><p>Removes a SmartStart entry from the list</p></td>
+<td><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;DSK&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24859-64107-46202-12845-60475-62452-54892-59867&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/SmartStart/CommissionableDevice/MT:-24J0AFN00KA0648G00</p></td>
+<td><p>When a device is commissionable this topic should be published with
+the retained flag set. When a device is no longer commissionable this
+topic should be unretained.</p>
+<p><em>note</em> that the last part of the topic is just an identifier
+it does not need to be identical to the QRCode payload.</p>
+</td>
+<td><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;QRCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MT:-24J0AFN00KA0648G00&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To avoid duplicating the list many times and publishing it to all, a
+dedicated MQTT Client has to do the house keeping for the SmartStart
+list, keep all inputs from other MQTT Clients and Protocol Controllers,
+and merge them into a single list that gets redistributed to all subscribers.
+The MQTT broker has to make sure that a single client has the right to
+publish to the <code class="docutils literal notranslate"><span class="pre">ucl/SmartStart/List</span></code> topic.</p>
+<p>Both ProtocolControllers and MQTT clients may change things in the
+SmartStart list, using the <em>Update</em> and <em>Remove</em> topics. Accepting the
+<em>Update</em> and <em>Remove</em> commands is up to the MQTT Client in charge of the
+SmartStart list.</p>
+<p>The interactions are shown in
+<a class="reference internal" href="#figure-smart-start-list-manager-mqtt-client"><span class="std std-numref">Figure 3.2</span></a>.</p>
+<figure class="align-center" id="figure-smart-start-list-manager-mqtt-client" style="width: 80%">
+<img alt="SmartStart list manager MQTT client" src="../../_images/SmartStart_list_manager_MQTT_client.png" />
+<figcaption>
+<p><span class="caption-number">Figure 3.2 </span><span class="caption-text">SmartStart list manager MQTT client</span><a class="headerlink" href="#figure-smart-start-list-manager-mqtt-client" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="example-adding-a-node-using-smartstart">
+<h4><span class="section-number">3.4.3.3. </span>Example: Adding a Node Using SmartStart<a class="headerlink" href="#example-adding-a-node-using-smartstart" title="Permalink to this heading"></a></h4>
+<p>The figure below shows an example of a SmartStart based node inclusion
+into a PAN.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-8abfd51d6dcc07bf11966d0bc2d97497a8c0b28e.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;SmartStart Provisioning List \nMQTT Client&quot; as upvl
+participant &quot;IoT Service&quot; as dev_ui
+participant &quot;Protocol Controller\nunid: zw-0001&quot; as protocol_controller
+participant &quot;PAN Node&quot; as pan_node
+
+rnote over dev_ui: Add a new node in \nthe Provisioning List
+dev_ui -&gt; upvl: &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update\n {&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n&quot;Unid&quot;:&quot;&quot;,\n&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n&quot;Include&quot;: true}
+rnote over upvl: Accepts the \nupdate and \npublishes it back
+upvl -&gt; dev_ui: &lt;font color=#00003C&gt;ucl/SmartStart/List\n {&quot;value&quot;:[{\n\t&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n\t&quot;Unid&quot;: &quot;&quot;,\n\t&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n\t&quot;Include&quot;: true}]}
+&amp; upvl -&gt; protocol_controller
+
+rnote over protocol_controller, pan_node: Node is included
+rnote over protocol_controller: Update the SmartStart \nlist entry with new info
+protocol_controller -&gt; upvl: &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update\n {&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n&quot;Unid&quot;: &quot;123456&quot;}
+rnote over upvl: Accepts the \nupdate and \npublishes it back
+upvl-&gt; dev_ui: &lt;font color=#00003C&gt; ucl/SmartStart/List\n {&quot;value&quot;:[{\n\t&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n\t&quot;Unid&quot;:&quot;123456&quot;,\n\t&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n\t&quot;Include&quot;: true}]}
+&amp; upvl-&gt; protocol_controller:
+
+rnote over dev_ui: Remove the node \nfrom Provisioning list
+dev_ui -&gt; upvl:  &lt;font color=#6C2A0D&gt; ucl/SmartStart/List/Remove \n {&quot;DSK&quot;: &quot;24859-64107-46202&quot;}
+rnote over upvl: Accepts the \nupdate and \npublishes it back
+upvl -&gt; dev_ui: &lt;font color=#00003C&gt; ucl/SmartStart/List\n { &quot;value&quot;: [] }
+&amp; upvl -&gt; protocol_controller
+rnote over protocol_controller: The node stays in the \nnetwork but will not \nbe reincluded automatically"/>
+</p>
+</section>
+<section id="example-adding-a-node-using-smartstart-while-the-node-requires-manual-intervention-to-enable-to-be-included">
+<h4><span class="section-number">3.4.3.4. </span>Example: Adding a Node Using SmartStart, while the Node Requires Manual Intervention to Enable to be Included<a class="headerlink" href="#example-adding-a-node-using-smartstart-while-the-node-requires-manual-intervention-to-enable-to-be-included" title="Permalink to this heading"></a></h4>
+<p>For example, in a Z-Wave network, manual intervention needed indicates that
+the end node needs to be excluded from another network before it can be
+included in a new network.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-c11cf9db5ff782c553ffe1a0c030e7478e483c88.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;SmartStart Provisioning List \nMQTT Client&quot; as upvl
+participant &quot;IoT Service&quot; as dev_ui
+participant &quot;Protocol Controller\nunid: zw-0001&quot; as protocol_controller
+participant &quot;PAN Node&quot; as pan_node
+
+rnote over dev_ui: Add a new node in \nthe Provisioning List
+dev_ui -&gt; upvl: &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update \n{\n&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n&quot;Unid&quot;:&quot;&quot;,\n&quot;ProtocolControllerUnid&quot;:&quot;&quot;, \n&quot;Include&quot;: true}
+rnote over upvl: Accepts the \nupdate and \npublishes it back
+upvl -&gt; dev_ui: &lt;font color=#00003C&gt;ucl/SmartStart/List \n{&quot;value&quot;:[{\n\t&quot;DSK&quot;: &quot;24859-64107-46202&quot;, \n\t&quot;Unid&quot;: &quot;&quot;,\n\t&quot;ProtocolControllerUnid&quot;:&quot;&quot;, \n\t&quot;Include&quot;: true}]}
+&amp; upvl -&gt; protocol_controller
+
+rnote over protocol_controller, pan_node: Protocol Controller detects \nthat the node can not \njoin the network as \nit needs manual intervention
+rnote over protocol_controller: Protocol Controller also sees that \n the UNID and ProtocolControllerUnid \nare both empty
+rnote over protocol_controller: Protocol Controller sets\nManualInterventionRequired\nto true
+protocol_controller -&gt; upvl: &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update \n {&quot;DSK&quot;:&quot;24859-64107-46202&quot;,\n&quot;ManualInterventionRequired&quot;:true}
+upvl -&gt; dev_ui: &lt;font color=#00003C&gt;ucl/SmartStart/List \n {&quot;value&quot;:[{\n\t&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n\t&quot;Unid&quot;: &quot;&quot;,\n\t&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n\t&quot;Include&quot;: true, \n\t&quot;ManualInterventionRequired&quot;:true}]}
+&amp; upvl-&gt; protocol_controller
+rnote over dev_ui: User is notified\n For manual intervention
+rnote over dev_ui: User is done\n with manual step\n to allow the node\n to join new network
+rnote over protocol_controller, pan_node: Node is included
+rnote over protocol_controller: Set ManualInterventionRequired \nfalse after successful inclusion
+protocol_controller -&gt; upvl:  &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update \n {&quot;DSK&quot;:&quot;24859-64107-46202&quot;,\n&quot;Unid&quot;:&quot;2485911&quot;,\n&quot;ManualInterventionRequired&quot;: false}
+upvl -&gt; dev_ui: &lt;font color=#00003C&gt;ucl/SmartStart/List \n {&quot;value&quot;:[{\n\t&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n\t&quot;Unid&quot;: &quot;2485911&quot;,\n\t&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n\t&quot;Include&quot;: true,\n\t&quot;ManualInterventionRequired&quot;:false}]}"/>
+</p>
+</section>
+<section id="example-adding-a-node-using-smartstart-while-the-node-is-included-in-other-protocol-controller-s-network-in-unify">
+<h4><span class="section-number">3.4.3.5. </span>Example: Adding a Node Using SmartStart, while the Node is Included in Other Protocol Controller’s Network in Unify<a class="headerlink" href="#example-adding-a-node-using-smartstart-while-the-node-is-included-in-other-protocol-controller-s-network-in-unify" title="Permalink to this heading"></a></h4>
+<p class="plantuml">
+<img src="../../_images/plantuml-7e19639fceccd3933df7618764887284f6872f81.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;SmartStart Provisioning List \nMQTT Client&quot; as upvl
+participant &quot;IoT Service&quot; as dev_ui
+participant &quot;Protocol Controller (PC1)\nunid: zw-0001&quot; as protocol_controller
+participant &quot;PAN Node&quot; as pan_node
+participant &quot;Protocol Controller (PC2) \nunid: zw-0002&quot; as protocol_controller2
+
+rnote over dev_ui: Add a new node in \nthe Provisioning List
+dev_ui -&gt; upvl: &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update \n {&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n&quot;Unid&quot;:&quot;&quot;,\n&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n&quot;Include&quot;: true}
+rnote over upvl: Accepts the \nupdate and \npublishes it back
+upvl -&gt; dev_ui: &lt;font color=#00003C&gt;ucl/SmartStart/List \n {&quot;value&quot;:[{\n\t&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n\t&quot;Unid&quot;: &quot;&quot;,\n\t&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n\t&quot;Include&quot;: true}]}
+&amp; upvl -&gt; protocol_controller
+&amp; upvl -&gt; protocol_controller2
+
+rnote over protocol_controller, pan_node: Node is included
+rnote over protocol_controller: Update the SmartStart \nlist entry with new info
+protocol_controller -&gt; upvl: &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update \n {&quot;DSK&quot;:&quot;24859-64107-46202&quot;,\n&quot;Unid&quot;:&quot;123456&quot;}
+rnote over upvl: Accepts the \nupdate and \npublishes it back
+upvl -&gt; dev_ui: &lt;font color=#00003C&gt;ucl/SmartStart/List \n{&quot;value&quot;:[{\n\t&quot;DSK&quot;: &quot;24859-64107-46202&quot;,\n\t&quot;Unid&quot;: &quot;123456&quot;,\n&quot;ProtocolControllerUnid&quot;:&quot;&quot;,\n\t&quot;Include&quot;: true}]}
+&amp; upvl-&gt; protocol_controller:
+&amp; upvl-&gt; protocol_controller2:
+
+rnote over protocol_controller2: PC2 detects node cannot be\nincluded without manual intervention\n(already included to PC1)
+rnote over protocol_controller2: PC2 sees that \nthe unid is non-empty\nso PC2 DOES NOT set \nManualInterventionRequired to true"/>
+</p>
+</section>
+</section>
+</section>
+<section id="diagnostics">
+<h2><span class="section-number">3.5. </span>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this heading"></a></h2>
+<p>This functionality enables retrieving statistics to assess the network health
+and other properties. It is based on the existing Diagnostics (Cluster ID 0x0B05).</p>
+<p>Refer to the XML file for the list of attributes available in this Cluster.</p>
+<section id="id1">
+<h3><span class="section-number">3.5.1. </span>MQTT Topics and Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-diagnotics-mqtt-topic-space-overview" style="width: 90%">
+<caption><span class="caption-number">Table 3.8 </span><span class="caption-text">Diagnostics MQTT Topics</span><a class="headerlink" href="#table-unify-specifications-diagnotics-mqtt-topic-space-overview" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/by-unid/+/+/Diagnostics/Commands/&lt;CommandName&gt;</p></td>
+<td><p>Command topic space. IoT services can publish under this topic.</p>
+<p>See the XML file for command definitions.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/+/Diagnostics/Attributes/&lt;AttributeName&gt;/Reported</p></td>
+<td><p>Used to publish the standard and additionnal attributes of the cluster.</p>
+<p>See the XML file for standard attributes definitions</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/+/+/Diagnostics/Attributes/&lt;AttributeName&gt;/Desired</p></td>
+<td><p>Used to publish the standard and additionnal attributes of the cluster.</p>
+<p>See the XML file for standard attributes definitions</p>
+<p>See the XML file for attributes definitions</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/+/Diagnostics/SupportedCommands</p></td>
+<td><p>Used to publish the supported commands</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/+/+/Diagnostics/SupportedGeneratedCommands</p></td>
+<td><p>Used to publish the generated commands</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/+/Diagnostics/GeneratedCommands/&lt;CommandName&gt;</p></td>
+<td><p>Topic used to publish generated commands.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="requesting-diagnostics">
+<h4><span class="section-number">3.5.1.1. </span>Requesting Diagnostics<a class="headerlink" href="#requesting-diagnostics" title="Permalink to this heading"></a></h4>
+<p>Protocol Controllers SHOULD request Diagnostics from nodes regularly, but
+the polling interval may be large to minimize traffic. Protocol Controllers
+SHOULD allow IoT Service to request fresh diagnostics data for a
+UNID/Endpoint by advertising the <strong>ForceReadAttributes</strong> command as supported
+for this cluster.</p>
+<p>An IoT Service can ask a Protocol Controller to request updated diagnostics
+data by using the special ForceReadAttributes command.</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;Unid&gt;/Ep&lt;EndPointID&gt;/Diagnostics/Commands/ForceReadAttributes</span> -
+{
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="w"> </span><span class="p">:[]</span>
+}
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="protocolcontroller-rftelemetry">
+<h2><span class="section-number">3.6. </span>ProtocolController/RFTelemetry<a class="headerlink" href="#protocolcontroller-rftelemetry" title="Permalink to this heading"></a></h2>
+<p>RFTelemetry is a telemetry cluster functionality, using a custom XML
+file definition. It uses a Manufacturer specific ZigBee Cluster ID.</p>
+<p>Measurement data about the last RF transmissions will be published under this
+cluster. A TxReport Command will be generated for this cluster at every
+transmission attempt, if the command can be generated and the <em>ReportingEnabled</em>
+attribute is set to true.</p>
+<p>No aggregation is provided for this cluster.</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">Unify_ProtocolController_RFTelemetry.xml</span></code> cluster in the dotdot-xml
+folder provided as part of the Unify SDK.</p>
+<section id="id2">
+<h3><span class="section-number">3.6.1. </span>MQTT Topics and Parameters<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-rf-telemetry-mqtt-topic-space-overview" style="width: 90%">
+<caption><span class="caption-number">Table 3.9 </span><span class="caption-text">RF Telemetry MQTT Topics</span><a class="headerlink" href="#table-unify-specifications-rf-telemetry-mqtt-topic-space-overview" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/by-unid/+/ProtocolController/RFTelemetry/Commands/&lt;CommandName&gt;</p></td>
+<td><p>Command topic space. IoT services can publish under this topic.</p>
+<p>See the XML file for command definitions.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/ProtocolController/RFTelemetry/Attributes/&lt;AttributeName&gt;/Reported</p></td>
+<td><p>Used to publish the standard attributes of the cluster.</p>
+<p>See the XML file for attributes definitions</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/+/ProtocolController/RFTelemetry/Attributes/&lt;AttributeName&gt;/Desired</p></td>
+<td><p>Used to publish the standard attributes of the cluster.</p>
+<p>See the XML file for attributes definitions</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/ProtocolController/RFTelemetry/SupportedCommands</p></td>
+<td><p>Used to publish the supported commands</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/+/ProtocolController/RFTelemetry/SupportedGeneratedCommands</p></td>
+<td><p>Used to publish the generated commands</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/ProtocolController/RFTelemetry/GeneratedCommands/TxReport</p></td>
+<td><p>Topic used to publish the transmission data.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example, the publications for the ProtocolController/RFTelemetry
+could be as follow:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/SupportedCommands</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;WriteAttributes&quot;</span><span class="p">]</span>}
+<span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/SupportedGeneratedCommands</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;TxReport&quot;</span><span class="p">]</span>}
+<span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>}
+<span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/ClusterRevision/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>}
+</pre></div>
+</div>
+<p>If the <em>TxReportEnabled</em> is set to true, the ProtocolController will generate
+an incoming command at every transmission attempt.</p>
+<p>Not all fields may be available for all RF Protocols. A protocol Controller
+MUST use the following values to indicate unknown data for the following
+data types:</p>
+<ul class="simple">
+<li><p><strong>string</strong>: Use the value <em>“”</em></p></li>
+<li><p><strong>uint8</strong>: Use the value <em>0</em></p></li>
+<li><p><strong>int8</strong>: Use the value <em>127</em></p></li>
+</ul>
+<p>For example it could publish:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/GeneratedCommands/TxReport</span>
+{
+<span class="w">  </span><span class="nt">&quot;SourceUNID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zw-DCE2F035-0001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationUNID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zw-DCE2F035-0003&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransmissionSuccessful&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransmissionTimeMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">299</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TxPowerdBm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TxChannel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RoutingAttempts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RouteChanged&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransmissionSpeed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Z-WaveLongRange-100-kbits-per-second&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;MeasuredNoiseFloordBm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-120</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;LastRouteRepeaters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;zw-DCE2F035-0003&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;zw-DCE2F035-00A5&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;IncomingRSSIRepeaters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="mi">-85</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">-90</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;AckRSSI&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-85</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationAckTxPowerdBm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationAckMeasuredRSSI&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-95</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationAckMeasuredNoiseFloor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-110</span>
+}
+</pre></div>
+</div>
+<p>An example with a transmission failure could be:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/GeneratedCommands/TxReport</span>
+{
+<span class="w">  </span><span class="nt">&quot;SourceUNID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zw-DCE2F035-0001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationUNID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zw-DCE2F035-0005&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransmissionSuccessful&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransmissionTimeMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">862</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TxPowerdBm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TxChannel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RoutingAttempts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RouteChanged&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransmissionSpeed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;MeasuredNoiseFloordBm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">127</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;LastRouteRepeaters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;zw-DCE2F035-0003&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;zw-DCE2F035-00A5&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;IncomingRSSIRepeaters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="mi">127</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">127</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;LastRouteFailedLinkFunctionalUNID&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nt">&quot;zw-DCE2F035-00A5&quot;</span>
+<span class="w">  </span><span class="nt">&quot;LastRouteFailedLinkNonFunctionalUNID&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nt">&quot;zw-DCE2F035-0005&quot;</span>
+<span class="w">  </span><span class="nt">&quot;AckRSSI&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">127</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationAckTxPowerdBm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">127</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationAckMeasuredRSSI&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">127</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DestinationAckMeasuredNoiseFloor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">127</span>
+}
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

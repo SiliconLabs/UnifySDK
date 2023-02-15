@@ -14,6 +14,7 @@ rust_command_class_frame_types = { path = "../rust_command_class_frame_types" }
 zwave_rust_proc_macros = { path = "../zwave_rust_proc_macros" }
 zwave_rust_proc_macros_legacy = { path = "../zwave_rust_proc_macros_legacy" }
 unify_attribute_store_sys = { path = "../../../../components/uic_rust/unify_attribute_store_sys" }
+unify_attribute_resolver_sys = { path = "../../../../components/uic_rust/unify_attribute_resolver_sys" }
 unify_middleware =  { path = "../../../../components/uic_rust/unify_middleware" }
 unify_tools =  { path = "../../../../components/uic_rust/unify_tools" }
 unify_attribute_poll =  { path = "../../../../components/unify_attribute_poll" }
@@ -22,9 +23,9 @@ unify_sl_status_sys = { path = "../../../../components/uic_rust/unify_sl_status_
 unify_config_sys = { path = "../../../../components/uic_rust/unify_config_sys" }
 unify_proc_macro = { path = "../../../../components/uic_rust/unify_proc_macro" }
 crc16 = "0.4.*"
-futures = "0.3.*"
+futures = "0.3.25"
 mockall = "0.11.*"
-serde_yaml = "0.8.*"
+serde_yaml = "0.9"
 
 [lib]
 crate-type = ["lib","staticlib"]
@@ -35,3 +36,4 @@ mockall = "0.11.0"
 
 [build-dependencies]
 unify_build_utils =  { path = "../../../../components/uic_rust/unify_build_utils" }
+anyhow= "*"

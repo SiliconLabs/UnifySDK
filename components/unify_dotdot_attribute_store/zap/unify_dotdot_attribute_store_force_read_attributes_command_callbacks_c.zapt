@@ -1,0 +1,84 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+// clang-format off
+{{zap_header}}
+// clang-format on
+// Includes from this component
+#include "unify_dotdot_attribute_store_configuration.h"
+#include "unify_dotdot_attribute_store_helpers.h"
+#include "unify_dotdot_attribute_store_force_read_attributes_command_callbacks.h"
+#include "unify_dotdot_defined_attribute_types.h"
+
+// Other includes
+#include "zap-types.h"
+#include "dotdot_mqtt.h"
+#include "attribute_store.h"
+#include "attribute_store_helper.h"
+
+#include "sl_log.h"
+#define LOG_TAG "unify_dotdot_attribute_store"
+
+// clang-format off
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster {{label}}
+////////////////////////////////////////////////////////////////////////////////
+static sl_status_t {{asForceReadAttributesCallback this}} (
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  {{dotdot_prefix}}_callback_call_type_t call_type,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t attribute_list) {
+
+  if (false == is_force_read_attributes_enabled()){
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_{{asSnakeCaseLower label}}_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Go and undefine everything that needs to be read again:
+  {{#zcl_attributes}}
+  if (true == attribute_list.{{asSnakeCaseLower label}}) {
+    if (SL_STATUS_OK == {{asAttributeUndefineReportedFunction parent.label label}}(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of {{parent.label}}::{{label}} under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  {{/zcl_attributes}}
+  return SL_STATUS_OK;
+}
+{{/if}}
+{{/zcl_clusters}}
+// clang-format on
+
+////////////////////////////////////////////////////////////////////////////////
+// Functions shared within the component
+////////////////////////////////////////////////////////////////////////////////
+sl_status_t
+  unify_dotdot_attribute_store_force_read_attributes_command_callbacks_init()
+{
+  // Register ForceReadAttribute callbacks on all supported clusters
+  // clang-format off
+  {{#zcl_clusters}}{{#if (supportedCluster label)}}
+  {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_force_read_attributes_callback(&{{asForceReadAttributesCallback this}});
+  {{/if}}{{/zcl_clusters}}
+  // clang-format on
+
+  return SL_STATUS_OK;
+}

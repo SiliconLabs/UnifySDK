@@ -4092,121 +4092,6 @@ uint32_t squawk_configuration_squawk_mode_get_enum_value_number(const std::strin
   return std::numeric_limits<uint32_t>::max();
 }
 
-// Enum to string map for TLKeyIndex
-const std::map<uint32_t, std::string> tl_key_index_enum_id_to_string_map {
-  { 0, "DevelopmentKey" },
-  { 4, "MasterKey" },
-  { 15, "CertificationKey" },
-};
-
-// String to enum map for TLKeyIndex
-const std::map<std::string, uint32_t> tl_key_index_enum_string_to_id_map {
-  { "DevelopmentKey", 0 },
-  { "MasterKey", 4 },
-  { "CertificationKey", 15 },
-};
-
-std::string tl_key_index_get_enum_value_name(
-  uint32_t value)
-{
-  auto it = tl_key_index_enum_id_to_string_map.find(value);
-  if (it != tl_key_index_enum_id_to_string_map.end()){
-    return it->second;
-  }
-
-  // No known name value is set for this field.
-  // Set it to a string version of the value.
-  return std::to_string(value);
-}
-
-uint32_t tl_key_index_get_enum_value_number(const std::string &str)
-{
-  auto it = tl_key_index_enum_string_to_id_map.find(str);
-  if (it != tl_key_index_enum_string_to_id_map.end()){
-    return it->second;
-  }
-
-  // No known numeric value is set for this string.
-  // Return UINT32_MAX to indicate an error.
-  return std::numeric_limits<uint32_t>::max();
-}
-
-// Enum to string map for TLStatus
-const std::map<uint32_t, std::string> tl_status_enum_id_to_string_map {
-  { 0, "Success" },
-  { 1, "Failure" },
-};
-
-// String to enum map for TLStatus
-const std::map<std::string, uint32_t> tl_status_enum_string_to_id_map {
-  { "Success", 0 },
-  { "Failure", 1 },
-};
-
-std::string tl_status_get_enum_value_name(
-  uint32_t value)
-{
-  auto it = tl_status_enum_id_to_string_map.find(value);
-  if (it != tl_status_enum_id_to_string_map.end()){
-    return it->second;
-  }
-
-  // No known name value is set for this field.
-  // Set it to a string version of the value.
-  return std::to_string(value);
-}
-
-uint32_t tl_status_get_enum_value_number(const std::string &str)
-{
-  auto it = tl_status_enum_string_to_id_map.find(str);
-  if (it != tl_status_enum_string_to_id_map.end()){
-    return it->second;
-  }
-
-  // No known numeric value is set for this string.
-  // Return UINT32_MAX to indicate an error.
-  return std::numeric_limits<uint32_t>::max();
-}
-
-// Enum to string map for TLZigbeeInformationLogicalType
-const std::map<uint32_t, std::string> tl_zigbee_information_logical_type_enum_id_to_string_map {
-  { 0, "Coordinator" },
-  { 1, "Router" },
-  { 2, "EndDevice" },
-};
-
-// String to enum map for TLZigbeeInformationLogicalType
-const std::map<std::string, uint32_t> tl_zigbee_information_logical_type_enum_string_to_id_map {
-  { "Coordinator", 0 },
-  { "Router", 1 },
-  { "EndDevice", 2 },
-};
-
-std::string tl_zigbee_information_logical_type_get_enum_value_name(
-  uint32_t value)
-{
-  auto it = tl_zigbee_information_logical_type_enum_id_to_string_map.find(value);
-  if (it != tl_zigbee_information_logical_type_enum_id_to_string_map.end()){
-    return it->second;
-  }
-
-  // No known name value is set for this field.
-  // Set it to a string version of the value.
-  return std::to_string(value);
-}
-
-uint32_t tl_zigbee_information_logical_type_get_enum_value_number(const std::string &str)
-{
-  auto it = tl_zigbee_information_logical_type_enum_string_to_id_map.find(str);
-  if (it != tl_zigbee_information_logical_type_enum_string_to_id_map.end()){
-    return it->second;
-  }
-
-  // No known numeric value is set for this string.
-  // Return UINT32_MAX to indicate an error.
-  return std::numeric_limits<uint32_t>::max();
-}
-
 // Enum to string map for ThermostatACCapacityFormat
 const std::map<uint32_t, std::string> thermostatac_capacity_format_enum_id_to_string_map {
   { 0, "BTUh" },
@@ -5322,6 +5207,8817 @@ uint32_t zcl_type_get_enum_value_number(const std::string &str)
   return std::numeric_limits<uint32_t>::max();
 }
 
+std::string get_enum_value_name(
+  dotdot_cluster_id_t cluster_id,
+  dotdot_attribute_id_t attribute_id,
+  uint32_t value)
+{
+  if (0 == cluster_id) {
+  #ifdef BASIC_ZCL_VERSION_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basiczcl_version instead of this: basic_zcl_version
+      return basic_zcl_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_APPLICATION_VERSION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicapplication_version instead of this: basic_application_version
+      return basic_application_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_STACK_VERSION_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicstack_version instead of this: basic_stack_version
+      return basic_stack_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_HW_VERSION_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basichw_version instead of this: basic_hw_version
+      return basic_hw_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_MANUFACTURER_NAME_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicmanufacturer_name instead of this: basic_manufacturer_name
+      return basic_manufacturer_name_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_MODEL_IDENTIFIER_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicmodel_identifier instead of this: basic_model_identifier
+      return basic_model_identifier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_DATE_CODE_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicdate_code instead of this: basic_date_code
+      return basic_date_code_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_POWER_SOURCE_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicpower_source instead of this: basic_power_source
+      return basic_power_source_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_GENERIC_DEVICE_CLASS_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicgeneric_device_class instead of this: basic_generic_device_class
+      return basic_generic_device_class_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_GENERIC_DEVICE_TYPE_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicgeneric_device_type instead of this: basic_generic_device_type
+      return basic_generic_device_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_PRODUCT_CODE_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicproduct_code instead of this: basic_product_code
+      return basic_product_code_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_PRODUCTURL_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicproducturl instead of this: basic_producturl
+      return basic_producturl_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_MANUFACTURER_VERSION_DETAILS_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicmanufacturer_version_details instead of this: basic_manufacturer_version_details
+      return basic_manufacturer_version_details_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_SERIAL_NUMBER_ENUM_NAME_AVAILABLE
+    if (13 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicserial_number instead of this: basic_serial_number
+      return basic_serial_number_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_PRODUCT_LABEL_ENUM_NAME_AVAILABLE
+    if (14 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicproduct_label instead of this: basic_product_label
+      return basic_product_label_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_LOCATION_DESCRIPTION_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basiclocation_description instead of this: basic_location_description
+      return basic_location_description_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_PHYSICAL_ENVIRONMENT_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicphysical_environment instead of this: basic_physical_environment
+      return basic_physical_environment_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_DEVICE_ENABLED_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicdevice_enabled instead of this: basic_device_enabled
+      return basic_device_enabled_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicalarm_mask instead of this: basic_alarm_mask
+      return basic_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_DISABLE_LOCAL_CONFIG_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicdisable_local_config instead of this: basic_disable_local_config
+      return basic_disable_local_config_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_SW_BUILDID_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicsw_buildid instead of this: basic_sw_buildid
+      return basic_sw_buildid_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1 == cluster_id) {
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage instead of this: power_configuration_mains_voltage
+      return power_configuration_mains_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_frequency instead of this: power_configuration_mains_frequency
+      return power_configuration_mains_frequency_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_alarm_mask instead of this: power_configuration_mains_alarm_mask
+      return power_configuration_mains_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage_min_threshold instead of this: power_configuration_mains_voltage_min_threshold
+      return power_configuration_mains_voltage_min_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_MAX_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage_max_threshold instead of this: power_configuration_mains_voltage_max_threshold
+      return power_configuration_mains_voltage_max_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage_dwell_trip_point instead of this: power_configuration_mains_voltage_dwell_trip_point
+      return power_configuration_mains_voltage_dwell_trip_point_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage instead of this: power_configuration_battery_voltage
+      return power_configuration_battery_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_remaining instead of this: power_configuration_battery_percentage_remaining
+      return power_configuration_battery_percentage_remaining_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_manufacturer instead of this: power_configuration_battery_manufacturer
+      return power_configuration_battery_manufacturer_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_SIZE_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_size instead of this: power_configuration_battery_size
+      return power_configuration_battery_size_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERYA_HR_RATING_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbatterya_hr_rating instead of this: power_configuration_batterya_hr_rating
+      return power_configuration_batterya_hr_rating_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_QUANTITY_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_quantity instead of this: power_configuration_battery_quantity
+      return power_configuration_battery_quantity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_RATED_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_rated_voltage instead of this: power_configuration_battery_rated_voltage
+      return power_configuration_battery_rated_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_alarm_mask instead of this: power_configuration_battery_alarm_mask
+      return power_configuration_battery_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_min_threshold instead of this: power_configuration_battery_voltage_min_threshold
+      return power_configuration_battery_voltage_min_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (55 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_threshold1 instead of this: power_configuration_battery_voltage_threshold1
+      return power_configuration_battery_voltage_threshold1_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (56 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_threshold2 instead of this: power_configuration_battery_voltage_threshold2
+      return power_configuration_battery_voltage_threshold2_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (57 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_threshold3 instead of this: power_configuration_battery_voltage_threshold3
+      return power_configuration_battery_voltage_threshold3_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (58 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_min_threshold instead of this: power_configuration_battery_percentage_min_threshold
+      return power_configuration_battery_percentage_min_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (59 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_threshold1 instead of this: power_configuration_battery_percentage_threshold1
+      return power_configuration_battery_percentage_threshold1_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (60 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_threshold2 instead of this: power_configuration_battery_percentage_threshold2
+      return power_configuration_battery_percentage_threshold2_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (61 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_threshold3 instead of this: power_configuration_battery_percentage_threshold3
+      return power_configuration_battery_percentage_threshold3_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_ALARM_STATE_ENUM_NAME_AVAILABLE
+    if (62 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_alarm_state instead of this: power_configuration_battery_alarm_state
+      return power_configuration_battery_alarm_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage instead of this: power_configuration_battery2_voltage
+      return power_configuration_battery2_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_remaining instead of this: power_configuration_battery2_percentage_remaining
+      return power_configuration_battery2_percentage_remaining_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (80 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_manufacturer instead of this: power_configuration_battery2_manufacturer
+      return power_configuration_battery2_manufacturer_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_SIZE_ENUM_NAME_AVAILABLE
+    if (81 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_size instead of this: power_configuration_battery2_size
+      return power_configuration_battery2_size_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2A_HR_RATING_ENUM_NAME_AVAILABLE
+    if (82 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2a_hr_rating instead of this: power_configuration_battery2a_hr_rating
+      return power_configuration_battery2a_hr_rating_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_QUANTITY_ENUM_NAME_AVAILABLE
+    if (83 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_quantity instead of this: power_configuration_battery2_quantity
+      return power_configuration_battery2_quantity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_RATED_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (84 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_rated_voltage instead of this: power_configuration_battery2_rated_voltage
+      return power_configuration_battery2_rated_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (85 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_alarm_mask instead of this: power_configuration_battery2_alarm_mask
+      return power_configuration_battery2_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (86 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_min_threshold instead of this: power_configuration_battery2_voltage_min_threshold
+      return power_configuration_battery2_voltage_min_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (87 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_threshold1 instead of this: power_configuration_battery2_voltage_threshold1
+      return power_configuration_battery2_voltage_threshold1_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (88 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_threshold2 instead of this: power_configuration_battery2_voltage_threshold2
+      return power_configuration_battery2_voltage_threshold2_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (89 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_threshold3 instead of this: power_configuration_battery2_voltage_threshold3
+      return power_configuration_battery2_voltage_threshold3_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (90 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_min_threshold instead of this: power_configuration_battery2_percentage_min_threshold
+      return power_configuration_battery2_percentage_min_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (91 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_threshold1 instead of this: power_configuration_battery2_percentage_threshold1
+      return power_configuration_battery2_percentage_threshold1_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (92 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_threshold2 instead of this: power_configuration_battery2_percentage_threshold2
+      return power_configuration_battery2_percentage_threshold2_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (93 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_threshold3 instead of this: power_configuration_battery2_percentage_threshold3
+      return power_configuration_battery2_percentage_threshold3_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_ALARM_STATE_ENUM_NAME_AVAILABLE
+    if (94 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_alarm_state instead of this: power_configuration_battery2_alarm_state
+      return power_configuration_battery2_alarm_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (96 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage instead of this: power_configuration_battery3_voltage
+      return power_configuration_battery3_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING_ENUM_NAME_AVAILABLE
+    if (97 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_remaining instead of this: power_configuration_battery3_percentage_remaining
+      return power_configuration_battery3_percentage_remaining_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (112 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_manufacturer instead of this: power_configuration_battery3_manufacturer
+      return power_configuration_battery3_manufacturer_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_SIZE_ENUM_NAME_AVAILABLE
+    if (113 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_size instead of this: power_configuration_battery3_size
+      return power_configuration_battery3_size_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3A_HR_RATING_ENUM_NAME_AVAILABLE
+    if (114 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3a_hr_rating instead of this: power_configuration_battery3a_hr_rating
+      return power_configuration_battery3a_hr_rating_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_QUANTITY_ENUM_NAME_AVAILABLE
+    if (115 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_quantity instead of this: power_configuration_battery3_quantity
+      return power_configuration_battery3_quantity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_RATED_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (116 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_rated_voltage instead of this: power_configuration_battery3_rated_voltage
+      return power_configuration_battery3_rated_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (117 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_alarm_mask instead of this: power_configuration_battery3_alarm_mask
+      return power_configuration_battery3_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (118 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_min_threshold instead of this: power_configuration_battery3_voltage_min_threshold
+      return power_configuration_battery3_voltage_min_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (119 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_threshold1 instead of this: power_configuration_battery3_voltage_threshold1
+      return power_configuration_battery3_voltage_threshold1_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (120 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_threshold2 instead of this: power_configuration_battery3_voltage_threshold2
+      return power_configuration_battery3_voltage_threshold2_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (121 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_threshold3 instead of this: power_configuration_battery3_voltage_threshold3
+      return power_configuration_battery3_voltage_threshold3_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (122 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_min_threshold instead of this: power_configuration_battery3_percentage_min_threshold
+      return power_configuration_battery3_percentage_min_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (123 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_threshold1 instead of this: power_configuration_battery3_percentage_threshold1
+      return power_configuration_battery3_percentage_threshold1_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (124 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_threshold2 instead of this: power_configuration_battery3_percentage_threshold2
+      return power_configuration_battery3_percentage_threshold2_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (125 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_threshold3 instead of this: power_configuration_battery3_percentage_threshold3
+      return power_configuration_battery3_percentage_threshold3_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_ALARM_STATE_ENUM_NAME_AVAILABLE
+    if (126 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_alarm_state instead of this: power_configuration_battery3_alarm_state
+      return power_configuration_battery3_alarm_state_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (2 == cluster_id) {
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_CURRENT_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationcurrent_temperature instead of this: device_temperature_configuration_current_temperature
+      return device_temperature_configuration_current_temperature_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_MIN_TEMP_EXPERIENCED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationmin_temp_experienced instead of this: device_temperature_configuration_min_temp_experienced
+      return device_temperature_configuration_min_temp_experienced_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_MAX_TEMP_EXPERIENCED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationmax_temp_experienced instead of this: device_temperature_configuration_max_temp_experienced
+      return device_temperature_configuration_max_temp_experienced_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationover_temp_total_dwell instead of this: device_temperature_configuration_over_temp_total_dwell
+      return device_temperature_configuration_over_temp_total_dwell_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_DEVICE_TEMP_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationdevice_temp_alarm_mask instead of this: device_temperature_configuration_device_temp_alarm_mask
+      return device_temperature_configuration_device_temp_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationlow_temp_threshold instead of this: device_temperature_configuration_low_temp_threshold
+      return device_temperature_configuration_low_temp_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationhigh_temp_threshold instead of this: device_temperature_configuration_high_temp_threshold
+      return device_temperature_configuration_high_temp_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationlow_temp_dwell_trip_point instead of this: device_temperature_configuration_low_temp_dwell_trip_point
+      return device_temperature_configuration_low_temp_dwell_trip_point_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationhigh_temp_dwell_trip_point instead of this: device_temperature_configuration_high_temp_dwell_trip_point
+      return device_temperature_configuration_high_temp_dwell_trip_point_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (3 == cluster_id) {
+  #ifdef IDENTIFY_IDENTIFY_TIME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: identifyidentify_time instead of this: identify_identify_time
+      return identify_identify_time_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (4 == cluster_id) {
+  #ifdef GROUPS_NAME_SUPPORT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: groupsname_support instead of this: groups_name_support
+      return groups_name_support_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (5 == cluster_id) {
+  #ifdef SCENES_SCENE_COUNT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesscene_count instead of this: scenes_scene_count
+      return scenes_scene_count_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SCENES_CURRENT_SCENE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenescurrent_scene instead of this: scenes_current_scene
+      return scenes_current_scene_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SCENES_CURRENT_GROUP_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenescurrent_group instead of this: scenes_current_group
+      return scenes_current_group_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SCENES_SCENE_VALID_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesscene_valid instead of this: scenes_scene_valid
+      return scenes_scene_valid_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SCENES_NAME_SUPPORT_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesname_support instead of this: scenes_name_support
+      return scenes_name_support_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SCENES_LAST_CONFIGURED_BY_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: sceneslast_configured_by instead of this: scenes_last_configured_by
+      return scenes_last_configured_by_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SCENES_SCENE_TABLE_ENUM_NAME_AVAILABLE
+    if (3841 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesscene_table instead of this: scenes_scene_table
+      return scenes_scene_table_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (6 == cluster_id) {
+  #ifdef ON_OFF_ON_OFF_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offon_off instead of this: on_off_on_off
+      return on_off_on_off_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ON_OFF_GLOBAL_SCENE_CONTROL_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offglobal_scene_control instead of this: on_off_global_scene_control
+      return on_off_global_scene_control_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ON_OFF_ON_TIME_ENUM_NAME_AVAILABLE
+    if (16385 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offon_time instead of this: on_off_on_time
+      return on_off_on_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ON_OFF_OFF_WAIT_TIME_ENUM_NAME_AVAILABLE
+    if (16386 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offoff_wait_time instead of this: on_off_off_wait_time
+      return on_off_off_wait_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ON_OFF_START_UP_ON_OFF_ENUM_NAME_AVAILABLE
+    if (16387 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offstart_up_on_off instead of this: on_off_start_up_on_off
+      return on_off_start_up_on_off_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (8 == cluster_id) {
+  #ifdef LEVEL_CURRENT_LEVEL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelcurrent_level instead of this: level_current_level
+      return level_current_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_REMAINING_TIME_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelremaining_time instead of this: level_remaining_time
+      return level_remaining_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_MIN_LEVEL_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmin_level instead of this: level_min_level
+      return level_min_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_MAX_LEVEL_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmax_level instead of this: level_max_level
+      return level_max_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_CURRENT_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelcurrent_frequency instead of this: level_current_frequency
+      return level_current_frequency_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_MIN_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmin_frequency instead of this: level_min_frequency
+      return level_min_frequency_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_MAX_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmax_frequency instead of this: level_max_frequency
+      return level_max_frequency_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_OPTIONS_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: leveloptions instead of this: level_options
+      return level_options_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_ON_OFF_TRANSITION_TIME_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelon_off_transition_time instead of this: level_on_off_transition_time
+      return level_on_off_transition_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_ON_LEVEL_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelon_level instead of this: level_on_level
+      return level_on_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_ON_TRANSITION_TIME_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelon_transition_time instead of this: level_on_transition_time
+      return level_on_transition_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_OFF_TRANSITION_TIME_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: leveloff_transition_time instead of this: level_off_transition_time
+      return level_off_transition_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_DEFAULT_MOVE_RATE_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: leveldefault_move_rate instead of this: level_default_move_rate
+      return level_default_move_rate_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef LEVEL_START_UP_CURRENT_LEVEL_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelstart_up_current_level instead of this: level_start_up_current_level
+      return level_start_up_current_level_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (9 == cluster_id) {
+  #ifdef ALARMS_ALARM_COUNT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: alarmsalarm_count instead of this: alarms_alarm_count
+      return alarms_alarm_count_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (10 == cluster_id) {
+  #ifdef TIME_TIME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timetime instead of this: time_time
+      return time_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_TIME_STATUS_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timetime_status instead of this: time_time_status
+      return time_time_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_TIME_ZONE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timetime_zone instead of this: time_time_zone
+      return time_time_zone_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_DST_START_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timedst_start instead of this: time_dst_start
+      return time_dst_start_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_DST_END_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timedst_end instead of this: time_dst_end
+      return time_dst_end_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_DST_SHIFT_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timedst_shift instead of this: time_dst_shift
+      return time_dst_shift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_STANDARD_TIME_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timestandard_time instead of this: time_standard_time
+      return time_standard_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_LOCAL_TIME_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timelocal_time instead of this: time_local_time
+      return time_local_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_LAST_SET_TIME_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timelast_set_time instead of this: time_last_set_time
+      return time_last_set_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TIME_VALID_UNTIL_TIME_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timevalid_until_time instead of this: time_valid_until_time
+      return time_valid_until_time_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (25 == cluster_id) {
+  #ifdef OTA_UPGRADE_UPGRADE_SERVERID_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_serverid instead of this: ota_upgrade_upgrade_serverid
+      return ota_upgrade_upgrade_serverid_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_FILE_OFFSET_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradefile_offset instead of this: ota_upgrade_file_offset
+      return ota_upgrade_file_offset_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_CURRENT_FILE_VERSION_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_file_version instead of this: ota_upgrade_current_file_version
+      return ota_upgrade_current_file_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_zig_bee_stack_version instead of this: ota_upgrade_current_zig_bee_stack_version
+      return ota_upgrade_current_zig_bee_stack_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_DOWNLOADED_FILE_VERSION_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_file_version instead of this: ota_upgrade_downloaded_file_version
+      return ota_upgrade_downloaded_file_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_zig_bee_stack_version instead of this: ota_upgrade_downloaded_zig_bee_stack_version
+      return ota_upgrade_downloaded_zig_bee_stack_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_IMAGE_UPGRADE_STATUS_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_upgrade_status instead of this: ota_upgrade_image_upgrade_status
+      return ota_upgrade_image_upgrade_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_MANUFACTURERID_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademanufacturerid instead of this: ota_upgrade_manufacturerid
+      return ota_upgrade_manufacturerid_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_IMAGE_TYPEID_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_typeid instead of this: ota_upgrade_image_typeid
+      return ota_upgrade_image_typeid_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_MINIMUM_BLOCK_PERIOD_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademinimum_block_period instead of this: ota_upgrade_minimum_block_period
+      return ota_upgrade_minimum_block_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_IMAGE_STAMP_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_stamp instead of this: ota_upgrade_image_stamp
+      return ota_upgrade_image_stamp_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_activation_policy instead of this: ota_upgrade_upgrade_activation_policy
+      return ota_upgrade_upgrade_activation_policy_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_timeout_policy instead of this: ota_upgrade_upgrade_timeout_policy
+      return ota_upgrade_upgrade_timeout_policy_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (32 == cluster_id) {
+  #ifdef POLL_CONTROL_CHECK_IN_INTERVAL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlcheck_in_interval instead of this: poll_control_check_in_interval
+      return poll_control_check_in_interval_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POLL_CONTROL_LONG_POLL_INTERVAL_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controllong_poll_interval instead of this: poll_control_long_poll_interval
+      return poll_control_long_poll_interval_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POLL_CONTROL_SHORT_POLL_INTERVAL_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlshort_poll_interval instead of this: poll_control_short_poll_interval
+      return poll_control_short_poll_interval_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POLL_CONTROL_FAST_POLL_TIMEOUT_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlfast_poll_timeout instead of this: poll_control_fast_poll_timeout
+      return poll_control_fast_poll_timeout_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POLL_CONTROL_CHECK_IN_INTERVAL_MIN_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlcheck_in_interval_min instead of this: poll_control_check_in_interval_min
+      return poll_control_check_in_interval_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POLL_CONTROL_LONG_POLL_INTERVAL_MIN_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controllong_poll_interval_min instead of this: poll_control_long_poll_interval_min
+      return poll_control_long_poll_interval_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef POLL_CONTROL_FAST_POLL_TIMEOUT_MAX_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlfast_poll_timeout_max instead of this: poll_control_fast_poll_timeout_max
+      return poll_control_fast_poll_timeout_max_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (256 == cluster_id) {
+  #ifdef SHADE_CONFIGURATION_PHYSICAL_CLOSED_LIMIT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationphysical_closed_limit instead of this: shade_configuration_physical_closed_limit
+      return shade_configuration_physical_closed_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_MOTOR_STEP_SIZE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationmotor_step_size instead of this: shade_configuration_motor_step_size
+      return shade_configuration_motor_step_size_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationstatus instead of this: shade_configuration_status
+      return shade_configuration_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_CLOSED_LIMIT_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationclosed_limit instead of this: shade_configuration_closed_limit
+      return shade_configuration_closed_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_MODE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationmode instead of this: shade_configuration_mode
+      return shade_configuration_mode_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (257 == cluster_id) {
+  #ifdef DOOR_LOCK_LOCK_STATE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklock_state instead of this: door_lock_lock_state
+      return door_lock_lock_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_LOCK_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklock_type instead of this: door_lock_lock_type
+      return door_lock_lock_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ACTUATOR_ENABLED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockactuator_enabled instead of this: door_lock_actuator_enabled
+      return door_lock_actuator_enabled_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DOOR_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdoor_state instead of this: door_lock_door_state
+      return door_lock_door_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DOOR_OPEN_EVENTS_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdoor_open_events instead of this: door_lock_door_open_events
+      return door_lock_door_open_events_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DOOR_CLOSED_EVENTS_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdoor_closed_events instead of this: door_lock_door_closed_events
+      return door_lock_door_closed_events_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_OPEN_PERIOD_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockopen_period instead of this: door_lock_open_period
+      return door_lock_open_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_log_records_supported instead of this: door_lock_number_of_log_records_supported
+      return door_lock_number_of_log_records_supported_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_total_users_supported instead of this: door_lock_number_of_total_users_supported
+      return door_lock_number_of_total_users_supported_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofpin_users_supported instead of this: door_lock_number_ofpin_users_supported
+      return door_lock_number_ofpin_users_supported_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofrfid_users_supported instead of this: door_lock_number_ofrfid_users_supported
+      return door_lock_number_ofrfid_users_supported_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_week_day_schedules_supported_per_user instead of this: door_lock_number_of_week_day_schedules_supported_per_user
+      return door_lock_number_of_week_day_schedules_supported_per_user_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_year_day_schedules_supported_per_user instead of this: door_lock_number_of_year_day_schedules_supported_per_user
+      return door_lock_number_of_year_day_schedules_supported_per_user_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_holiday_schedules_supported instead of this: door_lock_number_of_holiday_schedules_supported
+      return door_lock_number_of_holiday_schedules_supported_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MAXPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxpin_code_length instead of this: door_lock_maxpin_code_length
+      return door_lock_maxpin_code_length_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MINPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (24 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminpin_code_length instead of this: door_lock_minpin_code_length
+      return door_lock_minpin_code_length_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MAXRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (25 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxrfid_code_length instead of this: door_lock_maxrfid_code_length
+      return door_lock_maxrfid_code_length_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MINRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (26 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminrfid_code_length instead of this: door_lock_minrfid_code_length
+      return door_lock_minrfid_code_length_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_LOGGING_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_logging instead of this: door_lock_enable_logging
+      return door_lock_enable_logging_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_LANGUAGE_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklanguage instead of this: door_lock_language
+      return door_lock_language_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_LED_SETTINGS_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockled_settings instead of this: door_lock_led_settings
+      return door_lock_led_settings_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_AUTO_RELOCK_TIME_ENUM_NAME_AVAILABLE
+    if (35 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockauto_relock_time instead of this: door_lock_auto_relock_time
+      return door_lock_auto_relock_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SOUND_VOLUME_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksound_volume instead of this: door_lock_sound_volume
+      return door_lock_sound_volume_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_OPERATING_MODE_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockoperating_mode instead of this: door_lock_operating_mode
+      return door_lock_operating_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SUPPORTED_OPERATING_MODES_ENUM_NAME_AVAILABLE
+    if (38 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksupported_operating_modes instead of this: door_lock_supported_operating_modes
+      return door_lock_supported_operating_modes_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DEFAULT_CONFIGURATION_REGISTER_ENUM_NAME_AVAILABLE
+    if (39 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdefault_configuration_register instead of this: door_lock_default_configuration_register
+      return door_lock_default_configuration_register_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_LOCAL_PROGRAMMING_ENUM_NAME_AVAILABLE
+    if (40 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_local_programming instead of this: door_lock_enable_local_programming
+      return door_lock_enable_local_programming_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_ONE_TOUCH_LOCKING_ENUM_NAME_AVAILABLE
+    if (41 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_one_touch_locking instead of this: door_lock_enable_one_touch_locking
+      return door_lock_enable_one_touch_locking_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_INSIDE_STATUSLED_ENUM_NAME_AVAILABLE
+    if (42 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_inside_statusled instead of this: door_lock_enable_inside_statusled
+      return door_lock_enable_inside_statusled_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_PRIVACY_MODE_BUTTON_ENUM_NAME_AVAILABLE
+    if (43 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_privacy_mode_button instead of this: door_lock_enable_privacy_mode_button
+      return door_lock_enable_privacy_mode_button_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockwrong_code_entry_limit instead of this: door_lock_wrong_code_entry_limit
+      return door_lock_wrong_code_entry_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockuser_code_temporary_disable_time instead of this: door_lock_user_code_temporary_disable_time
+      return door_lock_user_code_temporary_disable_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SENDPIN_OVER_THE_AIR_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksendpin_over_the_air instead of this: door_lock_sendpin_over_the_air
+      return door_lock_sendpin_over_the_air_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_REQUIREPI_NFORRF_OPERATION_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrequirepi_nforrf_operation instead of this: door_lock_requirepi_nforrf_operation
+      return door_lock_requirepi_nforrf_operation_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SECURITY_LEVEL_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksecurity_level instead of this: door_lock_security_level
+      return door_lock_security_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockalarm_mask instead of this: door_lock_alarm_mask
+      return door_lock_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_KEYPAD_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockkeypad_operation_event_mask instead of this: door_lock_keypad_operation_event_mask
+      return door_lock_keypad_operation_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RF_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (66 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrf_operation_event_mask instead of this: door_lock_rf_operation_event_mask
+      return door_lock_rf_operation_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MANUAL_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (67 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmanual_operation_event_mask instead of this: door_lock_manual_operation_event_mask
+      return door_lock_manual_operation_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RFID_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (68 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrfid_operation_event_mask instead of this: door_lock_rfid_operation_event_mask
+      return door_lock_rfid_operation_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_KEYPAD_PROGRAMMING_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (69 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockkeypad_programming_event_mask instead of this: door_lock_keypad_programming_event_mask
+      return door_lock_keypad_programming_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RF_PROGRAMMING_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (70 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrf_programming_event_mask instead of this: door_lock_rf_programming_event_mask
+      return door_lock_rf_programming_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (71 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrfid_programming_event_mask instead of this: door_lock_rfid_programming_event_mask
+      return door_lock_rfid_programming_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (258 == cluster_id) {
+  #ifdef WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringwindow_covering_type instead of this: window_covering_window_covering_type
+      return window_covering_window_covering_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringphysical_closed_limit_lift instead of this: window_covering_physical_closed_limit_lift
+      return window_covering_physical_closed_limit_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_TILT_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringphysical_closed_limit_tilt instead of this: window_covering_physical_closed_limit_tilt
+      return window_covering_physical_closed_limit_tilt_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_LIFT_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_lift instead of this: window_covering_current_position_lift
+      return window_covering_current_position_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_TILT_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_tilt instead of this: window_covering_current_position_tilt
+      return window_covering_current_position_tilt_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringnumber_of_actuations_lift instead of this: window_covering_number_of_actuations_lift
+      return window_covering_number_of_actuations_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_NUMBER_OF_ACTUATIONS_TILT_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringnumber_of_actuations_tilt instead of this: window_covering_number_of_actuations_tilt
+      return window_covering_number_of_actuations_tilt_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CONFIG_OR_STATUS_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringconfig_or_status instead of this: window_covering_config_or_status
+      return window_covering_config_or_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_lift_percentage instead of this: window_covering_current_position_lift_percentage
+      return window_covering_current_position_lift_percentage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_tilt_percentage instead of this: window_covering_current_position_tilt_percentage
+      return window_covering_current_position_tilt_percentage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_OPEN_LIMIT_LIFT_ENUM_NAME_AVAILABLE
+    if (256 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_open_limit_lift instead of this: window_covering_installed_open_limit_lift
+      return window_covering_installed_open_limit_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT_ENUM_NAME_AVAILABLE
+    if (257 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_closed_limit_lift instead of this: window_covering_installed_closed_limit_lift
+      return window_covering_installed_closed_limit_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_OPEN_LIMIT_TILT_ENUM_NAME_AVAILABLE
+    if (258 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_open_limit_tilt instead of this: window_covering_installed_open_limit_tilt
+      return window_covering_installed_open_limit_tilt_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT_ENUM_NAME_AVAILABLE
+    if (259 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_closed_limit_tilt instead of this: window_covering_installed_closed_limit_tilt
+      return window_covering_installed_closed_limit_tilt_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_VELOCITY_LIFT_ENUM_NAME_AVAILABLE
+    if (260 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringvelocity_lift instead of this: window_covering_velocity_lift
+      return window_covering_velocity_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_ACCELERATION_TIME_LIFT_ENUM_NAME_AVAILABLE
+    if (261 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringacceleration_time_lift instead of this: window_covering_acceleration_time_lift
+      return window_covering_acceleration_time_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_DECELERATION_TIME_LIFT_ENUM_NAME_AVAILABLE
+    if (262 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringdeceleration_time_lift instead of this: window_covering_deceleration_time_lift
+      return window_covering_deceleration_time_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_MODE_ENUM_NAME_AVAILABLE
+    if (263 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringmode instead of this: window_covering_mode
+      return window_covering_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INTERMEDIATE_SETPOINTS_LIFT_ENUM_NAME_AVAILABLE
+    if (264 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringintermediate_setpoints_lift instead of this: window_covering_intermediate_setpoints_lift
+      return window_covering_intermediate_setpoints_lift_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INTERMEDIATE_SETPOINTS_TILT_ENUM_NAME_AVAILABLE
+    if (265 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringintermediate_setpoints_tilt instead of this: window_covering_intermediate_setpoints_tilt
+      return window_covering_intermediate_setpoints_tilt_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (259 == cluster_id) {
+  #ifdef BARRIER_CONTROL_MOVING_STATE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlmoving_state instead of this: barrier_control_moving_state
+      return barrier_control_moving_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_SAFETY_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlsafety_status instead of this: barrier_control_safety_status
+      return barrier_control_safety_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_CAPABILITIES_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlcapabilities instead of this: barrier_control_capabilities
+      return barrier_control_capabilities_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_OPEN_EVENTS_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlopen_events instead of this: barrier_control_open_events
+      return barrier_control_open_events_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_CLOSE_EVENTS_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlclose_events instead of this: barrier_control_close_events
+      return barrier_control_close_events_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_COMMAND_OPEN_EVENTS_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlcommand_open_events instead of this: barrier_control_command_open_events
+      return barrier_control_command_open_events_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_COMMAND_CLOSE_EVENTS_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlcommand_close_events instead of this: barrier_control_command_close_events
+      return barrier_control_command_close_events_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_OPEN_PERIOD_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlopen_period instead of this: barrier_control_open_period
+      return barrier_control_open_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_CLOSE_PERIOD_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlclose_period instead of this: barrier_control_close_period
+      return barrier_control_close_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_BARRIER_POSITION_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlbarrier_position instead of this: barrier_control_barrier_position
+      return barrier_control_barrier_position_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (512 == cluster_id) {
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_PRESSURE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_pressure instead of this: pump_configuration_and_control_max_pressure
+      return pump_configuration_and_control_max_pressure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_speed instead of this: pump_configuration_and_control_max_speed
+      return pump_configuration_and_control_max_speed_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_FLOW_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_flow instead of this: pump_configuration_and_control_max_flow
+      return pump_configuration_and_control_max_flow_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_PRESSURE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_pressure instead of this: pump_configuration_and_control_min_const_pressure
+      return pump_configuration_and_control_min_const_pressure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_PRESSURE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_pressure instead of this: pump_configuration_and_control_max_const_pressure
+      return pump_configuration_and_control_max_const_pressure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_COMP_PRESSURE_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_comp_pressure instead of this: pump_configuration_and_control_min_comp_pressure
+      return pump_configuration_and_control_min_comp_pressure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_COMP_PRESSURE_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_comp_pressure instead of this: pump_configuration_and_control_max_comp_pressure
+      return pump_configuration_and_control_max_comp_pressure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_speed instead of this: pump_configuration_and_control_min_const_speed
+      return pump_configuration_and_control_min_const_speed_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_SPEED_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_speed instead of this: pump_configuration_and_control_max_const_speed
+      return pump_configuration_and_control_max_const_speed_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_flow instead of this: pump_configuration_and_control_min_const_flow
+      return pump_configuration_and_control_min_const_flow_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_FLOW_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_flow instead of this: pump_configuration_and_control_max_const_flow
+      return pump_configuration_and_control_max_const_flow_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_TEMP_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_temp instead of this: pump_configuration_and_control_min_const_temp
+      return pump_configuration_and_control_min_const_temp_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_TEMP_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_temp instead of this: pump_configuration_and_control_max_const_temp
+      return pump_configuration_and_control_max_const_temp_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_PUMP_STATUS_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlpump_status instead of this: pump_configuration_and_control_pump_status
+      return pump_configuration_and_control_pump_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_OPERATION_MODE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controleffective_operation_mode instead of this: pump_configuration_and_control_effective_operation_mode
+      return pump_configuration_and_control_effective_operation_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_CONTROL_MODE_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controleffective_control_mode instead of this: pump_configuration_and_control_effective_control_mode
+      return pump_configuration_and_control_effective_control_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_CAPACITY_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlcapacity instead of this: pump_configuration_and_control_capacity
+      return pump_configuration_and_control_capacity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_SPEED_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlspeed instead of this: pump_configuration_and_control_speed
+      return pump_configuration_and_control_speed_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_RUNNING_HOURS_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controllifetime_running_hours instead of this: pump_configuration_and_control_lifetime_running_hours
+      return pump_configuration_and_control_lifetime_running_hours_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_POWER_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlpower instead of this: pump_configuration_and_control_power
+      return pump_configuration_and_control_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_ENERGY_CONSUMED_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controllifetime_energy_consumed instead of this: pump_configuration_and_control_lifetime_energy_consumed
+      return pump_configuration_and_control_lifetime_energy_consumed_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_OPERATION_MODE_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controloperation_mode instead of this: pump_configuration_and_control_operation_mode
+      return pump_configuration_and_control_operation_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_CONTROL_MODE_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlcontrol_mode instead of this: pump_configuration_and_control_control_mode
+      return pump_configuration_and_control_control_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlalarm_mask instead of this: pump_configuration_and_control_alarm_mask
+      return pump_configuration_and_control_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (513 == cluster_id) {
+  #ifdef THERMOSTAT_LOCAL_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatlocal_temperature instead of this: thermostat_local_temperature
+      return thermostat_local_temperature_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_OUTDOOR_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoutdoor_temperature instead of this: thermostat_outdoor_temperature
+      return thermostat_outdoor_temperature_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPANCY_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupancy instead of this: thermostat_occupancy
+      return thermostat_occupancy_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MIN_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_min_heat_setpoint_limit instead of this: thermostat_abs_min_heat_setpoint_limit
+      return thermostat_abs_min_heat_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MAX_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_max_heat_setpoint_limit instead of this: thermostat_abs_max_heat_setpoint_limit
+      return thermostat_abs_max_heat_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MIN_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_min_cool_setpoint_limit instead of this: thermostat_abs_min_cool_setpoint_limit
+      return thermostat_abs_min_cool_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MAX_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_max_cool_setpoint_limit instead of this: thermostat_abs_max_cool_setpoint_limit
+      return thermostat_abs_max_cool_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_PI_COOLING_DEMAND_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatpi_cooling_demand instead of this: thermostat_pi_cooling_demand
+      return thermostat_pi_cooling_demand_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_PI_HEATING_DEMAND_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatpi_heating_demand instead of this: thermostat_pi_heating_demand
+      return thermostat_pi_heating_demand_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_HVAC_SYSTEM_TYPE_CONFIGURATION_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostathvac_system_type_configuration instead of this: thermostat_hvac_system_type_configuration
+      return thermostat_hvac_system_type_configuration_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_LOCAL_TEMPERATURE_CALIBRATION_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatlocal_temperature_calibration instead of this: thermostat_local_temperature_calibration
+      return thermostat_local_temperature_calibration_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_COOLING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_cooling_setpoint instead of this: thermostat_occupied_cooling_setpoint
+      return thermostat_occupied_cooling_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_HEATING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_heating_setpoint instead of this: thermostat_occupied_heating_setpoint
+      return thermostat_occupied_heating_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_COOLING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_cooling_setpoint instead of this: thermostat_unoccupied_cooling_setpoint
+      return thermostat_unoccupied_cooling_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_HEATING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_heating_setpoint instead of this: thermostat_unoccupied_heating_setpoint
+      return thermostat_unoccupied_heating_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_MIN_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmin_heat_setpoint_limit instead of this: thermostat_min_heat_setpoint_limit
+      return thermostat_min_heat_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_MAX_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmax_heat_setpoint_limit instead of this: thermostat_max_heat_setpoint_limit
+      return thermostat_max_heat_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_MIN_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmin_cool_setpoint_limit instead of this: thermostat_min_cool_setpoint_limit
+      return thermostat_min_cool_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_MAX_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (24 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmax_cool_setpoint_limit instead of this: thermostat_max_cool_setpoint_limit
+      return thermostat_max_cool_setpoint_limit_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_MIN_SETPOINT_DEAD_BAND_ENUM_NAME_AVAILABLE
+    if (25 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmin_setpoint_dead_band instead of this: thermostat_min_setpoint_dead_band
+      return thermostat_min_setpoint_dead_band_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_REMOTE_SENSING_ENUM_NAME_AVAILABLE
+    if (26 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatremote_sensing instead of this: thermostat_remote_sensing
+      return thermostat_remote_sensing_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_CONTROL_SEQUENCE_OF_OPERATION_ENUM_NAME_AVAILABLE
+    if (27 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatcontrol_sequence_of_operation instead of this: thermostat_control_sequence_of_operation
+      return thermostat_control_sequence_of_operation_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_SYSTEM_MODE_ENUM_NAME_AVAILABLE
+    if (28 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsystem_mode instead of this: thermostat_system_mode
+      return thermostat_system_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (29 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatalarm_mask instead of this: thermostat_alarm_mask
+      return thermostat_alarm_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_THERMOSTAT_RUNNING_MODE_ENUM_NAME_AVAILABLE
+    if (30 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatthermostat_running_mode instead of this: thermostat_thermostat_running_mode
+      return thermostat_thermostat_running_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_START_OF_WEEK_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatstart_of_week instead of this: thermostat_start_of_week
+      return thermostat_start_of_week_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_NUMBER_OF_WEEKLY_TRANSITIONS_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatnumber_of_weekly_transitions instead of this: thermostat_number_of_weekly_transitions
+      return thermostat_number_of_weekly_transitions_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatnumber_of_daily_transitions instead of this: thermostat_number_of_daily_transitions
+      return thermostat_number_of_daily_transitions_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_ENUM_NAME_AVAILABLE
+    if (35 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostattemperature_setpoint_hold instead of this: thermostat_temperature_setpoint_hold
+      return thermostat_temperature_setpoint_hold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostattemperature_setpoint_hold_duration instead of this: thermostat_temperature_setpoint_hold_duration
+      return thermostat_temperature_setpoint_hold_duration_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatthermostat_programming_operation_mode instead of this: thermostat_thermostat_programming_operation_mode
+      return thermostat_thermostat_programming_operation_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_THERMOSTAT_RUNNING_STATE_ENUM_NAME_AVAILABLE
+    if (41 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatthermostat_running_state instead of this: thermostat_thermostat_running_state
+      return thermostat_thermostat_running_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_SETPOINT_CHANGE_SOURCE_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsetpoint_change_source instead of this: thermostat_setpoint_change_source
+      return thermostat_setpoint_change_source_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_SETPOINT_CHANGE_AMOUNT_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsetpoint_change_amount instead of this: thermostat_setpoint_change_amount
+      return thermostat_setpoint_change_amount_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsetpoint_change_source_timestamp instead of this: thermostat_setpoint_change_source_timestamp
+      return thermostat_setpoint_change_source_timestamp_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_SETBACK_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_setback instead of this: thermostat_occupied_setback
+      return thermostat_occupied_setback_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_SETBACK_MIN_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_setback_min instead of this: thermostat_occupied_setback_min
+      return thermostat_occupied_setback_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_SETBACK_MAX_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_setback_max instead of this: thermostat_occupied_setback_max
+      return thermostat_occupied_setback_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_SETBACK_ENUM_NAME_AVAILABLE
+    if (55 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_setback instead of this: thermostat_unoccupied_setback
+      return thermostat_unoccupied_setback_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_SETBACK_MIN_ENUM_NAME_AVAILABLE
+    if (56 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_setback_min instead of this: thermostat_unoccupied_setback_min
+      return thermostat_unoccupied_setback_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_SETBACK_MAX_ENUM_NAME_AVAILABLE
+    if (57 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_setback_max instead of this: thermostat_unoccupied_setback_max
+      return thermostat_unoccupied_setback_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_EMERGENCY_HEAT_DELTA_ENUM_NAME_AVAILABLE
+    if (58 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatemergency_heat_delta instead of this: thermostat_emergency_heat_delta
+      return thermostat_emergency_heat_delta_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_TYPE_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_type instead of this: thermostat_ac_type
+      return thermostat_ac_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_CAPACITY_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_capacity instead of this: thermostat_ac_capacity
+      return thermostat_ac_capacity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_REFRIGERANT_TYPE_ENUM_NAME_AVAILABLE
+    if (66 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_refrigerant_type instead of this: thermostat_ac_refrigerant_type
+      return thermostat_ac_refrigerant_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_COMPRESSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (67 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_compressor_type instead of this: thermostat_ac_compressor_type
+      return thermostat_ac_compressor_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_ERROR_CODE_ENUM_NAME_AVAILABLE
+    if (68 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_error_code instead of this: thermostat_ac_error_code
+      return thermostat_ac_error_code_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_LOUVER_POSITION_ENUM_NAME_AVAILABLE
+    if (69 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_louver_position instead of this: thermostat_ac_louver_position
+      return thermostat_ac_louver_position_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_COIL_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (70 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_coil_temperature instead of this: thermostat_ac_coil_temperature
+      return thermostat_ac_coil_temperature_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_CAPACITY_FORMAT_ENUM_NAME_AVAILABLE
+    if (71 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_capacity_format instead of this: thermostat_ac_capacity_format
+      return thermostat_ac_capacity_format_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (514 == cluster_id) {
+  #ifdef FAN_CONTROL_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlfan_mode instead of this: fan_control_fan_mode
+      return fan_control_fan_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef FAN_CONTROL_FAN_MODE_SEQUENCE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlfan_mode_sequence instead of this: fan_control_fan_mode_sequence
+      return fan_control_fan_mode_sequence_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (515 == cluster_id) {
+  #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrelative_humidity instead of this: dehumidification_control_relative_humidity
+      return dehumidification_control_relative_humidity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_cooling instead of this: dehumidification_control_dehumidification_cooling
+      return dehumidification_control_dehumidification_cooling_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_RH_DEHUMIDIFICATION_SETPOINT_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrh_dehumidification_setpoint instead of this: dehumidification_control_rh_dehumidification_setpoint
+      return dehumidification_control_rh_dehumidification_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_MODE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrelative_humidity_mode instead of this: dehumidification_control_relative_humidity_mode
+      return dehumidification_control_relative_humidity_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_LOCKOUT_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_lockout instead of this: dehumidification_control_dehumidification_lockout
+      return dehumidification_control_dehumidification_lockout_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_hysteresis instead of this: dehumidification_control_dehumidification_hysteresis
+      return dehumidification_control_dehumidification_hysteresis_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_MAX_COOL_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_max_cool instead of this: dehumidification_control_dehumidification_max_cool
+      return dehumidification_control_dehumidification_max_cool_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_DISPLAY_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrelative_humidity_display instead of this: dehumidification_control_relative_humidity_display
+      return dehumidification_control_relative_humidity_display_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (516 == cluster_id) {
+  #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_TEMPERATURE_DISPLAY_MODE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostat_user_interface_configurationtemperature_display_mode instead of this: thermostat_user_interface_configuration_temperature_display_mode
+      return thermostat_user_interface_configuration_temperature_display_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_KEYPAD_LOCKOUT_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostat_user_interface_configurationkeypad_lockout instead of this: thermostat_user_interface_configuration_keypad_lockout
+      return thermostat_user_interface_configuration_keypad_lockout_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_SCHEDULE_PROGRAMMING_VISIBILITY_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostat_user_interface_configurationschedule_programming_visibility instead of this: thermostat_user_interface_configuration_schedule_programming_visibility
+      return thermostat_user_interface_configuration_schedule_programming_visibility_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (768 == cluster_id) {
+  #ifdef COLOR_CONTROL_CURRENT_HUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrent_hue instead of this: color_control_current_hue
+      return color_control_current_hue_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_CURRENT_SATURATION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrent_saturation instead of this: color_control_current_saturation
+      return color_control_current_saturation_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_REMAINING_TIME_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlremaining_time instead of this: color_control_remaining_time
+      return color_control_remaining_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_CURRENTX_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrentx instead of this: color_control_currentx
+      return color_control_currentx_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_CURRENTY_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrenty instead of this: color_control_currenty
+      return color_control_currenty_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_DRIFT_COMPENSATION_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controldrift_compensation instead of this: color_control_drift_compensation
+      return color_control_drift_compensation_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COMPENSATION_TEXT_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcompensation_text instead of this: color_control_compensation_text
+      return color_control_compensation_text_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_temperature_mireds instead of this: color_control_color_temperature_mireds
+      return color_control_color_temperature_mireds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_MODE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_mode instead of this: color_control_color_mode
+      return color_control_color_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_OPTIONS_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controloptions instead of this: color_control_options
+      return color_control_options_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_NUMBER_OF_PRIMARIES_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlnumber_of_primaries instead of this: color_control_number_of_primaries
+      return color_control_number_of_primaries_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY1X_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary1x instead of this: color_control_primary1x
+      return color_control_primary1x_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY1Y_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary1y instead of this: color_control_primary1y
+      return color_control_primary1y_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY1_INTENSITY_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary1_intensity instead of this: color_control_primary1_intensity
+      return color_control_primary1_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY2X_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary2x instead of this: color_control_primary2x
+      return color_control_primary2x_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY2Y_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary2y instead of this: color_control_primary2y
+      return color_control_primary2y_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY2_INTENSITY_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary2_intensity instead of this: color_control_primary2_intensity
+      return color_control_primary2_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY3X_ENUM_NAME_AVAILABLE
+    if (25 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary3x instead of this: color_control_primary3x
+      return color_control_primary3x_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY3Y_ENUM_NAME_AVAILABLE
+    if (26 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary3y instead of this: color_control_primary3y
+      return color_control_primary3y_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY3_INTENSITY_ENUM_NAME_AVAILABLE
+    if (27 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary3_intensity instead of this: color_control_primary3_intensity
+      return color_control_primary3_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY4X_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary4x instead of this: color_control_primary4x
+      return color_control_primary4x_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY4Y_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary4y instead of this: color_control_primary4y
+      return color_control_primary4y_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY4_INTENSITY_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary4_intensity instead of this: color_control_primary4_intensity
+      return color_control_primary4_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY5X_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary5x instead of this: color_control_primary5x
+      return color_control_primary5x_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY5Y_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary5y instead of this: color_control_primary5y
+      return color_control_primary5y_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY5_INTENSITY_ENUM_NAME_AVAILABLE
+    if (38 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary5_intensity instead of this: color_control_primary5_intensity
+      return color_control_primary5_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY6X_ENUM_NAME_AVAILABLE
+    if (40 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary6x instead of this: color_control_primary6x
+      return color_control_primary6x_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY6Y_ENUM_NAME_AVAILABLE
+    if (41 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary6y instead of this: color_control_primary6y
+      return color_control_primary6y_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY6_INTENSITY_ENUM_NAME_AVAILABLE
+    if (42 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary6_intensity instead of this: color_control_primary6_intensity
+      return color_control_primary6_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_WHITE_POINTX_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlwhite_pointx instead of this: color_control_white_pointx
+      return color_control_white_pointx_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_WHITE_POINTY_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlwhite_pointy instead of this: color_control_white_pointy
+      return color_control_white_pointy_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTRX_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointrx instead of this: color_control_color_pointrx
+      return color_control_color_pointrx_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTRY_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointry instead of this: color_control_color_pointry
+      return color_control_color_pointry_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTR_INTENSITY_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointr_intensity instead of this: color_control_color_pointr_intensity
+      return color_control_color_pointr_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTGX_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointgx instead of this: color_control_color_pointgx
+      return color_control_color_pointgx_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTGY_ENUM_NAME_AVAILABLE
+    if (55 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointgy instead of this: color_control_color_pointgy
+      return color_control_color_pointgy_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTG_INTENSITY_ENUM_NAME_AVAILABLE
+    if (56 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointg_intensity instead of this: color_control_color_pointg_intensity
+      return color_control_color_pointg_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTBX_ENUM_NAME_AVAILABLE
+    if (58 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointbx instead of this: color_control_color_pointbx
+      return color_control_color_pointbx_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTBY_ENUM_NAME_AVAILABLE
+    if (59 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointby instead of this: color_control_color_pointby
+      return color_control_color_pointby_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTB_INTENSITY_ENUM_NAME_AVAILABLE
+    if (60 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointb_intensity instead of this: color_control_color_pointb_intensity
+      return color_control_color_pointb_intensity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_ENHANCED_CURRENT_HUE_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlenhanced_current_hue instead of this: color_control_enhanced_current_hue
+      return color_control_enhanced_current_hue_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_ENHANCED_COLOR_MODE_ENUM_NAME_AVAILABLE
+    if (16385 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlenhanced_color_mode instead of this: color_control_enhanced_color_mode
+      return color_control_enhanced_color_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_ACTIVE_ENUM_NAME_AVAILABLE
+    if (16386 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_active instead of this: color_control_color_loop_active
+      return color_control_color_loop_active_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE
+    if (16387 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_direction instead of this: color_control_color_loop_direction
+      return color_control_color_loop_direction_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_TIME_ENUM_NAME_AVAILABLE
+    if (16388 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_time instead of this: color_control_color_loop_time
+      return color_control_color_loop_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE_ENUM_NAME_AVAILABLE
+    if (16389 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_start_enhanced_hue instead of this: color_control_color_loop_start_enhanced_hue
+      return color_control_color_loop_start_enhanced_hue_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_STORED_ENHANCED_HUE_ENUM_NAME_AVAILABLE
+    if (16390 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_stored_enhanced_hue instead of this: color_control_color_loop_stored_enhanced_hue
+      return color_control_color_loop_stored_enhanced_hue_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_CAPABILITIES_ENUM_NAME_AVAILABLE
+    if (16394 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_capabilities instead of this: color_control_color_capabilities
+      return color_control_color_capabilities_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MIN_MIREDS_ENUM_NAME_AVAILABLE
+    if (16395 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_temp_physical_min_mireds instead of this: color_control_color_temp_physical_min_mireds
+      return color_control_color_temp_physical_min_mireds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS_ENUM_NAME_AVAILABLE
+    if (16396 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_temp_physical_max_mireds instead of this: color_control_color_temp_physical_max_mireds
+      return color_control_color_temp_physical_max_mireds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS_ENUM_NAME_AVAILABLE
+    if (16397 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcouple_color_temp_to_level_min_mireds instead of this: color_control_couple_color_temp_to_level_min_mireds
+      return color_control_couple_color_temp_to_level_min_mireds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS_ENUM_NAME_AVAILABLE
+    if (16400 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlstart_up_color_temperature_mireds instead of this: color_control_start_up_color_temperature_mireds
+      return color_control_start_up_color_temperature_mireds_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (769 == cluster_id) {
+  #ifdef BALLAST_CONFIGURATION_PHYSICAL_MIN_LEVEL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationphysical_min_level instead of this: ballast_configuration_physical_min_level
+      return ballast_configuration_physical_min_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationphysical_max_level instead of this: ballast_configuration_physical_max_level
+      return ballast_configuration_physical_max_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_BALLAST_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationballast_status instead of this: ballast_configuration_ballast_status
+      return ballast_configuration_ballast_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_MIN_LEVEL_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationmin_level instead of this: ballast_configuration_min_level
+      return ballast_configuration_min_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_MAX_LEVEL_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationmax_level instead of this: ballast_configuration_max_level
+      return ballast_configuration_max_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_POWER_ON_LEVEL_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationpower_on_level instead of this: ballast_configuration_power_on_level
+      return ballast_configuration_power_on_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_POWER_ON_FADE_TIME_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationpower_on_fade_time instead of this: ballast_configuration_power_on_fade_time
+      return ballast_configuration_power_on_fade_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationintrinsic_ballast_factor instead of this: ballast_configuration_intrinsic_ballast_factor
+      return ballast_configuration_intrinsic_ballast_factor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_BALLAST_FACTOR_ADJUSTMENT_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationballast_factor_adjustment instead of this: ballast_configuration_ballast_factor_adjustment
+      return ballast_configuration_ballast_factor_adjustment_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_QUANTITY_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_quantity instead of this: ballast_configuration_lamp_quantity
+      return ballast_configuration_lamp_quantity_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_TYPE_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_type instead of this: ballast_configuration_lamp_type
+      return ballast_configuration_lamp_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_manufacturer instead of this: ballast_configuration_lamp_manufacturer
+      return ballast_configuration_lamp_manufacturer_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_RATED_HOURS_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_rated_hours instead of this: ballast_configuration_lamp_rated_hours
+      return ballast_configuration_lamp_rated_hours_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_BURN_HOURS_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_burn_hours instead of this: ballast_configuration_lamp_burn_hours
+      return ballast_configuration_lamp_burn_hours_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_ALARM_MODE_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_alarm_mode instead of this: ballast_configuration_lamp_alarm_mode
+      return ballast_configuration_lamp_alarm_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_burn_hours_trip_point instead of this: ballast_configuration_lamp_burn_hours_trip_point
+      return ballast_configuration_lamp_burn_hours_trip_point_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1024 == cluster_id) {
+  #ifdef ILLUMINANCE_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementmeasured_value instead of this: illuminance_measurement_measured_value
+      return illuminance_measurement_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementmin_measured_value instead of this: illuminance_measurement_min_measured_value
+      return illuminance_measurement_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementmax_measured_value instead of this: illuminance_measurement_max_measured_value
+      return illuminance_measurement_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementtolerance instead of this: illuminance_measurement_tolerance
+      return illuminance_measurement_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_LIGHT_SENSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementlight_sensor_type instead of this: illuminance_measurement_light_sensor_type
+      return illuminance_measurement_light_sensor_type_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1025 == cluster_id) {
+  #ifdef ILLUMINANCE_LEVEL_SENSING_LEVEL_STATUS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_level_sensinglevel_status instead of this: illuminance_level_sensing_level_status
+      return illuminance_level_sensing_level_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ILLUMINANCE_LEVEL_SENSING_LIGHT_SENSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_level_sensinglight_sensor_type instead of this: illuminance_level_sensing_light_sensor_type
+      return illuminance_level_sensing_light_sensor_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_level_sensingilluminance_target_level instead of this: illuminance_level_sensing_illuminance_target_level
+      return illuminance_level_sensing_illuminance_target_level_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1026 == cluster_id) {
+  #ifdef TEMPERATURE_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementmeasured_value instead of this: temperature_measurement_measured_value
+      return temperature_measurement_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TEMPERATURE_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementmin_measured_value instead of this: temperature_measurement_min_measured_value
+      return temperature_measurement_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TEMPERATURE_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementmax_measured_value instead of this: temperature_measurement_max_measured_value
+      return temperature_measurement_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef TEMPERATURE_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementtolerance instead of this: temperature_measurement_tolerance
+      return temperature_measurement_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1027 == cluster_id) {
+  #ifdef PRESSURE_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmeasured_value instead of this: pressure_measurement_measured_value
+      return pressure_measurement_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmin_measured_value instead of this: pressure_measurement_min_measured_value
+      return pressure_measurement_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmax_measured_value instead of this: pressure_measurement_max_measured_value
+      return pressure_measurement_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementtolerance instead of this: pressure_measurement_tolerance
+      return pressure_measurement_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_SCALED_VALUE_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementscaled_value instead of this: pressure_measurement_scaled_value
+      return pressure_measurement_scaled_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MIN_SCALED_VALUE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmin_scaled_value instead of this: pressure_measurement_min_scaled_value
+      return pressure_measurement_min_scaled_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MAX_SCALED_VALUE_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmax_scaled_value instead of this: pressure_measurement_max_scaled_value
+      return pressure_measurement_max_scaled_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_SCALED_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementscaled_tolerance instead of this: pressure_measurement_scaled_tolerance
+      return pressure_measurement_scaled_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_SCALE_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementscale instead of this: pressure_measurement_scale
+      return pressure_measurement_scale_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1028 == cluster_id) {
+  #ifdef FLOW_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementmeasured_value instead of this: flow_measurement_measured_value
+      return flow_measurement_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef FLOW_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementmin_measured_value instead of this: flow_measurement_min_measured_value
+      return flow_measurement_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef FLOW_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementmax_measured_value instead of this: flow_measurement_max_measured_value
+      return flow_measurement_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef FLOW_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementtolerance instead of this: flow_measurement_tolerance
+      return flow_measurement_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1029 == cluster_id) {
+  #ifdef RELATIVITY_HUMIDITY_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditymeasured_value instead of this: relativity_humidity_measured_value
+      return relativity_humidity_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditymin_measured_value instead of this: relativity_humidity_min_measured_value
+      return relativity_humidity_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef RELATIVITY_HUMIDITY_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditymax_measured_value instead of this: relativity_humidity_max_measured_value
+      return relativity_humidity_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef RELATIVITY_HUMIDITY_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditytolerance instead of this: relativity_humidity_tolerance
+      return relativity_humidity_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1030 == cluster_id) {
+  #ifdef OCCUPANCY_SENSING_OCCUPANCY_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingoccupancy instead of this: occupancy_sensing_occupancy
+      return occupancy_sensing_occupancy_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingoccupancy_sensor_type instead of this: occupancy_sensing_occupancy_sensor_type
+      return occupancy_sensing_occupancy_sensor_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_BITMAP_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingoccupancy_sensor_type_bitmap instead of this: occupancy_sensing_occupancy_sensor_type_bitmap
+      return occupancy_sensing_occupancy_sensor_type_bitmap_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingpir_occupied_to_unoccupied_delay instead of this: occupancy_sensing_pir_occupied_to_unoccupied_delay
+      return occupancy_sensing_pir_occupied_to_unoccupied_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingpir_unoccupied_to_occupied_delay instead of this: occupancy_sensing_pir_unoccupied_to_occupied_delay
+      return occupancy_sensing_pir_unoccupied_to_occupied_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingpir_unoccupied_to_occupied_threshold instead of this: occupancy_sensing_pir_unoccupied_to_occupied_threshold
+      return occupancy_sensing_pir_unoccupied_to_occupied_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingultrasonic_occupied_to_unoccupied_delay instead of this: occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay
+      return occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingultrasonic_unoccupied_to_occupied_delay instead of this: occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay
+      return occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingultrasonic_unoccupied_to_occupied_threshold instead of this: occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold
+      return occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingphysical_contact_occupied_to_unoccupied_delay instead of this: occupancy_sensing_physical_contact_occupied_to_unoccupied_delay
+      return occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingphysical_contact_unoccupied_to_occupied_delay instead of this: occupancy_sensing_physical_contact_unoccupied_to_occupied_delay
+      return occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingphysical_contact_unoccupied_to_occupied_threshold instead of this: occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold
+      return occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1033 == cluster_id) {
+  #ifdef PH_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementmeasured_value instead of this: ph_measurement_measured_value
+      return ph_measurement_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PH_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementmin_measured_value instead of this: ph_measurement_min_measured_value
+      return ph_measurement_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PH_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementmax_measured_value instead of this: ph_measurement_max_measured_value
+      return ph_measurement_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PH_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementtolerance instead of this: ph_measurement_tolerance
+      return ph_measurement_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1034 == cluster_id) {
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementmeasured_value instead of this: electrical_conductivity_measurement_measured_value
+      return electrical_conductivity_measurement_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementmin_measured_value instead of this: electrical_conductivity_measurement_min_measured_value
+      return electrical_conductivity_measurement_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementmax_measured_value instead of this: electrical_conductivity_measurement_max_measured_value
+      return electrical_conductivity_measurement_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementtolerance instead of this: electrical_conductivity_measurement_tolerance
+      return electrical_conductivity_measurement_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1035 == cluster_id) {
+  #ifdef WIND_SPEED_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementmeasured_value instead of this: wind_speed_measurement_measured_value
+      return wind_speed_measurement_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementmin_measured_value instead of this: wind_speed_measurement_min_measured_value
+      return wind_speed_measurement_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WIND_SPEED_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementmax_measured_value instead of this: wind_speed_measurement_max_measured_value
+      return wind_speed_measurement_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef WIND_SPEED_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementtolerance instead of this: wind_speed_measurement_tolerance
+      return wind_speed_measurement_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1036 == cluster_id) {
+  #ifdef CARBON_MONOXIDE_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidemeasured_value instead of this: carbon_monoxide_measured_value
+      return carbon_monoxide_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef CARBON_MONOXIDE_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidemin_measured_value instead of this: carbon_monoxide_min_measured_value
+      return carbon_monoxide_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef CARBON_MONOXIDE_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidemax_measured_value instead of this: carbon_monoxide_max_measured_value
+      return carbon_monoxide_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef CARBON_MONOXIDE_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidetolerance instead of this: carbon_monoxide_tolerance
+      return carbon_monoxide_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1280 == cluster_id) {
+  #ifdef IAS_ZONE_ZONE_STATE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezone_state instead of this: ias_zone_zone_state
+      return ias_zone_zone_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef IAS_ZONE_ZONE_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezone_type instead of this: ias_zone_zone_type
+      return ias_zone_zone_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef IAS_ZONE_ZONE_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezone_status instead of this: ias_zone_zone_status
+      return ias_zone_zone_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef IAS_ZONE_IASCIE_ADDRESS_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zoneiascie_address instead of this: ias_zone_iascie_address
+      return ias_zone_iascie_address_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef IAS_ZONE_ZONEID_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezoneid instead of this: ias_zone_zoneid
+      return ias_zone_zoneid_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef IAS_ZONE_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonenumber_of_zone_sensitivity_levels_supported instead of this: ias_zone_number_of_zone_sensitivity_levels_supported
+      return ias_zone_number_of_zone_sensitivity_levels_supported_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonecurrent_zone_sensitivity_level instead of this: ias_zone_current_zone_sensitivity_level
+      return ias_zone_current_zone_sensitivity_level_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1282 == cluster_id) {
+  #ifdef IASWD_MAX_DURATION_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: iaswdmax_duration instead of this: iaswd_max_duration
+      return iaswd_max_duration_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1794 == cluster_id) {
+  #ifdef METERING_CURRENT_SUMMATION_DELIVERED_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_summation_delivered instead of this: metering_current_summation_delivered
+      return metering_current_summation_delivered_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_CURRENT_SUMMATION_RECEIVED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_summation_received instead of this: metering_current_summation_received
+      return metering_current_summation_received_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_DELIVERED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_delivered instead of this: metering_current_max_demand_delivered
+      return metering_current_max_demand_delivered_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_RECEIVED_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_received instead of this: metering_current_max_demand_received
+      return metering_current_max_demand_received_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_POWER_FACTOR_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringpower_factor instead of this: metering_power_factor
+      return metering_power_factor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_READING_SNAP_SHOT_TIME_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringreading_snap_shot_time instead of this: metering_reading_snap_shot_time
+      return metering_reading_snap_shot_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_delivered_time instead of this: metering_current_max_demand_delivered_time
+      return metering_current_max_demand_delivered_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_received_time instead of this: metering_current_max_demand_received_time
+      return metering_current_max_demand_received_time_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_DEFAULT_UPDATE_PERIOD_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringdefault_update_period instead of this: metering_default_update_period
+      return metering_default_update_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_SUPPLY_STATUS_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringsupply_status instead of this: metering_supply_status
+      return metering_supply_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_CURRENT_INLET_ENERGY_CARRIER_SUMMATION_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_inlet_energy_carrier_summation instead of this: metering_current_inlet_energy_carrier_summation
+      return metering_current_inlet_energy_carrier_summation_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_outlet_energy_carrier_summation instead of this: metering_current_outlet_energy_carrier_summation
+      return metering_current_outlet_energy_carrier_summation_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_INLET_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringinlet_temperature instead of this: metering_inlet_temperature
+      return metering_inlet_temperature_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_OUTLET_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (24 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringoutlet_temperature instead of this: metering_outlet_temperature
+      return metering_outlet_temperature_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_UNITOF_MEASURE_ENUM_NAME_AVAILABLE
+    if (768 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringunitof_measure instead of this: metering_unitof_measure
+      return metering_unitof_measure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (769 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringmultiplier instead of this: metering_multiplier
+      return metering_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_DIVISOR_ENUM_NAME_AVAILABLE
+    if (770 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringdivisor instead of this: metering_divisor
+      return metering_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_SUMMATION_FORMATTING_ENUM_NAME_AVAILABLE
+    if (771 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringsummation_formatting instead of this: metering_summation_formatting
+      return metering_summation_formatting_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_DEMAND_FORMATTING_ENUM_NAME_AVAILABLE
+    if (772 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringdemand_formatting instead of this: metering_demand_formatting
+      return metering_demand_formatting_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_HISTORICAL_CONSUMPTION_FORMATTING_ENUM_NAME_AVAILABLE
+    if (773 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringhistorical_consumption_formatting instead of this: metering_historical_consumption_formatting
+      return metering_historical_consumption_formatting_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_METERING_DEVICE_TYPE_ENUM_NAME_AVAILABLE
+    if (774 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringmetering_device_type instead of this: metering_metering_device_type
+      return metering_metering_device_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_ENERGY_CARRIER_UNIT_OF_MEASURE_ENUM_NAME_AVAILABLE
+    if (777 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringenergy_carrier_unit_of_measure instead of this: metering_energy_carrier_unit_of_measure
+      return metering_energy_carrier_unit_of_measure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_ENERGY_CARRIER_SUMMATION_FORMATTING_ENUM_NAME_AVAILABLE
+    if (778 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringenergy_carrier_summation_formatting instead of this: metering_energy_carrier_summation_formatting
+      return metering_energy_carrier_summation_formatting_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_ENERGY_CARRIER_DEMAND_FORMATTING_ENUM_NAME_AVAILABLE
+    if (779 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringenergy_carrier_demand_formatting instead of this: metering_energy_carrier_demand_formatting
+      return metering_energy_carrier_demand_formatting_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_TEMPERATURE_UNIT_OF_MEASURE_ENUM_NAME_AVAILABLE
+    if (780 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringtemperature_unit_of_measure instead of this: metering_temperature_unit_of_measure
+      return metering_temperature_unit_of_measure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef METERING_TEMPERATURE_FORMATTING_ENUM_NAME_AVAILABLE
+    if (781 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringtemperature_formatting instead of this: metering_temperature_formatting
+      return metering_temperature_formatting_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (2820 == cluster_id) {
+  #ifdef ELECTRICAL_MEASUREMENT_MEASUREMENT_TYPE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasurement_type instead of this: electrical_measurement_measurement_type
+      return electrical_measurement_measurement_type_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (256 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage instead of this: electrical_measurement_dc_voltage
+      return electrical_measurement_dc_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MIN_ENUM_NAME_AVAILABLE
+    if (257 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_min instead of this: electrical_measurement_dc_voltage_min
+      return electrical_measurement_dc_voltage_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MAX_ENUM_NAME_AVAILABLE
+    if (258 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_max instead of this: electrical_measurement_dc_voltage_max
+      return electrical_measurement_dc_voltage_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_ENUM_NAME_AVAILABLE
+    if (259 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current instead of this: electrical_measurement_dc_current
+      return electrical_measurement_dc_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_MIN_ENUM_NAME_AVAILABLE
+    if (260 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_min instead of this: electrical_measurement_dc_current_min
+      return electrical_measurement_dc_current_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_MAX_ENUM_NAME_AVAILABLE
+    if (261 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_max instead of this: electrical_measurement_dc_current_max
+      return electrical_measurement_dc_current_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_ENUM_NAME_AVAILABLE
+    if (262 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power instead of this: electrical_measurement_dc_power
+      return electrical_measurement_dc_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_MIN_ENUM_NAME_AVAILABLE
+    if (263 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_min instead of this: electrical_measurement_dc_power_min
+      return electrical_measurement_dc_power_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_MAX_ENUM_NAME_AVAILABLE
+    if (264 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_max instead of this: electrical_measurement_dc_power_max
+      return electrical_measurement_dc_power_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (512 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_multiplier instead of this: electrical_measurement_dc_voltage_multiplier
+      return electrical_measurement_dc_voltage_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR_ENUM_NAME_AVAILABLE
+    if (513 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_divisor instead of this: electrical_measurement_dc_voltage_divisor
+      return electrical_measurement_dc_voltage_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (514 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_multiplier instead of this: electrical_measurement_dc_current_multiplier
+      return electrical_measurement_dc_current_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR_ENUM_NAME_AVAILABLE
+    if (515 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_divisor instead of this: electrical_measurement_dc_current_divisor
+      return electrical_measurement_dc_current_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (516 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_multiplier instead of this: electrical_measurement_dc_power_multiplier
+      return electrical_measurement_dc_power_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR_ENUM_NAME_AVAILABLE
+    if (517 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_divisor instead of this: electrical_measurement_dc_power_divisor
+      return electrical_measurement_dc_power_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (768 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency instead of this: electrical_measurement_ac_frequency
+      return electrical_measurement_ac_frequency_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN_ENUM_NAME_AVAILABLE
+    if (769 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_min instead of this: electrical_measurement_ac_frequency_min
+      return electrical_measurement_ac_frequency_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MAX_ENUM_NAME_AVAILABLE
+    if (770 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_max instead of this: electrical_measurement_ac_frequency_max
+      return electrical_measurement_ac_frequency_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT_ENUM_NAME_AVAILABLE
+    if (771 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementneutral_current instead of this: electrical_measurement_neutral_current
+      return electrical_measurement_neutral_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_TOTAL_ACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (772 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementtotal_active_power instead of this: electrical_measurement_total_active_power
+      return electrical_measurement_total_active_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_TOTAL_REACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (773 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementtotal_reactive_power instead of this: electrical_measurement_total_reactive_power
+      return electrical_measurement_total_reactive_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_TOTAL_APPARENT_POWER_ENUM_NAME_AVAILABLE
+    if (774 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementtotal_apparent_power instead of this: electrical_measurement_total_apparent_power
+      return electrical_measurement_total_apparent_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED1ST_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (775 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured1st_harmonic_current instead of this: electrical_measurement_measured1st_harmonic_current
+      return electrical_measurement_measured1st_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED3RD_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (776 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured3rd_harmonic_current instead of this: electrical_measurement_measured3rd_harmonic_current
+      return electrical_measurement_measured3rd_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED5TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (777 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured5th_harmonic_current instead of this: electrical_measurement_measured5th_harmonic_current
+      return electrical_measurement_measured5th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED7TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (778 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured7th_harmonic_current instead of this: electrical_measurement_measured7th_harmonic_current
+      return electrical_measurement_measured7th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED9TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (779 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured9th_harmonic_current instead of this: electrical_measurement_measured9th_harmonic_current
+      return electrical_measurement_measured9th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED11TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (780 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured11th_harmonic_current instead of this: electrical_measurement_measured11th_harmonic_current
+      return electrical_measurement_measured11th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE1ST_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (781 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase1st_harmonic_current instead of this: electrical_measurement_measured_phase1st_harmonic_current
+      return electrical_measurement_measured_phase1st_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE3RD_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (782 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase3rd_harmonic_current instead of this: electrical_measurement_measured_phase3rd_harmonic_current
+      return electrical_measurement_measured_phase3rd_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE5TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (783 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase5th_harmonic_current instead of this: electrical_measurement_measured_phase5th_harmonic_current
+      return electrical_measurement_measured_phase5th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE7TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (784 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase7th_harmonic_current instead of this: electrical_measurement_measured_phase7th_harmonic_current
+      return electrical_measurement_measured_phase7th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE9TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (785 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase9th_harmonic_current instead of this: electrical_measurement_measured_phase9th_harmonic_current
+      return electrical_measurement_measured_phase9th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE11TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (786 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase11th_harmonic_current instead of this: electrical_measurement_measured_phase11th_harmonic_current
+      return electrical_measurement_measured_phase11th_harmonic_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1024 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_multiplier instead of this: electrical_measurement_ac_frequency_multiplier
+      return electrical_measurement_ac_frequency_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1025 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_divisor instead of this: electrical_measurement_ac_frequency_divisor
+      return electrical_measurement_ac_frequency_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1026 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_multiplier instead of this: electrical_measurement_power_multiplier
+      return electrical_measurement_power_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1027 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_divisor instead of this: electrical_measurement_power_divisor
+      return electrical_measurement_power_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_HARMONIC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1028 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementharmonic_current_multiplier instead of this: electrical_measurement_harmonic_current_multiplier
+      return electrical_measurement_harmonic_current_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_PHASE_HARMONIC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1029 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementphase_harmonic_current_multiplier instead of this: electrical_measurement_phase_harmonic_current_multiplier
+      return electrical_measurement_phase_harmonic_current_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_LINE_CURRENT_ENUM_NAME_AVAILABLE
+    if (1281 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementline_current instead of this: electrical_measurement_line_current
+      return electrical_measurement_line_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_ENUM_NAME_AVAILABLE
+    if (1282 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_current instead of this: electrical_measurement_active_current
+      return electrical_measurement_active_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_ENUM_NAME_AVAILABLE
+    if (1283 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_current instead of this: electrical_measurement_reactive_current
+      return electrical_measurement_reactive_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (1285 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage instead of this: electrical_measurement_rms_voltage
+      return electrical_measurement_rms_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_ENUM_NAME_AVAILABLE
+    if (1286 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_min instead of this: electrical_measurement_rms_voltage_min
+      return electrical_measurement_rms_voltage_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_ENUM_NAME_AVAILABLE
+    if (1287 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_max instead of this: electrical_measurement_rms_voltage_max
+      return electrical_measurement_rms_voltage_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_ENUM_NAME_AVAILABLE
+    if (1288 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current instead of this: electrical_measurement_rms_current
+      return electrical_measurement_rms_current_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_ENUM_NAME_AVAILABLE
+    if (1289 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_min instead of this: electrical_measurement_rms_current_min
+      return electrical_measurement_rms_current_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_ENUM_NAME_AVAILABLE
+    if (1290 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_max instead of this: electrical_measurement_rms_current_max
+      return electrical_measurement_rms_current_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (1291 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power instead of this: electrical_measurement_active_power
+      return electrical_measurement_active_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_ENUM_NAME_AVAILABLE
+    if (1292 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_min instead of this: electrical_measurement_active_power_min
+      return electrical_measurement_active_power_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_ENUM_NAME_AVAILABLE
+    if (1293 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_max instead of this: electrical_measurement_active_power_max
+      return electrical_measurement_active_power_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (1294 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_power instead of this: electrical_measurement_reactive_power
+      return electrical_measurement_reactive_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_APPARENT_POWER_ENUM_NAME_AVAILABLE
+    if (1295 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementapparent_power instead of this: electrical_measurement_apparent_power
+      return electrical_measurement_apparent_power_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_FACTOR_ENUM_NAME_AVAILABLE
+    if (1296 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_factor instead of this: electrical_measurement_power_factor
+      return electrical_measurement_power_factor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_ENUM_NAME_AVAILABLE
+    if (1297 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period instead of this: electrical_measurement_averagerms_voltage_measurement_period
+      return electrical_measurement_averagerms_voltage_measurement_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+    if (1298 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter instead of this: electrical_measurement_averagerms_over_voltage_counter
+      return electrical_measurement_averagerms_over_voltage_counter_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+    if (1299 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter instead of this: electrical_measurement_averagerms_under_voltage_counter
+      return electrical_measurement_averagerms_under_voltage_counter_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_ENUM_NAME_AVAILABLE
+    if (1300 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage_period instead of this: electrical_measurement_rms_extreme_over_voltage_period
+      return electrical_measurement_rms_extreme_over_voltage_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_ENUM_NAME_AVAILABLE
+    if (1301 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage_period instead of this: electrical_measurement_rms_extreme_under_voltage_period
+      return electrical_measurement_rms_extreme_under_voltage_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_ENUM_NAME_AVAILABLE
+    if (1302 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag_period instead of this: electrical_measurement_rms_voltage_sag_period
+      return electrical_measurement_rms_voltage_sag_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_ENUM_NAME_AVAILABLE
+    if (1303 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell_period instead of this: electrical_measurement_rms_voltage_swell_period
+      return electrical_measurement_rms_voltage_swell_period_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1536 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_voltage_multiplier instead of this: electrical_measurement_ac_voltage_multiplier
+      return electrical_measurement_ac_voltage_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_VOLTAGE_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1537 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_voltage_divisor instead of this: electrical_measurement_ac_voltage_divisor
+      return electrical_measurement_ac_voltage_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1538 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_current_multiplier instead of this: electrical_measurement_ac_current_multiplier
+      return electrical_measurement_ac_current_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_CURRENT_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1539 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_current_divisor instead of this: electrical_measurement_ac_current_divisor
+      return electrical_measurement_ac_current_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1540 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_power_multiplier instead of this: electrical_measurement_ac_power_multiplier
+      return electrical_measurement_ac_power_multiplier_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_POWER_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1541 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_power_divisor instead of this: electrical_measurement_ac_power_divisor
+      return electrical_measurement_ac_power_divisor_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_OVERLOAD_ALARMS_MASK_ENUM_NAME_AVAILABLE
+    if (1792 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_overload_alarms_mask instead of this: electrical_measurement_dc_overload_alarms_mask
+      return electrical_measurement_dc_overload_alarms_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (1793 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_overload instead of this: electrical_measurement_dc_voltage_overload
+      return electrical_measurement_dc_voltage_overload_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (1794 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_overload instead of this: electrical_measurement_dc_current_overload
+      return electrical_measurement_dc_current_overload_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_ALARMS_MASK_ENUM_NAME_AVAILABLE
+    if (2048 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_alarms_mask instead of this: electrical_measurement_ac_alarms_mask
+      return electrical_measurement_ac_alarms_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_VOLTAGE_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2049 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_voltage_overload instead of this: electrical_measurement_ac_voltage_overload
+      return electrical_measurement_ac_voltage_overload_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_CURRENT_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2050 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_current_overload instead of this: electrical_measurement_ac_current_overload
+      return electrical_measurement_ac_current_overload_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_ACTIVE_POWER_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2051 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_active_power_overload instead of this: electrical_measurement_ac_active_power_overload
+      return electrical_measurement_ac_active_power_overload_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_REACTIVE_POWER_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2052 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_reactive_power_overload instead of this: electrical_measurement_ac_reactive_power_overload
+      return electrical_measurement_ac_reactive_power_overload_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2053 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage instead of this: electrical_measurement_averagerms_over_voltage
+      return electrical_measurement_averagerms_over_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2054 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage instead of this: electrical_measurement_averagerms_under_voltage
+      return electrical_measurement_averagerms_under_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2055 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage instead of this: electrical_measurement_rms_extreme_over_voltage
+      return electrical_measurement_rms_extreme_over_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2056 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage instead of this: electrical_measurement_rms_extreme_under_voltage
+      return electrical_measurement_rms_extreme_under_voltage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_ENUM_NAME_AVAILABLE
+    if (2057 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag instead of this: electrical_measurement_rms_voltage_sag
+      return electrical_measurement_rms_voltage_sag_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_ENUM_NAME_AVAILABLE
+    if (2058 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell instead of this: electrical_measurement_rms_voltage_swell
+      return electrical_measurement_rms_voltage_swell_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2305 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementline_current_phb instead of this: electrical_measurement_line_current_phb
+      return electrical_measurement_line_current_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2306 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_current_phb instead of this: electrical_measurement_active_current_phb
+      return electrical_measurement_active_current_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2307 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_current_phb instead of this: electrical_measurement_reactive_current_phb
+      return electrical_measurement_reactive_current_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHB_ENUM_NAME_AVAILABLE
+    if (2309 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_phb instead of this: electrical_measurement_rms_voltage_phb
+      return electrical_measurement_rms_voltage_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB_ENUM_NAME_AVAILABLE
+    if (2310 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_min_phb instead of this: electrical_measurement_rms_voltage_min_phb
+      return electrical_measurement_rms_voltage_min_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHB_ENUM_NAME_AVAILABLE
+    if (2311 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_max_phb instead of this: electrical_measurement_rms_voltage_max_phb
+      return electrical_measurement_rms_voltage_max_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2312 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_phb instead of this: electrical_measurement_rms_current_phb
+      return electrical_measurement_rms_current_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHB_ENUM_NAME_AVAILABLE
+    if (2313 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_min_phb instead of this: electrical_measurement_rms_current_min_phb
+      return electrical_measurement_rms_current_min_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB_ENUM_NAME_AVAILABLE
+    if (2314 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_max_phb instead of this: electrical_measurement_rms_current_max_phb
+      return electrical_measurement_rms_current_max_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHB_ENUM_NAME_AVAILABLE
+    if (2315 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_phb instead of this: electrical_measurement_active_power_phb
+      return electrical_measurement_active_power_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHB_ENUM_NAME_AVAILABLE
+    if (2316 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_min_phb instead of this: electrical_measurement_active_power_min_phb
+      return electrical_measurement_active_power_min_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHB_ENUM_NAME_AVAILABLE
+    if (2317 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_max_phb instead of this: electrical_measurement_active_power_max_phb
+      return electrical_measurement_active_power_max_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHB_ENUM_NAME_AVAILABLE
+    if (2318 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_power_phb instead of this: electrical_measurement_reactive_power_phb
+      return electrical_measurement_reactive_power_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHB_ENUM_NAME_AVAILABLE
+    if (2319 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementapparent_power_phb instead of this: electrical_measurement_apparent_power_phb
+      return electrical_measurement_apparent_power_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB_ENUM_NAME_AVAILABLE
+    if (2320 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_factor_phb instead of this: electrical_measurement_power_factor_phb
+      return electrical_measurement_power_factor_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2321 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phb instead of this: electrical_measurement_averagerms_voltage_measurement_period_phb
+      return electrical_measurement_averagerms_voltage_measurement_period_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+    if (2322 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phb instead of this: electrical_measurement_averagerms_over_voltage_counter_phb
+      return electrical_measurement_averagerms_over_voltage_counter_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+    if (2323 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phb instead of this: electrical_measurement_averagerms_under_voltage_counter_phb
+      return electrical_measurement_averagerms_under_voltage_counter_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2324 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage_period_phb instead of this: electrical_measurement_rms_extreme_over_voltage_period_phb
+      return electrical_measurement_rms_extreme_over_voltage_period_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2325 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage_period_phb instead of this: electrical_measurement_rms_extreme_under_voltage_period_phb
+      return electrical_measurement_rms_extreme_under_voltage_period_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2326 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag_period_phb instead of this: electrical_measurement_rms_voltage_sag_period_phb
+      return electrical_measurement_rms_voltage_sag_period_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2327 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell_period_phb instead of this: electrical_measurement_rms_voltage_swell_period_phb
+      return electrical_measurement_rms_voltage_swell_period_phb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2561 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementline_current_phc instead of this: electrical_measurement_line_current_phc
+      return electrical_measurement_line_current_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2562 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_current_phc instead of this: electrical_measurement_active_current_phc
+      return electrical_measurement_active_current_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2563 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_current_phc instead of this: electrical_measurement_reactive_current_phc
+      return electrical_measurement_reactive_current_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHC_ENUM_NAME_AVAILABLE
+    if (2565 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_phc instead of this: electrical_measurement_rms_voltage_phc
+      return electrical_measurement_rms_voltage_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC_ENUM_NAME_AVAILABLE
+    if (2566 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_min_phc instead of this: electrical_measurement_rms_voltage_min_phc
+      return electrical_measurement_rms_voltage_min_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHC_ENUM_NAME_AVAILABLE
+    if (2567 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_max_phc instead of this: electrical_measurement_rms_voltage_max_phc
+      return electrical_measurement_rms_voltage_max_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2568 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_phc instead of this: electrical_measurement_rms_current_phc
+      return electrical_measurement_rms_current_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHC_ENUM_NAME_AVAILABLE
+    if (2569 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_min_phc instead of this: electrical_measurement_rms_current_min_phc
+      return electrical_measurement_rms_current_min_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC_ENUM_NAME_AVAILABLE
+    if (2570 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_max_phc instead of this: electrical_measurement_rms_current_max_phc
+      return electrical_measurement_rms_current_max_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHC_ENUM_NAME_AVAILABLE
+    if (2571 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_phc instead of this: electrical_measurement_active_power_phc
+      return electrical_measurement_active_power_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHC_ENUM_NAME_AVAILABLE
+    if (2572 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_min_phc instead of this: electrical_measurement_active_power_min_phc
+      return electrical_measurement_active_power_min_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHC_ENUM_NAME_AVAILABLE
+    if (2573 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_max_phc instead of this: electrical_measurement_active_power_max_phc
+      return electrical_measurement_active_power_max_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHC_ENUM_NAME_AVAILABLE
+    if (2574 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_power_phc instead of this: electrical_measurement_reactive_power_phc
+      return electrical_measurement_reactive_power_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHC_ENUM_NAME_AVAILABLE
+    if (2575 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementapparent_power_phc instead of this: electrical_measurement_apparent_power_phc
+      return electrical_measurement_apparent_power_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC_ENUM_NAME_AVAILABLE
+    if (2576 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_factor_phc instead of this: electrical_measurement_power_factor_phc
+      return electrical_measurement_power_factor_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2577 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phc instead of this: electrical_measurement_averagerms_voltage_measurement_period_phc
+      return electrical_measurement_averagerms_voltage_measurement_period_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+    if (2578 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phc instead of this: electrical_measurement_averagerms_over_voltage_counter_phc
+      return electrical_measurement_averagerms_over_voltage_counter_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+    if (2579 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phc instead of this: electrical_measurement_averagerms_under_voltage_counter_phc
+      return electrical_measurement_averagerms_under_voltage_counter_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2580 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage_period_phc instead of this: electrical_measurement_rms_extreme_over_voltage_period_phc
+      return electrical_measurement_rms_extreme_over_voltage_period_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2581 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage_period_phc instead of this: electrical_measurement_rms_extreme_under_voltage_period_phc
+      return electrical_measurement_rms_extreme_under_voltage_period_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2582 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag_period_phc instead of this: electrical_measurement_rms_voltage_sag_period_phc
+      return electrical_measurement_rms_voltage_sag_period_phc_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2583 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell_period_phc instead of this: electrical_measurement_rms_voltage_swell_period_phc
+      return electrical_measurement_rms_voltage_swell_period_phc_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (2821 == cluster_id) {
+  #ifdef DIAGNOSTICS_NUMBER_OF_RESETS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsnumber_of_resets instead of this: diagnostics_number_of_resets
+      return diagnostics_number_of_resets_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PERSISTENT_MEMORY_WRITES_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticspersistent_memory_writes instead of this: diagnostics_persistent_memory_writes
+      return diagnostics_persistent_memory_writes_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_RX_BCAST_ENUM_NAME_AVAILABLE
+    if (256 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_rx_bcast instead of this: diagnostics_mac_rx_bcast
+      return diagnostics_mac_rx_bcast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_BCAST_ENUM_NAME_AVAILABLE
+    if (257 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_bcast instead of this: diagnostics_mac_tx_bcast
+      return diagnostics_mac_tx_bcast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_RX_UCAST_ENUM_NAME_AVAILABLE
+    if (258 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_rx_ucast instead of this: diagnostics_mac_rx_ucast
+      return diagnostics_mac_rx_ucast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_UCAST_ENUM_NAME_AVAILABLE
+    if (259 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_ucast instead of this: diagnostics_mac_tx_ucast
+      return diagnostics_mac_tx_ucast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_UCAST_RETRY_ENUM_NAME_AVAILABLE
+    if (260 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_ucast_retry instead of this: diagnostics_mac_tx_ucast_retry
+      return diagnostics_mac_tx_ucast_retry_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_UCAST_FAIL_ENUM_NAME_AVAILABLE
+    if (261 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_ucast_fail instead of this: diagnostics_mac_tx_ucast_fail
+      return diagnostics_mac_tx_ucast_fail_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_RX_BCAST_ENUM_NAME_AVAILABLE
+    if (262 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_rx_bcast instead of this: diagnostics_aps_rx_bcast
+      return diagnostics_aps_rx_bcast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_BCAST_ENUM_NAME_AVAILABLE
+    if (263 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_bcast instead of this: diagnostics_aps_tx_bcast
+      return diagnostics_aps_tx_bcast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_RX_UCAST_ENUM_NAME_AVAILABLE
+    if (264 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_rx_ucast instead of this: diagnostics_aps_rx_ucast
+      return diagnostics_aps_rx_ucast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_UCAST_SUCCESS_ENUM_NAME_AVAILABLE
+    if (265 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_ucast_success instead of this: diagnostics_aps_tx_ucast_success
+      return diagnostics_aps_tx_ucast_success_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_UCAST_RETRY_ENUM_NAME_AVAILABLE
+    if (266 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_ucast_retry instead of this: diagnostics_aps_tx_ucast_retry
+      return diagnostics_aps_tx_ucast_retry_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_UCAST_FAIL_ENUM_NAME_AVAILABLE
+    if (267 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_ucast_fail instead of this: diagnostics_aps_tx_ucast_fail
+      return diagnostics_aps_tx_ucast_fail_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_ROUTE_DISC_INITIATED_ENUM_NAME_AVAILABLE
+    if (268 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsroute_disc_initiated instead of this: diagnostics_route_disc_initiated
+      return diagnostics_route_disc_initiated_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NEIGHBOR_ADDED_ENUM_NAME_AVAILABLE
+    if (269 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsneighbor_added instead of this: diagnostics_neighbor_added
+      return diagnostics_neighbor_added_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NEIGHBOR_REMOVED_ENUM_NAME_AVAILABLE
+    if (270 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsneighbor_removed instead of this: diagnostics_neighbor_removed
+      return diagnostics_neighbor_removed_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NEIGHBOR_STALE_ENUM_NAME_AVAILABLE
+    if (271 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsneighbor_stale instead of this: diagnostics_neighbor_stale
+      return diagnostics_neighbor_stale_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_JOIN_INDICATION_ENUM_NAME_AVAILABLE
+    if (272 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsjoin_indication instead of this: diagnostics_join_indication
+      return diagnostics_join_indication_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_CHILD_MOVED_ENUM_NAME_AVAILABLE
+    if (273 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticschild_moved instead of this: diagnostics_child_moved
+      return diagnostics_child_moved_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NWKFC_FAILURE_ENUM_NAME_AVAILABLE
+    if (274 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsnwkfc_failure instead of this: diagnostics_nwkfc_failure
+      return diagnostics_nwkfc_failure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APSFC_FAILURE_ENUM_NAME_AVAILABLE
+    if (275 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsapsfc_failure instead of this: diagnostics_apsfc_failure
+      return diagnostics_apsfc_failure_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_UNAUTHORIZED_KEY_ENUM_NAME_AVAILABLE
+    if (276 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_unauthorized_key instead of this: diagnostics_aps_unauthorized_key
+      return diagnostics_aps_unauthorized_key_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NWK_DECRYPT_FAILURES_ENUM_NAME_AVAILABLE
+    if (277 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsnwk_decrypt_failures instead of this: diagnostics_nwk_decrypt_failures
+      return diagnostics_nwk_decrypt_failures_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_DECRYPT_FAILURES_ENUM_NAME_AVAILABLE
+    if (278 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_decrypt_failures instead of this: diagnostics_aps_decrypt_failures
+      return diagnostics_aps_decrypt_failures_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES_ENUM_NAME_AVAILABLE
+    if (279 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticspacket_buffer_allocate_failures instead of this: diagnostics_packet_buffer_allocate_failures
+      return diagnostics_packet_buffer_allocate_failures_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_RELAYED_UCAST_ENUM_NAME_AVAILABLE
+    if (280 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsrelayed_ucast instead of this: diagnostics_relayed_ucast
+      return diagnostics_relayed_ucast_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED_ENUM_NAME_AVAILABLE
+    if (281 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsphy_tomac_queue_limit_reached instead of this: diagnostics_phy_tomac_queue_limit_reached
+      return diagnostics_phy_tomac_queue_limit_reached_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT_ENUM_NAME_AVAILABLE
+    if (282 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticspacket_validate_drop_count instead of this: diagnostics_packet_validate_drop_count
+      return diagnostics_packet_validate_drop_count_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT_ENUM_NAME_AVAILABLE
+    if (283 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaveragemac_retry_peraps_message_sent instead of this: diagnostics_averagemac_retry_peraps_message_sent
+      return diagnostics_averagemac_retry_peraps_message_sent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_LAST_MESSAGELQI_ENUM_NAME_AVAILABLE
+    if (284 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticslast_messagelqi instead of this: diagnostics_last_messagelqi
+      return diagnostics_last_messagelqi_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_LAST_MESSAGERSSI_ENUM_NAME_AVAILABLE
+    if (285 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticslast_messagerssi instead of this: diagnostics_last_messagerssi
+      return diagnostics_last_messagerssi_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64769 == cluster_id) {
+  #ifdef PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_ENABLED_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: protocol_controller_rf_telemetrytx_report_enabled instead of this: protocol_controller_rf_telemetry_tx_report_enabled
+      return protocol_controller_rf_telemetry_tx_report_enabled_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: protocol_controller_rf_telemetrypti_enabled instead of this: protocol_controller_rf_telemetry_pti_enabled
+      return protocol_controller_rf_telemetry_pti_enabled_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64770 == cluster_id) {
+  #ifdef STATE_ENDPOINT_ID_LIST_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: stateendpoint_id_list instead of this: state_endpoint_id_list
+      return state_endpoint_id_list_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64771 == cluster_id) {
+  #ifdef BINDING_BINDING_TABLE_FULL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: bindingbinding_table_full instead of this: binding_binding_table_full
+      return binding_binding_table_full_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BINDING_BINDABLE_CLUSTER_LIST_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: bindingbindable_cluster_list instead of this: binding_bindable_cluster_list
+      return binding_bindable_cluster_list_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BINDING_BINDING_TABLE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: bindingbinding_table instead of this: binding_binding_table
+      return binding_binding_table_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64772 == cluster_id) {
+  #ifdef SYSTEM_METRICS_REPORTING_INTERVAL_SECONDS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsreporting_interval_seconds instead of this: system_metrics_reporting_interval_seconds
+      return system_metrics_reporting_interval_seconds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_usage_percent instead of this: system_metrics_cpu_usage_percent
+      return system_metrics_cpu_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_FREQUENCYM_HZ_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_frequencym_hz instead of this: system_metrics_cpu_frequencym_hz
+      return system_metrics_cpu_frequencym_hz_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_average_usage_percent instead of this: system_metrics_cpu_average_usage_percent
+      return system_metrics_cpu_average_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_min_usage_percent instead of this: system_metrics_cpu_min_usage_percent
+      return system_metrics_cpu_min_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_max_usage_percent instead of this: system_metrics_cpu_max_usage_percent
+      return system_metrics_cpu_max_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_RAM_TOTALMB_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsram_totalmb instead of this: system_metrics_ram_totalmb
+      return system_metrics_ram_totalmb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_RAM_FREEMB_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsram_freemb instead of this: system_metrics_ram_freemb
+      return system_metrics_ram_freemb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_RAM_AVAILABLEMB_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsram_availablemb instead of this: system_metrics_ram_availablemb
+      return system_metrics_ram_availablemb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_SWAP_MEMORY_TOTALMB_ENUM_NAME_AVAILABLE
+    if (35 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsswap_memory_totalmb instead of this: system_metrics_swap_memory_totalmb
+      return system_metrics_swap_memory_totalmb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_SWAP_MEMORY_USEDMB_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsswap_memory_usedmb instead of this: system_metrics_swap_memory_usedmb
+      return system_metrics_swap_memory_usedmb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_VIRTUAL_MEMORY_TOTALMB_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsvirtual_memory_totalmb instead of this: system_metrics_virtual_memory_totalmb
+      return system_metrics_virtual_memory_totalmb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_VIRTUAL_MEMORY_USEDMB_ENUM_NAME_AVAILABLE
+    if (38 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsvirtual_memory_usedmb instead of this: system_metrics_virtual_memory_usedmb
+      return system_metrics_virtual_memory_usedmb_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_DISKS_USAGE_ENUM_NAME_AVAILABLE
+    if (39 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsdisks_usage instead of this: system_metrics_disks_usage
+      return system_metrics_disks_usage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_DISKS_COUNTERS_ENUM_NAME_AVAILABLE
+    if (40 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsdisks_counters instead of this: system_metrics_disks_counters
+      return system_metrics_disks_counters_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_NETWORK_INTERFACES_DATA_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsnetwork_interfaces_data instead of this: system_metrics_network_interfaces_data
+      return system_metrics_network_interfaces_data_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_WIRELESS_NETWORK_INTERFACES_DATA_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricswireless_network_interfaces_data instead of this: system_metrics_wireless_network_interfaces_data
+      return system_metrics_wireless_network_interfaces_data_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_HOSTNAME_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricshostname instead of this: system_metrics_hostname
+      return system_metrics_hostname_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_FQDN_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsfqdn instead of this: system_metrics_fqdn
+      return system_metrics_fqdn_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_UPTIME_MINUTES_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsuptime_minutes instead of this: system_metrics_uptime_minutes
+      return system_metrics_uptime_minutes_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CURRENT_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (80 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscurrent_temperature_celcius instead of this: system_metrics_current_temperature_celcius
+      return system_metrics_current_temperature_celcius_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_AVERAGE_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (81 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsaverage_temperature_celcius instead of this: system_metrics_average_temperature_celcius
+      return system_metrics_average_temperature_celcius_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_MIN_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (82 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsmin_temperature_celcius instead of this: system_metrics_min_temperature_celcius
+      return system_metrics_min_temperature_celcius_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_MAX_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (83 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsmax_temperature_celcius instead of this: system_metrics_max_temperature_celcius
+      return system_metrics_max_temperature_celcius_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_POWER_PLUGGED_ENUM_NAME_AVAILABLE
+    if (96 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricspower_plugged instead of this: system_metrics_power_plugged
+      return system_metrics_power_plugged_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_BATTERY_PERCENTAGE_ENUM_NAME_AVAILABLE
+    if (97 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsbattery_percentage instead of this: system_metrics_battery_percentage
+      return system_metrics_battery_percentage_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_SYSTEM_INTERRUPTS_ENUM_NAME_AVAILABLE
+    if (112 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricssystem_interrupts instead of this: system_metrics_system_interrupts
+      return system_metrics_system_interrupts_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64773 == cluster_id) {
+  #ifdef APPLICATION_MONITORING_APPLICATION_NAME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_name instead of this: application_monitoring_application_name
+      return application_monitoring_application_name_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATION_VERSION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_version instead of this: application_monitoring_application_version
+      return application_monitoring_application_version_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATION_CONNECTED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_connected instead of this: application_monitoring_application_connected
+      return application_monitoring_application_connected_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationmqtt_topics instead of this: application_monitoring_applicationmqtt_topics
+      return application_monitoring_applicationmqtt_topics_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_UPTIME_MINUTES_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringuptime_minutes instead of this: application_monitoring_uptime_minutes
+      return application_monitoring_uptime_minutes_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_PROCESS_ID_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringprocess_id instead of this: application_monitoring_process_id
+      return application_monitoring_process_id_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_HOSTNAME_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringhostname instead of this: application_monitoring_hostname
+      return application_monitoring_hostname_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_FQDN_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringfqdn instead of this: application_monitoring_fqdn
+      return application_monitoring_fqdn_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_LOGGING_ENABLED_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_logging_enabled instead of this: application_monitoring_mqtt_logging_enabled
+      return application_monitoring_mqtt_logging_enabled_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_LOGGING_LEVEL_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_logging_level instead of this: application_monitoring_mqtt_logging_level
+      return application_monitoring_mqtt_logging_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_statistics_reporting_interval_seconds instead of this: application_monitoring_mqtt_statistics_reporting_interval_seconds
+      return application_monitoring_mqtt_statistics_reporting_interval_seconds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MESSAGES_SENT_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_messages_sent instead of this: application_monitoring_mqtt_messages_sent
+      return application_monitoring_mqtt_messages_sent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MESSAGES_RECEIVED_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_messages_received instead of this: application_monitoring_mqtt_messages_received
+      return application_monitoring_mqtt_messages_received_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_subscription_count instead of this: application_monitoring_mqtt_subscription_count
+      return application_monitoring_mqtt_subscription_count_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_AVERAGE_DELIVERY_TIME_SECONDS_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_average_delivery_time_seconds instead of this: application_monitoring_mqtt_average_delivery_time_seconds
+      return application_monitoring_mqtt_average_delivery_time_seconds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MIN_DELIVERY_TIME_SECONDS_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_min_delivery_time_seconds instead of this: application_monitoring_mqtt_min_delivery_time_seconds
+      return application_monitoring_mqtt_min_delivery_time_seconds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MAX_DELIVERY_TIME_SECONDS_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_max_delivery_time_seconds instead of this: application_monitoring_mqtt_max_delivery_time_seconds
+      return application_monitoring_mqtt_max_delivery_time_seconds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_statistics_reporting_interval_seconds instead of this: application_monitoring_application_statistics_reporting_interval_seconds
+      return application_monitoring_application_statistics_reporting_interval_seconds_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_usage_percent instead of this: application_monitoring_applicationcpu_usage_percent
+      return application_monitoring_applicationcpu_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (66 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_average_usage_percent instead of this: application_monitoring_applicationcpu_average_usage_percent
+      return application_monitoring_applicationcpu_average_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (67 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_min_usage_percent instead of this: application_monitoring_applicationcpu_min_usage_percent
+      return application_monitoring_applicationcpu_min_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (68 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_max_usage_percent instead of this: application_monitoring_applicationcpu_max_usage_percent
+      return application_monitoring_applicationcpu_max_usage_percent_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB_ENUM_NAME_AVAILABLE
+    if (69 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationram_usagemb instead of this: application_monitoring_applicationram_usagemb
+      return application_monitoring_applicationram_usagemb_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64774 == cluster_id) {
+  #ifdef NAME_AND_LOCATION_NAME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: name_and_locationname instead of this: name_and_location_name
+      return name_and_location_name_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef NAME_AND_LOCATION_LOCATION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: name_and_locationlocation instead of this: name_and_location_location
+      return name_and_location_location_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64775 == cluster_id) {
+  #ifdef CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: configuration_parametersconfiguration_parameters instead of this: configuration_parameters_configuration_parameters
+      return configuration_parameters_configuration_parameters_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64784 == cluster_id) {
+  #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorreporting_mode instead of this: aox_locator_reporting_mode
+      return aox_locator_reporting_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorposition_and_orientation_valid instead of this: aox_locator_position_and_orientation_valid
+      return aox_locator_position_and_orientation_valid_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_POSITION_AND_ORIENTATION_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorposition_and_orientation instead of this: aox_locator_position_and_orientation
+      return aox_locator_position_and_orientation_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_AZIMUTH_MASK_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorazimuth_mask instead of this: aox_locator_azimuth_mask
+      return aox_locator_azimuth_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ELEVATION_MASK_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorelevation_mask instead of this: aox_locator_elevation_mask
+      return aox_locator_elevation_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ALLOW_LIST_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorallow_list instead of this: aox_locator_allow_list
+      return aox_locator_allow_list_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_AOX_MODE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatoraox_mode instead of this: aox_locator_aox_mode
+      return aox_locator_aox_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANTENNA_MODE_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorantenna_mode instead of this: aox_locator_antenna_mode
+      return aox_locator_antenna_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANTENNA_ARRAY_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorantenna_array instead of this: aox_locator_antenna_array
+      return aox_locator_antenna_array_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_PERIOD_SAMPLES_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorperiod_samples instead of this: aox_locator_period_samples
+      return aox_locator_period_samples_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_FILTERING_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_filtering instead of this: aox_locator_angle_filtering
+      return aox_locator_angle_filtering_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_FILTERING_WEIGHT_ENUM_NAME_AVAILABLE
+    if (13 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_filtering_weight instead of this: aox_locator_angle_filtering_weight
+      return aox_locator_angle_filtering_weight_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT_ENUM_NAME_AVAILABLE
+    if (14 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_correction_timeout instead of this: aox_locator_angle_correction_timeout
+      return aox_locator_angle_correction_timeout_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_CORRECTION_DELAY_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_correction_delay instead of this: aox_locator_angle_correction_delay
+      return aox_locator_angle_correction_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorcte_mode instead of this: aox_locator_cte_mode
+      return aox_locator_cte_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_CTE_SAMPLING_INTERVAL_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorcte_sampling_interval instead of this: aox_locator_cte_sampling_interval
+      return aox_locator_cte_sampling_interval_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_CTE_LENGTH_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorcte_length instead of this: aox_locator_cte_length
+      return aox_locator_cte_length_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_SLOT_DURATION_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorslot_duration instead of this: aox_locator_slot_duration
+      return aox_locator_slot_duration_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64785 == cluster_id) {
+  #ifdef AOX_POSITION_ESTIMATION_POSITION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_position_estimationposition instead of this: aox_position_estimation_position
+      return aox_position_estimation_position_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64786 == cluster_id) {
+  #ifdef PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: protocol_controller_network_managementnetwork_management_state instead of this: protocol_controller_network_management_network_management_state
+      return protocol_controller_network_management_network_management_state_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+
+  std::string value_name;
+  return value_name;
+}
+
+uint32_t get_enum_name_value(
+  dotdot_cluster_id_t cluster_id,
+  dotdot_attribute_id_t attribute_id,
+  const std::string &name)
+{
+  if (0 == cluster_id) {
+  #ifdef BASIC_ZCL_VERSION_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basiczcl_version instead of this: basic_zcl_version
+      return basic_zcl_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_APPLICATION_VERSION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicapplication_version instead of this: basic_application_version
+      return basic_application_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_STACK_VERSION_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicstack_version instead of this: basic_stack_version
+      return basic_stack_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_HW_VERSION_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basichw_version instead of this: basic_hw_version
+      return basic_hw_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_MANUFACTURER_NAME_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicmanufacturer_name instead of this: basic_manufacturer_name
+      return basic_manufacturer_name_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_MODEL_IDENTIFIER_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicmodel_identifier instead of this: basic_model_identifier
+      return basic_model_identifier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_DATE_CODE_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicdate_code instead of this: basic_date_code
+      return basic_date_code_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_POWER_SOURCE_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicpower_source instead of this: basic_power_source
+      return basic_power_source_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_GENERIC_DEVICE_CLASS_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicgeneric_device_class instead of this: basic_generic_device_class
+      return basic_generic_device_class_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_GENERIC_DEVICE_TYPE_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicgeneric_device_type instead of this: basic_generic_device_type
+      return basic_generic_device_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_PRODUCT_CODE_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicproduct_code instead of this: basic_product_code
+      return basic_product_code_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_PRODUCTURL_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicproducturl instead of this: basic_producturl
+      return basic_producturl_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_MANUFACTURER_VERSION_DETAILS_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicmanufacturer_version_details instead of this: basic_manufacturer_version_details
+      return basic_manufacturer_version_details_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_SERIAL_NUMBER_ENUM_NAME_AVAILABLE
+    if (13 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicserial_number instead of this: basic_serial_number
+      return basic_serial_number_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_PRODUCT_LABEL_ENUM_NAME_AVAILABLE
+    if (14 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicproduct_label instead of this: basic_product_label
+      return basic_product_label_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_LOCATION_DESCRIPTION_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basiclocation_description instead of this: basic_location_description
+      return basic_location_description_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_PHYSICAL_ENVIRONMENT_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicphysical_environment instead of this: basic_physical_environment
+      return basic_physical_environment_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_DEVICE_ENABLED_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicdevice_enabled instead of this: basic_device_enabled
+      return basic_device_enabled_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicalarm_mask instead of this: basic_alarm_mask
+      return basic_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_DISABLE_LOCAL_CONFIG_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicdisable_local_config instead of this: basic_disable_local_config
+      return basic_disable_local_config_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_SW_BUILDID_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicsw_buildid instead of this: basic_sw_buildid
+      return basic_sw_buildid_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1 == cluster_id) {
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage instead of this: power_configuration_mains_voltage
+      return power_configuration_mains_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_frequency instead of this: power_configuration_mains_frequency
+      return power_configuration_mains_frequency_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_alarm_mask instead of this: power_configuration_mains_alarm_mask
+      return power_configuration_mains_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage_min_threshold instead of this: power_configuration_mains_voltage_min_threshold
+      return power_configuration_mains_voltage_min_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_MAX_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage_max_threshold instead of this: power_configuration_mains_voltage_max_threshold
+      return power_configuration_mains_voltage_max_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationmains_voltage_dwell_trip_point instead of this: power_configuration_mains_voltage_dwell_trip_point
+      return power_configuration_mains_voltage_dwell_trip_point_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage instead of this: power_configuration_battery_voltage
+      return power_configuration_battery_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_remaining instead of this: power_configuration_battery_percentage_remaining
+      return power_configuration_battery_percentage_remaining_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_manufacturer instead of this: power_configuration_battery_manufacturer
+      return power_configuration_battery_manufacturer_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_SIZE_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_size instead of this: power_configuration_battery_size
+      return power_configuration_battery_size_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERYA_HR_RATING_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbatterya_hr_rating instead of this: power_configuration_batterya_hr_rating
+      return power_configuration_batterya_hr_rating_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_QUANTITY_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_quantity instead of this: power_configuration_battery_quantity
+      return power_configuration_battery_quantity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_RATED_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_rated_voltage instead of this: power_configuration_battery_rated_voltage
+      return power_configuration_battery_rated_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_alarm_mask instead of this: power_configuration_battery_alarm_mask
+      return power_configuration_battery_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_min_threshold instead of this: power_configuration_battery_voltage_min_threshold
+      return power_configuration_battery_voltage_min_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (55 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_threshold1 instead of this: power_configuration_battery_voltage_threshold1
+      return power_configuration_battery_voltage_threshold1_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (56 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_threshold2 instead of this: power_configuration_battery_voltage_threshold2
+      return power_configuration_battery_voltage_threshold2_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (57 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_voltage_threshold3 instead of this: power_configuration_battery_voltage_threshold3
+      return power_configuration_battery_voltage_threshold3_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (58 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_min_threshold instead of this: power_configuration_battery_percentage_min_threshold
+      return power_configuration_battery_percentage_min_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (59 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_threshold1 instead of this: power_configuration_battery_percentage_threshold1
+      return power_configuration_battery_percentage_threshold1_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (60 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_threshold2 instead of this: power_configuration_battery_percentage_threshold2
+      return power_configuration_battery_percentage_threshold2_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (61 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_percentage_threshold3 instead of this: power_configuration_battery_percentage_threshold3
+      return power_configuration_battery_percentage_threshold3_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY_ALARM_STATE_ENUM_NAME_AVAILABLE
+    if (62 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery_alarm_state instead of this: power_configuration_battery_alarm_state
+      return power_configuration_battery_alarm_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage instead of this: power_configuration_battery2_voltage
+      return power_configuration_battery2_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_remaining instead of this: power_configuration_battery2_percentage_remaining
+      return power_configuration_battery2_percentage_remaining_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (80 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_manufacturer instead of this: power_configuration_battery2_manufacturer
+      return power_configuration_battery2_manufacturer_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_SIZE_ENUM_NAME_AVAILABLE
+    if (81 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_size instead of this: power_configuration_battery2_size
+      return power_configuration_battery2_size_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2A_HR_RATING_ENUM_NAME_AVAILABLE
+    if (82 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2a_hr_rating instead of this: power_configuration_battery2a_hr_rating
+      return power_configuration_battery2a_hr_rating_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_QUANTITY_ENUM_NAME_AVAILABLE
+    if (83 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_quantity instead of this: power_configuration_battery2_quantity
+      return power_configuration_battery2_quantity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_RATED_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (84 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_rated_voltage instead of this: power_configuration_battery2_rated_voltage
+      return power_configuration_battery2_rated_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (85 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_alarm_mask instead of this: power_configuration_battery2_alarm_mask
+      return power_configuration_battery2_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (86 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_min_threshold instead of this: power_configuration_battery2_voltage_min_threshold
+      return power_configuration_battery2_voltage_min_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (87 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_threshold1 instead of this: power_configuration_battery2_voltage_threshold1
+      return power_configuration_battery2_voltage_threshold1_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (88 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_threshold2 instead of this: power_configuration_battery2_voltage_threshold2
+      return power_configuration_battery2_voltage_threshold2_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (89 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_voltage_threshold3 instead of this: power_configuration_battery2_voltage_threshold3
+      return power_configuration_battery2_voltage_threshold3_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (90 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_min_threshold instead of this: power_configuration_battery2_percentage_min_threshold
+      return power_configuration_battery2_percentage_min_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (91 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_threshold1 instead of this: power_configuration_battery2_percentage_threshold1
+      return power_configuration_battery2_percentage_threshold1_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (92 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_threshold2 instead of this: power_configuration_battery2_percentage_threshold2
+      return power_configuration_battery2_percentage_threshold2_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (93 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_percentage_threshold3 instead of this: power_configuration_battery2_percentage_threshold3
+      return power_configuration_battery2_percentage_threshold3_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY2_ALARM_STATE_ENUM_NAME_AVAILABLE
+    if (94 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery2_alarm_state instead of this: power_configuration_battery2_alarm_state
+      return power_configuration_battery2_alarm_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (96 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage instead of this: power_configuration_battery3_voltage
+      return power_configuration_battery3_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING_ENUM_NAME_AVAILABLE
+    if (97 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_remaining instead of this: power_configuration_battery3_percentage_remaining
+      return power_configuration_battery3_percentage_remaining_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (112 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_manufacturer instead of this: power_configuration_battery3_manufacturer
+      return power_configuration_battery3_manufacturer_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_SIZE_ENUM_NAME_AVAILABLE
+    if (113 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_size instead of this: power_configuration_battery3_size
+      return power_configuration_battery3_size_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3A_HR_RATING_ENUM_NAME_AVAILABLE
+    if (114 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3a_hr_rating instead of this: power_configuration_battery3a_hr_rating
+      return power_configuration_battery3a_hr_rating_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_QUANTITY_ENUM_NAME_AVAILABLE
+    if (115 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_quantity instead of this: power_configuration_battery3_quantity
+      return power_configuration_battery3_quantity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_RATED_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (116 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_rated_voltage instead of this: power_configuration_battery3_rated_voltage
+      return power_configuration_battery3_rated_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (117 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_alarm_mask instead of this: power_configuration_battery3_alarm_mask
+      return power_configuration_battery3_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (118 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_min_threshold instead of this: power_configuration_battery3_voltage_min_threshold
+      return power_configuration_battery3_voltage_min_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (119 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_threshold1 instead of this: power_configuration_battery3_voltage_threshold1
+      return power_configuration_battery3_voltage_threshold1_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (120 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_threshold2 instead of this: power_configuration_battery3_voltage_threshold2
+      return power_configuration_battery3_voltage_threshold2_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (121 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_voltage_threshold3 instead of this: power_configuration_battery3_voltage_threshold3
+      return power_configuration_battery3_voltage_threshold3_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_MIN_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (122 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_min_threshold instead of this: power_configuration_battery3_percentage_min_threshold
+      return power_configuration_battery3_percentage_min_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1_ENUM_NAME_AVAILABLE
+    if (123 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_threshold1 instead of this: power_configuration_battery3_percentage_threshold1
+      return power_configuration_battery3_percentage_threshold1_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD2_ENUM_NAME_AVAILABLE
+    if (124 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_threshold2 instead of this: power_configuration_battery3_percentage_threshold2
+      return power_configuration_battery3_percentage_threshold2_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD3_ENUM_NAME_AVAILABLE
+    if (125 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_percentage_threshold3 instead of this: power_configuration_battery3_percentage_threshold3
+      return power_configuration_battery3_percentage_threshold3_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POWER_CONFIGURATION_BATTERY3_ALARM_STATE_ENUM_NAME_AVAILABLE
+    if (126 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: power_configurationbattery3_alarm_state instead of this: power_configuration_battery3_alarm_state
+      return power_configuration_battery3_alarm_state_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (2 == cluster_id) {
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_CURRENT_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationcurrent_temperature instead of this: device_temperature_configuration_current_temperature
+      return device_temperature_configuration_current_temperature_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_MIN_TEMP_EXPERIENCED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationmin_temp_experienced instead of this: device_temperature_configuration_min_temp_experienced
+      return device_temperature_configuration_min_temp_experienced_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_MAX_TEMP_EXPERIENCED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationmax_temp_experienced instead of this: device_temperature_configuration_max_temp_experienced
+      return device_temperature_configuration_max_temp_experienced_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationover_temp_total_dwell instead of this: device_temperature_configuration_over_temp_total_dwell
+      return device_temperature_configuration_over_temp_total_dwell_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_DEVICE_TEMP_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationdevice_temp_alarm_mask instead of this: device_temperature_configuration_device_temp_alarm_mask
+      return device_temperature_configuration_device_temp_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationlow_temp_threshold instead of this: device_temperature_configuration_low_temp_threshold
+      return device_temperature_configuration_low_temp_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationhigh_temp_threshold instead of this: device_temperature_configuration_high_temp_threshold
+      return device_temperature_configuration_high_temp_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationlow_temp_dwell_trip_point instead of this: device_temperature_configuration_low_temp_dwell_trip_point
+      return device_temperature_configuration_low_temp_dwell_trip_point_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: device_temperature_configurationhigh_temp_dwell_trip_point instead of this: device_temperature_configuration_high_temp_dwell_trip_point
+      return device_temperature_configuration_high_temp_dwell_trip_point_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (3 == cluster_id) {
+  #ifdef IDENTIFY_IDENTIFY_TIME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: identifyidentify_time instead of this: identify_identify_time
+      return identify_identify_time_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (4 == cluster_id) {
+  #ifdef GROUPS_NAME_SUPPORT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: groupsname_support instead of this: groups_name_support
+      return groups_name_support_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (5 == cluster_id) {
+  #ifdef SCENES_SCENE_COUNT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesscene_count instead of this: scenes_scene_count
+      return scenes_scene_count_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SCENES_CURRENT_SCENE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenescurrent_scene instead of this: scenes_current_scene
+      return scenes_current_scene_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SCENES_CURRENT_GROUP_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenescurrent_group instead of this: scenes_current_group
+      return scenes_current_group_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SCENES_SCENE_VALID_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesscene_valid instead of this: scenes_scene_valid
+      return scenes_scene_valid_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SCENES_NAME_SUPPORT_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesname_support instead of this: scenes_name_support
+      return scenes_name_support_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SCENES_LAST_CONFIGURED_BY_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: sceneslast_configured_by instead of this: scenes_last_configured_by
+      return scenes_last_configured_by_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SCENES_SCENE_TABLE_ENUM_NAME_AVAILABLE
+    if (3841 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: scenesscene_table instead of this: scenes_scene_table
+      return scenes_scene_table_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (6 == cluster_id) {
+  #ifdef ON_OFF_ON_OFF_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offon_off instead of this: on_off_on_off
+      return on_off_on_off_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ON_OFF_GLOBAL_SCENE_CONTROL_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offglobal_scene_control instead of this: on_off_global_scene_control
+      return on_off_global_scene_control_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ON_OFF_ON_TIME_ENUM_NAME_AVAILABLE
+    if (16385 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offon_time instead of this: on_off_on_time
+      return on_off_on_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ON_OFF_OFF_WAIT_TIME_ENUM_NAME_AVAILABLE
+    if (16386 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offoff_wait_time instead of this: on_off_off_wait_time
+      return on_off_off_wait_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ON_OFF_START_UP_ON_OFF_ENUM_NAME_AVAILABLE
+    if (16387 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: on_offstart_up_on_off instead of this: on_off_start_up_on_off
+      return on_off_start_up_on_off_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (8 == cluster_id) {
+  #ifdef LEVEL_CURRENT_LEVEL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelcurrent_level instead of this: level_current_level
+      return level_current_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_REMAINING_TIME_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelremaining_time instead of this: level_remaining_time
+      return level_remaining_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_MIN_LEVEL_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmin_level instead of this: level_min_level
+      return level_min_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_MAX_LEVEL_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmax_level instead of this: level_max_level
+      return level_max_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_CURRENT_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelcurrent_frequency instead of this: level_current_frequency
+      return level_current_frequency_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_MIN_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmin_frequency instead of this: level_min_frequency
+      return level_min_frequency_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_MAX_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelmax_frequency instead of this: level_max_frequency
+      return level_max_frequency_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_OPTIONS_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: leveloptions instead of this: level_options
+      return level_options_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_ON_OFF_TRANSITION_TIME_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelon_off_transition_time instead of this: level_on_off_transition_time
+      return level_on_off_transition_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_ON_LEVEL_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelon_level instead of this: level_on_level
+      return level_on_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_ON_TRANSITION_TIME_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelon_transition_time instead of this: level_on_transition_time
+      return level_on_transition_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_OFF_TRANSITION_TIME_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: leveloff_transition_time instead of this: level_off_transition_time
+      return level_off_transition_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_DEFAULT_MOVE_RATE_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: leveldefault_move_rate instead of this: level_default_move_rate
+      return level_default_move_rate_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef LEVEL_START_UP_CURRENT_LEVEL_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: levelstart_up_current_level instead of this: level_start_up_current_level
+      return level_start_up_current_level_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (9 == cluster_id) {
+  #ifdef ALARMS_ALARM_COUNT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: alarmsalarm_count instead of this: alarms_alarm_count
+      return alarms_alarm_count_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (10 == cluster_id) {
+  #ifdef TIME_TIME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timetime instead of this: time_time
+      return time_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_TIME_STATUS_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timetime_status instead of this: time_time_status
+      return time_time_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_TIME_ZONE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timetime_zone instead of this: time_time_zone
+      return time_time_zone_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_DST_START_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timedst_start instead of this: time_dst_start
+      return time_dst_start_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_DST_END_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timedst_end instead of this: time_dst_end
+      return time_dst_end_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_DST_SHIFT_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timedst_shift instead of this: time_dst_shift
+      return time_dst_shift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_STANDARD_TIME_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timestandard_time instead of this: time_standard_time
+      return time_standard_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_LOCAL_TIME_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timelocal_time instead of this: time_local_time
+      return time_local_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_LAST_SET_TIME_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timelast_set_time instead of this: time_last_set_time
+      return time_last_set_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TIME_VALID_UNTIL_TIME_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: timevalid_until_time instead of this: time_valid_until_time
+      return time_valid_until_time_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (25 == cluster_id) {
+  #ifdef OTA_UPGRADE_UPGRADE_SERVERID_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_serverid instead of this: ota_upgrade_upgrade_serverid
+      return ota_upgrade_upgrade_serverid_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_FILE_OFFSET_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradefile_offset instead of this: ota_upgrade_file_offset
+      return ota_upgrade_file_offset_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_CURRENT_FILE_VERSION_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_file_version instead of this: ota_upgrade_current_file_version
+      return ota_upgrade_current_file_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_zig_bee_stack_version instead of this: ota_upgrade_current_zig_bee_stack_version
+      return ota_upgrade_current_zig_bee_stack_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_DOWNLOADED_FILE_VERSION_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_file_version instead of this: ota_upgrade_downloaded_file_version
+      return ota_upgrade_downloaded_file_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_zig_bee_stack_version instead of this: ota_upgrade_downloaded_zig_bee_stack_version
+      return ota_upgrade_downloaded_zig_bee_stack_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_IMAGE_UPGRADE_STATUS_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_upgrade_status instead of this: ota_upgrade_image_upgrade_status
+      return ota_upgrade_image_upgrade_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_MANUFACTURERID_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademanufacturerid instead of this: ota_upgrade_manufacturerid
+      return ota_upgrade_manufacturerid_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_IMAGE_TYPEID_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_typeid instead of this: ota_upgrade_image_typeid
+      return ota_upgrade_image_typeid_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_MINIMUM_BLOCK_PERIOD_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademinimum_block_period instead of this: ota_upgrade_minimum_block_period
+      return ota_upgrade_minimum_block_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_IMAGE_STAMP_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_stamp instead of this: ota_upgrade_image_stamp
+      return ota_upgrade_image_stamp_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_activation_policy instead of this: ota_upgrade_upgrade_activation_policy
+      return ota_upgrade_upgrade_activation_policy_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_timeout_policy instead of this: ota_upgrade_upgrade_timeout_policy
+      return ota_upgrade_upgrade_timeout_policy_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (32 == cluster_id) {
+  #ifdef POLL_CONTROL_CHECK_IN_INTERVAL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlcheck_in_interval instead of this: poll_control_check_in_interval
+      return poll_control_check_in_interval_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POLL_CONTROL_LONG_POLL_INTERVAL_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controllong_poll_interval instead of this: poll_control_long_poll_interval
+      return poll_control_long_poll_interval_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POLL_CONTROL_SHORT_POLL_INTERVAL_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlshort_poll_interval instead of this: poll_control_short_poll_interval
+      return poll_control_short_poll_interval_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POLL_CONTROL_FAST_POLL_TIMEOUT_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlfast_poll_timeout instead of this: poll_control_fast_poll_timeout
+      return poll_control_fast_poll_timeout_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POLL_CONTROL_CHECK_IN_INTERVAL_MIN_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlcheck_in_interval_min instead of this: poll_control_check_in_interval_min
+      return poll_control_check_in_interval_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POLL_CONTROL_LONG_POLL_INTERVAL_MIN_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controllong_poll_interval_min instead of this: poll_control_long_poll_interval_min
+      return poll_control_long_poll_interval_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef POLL_CONTROL_FAST_POLL_TIMEOUT_MAX_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: poll_controlfast_poll_timeout_max instead of this: poll_control_fast_poll_timeout_max
+      return poll_control_fast_poll_timeout_max_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (256 == cluster_id) {
+  #ifdef SHADE_CONFIGURATION_PHYSICAL_CLOSED_LIMIT_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationphysical_closed_limit instead of this: shade_configuration_physical_closed_limit
+      return shade_configuration_physical_closed_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_MOTOR_STEP_SIZE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationmotor_step_size instead of this: shade_configuration_motor_step_size
+      return shade_configuration_motor_step_size_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationstatus instead of this: shade_configuration_status
+      return shade_configuration_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_CLOSED_LIMIT_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationclosed_limit instead of this: shade_configuration_closed_limit
+      return shade_configuration_closed_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SHADE_CONFIGURATION_MODE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: shade_configurationmode instead of this: shade_configuration_mode
+      return shade_configuration_mode_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (257 == cluster_id) {
+  #ifdef DOOR_LOCK_LOCK_STATE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklock_state instead of this: door_lock_lock_state
+      return door_lock_lock_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_LOCK_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklock_type instead of this: door_lock_lock_type
+      return door_lock_lock_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ACTUATOR_ENABLED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockactuator_enabled instead of this: door_lock_actuator_enabled
+      return door_lock_actuator_enabled_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DOOR_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdoor_state instead of this: door_lock_door_state
+      return door_lock_door_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DOOR_OPEN_EVENTS_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdoor_open_events instead of this: door_lock_door_open_events
+      return door_lock_door_open_events_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DOOR_CLOSED_EVENTS_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdoor_closed_events instead of this: door_lock_door_closed_events
+      return door_lock_door_closed_events_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_OPEN_PERIOD_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockopen_period instead of this: door_lock_open_period
+      return door_lock_open_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_log_records_supported instead of this: door_lock_number_of_log_records_supported
+      return door_lock_number_of_log_records_supported_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_total_users_supported instead of this: door_lock_number_of_total_users_supported
+      return door_lock_number_of_total_users_supported_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofpin_users_supported instead of this: door_lock_number_ofpin_users_supported
+      return door_lock_number_ofpin_users_supported_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofrfid_users_supported instead of this: door_lock_number_ofrfid_users_supported
+      return door_lock_number_ofrfid_users_supported_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_week_day_schedules_supported_per_user instead of this: door_lock_number_of_week_day_schedules_supported_per_user
+      return door_lock_number_of_week_day_schedules_supported_per_user_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_year_day_schedules_supported_per_user instead of this: door_lock_number_of_year_day_schedules_supported_per_user
+      return door_lock_number_of_year_day_schedules_supported_per_user_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_holiday_schedules_supported instead of this: door_lock_number_of_holiday_schedules_supported
+      return door_lock_number_of_holiday_schedules_supported_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MAXPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxpin_code_length instead of this: door_lock_maxpin_code_length
+      return door_lock_maxpin_code_length_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MINPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (24 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminpin_code_length instead of this: door_lock_minpin_code_length
+      return door_lock_minpin_code_length_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MAXRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (25 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxrfid_code_length instead of this: door_lock_maxrfid_code_length
+      return door_lock_maxrfid_code_length_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MINRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+    if (26 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminrfid_code_length instead of this: door_lock_minrfid_code_length
+      return door_lock_minrfid_code_length_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_LOGGING_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_logging instead of this: door_lock_enable_logging
+      return door_lock_enable_logging_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_LANGUAGE_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklanguage instead of this: door_lock_language
+      return door_lock_language_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_LED_SETTINGS_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockled_settings instead of this: door_lock_led_settings
+      return door_lock_led_settings_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_AUTO_RELOCK_TIME_ENUM_NAME_AVAILABLE
+    if (35 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockauto_relock_time instead of this: door_lock_auto_relock_time
+      return door_lock_auto_relock_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SOUND_VOLUME_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksound_volume instead of this: door_lock_sound_volume
+      return door_lock_sound_volume_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_OPERATING_MODE_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockoperating_mode instead of this: door_lock_operating_mode
+      return door_lock_operating_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SUPPORTED_OPERATING_MODES_ENUM_NAME_AVAILABLE
+    if (38 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksupported_operating_modes instead of this: door_lock_supported_operating_modes
+      return door_lock_supported_operating_modes_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_DEFAULT_CONFIGURATION_REGISTER_ENUM_NAME_AVAILABLE
+    if (39 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockdefault_configuration_register instead of this: door_lock_default_configuration_register
+      return door_lock_default_configuration_register_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_LOCAL_PROGRAMMING_ENUM_NAME_AVAILABLE
+    if (40 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_local_programming instead of this: door_lock_enable_local_programming
+      return door_lock_enable_local_programming_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_ONE_TOUCH_LOCKING_ENUM_NAME_AVAILABLE
+    if (41 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_one_touch_locking instead of this: door_lock_enable_one_touch_locking
+      return door_lock_enable_one_touch_locking_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_INSIDE_STATUSLED_ENUM_NAME_AVAILABLE
+    if (42 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_inside_statusled instead of this: door_lock_enable_inside_statusled
+      return door_lock_enable_inside_statusled_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ENABLE_PRIVACY_MODE_BUTTON_ENUM_NAME_AVAILABLE
+    if (43 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockenable_privacy_mode_button instead of this: door_lock_enable_privacy_mode_button
+      return door_lock_enable_privacy_mode_button_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockwrong_code_entry_limit instead of this: door_lock_wrong_code_entry_limit
+      return door_lock_wrong_code_entry_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockuser_code_temporary_disable_time instead of this: door_lock_user_code_temporary_disable_time
+      return door_lock_user_code_temporary_disable_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SENDPIN_OVER_THE_AIR_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksendpin_over_the_air instead of this: door_lock_sendpin_over_the_air
+      return door_lock_sendpin_over_the_air_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_REQUIREPI_NFORRF_OPERATION_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrequirepi_nforrf_operation instead of this: door_lock_requirepi_nforrf_operation
+      return door_lock_requirepi_nforrf_operation_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_SECURITY_LEVEL_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksecurity_level instead of this: door_lock_security_level
+      return door_lock_security_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockalarm_mask instead of this: door_lock_alarm_mask
+      return door_lock_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_KEYPAD_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockkeypad_operation_event_mask instead of this: door_lock_keypad_operation_event_mask
+      return door_lock_keypad_operation_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RF_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (66 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrf_operation_event_mask instead of this: door_lock_rf_operation_event_mask
+      return door_lock_rf_operation_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_MANUAL_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (67 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmanual_operation_event_mask instead of this: door_lock_manual_operation_event_mask
+      return door_lock_manual_operation_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RFID_OPERATION_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (68 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrfid_operation_event_mask instead of this: door_lock_rfid_operation_event_mask
+      return door_lock_rfid_operation_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_KEYPAD_PROGRAMMING_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (69 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockkeypad_programming_event_mask instead of this: door_lock_keypad_programming_event_mask
+      return door_lock_keypad_programming_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RF_PROGRAMMING_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (70 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrf_programming_event_mask instead of this: door_lock_rf_programming_event_mask
+      return door_lock_rf_programming_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK_ENUM_NAME_AVAILABLE
+    if (71 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrfid_programming_event_mask instead of this: door_lock_rfid_programming_event_mask
+      return door_lock_rfid_programming_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (258 == cluster_id) {
+  #ifdef WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringwindow_covering_type instead of this: window_covering_window_covering_type
+      return window_covering_window_covering_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringphysical_closed_limit_lift instead of this: window_covering_physical_closed_limit_lift
+      return window_covering_physical_closed_limit_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_TILT_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringphysical_closed_limit_tilt instead of this: window_covering_physical_closed_limit_tilt
+      return window_covering_physical_closed_limit_tilt_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_LIFT_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_lift instead of this: window_covering_current_position_lift
+      return window_covering_current_position_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_TILT_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_tilt instead of this: window_covering_current_position_tilt
+      return window_covering_current_position_tilt_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringnumber_of_actuations_lift instead of this: window_covering_number_of_actuations_lift
+      return window_covering_number_of_actuations_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_NUMBER_OF_ACTUATIONS_TILT_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringnumber_of_actuations_tilt instead of this: window_covering_number_of_actuations_tilt
+      return window_covering_number_of_actuations_tilt_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CONFIG_OR_STATUS_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringconfig_or_status instead of this: window_covering_config_or_status
+      return window_covering_config_or_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_lift_percentage instead of this: window_covering_current_position_lift_percentage
+      return window_covering_current_position_lift_percentage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringcurrent_position_tilt_percentage instead of this: window_covering_current_position_tilt_percentage
+      return window_covering_current_position_tilt_percentage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_OPEN_LIMIT_LIFT_ENUM_NAME_AVAILABLE
+    if (256 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_open_limit_lift instead of this: window_covering_installed_open_limit_lift
+      return window_covering_installed_open_limit_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT_ENUM_NAME_AVAILABLE
+    if (257 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_closed_limit_lift instead of this: window_covering_installed_closed_limit_lift
+      return window_covering_installed_closed_limit_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_OPEN_LIMIT_TILT_ENUM_NAME_AVAILABLE
+    if (258 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_open_limit_tilt instead of this: window_covering_installed_open_limit_tilt
+      return window_covering_installed_open_limit_tilt_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT_ENUM_NAME_AVAILABLE
+    if (259 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringinstalled_closed_limit_tilt instead of this: window_covering_installed_closed_limit_tilt
+      return window_covering_installed_closed_limit_tilt_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_VELOCITY_LIFT_ENUM_NAME_AVAILABLE
+    if (260 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringvelocity_lift instead of this: window_covering_velocity_lift
+      return window_covering_velocity_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_ACCELERATION_TIME_LIFT_ENUM_NAME_AVAILABLE
+    if (261 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringacceleration_time_lift instead of this: window_covering_acceleration_time_lift
+      return window_covering_acceleration_time_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_DECELERATION_TIME_LIFT_ENUM_NAME_AVAILABLE
+    if (262 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringdeceleration_time_lift instead of this: window_covering_deceleration_time_lift
+      return window_covering_deceleration_time_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_MODE_ENUM_NAME_AVAILABLE
+    if (263 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringmode instead of this: window_covering_mode
+      return window_covering_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INTERMEDIATE_SETPOINTS_LIFT_ENUM_NAME_AVAILABLE
+    if (264 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringintermediate_setpoints_lift instead of this: window_covering_intermediate_setpoints_lift
+      return window_covering_intermediate_setpoints_lift_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WINDOW_COVERING_INTERMEDIATE_SETPOINTS_TILT_ENUM_NAME_AVAILABLE
+    if (265 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: window_coveringintermediate_setpoints_tilt instead of this: window_covering_intermediate_setpoints_tilt
+      return window_covering_intermediate_setpoints_tilt_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (259 == cluster_id) {
+  #ifdef BARRIER_CONTROL_MOVING_STATE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlmoving_state instead of this: barrier_control_moving_state
+      return barrier_control_moving_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_SAFETY_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlsafety_status instead of this: barrier_control_safety_status
+      return barrier_control_safety_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_CAPABILITIES_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlcapabilities instead of this: barrier_control_capabilities
+      return barrier_control_capabilities_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_OPEN_EVENTS_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlopen_events instead of this: barrier_control_open_events
+      return barrier_control_open_events_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_CLOSE_EVENTS_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlclose_events instead of this: barrier_control_close_events
+      return barrier_control_close_events_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_COMMAND_OPEN_EVENTS_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlcommand_open_events instead of this: barrier_control_command_open_events
+      return barrier_control_command_open_events_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_COMMAND_CLOSE_EVENTS_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlcommand_close_events instead of this: barrier_control_command_close_events
+      return barrier_control_command_close_events_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_OPEN_PERIOD_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlopen_period instead of this: barrier_control_open_period
+      return barrier_control_open_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_CLOSE_PERIOD_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlclose_period instead of this: barrier_control_close_period
+      return barrier_control_close_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BARRIER_CONTROL_BARRIER_POSITION_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: barrier_controlbarrier_position instead of this: barrier_control_barrier_position
+      return barrier_control_barrier_position_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (512 == cluster_id) {
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_PRESSURE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_pressure instead of this: pump_configuration_and_control_max_pressure
+      return pump_configuration_and_control_max_pressure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_speed instead of this: pump_configuration_and_control_max_speed
+      return pump_configuration_and_control_max_speed_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_FLOW_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_flow instead of this: pump_configuration_and_control_max_flow
+      return pump_configuration_and_control_max_flow_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_PRESSURE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_pressure instead of this: pump_configuration_and_control_min_const_pressure
+      return pump_configuration_and_control_min_const_pressure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_PRESSURE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_pressure instead of this: pump_configuration_and_control_max_const_pressure
+      return pump_configuration_and_control_max_const_pressure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_COMP_PRESSURE_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_comp_pressure instead of this: pump_configuration_and_control_min_comp_pressure
+      return pump_configuration_and_control_min_comp_pressure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_COMP_PRESSURE_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_comp_pressure instead of this: pump_configuration_and_control_max_comp_pressure
+      return pump_configuration_and_control_max_comp_pressure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_speed instead of this: pump_configuration_and_control_min_const_speed
+      return pump_configuration_and_control_min_const_speed_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_SPEED_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_speed instead of this: pump_configuration_and_control_max_const_speed
+      return pump_configuration_and_control_max_const_speed_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_flow instead of this: pump_configuration_and_control_min_const_flow
+      return pump_configuration_and_control_min_const_flow_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_FLOW_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_flow instead of this: pump_configuration_and_control_max_const_flow
+      return pump_configuration_and_control_max_const_flow_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_TEMP_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmin_const_temp instead of this: pump_configuration_and_control_min_const_temp
+      return pump_configuration_and_control_min_const_temp_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_TEMP_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlmax_const_temp instead of this: pump_configuration_and_control_max_const_temp
+      return pump_configuration_and_control_max_const_temp_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_PUMP_STATUS_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlpump_status instead of this: pump_configuration_and_control_pump_status
+      return pump_configuration_and_control_pump_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_OPERATION_MODE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controleffective_operation_mode instead of this: pump_configuration_and_control_effective_operation_mode
+      return pump_configuration_and_control_effective_operation_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_CONTROL_MODE_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controleffective_control_mode instead of this: pump_configuration_and_control_effective_control_mode
+      return pump_configuration_and_control_effective_control_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_CAPACITY_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlcapacity instead of this: pump_configuration_and_control_capacity
+      return pump_configuration_and_control_capacity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_SPEED_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlspeed instead of this: pump_configuration_and_control_speed
+      return pump_configuration_and_control_speed_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_RUNNING_HOURS_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controllifetime_running_hours instead of this: pump_configuration_and_control_lifetime_running_hours
+      return pump_configuration_and_control_lifetime_running_hours_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_POWER_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlpower instead of this: pump_configuration_and_control_power
+      return pump_configuration_and_control_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_ENERGY_CONSUMED_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controllifetime_energy_consumed instead of this: pump_configuration_and_control_lifetime_energy_consumed
+      return pump_configuration_and_control_lifetime_energy_consumed_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_OPERATION_MODE_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controloperation_mode instead of this: pump_configuration_and_control_operation_mode
+      return pump_configuration_and_control_operation_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_CONTROL_MODE_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlcontrol_mode instead of this: pump_configuration_and_control_control_mode
+      return pump_configuration_and_control_control_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PUMP_CONFIGURATION_AND_CONTROL_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pump_configuration_and_controlalarm_mask instead of this: pump_configuration_and_control_alarm_mask
+      return pump_configuration_and_control_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (513 == cluster_id) {
+  #ifdef THERMOSTAT_LOCAL_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatlocal_temperature instead of this: thermostat_local_temperature
+      return thermostat_local_temperature_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_OUTDOOR_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoutdoor_temperature instead of this: thermostat_outdoor_temperature
+      return thermostat_outdoor_temperature_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPANCY_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupancy instead of this: thermostat_occupancy
+      return thermostat_occupancy_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MIN_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_min_heat_setpoint_limit instead of this: thermostat_abs_min_heat_setpoint_limit
+      return thermostat_abs_min_heat_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MAX_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_max_heat_setpoint_limit instead of this: thermostat_abs_max_heat_setpoint_limit
+      return thermostat_abs_max_heat_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MIN_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_min_cool_setpoint_limit instead of this: thermostat_abs_min_cool_setpoint_limit
+      return thermostat_abs_min_cool_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_ABS_MAX_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatabs_max_cool_setpoint_limit instead of this: thermostat_abs_max_cool_setpoint_limit
+      return thermostat_abs_max_cool_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_PI_COOLING_DEMAND_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatpi_cooling_demand instead of this: thermostat_pi_cooling_demand
+      return thermostat_pi_cooling_demand_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_PI_HEATING_DEMAND_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatpi_heating_demand instead of this: thermostat_pi_heating_demand
+      return thermostat_pi_heating_demand_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_HVAC_SYSTEM_TYPE_CONFIGURATION_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostathvac_system_type_configuration instead of this: thermostat_hvac_system_type_configuration
+      return thermostat_hvac_system_type_configuration_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_LOCAL_TEMPERATURE_CALIBRATION_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatlocal_temperature_calibration instead of this: thermostat_local_temperature_calibration
+      return thermostat_local_temperature_calibration_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_COOLING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_cooling_setpoint instead of this: thermostat_occupied_cooling_setpoint
+      return thermostat_occupied_cooling_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_HEATING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_heating_setpoint instead of this: thermostat_occupied_heating_setpoint
+      return thermostat_occupied_heating_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_COOLING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_cooling_setpoint instead of this: thermostat_unoccupied_cooling_setpoint
+      return thermostat_unoccupied_cooling_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_HEATING_SETPOINT_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_heating_setpoint instead of this: thermostat_unoccupied_heating_setpoint
+      return thermostat_unoccupied_heating_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_MIN_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmin_heat_setpoint_limit instead of this: thermostat_min_heat_setpoint_limit
+      return thermostat_min_heat_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_MAX_HEAT_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmax_heat_setpoint_limit instead of this: thermostat_max_heat_setpoint_limit
+      return thermostat_max_heat_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_MIN_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmin_cool_setpoint_limit instead of this: thermostat_min_cool_setpoint_limit
+      return thermostat_min_cool_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_MAX_COOL_SETPOINT_LIMIT_ENUM_NAME_AVAILABLE
+    if (24 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmax_cool_setpoint_limit instead of this: thermostat_max_cool_setpoint_limit
+      return thermostat_max_cool_setpoint_limit_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_MIN_SETPOINT_DEAD_BAND_ENUM_NAME_AVAILABLE
+    if (25 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatmin_setpoint_dead_band instead of this: thermostat_min_setpoint_dead_band
+      return thermostat_min_setpoint_dead_band_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_REMOTE_SENSING_ENUM_NAME_AVAILABLE
+    if (26 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatremote_sensing instead of this: thermostat_remote_sensing
+      return thermostat_remote_sensing_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_CONTROL_SEQUENCE_OF_OPERATION_ENUM_NAME_AVAILABLE
+    if (27 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatcontrol_sequence_of_operation instead of this: thermostat_control_sequence_of_operation
+      return thermostat_control_sequence_of_operation_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_SYSTEM_MODE_ENUM_NAME_AVAILABLE
+    if (28 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsystem_mode instead of this: thermostat_system_mode
+      return thermostat_system_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_ALARM_MASK_ENUM_NAME_AVAILABLE
+    if (29 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatalarm_mask instead of this: thermostat_alarm_mask
+      return thermostat_alarm_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_THERMOSTAT_RUNNING_MODE_ENUM_NAME_AVAILABLE
+    if (30 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatthermostat_running_mode instead of this: thermostat_thermostat_running_mode
+      return thermostat_thermostat_running_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_START_OF_WEEK_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatstart_of_week instead of this: thermostat_start_of_week
+      return thermostat_start_of_week_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_NUMBER_OF_WEEKLY_TRANSITIONS_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatnumber_of_weekly_transitions instead of this: thermostat_number_of_weekly_transitions
+      return thermostat_number_of_weekly_transitions_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatnumber_of_daily_transitions instead of this: thermostat_number_of_daily_transitions
+      return thermostat_number_of_daily_transitions_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_ENUM_NAME_AVAILABLE
+    if (35 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostattemperature_setpoint_hold instead of this: thermostat_temperature_setpoint_hold
+      return thermostat_temperature_setpoint_hold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostattemperature_setpoint_hold_duration instead of this: thermostat_temperature_setpoint_hold_duration
+      return thermostat_temperature_setpoint_hold_duration_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatthermostat_programming_operation_mode instead of this: thermostat_thermostat_programming_operation_mode
+      return thermostat_thermostat_programming_operation_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_THERMOSTAT_RUNNING_STATE_ENUM_NAME_AVAILABLE
+    if (41 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatthermostat_running_state instead of this: thermostat_thermostat_running_state
+      return thermostat_thermostat_running_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_SETPOINT_CHANGE_SOURCE_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsetpoint_change_source instead of this: thermostat_setpoint_change_source
+      return thermostat_setpoint_change_source_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_SETPOINT_CHANGE_AMOUNT_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsetpoint_change_amount instead of this: thermostat_setpoint_change_amount
+      return thermostat_setpoint_change_amount_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsetpoint_change_source_timestamp instead of this: thermostat_setpoint_change_source_timestamp
+      return thermostat_setpoint_change_source_timestamp_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_SETBACK_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_setback instead of this: thermostat_occupied_setback
+      return thermostat_occupied_setback_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_SETBACK_MIN_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_setback_min instead of this: thermostat_occupied_setback_min
+      return thermostat_occupied_setback_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_OCCUPIED_SETBACK_MAX_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatoccupied_setback_max instead of this: thermostat_occupied_setback_max
+      return thermostat_occupied_setback_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_SETBACK_ENUM_NAME_AVAILABLE
+    if (55 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_setback instead of this: thermostat_unoccupied_setback
+      return thermostat_unoccupied_setback_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_SETBACK_MIN_ENUM_NAME_AVAILABLE
+    if (56 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_setback_min instead of this: thermostat_unoccupied_setback_min
+      return thermostat_unoccupied_setback_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_UNOCCUPIED_SETBACK_MAX_ENUM_NAME_AVAILABLE
+    if (57 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatunoccupied_setback_max instead of this: thermostat_unoccupied_setback_max
+      return thermostat_unoccupied_setback_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_EMERGENCY_HEAT_DELTA_ENUM_NAME_AVAILABLE
+    if (58 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatemergency_heat_delta instead of this: thermostat_emergency_heat_delta
+      return thermostat_emergency_heat_delta_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_TYPE_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_type instead of this: thermostat_ac_type
+      return thermostat_ac_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_CAPACITY_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_capacity instead of this: thermostat_ac_capacity
+      return thermostat_ac_capacity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_REFRIGERANT_TYPE_ENUM_NAME_AVAILABLE
+    if (66 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_refrigerant_type instead of this: thermostat_ac_refrigerant_type
+      return thermostat_ac_refrigerant_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_COMPRESSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (67 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_compressor_type instead of this: thermostat_ac_compressor_type
+      return thermostat_ac_compressor_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_ERROR_CODE_ENUM_NAME_AVAILABLE
+    if (68 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_error_code instead of this: thermostat_ac_error_code
+      return thermostat_ac_error_code_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_LOUVER_POSITION_ENUM_NAME_AVAILABLE
+    if (69 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_louver_position instead of this: thermostat_ac_louver_position
+      return thermostat_ac_louver_position_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_COIL_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (70 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_coil_temperature instead of this: thermostat_ac_coil_temperature
+      return thermostat_ac_coil_temperature_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_AC_CAPACITY_FORMAT_ENUM_NAME_AVAILABLE
+    if (71 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_capacity_format instead of this: thermostat_ac_capacity_format
+      return thermostat_ac_capacity_format_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (514 == cluster_id) {
+  #ifdef FAN_CONTROL_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlfan_mode instead of this: fan_control_fan_mode
+      return fan_control_fan_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef FAN_CONTROL_FAN_MODE_SEQUENCE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlfan_mode_sequence instead of this: fan_control_fan_mode_sequence
+      return fan_control_fan_mode_sequence_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (515 == cluster_id) {
+  #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrelative_humidity instead of this: dehumidification_control_relative_humidity
+      return dehumidification_control_relative_humidity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_cooling instead of this: dehumidification_control_dehumidification_cooling
+      return dehumidification_control_dehumidification_cooling_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_RH_DEHUMIDIFICATION_SETPOINT_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrh_dehumidification_setpoint instead of this: dehumidification_control_rh_dehumidification_setpoint
+      return dehumidification_control_rh_dehumidification_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_MODE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrelative_humidity_mode instead of this: dehumidification_control_relative_humidity_mode
+      return dehumidification_control_relative_humidity_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_LOCKOUT_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_lockout instead of this: dehumidification_control_dehumidification_lockout
+      return dehumidification_control_dehumidification_lockout_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_hysteresis instead of this: dehumidification_control_dehumidification_hysteresis
+      return dehumidification_control_dehumidification_hysteresis_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_MAX_COOL_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controldehumidification_max_cool instead of this: dehumidification_control_dehumidification_max_cool
+      return dehumidification_control_dehumidification_max_cool_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_DISPLAY_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: dehumidification_controlrelative_humidity_display instead of this: dehumidification_control_relative_humidity_display
+      return dehumidification_control_relative_humidity_display_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (516 == cluster_id) {
+  #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_TEMPERATURE_DISPLAY_MODE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostat_user_interface_configurationtemperature_display_mode instead of this: thermostat_user_interface_configuration_temperature_display_mode
+      return thermostat_user_interface_configuration_temperature_display_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_KEYPAD_LOCKOUT_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostat_user_interface_configurationkeypad_lockout instead of this: thermostat_user_interface_configuration_keypad_lockout
+      return thermostat_user_interface_configuration_keypad_lockout_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_SCHEDULE_PROGRAMMING_VISIBILITY_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostat_user_interface_configurationschedule_programming_visibility instead of this: thermostat_user_interface_configuration_schedule_programming_visibility
+      return thermostat_user_interface_configuration_schedule_programming_visibility_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (768 == cluster_id) {
+  #ifdef COLOR_CONTROL_CURRENT_HUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrent_hue instead of this: color_control_current_hue
+      return color_control_current_hue_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_CURRENT_SATURATION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrent_saturation instead of this: color_control_current_saturation
+      return color_control_current_saturation_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_REMAINING_TIME_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlremaining_time instead of this: color_control_remaining_time
+      return color_control_remaining_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_CURRENTX_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrentx instead of this: color_control_currentx
+      return color_control_currentx_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_CURRENTY_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcurrenty instead of this: color_control_currenty
+      return color_control_currenty_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_DRIFT_COMPENSATION_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controldrift_compensation instead of this: color_control_drift_compensation
+      return color_control_drift_compensation_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COMPENSATION_TEXT_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcompensation_text instead of this: color_control_compensation_text
+      return color_control_compensation_text_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_temperature_mireds instead of this: color_control_color_temperature_mireds
+      return color_control_color_temperature_mireds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_MODE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_mode instead of this: color_control_color_mode
+      return color_control_color_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_OPTIONS_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controloptions instead of this: color_control_options
+      return color_control_options_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_NUMBER_OF_PRIMARIES_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlnumber_of_primaries instead of this: color_control_number_of_primaries
+      return color_control_number_of_primaries_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY1X_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary1x instead of this: color_control_primary1x
+      return color_control_primary1x_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY1Y_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary1y instead of this: color_control_primary1y
+      return color_control_primary1y_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY1_INTENSITY_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary1_intensity instead of this: color_control_primary1_intensity
+      return color_control_primary1_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY2X_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary2x instead of this: color_control_primary2x
+      return color_control_primary2x_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY2Y_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary2y instead of this: color_control_primary2y
+      return color_control_primary2y_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY2_INTENSITY_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary2_intensity instead of this: color_control_primary2_intensity
+      return color_control_primary2_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY3X_ENUM_NAME_AVAILABLE
+    if (25 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary3x instead of this: color_control_primary3x
+      return color_control_primary3x_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY3Y_ENUM_NAME_AVAILABLE
+    if (26 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary3y instead of this: color_control_primary3y
+      return color_control_primary3y_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY3_INTENSITY_ENUM_NAME_AVAILABLE
+    if (27 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary3_intensity instead of this: color_control_primary3_intensity
+      return color_control_primary3_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY4X_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary4x instead of this: color_control_primary4x
+      return color_control_primary4x_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY4Y_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary4y instead of this: color_control_primary4y
+      return color_control_primary4y_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY4_INTENSITY_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary4_intensity instead of this: color_control_primary4_intensity
+      return color_control_primary4_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY5X_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary5x instead of this: color_control_primary5x
+      return color_control_primary5x_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY5Y_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary5y instead of this: color_control_primary5y
+      return color_control_primary5y_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY5_INTENSITY_ENUM_NAME_AVAILABLE
+    if (38 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary5_intensity instead of this: color_control_primary5_intensity
+      return color_control_primary5_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY6X_ENUM_NAME_AVAILABLE
+    if (40 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary6x instead of this: color_control_primary6x
+      return color_control_primary6x_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY6Y_ENUM_NAME_AVAILABLE
+    if (41 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary6y instead of this: color_control_primary6y
+      return color_control_primary6y_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_PRIMARY6_INTENSITY_ENUM_NAME_AVAILABLE
+    if (42 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlprimary6_intensity instead of this: color_control_primary6_intensity
+      return color_control_primary6_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_WHITE_POINTX_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlwhite_pointx instead of this: color_control_white_pointx
+      return color_control_white_pointx_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_WHITE_POINTY_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlwhite_pointy instead of this: color_control_white_pointy
+      return color_control_white_pointy_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTRX_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointrx instead of this: color_control_color_pointrx
+      return color_control_color_pointrx_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTRY_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointry instead of this: color_control_color_pointry
+      return color_control_color_pointry_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTR_INTENSITY_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointr_intensity instead of this: color_control_color_pointr_intensity
+      return color_control_color_pointr_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTGX_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointgx instead of this: color_control_color_pointgx
+      return color_control_color_pointgx_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTGY_ENUM_NAME_AVAILABLE
+    if (55 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointgy instead of this: color_control_color_pointgy
+      return color_control_color_pointgy_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTG_INTENSITY_ENUM_NAME_AVAILABLE
+    if (56 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointg_intensity instead of this: color_control_color_pointg_intensity
+      return color_control_color_pointg_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTBX_ENUM_NAME_AVAILABLE
+    if (58 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointbx instead of this: color_control_color_pointbx
+      return color_control_color_pointbx_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTBY_ENUM_NAME_AVAILABLE
+    if (59 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointby instead of this: color_control_color_pointby
+      return color_control_color_pointby_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_POINTB_INTENSITY_ENUM_NAME_AVAILABLE
+    if (60 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_pointb_intensity instead of this: color_control_color_pointb_intensity
+      return color_control_color_pointb_intensity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_ENHANCED_CURRENT_HUE_ENUM_NAME_AVAILABLE
+    if (16384 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlenhanced_current_hue instead of this: color_control_enhanced_current_hue
+      return color_control_enhanced_current_hue_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_ENHANCED_COLOR_MODE_ENUM_NAME_AVAILABLE
+    if (16385 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlenhanced_color_mode instead of this: color_control_enhanced_color_mode
+      return color_control_enhanced_color_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_ACTIVE_ENUM_NAME_AVAILABLE
+    if (16386 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_active instead of this: color_control_color_loop_active
+      return color_control_color_loop_active_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE
+    if (16387 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_direction instead of this: color_control_color_loop_direction
+      return color_control_color_loop_direction_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_TIME_ENUM_NAME_AVAILABLE
+    if (16388 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_time instead of this: color_control_color_loop_time
+      return color_control_color_loop_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE_ENUM_NAME_AVAILABLE
+    if (16389 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_start_enhanced_hue instead of this: color_control_color_loop_start_enhanced_hue
+      return color_control_color_loop_start_enhanced_hue_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_LOOP_STORED_ENHANCED_HUE_ENUM_NAME_AVAILABLE
+    if (16390 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_loop_stored_enhanced_hue instead of this: color_control_color_loop_stored_enhanced_hue
+      return color_control_color_loop_stored_enhanced_hue_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_CAPABILITIES_ENUM_NAME_AVAILABLE
+    if (16394 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_capabilities instead of this: color_control_color_capabilities
+      return color_control_color_capabilities_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MIN_MIREDS_ENUM_NAME_AVAILABLE
+    if (16395 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_temp_physical_min_mireds instead of this: color_control_color_temp_physical_min_mireds
+      return color_control_color_temp_physical_min_mireds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS_ENUM_NAME_AVAILABLE
+    if (16396 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcolor_temp_physical_max_mireds instead of this: color_control_color_temp_physical_max_mireds
+      return color_control_color_temp_physical_max_mireds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS_ENUM_NAME_AVAILABLE
+    if (16397 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlcouple_color_temp_to_level_min_mireds instead of this: color_control_couple_color_temp_to_level_min_mireds
+      return color_control_couple_color_temp_to_level_min_mireds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS_ENUM_NAME_AVAILABLE
+    if (16400 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: color_controlstart_up_color_temperature_mireds instead of this: color_control_start_up_color_temperature_mireds
+      return color_control_start_up_color_temperature_mireds_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (769 == cluster_id) {
+  #ifdef BALLAST_CONFIGURATION_PHYSICAL_MIN_LEVEL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationphysical_min_level instead of this: ballast_configuration_physical_min_level
+      return ballast_configuration_physical_min_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationphysical_max_level instead of this: ballast_configuration_physical_max_level
+      return ballast_configuration_physical_max_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_BALLAST_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationballast_status instead of this: ballast_configuration_ballast_status
+      return ballast_configuration_ballast_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_MIN_LEVEL_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationmin_level instead of this: ballast_configuration_min_level
+      return ballast_configuration_min_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_MAX_LEVEL_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationmax_level instead of this: ballast_configuration_max_level
+      return ballast_configuration_max_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_POWER_ON_LEVEL_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationpower_on_level instead of this: ballast_configuration_power_on_level
+      return ballast_configuration_power_on_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_POWER_ON_FADE_TIME_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationpower_on_fade_time instead of this: ballast_configuration_power_on_fade_time
+      return ballast_configuration_power_on_fade_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationintrinsic_ballast_factor instead of this: ballast_configuration_intrinsic_ballast_factor
+      return ballast_configuration_intrinsic_ballast_factor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_BALLAST_FACTOR_ADJUSTMENT_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationballast_factor_adjustment instead of this: ballast_configuration_ballast_factor_adjustment
+      return ballast_configuration_ballast_factor_adjustment_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_QUANTITY_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_quantity instead of this: ballast_configuration_lamp_quantity
+      return ballast_configuration_lamp_quantity_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_TYPE_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_type instead of this: ballast_configuration_lamp_type
+      return ballast_configuration_lamp_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_MANUFACTURER_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_manufacturer instead of this: ballast_configuration_lamp_manufacturer
+      return ballast_configuration_lamp_manufacturer_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_RATED_HOURS_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_rated_hours instead of this: ballast_configuration_lamp_rated_hours
+      return ballast_configuration_lamp_rated_hours_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_BURN_HOURS_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_burn_hours instead of this: ballast_configuration_lamp_burn_hours
+      return ballast_configuration_lamp_burn_hours_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_ALARM_MODE_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_alarm_mode instead of this: ballast_configuration_lamp_alarm_mode
+      return ballast_configuration_lamp_alarm_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ballast_configurationlamp_burn_hours_trip_point instead of this: ballast_configuration_lamp_burn_hours_trip_point
+      return ballast_configuration_lamp_burn_hours_trip_point_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1024 == cluster_id) {
+  #ifdef ILLUMINANCE_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementmeasured_value instead of this: illuminance_measurement_measured_value
+      return illuminance_measurement_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementmin_measured_value instead of this: illuminance_measurement_min_measured_value
+      return illuminance_measurement_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementmax_measured_value instead of this: illuminance_measurement_max_measured_value
+      return illuminance_measurement_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementtolerance instead of this: illuminance_measurement_tolerance
+      return illuminance_measurement_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ILLUMINANCE_MEASUREMENT_LIGHT_SENSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_measurementlight_sensor_type instead of this: illuminance_measurement_light_sensor_type
+      return illuminance_measurement_light_sensor_type_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1025 == cluster_id) {
+  #ifdef ILLUMINANCE_LEVEL_SENSING_LEVEL_STATUS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_level_sensinglevel_status instead of this: illuminance_level_sensing_level_status
+      return illuminance_level_sensing_level_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ILLUMINANCE_LEVEL_SENSING_LIGHT_SENSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_level_sensinglight_sensor_type instead of this: illuminance_level_sensing_light_sensor_type
+      return illuminance_level_sensing_light_sensor_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: illuminance_level_sensingilluminance_target_level instead of this: illuminance_level_sensing_illuminance_target_level
+      return illuminance_level_sensing_illuminance_target_level_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1026 == cluster_id) {
+  #ifdef TEMPERATURE_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementmeasured_value instead of this: temperature_measurement_measured_value
+      return temperature_measurement_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TEMPERATURE_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementmin_measured_value instead of this: temperature_measurement_min_measured_value
+      return temperature_measurement_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TEMPERATURE_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementmax_measured_value instead of this: temperature_measurement_max_measured_value
+      return temperature_measurement_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef TEMPERATURE_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: temperature_measurementtolerance instead of this: temperature_measurement_tolerance
+      return temperature_measurement_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1027 == cluster_id) {
+  #ifdef PRESSURE_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmeasured_value instead of this: pressure_measurement_measured_value
+      return pressure_measurement_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmin_measured_value instead of this: pressure_measurement_min_measured_value
+      return pressure_measurement_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmax_measured_value instead of this: pressure_measurement_max_measured_value
+      return pressure_measurement_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementtolerance instead of this: pressure_measurement_tolerance
+      return pressure_measurement_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_SCALED_VALUE_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementscaled_value instead of this: pressure_measurement_scaled_value
+      return pressure_measurement_scaled_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MIN_SCALED_VALUE_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmin_scaled_value instead of this: pressure_measurement_min_scaled_value
+      return pressure_measurement_min_scaled_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_MAX_SCALED_VALUE_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementmax_scaled_value instead of this: pressure_measurement_max_scaled_value
+      return pressure_measurement_max_scaled_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_SCALED_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementscaled_tolerance instead of this: pressure_measurement_scaled_tolerance
+      return pressure_measurement_scaled_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PRESSURE_MEASUREMENT_SCALE_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pressure_measurementscale instead of this: pressure_measurement_scale
+      return pressure_measurement_scale_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1028 == cluster_id) {
+  #ifdef FLOW_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementmeasured_value instead of this: flow_measurement_measured_value
+      return flow_measurement_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef FLOW_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementmin_measured_value instead of this: flow_measurement_min_measured_value
+      return flow_measurement_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef FLOW_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementmax_measured_value instead of this: flow_measurement_max_measured_value
+      return flow_measurement_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef FLOW_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: flow_measurementtolerance instead of this: flow_measurement_tolerance
+      return flow_measurement_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1029 == cluster_id) {
+  #ifdef RELATIVITY_HUMIDITY_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditymeasured_value instead of this: relativity_humidity_measured_value
+      return relativity_humidity_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditymin_measured_value instead of this: relativity_humidity_min_measured_value
+      return relativity_humidity_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef RELATIVITY_HUMIDITY_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditymax_measured_value instead of this: relativity_humidity_max_measured_value
+      return relativity_humidity_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef RELATIVITY_HUMIDITY_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: relativity_humiditytolerance instead of this: relativity_humidity_tolerance
+      return relativity_humidity_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1030 == cluster_id) {
+  #ifdef OCCUPANCY_SENSING_OCCUPANCY_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingoccupancy instead of this: occupancy_sensing_occupancy
+      return occupancy_sensing_occupancy_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingoccupancy_sensor_type instead of this: occupancy_sensing_occupancy_sensor_type
+      return occupancy_sensing_occupancy_sensor_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_BITMAP_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingoccupancy_sensor_type_bitmap instead of this: occupancy_sensing_occupancy_sensor_type_bitmap
+      return occupancy_sensing_occupancy_sensor_type_bitmap_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingpir_occupied_to_unoccupied_delay instead of this: occupancy_sensing_pir_occupied_to_unoccupied_delay
+      return occupancy_sensing_pir_occupied_to_unoccupied_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingpir_unoccupied_to_occupied_delay instead of this: occupancy_sensing_pir_unoccupied_to_occupied_delay
+      return occupancy_sensing_pir_unoccupied_to_occupied_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingpir_unoccupied_to_occupied_threshold instead of this: occupancy_sensing_pir_unoccupied_to_occupied_threshold
+      return occupancy_sensing_pir_unoccupied_to_occupied_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingultrasonic_occupied_to_unoccupied_delay instead of this: occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay
+      return occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingultrasonic_unoccupied_to_occupied_delay instead of this: occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay
+      return occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingultrasonic_unoccupied_to_occupied_threshold instead of this: occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold
+      return occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingphysical_contact_occupied_to_unoccupied_delay instead of this: occupancy_sensing_physical_contact_occupied_to_unoccupied_delay
+      return occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingphysical_contact_unoccupied_to_occupied_delay instead of this: occupancy_sensing_physical_contact_unoccupied_to_occupied_delay
+      return occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: occupancy_sensingphysical_contact_unoccupied_to_occupied_threshold instead of this: occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold
+      return occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1033 == cluster_id) {
+  #ifdef PH_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementmeasured_value instead of this: ph_measurement_measured_value
+      return ph_measurement_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PH_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementmin_measured_value instead of this: ph_measurement_min_measured_value
+      return ph_measurement_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PH_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementmax_measured_value instead of this: ph_measurement_max_measured_value
+      return ph_measurement_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PH_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ph_measurementtolerance instead of this: ph_measurement_tolerance
+      return ph_measurement_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1034 == cluster_id) {
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementmeasured_value instead of this: electrical_conductivity_measurement_measured_value
+      return electrical_conductivity_measurement_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementmin_measured_value instead of this: electrical_conductivity_measurement_min_measured_value
+      return electrical_conductivity_measurement_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementmax_measured_value instead of this: electrical_conductivity_measurement_max_measured_value
+      return electrical_conductivity_measurement_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_conductivity_measurementtolerance instead of this: electrical_conductivity_measurement_tolerance
+      return electrical_conductivity_measurement_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1035 == cluster_id) {
+  #ifdef WIND_SPEED_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementmeasured_value instead of this: wind_speed_measurement_measured_value
+      return wind_speed_measurement_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementmin_measured_value instead of this: wind_speed_measurement_min_measured_value
+      return wind_speed_measurement_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WIND_SPEED_MEASUREMENT_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementmax_measured_value instead of this: wind_speed_measurement_max_measured_value
+      return wind_speed_measurement_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef WIND_SPEED_MEASUREMENT_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: wind_speed_measurementtolerance instead of this: wind_speed_measurement_tolerance
+      return wind_speed_measurement_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1036 == cluster_id) {
+  #ifdef CARBON_MONOXIDE_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidemeasured_value instead of this: carbon_monoxide_measured_value
+      return carbon_monoxide_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef CARBON_MONOXIDE_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidemin_measured_value instead of this: carbon_monoxide_min_measured_value
+      return carbon_monoxide_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef CARBON_MONOXIDE_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidemax_measured_value instead of this: carbon_monoxide_max_measured_value
+      return carbon_monoxide_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef CARBON_MONOXIDE_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidetolerance instead of this: carbon_monoxide_tolerance
+      return carbon_monoxide_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1280 == cluster_id) {
+  #ifdef IAS_ZONE_ZONE_STATE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezone_state instead of this: ias_zone_zone_state
+      return ias_zone_zone_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef IAS_ZONE_ZONE_TYPE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezone_type instead of this: ias_zone_zone_type
+      return ias_zone_zone_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef IAS_ZONE_ZONE_STATUS_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezone_status instead of this: ias_zone_zone_status
+      return ias_zone_zone_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef IAS_ZONE_IASCIE_ADDRESS_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zoneiascie_address instead of this: ias_zone_iascie_address
+      return ias_zone_iascie_address_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef IAS_ZONE_ZONEID_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonezoneid instead of this: ias_zone_zoneid
+      return ias_zone_zoneid_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef IAS_ZONE_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonenumber_of_zone_sensitivity_levels_supported instead of this: ias_zone_number_of_zone_sensitivity_levels_supported
+      return ias_zone_number_of_zone_sensitivity_levels_supported_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: ias_zonecurrent_zone_sensitivity_level instead of this: ias_zone_current_zone_sensitivity_level
+      return ias_zone_current_zone_sensitivity_level_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1282 == cluster_id) {
+  #ifdef IASWD_MAX_DURATION_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: iaswdmax_duration instead of this: iaswd_max_duration
+      return iaswd_max_duration_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1794 == cluster_id) {
+  #ifdef METERING_CURRENT_SUMMATION_DELIVERED_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_summation_delivered instead of this: metering_current_summation_delivered
+      return metering_current_summation_delivered_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_CURRENT_SUMMATION_RECEIVED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_summation_received instead of this: metering_current_summation_received
+      return metering_current_summation_received_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_DELIVERED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_delivered instead of this: metering_current_max_demand_delivered
+      return metering_current_max_demand_delivered_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_RECEIVED_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_received instead of this: metering_current_max_demand_received
+      return metering_current_max_demand_received_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_POWER_FACTOR_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringpower_factor instead of this: metering_power_factor
+      return metering_power_factor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_READING_SNAP_SHOT_TIME_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringreading_snap_shot_time instead of this: metering_reading_snap_shot_time
+      return metering_reading_snap_shot_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_delivered_time instead of this: metering_current_max_demand_delivered_time
+      return metering_current_max_demand_delivered_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_max_demand_received_time instead of this: metering_current_max_demand_received_time
+      return metering_current_max_demand_received_time_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_DEFAULT_UPDATE_PERIOD_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringdefault_update_period instead of this: metering_default_update_period
+      return metering_default_update_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_SUPPLY_STATUS_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringsupply_status instead of this: metering_supply_status
+      return metering_supply_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_CURRENT_INLET_ENERGY_CARRIER_SUMMATION_ENUM_NAME_AVAILABLE
+    if (21 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_inlet_energy_carrier_summation instead of this: metering_current_inlet_energy_carrier_summation
+      return metering_current_inlet_energy_carrier_summation_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION_ENUM_NAME_AVAILABLE
+    if (22 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringcurrent_outlet_energy_carrier_summation instead of this: metering_current_outlet_energy_carrier_summation
+      return metering_current_outlet_energy_carrier_summation_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_INLET_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (23 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringinlet_temperature instead of this: metering_inlet_temperature
+      return metering_inlet_temperature_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_OUTLET_TEMPERATURE_ENUM_NAME_AVAILABLE
+    if (24 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringoutlet_temperature instead of this: metering_outlet_temperature
+      return metering_outlet_temperature_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_UNITOF_MEASURE_ENUM_NAME_AVAILABLE
+    if (768 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringunitof_measure instead of this: metering_unitof_measure
+      return metering_unitof_measure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (769 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringmultiplier instead of this: metering_multiplier
+      return metering_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_DIVISOR_ENUM_NAME_AVAILABLE
+    if (770 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringdivisor instead of this: metering_divisor
+      return metering_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_SUMMATION_FORMATTING_ENUM_NAME_AVAILABLE
+    if (771 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringsummation_formatting instead of this: metering_summation_formatting
+      return metering_summation_formatting_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_DEMAND_FORMATTING_ENUM_NAME_AVAILABLE
+    if (772 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringdemand_formatting instead of this: metering_demand_formatting
+      return metering_demand_formatting_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_HISTORICAL_CONSUMPTION_FORMATTING_ENUM_NAME_AVAILABLE
+    if (773 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringhistorical_consumption_formatting instead of this: metering_historical_consumption_formatting
+      return metering_historical_consumption_formatting_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_METERING_DEVICE_TYPE_ENUM_NAME_AVAILABLE
+    if (774 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringmetering_device_type instead of this: metering_metering_device_type
+      return metering_metering_device_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_ENERGY_CARRIER_UNIT_OF_MEASURE_ENUM_NAME_AVAILABLE
+    if (777 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringenergy_carrier_unit_of_measure instead of this: metering_energy_carrier_unit_of_measure
+      return metering_energy_carrier_unit_of_measure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_ENERGY_CARRIER_SUMMATION_FORMATTING_ENUM_NAME_AVAILABLE
+    if (778 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringenergy_carrier_summation_formatting instead of this: metering_energy_carrier_summation_formatting
+      return metering_energy_carrier_summation_formatting_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_ENERGY_CARRIER_DEMAND_FORMATTING_ENUM_NAME_AVAILABLE
+    if (779 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringenergy_carrier_demand_formatting instead of this: metering_energy_carrier_demand_formatting
+      return metering_energy_carrier_demand_formatting_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_TEMPERATURE_UNIT_OF_MEASURE_ENUM_NAME_AVAILABLE
+    if (780 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringtemperature_unit_of_measure instead of this: metering_temperature_unit_of_measure
+      return metering_temperature_unit_of_measure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef METERING_TEMPERATURE_FORMATTING_ENUM_NAME_AVAILABLE
+    if (781 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: meteringtemperature_formatting instead of this: metering_temperature_formatting
+      return metering_temperature_formatting_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (2820 == cluster_id) {
+  #ifdef ELECTRICAL_MEASUREMENT_MEASUREMENT_TYPE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasurement_type instead of this: electrical_measurement_measurement_type
+      return electrical_measurement_measurement_type_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (256 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage instead of this: electrical_measurement_dc_voltage
+      return electrical_measurement_dc_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MIN_ENUM_NAME_AVAILABLE
+    if (257 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_min instead of this: electrical_measurement_dc_voltage_min
+      return electrical_measurement_dc_voltage_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MAX_ENUM_NAME_AVAILABLE
+    if (258 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_max instead of this: electrical_measurement_dc_voltage_max
+      return electrical_measurement_dc_voltage_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_ENUM_NAME_AVAILABLE
+    if (259 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current instead of this: electrical_measurement_dc_current
+      return electrical_measurement_dc_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_MIN_ENUM_NAME_AVAILABLE
+    if (260 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_min instead of this: electrical_measurement_dc_current_min
+      return electrical_measurement_dc_current_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_MAX_ENUM_NAME_AVAILABLE
+    if (261 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_max instead of this: electrical_measurement_dc_current_max
+      return electrical_measurement_dc_current_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_ENUM_NAME_AVAILABLE
+    if (262 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power instead of this: electrical_measurement_dc_power
+      return electrical_measurement_dc_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_MIN_ENUM_NAME_AVAILABLE
+    if (263 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_min instead of this: electrical_measurement_dc_power_min
+      return electrical_measurement_dc_power_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_MAX_ENUM_NAME_AVAILABLE
+    if (264 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_max instead of this: electrical_measurement_dc_power_max
+      return electrical_measurement_dc_power_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (512 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_multiplier instead of this: electrical_measurement_dc_voltage_multiplier
+      return electrical_measurement_dc_voltage_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR_ENUM_NAME_AVAILABLE
+    if (513 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_divisor instead of this: electrical_measurement_dc_voltage_divisor
+      return electrical_measurement_dc_voltage_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (514 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_multiplier instead of this: electrical_measurement_dc_current_multiplier
+      return electrical_measurement_dc_current_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR_ENUM_NAME_AVAILABLE
+    if (515 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_divisor instead of this: electrical_measurement_dc_current_divisor
+      return electrical_measurement_dc_current_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (516 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_multiplier instead of this: electrical_measurement_dc_power_multiplier
+      return electrical_measurement_dc_power_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR_ENUM_NAME_AVAILABLE
+    if (517 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_power_divisor instead of this: electrical_measurement_dc_power_divisor
+      return electrical_measurement_dc_power_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_ENUM_NAME_AVAILABLE
+    if (768 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency instead of this: electrical_measurement_ac_frequency
+      return electrical_measurement_ac_frequency_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN_ENUM_NAME_AVAILABLE
+    if (769 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_min instead of this: electrical_measurement_ac_frequency_min
+      return electrical_measurement_ac_frequency_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MAX_ENUM_NAME_AVAILABLE
+    if (770 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_max instead of this: electrical_measurement_ac_frequency_max
+      return electrical_measurement_ac_frequency_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT_ENUM_NAME_AVAILABLE
+    if (771 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementneutral_current instead of this: electrical_measurement_neutral_current
+      return electrical_measurement_neutral_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_TOTAL_ACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (772 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementtotal_active_power instead of this: electrical_measurement_total_active_power
+      return electrical_measurement_total_active_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_TOTAL_REACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (773 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementtotal_reactive_power instead of this: electrical_measurement_total_reactive_power
+      return electrical_measurement_total_reactive_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_TOTAL_APPARENT_POWER_ENUM_NAME_AVAILABLE
+    if (774 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementtotal_apparent_power instead of this: electrical_measurement_total_apparent_power
+      return electrical_measurement_total_apparent_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED1ST_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (775 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured1st_harmonic_current instead of this: electrical_measurement_measured1st_harmonic_current
+      return electrical_measurement_measured1st_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED3RD_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (776 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured3rd_harmonic_current instead of this: electrical_measurement_measured3rd_harmonic_current
+      return electrical_measurement_measured3rd_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED5TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (777 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured5th_harmonic_current instead of this: electrical_measurement_measured5th_harmonic_current
+      return electrical_measurement_measured5th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED7TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (778 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured7th_harmonic_current instead of this: electrical_measurement_measured7th_harmonic_current
+      return electrical_measurement_measured7th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED9TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (779 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured9th_harmonic_current instead of this: electrical_measurement_measured9th_harmonic_current
+      return electrical_measurement_measured9th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED11TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (780 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured11th_harmonic_current instead of this: electrical_measurement_measured11th_harmonic_current
+      return electrical_measurement_measured11th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE1ST_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (781 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase1st_harmonic_current instead of this: electrical_measurement_measured_phase1st_harmonic_current
+      return electrical_measurement_measured_phase1st_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE3RD_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (782 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase3rd_harmonic_current instead of this: electrical_measurement_measured_phase3rd_harmonic_current
+      return electrical_measurement_measured_phase3rd_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE5TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (783 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase5th_harmonic_current instead of this: electrical_measurement_measured_phase5th_harmonic_current
+      return electrical_measurement_measured_phase5th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE7TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (784 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase7th_harmonic_current instead of this: electrical_measurement_measured_phase7th_harmonic_current
+      return electrical_measurement_measured_phase7th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE9TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (785 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase9th_harmonic_current instead of this: electrical_measurement_measured_phase9th_harmonic_current
+      return electrical_measurement_measured_phase9th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_MEASURED_PHASE11TH_HARMONIC_CURRENT_ENUM_NAME_AVAILABLE
+    if (786 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementmeasured_phase11th_harmonic_current instead of this: electrical_measurement_measured_phase11th_harmonic_current
+      return electrical_measurement_measured_phase11th_harmonic_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1024 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_multiplier instead of this: electrical_measurement_ac_frequency_multiplier
+      return electrical_measurement_ac_frequency_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_FREQUENCY_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1025 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_frequency_divisor instead of this: electrical_measurement_ac_frequency_divisor
+      return electrical_measurement_ac_frequency_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1026 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_multiplier instead of this: electrical_measurement_power_multiplier
+      return electrical_measurement_power_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1027 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_divisor instead of this: electrical_measurement_power_divisor
+      return electrical_measurement_power_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_HARMONIC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1028 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementharmonic_current_multiplier instead of this: electrical_measurement_harmonic_current_multiplier
+      return electrical_measurement_harmonic_current_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_PHASE_HARMONIC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1029 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementphase_harmonic_current_multiplier instead of this: electrical_measurement_phase_harmonic_current_multiplier
+      return electrical_measurement_phase_harmonic_current_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_LINE_CURRENT_ENUM_NAME_AVAILABLE
+    if (1281 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementline_current instead of this: electrical_measurement_line_current
+      return electrical_measurement_line_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_ENUM_NAME_AVAILABLE
+    if (1282 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_current instead of this: electrical_measurement_active_current
+      return electrical_measurement_active_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_ENUM_NAME_AVAILABLE
+    if (1283 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_current instead of this: electrical_measurement_reactive_current
+      return electrical_measurement_reactive_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (1285 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage instead of this: electrical_measurement_rms_voltage
+      return electrical_measurement_rms_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_ENUM_NAME_AVAILABLE
+    if (1286 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_min instead of this: electrical_measurement_rms_voltage_min
+      return electrical_measurement_rms_voltage_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_ENUM_NAME_AVAILABLE
+    if (1287 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_max instead of this: electrical_measurement_rms_voltage_max
+      return electrical_measurement_rms_voltage_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_ENUM_NAME_AVAILABLE
+    if (1288 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current instead of this: electrical_measurement_rms_current
+      return electrical_measurement_rms_current_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_ENUM_NAME_AVAILABLE
+    if (1289 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_min instead of this: electrical_measurement_rms_current_min
+      return electrical_measurement_rms_current_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_ENUM_NAME_AVAILABLE
+    if (1290 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_max instead of this: electrical_measurement_rms_current_max
+      return electrical_measurement_rms_current_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (1291 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power instead of this: electrical_measurement_active_power
+      return electrical_measurement_active_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_ENUM_NAME_AVAILABLE
+    if (1292 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_min instead of this: electrical_measurement_active_power_min
+      return electrical_measurement_active_power_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_ENUM_NAME_AVAILABLE
+    if (1293 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_max instead of this: electrical_measurement_active_power_max
+      return electrical_measurement_active_power_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_POWER_ENUM_NAME_AVAILABLE
+    if (1294 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_power instead of this: electrical_measurement_reactive_power
+      return electrical_measurement_reactive_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_APPARENT_POWER_ENUM_NAME_AVAILABLE
+    if (1295 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementapparent_power instead of this: electrical_measurement_apparent_power
+      return electrical_measurement_apparent_power_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_FACTOR_ENUM_NAME_AVAILABLE
+    if (1296 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_factor instead of this: electrical_measurement_power_factor
+      return electrical_measurement_power_factor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_ENUM_NAME_AVAILABLE
+    if (1297 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period instead of this: electrical_measurement_averagerms_voltage_measurement_period
+      return electrical_measurement_averagerms_voltage_measurement_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+    if (1298 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter instead of this: electrical_measurement_averagerms_over_voltage_counter
+      return electrical_measurement_averagerms_over_voltage_counter_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+    if (1299 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter instead of this: electrical_measurement_averagerms_under_voltage_counter
+      return electrical_measurement_averagerms_under_voltage_counter_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_ENUM_NAME_AVAILABLE
+    if (1300 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage_period instead of this: electrical_measurement_rms_extreme_over_voltage_period
+      return electrical_measurement_rms_extreme_over_voltage_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_ENUM_NAME_AVAILABLE
+    if (1301 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage_period instead of this: electrical_measurement_rms_extreme_under_voltage_period
+      return electrical_measurement_rms_extreme_under_voltage_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_ENUM_NAME_AVAILABLE
+    if (1302 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag_period instead of this: electrical_measurement_rms_voltage_sag_period
+      return electrical_measurement_rms_voltage_sag_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_ENUM_NAME_AVAILABLE
+    if (1303 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell_period instead of this: electrical_measurement_rms_voltage_swell_period
+      return electrical_measurement_rms_voltage_swell_period_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1536 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_voltage_multiplier instead of this: electrical_measurement_ac_voltage_multiplier
+      return electrical_measurement_ac_voltage_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_VOLTAGE_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1537 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_voltage_divisor instead of this: electrical_measurement_ac_voltage_divisor
+      return electrical_measurement_ac_voltage_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1538 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_current_multiplier instead of this: electrical_measurement_ac_current_multiplier
+      return electrical_measurement_ac_current_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_CURRENT_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1539 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_current_divisor instead of this: electrical_measurement_ac_current_divisor
+      return electrical_measurement_ac_current_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER_ENUM_NAME_AVAILABLE
+    if (1540 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_power_multiplier instead of this: electrical_measurement_ac_power_multiplier
+      return electrical_measurement_ac_power_multiplier_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_POWER_DIVISOR_ENUM_NAME_AVAILABLE
+    if (1541 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_power_divisor instead of this: electrical_measurement_ac_power_divisor
+      return electrical_measurement_ac_power_divisor_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_OVERLOAD_ALARMS_MASK_ENUM_NAME_AVAILABLE
+    if (1792 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_overload_alarms_mask instead of this: electrical_measurement_dc_overload_alarms_mask
+      return electrical_measurement_dc_overload_alarms_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_VOLTAGE_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (1793 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_voltage_overload instead of this: electrical_measurement_dc_voltage_overload
+      return electrical_measurement_dc_voltage_overload_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_DC_CURRENT_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (1794 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementdc_current_overload instead of this: electrical_measurement_dc_current_overload
+      return electrical_measurement_dc_current_overload_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_ALARMS_MASK_ENUM_NAME_AVAILABLE
+    if (2048 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_alarms_mask instead of this: electrical_measurement_ac_alarms_mask
+      return electrical_measurement_ac_alarms_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_VOLTAGE_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2049 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_voltage_overload instead of this: electrical_measurement_ac_voltage_overload
+      return electrical_measurement_ac_voltage_overload_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_CURRENT_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2050 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_current_overload instead of this: electrical_measurement_ac_current_overload
+      return electrical_measurement_ac_current_overload_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_ACTIVE_POWER_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2051 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_active_power_overload instead of this: electrical_measurement_ac_active_power_overload
+      return electrical_measurement_ac_active_power_overload_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AC_REACTIVE_POWER_OVERLOAD_ENUM_NAME_AVAILABLE
+    if (2052 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementac_reactive_power_overload instead of this: electrical_measurement_ac_reactive_power_overload
+      return electrical_measurement_ac_reactive_power_overload_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2053 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage instead of this: electrical_measurement_averagerms_over_voltage
+      return electrical_measurement_averagerms_over_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2054 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage instead of this: electrical_measurement_averagerms_under_voltage
+      return electrical_measurement_averagerms_under_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2055 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage instead of this: electrical_measurement_rms_extreme_over_voltage
+      return electrical_measurement_rms_extreme_over_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
+    if (2056 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage instead of this: electrical_measurement_rms_extreme_under_voltage
+      return electrical_measurement_rms_extreme_under_voltage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_ENUM_NAME_AVAILABLE
+    if (2057 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag instead of this: electrical_measurement_rms_voltage_sag
+      return electrical_measurement_rms_voltage_sag_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_ENUM_NAME_AVAILABLE
+    if (2058 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell instead of this: electrical_measurement_rms_voltage_swell
+      return electrical_measurement_rms_voltage_swell_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2305 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementline_current_phb instead of this: electrical_measurement_line_current_phb
+      return electrical_measurement_line_current_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2306 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_current_phb instead of this: electrical_measurement_active_current_phb
+      return electrical_measurement_active_current_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2307 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_current_phb instead of this: electrical_measurement_reactive_current_phb
+      return electrical_measurement_reactive_current_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHB_ENUM_NAME_AVAILABLE
+    if (2309 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_phb instead of this: electrical_measurement_rms_voltage_phb
+      return electrical_measurement_rms_voltage_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB_ENUM_NAME_AVAILABLE
+    if (2310 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_min_phb instead of this: electrical_measurement_rms_voltage_min_phb
+      return electrical_measurement_rms_voltage_min_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHB_ENUM_NAME_AVAILABLE
+    if (2311 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_max_phb instead of this: electrical_measurement_rms_voltage_max_phb
+      return electrical_measurement_rms_voltage_max_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB_ENUM_NAME_AVAILABLE
+    if (2312 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_phb instead of this: electrical_measurement_rms_current_phb
+      return electrical_measurement_rms_current_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHB_ENUM_NAME_AVAILABLE
+    if (2313 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_min_phb instead of this: electrical_measurement_rms_current_min_phb
+      return electrical_measurement_rms_current_min_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB_ENUM_NAME_AVAILABLE
+    if (2314 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_max_phb instead of this: electrical_measurement_rms_current_max_phb
+      return electrical_measurement_rms_current_max_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHB_ENUM_NAME_AVAILABLE
+    if (2315 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_phb instead of this: electrical_measurement_active_power_phb
+      return electrical_measurement_active_power_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHB_ENUM_NAME_AVAILABLE
+    if (2316 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_min_phb instead of this: electrical_measurement_active_power_min_phb
+      return electrical_measurement_active_power_min_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHB_ENUM_NAME_AVAILABLE
+    if (2317 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_max_phb instead of this: electrical_measurement_active_power_max_phb
+      return electrical_measurement_active_power_max_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHB_ENUM_NAME_AVAILABLE
+    if (2318 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_power_phb instead of this: electrical_measurement_reactive_power_phb
+      return electrical_measurement_reactive_power_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHB_ENUM_NAME_AVAILABLE
+    if (2319 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementapparent_power_phb instead of this: electrical_measurement_apparent_power_phb
+      return electrical_measurement_apparent_power_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB_ENUM_NAME_AVAILABLE
+    if (2320 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_factor_phb instead of this: electrical_measurement_power_factor_phb
+      return electrical_measurement_power_factor_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2321 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phb instead of this: electrical_measurement_averagerms_voltage_measurement_period_phb
+      return electrical_measurement_averagerms_voltage_measurement_period_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+    if (2322 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phb instead of this: electrical_measurement_averagerms_over_voltage_counter_phb
+      return electrical_measurement_averagerms_over_voltage_counter_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+    if (2323 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phb instead of this: electrical_measurement_averagerms_under_voltage_counter_phb
+      return electrical_measurement_averagerms_under_voltage_counter_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2324 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage_period_phb instead of this: electrical_measurement_rms_extreme_over_voltage_period_phb
+      return electrical_measurement_rms_extreme_over_voltage_period_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2325 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage_period_phb instead of this: electrical_measurement_rms_extreme_under_voltage_period_phb
+      return electrical_measurement_rms_extreme_under_voltage_period_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2326 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag_period_phb instead of this: electrical_measurement_rms_voltage_sag_period_phb
+      return electrical_measurement_rms_voltage_sag_period_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHB_ENUM_NAME_AVAILABLE
+    if (2327 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell_period_phb instead of this: electrical_measurement_rms_voltage_swell_period_phb
+      return electrical_measurement_rms_voltage_swell_period_phb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2561 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementline_current_phc instead of this: electrical_measurement_line_current_phc
+      return electrical_measurement_line_current_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2562 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_current_phc instead of this: electrical_measurement_active_current_phc
+      return electrical_measurement_active_current_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2563 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_current_phc instead of this: electrical_measurement_reactive_current_phc
+      return electrical_measurement_reactive_current_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHC_ENUM_NAME_AVAILABLE
+    if (2565 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_phc instead of this: electrical_measurement_rms_voltage_phc
+      return electrical_measurement_rms_voltage_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC_ENUM_NAME_AVAILABLE
+    if (2566 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_min_phc instead of this: electrical_measurement_rms_voltage_min_phc
+      return electrical_measurement_rms_voltage_min_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHC_ENUM_NAME_AVAILABLE
+    if (2567 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_max_phc instead of this: electrical_measurement_rms_voltage_max_phc
+      return electrical_measurement_rms_voltage_max_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC_ENUM_NAME_AVAILABLE
+    if (2568 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_phc instead of this: electrical_measurement_rms_current_phc
+      return electrical_measurement_rms_current_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHC_ENUM_NAME_AVAILABLE
+    if (2569 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_min_phc instead of this: electrical_measurement_rms_current_min_phc
+      return electrical_measurement_rms_current_min_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC_ENUM_NAME_AVAILABLE
+    if (2570 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_current_max_phc instead of this: electrical_measurement_rms_current_max_phc
+      return electrical_measurement_rms_current_max_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHC_ENUM_NAME_AVAILABLE
+    if (2571 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_phc instead of this: electrical_measurement_active_power_phc
+      return electrical_measurement_active_power_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHC_ENUM_NAME_AVAILABLE
+    if (2572 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_min_phc instead of this: electrical_measurement_active_power_min_phc
+      return electrical_measurement_active_power_min_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHC_ENUM_NAME_AVAILABLE
+    if (2573 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementactive_power_max_phc instead of this: electrical_measurement_active_power_max_phc
+      return electrical_measurement_active_power_max_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHC_ENUM_NAME_AVAILABLE
+    if (2574 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementreactive_power_phc instead of this: electrical_measurement_reactive_power_phc
+      return electrical_measurement_reactive_power_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHC_ENUM_NAME_AVAILABLE
+    if (2575 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementapparent_power_phc instead of this: electrical_measurement_apparent_power_phc
+      return electrical_measurement_apparent_power_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC_ENUM_NAME_AVAILABLE
+    if (2576 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementpower_factor_phc instead of this: electrical_measurement_power_factor_phc
+      return electrical_measurement_power_factor_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2577 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phc instead of this: electrical_measurement_averagerms_voltage_measurement_period_phc
+      return electrical_measurement_averagerms_voltage_measurement_period_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+    if (2578 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phc instead of this: electrical_measurement_averagerms_over_voltage_counter_phc
+      return electrical_measurement_averagerms_over_voltage_counter_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+    if (2579 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phc instead of this: electrical_measurement_averagerms_under_voltage_counter_phc
+      return electrical_measurement_averagerms_under_voltage_counter_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2580 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_over_voltage_period_phc instead of this: electrical_measurement_rms_extreme_over_voltage_period_phc
+      return electrical_measurement_rms_extreme_over_voltage_period_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2581 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_extreme_under_voltage_period_phc instead of this: electrical_measurement_rms_extreme_under_voltage_period_phc
+      return electrical_measurement_rms_extreme_under_voltage_period_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2582 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_sag_period_phc instead of this: electrical_measurement_rms_voltage_sag_period_phc
+      return electrical_measurement_rms_voltage_sag_period_phc_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC_ENUM_NAME_AVAILABLE
+    if (2583 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementrms_voltage_swell_period_phc instead of this: electrical_measurement_rms_voltage_swell_period_phc
+      return electrical_measurement_rms_voltage_swell_period_phc_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (2821 == cluster_id) {
+  #ifdef DIAGNOSTICS_NUMBER_OF_RESETS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsnumber_of_resets instead of this: diagnostics_number_of_resets
+      return diagnostics_number_of_resets_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PERSISTENT_MEMORY_WRITES_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticspersistent_memory_writes instead of this: diagnostics_persistent_memory_writes
+      return diagnostics_persistent_memory_writes_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_RX_BCAST_ENUM_NAME_AVAILABLE
+    if (256 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_rx_bcast instead of this: diagnostics_mac_rx_bcast
+      return diagnostics_mac_rx_bcast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_BCAST_ENUM_NAME_AVAILABLE
+    if (257 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_bcast instead of this: diagnostics_mac_tx_bcast
+      return diagnostics_mac_tx_bcast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_RX_UCAST_ENUM_NAME_AVAILABLE
+    if (258 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_rx_ucast instead of this: diagnostics_mac_rx_ucast
+      return diagnostics_mac_rx_ucast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_UCAST_ENUM_NAME_AVAILABLE
+    if (259 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_ucast instead of this: diagnostics_mac_tx_ucast
+      return diagnostics_mac_tx_ucast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_UCAST_RETRY_ENUM_NAME_AVAILABLE
+    if (260 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_ucast_retry instead of this: diagnostics_mac_tx_ucast_retry
+      return diagnostics_mac_tx_ucast_retry_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_MAC_TX_UCAST_FAIL_ENUM_NAME_AVAILABLE
+    if (261 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsmac_tx_ucast_fail instead of this: diagnostics_mac_tx_ucast_fail
+      return diagnostics_mac_tx_ucast_fail_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_RX_BCAST_ENUM_NAME_AVAILABLE
+    if (262 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_rx_bcast instead of this: diagnostics_aps_rx_bcast
+      return diagnostics_aps_rx_bcast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_BCAST_ENUM_NAME_AVAILABLE
+    if (263 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_bcast instead of this: diagnostics_aps_tx_bcast
+      return diagnostics_aps_tx_bcast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_RX_UCAST_ENUM_NAME_AVAILABLE
+    if (264 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_rx_ucast instead of this: diagnostics_aps_rx_ucast
+      return diagnostics_aps_rx_ucast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_UCAST_SUCCESS_ENUM_NAME_AVAILABLE
+    if (265 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_ucast_success instead of this: diagnostics_aps_tx_ucast_success
+      return diagnostics_aps_tx_ucast_success_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_UCAST_RETRY_ENUM_NAME_AVAILABLE
+    if (266 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_ucast_retry instead of this: diagnostics_aps_tx_ucast_retry
+      return diagnostics_aps_tx_ucast_retry_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_TX_UCAST_FAIL_ENUM_NAME_AVAILABLE
+    if (267 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_tx_ucast_fail instead of this: diagnostics_aps_tx_ucast_fail
+      return diagnostics_aps_tx_ucast_fail_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_ROUTE_DISC_INITIATED_ENUM_NAME_AVAILABLE
+    if (268 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsroute_disc_initiated instead of this: diagnostics_route_disc_initiated
+      return diagnostics_route_disc_initiated_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NEIGHBOR_ADDED_ENUM_NAME_AVAILABLE
+    if (269 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsneighbor_added instead of this: diagnostics_neighbor_added
+      return diagnostics_neighbor_added_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NEIGHBOR_REMOVED_ENUM_NAME_AVAILABLE
+    if (270 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsneighbor_removed instead of this: diagnostics_neighbor_removed
+      return diagnostics_neighbor_removed_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NEIGHBOR_STALE_ENUM_NAME_AVAILABLE
+    if (271 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsneighbor_stale instead of this: diagnostics_neighbor_stale
+      return diagnostics_neighbor_stale_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_JOIN_INDICATION_ENUM_NAME_AVAILABLE
+    if (272 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsjoin_indication instead of this: diagnostics_join_indication
+      return diagnostics_join_indication_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_CHILD_MOVED_ENUM_NAME_AVAILABLE
+    if (273 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticschild_moved instead of this: diagnostics_child_moved
+      return diagnostics_child_moved_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NWKFC_FAILURE_ENUM_NAME_AVAILABLE
+    if (274 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsnwkfc_failure instead of this: diagnostics_nwkfc_failure
+      return diagnostics_nwkfc_failure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APSFC_FAILURE_ENUM_NAME_AVAILABLE
+    if (275 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsapsfc_failure instead of this: diagnostics_apsfc_failure
+      return diagnostics_apsfc_failure_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_UNAUTHORIZED_KEY_ENUM_NAME_AVAILABLE
+    if (276 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_unauthorized_key instead of this: diagnostics_aps_unauthorized_key
+      return diagnostics_aps_unauthorized_key_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_NWK_DECRYPT_FAILURES_ENUM_NAME_AVAILABLE
+    if (277 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsnwk_decrypt_failures instead of this: diagnostics_nwk_decrypt_failures
+      return diagnostics_nwk_decrypt_failures_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_APS_DECRYPT_FAILURES_ENUM_NAME_AVAILABLE
+    if (278 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaps_decrypt_failures instead of this: diagnostics_aps_decrypt_failures
+      return diagnostics_aps_decrypt_failures_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES_ENUM_NAME_AVAILABLE
+    if (279 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticspacket_buffer_allocate_failures instead of this: diagnostics_packet_buffer_allocate_failures
+      return diagnostics_packet_buffer_allocate_failures_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_RELAYED_UCAST_ENUM_NAME_AVAILABLE
+    if (280 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsrelayed_ucast instead of this: diagnostics_relayed_ucast
+      return diagnostics_relayed_ucast_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED_ENUM_NAME_AVAILABLE
+    if (281 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsphy_tomac_queue_limit_reached instead of this: diagnostics_phy_tomac_queue_limit_reached
+      return diagnostics_phy_tomac_queue_limit_reached_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT_ENUM_NAME_AVAILABLE
+    if (282 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticspacket_validate_drop_count instead of this: diagnostics_packet_validate_drop_count
+      return diagnostics_packet_validate_drop_count_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT_ENUM_NAME_AVAILABLE
+    if (283 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaveragemac_retry_peraps_message_sent instead of this: diagnostics_averagemac_retry_peraps_message_sent
+      return diagnostics_averagemac_retry_peraps_message_sent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_LAST_MESSAGELQI_ENUM_NAME_AVAILABLE
+    if (284 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticslast_messagelqi instead of this: diagnostics_last_messagelqi
+      return diagnostics_last_messagelqi_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DIAGNOSTICS_LAST_MESSAGERSSI_ENUM_NAME_AVAILABLE
+    if (285 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticslast_messagerssi instead of this: diagnostics_last_messagerssi
+      return diagnostics_last_messagerssi_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64769 == cluster_id) {
+  #ifdef PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_ENABLED_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: protocol_controller_rf_telemetrytx_report_enabled instead of this: protocol_controller_rf_telemetry_tx_report_enabled
+      return protocol_controller_rf_telemetry_tx_report_enabled_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: protocol_controller_rf_telemetrypti_enabled instead of this: protocol_controller_rf_telemetry_pti_enabled
+      return protocol_controller_rf_telemetry_pti_enabled_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64770 == cluster_id) {
+  #ifdef STATE_ENDPOINT_ID_LIST_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: stateendpoint_id_list instead of this: state_endpoint_id_list
+      return state_endpoint_id_list_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64771 == cluster_id) {
+  #ifdef BINDING_BINDING_TABLE_FULL_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: bindingbinding_table_full instead of this: binding_binding_table_full
+      return binding_binding_table_full_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BINDING_BINDABLE_CLUSTER_LIST_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: bindingbindable_cluster_list instead of this: binding_bindable_cluster_list
+      return binding_bindable_cluster_list_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BINDING_BINDING_TABLE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: bindingbinding_table instead of this: binding_binding_table
+      return binding_binding_table_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64772 == cluster_id) {
+  #ifdef SYSTEM_METRICS_REPORTING_INTERVAL_SECONDS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsreporting_interval_seconds instead of this: system_metrics_reporting_interval_seconds
+      return system_metrics_reporting_interval_seconds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_usage_percent instead of this: system_metrics_cpu_usage_percent
+      return system_metrics_cpu_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_FREQUENCYM_HZ_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_frequencym_hz instead of this: system_metrics_cpu_frequencym_hz
+      return system_metrics_cpu_frequencym_hz_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_average_usage_percent instead of this: system_metrics_cpu_average_usage_percent
+      return system_metrics_cpu_average_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_min_usage_percent instead of this: system_metrics_cpu_min_usage_percent
+      return system_metrics_cpu_min_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (20 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscpu_max_usage_percent instead of this: system_metrics_cpu_max_usage_percent
+      return system_metrics_cpu_max_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_RAM_TOTALMB_ENUM_NAME_AVAILABLE
+    if (32 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsram_totalmb instead of this: system_metrics_ram_totalmb
+      return system_metrics_ram_totalmb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_RAM_FREEMB_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsram_freemb instead of this: system_metrics_ram_freemb
+      return system_metrics_ram_freemb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_RAM_AVAILABLEMB_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsram_availablemb instead of this: system_metrics_ram_availablemb
+      return system_metrics_ram_availablemb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_SWAP_MEMORY_TOTALMB_ENUM_NAME_AVAILABLE
+    if (35 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsswap_memory_totalmb instead of this: system_metrics_swap_memory_totalmb
+      return system_metrics_swap_memory_totalmb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_SWAP_MEMORY_USEDMB_ENUM_NAME_AVAILABLE
+    if (36 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsswap_memory_usedmb instead of this: system_metrics_swap_memory_usedmb
+      return system_metrics_swap_memory_usedmb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_VIRTUAL_MEMORY_TOTALMB_ENUM_NAME_AVAILABLE
+    if (37 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsvirtual_memory_totalmb instead of this: system_metrics_virtual_memory_totalmb
+      return system_metrics_virtual_memory_totalmb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_VIRTUAL_MEMORY_USEDMB_ENUM_NAME_AVAILABLE
+    if (38 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsvirtual_memory_usedmb instead of this: system_metrics_virtual_memory_usedmb
+      return system_metrics_virtual_memory_usedmb_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_DISKS_USAGE_ENUM_NAME_AVAILABLE
+    if (39 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsdisks_usage instead of this: system_metrics_disks_usage
+      return system_metrics_disks_usage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_DISKS_COUNTERS_ENUM_NAME_AVAILABLE
+    if (40 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsdisks_counters instead of this: system_metrics_disks_counters
+      return system_metrics_disks_counters_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_NETWORK_INTERFACES_DATA_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsnetwork_interfaces_data instead of this: system_metrics_network_interfaces_data
+      return system_metrics_network_interfaces_data_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_WIRELESS_NETWORK_INTERFACES_DATA_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricswireless_network_interfaces_data instead of this: system_metrics_wireless_network_interfaces_data
+      return system_metrics_wireless_network_interfaces_data_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_HOSTNAME_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricshostname instead of this: system_metrics_hostname
+      return system_metrics_hostname_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_FQDN_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsfqdn instead of this: system_metrics_fqdn
+      return system_metrics_fqdn_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_UPTIME_MINUTES_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsuptime_minutes instead of this: system_metrics_uptime_minutes
+      return system_metrics_uptime_minutes_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_CURRENT_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (80 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricscurrent_temperature_celcius instead of this: system_metrics_current_temperature_celcius
+      return system_metrics_current_temperature_celcius_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_AVERAGE_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (81 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsaverage_temperature_celcius instead of this: system_metrics_average_temperature_celcius
+      return system_metrics_average_temperature_celcius_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_MIN_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (82 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsmin_temperature_celcius instead of this: system_metrics_min_temperature_celcius
+      return system_metrics_min_temperature_celcius_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_MAX_TEMPERATURE_CELCIUS_ENUM_NAME_AVAILABLE
+    if (83 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsmax_temperature_celcius instead of this: system_metrics_max_temperature_celcius
+      return system_metrics_max_temperature_celcius_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_POWER_PLUGGED_ENUM_NAME_AVAILABLE
+    if (96 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricspower_plugged instead of this: system_metrics_power_plugged
+      return system_metrics_power_plugged_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_BATTERY_PERCENTAGE_ENUM_NAME_AVAILABLE
+    if (97 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricsbattery_percentage instead of this: system_metrics_battery_percentage
+      return system_metrics_battery_percentage_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SYSTEM_METRICS_SYSTEM_INTERRUPTS_ENUM_NAME_AVAILABLE
+    if (112 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: system_metricssystem_interrupts instead of this: system_metrics_system_interrupts
+      return system_metrics_system_interrupts_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64773 == cluster_id) {
+  #ifdef APPLICATION_MONITORING_APPLICATION_NAME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_name instead of this: application_monitoring_application_name
+      return application_monitoring_application_name_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATION_VERSION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_version instead of this: application_monitoring_application_version
+      return application_monitoring_application_version_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATION_CONNECTED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_connected instead of this: application_monitoring_application_connected
+      return application_monitoring_application_connected_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationmqtt_topics instead of this: application_monitoring_applicationmqtt_topics
+      return application_monitoring_applicationmqtt_topics_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_UPTIME_MINUTES_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringuptime_minutes instead of this: application_monitoring_uptime_minutes
+      return application_monitoring_uptime_minutes_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_PROCESS_ID_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringprocess_id instead of this: application_monitoring_process_id
+      return application_monitoring_process_id_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_HOSTNAME_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringhostname instead of this: application_monitoring_hostname
+      return application_monitoring_hostname_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_FQDN_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringfqdn instead of this: application_monitoring_fqdn
+      return application_monitoring_fqdn_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_LOGGING_ENABLED_ENUM_NAME_AVAILABLE
+    if (33 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_logging_enabled instead of this: application_monitoring_mqtt_logging_enabled
+      return application_monitoring_mqtt_logging_enabled_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_LOGGING_LEVEL_ENUM_NAME_AVAILABLE
+    if (34 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_logging_level instead of this: application_monitoring_mqtt_logging_level
+      return application_monitoring_mqtt_logging_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS_ENUM_NAME_AVAILABLE
+    if (48 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_statistics_reporting_interval_seconds instead of this: application_monitoring_mqtt_statistics_reporting_interval_seconds
+      return application_monitoring_mqtt_statistics_reporting_interval_seconds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MESSAGES_SENT_ENUM_NAME_AVAILABLE
+    if (49 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_messages_sent instead of this: application_monitoring_mqtt_messages_sent
+      return application_monitoring_mqtt_messages_sent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MESSAGES_RECEIVED_ENUM_NAME_AVAILABLE
+    if (50 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_messages_received instead of this: application_monitoring_mqtt_messages_received
+      return application_monitoring_mqtt_messages_received_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT_ENUM_NAME_AVAILABLE
+    if (51 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_subscription_count instead of this: application_monitoring_mqtt_subscription_count
+      return application_monitoring_mqtt_subscription_count_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_AVERAGE_DELIVERY_TIME_SECONDS_ENUM_NAME_AVAILABLE
+    if (52 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_average_delivery_time_seconds instead of this: application_monitoring_mqtt_average_delivery_time_seconds
+      return application_monitoring_mqtt_average_delivery_time_seconds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MIN_DELIVERY_TIME_SECONDS_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_min_delivery_time_seconds instead of this: application_monitoring_mqtt_min_delivery_time_seconds
+      return application_monitoring_mqtt_min_delivery_time_seconds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_MQTT_MAX_DELIVERY_TIME_SECONDS_ENUM_NAME_AVAILABLE
+    if (54 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringmqtt_max_delivery_time_seconds instead of this: application_monitoring_mqtt_max_delivery_time_seconds
+      return application_monitoring_mqtt_max_delivery_time_seconds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS_ENUM_NAME_AVAILABLE
+    if (64 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_statistics_reporting_interval_seconds instead of this: application_monitoring_application_statistics_reporting_interval_seconds
+      return application_monitoring_application_statistics_reporting_interval_seconds_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (65 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_usage_percent instead of this: application_monitoring_applicationcpu_usage_percent
+      return application_monitoring_applicationcpu_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (66 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_average_usage_percent instead of this: application_monitoring_applicationcpu_average_usage_percent
+      return application_monitoring_applicationcpu_average_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (67 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_min_usage_percent instead of this: application_monitoring_applicationcpu_min_usage_percent
+      return application_monitoring_applicationcpu_min_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+    if (68 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_max_usage_percent instead of this: application_monitoring_applicationcpu_max_usage_percent
+      return application_monitoring_applicationcpu_max_usage_percent_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB_ENUM_NAME_AVAILABLE
+    if (69 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationram_usagemb instead of this: application_monitoring_applicationram_usagemb
+      return application_monitoring_applicationram_usagemb_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64774 == cluster_id) {
+  #ifdef NAME_AND_LOCATION_NAME_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: name_and_locationname instead of this: name_and_location_name
+      return name_and_location_name_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef NAME_AND_LOCATION_LOCATION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: name_and_locationlocation instead of this: name_and_location_location
+      return name_and_location_location_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64775 == cluster_id) {
+  #ifdef CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: configuration_parametersconfiguration_parameters instead of this: configuration_parameters_configuration_parameters
+      return configuration_parameters_configuration_parameters_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64784 == cluster_id) {
+  #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorreporting_mode instead of this: aox_locator_reporting_mode
+      return aox_locator_reporting_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorposition_and_orientation_valid instead of this: aox_locator_position_and_orientation_valid
+      return aox_locator_position_and_orientation_valid_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_POSITION_AND_ORIENTATION_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorposition_and_orientation instead of this: aox_locator_position_and_orientation
+      return aox_locator_position_and_orientation_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_AZIMUTH_MASK_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorazimuth_mask instead of this: aox_locator_azimuth_mask
+      return aox_locator_azimuth_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ELEVATION_MASK_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorelevation_mask instead of this: aox_locator_elevation_mask
+      return aox_locator_elevation_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ALLOW_LIST_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorallow_list instead of this: aox_locator_allow_list
+      return aox_locator_allow_list_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_AOX_MODE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatoraox_mode instead of this: aox_locator_aox_mode
+      return aox_locator_aox_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANTENNA_MODE_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorantenna_mode instead of this: aox_locator_antenna_mode
+      return aox_locator_antenna_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANTENNA_ARRAY_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorantenna_array instead of this: aox_locator_antenna_array
+      return aox_locator_antenna_array_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_PERIOD_SAMPLES_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorperiod_samples instead of this: aox_locator_period_samples
+      return aox_locator_period_samples_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_FILTERING_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_filtering instead of this: aox_locator_angle_filtering
+      return aox_locator_angle_filtering_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_FILTERING_WEIGHT_ENUM_NAME_AVAILABLE
+    if (13 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_filtering_weight instead of this: aox_locator_angle_filtering_weight
+      return aox_locator_angle_filtering_weight_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT_ENUM_NAME_AVAILABLE
+    if (14 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_correction_timeout instead of this: aox_locator_angle_correction_timeout
+      return aox_locator_angle_correction_timeout_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_ANGLE_CORRECTION_DELAY_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorangle_correction_delay instead of this: aox_locator_angle_correction_delay
+      return aox_locator_angle_correction_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorcte_mode instead of this: aox_locator_cte_mode
+      return aox_locator_cte_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_CTE_SAMPLING_INTERVAL_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorcte_sampling_interval instead of this: aox_locator_cte_sampling_interval
+      return aox_locator_cte_sampling_interval_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_CTE_LENGTH_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorcte_length instead of this: aox_locator_cte_length
+      return aox_locator_cte_length_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef AOX_LOCATOR_SLOT_DURATION_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_locatorslot_duration instead of this: aox_locator_slot_duration
+      return aox_locator_slot_duration_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64785 == cluster_id) {
+  #ifdef AOX_POSITION_ESTIMATION_POSITION_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: aox_position_estimationposition instead of this: aox_position_estimation_position
+      return aox_position_estimation_position_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64786 == cluster_id) {
+  #ifdef PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: protocol_controller_network_managementnetwork_management_state instead of this: protocol_controller_network_management_network_management_state
+      return protocol_controller_network_management_network_management_state_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // C Wrapper
 extern "C" {
 char *aox_locator_antenna_mode_get_enum_value_name_c(
@@ -6313,39 +15009,6 @@ char *squawk_configuration_squawk_mode_get_enum_value_name_c(
 uint32_t squawk_configuration_squawk_mode_get_enum_value_number_c(const char *str)
 {
   return squawk_configuration_squawk_mode_get_enum_value_number(std::string(str));
-}
-char *tl_key_index_get_enum_value_name_c(
-  uint32_t value, char *result, size_t max_result_size)
-{
-  snprintf(result, max_result_size, "%s", tl_key_index_get_enum_value_name(value).c_str());
-  return result;
-}
-
-uint32_t tl_key_index_get_enum_value_number_c(const char *str)
-{
-  return tl_key_index_get_enum_value_number(std::string(str));
-}
-char *tl_status_get_enum_value_name_c(
-  uint32_t value, char *result, size_t max_result_size)
-{
-  snprintf(result, max_result_size, "%s", tl_status_get_enum_value_name(value).c_str());
-  return result;
-}
-
-uint32_t tl_status_get_enum_value_number_c(const char *str)
-{
-  return tl_status_get_enum_value_number(std::string(str));
-}
-char *tl_zigbee_information_logical_type_get_enum_value_name_c(
-  uint32_t value, char *result, size_t max_result_size)
-{
-  snprintf(result, max_result_size, "%s", tl_zigbee_information_logical_type_get_enum_value_name(value).c_str());
-  return result;
-}
-
-uint32_t tl_zigbee_information_logical_type_get_enum_value_number_c(const char *str)
-{
-  return tl_zigbee_information_logical_type_get_enum_value_number(std::string(str));
 }
 char *thermostatac_capacity_format_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)

@@ -8,75 +8,75 @@ def ep 0x00000004
 def zwINDICATOR_ID 0x00008703
 def zwPROPERTY_BIT_MASK 0x00008705
 
-def logic_soft_wall_switch ((r'zwMANUFACTURER_ID == 0x0234) & (r'zwPRODUCT_TYPE_ID == 0x3) & (r'zwPRODUCT_ID == 0x010A))
+def logic_soft_wall_switch ((r'ep[0].zwMANUFACTURER_ID == 0x0234) & (r'ep[0].zwPRODUCT_TYPE_ID == 0x3) & (r'ep[0].zwPRODUCT_ID == 0x010A))
 
-scope 0 {
+// Here we operate from the NodeID level, we want to map accross endpoints.
+scope 0 common_parent_type(3) {
 
 // Shortcut Endpoints Indicator Capabilities, they are broken and redundant from
 // the root device.
 
-r'^.ep[1].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+r'ep[1].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[1].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+r'ep[1].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[1].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+r'ep[1].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[1].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+r'ep[1].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[2].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+r'ep[2].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[2].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+r'ep[2].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[2].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+r'ep[2].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[2].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+r'ep[2].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[3].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+r'ep[3].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[3].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+r'ep[3].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[3].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+r'ep[3].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[3].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+r'ep[3].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[4].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+r'ep[4].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[4].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+r'ep[4].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[4].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+r'ep[4].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
 
-r'^.ep[4].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+r'ep[4].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined
-
 }

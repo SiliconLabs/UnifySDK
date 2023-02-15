@@ -1,42 +1,70 @@
 # Unify Build Guide
 
-This document is intended for systems integrators who are trying to cross-compile the Unify components. This guide explains how to build Debian packages for the Raspberry Pi.
+This document is intended for systems integrators who are trying to
+cross-compile the Unify components. This guide explains how to build Debian
+packages for the Raspberry Pi.
 
-For a list of build dependencies please refer to the [Dockerfile](../docker/Dockerfile)
+For a list of build dependencies please refer to the
+[Dockerfile](../docker/Dockerfile). We are introducing an experiemental way to
+build which is Nix. You can find the instructions in
+[readme_nix.md](readme_nix.md).
+
+```{toctree}
+---
+maxdepth: 2
+titlesonly:
+hidden:
+---
+readme_nix.md
+```
 
 ## Build Instructions
 
 The Unify Host SDK uses a docker container to provide an appropriate build environment.
-As a prerequisite docker must be installed on the build host. See
-[readme.md](../docker/readme_developer.md) for information about how to install
-docker and build the Unify Host SDK environment.
+As a prerequisite Docker must be installed on the build host.
 
-During the build, the CMake build system will fetch additional required dependencies
-online.
+### Install Docker
+
+The following documentation explains how to install and set up Docker.
+
+- [Windows and OSX](https://www.docker.com/products/docker-desktop)
+- [Debian/Ubuntu Linux Linux](https://docs.docker.com/engine/install/ubuntu/)
+
+## Build Docker Image
+
+The *Dockerfile*  in `docker/Dockerfile` supports building all target applications
+(protocol controllers, UPVL, Developer GUI, etc.).
+To build the Docker image with support for the 64-bit Bullseye reference platform, you can run:
+
+``` bash
+./docker/build_docker.sh arm64 uic_arm64
+```
+
+This will build the Unify toolchain docker images and name it *uic_arm64*.
 
 ### Getting the source
 
 There are two ways to obtain the Unify source code, the simplest way is
 to download it from the [GitHub release assets](https://github.com/SiliconLabs/UnifySDK/releases).
 Alternatively, the source code repository can be cloned using git. Note that
-git clients need to have _git-lfs_ support.
+git clients need to have *git-lfs* support.
 
 ```bash
 git@github.com:SiliconLabs/UnifySDK.git
 ```
 
+> Note: During the build, the CMake build system will fetch additional required dependencies
+online.
+
 ### Cross Compiling for Raspberry Pi Using Docker
 
-> The Raspberry Pi build is supported by Raspberry Pi OS Buster.
+> The Raspberry Pi build is supported by Raspberry Pi OS Bullseye 64-bit.
 
 To start a Docker container with a pre-configured build system, run the
 following command from the root of the Unify source directory
 
 ```bash
-docker run -it --rm \
-  -v`pwd`:`pwd` \
-  -w `pwd` \
-  uic_armhf
+docker run -it --rm -v $PWD:$PWD -w $PWD uic_arm64
 ```
 
 Once the Docker container is started, a new prompt will be shown. Building
@@ -45,14 +73,15 @@ binaries and Debian packages is done as follows:
 ```bash
 mkdir build
 cd build
-cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../cmake/armhf_debian.cmake ..
+cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../cmake/arm64_debian.cmake ..
 ninja               # Build binaries
 ninja deb           # Build Debian Installers (optional)
 ```
 
-After running this, the `zpc` binary is located in `./applications/zpc/zpc`. The
-Debian installer path are directly in the build folder
-`./uic-<component>_<version>_armhf.deb` and `./libuic_<version>_armhf.deb`
+After running this, the `zpc` binary is located in `./build/applications/zpc/zpc`.
+
+The Debian packages are available at `./build/_CPack_Packages/Linux/DEB/uic-<component>_<version>_arm64.deb`
+or as a Zip of all the Debian packages at `./build/deb-packages/unify_<version>_arm64.zip`.
 
 ### Disabling the build of a Unify Application
 
@@ -71,20 +100,20 @@ For e.g. to disable build for ZigPC following command can be used.
 ### Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host
 
 When cross compiling the Unify, the unit tests are build for the target platform ie
-`armhf`. Using QEMU it is possible to run those binaries directly within Docker on the
+`arm64`. Using QEMU it is possible to run those binaries directly within Docker on the
 Host machine.
 
 To enable running the unit tests inside Docker on the Host machine, run the
 following command in the Host (not within the docker container).
 
 ``` bash
-docker run --user 0 --privileged --rm -it uic_armhf update-binfmts --enable
+docker run --user 0 --privileged --rm -it uic_arm64 update-binfmts --enable
 ```
 
 > NB: This command needs to be run once after each restart of the Host machine.
 
 After enabling this, unit tests can be run by issuing the following command in
-the `uic_armhf` docker image in the build directory:
+the `uic_arm64` docker image in the build directory:
 
 ```bash
 ninja test
@@ -113,15 +142,15 @@ to parts of the filesystem. The default path for writing files is
   After running `ninja` inside the Docker container you may explore a lot of
   `expected primary expression before 'case:'` errors. This is because of Windows
   line endings (CRLF vs Linux's CR-only).
-  
+
   Workaround: run in your repository folder
-  
+
   ``` sh
   git config --global core.autocrlf input
   git rm --cached -r .
   git reset --hard
   ```
-  
+
   Explanations:
   [Stackoverflow solution](https://stackoverflow.com/questions/1967370/git-replacing-lf-with-crlf).
 
@@ -129,32 +158,32 @@ to parts of the filesystem. The default path for writing files is
 
   ``` sh
   user@winmachine MINGW64 ~/path/to/UnifySDK (main)
-  $ winpty docker run -it --rm  -v`pwd`:`pwd` -w `pwd` uic_armhf
+  $ winpty docker run -it --rm  -v $PWD:$PWD -w $PWD uic_arm64
   docker: Error response from daemon: the working directory 'C:/path/to/UnifySDK' is invalid, it needs to be an absolute path.
   See 'docker run --help'.
   ```
-  
-  Workaround: add the `/` symbol before `pwd`:
-  
+
+  Workaround: add the `/` symbol before $PWD:
+
   ``` sh
   user@winmachine MINGW64 ~/path/to/UnifySDK (main)
-  $ winpty docker run -it --rm  -v/`pwd`:/`pwd` -w /`pwd` uic_armhf
+  $ winpty docker run -it --rm  -v/$PWD:/$PWD -w /$PWD uic_arm64
   user@dockercontainer:/c/path/to/UnifySDK$
   ```
-  
+
   Explanation:
   [Stackoverflow solution](https://stackoverflow.com/questions/40213524/using-absolute-path-with-docker-run-command-not-working#comment109755641_40214650).
-  
+
 - _"winpty" issue_
 
   ``` sh
   user@winmachine MINGW64 ~/path/to/UnifySDK (main)
-  $ docker run -it --rm  -v`pwd`:`pwd` -w `pwd` uic_armhf
+  $ docker run -it --rm  -v $PWD:$PWD -w $PWD uic_arm64
   the input device is not a TTY.  If you are using mintty, try prefixing the command with 'winpty'
   ```
-  
+
   Workaround: add a `winpty` prefix to the command:
-  
+
   ``` sh
-  winpty docker run -it --rm  -v`pwd`:`pwd` -w `pwd` uic_armhf
+  winpty docker run -it --rm  -v $PWD:$PWD -w $PWD uic_arm64
   ```

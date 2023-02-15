@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UPVL User’s Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -83,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -143,7 +149,7 @@ configure the MQTT broker Hostname or IP, UPVL database path, through command li
 options. For more details about the options, run <code class="docutils literal notranslate"><span class="pre">uic-upvl</span> <span class="pre">--help</span></code>.</p>
 <p>Make sure that you do not run the UPVL both as a service and using the
 command line.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service uic-upvl status
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service<span class="w"> </span>uic-upvl<span class="w"> </span>status
 <span class="go">● uic-upvl.service - Unify Framework Provisioning List</span>
 <span class="go">     Loaded: loaded (/lib/systemd/system/uic-upvl.service; enabled; vendor preset: enabled)</span>
 <span class="go">     Active: active (running) since Tue 2022-02-01 13:32:57 CET; 20h ago</span>
@@ -167,7 +173,7 @@ command line.</p>
 </div>
 <p>If the service is running, stop it using the following command before
 you run the application manually:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service uic-upvl stop
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service<span class="w"> </span>uic-upvl<span class="w"> </span>stop
 </pre></div>
 </div>
 </section>
@@ -176,7 +182,7 @@ you run the application manually:</p>
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p><em>Inclusion of a device keeps failing</em> try to reset the UPVL database:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl stop uic-upvl <span class="o">&amp;&amp;</span> rm /var/lib/uic/upvl.db <span class="o">&amp;&amp;</span> sudo systemctl start uic-upvl
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>uic-upvl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>/var/lib/uic/upvl.db<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-upvl
 </pre></div>
 </div>
 </li>
@@ -189,7 +195,7 @@ you run the application manually:</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

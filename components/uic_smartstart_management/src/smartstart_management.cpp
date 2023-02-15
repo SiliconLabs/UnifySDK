@@ -69,9 +69,10 @@ static void smartstart_management_on_list_update(const char *topic,
                                                  const size_t message_length)
 {
   sl_log_debug(LOG_TAG,
-               "SmartStart management received Topic: %s update: %s\n",
+               "SmartStart management received topic update at %s. "
+               "Message length %d\n",
                topic,
-               message);
+               message_length);
   if (message == nullptr || message_length == 0) {
     return;
   }
@@ -259,7 +260,11 @@ sl_status_t
   bool has_entries_awaiting_inclusion = false;
 
   try {
-    nlohmann::json jsn   = nlohmann::json::parse(smartstart_list);
+    nlohmann::basic_json jsn = nlohmann::json::parse(smartstart_list);
+    if (0 == jsn.count("value")) {
+      sl_log_warning(LOG_TAG, "No value for the SmartStart list.");
+      return SL_STATUS_FAIL;
+    }
     nlohmann::json value = jsn["value"];
 
     for (auto &element: value) {
@@ -300,6 +305,7 @@ sl_status_t
         sl_log_warning(LOG_TAG,
                        "Failed to parse SmartStart entry, skipping entry: %s\n",
                        err.what());
+        return SL_STATUS_FAIL;
       }
     }
   } catch (std::exception &err) {

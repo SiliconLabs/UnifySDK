@@ -135,15 +135,19 @@ a CLI prompt will appear.
 
 ## OpenThread Border Router
 
-To run the OpenThread Border Router (OTBR), start the `otbr-agent` service:
+To run the OpenThread Border Router (OTBR), start the `uic-otbr` service:
 
 ```console
-pi@raspberrypi:~ $ sudo systemctl start otbr-agent
+pi@raspberrypi:~ $ sudo systemctl start uic-otbr
 ```
 
-As usual, verify that it is running using `systemctl status`. Next, run the
+Verify that the 'otbr-agent' service is running using `systemctl status`. Next, run the
 `ot-ctl` CLI application.  This connects to OTBR and provides a CLI for
 entering OpenThread commands:
+
+Alternatively, verify that the 'otbr-web' service is running using `systemctl status`. Next, connect to the host
+using a web browser to access the OTBR Web UI application. This provides a visual interface to configure a set of
+network operations in conjunction with the `ot-ctl` CLI.
 
 ```console
 pi@raspberrypi:~ $ sudo ot-ctl

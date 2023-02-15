@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Guide to UAM files" name="description" />
+<meta content="Mapper, UAM, Mapping" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to write UAM files &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/how_to_write_uam_files.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to develop a Protocol Controller" href="how_to_develop_a_protocol_controller.html" />
+    <link rel="prev" title="Unify Library Overview" href="unify_library_overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readme_building.html">Unify Build Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_cmake.html">CMake Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_debug.html">Unify Debugging Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_rust.html">Unify Rust Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html#base-platform">Base Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html#test-framework">Test Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html#build-system">Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html#packaging-framework">Packaging Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html#coding-standard">Coding Standard</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="unify_library_overview.html#how-tos">How To’s</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to write UAM files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="how_to_develop_a_protocol_controller.html">How to develop a Protocol Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="how_to_develop_an_iot_service.html">How To Make an IoT Service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-write-uam-files">
+<span id="how-to-write-uam-files-section"></span><h1>How to write UAM files<a class="headerlink" href="#how-to-write-uam-files" title="Permalink to this heading"></a></h1>
+<p>The attribute mapper is a component that allows to define relations between
+attributes stored in the Attribute Store. It can be used for mapping, as
+well as easily adding logic around attributes.</p>
+<section id="syntax-highlighting">
+<h2>Syntax highlighting<a class="headerlink" href="#syntax-highlighting" title="Permalink to this heading"></a></h2>
+<p>To make developer easier, we recommend that you enable some syntax highlighting
+for the UAM files. A VSCode extension configuration is provided in the mapper
+component folder: <code class="docutils literal notranslate"><span class="pre">components/uic_attribute_mapper/vscode-extension</span></code>.</p>
+<p>No binaries are distributed, but can be generated using vsce.
+To enable it, navigate to the folder, and generate the package:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~/unify $ </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>vsce
+<span class="gp">pi@raspberrypi:~/unify $ </span><span class="nb">cd</span><span class="w"> </span>./components/uic_attribute_mapper/vscode-extension
+<span class="gp">pi@raspberrypi:~/unify/components/uic_attribute_mapper/vscode-extension $ </span>vsce<span class="w"> </span>package
+<span class="go">WARNING  LICENSE.md, LICENSE.txt or LICENSE not found</span>
+<span class="go">Do you want to continue? [y/N] y</span>
+<span class="go">DONE  Packaged: ~/unify/components/uic_attribute_mapper/vscode-extension/attribute-mapper-0.2.0.vsix (7 files, 3.23KB)</span>
+</pre></div>
+</div>
+<p>Afterwards the <code class="docutils literal notranslate"><span class="pre">attribute-mapper-0.2.0.vsix</span></code> file can be installed in VSCode
+using the command palette <em>(Ctrl+Shift+P)</em>, select <code class="docutils literal notranslate"><span class="pre">&quot;Install</span> <span class="pre">from</span> <span class="pre">VSIX&quot;</span></code> and
+provide the path to the generated extension.</p>
+</section>
+<section id="path-configuration">
+<h2>Path Configuration<a class="headerlink" href="#path-configuration" title="Permalink to this heading"></a></h2>
+<p>To enable the Attribute Mapper with user-defined <em>uam</em> files, it needs to be
+initialized and provided with a directory name containing a set of <em>.uam</em>
+files.</p>
+<p>For example, using an application like the
+<a class="reference internal" href="how_to_develop_a_protocol_controller.html"><span class="doc">Example Protocol Controller</span></a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>./applications/epc/epc<span class="w"> </span>--mapdir<span class="w"> </span>/path/to/uam/files/
+</pre></div>
+</div>
+</section>
+<section id="attribute-type-registration">
+<h2>Attribute Type registration<a class="headerlink" href="#attribute-type-registration" title="Permalink to this heading"></a></h2>
+The mapper allows to manipulate attributes that are stored as numerical values,
+as long as they are registered to the Attribute Store using the
+<a href="../doxygen_uic/group__attribute__store__type__registration.html">
+  attribute_store_register_type API
+</a>.<p>Attribute types not registered to the Attribute Store will be treated as
+32-bit signed integer values.</p>
+</section>
+<section id="uam-file-structure-and-syntax">
+<h2>UAM File structure and syntax<a class="headerlink" href="#uam-file-structure-and-syntax" title="Permalink to this heading"></a></h2>
+<p>A uam file template could be as follow. It contains a set of definitions and a
+scope. The scope itself contains a set of assignments.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// this is a comment</span>
+
+<span class="nb">def</span> <span class="ow">&lt;</span><span class="no">name1</span><span class="ow">&gt;</span> <span class="no">expression</span>
+<span class="nb">def</span> <span class="ow">&lt;</span><span class="no">name2</span><span class="ow">&gt;</span> <span class="no">expression</span>
+
+<span class="nb">scope</span> <span class="no">0</span> <span class="ow">&lt;</span><span class="no">settings</span><span class="ow">&gt;</span> {
+  <span class="ow">&lt;</span><span class="no">attribute1</span><span class="ow">&gt;</span> <span class="o">=</span> <span class="ow">&lt;</span><span class="no">expression1</span><span class="ow">&gt;</span>
+  <span class="ow">&lt;</span><span class="no">attribute2</span><span class="ow">&gt;</span> <span class="o">=</span> <span class="ow">&lt;</span><span class="no">expression2</span><span class="ow">&gt;</span>
+}
+</pre></div>
+</div>
+<p>The mapper can identify the following “value states” for each attribute:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">r</span></code> for reported value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">d</span></code> for desired value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code> for the existence of the attribute.
+(evaluates to true/false depending on if the attribute exists)</p></li>
+</ul>
+<p>The value states must be used in front of attribute types, using a <code class="docutils literal notranslate"><span class="pre">'</span></code> character.
+To perform an assignment, the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign must be used.
+For example, if the reported value of attribute type 1 should take the
+desired value of attribute type 2, the following expression can be used:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nv">r&#39;1</span> <span class="o">=</span> <span class="nv">d&#39;2</span>
+</pre></div>
+</div>
+<p>The mapper constantly monitor attribute updates, so whenever
+the desired value of attribute 2 is updated, the reported value of attribute
+1 will be adjusted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Assignments to reported values will trigger attribute creations
+in the attribute store.</p>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">r'1</span> <span class="pre">=</span> <span class="pre">r'2</span></code> will create attribute type 1 and set its reported value
+if it does not exist.</p>
+<p>But</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">d'1</span> <span class="pre">=</span> <span class="pre">r'2</span></code> will not create attribute type 1 and set its desired value
+if it does not exist.</p></li>
+</ul>
+<section id="aliases-def">
+<h3>Aliases (def)<a class="headerlink" href="#aliases-def" title="Permalink to this heading"></a></h3>
+<p>To avoid using raw type values, the mapper allows to define value substitutions
+using the <code class="docutils literal notranslate"><span class="pre">def</span></code> keyword. For example, <code class="docutils literal notranslate"><span class="pre">r'1</span> <span class="pre">=</span> <span class="pre">d'2</span></code> above could be expressed
+as:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">def</span> <span class="no">zwave_state</span> <span class="no">1</span>
+<span class="nb">def</span> <span class="no">zigbee_state</span> <span class="no">2</span>
+<span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">r&#39;zwave_state</span> <span class="o">=</span> <span class="nv">d&#39;zigbee_state</span>
+}
+</pre></div>
+</div>
+</section>
+<section id="operators">
+<h3>Operators<a class="headerlink" href="#operators" title="Permalink to this heading"></a></h3>
+<p>Regular operators can be used to modify the value. The available operators are
+shown in
+<a class="reference internal" href="#table-attribute-mapper-available-operators"><span class="std std-numref">Table 1</span></a>.</p>
+<table class="colwidths-given docutils align-default" id="table-attribute-mapper-available-operators">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Unify Attribute Mapper available operators</span><a class="headerlink" href="#table-attribute-mapper-available-operators" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Name/Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>+</p></td>
+<td><p>Addition</p></td>
+</tr>
+<tr class="row-odd"><td><p>-</p></td>
+<td><p>Subtraction</p></td>
+</tr>
+<tr class="row-even"><td><p>*</p></td>
+<td><p>Multiplication</p></td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>Division</p></td>
+</tr>
+<tr class="row-even"><td><p>&amp;</p></td>
+<td><p>bitwise AND</p></td>
+</tr>
+<tr class="row-odd"><td><p>|</p></td>
+<td><p>bitwise OR</p></td>
+</tr>
+<tr class="row-even"><td><p>%</p></td>
+<td><p>Modulo</p></td>
+</tr>
+<tr class="row-odd"><td><p>**</p></td>
+<td><p>Exponent</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example, if a value needs to be multiplicated by 2 and incremented by 1:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">def</span> <span class="no">zwave_state</span> <span class="no">1</span>
+<span class="nb">def</span> <span class="no">zigbee_state</span> <span class="no">2</span>
+<span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">r&#39;zwave_state</span> <span class="o">=</span> ((<span class="nv">d&#39;zigbee_state</span> <span class="ow">*</span> <span class="no">2</span>) <span class="ow">+</span> <span class="no">1</span>)
+}
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is <strong>strongly recommended</strong> to use parentheses around operations, as
+little priority handling is implemented in the mapper.</p>
+</div>
+</section>
+<section id="if-and-comparison-operators">
+<h3>IF and Comparison Operators<a class="headerlink" href="#if-and-comparison-operators" title="Permalink to this heading"></a></h3>
+<p>Comparison operators are also available for in UAM maps.
+The available comparison operators are shown in
+<a class="reference internal" href="#table-attribute-mapper-available-comparison-operators"><span class="std std-numref">Table 2</span></a>.</p>
+<table class="colwidths-given docutils align-default" id="table-attribute-mapper-available-comparison-operators">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Unify Attribute Mapper available comparison operators</span><a class="headerlink" href="#table-attribute-mapper-available-comparison-operators" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Name/Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>==</p></td>
+<td><p>Equal to</p></td>
+</tr>
+<tr class="row-odd"><td><p>!=</p></td>
+<td><p>Not equal to</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;</p></td>
+<td><p>Greater than</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;</p></td>
+<td><p>Less than</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;=</p></td>
+<td><p>Less than or equal to</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;=</p></td>
+<td><p>Greater than or equal to</p></td>
+</tr>
+</tbody>
+</table>
+<p>These operators should be used with <code class="docutils literal notranslate"><span class="pre">if</span></code> statements. The <code class="docutils literal notranslate"><span class="pre">if</span></code> syntax is as
+follows: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">condition</span> <span class="pre">value_if_true</span> <span class="pre">value_if_false</span></code>.
+A switch-like statement can be made using multiple <code class="docutils literal notranslate"><span class="pre">if</span></code> statements.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="c c-Singleline">// If the desired value of attribute 2 is 0, set reported of 1 to 1</span>
+  <span class="c c-Singleline">// If the reported value of attribute 3 is 3, set reported of 1 to 2</span>
+  <span class="c c-Singleline">// if none of the previous conditions is true, set the reported of 1 to 0.</span>
+  <span class="nv">r&#39;1</span> <span class="o">=</span>
+    <span class="nb">if</span> (<span class="nv">d&#39;2</span> <span class="ow">==</span> <span class="no">0</span>) <span class="no">1</span>
+    <span class="nb">if</span> (<span class="nv">r&#39;3</span> <span class="ow">==</span> <span class="no">3</span>) <span class="no">2</span>
+    <span class="no">0</span>
+}
+</pre></div>
+</div>
+<p>Note in the example above that line breaks and indentation does not have any
+impact, and are just used for readability. The statement can be written in one
+line too. This is an example from the ZPC default maps, which determines if the
+reported value of the battery low flag should go to 1 or 0 based on the
+reported battery percentage.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// [...] Skipping def statements</span>
+<span class="nv">r&#39;zbBATTERY_LOW</span> <span class="o">=</span>
+  <span class="nb">if</span> (<span class="nv">r&#39;zwBATTERY</span> <span class="ow">&lt;</span> <span class="no">10</span>) <span class="no">1</span>
+  <span class="nb">if</span> (<span class="nv">r&#39;zwBATTERY</span> <span class="ow">==</span> <span class="no">0xFF</span>) <span class="no">1</span>
+  <span class="no">0</span>
+</pre></div>
+</div>
+<p>Note that bitwise operators <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> can be used for evaluating a set of
+boolean expressions:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nv">r&#39;1</span> <span class="o">=</span>
+  <span class="nb">if</span> ((<span class="nv">d&#39;2</span> <span class="ow">==</span> <span class="no">0</span>) <span class="ow">&amp;</span> (<span class="nv">r&#39;3</span> <span class="ow">==</span> <span class="no">3</span>)) <span class="no">12</span>
+  <span class="nb">if</span> (<span class="nv">d&#39;2</span> <span class="ow">==</span> <span class="no">0</span>) <span class="no">1</span>
+  <span class="nb">if</span> (<span class="nv">r&#39;3</span> <span class="ow">==</span> <span class="no">3</span>) <span class="no">2</span>
+  <span class="no">0</span>
+</pre></div>
+</div>
+</section>
+<section id="undefined-keyword">
+<h3>undefined keyword<a class="headerlink" href="#undefined-keyword" title="Permalink to this heading"></a></h3>
+<p>A special <code class="docutils literal notranslate"><span class="pre">undefined</span></code> keyword can be used to abort assignment evaluations.
+For example, to set the reported value of an attribute <strong>only if</strong> another
+attribute exists, the following map can be used:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If attribute type 2 exists, set the value to 1, else do not do anything</span>
+<span class="nv">r&#39;1</span> <span class="o">=</span>
+  <span class="nb">if</span> (<span class="nv">e&#39;2</span>) <span class="no">1</span>
+  <span class="no">undefined</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">undefined</span></code> evaluates to false in an <code class="docutils literal notranslate"><span class="pre">if</span></code> condition, so the expression
+<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(undefined)</span> <span class="pre">1</span> <span class="pre">2</span></code> will evaluate to 2.</p>
+</div>
+<p>An attribute path will evaluate to undefined if either:</p>
+<ol class="arabic simple">
+<li><p>The attribute type does not exist</p></li>
+<li><p>The value of the attribute is empty, i.e. undefined</p></li>
+</ol>
+</section>
+<section id="or-keyword">
+<h3>or keyword<a class="headerlink" href="#or-keyword" title="Permalink to this heading"></a></h3>
+<p>Additionally, a special <code class="docutils literal notranslate"><span class="pre">or</span></code> keyword can be used for fallback values,
+in case something is undefined:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If attribute type 2 has a reported value, set the reported value of 1 to this value</span>
+<span class="c c-Singleline">// else set it to the (reported value of attribute type 3) + 2</span>
+<span class="nv">r&#39;1</span> <span class="o">=</span> <span class="nv">r&#39;2</span> <span class="no">or</span> (<span class="nv">r&#39;3</span> <span class="ow">+</span> <span class="no">2</span>)
+</pre></div>
+</div>
+<p>For example <code class="docutils literal notranslate"><span class="pre">undefined</span> <span class="pre">or</span> <span class="pre">4</span></code> will evaluate to 4.</p>
+</section>
+<section id="attribute-navigation">
+<h3>Attribute navigation<a class="headerlink" href="#attribute-navigation" title="Permalink to this heading"></a></h3>
+<p>Tree navigation operators can be used to navigate the Attribute Store tree,
+for when attributes are organized in a more complicated manner. They are
+shown in <a class="reference internal" href="#table-attribute-mapper-available-navigation-operators"><span class="std std-numref">Table 3</span></a>.</p>
+<table class="colwidths-given docutils align-default" id="table-attribute-mapper-available-navigation-operators">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Unify Attribute Mapper available navigation operators</span><a class="headerlink" href="#table-attribute-mapper-available-navigation-operators" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Name/Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[]</p></td>
+<td><p>Reported value navigation</p></td>
+</tr>
+<tr class="row-odd"><td><p>.</p></td>
+<td><p>Child navigation</p></td>
+</tr>
+<tr class="row-even"><td><p>^</p></td>
+<td><p>Parent navigation</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Parent navigation operator has some known issues and may not work.</p>
+</div>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If the desired value of (attribute 3 placed under attribute 2 with reported value 1) is greater than 0, set reported of 1 to 1</span>
+<span class="nv">r&#39;1</span> <span class="o">=</span>
+  <span class="nb">if</span> (<span class="nv">d&#39;2[1].3</span> <span class="ow">&gt;</span> <span class="no">0</span>) <span class="no">1</span>
+  <span class="no">undefined</span>
+</pre></div>
+</div>
+<p>All attributes are placed under a common parent attribute type, usually
+representing an endpoint.
+For example, if trying to navigate up the tree, the parent is the endpoint
+attribute.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">def</span> <span class="no">ep</span> <span class="no">0x00000004</span>
+<span class="nb">scope</span> <span class="no">0</span> {
+  <span class="c c-Singleline">// Set the reported value of attribute 1 to the reported value of attribute 1 under endpoint ID 1 to the same value under endpoint 0.</span>
+  <span class="no">r</span>&#39;^.<span class="no">ep</span>[<span class="no">1</span>].<span class="no">1</span> <span class="o">=</span> <span class="no">r</span>&#39;^.<span class="no">ep</span>[<span class="no">0</span>].<span class="no">1</span>
+}
+</pre></div>
+</div>
+</section>
+<section id="built-in-functions">
+<h3>Built-in functions<a class="headerlink" href="#built-in-functions" title="Permalink to this heading"></a></h3>
+<p>A few built-in functions are available for usage in the UAM files.
+Functions are invoked with the following syntax:
+<code class="docutils literal notranslate"><span class="pre">fn_&lt;function_name&gt;(expression,</span> <span class="pre">expression,</span> <span class="pre">...)</span></code></p>
+<p>The following example shows the use of a function as an assignment:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="c c-Singleline">// Attribute type 1 will be the absolute value of attribute type 2</span>
+  <span class="nv">r&#39;1</span> <span class="o">=</span> <span class="no">fn_absolute_value</span>(<span class="nv">r&#39;2</span>)
+  <span class="c c-Singleline">// Attribute type 10 will be the min value between the reported value of type 2, 3 or 4</span>
+  <span class="nv">r&#39;10</span> <span class="o">=</span> <span class="no">fn_min_value</span>(<span class="nv">r&#39;2</span>,<span class="nv">r&#39;3</span>,<span class="nv">r&#39;4</span>)
+}
+</pre></div>
+</div>
+<p>The following example shows the use of a function as condition evaluation and assignment.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">r&#39;1</span> <span class="o">=</span> <span class="nb">if</span> (<span class="no">fn_is_any_undefined</span>(<span class="nv">r&#39;2</span>, <span class="nv">r&#39;3</span>, <span class="nv">r&#39;4</span>)) <span class="nv">r&#39;6</span> <span class="no">fn_min_value</span>(<span class="nv">r&#39;2</span>, (<span class="no">2</span> <span class="ow">*</span> <span class="nv">r&#39;3</span>), (<span class="no">20</span> <span class="ow">%</span> <span class="nv">r&#39;3</span>))
+}
+</pre></div>
+</div>
+The available functions can be found in the
+<a href="../doxygen_uic/group__attribute__mapper__built__in__functions__definitions.html">
+  Available Mapper built-in functions
+</a>.
+<br/><br/></section>
+<section id="scope-settings">
+<h3>Scope settings<a class="headerlink" href="#scope-settings" title="Permalink to this heading"></a></h3>
+<p>Some mapper configuration can be attached to scopes. The available settings
+are shown in <a class="reference internal" href="#table-attribute-mapper-available-scope-settings"><span class="std std-numref">Table 4</span></a>.</p>
+<table class="colwidths-given docutils align-default" id="table-attribute-mapper-available-scope-settings">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Unify Attribute Mapper available scope settings</span><a class="headerlink" href="#table-attribute-mapper-available-scope-settings" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 17%" />
+<col style="width: 25%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Setting Name</p></th>
+<th class="head"><p>Default value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#how-to-write-uam-files-clear-desired-subsection"><span class="std std-ref">Automatic desired value clearance</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">clear_desired</span></code></p></td>
+<td><p>1</p></td>
+<td><p>Controls if the desired value gets</p>
+<p>undefined automatically during mappings.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#how-to-write-uam-files-chain-reaction-subsection"><span class="std std-ref">Chain reaction evaluations</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chain_reaction</span></code></p></td>
+<td><p>1</p></td>
+<td><p>Controls if the Attribute Mapper triggers new</p>
+<p>evaluations based on attribute</p>
+<p>update it performed itself.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#how-to-write-uam-files-attribute-creaction-subsection"><span class="std std-ref">Attribute Creations</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">create_attributes</span></code></p></td>
+<td><p>1</p></td>
+<td><p>Controls when to create new attributes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#how-to-write-uam-files-common-parent-type-setting-subsection"><span class="std std-ref">Common Parent Type local override</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">common_parent_type</span></code></p></td>
+<td><p>Mapper’s engine</p>
+<p>Common Parent Type</p>
+<p>configuration</p>
+</td>
+<td><p>Temporarily changes the Common Parent Type for a scope.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The syntax is as follow: <code class="docutils literal notranslate"><span class="pre">scope</span> <span class="pre">&lt;priority&gt;</span> <span class="pre">setting_name(value)</span> <span class="pre">setting_name(value)</span> <span class="pre">{&lt;assignments&gt;}</span></code>
+For example, this UAM snippet shows scopes with different configurations.
+Note that the priority value has no effect at the moment.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> <span class="no">chain_reaction</span>(<span class="no">0</span>) <span class="no">clear_desired</span>(<span class="no">0</span>) <span class="no">create_attributes</span>(<span class="no">2</span>) {
+  <span class="nv">r&#39;1</span> <span class="o">=</span>  <span class="nv">r&#39;2</span>
+  <span class="nv">r&#39;2</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+  <span class="nv">d&#39;1</span> <span class="o">=</span>  <span class="nv">d&#39;2</span>
+  <span class="nv">d&#39;2</span> <span class="o">=</span>  <span class="nv">d&#39;1</span>
+}
+<span class="nb">scope</span> <span class="no">1</span> <span class="no">chain_reaction</span>(<span class="no">0</span>) <span class="no">clear_desired</span>(<span class="no">1</span>) {
+  <span class="nv">r&#39;3</span> <span class="o">=</span>  <span class="nv">d&#39;4</span>
+  <span class="nv">r&#39;4</span> <span class="o">=</span>  <span class="nv">d&#39;3</span>
+}
+<span class="nb">scope</span> <span class="no">2</span> <span class="no">chain_reaction</span>(<span class="no">1</span>) <span class="no">clear_desired</span>(<span class="no">0</span>) {
+  <span class="nv">d&#39;6</span> <span class="o">=</span>  <span class="nv">r&#39;5</span>
+  <span class="nv">r&#39;6</span> <span class="o">=</span>  <span class="nv">d&#39;6</span>
+}
+<span class="nb">scope</span> <span class="no">3</span> <span class="no">chain_reaction</span>(<span class="no">1</span>) <span class="no">clear_desired</span>(<span class="no">1</span>) <span class="no">common_parent_type</span>(<span class="no">3</span>) {
+  <span class="nv">r&#39;8</span> <span class="o">=</span>  <span class="nv">d&#39;9</span>
+  <span class="nv">r&#39;9</span> <span class="o">=</span>  <span class="nv">r&#39;8</span>
+  <span class="nv">r&#39;10</span> <span class="o">=</span>  <span class="nv">r&#39;9</span>
+}
+</pre></div>
+</div>
+<section id="automatic-desired-value-clearance">
+<span id="how-to-write-uam-files-clear-desired-subsection"></span><h4>Automatic desired value clearance<a class="headerlink" href="#automatic-desired-value-clearance" title="Permalink to this heading"></a></h4>
+<p>By default, the Attribute Mapper will clear (undefine) the desired value of
+an attribute when it sets the reported value.</p>
+<p>For example, in the following map:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">d&#39;1</span> <span class="o">=</span> <span class="nv">r&#39;2</span>
+  <span class="nv">r&#39;1</span> <span class="o">=</span> <span class="nv">r&#39;2</span>
+}
+</pre></div>
+</div>
+<p>If the reported value of Attribute Type 2 is updated, it will be mapped to both
+the desired and reported value of Attribute Type 1, but setting the reported
+value of Attribute Type 1 will clear the desired value.</p>
+<p>Evaluation steps:</p>
+<ol class="arabic simple">
+<li><p>r’2 is updated to a new value x</p></li>
+<li><p>d’1 is updated to x</p></li>
+<li><p>d’1 is undefined, r’1 is updated to x.</p></li>
+</ol>
+<p>To prevent this from happening, the scope can be configured not to clear the
+desired value.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> <span class="no">clear_desired</span>(<span class="no">0</span>) {
+  <span class="nv">d&#39;1</span> <span class="o">=</span> <span class="nv">r&#39;2</span>
+  <span class="nv">r&#39;1</span> <span class="o">=</span> <span class="nv">r&#39;2</span>
+}
+</pre></div>
+</div>
+<p>Evaluation steps:</p>
+<ol class="arabic simple">
+<li><p>r’2 is updated to a new value x</p></li>
+<li><p>d’1 is updated to x</p></li>
+<li><p>r’1 is updated to x.</p></li>
+</ol>
+</section>
+<section id="chain-reaction-evaluations">
+<span id="how-to-write-uam-files-chain-reaction-subsection"></span><h4>Chain reaction evaluations<a class="headerlink" href="#chain-reaction-evaluations" title="Permalink to this heading"></a></h4>
+<p>By default, the Attribute Mapper will react to its own updates, so it can
+continously trigger itself to update more values.</p>
+<p>Let’s take the following map as a example:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;1</span>
+  <span class="nv">r&#39;3</span> <span class="o">=</span> <span class="nv">r&#39;2</span>
+  <span class="nv">r&#39;4</span> <span class="o">=</span> <span class="nv">r&#39;3</span>
+}
+</pre></div>
+</div>
+<p>Evaluation steps:</p>
+<ol class="arabic simple">
+<li><p>r’1 is updated to a new value x</p></li>
+<li><p>r’2 is updated to x.</p></li>
+<li><p>r’3 is updated to x.</p></li>
+<li><p>r’4 is updated to x.</p></li>
+</ol>
+<p>When attributes have many dependencies, it can be difficult to keep track of
+the chain reaction of changes triggered by one attribute.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> <span class="no">chain_reaction</span>(<span class="no">0</span>) {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;1</span>
+  <span class="nv">r&#39;3</span> <span class="o">=</span> <span class="nv">r&#39;2</span>
+  <span class="nv">r&#39;4</span> <span class="o">=</span> <span class="nv">r&#39;3</span>
+}
+</pre></div>
+</div>
+<p>Evaluation steps:</p>
+<ol class="arabic simple">
+<li><p>r’1 is updated to a new value x</p></li>
+<li><p>r’2 is updated to x.</p></li>
+</ol>
+<p>Note that switching off the chain-reaction and desired clearance allows the
+mapper to map 2 attributes in all directions (desired &lt;-&gt; reported)
+without any infinite loop.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> <span class="no">chain_reaction</span>(<span class="no">0</span>) <span class="no">clear_desired</span>(<span class="no">0</span>) {
+  <span class="nv">r&#39;1</span> <span class="o">=</span>  <span class="nv">r&#39;2</span>
+  <span class="nv">r&#39;2</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+  <span class="nv">d&#39;1</span> <span class="o">=</span>  <span class="nv">d&#39;2</span>
+  <span class="nv">d&#39;2</span> <span class="o">=</span>  <span class="nv">d&#39;1</span>
+}
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Chain reaction is always active for attribute creations.</p>
+</div>
+<p>For example, considering the following map:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> <span class="no">chain_reaction</span>(<span class="no">0</span>) {
+  <span class="nv">r&#39;1</span> <span class="o">=</span>  <span class="nv">r&#39;2</span>
+}
+<span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">r&#39;3</span> <span class="o">=</span>  <span class="nb">if</span> (<span class="nv">e&#39;1</span>) <span class="no">1</span> <span class="no">undefined</span>
+}
+</pre></div>
+</div>
+<p>If the Reported value of Attribute Type 2 is updated and no Attribute
+Type 1 exists, then:</p>
+<p>1. Attribute Type 1 is created. Other maps depending on the existence of
+Attribute Type 1 will be evaluated immediately.
+2. Attribute Type 3 is (possibly created), then its reported value is set to 1
+3. r’1 is updated to the same value as the reported value of Type 2.</p>
+</section>
+<section id="attribute-creations">
+<span id="how-to-write-uam-files-attribute-creaction-subsection"></span><h4>Attribute Creations<a class="headerlink" href="#attribute-creations" title="Permalink to this heading"></a></h4>
+<p>Scope configurations allows to change the default attribute creation settings.
+For example using the following map:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+  <span class="nv">e&#39;3</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+  <span class="nv">d&#39;4</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+}
+</pre></div>
+</div>
+<p>If the Reported value of Attribute Type 1 is updated, the mapper will:</p>
+<ul class="simple">
+<li><p>Create Attribute Type 2 and set its reported value.</p></li>
+<li><p>Create Attribute Type 3.</p></li>
+<li><p>Not create Attribute Type 4.</p></li>
+</ul>
+<p>A <code class="docutils literal notranslate"><span class="pre">create_attributes</span></code> setting can be used to modify this behavior. Here are
+the possible values:</p>
+<ul class="simple">
+<li><ol class="arabic simple" start="0">
+<li><p>will create attributes only when assigning values types <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple">
+<li><p>(default) will create attributes when assigning values types <code class="docutils literal notranslate"><span class="pre">e</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code></p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>will create attributes when assigning any values type <code class="docutils literal notranslate"><span class="pre">e</span></code>, <code class="docutils literal notranslate"><span class="pre">r</span></code> and <code class="docutils literal notranslate"><span class="pre">d</span></code></p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="common-parent-type-local-override">
+<span id="how-to-write-uam-files-common-parent-type-setting-subsection"></span><h4>Common Parent Type local override<a class="headerlink" href="#common-parent-type-local-override" title="Permalink to this heading"></a></h4>
+<p>The attribute mapper should be configured by default with an Attribute
+representing Endpoints, but if mapping needs to happen at another level,
+scope settings can locally override the Common Parent Attribute Type using the <code class="docutils literal notranslate"><span class="pre">common_parent_type</span></code> scope
+configuration.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> <span class="no">common_parent_type</span>(<span class="no">23</span>) {
+  <span class="c c-Singleline">// Attribute Type 23 is the &quot;Common Parent Type&quot; for this mapping.</span>
+  <span class="nv">r&#39;2</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+  <span class="nv">e&#39;3</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+  <span class="nv">d&#39;4</span> <span class="o">=</span>  <span class="nv">r&#39;1</span>
+}
+</pre></div>
+</div>
+<p>It is recommended to use this setting if mapping have to be done where both
+the destination and original attributes are located some levels above or under
+the default parent type.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">def</span> <span class="no">ep</span> <span class="no">0x00000004</span>
+<span class="nb">scope</span> <span class="no">0</span> <span class="no">common_parent_type</span>(<span class="no">3</span>) {
+  <span class="c c-Singleline">// Set the reported value of attribute 1 to the reported value of</span>
+  <span class="c c-Singleline">// attribute 1 under endpoint ID 1 to the same value under endpoint 0.</span>
+  <span class="c c-Singleline">// Equivalent to : r&#39;^.ep[1].1 = r&#39;^.ep[0].1</span>
+  <span class="nv">r&#39;ep[1].1</span> <span class="o">=</span> <span class="nv">r&#39;ep[0].1</span>
+}
+</pre></div>
+</div>
+</section>
+</section>
+<section id="debugging-evaluations">
+<h3>Debugging evaluations<a class="headerlink" href="#debugging-evaluations" title="Permalink to this heading"></a></h3>
+<p>When the mapper is running, it can be configured to print its evaluations.
+Make sure to run with the debug log level enabled for the <code class="docutils literal notranslate"><span class="pre">attribute_mapper</span></code>
+logging tag.</p>
+<p>For debug builds, it will by default print the left-hand side of the assignment,
+the Attribute ID that triggered the change and the calculated value.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_attribute_mapper_process] 1 pending attribute updates to evaluate.</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Multilevel Switch State ) ).( ( OnOff (virtual state) ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1138 - Result value: 1</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x2 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1186 - Result value: 0</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x3 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1188 - Result value: 64.3939</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x4 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1190 - Result value: 61.3517</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: r&#39;( ( ZCL ColorControl CurrentHue ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1219 - Result value: 125.566</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_attribute_mapper_process] Ignoring update to Attribute ID 1219 as the mapper was instructed to ignore it.</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: r&#39;( ( ZCL ColorControl CurrentSaturation ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1220 - Result value: 254</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: r&#39;( ( ZCL OnOff OnOff ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1231 - Result value: 1</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [poll_engine] updated Multilevel Switch State[1133] in poll-queue</span>
+</pre></div>
+</div>
+<p>If the same attribute ID has several assignments, the full expression can
+be logged, by changing <code class="docutils literal notranslate"><span class="pre">assignment.lhs</span></code> to <code class="docutils literal notranslate"><span class="pre">assignment</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">mapper_engine.cpp</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef NDEBUG</span>
+<span class="w">  </span><span class="c1">// Debug build will print the matched expressions</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="w"> </span><span class="n">ss</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ss</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Match expression: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">assignment</span>
+<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; triggered by Attribute ID &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">dec</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">original_node</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; (&quot;</span>
+<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">attribute_store_get_type_name</span><span class="p">(</span><span class="n">original_node</span><span class="p">.</span><span class="n">type</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;)&quot;</span>
+<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; affecting Attribute ID &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">dec</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">destination_node</span>
+<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; - Result value: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+<span class="w">  </span><span class="n">sl_log_debug</span><span class="p">(</span><span class="n">LOG_TAG</span><span class="p">,</span><span class="w"> </span><span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

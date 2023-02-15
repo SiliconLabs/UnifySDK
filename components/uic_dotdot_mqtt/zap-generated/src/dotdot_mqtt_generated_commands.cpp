@@ -10683,6 +10683,42 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_set_parameter_co
                     payload.size(),
                     false);
 }
+/**
+ * @brief Publishes an incoming/generated DiscoverParameterRange command for
+ * the ConfigurationParameters cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/ConfigurationParameters/GeneratedCommands/DiscoverParameterRange
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_configuration_parameters_publish_generated_discover_parameter_range_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "ConfigurationParameters/GeneratedCommands/DiscoverParameterRange";
+
+  std::string payload =
+    get_json_payload_for_configuration_parameters_discover_parameter_range_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
 
 
 /**

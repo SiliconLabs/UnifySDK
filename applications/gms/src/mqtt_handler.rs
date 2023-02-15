@@ -11,6 +11,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 use crate::cache::Cache;
+use unify_application_monitoring_sys::unify_application_monitoring_init;
 use std::collections::BTreeMap;
 use std::collections::HashSet;
 use unify_log_sys::*;
@@ -44,7 +45,9 @@ impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttGroupHandler<T> {
         }
     }
     fn before_disconnect(&mut self) {}
-    fn after_connect(&mut self) {}
+    fn after_connect(&mut self) {
+        unify_application_monitoring_init();
+    }
 }
 
 impl<T: MqttClientTrait> MqttGroupHandler<T> {

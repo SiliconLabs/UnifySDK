@@ -1,10 +1,10 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.234.0/containers/docker-existing-dockerfile
 {
-	"image": "rust:1-60-buster-slim",
+	"image": "rust:1.65.0-slim-bullseye",
 	"settings": {},
 	"extensions": [
-		"matklad.rust-analyzer",
-		"dustypomerleau.rust-syntax"
+		"rust-lang.rust-analyzer",
+		"bungcip.better-toml"
 	]
 }

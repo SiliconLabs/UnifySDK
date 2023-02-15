@@ -11,10 +11,10 @@ path = "src/uic_attribute_utils_lib.rs"
 
 [build-dependencies]
 unify_build_utils = { path = "../unify_build_utils" }
+anyhow = "*"
 
 [dependencies]
 unify_tools = { path = "../unify_tools" }
 unify_proc_macro = { path = "../unify_proc_macro" }
 unify_log_sys = { path = "../unify_log_sys" }
 unify_sl_status_sys = { path = "../unify_sl_status_sys" }
-

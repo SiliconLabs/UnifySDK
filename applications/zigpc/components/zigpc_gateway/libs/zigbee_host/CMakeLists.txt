@@ -3,7 +3,7 @@
 # ##############################################################################
 
 include(ExternalProject)
-find_package(GeckoSDK 4.1.1 EXACT REQUIRED)
+find_package(GeckoSDK 4.2.0 EXACT REQUIRED)
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
 set(LIB_NAME libzigbee_host)
@@ -41,7 +41,7 @@ ExternalProject_Add(
   BUILD_ALWAYS true
   UPDATE_COMMAND ""
   INSTALL_COMMAND ""
-  CONFIGURE_COMMAND "" 
+  CONFIGURE_COMMAND ""
   BUILD_BYPRODUCTS ${LIB_PATH} ${BUILD_BYPRODUCTS}
   BUILD_COMMAND
    ${MAKE_EXECUTABLE} BASE_SDK_PATH=${GeckoSDK_ROOT_DIR}
@@ -49,7 +49,7 @@ ExternalProject_Add(
    CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} LD=${CMAKE_LINKER}
    AR=${CMAKE_C_COMPILER_AR} C_FLAGS_DEBUG=${CMAKE_C_FLAGS_DEBUG}
    C_FLAGS_RELEASE=${CMAKE_C_FLAGS_RELEASE} AR_FLAGS=rs ${LIB_MAKE_TARGET})
- 
+
 # Add library that links to the Makefile generated library
 set(ZIGBEE_HOST_STACK_INCLUDES
     ${GeckoSDK_ROOT_DIR}/protocol/zigbee
@@ -71,14 +71,19 @@ target_link_libraries(zigbee_host INTERFACE ${LIB_PATH} ${CMAKE_THREAD_LIBS_INIT
 target_include_directories(zigbee_host INTERFACE include gen/autogen gen/config
                                                  ${ZIGBEE_HOST_STACK_INCLUDES})
 target_compile_definitions(
-  zigbee_host INTERFACE UC_BUILD PLATFORM_HEADER="platform-header.h")
+  zigbee_host INTERFACE UC_BUILD=1 PLATFORM_HEADER="platform-header.h")
 
-# Add mocks
-add_mock(zigbee_host_mock include/zigbee_host.h include/zigbee_host_callbacks.h)
-add_dependencies(zigbee_host_mock libzigbee_host)
-target_include_directories(
-  zigbee_host_mock PRIVATE gen/autogen gen/config ${ZIGBEE_HOST_STACK_INCLUDES})
-target_compile_definitions(zigbee_host_mock
-                           PUBLIC UC_BUILD PLATFORM_HEADER="platform-header.h")
+if(BUILD_TESTING)
+  # Add mocks
+  add_mock(zigbee_host_mock include/zigbee_host.h include/zigbee_host_callbacks.h)
+  add_dependencies(zigbee_host_mock libzigbee_host)
+  target_include_directories(
+    zigbee_host_mock PRIVATE gen/autogen gen/config ${ZIGBEE_HOST_STACK_INCLUDES})
+  target_compile_definitions(zigbee_host_mock
+                            PUBLIC UC_BUILD=1 PLATFORM_HEADER="platform-header.h")
+  target_compile_options(zigbee_host_mock
+                         PUBLIC
+                         -Wno-address-of-packed-member)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

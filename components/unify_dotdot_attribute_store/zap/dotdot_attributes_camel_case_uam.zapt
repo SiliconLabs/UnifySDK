@@ -1,0 +1,8 @@
+{{zap_header}}
+{{#zcl_clusters}}
+// This represents short CamelCase labels the attributes in the DotDot {{label}} cluster
+{{#zcl_attributes}}
+def zb_{{label}} 0x{{attributeID this}}
+{{/zcl_attributes}}
+
+{{/zcl_clusters}}

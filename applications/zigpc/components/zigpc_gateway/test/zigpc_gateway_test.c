@@ -36,6 +36,9 @@ static const zigbee_eui64_t TEST_EUI64
 static const zigbee_eui64_t TEST_EUI64_LE
   = {0xF, 0xE, 0xE, 0xB, 0xD, 0xA, 0xE, 0xD};
 
+static const EmberEUI64 TEST_EUI64_EMBER =
+    {0xF, 0xE, 0xE, 0xB, 0xD, 0xA, 0xE, 0xD};
+
 static const size_t DEFER_CYCLES_DEFAULT               = 2U;
 static const size_t DEFER_CYCLES_MESSAGE_LIMIT_REACHED = 10U;
 static const size_t DEFER_CYCLES_START_BACKOFF         = 20U;
@@ -346,22 +349,37 @@ void test_zigpc_gateway_request_binding_call(void)
 {
   zigbee_endpoint_id_t test_endpoint = 7;
   zcl_cluster_id_t test_zcl_cluster  = 0x08;
+  EmberEUI64 destEui64 = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01};
+  EmberEUI64 destEui64_le = {0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+  uint8_t destEndpoint = 1;
 
   // ARRANGE
-  zigbeeHostInitBinding_ExpectAndReturn(TEST_EUI64_LE,
-                                        test_endpoint,
-                                        test_zcl_cluster,
+  zigbeeHostInitBinding_ExpectAndReturn(TEST_EUI64_EMBER,
+                                        (uint8_t)test_endpoint,
+                                        (uint16_t)test_zcl_cluster,
                                         0,
+                                        destEui64_le,
+                                        destEndpoint,
+                                        true,
                                         EMBER_SUCCESS);
 
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_eui64
-    = zigpc_gateway_request_binding(NULL, test_endpoint, test_zcl_cluster);
-  sl_status_t status = zigpc_gateway_request_binding(TEST_EUI64,
-                                                     test_endpoint,
-                                                     test_zcl_cluster);
+    = zigpc_gateway_request_binding(
+            NULL, 
+            test_endpoint, 
+            test_zcl_cluster,
+            destEui64,
+            destEndpoint);
+
+  sl_status_t status = zigpc_gateway_request_binding(
+                        TEST_EUI64,
+                        test_endpoint,
+                        test_zcl_cluster,
+                        destEui64,
+                        destEndpoint);
 
   contiki_test_helper_run(TICK_DURATION_MS * 2);
 
@@ -453,7 +471,7 @@ void test_zigpc_gateway_store_zcl_command_frame_sleepy_call(void)
 void test_zigpc_gateway_unload_zcl_command_frame_sleepy_call(void)
 {
   // ARRANGE
-  zigbeeHostSendPollingCheckInResponse_ExpectAndReturn(EMBER_SUCCESS);
+  zigbeeHostSendPollingCheckInResponse_ExpectAndReturn(true, EMBER_SUCCESS);
 
   zigbeeHostFillZclFrame_ExpectAndReturn(
     test_sleepy_zcl_frame.buffer,
@@ -475,7 +493,8 @@ void test_zigpc_gateway_unload_zcl_command_frame_sleepy_call(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_EMPTY, status);
 
   // Check to see if no messages are unloaded again
-
+  zigbeeHostSendPollingCheckInResponse_ExpectAndReturn(false, EMBER_SUCCESS);
+  
   // ARRANGE
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 

@@ -113,6 +113,13 @@ static std::unordered_map<zcl_cluster_id_t, std::set<zcl_command_id_t>>  command
       ZIGPC_ZCL_CLUSTER_THERMOSTAT_COMMAND_GET_RELAY_STATUS_LOG_RESPONSE,
     }
   },
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    {
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST,
+    }
+  },
 };
 
 bool zigpc_zclcmdparse_cluster_command_supported(zcl_cluster_id_t cluster_id,
@@ -2145,6 +2152,124 @@ zigpc_zcl_status_t zigpc_zclcmdparse_thermostat_get_relay_status_log_response_co
   return status;
 }
 
+zigpc_zcl_status_t zigpc_zclcmdparse_ias_zone_zone_status_change_notification_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_SUCCESS;
+  size_t payload_offset = cmd->frame_payload_offset;
+  zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
+  size_t arg_size = 0;
+  zigpc_zclcmdparse_ias_zone_zone_status_change_notification_t *data;
+  data = &result->data.ias_zone_zone_status_change_notification;
+
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_MAP16;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->zone_status, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_MAP8;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->extended_status, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->zoneid, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_UINT16;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->delay, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    result->cluster_id = ZIGPC_ZCL_CLUSTER_IAS_ZONE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION;
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "IASZone", "ZoneStatusChangeNotification");
+  }
+  return status;
+}
+
+zigpc_zcl_status_t zigpc_zclcmdparse_ias_zone_zone_enroll_request_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_SUCCESS;
+  size_t payload_offset = cmd->frame_payload_offset;
+  zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
+  size_t arg_size = 0;
+  zigpc_zclcmdparse_ias_zone_zone_enroll_request_t *data;
+  data = &result->data.ias_zone_zone_enroll_request;
+
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_ENUM16;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->zone_type, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_UINT16;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->manufacturer_code, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    result->cluster_id = ZIGPC_ZCL_CLUSTER_IAS_ZONE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST;
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "IASZone", "ZoneEnrollRequest");
+  }
+  return status;
+}
+
 
 
 zigpc_zcl_status_t zigpc_zclcmdparse_identify_client_cluster(
@@ -2324,6 +2449,24 @@ zigpc_zcl_status_t zigpc_zclcmdparse_thermostat_client_cluster(
   return status;
 }
 
+zigpc_zcl_status_t zigpc_zclcmdparse_ias_zone_client_cluster(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+  switch(cmd->command_id) {
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION:
+      status = zigpc_zclcmdparse_ias_zone_zone_status_change_notification_command(cmd, result);
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST:
+      status = zigpc_zclcmdparse_ias_zone_zone_enroll_request_command(cmd, result);
+      break;
+    default:
+      break;
+  }
+  return status;
+}
+
 void zigpc_zclcmdparse_on_command_received(void* event_data) {
   zigpc_zclcmdparse_result_t result;
   zigpc_gateway_on_command_received_t *cmd
@@ -2350,6 +2493,9 @@ void zigpc_zclcmdparse_on_command_received(void* event_data) {
           break;
         case ZIGPC_ZCL_CLUSTER_THERMOSTAT:
           cmd->return_status = zigpc_zclcmdparse_thermostat_client_cluster(cmd, &result);
+          break;
+        case ZIGPC_ZCL_CLUSTER_IAS_ZONE:
+          cmd->return_status = zigpc_zclcmdparse_ias_zone_client_cluster(cmd, &result);
           break;
         default:
           break;

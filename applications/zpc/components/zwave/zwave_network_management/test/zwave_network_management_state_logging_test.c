@@ -11,7 +11,8 @@
  *
  *****************************************************************************/
 #include "nm_state_machine.h"
-#include "zwave_network_management_state.h"
+#include "zwave_network_management_types.h"
+
 #include "state_logging.h"
 
 #include "unity.h"

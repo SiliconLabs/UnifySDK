@@ -23,5 +23,7 @@ export type NodesState = {
   DeviceType: string;
   SortName: string,
   IsSortAcs: boolean,
-  IsAllExpanded: boolean
+  IsAllExpanded: boolean,
+  ShowUnavailable: boolean,
+  ShowOffline: boolean
 }

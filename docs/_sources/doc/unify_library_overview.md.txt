@@ -15,7 +15,7 @@ The Unify Framework Library provides the following overall features
 - Build system with docker containers
 - Documentation framework
 - Packaging system for distributing components and basic scripts for system
-  integration with debian buster.
+  integration with Debian Bullseye.
 - Coding standard
 
 The figure below show the meta functionality that the Unify Frameworks provides.
@@ -149,7 +149,7 @@ well as a few C/C++ headers with definitions.
 This represents the data model used between all entities in the Unify
 Framework. Note that the definitions in these XML files take precedence
 over examples from the
-[Unify Framework Specifications](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+[Unify Framework Specifications](./unify_specifications/index.rst).
 
 These XML files represent ZCL/Dotdot clusters and can be split into 2 ranges:
 
@@ -291,7 +291,7 @@ See [Developer documentation.](readme_developer.md)
 
 ## Packaging Framework
 
-The Packaging Framework supports debian and cmake scripts which facilitates
+The Packaging Framework supports Debian and cmake scripts which facilitates
 packaging of Unify components.
 
 ## Coding Standard
@@ -308,6 +308,7 @@ Those sections show how to use the Unify Library.
 ---
 maxdepth: 1
 ---
-how_to_develop_a_protocol_controller.md
+how_to_write_uam_files.rst
+how_to_develop_a_protocol_controller.rst
 how_to_develop_an_iot_service.md
 ```

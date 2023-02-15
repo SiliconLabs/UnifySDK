@@ -160,6 +160,11 @@ sl_status_t
                    "Attribute timeout callback rejected for Attribute ID %d",
                    node);
     return SL_STATUS_FAIL;
+  } else if (ATTRIBUTE_STORE_INVALID_NODE == node) {
+    sl_log_debug(LOG_TAG,
+                 "Attribute timeout callback rejected due to"
+                 "invalid Attribute (ID = ATTRIBUTE_STORE_INVALID_NODE)");
+    return SL_STATUS_FAIL;
   }
 
   if (duration == 0) {

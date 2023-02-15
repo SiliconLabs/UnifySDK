@@ -1,0 +1,187 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+{{zap_header}}
+#include "unify_dotdot_attribute_store_configuration.h"
+#include "unify_dotdot_attribute_store_helpers.h"
+#include "unify_dotdot_defined_attribute_types.h"
+
+#include "sl_status.h"
+#include "zap-types.h"
+#include "attribute_store.h"
+#include "attribute_store_helper.h"
+
+#include "sl_log.h"
+#define LOG_TAG "unify_dotdot_attribute_store_helpers"
+
+// Static variables used to return pointers.
+static char received_string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster {{label}}
+////////////////////////////////////////////////////////////////////////////////
+{{#zcl_attributes}}
+bool {{asAttributeIsSupportedFunction parent.label label}}(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      {{asAttributeIdDefine parent.label label}});
+  return attribute_store_node_exists(node);
+}
+
+{{asUnderlyingType type}} {{asAttributeGetFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      {{asAttributeIdDefine parent.label label}});
+
+  {{#if (isString type)}}
+  if (REPORTED_ATTRIBUTE == value_state) {
+    attribute_store_get_reported_string(node, received_string, ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  } else {
+    attribute_store_get_desired_string(node, received_string, ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  }
+  return received_string;
+  {{else}}
+  {{asUnderlyingType type}} result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+  {{/if}}
+}
+
+sl_status_t {{asAttributeSetFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  {{#if (isMonotonousArray label)}}
+  size_t new_{{asSnakeCaseLower label}}_count,
+  {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}}* new_{{asSnakeCaseLower label}}
+  {{else}}
+  {{asUnderlyingType type}} new_{{asSnakeCaseLower label}}
+  {{/if}}
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      {{asAttributeIdDefine parent.label label}});
+
+  {{#if (isMonotonousArray label)}}
+  // Skip attribute {{label}} because it is an array,
+  // we typically don't save them as array in the attribute store.
+  sl_log_error(LOG_TAG, "Error, skipping to change the desired value of {{label}}, Attribute %d, "
+                        "because it is a complicated type (array: {{type}}). "
+                        "Please change the code to do this manually.",node);
+  return SL_STATUS_FAIL;
+  {{else if (isStruct type)}}
+  // Skip attribute {{label}} because it is a struct,
+  // we typically don't save them as structs in the attribute store.
+  sl_log_error(LOG_TAG, "Error, skipping to change the desired value of {{label}}, Attribute %d, "
+                        "because it is a complicated type (struct: {{type}}). "
+                        "Please change the code to do this manually.", node);
+  return SL_STATUS_FAIL;
+  {{else if (isString type)}}
+  if (REPORTED_ATTRIBUTE == value_state){
+    return attribute_store_set_reported_string(node, new_{{asSnakeCaseLower label}});
+  } else {
+    return attribute_store_set_desired_string(node, new_{{asSnakeCaseLower label}});
+  }
+  {{else}}
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_{{asSnakeCaseLower label}},
+                                                  sizeof({{asUnderlyingType type}}));
+  {{/if}}
+}
+
+sl_status_t {{asAttributeUndefineReportedFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      {{asAttributeIdDefine parent.label label}});
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t {{asAttributeUndefineDesiredFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      {{asAttributeIdDefine parent.label label}});
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t {{asAttributeCreateFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           {{asAttributeIdDefine parent.label label}});
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+{{/zcl_attributes}}
+
+bool dotdot_is_any_{{asSnakeCaseLower label}}_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  {{#zcl_attributes}}
+  if (true == {{asAttributeIsSupportedFunction parent.label label}}(unid, endpoint_id)) {
+    return true;
+  }
+  {{/zcl_attributes}}
+
+  return false;
+}
+
+bool dotdot_is_any_{{asSnakeCaseLower label}}_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  {{#zcl_attributes}}
+  {{#if isWritable}}
+  if (true == {{asAttributeIsSupportedFunction parent.label label}}(unid, endpoint_id)) {
+    return true;
+  }
+  {{/if}}
+  {{/zcl_attributes}}
+
+  return false;
+}
+{{/if}}
+{{/zcl_clusters}}

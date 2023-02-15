@@ -13,14 +13,28 @@
 // Includes from this component
 #include "ucl_mqtt_node_interview.h"
 
-// Includes from other components
+// Unify components
 #include "attribute_store.h"
+#include "attribute_store_helper.h"
+#include "attribute_resolver_rule.h"
+
+// ZPC components
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
 
 #include "sl_log.h"
 #define LOG_TAG "ucl_mqtt_node_interview"
+
+///////////////////////////////////////////////////////////////////////////////
+// Private helper functions
+///////////////////////////////////////////////////////////////////////////////
+void undefine_attribute_with_get_rule(attribute_store_node_t node)
+{
+  if (attribute_resolver_has_get_rule(attribute_store_get_node_type(node))) {
+    attribute_store_undefine_reported(node);
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Public interface functions
@@ -36,27 +50,21 @@ sl_status_t ucl_mqtt_initiate_node_interview(const unid_t node_unid)
   attribute_store_node_t node
     = attribute_store_network_helper_get_node_id_node(node_unid);
 
-  if (node == ATTRIBUTE_STORE_INVALID_NODE) {
-    return SL_STATUS_NOT_FOUND;
-  }
-
-  // Start off by deleting all the endpoints under the node:
+  uint32_t child_index = 0;
   attribute_store_node_t current_endpoint
-    = attribute_store_get_first_child_by_type(node, ATTRIBUTE_ENDPOINT_ID);
+    = attribute_store_get_node_child_by_type(node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             child_index);
   while (current_endpoint != ATTRIBUTE_STORE_INVALID_NODE) {
-    // No harm in calling delete on an invalid node.
-    if (SL_STATUS_OK != attribute_store_delete_node(current_endpoint)) {
-      return SL_STATUS_FAIL;
-    }
-    // Keep the child index to 0 here, since we delete them
+    // Undefine all attributes that have a Get rule attached under the endpoint.
+    attribute_store_walk_tree(current_endpoint,
+                              &undefine_attribute_with_get_rule);
+    child_index += 1;
     current_endpoint
-      = attribute_store_get_first_child_by_type(node, ATTRIBUTE_ENDPOINT_ID);
+      = attribute_store_get_node_child_by_type(node,
+                                               ATTRIBUTE_ENDPOINT_ID,
+                                               child_index);
   }
-
-  // Now that we wiped the endpoints, create endpoint 0 again with an empty NIF.
-  current_endpoint
-    = attribute_store_network_helper_create_endpoint_node(node_unid, 0);
-  attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, current_endpoint);
 
   return SL_STATUS_OK;
 }
@@ -74,11 +82,7 @@ sl_status_t
   attribute_store_node_t node
     = attribute_store_network_helper_get_node_id_node(node_unid);
 
-  if (node == ATTRIBUTE_STORE_INVALID_NODE) {
-    return SL_STATUS_NOT_FOUND;
-  }
-
-  // Start off by deleting all the endpoints under the node:
+  // Get the endpoint by value:
   attribute_store_node_t endpoint
     = attribute_store_get_node_child_by_value(node,
                                               ATTRIBUTE_ENDPOINT_ID,
@@ -86,18 +90,9 @@ sl_status_t
                                               &endpoint_id,
                                               sizeof(zwave_endpoint_id_t),
                                               0);
-  if (endpoint == ATTRIBUTE_STORE_INVALID_NODE) {
-    return SL_STATUS_NOT_FOUND;
-  }
 
-  if (SL_STATUS_OK != attribute_store_delete_node(endpoint)) {
-    return SL_STATUS_FAIL;
-  }
-
-  // Now that we wiped the endpoint, create it again with an empty NIF.
-  endpoint = attribute_store_network_helper_create_endpoint_node(node_unid,
-                                                                 endpoint_id);
-  attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint);
+  // Undefine everything under it
+  attribute_store_walk_tree(endpoint, &undefine_attribute_with_get_rule);
 
   return SL_STATUS_OK;
 }

@@ -42,8 +42,8 @@ static unsigned int set_all_callbacks()
 static void unset_all_callbacks()
 {
   {{#zcl_clusters}}{{#if (supportedCluster label)}}{{#zcl_commands}}
-  {{asCommandCallback this}}_set(NULL);{{/zcl_commands}}
-  {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_write_attributes_callback(NULL);{{/if}}{{/zcl_clusters}}
+  {{asCommandCallback this}}_clear();{{/zcl_commands}}
+  {{dotdot_prefix}}_clear_{{asSnakeCaseLower label}}_write_attributes_callbacks();{{/if}}{{/zcl_clusters}}
 }
 
 static void reset_callback_counters()

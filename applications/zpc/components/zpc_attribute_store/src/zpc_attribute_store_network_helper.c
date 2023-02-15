@@ -197,8 +197,7 @@ attribute_store_node_t attribute_store_network_helper_get_zwave_node_id_node(
 attribute_store_node_t attribute_store_network_helper_get_endpoint_node(
   const unid_t node_unid, zwave_endpoint_id_t endpoint_id)
 {
-  attribute_store_node_t node_id_identifier;
-  node_id_identifier
+  attribute_store_node_t node_id_identifier
     = attribute_store_network_helper_get_node_id_node(node_unid);
   if (node_id_identifier == ATTRIBUTE_STORE_INVALID_NODE) {
     return ATTRIBUTE_STORE_INVALID_NODE;

@@ -1,0 +1,21 @@
+
+// Special maps to help controlling the ZRB5100 Logic Group Matrix
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def zwSWITCH_BINARY_STATE       0x2502
+
+def zbSTARTUP_CURRENT_LEVEL     0x00084000
+def ep 4
+
+def ZDB5100_logic_group_matrix ((r'ep[0].zwMANUFACTURER_ID == 0x0234) & (r'ep[0].zwPRODUCT_TYPE_ID == 0x0003) & (r'ep[0].zwPRODUCT_ID == 0x0121))
+
+scope 0 common_parent_type(3) {
+
+  // ZDB5100
+  // Delete OnOff on EP5 as it supports both Level and OnOff Command Class, and we want to handle it through Level
+  e'ep[5].zwSWITCH_BINARY_STATE = if ZDB5100_logic_group_matrix 0 undefined
+  // Override default behaviour as the ZDB5100 always sets its Level to MinLevel on startup
+  r'ep[5].zbSTARTUP_CURRENT_LEVEL = if ZDB5100_logic_group_matrix 0 undefined
+}

@@ -33,8 +33,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 static sqlite3_stmt *upsert_statement             = NULL;
 static sqlite3_stmt *select_statement             = NULL;
+static sqlite3_stmt *select_all_statement         = NULL;
 static sqlite3_stmt *select_child_index_statement = NULL;
 static sqlite3_stmt *delete_statement             = NULL;
+const char select_all_sql[]
+  = "SELECT id, type, parent_id, reported_value, "
+    "desired_value FROM " DATASTORE_TABLE_ATTRIBUTES ";";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Private helper functions
@@ -154,6 +158,14 @@ sl_status_t datastore_attribute_statement_init()
     return SL_STATUS_FAIL;
   }
 
+  // Select All statement
+  rc = sqlite3_prepare_v2(db, select_all_sql, -1, &select_all_statement, NULL);
+  if (rc != SQLITE_OK) {
+    sl_log_error(LOG_TAG,
+                 "Prepare All Select statement failed: %s\n",
+                 sqlite3_errmsg(db));
+    return SL_STATUS_FAIL;
+  }
   // Select child index statement:
   // LIMIT ?,1 is to fetch a particular row
   // (child_index, 0 for the first, 1 for the second, etc.)
@@ -195,12 +207,14 @@ sl_status_t datastore_attribute_statement_teardown()
   // Free up the allocated memory for these statements
   sqlite3_finalize(upsert_statement);
   sqlite3_finalize(select_statement);
+  sqlite3_finalize(select_all_statement);
   sqlite3_finalize(select_child_index_statement);
   sqlite3_finalize(delete_statement);
 
   // Set them back to NULL, so that we can detect if they are missing a re-init
   upsert_statement             = NULL;
   select_statement             = NULL;
+  select_all_statement         = NULL;
   select_child_index_statement = NULL;
   delete_statement             = NULL;
 
@@ -343,6 +357,49 @@ sl_status_t datastore_fetch_attribute(datastore_attribute_id_t id,
   // We are done, reset so we can execute the query again
   sqlite3_reset(select_statement);
   return status;
+}
+
+sl_status_t datastore_fetch_all_attributes(datastore_attribute_t *attribute)
+{
+  if (db == NULL) {
+    log_database_not_initialized();
+    return SL_STATUS_FAIL;
+  }
+
+  // Execute the query
+  int step = sqlite3_step(select_all_statement);
+  if (step == SQLITE_ROW) {
+    // Get the row results into the variables
+    attribute->id   = (uint32_t)sqlite3_column_int64(select_all_statement, 0);
+    attribute->type = (uint32_t)sqlite3_column_int64(select_all_statement, 1);
+    attribute->parent_id
+      = (uint32_t)sqlite3_column_int64(select_all_statement, 2);
+
+    // Get a pointer from sqlite and copy the data to the user pointer
+    // Reported value
+    const uint8_t *value_buffer
+      = (const uint8_t *)sqlite3_column_blob(select_all_statement, 3);
+    attribute->reported_value_size
+      = (uint8_t)sqlite3_column_bytes(select_all_statement, 3);
+    memcpy(attribute->reported_value,
+           value_buffer,
+           attribute->reported_value_size);
+
+    // Desired value
+    value_buffer
+      = (const uint8_t *)sqlite3_column_blob(select_all_statement, 4);
+    attribute->desired_value_size
+      = (uint8_t)sqlite3_column_bytes(select_all_statement, 4);
+    memcpy(attribute->desired_value,
+           value_buffer,
+           attribute->desired_value_size);
+
+    return SL_STATUS_IN_PROGRESS;
+  } else {
+    // We are done iterating
+    sqlite3_reset(select_all_statement);
+    return SL_STATUS_OK;
+  }
 }
 
 sl_status_t datastore_fetch_attribute_child(datastore_attribute_id_t parent_id,

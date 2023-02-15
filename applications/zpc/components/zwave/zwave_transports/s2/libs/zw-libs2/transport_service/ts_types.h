@@ -1,35 +1,10 @@
-/* © 2017 Silicon Laboratories Inc.
+/**
+ * @file ts_types.h
+ * @copyright 2022 Silicon Laboratories Inc.
+ *
+ * @brief Type definitions for transport service.
+ * Generic defines for the protocol types uint8_t, uint16_t etc.
  */
-/*********************************  types.h  ********************************
- *           #######
- *           ##  ##
- *           #  ##    ####   #####    #####  ##  ##   #####
- *             ##    ##  ##  ##  ##  ##      ##  ##  ##
- *            ##  #  ######  ##  ##   ####   ##  ##   ####
- *           ##  ##  ##      ##  ##      ##   #####      ##
- *          #######   ####   ##  ##  #####       ##  #####
- *                                           #####
- *          Z-Wave, the wireless language.
- *
- *              Copyright (c) 2015
- *              Sigma Designs, Inc.
- *              Denmark
- *
- *              All Rights Reserved
- *
- *    This source file is subject to the terms and conditions of the
- *    Zensys Software License Agreement which restricts the manner
- *    in which it may be used.
- *
- *---------------------------------------------------------------------------
- *
- * Description: Type definitions for transport service.
- *     Generic defines for the protocol types uint8_t, uint16_t etc.
- *
- * Author:
- *
- ****************************************************************************/
-
 /****************************************************************************/
 /*                      PUBLIC TYPES and DEFINITIONS                        */
 /****************************************************************************/
@@ -45,7 +20,7 @@
 #include <s2_protocol.h>
 #endif
 #include <ZW_classcmd.h>
-#if defined(__C51__) || defined(EFR32ZG)
+#if defined(__C51__) || defined(EFR32ZG) || defined(ZWAVE_ON_LINUX)
 #define ZW_SLAVE_ENHANCED_232  // Defined to pull in ZW_SendDataEx from ZW_transport_api.h
 #include <ZW_transport_api.h>
 #endif /* __C51__ */
@@ -229,7 +204,7 @@ extern uint8_t MyNodeID;
 typedef void (*ZW_CommandHandler_Callback_t)(ts_param_t* p, ZW_APPLICATION_TX_BUFFER *pCmd, uint16_t cmdLength);
 typedef void (*ZW_TransportService_SendData_Callback_t)(uint8_t txStatus, void *t);
 
-#ifdef EFR32ZG
+#if defined(EFR32ZG) || defined(ZWAVE_ON_LINUX)
 
 extern uint16_t g_nodeID;
 
@@ -264,7 +239,7 @@ extern uint8_t MyNodeID;
 #endif
 
 
-#if (defined(__i386__) || defined(__amd64__) || defined(__arm__)) && !defined(EFR32ZG)
+#if (defined(__i386__) || defined(__amd64__) || defined(__arm__) || defined(__aarch64__)) && !defined(EFR32ZG) && !defined(ZWAVE_ON_LINUX)
 typedef void* TX_STATUS_TYPE;
 bool TS_SEND_RAW(node_t snode, node_t dnode, uint8_t *cmd, uint8_t len, uint8_t flags, void(*completedFunc)(uint8_t, TX_STATUS_TYPE*));
 #endif

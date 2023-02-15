@@ -19,9 +19,9 @@ pub trait PollRunnableTrait {
     /// this function takes self. meaning self is moved and does not exist
     /// anymore after the function run is called. Secondly, this call is none
     /// blocking
-    /// 
-    /// # Arguments 
-    /// 
+    ///
+    /// # Arguments
+    ///
     /// * `poll_map`    map containing poll timeout given different attribute
     /// type_id's
     fn run(self, poll_map: AttributePollMap);

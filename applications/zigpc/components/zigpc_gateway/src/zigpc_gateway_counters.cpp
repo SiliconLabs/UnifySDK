@@ -11,6 +11,7 @@
  *
  *****************************************************************************/
 #include <array>
+#include <vector>
 #include <algorithm>
 #include <string>
 
@@ -24,28 +25,29 @@
  * @brief Raw strings exported from EmberAf in stack/include/ember-types.h
  *
  */
-constexpr std::string_view COUNTER_LABELS_RAW[EMBER_COUNTER_TYPE_COUNT + 1]
-  = {EMBER_COUNTER_STRINGS};
+const std::vector<const char*> COUNTER_LABELS_RAW = {EMBER_COUNTER_STRINGS};
+
+const static std::array<std::string, EMBER_COUNTER_TYPE_COUNT> COUNTER_LABELS_WO_SPACES = [](){
+    // Transform raw counter labels to remove included spaces
+    // i.e. "Mac Rx Bcast" -> "MacRxBcast"
+    std::array<std::string, EMBER_COUNTER_TYPE_COUNT> tmp;
+    for(size_t i = 0U; i < EMBER_COUNTER_TYPE_COUNT; ++i)
+    {
+      std::string tmpStr = std::string(COUNTER_LABELS_RAW[i]);
+      tmpStr.erase( std::remove_if(tmpStr.begin(),
+                                  tmpStr.end(),
+                                  [](unsigned char x){ return std::isspace(x); }));
+
+      tmp[i] = tmpStr;
+    }
+
+    return tmp;
+  }();
 
 const char *zigpc_gateway_get_counters_entry_label(size_t offset)
 {
-  static std::array<std::string, EMBER_COUNTER_TYPE_COUNT> counter_labels;
-
-  // Transform raw counter labels to remove included spaces
-  // i.e. "Mac Rx Bcast" -> "MacRxBcast"
-  if (counter_labels.at(0) == "") {
-    for (size_t i = 0U; i < EMBER_COUNTER_TYPE_COUNT; i++) {
-      if (COUNTER_LABELS_RAW[i] == nullptr) {
-        break;
-      }
-      std::string label(COUNTER_LABELS_RAW[i]);
-      label.erase(std::remove(label.begin(), label.end(), ' '), label.end());
-      counter_labels.at(i) = label;
-    }
-  }
-
   if (offset < EMBER_COUNTER_TYPE_COUNT) {
-    return counter_labels[offset].c_str();
+    return COUNTER_LABELS_WO_SPACES[offset].c_str();
   } else {
     return nullptr;
   }

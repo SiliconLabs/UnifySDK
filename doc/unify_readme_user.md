@@ -6,7 +6,7 @@ Details about each application can be found in the application specific user gui
 
 ## Running Using Systemd
 
-Normally, the Unify components should be run as a service. When the debian packages
+Normally, the Unify components should be run as a service. When the Debian packages
 are installed they automatically enables themselves as systemd services.
 
 The the components can be started and stopped using the `systemctl` command (see systemctl
@@ -98,7 +98,7 @@ found [here](https://manpages.debian.org/stretch/logrotate/logrotate.8.en.html).
 ## Setting up Mosquitto
 
 The Unify framework need to the mosquitto MQTT broker to work. For this reason
-mosquitto is a dependency of all the provided debian packages. The Unify
+mosquitto is a dependency of all the provided Debian packages. The Unify
 framework works with the default mosquitto installation but it may be
 desireable to change the mosquito broker installation, eg. to enable TLS
 support.

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Using the Co-Processor Communication Daemon (CPCd) &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -66,8 +71,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../zigbeed/readme_user.html">Zigbee</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html">OpenThread Border Router User Guide</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html#openthread-boarder-router-user-guide">OpenThread Boarder Router User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html">OpenThread</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cpc-hci-bridge/readme_user.html">Bluetooth</a></li>
 </ul>
 </li>
@@ -76,6 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -98,6 +103,9 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="using-the-co-processor-communication-daemon-cpcd">
 <h1>Using the Co-Processor Communication Daemon (CPCd)<a class="headerlink" href="#using-the-co-processor-communication-daemon-cpcd" title="Permalink to this heading"></a></h1>
+<p>This documentation is a condensed format specifically for Unify.
+The full CPCd documentation can be found on the
+<a class="reference external" href="https://github.com/SiliconLabs/cpc-daemon">CPCd GitHub page</a>.</p>
 <p>The key host software component at the heart of the multiprotocol architecture is
 a multiplexer called CPCd (Co-Processor Communication daemon). CPCd runs on
 the host and acts as a reliable and secure serial transport layer to the
@@ -146,9 +154,9 @@ See the <a class="reference internal" href="../../doc/getting_started_multiproto
 get started using CPCd right away.</p>
 <p>The build essential and CMake packages in Linux are required for this step.
 Compile the CPC daemon in the source folder using the following commands:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir build
-<span class="nb">cd</span> build
-cmake ../
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>../
 make
 </pre></div>
 </div>
@@ -157,7 +165,7 @@ make
 <h2>Installing CPCd<a class="headerlink" href="#installing-cpcd" title="Permalink to this heading"></a></h2>
 <p>Super-user permissions may be required to install the daemon, cpclib, and the
 configuration file.  These can be installed with the following commands:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make install
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>install
 </pre></div>
 </div>
 </section>
@@ -168,7 +176,7 @@ configuration file installed in the previous step (/usr/local/etc/cpcd.conf).
 Note: in the Unify binary Debian package installation, the configuration
 file is installed in /usr/etc/cpcd.conf.
 To specify a different configuration file, use the –conf argument. For example:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cpcd --conf &lt;configuration file path&gt;
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cpcd<span class="w"> </span>--conf<span class="w"> </span>&lt;configuration<span class="w"> </span>file<span class="w"> </span>path&gt;
 </pre></div>
 </div>
 </section>
@@ -178,12 +186,12 @@ To specify a different configuration file, use the –conf argument. For example
 <span class="c1"># Optional, defaults to &quot;cpcd_0&quot;</span>
 <span class="c1"># This string uniquely identifies the running cpcd instance. This value is</span>
 <span class="c1"># passed in the initialization of the library</span>
-instance_name: cpcd_0
+instance_name:<span class="w"> </span>cpcd_0
 
 <span class="c1"># Bus type selection</span>
 <span class="c1"># Mandatory</span>
 <span class="c1"># Allowed values : UART or SPI</span>
-bus_type: UART
+bus_type:<span class="w"> </span>UART
 
 <span class="c1"># SPI device file</span>
 <span class="c1"># Mandatory if spi chosen, ignored if uart chosen</span>
@@ -207,17 +215,17 @@ bus_type: UART
 
 <span class="c1"># UART device file</span>
 <span class="c1"># Mandatory if uart chosen, ignored if spi chosen</span>
-uart_device_file: /dev/ttyACM0
+uart_device_file:<span class="w"> </span>/dev/ttyACM0
 
 <span class="c1"># UART baud rate.</span>
 <span class="c1"># Optional if uart chosen, ignored if spi chosen. Defaults at 115200</span>
 <span class="c1"># Allowed values : standard UART baud rates listed in &#39;termios.h&#39;</span>
-uart_device_baud: <span class="m">115200</span>
+uart_device_baud:<span class="w"> </span><span class="m">115200</span>
 
 <span class="c1"># UART flow control.</span>
 <span class="c1"># Optional if uart chosen, ignored if spi chosen. Defaults at &#39;false&#39;</span>
 <span class="c1"># Allowed values are &#39;true&#39; or &#39;false&#39;</span>
-uart_hardflow: <span class="nb">true</span>
+uart_hardflow:<span class="w"> </span><span class="nb">true</span>
 
 <span class="c1"># BOOTLOADER Recovery Pins Enabled</span>
 <span class="c1"># Set to true to enter bootloader via wake and reset pins</span>
@@ -237,37 +245,37 @@ uart_hardflow: <span class="nb">true</span>
 <span class="c1"># Prints tracing information to stdout</span>
 <span class="c1"># Optional, defaults to &#39;false&#39;</span>
 <span class="c1"># Allowed values are &#39;true&#39; or &#39;false&#39;</span>
-stdout_trace: <span class="nb">false</span>
+stdout_trace:<span class="w"> </span><span class="nb">false</span>
 
 <span class="c1"># Prints tracing information to a file located under TRACES_FOLDER</span>
 <span class="c1"># Optional, defaults to &#39;false&#39;</span>
 <span class="c1"># Allowed values are &#39;true&#39; or &#39;false&#39;</span>
-trace_to_file: <span class="nb">false</span>
+trace_to_file:<span class="w"> </span><span class="nb">false</span>
 
 <span class="c1"># Traces folder</span>
 <span class="c1"># Optional, defaults to &#39;/dev/shm/cpcd-traces&#39;</span>
 <span class="c1"># Folder mounted on a tmpfs is prefered</span>
-traces_folder: /dev/shm/cpcd-traces
+traces_folder:<span class="w"> </span>/dev/shm/cpcd-traces
 
 <span class="c1"># Enable frame trace</span>
 <span class="c1"># Optional, defaults to &#39;false&#39;</span>
 <span class="c1"># Allowed values are &#39;true&#39; or &#39;false&#39;</span>
-enable_frame_trace: <span class="nb">false</span>
+enable_frame_trace:<span class="w"> </span><span class="nb">false</span>
 
 <span class="c1"># Number of open file descriptors.</span>
 <span class="c1"># Optional, defaults at 2000</span>
 <span class="c1"># If the error &#39;Too many open files&#39; occurs, this is the value to increase.</span>
-rlimit_nofile: <span class="m">2000</span>
+rlimit_nofile:<span class="w"> </span><span class="m">2000</span>
 
 <span class="c1"># Disable the encryption over CPC endpoints</span>
 <span class="c1"># Optional, defaults true</span>
-disable_encryption: <span class="nb">true</span>
+disable_encryption:<span class="w"> </span><span class="nb">true</span>
 
 <span class="c1"># Binding key file</span>
 <span class="c1"># Mandatory when security is used</span>
 <span class="c1"># Must have 32 alphanumeric characters as the first line, representing a 128</span>
 <span class="c1"># bit binding key</span>
-binding_key_file: /etc/binding-key.key
+binding_key_file:<span class="w"> </span>/etc/binding-key.key
 </pre></div>
 </div>
 </section>
@@ -275,7 +283,7 @@ binding_key_file: /etc/binding-key.key
 <h2>Obtaining the Version of CPCd<a class="headerlink" href="#obtaining-the-version-of-cpcd" title="Permalink to this heading"></a></h2>
 <p>If CPCd is started with the -v or –version argument, the daemon first prints
 the version of CPCd and exits.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cpcd –v
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cpcd<span class="w"> </span>–v
 </pre></div>
 </div>
 </section>
@@ -314,7 +322,7 @@ Only enable tracing during development, for debugging purposes only.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

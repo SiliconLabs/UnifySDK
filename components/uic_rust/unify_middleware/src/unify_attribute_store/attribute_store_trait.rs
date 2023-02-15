@@ -37,6 +37,24 @@ where
     fn from_handle_and_type(&self, handle: u32, type_id: u32) -> T;
 
     fn attribute_type_from_name(&self, name: &str) -> Result<u32, AttributeStoreError>;
+
+    /// Asks the Attribute Store to associate an Attribute Type with a
+    /// Name, Parent Type and Storage Type.
+    /// If the Attrbute store is configured to perform Type validation,
+    /// setting values will be limited to that type
+    fn register_attribute_type(
+        &self,
+        attribute_type: AttributeTypeId,
+        attribute_name: &str,
+        parent_type: AttributeTypeId,
+        storage_type: AttributeStorageType,
+    ) -> Result<(), AttributeStoreError>;
+
+    // Logs information registered for an Atttribute type.
+    fn log_type_information(&self, attribute_type: AttributeTypeId);
+
+    // Enables or disable Attribute Store Type validation.
+    fn set_type_validation(&self, enabled: bool);
 }
 
 /// Wraps `attribute.valid()` and returns an

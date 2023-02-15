@@ -6,5 +6,6 @@ var uic__stdin_8hpp =
     [ "uic_stdin_add_commands", "group__uic__stdin.html#ga914fe74285cc40d4ecdc52646fad1f9d", null ],
     [ "uic_stdin_get_output_fd", "group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af", null ],
     [ "uic_stdin_handle_command", "group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e", null ],
-    [ "uic_stdin_set_prompt_string", "group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4", null ]
+    [ "uic_stdin_set_prompt_string", "group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4", null ],
+    [ "unify_stdin_attribute_store_log_node", "group__uic__stdin.html#gadf8c2d3481fa99ef2b97979a8013b033", null ]
 ];

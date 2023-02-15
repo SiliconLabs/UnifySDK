@@ -119,8 +119,9 @@ sl_status_t zigpc_gateway_unload_sleepy_messages(const zigbee_eui64_t eui64)
 
   //send a check-in response only if there are messages stored
   if (zigpc_gateway_retrieve_num_stored(eui64) > 0) {
-    zigbeeHostSendPollingCheckInResponse();
+    zigbeeHostSendPollingCheckInResponse(true);
   } else {
+    zigbeeHostSendPollingCheckInResponse(false);
     status = SL_STATUS_EMPTY;
   }
 
@@ -165,18 +166,49 @@ sl_status_t zigpc_gateway_send_zcl_frame_multicast(zigbee_group_id_t group_id,
   return status;
 }
 
-sl_status_t zigpc_gateway_request_binding(const zigbee_eui64_t eui64,
-                                          uint8_t endpoint_id,
-                                          zcl_cluster_id_t cluster_id)
+sl_status_t zigpc_gateway_request_binding(const zigbee_eui64_t source_eui64,
+                                          uint8_t source_endpoint_id,
+                                          zcl_cluster_id_t cluster_id,
+                                          const zigbee_eui64_t dest_eui64,
+                                          uint8_t dest_endpoint_id)
 {
   sl_status_t status = SL_STATUS_OK;
 
-  if (eui64 == nullptr) {
+  if (source_eui64 == nullptr || dest_eui64 == nullptr) {
+    sl_log_warning(LOG_TAG, "Error on binding request, null address");
     status = SL_STATUS_NULL_POINTER;
   } else {
-    auto call = std::make_shared<gw::BindingRequestRequest>(eui64,
-                                                            endpoint_id,
-                                                            cluster_id);
+    auto call = std::make_shared<gw::BindingRequestRequest>(source_eui64,
+                                                            source_endpoint_id,
+                                                            cluster_id,
+                                                            dest_eui64,
+                                                            dest_endpoint_id,
+                                                            true);
+
+    gw::RequestQueue::getInstance().enqueue(call);
+  }
+
+  return status;
+}
+
+sl_status_t zigpc_gateway_request_unbind(const zigbee_eui64_t source_eui64,
+                                          uint8_t source_endpoint_id,
+                                          zcl_cluster_id_t cluster_id,
+                                          const zigbee_eui64_t dest_eui64,
+                                          uint8_t dest_endpoint_id)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  if ((source_eui64 == nullptr) ||(dest_eui64 == nullptr)) {
+    sl_log_warning(LOG_TAG, "Error on unbinding request, null address");
+    status = SL_STATUS_NULL_POINTER;
+  } else {
+    auto call = std::make_shared<gw::BindingRequestRequest>(source_eui64,
+                                                            source_endpoint_id,
+                                                            cluster_id,
+                                                            dest_eui64,
+                                                            dest_endpoint_id,
+                                                            false);
 
     gw::RequestQueue::getInstance().enqueue(call);
   }
@@ -186,14 +218,17 @@ sl_status_t zigpc_gateway_request_binding(const zigbee_eui64_t eui64,
 
 sl_status_t
   zigpc_gateway_request_binding_endpoint(const zigbee_eui64_t eui64,
-                                         const zigbee_endpoint_t endpoint)
+                                         const zigbee_endpoint_t endpoint,
+                                         const zigbee_eui64_t gateway_eui64)
 {
   const unsigned int num_clusters = endpoint.cluster_count;
   for (unsigned int i = 0; i < num_clusters; i++) {
     sl_status_t status
       = zigpc_gateway_request_binding(eui64,
                                       endpoint.endpoint_id,
-                                      endpoint.cluster_list[i].cluster_id);
+                                      endpoint.cluster_list[i].cluster_id,
+                                      gateway_eui64,
+                                      ZIGBEE_DEFAULT_APP_ENDPOINT_ID );
 
     if (SL_STATUS_OK != status) {
       sl_log_warning(LOG_TAG,
@@ -336,9 +371,7 @@ bool zigpc_gateway_install_code_is_valid(const uint8_t *install_code,
 
 sl_status_t zigpc_gateway_bootload_restart()
 {
-    EmberStatus status = 
-        zigbeeHostLaunchBootloader();
-    
-    return (status == EMBER_SUCCESS) ? 
-                SL_STATUS_OK : SL_STATUS_FAIL;
+  EmberStatus status = zigbeeHostLaunchBootloader();
+
+  return (status == EMBER_SUCCESS) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }

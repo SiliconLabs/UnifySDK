@@ -29,7 +29,7 @@
 #include "dotdot_mqtt.hpp"
 #include "dotdot_mqtt_group_commands.h"
 #include "dotdot_mqtt_command_helpers.hpp"
-#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_parsing_helpers.hpp"
 
 static constexpr char LOG_TAG[] = "dotdot_mqtt";
 static constexpr char LOG_FMT_JSON_PARSE_FAIL[] = "by-group %s::%s: Unable to parse JSON payload: check payload syntax";
@@ -101,6 +101,8 @@ static void {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower parent.label}}_{{as
     {{/first}}
     {{#if isArray}}
       std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
+    {{else if (isString type)}}
+      std::string {{asSnakeCaseLower label}};
     {{/if}}{{/zcl_command_arguments}}
 
       nlohmann::json jsn;
@@ -112,15 +114,19 @@ static void {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower parent.label}}_{{as
           jsn,{{/first}}
         {{#if isArray}}
           {{asSnakeCaseLower label}}{{listComma this}}
+        {{else if (isString type)}}
+          {{asSnakeCaseLower label}}{{listComma this}}
         {{else}}
           fields.{{asSnakeCaseLower label}}{{listComma this}}
         {{/if}}
       {{#last}});{{/last}}{{/zcl_command_arguments}}
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       {{#zcl_command_arguments}}{{#if isArray}}
         fields.{{asSnakeCaseLower label}}_count = {{asSnakeCaseLower label}}.size();
         fields.{{asSnakeCaseLower label}} = {{asSnakeCaseLower label}}.data();
+      {{else if (isString type)}}
+        fields.{{asSnakeCaseLower label}} = {{asSnakeCaseLower label}}.c_str();
       {{/if}}{{/zcl_command_arguments}}
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -140,7 +146,7 @@ static void {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower parent.label}}_{{as
         group_id{{#zcl_command_arguments}}{{#first}},
         &fields{{/first}}{{/zcl_command_arguments}}
       );
-  } else if ((group_dispatch_callback != nullptr) && ({{asCommandCallback this}} != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_{{asCommandCallback this}}().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -190,9 +196,8 @@ static void {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower label}}_WriteAttrib
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && ({{asWriteAttributesCallback this}} != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_{{asWriteAttributesCallback this}}().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "{{label}}",
                               "WriteAttributes",

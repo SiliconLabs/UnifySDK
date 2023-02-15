@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Name and location service User’s Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -83,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -148,28 +154,28 @@ options. For more details about the options, run <code class="docutils literal n
 <h2>How to use it<a class="headerlink" href="#how-to-use-it" title="Permalink to this heading"></a></h2>
 <section id="how-to-create-a-node-with-two-endpoints-update-its-name-and-location-attributes-and-delete-a-node">
 <h3>How to create a node with two endpoints, update it’s Name and Location attributes and delete a node<a class="headerlink" href="#how-to-create-a-node-with-two-endpoints-update-its-name-and-location-attributes-and-delete-a-node" title="Permalink to this heading"></a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/State&quot;</span> -m <span class="s1">&#39;some_dummy_data&#39;</span> <span class="c1"># register UNID &quot;node_test&quot;</span>
-<span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported&quot;</span> -m <span class="s1">&#39;{&quot;value&quot;:[1,2,3]}&#39;</span> <span class="c1"># create 3 nodes with UNID &quot;node_test&quot; and endpoints 1,2,3</span>
-<span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/ep1/Basic/Attributes/PowerSource/Reported&quot;</span> -m <span class="s1">&#39;{&quot;any_json&quot;:&quot;payload&quot;}&#39;</span> <span class="c1"># add a node with UNID &quot;node_test&quot;, endpoint 1</span>
-<span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot;</span> -m <span class="s1">&#39;{&quot;Name&quot;:&quot;new_name&quot;}&#39;</span> <span class="c1"># write Name attribute for node with UNID &quot;node_test&quot;, endpoint 1</span>
-<span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot;</span> -m <span class="s1">&#39;{&quot;Location&quot;:&quot;new_location&quot;}&#39;</span> <span class="c1"># write Location attribute for node with UNID &quot;node_test&quot;, endpoint 1</span>
-<span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/State&quot;</span> -m <span class="s1">&#39;&#39;</span> <span class="c1"># remove all endpoints with UNID &quot;node_test&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/State&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;some_dummy_data&#39;</span><span class="w"> </span><span class="c1"># register UNID &quot;node_test&quot;</span>
+<span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;value&quot;:[1,2,3]}&#39;</span><span class="w"> </span><span class="c1"># create 3 nodes with UNID &quot;node_test&quot; and endpoints 1,2,3</span>
+<span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/ep1/Basic/Attributes/PowerSource/Reported&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;any_json&quot;:&quot;payload&quot;}&#39;</span><span class="w"> </span><span class="c1"># add a node with UNID &quot;node_test&quot;, endpoint 1</span>
+<span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;Name&quot;:&quot;new_name&quot;}&#39;</span><span class="w"> </span><span class="c1"># write Name attribute for node with UNID &quot;node_test&quot;, endpoint 1</span>
+<span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;Location&quot;:&quot;new_location&quot;}&#39;</span><span class="w"> </span><span class="c1"># write Location attribute for node with UNID &quot;node_test&quot;, endpoint 1</span>
+<span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/State&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="c1"># remove all endpoints with UNID &quot;node_test&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="how-to-test-a-proxying-feature">
 <h3>How to test a proxying feature<a class="headerlink" href="#how-to-test-a-proxying-feature" title="Permalink to this heading"></a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/State&quot;</span> -m <span class="s1">&#39;some_dummy_data&#39;</span> <span class="c1"># register UNID &quot;node_test&quot;</span>
-<span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported&quot;</span> -m <span class="s1">&#39;{&quot;value&quot;:[0]}&#39;</span> <span class="c1"># create a node with UNID &quot;node_test&quot; and endpoints 0</span>
-<span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/ep0/Basic/Attributes/LocationDescription/Desired&quot;</span> -m <span class="s1">&#39;{&quot;value&quot;:&quot;Rooftop&quot;}&#39;</span> <span class="c1"># after receiving a &quot;LocationDescription&quot; message - the node is &quot;proxied&quot; and couldn&#39;t perform the Location attribute update without Protocol Controller</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/State&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;some_dummy_data&#39;</span><span class="w"> </span><span class="c1"># register UNID &quot;node_test&quot;</span>
+<span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;value&quot;:[0]}&#39;</span><span class="w"> </span><span class="c1"># create a node with UNID &quot;node_test&quot; and endpoints 0</span>
+<span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/ep0/Basic/Attributes/LocationDescription/Desired&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;value&quot;:&quot;Rooftop&quot;}&#39;</span><span class="w"> </span><span class="c1"># after receiving a &quot;LocationDescription&quot; message - the node is &quot;proxied&quot; and couldn&#39;t perform the Location attribute update without Protocol Controller</span>
 </pre></div>
 </div>
 <p>Now a user wants to update a Location attribute by publishing to “WriteAttributes” topic:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_pub -h localhost -p <span class="m">1883</span> -t <span class="s2">&quot;ucl/by-unid/node_test/ep0/NameAndLocation/Commands/WriteAttributes&quot;</span> -m <span class="s1">&#39;{&quot;Location&quot;:&quot;updated_location&quot;}&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;ucl/by-unid/node_test/ep0/NameAndLocation/Commands/WriteAttributes&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;Location&quot;:&quot;updated_location&quot;}&#39;</span>
 </pre></div>
 </div>
 <p>But the NAL service doesn’t update anything, it publishes a message to <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/node_test/ep0/Basic/Commands/WriteAttributes</span></code> topic and waits a command to change Location attribute from the Protocol Controller:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_sub -v -h localhost -p <span class="m">1883</span> -t <span class="s1">&#39;#&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">username@hostname:~ $ </span>mosquitto_sub<span class="w"> </span>-v<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;#&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/node_test/State</span> some_dummy_data <span class="c c-Singleline"># published by user</span>
@@ -197,7 +203,7 @@ options. For more details about the options, run <code class="docutils literal n
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

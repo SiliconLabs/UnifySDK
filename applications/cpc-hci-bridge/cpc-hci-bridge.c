@@ -232,7 +232,7 @@ void *cpc_to_pty_func(void *ptr)
     size = cpc_read_endpoint(endpoint,
                              &data_from_cpc[0],
                              FROM_CPC_BUF_SIZE,
-                             SL_CPC_FLAG_NON_BLOCK);
+                             CPC_ENDPOINT_READ_FLAG_NON_BLOCKING);
     if (size > 0) {
       sl_log_debug(LOG_TAG, "Len from cpc: %zd", size);
       sl_log_debug(LOG_TAG, "Data from cpc:");

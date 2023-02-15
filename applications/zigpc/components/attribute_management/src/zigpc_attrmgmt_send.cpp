@@ -25,6 +25,7 @@
 
 #include "zigpc_config.h"
 
+#include "attribute_management.h"
 #include "attribute_management_int.h"
 #include "zigpc_attrmgmt_int.hpp"
 
@@ -93,7 +94,8 @@ void zigpc_attrmgmt_send_delayed_read_command_callback(void *data)
 
 void zigpc_attrmgmt_send_delayed_read_command(const zigbee_eui64_t eui64,
                                               zigbee_endpoint_id_t endpoint_id,
-                                              zcl_cluster_id_t cluster_id)
+                                              zcl_cluster_id_t cluster_id,
+                                              unsigned int delay_ms)
 {
   if (eui64 != NULL) {
     // NOTE: will be freed in zigpc_attrmgmt_send_delayed_read_command_callback
@@ -104,7 +106,7 @@ void zigpc_attrmgmt_send_delayed_read_command(const zigbee_eui64_t eui64,
     read_data->cluster_id  = cluster_id;
 
     ctimer_set(&read_data->timer,
-               ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES,
+               delay_ms,
                zigpc_attrmgmt_send_delayed_read_command_callback,
                static_cast<void *>(read_data));
   }
@@ -296,7 +298,6 @@ sl_status_t
                                                    endpoint_id,
                                                    cluster_id,
                                                    attr_ids
-
       );
     }
   }

@@ -6,7 +6,6 @@ var zwave__s0__sm_8c =
     [ "LOG_TAG", "zwave__s0__sm_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "S0_INCLUSION_TIMER", "zwave__s0__sm_8c.html#afa23edc3a2766774e7e76c0ed7d0edf0", null ],
     [ "S0_KEY_LENGTH", "zwave__s0__sm_8c.html#abe0a6a84bc35b95b882732cf63510d6a", null ],
-    [ "STR_CASE", "zwave__s0__sm_8c.html#aa9c745028f5403752ba3dcb66ee80fae", null ],
     [ "UNUSED", "zwave__s0__sm_8c.html#a86d500a34c624c2cae56bc25a31b12f3", null ],
     [ "s0_action_t", "zwave__s0__sm_8c.html#a9bad29ff29b3775317a9f5b32f9bef2c", [
       [ "S0_SEND_SCHEME_GET_ACTION", "zwave__s0__sm_8c.html#a9bad29ff29b3775317a9f5b32f9bef2cae21e422cf55e4b04660e4cb65437108a", null ],

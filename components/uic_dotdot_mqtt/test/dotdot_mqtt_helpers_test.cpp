@@ -10,11 +10,11 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-#include "unity.h"
-#include "dotdot_mqtt_helpers.hpp"
+#include "workaround.hpp"
 #include "dotdot_mqtt_helpers.h"
 
 extern "C" {
+#include "unity.h"
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp() {}
 

@@ -55,9 +55,14 @@ extern attribute_store_node_t node_id_node;
 /** The Supporting Node Endpoint Attribute ID */
 extern attribute_store_node_t endpoint_id_node;
 
+// UNID of the ZPC based on its NodeID / HomeID
+extern unid_t zpc_unid;
+// UNID of the test Supporting NodeID. based on its NodeID / HomeID
+extern unid_t supporting_node_unid;
+
 /**
  * @brief Create test network
- * 
+ *
  * Create a test network consiting of
  * - root
  *   - home_id_node

@@ -36,6 +36,7 @@
 
 // static functions intercept
 static attribute_store_node_changed_callback_t node_id_update_callback_save;
+static attribute_store_node_changed_callback_t endpoint_id_update_callback;
 static attribute_store_node_changed_callback_t
   network_status_update_callback_save;
 static uic_mqtt_dotdot_state_interview_callback_t
@@ -60,7 +61,7 @@ const attribute_store_node_t node_id_in_network_2 = 0x25;
 
 // Expected publications
 const static char expected_state_topic[] = "ucl/by-unid/zw-DEADBEEF-0009/State";
-const static char expected_node_topic[] = "ucl/by-unid/zw-DEADBEEF-0009";
+const static char expected_node_topic[]  = "ucl/by-unid/zw-DEADBEEF-0009";
 const static char expected_state_message_1[]
   = "{\"NetworkStatus\": \"Online interviewing\", \"Security\": \"None\", "
     "\"MaximumCommandDelay\": \"infinite\"}";
@@ -99,6 +100,7 @@ static void uic_mqtt_dotdot_state_discover_neighbors_callback_set_stub(
 void suiteSetUp()
 {
   node_id_update_callback_save                           = NULL;
+  endpoint_id_update_callback                            = NULL;
   network_status_update_callback_save                    = NULL;
   uic_mqtt_dotdot_state_interview_callback_save          = NULL;
   uic_mqtt_dotdot_state_remove_offline_callback_save     = NULL;
@@ -133,6 +135,13 @@ void setUp()
   attribute_store_register_callback_by_type_and_state_ExpectAndReturn(
     NULL,
     ATTRIBUTE_NODE_ID,
+    REPORTED_ATTRIBUTE,
+    SL_STATUS_OK);
+  attribute_store_register_callback_by_type_and_state_IgnoreArg_callback_function();
+
+  attribute_store_register_callback_by_type_and_state_ExpectAndReturn(
+    NULL,
+    ATTRIBUTE_ENDPOINT_ID,
     REPORTED_ATTRIBUTE,
     SL_STATUS_OK);
   attribute_store_register_callback_by_type_and_state_IgnoreArg_callback_function();
@@ -174,6 +183,8 @@ static sl_status_t attribute_store_callback_registration_stub(
 
   if (type == ATTRIBUTE_NODE_ID) {
     node_id_update_callback_save = callback_function;
+  } else if (type == ATTRIBUTE_ENDPOINT_ID) {
+    endpoint_id_update_callback = callback_function;
   } else if ((type == ATTRIBUTE_GRANTED_SECURITY_KEYS)
              || (type == ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL)
              || (type == ATTRIBUTE_NETWORK_STATUS)) {
@@ -403,6 +414,14 @@ void test_ucl_node_id_attribute_delete_case()
   node_id_update_callback_save(test_delete_node, ATTRIBUTE_DELETED);
 }
 
+void test_ucl_endpoint_id_update_create_cases()
+{
+  TEST_ASSERT_NOT_NULL(endpoint_id_update_callback);
+  // Nothing should happen if updated/created
+  endpoint_id_update_callback(324, ATTRIBUTE_CREATED);
+  endpoint_id_update_callback(324, ATTRIBUTE_UPDATED);
+}
+
 void test_ucl_network_status_attribute_update_happy_case()
 {
   TEST_ASSERT_NOT_NULL(network_status_update_callback_save);
@@ -468,8 +487,29 @@ void test_ucl_node_state_interview_command_cb_type_check()
 {
   TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_state_interview_callback_save);
   static dotdot_unid_t unid_test = "zw-DEADBEEF-0001";
+  network_status                 = NODE_STATE_TOPIC_STATE_INCLUDED;
   is_zpc_unid_ExpectAndReturn(unid_test, false);
-  TEST_ASSERT_EQUAL_UINT32(
+  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(unid_test,
+                                                                   0,
+                                                                   43);
+
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(43,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             66);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    66,
+    ATTRIBUTE_NETWORK_STATUS,
+    0,
+    77);
+  attribute_store_get_reported_ExpectAndReturn(77,
+                                               NULL,
+                                               sizeof(node_state_topic_state_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnThruPtr_value(&network_status);
+
+  TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     uic_mqtt_dotdot_state_interview_callback_save(unid_test, 0, 1));
 }
@@ -500,6 +540,25 @@ void test_ucl_node_state_remove_offline_command_cb_type_check()
   TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_state_remove_offline_callback_save);
   static dotdot_unid_t unid_test = "zw-DEADBEEF-0001";
   is_zpc_unid_ExpectAndReturn(unid_test, false);
+  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(unid_test,
+                                                                   0,
+                                                                   43);
+
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(43,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             66);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    66,
+    ATTRIBUTE_NETWORK_STATUS,
+    0,
+    77);
+  attribute_store_get_reported_ExpectAndReturn(77,
+                                               NULL,
+                                               sizeof(node_state_topic_state_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnThruPtr_value(&network_status);
   TEST_ASSERT_EQUAL_UINT32(
     SL_STATUS_OK,
     uic_mqtt_dotdot_state_remove_offline_callback_save(unid_test, 0, 1));
@@ -532,6 +591,25 @@ void test_ucl_node_state_discover_neighbors_command_cb_type_check()
   TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_state_discover_neighbors_callback_save);
   static dotdot_unid_t unid_test = "zw-DEADBEEF-0001";
   is_zpc_unid_ExpectAndReturn(unid_test, false);
+  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(unid_test,
+                                                                   0,
+                                                                   43);
+
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(43,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             66);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    66,
+    ATTRIBUTE_NETWORK_STATUS,
+    0,
+    77);
+  attribute_store_get_reported_ExpectAndReturn(77,
+                                               NULL,
+                                               sizeof(node_state_topic_state_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnThruPtr_value(&network_status);
   TEST_ASSERT_EQUAL_UINT32(
     SL_STATUS_OK,
     uic_mqtt_dotdot_state_discover_neighbors_callback_save(unid_test, 0, 1));
@@ -574,7 +652,7 @@ void test_teardown()
                           sizeof(expected_state_message_3) - 1,
                           true);
 
-  uic_mqtt_unretain_by_regex_Expect(expected_state_topic);
+  uic_mqtt_unretain_by_regex_Expect(REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS);
   uic_mqtt_unretain_by_regex_IgnoreArg_regex();
 
   // Kick the process exit
@@ -627,6 +705,7 @@ void test_ucl_publish_endpoint_list()
   attribute_store_get_node_child_ExpectAndReturn(test_node_id_node,
                                                  0,
                                                  test_ep_node);
+  attribute_store_node_exists_ExpectAndReturn(test_ep_node, true);
   attribute_store_is_value_defined_ExpectAndReturn(test_ep_node,
                                                    REPORTED_ATTRIBUTE,
                                                    1);

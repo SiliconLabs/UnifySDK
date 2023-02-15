@@ -11,7 +11,7 @@ var group__ZWAPI__INIT =
       [ "product_type", "structzwapi__chip__data__t.html#aa63fd5410a0cfc6f04bd4f6acbf452a3", null ],
       [ "rf_region", "structzwapi__chip__data__t.html#a8f421bbc256cb2dcd9566fd237f5855b", null ],
       [ "supported_bitmask", "structzwapi__chip__data__t.html#a0b7899d68309fff22750a3361a85e435", null ],
-      [ "supported_setup_bitmask", "structzwapi__chip__data__t.html#ae28771eafa63351fda32367ca4b7f5f1", null ],
+      [ "supported_setup_bitmask", "structzwapi__chip__data__t.html#a5035a1e13213f3b68a77bdd088fff5e4", null ],
       [ "version_major", "structzwapi__chip__data__t.html#a7777b839ad7297f0bef28934fb0c7440", null ],
       [ "version_minor", "structzwapi__chip__data__t.html#a18d47f765f6b21ddeefee6551de31aa3", null ]
     ] ],
@@ -75,7 +75,9 @@ var group__ZWAPI__INIT =
     [ "zwapi_log_to_file_enable", "group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887", null ],
     [ "zwapi_poll", "group__ZWAPI__INIT.html#gad44a77c9f06a6a5b81d5b3fd1f38e6b1", null ],
     [ "zwapi_refresh_capabilities", "group__ZWAPI__INIT.html#gab39e440bdb6435b04e754771c5ad41b5", null ],
+    [ "zwapi_set_awaiting_zwave_api_started", "group__ZWAPI__INIT.html#gac747addbb718dc86d958ba5f38bb5ad5", null ],
     [ "zwapi_set_zwave_lr_channel", "group__ZWAPI__INIT.html#ga4b9748e3273a22a02d08e545f8c39d14", null ],
     [ "zwapi_support_command_func", "group__ZWAPI__INIT.html#ga0a823074baec69913d0e8590b46e4e33", null ],
-    [ "zwapi_support_setup_func", "group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12", null ]
+    [ "zwapi_support_setup_func", "group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12", null ],
+    [ "zwave_api_get_callbacks", "group__ZWAPI__INIT.html#ga1f464f2f17aea6c240c99b18b86731a2", null ]
 ];

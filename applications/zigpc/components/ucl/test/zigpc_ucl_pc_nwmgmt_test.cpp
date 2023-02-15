@@ -334,4 +334,37 @@ void test_publish_state_should_publish_requested_params(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 }
 
+void test_publish_state_rejects_invalid_state(void)
+{
+  sl_status_t status = SL_STATUS_OK;
+  const char invalid_char = 0xFF;
+  const char invalid_str[] = {invalid_char,invalid_char,invalid_char, '\0'};
+
+  zigpc_net_mgmt_fsm_state_t test_state = ZIGPC_NET_MGMT_FSM_STATE_NODE_REMOVE;
+  const char *req_params[]             = {
+    invalid_str,
+    "Second",
+  };
+  zigpc_net_mgmt_on_network_state_update_t net_state = {
+    .new_state                       = test_state,
+    .next_supported_states_list = {
+      ZIGPC_NET_MGMT_FSM_STATE_IDLE,
+    },
+    .next_supported_states_count     = 1,
+    .requested_state_parameter_list = {
+      req_params[0],
+      req_params[1],
+    },
+    .requested_state_parameter_count = 2,
+  };
+
+  zigpc_datastore_read_network_IgnoreAndReturn(SL_STATUS_OK);
+  uic_mqtt_publish_Ignore();
+  
+  //status = 
+  status = zigpc_ucl::pc_nwmgmt::on_net_state_update(net_state);
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OBJECT_READ, status);
+}
+
 }  // extern "C"

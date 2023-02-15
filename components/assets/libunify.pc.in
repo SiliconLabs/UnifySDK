@@ -1,0 +1,15 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${exec_prefix}/include
+
+Name: unify
+Description: Unified IOT Controller library (Shared)
+Version: @CMAKE_PROJECT_VERSION@
+Libs: -L${libdir} -l:libunify.so @PC_LIBS@
+Cflags: -I${includedir}/uic -I${includedir}/uic/lib -I${includedir}/uic/sys  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB \
+-DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_PROGRAM_OPTIONS_NO_LIB \
+-DBOOST_CHRONO_NO_LINK -DBOOST_LOG_DYN_LINK -DBOOST_LOG_NO_LIB -DBOOST_LOG_SETUP_DYN_LINK \
+-DBOOST_LOG_SETUP_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK \
+-DBOOST_THREAD_DYN_LINK -DBOOST_THREAD_NO_LIB
+

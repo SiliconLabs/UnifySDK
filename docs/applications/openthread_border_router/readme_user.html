@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OpenThread Border Router User Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -54,8 +59,12 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/multiprotocol.html#applications">Applications</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../cpcd/readme_user.html">CPC Daemon</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../zigbeed/readme_user.html">Zigbee</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">OpenThread Border Router User Guide</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#openthread-boarder-router-user-guide">OpenThread Boarder Router User Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">OpenThread</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../cpc-hci-bridge/readme_user.html">Bluetooth</a></li>
 </ul>
 </li>
@@ -64,6 +73,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -92,11 +102,31 @@ with CPCd connectivity and multiprotocol capabilities enabled.
 It communicates to the 802.15.4 RCP using SPINEL via CPCd.
 It can run alongside zigbeed using the same RCP, provided both
 networks use the same 802.15.4 channel.</p>
-<p>To get started running OTBR with CPCd, see the
-<a class="reference internal" href="../../doc/getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol Setup</span></a> page.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The uic-otbr package contains a collection of compiled executables and
+systemd services which performs the role of a Thread border router when enabled.</p>
+<p>There are four OTBR services included in the uic-otbr package:</p>
+<ul class="simple">
+<li><p>otbr-agent    - service to instantiate an OpenThread networking agent</p></li>
+<li><p>otbr-web      - service to provide a web UI for configuration and management</p></li>
+<li><p>otbr-firewall - service to implement ingress filtering rules</p></li>
+<li><p>otbr-nat44    - service to allow connections to IPV4 endpoints</p></li>
+</ul>
+<p>These services can be independently controlled, or they can be started and stopped together with the top-level <strong>uic-otbr</strong> service.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="openthread-boarder-router-user-guide">
-<h1>OpenThread Boarder Router User Guide<a class="headerlink" href="#openthread-boarder-router-user-guide" title="Permalink to this heading"></a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p>The uic-otbr package depends on the uic-cpcd package of the same version.</p>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this heading"></a></h2>
+<p>To get started running OTBR with CPCd, and for RCP troubleshooting information, see the
+<a class="reference internal" href="../../doc/getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol Setup</span></a> page.</p>
+<p>For more information about OpenThread and the OpenThread Border Router project, see the
+<a class="reference external" href="https://openthread.io">OpenThread Homepage</a> and the <a class="reference external" href="https://github.com/openthread/openthread">OpenThread</a>
+and <a class="reference external" href="https://github.com/openthread/ot-br-posix">OpenThread Border Router</a> GitHub pages.</p>
+</section>
 </section>
 
 
@@ -104,7 +134,7 @@ networks use the same 802.15.4 channel.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

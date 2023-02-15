@@ -11,7 +11,9 @@ add_library(
   PUBLIC include
   PRIVATE src src/health_metrics ${nlohmann_json_include})
 
+if(BUILD_TESTING)
   add_subdirectory(test)
+endif()
 
-  target_link_libraries(
-    zigpc_diagnostics  PRIVATE zigpc_net_mgmt zigpc_gateway zigpc_common  uic_contiki uic_log  uic_mqtt)
+target_link_libraries(
+    zigpc_diagnostics  PRIVATE zigpc_net_mgmt zigpc_gateway zigpc_common  unify)

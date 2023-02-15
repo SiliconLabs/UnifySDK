@@ -26,7 +26,7 @@
 
 #include "dotdot_mqtt.h"
 #include "dotdot_mqtt.hpp"
-#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_parsing_helpers.hpp"
 #include "dotdot_mqtt_attributes.h"
 #include "dotdot_mqtt_translators.h"
 
@@ -7828,6 +7828,7 @@ static uic_mqtt_dotdot_scenes_attribute_current_group_callback_t uic_mqtt_dotdot
 static uic_mqtt_dotdot_scenes_attribute_scene_valid_callback_t uic_mqtt_dotdot_scenes_attribute_scene_valid_callback = nullptr;
 static uic_mqtt_dotdot_scenes_attribute_name_support_callback_t uic_mqtt_dotdot_scenes_attribute_name_support_callback = nullptr;
 static uic_mqtt_dotdot_scenes_attribute_last_configured_by_callback_t uic_mqtt_dotdot_scenes_attribute_last_configured_by_callback = nullptr;
+static uic_mqtt_dotdot_scenes_attribute_scene_table_callback_t uic_mqtt_dotdot_scenes_attribute_scene_table_callback = nullptr;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update handlers for Scenes
@@ -8288,6 +8289,89 @@ static void uic_mqtt_dotdot_on_scenes_last_configured_by_attribute_update(
   );
 
 }
+static void uic_mqtt_dotdot_on_scenes_scene_table_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_scenes_attribute_scene_table_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  std::vector<SSceneTable> scene_table;
+  size_t scene_table_count = 0;
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "Scenes::SceneTable: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      auto &scene_table_json = json_payload.at("value");
+      for (size_t i = 0; i < scene_table_json.size(); i++) {
+        scene_table.push_back(scene_table_json.at(i).get<SSceneTable>());
+          }
+      // Take our vector and pack it into the updated state
+      scene_table_count = scene_table.size();
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_scenes_attribute_scene_table_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    scene_table_count,
+    scene_table.data()
+  );
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute init functions for Scenes
@@ -8321,6 +8405,10 @@ sl_status_t uic_mqtt_dotdot_scenes_attributes_init()
     subscription_topic = base_topic + "Scenes/Attributes/LastConfiguredBy/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_scenes_last_configured_by_attribute_update);
   }
+  if(uic_mqtt_dotdot_scenes_attribute_scene_table_callback) {
+    subscription_topic = base_topic + "Scenes/Attributes/SceneTable/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_scenes_scene_table_attribute_update);
+  }
 
   return SL_STATUS_OK;
 }
@@ -8352,6 +8440,10 @@ void uic_mqtt_dotdot_scenes_attribute_name_support_callback_set(const uic_mqtt_d
 void uic_mqtt_dotdot_scenes_attribute_last_configured_by_callback_set(const uic_mqtt_dotdot_scenes_attribute_last_configured_by_callback_t callback)
 {
   uic_mqtt_dotdot_scenes_attribute_last_configured_by_callback = callback;
+}
+void uic_mqtt_dotdot_scenes_attribute_scene_table_callback_set(const uic_mqtt_dotdot_scenes_attribute_scene_table_callback_t callback)
+{
+  uic_mqtt_dotdot_scenes_attribute_scene_table_callback = callback;
 }
 
 // End of supported cluster.

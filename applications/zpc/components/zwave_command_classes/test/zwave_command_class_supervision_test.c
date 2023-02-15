@@ -11,6 +11,7 @@
  *
  *****************************************************************************/
 #include "zwave_command_class_supervision.h"
+#include "zwave_command_class_supervision_process.h"
 #include "zwave_command_class_supervision_internals.h"
 
 // Generic includes
@@ -65,6 +66,7 @@ static zwave_controller_connection_info_t test_connection_info = {};
 static zwave_tx_options_t test_tx_options                      = {};
 static zwapi_tx_report_t test_tx_info                          = {};
 static zwave_multicast_group_id_t test_group                   = 0;
+static zwave_multicast_group_id_t test_group_2                 = 0;
 static zwave_tx_session_id_t tx_session_id                     = NULL;
 static zwave_command_handler_t supervision_handler             = {};
 
@@ -142,6 +144,11 @@ void suiteSetUp()
   ZW_ADD_NODE_TO_MASK(2, node_list);
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     zwave_tx_assign_group(node_list, &test_group));
+  zwave_tx_lock_group(test_group);
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_tx_assign_group(node_list, &test_group_2));
+  zwave_tx_unlock_group(test_group);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -160,6 +167,7 @@ void setUp()
   received_supervision_status = 0;
   wake_up_value               = 0;
   memset(&received_tx_info, 0, sizeof(zwapi_tx_report_t));
+  test_tx_options.transport.group_id = ZWAVE_TX_INVALID_GROUP;
 
   //Contiki starts
   contiki_test_helper_init();
@@ -168,7 +176,8 @@ void setUp()
   zwave_command_handler_register_handler_Stub(
     &zwave_command_handler_register_handler_stub);
   zwave_command_class_supervision_init();
-  contiki_test_helper_run(10);  // (get through the init event)
+  // get through the init event and get a non-zero clock
+  contiki_test_helper_run(10);
 }
 
 static void wake_up_on_demand_verification(bool supported)
@@ -481,7 +490,6 @@ void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
   zwave_tx_send_data_IgnoreArg_data();
   zwave_tx_send_data_IgnoreArg_user();
   zwave_tx_send_data_IgnoreArg_tx_options();
-  zwave_tx_send_data_IgnoreArg_on_send_complete();
   zwave_tx_send_data_IgnoreArg_session();
 
   // Generate a new session
@@ -493,6 +501,9 @@ void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
     supervision_complete_callback,
     test_user,
     NULL);
+
+  // Here we just do not queue the follow-ups.
+  // Receiving the reports would just be the same.
 
   TEST_ASSERT_EQUAL(1, send_data_tx_calls);
   TEST_ASSERT_EQUAL(0, supervision_complete_calls);
@@ -514,20 +525,6 @@ void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
     test_encapsulated_frame_data,
     received_data + SUPERVISION_GET_ENCAPSULATED_COMMANDS_LENGTH_INDEX + 1,
     sizeof(test_encapsulated_frame_data));
-
-  TEST_ASSERT_EQUAL(0, supervision_complete_calls);
-
-  // Simulate zwave_tx callback, here we should be happy:
-  test_tx_info.ack_channel_number = 38;
-  test_tx_info.transmit_ticks     = 0xfa9;
-  test_tx_info.tx_channel_number  = 25;
-  TEST_ASSERT_NOT_NULL(supervision_on_send_complete);
-  supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
-                               &test_tx_info,
-                               supervision_user);
-
-  TEST_ASSERT_EQUAL(1, send_data_tx_calls);
-  TEST_ASSERT_EQUAL(0, supervision_complete_calls);
 
   // Now imagine that we get a success report without queuing follow-ups.
   uint8_t used_session_id = received_data[SUPERVISION_GET_SESSION_ID_INDEX]
@@ -573,7 +570,267 @@ void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
   // tx_info data should have been copied here due to lack of Singlecast follow-up.
 }
 
-void test_zwave_command_class_supervision_report_handler_multicast_transmit_fail()
+/**
+ * @brief Test that we restart superivsion expiry timer with multiple
+ * multicast sessions
+ */
+void test_zwave_command_class_supervision_report_2_multicast_sessions_with_timer_expiry()
+{
+  contiki_test_helper_run(10);
+  uint8_t test_frame_data[]
+    = {COMMAND_CLASS_SWITCH_BINARY, SWITCH_BINARY_SET, 0xFF, 0x12, 0x00};
+  uint8_t test_frame_data_2[] = {COMMAND_CLASS_SWITCH_MULTILEVEL,
+                                 SWITCH_MULTILEVEL_SET,
+                                 0x60,
+                                 0x60,
+                                 0x00};
+
+  test_connection_info.remote.multicast_group = test_group;
+  test_connection_info.remote.endpoint_id     = 2;
+  test_connection_info.remote.is_multicast    = true;
+
+  test_tx_options.number_of_responses               = 4;
+  test_tx_options.discard_timeout_ms                = 0;
+  test_tx_options.qos_priority                      = 39;
+  test_tx_options.transport.valid_parent_session_id = false;
+  test_tx_options.transport.parent_session_id       = 0;
+  test_tx_options.transport.is_test_frame           = false;
+  void *test_user                                   = (void *)0x935;
+
+  zwave_tx_send_data_AddCallback(
+    (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_frame_data)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_session();
+
+  // Generate the first session, multicast
+  zwave_command_class_supervision_send_data(&test_connection_info,
+                                            sizeof(test_frame_data),
+                                            test_frame_data,
+                                            &test_tx_options,
+                                            supervision_complete_callback,
+                                            test_user,
+                                            NULL);
+
+  // Generate 2 follow-ups:
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_frame_data)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_session();
+  test_tx_options.transport.group_id       = test_group;
+  test_connection_info.remote.node_id      = 1;
+  test_connection_info.remote.is_multicast = false;
+  zwave_command_class_supervision_send_data(&test_connection_info,
+                                            sizeof(test_frame_data),
+                                            test_frame_data,
+                                            &test_tx_options,
+                                            supervision_complete_callback,
+                                            test_user + 1,
+                                            NULL);
+  void *multicast_1_fu_1_handle = supervision_user;
+  uint8_t used_session_id_1 = received_data[SUPERVISION_GET_SESSION_ID_INDEX]
+                              & SUPERVISION_GET_PROPERTIES1_SESSION_ID_MASK;
+
+  // Now we get a Send complete for the First singlecast follow-up frame:
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_frame_data)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_session();
+
+  test_tx_options.transport.group_id  = test_group;
+  test_connection_info.remote.node_id = 2;
+  zwave_command_class_supervision_send_data(&test_connection_info,
+                                            sizeof(test_frame_data),
+                                            test_frame_data,
+                                            &test_tx_options,
+                                            supervision_complete_callback,
+                                            test_user + 1,
+                                            NULL);
+  void *multicast_1_fu_2_handle = supervision_user;
+
+  // Start second multicast wave:
+  test_connection_info.remote.endpoint_id     = 3;
+  test_connection_info.remote.multicast_group = test_group_2;
+  test_connection_info.remote.is_multicast    = true;
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_frame_data)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_session();
+
+  // Multicast 2
+  zwave_command_class_supervision_send_data(&test_connection_info,
+                                            sizeof(test_frame_data_2),
+                                            test_frame_data_2,
+                                            &test_tx_options,
+                                            supervision_complete_callback,
+                                            test_user,
+                                            NULL);
+
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_frame_data_2)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_session();
+  test_tx_options.transport.group_id       = test_group_2;
+  test_connection_info.remote.node_id      = 1;
+  test_connection_info.remote.is_multicast = false;
+  zwave_command_class_supervision_send_data(&test_connection_info,
+                                            sizeof(test_frame_data_2),
+                                            test_frame_data_2,
+                                            &test_tx_options,
+                                            supervision_complete_callback,
+                                            test_user + 1,
+                                            NULL);
+  void *multicast_2_fu_1_handle = supervision_user;
+  uint8_t used_session_id_2 = received_data[SUPERVISION_GET_SESSION_ID_INDEX]
+                              & SUPERVISION_GET_PROPERTIES1_SESSION_ID_MASK;
+
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_frame_data_2)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_session();
+  test_tx_options.transport.group_id       = test_group_2;
+  test_connection_info.remote.node_id      = 2;
+  test_connection_info.remote.is_multicast = false;
+  zwave_command_class_supervision_send_data(&test_connection_info,
+                                            sizeof(test_frame_data_2),
+                                            test_frame_data_2,
+                                            &test_tx_options,
+                                            supervision_complete_callback,
+                                            test_user + 1,
+                                            NULL);
+
+  // Send complete for the Second singlecast follow-up frame:
+  contiki_test_helper_run(50);
+  TEST_ASSERT_NOT_NULL(supervision_on_send_complete);
+  supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
+                               &test_tx_info,
+                               multicast_1_fu_1_handle);
+  contiki_test_helper_run(500);
+
+  // Pretend we get a reply:
+  uint8_t test_reply_frame_data[] = {COMMAND_CLASS_SUPERVISION,
+                                     SUPERVISION_REPORT,
+                                     used_session_id_1,
+                                     SUPERVISION_REPORT_SUCCESS,
+                                     0x03};
+
+  // Simulates an incoming report, with matching Session ID for the first node
+  test_connection_info.remote.node_id      = 1;
+  test_connection_info.remote.endpoint_id  = 2;
+  test_connection_info.remote.is_multicast = false;
+
+  TEST_ASSERT_EQUAL(0, supervision_complete_calls);
+  zwave_command_class_supervision_process_log();
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    supervision_handler.control_handler(&test_connection_info,
+                                        test_reply_frame_data,
+                                        sizeof(test_reply_frame_data)));
+
+  TEST_ASSERT_EQUAL(1, supervision_complete_calls);
+
+  // Now we send session 1 for node 2, but node 2 answers with session 2
+  contiki_test_helper_run(50);
+  supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
+                               &test_tx_info,
+                               multicast_1_fu_2_handle);
+  contiki_test_helper_run(500);
+
+  test_connection_info.remote.node_id      = 2;
+  test_connection_info.remote.endpoint_id  = 3;
+  test_connection_info.remote.is_multicast = false;
+  test_reply_frame_data[2]                 = used_session_id_2;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    supervision_handler.control_handler(&test_connection_info,
+                                        test_reply_frame_data,
+                                        sizeof(test_reply_frame_data)));
+
+  TEST_ASSERT_EQUAL(2, supervision_complete_calls);
+
+  // Now time out waiting for the last 2 sessions:
+  contiki_test_helper_run(50);
+  supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
+                               &test_tx_info,
+                               multicast_2_fu_1_handle);
+  contiki_test_helper_run(1);
+  contiki_test_helper_run(7000);  //SUPERVISION_REPORT_TIMEOUT is 8000
+  TEST_ASSERT_EQUAL(2, supervision_complete_calls);
+  // passing the timeout, both expired so there will be an extra 1 ms
+  //  before the next one
+  contiki_test_helper_run(1000);
+  TEST_ASSERT_EQUAL(3, supervision_complete_calls);
+  contiki_test_helper_run(1);
+  TEST_ASSERT_EQUAL(4, supervision_complete_calls);
+}
+
+void test_zwave_command_class_supervision_multicast_transmit_timeout()
 {
   // For the report to make sense, we need to initiate a transmission of
   // a Supervision Get.
@@ -583,6 +840,7 @@ void test_zwave_command_class_supervision_report_handler_multicast_transmit_fail
   test_connection_info.remote.multicast_group = test_group;
   test_connection_info.remote.endpoint_id     = 2;
   test_connection_info.remote.is_multicast    = true;
+  test_tx_options.transport.group_id          = ZWAVE_TX_INVALID_GROUP;
 
   test_tx_options.number_of_responses               = 4;
   test_tx_options.discard_timeout_ms                = 800;
@@ -620,7 +878,152 @@ void test_zwave_command_class_supervision_report_handler_multicast_transmit_fail
     test_user,
     NULL);
 
+  TEST_ASSERT_EQUAL_UINT32(test_tx_options.discard_timeout_ms,
+                           received_tx_options.discard_timeout_ms);
+  TEST_ASSERT_EQUAL_UINT8(test_tx_options.number_of_responses + 1,
+                          received_tx_options.number_of_responses);
+  TEST_ASSERT_EQUAL_PTR(test_tx_options.transport.parent_session_id,
+                        received_tx_options.transport.parent_session_id);
+  TEST_ASSERT_EQUAL_UINT32(test_tx_options.qos_priority,
+                           received_tx_options.qos_priority);
+  TEST_ASSERT_EQUAL_UINT8(
+    test_tx_options.transport.valid_parent_session_id,
+    received_tx_options.transport.valid_parent_session_id);
+  TEST_ASSERT_EQUAL_UINT8(test_tx_options.transport.is_test_frame,
+                          received_tx_options.transport.is_test_frame);
+
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(
+    test_encapsulated_frame_data,
+    received_data + SUPERVISION_GET_ENCAPSULATED_COMMANDS_LENGTH_INDEX + 1,
+    sizeof(test_encapsulated_frame_data));
+
   TEST_ASSERT_EQUAL(1, send_data_tx_calls);
+  TEST_ASSERT_EQUAL(0, supervision_complete_calls);
+
+  // here we will let the timer run out. We do not check with tx was which
+  // multicast session. SUPERVISION_SEND_DATA_EMERGENCY_TIMER + discard timeout
+  contiki_test_helper_run(59999 + test_tx_options.discard_timeout_ms);
+  zwave_command_class_supervision_process_log();
+
+  TEST_ASSERT_EQUAL(0, supervision_complete_calls);
+  contiki_test_helper_run(1);
+
+  // Callbacks were called with a transmit fail.
+  TEST_ASSERT_EQUAL(2, supervision_complete_calls);
+  TEST_ASSERT_EQUAL_UINT8(SUPERVISION_REPORT_FAIL, received_supervision_status);
+  TEST_ASSERT_EQUAL_PTR(test_user, received_user);
+  contiki_test_helper_run(1);
+  TEST_ASSERT_EQUAL(2, supervision_complete_calls);
+}
+
+void test_zwave_command_class_supervision_multicast_follow_up_transmit_timeout()
+{
+  // For the report to make sense, we need to initiate a transmission of
+  // a Supervision Get.
+  uint8_t test_encapsulated_frame_data[]
+    = {COMMAND_CLASS_SWITCH_BINARY, SWITCH_BINARY_SET, 0xFF, 0x12, 0x00};
+
+  test_connection_info.remote.multicast_group = test_group;
+  test_connection_info.remote.endpoint_id     = 2;
+  test_connection_info.remote.is_multicast    = true;
+  test_tx_options.transport.group_id          = ZWAVE_TX_INVALID_GROUP;
+
+  test_tx_options.number_of_responses               = 4;
+  test_tx_options.discard_timeout_ms                = 800;
+  test_tx_options.qos_priority                      = 39;
+  test_tx_options.transport.valid_parent_session_id = false;
+  test_tx_options.transport.parent_session_id       = 0;
+  test_tx_options.transport.is_test_frame           = false;
+  void *test_user                                   = (void *)0x935;
+
+  zwave_tx_send_data_AddCallback(
+    (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_encapsulated_frame_data)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_session();
+
+  // Generate a new session
+  zwave_command_class_supervision_send_data(
+    &test_connection_info,
+    sizeof(test_encapsulated_frame_data),
+    test_encapsulated_frame_data,
+    &test_tx_options,
+    supervision_complete_callback,
+    test_user,
+    NULL);
+
+  // Follow up 1
+  test_tx_options.transport.group_id       = test_group;
+  test_connection_info.remote.node_id      = 1;
+  test_connection_info.remote.is_multicast = false;
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_encapsulated_frame_data)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_session();
+
+  zwave_command_class_supervision_send_data(
+    &test_connection_info,
+    sizeof(test_encapsulated_frame_data),
+    test_encapsulated_frame_data,
+    &test_tx_options,
+    supervision_complete_callback,
+    test_user,
+    NULL);
+  void *multicast_fu_1_handle = supervision_user;
+
+  // Follow up 2
+  test_tx_options.transport.group_id       = test_group;
+  test_connection_info.remote.node_id      = 2;
+  test_connection_info.remote.is_multicast = false;
+  zwave_tx_send_data_ExpectAndReturn(&test_connection_info,
+                                     sizeof(test_encapsulated_frame_data)
+                                       + 4,  // Supervision get adds 4 bytes
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_data();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_session();
+
+  zwave_command_class_supervision_send_data(
+    &test_connection_info,
+    sizeof(test_encapsulated_frame_data),
+    test_encapsulated_frame_data,
+    &test_tx_options,
+    supervision_complete_callback,
+    test_user,
+    NULL);
+  void *multicast_fu_2_handle = supervision_user;
+
+  TEST_ASSERT_EQUAL(3, send_data_tx_calls);
   TEST_ASSERT_EQUAL(0, supervision_complete_calls);
   TEST_ASSERT_EQUAL_UINT32(test_tx_options.discard_timeout_ms,
                            received_tx_options.discard_timeout_ms);
@@ -641,25 +1044,30 @@ void test_zwave_command_class_supervision_report_handler_multicast_transmit_fail
     received_data + SUPERVISION_GET_ENCAPSULATED_COMMANDS_LENGTH_INDEX + 1,
     sizeof(test_encapsulated_frame_data));
 
-  //Get the timer to run after send data call
-  contiki_test_helper_run(0);
-
-  // Simulate zwave_tx callback, here we should be happy:
   TEST_ASSERT_NOT_NULL(supervision_on_send_complete);
   supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
                                &test_tx_info,
-                               supervision_user);
+                               multicast_fu_1_handle);
+  supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
+                               &test_tx_info,
+                               multicast_fu_2_handle);
 
-  TEST_ASSERT_EQUAL(1, send_data_tx_calls);
+  //Get the timer to run after send data call
+  contiki_test_helper_run(0);
+
+  TEST_ASSERT_EQUAL(3, send_data_tx_calls);
   TEST_ASSERT_EQUAL(0, supervision_complete_calls);
 
   // here we will let the timer run out. We do not check with tx was which
-  // multicast session. SUPERVISION_SEND_DATA_EMERGENCY_TIMER + discard timeout
-  contiki_test_helper_run(59999 + test_tx_options.discard_timeout_ms);
+  // multicast session. SUPERVISION_REPORT_TIMEOUT
+  contiki_test_helper_run(7999);
+  zwave_command_class_supervision_process_log();
   TEST_ASSERT_EQUAL(0, supervision_complete_calls);
-  contiki_test_helper_run(1);
+  contiki_test_helper_run(2);
 
-  // Callbacks were called with a transmit fail.
+  // Callbacks were called with a transmit fail, 1 at a time.
+  TEST_ASSERT_EQUAL(1, supervision_complete_calls);
+  contiki_test_helper_run(1);
   TEST_ASSERT_EQUAL(2, supervision_complete_calls);
   TEST_ASSERT_EQUAL_UINT8(SUPERVISION_REPORT_FAIL, received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user, received_user);
@@ -667,6 +1075,8 @@ void test_zwave_command_class_supervision_report_handler_multicast_transmit_fail
 
 void test_zwave_command_class_supervision_report_handler_zwave_tx_fail()
 {
+  zwave_command_class_supervision_process_log();
+
   // For the report to make sense, we need to initiate a transmission of
   // a Supervision Get.
   uint8_t test_encapsulated_frame_data[]
@@ -942,7 +1352,7 @@ void test_zwave_command_class_supervision_report_handler_working()
                           received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user, received_user);
 
-  // Simulates a second report, with unkonwn Session ID
+  // Simulates a second report, with unknown Session ID
   test_reply_frame_data[SUPERVISION_REPORT_SESSION_ID_INDEX]
     = ((used_session_id + 1)
        | SUPERVISION_GET_PROPERTIES1_STATUS_UPDATES_BIT_MASK);

@@ -43,6 +43,13 @@
 #include <stddef.h>
 #include "sl_status.h"
 
+// Helper defines for applications to "unretain_by_regex"
+// clang-format off
+#define REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS   "^(?!((ucl\\/by-unid\\/.*\\/State$)|(ucl\\/by-mqtt-client\\/.*))).*"
+#define REGEX_NOT_STATE_TOPIC                   "^(?!ucl\\/by-unid\\/.*\\/State$).*"
+#define REGEX_ALL_TOPICS                        "^.+"
+// clang-format on
+
 /**
  * @brief A callback type for pushing incoming messages.
  *
@@ -53,6 +60,11 @@
 typedef void (*mqtt_message_callback_t)(const char *topic,
                                         const char *message,
                                         const size_t message_length);
+
+typedef void (*mqtt_message_callback_ex_t)(const char *topic,
+                                           const char *message,
+                                           const size_t message_length,
+                                           void *user);
 
 /**
  * @brief A callback type for a before disconnect and after connect.
@@ -142,6 +154,18 @@ void uic_mqtt_unretain_by_regex(const char *regex);
 void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callback);
 
 /**
+ * @brief Subscribe to a topic.
+ *
+ * @param topic Describes the subscription topic pattern.
+ * @param callback A callback function,
+ *                 that will be called when a message is received from the broker.
+ *
+ */
+void uic_mqtt_subscribe_ex(const char *topic,
+                           mqtt_message_callback_ex_t callback,
+                           void *user);
+
+/**
  * @brief Unsubscribe from a topic.
  *
  * @param topic Describes the subscription pattern.
@@ -149,6 +173,18 @@ void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callback);
  *
  */
 void uic_mqtt_unsubscribe(const char *topic, mqtt_message_callback_t callback);
+
+/**
+ * @brief Unsubscribe from a topic.
+ *
+ * @param topic     Describes the subscription pattern.
+ * @param callback  A callback function corresponds to unsubscribe topic
+ * @param user      User pointer value to pass to the MQTT message callback
+ *
+ */
+void uic_mqtt_unsubscribe_ex(const char *topic,
+                             mqtt_message_callback_ex_t callback,
+                             void *user);
 
 /**
  * @brief Set a callback which will be executed before calling a disconnect.
@@ -163,9 +199,22 @@ void uic_mqtt_set_before_disconnect_callback(
  * @brief Set a callback which will be executed after having connected.
  *
  * @param callback A callback function to be executed after having connected.
- *
  */
 void uic_mqtt_set_after_connect_callback(mqtt_connection_callbacks_t callback);
+
+/**
+ * @brief Gets the MQTT Client ID in used by the MQTT Client.
+ *
+ * @returns NULL if no Client ID is in use, else a C string containing the Client ID.
+ */
+const char *uic_mqtt_get_client_id();
+
+/**
+ * @brief Checks if we are currently connected to an MQTT Broker.
+ *
+ * @returns true if connected to a broker
+ */
+bool uic_mqtt_is_connected_to_broker();
 
 #ifdef __cplusplus
 }

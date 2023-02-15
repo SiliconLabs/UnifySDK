@@ -72,6 +72,12 @@ static sl_status_t
   return SL_STATUS_OK;
 }
 
+static bool attribute_store_node_exists_stub(attribute_store_node_t node,
+                                             int cmock_num_calls)
+{
+  return node != ATTRIBUTE_STORE_INVALID_NODE;
+}
+
 /// Called before each and every test
 void setUp()
 {
@@ -81,6 +87,7 @@ void setUp()
   attribute_resolver_register_rule_Stub(get_function_ptrs);
   zwave_command_handler_register_handler_Stub(get_handler);
   attribute_store_register_callback_by_type_Stub(get_ats_callbacks);
+  attribute_store_node_exists_Stub(&attribute_store_node_exists_stub);
 }
 
 /// Report frame with testing

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unify Coding Standard &mdash; Unify Host SDK</title>
@@ -18,10 +18,15 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Api documentation" href="../api.html" />
+    <link rel="next" title="API documentation" href="../api.html" />
     <link rel="prev" title="How To Make an IoT Service" href="../how_to_develop_an_iot_service.html" /> 
 </head>
 
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -120,17 +125,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#id3">8 C++ Specific Guidelines</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../api.html">Api documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#component-templates">Component Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
 
@@ -172,7 +177,7 @@ disagree with is better than having no coding standard.</p>
 <h3>1.2 Latest version of this document<a class="headerlink" href="#latest-version-of-this-document" title="Permalink to this heading"></a></h3>
 <p>This document is version <strong>0.1</strong>.</p>
 <p>The latest version of this document can always be found in Stash:</p>
-<p><a class="reference external" href="https://stash.silabs.com/projects/UIC/repos/uic/browse/doc/standards/coding-standard.md">coding_standard</a></p>
+<p><a class="reference external" href="https://siliconlabs.github.io/UnifySDK/doc/standards/coding-standard.html">coding_standard</a></p>
 <p><strong>Note:</strong> The reason why this document is in git is so that we can use pull-
 requests for changes and make it easier for people to track changes to the
 standard.</p>
@@ -2199,7 +2204,7 @@ are not mockable with CMock. E.g. simple converters.</p></li>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

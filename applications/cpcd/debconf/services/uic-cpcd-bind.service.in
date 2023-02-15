@@ -1,0 +1,10 @@
+[Unit]
+Description=UIC CPCd Binding
+ConditionPathExists=!/var/lib/uic/cpcd-binding-key
+
+[Service]
+Type=oneshot
+ExecStart=${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/cpcd --bind ecdh --key /var/lib/uic/cpcd-binding-key
+User=uic
+Group=uic
+LimitMEMLOCK=infinity

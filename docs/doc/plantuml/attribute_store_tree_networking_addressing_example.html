@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/plantuml/attribute_store_tree_networking_addressing_example.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <figure class="align-center">
+<p class="plantuml">
+<img src="../../_images/plantuml-33d2fc468245e7b3f2a5e5517b7ba87eb839d4c1.png" alt="!theme plain
+title Attribute Store tree networking addressing example
+
+object root
+root : Attribute Type = TREE_ROOT
+root : value = Desired: [], Reported: []
+
+object &quot;HomeID&quot; as home_id #fffae6
+home_id : Attribute Type = ATTRIBUTE_HOME_ID
+home_id : value = Desired: [], Reported: [FB E6 8C CE]
+
+object &quot;NodeID&quot; as node_id_1 #f2ffe6
+node_id_1 : Attribute Type = ATTRIBUTE_NODE_ID
+node_id_1 : value = Desired: [], Reported: [03]
+
+object &quot;NodeID&quot; as node_id_2 #f2ffe6
+node_id_2 : Attribute Type = ATTRIBUTE_NODE_ID
+node_id_2 : value = Desired: [], Reported: [04]
+
+object &quot;Endpoint&quot; as endpoint_1 #e6fff7
+endpoint_1 : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+endpoint_1 : value = Desired: [], Reported: [00]
+
+object &quot;Endpoint&quot; as endpoint_2 #e6fff7
+endpoint_2 : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+endpoint_2 : value = Desired: [], Reported: [01]
+
+object &quot;Endpoint&quot; as endpoint_3 #e6fff7
+endpoint_3 : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+endpoint_3 : value = Desired: [], Reported: [00]
+
+object &quot;OnOff attribute&quot; as node_1_ep_2_on_off #FFFFFF
+node_1_ep_2_on_off : Attribute Type = DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF
+node_1_ep_2_on_off : value = Desired: [01], Reported: [00]
+
+root *-- home_id
+home_id *-- node_id_1
+home_id *-- node_id_2
+node_id_1 *-- endpoint_1
+node_id_1 *-- endpoint_2
+node_id_2 *-- endpoint_3
+endpoint_2 *-- node_1_ep_2_on_off"/>
+</p>
+</figure>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

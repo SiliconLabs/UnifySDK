@@ -10,21 +10,31 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+// Includes from the component being tested
+#include "zwave_s2_transport.h"
+#include "zwave_s2_internal.h"
+#include "S2_external.h"  // To invoke S2_send_frame()
+#include "zwave_s2_keystore_int.h"
 
+// Mocks
 #include "cmock.h"
 #include "contiki_test_helper.h"
 #include "process.h"
-
 #include "S2_mock.h"
-#include "sl_log.h"
-#include "sl_status.h"
-#include "zwave_s2_transport.h"
 #include "zwapi_protocol_mem_mock.h"
-#include "zwave_s2_keystore_int.h"
-#include "zwave_s2_internal.h"
-#include "zwave_rx.h"
-#include "zwave_controller_callbacks.h"
 #include "zwave_tx_mock.h"
+
+// ZPC Components
+#include "zwave_controller_callbacks.h"
+#include "s2_classcmd.h"
+#include "ZW_classcmd.h"
+#include "zwave_rx.h"
+
+// Unify components
+#include "sl_status.h"
+#include "sl_log.h"
+
+// Generic includes
 #include <string.h>
 
 CTR_DRBG_CTX s2_ctr_drbg;
@@ -138,6 +148,42 @@ void test_zwave_s2_send_data()
   TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_VERIFIED, my_status);
 }
 
+void test_zwave_s2_send_data_nonce_report_sos()
+{
+  uint8_t nonce_report[]
+    = {COMMAND_CLASS_SECURITY_2, SECURITY_2_NONCE_REPORT, 0x23, 0x01, 0x00};
+  const s2_connection_t s2_connection = {.l_node = 3, .r_node = 5};
+
+  // Expected zwave_tx_send_data parameters
+  zwave_controller_connection_info_t expected_info = {};
+  zwave_tx_options_t expected_options              = {};
+
+  expected_info.encapsulation  = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  expected_info.local.node_id  = s2_connection.l_node;
+  expected_info.remote.node_id = s2_connection.r_node;
+
+  expected_options.qos_priority
+    = ZWAVE_TX_QOS_RECOMMENDED_TIMING_CRITICAL_PRIORITY;
+  expected_options.number_of_responses = 1;
+  // SOS/MOS flags triggers an ignore of the incoming frames back-off
+  expected_options.transport.ignore_incoming_frames_back_off = true;
+
+  zwave_tx_send_data_ExpectAndReturn(&expected_info,
+                                     sizeof(nonce_report),
+                                     nonce_report,
+                                     &expected_options,
+                                     NULL,
+                                     0,
+                                     0,
+                                     SL_STATUS_OK);
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+
+  // Send from S2, will trigger a call to zwave_tx_send_data
+  TEST_ASSERT_EQUAL(
+    1,
+    S2_send_frame(NULL, &s2_connection, nonce_report, sizeof(nonce_report)));
+}
+
 static sl_status_t zwapi_memory_get_buffer_stub(uint16_t offset,
                                                 uint8_t *buf,
                                                 uint8_t length,
@@ -148,8 +194,8 @@ static sl_status_t zwapi_memory_get_buffer_stub(uint16_t offset,
        .security_netkey = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
        .assigned_keys   = 0x87,
        .security2_key   = {{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-                         {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
-                         {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}},
+                           {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+                           {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}},
        .ecdh_priv_key
        = {0xab, 0xe,  0xab, 0xe,  0xab, 0xe,  0xab, 0xe,  0xab, 0xe,  0xab,
           0xe,  0xab, 0xe,  0xab, 0xe,  0xab, 0xe,  0xab, 0xe,  0xab, 0xe,

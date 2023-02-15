@@ -42,6 +42,16 @@ bool attribute_store_is_value_defined(
   }
 }
 
+bool attribute_store_is_reported_defined(attribute_store_node_t node)
+{
+  return attribute_store_is_value_defined(node, REPORTED_ATTRIBUTE);
+}
+
+bool attribute_store_is_desired_defined(attribute_store_node_t node)
+{
+  return attribute_store_is_value_defined(node, DESIRED_ATTRIBUTE);
+}
+
 bool attribute_store_is_value_matched(attribute_store_node_t node)
 {
   uint8_t desired_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {0};
@@ -132,6 +142,13 @@ sl_status_t attribute_store_get_reported(attribute_store_node_t node,
  */
 static uint8_t sanitize_string_to_local_buffer(const char *string)
 {
+  // Double check for NULL pointers
+  if (string == NULL) {
+    // Write an empty string in the Attribute store if we get a NULL pointer
+    received_value[0] = '\0';
+    return sizeof(char);
+  }
+
   // Sanitize the length of the string, using our local buffer
   strncpy((char *)received_value, string, sizeof(received_value));
   // Ensure NULL termination
@@ -192,6 +209,38 @@ sl_status_t
     REPORTED_ATTRIBUTE,
     (const uint8_t *)received_value,
     string_length);
+}
+
+sl_status_t attribute_store_append_to_reported(attribute_store_node_t node,
+                                               const uint8_t *array,
+                                               uint8_t extra_array_length)
+{
+  // Read the existing array in our local buffer
+  uint8_t array_length = 0;
+  attribute_store_get_node_attribute_value(node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)received_value,
+                                           &array_length);
+
+  if (array_length == 0) {
+    return attribute_store_set_reported(node, array, extra_array_length);
+  }
+
+  uint8_t new_array_length;
+  if (array_length + extra_array_length < 255) {
+    new_array_length = array_length + extra_array_length;
+  } else {
+    return SL_STATUS_FAIL;
+  }
+  // Now try to append as much as possible from the array to the old array
+  memcpy(received_value + array_length, array, extra_array_length);
+
+  // Push it to the attribute store:
+  return attribute_store_set_node_attribute_value(
+    node,
+    REPORTED_ATTRIBUTE,
+    (const uint8_t *)received_value,
+    new_array_length);
 }
 
 /**
@@ -408,6 +457,28 @@ sl_status_t attribute_store_set_child_reported_only_if_missing(
   return attribute_store_set_reported(child_node, value, value_size);
 }
 
+sl_status_t attribute_store_set_child_reported_only_if_exists(
+  attribute_store_node_t parent,
+  attribute_store_type_t type,
+  const void *value,
+  uint8_t value_size)
+{
+  attribute_store_node_t child_node
+    = attribute_store_get_first_child_by_type(parent, type);
+  return attribute_store_set_reported(child_node, value, value_size);
+}
+
+sl_status_t attribute_store_set_child_desired_only_if_exists(
+  attribute_store_node_t parent,
+  attribute_store_type_t type,
+  const void *value,
+  uint8_t value_size)
+{
+  attribute_store_node_t child_node
+    = attribute_store_get_first_child_by_type(parent, type);
+  return attribute_store_set_desired(child_node, value, value_size);
+}
+
 void attribute_store_walk_tree(attribute_store_node_t top,
                                void (*function)(attribute_store_node_t))
 {
@@ -415,6 +486,18 @@ void attribute_store_walk_tree(attribute_store_node_t top,
   function(top);
   for (size_t i = 0; i < attribute_store_get_node_child_count(top); i++) {
     attribute_store_walk_tree(attribute_store_get_node_child(top, i), function);
+  }
+}
+
+void attribute_store_walk_tree_with_return_value(
+  attribute_store_node_t top, sl_status_t (*function)(attribute_store_node_t))
+{
+  // Apply the function on the current node, ignore the sl_status_t return value:
+  function(top);
+  for (size_t i = 0; i < attribute_store_get_node_child_count(top); i++) {
+    attribute_store_walk_tree_with_return_value(
+      attribute_store_get_node_child(top, i),
+      function);
   }
 }
 
@@ -460,16 +543,7 @@ sl_status_t attribute_store_delete_all_children(attribute_store_node_t node)
   return SL_STATUS_OK;
 }
 
-/**
- * @brief Helper function that sets the Reported or Desired value of a number
- *
- * Note: Does not work with the DESIRED_OR_REPORTED attribute value type.
- *
- * @param node            Attribute Store node to read the value from
- * @param value           The value to set
- * @return sl_status_t
- */
-static sl_status_t
+sl_status_t
   attribute_store_set_number(attribute_store_node_t node,
                              number_t value,
                              attribute_store_node_value_state_t value_state)
@@ -568,16 +642,7 @@ sl_status_t attribute_store_set_desired_number(attribute_store_node_t node,
   return attribute_store_set_number(node, value, DESIRED_ATTRIBUTE);
 }
 
-/**
- * @brief Helper function that sets the Reported or Desired value of a number
- *
- * Note: Does not work with the DESIRED_OR_REPORTED attribute value type.
- *
- * @param node            Attribute Store node to read the value from
- * @param value           The value to set
- * @return sl_status_t
- */
-static number_t
+number_t
   attribute_store_get_number(attribute_store_node_t node,
                              attribute_store_node_value_state_t value_state)
 {
@@ -745,5 +810,17 @@ attribute_store_node_t
 
   child_node = attribute_store_add_node(type, parent_node);
   attribute_store_set_desired(child_node, value, value_size);
+  return child_node;
+}
+
+attribute_store_node_t
+  attribute_store_create_child_if_missing(attribute_store_node_t node,
+                                          attribute_store_type_t type)
+{
+  attribute_store_node_t child_node
+    = attribute_store_get_first_child_by_type(node, type);
+  if (ATTRIBUTE_STORE_INVALID_NODE == child_node) {
+    child_node = attribute_store_add_node(type, node);
+  }
   return child_node;
 }

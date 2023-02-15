@@ -11,8 +11,6 @@ var zwapi__internal_8h =
     [ "zwapi_send_command_with_response", "zwapi__internal_8h.html#a5ec89d5817b8ce00454fce891ae8400e", null ],
     [ "zwave_api_protocol_init_callbacks", "zwapi__internal_8h.html#af8a0f2e49dcc15d4fd7b84a1704342f3", null ],
     [ "zwave_api_protocol_rx_dispatch", "zwapi__internal_8h.html#adae889855e6d3fcf03c1723303a9ab13", null ],
-    [ "awaiting_zwave_api_started", "zwapi__internal_8h.html#a70f3cbc632187587379653d3a2917ca3", null ],
-    [ "callbacks", "zwapi__internal_8h.html#afc8113e4f1b79c8443755893466cefe2", null ],
     [ "zwapi_add_node_to_network_callback", "zwapi__internal_8h.html#ad245089f2401680aa65614f1e06cb2b8", null ],
     [ "zwapi_assign_return_route_callback", "zwapi__internal_8h.html#ae07829e817692ad0daad81d74cfa8707", null ],
     [ "zwapi_assign_suc_return_route_callback", "zwapi__internal_8h.html#af9d7c27bfe1b540259cad46fe1916a03", null ],

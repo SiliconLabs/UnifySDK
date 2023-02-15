@@ -20,5 +20,6 @@
 #include "zigpc_cpu_load_metric.hpp"
 #include "zigpc_example_metric.hpp"
 #include "zigpc_counter_plugin_metric.hpp"
+#include "zigpc_neighbor_table_metric.hpp"
 #endif
 #endif

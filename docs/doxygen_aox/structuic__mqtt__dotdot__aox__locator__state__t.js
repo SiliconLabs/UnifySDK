@@ -1,0 +1,25 @@
+var structuic__mqtt__dotdot__aox__locator__state__t =
+[
+    [ "allow_list", "structuic__mqtt__dotdot__aox__locator__state__t.html#adb99dbbebf48830170ee855495ecd289", null ],
+    [ "allow_list_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#a599b6bcdd8f78f07920815872e499792", null ],
+    [ "angle_correction_delay", "structuic__mqtt__dotdot__aox__locator__state__t.html#aedf0ca6623cf2a9262d3728b10cebfef", null ],
+    [ "angle_correction_timeout", "structuic__mqtt__dotdot__aox__locator__state__t.html#a419402d1a7b02d4dcffd5d4f7ec6e6ad", null ],
+    [ "angle_filtering", "structuic__mqtt__dotdot__aox__locator__state__t.html#acd9d9976ae94a74466df6463a45a8f9c", null ],
+    [ "angle_filtering_weight", "structuic__mqtt__dotdot__aox__locator__state__t.html#a39c0a31b678933c19082a8f2a68eb3f1", null ],
+    [ "antenna_array", "structuic__mqtt__dotdot__aox__locator__state__t.html#aa26ba6f4de7fe3d4f2ab71038d65f332", null ],
+    [ "antenna_array_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#a52fee70edefddeaa747ea49be6c95ea8", null ],
+    [ "antenna_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#af23cdfb4b8eb8dac36a08eece37aadb4", null ],
+    [ "aox_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#a1c81b801fa19026d97f424f3cd6c81ee", null ],
+    [ "azimuth_mask", "structuic__mqtt__dotdot__aox__locator__state__t.html#a8d21446894e91d4342137bda73192064", null ],
+    [ "azimuth_mask_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#ad9db11399d5971a412d80a3f425f0c47", null ],
+    [ "cte_length", "structuic__mqtt__dotdot__aox__locator__state__t.html#a6dd2c68f49cd3ca0cbebcbbd4d19b6c6", null ],
+    [ "cte_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#aed544dafe9673ec3700537feffaf11f7", null ],
+    [ "cte_sampling_interval", "structuic__mqtt__dotdot__aox__locator__state__t.html#a193adc8ef154f32e33728c44670743fe", null ],
+    [ "elevation_mask", "structuic__mqtt__dotdot__aox__locator__state__t.html#a3446486697bd472be4d786026c862289", null ],
+    [ "elevation_mask_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#a7e3c76da67536f7a88c119806e35ba51", null ],
+    [ "period_samples", "structuic__mqtt__dotdot__aox__locator__state__t.html#a44f369010f39745d2033a2212adc1774", null ],
+    [ "position_and_orientation", "structuic__mqtt__dotdot__aox__locator__state__t.html#a3ba80b15a1019daedc25e648cf13d457", null ],
+    [ "position_and_orientation_valid", "structuic__mqtt__dotdot__aox__locator__state__t.html#a36788700156387b39ee5916f155a2b25", null ],
+    [ "reporting_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#a9d695c54c169ff0846fef5fd074fdd07", null ],
+    [ "slot_duration", "structuic__mqtt__dotdot__aox__locator__state__t.html#a6e7e6e9c6988d9c5a0ae5872468a5e6f", null ]
+];

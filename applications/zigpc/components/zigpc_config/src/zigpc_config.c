@@ -34,10 +34,13 @@ static const char *CONFIG_KEY_ZIGPC_NCP_FIRMWARE_PATH
   = "zigpc.ncp_firmware_path";
 static const char *CONFIG_FLAG_ZIGPC_NCP_UPDATE = "zigpc.ncp_update";
 
-static const char *CONFIG_KEY_ZIGPC_OTA_PATH = "zigpc.ota_path";
-static const char *ZIGPC_DEFAULT_OTA_PATH    = "./ota-files/";
+static const char *CONFIG_KEY_ZIGPC_OTA_PATH        = "zigpc.ota_path";
+static const char *ZIGPC_DEFAULT_OTA_PATH           = "./ota-files/";
 static const char *CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY = "zigpc.poll_attr_only";
-static const bool DEFAULT_POLL_ATTR_ONLY = false;
+static const bool DEFAULT_POLL_ATTR_ONLY            = false;
+
+static const char *CONFIG_KEY_ZIGPC_POLLING_RATE = "zigpc.attr_polling_rate_ms";
+static const int ZIGPC_DEFAULT_POLLING_RATE_MS  = 20000;
 
 static zigpc_config_t config;
 int zigpc_config_init()
@@ -59,6 +62,10 @@ int zigpc_config_init()
   status |= config_add_string(CONFIG_KEY_ZIGPC_SERIAL_PORT,
                               "serial port to use",
                               DEFAULT_SERIAL_PORT);
+
+  status |= config_add_int(CONFIG_KEY_ZIGPC_POLLING_RATE,
+                           "Polling rate in MS",
+                           ZIGPC_DEFAULT_POLLING_RATE_MS);
   status
     |= config_add_bool(CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY,
                        "Allow Trust Center joins using well-known link key",
@@ -74,16 +81,13 @@ int zigpc_config_init()
   status |= config_add_string(CONFIG_KEY_ZIGPC_OTA_PATH,
                               "OTA file path for storing OTA firmware",
                               ZIGPC_DEFAULT_OTA_PATH);
-  status |= config_add_string(
-                CONFIG_KEY_ZIGPC_NCP_FIRMWARE_PATH,
-                "Path to firmware to update NCP",
-                ""); //No default path
-  
-  status
-    |= config_add_bool(CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY ,
-                       "Flag to poll attributes only",
-                       DEFAULT_POLL_ATTR_ONLY );
+  status |= config_add_string(CONFIG_KEY_ZIGPC_NCP_FIRMWARE_PATH,
+                              "Path to firmware to update NCP",
+                              "");  //No default path
 
+  status |= config_add_bool(CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY,
+                            "Flag to poll attributes only",
+                            DEFAULT_POLL_ATTR_ONLY);
 
   return status != CONFIG_STATUS_OK;
 }
@@ -99,8 +103,10 @@ sl_status_t zigpc_config_fixt_setup()
   status |= config_get_as_bool(CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY,
                                &config.tc_use_well_known_key);
   status |= config_get_as_string(CONFIG_KEY_ZIGPC_OTA_PATH, &config.ota_path);
-  status |= config_get_as_bool(CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY ,
+  status |= config_get_as_bool(CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY,
                                &config.poll_attr_only);
+  status |= config_get_as_int(CONFIG_KEY_ZIGPC_POLLING_RATE,
+                              &config.attr_polling_rate_ms);
 
   return status == CONFIG_STATUS_OK ? SL_STATUS_OK : SL_STATUS_FAIL;
 }

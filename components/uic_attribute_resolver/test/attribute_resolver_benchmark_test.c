@@ -17,6 +17,7 @@
 #include "attribute_store_fixt.h"
 #include "datastore_fixt.h"
 #include "attribute_resolver.h"
+#include "attribute_resolver_rule_mock.h"
 #include "attribute_resolver_rule_internal_mock.h"
 #include "sl_log.h"
 #include "attribute_store.h"
@@ -25,8 +26,8 @@
 #include <time.h>
 #include <string.h>
 
-#define LOG_TAG "attribute_resolver_benchmark_test"
-#define DB_FILENAME "attribute_resolver_benchmark_test.db"
+#define LOG_TAG           "attribute_resolver_benchmark_test"
+#define DB_FILENAME       "attribute_resolver_benchmark_test.db"
 #define ATTRIBUTE_HOME_ID 2
 
 typedef enum {
@@ -48,12 +49,11 @@ sl_status_t attribute_resolver_send(attribute_store_node_t node,
   return SL_STATUS_OK;
 }
 
-attribute_resolver_config_t attribute_resolver_config = {
-    .send_init = NULL,
-    .send      = attribute_resolver_send,
-    .get_retry_timeout = 20000,
-    .get_retry_count = 3
-};
+attribute_resolver_config_t attribute_resolver_config
+  = {.send_init         = NULL,
+     .send              = attribute_resolver_send,
+     .get_retry_timeout = 20000,
+     .get_retry_count   = 3};
 
 void suiteSetUp()
 {
@@ -107,7 +107,6 @@ void setUp()
   attribute_store_delete_node(attribute_store_get_root());
 }
 
-
 void test_attribute_resolver_benchmark()
 {
   // This has approximately 87000 attribute nodes
@@ -127,7 +126,7 @@ void test_attribute_resolver_benchmark()
   total_nodes = total_nodes - 1;
 
   // continue resolving the rest
-  for (int i = 0;i < total_nodes;i++) {
+  for (int i = 0; i < total_nodes; i++) {
     attribute_resolver_rule_execute_IgnoreAndReturn(SL_STATUS_OK);
     attribute_resolver_rule_busy_IgnoreAndReturn(false);
     attribute_resolver_has_get_rule_IgnoreAndReturn(true);

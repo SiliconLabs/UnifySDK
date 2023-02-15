@@ -27,10 +27,6 @@
 extern "C" {
 #endif
 
-extern zwapi_callbacks_t *callbacks;
-// Indicate if we are waiting for a Z-Wave API Started Command before communicating
-extern bool awaiting_zwave_api_started;
-
 // Forward declarations
 struct LEARN_INFO;
 

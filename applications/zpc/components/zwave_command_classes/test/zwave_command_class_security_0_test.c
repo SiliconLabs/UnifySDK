@@ -26,6 +26,7 @@
 #include "ZW_classcmd.h"
 #include "zwave_utils.h"
 #include "zwave_controller_types.h"
+#include "zpc_attribute_store_type_registration.h"
 
 // Test helpers
 #include "zpc_attribute_store_test_helper.h"
@@ -60,6 +61,7 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -281,4 +283,70 @@ void test_s0_support_handler_non_supported_command()
   TEST_ASSERT_EQUAL(
     SL_STATUS_NOT_SUPPORTED,
     s0_handler.support_handler(&info, incoming_frame, sizeof(incoming_frame)));
+}
+
+void test_s0_control_handler_happy_case_more_reports()
+{
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  zwave_controller_connection_info_t info
+    = {.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0};
+  attribute_store_get_reported(node_id_node,
+                               &(info.remote.node_id),
+                               sizeof(info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(info.remote.endpoint_id),
+                               sizeof(info.remote.endpoint_id));
+
+  const uint8_t incoming_frame[] = {COMMAND_CLASS_SECURITY,
+                                    SECURITY_COMMANDS_SUPPORTED_REPORT,
+                                    1,
+                                    23,
+                                    34,
+                                    45};
+
+  zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
+    info.remote.node_id,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    s0_handler.control_handler(&info, incoming_frame, sizeof(incoming_frame)));
+
+  attribute_store_node_t secure_nif_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+
+  const uint8_t expected_data[] = {23, 34, 45};
+  uint8_t array_size            = 0;
+  attribute_store_get_node_attribute_value(secure_nif_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_frame,
+                                           &array_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_data, received_frame, array_size);
+
+  const uint8_t new_incoming_frame[] = {COMMAND_CLASS_SECURITY,
+                                        SECURITY_COMMANDS_SUPPORTED_REPORT,
+                                        0,
+                                        24,
+                                        35,
+                                        46};
+
+  zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
+    info.remote.node_id,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    s0_handler.control_handler(&info,
+                                               new_incoming_frame,
+                                               sizeof(new_incoming_frame)));
+  secure_nif_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+
+  const uint8_t new_expected_data[] = {23, 34, 45, 24, 35, 46};
+  array_size                        = 0;
+  attribute_store_get_node_attribute_value(secure_nif_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_frame,
+                                           &array_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(new_expected_data, received_frame, array_size);
 }

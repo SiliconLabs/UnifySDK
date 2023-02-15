@@ -81,12 +81,10 @@ sl_status_t zigpc_attrmgmt_send_poll_attributes()
                    attribute_poll_iter->eui64,
                    attribute_poll_iter->endpoint_id,
                    attribute_poll_iter->cluster_id);
-
       status = zigpc_attrmgmt_send_read_attributes_command(
         eui64_array,
         attribute_poll_iter->endpoint_id,
         attribute_poll_iter->cluster_id);
-
       std::advance(attribute_poll_iter, 1);
     } else {
       sl_log_warning(LOG_TAG, "Error parsing eui64");

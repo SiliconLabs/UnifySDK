@@ -129,7 +129,7 @@ static bool validate_path(std::vector<BranchNode> *branch_data,
   return true;
 }
 
-// Converts node type from sytring or hex string to uint32_t
+// Converts node type from string or hex string to uint32_t
 // return 0x0000000 (INVALID_TYPE) if cannot convert
 static uint32_t convert_node_type(std::string s_node_type)
 {

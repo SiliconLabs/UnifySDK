@@ -239,6 +239,7 @@ size_t dotdot_get_aox_locator_azimuth_mask_count(
  * @param unid        UNID to get value for
  * @param endpoint    Endpoint to get value for
  * @param value       Pointer where the value will be copied
+ * @param index       Index value of the attribute array
  * @returns sl_status_ok if the value was copied to the value pointer.
  */
 sl_status_t dotdot_get_aox_locator_azimuth_mask(
@@ -292,6 +293,7 @@ size_t dotdot_get_aox_locator_elevation_mask_count(
  * @param unid        UNID to get value for
  * @param endpoint    Endpoint to get value for
  * @param value       Pointer where the value will be copied
+ * @param index       Index value of the attribute array
  * @returns sl_status_ok if the value was copied to the value pointer.
  */
 sl_status_t dotdot_get_aox_locator_elevation_mask(
@@ -345,6 +347,7 @@ size_t dotdot_get_aox_locator_allow_list_count(
  * @param unid        UNID to get value for
  * @param endpoint    Endpoint to get value for
  * @param value       Pointer where the value will be copied
+ * @param index       Index value of the attribute array
  * @returns sl_status_ok if the value was copied to the value pointer.
  */
 sl_status_t dotdot_get_aox_locator_allow_list(
@@ -476,6 +479,7 @@ size_t dotdot_get_aox_locator_antenna_array_count(
  * @param unid        UNID to get value for
  * @param endpoint    Endpoint to get value for
  * @param value       Pointer where the value will be copied
+ * @param index       Index value of the attribute array
  * @returns sl_status_ok if the value was copied to the value pointer.
  */
 sl_status_t dotdot_get_aox_locator_antenna_array(

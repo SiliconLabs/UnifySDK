@@ -10,7 +10,7 @@ var structzwapi__chip__data__t =
     [ "product_type", "structzwapi__chip__data__t.html#aa63fd5410a0cfc6f04bd4f6acbf452a3", null ],
     [ "rf_region", "structzwapi__chip__data__t.html#a8f421bbc256cb2dcd9566fd237f5855b", null ],
     [ "supported_bitmask", "structzwapi__chip__data__t.html#a0b7899d68309fff22750a3361a85e435", null ],
-    [ "supported_setup_bitmask", "structzwapi__chip__data__t.html#ae28771eafa63351fda32367ca4b7f5f1", null ],
+    [ "supported_setup_bitmask", "structzwapi__chip__data__t.html#a5035a1e13213f3b68a77bdd088fff5e4", null ],
     [ "version_major", "structzwapi__chip__data__t.html#a7777b839ad7297f0bef28934fb0c7440", null ],
     [ "version_minor", "structzwapi__chip__data__t.html#a18d47f765f6b21ddeefee6551de31aa3", null ]
 ];

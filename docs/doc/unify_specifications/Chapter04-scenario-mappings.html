@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Unify Scenario Mappings" name="description" />
+<meta content="Mappings, PHY, Examples" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Scenario Mapping to Specific PHYs: Z-Wave, BLE and ZigBee &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/Chapter04-scenario-mappings.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. Common OTA FW Update Service" href="Chapter05-common-ota.html" />
+    <link rel="prev" title="3. Network Management Commands" href="Chapter03-network-management.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-applications-overview">Unify Applications Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../UnifySDK.html#resources">Resources</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Unify Specifications</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter08-aox-application.html">8. AoX Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter09-binding.html">9. Binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter11-system-metrics.html">11. System Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scenario-mapping-to-specific-phys-z-wave-ble-and-zigbee">
+<span id="unify-specifications-chapter-scenario-mapping"></span><h1><span class="section-number">4. </span>Scenario Mapping to Specific PHYs: Z-Wave, BLE and ZigBee<a class="headerlink" href="#scenario-mapping-to-specific-phys-z-wave-ble-and-zigbee" title="Permalink to this heading"></a></h1>
+<p>This chapter describes use-cases or scenarios using the same Unify commands but showing the Protocol Controller translation details for several PHYs.</p>
+<section id="adding-a-node-to-a-network">
+<h2><span class="section-number">4.1. </span>Adding a Node to a Network<a class="headerlink" href="#adding-a-node-to-a-network" title="Permalink to this heading"></a></h2>
+<p>This use case explains how to include a new node into a network. It is assumed that the
+implementations follow the lines described in Network Management Commands and
+Service discovery.</p>
+<section id="z-wave-pan">
+<h3><span class="section-number">4.1.1. </span>Z-Wave PAN<a class="headerlink" href="#z-wave-pan" title="Permalink to this heading"></a></h3>
+<figure class="align-center" id="figure-adding-a-node-with-a-zwave-pan" style="width: 80%">
+<img alt="Adding a node with a Z-Wave PAN" src="../../_images/AddingAnodeWithaZ-WavePAN.png" />
+<figcaption>
+<p><span class="caption-number">Figure 4.1 </span><span class="caption-text">Adding a node with a Z-Wave PAN</span><a class="headerlink" href="#figure-adding-a-node-with-a-zwave-pan" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ble-pan">
+<h3><span class="section-number">4.1.2. </span>BLE PAN<a class="headerlink" href="#ble-pan" title="Permalink to this heading"></a></h3>
+<figure class="align-center" id="figure-adding-a-node-with-a-ble-pan" style="width: 80%">
+<img alt="Adding a node with a BLE PAN" src="../../_images/AddingAnodeWithaBLEPAN.png" />
+<figcaption>
+<p><span class="caption-number">Figure 4.2 </span><span class="caption-text">Adding a node with a BLE PAN</span><a class="headerlink" href="#figure-adding-a-node-with-a-ble-pan" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="zigbee-pan">
+<h3><span class="section-number">4.1.3. </span>ZigBee PAN<a class="headerlink" href="#zigbee-pan" title="Permalink to this heading"></a></h3>
+<p>The following section shows the Zigbee 3.0 Install Code based commissioning method. This method uses a Unify SmartStart DSK (Device-Specific Key) to convey the Install Code that is flashed out-of-band to a joining device. See the Zigbee Protocol Controller implementation references on how the DSK is formatted according to one of the formats specified in [Network Management](./Chapter03-network-management.md).</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-94de98b3c02902683215d2bbea4b0b72158b923b.png" alt="' Allows simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title SmartStart List based commissioning using Z3 Install Code based Device-Specific Keys (DSK)
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;Unify MQTT Broker&quot; as mqtt_broker
+participant &quot;Unify UPVL&quot; as upvl
+participant &quot;Zigbee Protocol Controller&quot; as protocol_controller
+participant &quot;Zigbee Node 1&quot; as node_1
+
+
+== Out-of-band Setup of Joining Device  ==
+node_1 -&gt; node_1: Flash Installation Code
+note over node_1
+   Extract Install Code CRC
+   to be included in DSK
+end note
+...
+== Unify Initialization ==
+upvl -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/SmartStart/List/Remove&lt;/font&gt;
+upvl -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/SmartStart/List/Update&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/SmartStart/List&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/ProtocolController/NetworkManagement&lt;/font&gt;
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/SmartStart/List&lt;/font&gt;
+...
+upvl -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/SmartStart/List&lt;/font&gt; \n &lt;font color=#00003C&gt;&lt;b&gt; {&quot;value&quot;:[]}
+
+
+== Zigbee Protocol Controller advertises it's ready for Network Management Operations ==
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/&lt;PC_UNID&gt;/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;State&quot; : &quot;idle&quot;, \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;SupportedStateList&quot;: [&quot;remove node&quot;], \n&lt;font color=#00003C&gt;&lt;b&gt;}
+&amp; mqtt_broker -&gt; iot_service
+...
+
+
+== Add Node 1 Install Code/DSK via the UPVL ==
+note over iot_service
+   Format EUI64, Install Code,
+   and CRC extracted from the
+   joining device into a
+   recognized DSK format.
+end note
+iot_service -&gt; mqtt_broker : &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{\n\t&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DSK&quot; : &quot;NODE_1_DSK&quot; \n\t&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;Include&quot; : true \n\t&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;Unid&quot; : &quot;&quot; \n\t&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;ProtocolControllerUnid&quot; : &quot;&quot; \n&lt;font color=#6C2A0D&gt;&lt;b&gt;}&lt;/b&gt;
+&amp; mqtt_broker -&gt; upvl
+upvl -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/SmartStart/List \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[{\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DSK&quot; : &quot;NODE_1_DSK&quot; \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;Include&quot; : true \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;Unid&quot; : &quot;&quot; \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;ProtocolControllerUnid&quot; : &quot;&quot; \n&lt;font color=#00003C&gt;&lt;b&gt;}]}&lt;/b&gt;
+&amp; mqtt_broker -&gt; protocol_controller
+
+protocol_controller -&gt; protocol_controller: NODE_1 Install Code based Link Key \nadded to Trust Center (TC)
+
+== Node 1 Starts Network Steering ==
+
+node_1 -&gt; node_1: Network Steering \nwith TC Link key update
+node_1 -&gt; protocol_controller: Device Annouce + TC join
+protocol_controller -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/&lt;PC_UNID&gt;/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;State&quot; : &quot;add node&quot;, \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;SupportedStateList&quot;: [&quot;idle&quot;], \n&lt;font color=#00003C&gt;&lt;b&gt;}
+&amp; mqtt_broker -&gt; iot_service
+...
+node_1 -&gt; node_1: Perform TC Link key update
+node_1 -&gt; protocol_controller: Replacement APS Link Key Verified on NODE_1
+protocol_controller -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/&lt;PC_UNID&gt;/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;State&quot; : &quot;add node&quot;, \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;SupportedStateList&quot;: [&quot;idle&quot;], \n&lt;font color=#00003C&gt;&lt;b&gt;}
+&amp; mqtt_broker -&gt; iot_service
+protocol_controller -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/&lt;NODE_1_UNID&gt;/State \n&lt;font color=#00003C&gt;&lt;b&gt;{\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;NetworkStatus&quot; : &quot;Online interviewing&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;}
+&amp; mqtt_broker -&gt; iot_service
+== Update the Unid field in the SmartStart list via the UPVL ==
+protocol_controller -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/SmartStart/List/Update \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{\n\t&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DSK&quot; : &quot;NODE_1_DSK&quot; \n\t&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;Unid&quot; : &quot;NODE_1_UNID&quot; \n&lt;font color=#6C2A0D&gt;&lt;b&gt;}}&lt;/b&gt;
+mqtt_broker -&gt; upvl
+upvl -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/SmartStart/List \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[{\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DSK&quot; : &quot;NODE_1_DSK&quot; \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;Include&quot; : true \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;Unid&quot; : &quot;NODE_1_UNID&quot; \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;ProtocolControllerUnid&quot; : &quot;&quot; \n&lt;font color=#00003C&gt;&lt;b&gt;}]}&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== Zigbee Protocol Controller advertises it's ready for Network Management Operations again ==
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/&lt;PC_UNID&gt;/ProtocolController/NetworkManagement \n&lt;font color=#00003C&gt;&lt;b&gt;{\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;State&quot; : &quot;idle&quot;, \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;SupportedStateList&quot;: [&quot;remove node&quot;], \n&lt;font color=#00003C&gt;&lt;b&gt;}
+&amp; mqtt_broker -&gt; iot_service"/>
+</p>
+</section>
+</section>
+<section id="special-requirements-for-ble-aox-protocol-controllers">
+<h2><span class="section-number">4.2. </span>Special Requirements for BLE AoX Protocol Controllers<a class="headerlink" href="#special-requirements-for-ble-aox-protocol-controllers" title="Permalink to this heading"></a></h2>
+<p>BLE-based AoX (Angle-of-X) solutions rely on AoX Locators to report the angle of
+arrival of beacons transmitted from asset tags. AoX Locators typically
+control radio boards connected to one or more antennas.</p>
+<p>An additional Positioning helper application is used to infer the
+position of the tag based on the several angle information readings from
+one or more locators.</p>
+<p>There are typically no network management operations available for such
+applications. The list of Asset Tags allowed in the Unify network can be configured
+using the AoX Locator cluster.</p>
+<section id="aox-protocol-controller">
+<h3><span class="section-number">4.2.1. </span>AoX Protocol Controller<a class="headerlink" href="#aox-protocol-controller" title="Permalink to this heading"></a></h3>
+<p>The AoX Protocol Controller MUST publish a node state
+(<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;unid&gt;/State</span></code>) for itself.</p>
+<p>The Endpoint ID should always be 0 for an AoX locator.</p>
+<p>Details on how the data is reported for AoXPCs is provided in
+<a class="reference internal" href="Chapter06-service-discovery.html#unify-specifications-chapter-service-discovery"><span class="std std-ref">Service Discovery</span></a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

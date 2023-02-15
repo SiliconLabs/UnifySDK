@@ -16,6 +16,7 @@
 
 /**
  * @defgroup dotdot_cluster_id_definitions DotDot Cluster ID definitions
+ * @ingroup unify_components
  * @brief Header with Cluster ID definitions
  *
  * Cluster identifier defines (e.g. OnOff ID is 0x0006)
@@ -195,10 +196,6 @@
 
 // Definitions for cluster: Diagnostics
 #define DOTDOT_DIAGNOSTICS_CLUSTER_ID ((dotdot_cluster_id_t)0xB05)
-
-
-// Definitions for cluster: TouchlinkCommissioning
-#define DOTDOT_TOUCHLINK_COMMISSIONING_CLUSTER_ID ((dotdot_cluster_id_t)0x1000)
 
 
 // Definitions for cluster: ProtocolController-RFTelemetry

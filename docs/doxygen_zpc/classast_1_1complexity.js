@@ -5,6 +5,7 @@ var classast_1_1complexity =
     [ "operator()", "classast_1_1complexity.html#a2983920a330bb8e8a1b27c705cb8ff6e", null ],
     [ "operator()", "classast_1_1complexity.html#ab49601c765d0d5b2fdfdc2963ca52211", null ],
     [ "operator()", "classast_1_1complexity.html#a2c6af609b0bb587453ef176c578949bf", null ],
+    [ "operator()", "classast_1_1complexity.html#a3e26e9b324da0936d70bb02b7d010e7a", null ],
     [ "operator()", "classast_1_1complexity.html#a67ba332a96ceecd617228c3fc527a284", null ],
     [ "operator()", "classast_1_1complexity.html#a5ad5d11d7a65bce9aa26832a250d3876", null ],
     [ "operator()", "classast_1_1complexity.html#a6bc2654a5dada9d0485dd7b5794df45d", null ],

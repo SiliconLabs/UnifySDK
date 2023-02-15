@@ -145,6 +145,7 @@ pub fn attribute_callback_by_type_and_state<F>(
 ) where
     F: 'static + Fn(&AttributeEvent<Attribute>),
 {
-    attribute_changed_task!(callback, move |event| event.attribute.type_of()  == attribute_type
+    attribute_changed_task!(callback, move |event| event.attribute.type_of()
+        == attribute_type
         && event.value_state == value_state);
 }

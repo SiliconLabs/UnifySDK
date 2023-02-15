@@ -18,7 +18,6 @@
 
 // Test includes
 #include "unity.h"
-#include "test_cpp_includes.hpp"
 
 // Unify components
 #include "attribute.hpp"

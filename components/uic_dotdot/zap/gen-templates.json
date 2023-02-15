@@ -25,6 +25,16 @@
       "output": "src/dotdot_cluster_id_definitions.c"
     },
     {
+      "path": "dotdot_attribute_id_definitions.h.zapt",
+      "name": "ZCL Attribute ID definitions",
+      "output": "include/dotdot_attribute_id_definitions.h"
+    },
+    {
+      "path": "dotdot_attribute_id_definitions.c.zapt",
+      "name": "ZCL Attribute ID implementation",
+      "output": "src/dotdot_attribute_id_definitions.c"
+    },
+    {
       "path": "readme_ucl_mqtt_reference.md.zapt",
       "name": "UCL MQTT Reference Guide",
       "output": "readme_ucl_mqtt_reference.md"

@@ -11,7 +11,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-//! C interface for the Attribute Poll Engine wrapping (inlcude/attribute_poll.h)
+//! C interface for the Attribute Poll Engine wrapping (include/attribute_poll.h)
 
 use unify_middleware::attribute_store_or_return_with;
 
@@ -46,10 +46,15 @@ pub unsafe extern "C" fn attribute_poll_schedule(handle: attribute_store_node_t)
 }
 
 #[no_mangle]
-pub extern "C" fn attribute_poll_init(backoff : u32, default_interval : u32) -> sl_status_t {
+pub extern "C" fn attribute_poll_init(
+    backoff: u32,
+    default_interval: u32,
+    poll_mark_attribute_type: u32,
+) -> sl_status_t {
     AttributePoll::default().initialize(PollEngineConfig {
-        backoff: backoff,
-        default_interval: default_interval,
+        backoff,
+        default_interval,
+        poll_mark_attribute_type,
     });
     SL_STATUS_OK
 }
@@ -64,4 +69,9 @@ pub unsafe extern "C" fn attribute_poll_disable() -> sl_status_t {
 pub unsafe extern "C" fn attribute_poll_enable() -> sl_status_t {
     AttributePoll::default().resume();
     SL_STATUS_OK
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn attribute_poll_print() {
+    AttributePoll::default().print_queue();
 }

@@ -10,7 +10,6 @@ var dir_409f97388efe006bc3438b95e9edef48 =
     [ "uic_datastore", "dir_cede68330374af30fa0e69b6643738da.html", "dir_cede68330374af30fa0e69b6643738da" ],
     [ "uic_definitions", "dir_7c87d75141af09ca270650942fb5c70f.html", "dir_7c87d75141af09ca270650942fb5c70f" ],
     [ "uic_dotdot", "dir_8b0157f983fac506bb8c308a55642aa4.html", "dir_8b0157f983fac506bb8c308a55642aa4" ],
-    [ "uic_dotdot_attribute_store", "dir_bb686bd91aaea980c054563af2d6018d.html", "dir_bb686bd91aaea980c054563af2d6018d" ],
     [ "uic_dotdot_mqtt", "dir_fddaf0ada9b26e48dca23fc9f0133e62.html", "dir_fddaf0ada9b26e48dca23fc9f0133e62" ],
     [ "uic_gbl_interface", "dir_0cdfc6ab4dc950f3ea41176841f2ab7f.html", "dir_0cdfc6ab4dc950f3ea41176841f2ab7f" ],
     [ "uic_log", "dir_5f2c90d192337826b3478703dff57157.html", "dir_5f2c90d192337826b3478703dff57157" ],
@@ -22,7 +21,9 @@ var dir_409f97388efe006bc3438b95e9edef48 =
     [ "uic_rust", "dir_eef00050f8c27990609ce0d8636bc369.html", "dir_eef00050f8c27990609ce0d8636bc369" ],
     [ "uic_smartstart_management", "dir_d57524c1a146996b41e3386fc0ef5c20.html", "dir_d57524c1a146996b41e3386fc0ef5c20" ],
     [ "uic_stdin", "dir_66b8a743c1b42e2dacc13fc162290ee0.html", "dir_66b8a743c1b42e2dacc13fc162290ee0" ],
+    [ "unify_application_monitoring", "dir_96a9893d53ad312a5db6d5573602d229.html", "dir_96a9893d53ad312a5db6d5573602d229" ],
     [ "unify_attribute_poll", "dir_7b00dbf5ead577980f53c854973806c1.html", "dir_7b00dbf5ead577980f53c854973806c1" ],
+    [ "unify_dotdot_attribute_store", "dir_112d20045a7ca684343196244a8f6d73.html", "dir_112d20045a7ca684343196244a8f6d73" ],
     [ "unify_node_state_monitor", "dir_b258a34d42f197572add6d5119d84546.html", "dir_b258a34d42f197572add6d5119d84546" ],
     [ "unify_validator", "dir_d3809660ba1f3db83edbdf4be9d5c882.html", "dir_d3809660ba1f3db83edbdf4be9d5c882" ]
 ];

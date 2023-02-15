@@ -61,6 +61,7 @@ sl_status_t zigpc_gateway_reset_observers(void)
       ZIGPC_GATEWAY_NOTIFY_ZCL_COMMAND_RECEIVED,
       ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_STARTED,
       ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_COMPLETED,
+      ZIGPC_GATEWAY_NOTIFY_BIND_UNBIND_RESPONSE
     };
 
   zigpc_observable_clear(&zigpc_gateway_observable);
@@ -261,14 +262,24 @@ void zigpc_gateway_hdl_on_endpoint_clusters_discovered(
                endpointInfo->endpoint,
                endpointInfo->deviceId,
                endpointInfo->inClusterCount);
+
   for (int i = 0; i < endpointInfo->inClusterCount; i++) {
     sl_log_debug(LOG_TAG,
                  "Discovered EUI64 %016" PRIX64
-                 ": endpoint %u: cluster %u = 0x%04X",
+                 ": endpoint %u: in/server cluster %u = 0x%04X",
                  eui64_uint,
                  endpointInfo->endpoint,
                  i,
                  endpointInfo->inClusterList[i]);
+  }
+  for (int i = 0; i < endpointInfo->outClusterCount; i++) {
+    sl_log_debug(LOG_TAG,
+                 "Discovered EUI64 %016" PRIX64
+                 ": endpoint %u: out/client cluster %u = 0x%04X",
+                 eui64_uint,
+                 endpointInfo->endpoint,
+                 i,
+                 endpointInfo->outClusterList[i]);
   }
 
   endpoint_discovered.endpoint.endpoint_id   = endpointInfo->endpoint;
@@ -534,7 +545,7 @@ void zigpc_gateway_hdl_on_ota_update_started(const EmberEUI64 eui64,
     sl_log_warning(LOG_TAG, "OTA_UPDATE_STARTED notify failed: 0x%X", status);
   }
 }
-
+  
 void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
                                                uint16_t manufacturerId,
                                                uint16_t imageTypeId,
@@ -562,6 +573,51 @@ void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
   }
 }
 
+void zigpc_gateway_hdl_bind_unbind_response( 
+        const EmberEUI64 sourceEui64,
+        uint8_t sourceEndpoint,
+        uint16_t clusterId,
+        const EmberEUI64 destEui64,
+        uint8_t destEndpoint,
+        bool isBindResponse,
+        uint8_t zdoStatus)
+{
+        static zigpc_gateway_on_bind_unbind_reponse_t response_event;
+    
+        sl_status_t status = SL_STATUS_OK;
+
+        zigbee_binding_t binding_data;
+
+        zigbee_eui64_t source_eui64;
+        zigbee_eui64_t dest_eui64;
+        /*status = */zigbee_eui64_copy_switch_endian(source_eui64, sourceEui64);
+        /*status = */zigbee_eui64_copy_switch_endian(dest_eui64, destEui64);
+
+        binding_data.source_address = zigbee_eui64_to_uint(source_eui64); 
+        binding_data.dest_address = zigbee_eui64_to_uint(dest_eui64); 
+        binding_data.source_endpoint = sourceEndpoint;
+        binding_data.source_cluster = clusterId;
+        binding_data.dest_endpoint = destEndpoint;
+  
+        sl_log_info(LOG_TAG,
+               "Binding SrcEUI64:%016" PRIX64 " Src end %u, Cluster 0x%04X, DestEUI64:%016" PRIX64 "Dest end %u",
+               binding_data.source_address,
+               binding_data.source_endpoint,
+               binding_data.source_cluster,
+               binding_data.dest_address,
+               binding_data.dest_endpoint);
+
+        response_event.binding = binding_data;
+        response_event.is_bind_response = isBindResponse;
+        response_event.zdo_status = zdoStatus;
+  
+        status = zigpc_observable_notify(
+                    &zigpc_gateway_observable,
+                    ZIGPC_GATEWAY_NOTIFY_BIND_UNBIND_RESPONSE,
+                    (void*)&response_event);
+        (void)status;
+}
+
 struct zigbeeHostCallbacks zigpc_gateway_zigbee_host_callbacks = {
   .onEmberAfStackInitalized        = NULL,
   .onEmberAfNcpPreReset            = zigpc_gateway_on_ncp_pre_reset,
@@ -580,4 +636,5 @@ struct zigbeeHostCallbacks zigpc_gateway_zigbee_host_callbacks = {
   .onClusterCommandReceived     = zigpc_gateway_hdl_on_cmd_received,
   .onOtaUpdateStarted           = zigpc_gateway_hdl_on_ota_update_started,
   .onOtaUpdateCompleted         = zigpc_gateway_hdl_on_ota_update_completed,
+  .onBindUnbindResponse         = zigpc_gateway_hdl_bind_unbind_response
 };

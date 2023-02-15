@@ -83,8 +83,10 @@ template<typename search_key_t, typename data_t> class StoreAccessor
   attribute_store_node_t find(attribute_store_node_t parent, search_key_t key)
   {
     auto found_node = ATTRIBUTE_STORE_INVALID_NODE;
-
-    std::string key_str = std::to_string(key);
+    
+    std::stringstream ss;
+    ss << key;
+    std::string key_str = ss.str();
 
     bool input_valid = attribute_store_node_exists(parent);
     if (input_valid == false) {
@@ -187,7 +189,9 @@ template<typename search_key_t, typename data_t> class StoreAccessor
     sl_status_t status = SL_STATUS_OK;
     auto found_node    = ATTRIBUTE_STORE_INVALID_NODE;
 
-    std::string key_str = std::to_string(key);
+    std::stringstream ss;
+    ss << key;
+    std::string key_str = ss.str();
 
     found_node = this->find(parent, key);
     if (found_node != ATTRIBUTE_STORE_INVALID_NODE) {
@@ -257,7 +261,9 @@ template<typename search_key_t, typename data_t> class StoreAccessor
         reinterpret_cast<uint8_t *>(data),
         &data_size);
       if (status != SL_STATUS_OK) {
-        std::string key_str = std::to_string(key);
+        std::stringstream ss;
+        ss << key;
+        std::string key_str = ss.str();
         sl_log_error(LOG_TAG,
                      "%s: %s entity[NodeId:%u]: Failed to read entity data",
                      this->label.c_str(),
@@ -303,7 +309,9 @@ template<typename search_key_t, typename data_t> class StoreAccessor
         reinterpret_cast<const uint8_t *>(data),
         data_size);
       if (status != SL_STATUS_OK) {
-        std::string key_str = std::to_string(key);
+        std::stringstream ss;
+        ss << key;
+        std::string key_str = ss.str();
         sl_log_error(LOG_TAG,
                      "%s: %s entity[NodeId:%u]: Failed to write entity data",
                      this->label.c_str(),
@@ -328,7 +336,9 @@ template<typename search_key_t, typename data_t> class StoreAccessor
   {
     sl_status_t status = SL_STATUS_OK;
 
-    std::string key_str = std::to_string(key);
+    std::stringstream ss;
+    ss << key;
+    std::string key_str = ss.str();
 
     attribute_store_node_t found_node = this->find(parent, key);
 
@@ -363,7 +373,9 @@ template<typename search_key_t, typename data_t> class StoreAccessor
 
     attribute_store_node_t found_node = this->find(parent, key);
 
-    std::string key_str = std::to_string(key);
+    std::stringstream ss;
+    ss << key;
+    std::string key_str = ss.str();
     if (found_node == ATTRIBUTE_STORE_INVALID_NODE) {
       status = SL_STATUS_NOT_FOUND;
       sl_log_warning(LOG_TAG,
@@ -721,6 +733,19 @@ class ClusterAttributeListAccessor :
   std::string to_str(attribute_store_node_t parent, size_t list_count) override;
 };
 
+class BindingListAccessor :
+     public StoreListAccessor<std::string>
+{
+    public:
+    explicit BindingListAccessor();
+  
+    static inline std::string get_label_type(void)
+    {
+        return "Binding";
+    }
+  
+    std::string to_str(attribute_store_node_t parent, size_t list_count) override;
+};
 
 class ClusterCommandListAccessor : public StoreListAccessor<zcl_command_id_t>
 {

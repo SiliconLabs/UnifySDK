@@ -30,6 +30,7 @@ export type ClusterViewOverride = {
   ViewTable: ViewTableItem[] | undefined,
   NodesTooltip: any | undefined,
   NavbarItem: NavbarItem | undefined,
+  CustomActions: any | undefined,
   IsExpandable: boolean | undefined
 }
 

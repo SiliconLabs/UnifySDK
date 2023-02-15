@@ -59,7 +59,11 @@
   polling_interval_zwave: 21600
   polling_interval_zwave_v1: 21600
   polling_interval_zwave_v2: 21600
-
+# Barrier Operator every 6 hours.
+- attribute_type: 0x6603 #ATTRIBUTE_COMMAND_CLASS_BARRIER_OPERATOR_STATE
+  polling_interval_zwave: 7200
+  polling_interval_zwave_v1: 7200
+  polling_interval_zwave_v2: 7200
 ## Management Command Classes
 
 # Check on the Wake Up Settings once a week

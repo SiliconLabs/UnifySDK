@@ -14,7 +14,7 @@
 #include "unity.h"
 
 // C++ mocks.
-#include "smartstart_management_mock.hpp"
+#include "workaround.hpp"
 
 using namespace smartstart;
 

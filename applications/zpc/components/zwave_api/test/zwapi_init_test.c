@@ -18,8 +18,10 @@
 
 // Includes from this component
 #include "zwapi_init.h"
+
 #include "zwapi_func_ids.h"
 #include "zwapi_session_mock.h"
+#include "zwapi_protocol_basis_mock.h"
 
 // Static variables
 static uint8_t response_length      = 0;
@@ -205,11 +207,9 @@ void test_zwapi_get_protocol_version(void)
 
 void test_zwapi_awaiting_zwave_api_started(void)
 {
-  // Cheap trick to modify the value directly.
-  extern bool awaiting_zwave_api_started;
-  awaiting_zwave_api_started = false;
+  zwapi_set_awaiting_zwave_api_started(false);
   TEST_ASSERT_FALSE(zwapi_is_awaiting_zwave_api_started());
-  awaiting_zwave_api_started = true;
+  zwapi_set_awaiting_zwave_api_started(true);
   TEST_ASSERT_TRUE(zwapi_is_awaiting_zwave_api_started());
 }
 
@@ -231,4 +231,133 @@ void test_zwapi_init()
 
   zwapi_init("test", &serial_fd, &callbacks);
   TEST_ASSERT_EQUAL(3, serial_fd);
+}
+
+void test_zwapi_refresh_capabilities_bad_cases()
+{
+  //Capablities status fail
+  zwapi_session_send_frame_with_response_ExpectAndReturn(
+    FUNC_ID_SERIAL_API_GET_CAPABILITIES,
+    NULL,
+    0,
+    NULL,
+    NULL,
+    SL_STATUS_FAIL);
+  zwapi_session_send_frame_with_response_IgnoreArg_response_buf();
+  zwapi_session_send_frame_with_response_IgnoreArg_response_len();
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwapi_refresh_capabilities());
+
+  uint8_t response_length = 10;
+
+  //Capablities status ok but response length do not have Z-Wave module data
+  zwapi_session_send_frame_with_response_ExpectAndReturn(
+    FUNC_ID_SERIAL_API_GET_CAPABILITIES,
+    NULL,
+    0,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  zwapi_session_send_frame_with_response_IgnoreArg_response_buf();
+  zwapi_session_send_frame_with_response_IgnoreArg_response_len();
+  zwapi_session_send_frame_with_response_ReturnMemThruPtr_response_buf(
+    response_buffer,
+    response_length);
+  zwapi_session_send_frame_with_response_ReturnThruPtr_response_len(
+    &response_length);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwapi_refresh_capabilities());
+}
+
+void test_zwapi_get_init_data()
+{
+  //Happy case
+  uint8_t res_buffer[]
+    = {0x19, 0x01, 0x09, 0xb2, 0x53, 0x02, 0x01, 0x02, 0x07, 0x30};
+  response_length = 10;
+
+  uint8_t ver, capabilities, len, chip_type, chip_version;
+  uint8_t node_list[501] = {0};
+  ver                  = 1;
+  capabilities         = 1;
+  len                  = 1;
+  chip_type            = 1;
+  chip_version         = 1;
+  zwapi_session_send_frame_with_response_ExpectAndReturn(
+    FUNC_ID_SERIAL_API_GET_INIT_DATA,
+    NULL,
+    0,
+    res_buffer,
+    &response_length,
+    SL_STATUS_OK);
+  zwapi_session_send_frame_with_response_IgnoreArg_response_buf();
+  zwapi_session_send_frame_with_response_IgnoreArg_response_len();
+  zwapi_session_send_frame_with_response_ReturnMemThruPtr_response_buf(
+    res_buffer,
+    response_length);
+  zwapi_session_send_frame_with_response_ReturnThruPtr_response_len(
+    &response_length);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwapi_get_init_data(&ver,
+                                        &capabilities,
+                                        &len,
+                                        node_list,
+                                        &chip_type,
+                                        &chip_version));
+  uint8_t list[501] = {0x01, 0x02};
+  TEST_ASSERT_EQUAL(0xB2, ver);
+  TEST_ASSERT_EQUAL(0x53, capabilities);
+  TEST_ASSERT_EQUAL(0x02, len);
+  TEST_ASSERT_EQUAL_INT8_ARRAY(list, node_list, 2);
+  TEST_ASSERT_EQUAL(0x07, chip_type);
+  TEST_ASSERT_EQUAL(0x30, chip_version);
+
+  //Send command status fail
+  zwapi_session_send_frame_with_response_IgnoreAndReturn(SL_STATUS_FAIL);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwapi_get_init_data(&ver,
+                                        &capabilities,
+                                        &len,
+                                        node_list,
+                                        &chip_type,
+                                        &chip_version));
+
+  //Response length smaller than IDX_DATA
+  response_length = 2;
+  zwapi_session_send_frame_with_response_ExpectAndReturn(
+    FUNC_ID_SERIAL_API_GET_INIT_DATA,
+    NULL,
+    0,
+    res_buffer,
+    &response_length,
+    SL_STATUS_OK);
+  zwapi_session_send_frame_with_response_IgnoreArg_response_buf();
+  zwapi_session_send_frame_with_response_IgnoreArg_response_len();
+  zwapi_session_send_frame_with_response_ReturnMemThruPtr_response_buf(
+    res_buffer,
+    response_length);
+  zwapi_session_send_frame_with_response_ReturnThruPtr_response_len(
+    &response_length);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwapi_get_init_data(&ver,
+                                        &capabilities,
+                                        &len,
+                                        node_list,
+                                        &chip_type,
+                                        &chip_version));
+}
+void test_zwapi_support_setup_func(void)
+{
+  uint16_t cmd;
+  cmd = 0 << 8;
+  cmd |= 9;
+  TEST_ASSERT_EQUAL(false, zwapi_support_setup_func(cmd));
+}
+void test_zwapi_log_to_file_enable(void)
+{
+  char *filename = "";
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zwapi_log_to_file_enable(filename));
+}
+
+void test_zwapi_log_to_file_disable(void)
+{
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zwapi_log_to_file_disable());
 }

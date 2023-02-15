@@ -7,5 +7,6 @@ var zigpc__ucl__int_8hpp =
     [ "publish", "zigpc__ucl__int_8hpp.html#a921a55b253600dd4da3c0f31c0fff82d", null ],
     [ "subscribe", "zigpc__ucl__int_8hpp.html#a684dac450566b02786692bb552a6bdd3", null ],
     [ "unretain", "zigpc__ucl__int_8hpp.html#a5a7fcb6173ace81268c71d4fc8993a67", null ],
+    [ "LOG_FMT_JSON_ERROR", "zigpc__ucl__int_8hpp.html#aaacb9ae763becd23fb1413264ed024f1", null ],
     [ "LOG_TAG", "zigpc__ucl__int_8hpp.html#ad76ad6abbd39146546ea4cea0815cfe6", null ]
 ];

@@ -12,12 +12,16 @@ var zigpc__gateway_8h =
     [ "zigpc_gateway_get_counters_capacity", "group__zigpc__gateway.html#ga61f67214bb773f5143b70dfbce6e80d8", null ],
     [ "zigpc_gateway_get_counters_entry_label", "group__zigpc__gateway.html#ga1f07c2900fac9697f0f7a42fb50c9eeb", null ],
     [ "zigpc_gateway_get_counters_list", "group__zigpc__gateway.html#ga8a6257cf6118529b61387a4afd814367", null ],
+    [ "zigpc_gateway_get_neighbor_count", "group__zigpc__gateway.html#ga529184f2974f1ddeea2f6bccd093464d", null ],
+    [ "zigpc_gateway_get_neighbor_eui64", "group__zigpc__gateway.html#gad41ed1def7d3d4de20d450478e081018", null ],
     [ "zigpc_gateway_install_code_is_valid", "group__zigpc__gateway.html#gab170cdf1b427f9c324ed2c050f36f521", null ],
     [ "zigpc_gateway_network_init", "group__zigpc__gateway.html#ga9d61b2526c7213f927a423fa4c8b0412", null ],
     [ "zigpc_gateway_network_permit_joins", "group__zigpc__gateway.html#ga9bc1f5bba5ca4457495b80c3f6bdc928", null ],
     [ "zigpc_gateway_remove_node", "group__zigpc__gateway.html#gaeea7caf0b81c569c2b10deeeebe1acf5", null ],
-    [ "zigpc_gateway_request_binding", "group__zigpc__gateway.html#gaf7a4398c698e006b0d3dfdb389f7a990", null ],
-    [ "zigpc_gateway_request_binding_endpoint", "group__zigpc__gateway.html#gaaf18d750c515daba01b6ee589903ca41", null ],
+    [ "zigpc_gateway_request_binding", "group__zigpc__gateway.html#ga38a11a31db0e2d92233a4405249a6327", null ],
+    [ "zigpc_gateway_request_binding_endpoint", "group__zigpc__gateway.html#gad994f0ed55142bf8969f40cff15f986d", null ],
+    [ "zigpc_gateway_request_unbind", "group__zigpc__gateway.html#gac533d4cf63f7ebb34c94fa75a219fa80", null ],
+    [ "zigpc_gateway_send_emberaf_command", "group__zigpc__gateway.html#gad0d6bbc597488b8f984c5a040848133c", null ],
     [ "zigpc_gateway_send_zcl_command_frame", "group__zigpc__gateway.html#ga567e113eb2a03b16b7248d68efeea4b0", null ],
     [ "zigpc_gateway_send_zcl_frame_multicast", "group__zigpc__gateway.html#ga671ec02eb4808a5e4729ae83c40b31c7", null ]
 ];

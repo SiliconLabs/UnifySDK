@@ -41,6 +41,7 @@ var group__zwave__tx__queue =
       [ "set_transmission_timestamp", "classzwave__tx__queue.html#acea144f5d9bc763504c99580a16d95f9", null ],
       [ "set_transmissions_results", "classzwave__tx__queue.html#ac19e2788a1b2183c101553999d0e5d20", null ],
       [ "simple_log", "classzwave__tx__queue.html#ac75ab299997ce24c1dda136b502203d3", null ],
+      [ "size", "classzwave__tx__queue.html#a9c079f1dcf1cf1b2246daab49bd2578c", null ],
       [ "zwave_tx_has_frames_for_node", "classzwave__tx__queue.html#a1f77587afbac88debd088b3e3ed1c67f", null ],
       [ "queue", "classzwave__tx__queue.html#ad61bd9e04dcd7998ced3051da0ecf9a7", null ],
       [ "zwave_tx_session_id_counter", "classzwave__tx__queue.html#a0a92b47bef1a3297c533e7374ca72bb7", null ]

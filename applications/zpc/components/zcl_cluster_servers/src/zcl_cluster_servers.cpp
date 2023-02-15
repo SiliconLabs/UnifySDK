@@ -16,6 +16,8 @@
 #include "zcl_rf_telemetry_cluster_server.h"
 #include "configuration_parameter_cluster_server.h"
 #include "zcl_binding_cluster_server.h"
+#include "zcl_scenes_cluster_server.h"
+#include "zcl_OTA_cluster_server.hpp"
 
 //Includes from other components
 #include "attribute_store.h"
@@ -26,7 +28,6 @@
 // Interfaces
 #include "zwave_controller_types.h"
 
-#include "zcl_OTA_cluster_server.hpp"
 ///////////////////////////////////////////////////////////////////////////////
 //  Init and teardown functions.
 //////////////////////////////////////////////////////////////////////////////
@@ -38,11 +39,13 @@ sl_status_t zcl_cluster_servers_init()
   init_status |= zcl_rf_telemetry_cluster_server_init();
   init_status |= configuration_parameter_cluster_server_init();
   init_status |= binding_cluster_server_init();
+  init_status |= zcl_scenes_cluster_server_init();
   return init_status;
 }
 
 int zcl_cluster_servers_teardown()
 {
   zcl_group_cluster_server_teardown();
+  zcl_scenes_cluster_server_teardown();
   return 0;
 }

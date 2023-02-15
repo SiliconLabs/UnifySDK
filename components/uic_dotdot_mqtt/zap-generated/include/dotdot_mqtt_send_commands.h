@@ -6940,6 +6940,45 @@ void uic_mqtt_dotdot_configuration_parameters_publish_set_parameter_command_to_g
   
 );
 /**
+ * @brief Sends/Publishes a DiscoverParameterRange command for
+ * the ConfigurationParameters cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/ConfigurationParameters/Commands/DiscoverParameterRange
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a DiscoverParameterRange command for
+ * the ConfigurationParameters cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/ConfigurationParameters/Commands/DiscoverParameterRange
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
+  
+);
+/**
  * @brief Sends/Publishes a IQReport command for
  * the AoXLocator cluster to a destination.
  *

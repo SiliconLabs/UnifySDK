@@ -1,6 +1,7 @@
 // NAL is "Name and Location"
 
 use crate::cache::*;
+use unify_application_monitoring_sys::unify_application_monitoring_init;
 use unify_log_sys::*;
 use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
@@ -59,6 +60,7 @@ impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttNALHandler<T> {
                     .publish(&topic.as_str(), &payload.as_str().as_bytes(), true);
             }
         }
+        unify_application_monitoring_init();
     }
 }
 
@@ -521,7 +523,8 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
                 "ucl/by-unid/{}/ep{}/NameAndLocation/Commands/WriteAttributes",
                 key.unid, key.ep_id
             );
-            let _ = mqtt_client.unsubscribe(&topic)
+            let _ = mqtt_client
+                .unsubscribe(&topic)
                 .map_err(|e| format!("error unsubscribing from topic '{}' : {}", topic, e));
         }
         {

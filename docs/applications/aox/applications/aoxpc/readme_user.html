@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AoXPC User Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/js/charenc.js"></script>
+        <script src="../../../../_static/js/crypt.js"></script>
+        <script src="../../../../_static/js/sha1.js"></script>
+        <script src="../../../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../../../_static/js/qr_code_scanner.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -75,6 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../doc/license.html">License</a></li>
 </ul>
 
@@ -126,12 +132,12 @@ As of now, AoXPC supports only AngleReport.</p></li>
 <p>The AoXPC can be started either from command line, or as a system service.
 Running AoXPC as a system service is supported if there is only one locator
 radio connected to the system.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start uic-aoxpc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-aoxpc
 </pre></div>
 </div>
 <p>If the system hosts several locators, an AoXPC can be started for each
 locator from the command line.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aoxpc --aoxpc.ncp.serial /dev/ttyACM1 --aoxpc.datastore_file aoxpc_1.db
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aoxpc<span class="w"> </span>--aoxpc.ncp.serial<span class="w"> </span>/dev/ttyACM1<span class="w"> </span>--aoxpc.datastore_file<span class="w"> </span>aoxpc_1.db
 </pre></div>
 </div>
 <blockquote>
@@ -145,11 +151,11 @@ A datastore file can be used only by one aoxpc instance at once.</p>
 Co-Processor (NCP) mode. There are 2 ways to set up an NCP connection with the
 locator, either via serial port or via TCP/IP. The connection parameters can be
 specified with the following CLI options:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>  --aoxpc.ncp.serial arg <span class="o">(=</span>/dev/ttyACM0<span class="o">)</span>
-                                        Serial port where NCP module is
-                                        connected
-  --aoxpc.ncp.baud_rate arg <span class="o">(=</span><span class="m">115200</span><span class="o">)</span>   Baud rate of the serial connection
-  --aoxpc.ncp.tcp arg                   TCP address of the connection
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>--aoxpc.ncp.serial<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span>/dev/ttyACM0<span class="o">)</span>
+<span class="w">                                        </span>Serial<span class="w"> </span>port<span class="w"> </span>where<span class="w"> </span>NCP<span class="w"> </span>module<span class="w"> </span>is
+<span class="w">                                        </span>connected
+<span class="w">  </span>--aoxpc.ncp.baud_rate<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">115200</span><span class="o">)</span><span class="w">   </span>Baud<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>serial<span class="w"> </span>connection
+<span class="w">  </span>--aoxpc.ncp.tcp<span class="w"> </span>arg<span class="w">                   </span>TCP<span class="w"> </span>address<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>connection
 </pre></div>
 </div>
 <p>If the <code class="docutils literal notranslate"><span class="pre">aoxpc.ncp.tcp</span></code> is given, it takes precedence over the serial port.</p>
@@ -216,75 +222,75 @@ configuration methods in action. These methods will give the exact same result.<
 <section id="using-json-configuration-file">
 <h4>Using JSON configuration file<a class="headerlink" href="#using-json-configuration-file" title="Permalink to this heading"></a></h4>
 <p>Save the following file as <code class="docutils literal notranslate"><span class="pre">my_aox_config.json</span></code>.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;locators&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ble-pd-111111111111&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;coordinate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="w"></span>
-<span class="w">      </span><span class="p">},</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;orientation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ble-pd-222222222222&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;coordinate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="w"></span>
-<span class="w">      </span><span class="p">},</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;orientation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;locators&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ble-pd-111111111111&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;coordinate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;orientation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ble-pd-222222222222&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;coordinate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;orientation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Start the aoxpc instances.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aoxpc --aoxpc.config my_aox_config.json --aoxpc.ncp.serial /dev/ttyACM1 --aoxpc.datastore_file aoxpc_1.db
-aoxpc --aoxpc.config my_aox_config.json --aoxpc.ncp.serial /dev/ttyACM2 --aoxpc.datastore_file aoxpc_2.db
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aoxpc<span class="w"> </span>--aoxpc.config<span class="w"> </span>my_aox_config.json<span class="w"> </span>--aoxpc.ncp.serial<span class="w"> </span>/dev/ttyACM1<span class="w"> </span>--aoxpc.datastore_file<span class="w"> </span>aoxpc_1.db
+aoxpc<span class="w"> </span>--aoxpc.config<span class="w"> </span>my_aox_config.json<span class="w"> </span>--aoxpc.ncp.serial<span class="w"> </span>/dev/ttyACM2<span class="w"> </span>--aoxpc.datastore_file<span class="w"> </span>aoxpc_2.db
 </pre></div>
 </div>
 </section>
 <section id="using-aoxlocator-cluster-attributes">
 <h4>Using AoXLocator cluster attributes<a class="headerlink" href="#using-aoxlocator-cluster-attributes" title="Permalink to this heading"></a></h4>
 <p>Start the aoxpc instances.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aoxpc --aoxpc.ncp.serial /dev/ttyACM1 --aoxpc.datastore_file aoxpc_1.db
-aoxpc --aoxpc.ncp.serial /dev/ttyACM2 --aoxpc.datastore_file aoxpc_2.db
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aoxpc<span class="w"> </span>--aoxpc.ncp.serial<span class="w"> </span>/dev/ttyACM1<span class="w"> </span>--aoxpc.datastore_file<span class="w"> </span>aoxpc_1.db
+aoxpc<span class="w"> </span>--aoxpc.ncp.serial<span class="w"> </span>/dev/ttyACM2<span class="w"> </span>--aoxpc.datastore_file<span class="w"> </span>aoxpc_2.db
 </pre></div>
 </div>
 <p>Write AoXLocator cluster attributes from a remote client.</p>
-<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/ble-pd-111111111111/ep0/AoXLocator/Commands/WriteAttributes</span> - {<span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;PositionAndOrientation&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoordinateX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoordinateY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoordinateZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;OrientationX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;OrientationY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;OrientationZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">  </span>}<span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;PositionAndOrientationValid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/ble-pd-111111111111/ep0/AoXLocator/Commands/WriteAttributes</span> - {
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientation&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">    </span><span class="nt">&quot;CoordinateX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CoordinateY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CoordinateZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;OrientationX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;OrientationY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;OrientationZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">  </span>}<span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientationValid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 }
 </pre></div>
 </div>
-<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/ble-pd-222222222222/ep0/AoXLocator/Commands/WriteAttributes</span> - {<span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;PositionAndOrientation&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoordinateX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoordinateY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoordinateZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;OrientationX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;OrientationY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;OrientationZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">  </span>}<span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;PositionAndOrientationValid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/ble-pd-222222222222/ep0/AoXLocator/Commands/WriteAttributes</span> - {
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientation&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">    </span><span class="nt">&quot;CoordinateX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CoordinateY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CoordinateZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;OrientationX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;OrientationY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;OrientationZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">  </span>}<span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientationValid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 }
 </pre></div>
 </div>
@@ -298,7 +304,7 @@ aoxpc --aoxpc.ncp.serial /dev/ttyACM2 --aoxpc.datastore_file aoxpc_2.db
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

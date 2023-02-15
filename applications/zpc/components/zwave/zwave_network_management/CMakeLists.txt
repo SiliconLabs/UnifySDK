@@ -11,18 +11,20 @@ add_library(
   src/zwave_network_management_return_route_queue.c)
 
 target_link_libraries(zwave_network_management
-                      PUBLIC zwave_controller uic_contiki
-                      PRIVATE zwave_s0 zwave_s2)
+                      PUBLIC unify
+                      PRIVATE zwave_s0 zwave_s2 zwave_smartstart_management)
 target_include_directories(zwave_network_management PUBLIC include)
 install(TARGETS zwave_network_management LIBRARY DESTINATION lib)
 
-# Unit tests
-add_subdirectory(test)
+if(BUILD_TESTING)
+  # Unit tests
+  add_subdirectory(test)
 
-## Mocks
-target_add_mock(zwave_network_management)
+  ## Mocks
+  target_add_mock(zwave_network_management)
 
-# Helper mocks
-add_mock(zwave_network_management_helpers_mock src/zwave_network_management_helpers.h)
-target_link_libraries(zwave_network_management_helpers_mock
-                      PUBLIC zwave_controller)
+  # Helper mocks
+  add_mock(zwave_network_management_helpers_mock src/zwave_network_management_helpers.h)
+  target_link_libraries(zwave_network_management_helpers_mock
+                        PUBLIC zwave_controller)
+endif()

@@ -12,7 +12,7 @@
  *****************************************************************************/
 #include "attribute_mapper.h"
 #include "attribute_mapper_process.h"
-#include "attribute_mapper_engine.hpp"
+#include "workaround.hpp"
 
 // Other Unify components
 #include "attribute_store_fixt.h"
@@ -59,7 +59,7 @@ void setUp()
   node_2        = attribute_store_emplace(root_node, 2, &value, sizeof(value));
 
   MapperEngine &e = MapperEngine::get_instance();
-  e.set_ep_type(attribute_store_get_node_type(root_node));
+  e.set_common_parent_type(attribute_store_get_node_type(root_node));
   e.reset();
 
   // Start the process
@@ -142,9 +142,7 @@ void test_attribute_mapper_process_creation_then_deletion_test()
   MapperEngine &e = MapperEngine::get_instance();
   e.add_expression(R"(scope 0 {
     r'3 = r'1
-    e'3 = e'1
     r'4 = r'2
-    e'4 = e'2
   })");
 
   on_reported_attribute_update(node_1, ATTRIBUTE_CREATED);
@@ -164,14 +162,13 @@ void test_attribute_mapper_process_creation_then_deletion_test()
   on_reported_attribute_update(node_1, ATTRIBUTE_DELETED);
   on_reported_attribute_update(node_2, ATTRIBUTE_DELETED);
 
-  // Delete should cancel out immediately the updated, no need for contiki events
-  node_3 = attribute_store_get_first_child_by_type(root_node, 3);
-  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, node_3);
-  node_4 = attribute_store_get_first_child_by_type(root_node, 4);
-  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, node_4);
+  // Delete should cancel out immediately the updated, no need for contiki events to run the rules:
+  // Mapper engine won't do anything to the reported values when the attributes are deleted.
+  TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(node_3));
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(node_4));
 }
 
-void test_attribute_mapper_process_unkonwn_event_test()
+void test_attribute_mapper_process_unknown_event_test()
 {
   // Nothing much to test here.
   process_post(&unify_attribute_mapper_process, 0xFF, nullptr);

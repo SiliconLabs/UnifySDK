@@ -20,6 +20,8 @@
 
 #include "zigbee_host_common.h"
 
+extern struct zigbeeHostState z3gwState;
+
 /** @brief OTA Server Block Sent Callback
  *
  * This function will be called when a block is sent to a device.

@@ -13,16 +13,15 @@
 // Includes from this component
 #include "zwave_tx_state_logging.h"
 
+// Interfaces
+#include "zwave_helper_macros.h"
+
 // Generic includes
 #include <stdio.h>
 
 // Unify Includes
 #include "sl_log.h"
 #define LOG_TAG "zwave_tx_state_logging"
-
-#define STR_CASE(x) \
-  case x:           \
-    return #x;
 
 const char *zwave_tx_state_name(zwave_tx_state_t state)
 {

@@ -7,5 +7,6 @@
 
 #ifdef __cplusplus
 #include <string>
+#include "ota.hpp"
 #endif
 #endif

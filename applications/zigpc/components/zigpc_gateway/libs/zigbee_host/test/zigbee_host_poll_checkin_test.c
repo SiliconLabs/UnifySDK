@@ -67,7 +67,7 @@ void test_poll_control_send_checkin_response_sanity(void)
   emberAfSendResponse_ExpectAndReturn(EMBER_SUCCESS);
 
   // ACT
-  EmberStatus status = zigbeeHostSendPollingCheckInResponse();
+  EmberStatus status = zigbeeHostSendPollingCheckInResponse(true);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(EMBER_SUCCESS, status);
@@ -87,7 +87,7 @@ void test_poll_control_send_checkin_response_failed(void)
   emberAfSendResponse_ExpectAndReturn(EMBER_ERR_FATAL);
 
   // ACT
-  EmberStatus status = zigbeeHostSendPollingCheckInResponse();
+  EmberStatus status = zigbeeHostSendPollingCheckInResponse(true);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(EMBER_ERR_FATAL, status);

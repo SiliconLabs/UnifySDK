@@ -91,6 +91,9 @@ void test_zwave_s2_nonce_management_get_span_data()
   TEST_ASSERT_EQUAL_UINT8_ARRAY(test_ctx.span_table[1].d.rng.k,
                                 span_data.key,
                                 sizeof(span_data.key));
+  zwave_s2_reset_span(node_id);
+  TEST_ASSERT_EQUAL(test_ctx.span_table[1].state, SPAN_NOT_USED);
+
 }
 
 void test_zwave_s2_nonce_management_zwave_s2_set_span_table()
@@ -241,6 +244,8 @@ void test_zwave_s2_nonce_management_zwave_s2_set_mpan_data()
   TEST_ASSERT_EQUAL_UINT8_ARRAY(mpan_data.inner_state,
                                 test_ctx.mpan_table[1].inner_state,
                                 sizeof(mpan_data.inner_state));
+  zwave_s2_reset_mpan(owner_node_id, group_id);
+  TEST_ASSERT_EQUAL(test_ctx.mpan_table[1].state, MPAN_NOT_USED);
 }
 
 void test_zwave_s2_nonce_management_zwave_s2_set_mpan_data_reuse_entry()

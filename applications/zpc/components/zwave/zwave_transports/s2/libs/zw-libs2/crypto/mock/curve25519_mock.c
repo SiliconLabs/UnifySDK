@@ -1,11 +1,9 @@
-/* © 2014 Silicon Laboratories Inc. */
-/*
- * curve25529_mock.c
+/**
+ * @file curve25529_mock.c
+ * Defines a platform abstraction layer for the Z-Wave bootloader.
  *
- *  Created on: Oct 20, 2015
- *      Author: trasmussen
+ * @copyright 2022 Silicon Laboratories Inc.
  */
-
 #include <stdint.h>
 #include "curve25519.h"
 #include "mock_control.h"

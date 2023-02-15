@@ -1,5 +1,6 @@
 var zigpc__gateway__notify_8c =
 [
+    [ "zigpc_gateway_hdl_bind_unbind_response", "zigpc__gateway__notify_8c.html#a822c41f42b98f6d8a66dc338b9c6d007", null ],
     [ "zigpc_gateway_hdl_on_cmd_received", "zigpc__gateway__notify_8c.html#a97fb17b434befa16e81ae752dde2d06a", null ],
     [ "zigpc_gateway_hdl_on_configure_response", "zigpc__gateway__notify_8c.html#a6372fc6b111809f3a5320e396ebf0696", null ],
     [ "zigpc_gateway_hdl_on_device_endpoints_discovered", "zigpc__gateway__notify_8c.html#ae11b0aefe4deac04a50d8a5c10666316", null ],

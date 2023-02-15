@@ -17,7 +17,7 @@
 // Includes from other components
 #include "ZW_classcmd.h"
 #include "zwave_network_management.h"
-#include "zwave_network_management_state.h"
+#include "zwave_network_management_types.h"
 #include "sys/ctimer.h"
 #include "zwave_command_class_indices.h"
 #include "zwave_controller.h"

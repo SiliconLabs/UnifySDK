@@ -12,10 +12,11 @@ var NAVTREEINDEX1 =
 "configuration_parameters.html#configuration_parameters_cmds":[46,2],
 "configuration_parameters.html#configuration_parameters_default_reset_all_parameters_cmd":[46,2,1],
 "configuration_parameters.html#configuration_parameters_discover_parameter_cmd":[46,2,0],
-"configuration_parameters.html#configuration_parameters_force_read_attr_cmd":[46,2,4],
+"configuration_parameters.html#configuration_parameters_discover_parameter_range_cmd":[46,2,3],
+"configuration_parameters.html#configuration_parameters_force_read_attr_cmd":[46,2,5],
 "configuration_parameters.html#configuration_parameters_recv_cmd_support":[46,1],
 "configuration_parameters.html#configuration_parameters_set_parameter_cmd":[46,2,2],
-"configuration_parameters.html#configuration_parameters_write_attr_cmd":[46,2,3],
+"configuration_parameters.html#configuration_parameters_write_attr_cmd":[46,2,4],
 "dehumidification_control.html":[20],
 "dehumidification_control.html#dehumidification_control_attr_cluster_revision":[20,0,8],
 "dehumidification_control.html#dehumidification_control_attr_dehumidification_cooling":[20,0,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "electrical_measurement.html#electrical_measurement_attr_dc_current":[38,0,4],
 "electrical_measurement.html#electrical_measurement_attr_dc_current_divisor":[38,0,13],
 "electrical_measurement.html#electrical_measurement_attr_dc_current_max":[38,0,6],
-"electrical_measurement.html#electrical_measurement_attr_dc_current_min":[38,0,5],
-"electrical_measurement.html#electrical_measurement_attr_dc_current_multiplier":[38,0,12]
+"electrical_measurement.html#electrical_measurement_attr_dc_current_min":[38,0,5]
 };

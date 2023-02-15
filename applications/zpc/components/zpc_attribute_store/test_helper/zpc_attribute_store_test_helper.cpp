@@ -26,6 +26,8 @@ const zwave_node_id_t zpc_node_id           = 1;
 const zwave_node_id_t zpc_endpoint_id       = 0;
 const zwave_node_id_t node_id               = 4;
 const zwave_endpoint_id_t endpoint_id       = 3;
+unid_t zpc_unid                             = "zw-CAFECAFE-0001";
+unid_t supporting_node_unid                 = "zw-CAFECAFE-0004";
 attribute_store_node_t home_id_node         = ATTRIBUTE_STORE_INVALID_NODE;
 attribute_store_node_t zpc_node_id_node     = ATTRIBUTE_STORE_INVALID_NODE;
 attribute_store_node_t node_id_node         = ATTRIBUTE_STORE_INVALID_NODE;
@@ -36,6 +38,8 @@ void zpc_attribute_store_test_helper_create_network()
 {
   // Configure the UNID module to know our UNID.
   zwave_unid_set_home_id(home_id);
+  zwave_unid_from_node_id(zpc_node_id, zpc_unid);
+  zwave_unid_from_node_id(node_id, supporting_node_unid);
 
   // Make sure to start from scratch
   attribute_store_delete_node(attribute_store_get_root());

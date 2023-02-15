@@ -1,10 +1,7 @@
-/* © 2014 Silicon Laboratories Inc.
- */
 /**
  * @file ZW_s2_key_scrambler.c
- * @author Christian Salmony Olsen
- * @date 31/08/2015
  * @brief This module scrambles and de-scrambles the S2 network key.
+ * @copyright 2014 Silicon Laboratories Inc.
  */
 #define DEBUG
 #include <platform.h>

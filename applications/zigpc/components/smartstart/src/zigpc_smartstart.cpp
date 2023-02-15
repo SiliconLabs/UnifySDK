@@ -68,45 +68,10 @@ template<> struct std::hash<dsk_key_t> {
 };
 
 /**
- * @brief Comparison operator for DSK content based on install codes.
- *
- * @param lhs
- * @param rhs
- * @return true if members in content is equal, false otherwise.
- */
-bool operator==(const zigpc_dsk_install_code_t &lhs,
-                const zigpc_dsk_install_code_t &rhs)
-{
-  bool equal = true;
-
-  if (lhs.install_code_length != rhs.install_code_length) {
-    equal = false;
-  }
-
-  if ((equal == true) && (lhs.dsk.compare(rhs.dsk) != 0)) {
-    equal = false;
-  }
-
-  if ((equal == true)
-      && (memcmp(lhs.eui64, rhs.eui64, sizeof(zigbee_eui64_t)))) {
-    equal = false;
-  }
-
-  if ((equal == true)
-      && (memcmp(lhs.install_code,
-                 rhs.install_code,
-                 sizeof(zigbee_install_code_t)))) {
-    equal = false;
-  }
-
-  return equal;
-}
-
-/**
  * @brief Map of DSKs parsed and processed by ZigPC.
  *
  */
-static std::unordered_map<dsk_key_t, zigpc_dsk_install_code_t>
+std::unordered_map<dsk_key_t, zigpc_common::dsk_install_code_t> //NOSONAR - this cannot be const as we need to add entries to it
   stored_dsk_entries;
 
 void zigpc_smartstart_on_network_init(void *event_data)
@@ -142,7 +107,7 @@ void zigpc_smartstart_on_list_update(bool entries_pending_inclusion)
     if (!entry.device_unid.empty()) {
       continue;
     }
-    zigpc_dsk_install_code_t dsk_content;
+    zigpc_common::dsk_install_code_t dsk_content;
     sl_status_t status
       = zigpc_smartstart_dsk_parse_install_code(entry.dsk, dsk_content);
     if (status == SL_STATUS_OK) {

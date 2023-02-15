@@ -29,6 +29,8 @@
 
 #include "test_zigbee_host_callbacks_mock.h"
 
+extern struct zigbeeHostState z3gwState;
+
 /**
  * @brief  Setup the test suite
  * (called once before all test_xxx functions are called)
@@ -79,15 +81,11 @@ void test_send_bind_request_sanity(void)
   uint16_t group_id       = 0;
 
   // ARRANGE
-  emberAfGetEui64_Expect(NULL);
-  emberAfGetEui64_IgnoreArg_returnEui64();
-  emberAfGetEui64_ReturnThruPtr_returnEui64(gatewayEui64);
-
-  emberAfPrimaryEndpointForCurrentNetworkIndex_ExpectAndReturn(gatewayEndpoint);
 
   emberAfLookupAddressTableEntryByEui64_ExpectAndReturn(eui64, 0);
   emberAfPluginAddressTableLookupNodeIdByIndex_ExpectAndReturn(0, nodeId);
-
+  emberGetLastAppZigDevRequestSequence_IgnoreAndReturn(1);
+  
   emberBindRequest_ExpectAndReturn(nodeId,
                                    eui64,
                                    endpoint,
@@ -102,7 +100,7 @@ void test_send_bind_request_sanity(void)
 
   // ACT
   EmberStatus status
-    = zigbeeHostInitBinding(eui64, endpoint, clusterId, group_id);
+    = zigbeeHostInitBinding(eui64, endpoint, clusterId, group_id, gatewayEui64, 1, true);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(EMBER_SUCCESS, status);

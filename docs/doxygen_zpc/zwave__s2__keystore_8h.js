@@ -8,5 +8,6 @@ var zwave__s2__keystore_8h =
     [ "zwave_s2_keystore_get_assigned_keys", "group__zwave__s2__keystore.html#ga42cbe7b3856c32fcde78b52c3b0be2ae", null ],
     [ "zwave_s2_keystore_get_dsk", "group__zwave__s2__keystore.html#gaaa90915209c3b118a05cc8adb221f83e", null ],
     [ "zwave_s2_keystore_reset_assigned_keys", "group__zwave__s2__keystore.html#ga5f2ffcd45d335cc55446098a1b970cf6", null ],
-    [ "zwave_s2_log_security_keys", "group__zwave__s2__keystore.html#ga6e7eb7c062ee0f17a650a0e7ca7c9831", null ]
+    [ "zwave_s2_log_security_keys", "group__zwave__s2__keystore.html#ga6e7eb7c062ee0f17a650a0e7ca7c9831", null ],
+    [ "zwave_s2_save_security_keys", "group__zwave__s2__keystore.html#gac49dbe5742fe551166c94f1123e9ab79", null ]
 ];

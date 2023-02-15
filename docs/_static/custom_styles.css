@@ -128,6 +128,12 @@ body {
     height: calc(100% - 20px);
 }
 
+/* override table no-wrap */
+.wy-table-responsive table td, .wy-table-responsive table th {
+    white-space: normal;
+}
+
+
 footer {
     text-align: center;
 }
@@ -159,4 +165,42 @@ h3 {
 
 .wy-menu-vertical li.current>a {
     padding-right: 10px !important;
+}
+
+.error-message {
+    color: red;
+    line-height: 40px;
+    text-align: center;
+}
+
+.dsk-value {
+    line-height: 40px;
+    margin-right: 20px;
+}
+
+#qr-reader {
+    width: 50%;
+    margin: auto;
+}
+
+.dsk-container {
+    visibility: hidden;
+    margin: auto;
+    width: 50%;
+    margin-top: 30px;
+    line-height: 40px;
+}
+
+.dsk-container>div {
+    text-align: center;
+}
+
+video {
+    width: inherit !important;
+}
+
+.flip video {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
 }

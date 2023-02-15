@@ -32,6 +32,8 @@ var unionzigpc__zclcmdparse__callback__data__t =
     [ "groups_get_group_membership_response", "unionzigpc__zclcmdparse__callback__data__t.html#a7482276f78e83815dbc20e3386cd75eb", null ],
     [ "groups_remove_group_response", "unionzigpc__zclcmdparse__callback__data__t.html#ab6417546e3c117bf53f8cdffded5bb05", null ],
     [ "groups_view_group_response", "unionzigpc__zclcmdparse__callback__data__t.html#a3d419dc5c625ccb90ab6985d0ba39a7f", null ],
+    [ "ias_zone_zone_enroll_request", "unionzigpc__zclcmdparse__callback__data__t.html#ad7a9e4ed5a3d62dfb2ecaa345527372d", null ],
+    [ "ias_zone_zone_status_change_notification", "unionzigpc__zclcmdparse__callback__data__t.html#a6330c0cfa06b71032c81674fa043789d", null ],
     [ "identify_identify_query_response", "unionzigpc__zclcmdparse__callback__data__t.html#a0b25dd27a6c1616a4978f2d07464e516", null ],
     [ "poll_control_check_in_response", "unionzigpc__zclcmdparse__callback__data__t.html#a571a7ef9013384bc0f04cd77950fd989", null ],
     [ "poll_control_fast_poll_stop", "unionzigpc__zclcmdparse__callback__data__t.html#abd60784505fcf44eaa9279bde82677a7", null ],

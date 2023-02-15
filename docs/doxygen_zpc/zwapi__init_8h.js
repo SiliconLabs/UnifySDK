@@ -45,7 +45,9 @@ var zwapi__init_8h =
     [ "zwapi_log_to_file_enable", "group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887", null ],
     [ "zwapi_poll", "group__ZWAPI__INIT.html#gad44a77c9f06a6a5b81d5b3fd1f38e6b1", null ],
     [ "zwapi_refresh_capabilities", "group__ZWAPI__INIT.html#gab39e440bdb6435b04e754771c5ad41b5", null ],
+    [ "zwapi_set_awaiting_zwave_api_started", "group__ZWAPI__INIT.html#gac747addbb718dc86d958ba5f38bb5ad5", null ],
     [ "zwapi_set_zwave_lr_channel", "group__ZWAPI__INIT.html#ga4b9748e3273a22a02d08e545f8c39d14", null ],
     [ "zwapi_support_command_func", "group__ZWAPI__INIT.html#ga0a823074baec69913d0e8590b46e4e33", null ],
-    [ "zwapi_support_setup_func", "group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12", null ]
+    [ "zwapi_support_setup_func", "group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12", null ],
+    [ "zwave_api_get_callbacks", "group__ZWAPI__INIT.html#ga1f464f2f17aea6c240c99b18b86731a2", null ]
 ];

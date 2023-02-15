@@ -17,6 +17,7 @@
 mod mqtt_handler;
 mod pti_sniffer;
 use mqtt_handler::*;
+use unify_application_monitoring_sys::unify_application_monitoring_set_application_name;
 use unify_config_sys::*;
 use unify_log_sys::*;
 use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
@@ -31,6 +32,7 @@ extern crate lazy_static;
 declare_app_name!("unify-upti-cap");
 const UNID: &'static str = "upti";
 const IPS: &'static str = "";
+const FULL_APPLICATION_NAME: &str = "UPTI-Capture (Unify Packet Trace Interface Capture)";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
 fn main() -> std::result::Result<(), sl_status_t> {
@@ -38,7 +40,6 @@ fn main() -> std::result::Result<(), sl_status_t> {
         // error message handled by uic_config
         return Ok(());
     }
-
     ok_or_exit_with_message(run(), "mqtt_client error")
 }
 
@@ -78,6 +79,7 @@ fn ok_or_exit_with_message<T, E: std::fmt::Display>(
 }
 
 fn run() -> Result<(), sl_status_t> {
+    unify_application_monitoring_set_application_name(FULL_APPLICATION_NAME);
     let mqtt_client = UnifyMqttClient::default();
     mqtt_client.initialize()?;
     let handler = MqttHandler::new()?;

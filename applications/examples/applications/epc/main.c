@@ -13,6 +13,7 @@
 // EPC Components
 #include "epc_datastore_fixt.h"
 #include "epc_config_fixt.h"
+#include "epc_application_monitoring.h"
 #include "epc_config.h"
 
 // Unify components
@@ -20,7 +21,7 @@
 #include "datastore_fixt.h"
 #include "attribute_store_fixt.h"
 #include "dotdot_mqtt.h"
-#include "uic_dotdot_attribute_store_registration.h"
+#include "unify_dotdot_attribute_store.h"
 #include "sl_log.h"
 
 // Generic incldues
@@ -30,13 +31,18 @@
 #define LOG_TAG "main"
 
 // List of init functions.
-static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
-  {&epc_config_fixt_setup, "EPC Config"},
-  {&epc_datastore_fixt_setup, "Datastore"},
-  {&attribute_store_init, "Attribute store"},
-  {&uic_mqtt_dotdot_init, "DotDot MQTT"},
-  {&uic_dotdot_attribute_store_registration_init, "ZCL Attribute Registration"},
-  {NULL, "Terminator"}};
+static uic_fixt_setup_step_t uic_fixt_setup_steps_list[]
+  = {{&epc_config_fixt_setup, "EPC Config"},
+     {&epc_application_monitoring_init, "EPC ApplicationMonitoring"},
+     {&epc_datastore_fixt_setup, "Datastore"},
+     {&attribute_store_init, "Attribute store"},
+     /**
+      * Initializes the ZCL/DotDot specialization of the Attribute Store.
+      * MUST be initialized before uic_mqtt_dotdot_init
+      */
+     {&unify_dotdot_attribute_store_init, "Unify DotDot Attribute Store"},
+     {&uic_mqtt_dotdot_init, "DotDot MQTT"},
+     {NULL, "Terminator"}};
 
 // List of shutdown functions
 static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[]

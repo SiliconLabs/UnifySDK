@@ -44,7 +44,6 @@
 
 #include "zwave_controller.h"
 #include "zwave_tx.h"
-
 #include "zwave_command_class_version_types.h"
 
 // The maximum number of transports that can be registered.

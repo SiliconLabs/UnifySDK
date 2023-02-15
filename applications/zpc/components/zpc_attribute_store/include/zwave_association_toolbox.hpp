@@ -97,5 +97,15 @@ void substract_association_lists(const association_set &set_1,
                                  const association_set &set_2,
                                  association_set &result);
 
+/**
+ * @brief Merge set_1 and set_2.
+ *
+ * @param [in] set_1
+ * @param [in] set_2
+ * @param [out] result, set that have set_1 and set_2 elements
+ */
+void merge_association_lists(const association_set &set_1,
+                             const association_set &set_2,
+                             association_set &result);
 #endif  //ZWAVE_ASSOCIATION_TOOLBOX_HPP
 /** @} end zwave_association_toolbox */

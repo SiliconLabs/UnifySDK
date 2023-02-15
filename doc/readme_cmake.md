@@ -241,7 +241,8 @@ add_component_to_uic(
   uic-zpc # Package Name
   "Universal IOT controller - Z-Wave protocol Controller"
   "${CMAKE_PROJECT_NAME}-zpc" # Package Debian filename
-  "libuic" # Package Depends on
+  "libfoo" # Package Depends on
+  "" # Package replaces
   "debconf/config;\
    debconf/templates;\
    debconf/conffiles;\

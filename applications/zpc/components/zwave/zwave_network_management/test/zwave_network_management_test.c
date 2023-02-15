@@ -34,11 +34,11 @@
 #include "zwave_controller_utils_mock.h"
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_storage_mock.h"
+#include "zwave_smartstart_management_mock.h"
 
 #include "ZW_classcmd.h"
 #include "sl_log.h"
 #include "zwave_s2_network.h"
-#include "zpc_endian.h"
 #include "process.h"
 
 #define KEY_CLASS_S0                 0x80
@@ -1891,7 +1891,145 @@ void test_zwave_network_management_s0_add_end_node()
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
+//
+// A test for all NM state changes for S2 inclusion
+void test_zwave_network_management_add_node_with_same_dsk_in_smart_start_list()
+{
+  node_id                           = 0x44;
+  LEARN_INFO sample_add_node_report = {ADD_NODE_STATUS_LEARN_READY, node_id};
 
+  for (int i = 0; i < sizeof(dsk); i++) {
+    dsk[i] = i;
+  }
+
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
+  // Mocking the zwapi_add_node_from_network function call
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
+  // Ignoring the completedFunc argument of zwapi_add_node_from_network
+  zwapi_add_node_to_network_IgnoreArg_completedFunc();
+  zwave_controller_on_state_updated_Ignore();
+
+  zwapi_add_node_to_network_AddCallback(my_s2_add_node_stub);
+
+  zwave_network_management_add_node();
+  contiki_test_helper_run(0);
+  // check the Network Management state is 'Add Node' state
+  TEST_ASSERT_EQUAL(NM_WAITING_FOR_ADD, zwave_network_management_get_state());
+
+  sample_add_node_report.bStatus = ADD_NODE_STATUS_NODE_FOUND;
+  sample_add_node_report.bSource = node_id;
+  my_s2_add_node_callback_save(&sample_add_node_report);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_NODE_FOUND, zwave_network_management_get_state());
+
+  sample_add_node_report.bStatus = ADD_NODE_STATUS_ADDING_END_NODE;
+  sample_add_node_report.pCmd    = node_add_nif_with_s2;
+  sample_add_node_report.bSource = node_id;
+  sample_add_node_report.bLen    = sizeof(node_add_nif_with_s2);
+  my_s2_add_node_callback_save(&sample_add_node_report);
+
+  sample_nif->basic_device_class    = BASIC_TYPE_END_NODE;
+  sample_nif->command_class_list[0] = COMMAND_CLASS_ZWAVEPLUS_INFO;
+  sample_nif->command_class_list[1] = COMMAND_CLASS_SECURITY_2;
+
+  zwave_command_class_list_unpack_Expect(NULL,
+                                         &sample_add_node_report.pCmd[3],
+                                         sample_add_node_report.bLen - 3);
+  zwave_command_class_list_unpack_ReturnThruPtr_node_info(sample_nif);
+  zwave_command_class_list_unpack_IgnoreArg_node_info();
+
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
+
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_WAIT_FOR_PROTOCOL, zwave_network_management_get_state());
+
+  sample_add_node_report.bStatus = ADD_NODE_STATUS_DONE;
+  sample_add_node_report.bSource = node_id;
+  my_s2_add_node_callback_save(&sample_add_node_report);
+
+  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_STOP), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_IgnoreArg_completedFunc();
+
+  zwapi_get_protocol_info_ExpectAndReturn(node_id, NULL, SL_STATUS_OK),
+    zwapi_get_protocol_info_IgnoreArg_node_info_header();
+  zwave_s2_start_add_node_Expect(node_id);
+
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_WAIT_FOR_SECURE_ADD,
+                    zwave_network_management_get_state());
+
+  // Expect zwave_controller_on_keys_report() being called after arrival of
+  // kex report
+  uint8_t key_request = KEY_CLASS_S0 | KEY_CLASS_S2_UNAUTHENTICATED
+                        | KEY_CLASS_S2_AUTHENTICATED | KEY_CLASS_S2_ACCESS;
+  zwave_controller_on_keys_report_Expect(0, key_request);
+  zwave_controller_on_keys_report_IgnoreArg_csa();
+  // Fire NM_EV_ADD_SECURITY_REQ_KEYS (That keys report has arrived from other side)
+  my_sec2_inclusion_cb.on_keys_request(key_request, 0);
+  /* ----------------------------------------------------*/
+
+  zwave_controller_on_state_updated_Ignore();
+  TEST_ASSERT_EQUAL(NM_WAIT_FOR_SECURE_ADD,
+                    zwave_network_management_get_state());
+
+  //expect zwave_s2_key_grant() called
+  zwave_s2_key_grant_Expect(1, key_request, 0);
+
+  // Fire NM_EV_ADD_SECURITY_KEYS_SET (Grant keys)
+  zwave_network_management_keys_set(1, 0, key_request);
+  contiki_test_helper_run(0);
+
+  /* ----------------------------------------------------*/
+  find_dsk_obfuscated_bytes_from_smart_start_list_ExpectAndReturn(0, 0, true);
+  find_dsk_obfuscated_bytes_from_smart_start_list_IgnoreArg_dsk();
+  find_dsk_obfuscated_bytes_from_smart_start_list_IgnoreArg_obfuscated_bytes();
+  //Fire NM_EV_ADD_SECURITY_KEY_CHALLENGE
+  my_sec2_inclusion_cb.on_dsk_challenge(granted_keys, 2, dsk);
+  zwave_s2_dsk_accept_Expect(1, dsk, 2);
+  contiki_test_helper_run(0);
+
+  /* ----------------------------------------------------*/
+  zwave_s2_dsk_accept_Expect(1, dsk, 2);
+  // Fire NM_EV_ADD_SECURITY_DSK_SET
+  zwave_network_management_dsk_set(dsk);
+  contiki_test_helper_run(0);
+
+  /* ----------------------------------------------------*/
+  TEST_ASSERT_EQUAL(NM_WAIT_FOR_SECURE_ADD,
+                    zwave_network_management_get_state());
+  printf("----");
+  // Now the S2 library will complete the inclusion and the and we
+  // expect to get our finalt inclusion complete callback, with the
+  // full dsk and granted keys
+  zwave_controller_on_node_added_ExpectWithArray(
+    SL_STATUS_OK,
+    (zwave_node_info_t *)node_add_nif_with_s2,
+    sizeof(node_add_nif_with_s2),
+    node_id,
+    dsk,
+    sizeof(dsk),
+    granted_keys,
+    ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE,
+    PROTOCOL_ZWAVE);
+
+  zwave_controller_on_node_added_IgnoreArg_nif();
+  // Fire NM_EV_SECURITY_DONE
+  my_sec2_inclusion_cb.on_inclusion_complete(
+    granted_keys,
+    ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
+  contiki_test_helper_run(0);
+  /* ----------------------------------------------------*/
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+}
 // A test for all NM state changes for S2 inclusion
 void test_zwave_network_management_add_node()
 {
@@ -1990,6 +2128,9 @@ void test_zwave_network_management_add_node()
 
   /* ----------------------------------------------------*/
   zwave_controller_on_dsk_report_Expect(2, dsk, 0x87);
+  find_dsk_obfuscated_bytes_from_smart_start_list_ExpectAndReturn(0, 0, false);
+  find_dsk_obfuscated_bytes_from_smart_start_list_IgnoreArg_dsk();
+  find_dsk_obfuscated_bytes_from_smart_start_list_IgnoreArg_obfuscated_bytes();
   //Fire NM_EV_ADD_SECURITY_KEY_CHALLENGE
   my_sec2_inclusion_cb.on_dsk_challenge(granted_keys, 2, dsk);
   contiki_test_helper_run(0);
@@ -2203,6 +2344,9 @@ void test_zwave_network_management_add_node_wrong_dsk_input()
   reported_dsk[0] = 1;
   reported_dsk[1] = 1;
 
+  find_dsk_obfuscated_bytes_from_smart_start_list_ExpectAndReturn(0, 0, false);
+  find_dsk_obfuscated_bytes_from_smart_start_list_IgnoreArg_dsk();
+  find_dsk_obfuscated_bytes_from_smart_start_list_IgnoreArg_obfuscated_bytes();
   // Post NM_EV_ADD_SECURITY_KEY_CHALLENGE to NM state machine with wrong dsk
   my_sec2_inclusion_cb.on_dsk_challenge(granted_keys, 2, reported_dsk);
   zwave_network_management_dsk_set(dsk);

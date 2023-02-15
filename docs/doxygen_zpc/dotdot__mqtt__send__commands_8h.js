@@ -76,6 +76,8 @@ var dotdot__mqtt__send__commands_8h =
     [ "uic_mqtt_dotdot_configuration_parameters_publish_default_reset_all_parameters_command_to_group", "group__dotdot__mqtt__send__commands.html#ga9fe673401fc3a0e7f7522d5711cb183f", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_command", "group__dotdot__mqtt__send__commands.html#ga8775ae8183f920841627f8c4e8ac192c", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_command_to_group", "group__dotdot__mqtt__send__commands.html#ga76ce48203f415ede8f106a416b9f9757", null ],
+    [ "uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_command", "group__dotdot__mqtt__send__commands.html#gaf8f991fb7ba6ff1483deae4073d98b92", null ],
+    [ "uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_command_to_group", "group__dotdot__mqtt__send__commands.html#gab7687a6b5d2f37081fbd0edc0124bedb", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_set_parameter_command", "group__dotdot__mqtt__send__commands.html#ga07d3a78d459806db0e0434a150973671", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_set_parameter_command_to_group", "group__dotdot__mqtt__send__commands.html#ga3f8f517476a4b7e85cf6871159245eea", null ],
     [ "uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_command", "group__dotdot__mqtt__send__commands.html#ga4a6fed7a5a051ec26483033050ccb1c3", null ],

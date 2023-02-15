@@ -363,7 +363,7 @@ static sl_status_t zwave_command_class_basic_handle_report(
   // Current/target value adjustments based on the reported duration.
   if (duration == 0) {
     // Ensure no mismatch between reported/desired if duration is 0.
-    if (attribute_store_is_value_defined(value_node, DESIRED_ATTRIBUTE)) {
+    if (attribute_store_is_desired_defined(value_node)) {
       attribute_store_set_reported_as_desired(value_node);
       attribute_store_undefine_desired(value_node);
     }
@@ -426,11 +426,12 @@ static void
   }
 
   // Finally, just double check that we did not already do that by any chance
+  // On restart we get a few "ATTRIBUTE_CREATED" callbbaks that are not true original creations.
   if (get_basic_probe_status(endpoint_node) != NOT_REQUESTED) {
-    sl_log_info(LOG_TAG,
-                "Prevented an attempt to send several Basic Get Probes "
-                "for Attribute node %d. This should not happen.",
-                endpoint_node);
+    sl_log_debug(LOG_TAG,
+                 "Prevented an attempt to send several Basic Get Probes "
+                 "for Attribute node %d.",
+                 endpoint_node);
     return;
   }
 

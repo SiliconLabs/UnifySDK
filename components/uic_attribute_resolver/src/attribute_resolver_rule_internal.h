@@ -45,8 +45,8 @@ typedef void (*attribute_rule_complete_t)(attribute_store_node_t, clock_time_t);
  *                be called when we are done executing
  * - SL_STATUS_ALREADY_EXISTS        refer to \ref attribute_resolver_function_t
  * - SL_STATUS_NOT_FOUND             the requested rule is not in the the book
- * - SL_STATUS_NOT_BUSY              we are already executing a rule.
- * - SL_STATUS_WOULD_OVERFLOW        our buffer cannot handle the frame.
+ * - SL_STATUS_BUSY                  The Attribute Resolver is already executing a rule.
+ * - SL_STATUS_WOULD_OVERFLOW        The Attribute Resolver buffer cannot handle the frame.
  * - SL_STATUS_NOT_READY             The send function cannot service our frame.
  * - SL_STATUS_FAIL (or other codes) refer to \ref attribute_resolver_function_t
  */
@@ -56,26 +56,6 @@ sl_status_t attribute_resolver_rule_execute(attribute_store_node_t node,
 void attribute_resolver_rule_register(attribute_store_type_t node_type,
                                       attribute_resolver_function_t set_func,
                                       attribute_resolver_function_t get_func);
-
-/**
- * @brief Returns if the Rule Book can resolve a Set Rule for the attribute type
- *
- * @param node_type The attribute Store node type for which we want to know
- *                  if there is a Set rule registered.
- * @returns true if a set rule is registered
- *          false if no set rule is registered
- */
-bool attribute_resolver_has_set_rule(attribute_store_type_t node_type);
-
-/**
- * @brief Returns if the Rule Book can resolve a Get Rule for the attribute type
- *
- * @param node_type The attribute Store node type for which we want to know
- *                  if there is a Get rule registered.
- * @returns true if a Get rule is registered
- *          false if no Get rule is registered
- */
-bool attribute_resolver_has_get_rule(attribute_store_type_t node_type);
 
 /**
  * @brief Initialize the rule book

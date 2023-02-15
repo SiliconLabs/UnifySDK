@@ -1,18 +1,28 @@
-import { SceneItem } from "../scene-list/scene-list-types";
-
 export type SceneProps = {
-  SceneList: any;
-  GroupList: any[];
-  IsConnected: boolean | null;
-  SocketServer: WebSocket;
-  GroupID: string;
-  SceneID: string;
+  GroupList: any[],
+  NodeList: any[],
+  IsConnected: boolean | null,
+  SocketServer: WebSocket,
+  GroupID: string,
+  SceneID: string,
+  Unid: string,
+  Ep: string
 }
 
 export type SceneState = {
   Scene: SceneItem,
   Cluster: string,
-  Cmd: string,
   GetScene: any,
-  IsSceneListReceived: boolean
+  ClusterToAdd: string,
+  IsEdit: boolean,
+  AvailableClusters: string[]
+}
+
+export type SceneItem = {
+  GroupID: number | null,
+  SceneID: number | null,
+  SceneName: string,
+  TransitionTime: number,
+  TransitionTime100ms: number,
+  SceneTableExtensions: any
 }

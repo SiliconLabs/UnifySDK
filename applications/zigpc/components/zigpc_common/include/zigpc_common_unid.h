@@ -30,6 +30,24 @@ extern "C" {
 #define ZIGPC_UNID_PREFIX "zb-"
 #define ZIGPC_UNID_PREFIX_LENGTH 3
 
+#define ZIGPC_EUI64_STRING_LENGTH 16    
+
+#define UCL_TOP_LEVEL "ucl/"
+#define UCL_BY_UNID "by-unid/"
+#define UCL_EP_PREFIX "/ep"
+#define UCL_NODE_STATE "/State"
+#define UCL_PROTOCOL_CONTROLLER "/ProtocolController"
+
+#define UCL_ATTRIBUTE_TOPIC "/Attributes"
+#define UCL_ATTRIBUTE_REPORTED_TOPIC "/Reported"
+#define UCL_ATTRIBUTE_DESIRED_TOPIC "/Desired"
+
+#define UCL_COMMAND_TOPIC "/Commands"
+#define UCL_SUPPORTED_COMMAND_TOPIC "/SupportedCommands"
+#define UCL_GENERATED_COMMAND_TOPIC "/SupportedGeneratedCommands"
+
+#define UCL_VALUE "\"value\""
+
 #ifdef __cplusplus
 }
 #endif

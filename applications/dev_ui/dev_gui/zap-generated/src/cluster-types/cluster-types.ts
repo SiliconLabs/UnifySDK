@@ -3,18 +3,29 @@
 //To change the stucture of the ClusterTypes, modify cluster-types.zapt
 
 export enum ClusterTypes {
-    Basic = "Basic", 
+    BarrierControl = "BarrierControl", 
+	Basic = "Basic", 
 	ColorControl = "ColorControl", 
+	ConcentrationMeasurement = "ConcentrationMeasurement", 
 	DoorLock = "DoorLock", 
+	ElectricalConductivityMeasurement = "ElectricalConductivityMeasurement", 
 	ElectricalMeasurement = "ElectricalMeasurement", 
+	FlowMeasurement = "FlowMeasurement", 
 	IASZone = "IASZone", 
 	Identify = "Identify", 
+	IlluminanceMeasurement = "IlluminanceMeasurement", 
 	Level = "Level", 
+	Metering = "Metering", 
 	OccupancySensing = "OccupancySensing", 
 	OnOff = "OnOff", 
+	PhMeasurement = "PhMeasurement", 
+	PressureMeasurement = "PressureMeasurement", 
 	Scenes = "Scenes", 
+	TemperatureMeasurement = "TemperatureMeasurement", 
 	Thermostat = "Thermostat", 
-	Metering = "Metering", 
+	WaterContentMeasurement = "WaterContentMeasurement", 
+	WindSpeedMeasurement = "WindSpeedMeasurement", 
+	WindowCovering = "WindowCovering", 
 	PowerConfiguration = "PowerConfiguration"
 }
 

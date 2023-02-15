@@ -5,5 +5,6 @@ var structuic__mqtt__dotdot__scenes__command__add__scene__fields__t =
     [ "groupid", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#a4991f82376e99b4c6b7138bb6cc41e0c", null ],
     [ "scene_name", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#ae3509e7cd8870f1c95ff200fe94f4755", null ],
     [ "sceneid", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#aaba8bc670c86468b6c9a74eabb06f666", null ],
-    [ "transition_time", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#afabf52c0867455172eb0e2c5dd25bd37", null ]
+    [ "transition_time", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#afabf52c0867455172eb0e2c5dd25bd37", null ],
+    [ "transition_time100ms", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#a40700f995fb5d00a30d9587edda32be3", null ]
 ];

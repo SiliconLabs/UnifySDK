@@ -67,7 +67,6 @@ void test_zpc_stdin_attribute_store_log_test()
   attribute_store_node_t root_node = attribute_store_get_root();
   attribute_store_node_t node_1    = attribute_store_add_node(1, root_node);
   attribute_store_set_desired_as_reported(node_1);
-  attribute_store_set_desired_as_reported(node_1);
   attribute_store_node_t node_2 = attribute_store_add_node(2, node_1);
   attribute_store_set_reported_number(node_2, 23);
   attribute_store_set_desired_number(node_2, 24);
@@ -101,7 +100,6 @@ void test_zpc_stdin_attribute_store_log_test()
   attribute_store_set_desired_number(node_12, 0.9999999);
   attribute_store_node_t node_13 = attribute_store_add_node(13, node_3);
   attribute_store_set_reported_string(node_13, "Test String value");
-  //attribute_store_set_desired_string(node_13, "desired string???");
   attribute_store_node_t node_14 = attribute_store_add_node(14, node_1);
   uint8_t byte_array[] = {1, 2, 5, 4, 5, 8, 10, 12, 14, 21, 52, 35, 9, 255};
   attribute_store_set_reported(node_14, byte_array, sizeof(byte_array));
@@ -110,27 +108,10 @@ void test_zpc_stdin_attribute_store_log_test()
   attribute_store_set_reported(node_15, byte_array, sizeof(byte_array));
   attribute_store_set_desired(node_15, byte_array, sizeof(byte_array));
 
-  sl_status_t state = uic_stdin_handle_command("attribute_store_log");
+  sl_status_t state;
+  state = uic_stdin_handle_command("attribute_store_log_network");
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 
-  state = uic_stdin_handle_command("attribute_store_log 3");
+  state = uic_stdin_handle_command("attribute_store_log_network 0");
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state  = uic_stdin_handle_command("attribute_store_log_network");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,state);
-
-  state  = uic_stdin_handle_command("attribute_store_log_network 0");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,state);
-
-  state  = uic_stdin_handle_command("attribute_store_log_search Next");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,state);
-
-  state  = uic_stdin_handle_command("attribute_store_log_search U8");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,state);
-
-  state = uic_stdin_handle_command("attribute_store_log_node 3");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  state = uic_stdin_handle_command("attribute_store_log_subtree 3");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }

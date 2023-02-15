@@ -79,6 +79,8 @@ typedef struct {
   /// Measured 0dBm output power for the Z-Wave module.
   /// Refer to \ref zwave_rx_init
   int zwave_measured_0dbm_power;
+  /// Max Z-Wave Long Range Transmit power
+  int zwave_max_lr_tx_power_dbm;
   ///< Default wake up interval to be used when including wake up nodes
   int default_wake_up_interval;
   uint16_t manufacturer_id;

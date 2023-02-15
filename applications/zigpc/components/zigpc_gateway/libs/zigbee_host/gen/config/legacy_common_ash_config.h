@@ -33,9 +33,9 @@
 #ifndef LEGACY_NCP_ASH_CONFIG_H
 #define LEGACY_NCP_ASH_CONFIG_H
 
-// <o LEGACY_NCP_ASH_SERIAL_PORT> The USART used for ASH communications <-1..3:1>
+// <o LEGACY_NCP_ASH_SERIAL_PORT> The USART used for ASH communications in COM_Port_t format, as defined in platform/service/legacy_hal/inc/serial.h (see defined names for USART ports) <-1..3:1>
 // <i> Default: (-1)
-// <i> The default value of -1 causes the ASH code to try to use the USART assigned to the "VCOM" intance of SL_IOSTREAM_USART. Otherwise the value is passed to Legacy HAL, which attempts to find an instance of SL_IOSTREAM_USART which uses that USART.
+// <i> The default value of -1 causes the ASH code to try to use the USART assigned to the "VCOM" instance of SL_IOSTREAM_USART. Otherwise the value is passed to Legacy HAL, which attempts to find an instance of SL_IOSTREAM_USART which uses that USART.
 #define LEGACY_NCP_ASH_SERIAL_PORT    (-1)
 
 #endif /* LEGACY_NCP_ASH_CONFIG_H */

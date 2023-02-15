@@ -1,5 +1,9 @@
 # Using the Co-Processor Communication Daemon (CPCd)
 
+This documentation is a condensed format specifically for Unify.
+The full CPCd documentation can be found on the
+[CPCd GitHub page](https://github.com/SiliconLabs/cpc-daemon).
+
 The key host software component at the heart of the multiprotocol architecture is
 a multiplexer called CPCd (Co-Processor Communication daemon). CPCd runs on
 the host and acts as a reliable and secure serial transport layer to the

@@ -17,11 +17,14 @@
 #include "dotdot_mqtt_send_commands.h"
 #include "dotdot_mqtt.hpp"
 #include "dotdot_mqtt_command_helpers.hpp"
-#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_parsing_helpers.hpp"
+#include "sl_log.h"
 
 // Generic includes
 #include <string>
 #include <nlohmann/json.hpp>
+
+#define LOG_TAG "dotdot_mqtt_send_commands"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Sending Commands functions
@@ -54,6 +57,7 @@ void uic_mqtt_dotdot_basic_publish_reset_to_factory_defaults_command(
     get_json_payload_for_basic_reset_to_factory_defaults_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -82,6 +86,8 @@ void uic_mqtt_dotdot_basic_publish_reset_to_factory_defaults_command_to_group(
   std::string payload =
     get_json_payload_for_basic_reset_to_factory_defaults_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -121,6 +127,7 @@ void uic_mqtt_dotdot_identify_publish_identify_command(
     get_json_payload_for_identify_identify_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -153,6 +160,8 @@ void uic_mqtt_dotdot_identify_publish_identify_command_to_group(
   std::string payload =
     get_json_payload_for_identify_identify_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -192,6 +201,7 @@ void uic_mqtt_dotdot_identify_publish_identify_query_response_command(
     get_json_payload_for_identify_identify_query_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -224,6 +234,8 @@ void uic_mqtt_dotdot_identify_publish_identify_query_response_command_to_group(
   std::string payload =
     get_json_payload_for_identify_identify_query_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -259,6 +271,7 @@ void uic_mqtt_dotdot_identify_publish_identify_query_command(
     get_json_payload_for_identify_identify_query_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -287,6 +300,8 @@ void uic_mqtt_dotdot_identify_publish_identify_query_command_to_group(
   std::string payload =
     get_json_payload_for_identify_identify_query_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -326,6 +341,7 @@ void uic_mqtt_dotdot_identify_publish_trigger_effect_command(
     get_json_payload_for_identify_trigger_effect_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -358,6 +374,8 @@ void uic_mqtt_dotdot_identify_publish_trigger_effect_command_to_group(
   std::string payload =
     get_json_payload_for_identify_trigger_effect_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -397,6 +415,7 @@ void uic_mqtt_dotdot_groups_publish_add_group_command(
     get_json_payload_for_groups_add_group_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -429,6 +448,8 @@ void uic_mqtt_dotdot_groups_publish_add_group_command_to_group(
   std::string payload =
     get_json_payload_for_groups_add_group_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -468,6 +489,7 @@ void uic_mqtt_dotdot_groups_publish_add_group_response_command(
     get_json_payload_for_groups_add_group_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -500,6 +522,8 @@ void uic_mqtt_dotdot_groups_publish_add_group_response_command_to_group(
   std::string payload =
     get_json_payload_for_groups_add_group_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -539,6 +563,7 @@ void uic_mqtt_dotdot_groups_publish_view_group_command(
     get_json_payload_for_groups_view_group_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -571,6 +596,8 @@ void uic_mqtt_dotdot_groups_publish_view_group_command_to_group(
   std::string payload =
     get_json_payload_for_groups_view_group_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -610,6 +637,7 @@ void uic_mqtt_dotdot_groups_publish_view_group_response_command(
     get_json_payload_for_groups_view_group_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -642,6 +670,8 @@ void uic_mqtt_dotdot_groups_publish_view_group_response_command_to_group(
   std::string payload =
     get_json_payload_for_groups_view_group_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -681,6 +711,7 @@ void uic_mqtt_dotdot_groups_publish_get_group_membership_command(
     get_json_payload_for_groups_get_group_membership_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -713,6 +744,8 @@ void uic_mqtt_dotdot_groups_publish_get_group_membership_command_to_group(
   std::string payload =
     get_json_payload_for_groups_get_group_membership_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -752,6 +785,7 @@ void uic_mqtt_dotdot_groups_publish_get_group_membership_response_command(
     get_json_payload_for_groups_get_group_membership_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -784,6 +818,8 @@ void uic_mqtt_dotdot_groups_publish_get_group_membership_response_command_to_gro
   std::string payload =
     get_json_payload_for_groups_get_group_membership_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -823,6 +859,7 @@ void uic_mqtt_dotdot_groups_publish_remove_group_command(
     get_json_payload_for_groups_remove_group_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -855,6 +892,8 @@ void uic_mqtt_dotdot_groups_publish_remove_group_command_to_group(
   std::string payload =
     get_json_payload_for_groups_remove_group_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -894,6 +933,7 @@ void uic_mqtt_dotdot_groups_publish_remove_group_response_command(
     get_json_payload_for_groups_remove_group_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -926,6 +966,8 @@ void uic_mqtt_dotdot_groups_publish_remove_group_response_command_to_group(
   std::string payload =
     get_json_payload_for_groups_remove_group_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -961,6 +1003,7 @@ void uic_mqtt_dotdot_groups_publish_remove_all_groups_command(
     get_json_payload_for_groups_remove_all_groups_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -989,6 +1032,8 @@ void uic_mqtt_dotdot_groups_publish_remove_all_groups_command_to_group(
   std::string payload =
     get_json_payload_for_groups_remove_all_groups_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1028,6 +1073,7 @@ void uic_mqtt_dotdot_groups_publish_add_group_if_identifying_command(
     get_json_payload_for_groups_add_group_if_identifying_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1060,6 +1106,8 @@ void uic_mqtt_dotdot_groups_publish_add_group_if_identifying_command_to_group(
   std::string payload =
     get_json_payload_for_groups_add_group_if_identifying_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1099,6 +1147,7 @@ void uic_mqtt_dotdot_scenes_publish_add_scene_command(
     get_json_payload_for_scenes_add_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1131,6 +1180,8 @@ void uic_mqtt_dotdot_scenes_publish_add_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_add_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1170,6 +1221,7 @@ void uic_mqtt_dotdot_scenes_publish_add_scene_response_command(
     get_json_payload_for_scenes_add_scene_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1202,6 +1254,8 @@ void uic_mqtt_dotdot_scenes_publish_add_scene_response_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_add_scene_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1241,6 +1295,7 @@ void uic_mqtt_dotdot_scenes_publish_view_scene_command(
     get_json_payload_for_scenes_view_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1273,6 +1328,8 @@ void uic_mqtt_dotdot_scenes_publish_view_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_view_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1312,6 +1369,7 @@ void uic_mqtt_dotdot_scenes_publish_view_scene_response_command(
     get_json_payload_for_scenes_view_scene_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1344,6 +1402,8 @@ void uic_mqtt_dotdot_scenes_publish_view_scene_response_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_view_scene_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1383,6 +1443,7 @@ void uic_mqtt_dotdot_scenes_publish_remove_scene_command(
     get_json_payload_for_scenes_remove_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1415,6 +1476,8 @@ void uic_mqtt_dotdot_scenes_publish_remove_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_remove_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1454,6 +1517,7 @@ void uic_mqtt_dotdot_scenes_publish_remove_scene_response_command(
     get_json_payload_for_scenes_remove_scene_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1486,6 +1550,8 @@ void uic_mqtt_dotdot_scenes_publish_remove_scene_response_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_remove_scene_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1525,6 +1591,7 @@ void uic_mqtt_dotdot_scenes_publish_remove_all_scenes_command(
     get_json_payload_for_scenes_remove_all_scenes_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1557,6 +1624,8 @@ void uic_mqtt_dotdot_scenes_publish_remove_all_scenes_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_remove_all_scenes_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1596,6 +1665,7 @@ void uic_mqtt_dotdot_scenes_publish_remove_all_scenes_response_command(
     get_json_payload_for_scenes_remove_all_scenes_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1628,6 +1698,8 @@ void uic_mqtt_dotdot_scenes_publish_remove_all_scenes_response_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_remove_all_scenes_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1667,6 +1739,7 @@ void uic_mqtt_dotdot_scenes_publish_store_scene_command(
     get_json_payload_for_scenes_store_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1699,6 +1772,8 @@ void uic_mqtt_dotdot_scenes_publish_store_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_store_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1738,6 +1813,7 @@ void uic_mqtt_dotdot_scenes_publish_store_scene_response_command(
     get_json_payload_for_scenes_store_scene_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1770,6 +1846,8 @@ void uic_mqtt_dotdot_scenes_publish_store_scene_response_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_store_scene_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1809,6 +1887,7 @@ void uic_mqtt_dotdot_scenes_publish_recall_scene_command(
     get_json_payload_for_scenes_recall_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1841,6 +1920,8 @@ void uic_mqtt_dotdot_scenes_publish_recall_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_recall_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1880,6 +1961,7 @@ void uic_mqtt_dotdot_scenes_publish_get_scene_membership_command(
     get_json_payload_for_scenes_get_scene_membership_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1912,6 +1994,8 @@ void uic_mqtt_dotdot_scenes_publish_get_scene_membership_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_get_scene_membership_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1951,6 +2035,7 @@ void uic_mqtt_dotdot_scenes_publish_get_scene_membership_response_command(
     get_json_payload_for_scenes_get_scene_membership_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -1983,6 +2068,8 @@ void uic_mqtt_dotdot_scenes_publish_get_scene_membership_response_command_to_gro
   std::string payload =
     get_json_payload_for_scenes_get_scene_membership_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2022,6 +2109,7 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_add_scene_command(
     get_json_payload_for_scenes_enhanced_add_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2054,6 +2142,8 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_add_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_enhanced_add_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2093,6 +2183,7 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_add_scene_response_command(
     get_json_payload_for_scenes_enhanced_add_scene_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2125,6 +2216,8 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_add_scene_response_command_to_group
   std::string payload =
     get_json_payload_for_scenes_enhanced_add_scene_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2164,6 +2257,7 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_view_scene_command(
     get_json_payload_for_scenes_enhanced_view_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2196,6 +2290,8 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_view_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_enhanced_view_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2235,6 +2331,7 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_view_scene_response_command(
     get_json_payload_for_scenes_enhanced_view_scene_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2267,6 +2364,8 @@ void uic_mqtt_dotdot_scenes_publish_enhanced_view_scene_response_command_to_grou
   std::string payload =
     get_json_payload_for_scenes_enhanced_view_scene_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2306,6 +2405,7 @@ void uic_mqtt_dotdot_scenes_publish_copy_scene_command(
     get_json_payload_for_scenes_copy_scene_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2338,6 +2438,8 @@ void uic_mqtt_dotdot_scenes_publish_copy_scene_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_copy_scene_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2377,6 +2479,7 @@ void uic_mqtt_dotdot_scenes_publish_copy_scene_response_command(
     get_json_payload_for_scenes_copy_scene_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2409,6 +2512,8 @@ void uic_mqtt_dotdot_scenes_publish_copy_scene_response_command_to_group(
   std::string payload =
     get_json_payload_for_scenes_copy_scene_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2444,6 +2549,7 @@ void uic_mqtt_dotdot_on_off_publish_off_command(
     get_json_payload_for_on_off_off_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2472,6 +2578,8 @@ void uic_mqtt_dotdot_on_off_publish_off_command_to_group(
   std::string payload =
     get_json_payload_for_on_off_off_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2507,6 +2615,7 @@ void uic_mqtt_dotdot_on_off_publish_on_command(
     get_json_payload_for_on_off_on_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2535,6 +2644,8 @@ void uic_mqtt_dotdot_on_off_publish_on_command_to_group(
   std::string payload =
     get_json_payload_for_on_off_on_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2570,6 +2681,7 @@ void uic_mqtt_dotdot_on_off_publish_toggle_command(
     get_json_payload_for_on_off_toggle_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2598,6 +2710,8 @@ void uic_mqtt_dotdot_on_off_publish_toggle_command_to_group(
   std::string payload =
     get_json_payload_for_on_off_toggle_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2637,6 +2751,7 @@ void uic_mqtt_dotdot_on_off_publish_off_with_effect_command(
     get_json_payload_for_on_off_off_with_effect_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2669,6 +2784,8 @@ void uic_mqtt_dotdot_on_off_publish_off_with_effect_command_to_group(
   std::string payload =
     get_json_payload_for_on_off_off_with_effect_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2704,6 +2821,7 @@ void uic_mqtt_dotdot_on_off_publish_on_with_recall_global_scene_command(
     get_json_payload_for_on_off_on_with_recall_global_scene_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2732,6 +2850,8 @@ void uic_mqtt_dotdot_on_off_publish_on_with_recall_global_scene_command_to_group
   std::string payload =
     get_json_payload_for_on_off_on_with_recall_global_scene_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2771,6 +2891,7 @@ void uic_mqtt_dotdot_on_off_publish_on_with_timed_off_command(
     get_json_payload_for_on_off_on_with_timed_off_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2803,6 +2924,8 @@ void uic_mqtt_dotdot_on_off_publish_on_with_timed_off_command_to_group(
   std::string payload =
     get_json_payload_for_on_off_on_with_timed_off_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2842,6 +2965,7 @@ void uic_mqtt_dotdot_level_publish_move_to_level_command(
     get_json_payload_for_level_move_to_level_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2874,6 +2998,8 @@ void uic_mqtt_dotdot_level_publish_move_to_level_command_to_group(
   std::string payload =
     get_json_payload_for_level_move_to_level_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2913,6 +3039,7 @@ void uic_mqtt_dotdot_level_publish_move_command(
     get_json_payload_for_level_move_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2945,6 +3072,8 @@ void uic_mqtt_dotdot_level_publish_move_command_to_group(
   std::string payload =
     get_json_payload_for_level_move_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -2984,6 +3113,7 @@ void uic_mqtt_dotdot_level_publish_step_command(
     get_json_payload_for_level_step_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3016,6 +3146,8 @@ void uic_mqtt_dotdot_level_publish_step_command_to_group(
   std::string payload =
     get_json_payload_for_level_step_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3055,6 +3187,7 @@ void uic_mqtt_dotdot_level_publish_stop_command(
     get_json_payload_for_level_stop_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3087,6 +3220,8 @@ void uic_mqtt_dotdot_level_publish_stop_command_to_group(
   std::string payload =
     get_json_payload_for_level_stop_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3126,6 +3261,7 @@ void uic_mqtt_dotdot_level_publish_move_to_level_with_on_off_command(
     get_json_payload_for_level_move_to_level_with_on_off_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3158,6 +3294,8 @@ void uic_mqtt_dotdot_level_publish_move_to_level_with_on_off_command_to_group(
   std::string payload =
     get_json_payload_for_level_move_to_level_with_on_off_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3197,6 +3335,7 @@ void uic_mqtt_dotdot_level_publish_move_with_on_off_command(
     get_json_payload_for_level_move_with_on_off_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3229,6 +3368,8 @@ void uic_mqtt_dotdot_level_publish_move_with_on_off_command_to_group(
   std::string payload =
     get_json_payload_for_level_move_with_on_off_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3268,6 +3409,7 @@ void uic_mqtt_dotdot_level_publish_step_with_on_off_command(
     get_json_payload_for_level_step_with_on_off_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3300,6 +3442,8 @@ void uic_mqtt_dotdot_level_publish_step_with_on_off_command_to_group(
   std::string payload =
     get_json_payload_for_level_step_with_on_off_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3339,6 +3483,7 @@ void uic_mqtt_dotdot_level_publish_stop_with_on_off_command(
     get_json_payload_for_level_stop_with_on_off_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3371,6 +3516,8 @@ void uic_mqtt_dotdot_level_publish_stop_with_on_off_command_to_group(
   std::string payload =
     get_json_payload_for_level_stop_with_on_off_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3410,6 +3557,7 @@ void uic_mqtt_dotdot_level_publish_move_to_closest_frequency_command(
     get_json_payload_for_level_move_to_closest_frequency_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3442,6 +3590,8 @@ void uic_mqtt_dotdot_level_publish_move_to_closest_frequency_command_to_group(
   std::string payload =
     get_json_payload_for_level_move_to_closest_frequency_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3481,6 +3631,7 @@ void uic_mqtt_dotdot_alarms_publish_reset_alarm_command(
     get_json_payload_for_alarms_reset_alarm_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3513,6 +3664,8 @@ void uic_mqtt_dotdot_alarms_publish_reset_alarm_command_to_group(
   std::string payload =
     get_json_payload_for_alarms_reset_alarm_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3552,6 +3705,7 @@ void uic_mqtt_dotdot_alarms_publish_alarm_command(
     get_json_payload_for_alarms_alarm_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3584,6 +3738,8 @@ void uic_mqtt_dotdot_alarms_publish_alarm_command_to_group(
   std::string payload =
     get_json_payload_for_alarms_alarm_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3619,6 +3775,7 @@ void uic_mqtt_dotdot_alarms_publish_reset_all_alarms_command(
     get_json_payload_for_alarms_reset_all_alarms_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3647,6 +3804,8 @@ void uic_mqtt_dotdot_alarms_publish_reset_all_alarms_command_to_group(
   std::string payload =
     get_json_payload_for_alarms_reset_all_alarms_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3686,6 +3845,7 @@ void uic_mqtt_dotdot_alarms_publish_get_alarm_response_command(
     get_json_payload_for_alarms_get_alarm_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3718,6 +3878,8 @@ void uic_mqtt_dotdot_alarms_publish_get_alarm_response_command_to_group(
   std::string payload =
     get_json_payload_for_alarms_get_alarm_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3753,6 +3915,7 @@ void uic_mqtt_dotdot_alarms_publish_get_alarm_command(
     get_json_payload_for_alarms_get_alarm_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3781,6 +3944,8 @@ void uic_mqtt_dotdot_alarms_publish_get_alarm_command_to_group(
   std::string payload =
     get_json_payload_for_alarms_get_alarm_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3816,6 +3981,7 @@ void uic_mqtt_dotdot_alarms_publish_reset_alarm_log_command(
     get_json_payload_for_alarms_reset_alarm_log_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3844,6 +4010,8 @@ void uic_mqtt_dotdot_alarms_publish_reset_alarm_log_command_to_group(
   std::string payload =
     get_json_payload_for_alarms_reset_alarm_log_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3883,6 +4051,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_notify_command(
     get_json_payload_for_ota_upgrade_image_notify_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3915,6 +4084,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_notify_command_to_group(
   std::string payload =
     get_json_payload_for_ota_upgrade_image_notify_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3954,6 +4125,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_next_image_request_command(
     get_json_payload_for_ota_upgrade_query_next_image_request_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -3986,6 +4158,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_next_image_request_command_to_gro
   std::string payload =
     get_json_payload_for_ota_upgrade_query_next_image_request_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4025,6 +4199,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_next_image_response_command(
     get_json_payload_for_ota_upgrade_query_next_image_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4057,6 +4232,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_next_image_response_command_to_gr
   std::string payload =
     get_json_payload_for_ota_upgrade_query_next_image_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4096,6 +4273,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_block_request_command(
     get_json_payload_for_ota_upgrade_image_block_request_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4128,6 +4306,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_block_request_command_to_group(
   std::string payload =
     get_json_payload_for_ota_upgrade_image_block_request_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4167,6 +4347,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_page_request_command(
     get_json_payload_for_ota_upgrade_image_page_request_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4199,6 +4380,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_page_request_command_to_group(
   std::string payload =
     get_json_payload_for_ota_upgrade_image_page_request_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4238,6 +4421,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_block_response_command(
     get_json_payload_for_ota_upgrade_image_block_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4270,6 +4454,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_image_block_response_command_to_group(
   std::string payload =
     get_json_payload_for_ota_upgrade_image_block_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4309,6 +4495,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_upgrade_end_request_command(
     get_json_payload_for_ota_upgrade_upgrade_end_request_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4341,6 +4528,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_upgrade_end_request_command_to_group(
   std::string payload =
     get_json_payload_for_ota_upgrade_upgrade_end_request_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4380,6 +4569,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_upgrade_end_response_command(
     get_json_payload_for_ota_upgrade_upgrade_end_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4412,6 +4602,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_upgrade_end_response_command_to_group(
   std::string payload =
     get_json_payload_for_ota_upgrade_upgrade_end_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4451,6 +4643,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_device_specific_file_request_comm
     get_json_payload_for_ota_upgrade_query_device_specific_file_request_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4483,6 +4676,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_device_specific_file_request_comm
   std::string payload =
     get_json_payload_for_ota_upgrade_query_device_specific_file_request_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4522,6 +4717,7 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_device_specific_file_response_com
     get_json_payload_for_ota_upgrade_query_device_specific_file_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4554,6 +4750,8 @@ void uic_mqtt_dotdot_ota_upgrade_publish_query_device_specific_file_response_com
   std::string payload =
     get_json_payload_for_ota_upgrade_query_device_specific_file_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4589,6 +4787,7 @@ void uic_mqtt_dotdot_poll_control_publish_check_in_command(
     get_json_payload_for_poll_control_check_in_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4617,6 +4816,8 @@ void uic_mqtt_dotdot_poll_control_publish_check_in_command_to_group(
   std::string payload =
     get_json_payload_for_poll_control_check_in_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4656,6 +4857,7 @@ void uic_mqtt_dotdot_poll_control_publish_check_in_response_command(
     get_json_payload_for_poll_control_check_in_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4688,6 +4890,8 @@ void uic_mqtt_dotdot_poll_control_publish_check_in_response_command_to_group(
   std::string payload =
     get_json_payload_for_poll_control_check_in_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4723,6 +4927,7 @@ void uic_mqtt_dotdot_poll_control_publish_fast_poll_stop_command(
     get_json_payload_for_poll_control_fast_poll_stop_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4751,6 +4956,8 @@ void uic_mqtt_dotdot_poll_control_publish_fast_poll_stop_command_to_group(
   std::string payload =
     get_json_payload_for_poll_control_fast_poll_stop_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4790,6 +4997,7 @@ void uic_mqtt_dotdot_poll_control_publish_set_long_poll_interval_command(
     get_json_payload_for_poll_control_set_long_poll_interval_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4822,6 +5030,8 @@ void uic_mqtt_dotdot_poll_control_publish_set_long_poll_interval_command_to_grou
   std::string payload =
     get_json_payload_for_poll_control_set_long_poll_interval_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4861,6 +5071,7 @@ void uic_mqtt_dotdot_poll_control_publish_set_short_poll_interval_command(
     get_json_payload_for_poll_control_set_short_poll_interval_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4893,6 +5104,8 @@ void uic_mqtt_dotdot_poll_control_publish_set_short_poll_interval_command_to_gro
   std::string payload =
     get_json_payload_for_poll_control_set_short_poll_interval_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4932,6 +5145,7 @@ void uic_mqtt_dotdot_door_lock_publish_lock_door_command(
     get_json_payload_for_door_lock_lock_door_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -4964,6 +5178,8 @@ void uic_mqtt_dotdot_door_lock_publish_lock_door_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_lock_door_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5003,6 +5219,7 @@ void uic_mqtt_dotdot_door_lock_publish_lock_door_response_command(
     get_json_payload_for_door_lock_lock_door_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5035,6 +5252,8 @@ void uic_mqtt_dotdot_door_lock_publish_lock_door_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_lock_door_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5074,6 +5293,7 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_door_command(
     get_json_payload_for_door_lock_unlock_door_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5106,6 +5326,8 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_door_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_unlock_door_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5145,6 +5367,7 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_door_response_command(
     get_json_payload_for_door_lock_unlock_door_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5177,6 +5400,8 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_door_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_unlock_door_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5216,6 +5441,7 @@ void uic_mqtt_dotdot_door_lock_publish_toggle_command(
     get_json_payload_for_door_lock_toggle_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5248,6 +5474,8 @@ void uic_mqtt_dotdot_door_lock_publish_toggle_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_toggle_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5287,6 +5515,7 @@ void uic_mqtt_dotdot_door_lock_publish_toggle_response_command(
     get_json_payload_for_door_lock_toggle_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5319,6 +5548,8 @@ void uic_mqtt_dotdot_door_lock_publish_toggle_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_toggle_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5358,6 +5589,7 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_with_timeout_command(
     get_json_payload_for_door_lock_unlock_with_timeout_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5390,6 +5622,8 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_with_timeout_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_unlock_with_timeout_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5429,6 +5663,7 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_with_timeout_response_command(
     get_json_payload_for_door_lock_unlock_with_timeout_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5461,6 +5696,8 @@ void uic_mqtt_dotdot_door_lock_publish_unlock_with_timeout_response_command_to_g
   std::string payload =
     get_json_payload_for_door_lock_unlock_with_timeout_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5500,6 +5737,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_log_record_command(
     get_json_payload_for_door_lock_get_log_record_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5532,6 +5770,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_log_record_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_log_record_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5571,6 +5811,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_log_record_response_command(
     get_json_payload_for_door_lock_get_log_record_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5603,6 +5844,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_log_record_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_log_record_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5642,6 +5885,7 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_command(
     get_json_payload_for_door_lock_setpin_code_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5674,6 +5918,8 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_setpin_code_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5713,6 +5959,7 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_response_command(
     get_json_payload_for_door_lock_setpin_code_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5745,6 +5992,8 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_setpin_code_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5784,6 +6033,7 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_command(
     get_json_payload_for_door_lock_getpin_code_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5816,6 +6066,8 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_getpin_code_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5855,6 +6107,7 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command(
     get_json_payload_for_door_lock_getpin_code_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5887,6 +6140,8 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_getpin_code_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5926,6 +6181,7 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_command(
     get_json_payload_for_door_lock_clearpin_code_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5958,6 +6214,8 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clearpin_code_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -5997,6 +6255,7 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_response_command(
     get_json_payload_for_door_lock_clearpin_code_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6029,6 +6288,8 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clearpin_code_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6064,6 +6325,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_command(
     get_json_payload_for_door_lock_clear_allpin_codes_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6092,6 +6354,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clear_allpin_codes_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6131,6 +6395,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_response_command(
     get_json_payload_for_door_lock_clear_allpin_codes_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6163,6 +6428,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_response_command_to_gr
   std::string payload =
     get_json_payload_for_door_lock_clear_allpin_codes_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6202,6 +6469,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_status_command(
     get_json_payload_for_door_lock_set_user_status_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6234,6 +6502,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_status_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_set_user_status_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6273,6 +6543,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_status_response_command(
     get_json_payload_for_door_lock_set_user_status_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6305,6 +6576,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_status_response_command_to_group
   std::string payload =
     get_json_payload_for_door_lock_set_user_status_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6344,6 +6617,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_status_command(
     get_json_payload_for_door_lock_get_user_status_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6376,6 +6650,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_status_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_user_status_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6415,6 +6691,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_status_response_command(
     get_json_payload_for_door_lock_get_user_status_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6447,6 +6724,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_status_response_command_to_group
   std::string payload =
     get_json_payload_for_door_lock_get_user_status_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6486,6 +6765,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_weekday_schedule_command(
     get_json_payload_for_door_lock_set_weekday_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6518,6 +6798,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_weekday_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_set_weekday_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6557,6 +6839,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_weekday_schedule_response_command(
     get_json_payload_for_door_lock_set_weekday_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6589,6 +6872,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_weekday_schedule_response_command_to_
   std::string payload =
     get_json_payload_for_door_lock_set_weekday_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6628,6 +6913,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_weekday_schedule_command(
     get_json_payload_for_door_lock_get_weekday_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6660,6 +6946,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_weekday_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_weekday_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6699,6 +6987,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_weekday_schedule_response_command(
     get_json_payload_for_door_lock_get_weekday_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6731,6 +7020,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_weekday_schedule_response_command_to_
   std::string payload =
     get_json_payload_for_door_lock_get_weekday_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6770,6 +7061,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_weekday_schedule_command(
     get_json_payload_for_door_lock_clear_weekday_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6802,6 +7094,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_weekday_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clear_weekday_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6841,6 +7135,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_weekday_schedule_response_command(
     get_json_payload_for_door_lock_clear_weekday_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6873,6 +7168,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_weekday_schedule_response_command_t
   std::string payload =
     get_json_payload_for_door_lock_clear_weekday_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6912,6 +7209,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_year_day_schedule_command(
     get_json_payload_for_door_lock_set_year_day_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6944,6 +7242,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_year_day_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_set_year_day_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -6983,6 +7283,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_year_day_schedule_response_command(
     get_json_payload_for_door_lock_set_year_day_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7015,6 +7316,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_year_day_schedule_response_command_to
   std::string payload =
     get_json_payload_for_door_lock_set_year_day_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7054,6 +7357,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_year_day_schedule_command(
     get_json_payload_for_door_lock_get_year_day_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7086,6 +7390,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_year_day_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_year_day_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7125,6 +7431,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_year_day_schedule_response_command(
     get_json_payload_for_door_lock_get_year_day_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7157,6 +7464,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_year_day_schedule_response_command_to
   std::string payload =
     get_json_payload_for_door_lock_get_year_day_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7196,6 +7505,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_year_day_schedule_command(
     get_json_payload_for_door_lock_clear_year_day_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7228,6 +7538,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_year_day_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clear_year_day_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7267,6 +7579,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_year_day_schedule_response_command(
     get_json_payload_for_door_lock_clear_year_day_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7299,6 +7612,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_year_day_schedule_response_command_
   std::string payload =
     get_json_payload_for_door_lock_clear_year_day_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7338,6 +7653,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_holiday_schedule_command(
     get_json_payload_for_door_lock_set_holiday_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7370,6 +7686,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_holiday_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_set_holiday_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7409,6 +7727,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_holiday_schedule_response_command(
     get_json_payload_for_door_lock_set_holiday_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7441,6 +7760,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_holiday_schedule_response_command_to_
   std::string payload =
     get_json_payload_for_door_lock_set_holiday_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7480,6 +7801,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_holiday_schedule_command(
     get_json_payload_for_door_lock_get_holiday_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7512,6 +7834,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_holiday_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_holiday_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7551,6 +7875,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_holiday_schedule_response_command(
     get_json_payload_for_door_lock_get_holiday_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7583,6 +7908,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_holiday_schedule_response_command_to_
   std::string payload =
     get_json_payload_for_door_lock_get_holiday_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7622,6 +7949,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_holiday_schedule_command(
     get_json_payload_for_door_lock_clear_holiday_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7654,6 +7982,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_holiday_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clear_holiday_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7693,6 +8023,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_holiday_schedule_response_command(
     get_json_payload_for_door_lock_clear_holiday_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7725,6 +8056,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_holiday_schedule_response_command_t
   std::string payload =
     get_json_payload_for_door_lock_clear_holiday_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7764,6 +8097,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_type_command(
     get_json_payload_for_door_lock_set_user_type_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7796,6 +8130,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_type_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_set_user_type_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7835,6 +8171,7 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_type_response_command(
     get_json_payload_for_door_lock_set_user_type_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7867,6 +8204,8 @@ void uic_mqtt_dotdot_door_lock_publish_set_user_type_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_set_user_type_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7906,6 +8245,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_type_command(
     get_json_payload_for_door_lock_get_user_type_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7938,6 +8278,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_type_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_user_type_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -7977,6 +8319,7 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_type_response_command(
     get_json_payload_for_door_lock_get_user_type_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8009,6 +8352,8 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_type_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_get_user_type_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8048,6 +8393,7 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_command(
     get_json_payload_for_door_lock_setrfid_code_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8080,6 +8426,8 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_setrfid_code_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8119,6 +8467,7 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_response_command(
     get_json_payload_for_door_lock_setrfid_code_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8151,6 +8500,8 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_setrfid_code_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8190,6 +8541,7 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_command(
     get_json_payload_for_door_lock_getrfid_code_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8222,6 +8574,8 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_getrfid_code_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8261,6 +8615,7 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_response_command(
     get_json_payload_for_door_lock_getrfid_code_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8293,6 +8648,8 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_getrfid_code_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8332,6 +8689,7 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_command(
     get_json_payload_for_door_lock_clearrfid_code_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8364,6 +8722,8 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clearrfid_code_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8403,6 +8763,7 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_response_command(
     get_json_payload_for_door_lock_clearrfid_code_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8435,6 +8796,8 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_response_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clearrfid_code_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8470,6 +8833,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_command(
     get_json_payload_for_door_lock_clear_allrfid_codes_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8498,6 +8862,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_command_to_group(
   std::string payload =
     get_json_payload_for_door_lock_clear_allrfid_codes_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8537,6 +8903,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_response_command(
     get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8569,6 +8936,8 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_response_command_to_g
   std::string payload =
     get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8608,6 +8977,7 @@ void uic_mqtt_dotdot_door_lock_publish_operating_event_notification_command(
     get_json_payload_for_door_lock_operating_event_notification_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8640,6 +9010,8 @@ void uic_mqtt_dotdot_door_lock_publish_operating_event_notification_command_to_g
   std::string payload =
     get_json_payload_for_door_lock_operating_event_notification_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8679,6 +9051,7 @@ void uic_mqtt_dotdot_door_lock_publish_programming_event_notification_command(
     get_json_payload_for_door_lock_programming_event_notification_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8711,6 +9084,8 @@ void uic_mqtt_dotdot_door_lock_publish_programming_event_notification_command_to
   std::string payload =
     get_json_payload_for_door_lock_programming_event_notification_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8746,6 +9121,7 @@ void uic_mqtt_dotdot_window_covering_publish_up_or_open_command(
     get_json_payload_for_window_covering_up_or_open_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8774,6 +9150,8 @@ void uic_mqtt_dotdot_window_covering_publish_up_or_open_command_to_group(
   std::string payload =
     get_json_payload_for_window_covering_up_or_open_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8809,6 +9187,7 @@ void uic_mqtt_dotdot_window_covering_publish_down_or_close_command(
     get_json_payload_for_window_covering_down_or_close_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8837,6 +9216,8 @@ void uic_mqtt_dotdot_window_covering_publish_down_or_close_command_to_group(
   std::string payload =
     get_json_payload_for_window_covering_down_or_close_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8872,6 +9253,7 @@ void uic_mqtt_dotdot_window_covering_publish_stop_command(
     get_json_payload_for_window_covering_stop_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8900,6 +9282,8 @@ void uic_mqtt_dotdot_window_covering_publish_stop_command_to_group(
   std::string payload =
     get_json_payload_for_window_covering_stop_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8939,6 +9323,7 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_lift_value_command(
     get_json_payload_for_window_covering_go_to_lift_value_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -8971,6 +9356,8 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_lift_value_command_to_group(
   std::string payload =
     get_json_payload_for_window_covering_go_to_lift_value_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9010,6 +9397,7 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_lift_percentage_command(
     get_json_payload_for_window_covering_go_to_lift_percentage_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9042,6 +9430,8 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_lift_percentage_command_to_gr
   std::string payload =
     get_json_payload_for_window_covering_go_to_lift_percentage_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9081,6 +9471,7 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_tilt_value_command(
     get_json_payload_for_window_covering_go_to_tilt_value_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9113,6 +9504,8 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_tilt_value_command_to_group(
   std::string payload =
     get_json_payload_for_window_covering_go_to_tilt_value_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9152,6 +9545,7 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_tilt_percentage_command(
     get_json_payload_for_window_covering_go_to_tilt_percentage_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9184,6 +9578,8 @@ void uic_mqtt_dotdot_window_covering_publish_go_to_tilt_percentage_command_to_gr
   std::string payload =
     get_json_payload_for_window_covering_go_to_tilt_percentage_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9223,6 +9619,7 @@ void uic_mqtt_dotdot_barrier_control_publish_go_to_percent_command(
     get_json_payload_for_barrier_control_go_to_percent_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9255,6 +9652,8 @@ void uic_mqtt_dotdot_barrier_control_publish_go_to_percent_command_to_group(
   std::string payload =
     get_json_payload_for_barrier_control_go_to_percent_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9290,6 +9689,7 @@ void uic_mqtt_dotdot_barrier_control_publish_stop_command(
     get_json_payload_for_barrier_control_stop_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9318,6 +9718,8 @@ void uic_mqtt_dotdot_barrier_control_publish_stop_command_to_group(
   std::string payload =
     get_json_payload_for_barrier_control_stop_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9357,6 +9759,7 @@ void uic_mqtt_dotdot_thermostat_publish_setpoint_raise_or_lower_command(
     get_json_payload_for_thermostat_setpoint_raise_or_lower_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9389,6 +9792,8 @@ void uic_mqtt_dotdot_thermostat_publish_setpoint_raise_or_lower_command_to_group
   std::string payload =
     get_json_payload_for_thermostat_setpoint_raise_or_lower_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9428,6 +9833,7 @@ void uic_mqtt_dotdot_thermostat_publish_get_weekly_schedule_response_command(
     get_json_payload_for_thermostat_get_weekly_schedule_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9460,6 +9866,8 @@ void uic_mqtt_dotdot_thermostat_publish_get_weekly_schedule_response_command_to_
   std::string payload =
     get_json_payload_for_thermostat_get_weekly_schedule_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9499,6 +9907,7 @@ void uic_mqtt_dotdot_thermostat_publish_set_weekly_schedule_command(
     get_json_payload_for_thermostat_set_weekly_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9531,6 +9940,8 @@ void uic_mqtt_dotdot_thermostat_publish_set_weekly_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_thermostat_set_weekly_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9570,6 +9981,7 @@ void uic_mqtt_dotdot_thermostat_publish_get_relay_status_log_response_command(
     get_json_payload_for_thermostat_get_relay_status_log_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9602,6 +10014,8 @@ void uic_mqtt_dotdot_thermostat_publish_get_relay_status_log_response_command_to
   std::string payload =
     get_json_payload_for_thermostat_get_relay_status_log_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9641,6 +10055,7 @@ void uic_mqtt_dotdot_thermostat_publish_get_weekly_schedule_command(
     get_json_payload_for_thermostat_get_weekly_schedule_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9673,6 +10088,8 @@ void uic_mqtt_dotdot_thermostat_publish_get_weekly_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_thermostat_get_weekly_schedule_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9708,6 +10125,7 @@ void uic_mqtt_dotdot_thermostat_publish_clear_weekly_schedule_command(
     get_json_payload_for_thermostat_clear_weekly_schedule_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9736,6 +10154,8 @@ void uic_mqtt_dotdot_thermostat_publish_clear_weekly_schedule_command_to_group(
   std::string payload =
     get_json_payload_for_thermostat_clear_weekly_schedule_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9771,6 +10191,7 @@ void uic_mqtt_dotdot_thermostat_publish_get_relay_status_log_command(
     get_json_payload_for_thermostat_get_relay_status_log_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9799,6 +10220,8 @@ void uic_mqtt_dotdot_thermostat_publish_get_relay_status_log_command_to_group(
   std::string payload =
     get_json_payload_for_thermostat_get_relay_status_log_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9838,6 +10261,7 @@ void uic_mqtt_dotdot_color_control_publish_move_to_hue_command(
     get_json_payload_for_color_control_move_to_hue_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9870,6 +10294,8 @@ void uic_mqtt_dotdot_color_control_publish_move_to_hue_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_move_to_hue_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9909,6 +10335,7 @@ void uic_mqtt_dotdot_color_control_publish_move_hue_command(
     get_json_payload_for_color_control_move_hue_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9941,6 +10368,8 @@ void uic_mqtt_dotdot_color_control_publish_move_hue_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_move_hue_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -9980,6 +10409,7 @@ void uic_mqtt_dotdot_color_control_publish_step_hue_command(
     get_json_payload_for_color_control_step_hue_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10012,6 +10442,8 @@ void uic_mqtt_dotdot_color_control_publish_step_hue_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_step_hue_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10051,6 +10483,7 @@ void uic_mqtt_dotdot_color_control_publish_move_to_saturation_command(
     get_json_payload_for_color_control_move_to_saturation_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10083,6 +10516,8 @@ void uic_mqtt_dotdot_color_control_publish_move_to_saturation_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_move_to_saturation_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10122,6 +10557,7 @@ void uic_mqtt_dotdot_color_control_publish_move_saturation_command(
     get_json_payload_for_color_control_move_saturation_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10154,6 +10590,8 @@ void uic_mqtt_dotdot_color_control_publish_move_saturation_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_move_saturation_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10193,6 +10631,7 @@ void uic_mqtt_dotdot_color_control_publish_step_saturation_command(
     get_json_payload_for_color_control_step_saturation_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10225,6 +10664,8 @@ void uic_mqtt_dotdot_color_control_publish_step_saturation_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_step_saturation_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10264,6 +10705,7 @@ void uic_mqtt_dotdot_color_control_publish_move_to_hue_and_saturation_command(
     get_json_payload_for_color_control_move_to_hue_and_saturation_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10296,6 +10738,8 @@ void uic_mqtt_dotdot_color_control_publish_move_to_hue_and_saturation_command_to
   std::string payload =
     get_json_payload_for_color_control_move_to_hue_and_saturation_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10335,6 +10779,7 @@ void uic_mqtt_dotdot_color_control_publish_move_to_color_command(
     get_json_payload_for_color_control_move_to_color_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10367,6 +10812,8 @@ void uic_mqtt_dotdot_color_control_publish_move_to_color_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_move_to_color_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10406,6 +10853,7 @@ void uic_mqtt_dotdot_color_control_publish_move_color_command(
     get_json_payload_for_color_control_move_color_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10438,6 +10886,8 @@ void uic_mqtt_dotdot_color_control_publish_move_color_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_move_color_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10477,6 +10927,7 @@ void uic_mqtt_dotdot_color_control_publish_step_color_command(
     get_json_payload_for_color_control_step_color_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10509,6 +10960,8 @@ void uic_mqtt_dotdot_color_control_publish_step_color_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_step_color_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10548,6 +11001,7 @@ void uic_mqtt_dotdot_color_control_publish_move_to_color_temperature_command(
     get_json_payload_for_color_control_move_to_color_temperature_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10580,6 +11034,8 @@ void uic_mqtt_dotdot_color_control_publish_move_to_color_temperature_command_to_
   std::string payload =
     get_json_payload_for_color_control_move_to_color_temperature_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10619,6 +11075,7 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_move_to_hue_command(
     get_json_payload_for_color_control_enhanced_move_to_hue_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10651,6 +11108,8 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_move_to_hue_command_to_group
   std::string payload =
     get_json_payload_for_color_control_enhanced_move_to_hue_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10690,6 +11149,7 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_move_hue_command(
     get_json_payload_for_color_control_enhanced_move_hue_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10722,6 +11182,8 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_move_hue_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_enhanced_move_hue_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10761,6 +11223,7 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_step_hue_command(
     get_json_payload_for_color_control_enhanced_step_hue_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10793,6 +11256,8 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_step_hue_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_enhanced_step_hue_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10832,6 +11297,7 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_move_to_hue_and_saturation_c
     get_json_payload_for_color_control_enhanced_move_to_hue_and_saturation_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10864,6 +11330,8 @@ void uic_mqtt_dotdot_color_control_publish_enhanced_move_to_hue_and_saturation_c
   std::string payload =
     get_json_payload_for_color_control_enhanced_move_to_hue_and_saturation_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10903,6 +11371,7 @@ void uic_mqtt_dotdot_color_control_publish_color_loop_set_command(
     get_json_payload_for_color_control_color_loop_set_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10935,6 +11404,8 @@ void uic_mqtt_dotdot_color_control_publish_color_loop_set_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_color_loop_set_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -10974,6 +11445,7 @@ void uic_mqtt_dotdot_color_control_publish_stop_move_step_command(
     get_json_payload_for_color_control_stop_move_step_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11006,6 +11478,8 @@ void uic_mqtt_dotdot_color_control_publish_stop_move_step_command_to_group(
   std::string payload =
     get_json_payload_for_color_control_stop_move_step_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11045,6 +11519,7 @@ void uic_mqtt_dotdot_color_control_publish_move_color_temperature_command(
     get_json_payload_for_color_control_move_color_temperature_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11077,6 +11552,8 @@ void uic_mqtt_dotdot_color_control_publish_move_color_temperature_command_to_gro
   std::string payload =
     get_json_payload_for_color_control_move_color_temperature_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11116,6 +11593,7 @@ void uic_mqtt_dotdot_color_control_publish_step_color_temperature_command(
     get_json_payload_for_color_control_step_color_temperature_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11148,6 +11626,8 @@ void uic_mqtt_dotdot_color_control_publish_step_color_temperature_command_to_gro
   std::string payload =
     get_json_payload_for_color_control_step_color_temperature_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11187,6 +11667,7 @@ void uic_mqtt_dotdot_ias_zone_publish_zone_enroll_response_command(
     get_json_payload_for_ias_zone_zone_enroll_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11219,6 +11700,8 @@ void uic_mqtt_dotdot_ias_zone_publish_zone_enroll_response_command_to_group(
   std::string payload =
     get_json_payload_for_ias_zone_zone_enroll_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11258,6 +11741,7 @@ void uic_mqtt_dotdot_ias_zone_publish_zone_status_change_notification_command(
     get_json_payload_for_ias_zone_zone_status_change_notification_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11290,6 +11774,8 @@ void uic_mqtt_dotdot_ias_zone_publish_zone_status_change_notification_command_to
   std::string payload =
     get_json_payload_for_ias_zone_zone_status_change_notification_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11325,6 +11811,7 @@ void uic_mqtt_dotdot_ias_zone_publish_initiate_normal_operation_mode_command(
     get_json_payload_for_ias_zone_initiate_normal_operation_mode_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11353,6 +11840,8 @@ void uic_mqtt_dotdot_ias_zone_publish_initiate_normal_operation_mode_command_to_
   std::string payload =
     get_json_payload_for_ias_zone_initiate_normal_operation_mode_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11392,6 +11881,7 @@ void uic_mqtt_dotdot_ias_zone_publish_zone_enroll_request_command(
     get_json_payload_for_ias_zone_zone_enroll_request_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11424,6 +11914,8 @@ void uic_mqtt_dotdot_ias_zone_publish_zone_enroll_request_command_to_group(
   std::string payload =
     get_json_payload_for_ias_zone_zone_enroll_request_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11463,6 +11955,7 @@ void uic_mqtt_dotdot_ias_zone_publish_initiate_test_mode_command(
     get_json_payload_for_ias_zone_initiate_test_mode_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11495,6 +11988,8 @@ void uic_mqtt_dotdot_ias_zone_publish_initiate_test_mode_command_to_group(
   std::string payload =
     get_json_payload_for_ias_zone_initiate_test_mode_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11534,6 +12029,7 @@ void uic_mqtt_dotdot_iaswd_publish_start_warning_command(
     get_json_payload_for_iaswd_start_warning_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11566,6 +12062,8 @@ void uic_mqtt_dotdot_iaswd_publish_start_warning_command_to_group(
   std::string payload =
     get_json_payload_for_iaswd_start_warning_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11605,6 +12103,7 @@ void uic_mqtt_dotdot_iaswd_publish_squawk_command(
     get_json_payload_for_iaswd_squawk_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11637,6 +12136,8 @@ void uic_mqtt_dotdot_iaswd_publish_squawk_command_to_group(
   std::string payload =
     get_json_payload_for_iaswd_squawk_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11676,6 +12177,7 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_profile_info_response_co
     get_json_payload_for_electrical_measurement_get_profile_info_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11708,6 +12210,8 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_profile_info_response_co
   std::string payload =
     get_json_payload_for_electrical_measurement_get_profile_info_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11743,6 +12247,7 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_profile_info_command(
     get_json_payload_for_electrical_measurement_get_profile_info_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11771,6 +12276,8 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_profile_info_command_to_
   std::string payload =
     get_json_payload_for_electrical_measurement_get_profile_info_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11810,6 +12317,7 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_measurement_profile_resp
     get_json_payload_for_electrical_measurement_get_measurement_profile_response_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11842,6 +12350,8 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_measurement_profile_resp
   std::string payload =
     get_json_payload_for_electrical_measurement_get_measurement_profile_response_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11881,6 +12391,7 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_measurement_profile_comm
     get_json_payload_for_electrical_measurement_get_measurement_profile_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11913,6 +12424,8 @@ void uic_mqtt_dotdot_electrical_measurement_publish_get_measurement_profile_comm
   std::string payload =
     get_json_payload_for_electrical_measurement_get_measurement_profile_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11948,6 +12461,7 @@ void uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_tx_report_command(
     get_json_payload_for_protocol_controller_rf_telemetry_tx_report_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -11981,6 +12495,8 @@ void uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_tx_report_command_
     get_json_payload_for_protocol_controller_rf_telemetry_tx_report_command(
     fields);
 
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
                    payload.c_str(),
@@ -12011,6 +12527,7 @@ void uic_mqtt_dotdot_state_publish_remove_command(
     get_json_payload_for_state_remove_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12039,6 +12556,8 @@ void uic_mqtt_dotdot_state_publish_remove_command_to_group(
   std::string payload =
     get_json_payload_for_state_remove_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12070,6 +12589,7 @@ void uic_mqtt_dotdot_state_publish_remove_offline_command(
     get_json_payload_for_state_remove_offline_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12098,6 +12618,8 @@ void uic_mqtt_dotdot_state_publish_remove_offline_command_to_group(
   std::string payload =
     get_json_payload_for_state_remove_offline_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12129,6 +12651,7 @@ void uic_mqtt_dotdot_state_publish_discover_neighbors_command(
     get_json_payload_for_state_discover_neighbors_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12157,6 +12680,8 @@ void uic_mqtt_dotdot_state_publish_discover_neighbors_command_to_group(
   std::string payload =
     get_json_payload_for_state_discover_neighbors_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12188,6 +12713,7 @@ void uic_mqtt_dotdot_state_publish_interview_command(
     get_json_payload_for_state_interview_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12216,6 +12742,8 @@ void uic_mqtt_dotdot_state_publish_interview_command_to_group(
   std::string payload =
     get_json_payload_for_state_interview_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12255,6 +12783,7 @@ void uic_mqtt_dotdot_binding_publish_bind_command(
     get_json_payload_for_binding_bind_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12287,6 +12816,8 @@ void uic_mqtt_dotdot_binding_publish_bind_command_to_group(
   std::string payload =
     get_json_payload_for_binding_bind_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12326,6 +12857,7 @@ void uic_mqtt_dotdot_binding_publish_unbind_command(
     get_json_payload_for_binding_unbind_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12358,6 +12890,8 @@ void uic_mqtt_dotdot_binding_publish_unbind_command_to_group(
   std::string payload =
     get_json_payload_for_binding_unbind_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12397,6 +12931,7 @@ void uic_mqtt_dotdot_binding_publish_bind_to_protocol_controller_command(
     get_json_payload_for_binding_bind_to_protocol_controller_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12429,6 +12964,8 @@ void uic_mqtt_dotdot_binding_publish_bind_to_protocol_controller_command_to_grou
   std::string payload =
     get_json_payload_for_binding_bind_to_protocol_controller_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12468,6 +13005,7 @@ void uic_mqtt_dotdot_binding_publish_unbind_from_protocol_controller_command(
     get_json_payload_for_binding_unbind_from_protocol_controller_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12500,6 +13038,8 @@ void uic_mqtt_dotdot_binding_publish_unbind_from_protocol_controller_command_to_
   std::string payload =
     get_json_payload_for_binding_unbind_from_protocol_controller_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12535,6 +13075,7 @@ void uic_mqtt_dotdot_application_monitoring_publish_log_entry_command(
     get_json_payload_for_application_monitoring_log_entry_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12567,6 +13108,8 @@ void uic_mqtt_dotdot_application_monitoring_publish_log_entry_command_to_group(
   std::string payload =
     get_json_payload_for_application_monitoring_log_entry_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12606,6 +13149,7 @@ void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_command
     get_json_payload_for_configuration_parameters_discover_parameter_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12638,6 +13182,8 @@ void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_command
   std::string payload =
     get_json_payload_for_configuration_parameters_discover_parameter_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12673,6 +13219,7 @@ void uic_mqtt_dotdot_configuration_parameters_publish_default_reset_all_paramete
     get_json_payload_for_configuration_parameters_default_reset_all_parameters_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12701,6 +13248,8 @@ void uic_mqtt_dotdot_configuration_parameters_publish_default_reset_all_paramete
   std::string payload =
     get_json_payload_for_configuration_parameters_default_reset_all_parameters_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12740,6 +13289,7 @@ void uic_mqtt_dotdot_configuration_parameters_publish_set_parameter_command(
     get_json_payload_for_configuration_parameters_set_parameter_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12772,6 +13322,82 @@ void uic_mqtt_dotdot_configuration_parameters_publish_set_parameter_command_to_g
   std::string payload =
     get_json_payload_for_configuration_parameters_set_parameter_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a DiscoverParameterRange command for
+ * the ConfigurationParameters cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/ConfigurationParameters/Commands/DiscoverParameterRange
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "ConfigurationParameters/Commands/DiscoverParameterRange";
+
+
+  std::string payload =
+    get_json_payload_for_configuration_parameters_discover_parameter_range_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a DiscoverParameterRange command for
+ * the ConfigurationParameters cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/ConfigurationParameters/Commands/DiscoverParameterRange
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/ConfigurationParameters/Commands/DiscoverParameterRange";
+
+  std::string payload =
+    get_json_payload_for_configuration_parameters_discover_parameter_range_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12811,6 +13437,7 @@ void uic_mqtt_dotdot_aox_locator_publish_iq_report_command(
     get_json_payload_for_aox_locator_iq_report_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12843,6 +13470,8 @@ void uic_mqtt_dotdot_aox_locator_publish_iq_report_command_to_group(
   std::string payload =
     get_json_payload_for_aox_locator_iq_report_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12882,6 +13511,7 @@ void uic_mqtt_dotdot_aox_locator_publish_angle_report_command(
     get_json_payload_for_aox_locator_angle_report_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12914,6 +13544,8 @@ void uic_mqtt_dotdot_aox_locator_publish_angle_report_command_to_group(
   std::string payload =
     get_json_payload_for_aox_locator_angle_report_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12953,6 +13585,7 @@ void uic_mqtt_dotdot_aox_locator_publish_angle_correction_command(
     get_json_payload_for_aox_locator_angle_correction_command(
     fields);
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -12986,6 +13619,8 @@ void uic_mqtt_dotdot_aox_locator_publish_angle_correction_command_to_group(
     get_json_payload_for_aox_locator_angle_correction_command(
     fields);
 
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
                    payload.c_str(),
@@ -13016,6 +13651,7 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_write_comman
     get_json_payload_for_protocol_controller_network_management_write_command(
     );
 
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -13044,6 +13680,8 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_write_comman
   std::string payload =
     get_json_payload_for_protocol_controller_network_management_write_command(
     );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),

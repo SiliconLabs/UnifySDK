@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unify Dockerfile &mdash; Unify Host SDK</title>
@@ -18,11 +18,14 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="System Requirements" href="../doc/system_requirements.html" />
-    <link rel="prev" title="Api documentation" href="../doc/api.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -44,33 +47,14 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../doc/readme_developer.html">Unify Developer Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_building.html">Unify Build Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_cmake.html">CMake Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_debug.html">Unify Debugging Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_rust.html">Unify Rust Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/unify_library_overview.html">Unify Library Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/api.html">Api documentation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Docker</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-docker">Install Docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build-dockerfile-image">Build Dockerfile Image</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_developer.html#component-templates">Component Templates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../doc/readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/license.html">License</a></li>
 </ul>
 
@@ -106,10 +90,10 @@
 <section id="build-dockerfile-image">
 <h2>Build Dockerfile Image<a class="headerlink" href="#build-dockerfile-image" title="Permalink to this heading"></a></h2>
 <p>To build the docker image enter the <code class="docutils literal notranslate"><span class="pre">docker</span></code> folder and run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build_docker.sh armhf uic_armhf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build_docker.sh<span class="w"> </span>arm64<span class="w"> </span>uic_arm64
 </pre></div>
 </div>
-<p>This will build the Unify toolchain docker images and name it <em>uic_armhf</em>.</p>
+<p>This will build the Unify toolchain docker images and name it <em>uic_arm64</em>.</p>
 </section>
 </section>
 
@@ -118,7 +102,7 @@
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

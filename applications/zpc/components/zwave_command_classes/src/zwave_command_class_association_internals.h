@@ -31,6 +31,8 @@
 
 // First index of the frame containing association data for (Multi Channel) Association Reports
 #define REPORT_ASSOCIATION_BYTES_INDEX 5
+#define ASSOCIATION_REPORTS_REPORTS_TO_FOLLOW 4
+
 
 ///< Maximum content (number of bytes) for a Association group. This is aligned
 ///< with the storage capacity of the attribute store.
@@ -72,6 +74,17 @@ typedef struct association_grouping_report_frame {
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @brief Listens to SUPPORTED_GROUPINGS value updates and create all the supported
+ * association groups based on the value of the SUPPORTED_GROUPINGS
+ *
+ * @param updated_node  SUPPORTED_GROUPINGS node
+ * @param change        Type of Attribute Store change
+ *
+ */
+void zwave_command_class_association_on_supported_groupings_update(
+  attribute_store_node_t updated_node, attribute_store_change_t change);
 
 #ifdef __cplusplus
 }

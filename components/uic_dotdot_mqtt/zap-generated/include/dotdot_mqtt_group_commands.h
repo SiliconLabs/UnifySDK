@@ -3546,6 +3546,22 @@ typedef void (*uic_mqtt_dotdot_by_group_configuration_parameters_set_parameter_c
  */
 void uic_mqtt_dotdot_by_group_configuration_parameters_set_parameter_callback_set(const uic_mqtt_dotdot_by_group_configuration_parameters_set_parameter_callback_t callback);
 
+/**
+ * @brief Callback signature for by-group ConfigurationParameters::DiscoverParameterRange command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/ConfigurationParameters/discover_parameter_range is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback_set(const uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback_t callback);
+
 typedef void (*uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback_t)(
     const dotdot_group_id_t group_id,
     uic_mqtt_dotdot_configuration_parameters_state_t,

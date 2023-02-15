@@ -11,8 +11,8 @@
  *
  *****************************************************************************/
 // Includes from this component
-#include "zwave_command_class_association_helper.h"
 #include "zwave_command_classes_utils.h"
+#include "zwave_association_toolbox.h"
 
 // Includes from other components
 #include "unity.h"
@@ -756,7 +756,7 @@ void test_is_association_legal()
   TEST_ASSERT_FALSE(
     is_association_legal(node_id, endpoint_id, 1, test_association));
 
-  // Now make the NodeID 7 AL, but unkonwn protocol will prevent the association
+  // Now make the NodeID 7 AL, but unknown protocol will prevent the association
   // to be valid
   listening_protocol = ZWAVE_NODE_INFO_LISTENING_PROTOCOL_LISTENING_MASK;
   attribute_store_set_child_reported(node_id_7_node,

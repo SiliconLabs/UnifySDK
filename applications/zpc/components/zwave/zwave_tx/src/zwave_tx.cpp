@@ -140,6 +140,7 @@ sl_status_t
   }
 
   sl_log_error(LOG_TAG, "Tx Queue rejected new frame request.");
+  tx_queue.log(true);
   return SL_STATUS_FAIL;
 }
 
@@ -235,4 +236,9 @@ void zwave_tx_log_element(zwave_tx_session_id_t session_id,
                           bool log_frame_payload)
 {
   tx_queue.log_element(session_id, log_frame_payload);
+}
+
+int zwave_tx_get_queue_size()
+{
+  return tx_queue.size();
 }

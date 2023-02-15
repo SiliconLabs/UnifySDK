@@ -2,14 +2,22 @@
 # Zigbeed Generate, Build and Packaging
 # ##############################################################################
 
-if(CMAKE_SYSTEM_PROCESSOR MATCHES "armhf")
 
-    find_package(GeckoSDK 4.1.1 EXACT REQUIRED)
-    find_package(CPCD 4.1.1 EXACT REQUIRED)
+if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "armhf")
+  set(ZIGBEED_ARCHITECTURE arm32v7)
+elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "arm64")
+  set(ZIGBEED_ARCHITECTURE arm64v8)
+else()
+  set(ZIGBEED_ARCHITECTURE arch_x86_64)
+endif()
+
+    find_package(GeckoSDK 4.2.0 EXACT REQUIRED)
+    find_package(CPCD 4.2.0 EXACT REQUIRED)
     find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
     set(OUTPUT_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
     set(SLC_PROJECT_DIR ${CMAKE_CURRENT_BINARY_DIR}/gen)
+
 
     add_custom_target(
         zigbeed-generated ALL
@@ -23,6 +31,7 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "armhf")
         ${MAKE_EXECUTABLE} -f zigbeed.Makefile
         LD_FLAGS=-L${cpcd_BINARY_DIR}
         BASE_SDK_PATH=${GeckoSDK_ROOT_DIR}
+        ARCHITECTURE=${ZIGBEED_ARCHITECTURE}
         CPC_DAEMON_LIB=${cpcd_SOURCE_DIR}/lib
         BUILD_DIR=${OUTPUT_BUILD_DIR} OUTPUT_DIR=${CMAKE_CURRENT_BINARY_DIR}
         CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} LD=${CMAKE_C_COMPILER}
@@ -35,6 +44,7 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "armhf")
         "Universal IOT controller - zigbeed"
         "${CMAKE_PROJECT_NAME}-zigbeed" # Package Debian filename
         "uic-cpcd,socat" # Package Depends on
+        ""
         "${CMAKE_BINARY_DIR}/applications/zigbeed/debconf/postinst;\
         ${CMAKE_BINARY_DIR}/applications/zigbeed/debconf/prerm;\
         ${CMAKE_BINARY_DIR}/applications/zigbeed/debconf/postrm")
@@ -90,6 +100,5 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "armhf")
         FILES ${CMAKE_CURRENT_SOURCE_DIR}/zigbeed.conf
         DESTINATION /usr/local/etc/
         COMPONENT uic-zigbeed)
-else()
-    message("Unable to build zigbeed for target architecture")
-endif()
+
+

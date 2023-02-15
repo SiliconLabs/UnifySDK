@@ -7,6 +7,7 @@
 
 #ifdef __cplusplus
 #include <vector>
+#include "smartstart_management.hpp"
 #include <string>
 #endif
 #endif

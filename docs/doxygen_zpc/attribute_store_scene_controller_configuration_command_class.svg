@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="636px" preserveAspectRatio="none" style="width:1092px;height:636px;background:#FFFFFF;" version="1.1" viewBox="0 0 1092 636" width="1092px" zoomAndPan="magnify"><defs><filter height="300%" id="fm6i7436h023a" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="26.7999" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="442" x="318" y="8"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="324" y="26.0059">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="311" x="443" y="26.0059">: ATTRIBUTE_COMMAND_CLASS_SCENE_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M6,59.7999 C6,49.7999 545.5,49.7999 545.5,49.7999 C545.5,49.7999 1085,49.7999 1085,59.7999 L1085,619.7999 C1085,629.7999 545.5,629.7999 545.5,629.7999 C545.5,629.7999 6,629.7999 6,619.7999 L6,59.7999 " fill="#FFFFFF" filter="url(#fm6i7436h023a)" style="stroke:#000000;stroke-width:1.5;"/><path d="M6,59.7999 C6,69.7999 545.5,69.7999 545.5,69.7999 C545.5,69.7999 1085,69.7999 1085,59.7999 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="100" x="495.5" y="84.8059">Attribute Store</text><!--MD5=[5ba0956d56f27b9d059aa641d08e391d]
+cluster For all supported Association groups--><rect fill="#FFFFFF" filter="url(#fm6i7436h023a)" height="321" style="stroke:#000000;stroke-width:1.5;" width="731" x="330" y="284.7999"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="257" x="567" y="299.8059">For all supported Association groups</text><rect fill="#F2FFE6" filter="url(#fm6i7436h023a)" height="50.4001" style="stroke:#000000;stroke-width:1.5;" width="196" x="255" y="99.7999"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="332" y="112.948">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="256" x2="450" y1="118.2" y2="118.2"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="184" x="261" y="131.49">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="157" x="261" y="143.49">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#fm6i7436h023a)" height="50.4001" style="stroke:#000000;stroke-width:1.5;" width="219" x="243.5" y="209.7999"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="97" x="304.5" y="222.948">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="244.5" x2="461.5" y1="228.2" y2="228.2"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="207" x="249.5" y="241.49">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="160" x="249.5" y="253.49">value = Desired: [] - Reported: [04]</text><rect fill="#FEFEFE" filter="url(#fm6i7436h023a)" height="50.4001" style="stroke:#000000;stroke-width:1.5;" width="292" x="22" y="319.7999"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="147" y="332.948">Version</text><line style="stroke:#000000;stroke-width:1.5;" x1="23" x2="313" y1="338.2" y2="338.2"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="280" x="28" y="351.49">Attribute Type = ATTRIBUTE(ACTUATOR_CONF_VERSION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="154" x="28" y="363.49">value = Desired: [] - Reported: [1]</text><rect fill="#FFFFFF" filter="url(#fm6i7436h023a)" height="50.4001" style="stroke:#000000;stroke-width:1.5;" width="378" x="349" y="319.7999"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="480.5" y="332.948">Association Group ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="350" x2="726" y1="338.2" y2="338.2"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="366" x="355" y="351.49">Attribute Type = ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="154" x="355" y="363.49">value = Desired: [] - Reported: [1]</text><rect fill="#FFFFFF" filter="url(#fm6i7436h023a)" height="50.4001" style="stroke:#000000;stroke-width:1.5;" width="310" x="383" y="429.7999"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="145" x="465.5" y="442.948">Local Scene Configuration</text><line style="stroke:#000000;stroke-width:1.5;" x1="384" x2="692" y1="448.2" y2="448.2"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="298" x="389" y="461.49">Attribute Type = ATTRIBUTE(CONTROLLER_CONFIGURATION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="160" x="389" y="473.49">value = Desired: [0] - Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fm6i7436h023a)" height="50.4001" style="stroke:#000000;stroke-width:1.5;" width="286" x="346" y="539.7999"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="50" x="464" y="552.948">Scene ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="347" x2="631" y1="558.2" y2="558.2"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="274" x="352" y="571.49">Attribute Type = ATTRIBUTE(CONTROLLER_SETTING_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="160" x="352" y="583.49">value = Desired: [0] - Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fm6i7436h023a)" height="50.4001" style="stroke:#000000;stroke-width:1.5;" width="378" x="667" y="539.7999"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="140" x="786" y="552.948">Dimming Duration Setting</text><line style="stroke:#000000;stroke-width:1.5;" x1="668" x2="1044" y1="558.2" y2="558.2"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="366" x="673" y="571.49">Attribute Type = ATTRIBUTE(CONTROLLER_SETTING_DIMMING_DURATION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="673" y="583.49">value = Desired: [0] - Reported: [20]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="1724" d="M353,163.4099 C353,178.7499 353,196.0399 353,209.6399 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="353,150.0399,349,156.0399,353,162.0399,357,156.0399,353,150.0399" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c4a4e185f2beba9fb9ec0dd52638d41f]
+reverse link endpoint to version--><path codeLine="1725" d="M299.98,266.7499 C271.19,283.5599 236.13,304.0299 209.38,319.6399 " fill="none" id="endpoint-backto-version" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="311.48,260.0399,304.2816,259.6115,301.1175,266.0913,308.3159,266.5198,311.48,260.0399" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a1b446e4d507d42fc0b4e26a6ee79157]
+reverse link endpoint to association_group_id--><path codeLine="1726" d="M406.02,266.7499 C434.81,283.5599 469.87,304.0299 496.62,319.6399 " fill="none" id="endpoint-backto-association_group_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="394.52,260.0399,397.6841,266.5198,404.8825,266.0913,401.7184,259.6115,394.52,260.0399" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5a64345c29eccec373fd92f42895a0d1]
+reverse link association_group_id to local_scene_configuration--><path codeLine="1727" d="M538,383.4099 C538,398.7499 538,416.0399 538,429.6399 " fill="none" id="association_group_id-backto-local_scene_configuration" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="538,370.0399,534,376.0399,538,382.0399,542,376.0399,538,370.0399" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1c5665d71844754c95451380e12fe5e3]
+reverse link local_scene_configuration to scene_id--><path codeLine="1728" d="M521.57,492.0099 C514.46,507.6899 506.32,525.6199 499.96,539.6399 " fill="none" id="local_scene_configuration-backto-scene_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="527,480.0399,520.8788,483.8519,522.0433,490.9684,528.1645,487.1564,527,480.0399" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[09b126cc81efba8b43b2e4d886b90284]
+reverse link local_scene_configuration to dimming_duration_setting--><path codeLine="1729" d="M621.28,484.0899 C672.25,501.3899 736.76,523.2999 785.25,539.7699 " fill="none" id="local_scene_configuration-backto-dimming_duration_setting" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="608.97,479.8999,613.3674,485.615,620.3342,483.754,615.9368,478.0389,608.97,479.8999" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9cb0e746f8819ccda465432e35d8b7ea]
+@startuml attribute_store_scene_controller_configuration_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_SCENE_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(ACTUATOR_CONF_VERSION)
+  version : value = Desired: [] - Reported: [1]
+
+  package "For all supported Association groups" <<Rectangle>> {
+    object "Association Group ID" as association_group_id #FFFFFF
+    association_group_id : Attribute Type = ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID
+    association_group_id : value = Desired: [] - Reported: [1]
+
+    object "Local Scene Configuration" as local_scene_configuration #FFFFFF
+    local_scene_configuration : Attribute Type = ATTRIBUTE(CONTROLLER_CONFIGURATION)
+    local_scene_configuration : value = Desired: [0] - Reported: [0]
+
+    object "Scene ID" as scene_id #FFFFFF
+    scene_id : Attribute Type = ATTRIBUTE(CONTROLLER_SETTING_ID)
+    scene_id : value = Desired: [0] - Reported: [0]
+
+    object "Dimming Duration Setting" as dimming_duration_setting #FFFFFF
+    dimming_duration_setting : Attribute Type = ATTRIBUTE(CONTROLLER_SETTING_DIMMING_DURATION)
+    dimming_duration_setting : value = Desired: [0] - Reported: [20]
+  }
+}
+
+node *- - endpoint
+endpoint *- - version
+endpoint *- - association_group_id
+association_group_id *- - local_scene_configuration
+local_scene_configuration *- - scene_id
+local_scene_configuration *- - dimming_duration_setting
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

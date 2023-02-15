@@ -86,6 +86,12 @@ void update_callback_2(attribute_store_node_t test,
   update_callback_2_counter++;
 }
 
+void update_callback_that_deletes_the_root_node(attribute_store_node_t test,
+                                                attribute_store_change_t change)
+{
+  attribute_store_delete_node(attribute_store_get_root());
+}
+
 void touch_callback(attribute_store_node_t touched_node)
 {
   received_touched_node = touched_node;
@@ -143,6 +149,19 @@ void update_callback_add_child(attribute_store_node_t node,
     // Try to add a child to the node: Should not be possible
     TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE,
                       attribute_store_add_node(node, 0x4321));
+  }
+}
+
+/**
+ * When a node gets deleted, I go up to the parent and create a new node of
+ * the same type of the one that was just deleted.
+ */
+void update_callback_respawn_on_deletion(attribute_store_node_t node,
+                                         attribute_store_change_t change)
+{
+  if (change == ATTRIBUTE_DELETED) {
+    attribute_store_add_node(attribute_store_get_node_type(node),
+                             attribute_store_get_node_parent(node));
   }
 }
 
@@ -1033,7 +1052,7 @@ void test_refreshing_node_and_children_callbacks()
   update_callback_1_update_counter   = 0;
   update_callback_2_counter          = 0;
   uint32_t expecting_counter_to_be   = 4;
-  uint32_t expecting_counter_2_to_be = 1;
+  uint32_t expecting_counter_2_to_be = 2;
   attribute_store_node_t root_node;
   attribute_store_node_t home_id;
   attribute_store_node_t test_id;
@@ -1075,6 +1094,8 @@ void test_refreshing_node_and_children_callbacks()
 
   // Checking that the refreshing worked
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
+  TEST_ASSERT_EQUAL(expecting_counter_to_be,
+                    update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(expecting_counter_to_be, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(expecting_counter_2_to_be, update_callback_2_counter);
 
@@ -1132,6 +1153,9 @@ void test_uninitialized_attribute_store()
                     attribute_store_get_node_child(test_node, 0));
 
   TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(test_node));
+  TEST_ASSERT_EQUAL(0,
+                    attribute_store_get_node_child_count_by_type(test_node, 1));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count_by_type(0x3344, 1));
 
   TEST_ASSERT_EQUAL(
     ATTRIBUTE_STORE_INVALID_NODE,
@@ -1434,4 +1458,89 @@ void test_attribute_store_is_node_a_child()
   TEST_ASSERT_FALSE(
     attribute_store_is_node_a_child(ATTRIBUTE_STORE_INVALID_NODE, node_1));
   TEST_ASSERT_FALSE(attribute_store_is_node_a_child(9999999, 124));
+}
+
+void test_attribute_store_delete_callback_that_deletes_a_parent()
+{
+  // node_1 under root
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+  attribute_store_add_node(2, attribute_store_get_root());
+  attribute_store_add_node(2, attribute_store_get_root());
+  attribute_store_add_node(3, attribute_store_get_root());
+  attribute_store_add_node(4, attribute_store_get_root());
+
+  TEST_ASSERT_EQUAL(
+    5,
+    attribute_store_get_node_child_count(attribute_store_get_root()));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_register_callback_by_type(
+                      &update_callback_that_deletes_the_root_node,
+                      1));
+
+  // Delete node_1, it will trigger a root deletion.
+  attribute_store_delete_node(node_1);
+  TEST_IGNORE_MESSAGE("At that point actually we should have 0 child left");
+  TEST_ASSERT_EQUAL(
+    0,
+    attribute_store_get_node_child_count(attribute_store_get_root()));
+}
+
+void test_attribute_store_count_children_by_type()
+{
+  attribute_store_add_node(1, attribute_store_get_root());
+  attribute_store_add_node(2, attribute_store_get_root());
+  attribute_store_add_node(2, attribute_store_get_root());
+  attribute_store_add_node(3, attribute_store_get_root());
+  attribute_store_add_node(4, attribute_store_get_root());
+
+  TEST_ASSERT_EQUAL(
+    5,
+    attribute_store_get_node_child_count(attribute_store_get_root()));
+
+  TEST_ASSERT_EQUAL(
+    1,
+    attribute_store_get_node_child_count_by_type(attribute_store_get_root(),
+                                                 1));
+  TEST_ASSERT_EQUAL(
+    2,
+    attribute_store_get_node_child_count_by_type(attribute_store_get_root(),
+                                                 2));
+  TEST_ASSERT_EQUAL(
+    1,
+    attribute_store_get_node_child_count_by_type(attribute_store_get_root(),
+                                                 4));
+  TEST_ASSERT_EQUAL(
+    0,
+    attribute_store_get_node_child_count_by_type(ATTRIBUTE_STORE_INVALID_NODE,
+                                                 1));
+}
+
+void test_attribute_store_avoid_infinite_create_recursion_on_parent_deletion()
+{
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+  attribute_store_node_t node_2 = attribute_store_add_node(2, node_1);
+
+  // Attach a callback that re-spawn the node_2 whenever it gets deleted:
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_register_callback_by_type(
+                      &update_callback_respawn_on_deletion,
+                      2));
+
+  // Now delete node 2, check that a new node_2 exists immediately:
+  attribute_store_delete_node(node_2);
+  TEST_ASSERT_FALSE(attribute_store_node_exists(node_2));
+  node_2 = attribute_store_get_first_child_by_type(node_1, 2);
+  TEST_ASSERT_TRUE(attribute_store_node_exists(node_2));
+
+  // Now delete node_1, the attribute store will not let the callback re-spawn
+  // any node_2 while deleting the parent.
+  attribute_store_delete_node(node_1);
+  TEST_ASSERT_FALSE(attribute_store_node_exists(node_1));
+  TEST_ASSERT_FALSE(attribute_store_node_exists(node_2));
+  TEST_ASSERT_EQUAL(
+    0,
+    attribute_store_get_node_total_child_count(attribute_store_get_root()));
 }

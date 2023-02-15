@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   unify-base:
-    image: unify-runtime
+    image: unify-runtime:latest
     build:
       context: .
       args:
@@ -31,7 +31,7 @@ services:
       - unify-dev-gui-api
     networks:
       - mqtt-network
-    entrypoint: dev-gui-client
+    entrypoint: dev-gui-client --REACT_APP_MQTT_HOST mqtt-broker
     ports:
       - "3080:3080"
 
@@ -56,7 +56,7 @@ services:
       - mqtt-broker
     networks:
       - mqtt-network
-    entrypoint: uic-gms --mqtt.host mqtt-broker
+    entrypoint: uic-gms --mqtt.host mqtt-broker --mqtt.client_id gms-portable_runtime
     volumes:
       - unify_gms:/var/lib
 
@@ -68,7 +68,7 @@ services:
       - mqtt-broker
     networks:
       - mqtt-network
-    entrypoint: uic-upvl --mqtt.host mqtt-broker
+    entrypoint: uic-upvl --mqtt.host mqtt-broker --mqtt.client_id upvl-portable_runtime
     volumes:
       - unify_upvl:/var/lib
 
@@ -80,7 +80,7 @@ services:
       - mqtt-broker
     networks:
       - mqtt-network
-    entrypoint: uic-nal --mqtt.host mqtt-broker
+    entrypoint: uic-nal --mqtt.host mqtt-broker --mqtt.client_id nal-portable_runtime
     volumes:
       - unify_nal:/var/lib
 
@@ -92,7 +92,7 @@ services:
       - mqtt-broker
     networks:
       - mqtt-network
-    entrypoint: uic-image-provider --mqtt.host mqtt-broker
+    entrypoint: uic-image-provider --mqtt.host mqtt-broker --mqtt.client_id image-provider-portable_runtime
     volumes:
       - unify_image_provider:/var/lib
 
@@ -104,7 +104,7 @@ services:
       - mqtt-broker
     networks:
       - mqtt-network
-    entrypoint: uic-upti-cap --mqtt.host mqtt-broker
+    entrypoint: uic-upti-cap --mqtt.host mqtt-broker --mqtt.client_id upti-cap-portable_runtime
     volumes:
       - unify_upti_cap:/var/lib
 
@@ -120,7 +120,7 @@ services:
     environment:
       - ZPC_DEVICE
       - ZPC_CONFIG_ARGS
-    entrypoint: "/unify/run_zpc.sh --mqtt.host mqtt-broker ${ZPC_CONFIG_ARGS}"
+    entrypoint: "/unify/run_zpc.sh --mqtt.host mqtt-broker ${ZPC_CONFIG_ARGS} --mqtt.client_id zpc-portable_runtime"
     volumes:
       - unify_zpc:/var/lib
 

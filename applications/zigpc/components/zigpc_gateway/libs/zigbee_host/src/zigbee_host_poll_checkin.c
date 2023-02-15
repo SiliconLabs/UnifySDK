@@ -18,16 +18,14 @@
 
 #include "zigbee_host.h"
 
-EmberStatus zigbeeHostSendPollingCheckInResponse(void)
+EmberStatus zigbeeHostSendPollingCheckInResponse(bool startFastPolling)
 {
-  bool fastPolling = true;
-
   //In units of quarters of a second
   //by default, has a value of 32 (based on poll-control-client plugin)
   uint16_t fastPollingTimeout
     = EMBER_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT;
 
-  emberAfFillCommandPollControlClusterCheckInResponse(fastPolling,
+    emberAfFillCommandPollControlClusterCheckInResponse(startFastPolling,
                                                       fastPollingTimeout);
 
   return emberAfSendResponse();

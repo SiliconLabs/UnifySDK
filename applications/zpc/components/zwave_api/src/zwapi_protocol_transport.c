@@ -19,7 +19,6 @@
 #include "zwapi_utils.h"
 
 // Generic includes
-#include <assert.h>
 #include <stddef.h>
 
 // Unify Includes
@@ -223,7 +222,6 @@ sl_status_t zwapi_send_data(zwave_node_id_t destination_node_id,
   if ((data_length + 2) > sizeof(request_buffer)) {
     sl_log_error(LOG_TAG,
                  "The frame is too long, therefore, the frame is discarded\n");
-    assert(0);
     return SL_STATUS_FAIL;
   }
 

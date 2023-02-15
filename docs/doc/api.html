@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Api documentation &mdash; Unify Host SDK</title>
+  <title>API documentation &mdash; Unify Host SDK</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
@@ -18,10 +18,15 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Unify Dockerfile" href="../docker/readme_developer.html" />
+    <link rel="next" title="System Requirements" href="system_requirements.html" />
     <link rel="prev" title="Unify Coding Standard" href="standards/coding-standard.html" /> 
 </head>
 
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -56,20 +61,20 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_rust.html">Unify Rust Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Api documentation</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">API documentation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#unify-library-doxygen">Unify Library Doxygen</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#component-templates">Component Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -91,7 +96,7 @@
            <div itemprop="articleBody">
              
   <section class="tex2jax_ignore mathjax_ignore" id="api-documentation">
-<h1>Api documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h1>
+<h1>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h1>
 <p>Find the programming API’s of various components at the the following links:</p>
 <section id="unify-library-doxygen">
 <h2>Unify Library Doxygen<a class="headerlink" href="#unify-library-doxygen" title="Permalink to this heading"></a></h2>
@@ -99,6 +104,7 @@
 <li><p><a href="../doxygen_uic/index.html">Unify Library API</a></p></li>
 <li><p><a href="../doxygen_zpc/index.html">ZPC API</a></p></li>
 <li><p><a href="../doxygen_zigpc/index.html">ZigPC API</a></p></li>
+<li><p><a href="../doxygen_aox/index.html">AoX API</a></p></li>
 <li><p><a href="../reference_ucl_mqtt/index.html">UCL MQTT API</a></p></li>
 </ul>
 </section>
@@ -109,7 +115,7 @@
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

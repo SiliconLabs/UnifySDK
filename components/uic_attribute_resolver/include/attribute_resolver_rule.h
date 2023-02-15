@@ -103,6 +103,26 @@ attribute_resolver_function_t
   attribute_resolver_set_function(attribute_store_type_t node_type);
 
 /**
+ * @brief Returns if the Rule Book can resolve a Set Rule for the attribute type
+ *
+ * @param node_type The attribute Store node type for which we want to know
+ *                  if there is a Set rule registered.
+ * @returns true if a set rule is registered
+ *          false if no set rule is registered
+ */
+bool attribute_resolver_has_set_rule(attribute_store_type_t node_type);
+
+/**
+ * @brief Returns if the Rule Book can resolve a Get Rule for the attribute type
+ *
+ * @param node_type The attribute Store node type for which we want to know
+ *                  if there is a Get rule registered.
+ * @returns true if a Get rule is registered
+ *          false if no Get rule is registered
+ */
+bool attribute_resolver_has_get_rule(attribute_store_type_t node_type);
+
+/**
  * @brief Callback function which must be called when frame tranmission is done
  *
  * This function must be called when a frame sent using attribute_resolver_send

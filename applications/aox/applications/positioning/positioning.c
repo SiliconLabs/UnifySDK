@@ -355,7 +355,7 @@ static sl_status_t locator_position_and_orientation_valid_callback(
 static void positioning_teardown(void)
 {
   // Remove all retained topics.
-  uic_mqtt_unretain_by_regex(".*");
+  uic_mqtt_unretain_by_regex(REGEX_ALL_TOPICS);
 }
 
 /**************************************************************************//**

@@ -27,17 +27,7 @@
 
 #include "sl_status.h"
 #include "zigpc_common_zigbee.h"
-
-/**
- * @brief Content of DSKs that have been parsed for install code based joins.
- *
- */
-typedef struct {
-  std::string dsk;
-  uint8_t install_code_length;
-  zigbee_eui64_t eui64;
-  zigbee_install_code_t install_code;
-} zigpc_dsk_install_code_t;
+#include "zigpc_common_dsk.hpp"
 
 extern const char LOG_TAG[];
 
@@ -93,7 +83,7 @@ std::string zigpc_smartstart_get_unid(zigbee_eui64_t eui64);
  * SL_STATUS_FAIL otherwise.
  */
 sl_status_t zigpc_smartstart_dsk_parse_install_code(
-  const std::string &dsk, zigpc_dsk_install_code_t &dsk_content);
+  const std::string &dsk, zigpc_common::dsk_install_code_t &dsk_content);
 
 /** @} end zigpc_smartstart_int */
 

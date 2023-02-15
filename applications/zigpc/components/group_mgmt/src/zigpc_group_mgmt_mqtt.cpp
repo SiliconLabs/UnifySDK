@@ -25,6 +25,7 @@
 #include "zigpc_group_map.h"
 #include "zigpc_group_mgmt_mqtt.h"
 
+
 static const char LOG_TAG[] = "zigpc_groups_mqtt";
 
 /**

@@ -391,6 +391,29 @@ void test_attribute_store_set_reported_string_happy_case()
                    - 1]);  // not Appended NULL termination, string was correct
 }
 
+void test_attribute_store_set_string_from_null_pointer()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const char *string_1 = NULL;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string_1));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL_STRING("", (const char *)received_value);
+}
+
 void test_attribute_store_concatenate_reported_string_happy_case()
 {
   attribute_store_node_t root_node = attribute_store_get_root();
@@ -1422,4 +1445,183 @@ void test_attribute_store_set_child_reported_only_if_missing()
   TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node);
   attribute_store_get_reported(new_node, &value, sizeof(value));
   TEST_ASSERT_EQUAL(3, value);
+}
+
+void test_attribute_store_append_to_reported_happy_case()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const uint8_t report_1[] = {23, 34, 45};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_reported(test_node, report_1, sizeof(report_1)));
+
+  const uint8_t report_2[] = {24, 35, 46};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_append_to_reported(test_node, report_2, sizeof(report_2)));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH - 1]     = 10;
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL(6, received_value_size);
+  TEST_ASSERT_EQUAL(23, received_value[0]);
+  TEST_ASSERT_EQUAL(34, received_value[1]);
+  TEST_ASSERT_EQUAL(45, received_value[2]);
+  TEST_ASSERT_EQUAL(24, received_value[3]);
+  TEST_ASSERT_EQUAL(35, received_value[4]);
+  TEST_ASSERT_EQUAL(46, received_value[5]);
+  TEST_ASSERT_EQUAL(
+    10,
+    received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH
+                   - 1]);  // not Appended NULL termination, string was correct
+}
+
+void test_attribute_store_append_to_reported_undefined_previous_value()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const uint8_t report_1[] = {23, 34, 45};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_append_to_reported(test_node, report_1, sizeof(report_1)));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_value,
+                                           &received_value_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(report_1, received_value, received_value_size);
+}
+
+void test_attribute_store_append_to_reported_empty_string()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const uint8_t report_1[] = {23, 34, 45};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_reported(test_node, report_1, sizeof(report_1)));
+
+  const uint8_t report_2[] = {};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_append_to_reported(test_node, report_2, sizeof(report_2)));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_value,
+                                           &received_value_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(report_1, received_value, received_value_size);
+}
+
+void test_attribute_store_append_to_reported_large_array()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const uint8_t report_1[] = {23, 34, 45};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_reported(test_node, report_1, sizeof(report_1)));
+
+  const uint8_t report_2[] = {12, 13, 14};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_append_to_reported(test_node, report_2, 255));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_value,
+                                           &received_value_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(report_1, received_value, received_value_size);
+}
+
+void test_attribute_store_set_child_reported_only_if_exists()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  const uint8_t value[] = {0x01, 0xFF, 0xA2};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_set_child_reported_only_if_exists(root_node,
+                                                      1,
+                                                      value,
+                                                      sizeof(value)));
+
+  attribute_store_node_t test_node
+    = attribute_store_get_first_child_by_type(root_node, 1);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  test_node = attribute_store_add_node(1, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(test_node));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_child_reported_only_if_exists(root_node,
+                                                      1,
+                                                      value,
+                                                      sizeof(value)));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(test_node));
+}
+
+void test_attribute_store_set_child_desired_only_if_exists()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  const uint8_t value[] = {0x01, 0xFF, 0xA2};
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_set_child_desired_only_if_exists(root_node,
+                                                     1,
+                                                     value,
+                                                     sizeof(value)));
+
+  attribute_store_node_t test_node
+    = attribute_store_get_first_child_by_type(root_node, 1);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  test_node = attribute_store_add_node(1, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  TEST_ASSERT_FALSE(attribute_store_is_desired_defined(test_node));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_child_desired_only_if_exists(root_node,
+                                                     1,
+                                                     value,
+                                                     sizeof(value)));
+  TEST_ASSERT_TRUE(attribute_store_is_desired_defined(test_node));
 }

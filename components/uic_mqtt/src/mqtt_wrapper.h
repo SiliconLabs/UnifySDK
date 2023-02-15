@@ -189,6 +189,19 @@ sl_status_t mqtt_wrapper_loop_write(void *instance);
 sl_status_t mqtt_wrapper_loop_misc(void *instance);
 
 /**
+ * @brief Configures the MQTT Will message using the Client ID.
+ *
+ * @param instance          Pointer to a client-instance.
+ * @param mqtt_client_id    String of the Client ID
+ * @param qos               MQTT QoS for the Will message.
+ *
+ * @returns SL_STATUS_OK if successful, any other codes in case of error.
+ */
+sl_status_t mqtt_wrapper_set_will_message(void *instance,
+                                          const char *mqtt_client_id,
+                                          int qos);
+
+/**
  * @brief Publish a message to a topic.
  *
  * @param instance Pointer to a client-instance.

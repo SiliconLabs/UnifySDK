@@ -8,9 +8,12 @@ target_include_directories(
 
 target_link_libraries(
   zigpc_group_mgmt
-  PRIVATE zigpc_common zigpc_datastore zigpc_zcl_util zigpc_zcl_command_parser uic_log uic_mqtt)
+  PRIVATE zigpc_common zigpc_datastore zigpc_zcl_util zigpc_zcl_command_parser
+  unify)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
 
-add_mock(zigpc_group_mgmt_mock include/zigpc_group_mgmt.h)
-target_interface_libraries(zigpc_group_mgmt_mock zigpc_common zigpc_zcl_util)
+  add_mock(zigpc_group_mgmt_mock include/zigpc_group_mgmt.h)
+  target_interface_libraries(zigpc_group_mgmt_mock zigpc_common zigpc_zcl_util)
+endif()

@@ -48,6 +48,7 @@ sl_status_t zigpc_attrmgmt_build_configure_report_records(
             ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT,  // minimum_reporting_interval
             ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT,  // maximum_reporting_interval
             ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT,        // reportable_change
+            0,        //timeout period 
           };
           record_list.push_back(record);
         }

@@ -87,6 +87,10 @@ static void zwave_command_class_supervision_restart_timer()
 
   // Set the timer and leave extra room for the Supervision Report to come to us.
   if (next_expiry != 0) {
+    // zwave_command_class_supervision_close_session call this function, and may be
+    // invoked from another process, so make sure the timer is started within
+    // the Supervision Process context
+    PROCESS_CONTEXT_BEGIN(&zwave_command_class_supervision_process);
     if (next_expiry < clock_time()) {
       // Already expired! Restart the timer in 1ms and get rid of
       // the already expired sessions
@@ -94,6 +98,7 @@ static void zwave_command_class_supervision_restart_timer()
     } else {
       etimer_set(&supervision_timer, next_expiry - clock_time());
     }
+    PROCESS_CONTEXT_END(&zwave_command_class_supervision_process);
   }
 }
 
@@ -109,10 +114,11 @@ static void supervision_process_on_timer_expired_event(etimer *timer)
       sl_log_debug(LOG_TAG,
                    "Timed out waiting for a Supervision Report for NodeID "
                    "%d:%d Session ID %d. "
-                   "Considering Supervision Session failed",
+                   "Considering Supervision ID %d Session failed",
                    it->second.session.node_id,
                    it->second.session.endpoint_id,
-                   it->second.session.session_id);
+                   it->second.session.session_id,
+                   it->first);
       expired_sessions.push_back(it->first);
       if (it->second.callback != nullptr) {
         it->second.callback(SUPERVISION_REPORT_FAIL,
@@ -213,13 +219,14 @@ static supervision_id_t
       return it->first;
     }
   }
-  sl_log_debug(LOG_TAG,
-               "Could not update Singlecast follow-up Supervision Session for "
-               "NodeID %d, Endpoint ID %d, Group ID %d. Ignoring.",
-               node_id,
-               endpoint_id,
-               group_id);
-  return 0;
+  sl_log_warning(LOG_TAG,
+                 "Could not update Singlecast follow-up Supervision Session "
+                 "for NodeID %d:%d, Group ID %d. Ignoring.",
+                 node_id,
+                 endpoint_id,
+                 group_id);
+  zwave_command_class_supervision_process_log();
+  return INVALID_SUPERVISION_ID;
 }
 
 static supervision_id_t zwave_command_class_supervision_create_group_session(
@@ -330,6 +337,15 @@ sl_status_t
   if (it == sessions.end()) {
     return SL_STATUS_NOT_FOUND;
   }
+
+  sl_log_debug(LOG_TAG,
+               "Closing Supervision Session %d "
+               "(local SessionID %d with NodeID %d:%d, group %d)",
+               supervision_id,
+               it->second.session.session_id,
+               it->second.session.node_id,
+               it->second.session.endpoint_id,
+               it->second.session.group_id);
   sessions.erase(it);
   zwave_command_class_supervision_restart_timer();
 
@@ -359,6 +375,32 @@ sl_status_t zwave_command_class_supervision_close_session_by_tx_session(
   }
 
   return zwave_command_class_supervision_close_session(supervision_id);
+}
+
+void zwave_command_class_supervision_process_log()
+{
+  sl_log_debug(LOG_TAG, "Number of Supervision Sessions: %d", sessions.size());
+  for (auto it = sessions.begin(); it != sessions.end(); ++it) {
+    sl_log_debug(LOG_TAG,
+                 "\t - Supervision ID %d / NodeID %d:%d - Group %d, "
+                 "Session ID %d - Callback (%p[%p]) - Expiry %lu",
+                 it->first,
+                 it->second.session.node_id,
+                 it->second.session.endpoint_id,
+                 it->second.session.group_id,
+                 it->second.session.session_id,
+                 it->second.callback,
+                 it->second.user,
+                 it->second.expiry_time);
+  }
+  if (0 == etimer_expired(&supervision_timer)) {
+    sl_log_debug(LOG_TAG,
+                 "Supervision Timer running - Expiration %lu / now %lu",
+                 etimer_expiration_time(&supervision_timer),
+                 clock_time());
+  } else {
+    sl_log_debug(LOG_TAG, "Supervision Timer NOT running");
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -19,6 +19,7 @@
 #include "zwave_command_handler.h"
 #include "attribute_resolver.h"
 
+#include "zpc_attribute_store_type_registration.h"
 #include "zwave_controller_storage.h"
 
 #include "attribute.hpp"
@@ -52,6 +53,7 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)

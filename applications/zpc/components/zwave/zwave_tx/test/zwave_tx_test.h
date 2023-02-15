@@ -61,10 +61,11 @@ static const zwave_tx_options_t test_tx_options_1
      .fasttrack           = true,
      .send_follow_ups     = false,
      .transport           = {
-                 .group_id           = ZWAVE_TX_INVALID_GROUP,
-                 .rf_power           = NORMAL_POWER,
-                 .is_first_follow_up = false,
-                 .is_test_frame      = false,
+                 .group_id                        = ZWAVE_TX_INVALID_GROUP,
+                 .rf_power                        = NORMAL_POWER,
+                 .is_first_follow_up              = false,
+                 .is_test_frame                   = false,
+                 .ignore_incoming_frames_back_off = false,
      }};
 
 static const zwave_tx_options_t test_tx_options_2
@@ -74,10 +75,11 @@ static const zwave_tx_options_t test_tx_options_2
      .fasttrack           = false,
      .send_follow_ups     = false,
      .transport           = {
-                 .is_first_follow_up = false,
-                 .is_test_frame      = false,
-                 .rf_power           = NORMAL_POWER,
-                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+                 .is_first_follow_up              = false,
+                 .is_test_frame                   = false,
+                 .ignore_incoming_frames_back_off = false,
+                 .rf_power                        = NORMAL_POWER,
+                 .group_id                        = ZWAVE_TX_INVALID_GROUP,
      }};
 
 static const zwave_tx_options_t test_tx_options_2_multi_responses
@@ -87,10 +89,11 @@ static const zwave_tx_options_t test_tx_options_2_multi_responses
      .fasttrack           = false,
      .send_follow_ups     = false,
      .transport           = {
-                 .is_first_follow_up = false,
-                 .is_test_frame      = false,
-                 .rf_power           = NORMAL_POWER,
-                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+                 .is_first_follow_up              = false,
+                 .is_test_frame                   = false,
+                 .ignore_incoming_frames_back_off = false,
+                 .rf_power                        = NORMAL_POWER,
+                 .group_id                        = ZWAVE_TX_INVALID_GROUP,
      }};
 
 static const zwave_tx_options_t test_tx_options_3
@@ -100,10 +103,11 @@ static const zwave_tx_options_t test_tx_options_3
      .fasttrack           = false,
      .send_follow_ups     = false,
      .transport           = {
-                 .is_test_frame      = false,
-                 .rf_power           = NORMAL_POWER,
-                 .group_id           = ZWAVE_TX_INVALID_GROUP,
-                 .is_first_follow_up = false,
+                 .is_test_frame                   = false,
+                 .rf_power                        = NORMAL_POWER,
+                 .ignore_incoming_frames_back_off = false,
+                 .group_id                        = ZWAVE_TX_INVALID_GROUP,
+                 .is_first_follow_up              = false,
      }};
 
 static const zwave_tx_options_t test_tx_options_test_frame
@@ -113,10 +117,11 @@ static const zwave_tx_options_t test_tx_options_test_frame
      .fasttrack           = false,
      .send_follow_ups     = false,
      .transport           = {
-                 .is_first_follow_up = false,
-                 .is_test_frame      = true,
-                 .rf_power           = MINUS_3_DBM,
-                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+                 .is_first_follow_up              = false,
+                 .is_test_frame                   = true,
+                 .ignore_incoming_frames_back_off = false,
+                 .rf_power                        = MINUS_3_DBM,
+                 .group_id                        = ZWAVE_TX_INVALID_GROUP,
      }};
 
 static const zwave_tx_options_t test_tx_options_group_id
@@ -126,10 +131,11 @@ static const zwave_tx_options_t test_tx_options_group_id
      .fasttrack           = false,
      .send_follow_ups     = false,
      .transport           = {
-                 .is_first_follow_up = false,
-                 .is_test_frame      = false,
-                 .rf_power           = NORMAL_POWER,
-                 .group_id           = 34,
+                 .is_first_follow_up              = false,
+                 .is_test_frame                   = false,
+                 .ignore_incoming_frames_back_off = false,
+                 .rf_power                        = NORMAL_POWER,
+                 .group_id                        = 34,
      }};
 
 static const uint8_t expected_tx_options_singlecast

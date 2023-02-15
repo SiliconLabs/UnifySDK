@@ -26,16 +26,14 @@
 #include "zwave_s0_network.h"
 #include "s2_keystore.h"
 #include "s2_classcmd.h"
+#include "zwave_helper_macros.h"
+
 
 #define LOG_TAG            "zwave_s0_sm"
 #define S0_INCLUSION_TIMER 10 * CLOCK_SECOND
 #define ELEM_COUNT(ARRAY)  (sizeof(ARRAY) / (sizeof(ARRAY[0])))
 #define S0_KEY_LENGTH      16
 #define UNUSED(x)          x = x;
-
-#define STR_CASE(x) \
-  case x:           \
-    return #x;
 
 static s0_on_bootstrapping_complete_cb s0_on_bootstrapping_complete_callback
   = NULL;

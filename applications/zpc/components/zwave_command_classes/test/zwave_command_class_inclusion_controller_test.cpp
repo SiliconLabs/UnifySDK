@@ -21,12 +21,15 @@
 // ZPC Includes
 #include "attribute_store_defined_attribute_types.h"
 #include "attribute.hpp"
-#include "zpc_attribute_store_test_helper.h"
+#include "zpc_attribute_store_type_registration.h"
 #include "zwave_unid.h"
 
 #include "zwave_unid.h"
 #include "ZW_classcmd.h"
+
+// Test helpers
 #include "contiki_test_helper.h"
+#include "zpc_attribute_store_test_helper.h"
 
 // Generic includes
 #include <string.h>
@@ -111,6 +114,7 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
 }
 
 static sl_status_t zwave_command_handler_register_handler_stub(
@@ -244,7 +248,7 @@ void test_zwave_command_class_inclusion_controller_reject_frame_too_low_security
     attr_node_id.child_by_type(ATTRIBUTE_GRANTED_SECURITY_KEYS).is_valid());
 }
 
-void test_zwave_command_class_inclusion_controller_reject_frame_unkonwn_node()
+void test_zwave_command_class_inclusion_controller_reject_frame_unknown_node()
 {
   // Receive from an unknown node
   connection.remote.node_id = 20;

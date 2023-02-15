@@ -1,9 +1,12 @@
 var nm__state__machine_8c =
 [
+    [ "ACCEPT_DSK", "nm__state__machine_8c.html#ac85deb9ebbcf74dfda490b3ee38eb36c", null ],
     [ "ADD_NODE_HOME_ID", "nm__state__machine_8c.html#ae39b24f70c491cd30f1820728df65603", null ],
     [ "ADD_NODE_STOP", "nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d", null ],
     [ "ADD_NODE_STOP_FAILED", "nm__state__machine_8c.html#ace46a0a1deffc7ee590c4bf2972ac5c3", null ],
     [ "LOG_TAG", "nm__state__machine_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
+    [ "OBFUSCATED_DSK_LEN", "nm__state__machine_8c.html#abba5c075714269e3070bf62e7e40ee51", null ],
+    [ "REJECT_DSK", "nm__state__machine_8c.html#a8a3ecfd451775e0f746b293b85550eac", null ],
     [ "add_node_status_update", "nm__state__machine_8c.html#a9d552fc6b0125173d0ed560c46e79ffb", null ],
     [ "dispatch_node_added", "nm__state__machine_8c.html#af9725af53f46d47041ed76276f01b39c", null ],
     [ "get_event_for_learn_status", "nm__state__machine_8c.html#abf1b965ec1c5a35734c8cb5c5824aaf9", null ],

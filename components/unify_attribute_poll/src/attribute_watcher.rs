@@ -11,9 +11,11 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+use crate::attribute_watcher_trait::AttributeWatcherTrait;
 use async_trait::async_trait;
 use futures::channel::mpsc::{unbounded, UnboundedReceiver, UnboundedSender};
-use futures::{select, StreamExt};
+use futures::StreamExt;
+use futures_concurrency::Race;
 use once_cell::sync::Lazy;
 use unify_attribute_store_sys::attribute_store_node_t;
 use unify_log_sys::*;
@@ -21,8 +23,6 @@ use unify_middleware::{attribute_changed, AttributeValueState};
 use unify_middleware::{attribute_store_or_return_with, Attribute, AttributeTrait};
 use unify_middleware::{contiki::contiki_spawn, AttributeEvent, AttributeEventType};
 use unify_sl_status_sys::SL_STATUS_OK;
-
-use crate::attribute_watcher_trait::AttributeWatcherTrait;
 declare_app_name!("poll_engine");
 
 static mut TOUCH_CHANNEL: Lazy<(
@@ -68,11 +68,14 @@ impl AttributeWatcher {
         };
 
         let mut attribute_changes = attribute_changed(attribute_predicate).fuse();
+
         loop {
-            let cmd = select! {
-                event = attribute_changes.select_next_some() => event,
-                event = TOUCH_CHANNEL.1.select_next_some() => event,
-            };
+            let cmd = (
+                attribute_changes.select_next_some(),
+                TOUCH_CHANNEL.1.select_next_some(),
+            )
+                .race()
+                .await;
 
             if let Err(e) = sender.start_send(cmd) {
                 log_error!("poll engine should outlive this attribute watcher {}", e);

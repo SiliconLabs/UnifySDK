@@ -29,7 +29,7 @@
 #include "dotdot_mqtt.hpp"
 #include "dotdot_mqtt_group_commands.h"
 #include "dotdot_mqtt_command_helpers.hpp"
-#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_parsing_helpers.hpp"
 
 static constexpr char LOG_TAG[] = "dotdot_mqtt";
 static constexpr char LOG_FMT_JSON_PARSE_FAIL[] = "by-group %s::%s: Unable to parse JSON payload: check payload syntax";
@@ -344,6 +344,7 @@ static uic_mqtt_dotdot_by_group_name_and_location_write_attributes_callback_t ui
 static uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_callback_t uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_callback = nullptr;
 static uic_mqtt_dotdot_by_group_configuration_parameters_default_reset_all_parameters_callback_t uic_mqtt_dotdot_by_group_configuration_parameters_default_reset_all_parameters_callback = nullptr;
 static uic_mqtt_dotdot_by_group_configuration_parameters_set_parameter_callback_t uic_mqtt_dotdot_by_group_configuration_parameters_set_parameter_callback = nullptr;
+static uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback_t uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback = nullptr;
 static uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback_t uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback = nullptr;
 
 
@@ -1789,6 +1790,12 @@ void uic_mqtt_dotdot_by_group_configuration_parameters_set_parameter_callback_se
   uic_mqtt_dotdot_by_group_configuration_parameters_set_parameter_callback = callback;
 }
 
+
+void uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback_set(const uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback = callback;
+}
+
 void uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback_set(
   const uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback_t callback)
 {
@@ -1867,7 +1874,7 @@ static void uic_mqtt_dotdot_on_by_group_basic_reset_to_factory_defaults(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -1886,7 +1893,7 @@ static void uic_mqtt_dotdot_on_by_group_basic_reset_to_factory_defaults(
       uic_mqtt_dotdot_by_group_basic_reset_to_factory_defaults_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_basic_reset_to_factory_defaults_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_basic_reset_to_factory_defaults_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -1929,9 +1936,8 @@ static void uic_mqtt_dotdot_on_by_group_basic_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_basic_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_basic_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Basic",
                               "WriteAttributes",
@@ -2019,9 +2025,8 @@ static void uic_mqtt_dotdot_on_by_group_power_configuration_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_power_configuration_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_power_configuration_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "PowerConfiguration",
                               "WriteAttributes",
@@ -2105,9 +2110,8 @@ static void uic_mqtt_dotdot_on_by_group_device_temperature_configuration_WriteAt
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_device_temperature_configuration_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_device_temperature_configuration_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "DeviceTemperatureConfiguration",
                               "WriteAttributes",
@@ -2207,9 +2211,9 @@ static void uic_mqtt_dotdot_on_by_group_identify_identify(
         uic_mqtt_dotdot_parse_identify_identify(
           jsn,
           fields.identify_time
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2229,7 +2233,7 @@ static void uic_mqtt_dotdot_on_by_group_identify_identify(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_identify_identify_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_identify_identify_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2292,9 +2296,9 @@ static void uic_mqtt_dotdot_on_by_group_identify_identify_query_response(
         uic_mqtt_dotdot_parse_identify_identify_query_response(
           jsn,
           fields.timeout
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2314,7 +2318,7 @@ static void uic_mqtt_dotdot_on_by_group_identify_identify_query_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_identify_identify_query_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_identify_identify_query_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2373,7 +2377,7 @@ static void uic_mqtt_dotdot_on_by_group_identify_identify_query(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2392,7 +2396,7 @@ static void uic_mqtt_dotdot_on_by_group_identify_identify_query(
       uic_mqtt_dotdot_by_group_identify_identify_query_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_identify_identify_query_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_identify_identify_query_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2451,11 +2455,11 @@ static void uic_mqtt_dotdot_on_by_group_identify_trigger_effect(
         uic_mqtt_dotdot_parse_identify_trigger_effect(
           jsn,
           fields.effect_identifier,
-      
+              
           fields.effect_variant
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2475,7 +2479,7 @@ static void uic_mqtt_dotdot_on_by_group_identify_trigger_effect(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_identify_trigger_effect_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_identify_trigger_effect_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2526,9 +2530,8 @@ static void uic_mqtt_dotdot_on_by_group_identify_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_identify_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_identify_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Identify",
                               "WriteAttributes",
@@ -2634,7 +2637,8 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group(
 
     
     uic_mqtt_dotdot_groups_command_add_group_fields_t fields;
-
+      std::string group_name;
+    
 
       nlohmann::json jsn;
       try {
@@ -2644,11 +2648,12 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group(
         uic_mqtt_dotdot_parse_groups_add_group(
           jsn,
           fields.group_id,
-      
-          fields.group_name
+              
+          group_name
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.group_name = group_name.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2668,7 +2673,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_add_group_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_add_group_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2735,11 +2740,11 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group_response(
         uic_mqtt_dotdot_parse_groups_add_group_response(
           jsn,
           fields.status,
-      
+              
           fields.group_id
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2759,7 +2764,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_add_group_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_add_group_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2826,9 +2831,9 @@ static void uic_mqtt_dotdot_on_by_group_groups_view_group(
         uic_mqtt_dotdot_parse_groups_view_group(
           jsn,
           fields.group_id
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2848,7 +2853,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_view_group(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_view_group_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_view_group_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2901,7 +2906,8 @@ static void uic_mqtt_dotdot_on_by_group_groups_view_group_response(
 
     
     uic_mqtt_dotdot_groups_command_view_group_response_fields_t fields;
-
+      std::string group_name;
+    
 
       nlohmann::json jsn;
       try {
@@ -2911,13 +2917,14 @@ static void uic_mqtt_dotdot_on_by_group_groups_view_group_response(
         uic_mqtt_dotdot_parse_groups_view_group_response(
           jsn,
           fields.status,
-      
+              
           fields.group_id,
-      
-          fields.group_name
+              
+          group_name
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.group_name = group_name.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -2937,7 +2944,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_view_group_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_view_group_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_view_group_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -2999,7 +3006,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership(
     
     uic_mqtt_dotdot_groups_command_get_group_membership_fields_t fields;
       std::vector<uint16_t> group_list;
-    
+
 
       nlohmann::json jsn;
       try {
@@ -3011,11 +3018,11 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership(
           group_list
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
         fields.group_list_count = group_list.size();
         fields.group_list = group_list.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -3034,7 +3041,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_get_group_membership_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_get_group_membership_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3088,7 +3095,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership_response(
     
     uic_mqtt_dotdot_groups_command_get_group_membership_response_fields_t fields;
       std::vector<uint16_t> group_list;
-    
+
 
       nlohmann::json jsn;
       try {
@@ -3098,15 +3105,15 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership_response(
         uic_mqtt_dotdot_parse_groups_get_group_membership_response(
           jsn,
           fields.capacity,
-      
+              
           group_list
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
         fields.group_list_count = group_list.size();
         fields.group_list = group_list.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -3125,7 +3132,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_get_group_membership_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_get_group_membership_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3192,9 +3199,9 @@ static void uic_mqtt_dotdot_on_by_group_groups_remove_group(
         uic_mqtt_dotdot_parse_groups_remove_group(
           jsn,
           fields.group_id
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -3214,7 +3221,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_remove_group(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_remove_group_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_remove_group_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3277,11 +3284,11 @@ static void uic_mqtt_dotdot_on_by_group_groups_remove_group_response(
         uic_mqtt_dotdot_parse_groups_remove_group_response(
           jsn,
           fields.status,
-      
+              
           fields.group_id
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -3301,7 +3308,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_remove_group_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_remove_group_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_remove_group_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3364,7 +3371,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_remove_all_groups(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -3383,7 +3390,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_remove_all_groups(
       uic_mqtt_dotdot_by_group_groups_remove_all_groups_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_remove_all_groups_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_remove_all_groups_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3432,7 +3439,8 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group_if_identifying(
 
     
     uic_mqtt_dotdot_groups_command_add_group_if_identifying_fields_t fields;
-
+      std::string group_name;
+    
 
       nlohmann::json jsn;
       try {
@@ -3442,11 +3450,12 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group_if_identifying(
         uic_mqtt_dotdot_parse_groups_add_group_if_identifying(
           jsn,
           fields.group_id,
-      
-          fields.group_name
+              
+          group_name
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.group_name = group_name.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -3466,7 +3475,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_add_group_if_identifying(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_add_group_if_identifying_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_add_group_if_identifying_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3517,9 +3526,8 @@ static void uic_mqtt_dotdot_on_by_group_groups_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_groups_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_groups_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Groups",
                               "WriteAttributes",
@@ -3649,8 +3657,9 @@ static void uic_mqtt_dotdot_on_by_group_scenes_add_scene(
 
     
     uic_mqtt_dotdot_scenes_command_add_scene_fields_t fields;
-      std::vector<SExtensionFieldSetList> extension_field_sets;
-    
+      std::string scene_name;
+          std::vector<SExtensionFieldSetList> extension_field_sets;
+
 
       nlohmann::json jsn;
       try {
@@ -3660,21 +3669,24 @@ static void uic_mqtt_dotdot_on_by_group_scenes_add_scene(
         uic_mqtt_dotdot_parse_scenes_add_scene(
           jsn,
           fields.groupid,
-      
+              
           fields.sceneid,
-      
+              
           fields.transition_time,
+              
+          scene_name,
       
-          fields.scene_name,
+          extension_field_sets,
       
-          extension_field_sets
-      );
+          fields.transition_time100ms
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.scene_name = scene_name.c_str();
       
         fields.extension_field_sets_count = extension_field_sets.size();
         fields.extension_field_sets = extension_field_sets.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -3693,7 +3705,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_add_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_add_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_add_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3716,6 +3728,10 @@ static void uic_mqtt_dotdot_on_by_group_scenes_add_scene(
       }
       if (jsn.find("ExtensionFieldSets") == jsn.end()) {
         sl_log_debug(LOG_TAG, "Scenes::AddScene: Missing command-argument: ExtensionFieldSets\n");
+        return;
+      }
+      if (jsn.find("TransitionTime100ms") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "Scenes::AddScene: Missing command-argument: TransitionTime100ms\n");
         return;
       }
 
@@ -3772,13 +3788,13 @@ static void uic_mqtt_dotdot_on_by_group_scenes_add_scene_response(
         uic_mqtt_dotdot_parse_scenes_add_scene_response(
           jsn,
           fields.status,
-      
+              
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -3798,7 +3814,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_add_scene_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_add_scene_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_add_scene_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3869,11 +3885,11 @@ static void uic_mqtt_dotdot_on_by_group_scenes_view_scene(
         uic_mqtt_dotdot_parse_scenes_view_scene(
           jsn,
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -3893,7 +3909,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_view_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_view_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_view_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -3950,8 +3966,9 @@ static void uic_mqtt_dotdot_on_by_group_scenes_view_scene_response(
 
     
     uic_mqtt_dotdot_scenes_command_view_scene_response_fields_t fields;
-      std::vector<SExtensionFieldSetList> extension_field_sets;
-    
+      std::string scene_name;
+          std::vector<SExtensionFieldSetList> extension_field_sets;
+
 
       nlohmann::json jsn;
       try {
@@ -3961,23 +3978,24 @@ static void uic_mqtt_dotdot_on_by_group_scenes_view_scene_response(
         uic_mqtt_dotdot_parse_scenes_view_scene_response(
           jsn,
           fields.status,
-      
+              
           fields.groupid,
-      
+              
           fields.sceneid,
-      
+              
           fields.transition_time,
-      
-          fields.scene_name,
+              
+          scene_name,
       
           extension_field_sets
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.scene_name = scene_name.c_str();
       
         fields.extension_field_sets_count = extension_field_sets.size();
         fields.extension_field_sets = extension_field_sets.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -3996,7 +4014,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_view_scene_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_view_scene_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_view_scene_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4079,11 +4097,11 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_scene(
         uic_mqtt_dotdot_parse_scenes_remove_scene(
           jsn,
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4103,7 +4121,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_remove_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_remove_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4170,13 +4188,13 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_scene_response(
         uic_mqtt_dotdot_parse_scenes_remove_scene_response(
           jsn,
           fields.status,
-      
+              
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4196,7 +4214,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_scene_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_remove_scene_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_remove_scene_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4267,9 +4285,9 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_all_scenes(
         uic_mqtt_dotdot_parse_scenes_remove_all_scenes(
           jsn,
           fields.groupid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4289,7 +4307,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_all_scenes(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_remove_all_scenes_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_remove_all_scenes_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4352,11 +4370,11 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_all_scenes_response(
         uic_mqtt_dotdot_parse_scenes_remove_all_scenes_response(
           jsn,
           fields.status,
-      
+              
           fields.groupid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4376,7 +4394,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_remove_all_scenes_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4443,11 +4461,11 @@ static void uic_mqtt_dotdot_on_by_group_scenes_store_scene(
         uic_mqtt_dotdot_parse_scenes_store_scene(
           jsn,
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4467,7 +4485,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_store_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_store_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_store_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4534,13 +4552,13 @@ static void uic_mqtt_dotdot_on_by_group_scenes_store_scene_response(
         uic_mqtt_dotdot_parse_scenes_store_scene_response(
           jsn,
           fields.status,
-      
+              
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4560,7 +4578,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_store_scene_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_store_scene_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_store_scene_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4631,13 +4649,13 @@ static void uic_mqtt_dotdot_on_by_group_scenes_recall_scene(
         uic_mqtt_dotdot_parse_scenes_recall_scene(
           jsn,
           fields.groupid,
-      
+              
           fields.sceneid,
-      
+              
           fields.transition_time
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4657,7 +4675,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_recall_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_recall_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_recall_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4728,9 +4746,9 @@ static void uic_mqtt_dotdot_on_by_group_scenes_get_scene_membership(
         uic_mqtt_dotdot_parse_scenes_get_scene_membership(
           jsn,
           fields.groupid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -4750,7 +4768,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_get_scene_membership(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_get_scene_membership_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_get_scene_membership_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4804,7 +4822,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_get_scene_membership_response(
     
     uic_mqtt_dotdot_scenes_command_get_scene_membership_response_fields_t fields;
       std::vector<uint8_t> scene_list;
-    
+
 
       nlohmann::json jsn;
       try {
@@ -4814,19 +4832,19 @@ static void uic_mqtt_dotdot_on_by_group_scenes_get_scene_membership_response(
         uic_mqtt_dotdot_parse_scenes_get_scene_membership_response(
           jsn,
           fields.status,
-      
+              
           fields.capacity,
-      
+              
           fields.groupid,
-      
+              
           scene_list
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
         fields.scene_list_count = scene_list.size();
         fields.scene_list = scene_list.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -4845,7 +4863,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_get_scene_membership_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_get_scene_membership_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_get_scene_membership_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -4910,8 +4928,9 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_add_scene(
 
     
     uic_mqtt_dotdot_scenes_command_enhanced_add_scene_fields_t fields;
-      std::vector<SExtensionFieldSetList> extension_field_sets;
-    
+      std::string scene_name;
+          std::vector<SExtensionFieldSetList> extension_field_sets;
+
 
       nlohmann::json jsn;
       try {
@@ -4921,21 +4940,22 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_add_scene(
         uic_mqtt_dotdot_parse_scenes_enhanced_add_scene(
           jsn,
           fields.groupid,
-      
+              
           fields.sceneid,
-      
+              
           fields.transition_time,
-      
-          fields.scene_name,
+              
+          scene_name,
       
           extension_field_sets
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.scene_name = scene_name.c_str();
       
         fields.extension_field_sets_count = extension_field_sets.size();
         fields.extension_field_sets = extension_field_sets.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -4954,7 +4974,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_add_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_enhanced_add_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5033,13 +5053,13 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_add_scene_response(
         uic_mqtt_dotdot_parse_scenes_enhanced_add_scene_response(
           jsn,
           fields.status,
-      
+              
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5059,7 +5079,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_add_scene_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5130,11 +5150,11 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_view_scene(
         uic_mqtt_dotdot_parse_scenes_enhanced_view_scene(
           jsn,
           fields.groupid,
-      
+              
           fields.sceneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5154,7 +5174,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_view_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_enhanced_view_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_enhanced_view_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5211,8 +5231,9 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_view_scene_response(
 
     
     uic_mqtt_dotdot_scenes_command_enhanced_view_scene_response_fields_t fields;
-      std::vector<SExtensionFieldSetList> extension_field_sets;
-    
+      std::string scene_name;
+          std::vector<SExtensionFieldSetList> extension_field_sets;
+
 
       nlohmann::json jsn;
       try {
@@ -5222,23 +5243,24 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_view_scene_response(
         uic_mqtt_dotdot_parse_scenes_enhanced_view_scene_response(
           jsn,
           fields.status,
-      
+              
           fields.groupid,
-      
+              
           fields.sceneid,
-      
+              
           fields.transition_time,
-      
-          fields.scene_name,
+              
+          scene_name,
       
           extension_field_sets
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.scene_name = scene_name.c_str();
       
         fields.extension_field_sets_count = extension_field_sets.size();
         fields.extension_field_sets = extension_field_sets.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -5257,7 +5279,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_enhanced_view_scene_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5340,17 +5362,17 @@ static void uic_mqtt_dotdot_on_by_group_scenes_copy_scene(
         uic_mqtt_dotdot_parse_scenes_copy_scene(
           jsn,
           fields.mode,
-      
+              
           fields.group_identifier_from,
-      
+              
           fields.scene_identifier_from,
-      
+              
           fields.group_identifier_to,
-      
+              
           fields.scene_identifier_to
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5370,7 +5392,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_copy_scene(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_copy_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_copy_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5449,13 +5471,13 @@ static void uic_mqtt_dotdot_on_by_group_scenes_copy_scene_response(
         uic_mqtt_dotdot_parse_scenes_copy_scene_response(
           jsn,
           fields.status,
-      
+              
           fields.group_identifier_from,
-      
+              
           fields.scene_identifier_from
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5475,7 +5497,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_copy_scene_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_copy_scene_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_copy_scene_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5530,9 +5552,8 @@ static void uic_mqtt_dotdot_on_by_group_scenes_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_scenes_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_scenes_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Scenes",
                               "WriteAttributes",
@@ -5704,7 +5725,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_off(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5723,7 +5744,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_off(
       uic_mqtt_dotdot_by_group_on_off_off_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_on_off_off_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_on_off_off_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5778,7 +5799,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_on(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5797,7 +5818,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_on(
       uic_mqtt_dotdot_by_group_on_off_on_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_on_off_on_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_on_off_on_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5852,7 +5873,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_toggle(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5871,7 +5892,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_toggle(
       uic_mqtt_dotdot_by_group_on_off_toggle_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_on_off_toggle_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_on_off_toggle_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -5930,11 +5951,11 @@ static void uic_mqtt_dotdot_on_by_group_on_off_off_with_effect(
         uic_mqtt_dotdot_parse_on_off_off_with_effect(
           jsn,
           fields.effect_identifier,
-      
+              
           fields.effect_variant
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -5954,7 +5975,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_off_with_effect(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_on_off_off_with_effect_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_on_off_off_with_effect_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6017,7 +6038,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_on_with_recall_global_scene(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6036,7 +6057,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_on_with_recall_global_scene(
       uic_mqtt_dotdot_by_group_on_off_on_with_recall_global_scene_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_on_off_on_with_recall_global_scene_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_on_off_on_with_recall_global_scene_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6095,13 +6116,13 @@ static void uic_mqtt_dotdot_on_by_group_on_off_on_with_timed_off(
         uic_mqtt_dotdot_parse_on_off_on_with_timed_off(
           jsn,
           fields.on_off_control,
-      
+              
           fields.on_time,
-      
+              
           fields.off_wait_time
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6121,7 +6142,7 @@ static void uic_mqtt_dotdot_on_by_group_on_off_on_with_timed_off(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_on_off_on_with_timed_off_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_on_off_on_with_timed_off_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6176,9 +6197,8 @@ static void uic_mqtt_dotdot_on_by_group_on_off_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_on_off_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_on_off_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "OnOff",
                               "WriteAttributes",
@@ -6302,15 +6322,15 @@ static void uic_mqtt_dotdot_on_by_group_level_move_to_level(
         uic_mqtt_dotdot_parse_level_move_to_level(
           jsn,
           fields.level,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6330,7 +6350,7 @@ static void uic_mqtt_dotdot_on_by_group_level_move_to_level(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_move_to_level_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_move_to_level_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6405,15 +6425,15 @@ static void uic_mqtt_dotdot_on_by_group_level_move(
         uic_mqtt_dotdot_parse_level_move(
           jsn,
           fields.move_mode,
-      
+              
           fields.rate,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6433,7 +6453,7 @@ static void uic_mqtt_dotdot_on_by_group_level_move(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_move_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_move_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6508,17 +6528,17 @@ static void uic_mqtt_dotdot_on_by_group_level_step(
         uic_mqtt_dotdot_parse_level_step(
           jsn,
           fields.step_mode,
-      
+              
           fields.step_size,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6538,7 +6558,7 @@ static void uic_mqtt_dotdot_on_by_group_level_step(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_step_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_step_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6617,11 +6637,11 @@ static void uic_mqtt_dotdot_on_by_group_level_stop(
         uic_mqtt_dotdot_parse_level_stop(
           jsn,
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6641,7 +6661,7 @@ static void uic_mqtt_dotdot_on_by_group_level_stop(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_stop_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_stop_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6708,15 +6728,15 @@ static void uic_mqtt_dotdot_on_by_group_level_move_to_level_with_on_off(
         uic_mqtt_dotdot_parse_level_move_to_level_with_on_off(
           jsn,
           fields.level,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6736,7 +6756,7 @@ static void uic_mqtt_dotdot_on_by_group_level_move_to_level_with_on_off(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_move_to_level_with_on_off_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_move_to_level_with_on_off_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6811,15 +6831,15 @@ static void uic_mqtt_dotdot_on_by_group_level_move_with_on_off(
         uic_mqtt_dotdot_parse_level_move_with_on_off(
           jsn,
           fields.move_mode,
-      
+              
           fields.rate,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6839,7 +6859,7 @@ static void uic_mqtt_dotdot_on_by_group_level_move_with_on_off(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_move_with_on_off_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_move_with_on_off_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -6914,17 +6934,17 @@ static void uic_mqtt_dotdot_on_by_group_level_step_with_on_off(
         uic_mqtt_dotdot_parse_level_step_with_on_off(
           jsn,
           fields.step_mode,
-      
+              
           fields.step_size,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -6944,7 +6964,7 @@ static void uic_mqtt_dotdot_on_by_group_level_step_with_on_off(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_step_with_on_off_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_step_with_on_off_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7023,11 +7043,11 @@ static void uic_mqtt_dotdot_on_by_group_level_stop_with_on_off(
         uic_mqtt_dotdot_parse_level_stop_with_on_off(
           jsn,
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7047,7 +7067,7 @@ static void uic_mqtt_dotdot_on_by_group_level_stop_with_on_off(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_stop_with_on_off_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_stop_with_on_off_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7114,9 +7134,9 @@ static void uic_mqtt_dotdot_on_by_group_level_move_to_closest_frequency(
         uic_mqtt_dotdot_parse_level_move_to_closest_frequency(
           jsn,
           fields.frequency
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7136,7 +7156,7 @@ static void uic_mqtt_dotdot_on_by_group_level_move_to_closest_frequency(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_move_to_closest_frequency_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_move_to_closest_frequency_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7183,9 +7203,8 @@ static void uic_mqtt_dotdot_on_by_group_level_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_level_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_level_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Level",
                               "WriteAttributes",
@@ -7321,11 +7340,11 @@ static void uic_mqtt_dotdot_on_by_group_alarms_reset_alarm(
         uic_mqtt_dotdot_parse_alarms_reset_alarm(
           jsn,
           fields.alarm_code,
-      
+              
           fields.cluster_identifier
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7345,7 +7364,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_reset_alarm(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_alarms_reset_alarm_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_alarms_reset_alarm_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7412,11 +7431,11 @@ static void uic_mqtt_dotdot_on_by_group_alarms_alarm(
         uic_mqtt_dotdot_parse_alarms_alarm(
           jsn,
           fields.alarm_code,
-      
+              
           fields.cluster_identifier
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7436,7 +7455,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_alarm(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_alarms_alarm_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_alarms_alarm_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7499,7 +7518,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_reset_all_alarms(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7518,7 +7537,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_reset_all_alarms(
       uic_mqtt_dotdot_by_group_alarms_reset_all_alarms_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_alarms_reset_all_alarms_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_alarms_reset_all_alarms_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7577,15 +7596,15 @@ static void uic_mqtt_dotdot_on_by_group_alarms_get_alarm_response(
         uic_mqtt_dotdot_parse_alarms_get_alarm_response(
           jsn,
           fields.status,
-      
+              
           fields.alarm_code,
-      
+              
           fields.cluster_identifier,
-      
+              
           fields.time_stamp
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7605,7 +7624,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_get_alarm_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_alarms_get_alarm_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_alarms_get_alarm_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7676,7 +7695,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_get_alarm(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7695,7 +7714,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_get_alarm(
       uic_mqtt_dotdot_by_group_alarms_get_alarm_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_alarms_get_alarm_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_alarms_get_alarm_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7750,7 +7769,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_reset_alarm_log(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -7769,7 +7788,7 @@ static void uic_mqtt_dotdot_on_by_group_alarms_reset_alarm_log(
       uic_mqtt_dotdot_by_group_alarms_reset_alarm_log_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_alarms_reset_alarm_log_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_alarms_reset_alarm_log_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -7812,9 +7831,8 @@ static void uic_mqtt_dotdot_on_by_group_alarms_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_alarms_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_alarms_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Alarms",
                               "WriteAttributes",
@@ -7922,9 +7940,8 @@ static void uic_mqtt_dotdot_on_by_group_time_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_time_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_time_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Time",
                               "WriteAttributes",
@@ -8024,17 +8041,17 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_notify(
         uic_mqtt_dotdot_parse_ota_upgrade_image_notify(
           jsn,
           fields.payload_type,
-      
+              
           fields.query_jitter,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.new_file_version
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8054,7 +8071,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_notify(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_image_notify_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_image_notify_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8133,17 +8150,17 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_next_image_request(
         uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_request(
           jsn,
           fields.field_control,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.current_file_version,
-      
+              
           fields.hardware_version
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8163,7 +8180,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_next_image_request(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8242,17 +8259,17 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_next_image_response(
         uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_response(
           jsn,
           fields.status,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version,
-      
+              
           fields.image_size
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8272,7 +8289,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_next_image_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8351,23 +8368,23 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_block_request(
         uic_mqtt_dotdot_parse_ota_upgrade_image_block_request(
           jsn,
           fields.field_control,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version,
-      
+              
           fields.file_offset,
-      
+              
           fields.maximum_data_size,
-      
+              
           fields.request_node_address,
-      
+              
           fields.minimum_block_period
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8387,7 +8404,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_block_request(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_image_block_request_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8478,25 +8495,25 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_page_request(
         uic_mqtt_dotdot_parse_ota_upgrade_image_page_request(
           jsn,
           fields.field_control,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version,
-      
+              
           fields.file_offset,
-      
+              
           fields.maximum_data_size,
-      
+              
           fields.page_size,
-      
+              
           fields.response_spacing,
-      
+              
           fields.request_node_address
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8516,7 +8533,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_page_request(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_image_page_request_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8601,7 +8618,8 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_block_response(
 
     
     uic_mqtt_dotdot_ota_upgrade_command_image_block_response_fields_t fields;
-
+      std::string image_data;
+    
 
       nlohmann::json jsn;
       try {
@@ -8611,25 +8629,26 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_block_response(
         uic_mqtt_dotdot_parse_ota_upgrade_image_block_response(
           jsn,
           fields.status,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version,
-      
+              
           fields.file_offset,
-      
-          fields.image_data,
+              
+          image_data,
       
           fields.current_time,
-      
+              
           fields.request_time,
-      
+              
           fields.minimum_block_period
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.image_data = image_data.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8649,7 +8668,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_image_block_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_image_block_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8744,15 +8763,15 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_upgrade_end_request(
         uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_request(
           jsn,
           fields.status,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8772,7 +8791,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_upgrade_end_request(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8847,17 +8866,17 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_upgrade_end_response(
         uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_response(
           jsn,
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version,
-      
+              
           fields.current_time,
-      
+              
           fields.upgrade_time
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8877,7 +8896,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_upgrade_end_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -8956,17 +8975,17 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_device_specific_file_r
         uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_request(
           jsn,
           fields.request_node_address,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version,
-      
+              
           fields.current_zigbee_stack_version
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8986,7 +9005,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_device_specific_file_r
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9065,17 +9084,17 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_device_specific_file_r
         uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_response(
           jsn,
           fields.status,
-      
+              
           fields.manufacturer_code,
-      
+              
           fields.image_type,
-      
+              
           fields.file_version,
-      
+              
           fields.image_size
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9095,7 +9114,7 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_query_device_specific_file_r
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9158,9 +9177,8 @@ static void uic_mqtt_dotdot_on_by_group_ota_upgrade_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ota_upgrade_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "OTAUpgrade",
                               "WriteAttributes",
@@ -9296,7 +9314,7 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_check_in(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9315,7 +9333,7 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_check_in(
       uic_mqtt_dotdot_by_group_poll_control_check_in_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_poll_control_check_in_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_poll_control_check_in_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9374,11 +9392,11 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_check_in_response(
         uic_mqtt_dotdot_parse_poll_control_check_in_response(
           jsn,
           fields.start_fast_polling,
-      
+              
           fields.fast_poll_timeout
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9398,7 +9416,7 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_check_in_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_poll_control_check_in_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_poll_control_check_in_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9461,7 +9479,7 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_fast_poll_stop(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9480,7 +9498,7 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_fast_poll_stop(
       uic_mqtt_dotdot_by_group_poll_control_fast_poll_stop_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_poll_control_fast_poll_stop_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_poll_control_fast_poll_stop_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9539,9 +9557,9 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_set_long_poll_interval(
         uic_mqtt_dotdot_parse_poll_control_set_long_poll_interval(
           jsn,
           fields.new_long_poll_interval
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9561,7 +9579,7 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_set_long_poll_interval(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9624,9 +9642,9 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_set_short_poll_interval(
         uic_mqtt_dotdot_parse_poll_control_set_short_poll_interval(
           jsn,
           fields.new_short_poll_interval
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9646,7 +9664,7 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_set_short_poll_interval(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9693,9 +9711,8 @@ static void uic_mqtt_dotdot_on_by_group_poll_control_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_poll_control_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_poll_control_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "PollControl",
                               "WriteAttributes",
@@ -9799,9 +9816,8 @@ static void uic_mqtt_dotdot_on_by_group_shade_configuration_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_shade_configuration_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_shade_configuration_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "ShadeConfiguration",
                               "WriteAttributes",
@@ -9891,7 +9907,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_lock_door(
 
     
     uic_mqtt_dotdot_door_lock_command_lock_door_fields_t fields;
-
+      std::string pin_orrfid_code;
+    
 
       nlohmann::json jsn;
       try {
@@ -9900,10 +9917,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_lock_door(
       
         uic_mqtt_dotdot_parse_door_lock_lock_door(
           jsn,
-          fields.pin_orrfid_code
+          pin_orrfid_code
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin_orrfid_code = pin_orrfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9923,7 +9941,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_lock_door(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_lock_door_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_lock_door_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9986,9 +10004,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_lock_door_response(
         uic_mqtt_dotdot_parse_door_lock_lock_door_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10008,7 +10026,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_lock_door_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_lock_door_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_lock_door_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10061,7 +10079,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_door(
 
     
     uic_mqtt_dotdot_door_lock_command_unlock_door_fields_t fields;
-
+      std::string pin_orrfid_code;
+    
 
       nlohmann::json jsn;
       try {
@@ -10070,10 +10089,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_door(
       
         uic_mqtt_dotdot_parse_door_lock_unlock_door(
           jsn,
-          fields.pin_orrfid_code
+          pin_orrfid_code
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin_orrfid_code = pin_orrfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10093,7 +10113,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_door(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_unlock_door_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_unlock_door_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10156,9 +10176,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_door_response(
         uic_mqtt_dotdot_parse_door_lock_unlock_door_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10178,7 +10198,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_door_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_unlock_door_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_unlock_door_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10231,7 +10251,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_toggle(
 
     
     uic_mqtt_dotdot_door_lock_command_toggle_fields_t fields;
-
+      std::string pin_orrfid_code;
+    
 
       nlohmann::json jsn;
       try {
@@ -10240,10 +10261,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_toggle(
       
         uic_mqtt_dotdot_parse_door_lock_toggle(
           jsn,
-          fields.pin_orrfid_code
+          pin_orrfid_code
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin_orrfid_code = pin_orrfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10263,7 +10285,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_toggle(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_toggle_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_toggle_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10326,9 +10348,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_toggle_response(
         uic_mqtt_dotdot_parse_door_lock_toggle_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10348,7 +10370,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_toggle_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_toggle_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_toggle_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10401,7 +10423,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout(
 
     
     uic_mqtt_dotdot_door_lock_command_unlock_with_timeout_fields_t fields;
-
+      std::string pin_orrfid_code;
+    
 
       nlohmann::json jsn;
       try {
@@ -10411,11 +10434,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout(
         uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout(
           jsn,
           fields.timeout_in_seconds,
-      
-          fields.pin_orrfid_code
+              
+          pin_orrfid_code
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin_orrfid_code = pin_orrfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10435,7 +10459,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10502,9 +10526,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout_response(
         uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10524,7 +10548,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_unlock_with_timeout_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_unlock_with_timeout_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10587,9 +10611,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_log_record(
         uic_mqtt_dotdot_parse_door_lock_get_log_record(
           jsn,
           fields.log_index
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10609,7 +10633,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_log_record(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_log_record_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_log_record_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10662,7 +10686,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_log_record_response(
 
     
     uic_mqtt_dotdot_door_lock_command_get_log_record_response_fields_t fields;
-
+      std::string pin;
+    
 
       nlohmann::json jsn;
       try {
@@ -10672,21 +10697,22 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_log_record_response(
         uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
           jsn,
           fields.log_entryid,
-      
+              
           fields.timestamp,
-      
+              
           fields.event_type,
-      
+              
           fields.source_operation_event,
-      
+              
           fields.eventid_or_alarm_code,
-      
+              
           fields.userid,
-      
-          fields.pin
+              
+          pin
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin = pin.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10706,7 +10732,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_log_record_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_log_record_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_log_record_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10783,7 +10809,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
 
     
     uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t fields;
-
+      std::string pin;
+    
 
       nlohmann::json jsn;
       try {
@@ -10793,15 +10820,16 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
         uic_mqtt_dotdot_parse_door_lock_setpin_code(
           jsn,
           fields.userid,
-      
+              
           fields.user_status,
-      
+              
           fields.user_type,
-      
-          fields.pin
+              
+          pin
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin = pin.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10821,7 +10849,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_setpin_code_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setpin_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10896,9 +10924,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
         uic_mqtt_dotdot_parse_door_lock_setpin_code_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -10918,7 +10946,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_setpin_code_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setpin_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10981,9 +11009,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
         uic_mqtt_dotdot_parse_door_lock_getpin_code(
           jsn,
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11003,7 +11031,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_getpin_code_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getpin_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11056,7 +11084,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
 
     
     uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t fields;
-
+      std::string code;
+    
 
       nlohmann::json jsn;
       try {
@@ -11066,15 +11095,16 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
         uic_mqtt_dotdot_parse_door_lock_getpin_code_response(
           jsn,
           fields.userid,
-      
+              
           fields.user_status,
-      
+              
           fields.user_type,
-      
-          fields.code
+              
+          code
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.code = code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11094,7 +11124,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_getpin_code_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getpin_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11169,9 +11199,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
         uic_mqtt_dotdot_parse_door_lock_clearpin_code(
           jsn,
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11191,7 +11221,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clearpin_code_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearpin_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11254,9 +11284,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
         uic_mqtt_dotdot_parse_door_lock_clearpin_code_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11276,7 +11306,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clearpin_code_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearpin_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11335,7 +11365,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11354,7 +11384,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes(
       uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11413,9 +11443,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response(
         uic_mqtt_dotdot_parse_door_lock_clear_allpin_codes_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11435,7 +11465,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11498,11 +11528,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_status(
         uic_mqtt_dotdot_parse_door_lock_set_user_status(
           jsn,
           fields.userid,
-      
+              
           fields.user_status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11522,7 +11552,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_status(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_user_status_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_user_status_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11589,9 +11619,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_status_response(
         uic_mqtt_dotdot_parse_door_lock_set_user_status_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11611,7 +11641,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_status_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_user_status_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_user_status_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11674,9 +11704,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_status(
         uic_mqtt_dotdot_parse_door_lock_get_user_status(
           jsn,
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11696,7 +11726,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_status(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_user_status_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_user_status_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11759,11 +11789,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_status_response(
         uic_mqtt_dotdot_parse_door_lock_get_user_status_response(
           jsn,
           fields.userid,
-      
+              
           fields.user_status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11783,7 +11813,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_status_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_user_status_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_user_status_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11850,21 +11880,21 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_weekday_schedule(
         uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid,
-      
+              
           fields.days_mask,
-      
+              
           fields.start_hour,
-      
+              
           fields.start_minute,
-      
+              
           fields.end_hour,
-      
+              
           fields.end_minute
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11884,7 +11914,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_weekday_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -11971,9 +12001,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_weekday_schedule_response(
         uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -11993,7 +12023,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_weekday_schedule_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_weekday_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_weekday_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12056,11 +12086,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_weekday_schedule(
         uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12080,7 +12110,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_weekday_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12147,23 +12177,23 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_weekday_schedule_response(
         uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule_response(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid,
-      
+              
           fields.status,
-      
+              
           fields.days_mask,
-      
+              
           fields.start_hour,
-      
+              
           fields.start_minute,
-      
+              
           fields.end_hour,
-      
+              
           fields.end_minute
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12183,7 +12213,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_weekday_schedule_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12274,11 +12304,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_weekday_schedule(
         uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12298,7 +12328,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_weekday_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12365,9 +12395,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_weekday_schedule_respons
         uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12387,7 +12417,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_weekday_schedule_respons
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_weekday_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12450,15 +12480,15 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_year_day_schedule(
         uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid,
-      
+              
           fields.local_start_time,
-      
+              
           fields.local_end_time
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12478,7 +12508,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_year_day_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12553,9 +12583,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_year_day_schedule_response
         uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12575,7 +12605,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_year_day_schedule_response
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_year_day_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_year_day_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12638,11 +12668,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_year_day_schedule(
         uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12662,7 +12692,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_year_day_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12729,17 +12759,17 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_year_day_schedule_response
         uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule_response(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid,
-      
+              
           fields.status,
-      
+              
           fields.local_start_time,
-      
+              
           fields.local_end_time
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12759,7 +12789,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_year_day_schedule_response
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12838,11 +12868,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_year_day_schedule(
         uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule(
           jsn,
           fields.scheduleid,
-      
+              
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12862,7 +12892,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_year_day_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12929,9 +12959,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_year_day_schedule_respon
         uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -12951,7 +12981,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_year_day_schedule_respon
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_year_day_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13014,15 +13044,15 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_holiday_schedule(
         uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule(
           jsn,
           fields.holiday_scheduleid,
-      
+              
           fields.local_start_time,
-      
+              
           fields.local_end_time,
-      
+              
           fields.operating_mode_during_holiday
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13042,7 +13072,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_holiday_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13117,9 +13147,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_holiday_schedule_response(
         uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13139,7 +13169,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_holiday_schedule_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_holiday_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_holiday_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13202,9 +13232,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_holiday_schedule(
         uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule(
           jsn,
           fields.holiday_scheduleid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13224,7 +13254,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_holiday_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13287,17 +13317,17 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_holiday_schedule_response(
         uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule_response(
           jsn,
           fields.holiday_scheduleid,
-      
+              
           fields.status,
-      
+              
           fields.local_start_time,
-      
+              
           fields.local_end_time,
-      
+              
           fields.operating_mode_during_holiday
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13317,7 +13347,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_holiday_schedule_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13396,9 +13426,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_holiday_schedule(
         uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule(
           jsn,
           fields.holiday_scheduleid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13418,7 +13448,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_holiday_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13481,9 +13511,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_holiday_schedule_respons
         uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13503,7 +13533,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_holiday_schedule_respons
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_holiday_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13566,11 +13596,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_type(
         uic_mqtt_dotdot_parse_door_lock_set_user_type(
           jsn,
           fields.userid,
-      
+              
           fields.user_type
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13590,7 +13620,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_type(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_user_type_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_user_type_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13657,9 +13687,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_type_response(
         uic_mqtt_dotdot_parse_door_lock_set_user_type_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13679,7 +13709,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_set_user_type_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_set_user_type_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_user_type_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13742,9 +13772,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_type(
         uic_mqtt_dotdot_parse_door_lock_get_user_type(
           jsn,
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13764,7 +13794,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_type(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_user_type_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_user_type_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13827,11 +13857,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_type_response(
         uic_mqtt_dotdot_parse_door_lock_get_user_type_response(
           jsn,
           fields.userid,
-      
+              
           fields.user_type
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13851,7 +13881,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_type_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_get_user_type_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_user_type_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13908,7 +13938,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
 
     
     uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t fields;
-
+      std::string rfid_code;
+    
 
       nlohmann::json jsn;
       try {
@@ -13918,15 +13949,16 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
         uic_mqtt_dotdot_parse_door_lock_setrfid_code(
           jsn,
           fields.userid,
-      
+              
           fields.user_status,
-      
+              
           fields.user_type,
-      
-          fields.rfid_code
+              
+          rfid_code
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.rfid_code = rfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -13946,7 +13978,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_setrfid_code_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setrfid_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14021,9 +14053,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
         uic_mqtt_dotdot_parse_door_lock_setrfid_code_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14043,7 +14075,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_setrfid_code_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setrfid_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14106,9 +14138,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
         uic_mqtt_dotdot_parse_door_lock_getrfid_code(
           jsn,
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14128,7 +14160,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_getrfid_code_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getrfid_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14181,7 +14213,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
 
     
     uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t fields;
-
+      std::string rfid_code;
+    
 
       nlohmann::json jsn;
       try {
@@ -14191,15 +14224,16 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
         uic_mqtt_dotdot_parse_door_lock_getrfid_code_response(
           jsn,
           fields.userid,
-      
+              
           fields.user_status,
-      
+              
           fields.user_type,
-      
-          fields.rfid_code
+              
+          rfid_code
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.rfid_code = rfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14219,7 +14253,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_getrfid_code_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getrfid_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14294,9 +14328,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
         uic_mqtt_dotdot_parse_door_lock_clearrfid_code(
           jsn,
           fields.userid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14316,7 +14350,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clearrfid_code_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearrfid_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14379,9 +14413,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
         uic_mqtt_dotdot_parse_door_lock_clearrfid_code_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14401,7 +14435,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14460,7 +14494,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14479,7 +14513,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes(
       uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14538,9 +14572,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response(
         uic_mqtt_dotdot_parse_door_lock_clear_allrfid_codes_response(
           jsn,
           fields.status
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14560,7 +14594,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14613,7 +14647,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_operating_event_notification(
 
     
     uic_mqtt_dotdot_door_lock_command_operating_event_notification_fields_t fields;
-
+      std::string pin;
+          std::string data;
+    
 
       nlohmann::json jsn;
       try {
@@ -14623,19 +14659,21 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_operating_event_notification(
         uic_mqtt_dotdot_parse_door_lock_operating_event_notification(
           jsn,
           fields.operation_event_source,
-      
+              
           fields.operation_event_code,
-      
+              
           fields.userid,
-      
-          fields.pin,
+              
+          pin,
       
           fields.local_time,
-      
-          fields.data
+              
+          data
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin = pin.c_str();
+              fields.data = data.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14655,7 +14693,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_operating_event_notification(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_operating_event_notification_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_operating_event_notification_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14728,7 +14766,9 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification
 
     
     uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t fields;
-
+      std::string pin;
+          std::string data;
+    
 
       nlohmann::json jsn;
       try {
@@ -14738,23 +14778,25 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification
         uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
           jsn,
           fields.program_event_source,
-      
+              
           fields.program_event_code,
-      
+              
           fields.userid,
-      
-          fields.pin,
+              
+          pin,
       
           fields.user_type,
-      
+              
           fields.user_status,
-      
+              
           fields.local_time,
-      
-          fields.data
+              
+          data
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.pin = pin.c_str();
+              fields.data = data.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -14774,7 +14816,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_programming_event_notification_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_programming_event_notification_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -14849,9 +14891,8 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_door_lock_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "DoorLock",
                               "WriteAttributes",
@@ -15163,7 +15204,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_up_or_open(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15182,7 +15223,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_up_or_open(
       uic_mqtt_dotdot_by_group_window_covering_up_or_open_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_up_or_open_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_up_or_open_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15237,7 +15278,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_down_or_close(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15256,7 +15297,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_down_or_close(
       uic_mqtt_dotdot_by_group_window_covering_down_or_close_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_down_or_close_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_down_or_close_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15311,7 +15352,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_stop(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15330,7 +15371,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_stop(
       uic_mqtt_dotdot_by_group_window_covering_stop_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_stop_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_stop_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15389,9 +15430,9 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_lift_value(
         uic_mqtt_dotdot_parse_window_covering_go_to_lift_value(
           jsn,
           fields.lift_value
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15411,7 +15452,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_lift_value(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_go_to_lift_value_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_go_to_lift_value_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15474,9 +15515,9 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_lift_percentage(
         uic_mqtt_dotdot_parse_window_covering_go_to_lift_percentage(
           jsn,
           fields.percentage_lift_value
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15496,7 +15537,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_lift_percentage(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15559,9 +15600,9 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_tilt_value(
         uic_mqtt_dotdot_parse_window_covering_go_to_tilt_value(
           jsn,
           fields.tilt_value
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15581,7 +15622,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_tilt_value(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15644,9 +15685,9 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_tilt_percentage(
         uic_mqtt_dotdot_parse_window_covering_go_to_tilt_percentage(
           jsn,
           fields.percentage_tilt_value
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15666,7 +15707,7 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_go_to_tilt_percentage(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15713,9 +15754,8 @@ static void uic_mqtt_dotdot_on_by_group_window_covering_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_window_covering_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_window_covering_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "WindowCovering",
                               "WriteAttributes",
@@ -15843,9 +15883,9 @@ static void uic_mqtt_dotdot_on_by_group_barrier_control_go_to_percent(
         uic_mqtt_dotdot_parse_barrier_control_go_to_percent(
           jsn,
           fields.percent_open
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15865,7 +15905,7 @@ static void uic_mqtt_dotdot_on_by_group_barrier_control_go_to_percent(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_barrier_control_go_to_percent_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_barrier_control_go_to_percent_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15924,7 +15964,7 @@ static void uic_mqtt_dotdot_on_by_group_barrier_control_stop(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -15943,7 +15983,7 @@ static void uic_mqtt_dotdot_on_by_group_barrier_control_stop(
       uic_mqtt_dotdot_by_group_barrier_control_stop_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_barrier_control_stop_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_barrier_control_stop_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -15986,9 +16026,8 @@ static void uic_mqtt_dotdot_on_by_group_barrier_control_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_barrier_control_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_barrier_control_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "BarrierControl",
                               "WriteAttributes",
@@ -16080,9 +16119,8 @@ static void uic_mqtt_dotdot_on_by_group_pump_configuration_and_control_WriteAttr
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_pump_configuration_and_control_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_pump_configuration_and_control_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "PumpConfigurationAndControl",
                               "WriteAttributes",
@@ -16182,11 +16220,11 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_setpoint_raise_or_lower(
         uic_mqtt_dotdot_parse_thermostat_setpoint_raise_or_lower(
           jsn,
           fields.mode,
-      
+              
           fields.amount
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -16206,7 +16244,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_setpoint_raise_or_lower(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_setpoint_raise_or_lower_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_setpoint_raise_or_lower_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -16264,7 +16302,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_weekly_schedule_response(
     
     uic_mqtt_dotdot_thermostat_command_get_weekly_schedule_response_fields_t fields;
       std::vector<TransitionType> transitions;
-    
+
 
       nlohmann::json jsn;
       try {
@@ -16274,19 +16312,19 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_weekly_schedule_response(
         uic_mqtt_dotdot_parse_thermostat_get_weekly_schedule_response(
           jsn,
           fields.number_of_transitions,
-      
+              
           fields.day_of_week,
-      
+              
           fields.mode,
-      
+              
           transitions
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
         fields.transitions_count = transitions.size();
         fields.transitions = transitions.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -16305,7 +16343,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_weekly_schedule_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_get_weekly_schedule_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_get_weekly_schedule_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -16371,7 +16409,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_set_weekly_schedule(
     
     uic_mqtt_dotdot_thermostat_command_set_weekly_schedule_fields_t fields;
       std::vector<TransitionType> transitions;
-    
+
 
       nlohmann::json jsn;
       try {
@@ -16381,19 +16419,19 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_set_weekly_schedule(
         uic_mqtt_dotdot_parse_thermostat_set_weekly_schedule(
           jsn,
           fields.number_of_transitions,
-      
+              
           fields.day_of_week,
-      
+              
           fields.mode,
-      
+              
           transitions
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
         fields.transitions_count = transitions.size();
         fields.transitions = transitions.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -16412,7 +16450,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_set_weekly_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_set_weekly_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_set_weekly_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -16487,19 +16525,19 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_relay_status_log_response
         uic_mqtt_dotdot_parse_thermostat_get_relay_status_log_response(
           jsn,
           fields.time_of_day,
-      
+              
           fields.relay_status,
-      
+              
           fields.local_temperature,
-      
+              
           fields.humidity_percentage,
-      
+              
           fields.set_point,
-      
+              
           fields.unread_entries
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -16519,7 +16557,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_relay_status_log_response
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -16602,11 +16640,11 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_weekly_schedule(
         uic_mqtt_dotdot_parse_thermostat_get_weekly_schedule(
           jsn,
           fields.days_to_return,
-      
+              
           fields.mode_to_return
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -16626,7 +16664,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_weekly_schedule(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_get_weekly_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_get_weekly_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -16689,7 +16727,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_clear_weekly_schedule(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -16708,7 +16746,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_clear_weekly_schedule(
       uic_mqtt_dotdot_by_group_thermostat_clear_weekly_schedule_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_clear_weekly_schedule_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_clear_weekly_schedule_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -16763,7 +16801,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_relay_status_log(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -16782,7 +16820,7 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_get_relay_status_log(
       uic_mqtt_dotdot_by_group_thermostat_get_relay_status_log_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_get_relay_status_log_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_get_relay_status_log_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -16825,9 +16863,8 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Thermostat",
                               "WriteAttributes",
@@ -16939,9 +16976,8 @@ static void uic_mqtt_dotdot_on_by_group_fan_control_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_fan_control_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_fan_control_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "FanControl",
                               "WriteAttributes",
@@ -17025,9 +17061,8 @@ static void uic_mqtt_dotdot_on_by_group_dehumidification_control_WriteAttributes
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_dehumidification_control_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_dehumidification_control_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "DehumidificationControl",
                               "WriteAttributes",
@@ -17111,9 +17146,8 @@ static void uic_mqtt_dotdot_on_by_group_thermostat_user_interface_configuration_
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_thermostat_user_interface_configuration_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_thermostat_user_interface_configuration_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "ThermostatUserInterfaceConfiguration",
                               "WriteAttributes",
@@ -17213,17 +17247,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_hue(
         uic_mqtt_dotdot_parse_color_control_move_to_hue(
           jsn,
           fields.hue,
-      
+              
           fields.direction,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17243,7 +17277,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_hue(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_to_hue_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_to_hue_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -17322,15 +17356,15 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_hue(
         uic_mqtt_dotdot_parse_color_control_move_hue(
           jsn,
           fields.move_mode,
-      
+              
           fields.rate,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17350,7 +17384,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_hue(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_hue_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_hue_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -17425,17 +17459,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_hue(
         uic_mqtt_dotdot_parse_color_control_step_hue(
           jsn,
           fields.step_mode,
-      
+              
           fields.step_size,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17455,7 +17489,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_hue(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_step_hue_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_step_hue_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -17534,15 +17568,15 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_saturation(
         uic_mqtt_dotdot_parse_color_control_move_to_saturation(
           jsn,
           fields.saturation,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17562,7 +17596,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_saturation(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_to_saturation_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_to_saturation_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -17637,15 +17671,15 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_saturation(
         uic_mqtt_dotdot_parse_color_control_move_saturation(
           jsn,
           fields.move_mode,
-      
+              
           fields.rate,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17665,7 +17699,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_saturation(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_saturation_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_saturation_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -17740,17 +17774,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_saturation(
         uic_mqtt_dotdot_parse_color_control_step_saturation(
           jsn,
           fields.step_mode,
-      
+              
           fields.step_size,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17770,7 +17804,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_saturation(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_step_saturation_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_step_saturation_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -17849,17 +17883,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_hue_and_saturation
         uic_mqtt_dotdot_parse_color_control_move_to_hue_and_saturation(
           jsn,
           fields.hue,
-      
+              
           fields.saturation,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17879,7 +17913,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_hue_and_saturation
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_to_hue_and_saturation_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_to_hue_and_saturation_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -17958,17 +17992,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_color(
         uic_mqtt_dotdot_parse_color_control_move_to_color(
           jsn,
           fields.colorx,
-      
+              
           fields.colory,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -17988,7 +18022,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_color(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_to_color_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_to_color_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18067,15 +18101,15 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_color(
         uic_mqtt_dotdot_parse_color_control_move_color(
           jsn,
           fields.ratex,
-      
+              
           fields.ratey,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18095,7 +18129,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_color(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_color_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_color_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18170,17 +18204,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_color(
         uic_mqtt_dotdot_parse_color_control_step_color(
           jsn,
           fields.stepx,
-      
+              
           fields.stepy,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18200,7 +18234,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_color(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_step_color_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_step_color_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18279,15 +18313,15 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_color_temperature(
         uic_mqtt_dotdot_parse_color_control_move_to_color_temperature(
           jsn,
           fields.color_temperature_mireds,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18307,7 +18341,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_to_color_temperature(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_to_color_temperature_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_to_color_temperature_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18382,17 +18416,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_move_to_hue(
         uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue(
           jsn,
           fields.enhanced_hue,
-      
+              
           fields.direction,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18412,7 +18446,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_move_to_hue(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_enhanced_move_to_hue_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_enhanced_move_to_hue_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18491,15 +18525,15 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_move_hue(
         uic_mqtt_dotdot_parse_color_control_enhanced_move_hue(
           jsn,
           fields.move_mode,
-      
+              
           fields.rate,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18519,7 +18553,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_move_hue(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_enhanced_move_hue_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_enhanced_move_hue_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18594,17 +18628,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_step_hue(
         uic_mqtt_dotdot_parse_color_control_enhanced_step_hue(
           jsn,
           fields.step_mode,
-      
+              
           fields.step_size,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18624,7 +18658,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_step_hue(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_enhanced_step_hue_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_enhanced_step_hue_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18703,17 +18737,17 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_move_to_hue_and_s
         uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue_and_saturation(
           jsn,
           fields.enhanced_hue,
-      
+              
           fields.saturation,
-      
+              
           fields.transition_time,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18733,7 +18767,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_enhanced_move_to_hue_and_s
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_enhanced_move_to_hue_and_saturation_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_enhanced_move_to_hue_and_saturation_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18812,21 +18846,21 @@ static void uic_mqtt_dotdot_on_by_group_color_control_color_loop_set(
         uic_mqtt_dotdot_parse_color_control_color_loop_set(
           jsn,
           fields.update_flags,
-      
+              
           fields.action,
-      
+              
           fields.direction,
-      
+              
           fields.time,
-      
+              
           fields.start_hue,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18846,7 +18880,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_color_loop_set(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_color_loop_set_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_color_loop_set_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -18933,11 +18967,11 @@ static void uic_mqtt_dotdot_on_by_group_color_control_stop_move_step(
         uic_mqtt_dotdot_parse_color_control_stop_move_step(
           jsn,
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -18957,7 +18991,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_stop_move_step(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_stop_move_step_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_stop_move_step_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -19024,19 +19058,19 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_color_temperature(
         uic_mqtt_dotdot_parse_color_control_move_color_temperature(
           jsn,
           fields.move_mode,
-      
+              
           fields.rate,
-      
+              
           fields.color_temperature_minimum_mireds,
-      
+              
           fields.color_temperature_maximum_mireds,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -19056,7 +19090,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_move_color_temperature(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_move_color_temperature_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_move_color_temperature_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -19139,21 +19173,21 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_color_temperature(
         uic_mqtt_dotdot_parse_color_control_step_color_temperature(
           jsn,
           fields.step_mode,
-      
+              
           fields.step_size,
-      
+              
           fields.transition_time,
-      
+              
           fields.color_temperature_minimum_mireds,
-      
+              
           fields.color_temperature_maximum_mireds,
-      
+              
           fields.options_mask,
-      
+              
           fields.options_override
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -19173,7 +19207,7 @@ static void uic_mqtt_dotdot_on_by_group_color_control_step_color_temperature(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_step_color_temperature_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_step_color_temperature_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -19244,9 +19278,8 @@ static void uic_mqtt_dotdot_on_by_group_color_control_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_color_control_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_color_control_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "ColorControl",
                               "WriteAttributes",
@@ -19406,9 +19439,8 @@ static void uic_mqtt_dotdot_on_by_group_ballast_configuration_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ballast_configuration_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ballast_configuration_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "BallastConfiguration",
                               "WriteAttributes",
@@ -19492,9 +19524,8 @@ static void uic_mqtt_dotdot_on_by_group_illuminance_measurement_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_illuminance_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_illuminance_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "IlluminanceMeasurement",
                               "WriteAttributes",
@@ -19578,9 +19609,8 @@ static void uic_mqtt_dotdot_on_by_group_illuminance_level_sensing_WriteAttribute
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_illuminance_level_sensing_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_illuminance_level_sensing_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "IlluminanceLevelSensing",
                               "WriteAttributes",
@@ -19664,9 +19694,8 @@ static void uic_mqtt_dotdot_on_by_group_temperature_measurement_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_temperature_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_temperature_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "TemperatureMeasurement",
                               "WriteAttributes",
@@ -19750,9 +19779,8 @@ static void uic_mqtt_dotdot_on_by_group_pressure_measurement_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_pressure_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_pressure_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "PressureMeasurement",
                               "WriteAttributes",
@@ -19836,9 +19864,8 @@ static void uic_mqtt_dotdot_on_by_group_flow_measurement_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_flow_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_flow_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "FlowMeasurement",
                               "WriteAttributes",
@@ -19922,9 +19949,8 @@ static void uic_mqtt_dotdot_on_by_group_relativity_humidity_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_relativity_humidity_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_relativity_humidity_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "RelativityHumidity",
                               "WriteAttributes",
@@ -20008,9 +20034,8 @@ static void uic_mqtt_dotdot_on_by_group_occupancy_sensing_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "OccupancySensing",
                               "WriteAttributes",
@@ -20094,9 +20119,8 @@ static void uic_mqtt_dotdot_on_by_group_ph_measurement_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ph_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ph_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "PhMeasurement",
                               "WriteAttributes",
@@ -20180,9 +20204,8 @@ static void uic_mqtt_dotdot_on_by_group_electrical_conductivity_measurement_Writ
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_electrical_conductivity_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_electrical_conductivity_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "ElectricalConductivityMeasurement",
                               "WriteAttributes",
@@ -20266,9 +20289,8 @@ static void uic_mqtt_dotdot_on_by_group_wind_speed_measurement_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_wind_speed_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_wind_speed_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "WindSpeedMeasurement",
                               "WriteAttributes",
@@ -20352,9 +20374,8 @@ static void uic_mqtt_dotdot_on_by_group_carbon_monoxide_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "CarbonMonoxide",
                               "WriteAttributes",
@@ -20454,11 +20475,11 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_zone_enroll_response(
         uic_mqtt_dotdot_parse_ias_zone_zone_enroll_response(
           jsn,
           fields.enroll_response_code,
-      
+              
           fields.zoneid
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -20478,7 +20499,7 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_zone_enroll_response(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -20545,15 +20566,15 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_zone_status_change_notification
         uic_mqtt_dotdot_parse_ias_zone_zone_status_change_notification(
           jsn,
           fields.zone_status,
-      
+              
           fields.extended_status,
-      
+              
           fields.zoneid,
-      
+              
           fields.delay
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -20573,7 +20594,7 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_zone_status_change_notification
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -20644,7 +20665,7 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_initiate_normal_operation_mode(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -20663,7 +20684,7 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_initiate_normal_operation_mode(
       uic_mqtt_dotdot_by_group_ias_zone_initiate_normal_operation_mode_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ias_zone_initiate_normal_operation_mode_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ias_zone_initiate_normal_operation_mode_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -20722,11 +20743,11 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_zone_enroll_request(
         uic_mqtt_dotdot_parse_ias_zone_zone_enroll_request(
           jsn,
           fields.zone_type,
-      
+              
           fields.manufacturer_code
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -20746,7 +20767,7 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_zone_enroll_request(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -20813,11 +20834,11 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_initiate_test_mode(
         uic_mqtt_dotdot_parse_ias_zone_initiate_test_mode(
           jsn,
           fields.test_mode_duration,
-      
+              
           fields.current_zone_sensitivity_level
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -20837,7 +20858,7 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_initiate_test_mode(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -20888,9 +20909,8 @@ static void uic_mqtt_dotdot_on_by_group_ias_zone_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_ias_zone_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_ias_zone_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "IASZone",
                               "WriteAttributes",
@@ -21010,15 +21030,15 @@ static void uic_mqtt_dotdot_on_by_group_iaswd_start_warning(
         uic_mqtt_dotdot_parse_iaswd_start_warning(
           jsn,
           fields.siren_configuration,
-      
+              
           fields.warning_duration,
-      
+              
           fields.strobe_duty_cycle,
-      
+              
           fields.strobe_level
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -21038,7 +21058,7 @@ static void uic_mqtt_dotdot_on_by_group_iaswd_start_warning(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_iaswd_start_warning_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_iaswd_start_warning_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -21113,9 +21133,9 @@ static void uic_mqtt_dotdot_on_by_group_iaswd_squawk(
         uic_mqtt_dotdot_parse_iaswd_squawk(
           jsn,
           fields.squawk_configuration
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -21135,7 +21155,7 @@ static void uic_mqtt_dotdot_on_by_group_iaswd_squawk(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_iaswd_squawk_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_iaswd_squawk_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -21182,9 +21202,8 @@ static void uic_mqtt_dotdot_on_by_group_iaswd_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_iaswd_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_iaswd_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "IASWD",
                               "WriteAttributes",
@@ -21276,9 +21295,8 @@ static void uic_mqtt_dotdot_on_by_group_metering_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_metering_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_metering_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Metering",
                               "WriteAttributes",
@@ -21369,7 +21387,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_profile_info_
     
     uic_mqtt_dotdot_electrical_measurement_command_get_profile_info_response_fields_t fields;
       std::vector<uint16_t> list_of_attributes;
-    
+
 
       nlohmann::json jsn;
       try {
@@ -21379,19 +21397,19 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_profile_info_
         uic_mqtt_dotdot_parse_electrical_measurement_get_profile_info_response(
           jsn,
           fields.profile_count,
-      
+              
           fields.profile_interval_period,
-      
+              
           fields.max_number_of_intervals,
-      
+              
           list_of_attributes
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
         fields.list_of_attributes_count = list_of_attributes.size();
         fields.list_of_attributes = list_of_attributes.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -21410,7 +21428,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_profile_info_
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -21481,7 +21499,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_profile_info(
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -21500,7 +21518,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_profile_info(
       uic_mqtt_dotdot_by_group_electrical_measurement_get_profile_info_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_electrical_measurement_get_profile_info_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_electrical_measurement_get_profile_info_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -21550,7 +21568,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_measurement_p
     
     uic_mqtt_dotdot_electrical_measurement_command_get_measurement_profile_response_fields_t fields;
       std::vector<uint8_t> intervals;
-    
+
 
       nlohmann::json jsn;
       try {
@@ -21560,23 +21578,23 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_measurement_p
         uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_response(
           jsn,
           fields.start_time,
-      
+              
           fields.status,
-      
+              
           fields.profile_interval_period,
-      
+              
           fields.number_of_intervals_delivered,
-      
+              
           fields.attribute_id,
-      
+              
           intervals
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
         fields.intervals_count = intervals.size();
         fields.intervals = intervals.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -21595,7 +21613,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_measurement_p
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -21678,13 +21696,13 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_measurement_p
         uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile(
           jsn,
           fields.attributeid,
-      
+              
           fields.start_time,
-      
+              
           fields.number_of_intervals
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -21704,7 +21722,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_measurement_p
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -21759,9 +21777,8 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_electrical_measurement_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_electrical_measurement_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "ElectricalMeasurement",
                               "WriteAttributes",
@@ -21861,9 +21878,8 @@ static void uic_mqtt_dotdot_on_by_group_diagnostics_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_diagnostics_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_diagnostics_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Diagnostics",
                               "WriteAttributes",
@@ -21953,7 +21969,9 @@ static void uic_mqtt_dotdot_on_by_group_binding_bind(
 
     
     uic_mqtt_dotdot_binding_command_bind_fields_t fields;
-
+      std::string cluster_name;
+          std::string destination_unid;
+    
 
       nlohmann::json jsn;
       try {
@@ -21962,14 +21980,16 @@ static void uic_mqtt_dotdot_on_by_group_binding_bind(
       
         uic_mqtt_dotdot_parse_binding_bind(
           jsn,
-          fields.cluster_name,
+          cluster_name,
       
-          fields.destination_unid,
+          destination_unid,
       
           fields.destination_ep
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.cluster_name = cluster_name.c_str();
+              fields.destination_unid = destination_unid.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -21989,7 +22009,7 @@ static void uic_mqtt_dotdot_on_by_group_binding_bind(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_binding_bind_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_binding_bind_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22050,7 +22070,9 @@ static void uic_mqtt_dotdot_on_by_group_binding_unbind(
 
     
     uic_mqtt_dotdot_binding_command_unbind_fields_t fields;
-
+      std::string cluster_name;
+          std::string destination_unid;
+    
 
       nlohmann::json jsn;
       try {
@@ -22059,14 +22081,16 @@ static void uic_mqtt_dotdot_on_by_group_binding_unbind(
       
         uic_mqtt_dotdot_parse_binding_unbind(
           jsn,
-          fields.cluster_name,
+          cluster_name,
       
-          fields.destination_unid,
+          destination_unid,
       
           fields.destination_ep
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.cluster_name = cluster_name.c_str();
+              fields.destination_unid = destination_unid.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -22086,7 +22110,7 @@ static void uic_mqtt_dotdot_on_by_group_binding_unbind(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_binding_unbind_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_binding_unbind_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22147,7 +22171,8 @@ static void uic_mqtt_dotdot_on_by_group_binding_bind_to_protocol_controller(
 
     
     uic_mqtt_dotdot_binding_command_bind_to_protocol_controller_fields_t fields;
-
+      std::string cluster_name;
+    
 
       nlohmann::json jsn;
       try {
@@ -22156,10 +22181,11 @@ static void uic_mqtt_dotdot_on_by_group_binding_bind_to_protocol_controller(
       
         uic_mqtt_dotdot_parse_binding_bind_to_protocol_controller(
           jsn,
-          fields.cluster_name
+          cluster_name
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.cluster_name = cluster_name.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -22179,7 +22205,7 @@ static void uic_mqtt_dotdot_on_by_group_binding_bind_to_protocol_controller(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_binding_bind_to_protocol_controller_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_binding_bind_to_protocol_controller_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22232,7 +22258,8 @@ static void uic_mqtt_dotdot_on_by_group_binding_unbind_from_protocol_controller(
 
     
     uic_mqtt_dotdot_binding_command_unbind_from_protocol_controller_fields_t fields;
-
+      std::string cluster_name;
+    
 
       nlohmann::json jsn;
       try {
@@ -22241,10 +22268,11 @@ static void uic_mqtt_dotdot_on_by_group_binding_unbind_from_protocol_controller(
       
         uic_mqtt_dotdot_parse_binding_unbind_from_protocol_controller(
           jsn,
-          fields.cluster_name
+          cluster_name
       );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.cluster_name = cluster_name.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -22264,7 +22292,7 @@ static void uic_mqtt_dotdot_on_by_group_binding_unbind_from_protocol_controller(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_binding_unbind_from_protocol_controller_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_binding_unbind_from_protocol_controller_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22311,9 +22339,8 @@ static void uic_mqtt_dotdot_on_by_group_binding_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_binding_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_binding_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "Binding",
                               "WriteAttributes",
@@ -22413,9 +22440,8 @@ static void uic_mqtt_dotdot_on_by_group_name_and_location_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_name_and_location_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_name_and_location_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "NameAndLocation",
                               "WriteAttributes",
@@ -22515,9 +22541,9 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_discover_parame
         uic_mqtt_dotdot_parse_configuration_parameters_discover_parameter(
           jsn,
           fields.parameter_id
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -22537,7 +22563,7 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_discover_parame
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22596,7 +22622,7 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_default_reset_a
 
       
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -22615,7 +22641,7 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_default_reset_a
       uic_mqtt_dotdot_by_group_configuration_parameters_default_reset_all_parameters_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_configuration_parameters_default_reset_all_parameters_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_configuration_parameters_default_reset_all_parameters_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22674,11 +22700,11 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_set_parameter(
         uic_mqtt_dotdot_parse_configuration_parameters_set_parameter(
           jsn,
           fields.parameter_id,
-      
+              
           fields.value
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -22698,7 +22724,7 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_set_parameter(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_configuration_parameters_set_parameter_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_configuration_parameters_set_parameter_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22728,6 +22754,97 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_set_parameter(
 
 }
 
+// Callback function for incoming publications on ucl/by-group/+/ConfigurationParameters/Commands/DiscoverParameterRange
+static void uic_mqtt_dotdot_on_by_group_configuration_parameters_discover_parameter_range(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_configuration_parameters_discover_parameter_range(
+          jsn,
+          fields.first_parameter_id,
+              
+          fields.last_parameter_id
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "ConfigurationParameters", "DiscoverParameterRange");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "ConfigurationParameters", "DiscoverParameterRange", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "ConfigurationParameters", "DiscoverParameterRange", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("FirstParameterId") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "ConfigurationParameters::DiscoverParameterRange: Missing command-argument: FirstParameterId\n");
+        return;
+      }
+      if (jsn.find("LastParameterId") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "ConfigurationParameters::DiscoverParameterRange: Missing command-argument: LastParameterId\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "ConfigurationParameters",
+        "DiscoverParameterRange",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_configuration_parameters_discover_parameter_range);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "DiscoverParameterRange: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
 static void uic_mqtt_dotdot_on_by_group_configuration_parameters_WriteAttributes(
   const char *topic,
   const char *message,
@@ -22749,9 +22866,8 @@ static void uic_mqtt_dotdot_on_by_group_configuration_parameters_WriteAttributes
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_configuration_parameters_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_configuration_parameters_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "ConfigurationParameters",
                               "WriteAttributes",
@@ -22819,6 +22935,10 @@ sl_status_t uic_mqtt_dotdot_by_group_configuration_parameters_init()
     subscription_topic = topic_bygroup + "ConfigurationParameters/Commands/SetParameter";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_configuration_parameters_set_parameter);
   }
+  if (uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_range_callback) {
+    subscription_topic = topic_bygroup + "ConfigurationParameters/Commands/DiscoverParameterRange";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_configuration_parameters_discover_parameter_range);
+  }
 
   return SL_STATUS_OK;
 }
@@ -22853,8 +22973,9 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_iq_report(
 
     
     uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t fields;
-      std::vector<int8_t> samples;
-    
+      std::string tag_unid;
+          std::vector<int8_t> samples;
+
 
       nlohmann::json jsn;
       try {
@@ -22863,22 +22984,23 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_iq_report(
       
         uic_mqtt_dotdot_parse_aox_locator_iq_report(
           jsn,
-          fields.tag_unid,
+          tag_unid,
       
           fields.channel,
-      
+              
           fields.rssi,
-      
+              
           samples,
       
           fields.sequence
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.tag_unid = tag_unid.c_str();
       
         fields.samples_count = samples.size();
         fields.samples = samples.data();
-      
+
 
       } catch (const nlohmann::json::parse_error& e) {
         // Catch JSON object field parsing errors
@@ -22897,7 +23019,7 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_iq_report(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_aox_locator_iq_report_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_aox_locator_iq_report_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -22966,7 +23088,8 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_angle_report(
 
     
     uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t fields;
-
+      std::string tag_unid;
+    
 
       nlohmann::json jsn;
       try {
@@ -22975,16 +23098,17 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_angle_report(
       
         uic_mqtt_dotdot_parse_aox_locator_angle_report(
           jsn,
-          fields.tag_unid,
+          tag_unid,
       
           fields.direction,
-      
+              
           fields.deviation,
-      
+              
           fields.sequence
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.tag_unid = tag_unid.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -23004,7 +23128,7 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_angle_report(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_aox_locator_angle_report_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_aox_locator_angle_report_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -23069,7 +23193,8 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_angle_correction(
 
     
     uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t fields;
-
+      std::string tag_unid;
+    
 
       nlohmann::json jsn;
       try {
@@ -23078,16 +23203,17 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_angle_correction(
       
         uic_mqtt_dotdot_parse_aox_locator_angle_correction(
           jsn,
-          fields.tag_unid,
+          tag_unid,
       
           fields.direction,
-      
+              
           fields.deviation,
-      
+              
           fields.sequence
-      );
+              );
 
-      // Populate list fields from vector types
+      // Populate list fields from vector or string types
+              fields.tag_unid = tag_unid.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -23107,7 +23233,7 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_angle_correction(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_aox_locator_angle_correction_callback != nullptr)) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_aox_locator_angle_correction_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -23166,9 +23292,8 @@ static void uic_mqtt_dotdot_on_by_group_aox_locator_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_aox_locator_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_aox_locator_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "AoXLocator",
                               "WriteAttributes",
@@ -23276,9 +23401,8 @@ static void uic_mqtt_dotdot_on_by_group_aox_position_estimation_WriteAttributes(
     return;
   }
 
-  if ((group_dispatch_callback != nullptr) && (uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback != nullptr)) {
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback().empty())) {
     try {
-
       group_dispatch_callback(group_id,
                               "AoXPositionEstimation",
                               "WriteAttributes",
@@ -23606,6 +23730,7 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/ConfigurationParameters/Commands/DiscoverParameter", uic_mqtt_dotdot_on_by_group_configuration_parameters_discover_parameter);
     uic_mqtt_subscribe("ucl/by-group/+/ConfigurationParameters/Commands/DefaultResetAllParameters", uic_mqtt_dotdot_on_by_group_configuration_parameters_default_reset_all_parameters);
     uic_mqtt_subscribe("ucl/by-group/+/ConfigurationParameters/Commands/SetParameter", uic_mqtt_dotdot_on_by_group_configuration_parameters_set_parameter);
+    uic_mqtt_subscribe("ucl/by-group/+/ConfigurationParameters/Commands/DiscoverParameterRange", uic_mqtt_dotdot_on_by_group_configuration_parameters_discover_parameter_range);
 
     uic_mqtt_subscribe("ucl/by-group/+/AoXLocator/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_aox_locator_WriteAttributes);
     uic_mqtt_subscribe("ucl/by-group/+/AoXLocator/Commands/IQReport", uic_mqtt_dotdot_on_by_group_aox_locator_iq_report);

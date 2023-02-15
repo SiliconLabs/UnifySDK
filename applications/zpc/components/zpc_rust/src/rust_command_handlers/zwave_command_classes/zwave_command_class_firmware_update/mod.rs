@@ -36,6 +36,7 @@ use crate::zwave_command_classes_sys::zwave_command_class_get_endpoint_node;
 use crate::zwave_controller_sys::{sl_status_t, zwave_node_get_command_class_version};
 use crate::zwave_tx_sys::*;
 use crc16::*;
+use unify_attribute_resolver_sys::*;
 use unify_attribute_store_sys::*;
 use unify_log_sys::*;
 use unify_proc_macro::{as_extern_c, generate_extern_c};
@@ -77,8 +78,9 @@ where
             is_first_follow_up: false,
             group_id: 0,
             is_test_frame: false,
+            ignore_incoming_frames_back_off: false,
             rf_power: zwave_tx_sys::rf_power_level_t::NORMAL_POWER,
-        }
+        },
     };
     let session: *mut zwave_tx_sys::zwave_tx_session_id_t = std::ptr::null_mut();
     let user: *mut ::std::os::raw::c_void = std::ptr::null_mut();
@@ -969,8 +971,9 @@ fn handle_fwu_md_get(
                 is_first_follow_up: false,
                 group_id: 0,
                 is_test_frame: false,
+                ignore_incoming_frames_back_off: false,
                 rf_power: zwave_tx_sys::rf_power_level_t::NORMAL_POWER,
-            }
+            },
         };
 
         // Constructing the report frame
@@ -1396,12 +1399,11 @@ fn handle_fwu_md_status_report(
                 )
             };
             if unsafe { attribute_store_node_exists(expiry_node) } {
-                attribute_store::write_attribute(
+                let _ = attribute_store::write_attribute(
                     expiry_node,
                     attribute_store_node_value_state_t::REPORTED_ATTRIBUTE,
-                    wait_time as u32,
-                )
-                .unwrap();
+                    wait_time as usize,
+                );
             }
         }
         0xfd => {
@@ -1693,7 +1695,7 @@ unsafe fn on_fwu_waiting_timer(node: u32, change: attribute_store_change_t) {
                 ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_EXPIRY_TIME,
                 0,
             );
-        let expiry_time: u32;
+        let expiry_time: usize;
         match attribute_store::read_attribute(
             expiry_node,
             attribute_store_node_value_state_t::REPORTED_ATTRIBUTE,

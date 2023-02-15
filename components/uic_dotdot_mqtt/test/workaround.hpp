@@ -7,9 +7,13 @@
 
 #ifdef __cplusplus
 #include "json_helpers.hpp"
+#include "dotdot_mqtt_helpers.hpp"
 #include <vector>
 #include <utility>
 #include <string>
 #include <nlohmann/json.hpp>
+#include "dotdot_mqtt_helpers.hpp"
+#include "dotdot_mqtt_parsing_helpers.hpp"
+#include "uic_typedefs.h"
 #endif
 #endif

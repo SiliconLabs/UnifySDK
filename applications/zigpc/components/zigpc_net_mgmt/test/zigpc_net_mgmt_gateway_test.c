@@ -16,7 +16,6 @@
 
 #include "zigpc_discovery_mock.h"
 #include "zigpc_gateway_notify_mock.h"
-#include "zigpc_net_mgmt_fsm_mock.h"
 #include "zigpc_net_mgmt_process_send_mock.h"
 
 #include "zigpc_net_mgmt_gateway.h"
@@ -85,14 +84,6 @@ void test_gateway_network_init_callback_should_call_process_send(void)
 {
   // ARRANGE
   struct zigpc_gateway_on_network_init callback_data;
-  zigpc_net_mgmt_fsm_get_state_ExpectAndReturn(ZIGPC_NET_MGMT_FSM_STATE_INIT);
-
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
 
   // ACT
   zigpc_net_mgmt_callback_on_network_initialized(&callback_data);
@@ -104,15 +95,6 @@ void test_gateway_node_added_callback_should_call_process_send(void)
 {
   // ARRANGE
   struct zigpc_gateway_on_node_add callback_data;
-  zigpc_net_mgmt_fsm_get_state_ExpectAndReturn(
-    ZIGPC_NET_MGMT_FSM_STATE_NODE_ADD);
-
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
 
   // ACT
   zigpc_net_mgmt_callback_on_node_add_complete(&callback_data);
@@ -124,64 +106,19 @@ void test_discovery_status_callback_should_call_process_send(void)
 {
   zigbee_eui64_uint_t eui64 = 0x0D0E0A0D0B0E0E0F;
 
-  // ARRANGE
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
   // ACT
   zigpc_net_mgmt_on_discovery_status(eui64, DISCOVERY_START);
-  // ASSERT (Handled by CMock)
 
-  // ARRANGE
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-  // ACT
   zigpc_net_mgmt_on_discovery_status(eui64, DISCOVERY_SUCCESS);
-  // ASSERT (Handled by CMock)
 
-  // ARRANGE
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-  // ACT
   zigpc_net_mgmt_on_discovery_status(eui64, DEVICE_DISCOVERY_FAIL);
-  // ASSERT (Handled by CMock)
-
-  // ARRANGE
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-  // ACT
   zigpc_net_mgmt_on_discovery_status(eui64, ENDPOINT_DISCOVERY_FAIL);
-  // ASSERT (Handled by CMock)
 }
 
 void test_gateway_node_removed_callback_should_call_process_send(void)
 {
   // ARRANGE
   zigpc_gateway_on_node_removed_t callback_data;
-  zigpc_net_mgmt_fsm_get_state_ExpectAndReturn(
-    ZIGPC_NET_MGMT_FSM_STATE_NODE_REMOVE);
-
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
 
   // ACT
   zigpc_net_mgmt_callback_on_node_removed(&callback_data);

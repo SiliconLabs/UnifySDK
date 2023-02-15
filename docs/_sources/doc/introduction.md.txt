@@ -11,18 +11,20 @@ self
 ./getting_started.md
 ./readme_developer.md
 ./system_requirements.md
+./qr_code_scanner.md
 ./license.md
 ```
 
 This documentation is for the [latest release of the Unify Host SDK](https://github.com/SiliconLabs/UnifySDK/releases/latest).
 
 The Unify Host SDK contains non-embedded applications developed by Silicon Labs.
+
 It is the main source for Silicon Labs customers who are working with Linux
 based applications in conjunction with Silicon Labs products.
 
 * The Silicon Labs Unify Host SDK source code may be found at
   <https://github.com/SiliconLabs/UnifySDK>
-* Released packages for Raspberry Pi 4 (Raspbian 10,Debian Buster) can be found
+* Released packages for Raspberry Pi 4 (Raspbian 11, Debian Bullseye 64-bit) can be found
   here <https://github.com/SiliconLabs/UnifySDK/releases>
 
 ## Introduction
@@ -34,8 +36,16 @@ interoperability with the host application. To equip customers developing
 complex IoT applications for single or multi-protocol use cases, Silicon Labs
 has created a single repository for important customer software needs on a Linux
 gateway. We've aggregated software from multiple repositories and simplified the
-distribution to enhance ease of use and accessibility. Details are presented in
-the sections below.
+distribution to enhance ease of use and accessibility.
+
+The Unify Host SDK contains two main software bundles:
+
+* The Unify Framework - A powerful IoT gateway framework that supports multiple wireless protocols.
+* Multiprotocol Host Software - A collection of host software for simultaneously
+  running multiple protocol stacks on the host.
+  Using a single radio co-processor, you can run Zigbee, OpenThread, and Bluetooth.
+
+Here is a component view along with further detailed descriptions below.
 
 ```{eval-rst}
 .. figure:: assets/img/unify_host_sdk.png
@@ -43,13 +53,6 @@ the sections below.
    :width: 75%
    :align: center
 ```
-
-The Unify Host SDK contains two main software bundles: the Unify Framework, and
-Multiprotocol Host Software. The Unify Framework is a powerful IoT gateway framework that
-supports multiple wireless protocols. Multiprotocol Host Software is a collection
-of host software for running multiple protocol stacks on the host simultaneously
-
-* Zigbee, OpenThread, and Bluetooth - using a single radio co-processor.
 
 ## Unify Framework
 
@@ -69,7 +72,7 @@ The Unify Framework has support for:
   [![Zigbee](assets/img/Zigbee_logo.png)](../applications/zigpc/readme_user.md)
   [![Z-Wave](assets/img/Z-Wave_logo.png)](../applications/zpc/readme_user.md)
 
-[Unify Framework details](UnifySDK.md).
+Further details can be found on the [Unify Framework introduction page](UnifySDK.md).
 
 ## Multiprotocol Host Software
 

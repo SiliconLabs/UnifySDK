@@ -1,8 +1,14 @@
 set(ZAP_FILE_INCLUDE_PATH ${ZAP_CURRENT_OUTPUT_DIR}/test)
+add_library(uic_dotdot_mqtt_shared SHARED $<TARGET_OBJECTS:uic_dotdot_mqtt>)
+target_link_libraries(uic_dotdot_mqtt_shared unify uic_definitions)
+target_include_directories(
+  uic_dotdot_mqtt_shared
+  PUBLIC $<TARGET_PROPERTY:uic_dotdot_mqtt,INCLUDE_DIRECTORIES>
+         ${ZAP_FILE_INCLUDE_PATH})
 
 # Dotdot MQTT test
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
   uic_dotdot_mqtt_test
   SOURCES
@@ -10,12 +16,8 @@ target_add_unittest(
   DEPENDS
   uic_mqtt_stub)
 
-target_include_directories(uic_dotdot_mqtt_test
-                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
-
-# Dotdot MQTT Attributes test
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
   dotdot_mqtt_attributes_test
   SOURCES
@@ -23,12 +25,9 @@ target_add_unittest(
   DEPENDS
   uic_mqtt_stub)
 
-target_include_directories(dotdot_mqtt_attributes_test
-                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
-
 # Dotdot MQTT Send Commands test
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
   dotdot_mqtt_send_commands_test
   SOURCES
@@ -36,12 +35,9 @@ target_add_unittest(
   DEPENDS
   uic_mqtt_stub)
 
-target_include_directories(dotdot_mqtt_send_commands_test
-                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
-
 # Dotdot MQTT Generated Commands test
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
   dotdot_mqtt_generated_commands_test
   SOURCES
@@ -49,20 +45,18 @@ target_add_unittest(
   DEPENDS
   uic_mqtt_stub)
 
-target_include_directories(dotdot_mqtt_generated_commands_test
-                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
-
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
-  dotdot_mqtt_internals_test
+  dotdot_mqtt_parsing_helpers_test
   SOURCES
-  dotdot_mqtt_internals_test.cpp
+  dotdot_mqtt_parsing_helpers_test.cpp
   DEPENDS
-  uic_mqtt_stub)
+  uic_mqtt_stub
+  uic_definitions)
 
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
   dotdot_mqtt_group_commands_test
   SOURCES
@@ -71,7 +65,7 @@ target_add_unittest(
   uic_mqtt_stub)
 
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
   dotdot_mqtt_supported_generated_commands_test
   SOURCES
@@ -80,7 +74,7 @@ target_add_unittest(
   uic_mqtt_stub)
 
 target_add_unittest(
-  uic_dotdot_mqtt
+  uic_dotdot_mqtt_shared
   NAME
   dotdot_mqtt_helpers_test
   SOURCES

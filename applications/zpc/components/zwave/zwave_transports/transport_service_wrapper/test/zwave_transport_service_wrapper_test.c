@@ -111,6 +111,7 @@ void test_send_data_cb_subseq_frag()
   conn.encapsulation      = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
   tx_options.qos_priority = ZWAVE_TX_QOS_RECOMMENDED_GET_ANSWER_PRIORITY
                             + (ZWAVE_TX_RECOMMENDED_QOS_GAP * 2);
+  tx_options.transport.ignore_incoming_frames_back_off = true;
 
   zwave_tx_send_data_ExpectWithArrayAndReturn(&conn,
                                               sizeof(conn),
@@ -148,7 +149,8 @@ void test_send_data_fail()
   conn.encapsulation      = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
   tx_options.qos_priority = ZWAVE_TX_QOS_RECOMMENDED_GET_ANSWER_PRIORITY
                             + (ZWAVE_TX_RECOMMENDED_QOS_GAP * 2);
-  tx_options.number_of_responses = 1;
+  tx_options.number_of_responses                       = 1;
+  tx_options.transport.ignore_incoming_frames_back_off = true;
 
   zwave_tx_send_data_ExpectWithArrayAndReturn(&conn,
                                               sizeof(conn),
@@ -206,7 +208,8 @@ void test_send_data_cb()
   conn.encapsulation      = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
   tx_options.qos_priority = ZWAVE_TX_QOS_RECOMMENDED_GET_ANSWER_PRIORITY
                             + (ZWAVE_TX_RECOMMENDED_QOS_GAP * 2);
-  tx_options.number_of_responses = 1;
+  tx_options.number_of_responses                       = 1;
+  tx_options.transport.ignore_incoming_frames_back_off = true;
 
   zwave_tx_send_data_AddCallback(my_tx_send_data_cb);
   zwave_tx_send_data_ExpectWithArrayAndReturn(&conn,
@@ -251,7 +254,8 @@ void test_send_data_cb_fail()
   conn.encapsulation      = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
   tx_options.qos_priority = ZWAVE_TX_QOS_RECOMMENDED_GET_ANSWER_PRIORITY
                             + (ZWAVE_TX_RECOMMENDED_QOS_GAP * 2);
-  tx_options.number_of_responses = 1;
+  tx_options.number_of_responses                       = 1;
+  tx_options.transport.ignore_incoming_frames_back_off = true;
 
   zwave_tx_send_data_AddCallback(my_tx_send_data_cb);
   zwave_tx_send_data_ExpectWithArrayAndReturn(&conn,

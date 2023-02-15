@@ -113,7 +113,7 @@ have been promoted from memory specific pointers */
 #define NON_NULL(x) (NULL != x)
 #endif
 
-#define UNUSED(x) x = x; /* Hack to silence warning C280 Unreferenced local variable */
+#define UNUSED(x) x = x /* Hack to silence warning C280 Unreferenced local variable */
 #define UNUSED_CONST(x) if(x) ; /* Hack to silence warning C280 Unreferenced const variable */
 
 #define UIP_HTONL(x) x // C51 is big endian by default

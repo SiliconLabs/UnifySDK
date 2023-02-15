@@ -12,8 +12,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 use async_trait::async_trait;
-use unify_middleware::AttributeEvent;
 use unify_middleware::Attribute;
+use unify_middleware::AttributeEvent;
 
 #[cfg_attr(test, mockall::automock)]
 #[async_trait]

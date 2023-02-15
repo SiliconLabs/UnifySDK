@@ -32,7 +32,7 @@ For including an IoT protocol stack, you need to install and setup at least one 
 which is flashed with a SerialAPI firmware.
 
 The Z-Wave Protocol Controller allows Unify to control Z-Wave devices. Starting
-quickly is achieved by just installing the `uic-zpc` debian package. This should
+quickly is achieved by just installing the `uic-zpc` Debian package. This should
 automatically start up the `ZPC` after the configuration steps. You need to
 provide the USB path for the Z-Wave module at the configuration steps.
 
@@ -47,7 +47,7 @@ A more in depth getting started guide specifically for the `ZPC` is
 running NCP or CPC Firmware for Zigbee.
 
 The `ZigPC` enables the Unify Framework to control Zigbee devices. Starting quickly
-can be done by simply installing the `uic-zigpc` debian package and configuring
+can be done by simply installing the `uic-zigpc` Debian package and configuring
 the USB device at the configuration step. After installing, the protocol
 controller should be started automatically as a systemd service.
 

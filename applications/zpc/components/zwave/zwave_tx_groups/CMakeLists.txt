@@ -6,9 +6,11 @@ target_include_directories(
   PUBLIC include
   PRIVATE src)
 
-target_link_libraries(zwave_tx_groups PRIVATE zwave_controller uic_log)
+target_link_libraries(zwave_tx_groups PRIVATE zwave_controller unify)
 install(TARGETS zwave_tx_groups LIBRARY DESTINATION lib)
 
-target_add_mock(zwave_tx_groups)
+if(BUILD_TESTING)
+  target_add_mock(zwave_tx_groups)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

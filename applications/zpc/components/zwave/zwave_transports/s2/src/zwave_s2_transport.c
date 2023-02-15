@@ -30,6 +30,7 @@
 
 // Includes from other components
 #include "zwave_controller_connection_info.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_internal.h"
 #include "zwave_controller_storage.h"
 #include "zwave_network_management.h"
@@ -50,6 +51,10 @@
 #define SECURITY_2_NONCE_GET                 0x01
 #define SECURITY_2_COMMANDS_SUPPORTED_REPORT 0x0E
 #define INVALID_KEY_ID                       0xFF
+
+// Frame parsing constants
+#define S2_NONCE_REPORT_MOS_SOS_INDEX 3
+#define S2_NONCE_REPORT_MOS_SOS_MASK  0x3
 
 struct S2 *s2_ctx;
 
@@ -316,9 +321,17 @@ uint8_t S2_send_frame(struct S2 *ctxt,
     options.number_of_responses = 0;
   }
 
-  // One exception, Nonce Get will require a response.
-  if (len >= 2 && buf[1] == SECURITY_2_NONCE_GET) {
+  // Some exceptions, Nonce Get will require a response.
+  if (len > COMMAND_INDEX && buf[COMMAND_INDEX] == SECURITY_2_NONCE_GET) {
     options.number_of_responses = 1;
+  } else if ((len > S2_NONCE_REPORT_MOS_SOS_INDEX)
+             && (buf[COMMAND_INDEX] == SECURITY_2_NONCE_REPORT)
+             && (buf[S2_NONCE_REPORT_MOS_SOS_INDEX]
+                 & S2_NONCE_REPORT_MOS_SOS_MASK)) {
+    // SOS / MOS should trigger a response (retransmit of the last frame).
+    // Also we should not back-off when out of sync.
+    options.number_of_responses                       = 1;
+    options.transport.ignore_incoming_frames_back_off = true;
   }
 
   state.transmit_start_time = clock_time();

@@ -61,6 +61,9 @@ class QrCodeDlg extends React.Component<QrCodeDlgProps, QrCodeDlgState> {
     }
 
     render() {
+        let props: any = { width: '265px' };
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+            props.transform = 'scaleX(-1)';
         return (
             <Modal size="sm" show={this.state.ShowModal} onHide={() => this.toggleModal(false)} >
                 <Modal.Header>
@@ -71,7 +74,7 @@ class QrCodeDlg extends React.Component<QrCodeDlgProps, QrCodeDlgState> {
                         delay={300}
                         onError={this.handleError}
                         onScan={this.handleScan}
-                        style={{ width: '265px', transform: 'scaleX(-1)' }}
+                        style={props}
                     />
                     <div className="error-modal-header row padding-h-15" hidden={this.state.Error.length === 0}>{this.state.Error}</div>
                 </Modal.Body>

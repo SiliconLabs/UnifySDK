@@ -456,7 +456,7 @@ fn get_supported_devices() -> Vec<AdapterItem> {
                         // If no broadcast address provided for interface
                         // use 255.255.255.255
                         None => std::net::IpAddr::V4(Ipv4Addr::new(255, 255, 255, 255)),
-                        Some(broadcast) => (std::net::IpAddr::V4(broadcast)),
+                        Some(broadcast) => std::net::IpAddr::V4(broadcast),
                     },
                 };
                 address_list.push(address);

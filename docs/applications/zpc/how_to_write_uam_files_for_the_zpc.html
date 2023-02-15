@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UAM maps for the ZPC &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -75,6 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -106,242 +112,9 @@ they can also be used to:</p>
 <li><p>Fill device data automatically, and skip interviewing known properties</p></li>
 <li><p>Configure/Set certain values automatically</p></li>
 </ul>
-<section id="mapper-file-structure">
-<h3>Mapper file structure<a class="headerlink" href="#mapper-file-structure" title="Permalink to this heading"></a></h3>
-<p>A mapper file template could be as follow:</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// this is a comment</span>
-
-<span class="nb">def</span> <span class="ow">&lt;</span><span class="no">name1</span><span class="ow">&gt;</span> <span class="no">expression</span>
-<span class="nb">def</span> <span class="ow">&lt;</span><span class="no">name2</span><span class="ow">&gt;</span> <span class="no">expression</span>
-
-<span class="nb">scope</span> <span class="no">0</span> {
-  <span class="ow">&lt;</span><span class="no">attribute1</span><span class="ow">&gt;</span> <span class="o">=</span> <span class="ow">&lt;</span><span class="no">expression1</span><span class="ow">&gt;</span>
-  <span class="ow">&lt;</span><span class="no">attribute2</span><span class="ow">&gt;</span> <span class="o">=</span> <span class="ow">&lt;</span><span class="no">expression2</span><span class="ow">&gt;</span>
-}
-</pre></div>
-</div>
-</section>
-<section id="mapper-grammar-and-keywords">
-<h3>Mapper grammar and keywords<a class="headerlink" href="#mapper-grammar-and-keywords" title="Permalink to this heading"></a></h3>
-<p>The mapper allows to manipulate attributes that are stored as 32-bit signed
-integer values. Each attribute can use the following “value states”:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">r</span></code> for reported value</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">d</span></code> for desired value</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code> for the existence of the attribute. (evaluates to true/false depending on if the attribute exists)</p></li>
-</ul>
-<p>The value states must be used in front of attribute types, using a <code class="docutils literal notranslate"><span class="pre">'</span></code> character.
-To perform an assignment, the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign can be used. For example, if the reported
-value of attribute type 1 should take the desired value of attribute type 2,
-the following expression can be used:</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nv">r&#39;1</span> <span class="o">=</span> <span class="nv">d&#39;2</span>
-</pre></div>
-</div>
-<p>Note: Assignments to reported values will trigger attribute creations
-in the attribute store.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">d'1</span> <span class="pre">=</span> <span class="pre">r'2</span></code> will not create attribute type 1 and set its desired value
-if it does not exist.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">r'1</span> <span class="pre">=</span> <span class="pre">r'2</span></code> will create attribute type 1 and set its reported value
-if it does not exist.</p></li>
-</ul>
-<p>The mapper constantly monitor attribute updates, so whenever
-the desired value of attribute 2 is updated, the reported value of attribute
-1 will be adjusted.</p>
-<p>To avoid using raw type values, the mapper allows to define value substitutions
-using the <code class="docutils literal notranslate"><span class="pre">def</span></code> keyword. For example, the example above could be expressed as:</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">def</span> <span class="no">zwave_state</span> <span class="no">1</span>
-<span class="nb">def</span> <span class="no">zigbee_state</span> <span class="no">2</span>
-<span class="nv">r&#39;zwave_state</span> <span class="o">=</span> <span class="nv">d&#39;zigbee_state</span>
-</pre></div>
-</div>
-<p>Regular operators can be used to modify the value. The available operators are:</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>Operator</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>+</td>
-<td>Addition</td>
-</tr>
-<tr>
-<td>-</td>
-<td>Subtraction</td>
-</tr>
-<tr>
-<td>*</td>
-<td>Multiplication</td>
-</tr>
-<tr>
-<td>/</td>
-<td>Division</td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td>bitwise AND</td>
-</tr>
-<tr>
-<td>|</td>
-<td>bitwise OR</td>
-</tr>
-<tr>
-<td>%</td>
-<td>Modulo</td>
-</tr>
-<tr>
-<td>**</td>
-<td>Exponent</td>
-</tr>
-</tbody>
-</table>
-<p>For example, if a value needs to be multiplicated by 2 and incremented by 1:</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">def</span> <span class="no">zwave_state</span> <span class="no">1</span>
-<span class="nb">def</span> <span class="no">zigbee_state</span> <span class="no">2</span>
-<span class="nv">r&#39;zwave_state</span> <span class="o">=</span> ((<span class="nv">d&#39;zigbee_state</span> <span class="ow">*</span> <span class="no">2</span>) <span class="ow">+</span> <span class="no">1</span>)
-</pre></div>
-</div>
-<p>It is <strong>strongly recommended</strong> to use parentheses around operations, as
-no priority handling is implemented in the mapper.</p>
-<p>Conditional statements are also available for maps. The available comparison
-operators are:</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>Operator</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>==</td>
-<td>Equal to</td>
-</tr>
-<tr>
-<td>!=</td>
-<td>Not equal to</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>Greater than</td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td>Less than</td>
-</tr>
-</tbody>
-</table>
-<p>These operators should be used with <code class="docutils literal notranslate"><span class="pre">if</span></code> statements. The <code class="docutils literal notranslate"><span class="pre">if</span></code> syntax is as
-follows: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">condition</span> <span class="pre">value</span></code>. A switch-like statement can be made using
-multiple <code class="docutils literal notranslate"><span class="pre">if</span></code> statements.</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If the desired value of attribute 2 is 0, set reported of 1 to 1</span>
-<span class="c c-Singleline">// If the reported value of attribute 3 is 3, set reported of 1 to 2</span>
-<span class="c c-Singleline">// if none of the previous conditions is true, set the reported of 1 to 0.</span>
-<span class="nv">r&#39;1</span> <span class="o">=</span>
-  <span class="nb">if</span> (<span class="nv">d&#39;2</span> <span class="ow">==</span> <span class="no">0</span>) <span class="no">1</span>
-  <span class="nb">if</span> (<span class="nv">r&#39;3</span> <span class="ow">==</span> <span class="no">3</span>) <span class="no">2</span>
-  <span class="no">0</span>
-</pre></div>
-</div>
-<p>Note in the example above that line breaks and indentation does not have any
-impact, and are just used for readability. The statement can be written in one
-line too. This is an example from the ZPC default maps, which determines if the
-reported value of the battery low flag should go to 1 or 0 based on the
-reported battery percentage.</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// [...] Skipping def statements</span>
-<span class="nv">r&#39;zbBATTERY_LOW</span> <span class="o">=</span>
-  <span class="nb">if</span> (<span class="nv">r&#39;zwBATTERY</span> <span class="ow">&lt;</span> <span class="no">10</span>) <span class="no">1</span>
-  <span class="nb">if</span> (<span class="nv">r&#39;zwBATTERY</span> <span class="ow">==</span> <span class="no">0xFF</span>) <span class="no">1</span>
-  <span class="no">0</span>
-</pre></div>
-</div>
-<p>Note that bitwise operators <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> can be used for evaluating a set of
-boolean expressions:</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nv">r&#39;1</span> <span class="o">=</span>
-  <span class="nb">if</span> ((<span class="nv">d&#39;2</span> <span class="ow">==</span> <span class="no">0</span>) <span class="ow">&amp;</span> (<span class="nv">r&#39;3</span> <span class="ow">==</span> <span class="no">3</span>)) <span class="no">12</span>
-  <span class="nb">if</span> (<span class="nv">d&#39;2</span> <span class="ow">==</span> <span class="no">0</span>) <span class="no">1</span>
-  <span class="nb">if</span> (<span class="nv">r&#39;3</span> <span class="ow">==</span> <span class="no">3</span>) <span class="no">2</span>
-  <span class="no">0</span>
-</pre></div>
-</div>
-<p>A special <code class="docutils literal notranslate"><span class="pre">undefined</span></code> keyword can be used to abort assignment evaluations.
-For example, to set the reported value of an attribute <strong>only if</strong> another
-attribute exists, the following map can be used:</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If attribute type 2 exists, set the value to 1, else do not do anything</span>
-<span class="nv">r&#39;1</span> <span class="o">=</span>
-  <span class="nb">if</span> (<span class="nv">e&#39;2</span>) <span class="no">1</span>
-  <span class="no">undefined</span>
-</pre></div>
-</div>
-<p>Additionally, a special <code class="docutils literal notranslate"><span class="pre">or</span></code> keyword can be used for fallback values:</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If attribute type 2 has a reported value, set the reported value of 1 to this value</span>
-<span class="c c-Singleline">// else set it to the (reported value of attribute type 3) + 2</span>
-<span class="nv">r&#39;1</span> <span class="o">=</span> <span class="nv">r&#39;2</span> <span class="no">or</span> (<span class="nv">r&#39;3</span> <span class="ow">+</span> <span class="no">2</span>)
-</pre></div>
-</div>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If attribute type 2 exists, set the value to 1, else do not do anything</span>
-<span class="nv">r&#39;1</span> <span class="o">=</span>
-  <span class="nb">if</span> (<span class="nv">e&#39;2</span>) <span class="no">1</span>
-  <span class="no">undefined</span>
-</pre></div>
-</div>
-<p>Tree navigation operators can be used to navigate the attribute store tree,
-for when attributes are organized in a more complicated manner.</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>Operator</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>[]</td>
-<td>Reported value navigation</td>
-</tr>
-<tr>
-<td>.</td>
-<td>Child navigation</td>
-</tr>
-<tr>
-<td>\^</td>
-<td>Parent navigation</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<div><p>WARNING:
-Parent navigation operator has some known issues.</p>
-</div></blockquote>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// If the desired value of (attribute 3 placed under attribute 2 with reported value 1) is greater than 0, set reported of 1 to 1</span>
-<span class="nv">r&#39;1</span> <span class="o">=</span>
-  <span class="nb">if</span> (<span class="nv">d&#39;2[1].3</span> <span class="ow">&gt;</span> <span class="no">0</span>) <span class="no">1</span>
-  <span class="no">undefined</span>
-</pre></div>
-</div>
-<p>All attributes are placed under an attribute representing an endpoint.
-If trying to navigate up the tree, the parent is the endpoint attribute.</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">def</span> <span class="no">ep</span> <span class="no">0x00000004</span>
-<span class="c c-Singleline">// Set the reported value of attribute 1 to the reported value of attribute 1 under endpoint ID 1 to the same value under endpoint 0.</span>
-<span class="no">r</span>&#39;^.<span class="no">ep</span>[<span class="no">1</span>].<span class="no">1</span> <span class="o">=</span> <span class="no">r</span>&#39;^.<span class="no">ep</span>[<span class="no">0</span>].<span class="no">1</span>
-</pre></div>
-</div>
-<p>Finally, all map assignment must have a scope. Multiple scopes for a given map
-file are not yet supported, but it will allow in the future to prioritize
-set of instructions.</p>
-<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// Defines</span>
-<span class="nb">def</span> <span class="no">zwave_state</span> <span class="no">1</span>
-<span class="nb">def</span> <span class="no">zigbee_state</span> <span class="no">2</span>
-
-<span class="c c-Singleline">// Mapping</span>
-<span class="nb">scope</span> <span class="no">0</span> {
-<span class="nv">r&#39;zwave_state</span> <span class="o">=</span> <span class="nv">r&#39;zigbee_state</span>
-}
-</pre></div>
-</div>
+<section id="guide-for-uam-files">
+<h3>Guide for UAM files<a class="headerlink" href="#guide-for-uam-files" title="Permalink to this heading"></a></h3>
+<p>Refer to <a class="reference internal" href="../../doc/how_to_write_uam_files.html"><span class="doc std std-doc">How to write UAM files</span></a></p>
 </section>
 <section id="attribute-types">
 <h3>Attribute types<a class="headerlink" href="#attribute-types" title="Permalink to this heading"></a></h3>
@@ -352,7 +125,7 @@ allocates in the attribute store under endpoints.</p>
 its contents. It is an easy and quick way to find out the list of
 attribute types and their values for a given NodeID. For example, showing
 the attribute store data for NodeID 2:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ZPC&gt;attribute_store_log 2
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ZPC&gt;attribute_store_log NodeID,2
 (305) NodeID .................................................................. 2
     │───(306) Endpoint ID ..................................................... 0
     │   │───(313) NIF ......................................................... [5e,25,26,33,70,27,32,81,85,59,72,86,7a,73,ef,5a,82]
@@ -393,8 +166,8 @@ can simply be referred to with its type.</p>
 <p>For example, the Basic Value reported in the Basic Command Class is defined
 here:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">///&lt; This represents the current state/value.</span>
-<span class="n">DEFINE_ATTRIBUTE</span><span class="p">(</span><span class="n">ATTRIBUTE_COMMAND_CLASS_BASIC_VALUE</span><span class="p">,</span><span class="w"></span>
-<span class="w">                 </span><span class="p">((</span><span class="n">COMMAND_CLASS_BASIC</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x02</span><span class="p">))</span><span class="w"></span>
+<span class="n">DEFINE_ATTRIBUTE</span><span class="p">(</span><span class="n">ATTRIBUTE_COMMAND_CLASS_BASIC_VALUE</span><span class="p">,</span>
+<span class="w">                 </span><span class="p">((</span><span class="n">COMMAND_CLASS_BASIC</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x02</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>The value of <code class="docutils literal notranslate"><span class="pre">ATTRIBUTE_COMMAND_CLASS_BASIC_VALUE</span></code> is 8194 or (0x2002), so it
@@ -622,7 +395,7 @@ the maximum supported value:</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

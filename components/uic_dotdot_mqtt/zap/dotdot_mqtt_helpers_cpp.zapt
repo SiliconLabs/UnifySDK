@@ -75,6 +75,65 @@ uint32_t {{asSnakeCaseLower label}}_get_enum_value_number(const std::string &str
 }
 {{/zcl_enums}}
 
+std::string get_enum_value_name(
+  dotdot_cluster_id_t cluster_id,
+  dotdot_attribute_id_t attribute_id,
+  uint32_t value)
+{
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  {{#zcl_attributes}}
+  {{#first}}
+  if ({{parent.code}} == cluster_id) {
+  {{/first}}
+  #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+    if ({{code}} == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: {{asSnakeCaseLower parent.label}}{{asSnakeCaseLower label}} instead of this: {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}
+      return {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name(value);
+    }
+  #endif
+  {{#last}}
+  }
+  {{/last}}
+  {{/zcl_attributes}}
+
+  {{/if}}
+  {{/zcl_clusters}}
+
+  std::string value_name;
+  return value_name;
+}
+
+uint32_t get_enum_name_value(
+  dotdot_cluster_id_t cluster_id,
+  dotdot_attribute_id_t attribute_id,
+  const std::string &name)
+{
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  {{#zcl_attributes}}
+  {{#first}}
+  if ({{parent.code}} == cluster_id) {
+  {{/first}}
+  #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+    if ({{code}} == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: {{asSnakeCaseLower parent.label}}{{asSnakeCaseLower label}} instead of this: {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}
+      return {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_number(name);
+    }
+  #endif
+  {{#last}}
+  }
+  {{/last}}
+  {{/zcl_attributes}}
+
+  {{/if}}
+  {{/zcl_clusters}}
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // C Wrapper
 extern "C" {
 {{#zcl_enums}}

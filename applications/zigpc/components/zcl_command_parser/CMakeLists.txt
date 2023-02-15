@@ -17,11 +17,13 @@ target_include_directories(
 target_link_libraries(
   zigpc_zcl_command_parser
   INTERFACE zigpc_common zigpc_zcl_util
-  PRIVATE zigpc_gateway uic_multi_invoke uic_log)
+  PRIVATE zigpc_gateway unify)
 
-add_mock(zigpc_zcl_command_parser_mock
-         ${ZAP_CURRENT_OUTPUT_DIR}/include/zcl_command_parser.h)
-target_interface_libraries(zigpc_zcl_command_parser_mock zigpc_common_mock
-                           zigpc_zcl_util_mock)
+if(BUILD_TESTING)
+  add_mock(zigpc_zcl_command_parser_mock
+          ${ZAP_CURRENT_OUTPUT_DIR}/include/zcl_command_parser.h)
+  target_interface_libraries(zigpc_zcl_command_parser_mock zigpc_common_mock
+                            zigpc_zcl_util_mock)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

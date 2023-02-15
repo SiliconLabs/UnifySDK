@@ -4,4 +4,4 @@ target_include_directories(aoxpc_ncp_update PUBLIC include)
 target_include_directories(aoxpc_ncp_update BEFORE
   PRIVATE ${GeckoSDK_ROOT_DIR}/platform/common/inc)
 target_link_libraries(aoxpc_ncp_update
-  PRIVATE uic_config uart_dfu aoxpc_config bluetooth_api uic_log)
+  PRIVATE uart_dfu aoxpc_config bluetooth_api unify)

@@ -13,15 +13,18 @@
 
 use unify_attribute_poll::attribute_poll_trait::AttributePollTrait;
 use unify_attribute_poll::{AttributePoll, PollEngineConfig};
-use unify_middleware::{AttributeStore, AttributeStoreTrait, AttributeTrait};
+use unify_middleware::{AttributeStore, AttributeStoreTrait, AttributeTrait, AttributeTypeId};
 
 #[test]
 fn test_something() {
     let attribute_store = AttributeStore::new().unwrap();
     let attribute_poll = AttributePoll::default();
+
+    const POLL_MARK_TYPE: AttributeTypeId = 0x18;
     attribute_poll.initialize(PollEngineConfig {
         backoff: 30,
         default_interval: 60,
+        poll_mark_attribute_type: POLL_MARK_TYPE,
     });
     let root = attribute_store.root();
     let child = root.add(1, Some(1234u32), Some(42u32)).unwrap();

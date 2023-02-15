@@ -12,6 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 use crate::upvl_db;
 use crate::upvl_json;
+use unify_application_monitoring_sys::unify_application_monitoring_init;
 use unify_log_sys::*;
 use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
@@ -38,7 +39,9 @@ impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttHandler<T> {
         }
     }
     fn before_disconnect(&mut self) {}
-    fn after_connect(&mut self) {}
+    fn after_connect(&mut self) {
+        unify_application_monitoring_init();
+    }
 }
 
 impl<T: MqttClientTrait> MqttHandler<T> {

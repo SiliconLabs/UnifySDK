@@ -36,6 +36,13 @@ var group__zigpc__common__zigbee =
       [ "cluster_name", "structzcl__profile.html#aab57341badbebeb279bb8990715d9742", null ],
       [ "num_attributes", "structzcl__profile.html#a10b9ed760280642b79ab0491a8ba59b0", null ]
     ] ],
+    [ "zigbee_binding_t", "structzigbee__binding__t.html", [
+      [ "dest_address", "structzigbee__binding__t.html#a2e995de15ce56ed83fd6071d98ff0e0a", null ],
+      [ "dest_endpoint", "structzigbee__binding__t.html#a591b68e356c6283f7baf8a1016d32b9e", null ],
+      [ "source_address", "structzigbee__binding__t.html#ab76ebbaff6e155825bb0bc493c9df906", null ],
+      [ "source_cluster", "structzigbee__binding__t.html#a2c5de0ec901f2530728d65c309f5c0fe", null ],
+      [ "source_endpoint", "structzigbee__binding__t.html#a911ba76369abc156d743d5948b8827d7", null ]
+    ] ],
     [ "zigbee_node_t", "structzigbee__node__t.html", [
       [ "endpoint_count", "structzigbee__node__t.html#aa975e2ca7b68b29209a77b3337726bc7", null ],
       [ "endpoint_list", "structzigbee__node__t.html#a6e8692cb43f2a6fc1eace73a4af7605b", null ],
@@ -73,6 +80,7 @@ var group__zigpc__common__zigbee =
     [ "ZCL_MIN_MFCTR_ID", "group__zigpc__common__zigbee.html#gab242f9d25aa9793036671670c79f1aed", null ],
     [ "ZCL_MIN_MFCTR_ID", "group__zigpc__common__zigbee.html#gab242f9d25aa9793036671670c79f1aed", null ],
     [ "ZCL_MIN_STD_ATTR_ID", "group__zigpc__common__zigbee.html#ga8a14d90dca087a5226f3521dd0144887", null ],
+    [ "ZIGBEE_DEFAULT_APP_ENDPOINT_ID", "group__zigpc__common__zigbee.html#gab9227385a8df97cfc935b9d9963b3ba6", null ],
     [ "ZIGBEE_EUI64_HEX_STR_LENGTH", "group__zigpc__common__zigbee.html#ga6e4bf3a136b1c2de70bb0875a28cf1d4", null ],
     [ "ZIGBEE_EUI64_SIZE", "group__zigpc__common__zigbee.html#ga41055c8db77db8e447761475af61fff0", null ],
     [ "ZIGBEE_EXTENDED_PAN_ID_SIZE", "group__zigpc__common__zigbee.html#gae3aba8b2af15765cb59437721d7775be", null ],
@@ -134,6 +142,11 @@ var group__zigpc__common__zigbee =
     [ "zcl_status_type", "group__zigpc__common__zigbee.html#gaa9947bc2df97f9a535a56b2da30c4ba9", [
       [ "ZCL_OP_STATUS_SUCCESS", "group__zigpc__common__zigbee.html#ggaa9947bc2df97f9a535a56b2da30c4ba9a23fcc8386d12ef28ff79345a494d26c2", null ]
     ] ],
+    [ "zdo_status_t", "group__zigpc__common__zigbee.html#gae04f6438ef66d1c5ac62ec16bec67e2e", [
+      [ "ZDO_SUCCESS", "group__zigpc__common__zigbee.html#ggae04f6438ef66d1c5ac62ec16bec67e2ea5b515cebb1ef3b4275604904140a70bb", null ],
+      [ "ZDO_TABLE_FULL", "group__zigpc__common__zigbee.html#ggae04f6438ef66d1c5ac62ec16bec67e2ea01ce67a503393c18a6c371939aed540f", null ],
+      [ "ZDO_DEVICE_BIND_TABLE_FULL", "group__zigpc__common__zigbee.html#ggae04f6438ef66d1c5ac62ec16bec67e2ea242da1cedd7f834d0d278dda7f76fa83", null ]
+    ] ],
     [ "zigbee_node_network_status", "group__zigpc__common__zigbee.html#ga08a96e23bc169d2dc1059ad68e6def4d", [
       [ "ZIGBEE_NODE_STATUS_INVALID", "group__zigpc__common__zigbee.html#gga08a96e23bc169d2dc1059ad68e6def4dab75daf4db40a7ba8c75ab0f626932488", null ],
       [ "ZIGBEE_NODE_STATUS_NODEID_ASSIGNED", "group__zigpc__common__zigbee.html#gga08a96e23bc169d2dc1059ad68e6def4da30355e52b605d986c4d8d69775b816ca", null ],
@@ -167,6 +180,7 @@ var group__zigpc__common__zigbee =
     [ "zigpc_common_zcl_frame_init_command", "group__zigpc__common__zigbee.html#ga652311238559a6cf745ab5566072ce6f", null ],
     [ "ATTR_DIRECTION_DESIRED", "group__zigpc__common__zigbee.html#gae8e5e0c8508fca44440f579f4a657fa5", null ],
     [ "ATTR_DIRECTION_REPORTED", "group__zigpc__common__zigbee.html#gad9a5b4cdea3eebb5a4ec3a8e16a16d1d", null ],
+    [ "NULL_BINDING", "group__zigpc__common__zigbee.html#gac5ceda77295a60e3017c6b54dbb991bc", null ],
     [ "null_command", "group__zigpc__common__zigbee.html#ga62fde67ffa209c5a4d668a1a656c72b6", null ],
     [ "ZIGBEE_NULL_GROUP_ID", "group__zigpc__common__zigbee.html#ga525041573d54a8e4458edc0ba9058cee", null ]
 ];

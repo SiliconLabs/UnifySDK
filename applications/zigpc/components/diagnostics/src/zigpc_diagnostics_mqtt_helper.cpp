@@ -39,6 +39,7 @@
 #include "zigpc_cpu_load_metric.hpp"
 #include "zigpc_example_metric.hpp"
 #include "zigpc_counter_plugin_metric.hpp"
+#include "zigpc_neighbor_table_metric.hpp"
 #include "zigpc_gateway.h"
 
 #include "zigpc_diagnostics.h"
@@ -168,7 +169,8 @@ void uic_metric_init()
     = {std::make_shared<zigpc_counter_plugin_metric>(m_notify, "Counters"),
        std::make_shared<zigpc_uptime_metric>(m_notify, "Uptime"),
        std::make_shared<zigpc_mem_usage_metric>(m_notify, "MemUsePercent"),
-       std::make_shared<zigpc_cpu_load_metric>(m_notify, "CpuLoadAverage")};
+       std::make_shared<zigpc_cpu_load_metric>(m_notify, "CpuLoadAverage"),
+       std::make_shared<zigpc_neighbor_metric>(m_notify, "NeighborTable")};
 
   for (auto &metric: metrics_to_add) {
     manager.add_metric(metric);

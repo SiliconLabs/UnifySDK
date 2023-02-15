@@ -15,8 +15,8 @@
 #include "unity.h"
 #include "attribute_store_fixt.h"
 #include "datastore.h"
-#include "attribute_mapper_engine.hpp"
-
+#include "workaround.hpp"
+#include "uic_version.h"
 using namespace attribute_store;
 
 extern "C" {
@@ -46,10 +46,11 @@ void setUp()
 void test_uam_test()
 {
   MapperEngine &e = MapperEngine::get_instance();
-  e.set_ep_type(attribute::root().type());
+  e.set_common_parent_type(attribute::root().type());
   e.reset();
 
   // Try to load and parse all uam files in rules directory
-  TEST_ASSERT_TRUE(e.load_path("../../../../applications/zpc/components/dotdot_mapper/rules"));
+  TEST_ASSERT_TRUE(
+    e.load_path(SOURCE_DIR "/applications/zpc/components/dotdot_mapper/rules"));
 }
 }

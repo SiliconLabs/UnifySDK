@@ -7331,6 +7331,534 @@ sl_status_t zigpc_command_mapper_occupancy_sensing_force_read_attributes_handler
 
 }
 
+/******************
+ * DotDot MQTT Command Handlers for IASZone cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for ZoneState/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_ias_zone_state_t Attribute values
+ * uic_mqtt_dotdot_ias_zone_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_ias_zone_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_ias_zone_state_t values,
+  uic_mqtt_dotdot_ias_zone_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if (values_to_write.iascie_address == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_IASCIE_ADDRESS,
+        ZIGPC_ZCL_DATA_TYPE_EUI64,
+        &values.iascie_address
+      );
+    }
+
+    if (values_to_write.current_zone_sensitivity_level == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_CURRENT_ZONE_SENSITIVITY_LEVEL,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.current_zone_sensitivity_level
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for ZoneState/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_ias_zone_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_ias_zone_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_ias_zone_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.zone_state == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATE
+      );
+    }
+    if (attributes_to_read.zone_type == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_TYPE
+      );
+    }
+    if (attributes_to_read.zone_status == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATUS
+      );
+    }
+    if (attributes_to_read.iascie_address == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_IASCIE_ADDRESS
+      );
+    }
+    if (attributes_to_read.zoneid == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONEID
+      );
+    }
+    if (attributes_to_read.number_of_zone_sensitivity_levels_supported == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED
+      );
+    }
+    if (attributes_to_read.current_zone_sensitivity_level == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_CURRENT_ZONE_SENSITIVITY_LEVEL
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT translator handler for IASZone/ZoneEnrollResponse command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param enroll_response_code  Command argument of type ZoneEnrollResponseEnrollResponseCode
+
+ * @param zoneid  Command argument of type uint8_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_ias_zone_zone_enroll_response_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    ZoneEnrollResponseEnrollResponseCode enroll_response_code,
+
+    uint8_t zoneid
+
+) {
+  sl_status_t status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+    return status;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &enroll_response_code });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &zoneid });
+
+  if (status == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_RESPONSE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for IASZone/InitiateNormalOperationMode command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_ias_zone_initiate_normal_operation_mode_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  sl_status_t status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+    return status;
+  }
+
+
+
+
+  if (status == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_NORMAL_OPERATION_MODE,
+      0,
+      nullptr
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for IASZone/InitiateTestMode command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param test_mode_duration  Command argument of type uint8_t
+
+ * @param current_zone_sensitivity_level  Command argument of type uint8_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_ias_zone_initiate_test_mode_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint8_t test_mode_duration,
+
+    uint8_t current_zone_sensitivity_level
+
+) {
+  sl_status_t status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+    return status;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &test_mode_duration });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &current_zone_sensitivity_level });
+
+  if (status == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_TEST_MODE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/******************
+ * DotDot MQTT Command Handlers for IASWD cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for MaxDuration/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_iaswd_state_t Attribute values
+ * uic_mqtt_dotdot_iaswd_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_iaswd_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_iaswd_state_t values,
+  uic_mqtt_dotdot_iaswd_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if (values_to_write.max_duration == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_IASWD_ATTR_MAX_DURATION,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.max_duration
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_IASWD,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for MaxDuration/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_iaswd_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_iaswd_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_iaswd_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.max_duration == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_IASWD_ATTR_MAX_DURATION
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_IASWD,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT translator handler for IASWD/StartWarning command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param siren_configuration  Command argument of type uint8_t
+
+ * @param warning_duration  Command argument of type uint16_t
+
+ * @param strobe_duty_cycle  Command argument of type uint8_t
+
+ * @param strobe_level  Command argument of type IaswdLevel
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_iaswd_start_warning_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint8_t siren_configuration,
+
+    uint16_t warning_duration,
+
+    uint8_t strobe_duty_cycle,
+
+    IaswdLevel strobe_level
+
+) {
+  sl_status_t status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+    return status;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &siren_configuration });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &warning_duration });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &strobe_duty_cycle });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &strobe_level });
+
+  if (status == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_IASWD,
+      ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_START_WARNING,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for IASWD/Squawk command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param squawk_configuration  Command argument of type uint8_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_iaswd_squawk_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint8_t squawk_configuration
+
+) {
+  sl_status_t status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+    return status;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &squawk_configuration });
+
+  if (status == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_IASWD,
+      ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_SQUAWK,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
 
 /**
  * @brief Register the callbacks for the DotDot Commands supported.
@@ -7615,6 +8143,33 @@ sl_status_t zigpc_command_mapper_register_dotdot_mqtt_handlers(void)
   );
   uic_mqtt_dotdot_set_occupancy_sensing_force_read_attributes_callback(
     zigpc_command_mapper_occupancy_sensing_force_read_attributes_handler
+  );
+  uic_mqtt_dotdot_set_ias_zone_write_attributes_callback(
+    zigpc_command_mapper_ias_zone_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_ias_zone_force_read_attributes_callback(
+    zigpc_command_mapper_ias_zone_force_read_attributes_handler
+  );
+  uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback_set(
+    zigpc_command_mapper_ias_zone_zone_enroll_response_handler
+  );
+  uic_mqtt_dotdot_ias_zone_initiate_normal_operation_mode_callback_set(
+    zigpc_command_mapper_ias_zone_initiate_normal_operation_mode_handler
+  );
+  uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback_set(
+    zigpc_command_mapper_ias_zone_initiate_test_mode_handler
+  );
+  uic_mqtt_dotdot_set_iaswd_write_attributes_callback(
+    zigpc_command_mapper_iaswd_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_iaswd_force_read_attributes_callback(
+    zigpc_command_mapper_iaswd_force_read_attributes_handler
+  );
+  uic_mqtt_dotdot_iaswd_start_warning_callback_set(
+    zigpc_command_mapper_iaswd_start_warning_handler
+  );
+  uic_mqtt_dotdot_iaswd_squawk_callback_set(
+    zigpc_command_mapper_iaswd_squawk_handler
   );
   return SL_STATUS_OK;
 }

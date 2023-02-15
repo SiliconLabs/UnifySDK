@@ -30,7 +30,7 @@ Running Unify with ZigPC requires the following equipment:
 
 ### Gateway Host Device: Raspberry Pi
 
-ZigPC is officially supported on a Raspberry Pi 4 running Debian Buster (A.K.A.
+ZigPC is officially supported on a Raspberry Pi 4 running Debian Bullseye (A.K.A.
 Raspberry Pi OS).
 
 For installation and setup, follow steps outlined in:
@@ -82,13 +82,6 @@ other properly.
 
 The Mosquitto publish & subscribe tools can be used to interact with the Unify
 MQTT broker by providing a topic and a message payload (if publishing).
-
-#### libuic.so
-
-This library contains the runtime dependencies used by some Unify components
-(including ZigPC). See
-[Unify Framework Library Developer Guide](../../doc/readme_developer.md)
-for more details.
 
 #### uic-upvl
 

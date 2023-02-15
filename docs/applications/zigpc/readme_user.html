@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZigPC User’s Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -75,6 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -120,7 +126,7 @@ device where EZSP is used as the serial protocol to communicate with the NCP.</p
 <p>Running Unify with ZigPC requires the following equipment:</p>
 <section id="gateway-host-device-raspberry-pi">
 <h3>Gateway Host Device: Raspberry Pi<a class="headerlink" href="#gateway-host-device-raspberry-pi" title="Permalink to this heading"></a></h3>
-<p>ZigPC is officially supported on a Raspberry Pi 4 running Debian Buster (A.K.A.
+<p>ZigPC is officially supported on a Raspberry Pi 4 running Debian Bullseye (A.K.A.
 Raspberry Pi OS).</p>
 <p>For installation and setup, follow steps outlined in:
 <a class="reference external" href="https://www.raspberrypi.org/documentation/">https://www.raspberrypi.org/documentation/</a></p>
@@ -168,13 +174,6 @@ other properly.</p>
 <p>The Mosquitto publish &amp; subscribe tools can be used to interact with the Unify
 MQTT broker by providing a topic and a message payload (if publishing).</p>
 </section>
-<section id="libuic-so">
-<h4><a class="reference external" href="http://libuic.so">libuic.so</a><a class="headerlink" href="#libuic-so" title="Permalink to this heading"></a></h4>
-<p>This library contains the runtime dependencies used by some Unify components
-(including ZigPC). See
-<a class="reference internal" href="../../doc/readme_developer.html"><span class="doc std std-doc">Unify Framework Library Developer Guide</span></a>
-for more details.</p>
-</section>
 <section id="uic-upvl">
 <h4>uic-upvl<a class="headerlink" href="#uic-upvl" title="Permalink to this heading"></a></h4>
 <p>The Unify Framework Provisioning List (UPVL)
@@ -209,11 +208,11 @@ Zigbee NCP connected on a serial port.</p>
 <ol class="arabic simple">
 <li><p>Run the MQTT Broker on the Raspberry Pi.</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl start mosquitto
-systemctl status mosquitto
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>start<span class="w"> </span>mosquitto
+systemctl<span class="w"> </span>status<span class="w"> </span>mosquitto
 
 <span class="c1"># If you encounter problems with running the service, logs can be received by running</span>
-journalctl -u mosquitto
+journalctl<span class="w"> </span>-u<span class="w"> </span>mosquitto
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -221,7 +220,7 @@ journalctl -u mosquitto
 the <a class="reference internal" href="../upvl/readme_user.html"><span class="doc std std-doc">UPVL User Guide</span></a>.</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure uic-upvl is running</span>
-sudo systemctl status uic-upvl
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-upvl
 
 <span class="c1"># NOTE: If it has stopped or not running, run the following commands:</span>
 <span class="c1">#     sudo systemctl enable uic-upvl</span>
@@ -233,7 +232,7 @@ sudo systemctl status uic-upvl
 the <a class="reference internal" href="../gms/readme_user.html"><span class="doc std std-doc">GMS User Guide</span></a>.</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure uic-gms is running</span>
-sudo systemctl status uic-gms
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-gms
 
 <span class="c1"># NOTE: If it has stopped or not running, run the following commands:</span>
 <span class="c1">#     sudo systemctl enable uic-gms</span>
@@ -245,7 +244,7 @@ sudo systemctl status uic-gms
 the <a class="reference internal" href="../image_provider/readme_user.html"><span class="doc std std-doc">Image Provider User Guide</span></a>.</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure uic-image-provider is running</span>
-sudo systemctl status uic-image-provider
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-image-provider
 
 <span class="c1"># NOTE: If it has stopped or not running, run the following commands:</span>
 <span class="c1">#     sudo systemctl enable uic-image-provider</span>
@@ -258,7 +257,7 @@ sudo systemctl status uic-image-provider
 Once installed, ZigPC will be configured to run as a system service by default.</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure uic-zigpc is running</span>
-sudo systemctl status uic-zigpc
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-zigpc
 
 <span class="c1"># NOTE: If it has stopped or not running, run the following commands:</span>
 <span class="c1">#     sudo systemctl enable uic-zigpc</span>
@@ -272,7 +271,7 @@ sudo systemctl status uic-zigpc
 <p>The configuration used by the service can be found at <code class="docutils literal notranslate"><span class="pre">etc/uic/uic.cfg</span></code></p>
 <p><strong>Running ZigPC on the command line</strong>
 If ZigPC is not running a system service</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host <span class="m">0</span>.0.0.0 --mqtt.port <span class="m">1883</span> --zigpc.datastore_file zigpc.db
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zigpc<span class="w"> </span>--zigpc.serial<span class="w"> </span>/dev/ttyACM0<span class="w"> </span>--mqtt.host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>--mqtt.port<span class="w"> </span><span class="m">1883</span><span class="w"> </span>--zigpc.datastore_file<span class="w"> </span>zigpc.db
 </pre></div>
 </div>
 <blockquote>
@@ -539,23 +538,23 @@ Commander stand-alone tool.</p>
 characters respectively) and put it in a file containing the following text:
 <code class="docutils literal notranslate"><span class="pre">Install</span> <span class="pre">Code:</span> <span class="pre">&lt;RANDOM_HEX_SEQUENCE&gt;</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Host&gt; cat /tmp/install-code.txt:
+Host&gt;<span class="w"> </span>cat<span class="w"> </span>/tmp/install-code.txt:
 
-Install Code: F64C3E6D196569CE4F2000A40069B534
+Install<span class="w"> </span>Code:<span class="w"> </span>F64C3E6D196569CE4F2000A40069B534
 </pre></div>
 </div>
 </li>
 <li><p>Connect the Zigbee device to your host machine via USB.</p></li>
 <li><p>Use the Simplicity Commander CLI to flash the Install code to the Zigbee Device:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Host&gt; commander flash --tokengroup znet --tokenfile /tmp/install-code.txt --device efr32mg12p
+Host&gt;<span class="w"> </span>commander<span class="w"> </span>flash<span class="w"> </span>--tokengroup<span class="w"> </span>znet<span class="w"> </span>--tokenfile<span class="w"> </span>/tmp/install-code.txt<span class="w"> </span>--device<span class="w"> </span>efr32mg12p
 </pre></div>
 </div>
 </li>
 <li><p>Validate the install code is present and extract the CRC corresponding to the
 install code by running the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Host&gt; commander tokendump –-tokengroup znet –-device efr32mg12p
+Host&gt;<span class="w"> </span>commander<span class="w"> </span>tokendump<span class="w"> </span>–-tokengroup<span class="w"> </span>znet<span class="w"> </span>–-device<span class="w"> </span>efr32mg12p
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ...</span>
@@ -588,17 +587,17 @@ joining, not the example EUI64 used as an example`.</p>
 </li>
 <li><p>Access the Zigbee device EmberCLI using Studio or a serial terminal to perform cleanup of the device state.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Z3Device&gt; plugin reporting clear
-Z3Device&gt; plugin groups clear
-Z3Device&gt; network leave
-Z3Device&gt; keys clear
+Z3Device&gt;<span class="w"> </span>plugin<span class="w"> </span>reporting<span class="w"> </span>clear
+Z3Device&gt;<span class="w"> </span>plugin<span class="w"> </span>groups<span class="w"> </span>clear
+Z3Device&gt;<span class="w"> </span>network<span class="w"> </span>leave
+Z3Device&gt;<span class="w"> </span>keys<span class="w"> </span>clear
 </pre></div>
 </div>
 <p>NOTE: Ensure that Z3Device is not part of the network by entering the
 <code class="docutils literal notranslate"><span class="pre">info</span></code> command and seeing <code class="docutils literal notranslate"><span class="pre">panID</span> <span class="pre">[0x0000]</span></code> and <code class="docutils literal notranslate"><span class="pre">nodeID</span> <span class="pre">[0xFFFE]</span></code> in the
 output:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Z3Device&gt; info
+Z3Device&gt;<span class="w"> </span>info
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># MFG String:</span>
@@ -614,7 +613,7 @@ Z3Device&gt; info
 <li><p>Validate that a new MQTT topic has been published showing the Protocol
 Controller Network Management state as <code class="docutils literal notranslate"><span class="pre">idle</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;], &quot;RequestedStateParameters&quot;: []}</span>
@@ -630,7 +629,7 @@ created above.</p>
 <p>OPTIONAL: you can also specify the EUI64 of the ZigPC Gateway NCP (see
 User Manual below) in the “ProtocolControllerUnid” field:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/SmartStart/List/Update&#39;</span> -m <span class="s1">&#39;{&quot;DSK&quot;:&quot;01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76&quot;,&quot;Include&quot;:true,&quot;ProtocolControllerUnid&quot;:&quot;&quot;,&quot;Unid&quot;:&quot;&quot;}&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/SmartStart/List/Update&#39;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;DSK&quot;:&quot;01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76&quot;,&quot;Include&quot;:true,&quot;ProtocolControllerUnid&quot;:&quot;&quot;,&quot;Unid&quot;:&quot;&quot;}&#39;</span>
 </pre></div>
 </div>
 <p><strong>Dev GUI Method</strong>: Go to the SmartStart tab and click on the “Add” key</p>
@@ -643,7 +642,7 @@ join using the install code configured.</p></li>
 <li><p>In the Z3Device, start the Network Steering plugin process by entering <code class="docutils literal notranslate"><span class="pre">plugin</span> <span class="pre">network-steering</span> <span class="pre">start</span> <span class="pre">0</span></code> on the Z3Device Ember CLI:</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Z3Device&gt; plugin network-steering start <span class="m">0</span>
+Z3Device&gt;<span class="w"> </span>plugin<span class="w"> </span>network-steering<span class="w"> </span>start<span class="w"> </span><span class="m">0</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="11">
@@ -660,7 +659,7 @@ following format: <code class="docutils literal notranslate"><span class="pre">z
 using the Mosquitto subscribe tool:</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/SmartStart/List&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/SmartStart/List&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/SmartStart/List { &quot;value&quot;: [{&quot;DSK&quot;:&quot;01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76&quot;,&quot;Include&quot;:true,&quot;ProtocolControllerUnid&quot;:&quot;&quot;,&quot;Unid&quot;:&quot;zb-0102030405060708&quot;}] }</span>
@@ -675,7 +674,7 @@ idle (previous MQTT messages would have shown the NetworkManagement state
 has transitioned from “idle” -&gt; “add node” -&gt; “node interview” -&gt; “idle”):</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: []}</span>
@@ -685,7 +684,7 @@ RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="
 <li><p>Validate that a new MQTT topic has been published showing Z3Device is online and functional:</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/State&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/State&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-0102030405060708/State { &quot;Security&quot;: &quot;Zigbee Z3.0&quot;, &quot;MaximumCommandDelay&quot;: &quot;1&quot;, &quot;NetworkStatus&quot;: &quot;Online functional&quot; }</span>
@@ -705,16 +704,16 @@ Commander stand-alone tool.</p>
 <li><p>Using CLI with argument <code class="docutils literal notranslate"><span class="pre">--zigpc.tc_use_well_known_key</span> <span class="pre">true</span></code></p></li>
 <li><p>Using system service configuration in <code class="docutils literal notranslate"><span class="pre">etc/uic/uic.cfg</span></code>:</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">zigpc</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">tc_use_well_known_key</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">zigpc</span><span class="p">:</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">tc_use_well_known_key</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 <ol class="arabic" start="2">
 <li><p>Validate the following MQTT topic has been published showing the Protocol
 Controller Network Management state as <code class="docutils literal notranslate"><span class="pre">idle</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;], &quot;RequestedStateParameters&quot;: []}</span>
@@ -727,7 +726,7 @@ as <code class="docutils literal notranslate"><span class="pre">zb-AAAAAAAAAAAAA
 </li>
 <li><p>Use the Mosquitto publish tool to request a Network Management state change to <code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">node</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39;</span> -m <span class="s1">&#39;{&quot;State&quot;: &quot;add node&quot;}&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;State&quot;: &quot;add node&quot;}&#39;</span>
 </pre></div>
 </div>
 <p><strong>Dev GUI Method</strong>: Go to the Nodes tab and click on the “States” dropdown and select the “add node” item.</p>
@@ -736,7 +735,7 @@ RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="
 </li>
 <li><p>In the Z3Device, start the Network Steering plugin process by entering <code class="docutils literal notranslate"><span class="pre">plugin</span> <span class="pre">network-steering</span> <span class="pre">start</span> <span class="pre">0</span></code> on the Z3Device Ember CLI:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Z3Device&gt; plugin network-steering start <span class="m">0</span>
+Z3Device&gt;<span class="w"> </span>plugin<span class="w"> </span>network-steering<span class="w"> </span>start<span class="w"> </span><span class="m">0</span>
 </pre></div>
 </div>
 </li>
@@ -752,7 +751,7 @@ following format: <code class="docutils literal notranslate"><span class="pre">z
 idle (previous MQTT messages would have shown the NetworkManagement state
 has transitioned from “idle” -&gt; “add node” -&gt; “node interview” -&gt; “idle”):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: []}</span>
@@ -761,7 +760,7 @@ RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="
 </li>
 <li><p>Validate that a new MQTT topic has been published showing Z3Device is online and functional:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/State&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/State&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-0102030405060708/State { &quot;Security&quot;: &quot;Zigbee Z3.0&quot;, &quot;MaximumCommandDelay&quot;: &quot;1&quot;, &quot;NetworkStatus&quot;: &quot;Online functional&quot; }</span>
@@ -783,7 +782,7 @@ discovered in the interview process.</p>
 NOTE: Endpoint 1 (ep1) chosen for this example. Other endpoint support will
 be published based on device discovery</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/+/SupportedCommands&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/+/SupportedCommands&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands</span>
@@ -816,7 +815,7 @@ endpoints:
 NOTE: Endpoint 1 (ep1) chosen for this example. Other endpoint support will
 be published based on device discovery.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/+/Attributes/#&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/+/Attributes/#&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/GlobalSceneControl/Reported { &quot;value&quot;: true }</span>
@@ -847,7 +846,7 @@ the Unify specification and the DotDot specification.</p>
 <ol class="arabic">
 <li><p>See the supported commands for a UCL cluster. For this exercise, the endpoint 1, OnOff cluster will be selected.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands {&quot;value&quot;: [&quot;Off&quot;,&quot;On&quot;,&quot;Toggle&quot;,&quot;OffWithEffect&quot;,&quot;OnWithRecallGlobalScene&quot;,&quot;OnWithTimedOff&quot;,&quot;WriteAttributes&quot;,&quot;ForceReadAttributes&quot;]}</span>
@@ -858,7 +857,7 @@ RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="
 <li><p>Publish a UCL command to send to the Z3Device endpoint’s OnOff cluster.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## sample output based on choosing to send the OnOff/Toggle command ##</span>
 <span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/Toggle&#39;</span> -m <span class="s1">&#39;{}&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/Toggle&#39;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
 </pre></div>
 </div>
 <p><strong>Dev GUI Method</strong>: Go to the OnOff tab and click on the <code class="docutils literal notranslate"><span class="pre">Toggle</span></code> Command on the ep1 row.</p>
@@ -874,7 +873,7 @@ RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="
 <li><p>Subscribe to the UCL OnOff Attribute in the OnOff cluster to see the updated
 reported state:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported { &quot;value&quot;: true }</span>
@@ -886,7 +885,7 @@ RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="
 <li><p>Retry the same UCL command to send to the Z3Device endpoint’s OnOff cluster.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## sample output based on choosing to send the OnOff/Toggle command ##</span>
 <span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/Toggle&#39;</span> -m <span class="s1">&#39;{}&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/Toggle&#39;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
 </pre></div>
 </div>
 </li>
@@ -901,7 +900,7 @@ RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="
 <li><p>Subscribe to the UCL OnOff Attribute in the OnOff cluster to see the updated
 reported state:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -W <span class="m">1</span> -v -t <span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-W<span class="w"> </span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported { &quot;value&quot;: false }</span>
@@ -917,14 +916,14 @@ discussed above.</p>
 <ol class="arabic">
 <li><p>Send a Network Management state change to start removing a node:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39;</span> -m <span class="s1">&#39;{&quot;State&quot;: &quot;remove node&quot;}&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;State&quot;: &quot;remove node&quot;}&#39;</span>
 </pre></div>
 </div>
 </li>
 <li><p>ZigPC will try to perform a state change. If successful, the following
 message will be published:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;remove node&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: [&quot;Unid&quot;]}</span>
@@ -934,14 +933,14 @@ RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="
 </li>
 <li><p>Send the UNID of the Z3Device to remove:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39;</span> -m <span class="s1">&#39;{&quot;State&quot;: &quot;remove node&quot;, &quot;StateParameters&quot;: {&quot;Unid&quot;: &quot;zb-0102030405060708&quot;}}&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;State&quot;: &quot;remove node&quot;, &quot;StateParameters&quot;: {&quot;Unid&quot;: &quot;zb-0102030405060708&quot;}}&#39;</span>
 </pre></div>
 </div>
 </li>
 <li><p>Validate that the Z3Device has left the network by entering
 <code class="docutils literal notranslate"><span class="pre">info</span></code> on the Ember CLI and noticing a nodeID of 0xFFFE:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-Z3Device&gt; info
+Z3Device&gt;<span class="w"> </span>info
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># MFG String:</span>
@@ -956,7 +955,7 @@ Z3Device&gt; info
 <li><p>Validate that the NetworkManagement topic has shown the state transition
 from “remove node” to “idle”:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: []}</span>
@@ -1032,7 +1031,7 @@ the publishing of information related to the ZigPC system, process, and Zigbee s
 <ol class="arabic">
 <li><p>Retrieve the metrics supported by the protocol controller diagnostics topic space.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/SupportedMetrics&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/SupportedMetrics&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/SupportedMetrics {&quot;value&quot;: [&quot;Uptime&quot;, &quot;CpuLoadAverage&quot;, &quot;MemUsePercent&quot;, &quot;Counters&quot;]}</span>
@@ -1041,13 +1040,13 @@ RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="
 </li>
 <li><p>Enable a metric using the <code class="docutils literal notranslate"><span class="pre">Request</span></code> subtopic:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_pub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/Request&#39;</span> -m <span class="s1">&#39;{&quot;value&quot;: [&quot;MemUsePercent&quot;]}&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/Request&#39;</span><span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;{&quot;value&quot;: [&quot;MemUsePercent&quot;]}&#39;</span>
 </pre></div>
 </div>
 </li>
 <li><p>Validate metric requested being updated regularly:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## command ##</span>
-RaspberryPi&gt; mosquitto_sub -h <span class="m">0</span>.0.0.0 -p <span class="m">1883</span> -t <span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/MemUsePercent&#39;</span>
+RaspberryPi&gt;<span class="w"> </span>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>-p<span class="w"> </span><span class="m">1883</span><span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/MemUsePercent&#39;</span>
 
 <span class="c1">## sample output ##</span>
 <span class="c1"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/MemUsePercent {&quot;value&quot;: 0.12}</span>
@@ -1183,7 +1182,7 @@ device endpoint cluster. For the Z3Light project, this should be at least 9.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

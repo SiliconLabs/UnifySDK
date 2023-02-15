@@ -1,8 +1,10 @@
 [Unit]
 Description=UIC CPC Daemon
+ConditionPathExists=/var/lib/uic/cpcd-binding-key
+Wants=uic-cpcd-bind.service
+After=uic-cpcd-bind.service
 
 [Service]
-ExecStartPre=-${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/cpcd --bind ecdh --key /var/lib/uic/cpcd-binding-key
 ExecStart=${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/cpcd -c ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_SYSCONFDIR}/cpcd.conf --key /var/lib/uic/cpcd-binding-key
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure

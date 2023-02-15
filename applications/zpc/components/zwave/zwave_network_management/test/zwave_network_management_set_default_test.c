@@ -61,6 +61,7 @@ void tearDown()
 {
   network_management_stop_ongoing_operations_Expect();
   process_exit(&zwave_network_management_process);
+  contiki_test_helper_run(1);
   TEST_ASSERT_EQUAL(0, zwave_network_management_fixt_teardown());
 }
 

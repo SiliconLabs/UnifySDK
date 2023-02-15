@@ -42,6 +42,8 @@ static uic_mqtt_dotdot_configuration_parameters_set_parameter_callback_t
   configuration_parameters_set_parameter_cb_save;
 static uic_mqtt_dotdot_configuration_parameters_default_reset_all_parameters_callback_t
   configuration_parameters_default_reset_cb_save;
+static uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_t
+  discover_parameter_range_callback;
 static unid_t test_unid = "zw-cafecafe-0004";
 //static zwave_node_id_t test_node_id         = 0x09;
 static zwave_endpoint_id_t test_endpoint_id = 0x03;
@@ -59,7 +61,7 @@ int suiteTearDown(int num_failures)
   return num_failures;
 }
 
-static void configuration_parameter_discover_paramter_command_stub(
+static void configuration_parameter_discover_parameter_command_stub(
   const uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback_t
     callback,
   int cmock_num_calls)
@@ -67,7 +69,7 @@ static void configuration_parameter_discover_paramter_command_stub(
   configuration_parameters_discover_parameter_callback = callback;
 }
 
-static void configuration_paramter_set_paramter_command_stub(
+static void configuration_parameter_set_parameter_command_stub(
   const uic_mqtt_dotdot_configuration_parameters_set_parameter_callback_t
     callback,
   int cmock_num_calls)
@@ -82,6 +84,15 @@ static void configuration_parameters_default_reset_command_stub(
 {
   configuration_parameters_default_reset_cb_save = callback;
 }
+
+static void configuration_parameter_discover_parameter_range_command_stub(
+  const uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_t
+    callback,
+  int cmock_num_calls)
+{
+  discover_parameter_range_callback = callback;
+}
+
 /// Called before each and every test
 void setUp()
 {
@@ -91,6 +102,7 @@ void setUp()
   configuration_parameters_discover_parameter_callback = NULL;
   configuration_parameters_set_parameter_cb_save       = NULL;
   configuration_parameters_default_reset_cb_save       = NULL;
+  discover_parameter_range_callback                    = NULL;
 
   zpc_attribute_store_test_helper_create_network();
   zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
@@ -98,11 +110,13 @@ void setUp()
 
   // Callback stubs for mocking the commands
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback_set_Stub(
-    configuration_parameter_discover_paramter_command_stub);
+    configuration_parameter_discover_parameter_command_stub);
   uic_mqtt_dotdot_configuration_parameters_set_parameter_callback_set_Stub(
-    configuration_paramter_set_paramter_command_stub);
+    configuration_parameter_set_parameter_command_stub);
   uic_mqtt_dotdot_configuration_parameters_default_reset_all_parameters_callback_set_Stub(
     configuration_parameters_default_reset_command_stub);
+  uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set_Stub(
+    configuration_parameter_discover_parameter_range_command_stub);
 
   configuration_parameter_cluster_server_init();
 }
@@ -251,7 +265,68 @@ void test_configuration_parameter_cluster_server_test_set_parm_command()
 {
   TEST_ASSERT_NOT_NULL(configuration_parameters_set_parameter_cb_save);
 
+  // No version data will not do anything:
+  configuration_parameter_id_t parameter_id_test       = 1;
+  configuration_parameter_value_t parameter_value_test = 11;
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    configuration_parameters_set_parameter_cb_save(
+                      test_unid,
+                      test_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+                      parameter_id_test,
+                      parameter_value_test));
+
+  // Create a v1 value:
   zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  // Test if the callback is supported by unid/endpoint
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    configuration_parameters_set_parameter_cb_save(
+                      test_unid,
+                      test_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+                      parameter_id_test,
+                      parameter_value_test));
+
+  // For v2 nodes, it will actually create the configuration parameter if it
+  // does not exist
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    configuration_parameters_set_parameter_cb_save(
+                      test_unid,
+                      test_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                      parameter_id_test,
+                      parameter_value_test));
+
+  attribute_store_node_t parameter_id_node
+    = attribute_store_get_node_child_by_value(
+      endpoint_id_node,
+      ATTRIBUTE(PARAMETER_ID),
+      REPORTED_ATTRIBUTE,
+      (const uint8_t *)&parameter_id_test,
+      sizeof(parameter_id_test),
+      0);
+  attribute_store_node_t value_node
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_VALUE));
+
+  configuration_parameter_value_t desired_value = 0;
+  attribute_store_get_desired(value_node,
+                              &desired_value,
+                              sizeof(desired_value));
+
+  TEST_ASSERT_EQUAL(parameter_value_test, desired_value);
+}
+
+void test_configuration_set_parameter_non_existing_for_v3_node()
+{
+  TEST_ASSERT_NOT_NULL(configuration_parameters_set_parameter_cb_save);
+
+  zwave_cc_version_t version = 3;
   attribute_store_set_child_reported(endpoint_id_node,
                                      ATTRIBUTE(VERSION),
                                      &version,
@@ -268,16 +343,6 @@ void test_configuration_parameter_cluster_server_test_set_parm_command()
                       parameter_id_test,
                       parameter_value_test));
 
-  // Test if paramter value of a given parameter id attribute value is updated
-  attribute_store_node_t parameter_node
-    = attribute_store_emplace(endpoint_id_node,
-                              ATTRIBUTE(PARAMETER_ID),
-                              &parameter_id_test,
-                              sizeof(parameter_id_test));
-
-  attribute_store_node_t value_node
-    = attribute_store_add_node(ATTRIBUTE(PARAMETER_VALUE), parameter_node);
-
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     configuration_parameters_set_parameter_cb_save(
                       test_unid,
@@ -286,12 +351,17 @@ void test_configuration_parameter_cluster_server_test_set_parm_command()
                       parameter_id_test,
                       parameter_value_test));
 
-  configuration_parameter_value_t desired_value = 0;
-  attribute_store_get_desired(value_node,
-                              &desired_value,
-                              sizeof(desired_value));
+  // This command does not create configuration parameters automatically for v3 nodes
+  attribute_store_node_t parameter_id_node
+    = attribute_store_get_node_child_by_value(
+      endpoint_id_node,
+      ATTRIBUTE(PARAMETER_ID),
+      REPORTED_ATTRIBUTE,
+      (const uint8_t *)&parameter_id_test,
+      sizeof(parameter_id_test),
+      0);
 
-  TEST_ASSERT_EQUAL(parameter_value_test, desired_value);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, parameter_id_node);
 }
 
 void test_configuration_parameter_cluster_server_test_default_reset_command()
@@ -417,4 +487,189 @@ void test_configuration_publishing_attributes_on_update_after_network_status_upd
                                      ATTRIBUTE(PARAMETER_VALUE),
                                      &new_value,
                                      sizeof(new_value));
+}
+
+void test_discover_parameter_range_happy_case()
+{
+  TEST_ASSERT_NOT_NULL(discover_parameter_range_callback);
+  const zwave_cc_version_t version = 2;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  configuration_parameter_id_t first_parameter_id_test = 12;
+  configuration_parameter_id_t last_parameter_id_test  = 300;
+  // Test if the callback is supported by unid/endpoint
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    discover_parameter_range_callback(
+                      test_unid,
+                      test_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+                      first_parameter_id_test,
+                      last_parameter_id_test));
+
+  // Now ask for real.
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    discover_parameter_range_callback(test_unid,
+                                      test_endpoint_id,
+                                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                      first_parameter_id_test,
+                                      last_parameter_id_test));
+
+  attribute_store_node_t parameters_list_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(PARAMETERS_TO_DISCOVER),
+                                             0);
+
+  // It should have saved value 289 in the list:
+  TEST_ASSERT_EQUAL(289,
+                    attribute_store_get_node_child_count(parameters_list_node));
+
+  for (configuration_parameter_id_t i = first_parameter_id_test;
+       i <= last_parameter_id_test;
+       ++i) {
+    TEST_ASSERT_NOT_EQUAL(
+      ATTRIBUTE_STORE_INVALID_NODE,
+      attribute_store_get_node_child_by_value(parameters_list_node,
+                                              ATTRIBUTE(PARAMETER_ID),
+                                              REPORTED_ATTRIBUTE,
+                                              (const uint8_t *)&i,
+                                              sizeof(i),
+                                              0));
+  }
+
+  // Calling again will not make any modification:
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    discover_parameter_range_callback(test_unid,
+                                      test_endpoint_id,
+                                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                      first_parameter_id_test,
+                                      last_parameter_id_test));
+  TEST_ASSERT_EQUAL(289,
+                    attribute_store_get_node_child_count(parameters_list_node));
+}
+
+void test_discover_parameter_range_first_param_is_zero()
+{
+  TEST_ASSERT_NOT_NULL(discover_parameter_range_callback);
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  configuration_parameter_id_t first_parameter_id_test = 0;
+  configuration_parameter_id_t last_parameter_id_test  = 3;
+  // Test if the callback is supported by unid/endpoint
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    discover_parameter_range_callback(
+                      test_unid,
+                      test_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+                      first_parameter_id_test,
+                      last_parameter_id_test));
+
+  // Now ask for real.
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    discover_parameter_range_callback(test_unid,
+                                      test_endpoint_id,
+                                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                      first_parameter_id_test,
+                                      last_parameter_id_test));
+
+  attribute_store_node_t parameters_list_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(PARAMETERS_TO_DISCOVER),
+                                             0);
+
+  // It should have saved value 3 in the list:
+  TEST_ASSERT_EQUAL(3,
+                    attribute_store_get_node_child_count(parameters_list_node));
+
+  for (configuration_parameter_id_t i = 1; i <= last_parameter_id_test; ++i) {
+    TEST_ASSERT_NOT_EQUAL(
+      ATTRIBUTE_STORE_INVALID_NODE,
+      attribute_store_get_node_child_by_value(parameters_list_node,
+                                              ATTRIBUTE(PARAMETER_ID),
+                                              REPORTED_ATTRIBUTE,
+                                              (const uint8_t *)&i,
+                                              sizeof(i),
+                                              0));
+  }
+  // Calling again will not make any modification:
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    discover_parameter_range_callback(test_unid,
+                                      test_endpoint_id,
+                                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                      first_parameter_id_test,
+                                      last_parameter_id_test));
+  TEST_ASSERT_EQUAL(3,
+                    attribute_store_get_node_child_count(parameters_list_node));
+}
+
+void test_discover_parameter_range_first_param_higher_than_last_param()
+{
+  TEST_ASSERT_NOT_NULL(discover_parameter_range_callback);
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  configuration_parameter_id_t first_parameter_id_test = UINT16_MAX;
+  configuration_parameter_id_t last_parameter_id_test  = UINT16_MAX - 23;
+  // Test if the callback is supported by unid/endpoint
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    discover_parameter_range_callback(
+                      test_unid,
+                      test_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+                      first_parameter_id_test,
+                      last_parameter_id_test));
+
+  // Now ask for real.
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    discover_parameter_range_callback(test_unid,
+                                      test_endpoint_id,
+                                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                      first_parameter_id_test,
+                                      last_parameter_id_test));
+
+  attribute_store_node_t parameters_list_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(PARAMETERS_TO_DISCOVER),
+                                             0);
+
+  // It should have saved value 24 in the list:
+  TEST_ASSERT_EQUAL(24,
+                    attribute_store_get_node_child_count(parameters_list_node));
+
+  for (configuration_parameter_id_t i = last_parameter_id_test;
+       ((i <= first_parameter_id_test) && (i != 0));
+       ++i) {
+    TEST_ASSERT_NOT_EQUAL(
+      ATTRIBUTE_STORE_INVALID_NODE,
+      attribute_store_get_node_child_by_value(parameters_list_node,
+                                              ATTRIBUTE(PARAMETER_ID),
+                                              REPORTED_ATTRIBUTE,
+                                              (const uint8_t *)&i,
+                                              sizeof(i),
+                                              0));
+  }
+  // Calling again will not make any modification:
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    discover_parameter_range_callback(test_unid,
+                                      test_endpoint_id,
+                                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                      first_parameter_id_test,
+                                      last_parameter_id_test));
+  TEST_ASSERT_EQUAL(24,
+                    attribute_store_get_node_child_count(parameters_list_node));
 }

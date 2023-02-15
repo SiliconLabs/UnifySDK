@@ -10,10 +10,11 @@ target_include_directories(
   PUBLIC include
   PRIVATE src)
 
-target_link_libraries(zigpc_datastore PRIVATE zigpc_common uic_log
-                                              uic_attribute_store
+target_link_libraries(zigpc_datastore PRIVATE zigpc_common unify
                                               pthread)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
 
-target_add_mock(zigpc_datastore)
+  target_add_mock(zigpc_datastore)
+endif()

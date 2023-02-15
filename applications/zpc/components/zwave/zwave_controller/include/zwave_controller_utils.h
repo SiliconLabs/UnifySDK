@@ -26,7 +26,7 @@
 #include "zwave_controller_connection_info.h"
 
 // Includes from other components
-#include "zwave_rx.h"
+#include "zwave_rx_definitions.h"
 #include "zwave_tx.h"
 
 // Interfaces

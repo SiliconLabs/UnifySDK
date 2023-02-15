@@ -30,17 +30,18 @@
 #include "uic_init.h"
 #include "uic_main_loop.h"
 #include "uic_component_fixtures_internal.h"
-//#include "zpc_config.h"
 
 #define LOG_TAG "uic_init"
 
 /* Prototypes */
-
 static void uic_main_contiki_setup(void);
 
 /* Static functions */
 
-/* Initialize and launch contiki processes */
+/**
+ * @brief Initialize and launch contiki processes
+ *
+ */
 static void uic_main_contiki_setup(void)
 {
   /* To initialize Contiki OS first call these init functions. */
@@ -54,10 +55,6 @@ static void uic_main_contiki_setup(void)
   setvbuf(stdout, (char *)NULL, _IONBF, 0);
 }
 
-/**
- * Read in the configuration parameters. Initialize and start up
- * contiki OS.  Initialize and start up the Unify processes.
- */
 sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
                      int argc,
                      char **argv,

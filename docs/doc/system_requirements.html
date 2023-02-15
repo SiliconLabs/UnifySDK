@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>System Requirements &mdash; Unify Host SDK</title>
@@ -18,11 +18,16 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="License" href="license.html" />
-    <link rel="prev" title="Unify Dockerfile" href="../docker/readme_developer.html" /> 
+    <link rel="next" title="QR-Code Scanner" href="qr_code_scanner.html" />
+    <link rel="prev" title="API documentation" href="api.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -51,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -74,14 +80,14 @@
   <section class="tex2jax_ignore mathjax_ignore" id="system-requirements">
 <h1>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h1>
 <p>The Unify Host SDK is at the moment only implemented for the Linux OS. The table
-below shows the resource usage of the individual components measured on armhf
+below shows the resource usage of the individual components measured on arm64
 release binaries. No debug symbols included. RAM figures are indicative for
 applications without any data added (i.e. initial memory usage). The measurement
 used for the RAM figures is the programs Resident Set Size (RSS) measured by
 <code class="docutils literal notranslate"><span class="pre">ps</span></code> or <code class="docutils literal notranslate"><span class="pre">smem</span></code>. Bear in mind that the RAM measurement for each application also
 includes memory used by shared libraries, thereby the actual memory consumed
 when running multiple Unify applications that use the same shared library
-(libuic and various system libraries) is lower than the sum of this table.</p>
+(libunify and various system libraries) is lower than the sum of this table.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Release binaries are compiled with <code class="docutils literal notranslate"><span class="pre">-O2</span> <span class="pre">-s</span></code></p></li>
@@ -98,64 +104,64 @@ when running multiple Unify applications that use the same shared library
 </thead>
 <tbody>
 <tr>
-<td>libuic</td>
-<td style="text-align: right;">10568 kB</td>
+<td>libunify</td>
+<td style="text-align: right;">12944 kB</td>
 <td style="text-align: right;">N/A</td>
 </tr>
 <tr>
 <td>uic-aoxpc</td>
-<td style="text-align: right;">4296 kB</td>
+<td style="text-align: right;">1460 kB</td>
 <td style="text-align: right;">10500 kB</td>
 </tr>
 <tr>
 <td>uic-zigpc</td>
-<td style="text-align: right;">740 kB</td>
+<td style="text-align: right;">1828 kB</td>
 <td style="text-align: right;">15000 kB</td>
 </tr>
 <tr>
 <td>uic-zpc</td>
-<td style="text-align: right;">2580 kB</td>
-<td style="text-align: right;">20000 kB</td>
+<td style="text-align: right;">4883 kB</td>
+<td style="text-align: right;">23 kB</td>
 </tr>
 <tr>
 <td>uic-gms</td>
-<td style="text-align: right;">412 kB</td>
-<td style="text-align: right;">8700 kB</td>
+<td style="text-align: right;">1542 kB</td>
+<td style="text-align: right;">15932 kB</td>
 </tr>
 <tr>
 <td>uic-nal</td>
-<td style="text-align: right;">448 kB</td>
-<td style="text-align: right;">10000 kB</td>
+<td style="text-align: right;">1590 kB</td>
+<td style="text-align: right;">17356 kB</td>
 </tr>
 <tr>
 <td>uic-positioning</td>
 <td style="text-align: right;">4256 kB</td>
-<td style="text-align: right;">11500 kB</td>
+<td style="text-align: right;">16300 kB</td>
 </tr>
 <tr>
 <td>uic-upti-cap</td>
-<td style="text-align: right;">452 kB</td>
-<td style="text-align: right;">8600 kB</td>
+<td style="text-align: right;">1590 kB</td>
+<td style="text-align: right;">16036 kB</td>
 </tr>
 <tr>
 <td>uic-upti-writer</td>
-<td style="text-align: right;">400 kB</td>
+<td style="text-align: right;">1570 kB</td>
 <td style="text-align: right;">8700 kB</td>
 </tr>
 <tr>
 <td>uic-image-provider</td>
-<td style="text-align: right;">428 kB</td>
-<td style="text-align: right;">8500 kB</td>
+<td style="text-align: right;">1542 kB</td>
+<td style="text-align: right;">15944 kB</td>
 </tr>
 <tr>
 <td>uic-upvl</td>
-<td style="text-align: right;">492 kB</td>
-<td style="text-align: right;">10000 kB</td>
+<td style="text-align: right;">1602 kB</td>
+<td style="text-align: right;">17296 kB</td>
 </tr>
 <tr>
 <td>uic-dev-gui</td>
-<td style="text-align: right;">30000 kB</td>
-<td style="text-align: right;">10000 kB</td>
+<td style="text-align: right;">43680 kB</td>
+<td style="text-align: right;">49404 kB</td>
 </tr>
 <tr>
 <td>zigbeed</td>
@@ -168,13 +174,13 @@ when running multiple Unify applications that use the same shared library
 <td style="text-align: right;">600 kB</td>
 </tr>
 <tr>
-<td>cpcd</td>
-<td style="text-align: right;">160 kB</td>
+<td>uic-cpcd</td>
+<td style="text-align: right;">275 kB</td>
 <td style="text-align: right;">2200 kB</td>
 </tr>
 <tr>
-<td>cpc-hci-bridge</td>
-<td style="text-align: right;">12 kB</td>
+<td>uic-cpc-hci-bridge</td>
+<td style="text-align: right;">10 kB</td>
 <td style="text-align: right;">TBD kB</td>
 </tr>
 </tbody>
@@ -183,16 +189,16 @@ when running multiple Unify applications that use the same shared library
 <ul class="simple">
 <li><p>ipset</p></li>
 <li><p>libavahi-client3</p></li>
-<li><p>libboost-atomic1.67.0</p></li>
-<li><p>libboost-chrono1.67.0</p></li>
-<li><p>libboost-date-time1.67.0</p></li>
-<li><p>libboost-filesystem1.67.0</p></li>
-<li><p>libboost-log1.67.0</p></li>
-<li><p>libboost-program-options1.67.0</p></li>
-<li><p>libboost-regex1.67.0</p></li>
-<li><p>libboost-system1.67.0</p></li>
-<li><p>libboost-thread1.67.0</p></li>
-<li><p>libipset11</p></li>
+<li><p>libboost-atomic1.74.0</p></li>
+<li><p>libboost-chrono1.74.0</p></li>
+<li><p>libboost-date-time1.74.0</p></li>
+<li><p>libboost-filesystem1.74.0</p></li>
+<li><p>libboost-log1.74.0</p></li>
+<li><p>libboost-program-options1.74.0</p></li>
+<li><p>libboost-regex1.74.0</p></li>
+<li><p>libboost-system1.74.0</p></li>
+<li><p>libboost-thread1.74.0</p></li>
+<li><p>libipset13</p></li>
 <li><p>libmbedcrypto3</p></li>
 <li><p>libmbedtls12</p></li>
 <li><p>libmbedx509-0</p></li>
@@ -207,7 +213,7 @@ when running multiple Unify applications that use the same shared library
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

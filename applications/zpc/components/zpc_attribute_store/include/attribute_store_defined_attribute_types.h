@@ -149,6 +149,29 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_SECONDS,
                  ((COMMAND_CLASS_SENSOR_ALARM << 8) | 0x06))
 
 ///////////////////////////////////
+// Barrier Operator Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BARRIER_OPERATOR_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_BARRIER_OPERATOR))
+
+// Bitmask Attribute contains the bytes that describe the supported subsystems
+// types that the device support. uint8_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BARRIER_OPERATOR_BITMASK,
+                 ((COMMAND_CLASS_BARRIER_OPERATOR << 8) | 0x02))
+
+// The Operator State attribute contain the state of the barrier operator.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BARRIER_OPERATOR_STATE,
+                 ((COMMAND_CLASS_BARRIER_OPERATOR << 8) | 0x03))
+
+// Subsystem type attribute is the type of the signaling subsystem
+// that the barrier contain.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BARRIER_OPERATOR_SUBSYSTEM_TYPE,
+                 ((COMMAND_CLASS_BARRIER_OPERATOR << 8) | 0x04))
+
+// Subsystem state attribute contain the state of the subsystem.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BARRIER_OPERATOR_SUBSYSTEM_STATE,
+                 ((COMMAND_CLASS_BARRIER_OPERATOR << 8) | 0x05))
+
+///////////////////////////////////
 // Basic Command Class
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BASIC_VERSION,
                  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_BASIC))
@@ -332,8 +355,9 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_SUPPORTED_GROUPINGS,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_MAX_NODES_SUPPORTED,
                  ((COMMAND_CLASS_ASSOCIATION << 8) | 0x06))
 /** Count for commands trying to set group content. set_commands_count_t */
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_CONTENT_COMMAND_COUNT,
-                 ((COMMAND_CLASS_ASSOCIATION << 8) | 0x07))
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_CONTENT_COMMAND_COUNT,
+  ((COMMAND_CLASS_ASSOCIATION << 8) | 0x07))
 
 ///////////////////////////////////
 // Clock Command Class
@@ -634,6 +658,22 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES_BITMASK,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTIVATION_VERSION,
                  ((COMMAND_CLASS_SCENE_ACTIVATION << 8) | 0x01))
 
+/// < Umbrella attribute under which we save the active scene and
+/// Scene configuration (serves both for Scene Activation and Scene Actuator
+/// Configuration Command Classes)
+/// Empty storage type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_LOCAL_SCENES,
+                 ((COMMAND_CLASS_SCENE_ACTIVATION << 8) | 0x02))
+
+/// < Current scene active at the node. local_scene_id_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTIVATION_ACTIVE_SCENE,
+                 ((COMMAND_CLASS_SCENE_ACTIVATION << 8) | 0x03))
+
+/// < Dimming Duration setting for a scene. local_scene_dimming_duration_t
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_SCENE_ACTIVATION_SETTING_DIMMING_DURATION,
+  ((COMMAND_CLASS_SCENE_ACTIVATION << 8) | 0x04))
+
 /////////////////////////////////////////////////
 // Scene Actuator Configuration Command Class
 /// < This represent the version of the  Scene Actuator Configuration Command Class
@@ -641,12 +681,51 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTIVATION_VERSION,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTUATOR_CONF_VERSION,
                  ((COMMAND_CLASS_SCENE_ACTUATOR_CONF << 8) | 0x01))
 
+/// < Umbrella attribute under which we save all the scenes settings
+/// Empty storage type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTUATOR_CONFIGURATION,
+                 ((COMMAND_CLASS_SCENE_ACTUATOR_CONF << 8) | 0x02))
+
+/// < Scene ID under which the Actuator configuration will be saved.
+/// local_scene_id_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTUATOR_ID,
+                 ((COMMAND_CLASS_SCENE_ACTUATOR_CONF << 8) | 0x03))
+
+/// < Dimming Duration setting for a scene. local_scene_dimming_duration_t
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_SCENE_ACTUATOR_SETTING_DIMMING_DURATION,
+  ((COMMAND_CLASS_SCENE_ACTUATOR_CONF << 8) | 0x04))
+
+/// < Level setting for a scene. local_scene_level_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTUATOR_SETTING_LEVEL,
+                 ((COMMAND_CLASS_SCENE_ACTUATOR_CONF << 8) | 0x05))
+
+/// < Override setting for a scene. local_scene_override_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTUATOR_SETTING_OVERRIDE,
+                 ((COMMAND_CLASS_SCENE_ACTUATOR_CONF << 8) | 0x06))
+
 /////////////////////////////////////////////////
 // Scene Controller Configuration Command Class
 /// < This represent the version of the  Scene Controller Configuration Command Class
 /// zwave_cc_version_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_CONTROLLER_CONF_VERSION,
                  ((COMMAND_CLASS_SCENE_CONTROLLER_CONF << 8) | 0x01))
+
+/// Umbrella attribute indicating how the scenes commands are configured
+/// for a given Association group ID.
+/// command_status_values_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_CONTROLLER_CONFIGURATION,
+                 ((COMMAND_CLASS_SCENE_CONTROLLER_CONF << 8) | 0x02))
+
+/// < Scene ID under which the Controller configuration will be saved.
+/// local_scene_id_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_CONTROLLER_SETTING_ID,
+                 ((COMMAND_CLASS_SCENE_CONTROLLER_CONF << 8) | 0x03))
+
+/// < Dimming Duration setting for a scene. local_scene_dimming_duration_t
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_SCENE_CONTROLLER_SETTING_DIMMING_DURATION,
+  ((COMMAND_CLASS_SCENE_CONTROLLER_CONF << 8) | 0x04))
 
 /////////////////////////////////////////////////
 // Security 0 (S0) Command Class
@@ -806,6 +885,27 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_INDICATOR_TIMEOUT, 0x87F0)
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
 ///< This represents a Group name. String representation with Null termination.
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
+
+// Scenes Cluster
+/// This is an umbrella attribute for the Scene Table. Empty storage type.
+// It's also in the XML files, so defined in the dotdot unify attribute store.
+//DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE, 0x00050f01)
+///< This represents a Scene ID and Group ID, as a pair, to identify each entry
+/// of the Scene table. uint8_t / uint16_t in a struct (scene_id_group_id_t).
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID, 0x00050f02)
+///< This represents a Scene Name. C String.
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_NAME, 0x00050f03)
+///< This represents a Scene actuator configuration (set of ZCL Attributes with values)
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_FIELD_SETS, 0x00050f04)
+///< This represents a Scene Transition Time.
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME, 0x00050f05)
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME_100MS,
+                 0x00050f06)
+
+///< This value is used to store last non zero level, this is used when turning
+///  a Light on/off using on_off cluster. uint32_t
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,
+                 0x00080f01)
 
 #endif  //ATTRIBUTE_AUTO_GENERATED
 #endif  //ATTRIBUTE_STORE_TYPES_H

@@ -57,6 +57,11 @@ var group__zigpc__gateway__notify =
       [ "manufacturer_id", "structzigpc__gateway__on__ota__completed__t.html#a97d2249da0572ed39d3cd4f67dbcd445", null ],
       [ "status", "structzigpc__gateway__on__ota__completed__t.html#a544d6f77c760e24ea4108354c2cb5a07", null ]
     ] ],
+    [ "zigpc_gateway_on_bind_unbind_reponse_t", "structzigpc__gateway__on__bind__unbind__reponse__t.html", [
+      [ "binding", "structzigpc__gateway__on__bind__unbind__reponse__t.html#a820c21a1267195e972668b736946b2fb", null ],
+      [ "is_bind_response", "structzigpc__gateway__on__bind__unbind__reponse__t.html#a69bb9c0a4dfdc4a273f64a1c12d2bea6", null ],
+      [ "zdo_status", "structzigpc__gateway__on__bind__unbind__reponse__t.html#ad5a2ce829a162bf5c4e48c5eb1e47ac8", null ]
+    ] ],
     [ "zigpc_gateway_on_network_init_t", "group__zigpc__gateway__notify.html#ga00ae90f318ee86d24b977cb4e2c2e456", null ],
     [ "zigpc_gateway_on_node_add_t", "group__zigpc__gateway__notify.html#gad109b0fac14a7d637091f8fa42a14a0c", null ],
     [ "zigpc_gateway_notify_event", "group__zigpc__gateway__notify.html#ga68b826da48d6db275d1cd028d9ec0cfc", [
@@ -72,6 +77,7 @@ var group__zigpc__gateway__notify =
       [ "ZIGPC_GATEWAY_NOTIFY_ZCL_COMMAND_RECEIVED", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca5adb8a2c8c2148f7d87faecade294b0a", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_STARTED", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfcac22e316ba6ba014810d0f5ebed1e26ea", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_COMPLETED", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca947ad9d6d46363cecebe5c7b6e27d4fd", null ],
+      [ "ZIGPC_GATEWAY_NOTIFY_BIND_UNBIND_RESPONSE", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca489c51621b546ff507e314a621364aa0", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_MAX", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfcab66357989c7fb30ca50e804a1459deb5", null ]
     ] ],
     [ "zigpc_gateway_register_observer", "group__zigpc__gateway__notify.html#ga5536dfdcda09fddfae9cd5ec1bbaba11", null ],

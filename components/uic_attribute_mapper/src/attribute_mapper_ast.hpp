@@ -31,6 +31,7 @@
 #include <boost/spirit/home/x3.hpp>
 #include <boost/spirit/home/x3/support/ast/variant.hpp>
 #include <boost/fusion/include/adapt_struct.hpp>
+#include <boost/spirit/include/qi_optional.hpp>
 
 using result_type_t = float;
 
@@ -45,6 +46,7 @@ struct condition;
 struct attribute;
 struct attribute_path_subscript;
 struct assignment;
+struct function_invokation;
 struct scope;
 
 using ast_node = boost::variant<ast::scope>;
@@ -64,12 +66,14 @@ enum operator_ids {
   operator_bitand,
   operator_bitor,
   operator_bitxor,
-  operator_left_shift,
-  operator_right_shift,
+  operator_less_than,
+  operator_greater_than,
   operator_or,
   operator_modulo,
   operator_exponent,
   operator_neq,
+  operator_less_than_or_eq,
+  operator_greater_than_or_eq,
 };
 
 /**
@@ -87,7 +91,8 @@ using operand = x3::variant<ast::nil,
                             x3::forward_ast<attribute>,
                             x3::forward_ast<signed_>,
                             x3::forward_ast<expression>,
-                            x3::forward_ast<condition>>;
+                            x3::forward_ast<condition>,
+                            x3::forward_ast<function_invokation>>;
 /**
  * @brief Attribute path element
  *
@@ -95,8 +100,8 @@ using operand = x3::variant<ast::nil,
  * an operand ( like a integer constant ) or a subscript ( 1234[4] )
  *
  */
-using attribute_path_element = boost::
-  variant<ast::nil, ast::operand, uint32_t, attribute_path_subscript>;
+using attribute_path_element
+  = boost::variant<ast::nil, ast::operand, uint32_t, attribute_path_subscript>;
 
 /**
  * @brief Uniary signed operand
@@ -188,6 +193,29 @@ struct assignment {
 };
 
 /**
+ * @brief Built-in function invokation
+ * Example : fn_min_value(r'3, 5, d'5 or 20)
+ */
+struct function_invokation {
+  std::string function_name;          // Function name to invoke.
+  std::vector<expression> arguments;  // Arguments for the function
+};
+
+/**
+ * @brief Scope setting
+ * A scope setting consists of a setting name and an associated value
+ */
+struct scope_setting {
+  std::string setting_name;
+  boost::optional<unsigned int> setting_value;
+};
+
+/**
+ * @brief Type for Scope settings list
+ */
+using scope_settings_t = std::vector<scope_setting>;
+
+/**
  * @brief Scope
  *
  * This defines a mappng scope with a priority
@@ -195,6 +223,7 @@ struct assignment {
  */
 struct scope {
   int priority;
+  scope_settings_t settings;
   std::vector<assignment> assignments;
 };
 
@@ -208,6 +237,8 @@ bool operator==(const attribute &a, const attribute &b);
 bool operator==(const attribute_path_subscript &a,
                 const attribute_path_subscript &b);
 bool operator==(const assignment &a, const assignment &b);
+bool operator==(const scope_setting &a, const scope_setting &b);
+bool operator==(const function_invokation &a, const function_invokation &b);
 
 }  // namespace ast
 
@@ -226,7 +257,11 @@ BOOST_FUSION_ADAPT_STRUCT(ast::assignment, lhs, rhs)
 BOOST_FUSION_ADAPT_STRUCT(ast::condition, cond_value, cond_true, cond_false)
 BOOST_FUSION_ADAPT_STRUCT(ast::attribute, value_type, attribute_path)
 BOOST_FUSION_ADAPT_STRUCT(ast::attribute_path_subscript, identifier, index)
-BOOST_FUSION_ADAPT_STRUCT(ast::scope, priority, assignments)
+BOOST_FUSION_ADAPT_STRUCT(ast::function_invokation, function_name, arguments)
+BOOST_FUSION_ADAPT_STRUCT(ast::scope_setting,
+                          (std::string, setting_name),
+                          (boost::optional<unsigned int>, setting_value))
+BOOST_FUSION_ADAPT_STRUCT(ast::scope, priority, settings, assignments)
 
 #endif  //ATTRIBUTE_MAPPER_AST_HPP
 

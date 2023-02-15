@@ -15,6 +15,8 @@ var attribute__resolver__rule_8h =
       [ "RESOLVER_SEND_STATUS_ABORTED", "attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830cac033783f504ffa0c04dda5efc27f07b6", null ]
     ] ],
     [ "attribute_resolver_get_function", "attribute__resolver__rule_8h.html#af925c586d1a3772b33267fd5785fd69f", null ],
+    [ "attribute_resolver_has_get_rule", "attribute__resolver__rule_8h.html#a58d353caf8250383d67d73fefe962e57", null ],
+    [ "attribute_resolver_has_set_rule", "attribute__resolver__rule_8h.html#aabfc185e2f3f5dfb2ace7099422c77b9", null ],
     [ "attribute_resolver_register_set_rule_listener", "attribute__resolver__rule_8h.html#a39dd5045c17b326ae80ddecf4af5e885", null ],
     [ "attribute_resolver_set_function", "attribute__resolver__rule_8h.html#a112b4b64335a30ed04331c863ced39d3", null ],
     [ "on_resolver_send_data_complete", "attribute__resolver__rule_8h.html#a4492c39a5c12416a2f66ea7cc55cc5d3", null ]

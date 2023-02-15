@@ -1,0 +1,99 @@
+// Central Scene Command Class
+def zwNUMBER_OF_SCENES 0x5B02
+def zwACTIVE_SCENE     0x5B06
+
+// Scene Activation Command Class
+def zw_LOCAL_SCENES    0x2B02
+def zw_ACTIVE_SCENE    0x2B03
+
+// Scene Actuator Configuration
+def zw_CONFIGURATION    0x2C02
+def zw_CONF_ID          0x2C03
+def zw_CONF_LEVEL       0x2C05
+
+// Scenes Cluster
+def zbSCENE_COUNT                   0x00050000
+def zbCURRENT_SCENE                 0x00050001
+def zbCURRENT_GROUP                 0x00050002
+def zbSCENE_VALID                   0x00050003
+def zbSCENES_NAME_SUPPORT           0x00050004
+def zbSCENE_TABLE                   0x00050f01
+def zbSCENE_ID_GROUP_ID             0x00050f02
+def zbSCENE_NAME                    0x00050f03
+def zbSCENE_FIELD_SETS              0x00050f04
+def zbSCENE_TRANSITION_TIME         0x00050f05
+def zbSCENE_TRANSITION_TIME_100MS   0x00050f06
+
+// Shortcuts
+def desired_scene_defined    fn_are_all_defined(d'zbCURRENT_SCENE, r'zbCURRENT_SCENE)
+def no_zwave_local_scene     (e'zw_LOCAL_SCENES.zw_ACTIVE_SCENE == 0)
+
+scope 0 chain_reaction(0) clear_desired(0) {
+
+  // Init data for Name support
+  r'zbSCENES_NAME_SUPPORT =
+    if (e'zbSCENE_TABLE & fn_are_all_undefined(r'zbSCENES_NAME_SUPPORT)) 0x80 undefined
+
+  // Scene count is supposed to be the number of elements in the Scene Table.
+  // We can't get the number of children by type here, so it's mapped in the Scene Server Cluster.
+  // set_scene_count(scene_table_node); <=> r'zbSCENE_COUNT = fn_child_count_by_type(zbSCENE_TABLE, zbSCENE_ID)
+
+  // ZCL -> Z-Wave
+  // No need to adjust the desired Scene Activation Active Scene, the Command Class
+  // handler listens to incoming dotdot mqtt commands and adjusts it itself.
+  /*
+  d'zw_LOCAL_SCENES.zw_ACTIVE_SCENE =
+    if (desired_scene_defined & (d'zbCURRENT_SCENE < 255) & (d'zbCURRENT_SCENE != r'zbCURRENT_SCENE)) (d'zbCURRENT_SCENE+1)
+    undefined
+  */
+
+  // Z-Wave -> ZCL
+  // Current scene follows the active scene if it exists, else it follows the ZCL desired value
+  r'zbCURRENT_SCENE =
+    if (no_zwave_local_scene & desired_scene_defined) d'zbCURRENT_SCENE
+    if (e'zbSCENE_TABLE & fn_are_all_undefined(r'zbCURRENT_SCENE)) 0 // Init data, when scene table is created
+    if (no_zwave_local_scene) undefined
+    if (r'zw_LOCAL_SCENES.zw_ACTIVE_SCENE > 0) (r'zw_LOCAL_SCENES.zw_ACTIVE_SCENE - 1)
+    if (r'zw_LOCAL_SCENES.zw_ACTIVE_SCENE == 0) 0
+    undefined
+
+  r'zbCURRENT_GROUP =
+    if (desired_scene_defined) d'zbCURRENT_GROUP
+    if (e'zbSCENE_TABLE & fn_are_all_undefined(r'zbCURRENT_GROUP)) 0 // Init data, when scene table is created
+    if (e'zw_LOCAL_SCENES.zw_ACTIVE_SCENE) 0
+    undefined
+
+  r'zbSCENE_VALID =
+    if (e'zbSCENE_TABLE & fn_are_all_defined(d'zbSCENE_VALID)) d'zbSCENE_VALID
+    if (e'zbSCENE_TABLE & fn_are_all_undefined(r'zbSCENE_VALID)) 0 // Init data, when scene table is created
+    undefined
+
+  // Z-Wave -> ZCL, for Central Scene
+  // All these mappings apply only if Scene Table is not present
+  r'zbSCENE_COUNT =
+    if (e'zbSCENE_TABLE) undefined
+    if (r'zwNUMBER_OF_SCENES) r'zwNUMBER_OF_SCENES undefined
+
+  r'zbCURRENT_SCENE =
+    if (e'zbSCENE_TABLE) undefined
+    if (r'zwACTIVE_SCENE > 0) (r'zwACTIVE_SCENE - 1)
+    undefined
+
+  r'zbSCENE_VALID =
+    if (e'zbSCENE_TABLE) undefined (r'zwACTIVE_SCENE > 0)
+
+  r'zbCURRENT_GROUP =
+    if (e'zbSCENE_TABLE) undefined
+    if (e'zwACTIVE_SCENE) 0 undefined
+
+  r'zbSCENES_NAME_SUPPORT =
+    if (e'zbSCENE_TABLE) undefined
+    if (e'zwACTIVE_SCENE) 0 undefined
+
+  // Existence links (left hand side gets deleted if right hand side does)
+  e'zbSCENE_COUNT = e'zbSCENE_TABLE
+  e'zbCURRENT_SCENE = e'zbSCENE_TABLE
+  e'zbSCENE_VALID = e'zbSCENE_TABLE
+  e'zbCURRENT_GROUP = e'zbSCENE_TABLE
+  e'zbSCENES_NAME_SUPPORT = e'zbSCENE_TABLE
+}

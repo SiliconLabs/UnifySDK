@@ -10,25 +10,30 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+#include "keep_sleeping_nodes_alive.h"
+#include "network_monitor_utils.h"
 
+// Generic includes
 #include <set>
 #include <vector>
 #include <optional>
 #include <iterator>
 #include <cassert>
 
+// Unify Components
 #include "attribute_store.h"
-#include "attribute_store_type_registration.h"
-#include "attribute_store_defined_attribute_types.h"
-#include "keep_sleeping_nodes_alive.h"
+#include "attribute_store_helper.h"
+#include "attribute_resolver.h"
 #include "sl_log.h"
 #include "ctimer.h"
+#include "ucl_definitions.h"
+
+// ZPC Components
+#include "attribute_store_type_registration.h"
+#include "attribute_store_defined_attribute_types.h"
 #include "zwave_utils.h"
 #include "zwave_controller_utils.h"
-#include "ucl_definitions.h"
-#include "attribute_store_helper.h"
 #include "zwave_tx.h"
-#include "network_monitor_utils.h"
 
 constexpr int32_t PING_TIMEOUT_SEC        = 4;
 constexpr int32_t GIVE_UP_TIMEOUT_SEC     = 15;
@@ -174,11 +179,11 @@ static void keep_awake(attribute_store_node_t node_id_node)
 {
   zwave_node_id_t node_id = 0;
   attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
-  sl_log_info(LOG_TAG,
-              "Preventing %s: %d from sleeping until its interview "
-              "is completed",
-              attribute_store_type_get_node_type_name(node_id_node),
-              node_id);
+  sl_log_debug(LOG_TAG,
+               "Preventing %s %d from sleeping until its interview "
+               "is completed",
+               attribute_store_type_get_node_type_name(node_id_node),
+               node_id);
 
   ctimer_set(&poll_timer,
              PING_TIMEOUT_SEC * CLOCK_SECOND,
@@ -216,7 +221,7 @@ static void
     return;
   }
 
-  zwave_node_id_t node_id;
+  zwave_node_id_t node_id = 0;
   attribute_store_get_reported(node_id_node, &node_id, sizeof(zwave_node_id_t));
 
   sl_log_debug(LOG_TAG,
@@ -226,9 +231,14 @@ static void
                operating_mode,
                network_status);
 
-  if (network_status == NODE_STATE_TOPIC_INTERVIEWING
-      && operating_mode == OPERATING_MODE_NL) {
-    keep_awake(node_id_node);
+  if ((network_status == NODE_STATE_TOPIC_INTERVIEWING)
+      && (operating_mode == OPERATING_MODE_NL)) {
+    if (true == is_node_or_parent_paused(node_id_node)) {
+      attribute_resolver_set_resolution_resumption_listener(node_id_node,
+                                                            &keep_awake);
+    } else {
+      keep_awake(node_id_node);
+    }
   } else {
     keep_alive.erase(node_id_node);
   }

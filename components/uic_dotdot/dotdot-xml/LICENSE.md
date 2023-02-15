@@ -20,16 +20,17 @@ Zigbee Alliance reserves all rights not expressly granted herein.
 
 **C. Limited Right to Use Content to Commercialize and Manufacture Simple Devices and Dynamic Devices** – If you are a member of Zigbee Alliance, you have a limited, non-exclusive right to use the Content to connect, make, manufacture, commercialize, sell, distribute, market or promote Simple Devices and Dynamic Devices.
 
-**D. Certification Requires Membership in Zigbee Alliance** – Certification of Simple Devices and Dynamic Devices and use of any Zigbee Alliance trademark and/or logo, including for purposes of labeling Simple Devices and Dynamic Devices specifying that they are certified by Zigbee Alliance or contain Zigbee technology, are limited to members of Zigbee Alliance. Members of Zigbee Alliance are subject to policies, procedures and terms and conditions relating to certification and trademark and logo usage, including the Zigbee Alliance Trademark and Logo Usage Guidelines and Terms, which can be found at [www.zigbee.org](https://zigbee.org)
+**D. Certification Requires Membership in Zigbee Alliance** – Certification of Simple Devices and Dynamic Devices and use of any Zigbee Alliance trademark and/or logo, including for purposes of labeling Simple Devices and Dynamic Devices specifying that they are certified by Zigbee Alliance or contain Zigbee technology, are limited to members of Zigbee Alliance. Members of Zigbee Alliance are subject to policies, procedures and terms and conditions relating to certification and trademark and logo usage, including the Zigbee Alliance Trademark and Logo Usage Guidelines and Terms, which can be found at [www.zigbee.org](www.zigbee.org).
+
 ## Joining Zigbee Alliance
 
-Information on becoming a member of Zigbee Alliance can be found at [www.zigbee.org](https://zigbee.org).
+Information on becoming a member of Zigbee Alliance can be found at [www.zigbee.org](www.zigbee.org).
 
 ## Disclaimer
 
 Zigbee Alliance is providing the Content to you at no charge. However, Content is not to be considered within the "public domain", as Zigbee Alliance is, and at all times shall remain the copyright holder in the Content. Elements of the Content may be subject to third party intellectual property rights, including without limitation, patent, copyright or trademark rights (such third parties may or may not be members of Zigbee Alliance). Zigbee Alliance is not responsible and shall not be held responsible in any manner for identifying, misidentifying or failing to identify any or all such third party intellectual property rights or rights holders. **THE CONTENT IS PROVIDED ON AN “AS IS” BASIS AND ZIGBEE ALLIANCE DISCLAIMS ALL WARRANTIES EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO: (A) ANY WARRANTY THAT THE USE OF THE CONTENT WILL NOT INFRINGE ANY RIGHTS OF THIRD PARTIES (INCLUDING WITHOUT LIMITATION ANY INTELLECTUAL PROPERTY RIGHTS INCLUDING PATENT, COPYRIGHT OR TRADEMARK RIGHTS); OR (B) ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NON-INFRINGEMENT. IN NO EVENT WILL ZIGBEE ALLIANCE BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF BUSINESS, LOSS OF USE OF DATA, INTERRUPTION OF BUSINESS, OR FOR ANY DIRECT, INDIRECT, SPECIAL OR EXEMPLARY, INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES OF ANY KIND, IN CONTRACT OR IN TORT, IN CONNECTION WITH THE CONTENT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH LOSS OR DAMAGE.**
 
-Any and all rights conveyed to you in the Content may be terminated or changed by Zigbee Alliance upon notice, which notice may be posted on the Zigbee Alliance website ([www.zigbee.org](https://zigbee.org)) or communicated to the contact you provided when downloading the Content.
+Any and all rights conveyed to you in the Content may be terminated or changed by Zigbee Alliance upon notice, which notice may be posted on the Zigbee Alliance website ([www.zigbee.org](www.zigbee.org)) or communicated to the contact you provided when downloading the Content.
 
 All company, brand and product names included in the Content may be trademarks that are the sole property of their respective owners.
 

@@ -26,10 +26,41 @@
 #define ZWAVE_COMMAND_CLASS_SWITCH_COLOR_H
 
 #include "sl_status.h"
+#include "attribute_store.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @brief Runs a functions for all chidren with a certain type for all color
+ * component IDs in the Color Switch Command Class
+ *
+ * @param state_node         Attribute Store node for the Color Switch State
+ * @param child_node_type    Type of children to run the function on
+ * @param function           Function to run on all children
+ *
+ * @return SL_STATUS_OK on success, any other error code for an error.
+ */
+void zwave_command_class_switch_color_invoke_on_all_attributes(
+  attribute_store_node_t state_node,
+  attribute_store_type_t child_node_type,
+  void (*function)(attribute_store_node_t));
+
+/**
+ * @brief Runs a functions for all chidren with a certain type for all color
+ * component IDs in the Color Switch Command Class
+ *
+ * @param state_node         Attribute Store node for the Color Switch State
+ * @param child_node_type    Type of children to run the function on
+ * @param function           Function to run on all children
+ *
+ * @return SL_STATUS_OK on success, any other error code for an error.
+ */
+void zwave_command_class_switch_color_invoke_on_all_attributes_with_return_value(
+  attribute_store_node_t state_node,
+  attribute_store_type_t child_node_type,
+  sl_status_t (*function)(attribute_store_node_t));
 
 /**
  * @brief This function initialize the Color Switch Command Class handler

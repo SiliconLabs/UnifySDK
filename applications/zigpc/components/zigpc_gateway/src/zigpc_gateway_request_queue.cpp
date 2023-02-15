@@ -16,6 +16,7 @@
 #include <iterator>
 #include <memory>
 #include <queue>
+#include <string>
 
 // Shared Unify includes
 #include <sl_log.h>
@@ -284,32 +285,47 @@ EmberStatus DeviceRemoveRequest::invoke(void)
   return status;
 }
 
-BindingRequestRequest::BindingRequestRequest(const zigbee_eui64_t eui64,
-                                             zigbee_endpoint_id_t endpoint_id,
-                                             zcl_cluster_id_t cluster_id) :
+BindingRequestRequest::BindingRequestRequest(const zigbee_eui64_t source_eui64,
+                                             zigbee_endpoint_id_t source_endpoint_id,
+                                             zcl_cluster_id_t cluster_id,
+                                             const zigbee_eui64_t dest_eui64,
+                                             zigbee_endpoint_id_t dest_endpoint_id,
+                                             bool is_binding_req) :
   RequestQueue::Entry("Binding Request"),
-  endpoint_id(endpoint_id),
-  cluster_id(cluster_id)
+  source_endpoint_id(source_endpoint_id),
+  cluster_id(cluster_id),
+  dest_endpoint_id(dest_endpoint_id),
+  is_binding_req(is_binding_req)
 {
-  std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
+  std::copy(source_eui64, source_eui64 + sizeof(zigbee_eui64_t), this->source_eui64);
+  std::copy(dest_eui64, dest_eui64 + sizeof(zigbee_eui64_t), this->dest_eui64);
 }
 
 EmberStatus BindingRequestRequest::invoke(void)
 {
-  zigbee_eui64_t eui64_le;
-  zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
+  zigbee_eui64_t source_eui64_le;
+  zigbee_eui64_copy_switch_endian(source_eui64_le, this->source_eui64);
+  
+  zigbee_eui64_t dest_eui64_le;
+  zigbee_eui64_copy_switch_endian(dest_eui64_le, this->dest_eui64);
+  
   EmberStatus status
-    = zigbeeHostInitBinding(eui64_le,
-                            this->endpoint_id,
+    = zigbeeHostInitBinding(source_eui64_le,
+                            this->source_endpoint_id,
                             this->cluster_id,
-                            0);  //only unicast bindings for now
+                            0,
+                            dest_eui64_le,
+                            this->dest_endpoint_id,
+                            this->is_binding_req);  //only unicast bindings for now
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_EUI64_EP_CLUSTER "Binding Request EmberAfStatus: 0x%X",
-         zigbee_eui64_to_uint(this->eui64),
-         this->endpoint_id,
+         LOG_PREFIX_EUI64_EP_CLUSTER "Binding Request " LOG_PREFIX_EUI64_EP "EmberAfStatus: 0x%X",
+         zigbee_eui64_to_uint(this->source_eui64),
+         this->source_endpoint_id,
          this->cluster_id,
+         zigbee_eui64_to_uint(this->dest_eui64),
+         this->dest_endpoint_id,
          status);
   return status;
 }

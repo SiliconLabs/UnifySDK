@@ -58,12 +58,12 @@ sl_status_t datastore_init(const char *database_path);
 
 /**
  * @brief start a datastore transaction
- * 
+ *
  * With transactions, datastore calls will be cached so that they can be commited
  * in one go. This increases the throughput of data.
  * Only one transaction at the time can be open, otherwise `SL_STATUS_ABORT` is returned.
- * 
- * 
+ *
+ *
  *  * @return sl_status_t
  *                    SL_STATUS_OK for success
  *                    SL_STATUS_IN_PROGRESS if there is an ongoing transaction
@@ -73,7 +73,7 @@ sl_status_t datastore_start_transaction();
 
 /**
  * @brief commit an open transaction
- * 
+ *
  *  * @return sl_status_t
  *                   SL_STATUS_OK for success
  *                   SL_STATUS_FAIL if an error occurred
@@ -160,6 +160,14 @@ bool datastore_contains_arr(datastore_key_t key);
  * @return true if key is present in the datatore else false
  */
 bool datastore_contains_int(datastore_key_t key);
+
+/**
+ * @brief Checks if the datastore is initialized and can be used.
+ *
+ * @return true if the datastore can be used
+ * @return false if the datastore cannot be used.
+ */
+bool datastore_is_initialized();
 
 #ifdef __cplusplus
 }

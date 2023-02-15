@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unify Framework Getting Started &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -65,6 +70,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -116,7 +122,7 @@ It is recommended to use the Developer GUI for controlling the Unify Framework I
 <p><strong>Prerequisite</strong>: Required hardware for using the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code> is a <a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a>
 which is flashed with a SerialAPI firmware.</p>
 <p>The Z-Wave Protocol Controller allows Unify to control Z-Wave devices. Starting
-quickly is achieved by just installing the <code class="docutils literal notranslate"><span class="pre">uic-zpc</span></code> debian package. This should
+quickly is achieved by just installing the <code class="docutils literal notranslate"><span class="pre">uic-zpc</span></code> Debian package. This should
 automatically start up the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code> after the configuration steps. You need to
 provide the USB path for the Z-Wave module at the configuration steps.</p>
 <p>A more in depth getting started guide specifically for the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code> is
@@ -127,7 +133,7 @@ provide the USB path for the Z-Wave module at the configuration steps.</p>
 <p><strong>Prerequisite</strong>: Required hardware for using the <code class="docutils literal notranslate"><span class="pre">ZigPC</span></code> is a <a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> which could be EFR32MG12/EFR32xG22
 running NCP or CPC Firmware for Zigbee.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ZigPC</span></code> enables the Unify Framework to control Zigbee devices. Starting quickly
-can be done by simply installing the <code class="docutils literal notranslate"><span class="pre">uic-zigpc</span></code> debian package and configuring
+can be done by simply installing the <code class="docutils literal notranslate"><span class="pre">uic-zigpc</span></code> Debian package and configuring
 the USB device at the configuration step. After installing, the protocol
 controller should be started automatically as a systemd service.</p>
 <p>For more information on getting started with the <code class="docutils literal notranslate"><span class="pre">ZigPC</span></code> is placed in
@@ -160,7 +166,7 @@ on the Raspberry Pi.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

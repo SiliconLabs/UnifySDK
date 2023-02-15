@@ -103,6 +103,31 @@ sl_status_t build_topic(zigpc_ucl::mqtt::topic_type_t topic_type,
  */
 sl_status_t parse_unid(std::string unid, zigbee_eui64_uint_t &eui64);
 
+sl_status_t parse_endpoint(
+                std::string endpoint_str, 
+                zigbee_endpoint_id_t &endpoint);
+
+sl_status_t parse_topic_eui64(
+                const std::string topic, 
+                zigbee_eui64_uint_t &eui64);
+
+sl_status_t parse_topic_endpoint(
+                const std::string topic, 
+                zigbee_endpoint_id_t &endpoint);
+
+sl_status_t parse_topic_cluster(
+                const std::string topic, 
+                std::string &cluster_name);
+
+sl_status_t parse_binding(
+                const std::string topic, 
+                const std::string payload, 
+                zigbee_eui64_uint_t &source_eui64,
+                zigbee_endpoint_id_t &source_ep,
+                std::string &cluster_name,
+                zigbee_eui64_uint_t &dest_eui64,
+                zigbee_endpoint_id_t &dest_ep);
+
 /**
  * @brief Build a UCL UNID based on the Zigbee device identifier.
  *
@@ -110,6 +135,11 @@ sl_status_t parse_unid(std::string unid, zigbee_eui64_uint_t &eui64);
  * @return std::string  UCL UNID including ZigPC prefix.
  */
 std::string build_unid(zigbee_eui64_uint_t eui64);
+
+sl_status_t 
+    publish_supported_generated(
+        zigbee_eui64_uint_t eui64,
+        zigbee_endpoint_id_t endpoint_id);
 
 }  // namespace mqtt
 

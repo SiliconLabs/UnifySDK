@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="The Dotdot Scenes Cluster in the Unify Framework" name="description" />
+<meta content="Scenes, ScenesTable" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. The Dotdot Scenes Cluster (0x0005) in the Unify Framework &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/Chapter07-scenes.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="8. AoX Application" href="Chapter08-aox-application.html" />
+    <link rel="prev" title="6. Service Discovery" href="Chapter06-service-discovery.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-applications-overview">Unify Applications Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../UnifySDK.html#resources">Resources</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Unify Specifications</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter08-aox-application.html">8. AoX Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter09-binding.html">9. Binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter11-system-metrics.html">11. System Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-dotdot-scenes-cluster-0x0005-in-the-unify-framework">
+<span id="unify-specifications-chapter-scenes"></span><h1><span class="section-number">7. </span>The Dotdot Scenes Cluster (0x0005) in the Unify Framework<a class="headerlink" href="#the-dotdot-scenes-cluster-0x0005-in-the-unify-framework" title="Permalink to this heading"></a></h1>
+<p>This cluster is used to define scene and configuration of each device/endpoint.
+In the Unify context, it can be used both for scene controlling devices
+(e.g., wall controller button) and for activating scenes for other nodes
+(e.g., light dimmer).</p>
+<p>This cluster requires additional attributes because the <em>Scene Table</em> is not
+captured by its defined attributes. See <a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a> for the <em>Scene Table</em> definition.</p>
+<p>Below is an example of a PAN node Scene Cluster server:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># Omitted the Desired values of attributes</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneCount/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/CurrentScene/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/CurrentGroup/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneValid/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/NameSupport/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneTable/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/SupportedCommands</span> {<span class="nt">&quot;value&quot;</span><span class="w"> </span><span class="p">:[</span><span class="s2">&quot;AddScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ViewScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RemoveScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RemoveAllScenes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;StoreScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RecallScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GetSceneMembership&quot;</span><span class="p">]</span>}
+</pre></div>
+</div>
+<p>Note that in the example above, the <em>ViewScene</em> and <em>GetSceneMembership</em> commands
+are available, but MAY have no effect, because their purpose is to retrieve
+data. Retrieving data is sometimes done automatically by the Protocol Controllers.
+In this case, a Protocol Controller MAY remove these commands from the
+<em>SupportedCommands</em> list.</p>
+<p>The Scene Table data is represented using this topic hierarchy:</p>
+<p><strong>Topic:</strong> <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Scenes/Attributes/SceneTable/Reported</span></code></p>
+<p><strong>Topic:</strong> <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Scenes/Attributes/SceneTable/Desired</span></code></p>
+<p>The payload of the JSON data published for the Scene Table is defined
+in the following JSON schema:</p>
+<p id="unify-specifications-chapter-scenes-scene-table-schema"><strong>JSON Schema:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scene Table&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scene Table for the Scene Cluster&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;SceneTableEntry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">65535</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;SceneName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;TransitionTime100ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;SceneTableExtensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;patternProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;GroupID&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;SceneID&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;SceneName&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;TransitionTime&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;TransitionTime100ms&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;SceneTableExtensions&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/SceneTableEntry&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;value&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>An example of a <em>SceneTableEntry</em> is shown below. The <em>SceneTableEntry</em> contains
+a set of Clusters, which are JSON objects and defined by their Cluster Name.
+Each cluster Objects contains a set of attributes, defined by their Attribute
+Name, and each attribute value can be either a JSON boolean, number, or string
+(in the case the value has a name).</p>
+<p><strong>Payload:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SceneName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cozy Scene&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransitionTime100ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SceneTableExtensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;OnOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;OnOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;Level&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;CurrentLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;ColorControl&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;CurrentX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;CurrentY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3455</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For each UNID/Endpoint, each Scene is uniquely identified by the
+<code class="docutils literal notranslate"><span class="pre">GroupID</span></code>/ <code class="docutils literal notranslate"><span class="pre">SceneID</span></code> pair, so SceneID 1 may be defined for multiple
+groups, or group 1 may have multiple scenes.</p>
+<section id="scenes-supporting-nodes">
+<h2><span class="section-number">7.1. </span>Scenes Supporting Nodes<a class="headerlink" href="#scenes-supporting-nodes" title="Permalink to this heading"></a></h2>
+<p>Protocol Controller MUST advertise the Scene Table attribute for PAN nodes that
+can be configured to react and change state based on scenes.</p>
+<p>All PAN nodes/endpoints supporting attributes marked as <code class="docutils literal notranslate"><span class="pre">sceneRequired=&quot;true&quot;</span></code>
+in the <a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a> SHOULD be presented as a Scene cluster server by Protocol
+Controllers.</p>
+<p>Protocol Controllers MAY add additional attributes than the ones marked at
+<code class="docutils literal notranslate"><span class="pre">sceneRequired=&quot;true&quot;</span></code> as part of the Scenes extension fieldsets/settings.
+For example, the ZPC exposes both the <code class="docutils literal notranslate"><span class="pre">CurrentHue</span></code> and <code class="docutils literal notranslate"><span class="pre">CurrentSaturation</span></code>
+from the ColorControl cluster, so that all the color information is
+contained in the table.</p>
+<p>Each scene configuration can be done using the supported commands,
+either <code class="docutils literal notranslate"><span class="pre">AddScene</span></code> or <code class="docutils literal notranslate"><span class="pre">StoreScene</span></code>.</p>
+<section id="example-with-storescene-command">
+<h3><span class="section-number">7.1.1. </span>Example with StoreScene Command<a class="headerlink" href="#example-with-storescene-command" title="Permalink to this heading"></a></h3>
+<p>Let’s assume the following is published for a device in the Unify Framework:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># OnOff/Level/ColorControl: (omitting Desired values and SupportedCommands)</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="mi">20</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="w"> </span><span class="p">:</span><span class="mi">20</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/ColorControl/Attributes/CurrentHue/Reported</span> -  {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="mi">52</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/ColorControl/Attributes/CurrentSaturation</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="mi">254</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/ColorControl/Attributes/ColorMode/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;CurrentHueAndCurrentSaturation&quot;</span>}
+
+<span class="c c-Singleline"># Scenes: (omitting Desired values)</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneCount/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/CurrentScene/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/CurrentGroup/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneValid/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/NameSupport/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneTable/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:[]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/SupportedCommands</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;AddScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ViewScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RemoveScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RemoveAllScenes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;StoreScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RecallScene&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GetSceneMembership&quot;</span><span class="p">]</span>}
+</pre></div>
+</div>
+<p>Sending a StoreScene will capture the current device settings the defined Scene:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># Sent by the IoT Service</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Commands/StoreScene</span> - {<span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="mi">1</span>}
+
+<span class="c c-Singleline"># Devices Publishes back: (Omitting Desired values)</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneCount/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneTable/Reported</span> -
+{
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span>{
+<span class="w">      </span><span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;SceneName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;SceneTableExtensions&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">        </span><span class="nt">&quot;ColorControl&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">          </span><span class="nt">&quot;ColorMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CurrentHueAndCurrentSaturation&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;CurrentHue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;CurrentSaturation&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span>
+<span class="w">        </span>}<span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Level&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">          </span><span class="nt">&quot;CurrentLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">        </span>}<span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;OnOff&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">          </span><span class="nt">&quot;OnOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span>}
+<span class="w">      </span>}<span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;TransitionTime100ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span>}
+<span class="w">  </span><span class="p">]</span>
+}
+</pre></div>
+</div>
+</section>
+<section id="example-with-addscene-command">
+<h3><span class="section-number">7.1.2. </span>Example with AddScene Command<a class="headerlink" href="#example-with-addscene-command" title="Permalink to this heading"></a></h3>
+<p>The AddScene Command needs to provide the contents of a SceneTableEntry in the
+<code class="docutils literal notranslate"><span class="pre">ExtensionFieldSets</span></code> field of the <code class="docutils literal notranslate"><span class="pre">AddScene</span></code> Command.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scenes Cluster AddScene Command Properties&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;SceneTableEntry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">65535</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;SceneName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;TransitionTime100ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;SceneTableExtensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/SceneTableEntry&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;GroupID&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;SceneID&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;SceneName&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;TransitionTime&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;TransitionTime100ms&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;SceneTableExtensions&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SGroupId&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;SceneName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SSceneName&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;ExtensionFieldSets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/SceneTableEntry&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;GroupID&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;SceneID&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;TransitionTime&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;SceneName&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;ExtensionFieldSets&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For example, a properly formed <em>AddScene</em> command could be as follows:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># Sent by the IoT Service</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Commands/AddScene</span> -
+  {
+<span class="w">    </span><span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;SceneName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Red time!&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ExtensionFieldSets&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">      </span><span class="nt">&quot;ColorControl&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">        </span><span class="nt">&quot;CurrentHue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;CurrentSaturation&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span>
+<span class="w">      </span>}<span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Level&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">        </span><span class="nt">&quot;CurrentLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span>
+<span class="w">      </span>}<span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;OnOff&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">        </span><span class="nt">&quot;OnOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">      </span>}
+<span class="w">    </span>}<span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;TransitionTime100ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span>}
+</pre></div>
+</div>
+<p>The Protocol Controller MAY use a subset of the ZCL attributes defined in the
+<code class="docutils literal notranslate"><span class="pre">ExtensionFieldSets</span></code> if the end node does not serve the Clusters or
+Attributes defined in this payload.</p>
+<p>If the Scene already exists, it will be replaced with a new name,
+transition times and <code class="docutils literal notranslate"><span class="pre">ExtensionFieldSets</span></code>.
+If the Scene does not already exist, it will be created.</p>
+<p>Note that it is possible to create Scenes with empty <code class="docutils literal notranslate"><span class="pre">ExtensionFieldSets</span></code>.</p>
+</section>
+</section>
+<section id="z-wave-scenes-actuators">
+<h2><span class="section-number">7.2. </span>(Z-Wave) Scenes Actuators<a class="headerlink" href="#z-wave-scenes-actuators" title="Permalink to this heading"></a></h2>
+<p>Scenes actuators do not support any of the ZCL required <em>SupportedCommands</em>,
+and instead use the Scene Cluster attributes to indicate which scene they
+wish to activate. Such devices are both Scene Cluster servers and clients.</p>
+<p>An MQTT client can therefore decide to activate scenes in a
+number of devices/endpoints based on the spontaneous changes made by these
+scenes actuator devices/endpoints.</p>
+<p>For example, a wall switch with four buttons and three possible gestures for each button
+may be presented as a scene device, supporting twelve read-only scenes that would
+transition automatically (i.e., <em>CurrentScene</em> attribute will be updated in a
+read-only fashion). At each activation, the wall switch will aditionally generate
+a Recall Scene command that will be forwarded to the IoT Services.
+The Scene table will stay empty and will not be writable by IoT Services.</p>
+<p>In this case, the wall switch Scenes numbers will not “match” the configured
+scenes in other devices. IoT Services SHOULD interpret the Scene ID as a unique
+combination with the UNID/ep to decide what to do.</p>
+<p>IoT Services SHOULD pay attention to the security level (see the “Security” in
+the State topic) of a UNID before modifying the state (or sending commands) of
+other PAN nodes based on Generated Commands from a PAN node.</p>
+<p>Note that the GroupID can be set to 0 if it is not used.</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># Omitted the Desired values of attributes</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneCount/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/CurrentScene/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/CurrentGroup/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneValid/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/NameSupport/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/SupportedCommands</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/SupportedGeneratedCommands</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:[</span><span class="s2">&quot;RecallScene&quot;</span><span class="p">]</span><span class="w"> </span>}
+</pre></div>
+</div>
+<p>For example, when such a device tries to activate SceneID 5, it will trigger
+the following publications:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># Trying to activate Scene 5 by issuing a command, unretained</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/GeneratedCommands/RecallScene</span> - {<span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;SceneID&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="mi">0</span>}
+
+<span class="c c-Singleline"># Updates its own state, moving into Scene 5 itself.</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/CurrentScene/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/SceneValid/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+</pre></div>
+</div>
+<section id="frame-flow-example-pan-node-without-actuator-capabilities">
+<h3><span class="section-number">7.2.1. </span>Frame flow example PAN Node without Actuator Capabilities<a class="headerlink" href="#frame-flow-example-pan-node-without-actuator-capabilities" title="Permalink to this heading"></a></h3>
+<p>The following diagram shows an example of a node using scenes without
+supporting any of the actuator functionalities.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-14294b73ed49dc88e1a85b8ad0b452cff07e591a.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Scene only PAN node example using the UCL / Unify Framework
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller&quot; as protocol_controller
+participant &quot;PAN Node&quot; as pan_node
+Actor &quot;User&quot; as end_user
+
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/Scenes/Attributes/#&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/Scenes/SupportedCommands&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/Scenes/SupportedGeneratedCommands&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/Scenes/GeneratedCommands/+&lt;/font&gt;
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/Scenes/Commands/+&lt;/font&gt;
+
+rnote over iot_service, pan_node: Node inclusion and capabilities discovery
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/SceneCount/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 12 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/SceneCount/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 12 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 0 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 0 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+rnote over iot_service, protocol_controller: Skipping additional Attribute Publications
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[ ]}
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/SupportedGeneratedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[ &quot;RecallScene&quot;]}
+&amp; mqtt_broker -&gt; iot_service
+
+== ==
+
+end_user -&gt; pan_node : Activate scene 5 button
+pan_node -&gt; protocol_controller : PHY command
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/ep0/Scenes/GeneratedCommands/RecallScene \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{ &quot;GroupID&quot;: 0, &quot;SceneID&quot;: 5, &quot;TransitionTime&quot;:0 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== ==
+
+end_user -&gt; pan_node : Activate scene 5 button again
+pan_node -&gt; protocol_controller : PHY command
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/ep0/Scenes/GeneratedCommands/RecallScene \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{ &quot;GroupID&quot;: 0, &quot;SceneID&quot;: 5, &quot;TransitionTime&quot;:0 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+== ==
+
+end_user -&gt; pan_node : Activate scene 2 button
+pan_node -&gt; protocol_controller : PHY command
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 2 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;: 2 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/ep0/Scenes/GeneratedCommands/RecallScene \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{ &quot;GroupID&quot;: 0, &quot;SceneID&quot;: 2, &quot;TransitionTime&quot;:0 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service"/>
+</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

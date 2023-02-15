@@ -15,10 +15,12 @@ target_include_directories(
 
 target_link_libraries(
   aoxpc_attribute_store
-  PUBLIC uic_attribute_store uic_definitions aoa_util
-  PRIVATE uic_log uic_dotdot_mqtt aoxpc_unid)
+  PUBLIC aoa_util
+  PRIVATE unify aoxpc_unid)
 
-# Mocks target_add_mock(aoxpc_attribute_store)
+if(BUILD_TESTING)
+  # Mocks target_add_mock(aoxpc_attribute_store)
 
-# Unit test
-add_subdirectory(test)
+  # Unit test
+  add_subdirectory(test)
+endif()

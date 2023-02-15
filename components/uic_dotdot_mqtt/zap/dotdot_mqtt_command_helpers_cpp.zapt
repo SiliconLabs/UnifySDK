@@ -29,7 +29,7 @@
 #include "dotdot_mqtt.h"
 #include "dotdot_mqtt.hpp"
 #include "dotdot_mqtt_command_helpers.hpp"
-#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_parsing_helpers.hpp"
 #include "dotdot_mqtt_translators.h"
 
 static constexpr char LOG_TAG[] = "dotdot_mqtt";
@@ -101,6 +101,9 @@ std::string get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCase
   json_payload["{{label}}"] =
     {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name(
       (uint32_t)fields->{{asSnakeCaseLower label}});
+  #elif defined({{asSnakeCaseUpper type}}_ENUM_NAME_AVAILABLE)
+  json_payload["{{label}}"] =
+    {{asSnakeCaseLower type}}_get_enum_value_name((uint32_t)fields->{{asSnakeCaseLower label}});
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["{{label}}"] = fields->{{asSnakeCaseLower label}};
@@ -126,13 +129,21 @@ std::string get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCase
 void {{asCommandParseFunction parent}}(
   nlohmann::json &jsn,{{/first}}
   {{#if isArray}}
+    {{#if (isString type)}}
+  std::vector<std::string> &{{asSnakeCaseLower label}}{{listComma this}}
+    {{else}}
   std::vector<{{asUnderlyingType type}}> &{{asSnakeCaseLower label}}{{listComma this}}
+    {{/if}}
   {{else}}
+    {{#if (isString type)}}
+  std::string &{{asSnakeCaseLower label}}{{listComma this}}
+    {{else}}
   {{asUnderlyingType type}} &{{asSnakeCaseLower label}}{{listComma this}}
+    {{/if}}
   {{/if}}{{#last}}
 ) {
 {{/last}}{{/zcl_command_arguments}}
-{{! transform enum respresetation to value }}
+{{! transform enum representation to value }}
 {{#zcl_command_arguments}}
   {{#if_is_enum type}}
   uint32_t {{label}}_enum_val = get_enum_decimal_value<{{asUnderlyingType type}}>("{{label}}", jsn);
@@ -161,14 +172,32 @@ void {{asCommandParseFunction parent}}(
     {{else if isArray}}
       {{#if (isString type)}} {{! list string type}}
   for (auto &{{label}}_el : jsn.at("{{label}}")) {
-    {{asSnakeCaseLower label}}.push_back({{label}}_el.get_ptr<const std::string*>()->c_str());
+    {{asSnakeCaseLower label}}.push_back({{label}}_el.get<std::string>());
+  }
+      {{else if (isStruct type)}} {{! Array of structs}}
+  // {{asUnderlyingType type}} is a struct
+  for (auto &{{label}}_el : jsn.at("{{label}}")) {
+
+    {{asUnderlyingType type}} item = {};
+        {{#zcl_struct_items_by_struct_name type}}
+     if ({{parent.label}}_el.at("{{label}}").is_null()) {
+      continue;
+     }
+          {{#if (isString type)}}
+    sl_log_warning(LOG_TAG,"Parsing limit reached. Too many nested special types");
+    //item.{{label}} = {{label}}_el.at("{{label}}").get<const std::string*>();
+          {{else}}
+    item.{{label}} = {{parent.label}}_el.at("{{label}}");
+          {{/if}}
+        {{/zcl_struct_items_by_struct_name}}
+    {{asSnakeCaseLower label}}.push_back(item);
   }
       {{else}}  {{! list non-string type}}
   {{asSnakeCaseLower label}} = jsn.at("{{label}}").get< std::vector< {{asUnderlyingType type}} >>();
       {{/if}}
     {{else}}
       {{#if (isString type)}} {{! single string type}}
-  {{asSnakeCaseLower label}} = jsn.at("{{label}}").get_ptr<const std::string*>()->c_str();
+  {{asSnakeCaseLower label}} = jsn.at("{{label}}").get<std::string>();
       {{else}}  {{! single non-string type}}
   {{asSnakeCaseLower label}} = jsn.at("{{label}}").get< {{asUnderlyingType type}} >();
       {{/if}}

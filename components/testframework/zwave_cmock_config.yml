@@ -15,6 +15,7 @@
     EmberEUI64: 'uint8_t'
     zigbee_eui64_t: 'uint8_t'
     zigbee_install_code_t: 'uint8_t'
+    zigbee_ext_panid_t: 'uint8_t'
     aoa_id_t: 'char'
   :plugins:
     - :ignore_arg

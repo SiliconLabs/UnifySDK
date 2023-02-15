@@ -13,12 +13,12 @@ the MSLA applicable to Source Code.
 
 | License                                                                                                      | Library                                                    | Application |
 | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | ----------- |
-| EPL/EDL                                                                                                      | [Mosquitto](https://mosquitto.org)                         | libuic      |
-| 3-clause BSD                                                                                                 | [Contiki](https://github.com/contiki-ng/contiki-ng)        | libuic      |
-| BSD                                                                                                          | [Editline](https://sourceforge.net/projects/libedit)       | libuic      |
-| Public Domain                                                                                                | [Sqlite](https://www.sqlite.org)                           | libuic      |
-| Boost                                                                                                        | [Boost](https://www.boost.org)                             | libuic      |
-| MIT                                                                                                          | [nlohmann_json](https://github.com/nlohmann/json)          | libuic      |
+| EPL/EDL                                                                                                      | [Mosquitto](https://mosquitto.org)                         | libunify    |
+| 3-clause BSD                                                                                                 | [Contiki](https://github.com/contiki-ng/contiki-ng)        | libunify    |
+| BSD                                                                                                          | [Editline](https://sourceforge.net/projects/libedit)       | libunify    |
+| Public Domain                                                                                                | [Sqlite](https://www.sqlite.org)                           | libunify    |
+| Boost                                                                                                        | [Boost](https://www.boost.org)                             | libunify    |
+| MIT                                                                                                          | [nlohmann_json](https://github.com/nlohmann/json)          | libunify    |
 | MIT                                                                                                          | [CMock](https://github.com/ThrowTheSwitch/CMock)           | Unittesting |
 | MIT                                                                                                          | [Unity](https://github.com/ThrowTheSwitch/Unity)           | Unittesting |
 | MIT                                                                                                          | [React](https://github.com/facebook/react)                 | Dev UI      |

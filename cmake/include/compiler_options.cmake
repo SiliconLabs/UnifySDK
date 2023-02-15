@@ -1,3 +1,24 @@
+if(NOT COMPILER_OPTIONS)
+  set(COMPILER_OPTIONS True)
+else()
+  return()
+endif()
+
+# ##############################################################################
+# C/Cpp Version Check
+# ##############################################################################
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  set(CXX_MIN_VERSION 8.3.0)
+  set(CXX_EXPECTED_VERSION 10.2.1)
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER CXX_EXPECTED_VERSION
+     OR CMAKE_CXX_COMPILER_VERSION VERSION_LESS GXX_MIN_VERSION)
+    message(
+      WARNING
+        "CXX compiler supported are between ${CXX_MIN_VERSION} and ${CXX_EXPECTED_VERSION}. CXX compiler version is ${CMAKE_CXX_COMPILER_VERSION} which may work, but it is unsupported"
+    )
+  endif()
+endif()
+
 # ##############################################################################
 # Compiler Options
 # ##############################################################################
@@ -12,15 +33,6 @@ set(CMAKE_CXX_EXTENSIONS ON) # Enable gnu++11 extentions
 # Set compiler Flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -Werror -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -Werror -Wall")
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-  set(CMAKE_C_FLAGS
-      "${CMAKE_C_FLAGS} -Wl,--unresolved-symbols=ignore-in-object-files")
-  set(CMAKE_CXX_FLAGS
-      "${CMAKE_CXX_FLAGS} -Wl,--unresolved-symbols=ignore-in-object-files")
-  add_compile_options (-fdiagnostics-color=always)
-endif()
 
 # Only add code coverage when CMAKE_GCOV is True
 if(CMAKE_GCOV)

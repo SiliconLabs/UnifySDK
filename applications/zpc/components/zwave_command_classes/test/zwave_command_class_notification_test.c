@@ -98,6 +98,12 @@ static sl_status_t zwave_command_handler_register_handler_stub(
   command_handler = new_command_class_handler;
   return SL_STATUS_OK;
 }
+static bool attribute_store_node_exists_stub(attribute_store_node_t node,
+                                             int cmock_num_calls)
+{
+  return node != ATTRIBUTE_STORE_INVALID_NODE;
+}
+
 static void init_notification_cc()
 {
   attribute_resolver_register_rule_Stub(attribute_resolver_register_rule_stub);
@@ -128,6 +134,7 @@ static void init_notification_cc()
 
 void setUp()
 {
+  attribute_store_node_exists_Stub(&attribute_store_node_exists_stub);
   init_notification_cc();
 }
 
@@ -473,9 +480,9 @@ void helper_test_zwave_command_class_supported_notification_types_report(
   const unsigned int version)
 {
   static uint8_t test_frame_data[]            = {COMMAND_CLASS_NOTIFICATION_V4,
-                                      NOTIFICATION_SUPPORTED_REPORT_V4,
-                                      0x01,
-                                      0x80};
+                                                 NOTIFICATION_SUPPORTED_REPORT_V4,
+                                                 0x01,
+                                                 0x80};
   static unid_t test_unid                     = "zw000001";
   static attribute_store_node_t endpoint_node = 0x011;
   static attribute_store_node_t supported_notification_type_node = 0x012;

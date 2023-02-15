@@ -44,7 +44,7 @@ class ConfigurationParams extends React.Component<ConfigurationParamsProps, Conf
                         :
                         <div className="col-sm-12 cluster-attributes">
                             {Object.keys(this.state.Parameter).map((field: any, cIndex: number) => {
-                                return <div key={cIndex} className={`col-sm-3 inline margin-v-10`}>
+                                return <div key={cIndex} className={`col-xl-3 col-md-6 inline margin-v-10`}>
                                     <Tooltip title={field}>
                                         <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} label={field} variant="outlined" type="text"
                                             value={(this.state.Parameter as any)[field]} />

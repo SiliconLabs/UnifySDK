@@ -61,13 +61,8 @@ void network_monitor_store_span_table_data()
       = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
     attribute_store_node_t span_node
-      = attribute_store_get_first_child_by_type(node_id_node,
-                                               ATTRIBUTE_S2_SPAN_ENTRY);
-
-    if (span_node == ATTRIBUTE_STORE_INVALID_NODE) {
-      span_node
-        = attribute_store_add_node(ATTRIBUTE_S2_SPAN_ENTRY, node_id_node);
-    }
+      = attribute_store_create_child_if_missing(node_id_node,
+                                                ATTRIBUTE_S2_SPAN_ENTRY);
 
     // Save this value.
     sl_log_debug(LOG_TAG, "Backing up SPAN data for NodeID %d.", node_id);
@@ -96,7 +91,7 @@ void network_monitor_restore_span_table_data()
 
     attribute_store_node_t span_node
       = attribute_store_get_first_child_by_type(node_id_node,
-                                               ATTRIBUTE_S2_SPAN_ENTRY);
+                                                ATTRIBUTE_S2_SPAN_ENTRY);
 
     span_entry_t span_data = {};
     sl_status_t span_status
@@ -139,13 +134,8 @@ static void store_group_membership(zwave_multicast_group_id_t group_id)
       = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
     attribute_store_node_t group_list_node
-      = attribute_store_get_first_child_by_type(node_id_node,
-                                               ATTRIBUTE_MULTICAST_GROUP_LIST);
-
-    if (group_list_node == ATTRIBUTE_STORE_INVALID_NODE) {
-      group_list_node = attribute_store_add_node(ATTRIBUTE_MULTICAST_GROUP_LIST,
-                                                 node_id_node);
-    }
+      = attribute_store_create_child_if_missing(node_id_node,
+                                                ATTRIBUTE_MULTICAST_GROUP_LIST);
 
     if (!ZW_IS_NODE_IN_MASK(node_id, node_list)) {
       // Make sure group membership is removed if not part of the group.
@@ -158,18 +148,10 @@ static void store_group_membership(zwave_multicast_group_id_t group_id)
                                                 0));
     } else {
       // Make sure group membership is saved if part of the group.
-      attribute_store_node_t group_node
-        = attribute_store_get_node_child_by_value(group_list_node,
-                                                  ATTRIBUTE_MULTICAST_GROUP,
-                                                  REPORTED_ATTRIBUTE,
-                                                  &group_id,
-                                                  sizeof(group_id),
-                                                  0);
-      if (group_node == ATTRIBUTE_STORE_INVALID_NODE) {
-        group_node = attribute_store_add_node(ATTRIBUTE_MULTICAST_GROUP,
-                                              group_list_node);
-        attribute_store_set_reported(group_node, &group_id, sizeof(group_id));
-      }
+      attribute_store_emplace(group_list_node,
+                              ATTRIBUTE_MULTICAST_GROUP,
+                              &group_id,
+                              sizeof(group_id));
     }
   }
 }
@@ -183,17 +165,14 @@ void network_monitor_store_mpan_table_data()
 
   attribute_store_node_t mpan_table_node
     = attribute_store_get_first_child_by_type(zpc_node_id_node,
-                                             ATTRIBUTE_S2_MPAN_TABLE);
+                                              ATTRIBUTE_S2_MPAN_TABLE);
   if (mpan_table_node == ATTRIBUTE_STORE_INVALID_NODE) {
     mpan_table_node
       = attribute_store_add_node(ATTRIBUTE_S2_MPAN_TABLE, zpc_node_id_node);
   }
 
   // Wipe the previous MPAN data
-  while (attribute_store_get_node_child_count(mpan_table_node)) {
-    attribute_store_delete_node(
-      attribute_store_get_node_child(mpan_table_node, 0));
-  }
+  attribute_store_delete_all_children(mpan_table_node);
 
   // For all possibly existing groups
   for (zwave_multicast_group_id_t group_id = 1; group_id < 255; group_id++) {
@@ -227,7 +206,7 @@ void network_monitor_restore_mpan_table_data()
 
   attribute_store_node_t mpan_table_node
     = attribute_store_get_first_child_by_type(zpc_node_id_node,
-                                             ATTRIBUTE_S2_MPAN_TABLE);
+                                              ATTRIBUTE_S2_MPAN_TABLE);
   // No MPAN table, we don't do anything
   if (mpan_table_node == ATTRIBUTE_STORE_INVALID_NODE) {
     sl_log_debug(LOG_TAG, "No MPAN table saved, skipping MPAN table reload");
@@ -273,7 +252,7 @@ void network_monitor_restore_mpan_table_data()
 
     attribute_store_node_t group_list_node
       = attribute_store_get_first_child_by_type(node_id_node,
-                                               ATTRIBUTE_MULTICAST_GROUP_LIST);
+                                                ATTRIBUTE_MULTICAST_GROUP_LIST);
 
     size_t group_entry_index = 0;
     attribute_store_node_t group_node

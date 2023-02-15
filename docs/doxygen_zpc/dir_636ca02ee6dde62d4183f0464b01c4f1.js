@@ -16,9 +16,12 @@ var dir_636ca02ee6dde62d4183f0464b01c4f1 =
     [ "attribute_mapper_ast_reducer.hpp", "attribute__mapper__ast__reducer_8hpp.html", [
       [ "reducer", "classast_1_1reducer.html", "classast_1_1reducer" ]
     ] ],
+    [ "attribute_mapper_built_in_functions.cpp", "attribute__mapper__built__in__functions_8cpp.html", "attribute__mapper__built__in__functions_8cpp" ],
+    [ "attribute_mapper_built_in_functions.hpp", "attribute__mapper__built__in__functions_8hpp.html", "attribute__mapper__built__in__functions_8hpp" ],
     [ "attribute_mapper_cyclic_check.hpp", "attribute__mapper__cyclic__check_8hpp.html", "attribute__mapper__cyclic__check_8hpp" ],
     [ "attribute_mapper_engine.hpp", "attribute__mapper__engine_8hpp.html", null ],
     [ "attribute_mapper_grammar.hpp", "attribute__mapper__grammar_8hpp.html", "attribute__mapper__grammar_8hpp" ],
     [ "attribute_mapper_parser.hpp", "attribute__mapper__parser_8hpp.html", "attribute__mapper__parser_8hpp" ],
-    [ "attribute_mapper_process.h", "attribute__mapper__process_8h.html", "attribute__mapper__process_8h" ]
+    [ "attribute_mapper_process.h", "attribute__mapper__process_8h.html", "attribute__mapper__process_8h" ],
+    [ "attribute_mapper_scope_settings.hpp", "attribute__mapper__scope__settings_8hpp.html", "attribute__mapper__scope__settings_8hpp" ]
 ];

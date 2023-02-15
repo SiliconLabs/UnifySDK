@@ -77,6 +77,7 @@ sl_status_t zwave_rx_fixt_setup(void)
       &zpc_zwave_serial_read_fd,
       zpc_get_config()->zwave_normal_tx_power_dbm,
       zpc_get_config()->zwave_measured_0dbm_power,
+      zpc_get_config()->zwave_max_lr_tx_power_dbm,
       zwave_rx_zpc_config_to_rf_region(zpc_get_config()->zwave_rf_region));
   }
 

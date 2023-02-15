@@ -23,6 +23,7 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zpc_attribute_store_network_helper.h"
+#include "zpc_attribute_store_type_registration.h"
 #include "sl_log.h"
 
 // Interface includes
@@ -104,11 +105,18 @@ static sl_status_t register_send_event_handler_stub(
 }
 
 /// Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp() {}
+void suiteSetUp()
+{
+  datastore_init(":memory:");
+  attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
+}
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -130,8 +138,6 @@ static void zwave_command_class_meter_init_verification()
 /// Called before each and every test
 void setUp()
 {
-  datastore_init(":memory:");
-  attribute_store_init();
   zpc_attribute_store_test_helper_create_network();
   zwave_unid_set_home_id(home_id);
   zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
@@ -157,11 +163,7 @@ void setUp()
 }
 
 /// Called after each and every test
-void tearDown()
-{
-  attribute_store_teardown();
-  datastore_teardown();
-}
+void tearDown() {}
 
 void test_meter_version_1_supporting_node()
 {

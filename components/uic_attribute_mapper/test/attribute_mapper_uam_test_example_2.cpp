@@ -15,9 +15,9 @@
 #include "unity.h"
 #include "attribute_store_fixt.h"
 #include "datastore.h"
-#include "attribute_mapper_engine.hpp"
-#include "attribute_store_test_helpers.hpp"
+#include "workaround.hpp"
 #include "attribute_store_type_registration.h"
+#include "uic_version.h"
 
 extern "C" {
 
@@ -30,27 +30,26 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
-  attribute_store_register_type(
-    111,
-    "DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE",
-    ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-    UNKNOWN_STORAGE_TYPE);
-  attribute_store_register_type(222,
-                                "ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE",
+  attribute_store_register_type(0x04020000,
+                                "ZCLMeasuredValue",
                                 ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-                                UNKNOWN_STORAGE_TYPE);
-  attribute_store_register_type(333,
-                                "ATTRIBUTE_SENSOR_MULTILEVEL_SCALE",
+                                U32_STORAGE_TYPE);
+  attribute_store_register_type(0x3102,
+                                "SensorType",
                                 ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-                                UNKNOWN_STORAGE_TYPE);
-  attribute_store_register_type(444,
-                                "ATTRIBUTE_SENSOR_MULTILEVEL_PRECISION",
+                                U8_STORAGE_TYPE);
+  attribute_store_register_type(0x3103,
+                                "Scale",
                                 ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-                                UNKNOWN_STORAGE_TYPE);
-  attribute_store_register_type(555,
-                                "ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_VALUE",
+                                U32_STORAGE_TYPE);
+  attribute_store_register_type(0x3104,
+                                "Precision",
                                 ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-                                UNKNOWN_STORAGE_TYPE);
+                                U32_STORAGE_TYPE);
+  attribute_store_register_type(0x3105,
+                                "Value",
+                                ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                U32_STORAGE_TYPE);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -69,103 +68,61 @@ void setUp()
 void test_mapper_engine_example()
 {
   MapperEngine &e = MapperEngine::get_instance();
-  e.set_ep_type(attribute::root().type());
+  e.set_common_parent_type(attribute::root().type());
   e.reset();
 
   // Create attribute tree
-  create_branch("DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE")
-    .set_reported<uint32_t>(100);
+  create_branch("ZCLMeasuredValue").set_reported<uint32_t>(100);
 
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SCALE")
-    .set_reported<uint32_t>(0);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_PRECISION")
-    .set_reported<uint32_t>(2);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SENSOR_VALUE")
-    .set_reported<uint32_t>(10);
+  create_branch("SensorType[1].Scale").set_reported<uint32_t>(0);
+  create_branch("SensorType[1].Precision").set_reported<uint32_t>(2);
+  create_branch("SensorType[1].Value").set_reported<uint32_t>(10);
 
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[2].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SCALE")
-    .set_reported<uint32_t>(1);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[2].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_PRECISION")
-    .set_reported<uint32_t>(2);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[2].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SENSOR_VALUE")
-    .set_reported<uint32_t>(10);
-
-  attribute_store_log();
+  create_branch("SensorType[2].Scale").set_reported<uint32_t>(1);
+  create_branch("SensorType[2].Precision").set_reported<uint32_t>(2);
+  create_branch("SensorType[2].Value").set_reported<uint32_t>(10);
 
   // Load UAM file
-  // Assumes that file located in uic/components/uic_attribute_mapper/test/rules/
-  TEST_ASSERT_TRUE(e.load_file("../../../../components/uic_attribute_mapper/"
-                               "test/rules/complex_test_map_2.uam"));
+  TEST_ASSERT_TRUE(e.load_file(SOURCE_DIR "/components/uic_attribute_mapper/"
+                                          "test/rules/complex_test_map_2.uam"));
 
   // Activate rules
-  check_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-               "MULTILEVEL_SENSOR_VALUE")
-    .set_reported<uint32_t>(100);
-
-  attribute_store_log();
+  attribute_store_node_t updated_node
+    = check_branch("SensorType[1].Value").set_reported<uint32_t>(100);
+  TEST_ASSERT_EQUAL(100, check_branch("ZCLMeasuredValue").reported<uint32_t>());
 
   // Test
-  TEST_ASSERT_EQUAL(
-    10,
-    check_branch("DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE")
-      .reported<uint32_t>());
+  e.on_attribute_updated(updated_node, REPORTED_ATTRIBUTE, ATTRIBUTE_UPDATED);
+  TEST_ASSERT_EQUAL(10, check_branch("ZCLMeasuredValue").reported<uint32_t>());
 }
 
 // Example with string as branch descriptor
 void test_mapper_engine_example_()
 {
   MapperEngine &e = MapperEngine::get_instance();
-  e.set_ep_type(attribute::root().type());
+  e.set_common_parent_type(attribute::root().type());
   e.reset();
 
   // Create attribute tree
-  create_branch("DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE")
-    .set_reported<uint32_t>(100);
+  create_branch("ZCLMeasuredValue").set_reported<uint32_t>(100);
 
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SCALE")
-    .set_reported<uint32_t>(1);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_PRECISION")
-    .set_reported<uint32_t>(2);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SENSOR_VALUE")
-    .set_reported<uint32_t>(100);
+  create_branch("SensorType[1].Scale").set_reported<uint32_t>(1);
+  create_branch("SensorType[1].Precision").set_reported<uint32_t>(2);
+  create_branch("SensorType[1].Value").set_reported<uint32_t>(100);
 
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[2].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SCALE")
-    .set_reported<uint32_t>(1);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[2].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_PRECISION")
-    .set_reported<uint32_t>(2);
-  create_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[2].ATTRIBUTE_SENSOR_"
-                "MULTILEVEL_SENSOR_VALUE")
-    .set_reported<uint32_t>(100);
-
-  attribute_store_log();
+  create_branch("SensorType[2].Scale").set_reported<uint32_t>(1);
+  create_branch("SensorType[2].Precision").set_reported<uint32_t>(2);
+  create_branch("SensorType[2].Value").set_reported<uint32_t>(100);
 
   // Load UAM file
-  // Assumes that file located in uic/components/uic_attribute_mapper/test/rules/
-  TEST_ASSERT_TRUE(e.load_file("../../../../components/uic_attribute_mapper/"
-                               "test/rules/complex_test_map_2.uam"));
+  TEST_ASSERT_TRUE(e.load_file(SOURCE_DIR "/components/uic_attribute_mapper/"
+                                          "test/rules/complex_test_map_2.uam"));
 
   // Activate rules
-  check_branch("ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE[1].ATTRIBUTE_SENSOR_"
-               "MULTILEVEL_SENSOR_VALUE")
-    .set_reported<uint32_t>(167000);
+  attribute_store_node_t updated_node
+    = check_branch("SensorType[1].Value").set_reported<uint32_t>(167000);
+  e.on_attribute_updated(updated_node, REPORTED_ATTRIBUTE, ATTRIBUTE_UPDATED);
 
-  attribute_store_log();
-
-  // Test FIXME!
-  //  TEST_ASSERT_EQUAL(
-  //    750,
-  //    check_branch("DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE")
-  //      .reported<uint32_t>());
+  TEST_ASSERT_EQUAL(750, check_branch("ZCLMeasuredValue").reported<uint32_t>());
 }
 }

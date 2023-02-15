@@ -35,15 +35,15 @@
 #include "attribute.hpp"
 #include "attribute_timeouts.h"
 #include "attribute_resolver.h"
+#include "attribute_mapper.h"
 
 // Contiki
 #include "sys/clock.h"
 
 // ZPC components
-#include "zpc_endian.h"
 #include "zwave_utils.h"
 #include "zwave_network_management.h"
-#include "zwave_network_management_state.h"
+#include "zwave_network_management_types.h"
 #include "zwave_controller.h"
 #include "zwave_controller_keyset.h"
 #include "zwave_controller_utils.h"
@@ -217,8 +217,7 @@ static void network_monitor_on_nif_updated(attribute_store_node_t updated_node,
     return;
   }
 
-  if (true
-      == attribute_store_is_value_defined(updated_node, REPORTED_ATTRIBUTE)) {
+  if (true == attribute_store_is_reported_defined(updated_node)) {
     return;
   }
 
@@ -492,7 +491,9 @@ static void network_monitor_remove_attribute_store_home_id(unid_t old_unid)
     = attribute_store_network_helper_get_home_id_node(old_unid);
 
   // Delete the node
+  attribute_mapper_pause_mapping();
   attribute_store_delete_node(home_id_node);
+  attribute_mapper_resume_mapping();
 }
 
 /**
@@ -515,7 +516,9 @@ static void network_monitor_remove_attribute_store_node(zwave_node_id_t node_id)
     node_id_node,
     network_monitor_node_id_resolution_listener);
   // Delete the node
+  attribute_mapper_pause_mapping();
   attribute_store_delete_node(node_id_node);
+  attribute_mapper_resume_mapping();
 }
 
 /**
@@ -677,12 +680,8 @@ static void network_monitor_update_new_node_attribute_store(
   // Find the Non-secure NIF for the node/endpoint 0
   attribute_store_node_t endpoint_id_node
     = attribute_store_network_helper_get_endpoint_node(unid, 0);
-  attribute_store_node_t nif_node
-    = attribute_store_get_first_child_by_type(endpoint_id_node,
-                                              ATTRIBUTE_ZWAVE_NIF);
-  if (nif_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
-  }
+  attribute_store_create_child_if_missing(endpoint_id_node,
+                                          ATTRIBUTE_ZWAVE_NIF);
 }
 
 // Handler Functions for events

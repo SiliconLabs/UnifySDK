@@ -20,6 +20,8 @@
 #include "attribute_mapper_ast_dep_eval.hpp"
 #include "attribute_mapper_cyclic_check.hpp"
 #include "attribute_mapper_ast_reducer.hpp"
+#include "attribute_mapper_built_in_functions.hpp"
+#include "attribute_mapper_scope_settings.hpp"
 
 #include "sl_log.h"
 #include <map>
@@ -27,11 +29,12 @@
 #include <assert.h>
 #include <boost/filesystem.hpp>
 
-constexpr const char *LOG_TAG = "attribute_mapper";
+constexpr const char LOG_TAG[] = "attribute_mapper";
 
 void MapperEngine::reset()
 {
   relations.clear();
+  assignment_settings.clear();
 }
 
 bool MapperEngine::load_path(const std::string &uam_path)
@@ -119,14 +122,23 @@ bool MapperEngine::add_expression(const std::string expression)
 
 bool MapperEngine::update_dependencies(const ast::ast_tree &ast)
 {
+  // First check that the AST has no unknown functions.
+  if (has_unknown_functions_in_tree(ast)) {
+    sl_log_error(LOG_TAG,
+                 "Unknown function name found, "
+                 "dependencies will not be updated.");
+    return false;
+  }
+
   for (auto ast_root: ast) {
     if (ast_root.type() == typeid(ast::scope)) {
-      const auto scope = boost::get<ast::scope>(ast_root);
+      const auto &scope = boost::get<ast::scope>(ast_root);
 
       //Go though all assignments in the ast, like r'xxx = yyy
       for (const auto &__assignment: scope.assignments) {
-        std::shared_ptr<ast::assignment> assignment
-          = std::make_shared<ast::assignment>(__assignment);
+        auto assignment = std::make_shared<ast::assignment>(__assignment);
+        auto scope_settings
+          = std::make_shared<ast::scope_settings_t>(scope.settings);
         // Use the dependency evaluator to get a list of attributes which this
         // assignment depends on.
         ast::dep_eval dep_eval;
@@ -157,6 +169,7 @@ bool MapperEngine::update_dependencies(const ast::ast_tree &ast)
           // such that quickly know which assignment should be re-evaluated
           // then this dependency changes
           relations.insert(std::make_pair(a, assignment));
+          assignment_settings[assignment] = scope_settings;
 
           // Register the a callback on the dependency
           if ((a.second == 'r') || (a.second == 'e')) {
@@ -184,10 +197,18 @@ bool MapperEngine::update_dependencies(const ast::ast_tree &ast)
   return true;
 }
 
-void MapperEngine::set_ep_type(attribute_store_type_t t)
+bool MapperEngine::has_unknown_functions_in_tree(const ast::ast_tree &ast)
 {
-  sl_log_debug(LOG_TAG, "Mapper engine configured with endpoint type %d", t);
-  ep_type = t;
+  ast::built_in_function_check function_check;
+  return function_check(ast);
+}
+
+void MapperEngine::set_common_parent_type(attribute_store_type_t t)
+{
+  sl_log_debug(LOG_TAG,
+               "Mapper engine configured with Common Parent type %d",
+               t);
+  this->common_parent_type = t;
 }
 
 //Get the singletron
@@ -244,37 +265,34 @@ void MapperEngine::on_attribute_updated(
     return;
   }
 
-  /* Locate the endpoint node
-    * FIXME: this is not the optimal solution. It would be better to
-    * store the path depth in the relations such that we could just
-    * go a number of levels up the the tree to find the common parent.
-    * This is also the reason why the evaluation of the ^ operator fails.
-    *
-    * Right releation r'aaa = r'bbb only works if the parent of aaa and bbb is
-    * of type ep_type.
-    *
-    * It would be nice could say the the sematics above just mean that aaa and
-    * bbb has A common parrent. Which could be of any type. But this requires
-    * us to note that for the expression r'aaa = r'bbb.ccc[1].ddd we note that
-    * when ddd changes we need to go 3 up to find the common parent of aaa and ddd
-    */
-  attribute_store::attribute endpoint = original_node.first_parent(ep_type);
-
-  if (!endpoint.is_valid()) {
-    sl_log_error(LOG_TAG,
-                 "Unable to locate the parent Endpoint node while evaluating "
-                 "relations after node %d udpate",
-                 original_node);
-    return;
-  }
-
   ast::attribute_dependency_t dep
     = std::make_pair(original_node.type(), updated_value_type);
 
   // find all relations that depend on this type
   auto [first, last] = relations.equal_range(dep);
   for (auto r = first; r != last; r++) {
-    const ast::assignment &assignment = *(r->second);
+    const ast::assignment &assignment     = *(r->second);
+    const ast::scope_settings_t &settings = *(assignment_settings[r->second]);
+
+    // Check if the scope has a endpoint type override, then locate the parent endpoint.
+    attribute_store_type_t scope_common_parent_type
+      = get_common_parent_type_scope_configuration(this->common_parent_type,
+                                                   settings);
+    attribute_store::attribute endpoint
+      = original_node.first_parent(scope_common_parent_type);
+    if (!endpoint.is_valid()) {
+      // Log warning only if the node does not exist. is_valid() return false
+      // if the node is marked for deletion.
+      if (endpoint == ATTRIBUTE_STORE_INVALID_NODE) {
+        sl_log_warning(LOG_TAG,
+                       "Unable to locate the parent node while "
+                       "evaluating relations after node %d udpate. Verify that "
+                       "the Common Parent Type (%d) is set correctly",
+                       original_node,
+                       scope_common_parent_type);
+      }
+      continue;
+    }
 
     // attempt evaluation of the right hand side of the assignment
     ast::eval<result_type_t> evaluator(endpoint);
@@ -282,8 +300,10 @@ void MapperEngine::on_attribute_updated(
 
     if (value) {
       // Verify if we want to create an attribute.
-      const bool create_if_missing = (assignment.lhs.value_type == 'r'
-                                      || assignment.lhs.value_type == 'e');
+      const bool create_if_missing
+        = should_create_attributes(assignment.lhs.value_type,
+                                   settings,
+                                   value.value());
 
       // Find the destination, start from the Endpoint node.
       attribute_store::attribute destination_node
@@ -294,11 +314,21 @@ void MapperEngine::on_attribute_updated(
         continue;
       }
 
+      bool attribute_reactions_paused_by_engine = false;
+      if ((false == is_chain_reaction_enabled(settings))
+          && (false
+              == attribute_mapper_is_attribute_reactions_paused(
+                destination_node))) {
+        attribute_reactions_paused_by_engine = true;
+        attribute_mapper_pause_reactions_to_attribute_updates(destination_node);
+      }
+
 #ifndef NDEBUG
       // Debug build will print the matched expressions
       std::stringstream ss;
       ss << "Match expression: " << assignment.lhs
-         << " triggered by Attribute ID " << std::dec << original_node
+         << " triggered by Attribute ID " << std::dec << original_node << " ("
+         << attribute_store_get_type_name(original_node.type()) << ")"
          << " affecting Attribute ID " << std::dec << destination_node
          << " - Result value: " << value.value();
       sl_log_debug(LOG_TAG, ss.str().c_str());
@@ -307,33 +337,32 @@ void MapperEngine::on_attribute_updated(
       try {
         if (assignment.lhs.value_type == 'r') {
           if (change != ATTRIBUTE_DELETED) {
-            destination_node.clear_desired();
+            if (is_clear_desired_value_enabled(settings)) {
+              destination_node.clear_desired();
+            }
             attribute_store_set_reported_number(destination_node,
                                                 value.value());
           }
         } else if (assignment.lhs.value_type == 'd') {
           attribute_store_set_desired_number(destination_node, value.value());
         } else if (assignment.lhs.value_type == 'e') {
-          //don't set a value just create the attribute
-          if (change == ATTRIBUTE_DELETED) {
-            sl_log_debug(LOG_TAG,
-                         "Deleting Attribute ID %d after "
-                         "the deletion of Attribute ID %d",
-                         original_node,
-                         destination_node);
+          // Existences don't set values, they create attributes
+          if (value.value() == 0) {
+            sl_log_debug(LOG_TAG, "Deleting Attribute ID %d", destination_node);
             destination_node.delete_node();
-            //TODO: Now that we have deleted a node we should asynchronously
-            // re-evaluate the realtions which depend on the type of the
-            // original deleted node, because the relations may be forfilled in
-            // a another way ie in the expression e'a = e'b | e'c, here if b is
-            // deleted, perhaps c still exists
           }
-          // The ATTRIBUTE_CREATED case is handled above in get_destination_for_attribute
+          // Creations for the exitence type assignment are handled by
+          // should_create_attributes / create_if_missing above.
         }
       } catch (std::invalid_argument const &) {
         sl_log_error(LOG_TAG,
                      "Failed to modify the value of Attribute Store node %d",
                      destination_node);
+      }
+
+      if (true == attribute_reactions_paused_by_engine) {
+        attribute_mapper_resume_reactions_to_attribute_updates(
+          destination_node);
       }
     }
   }

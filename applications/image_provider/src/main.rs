@@ -22,6 +22,7 @@ mod mqtt_ota;
 extern crate lazy_static;
 use crate::mqtt_ota::MqttOtaHandler;
 use image_watcher::OtaConfig;
+use unify_application_monitoring_sys::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
 use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
@@ -29,6 +30,7 @@ use unify_sl_status_sys::*;
 
 declare_app_name!("unify-image-provider");
 const IMAGE_PATH: &str = "/var/lib/uic-image-provider";
+const FULL_APPLICATION_NAME: &str = "OTA Image Provider Service";
 const POLL_PERIOD: i32 = 15;
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
@@ -45,6 +47,8 @@ fn main() -> std::result::Result<(), sl_status_t> {
 }
 
 fn run(ota_config: OtaConfig) -> Result<(), sl_status_t> {
+    unify_application_monitoring_set_application_name(FULL_APPLICATION_NAME);
+
     let mqtt_client = UnifyMqttClient::default();
     mqtt_client.initialize()?;
     let handler = MqttOtaHandler::new(mqtt_client.clone(), ota_config)?;
@@ -56,11 +60,7 @@ fn parse_application_arguments() -> std::result::Result<(), config_status_t> {
         .map(|arg| std::ffi::CString::new(arg).unwrap())
         .collect::<Vec<std::ffi::CString>>();
 
-    config_add_string(
-            "image_provider.image_path",
-            "image path",
-            IMAGE_PATH,
-        )
+    config_add_string("image_provider.image_path", "image path", IMAGE_PATH)
         .and(config_add_int(
             "image_provider.poll_period",
             "poll period",

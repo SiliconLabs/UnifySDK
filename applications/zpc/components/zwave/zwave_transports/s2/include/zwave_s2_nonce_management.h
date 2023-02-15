@@ -113,10 +113,27 @@ sl_status_t zwave_s2_get_mpan_data(zwave_node_id_t owner_node_id,
 void zwave_s2_set_mpan_data(zwave_node_id_t owner_node_id,
                             zwave_multicast_group_id_t group_id,
                             const mpan_entry_t *mpan_data);
+/**
+ * @brief Resets the SPAN for node_id
+ * by setting its state to SPAN_NOT_USED
+ *
+ * @param node_id [in]  The Z-Wave NodeID with which the SPAN needs to be reset
+ */
+void zwave_s2_reset_span(zwave_node_id_t node_id);
 
+/**
+ * @brief Resets the MPAN entry matching owner_node_id and group_id
+ * by setting its state to MPAN_NOT_USED
+ *
+ * @param owner_node_id [in]  The Z-Wave NodeID owning the MPAN group.
+ * @param group_id [in]       The Z-Wave Group ID.
+ */
+
+void zwave_s2_reset_mpan(zwave_node_id_t owner_node_id,
+                         zwave_multicast_group_id_t group_id);
 #ifdef __cplusplus
 }
 #endif
 
 #endif  //ZWAVE_S2_NONCE_MANAGEMENT_H
-/** @} end zwave_s2_nonce_management */
+        /** @} end zwave_s2_nonce_management */

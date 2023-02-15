@@ -20,4 +20,4 @@ target_include_directories(aoxpc_ncp_core
   ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/tcp
 )
 
-target_link_libraries(aoxpc_ncp_core uic_log aoxpc_config bluetooth_api)
+target_link_libraries(aoxpc_ncp_core unify aoxpc_config bluetooth_api)

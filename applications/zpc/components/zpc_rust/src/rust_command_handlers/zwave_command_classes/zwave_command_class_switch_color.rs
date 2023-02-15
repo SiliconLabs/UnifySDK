@@ -23,11 +23,14 @@ use crate::rust_command_handlers::{
         CommandClassConfigurationTrait, FrameControlSupportTrait, ZwaveVersionChangedTrait,
     },
 };
+use crate::zwave_command_classes_sys::{
+    is_zwave_command_class_filtered_for_root_device, sl_status_t,
+};
 use crate::zwave_controller_sys::zwave_controller_endpoint_t;
 use rust_command_class_frame_types::command_class_switch_color::*;
-use unify_attribute_store_sys::{
+use unify_attribute_resolver_sys::{
     attribute_resolver_register_rule, attribute_resolver_restart_set_resolution,
-    is_node_pending_set_resolution, sl_status_t,
+    is_node_pending_set_resolution,
 };
 use unify_log_sys::*;
 use unify_middleware::{
@@ -147,6 +150,13 @@ impl ZwaveVersionChangedTrait for CommandClassSwitchColorFrame {
     const ATTRIBUTE_STORE_TYPE: u32 = ATTRIBUTE_VERSION;
 
     fn on_attribute_version(ep: Attribute, version: u8) {
+        if unsafe {
+            is_zwave_command_class_filtered_for_root_device(COMMAND_CLASS_SWITCH_COLOR, ep.handle)
+        } == true
+        {
+            return;
+        }
+
         // Use any color component id at token for starting the supported get
         if version > 0 {
             if !ep
@@ -232,14 +242,14 @@ impl FrameControlSupportTrait for SwitchColorReportFrame {
 
         value_node.stop_transition();
 
-        // UIC-1927 : change value_node.set_desired(None) to
+        // UIC-1927 : change value_node.set_desired(current_value) to
         // .set_desired::<color_component_id_value_t>(Some(self.target_value.into()))
         // This will trigger the Rust callbacks to invoke on_value_update() later on.
         // which provokes that we try to set this desired value again.
 
         // Set all the values in the attribute store
         value_node
-            .set_desired::<color_component_id_value_t>(None)
+            .set_desired::<color_component_id_value_t>(Some(self.current_value.into()))
             .and(
                 value_node
                     .set_reported::<color_component_id_value_t>(Some(self.current_value.into())),
@@ -335,11 +345,11 @@ fn switch_color_supported_get(_: Attribute) -> Result<(sl_status_t, Vec<u8>), At
 mod test {
     use super::*;
     use crate::zwave_command_class_definitions::MockConnectionInfoTrait;
+    use crate::zwave_controller_sys::zwave_controller_endpoint_t;
     use serial_test::serial;
     use std::ffi::CString;
     use std::sync::Once;
     use unify_middleware::AttributeStore;
-    // use zwave_controller_sys::zwave_controller_endpoint_t;
     use unify_middleware::AttributeStoreTrait;
 
     extern "C" {

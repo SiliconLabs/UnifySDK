@@ -1,8 +1,6 @@
-/*
- * s2_inclusion_mock.c
- *
- *  Created on: 11. nov. 2019
- *      Author: cholsen
+/**
+ * @file s2_inclusion_mock.c
+ * @copyright 2022 Silicon Laboratories Inc.
  */
 #include <s2_protocol.h>
 

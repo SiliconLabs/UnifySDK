@@ -32,7 +32,7 @@
 
 /// Other
 #include "sl_log.h"
-#include "zpc_endian.h"
+#include "zwave_controller_endian.h"
 #define LOG_TAG "zwave_s2_keystore"
 
 #define S2_NUM_KEY_CLASSES (s2_get_key_count()) /* Includes the S0 key */
@@ -68,6 +68,11 @@ bool keystore_network_key_clear(uint8_t keyclass)
   return false;
 }
 
+void keystore_dynamic_private_key_read(uint8_t *buf)
+{
+  return keystore_private_key_read(buf);
+}
+
 void keystore_private_key_read(uint8_t *buf)
 {
   uint8_t nvr_version;
@@ -101,6 +106,11 @@ void keystore_public_key_debug_print(void)
 {
   uint8_t buf[32];
   keystore_public_key_read(buf);
+}
+
+void keystore_dynamic_public_key_read(uint8_t *buf)
+{
+  return keystore_public_key_read(buf);
 }
 
 void keystore_public_key_read(uint8_t *buf)
@@ -145,6 +155,74 @@ bool keystore_network_key_read(uint8_t keyclass, uint8_t *buf)
   }
 
   return true;
+}
+
+void write_key_to_file(uint8_t *key, FILE *f, bool is_key_s0)
+{
+  // Buffer need to be of size for following string
+  // 98;00000000000000000000000000000000;1\0
+  char str[NETWORK_KEY_SIZE * 2 + 3 + 1 + 1] = {0};
+  uint8_t index                              = 0;
+
+  if (is_key_s0) {
+    index += snprintf(str, 4, "98;");
+  } else {
+    index += snprintf(str, 4, "9F;");
+  }
+
+  for (int i = 0; i < NETWORK_KEY_SIZE; i++) {
+    index += snprintf(str + index, 3, "%02X", key[i]);
+  }
+  snprintf(str + index, 4, ";1\n");
+  fputs(str, f);
+}
+
+void zwave_s2_save_security_keys(const char *filename)
+{
+  FILE *f                               = 0;
+  uint8_t current_key[NETWORK_KEY_SIZE] = {0};
+  f                                     = fopen(filename, "w+");
+  if (!f) {
+    sl_log_error(LOG_TAG,
+                 "Could not open %s for writing S2 keys to it\n",
+                 filename);
+    return;
+  }
+  uint8_t assigned_keys = zwave_s2_keystore_get_assigned_keys();
+
+  // Can not run in the loop here because the order of keys zniffer wants in the
+  // dump is different than the the way keys are identified by class
+
+  if (KEY_CLASS_S0 & assigned_keys) {
+    nvm_config_get(security_netkey, current_key);
+    write_key_to_file(current_key, f, 1);
+  }
+
+  if (KEY_CLASS_S2_UNAUTHENTICATED & assigned_keys) {
+    nvm_config_get(security2_key[0], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+
+  if (KEY_CLASS_S2_AUTHENTICATED & assigned_keys) {
+    nvm_config_get(security2_key[1], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+
+  if (KEY_CLASS_S2_AUTHENTICATED_LR & assigned_keys) {
+    nvm_config_get(security2_lr_key[0], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+
+  if (KEY_CLASS_S2_ACCESS & assigned_keys) {
+    nvm_config_get(security2_key[2], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+
+  if (KEY_CLASS_S2_ACCESS_LR & assigned_keys) {
+    nvm_config_get(security2_lr_key[1], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+  fclose(f);
 }
 
 void zwave_s2_log_security_keys(sl_log_level_t log_level)
@@ -305,7 +383,7 @@ void zwave_s2_keystore_init()
                  "Failed to read magic from zwapi_memory_get_buffer\n");
     assert(false);
   }
-  magic = zpc_ntohl(magic);
+  magic = zwave_controller_ntohl(magic);
   if (magic != NVM_MAGIC) {
     sl_log_warning(LOG_TAG,
                    "NVM magic check failed %08x != %08x, generating new keys\n",
@@ -314,7 +392,7 @@ void zwave_s2_keystore_init()
     zwave_s2_create_new_learn_mode_ecdh_key();
     zwave_s2_create_new_network_keys();
 
-    magic = zpc_ntohl(NVM_MAGIC);
+    magic = zwave_controller_ntohl(NVM_MAGIC);
     nvm_config_set(magic, &magic);
   }
   zwave_s2_create_new_dynamic_ecdh_key();

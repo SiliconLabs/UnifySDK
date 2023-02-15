@@ -54,10 +54,6 @@ using namespace attribute_store;
 // Note, Multi Channel Association shares attributes with Association
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_##type
 
-// Minimum 2 attributes to create under a Group ID when created:
-constexpr attribute_store_type_t group_attributes[]
-  = {ATTRIBUTE(GROUP_CONTENT), ATTRIBUTE(MAX_NODES_SUPPORTED)};
-
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -308,17 +304,9 @@ static sl_status_t
                                &group_count,
                                sizeof(group_count));
 
-  attribute_store_node_t group_node;
-  for (association_group_id_t i = 1; i <= group_count; i++) {
-    group_node = attribute_store_emplace(endpoint_node,
-                                         ATTRIBUTE(GROUP_ID),
-                                         &i,
-                                         sizeof(i));
+  // zwave_command_class_association_on_supported_groupings_update callback
+  // will take care of creating the groups based on the groupings update
 
-    attribute_store_add_if_missing(group_node,
-                                   group_attributes,
-                                   COUNT_OF(group_attributes));
-  }
   // We are done parsing the frame
   return SL_STATUS_OK;
 }
@@ -512,12 +500,10 @@ static sl_status_t
 
   association_group_capacity_t capacity
     = association_report->max_nodes_supported;
-  attribute_store_node_t group_capacity_node
-    = attribute_store_get_first_child_by_type(group_id_node,
-                                              ATTRIBUTE(MAX_NODES_SUPPORTED));
-  attribute_store_set_reported(group_capacity_node,
-                               &capacity,
-                               sizeof(capacity));
+  attribute_store_set_child_reported(group_id_node,
+                                     ATTRIBUTE(MAX_NODES_SUPPORTED),
+                                     &capacity,
+                                     sizeof(capacity));
 
   attribute_store_node_t group_content_node
     = attribute_store_get_first_child_by_type(group_id_node,
@@ -529,18 +515,45 @@ static sl_status_t
     attribute_store_set_reported(group_content_node, &marker, sizeof(marker));
     return SL_STATUS_OK;
   }
-  // Else parse the list of associations.
+
+  // Check if we just received a "Report To Follow"
+  bool concatenate_with_previous_value = false;
+  reports_to_follow_t previous_reports_to_follow
+    = get_reports_to_follow(group_content_node);
+
+  reports_to_follow_t reports =
+    frame_data[ASSOCIATION_REPORTS_REPORTS_TO_FOLLOW];
+  
+
+  set_reports_to_follow(group_content_node, reports);
+  if (reports < previous_reports_to_follow) {
+    // We received a report with a decrement of a previous Report To Follow
+    // state. Concatenate the value.
+    concatenate_with_previous_value = true;
+  }
   association_bytes bytes(&frame_data[REPORT_ASSOCIATION_BYTES_INDEX],
                           &frame_data[frame_length]);
 
   // Convert into an association list:
   association_set list;
   get_association_list(bytes, list);
-
   // Set back into bytes to save it in our attribute store.
   bytes.clear();
   get_association_bytestream(list, bytes);
   attribute group(group_content_node);
+  
+  if (concatenate_with_previous_value == true) {
+    association_set existing_list;
+    association_bytes existing_bytes = 
+    group.get<association_bytes>(REPORTED_ATTRIBUTE);
+
+    get_association_list(existing_bytes, existing_list);
+    association_set merged_list;
+    merge_association_lists(list, existing_list, merged_list);
+    bytes.clear();
+    get_association_bytestream(merged_list, bytes);
+  }
+
   group.set<association_bytes>(REPORTED_ATTRIBUTE, bytes);
 
   for (auto association: list) {
@@ -1050,6 +1063,13 @@ sl_status_t zwave_command_class_multi_channel_association_init()
     ATTRIBUTE(GROUP_CONTENT),
     zwave_command_class_multi_channel_association_set,
     zwave_command_class_multi_channel_association_get);
+
+  // Listen to supported groupings update, so we create groups when we know
+  // how many are supported (zwave_command_class_association should register the same callback)
+  attribute_store_register_callback_by_type_and_state(
+    &zwave_command_class_association_on_supported_groupings_update,
+    ATTRIBUTE(SUPPORTED_GROUPINGS),
+    REPORTED_ATTRIBUTE);
 
   // Listen to Group creations (group id updates), so we can associate ourselves.
   attribute_store_register_callback_by_type_and_state(

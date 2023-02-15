@@ -15,11 +15,13 @@ target_include_directories(
           ${ZAP_CURRENT_OUTPUT_DIR}/src)
 
 target_link_libraries(zigpc_zcl_profiles PRIVATE zigpc_common zigpc_zcl_util
-                                                 uic_log)
+                                                 unify)
 
-# create mocks
+if(BUILD_TESTING)
+  # create mocks
 
-add_mock(zigpc_zcl_profiles_mock include/zcl_attribute_info.h)
+  add_mock(zigpc_zcl_profiles_mock include/zcl_attribute_info.h)
 
-target_interface_libraries(zigpc_zcl_profiles_mock zigpc_common_mock
-                           zigpc_zcl_util_mock)
+  target_interface_libraries(zigpc_zcl_profiles_mock zigpc_common_mock
+                            zigpc_zcl_util_mock)
+endif()

@@ -63,6 +63,7 @@ void test_init()
                             "    - tc_use_well_known_key: true\n"
                             "    - datastore_file: /tmp/database_file.db\n"
                             "    - ota_path: /test-ota-mock/\n"
+                            "    - attr_polling_rate_ms: 500\n"
                             "mqtt:\n"
                             "    - host: localhost\n"
                             "    - port: 2000\n";
@@ -81,5 +82,6 @@ void test_init()
                            zigpc_get_config()->datastore_file);
   TEST_ASSERT_EQUAL_STRING("/test-ota-mock/",
                            zigpc_get_config()->ota_path);
+  TEST_ASSERT_EQUAL_INT(500,zigpc_get_config()->attr_polling_rate_ms);
   TEST_ASSERT_TRUE(zigpc_get_config()->tc_use_well_known_key);
 }

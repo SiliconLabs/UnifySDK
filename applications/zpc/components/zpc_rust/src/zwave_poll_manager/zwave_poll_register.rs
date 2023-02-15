@@ -28,6 +28,8 @@ use unify_middleware::{
 use unify_sl_status_sys::*;
 declare_app_name!("zwave_poll_manager");
 
+pub const ATTRIBUTE_POLL_ENGINE_MARK: AttributeTypeId = 0x0018;
+
 #[allow(non_camel_case_types)]
 type sl_status_t = u32;
 
@@ -45,11 +47,10 @@ struct PollRegister {
 }
 
 struct ZPCPollConfig {
-    attribute_list_file : String ,
-    backoff : i32,
-    default_interval : i32
+    attribute_list_file: String,
+    backoff: i32,
+    default_interval: i32,
 }
-
 
 impl PollRegister {
     fn new(attribute_poller: impl AttributePollTrait + 'static) -> PollRegister {
@@ -177,15 +178,17 @@ fn get_zwave_plus_info_version(endpoint: Attribute) -> Option<u32> {
         .and_then(|a| a.get_reported::<u32>().ok())
 }
 
-fn get_poll_config() -> Result<ZPCPollConfig,unify_config_sys::config_status_t> {
+fn get_poll_config() -> Result<ZPCPollConfig, unify_config_sys::config_status_t> {
     Ok(ZPCPollConfig {
-      attribute_list_file : unify_config_sys::config_get_as_string("zpc.poll.attribute_list_file")?,
-      backoff : unify_config_sys::config_get_as_int("zpc.poll.backoff")?,
-      default_interval : unify_config_sys::config_get_as_int("zpc.poll.default_interval")?
+        attribute_list_file: unify_config_sys::config_get_as_string(
+            "zpc.poll.attribute_list_file",
+        )?,
+        backoff: unify_config_sys::config_get_as_int("zpc.poll.backoff")?,
+        default_interval: unify_config_sys::config_get_as_int("zpc.poll.default_interval")?,
     })
 }
 
-fn load_poll_map_from_config(file_name : String) -> Result<AttributePollMap, sl_status_t> {
+fn load_poll_map_from_config(file_name: String) -> Result<AttributePollMap, sl_status_t> {
     let config_item = std::path::PathBuf::from(file_name);
 
     if !config_item.exists() {
@@ -206,7 +209,6 @@ fn load_poll_map_from_config(file_name : String) -> Result<AttributePollMap, sl_
     })
 }
 
-
 #[no_mangle]
 /// Initialize the attribute poll manager
 /// return sl_status_t always returns SL_STATUS_OK
@@ -214,14 +216,15 @@ pub extern "C" fn zwave_poll_manager_init() -> sl_status_t {
     if let Ok(config) = get_poll_config() {
         if let Ok(poll_map) = load_poll_map_from_config(config.attribute_list_file) {
             AttributePoll::default().initialize(PollEngineConfig {
-                backoff : config.backoff as u32,
-                default_interval : config.default_interval as u32,
-            } );
-    
+                backoff: config.backoff as u32,
+                default_interval: config.default_interval as u32,
+                poll_mark_attribute_type: ATTRIBUTE_POLL_ENGINE_MARK as AttributeTypeId,
+            });
+
             let poll_register = PollRegister::new(AttributePoll::default());
-            poll_register.run(poll_map);    
-        } 
-    } 
+            poll_register.run(poll_map);
+        }
+    }
     SL_STATUS_OK
 }
 
@@ -253,7 +256,6 @@ mod poll_manager_test {
             AttributeStore::new().unwrap().from_handle(3)
         }
     }
-
 
     #[test]
     fn should_node_be_polled_test() {

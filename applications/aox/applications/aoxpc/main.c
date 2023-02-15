@@ -18,6 +18,7 @@
 #include "aoxpc.h"
 #include "aoxpc_correction.h"
 #include "aox_locator_configuration.h"
+#include "aoxpc_application_monitoring.h"
 #include "aoxpc_datastore_fixt.h"
 #include "aoxpc_config.h"
 #include "aoxpc_attribute_store_attr_type_name_helper.h"
@@ -46,6 +47,7 @@ int main(int argc, char **argv)
         * Start receiving NCP events in its own process.
         */
        {&aoxpc_ncp_process_fixt_setup, "NCP Process"},
+       {&aoxpc_application_monitoring_init, "AoXPC ApplicationMonitoring"},
        /*
         * Initialize AoXPC datastore for persistent storage
         */
@@ -59,7 +61,8 @@ int main(int argc, char **argv)
         * Initialize the module to register all attribute used by the AoXPC and
         * enable the APIs to convert the attribute type name to attribute type id.
         */
-       {&aoxpc_attribute_store_attr_type_name_helper_init, "AoXPC Attribute type name to id convertor"},
+       {&aoxpc_attribute_store_attr_type_name_helper_init,
+        "AoXPC Attribute type name to id convertor"},
        /*
        * Initialize AoXLocator cluster resources.
        * Attribute Store MUST be initialized before.
@@ -86,7 +89,6 @@ int main(int argc, char **argv)
   uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[]
     = {{&attribute_store_teardown, "Attribute store"},
        {&datastore_fixt_teardown, "Datastore"},
-       {&aoxpc_ncp_core_fixt_shutdown, "NCP Core"},
        {NULL, "Terminator"}};
 
   // Initialize all configurations

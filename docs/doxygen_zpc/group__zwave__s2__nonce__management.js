@@ -21,6 +21,8 @@ var group__zwave__s2__nonce__management =
     [ "span_entry_t", "group__zwave__s2__nonce__management.html#ga4b39a8e6ee88b81d0b9ed916331d5e68", null ],
     [ "zwave_s2_get_mpan_data", "group__zwave__s2__nonce__management.html#gaa00433bc35cb1f4c058831f4fdf7962b", null ],
     [ "zwave_s2_get_span_data", "group__zwave__s2__nonce__management.html#ga41e6a95e42ec3f5aa5694df21e21f130", null ],
+    [ "zwave_s2_reset_mpan", "group__zwave__s2__nonce__management.html#ga906b072bc46a96304381a7b9505b9f52", null ],
+    [ "zwave_s2_reset_span", "group__zwave__s2__nonce__management.html#ga63cf21e66f011cc2231ab1243fe66312", null ],
     [ "zwave_s2_set_mpan_data", "group__zwave__s2__nonce__management.html#gacb2c0299b25fc143bf1b5f7f595bedaa", null ],
     [ "zwave_s2_set_span_table", "group__zwave__s2__nonce__management.html#gac266476283e7d528976748c4627680cb", null ]
 ];

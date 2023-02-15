@@ -9,7 +9,6 @@ description = "The Name and Location Service is a helper MQTT component that all
 [package.metadata.deb]
 name = "uic-nal"
 maintainer = "Silicon Labs"
-depends = "libuic"
 maintainer-scripts = "debconf/"
 systemd-units = { enable = true }
 
@@ -22,6 +21,7 @@ unify_config_sys = { path = "../../components/uic_rust/unify_config_sys" }
 unify_mqtt_sys = {path = "../../components/uic_rust/unify_mqtt_sys" }
 unify_sl_status_sys = {path = "../../components/uic_rust/unify_sl_status_sys" }
 unify_validator_sys = { path = "../../components/uic_rust/unify_validator_sys" }
+unify_application_monitoring_sys = { path = "../../components/uic_rust/unify_application_monitoring_sys" }
 
 [dev-dependencies]
 mockall= "0.11.*"
@@ -29,3 +29,4 @@ serial_test = "0.5.*"
 
 [build-dependencies]
 unify_build_utils = { path = "../../components/uic_rust/unify_build_utils" }
+anyhow = "*"

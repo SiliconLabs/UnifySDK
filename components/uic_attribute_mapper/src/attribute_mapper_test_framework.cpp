@@ -50,7 +50,7 @@ bool build_tree(bpt::ptree branches) {
     if (v_r) {
       int32_t value = v_r.get();
       node.set_reported<uint32_t>(value);
-    } 
+    }
   }
   return true;
 }
@@ -82,7 +82,7 @@ int run_tests(bpt::ptree tests) {
     int scope_id = test.second.get<int>("scope");
     BOOST_FOREACH(bpt::ptree::value_type &test_assert, test.second.get_child("test_assert.")) {
       std::string branch_descriptor = test_assert.second.get<std::string>("branch_descriptor");
-  
+
       boost::optional<int32_t> a_v_d = test_assert.second.get_optional<int32_t>("value.desired");
       boost::optional<int32_t> a_v_r = test_assert.second.get_optional<int32_t>("value.reported");
 
@@ -126,7 +126,7 @@ int run_tests(bpt::ptree tests) {
   return test_errors;
 }
 
- 
+
 int main(int argc, char* argv[]) {
   // Check the number of parameters
   if (argc < 2) {
@@ -182,7 +182,7 @@ int main(int argc, char* argv[]) {
   try {
     std::string file_name = json_tree.get<std::string>("uam_file");
     MapperEngine &e = MapperEngine::get_instance();
-    e.set_ep_type(attribute::root().type());
+    e.set_common_parent_type(attribute::root().type());
     e.reset();
     e.load_file(file_name);
   }
@@ -192,7 +192,7 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  // Try to get test data from json, activate rules and 
+  // Try to get test data from json, activate rules and
   try {
     bpt::ptree tests = json_tree.get_child("test_data.");
     if(!activate_rules(tests)) {

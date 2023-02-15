@@ -10,6 +10,7 @@
  *****************************************************************************/
 // Includes from this component
 #include "zpc_attribute_store.h"
+#include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store_type_registration.h"
 #include "zpc_attribute_store_register_default_attribute_type_data.h"
@@ -26,9 +27,23 @@
 // Unify Components
 #include "attribute_store_helper.h"
 #include "attribute_store_configuration.h"
+#include "unify_dotdot_attribute_store.h"
 
 #include "sl_log.h"
 #define LOG_TAG "zpc_attribute_store"
+
+// ZPC Configuration for the Unify DotDot Attribute Store
+static const unify_dotdot_attribute_store_configuration_t zpc_configuration
+  = {.get_endpoint_node_function
+     = &attribute_store_network_helper_get_endpoint_node,
+     .get_unid_endpoint_function
+     = &attribute_store_network_helper_get_unid_endpoint_from_node,
+     .update_attribute_desired_values_on_commands = true,
+     .clear_reported_on_desired_updates           = false,
+     .automatic_deduction_of_supported_commands   = true,
+     .force_read_attributes_enabled               = false,
+     .write_attributes_enabled                    = true,
+     .publish_attribute_values_to_mqtt            = true};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Private functions
@@ -157,10 +172,10 @@ static sl_status_t invoke_update_callbacks_in_network()
     NODE_STATE_TOPIC_STATE_UNAVAILABLE,
     NODE_STATE_TOPIC_STATE_INCLUDED);
 
-  sl_log_info(
-    LOG_TAG,
-    "Refreshed callbacks on Attribute Node %d, representing our current HomeID",
-    home_id);
+  sl_log_info(LOG_TAG,
+              "Refreshed callbacks on Attribute Node %d, "
+              "representing our current HomeID",
+              home_id);
   return refresh;
 }
 
@@ -171,8 +186,6 @@ sl_status_t zpc_attribute_store_init()
   // For all other attribute, fill default registration data
   status |= zpc_attribute_store_register_default_attribute_type_data();
 
-  status |= invoke_update_callbacks_in_network();
-
   // Configure the attribute store.
   // Save in the worst case scenario every 10 minutes if we keep changing the
   // Attribute Store aggressively
@@ -182,5 +195,10 @@ sl_status_t zpc_attribute_store_init()
   attribute_store_configuration_set_auto_save_cooldown_interval(10);
   attribute_store_configuration_set_type_validation(true);
 
+  // Configure the Unify DotDot Attribute Store component:
+  unify_dotdot_attribute_store_set_configuration(&zpc_configuration);
+
+  // Just simulate an update of the whole Attribute Store.
+  status |= invoke_update_callbacks_in_network();
   return status;
 }

@@ -6,7 +6,8 @@ export type ClusterAttrState = {
     PristineSupportedAttributes: any,
     ShowModal: boolean,
     HideUnSup: boolean,
-    SupportedCommands: string[]
+    SupportedCommands: string[],
+    ForceRead: boolean
 }
 
 export type ClusterAttrProps = {

@@ -35,6 +35,7 @@ void suiteSetUp() {}
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTeardown(int num_failures)
 {
+  datastore_teardown();
   return num_failures;
 }
 
@@ -42,9 +43,11 @@ int suiteTeardown(int num_failures)
 void test_datastore_int_sunny_day()
 {
   const int mydata = 1337;
+  TEST_ASSERT_FALSE(datastore_is_initialized());
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
                             datastore_init(":memory:"),
                             "Initialization of datastore");
+  TEST_ASSERT_TRUE(datastore_is_initialized());
   TEST_ASSERT_FALSE_MESSAGE(datastore_contains_int("mykey"),
                             "mykey shouldn't be in the datastore");
 

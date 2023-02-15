@@ -22,8 +22,9 @@
 
 #ifndef WORKAROUND_HPP
 #define WORKAROUND_HPP
-
+#ifdef __cplusplus
+#include "unify_node_state_monitor.hpp"
 #include <queue>
-
+#endif
 #endif  //WORKAROUND_HPP
 /** @} end workaround */

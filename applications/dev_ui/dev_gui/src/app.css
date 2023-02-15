@@ -2,11 +2,20 @@
     word-break: normal;
 }
 
+.modal-backdrop.show {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-dialog .modal-body {
+    line-height: 25px;
+}
+
 .split2 {
     height: 100vh;
     float: left;
     width: 100%;
-    padding: 149px 0px 0px 280px;
+    padding: 175px 0px 0px 280px;
     transition: 0.3s;
 }
 
@@ -142,6 +151,10 @@
     padding: 5px !important;
 }
 
+.padding-10 {
+    padding: 10px !important;
+}
+
 .padding-h-15 {
     padding-left: 15px;
     padding-right: 15px;
@@ -153,6 +166,14 @@
 
 .padding-l-15 {
     padding-left: 15px;
+}
+
+.padding-l-25 {
+    padding-left: 25px;
+}
+
+.padding-r-10 {
+    padding-right: 10px;
 }
 
 .padding-v-20 {
@@ -309,6 +330,16 @@
     max-width: 30%;
 }
 
+.col-sm-20p {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.col-sm-40p {
+    flex: 0 0 40%;
+    max-width: 40%;
+}
+
 .cluster-attributes .MuiOutlinedInput-adornedEnd {
     padding-right: 0px;
 }
@@ -423,6 +454,227 @@ li.not-supported::marker {
 
 li.supported::marker {
     color: green;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-field-small .MuiInputBase-sizeSmall {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.text-field-small .MuiInputBase-input {
+    padding: 5.5px 7px;
+}
+
+.text-field-small .MuiInputLabel-sizeSmall {
+    font-size: 13px !important;
+    top: 2px !important;
+}
+
+.line27 {
+    line-height: 27px;
+}
+
+.MuiAutocomplete-root .small label {
+    top: -5px !important;
+}
+
+.mobile {
+    font-size: 35px;
+}
+
+.mobile .card {
+    border: 1px solid rgb(0 0 0 / 30%);
+}
+
+.mobile .card .card-header {
+    border-bottom: 1px solid rgb(0 0 0 / 30%);
+}
+
+.mobile .dropdown-menu {
+    font-size: 30px;
+}
+
+.mobile .small .dropdown-menu {
+    font-size: 25px;
+}
+
+.mobile h5 {
+    font-size: 40px;
+}
+
+.mobile h4,
+.mobile .h4 {
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.mobile h3 {
+    font-size: 45px;
+}
+
+.mobile .table-content {
+    line-height: 38px;
+    font-size: 35px;
+}
+
+.mobile .btn {
+    font-size: 35px;
+}
+
+.mobile .card-header {
+    font-size: 40px;
+    line-height: 53px;
+}
+
+.mobile .flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mobile .cluster-icon>div {
+    padding-right: 15px;
+}
+
+.mobile .header.collapsed+.side-bar-collapsed .split2 {
+    padding: 110px 0px 0px 74px;
+}
+
+.mobile .header.collapsed+.split-container .split2 {
+    padding-top: 110px;
+}
+
+.mobile .split2 {
+    padding: 255px 0px 0px 540px;
+}
+
+.mobile .side-bar-collapsed .split2 {
+    padding-left: 95px;
+}
+
+.mobile .header.collapsed+.split-container .split2 {
+    padding-top: 110px;
+}
+
+.mobile .header.collapsed+.side-bar-collapsed .split2 {
+    padding: 110px 0px 0px 95px;
+    transition: 0.3s;
+}
+
+.mobile .MuiOutlinedInput-root,
+.mobile .MuiMenuItem-root,
+.mobile .form-control,
+.mobile .input-group-text {
+    font-size: 35px !important;
+}
+
+.mobile .MuiInputLabel-root {
+    font-size: 25px !important;
+}
+
+.mobile .MuiInputLabel-root.MuiInputLabel-formControl {
+    line-height: 50px;
+}
+
+.mobile .MuiInputLabel-formControl.MuiFormLabel-filled,
+.mobile .MuiInputLabel-formControl.Mui-focused {
+    top: -9px !important;
+}
+
+.mobile .pro-sidebar {
+    width: 530px;
+    min-width: 530px;
+}
+
+.mobile .pro-item-content {
+    line-height: 45px !important;
+}
+
+.mobile .modal-lg,
+.mobile .modal-xl,
+.mobile .modal-dialog {
+    max-width: 90%;
+    width: 90%;
+}
+
+.mobile .form-check-input {
+    width: 28px;
+    height: 28px;
+}
+
+.mobile .check-container {
+    padding-right: 10px;
+}
+
+.mobile .modal-title.h4 {
+    font-size: 40px;
+}
+
+.mobile .modal-body {
+    padding: 30px;
+}
+
+.mobile button.close {
+    font-size: 50px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.mobile .connect-btn-cont {
+    margin-top: 10px;
+}
+
+.mobile .spinner-border {
+    width: 40px;
+    height: 40px;
+}
+
+.mobile .icon {
+    font-size: 45px;
+}
+
+.mobile .modal-header {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.mobile .table th,
+.mobile .table td {
+    line-height: 35px;
+}
+
+.mobile .error-modal-header {
+    color: red;
+    font-size: 23px;
+    margin-top: 5px;
+}
+
+.mobile .rf-telemetry .form-check.inline {
+    display: inline !important;
+}
+
+.mobile .Toastify__toast-container {
+    width: 60%;
+}
+
+.mobile .Toastify__toast-body {
+    line-height: 35px;
+}
+
+.mobile .Toastify__toast-icon {
+    width: 50px;
+}
+
+.mobile .Toastify__close-button>svg {
+    height: 35px;
+    width: 35px;
+}
+
+.mobile .text-field-small .MuiInputBase-sizeSmall {
+    font-size: 30px !important;
+    line-height: 51px;
 }
 
 @keyframes blinker {

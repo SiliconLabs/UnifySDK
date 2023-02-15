@@ -11,6 +11,7 @@ var zwave__command__classes__utils_8c =
     [ "is_portable_end_node", "group__command__classes__utils.html#ga7dd7a32346c549c1f82f97037625db40", null ],
     [ "is_using_zpc_highest_security_class", "group__command__classes__utils.html#ga9c5cc33bc4f4b02b55abb6d39878d1fe", null ],
     [ "is_zwave_command_class_filtered_for_root_device", "group__command__classes__utils.html#gab8c8edb0b4667b409c3ec1e67ae71361", null ],
+    [ "set_command_status_value", "group__command__classes__utils.html#ga9dfaa3aa52bb9b4ba3effc1d1480b1ea", null ],
     [ "set_reports_to_follow", "group__command__classes__utils.html#gae5b058ae65bbc7ee9ab4b959db376513", null ],
     [ "time_to_zwave_duration", "group__command__classes__utils.html#ga820213e01529b38b7641e9deac083073", null ],
     [ "zwave_command_class_get_endpoint_node", "group__command__classes__utils.html#gaff12f5d1f5b9eed08201efab5854190c", null ],

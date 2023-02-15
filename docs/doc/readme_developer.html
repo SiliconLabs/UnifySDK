@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unify Developer Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -56,16 +61,11 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_rust.html">Unify Rust Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html">Api documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#structure-of-components-best-practice">Structure of Components (Best Practice)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#structure">Structure</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#component-templates">Component Templates</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#demo">Demo</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#clang-format-autoformat-code">Clang-Format (autoformat code)</a><ul>
@@ -78,9 +78,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -116,13 +118,13 @@ Unify SDK source code.</p>
 <li class="toctree-l1"><a class="reference internal" href="readme_debug.html">Unify Debugging Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_rust.html">Unify Rust Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="how_to_write_uam_files.html">How to write UAM files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="how_to_develop_a_protocol_controller.html">How to develop a Protocol Controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="how_to_develop_an_iot_service.html">How To Make an IoT Service</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Api documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API documentation</a></li>
 </ul>
 </div>
 <section id="directory-structure-and-file-naming-conventions">
@@ -181,6 +183,7 @@ i.e. “unify_my_sample_component”.</p></li>
 |   |   `--                     // Various CMake includes e.g. compiler_options.cmake, doxygen.cmake, ...
 |   |-- modules/                // CMake modules
 |   |-- armhf_debian.cmake      // Toolchain files goes here in the format `&lt;arch&gt;(_&lt;dist&gt;).cmake`
+|   |-- arm64_debian.cmake      // Toolchain file for AARCH64/arm64
 |-- components/                 // Shared components (components shared between Unify applications)
 |   |-- uic_config/             // config component
 |   |   |-- platform/
@@ -190,7 +193,7 @@ i.e. “unify_my_sample_component”.</p></li>
 |   |   |-- test/               // Unittests for the component goes in here
 |   |   `-- CMakeLists.txt
 |   |-- uic_log/                // Logging framework
-|   |-- uic_mqtt_client/        // MQTT client library
+|   |-- uic_mqtt/               // MQTT client library
 |   |-- ...
 |   `-- CMakeLists.txt
 |-- dist/                       // Files for the &quot;target&quot; platform goes here e.g. init scripts, config files, etc.
@@ -204,63 +207,24 @@ i.e. “unify_my_sample_component”.</p></li>
 </div>
 </section>
 </section>
-<section id="component-templates">
-<h2>Component Templates<a class="headerlink" href="#component-templates" title="Permalink to this heading"></a></h2>
-<p>A <a class="reference external" href="https://cookiecutter.readthedocs.io/">cookiecutter</a> template helps
-to quickly add the boilerplate code for ZPC components.</p>
-<p>Cookiecutter is written in Python and the simplest way to install it is from PyPI using
-<a class="reference external" href="https://pipxproject.github.io/pipx/">pipx</a>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install --user pipx
-</pre></div>
-</div>
-<p>pipx is a utility for installing executable packages (i.e., packages with an entry-point)
-from PyPI and should be kept in their virtualenv.
-When configured correctly, they are placed in your PATH.
-The pipx installation will tell you what PATH-changes you need
-to perform.</p>
-<p>After installing and configuring pipx, you can install cookiecutter:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pipx install cookiecutter
-</pre></div>
-</div>
-<p>Then, from your <code class="docutils literal notranslate"><span class="pre">components</span></code> directory, execute cookiecutter and point it to
-the template repository (assuming you have your SSH-keys all set up, but you can also
-use HTTPS):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cookiecutter ssh://git@stash.silabs.com/uic/zpc_cookiecutter.git
-</pre></div>
-</div>
-<p>You will be asked some questions regarding your component, with default values in
-square brackets.</p>
-<p>After this is done, manually add your new component subdirectory to the
-<code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">components</span></code> directory.</p>
-<section id="demo">
-<h3>Demo<a class="headerlink" href="#demo" title="Permalink to this heading"></a></h3>
-<p>Here you can see a demo-session of adding a component with cookiecutter.</p>
-<p><em>Note! This Git-repository used in the demo is outdated and did only exist
-to demonstrate this functionality for the team to consider.</em></p>
-<a href=https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1>
-  Here is a small video demonstrating how to use the cookiecutter<br/>
-  <img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.png" width="60%">
-</a>
-</section>
-</section>
 <section id="clang-format-autoformat-code">
 <h2>Clang-Format (autoformat code)<a class="headerlink" href="#clang-format-autoformat-code" title="Permalink to this heading"></a></h2>
 <p>Clang-format is a tool that can format code according to coding style configuration.
 The <code class="docutils literal notranslate"><span class="pre">.clang-format</span></code> file in this repository depends on clang-format 10.</p>
 <section id="install-on-mac">
 <h3>Install on Mac<a class="headerlink" href="#install-on-mac" title="Permalink to this heading"></a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew install llvm
-ln -s <span class="s2">&quot;</span><span class="k">$(</span>brew --prefix llvm<span class="k">)</span><span class="s2">/bin/clang-format&quot;</span> <span class="s2">&quot;/usr/local/bin/clang-format&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>llvm
+ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>llvm<span class="k">)</span><span class="s2">/bin/clang-format&quot;</span><span class="w"> </span><span class="s2">&quot;/usr/local/bin/clang-format&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="install-on-ubuntu">
 <h3>Install on Ubuntu<a class="headerlink" href="#install-on-ubuntu" title="Permalink to this heading"></a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key <span class="p">|</span> sudo apt-key add -
-sudo <span class="nb">echo</span> <span class="s2">&quot;deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main</span>
-<span class="s2">deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main&quot;</span> &gt; /etc/apt/sources.list.d/llvm.list
-sudo apt-get update
-sudo apt-get install clang-format-10
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span>https://apt.llvm.org/llvm-snapshot.gpg.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt-key<span class="w"> </span>add<span class="w"> </span>-
+sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main</span>
+<span class="s2">deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/apt/sources.list.d/llvm.list
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>clang-format-10
 </pre></div>
 </div>
 </section>
@@ -273,7 +237,7 @@ See the plugin documentation for details.</p>
 <section id="command-line">
 <h3>Command Line<a class="headerlink" href="#command-line" title="Permalink to this heading"></a></h3>
 <p>You can run clang-format from the command line.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clang-format -i &lt;filename&gt;  <span class="c1"># -i causes to do in-file changes</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clang-format<span class="w"> </span>-i<span class="w"> </span>&lt;filename&gt;<span class="w">  </span><span class="c1"># -i causes to do in-file changes</span>
 </pre></div>
 </div>
 </section>
@@ -286,11 +250,11 @@ cmake-format will be run for all files before committing them to the repository.
 <p>The pre-commit hooks must be activated locally on your machine to
 work.</p>
 <p>First, the pre-commit Python module has to be installed:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install pre-commit
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
 </pre></div>
 </div>
 <p>Second, install the git hook:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pre-commit install
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pre-commit<span class="w"> </span>install
 </pre></div>
 </div>
 <p>From now on, all new files will be formatted before they are committed.</p>
@@ -303,56 +267,56 @@ work.</p>
 <p>The following is an example of the bare minimum main.c file to get started.
 A more comprehensive demo is located in <code class="docutils literal notranslate"><span class="pre">applications/demo_uic_lib</span></code>,
 where some of the shared Unify libraries are demonstrated as well, including MQTT client, logging, and the configuration system.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;uic_main.h&quot;</span><span class="cp"></span>
-<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;process.h&quot;</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;uic_main.h&quot;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;process.h&quot;</span>
 
 <span class="c1">// Demo process definition</span>
-<span class="n">PROCESS</span><span class="p">(</span><span class="n">my_unify_application_process</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Unify Application Process&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">PROCESS</span><span class="p">(</span><span class="n">my_unify_application_process</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Unify Application Process&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// Demo process implementation</span>
-<span class="w">    </span><span class="n">PROCESS_THREAD</span><span class="p">(</span><span class="n">my_unify_application_process</span><span class="p">,</span><span class="w"> </span><span class="n">ev</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">PROCESS_BEGIN</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">ev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">PROCESS_EVENT_INIT</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">PROCESS_THREAD</span><span class="p">(</span><span class="n">my_unify_application_process</span><span class="p">,</span><span class="w"> </span><span class="n">ev</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="n">PROCESS_BEGIN</span><span class="p">()</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">ev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">PROCESS_EVENT_INIT</span><span class="p">:</span>
 <span class="w">          </span><span class="c1">// Add Init code here</span>
-<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">PROCESS_EVENT_EXIT</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">PROCESS_EVENT_EXIT</span><span class="p">:</span>
 <span class="w">          </span><span class="c1">// Add Exit code here</span>
-<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">PROCESS_WAIT_EVENT</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">PROCESS_END</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">PROCESS_WAIT_EVENT</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">PROCESS_END</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Setup fixture, called on start-up</span>
-<span class="w">    </span><span class="n">sl_status_t</span><span class="w"> </span><span class="n">my_unify_application_setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">sl_status_t</span><span class="w"> </span><span class="n">my_unify_application_setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="c1">// Start the demo process</span>
-<span class="w">      </span><span class="n">process_start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_unify_application_process</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">SL_STATUS_OK</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">process_start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_unify_application_process</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">SL_STATUS_OK</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="c1">// Setup fixtures</span>
-<span class="w">      </span><span class="n">uic_fixt_setup_step_t</span><span class="w"> </span><span class="n">uic_fixt_setup_steps_list</span><span class="p">[]</span><span class="w"></span>
-<span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="n">my_unify_application_setup</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Unify Application&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">          </span><span class="p">{</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Terminator&quot;</span><span class="p">}};</span><span class="w"></span>
+<span class="w">      </span><span class="n">uic_fixt_setup_step_t</span><span class="w"> </span><span class="n">uic_fixt_setup_steps_list</span><span class="p">[]</span>
+<span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="n">my_unify_application_setup</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Unify Application&quot;</span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Terminator&quot;</span><span class="p">}};</span>
 
 <span class="w">      </span><span class="c1">// Shutdown fixtures</span>
-<span class="w">      </span><span class="n">uic_fixt_shutdown_step_t</span><span class="w"> </span><span class="n">uic_fixt_shutdown_steps_list</span><span class="p">[]</span><span class="w"></span>
-<span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Terminator&quot;</span><span class="p">}};</span><span class="w"></span>
+<span class="w">      </span><span class="n">uic_fixt_shutdown_step_t</span><span class="w"> </span><span class="n">uic_fixt_shutdown_steps_list</span><span class="p">[]</span>
+<span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Terminator&quot;</span><span class="p">}};</span>
 
 <span class="w">      </span><span class="c1">// Run uic_main and return result</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">uic_main</span><span class="p">(</span><span class="n">uic_fixt_setup_steps_list</span><span class="p">,</span><span class="w"></span>
-<span class="w">                      </span><span class="n">uic_fixt_shutdown_steps_list</span><span class="p">,</span><span class="w"></span>
-<span class="w">                      </span><span class="n">argc</span><span class="p">,</span><span class="w"></span>
-<span class="w">                      </span><span class="n">argv</span><span class="p">,</span><span class="w"></span>
-<span class="w">                      </span><span class="s">&quot;1.0&quot;</span><span class="w"> </span><span class="cm">/* My application version */</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">uic_main</span><span class="p">(</span><span class="n">uic_fixt_setup_steps_list</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">uic_fixt_shutdown_steps_list</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">argc</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">argv</span><span class="p">,</span>
+<span class="w">                      </span><span class="s">&quot;1.0&quot;</span><span class="w"> </span><span class="cm">/* My application version */</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -374,12 +338,12 @@ the following commands in the root of the source folder:</p>
 <div><p>NB: Prerequisite is to have the Unify docker image (see
 <a class="reference internal" href="../docker/readme_developer.html"><span class="doc std std-doc">Docker</span></a>)</p>
 </div></blockquote>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -it --rm  -v<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> -w <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> uic_armhf
-mkdir build
-<span class="nb">cd</span> build
-cmake -GNinja -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>../cmake/armhf_debian.cmake ..
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w">  </span>-v<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="w"> </span>-w<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="w"> </span>uic_arm64
+mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>-GNinja<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>../cmake/arm64_debian.cmake<span class="w"> </span>..
 ninja
-ninja deb
+ninja<span class="w"> </span>deb
 </pre></div>
 </div>
 </li>
@@ -396,6 +360,16 @@ This design was chosen to avoid concurrency issues between threads.</p>
 <p>Additional information on this is available in the
 <a href="../doxygen_uic/index.html">Unify Library API</a></p>
 </section>
+<section id="nix-experimental">
+<h2>Nix (Experimental)<a class="headerlink" href="#nix-experimental" title="Permalink to this heading"></a></h2>
+<p>We are adding support for <a class="reference external" href="https://nixos.wiki/wiki/Flakes"><code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">flakes</span></code></a> to make use of the <a class="reference external" href="https://nixos.org/manual/nix/stable/">nix package manager</a>.
+This aims to let developers leverage the benefits of using a <a class="reference external" href="https://nixos.org/manual/nix/stable/">purely functional package manager</a>.</p>
+<p>If you have <code class="docutils literal notranslate"><span class="pre">nix</span></code> installed and <code class="docutils literal notranslate"><span class="pre">flakes</span></code> enabled, you can run an application with one command without checking out the repo or installing any dependencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">nix</span> <span class="n">run</span> <span class="n">github</span><span class="p">:</span><span class="n">SiliconLabs</span><span class="o">/</span><span class="n">UnifySDK</span><span class="c1">#zpc</span>
+</pre></div>
+</div>
+<p>We elaborate on this in the <a class="reference internal" href="readme_nix.html"><span class="doc std std-doc">nix readme</span></a>.</p>
+</section>
 </section>
 
 
@@ -403,7 +377,7 @@ This design was chosen to avoid concurrency issues between threads.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

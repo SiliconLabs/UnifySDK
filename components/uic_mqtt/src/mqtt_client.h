@@ -107,6 +107,32 @@ typedef void (*message_callback_t)(const char *topic,
                                    const char *message,
                                    const size_t message_length);
 
+/**
+ * @brief A callback type for pushing incoming messages.
+ *
+ * @param topic The topic the message came from
+ * @param message The message payload
+ * @param message_length The size of the message payload in bytes.
+ * @param user User defined pointer provided when subscribing
+ */
+typedef void (*message_callback_ex_t)(const char *topic,
+                                      const char *message,
+                                      const size_t message_length,
+                                      void *user);
+/**
+ * @brief A callback type for MQTT connection/disconnection events
+ *
+ * @param instance          MQTT instance for the connection/disconnection
+ * @param file_descriptor   File descriptor used for the MQTT connection
+ */
+typedef void (*mqtt_connection_callback_t)(mqtt_client_t instance,
+                                           const int file_descriptor);
+
+/**
+ * @brief A void function type (void function()) to invoke when some events occurred.
+ */
+typedef void (*mqtt_simple_callback_t)();
+
 // C-wrappers. All of those functions have a C++ counterpart within mqtt_client
 // or a C++ specific functionality that needs to be bridged to C-land (e.g. new).
 
@@ -237,6 +263,24 @@ void mqtt_client_subscribe(mqtt_client_t instance,
                            message_callback_t callback);
 
 /**
+ * @brief Subscribe to an MQTT-topic.
+ *
+ * This, like (almost) all other functionality of the mqtt_client, is an asynchronous
+ * (non-blocking) call. The subscription request is queued and then sent if/when the
+ * connection-state allows for it.
+ *
+ * @param instance Pointer to an mqtt_client instance.
+ * @param topic The MQTT-topic name/pattern to subscribe to.
+ * @param callback Function-pointer to a callback-function that receives the incoming
+ *                 messages and has the \ref message_callback_t function-signature.
+ * @param user  User defined pointer which will be returned in the callback
+ */
+void mqtt_client_subscribe_ex(mqtt_client_t instance,
+                              const char *topic,
+                              message_callback_ex_t callback,
+                              void *user);
+
+/**
  * @brief Unsubscribe from an MQTT-topic
  *
  * This, like (almost) all other functionality of the mqtt_client, is an asynchronous
@@ -252,6 +296,25 @@ void mqtt_client_subscribe(mqtt_client_t instance,
 void mqtt_client_unsubscribe(mqtt_client_t instance,
                              const char *topic,
                              message_callback_t callback);
+
+/**
+ * @brief Unsubscribe from an MQTT-topic
+ *
+ * This, like (almost) all other functionality of the mqtt_client, is an asynchronous
+ * (non-blocking) call. The unsubscription request is queued and then sent if/when the
+ * connection-state allows for it, with one caveat: The callback-registration happens
+ * immediately, but sending the unsubscription-command to the broker is asynchronous.
+ *
+ * @param instance Pointer to an mqtt_client instance.
+ * @param topic The MQTT-topic name/pattern to unsubscribe from.
+ * @param callback Function-pointer to a callback-function that receives the incoming
+ *                 messages and has the \ref message_callback_t function-signature.
+ * @param user    Argument used when registering
+ */
+void mqtt_client_unsubscribe_ex(mqtt_client_t instance,
+                                const char *topic,
+                                message_callback_ex_t callback,
+                                void *user);
 
 /**
  * @brief Allocates a new mqtt_client instance.
@@ -291,33 +354,59 @@ mqtt_client_t mqtt_client_new(
  */
 void mqtt_client_delete(mqtt_client_t instance);
 
-void mqtt_client_on_connect_callback_set(
-  mqtt_client_t instance,
-  void (*on_connect)(mqtt_client_t inst, const int file_descriptor));
+/**
+ * @brief Sets the callback to be invoked after an MQTT connection is established.
+ *
+ * @param instance      MQTT instance used for the connection
+ * @param on_connect    Callback to invoke
+ */
+void mqtt_client_on_connect_callback_set(mqtt_client_t instance,
+                                         mqtt_connection_callback_t on_connect);
 
+/**
+ * @brief Sets the callback to be invoked after an MQTT connection is disconnected.
+ *
+ * @param instance          MQTT instance used for the connection
+ * @param on_disconnect     Callback to invoke
+ */
 void mqtt_client_on_disconnect_callback_set(
-  mqtt_client_t instance,
-  void (*on_disconnect)(mqtt_client_t inst, const int file_descriptor));
+  mqtt_client_t instance, mqtt_connection_callback_t on_disconnect);
 
 /**
  * @brief Sets a callback for calling before calling disconnect.
  *
  * @param instance A pointer to an mqtt_client instance.
- * @param before_disconnect A function-pointer to the external-function 
+ * @param before_disconnect A function-pointer to the external-function
  * before disconnect callback
  */
-void mqtt_client_before_disconnect_callback_set(mqtt_client_t instance,
-                                                void (*before_disconnect)());
+void mqtt_client_before_disconnect_callback_set(
+  mqtt_client_t instance, mqtt_simple_callback_t before_disconnect);
 
 /**
  * @brief Deletes/frees the mqtt_client instance.
  *
  * @param instance A pointer to an mqtt_client instance.
- * @param after_connect function-pointer to the external-function 
+ * @param after_connect function-pointer to the external-function
  * after connect callback
  */
-void mqtt_client_after_connect_callback_set(mqtt_client_t instance,
-                                            void (*after_connect)());
+void mqtt_client_after_connect_callback_set(
+  mqtt_client_t instance, mqtt_simple_callback_t after_connect);
+
+/**
+ * @brief Returns the MQTT Client ID in use by the Client instance.
+ *
+ * @param instance A pointer to an mqtt_client instance.
+ * @returns C String containing the Client ID. NULL if the instance is not in use.
+ */
+const char *mqtt_client_get_client_id(const mqtt_client_t client_instance);
+
+/**
+ * @brief Checks if we are connected to the MQTT Broker
+ *
+ * @param instance A pointer to an mqtt_client instance.
+ * @returns True if connected to the broker, false otherwise
+ */
+bool mqtt_client_is_connected_to_broker(const mqtt_client_t instance);
 
 #ifdef __cplusplus
 }  // extern "C"

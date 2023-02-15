@@ -31,6 +31,7 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zwave_unid.h"
+#include "zpc_attribute_store_type_registration.h"
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
@@ -178,6 +179,7 @@ void suiteSetUp()
   attribute_store_init();
   zwave_unid_set_home_id(home_id);
   contiki_test_helper_init();
+  zpc_attribute_store_register_known_attribute_types();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -608,4 +610,175 @@ void test_zwave_controller_reset_step()
   zwave_controller_on_reset_step_complete_Expect(
     ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY);
   contiki_test_helper_run(2);
+}
+
+void test_zwave_command_class_association_report()
+{
+  // Add the version node:
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(endpoint_id_node));
+  attribute_store_node_t version_node
+    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_VERSION,
+                               endpoint_id_node);
+
+  // No new attribute created due to unresolved version.
+  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
+
+  u8_value = 0;
+  attribute_store_set_reported(version_node, &u8_value, sizeof(u8_value));
+  // No new attribute created due to version = 0.
+  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
+
+  u8_value = 2;
+  attribute_store_set_reported(version_node, &u8_value, sizeof(u8_value));
+  // SUPPORTED_GROUPINGS Attribute got created:
+  TEST_ASSERT_EQUAL(2, attribute_store_get_node_child_count(endpoint_id_node));
+
+  attribute_store_node_t groupings_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(SUPPORTED_GROUPINGS),
+                                             0);
+
+  // Check that we can resolve supporting groupings:
+  // First check the frame creation:
+  TEST_ASSERT_NOT_NULL(association_groupings_get);
+  association_groupings_get(groupings_node,
+                            received_frame,
+                            &received_frame_size);
+  const uint8_t expected_frame_1[]
+    = {COMMAND_CLASS_ASSOCIATION, ASSOCIATION_GROUPINGS_GET};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame_1), received_frame_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame_1,
+                                received_frame,
+                                received_frame_size);
+
+  // Response for Groupings get:
+  const association_grouping_report_frame_t grouping_report
+    = {.command_class       = COMMAND_CLASS_ASSOCIATION,
+       .command             = ASSOCIATION_GROUPINGS_REPORT,
+       .supported_groupings = 2};
+  connection.remote.endpoint_id = endpoint_id;
+  connection.remote.node_id     = node_id;
+
+  // 2 groups, 2 listeners to when they are resolved.
+  attribute_resolver_set_resolution_listener_Expect(
+    0,
+    &establish_zpc_associations);
+  attribute_resolver_set_resolution_listener_IgnoreArg_node();
+  attribute_resolver_set_resolution_listener_Expect(
+    0,
+    &establish_zpc_associations);
+  attribute_resolver_set_resolution_listener_IgnoreArg_node();
+
+  TEST_ASSERT_NOT_NULL(association_handler.control_handler);
+  association_handler.control_handler(&connection,
+                                      (uint8_t *)&grouping_report,
+                                      sizeof(grouping_report));
+
+  // Verify that the value was accepted and saved in the Attribute Store
+  association_group_count_t groupings = 0;
+  attribute_store_get_reported(groupings_node, &groupings, sizeof(groupings));
+  TEST_ASSERT_EQUAL(2, groupings);
+
+  // Check that we can resolve group contents:
+  const association_group_id_t group_1 = 1;
+  attribute_store_node_t group_1_node
+    = attribute_store_get_node_child_by_value(endpoint_id_node,
+                                              ATTRIBUTE(GROUP_ID),
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&group_1,
+                                              sizeof(group_1),
+                                              0);
+  attribute_store_node_t group_content_node
+    = attribute_store_get_node_child_by_type(group_1_node,
+                                             ATTRIBUTE(GROUP_CONTENT),
+                                             0);
+  // First check the frame creation (Get):
+  TEST_ASSERT_NOT_NULL(association_get);
+  association_get(group_content_node, received_frame, &received_frame_size);
+  const uint8_t expected_frame_2[]
+    = {COMMAND_CLASS_ASSOCIATION, ASSOCIATION_GET, (uint8_t)group_1};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame_2), received_frame_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame_2,
+                                received_frame,
+                                received_frame_size);
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(group_content_node, REPORTED_ATTRIBUTE));
+
+  // Simulate a response for Association get:
+  const association_report_frame_t report
+    = {.command_class       = COMMAND_CLASS_ASSOCIATION,
+       .command             = ASSOCIATION_REPORT,
+       .grouping_identifier = 1,
+       .max_nodes_supported = 2,
+       .reports_to_follow   = 0x01,
+       .group_content       = {02, 03, 00, 04, 01}};
+  connection.remote.endpoint_id = endpoint_id;
+  connection.remote.node_id     = node_id;
+  zwave_tx_set_expected_frames_Expect(4, 1);
+  attribute_resolver_node_or_child_needs_resolution_ExpectAndReturn(
+    group_1_node,
+    true);
+
+  TEST_ASSERT_NOT_NULL(association_handler.control_handler);
+  association_handler.control_handler(&connection,
+                                      (uint8_t *)&report,
+                                      sizeof(report));
+
+  // Now go check the group data in the attribute store:
+  attribute_store_get_node_attribute_value(group_content_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_data,
+                                           &received_data_size);
+  TEST_ASSERT_EQUAL(2, received_data_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(report.group_content,
+                                received_data,
+                                received_data_size);
+
+  attribute_store_node_t group_capacity_node
+    = attribute_store_get_node_child_by_type(group_1_node,
+                                             ATTRIBUTE(MAX_NODES_SUPPORTED),
+                                             0);
+  association_group_capacity_t saved_group_capacity = 0;
+  attribute_store_get_reported(group_capacity_node,
+                               (uint8_t *)&saved_group_capacity,
+                               sizeof(saved_group_capacity));
+  TEST_ASSERT_EQUAL(report.max_nodes_supported, saved_group_capacity);
+
+  const association_report_frame_t report2
+    = {.command_class       = COMMAND_CLASS_ASSOCIATION,
+       .command             = ASSOCIATION_REPORT,
+       .grouping_identifier = 1,
+       .max_nodes_supported = 2,
+       .reports_to_follow   = 0x00,
+       .group_content       = {02, 06, 07}};
+  connection.remote.endpoint_id = endpoint_id;
+  connection.remote.node_id     = node_id;
+  zwave_network_management_assign_return_route_IgnoreAndReturn(SL_STATUS_OK);
+  attribute_resolver_node_or_child_needs_resolution_ExpectAndReturn(
+    group_1_node,
+    true);
+  TEST_ASSERT_NOT_NULL(association_handler.control_handler);
+  association_handler.control_handler(&connection,
+                                      (uint8_t *)&report2,
+                                      sizeof(report2));
+  // Now go check the group data in the attribute store:
+  attribute_store_get_node_attribute_value(group_content_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_data,
+                                           &received_data_size);
+  uint8_t group_content[] = {2, 3, 6, 7};
+  TEST_ASSERT_EQUAL(4, received_data_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(group_content,
+                                received_data,
+                                received_data_size);
+
+  group_capacity_node
+    = attribute_store_get_node_child_by_type(group_1_node,
+                                             ATTRIBUTE(MAX_NODES_SUPPORTED),
+                                             0);
+  saved_group_capacity = 0;
+  attribute_store_get_reported(group_capacity_node,
+                               (uint8_t *)&saved_group_capacity,
+                               sizeof(saved_group_capacity));
+  TEST_ASSERT_EQUAL(report.max_nodes_supported, saved_group_capacity);
 }

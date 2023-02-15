@@ -16,6 +16,7 @@
 #include "zwave_command_class_association.h"
 #include "zwave_command_class_agi.h"
 #include "zwave_command_class_alarm_sensor.h"
+#include "zwave_command_class_barrier_operator.h"
 #include "zwave_command_class_binary_switch.h"
 #include "zwave_command_class_central_scene.h"
 #include "zwave_command_class_configuration.h"
@@ -29,6 +30,9 @@
 #include "zwave_command_class_node_info_resolver.h"
 #include "zwave_command_class_notification.h"
 #include "zwave_command_class_powerlevel.h"
+#include "zwave_command_class_scene_activation_control.h"
+#include "zwave_command_class_scene_actuator_configuration_control.h"
+#include "zwave_command_class_scene_controller_configuration_control.h"
 #include "zwave_command_class_security_0.h"
 #include "zwave_command_class_security_2.h"
 #include "zwave_command_class_supervision.h"
@@ -64,55 +68,60 @@
 
 sl_status_t zwave_command_classes_init()
 {
-  sl_status_t initialization_status = SL_STATUS_OK;
+  sl_status_t status = SL_STATUS_OK;
 
   // Special handlers:
-  initialization_status |= zwave_command_class_granted_keys_resolver_init();
-  initialization_status |= zwave_command_class_node_info_resolver_init();
+  status |= zwave_command_class_granted_keys_resolver_init();
+  status |= zwave_command_class_node_info_resolver_init();
 
   // Do not abort initialization of other CCs if one fails.
   // Command Class handlers
   // Note: AGI should stay first, it allows others to register commands.
-  initialization_status |= zwave_command_class_agi_init();
-  initialization_status |= zwave_command_class_alarm_sensor_init();
-  initialization_status |= zwave_command_class_association_init();
-  initialization_status |= zwave_command_class_binary_switch_init();
-  initialization_status |= zwave_command_class_central_scene_init();
-  initialization_status |= zwave_command_class_configuration_init();
-  initialization_status |= zwave_command_class_indicator_init();
-  initialization_status |= zwave_command_class_manufacturer_specific_init();
-  initialization_status |= zwave_command_class_meter_control_init();
-  initialization_status |= zwave_command_class_multi_channel_init();
-  initialization_status |= zwave_command_class_multi_channel_association_init();
-  initialization_status |= zwave_command_class_multilevel_sensor_init();
-  initialization_status |= zwave_command_class_notification_init();
-  initialization_status |= zwave_command_class_powerlevel_init();
-  initialization_status |= zwave_command_class_security_0_init();
-  initialization_status |= zwave_command_class_security_2_init();
-  initialization_status |= zwave_command_class_supervision_init();
-  initialization_status |= zwave_command_class_switch_color_init();
-  initialization_status |= zwave_command_class_switch_multilevel_init();
-  initialization_status |= zwave_command_class_thermostat_mode_init();
-  initialization_status |= zwave_command_class_thermostat_setpoint_init();
-  initialization_status |= zwave_command_class_time_init();
-  initialization_status |= zwave_command_class_version_init();
-  initialization_status |= zwave_command_class_wake_up_init();
-  initialization_status |= zwave_command_class_zwave_plus_info_init();
-  initialization_status |= zwave_command_class_basic_init();
-  initialization_status |= zwave_command_class_device_reset_locally_init();
-  initialization_status |= zwave_command_class_multi_command_init();
-  initialization_status |= zwave_command_class_transport_service_init();
-  initialization_status |= zwave_command_class_inclusion_controller_init();
-  initialization_status |= zwave_command_class_indicator_control_init();
-  initialization_status
-    |= zwave_command_class_manufacturer_specific_control_init();
+  status |= zwave_command_class_agi_init();
+  status |= zwave_command_class_alarm_sensor_init();
+  status |= zwave_command_class_association_init();
+  status |= zwave_command_class_barrier_operator_init();
+  status |= zwave_command_class_basic_init();
+  status |= zwave_command_class_binary_switch_init();
+  status |= zwave_command_class_central_scene_init();
+  status |= zwave_command_class_configuration_init();
+  status |= zwave_command_class_device_reset_locally_init();
+  status |= zwave_command_class_inclusion_controller_init();
+  status |= zwave_command_class_indicator_init();
+  status |= zwave_command_class_manufacturer_specific_init();
+  status |= zwave_command_class_meter_control_init();
+  status |= zwave_command_class_multi_channel_init();
+  status |= zwave_command_class_multi_channel_association_init();
+  status |= zwave_command_class_multi_command_init();
+  status |= zwave_command_class_multilevel_sensor_init();
+  status |= zwave_command_class_notification_init();
+  status |= zwave_command_class_powerlevel_init();
+  status |= zwave_command_class_scene_activation_control_init();
+  status |= zwave_command_class_scene_actuator_configuration_control_init();
+  status |= zwave_command_class_scene_controller_configuration_control_init();
+  status |= zwave_command_class_security_0_init();
+  status |= zwave_command_class_security_2_init();
+  status |= zwave_command_class_supervision_init();
+  status |= zwave_command_class_switch_color_init();
+  status |= zwave_command_class_switch_multilevel_init();
+  status |= zwave_command_class_thermostat_mode_init();
+  status |= zwave_command_class_thermostat_setpoint_init();
+  status |= zwave_command_class_time_init();
+  status |= zwave_command_class_transport_service_init();
+  status |= zwave_command_class_version_init();
+  status |= zwave_command_class_wake_up_init();
+  status |= zwave_command_class_zwave_plus_info_init();
+
+  // Auto-generated handlers with overrides
+  status |= zwave_command_class_battery_control_init();
+  status |= zwave_command_class_indicator_control_init();
+  status |= zwave_command_class_manufacturer_specific_control_init();
 
   // Auto-generated handlers
-  initialization_status |= zwave_COMMAND_CLASS_DOOR_LOCK_init();
-  initialization_status |= zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_init();
-  initialization_status |= zwave_command_class_battery_control_init();
-  initialization_status |= zwave_COMMAND_CLASS_SENSOR_BINARY_init();
+  status |= zwave_COMMAND_CLASS_DOOR_LOCK_init();
+  status |= zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_init();
+  status |= zwave_COMMAND_CLASS_SENSOR_BINARY_init();
 
   zwave_command_handler_print_info(-1);
-  return initialization_status;
+  return status;
 }

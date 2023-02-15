@@ -55,7 +55,7 @@
 #include "process.h"
 #include "sl_status.h"
 
-/// This represents with an unkonwn delay before it can be reached
+/// This represents with an unknown delay before it can be reached
 #define MAX_COMMAND_DELAY_UNKNOWN 0xFFFFFFFF
 /// This represents with a possibly infinite delay before it can be reached
 /// (wakes up only on manual activations)

@@ -3,7 +3,10 @@ var group__zigpc__zcl__definitions =
     [ "__attribute__", "struct____attribute____.html", [
       [ "attribute_identifier", "struct____attribute____.html#a8671a4a508085fb8a2a31257083ad7d1", null ],
       [ "attribute_type", "struct____attribute____.html#a5b65dc3cdb4827b969b66b605f9bbedf", null ],
+      [ "cluster_id", "struct____attribute____.html#a759da1189c1e247eda93c37388156621", null ],
       [ "cool_set_point", "struct____attribute____.html#aa69d51c561b879270a03c85062efa3a2", null ],
+      [ "dest_endpoint", "struct____attribute____.html#ae05781ed3a58f7f96d162069c31a6b36", null ],
+      [ "dest_eui64", "struct____attribute____.html#a7a55fb5c462a7624980995e4b73b6dea", null ],
       [ "direction", "struct____attribute____.html#a255907e60c2339bd2e64c281e9f4899c", null ],
       [ "dummy", "struct____attribute____.html#ae0b7746cd2a5ecc22d8875fa742406e7", null ],
       [ "endpoint_discovered_count", "struct____attribute____.html#a125987996db5dff05507bd41a5a71e66", null ],
@@ -21,6 +24,7 @@ var group__zigpc__zcl__definitions =
       [ "panid", "struct____attribute____.html#a9244fa8defd1aeb3002f77150afd9db1", null ],
       [ "radio_channel", "struct____attribute____.html#aaea3dad6b8bc3039382e3eaa4fc01bb2", null ],
       [ "reportable_change", "struct____attribute____.html#acb90ecdaaaa4910031e50f56ae26bb73", null ],
+      [ "timeout_period", "struct____attribute____.html#a0011107547ad333250ccb85cafe01a2b", null ],
       [ "transition_time", "struct____attribute____.html#a48964041a6d059e5d5e6af338af7a0a9", null ],
       [ "zcl_version", "struct____attribute____.html#ad8ae956dcee71dfb05afa7440f6f5d92", null ]
     ] ],
@@ -34,6 +38,8 @@ var group__zigpc__zcl__definitions =
       [ "ZIGPC_ZCL_CLUSTER_THERMOSTAT", "group__zigpc__zcl__definitions.html#gga8b7b4a90ff4f613171005f68312cb938a673e7b5005fcd727c90215d69f6890cd", null ],
       [ "ZIGPC_ZCL_CLUSTER_COLOR_CONTROL", "group__zigpc__zcl__definitions.html#gga8b7b4a90ff4f613171005f68312cb938afc9a658110149a161a949e9684d6127b", null ],
       [ "ZIGPC_ZCL_CLUSTER_OCCUPANCY_SENSING", "group__zigpc__zcl__definitions.html#gga8b7b4a90ff4f613171005f68312cb938aee64c5c3eecdb047050437631bc85883", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE", "group__zigpc__zcl__definitions.html#gga8b7b4a90ff4f613171005f68312cb938a36aee9d6ab1b802f3cd4fff91b82505b", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IASWD", "group__zigpc__zcl__definitions.html#gga8b7b4a90ff4f613171005f68312cb938ac45746919ee446fb348aebb424b5e15e", null ],
       [ "ZIGPC_ZCL_CLUSTER_OTA_UPGRADE", "group__zigpc__zcl__definitions.html#gga8b7b4a90ff4f613171005f68312cb938a01c52c277adb4f62da07f6e2bccea137", null ]
     ] ],
     [ "zigpc_zcl_color_control_attr_type_t", "group__zigpc__zcl__definitions.html#ga22a23b1d6a8445410cc511764179b661", [
@@ -296,6 +302,29 @@ var group__zigpc__zcl__definitions =
       [ "ZIGPC_ZCL_CLUSTER_GROUPS_COMMAND_REMOVE_GROUP_RESPONSE", "group__zigpc__zcl__definitions.html#gga228467b3856fc8257a22ae2f0d86b872ac47e7fbefd7a7f62208218080b251b09", null ],
       [ "ZIGPC_ZCL_CLUSTER_GROUPS_COMMAND_REMOVE_ALL_GROUPS", "group__zigpc__zcl__definitions.html#gga228467b3856fc8257a22ae2f0d86b872a54eccc035fb6eec7d142645089deadad", null ],
       [ "ZIGPC_ZCL_CLUSTER_GROUPS_COMMAND_ADD_GROUP_IF_IDENTIFYING", "group__zigpc__zcl__definitions.html#gga228467b3856fc8257a22ae2f0d86b872a49dc0748db4145252f6cbb1440794f8b", null ]
+    ] ],
+    [ "zigpc_zcl_ias_zone_attr_type_t", "group__zigpc__zcl__definitions.html#gad8a6e5d4a8d1b6aab4e8069a54d68427", [
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATE", "group__zigpc__zcl__definitions.html#ggad8a6e5d4a8d1b6aab4e8069a54d68427aae2ee8fc67e6be346c6b0ffbad99db49", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_TYPE", "group__zigpc__zcl__definitions.html#ggad8a6e5d4a8d1b6aab4e8069a54d68427aa4b160931161a837bd62fe5ac4fd7181", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATUS", "group__zigpc__zcl__definitions.html#ggad8a6e5d4a8d1b6aab4e8069a54d68427a827b05e70db59cacb5a4f58e241ba6d8", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_IASCIE_ADDRESS", "group__zigpc__zcl__definitions.html#ggad8a6e5d4a8d1b6aab4e8069a54d68427af963cd612b9c2acd8d7aac78f58af62d", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONEID", "group__zigpc__zcl__definitions.html#ggad8a6e5d4a8d1b6aab4e8069a54d68427a560dfa65c2cc9588619c5ddf3d36f749", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED", "group__zigpc__zcl__definitions.html#ggad8a6e5d4a8d1b6aab4e8069a54d68427a2d73e84ed27bfbb2b6531282763815b6", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_CURRENT_ZONE_SENSITIVITY_LEVEL", "group__zigpc__zcl__definitions.html#ggad8a6e5d4a8d1b6aab4e8069a54d68427a72c88016b7e0d061d992ce240358f2b8", null ]
+    ] ],
+    [ "zigpc_zcl_ias_zone_command_type_t", "group__zigpc__zcl__definitions.html#gabbd18f3fab8d7fd9afaa03b441896b20", [
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_RESPONSE", "group__zigpc__zcl__definitions.html#ggabbd18f3fab8d7fd9afaa03b441896b20af2da87fa08fd4aef42e5be06e01b1f67", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION", "group__zigpc__zcl__definitions.html#ggabbd18f3fab8d7fd9afaa03b441896b20a743e452c99784073f532bdd852d28db4", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_NORMAL_OPERATION_MODE", "group__zigpc__zcl__definitions.html#ggabbd18f3fab8d7fd9afaa03b441896b20aef08427076f1e66380f0894f63bfa0a6", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST", "group__zigpc__zcl__definitions.html#ggabbd18f3fab8d7fd9afaa03b441896b20a266233ea879c009ccde303bd81ab35da", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_TEST_MODE", "group__zigpc__zcl__definitions.html#ggabbd18f3fab8d7fd9afaa03b441896b20add42aeb37bf926511ef7d22507edccb3", null ]
+    ] ],
+    [ "zigpc_zcl_iaswd_attr_type_t", "group__zigpc__zcl__definitions.html#ga57146a64b13c22f6191c1f411cf7ab03", [
+      [ "ZIGPC_ZCL_CLUSTER_IASWD_ATTR_MAX_DURATION", "group__zigpc__zcl__definitions.html#gga57146a64b13c22f6191c1f411cf7ab03aa618a9847824a9bb80f6ecd3aa922ff5", null ]
+    ] ],
+    [ "zigpc_zcl_iaswd_command_type_t", "group__zigpc__zcl__definitions.html#gaa1aa869adb78068b305732d63f6bd83d", [
+      [ "ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_START_WARNING", "group__zigpc__zcl__definitions.html#ggaa1aa869adb78068b305732d63f6bd83da813022cc63f0d46f546650e2a8032e4d", null ],
+      [ "ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_SQUAWK", "group__zigpc__zcl__definitions.html#ggaa1aa869adb78068b305732d63f6bd83da71a72316d23ebe5ec05a5c71d0c1f2a5", null ]
     ] ],
     [ "zigpc_zcl_identify_attr_type_t", "group__zigpc__zcl__definitions.html#ga08072ae07724a3bca8be16e010e8175e", [
       [ "ZIGPC_ZCL_CLUSTER_IDENTIFY_ATTR_IDENTIFY_TIME", "group__zigpc__zcl__definitions.html#gga08072ae07724a3bca8be16e010e8175eacc599b7a8471e086da9779379a0e858b", null ]

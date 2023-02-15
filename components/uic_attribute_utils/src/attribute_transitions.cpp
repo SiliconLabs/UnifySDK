@@ -18,12 +18,15 @@
 #include "sl_log.h"
 
 // Contiki
-#include "etimer.h"
+#include "sys/etimer.h"
+#include "sys/ctimer.h"
 
 // Generic includes
 #include <float.h>
 #include <map>
 #include <vector>
+#include <algorithm>
+#include <memory>
 
 constexpr char LOG_TAG[] = "attribute_transitions";
 
@@ -53,12 +56,66 @@ static std::map<attribute_store_node_t, transition_t> nodes_under_transition;
 // Timer restarted at fixed interval to refresh the attribute values under transition
 static struct etimer refresh_timer;
 
+struct fixed_transition {
+  attribute_store_node_t node;
+  attribute_store_node_value_state_t value_type;
+  float step;
+  float target_value;
+  struct ctimer timer;
+
+  // Dont copy this as it has a reference
+  fixed_transition(fixed_transition const &) = delete;
+
+  fixed_transition() : timer({}) {}
+
+  ~fixed_transition()
+  {
+    ctimer_stop(&timer);
+  }
+};
+
+std::map<attribute_store_node_t, std::unique_ptr<fixed_transition>>
+  fixed_transition_pool;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions
 ///////////////////////////////////////////////////////////////////////////////
 static void on_attribute_node_deleted(attribute_store_node_t deleted_node)
 {
   nodes_under_transition.erase(deleted_node);
+  //attribute_stop_transition(deleted_node);
+}
+
+static void fixed_transition_step(void *data)
+{
+  fixed_transition *transition = static_cast<fixed_transition *>(data);
+
+  if (false
+      == attribute_store_is_value_defined(transition->node,
+                                          transition->value_type)) {
+    // Value got undefined during a transition, just abort the transition.
+    attribute_stop_transition(transition->node);
+    return;
+  }
+
+  float current_value
+    = attribute_store_get_number(transition->node, transition->value_type);
+  float next_value = current_value + transition->step;
+  //Are we there yet ?
+  if (((transition->step > 0.0) && (next_value < transition->target_value))
+      || ((transition->step < 0.0)
+          && (next_value > transition->target_value))) {
+    attribute_store_set_number(transition->node,
+                               next_value,
+                               transition->value_type);
+    ctimer_restart(&transition->timer);
+  } else {
+    attribute_store_set_number(transition->node,
+                               transition->target_value,
+                               transition->value_type);
+
+    attribute_stop_transition(transition->node);
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,8 +187,9 @@ sl_status_t attribute_start_transition(attribute_store_node_t node,
 sl_status_t attribute_stop_transition(attribute_store_node_t node)
 {
   sl_log_debug(LOG_TAG, "Stopping transition on Attribute ID %d", node);
-  nodes_under_transition.erase(node);
 
+  fixed_transition_pool.erase(node);
+  nodes_under_transition.erase(node);
   if (nodes_under_transition.empty()) {
     etimer_stop(&refresh_timer);
   }
@@ -154,7 +212,14 @@ clock_time_t
 
 bool is_attribute_transition_ongoing(attribute_store_node_t node)
 {
-  return (nodes_under_transition.find(node) != nodes_under_transition.end());
+  if (fixed_transition_pool.count(node) > 0) {
+    return true;
+  }
+
+  if (nodes_under_transition.count(node) > 0) {
+    return true;
+  }
+  return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -223,6 +288,28 @@ static void refresh_all_transitions()
   }
 }
 
+sl_status_t attribute_start_fixed_transition(
+  attribute_store_node_t node,
+  attribute_store_node_value_state_t value_type,
+  float target_value,
+  float step,
+  clock_time_t step_interval)
+{
+  attribute_stop_transition(node);
+
+  auto result = fixed_transition_pool.insert(
+    std::make_pair(node, std::make_unique<fixed_transition>()));
+  auto &e = result.first->second;
+
+  e->node         = node;
+  e->value_type   = value_type;
+  e->step         = step;
+  e->target_value = target_value;
+
+  ctimer_set(&e->timer, step_interval, fixed_transition_step, &(*e));
+  return SL_STATUS_OK;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Contiki Process and thread
 ///////////////////////////////////////////////////////////////////////////////
@@ -236,6 +323,7 @@ PROCESS_THREAD(attribute_transitions_process, ev, data)
       attribute_transitions_ev_init();
     } else if (ev == PROCESS_EVENT_EXIT) {
       sl_log_debug(LOG_TAG, "Teardown of attribute transitions");
+      fixed_transition_pool.clear();
     } else if (ev == START_REFRESH_TIMER) {
       etimer_set(&refresh_timer, transition_refresh_rate);
     } else if ((ev == PROCESS_EVENT_TIMER) && (data == &refresh_timer)) {

@@ -10,7 +10,6 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-#include "unify_node_state_monitor.hpp"
 #include "contiki_test_helper.h"
 #include "mqtt_test_helper.h"
 #include "zap-types.h"

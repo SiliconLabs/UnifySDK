@@ -29,6 +29,11 @@ class uam_lexer(RegexLexer):
             (r"\+", Operator.Word),
             (r"\|", Operator.Word),
             (r"undefined", Name.Variable.Magic),
+            (r"chain_reaction", Generic.Heading),
+            (r"clear_desired", Generic.Heading),
+            (r"create_attributes", Generic.Heading),
+            (r"common_parent_type", Generic.Heading),
+            (r"fn_[a-zA-Z0-9_]+", Name.Function),
             (r'\s+', Text),
             (r'.', Text),
         ]
@@ -36,8 +41,6 @@ class uam_lexer(RegexLexer):
 
 
 # MQTT Lexer
-
-
 class mqtt_lexer(RegexLexer):
     name = 'MQTT'
     aliases = ['mqtt']
@@ -47,7 +50,7 @@ class mqtt_lexer(RegexLexer):
         'root': [
             (r'//.*?$', Comment.Singleline),
             (r'#.*?$', Comment.Singleline),
-            (r"^[a-zA-Z0-9_/\-<>]+", Operator.Word),
+            (r"^[a-zA-Z0-9_/\-<>+#]+", Operator.Word),
             (r'\{', Text, 'json-object'),
             (r'.', Text),
         ],
@@ -68,7 +71,7 @@ class mqtt_lexer(RegexLexer):
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Unify"
-copyright = "Copyright © 2022 Silicon Laboratories. All rights reserved."
+copyright = "Copyright © 2023 Silicon Laboratories. All rights reserved."
 author = "Silicon Labs"
 language = "en"
 
@@ -104,6 +107,7 @@ exclude_patterns = ["_build",
                     "**node_modules**",
                     "**uic_attribute_mapper/src/README.md",
                     "scripts/ci",
+                    "scripts/sd_card",
                     "**release_notes.md",
                     "externals",
                     "**build_**",
@@ -141,6 +145,7 @@ plantuml = "java -jar " + os.environ["PLANTUML_JAR_PATH"]
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
+html_js_files = ["js/charenc.js", "js/crypt.js", "js/sha1.js", "js/html5-qrcode.min.js", "js/qr_code_scanner.js"]
 html_css_files = ["custom_styles.css"]
 html_logo = "doxygen/assets/silicon-labs-logo.png"
 html_title = "Unify Host SDK"
@@ -148,6 +153,13 @@ html_baseurl = "https://siliconlabs.github.io/UnifySDK"
 
 releases_github_path = "SiliconLabs/UnifySDK"
 
+# -- Options for figures and tables (https://www.sphinx-doc.org/en/master/usage/configuration.html)
+numfig = True
+numfig_format = dict()
+numfig_format['figure'] = 'Figure %s'
+numfig_format['table'] = 'Table %s'
+numfig_format['code-block'] = 'Listing %s'
+numfig_format['section'] = 'Section %s'
 
 # -- Options for LaTeX output ------------------------------------------------
 latex_engine = "lualatex"
@@ -173,6 +185,13 @@ latex_documents = [
         root_doc,
         "unify_sdk_documentation.tex",
         "Unify Framework documentation",
+        "Silicon Labs",
+        "howto",
+    ),
+    (
+        "doc/unify_specifications/index",
+        "unify_specifications.tex",
+        "Unify Specifications",
         "Silicon Labs",
         "howto",
     ),

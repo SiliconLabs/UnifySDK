@@ -31,7 +31,6 @@ var zwave__command__class__switch__multilevel_8c =
     [ "set_reported_duration", "zwave__command__class__switch__multilevel_8c.html#ad9c702f574d93ec670441aa7b9344375", null ],
     [ "set_reported_on_off", "zwave__command__class__switch__multilevel_8c.html#a29a12e399a5555bdea5fd738176c9f09", null ],
     [ "set_reported_value", "zwave__command__class__switch__multilevel_8c.html#acc9175dc30996e464bf423af23dd6418", null ],
-    [ "set_state_value", "zwave__command__class__switch__multilevel_8c.html#a61b840814b4ebed1e48e1b62a0e6a645", null ],
     [ "update_node_state", "zwave__command__class__switch__multilevel_8c.html#a2230cf536d6bdba0265ca6c235afd89d", null ],
     [ "zwave_command_class_switch_multilevel_control_handler", "zwave__command__class__switch__multilevel_8c.html#ae3088526ca025e0a4f4d75d2c67dab7a", null ],
     [ "zwave_command_class_switch_multilevel_get", "zwave__command__class__switch__multilevel_8c.html#a2c29ee5e01b9818d09448de111541f33", null ],

@@ -13,10 +13,17 @@
 
 #include "unity.h"
 
-#include "zigpc_net_mgmt_fsm_mock.h"
+#include "zigpc_gateway_mock.h"
+#include "zigpc_datastore_mock.h"
+#include "zigpc_common_zigbee_mock.h"
 #include "zigpc_net_mgmt_process_send_mock.h"
+#include "zigpc_common_observable_mock.h"
+#include "zigpc_net_mgmt_notify_int.h"
+#include "zigpc_net_mgmt_notify.h"
 
 #include "zigpc_net_mgmt.h"
+
+struct zigpc_observable zigpc_net_mgmt_observable;
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are
@@ -49,14 +56,13 @@ void test_gateway_node_add_should_call_process_send(void)
   zigbee_eui64_t test_eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
   zigbee_install_code_t test_install_code = {0xA};
   uint8_t test_install_code_length        = 12;
-
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-
+  zigpc_gateway_add_node_install_code_ExpectAndReturn(test_eui64, test_install_code, test_install_code_length, SL_STATUS_OK);
+  
+  zigpc_observable_notify_ExpectAndReturn(&zigpc_net_mgmt_observable,
+                                          ZIGPC_NET_MGMT_NOTIFY_STATE_UPDATE,
+                                          NULL,
+                                          SL_STATUS_OK);
+  zigpc_observable_notify_IgnoreArg_data();
   // ACT
   sl_status_t test_status = zigpc_net_mgmt_add_node(test_eui64,
                                                     test_install_code,
@@ -75,15 +81,17 @@ void test_net_mgmt_node_remove_should_call_process_send(void)
   // ARRANGE
   zigbee_eui64_t test_eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
 
-  zigpc_net_mgmt_fsm_get_state_ExpectAndReturn(ZIGPC_NET_MGMT_FSM_STATE_IDLE);
 
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-
+  zigpc_datastore_read_device_IgnoreAndReturn(SL_STATUS_OK);
+  zigpc_datastore_write_device_IgnoreAndReturn(SL_STATUS_OK);
+  zigpc_gateway_remove_node_ExpectAndReturn(test_eui64, SL_STATUS_OK);
+  
+  zigpc_observable_notify_ExpectAndReturn(&zigpc_net_mgmt_observable,
+                                          ZIGPC_NET_MGMT_NOTIFY_STATE_UPDATE,
+                                          NULL,
+                                          SL_STATUS_OK);
+  zigpc_observable_notify_IgnoreArg_data();
+  
   // ACT
   sl_status_t test_status = zigpc_net_mgmt_remove_node(test_eui64);
 
@@ -99,13 +107,7 @@ void test_net_mgmt_change_state_request_should_call_process_send(void)
 {
   // ARRANGE
   zigpc_net_mgmt_state_change_request_t test_request = {.requested_state = 2};
-
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
+  zigpc_gateway_network_permit_joins_ExpectAndReturn(false, SL_STATUS_OK);
 
   // ACT
   sl_status_t test_status = zigpc_net_mgmt_state_change_request(&test_request);

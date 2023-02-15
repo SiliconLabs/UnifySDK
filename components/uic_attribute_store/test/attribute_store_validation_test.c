@@ -178,7 +178,7 @@ void test_attribute_store_int64_t_validation_test()
   TEST_ASSERT_TRUE(is_write_operation_valid(1, NULL, sizeof(int64_t)));
 }
 
-void test_attribute_store_unkonwn_type_validation_test()
+void test_attribute_store_unknown_type_validation_test()
 {
   attribute_store_configuration_set_type_validation(false);
 

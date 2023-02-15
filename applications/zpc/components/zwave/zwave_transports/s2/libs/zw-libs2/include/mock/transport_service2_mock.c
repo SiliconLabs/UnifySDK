@@ -1,8 +1,6 @@
-/*
- * transport_service2_mock.c
- *
- *  Created on: 11. nov. 2019
- *      Author: cholsen
+/**
+ * @file transport_service2_mock.c
+ * @copyright 2022 Silicon Laboratories Inc.
  */
 #include <ts_types.h>
 

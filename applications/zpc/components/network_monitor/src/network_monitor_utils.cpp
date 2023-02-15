@@ -15,6 +15,7 @@
 
 // Unify components
 #include "attribute.hpp"
+#include "attribute_resolver.h"
 #include "sys/clock.h"
 
 // ZPC Components
@@ -23,8 +24,14 @@
 bool network_monitor_is_node_asleep_due_to_inactivity(
   attribute_store_node_t node_id_node, int32_t inactive_time)
 {
+  // If the node is paused for resolution, we are not in a Wake Up session anyway.
+  // It can be that node just sent us in the last 10 seconds, but no Wake Up Notification.
+  if (true == is_node_or_parent_paused(node_id_node)) {
+    return true;
+  }
+
   clock_time_t current_time = clock_seconds();
-  clock_time_t  last_rx_tx   = 0;
+  clock_time_t last_rx_tx   = 0;
   attribute_store_node_t last_tx_rx_node
     = attribute_store_get_first_child_by_type(
       node_id_node,
@@ -36,7 +43,7 @@ bool network_monitor_is_node_asleep_due_to_inactivity(
 }
 
 /**
- * @brief Gets the Z-Wave operating mode () from the Attribute Store Node for the NodeID
+ * @brief Gets the Z-Wave operating mode from the Attribute Store Node for the NodeID
  *
  * @param node_id_node        NodeID node in the attribute store.
  * @returns zwave_operating_mode_t

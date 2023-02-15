@@ -28,10 +28,10 @@
 
 // Z-Wave definitions
 #include "zwave_node_id_definitions.h"
-#include "zwave_command_class_version_types.h"
 #include "zwave_controller_types.h"
 #include "zwave_keyset_definitions.h"
 #include "zwave_generic_types.h"
+#include "zwave_command_class_version_types.h"
 
 // Unify includes
 #include "sl_status.h"
@@ -56,6 +56,7 @@ typedef struct {
     zwave_node_id_t node_id,
     zwave_endpoint_id_t endpoint_id);
 } zwave_controller_storage_callback_t;
+
 
 /**
  * @brief zwave_controller_storage callbacks register API

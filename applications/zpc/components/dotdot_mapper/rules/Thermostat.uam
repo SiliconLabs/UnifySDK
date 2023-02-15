@@ -22,116 +22,234 @@ def zwTHERMOSTAT_MODE             0x4002
 def zwTHERMOSTAT_SUPPORTED_MODES  0x4003
 
 // Thermostat Cluster
-def zbTHERMOSTAT_CLUSTER_LOCAL_TEMPERATURE                      0x02010000
-def zbTHERMOSTAT_CLUSTER_OCCUPIED_COOLING_SETPOINT              0x02010011
-def zbTHERMOSTAT_CLUSTER_OCCUPIED_HEATING_SETPOINT              0x02010012
-def zbTHERMOSTAT_CLUSTER_SYSTEM_MODE                            0x0201001C
-def zbTHERMOSTAT_CLUSTER_THERMOSTAT_PROGRAMMING_OPERATION_MODE  0x02010025
-def zbTHERMOSTAT_CLUSTER_CONTROL_SEQUENCE_OF_OPERATION          0x0201001B
-def zbTHERMOSTAT_CLUSTER_MIN_HEAT_SETPOINT_LIMIT                0x02010015
-def zbTHERMOSTAT_CLUSTER_MAX_HEAT_SETPOINT_LIMIT                0x02010016
-def zbTHERMOSTAT_CLUSTER_MIN_COOL_SETPOINT_LIMIT                0x02010017
-def zbTHERMOSTAT_CLUSTER_MAX_COOL_SETPOINT_LIMIT                0x02010018
+def zb_LocalTemperature                     0x02010000
+def zb_HVACSystemTypeConfiguration          0x02010009
+def zb_LocalTemperatureCalibration          0x02010010
+def zb_OccupiedCoolingSetpoint              0x02010011
+def zb_OccupiedHeatingSetpoint              0x02010012
+def zb_UnoccupiedCoolingSetpoint            0x02010013
+def zb_UnoccupiedHeatingSetpoint            0x02010014
+def zb_MinHeatSetpointLimit                 0x02010015
+def zb_MaxHeatSetpointLimit                 0x02010016
+def zb_MinCoolSetpointLimit                 0x02010017
+def zb_MaxCoolSetpointLimit                 0x02010018
+def zb_MinSetpointDeadBand                  0x02010019
+def zb_RemoteSensing                        0x0201001a
+def zb_ControlSequenceOfOperation           0x0201001b
+def zb_SystemMode                           0x0201001c
+def zb_TemperatureSetpointHold              0x02010023
+def zb_TemperatureSetpointHoldDuration      0x02010024
+def zb_ThermostatProgrammingOperationMode   0x02010025
+def zb_OccupiedSetback                      0x02010034
+def zb_OccupiedSetbackMin                   0x02010035
+def zb_OccupiedSetbackMax                   0x02010036
+def zb_UnoccupiedSetback                    0x02010037
+def zb_EmergencyHeatDelta                   0x0201003a
+def zb_ACType                               0x02010040
+def zb_ACCapacity                           0x02010041
+def zb_ACRefrigerantType                    0x02010042
+def zb_ACCompressorType                     0x02010043
+def zb_ACErrorCode                          0x02010044
+def zb_ACLouverPosition                     0x02010045
+def zb_ACCoilTemperature                    0x02010046
+def zb_ACCapacityFormat                     0x02010047
+
+def thermostat_setpoint_supported (e'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE | e'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE)
 
 scope 0 {
+  // We map Setpoint setpoint_type 0x01 (HEATING) and 0x02 (COOLING)
+  // The Z-Wave units are converted into milli units, in ZigBee is should be
+  // deci-celsius.
+  // A value scale of 1 means fahrenheit
 
-// We map Setpoint setpoint_type 0x01 (HEATING) and 0x02 (COOLING)
-// The Z-Wave units are converted into milli units, in ZigBee is should be
-// deci-celsius.
-// A value scale of 1 means fahrenheit
+  // Heating
+  r'zb_OccupiedHeatingSetpoint =
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0 )
+      (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE / 10)
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
+      (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE - 32000) * 5) / 90)
+      undefined
 
-// Heating
-r'zbTHERMOSTAT_CLUSTER_OCCUPIED_HEATING_SETPOINT =
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0 )
-    (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE / 10)
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
-    (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE - 32000) * 5) / 90)
+  d'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE =
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0 )
+      (d'zb_OccupiedHeatingSetpoint*10)
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
+      (((d'zb_OccupiedHeatingSetpoint)*90) / 5 + 32000)
+      undefined
+
+  r'zb_MinHeatSetpointLimit =
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 0)
+      (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE / 10)
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 1)
+      (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE - 32000) * 5) / 90)
+      undefined
+
+  r'zb_MaxHeatSetpointLimit =
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 0)
+      (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE  / 10)
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 1)
+      (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE - 32000) * 5) / 90)
+      undefined
+
+  // Cooling
+  r'zb_OccupiedCoolingSetpoint =
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0)
+      (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE / 10 )
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1)
+      (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE - 32000) * 5) / 90)
+      undefined
+
+  r'zb_MinCoolSetpointLimit =
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 0)
+      (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE  / 10)
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 1)
+      (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE - 32000) * 5) / 90)
+      undefined
+
+  r'zb_MaxCoolSetpointLimit =
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 0)
+      (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE  / 10)
+    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 1)
+      (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE - 32000) * 5) / 90)
+      undefined
+
+  d'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE =
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0)
+      (d'zb_OccupiedCoolingSetpoint*10)
+    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
+      (((d'zb_OccupiedCoolingSetpoint)*90) / 5 + 32000)
+      undefined
+
+  // Local Temperature
+  r'zb_LocalTemperature =
+    if(thermostat_setpoint_supported == 0) undefined
+    if(r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SCALE == 0)
+      (r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SENSOR_VALUE  / 10)
+    if(r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SCALE == 1)
+      (((r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SENSOR_VALUE - 32000) * 5) / 90)
+      undefined
+
+
+  r'zb_SystemMode =
+    if (r'zwTHERMOSTAT_MODE == 0) 0
+    if (r'zwTHERMOSTAT_MODE == 1) 4
+    if (r'zwTHERMOSTAT_MODE == 2) 3
+    if (r'zwTHERMOSTAT_MODE == 3) 1
+    if (r'zwTHERMOSTAT_MODE == 6) 7
+    if (r'zwTHERMOSTAT_MODE == 8) 8
     undefined
 
-d'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE =
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0 )
-    (d'zbTHERMOSTAT_CLUSTER_OCCUPIED_HEATING_SETPOINT*10)
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
-    (((d'zbTHERMOSTAT_CLUSTER_OCCUPIED_HEATING_SETPOINT)*90) / 5 + 32000)
+  d'zwTHERMOSTAT_MODE =
+    if ( d'zb_SystemMode == 0) 0
+    if ( d'zb_SystemMode == 4) 1
+    if ( d'zb_SystemMode == 3) 2
+    if ( d'zb_SystemMode == 1) 3
+    if ( d'zb_SystemMode == 7) 6
+    if ( d'zb_SystemMode == 8) 8
     undefined
 
-r'zbTHERMOSTAT_CLUSTER_MIN_HEAT_SETPOINT_LIMIT =
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 0)
-    (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE / 10)
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 1)
-    (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE - 32000) * 5) / 90)
+  r'zb_ControlSequenceOfOperation =
+    if(((r'zwTHERMOSTAT_SUPPORTED_MODES) & 6) == 0x06) 0x04
+    if(((r'zwTHERMOSTAT_SUPPORTED_MODES) & 6) == 0x02) 0x02
     undefined
 
-r'zbTHERMOSTAT_CLUSTER_MAX_HEAT_SETPOINT_LIMIT =
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 0)
-    (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE  / 10)
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 1)
-    (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE - 32000) * 5) / 90)
+  // just set this to 0
+  r'zb_ThermostatProgrammingOperationMode = if(r'zwTHERMOSTAT_MODE) 0 undefined
+}
+
+// Non-writable attributes for Z-Wave.
+// ZCL has a few writable attributes that are actually not writable on Z-Wave
+// We roll-back desired value updates for these attributes here.
+scope 0 chain_reaction(0) {
+
+  d'zb_HVACSystemTypeConfiguration =
+    if (r'zb_HVACSystemTypeConfiguration != d'zb_HVACSystemTypeConfiguration) r'zb_HVACSystemTypeConfiguration
+    undefined
+  d'zb_LocalTemperatureCalibration =
+    if (r'zb_LocalTemperatureCalibration != d'zb_LocalTemperatureCalibration) r'zb_LocalTemperatureCalibration
     undefined
 
-// Cooling
-r'zbTHERMOSTAT_CLUSTER_OCCUPIED_COOLING_SETPOINT =
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0)
-    (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE / 10 )
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1)
-    (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE - 32000) * 5) / 90)
+  d'zb_UnoccupiedCoolingSetpoint =
+    if (r'zb_UnoccupiedCoolingSetpoint != d'zb_UnoccupiedCoolingSetpoint) r'zb_UnoccupiedCoolingSetpoint
     undefined
 
-r'zbTHERMOSTAT_CLUSTER_MIN_COOL_SETPOINT_LIMIT =
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 0)
-    (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE  / 10)
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 1)
-    (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE - 32000) * 5) / 90)
+  d'zb_UnoccupiedHeatingSetpoint =
+    if (r'zb_UnoccupiedHeatingSetpoint != d'zb_UnoccupiedHeatingSetpoint) r'zb_UnoccupiedHeatingSetpoint
     undefined
 
-r'zbTHERMOSTAT_CLUSTER_MAX_COOL_SETPOINT_LIMIT =
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 0)
-    (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE  / 10)
-  if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 1)
-    (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE - 32000) * 5) / 90)
+  d'zb_MinSetpointDeadBand =
+    if (r'zb_MinSetpointDeadBand != d'zb_MinSetpointDeadBand) r'zb_MinSetpointDeadBand
     undefined
 
-d'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE =
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0)
-    (d'zbTHERMOSTAT_CLUSTER_OCCUPIED_COOLING_SETPOINT*10)
-  if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
-    (((d'zbTHERMOSTAT_CLUSTER_OCCUPIED_COOLING_SETPOINT)*90) / 5 + 32000)
+  d'zb_MaxHeatSetpointLimit =
+    if (r'zb_MaxHeatSetpointLimit != d'zb_MaxHeatSetpointLimit) r'zb_MaxHeatSetpointLimit
     undefined
 
-// Local Temperature
-r'zbTHERMOSTAT_CLUSTER_LOCAL_TEMPERATURE =
-  if(r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SCALE == 0)
-    (r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SENSOR_VALUE  / 10)
-  if(r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SCALE == 1)
-    (((r'zwSENSOR_MULTILEVEL_SENSOR_TYPE[1].zwSENSOR_MULTILEVEL_SENSOR_VALUE - 32000) * 5) / 90)
+  d'zb_MinCoolSetpointLimit =
+    if (r'zb_MinCoolSetpointLimit != d'zb_MinCoolSetpointLimit) r'zb_MinCoolSetpointLimit
     undefined
 
+  d'zb_MaxCoolSetpointLimit =
+    if (r'zb_MaxCoolSetpointLimit != d'zb_MaxCoolSetpointLimit) r'zb_MaxCoolSetpointLimit
+    undefined
 
-r'zbTHERMOSTAT_CLUSTER_SYSTEM_MODE =
-  if (r'zwTHERMOSTAT_MODE == 0) 0
-  if (r'zwTHERMOSTAT_MODE == 1) 4
-  if (r'zwTHERMOSTAT_MODE == 2) 3
-  if (r'zwTHERMOSTAT_MODE == 3) 1
-  if (r'zwTHERMOSTAT_MODE == 6) 7
-  if (r'zwTHERMOSTAT_MODE == 8) 8
-  undefined
+  d'zb_RemoteSensing =
+    if (r'zb_RemoteSensing != d'zb_RemoteSensing) r'zb_RemoteSensing
+    undefined
 
-d'zwTHERMOSTAT_MODE =
-  if ( d'zbTHERMOSTAT_CLUSTER_SYSTEM_MODE == 0) 0
-  if ( d'zbTHERMOSTAT_CLUSTER_SYSTEM_MODE == 4) 1
-  if ( d'zbTHERMOSTAT_CLUSTER_SYSTEM_MODE == 3) 2
-  if ( d'zbTHERMOSTAT_CLUSTER_SYSTEM_MODE == 1) 3
-  if ( d'zbTHERMOSTAT_CLUSTER_SYSTEM_MODE == 7) 6
-  if ( d'zbTHERMOSTAT_CLUSTER_SYSTEM_MODE == 8) 8
-  undefined
+  d'zb_ControlSequenceOfOperation =
+    if (r'zb_ControlSequenceOfOperation != d'zb_ControlSequenceOfOperation) r'zb_ControlSequenceOfOperation
+    undefined
 
+  d'zb_TemperatureSetpointHold =
+    if (r'zb_TemperatureSetpointHold != d'zb_TemperatureSetpointHold) r'zb_TemperatureSetpointHold
+    undefined
 
-r'zbTHERMOSTAT_CLUSTER_CONTROL_SEQUENCE_OF_OPERATION =
-  if(((r'zwTHERMOSTAT_SUPPORTED_MODES) & 6) == 0x06) 0x04
-  if(((r'zwTHERMOSTAT_SUPPORTED_MODES) & 6) == 0x02) 0x02
-  undefined
+  d'zb_TemperatureSetpointHoldDuration =
+    if (r'zb_TemperatureSetpointHoldDuration != d'zb_TemperatureSetpointHoldDuration) r'zb_TemperatureSetpointHoldDuration
+    undefined
 
-//just set this to 0
-r'zbTHERMOSTAT_CLUSTER_THERMOSTAT_PROGRAMMING_OPERATION_MODE = if( r'zwTHERMOSTAT_MODE ) 0 undefined
+  d'zb_ThermostatProgrammingOperationMode =
+    if (r'zb_ThermostatProgrammingOperationMode != d'zb_ThermostatProgrammingOperationMode) r'zb_ThermostatProgrammingOperationMode
+    undefined
 
+  d'zb_OccupiedSetback =
+    if (r'zb_OccupiedSetback != d'zb_OccupiedSetback) r'zb_OccupiedSetback
+    undefined
+
+  d'zb_UnoccupiedSetback =
+    if (r'zb_UnoccupiedSetback != d'zb_UnoccupiedSetback) r'zb_UnoccupiedSetback
+    undefined
+
+  d'zb_EmergencyHeatDelta =
+    if (r'zb_EmergencyHeatDelta != d'zb_EmergencyHeatDelta) r'zb_EmergencyHeatDelta
+    undefined
+
+  d'zb_ACType =
+    if (r'zb_ACType != d'zb_ACType) r'zb_ACType
+    undefined
+
+  d'zb_ACCapacity =
+    if (r'zb_ACCapacity != d'zb_ACCapacity) r'zb_ACCapacity
+    undefined
+
+  d'zb_ACRefrigerantType =
+    if (r'zb_ACRefrigerantType != d'zb_ACRefrigerantType) r'zb_ACRefrigerantType
+    undefined
+
+  d'zb_ACCompressorType =
+    if (r'zb_ACCompressorType != d'zb_ACCompressorType) r'zb_ACCompressorType
+    undefined
+
+  d'zb_ACErrorCode =
+    if (r'zb_ACErrorCode != d'zb_ACErrorCode) r'zb_ACErrorCode
+    undefined
+
+  d'zb_ACLouverPosition =
+    if (r'zb_ACLouverPosition != d'zb_ACLouverPosition) r'zb_ACLouverPosition
+    undefined
+
+  d'zb_ACCapacityFormat =
+    if (r'zb_ACCapacityFormat != d'zb_ACCapacityFormat) r'zb_ACCapacityFormat
+    undefined
 }

@@ -34,9 +34,7 @@ extern "C" {
  * @brief Initiates the re-interview of a NodeID
  *
  * @param node_unid   The UNID of the node to interview.
- * @returns SL_STATUS_OK if the interview has been initiated,
- * SL_STATUS_NOT_FOUND if the NodeID does not exist, SL_STATUS_FAIL if
- * an error occureed.
+ * @returns SL_STATUS_OK in any case
  */
 sl_status_t ucl_mqtt_initiate_node_interview(const unid_t node_unid);
 
@@ -50,9 +48,7 @@ sl_status_t ucl_mqtt_initiate_node_interview(const unid_t node_unid);
  * @param node_unid     The UNID of the node to interview.
  * @param endpoint_id   The End Point ID under the NodeID that is to
  *                       be interviewed.
- * @returns SL_STATUS_OK if the interview has been initiated,
- * SL_STATUS_NOT_FOUND if the NodeID does not exist, SL_STATUS_FAIL if
- * an error occurred.
+ * @returns SL_STATUS_OK in any case
  */
 sl_status_t
   ucl_mqtt_initiate_endpoint_interview(const unid_t node_unid,

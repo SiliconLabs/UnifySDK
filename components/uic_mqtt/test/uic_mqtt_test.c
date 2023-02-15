@@ -10,23 +10,26 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+#include "uic_mqtt.h"
+#include "uic_mqtt_int.h"
+#include "unity.h"
+
 //Generic includes
 #include <stdbool.h>
 #include <string.h>
+
 // Contiki test resources
 #include "sys/process.h"
 #include "contiki_test_helper.h"
+
+// Unify components
+#include "sl_log.h"
 
 // CMocks
 #include "config_mock.h"
 #include "uic_main_externals_mock.h"
 #include "mqtt_client_mock.h"
-
-#include "unity.h"
-#include "cmock.h"
-#include "sl_log.h"
-#include "uic_mqtt.h"
-#include "uic_mqtt_int.h"
+#include "mqtt_client_id_mock.h"
 
 PROCESS_NAME(uic_mqtt_process);
 
@@ -36,8 +39,7 @@ const int testport               = 1337;
 static const char *test_cafile   = "/home/test/cafile";
 static const char *test_certfile = "/home/test/certfile";
 static const char *test_keyfile  = "/home/test/keyfile";
-static char test_id_uid[16];
-const char *test_mqtt_client_id = test_id_uid;
+const char *test_mqtt_client_id  = "test_client_id";
 
 // Connect callbacks variables
 static bool after_connect_called     = false;
@@ -52,7 +54,6 @@ static void subscribe_topic_callback(const char *topic,
 // Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
-  snprintf(test_id_uid, sizeof(test_id_uid), "uic_%i", getpid());
   mqtt_client_mock_Init();
 }
 
@@ -93,10 +94,6 @@ void test_uic_client_process_init_teardown()
   config_get_as_int_IgnoreArg_result();
   config_get_as_int_ReturnThruPtr_result((int *)&testport);
 
-  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CLIENT_ID, 0, CONFIG_STATUS_OK);
-  config_get_as_string_IgnoreArg_result();
-  config_get_as_string_ReturnThruPtr_result(&test_mqtt_client_id);
-
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
                                        CONFIG_STATUS_OK);
@@ -114,11 +111,14 @@ void test_uic_client_process_init_teardown()
                                        CONFIG_STATUS_OK);
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&test_keyfile);
+
+  mqtt_client_id_get_from_config_ExpectAndReturn(test_mqtt_client_id);
+
   mqtt_client_event_Expect(NULL, MQTT_EVENT_CONNECT);
   mqtt_client_file_descriptor_IgnoreAndReturn(0);
   mqtt_client_new_ExpectAndReturn(testhost,
                                   testport,
-                                  test_id_uid,
+                                  NULL,
                                   test_cafile,
                                   test_certfile,
                                   test_keyfile,
@@ -126,20 +126,25 @@ void test_uic_client_process_init_teardown()
                                   uic_mqtt_process_post_delayed,
                                   uic_mqtt_process_count_events,
                                   NULL);
+  mqtt_client_new_IgnoreArg_client_id();
   mqtt_client_setup_ExpectAndReturn(NULL, true);
   mqtt_client_disconnect_Expect(NULL);
   mqtt_client_on_connect_callback_set_Expect(NULL, uic_mqtt_process_on_connect);
   mqtt_client_on_disconnect_callback_set_Expect(NULL,
                                                 uic_mqtt_process_on_disconnect);
   uic_main_ext_register_rfd_IgnoreAndReturn(SL_STATUS_OK);
-  process_start(&uic_mqtt_process, NULL);
-  contiki_test_helper_run(0);
+
   uic_mqtt_setup();
+  contiki_test_helper_run(0);
+
   process_exit(&uic_mqtt_process);
+  contiki_test_helper_run(0);
 
   // Testing init and teardown callbacks before disconnect and after connecting
-  sl_log_debug("Test", "Testing here %d", after_connect_called);
-  sl_log_debug("Test", "Testing here %d", before_disconnect_called);
+  sl_log_debug("Test", "after_connect_called: %d", after_connect_called);
+  sl_log_debug("Test",
+               "before_disconnect_called: %d",
+               before_disconnect_called);
 }
 
 // Test the initialization and teardown of a Unify MQTT Client process
@@ -155,10 +160,6 @@ void test_uic_client_process_init_teardown_no_client_id()
   config_get_as_int_IgnoreArg_result();
   config_get_as_int_ReturnThruPtr_result((int *)&testport);
 
-  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CLIENT_ID, 0, CONFIG_STATUS_OK);
-  config_get_as_string_IgnoreArg_result();
-  config_get_as_string_ReturnThruPtr_result(&test_mqtt_client_id);
-
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
                                        CONFIG_STATUS_OK);
@@ -177,6 +178,8 @@ void test_uic_client_process_init_teardown_no_client_id()
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&test_keyfile);
 
+  mqtt_client_id_get_from_config_ExpectAndReturn(test_mqtt_client_id);
+
   mqtt_client_after_connect_callback_set_Expect(NULL, after_connect_callback);
   mqtt_client_before_disconnect_callback_set_Expect(
     NULL,
@@ -185,7 +188,7 @@ void test_uic_client_process_init_teardown_no_client_id()
   mqtt_client_file_descriptor_IgnoreAndReturn(0);
   mqtt_client_new_ExpectAndReturn(testhost,
                                   testport,
-                                  test_id_uid,
+                                  NULL,
                                   test_cafile,
                                   test_certfile,
                                   test_keyfile,
@@ -193,6 +196,8 @@ void test_uic_client_process_init_teardown_no_client_id()
                                   uic_mqtt_process_post_delayed,
                                   uic_mqtt_process_count_events,
                                   NULL);
+  mqtt_client_new_IgnoreArg_client_id();
+
   mqtt_client_setup_ExpectAndReturn(NULL, true);
   mqtt_client_disconnect_Expect(NULL);
   mqtt_client_on_connect_callback_set_Expect(NULL, uic_mqtt_process_on_connect);
@@ -201,10 +206,13 @@ void test_uic_client_process_init_teardown_no_client_id()
   uic_main_ext_register_rfd_IgnoreAndReturn(SL_STATUS_OK);
   uic_mqtt_set_after_connect_callback(after_connect_callback);
   uic_mqtt_set_before_disconnect_callback(before_disconnect_cabllback);
-  process_start(&uic_mqtt_process, NULL);
-  contiki_test_helper_run(0);
+
   uic_mqtt_setup();
+  contiki_test_helper_run(0);
+
+  //mqtt_client_disconnect_Expect(NULL);
   process_exit(&uic_mqtt_process);
+  contiki_test_helper_run(0);
 }
 
 // Make sure uic_mqtt_setup() does its business of fetching configuration, trying
@@ -220,10 +228,6 @@ void test_uic_client_setup_happy()
   config_get_as_int_IgnoreArg_result();
   config_get_as_int_ReturnThruPtr_result((int *)&testport);
 
-  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CLIENT_ID, 0, CONFIG_STATUS_OK);
-  config_get_as_string_IgnoreArg_result();
-  config_get_as_string_ReturnThruPtr_result(&test_mqtt_client_id);
-
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
                                        CONFIG_STATUS_OK);
@@ -242,9 +246,11 @@ void test_uic_client_setup_happy()
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&test_keyfile);
 
+  mqtt_client_id_get_from_config_ExpectAndReturn(test_mqtt_client_id);
+
   mqtt_client_new_ExpectAndReturn(testhost,
                                   testport,
-                                  test_id_uid,
+                                  NULL,
                                   test_cafile,
                                   test_certfile,
                                   test_keyfile,
@@ -252,12 +258,20 @@ void test_uic_client_setup_happy()
                                   uic_mqtt_process_post_delayed,
                                   uic_mqtt_process_count_events,
                                   NULL);
+  mqtt_client_new_IgnoreArg_client_id();
+
+  mqtt_client_event_Expect(NULL, MQTT_EVENT_CONNECT);
   mqtt_client_file_descriptor_IgnoreAndReturn(0);
   mqtt_client_on_connect_callback_set_Expect(NULL, uic_mqtt_process_on_connect);
   mqtt_client_on_disconnect_callback_set_Expect(NULL,
                                                 uic_mqtt_process_on_disconnect);
   mqtt_client_setup_ExpectAndReturn(NULL, true);
   uic_mqtt_setup();
+  contiki_test_helper_run(0);
+
+  mqtt_client_disconnect_Expect(NULL);
+  process_exit(&uic_mqtt_process);
+  contiki_test_helper_run(0);
 }
 
 // Ensure API correctness.

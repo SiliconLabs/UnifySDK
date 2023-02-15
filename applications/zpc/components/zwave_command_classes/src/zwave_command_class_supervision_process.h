@@ -14,6 +14,9 @@
 #ifndef ZWAVE_COMMAND_CLASS_SUPERVISION_PROCESS_H
 #define ZWAVE_COMMAND_CLASS_SUPERVISION_PROCESS_H
 
+// Component includes
+#include "zwave_command_class_supervision_internals.h"
+
 // Contiki includes
 #include "process.h"
 #include "etimer.h"
@@ -146,6 +149,11 @@ sl_status_t zwave_command_class_supervision_close_session(
  */
 sl_status_t zwave_command_class_supervision_assign_session_tx_id(
   supervision_id_t supervision_id, zwave_tx_session_id_t tx_session_id);
+
+/**
+ * @brief Logs the state of the Supervision process, with sessions and timers
+ */
+void zwave_command_class_supervision_process_log();
 
 #ifdef __cplusplus
 }

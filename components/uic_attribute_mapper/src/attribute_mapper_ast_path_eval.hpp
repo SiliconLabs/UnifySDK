@@ -58,7 +58,7 @@ struct attribute_path_eval {
     context(context)
   {}
 
-  /// hat operator ^ (parent)
+  /// Evaluates numbers and expressions into attributes
   attribute_store::attribute operator()(const ast::operand &oper);
 
   /// hat operator ^ (parent)

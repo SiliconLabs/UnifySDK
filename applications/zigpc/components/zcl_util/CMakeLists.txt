@@ -16,10 +16,12 @@ target_include_directories(
 target_link_libraries(
   zigpc_zcl_util
   INTERFACE zigpc_common
-  PRIVATE zigpc_common uic_log)
+  PRIVATE zigpc_common unify)
 
-add_mock(zigpc_zcl_util_mock include/zcl_util.h
-         ${ZAP_CURRENT_OUTPUT_DIR}/include/zcl_definitions.h)
-target_interface_libraries(zigpc_zcl_util_mock zigpc_common_mock)
+if(BUILD_TESTING)
+  add_mock(zigpc_zcl_util_mock include/zcl_util.h
+          ${ZAP_CURRENT_OUTPUT_DIR}/include/zcl_definitions.h)
+  target_interface_libraries(zigpc_zcl_util_mock zigpc_common_mock)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

@@ -81,6 +81,7 @@ extern "C" {
  *
  */
 #define ZIGBEE_INVALID_APP_ENDPOINT_ID 0
+#define ZIGBEE_DEFAULT_APP_ENDPOINT_ID 1
 
 /**
  * @brief Default string length for strings used in ZCL
@@ -374,6 +375,18 @@ typedef struct zcl_profile {
   unsigned int num_attributes;
 
 } zcl_profile_t;
+
+typedef struct 
+{
+    zigbee_eui64_uint_t source_address;
+    zigbee_endpoint_id_t source_endpoint;
+    zcl_cluster_id_t source_cluster;
+    zigbee_eui64_uint_t dest_address;
+    zigbee_endpoint_id_t dest_endpoint;
+} zigbee_binding_t;
+
+static const zigbee_binding_t NULL_BINDING = {0};
+
 /**
  * @brief The possible states that a Zigbee node can be in.
  *
@@ -425,6 +438,12 @@ typedef enum zigbee_node_network_status {
 
   ZIGBEE_NODE_STATUS_MAX_VAL,
 } zigbee_node_network_status_t;
+
+typedef enum {
+    ZDO_SUCCESS = 0x00,
+    ZDO_TABLE_FULL = 0x8c,
+    ZDO_DEVICE_BIND_TABLE_FULL = 0x8e
+} zdo_status_t;
 
 /**
  * Zigbee Node

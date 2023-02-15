@@ -1,89 +1,9 @@
-generate_rust_bindings(
-  NAME
-  uic_attribute_store
-  ALLOW_LIST
-  "attribute_store_.*|ATTRIBUTE_STORE.*|.*attribute_timeout.*|CLOCK_SECOND"
-  HEADERS
-  "$<TARGET_PROPERTY:uic_attribute_store,SOURCE_DIR>/include/*.h"
-  "${PROJECT_SOURCE_DIR}/components/uic_attribute_utils/include/attribute_timeouts.h"
-  DEPENDS
-  "uic_attribute_store"
-  "uic_datastore")
 
-  generate_rust_bindings(
-    NAME
-    uic_attribute_utils
-    ALLOW_LIST
-    ".*attribute_timeout.*|.*attribute.*transition.*"
-    HEADERS
-    "$<TARGET_PROPERTY:uic_attribute_utils,SOURCE_DIR>/include/*.h"
-    DEPENDS
-    "uic_attribute_store"
-    "uic_attribute_utils"
-    "uic_datastore")
+add_library(rust_interface_headers INTERFACE)
+target_include_directories(rust_interface_headers INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/unify_middleware/include>)
 
-
-generate_rust_bindings(
-  NAME
-  uic_log
-  ALLOW_LIST
-  ".*log.*"
-  HEADERS
-  "$<TARGET_PROPERTY:uic_log,SOURCE_DIR>/include/*.h"
-  DEPENDS
-  uic_log)
-
-generate_rust_bindings(
-  NAME
-  uic_config
-  ALLOW_LIST
-  ".*conf.*"
-  HEADERS
-  "$<TARGET_PROPERTY:uic_config,SOURCE_DIR>/include/*.h"
-  DEPENDS
-  uic_config)
-
-generate_rust_bindings(
-  NAME
-  uic_contiki
-  ALLOW_LIST
-  "process.*|ctimer_.*|CLOCK_SECOND|.*_poll_.*|clock_.*"
-  HEADERS
-  "$<TARGET_PROPERTY:uic_contiki,SOURCE_DIR>/core/sys/clock.h"
-  "$<TARGET_PROPERTY:uic_contiki,SOURCE_DIR>/core/sys/ctimer.h"
-  "$<TARGET_PROPERTY:uic_contiki,SOURCE_DIR>/core/sys/process.h"
-  "$<TARGET_PROPERTY:uic_contiki,SOURCE_DIR>/include/request_poller.h"
-  DEPENDS
-  uic_contiki)
-
-generate_rust_bindings(
-  NAME
-  uic_mqtt
-  ALLOW_LIST
-  "mqtt.*|uic_mqtt.*"
-  HEADERS
-  "$<TARGET_PROPERTY:uic_mqtt,SOURCE_DIR>/include/*.h"
-  DEPENDS
-  uic_mqtt)
-
-generate_rust_bindings(
-  NAME
-  uic_main
-  ALLOW_LIST
-  ".*component_fixtures.*|uic_init.*|.*main.*|.*signal_handler.*"
-  HEADERS
-  "$<TARGET_PROPERTY:uic_main,SOURCE_DIR>/include/uic_main.h"
-  "$<TARGET_PROPERTY:uic_main,SOURCE_DIR>/include/uic_init.h"
-  DEPENDS
-  "uic_main"
-  "uic_stdin")
-
-generate_rust_bindings(
-  NAME
-  unify_validator
-  ALLOW_LIST
-  ".*valid.*"
-  HEADERS
-  "$<TARGET_PROPERTY:unify_validator,SOURCE_DIR>/include/*.h"
-  DEPENDS
-  unify_validator)
+install(
+  FILES unify_middleware/include/rust_contiki_fixt.h unify_middleware/include/rust_attribute_store.h 
+  DESTINATION include/uic
+  COMPONENT libuic-dev)

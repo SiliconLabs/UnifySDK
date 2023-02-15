@@ -16,6 +16,7 @@
 extern "C" {
 
 // Shared Unify includes
+#include <string.h>
 #include <unity.h>
 #include <sl_status.h>
 #include "uic_mqtt_mock.h"
@@ -150,6 +151,10 @@ sl_status_t stub_attr_report_request(const zigbee_eui64_t eui64,
 void helper_expect_endpoint_configure_actions(zigbee_eui64_t dev,
                                               zigbee_endpoint_t &ep_obj)
 {
+    
+    zigpc_network_data_t network_data;
+  zigbee_eui64_t gw_eui64       = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1};
+    memcpy(network_data.gateway_eui64,gw_eui64, sizeof(zigbee_eui64_t));
   zigpc_datastore_get_cluster_count_ExpectAndReturn(dev,
                                                     ep_obj.endpoint_id,
                                                     ZCL_CLUSTER_SERVER_SIDE,
@@ -167,10 +172,12 @@ void helper_expect_endpoint_configure_actions(zigbee_eui64_t dev,
       &ep_obj.cluster_list[i].cluster_id);
   }
 
-  zigpc_gateway_request_binding_endpoint_ExpectAndReturn(dev,
-                                                         ep_obj,
-                                                         SL_STATUS_OK);
+  //zigpc_gateway_request_binding_endpoint_ExpectAndReturn(dev,
+  //                                                       ep_obj,
+  //                                                       gw_eui64,
+  //                                                       SL_STATUS_OK);
 
+  zigpc_gateway_request_binding_endpoint_IgnoreAndReturn(SL_STATUS_OK);
   configure_attributes_endpoint_ExpectAndReturn(dev, ep_obj, SL_STATUS_OK);
 }
 
@@ -196,20 +203,68 @@ void helper_expect_endpoint_update_capabilities(zigbee_eui64_t dev,
 void test_endpoint_configuration_sanity(void)
 {
   zigbee_eui64_t dev       = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x2};
+  zigbee_eui64_t gw_eui64       = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1};
   zigbee_endpoint_t ep_obj = {
     .endpoint_id = 1,
     .cluster_list
-    = {{.cluster_id = 0x004}, {.cluster_id = 0x0005}, {.cluster_id = 0x0029}},
+    = {{.cluster_id = 0x02}, {.cluster_id = 0x05}, {.cluster_id = 0x29}},
     .cluster_count = 3,
   };
+  
+    zigpc_network_data_t network_data;
+    memcpy(network_data.gateway_eui64,gw_eui64, sizeof(zigbee_eui64_t));
 
-  // ARRANGE
-  helper_expect_endpoint_configure_actions(dev, ep_obj);
+  zigpc_datastore_find_cluster_by_index_ExpectAndReturn
+      (dev,
+      1,
+      ZCL_CLUSTER_SERVER_SIDE,
+      0,
+      NULL,
+      SL_STATUS_OK);
+  zigpc_datastore_find_cluster_by_index_IgnoreArg_cluster_id();
+  zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(&(ep_obj.cluster_list[0].cluster_id));
+  
+  zigpc_datastore_find_cluster_by_index_ExpectAndReturn
+      (dev,
+      1,
+      ZCL_CLUSTER_SERVER_SIDE,
+      1,
+      NULL,
+      SL_STATUS_OK);
+  zigpc_datastore_find_cluster_by_index_IgnoreArg_cluster_id();
+  zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(&(ep_obj.cluster_list[1].cluster_id));
+    
+  zigpc_datastore_find_cluster_by_index_ExpectAndReturn
+      (dev,
+      1,
+      ZCL_CLUSTER_SERVER_SIDE,
+      2,
+      NULL,
+      SL_STATUS_OK);
+  zigpc_datastore_find_cluster_by_index_IgnoreArg_cluster_id();
+  zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(&(ep_obj.cluster_list[2].cluster_id));
+  
+    zigpc_datastore_get_cluster_count_ExpectAndReturn(dev, ep_obj.endpoint_id, ZCL_CLUSTER_SERVER_SIDE, 3);
+
+  zigpc_datastore_read_network_ExpectAndReturn(NULL, SL_STATUS_OK);
+  zigpc_datastore_read_network_IgnoreArg_data();
+  zigpc_datastore_read_network_ReturnThruPtr_data(&network_data);
+
+  zigpc_gateway_request_binding_endpoint_ExpectAndReturn(dev,
+                                                         ep_obj,
+                                                         gw_eui64,
+                                                         SL_STATUS_OK);
+
+  configure_attributes_endpoint_ExpectAndReturn(dev, ep_obj, SL_STATUS_OK);
+    
+  uic_mqtt_publish_Ignore();
+  uic_mqtt_subscribe_Ignore();
+    
+  zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
 
   // ACT
   sl_status_t status
     = zigpc_ctrl::perform_endpoint_configuration(dev, ep_obj.endpoint_id);
-
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 }
@@ -221,6 +276,7 @@ void test_endpoint_update_sanity(void)
 
   // ARRANGE
   helper_expect_endpoint_update_capabilities(dev, ep, false);
+  zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
 
   // ACT
   sl_status_t status = zigpc_ctrl::update_endpoint_capabilities(dev, ep);
@@ -271,6 +327,13 @@ void test_device_interviewed_sanity(void)
   std::string topic      = topic_unid + "/State";
   std::string payload
     = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online functional","Security":"Zigbee Z3"})";
+  
+  zigpc_network_data_t network_data;
+  zigbee_eui64_t gw_eui64       = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1};
+  memcpy(network_data.gateway_eui64,gw_eui64, sizeof(zigbee_eui64_t));
+  zigpc_datastore_read_network_ExpectAndReturn(NULL, SL_STATUS_OK);
+  zigpc_datastore_read_network_IgnoreArg_data();
+  zigpc_datastore_read_network_ReturnThruPtr_data(&network_data);
 
   zigpc_datastore_read_device_ExpectAndReturn(dev, nullptr, SL_STATUS_OK);
   zigpc_datastore_read_device_IgnoreArg_data();
@@ -279,6 +342,8 @@ void test_device_interviewed_sanity(void)
     sizeof(zigpc_device_data_t));
 
   uic_mqtt_publish_Expect(topic.c_str(), payload.c_str(), payload.size(), true);
+  uic_mqtt_publish_Ignore();
+  uic_mqtt_subscribe_Ignore();
 
   // ARRANGE
   zigpc_datastore_get_endpoint_count_ExpectAndReturn(dev, ep_count);
@@ -301,6 +366,8 @@ void test_device_interviewed_sanity(void)
     UCL_MQTT_PUBLISH_TYPE_ALL,
     SL_STATUS_OK);
 
+  zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
+  //zigpc_gateway_request_binding_endpoint
   // ACT
   sl_status_t status = zigpc_ctrl::on_device_interviewed(dev, true);
 
@@ -387,7 +454,7 @@ void test_controller_shutdown_sanity(void)
     zigpc_datastore_write_device_IgnoreArg_data();
   }
 
-  uic_mqtt_unretain_by_regex_Expect("^(?!ucl\\/by-unid\\/.*\\/State$).*");
+  uic_mqtt_unretain_by_regex_Expect(REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS);
 
   // ACT
   zigpc_ctrl::on_shutdown();
@@ -453,7 +520,7 @@ void test_controller_shutdown_one_failed_publish(void)
     zigpc_datastore_write_device_IgnoreArg_data();
   }
 
-  uic_mqtt_unretain_by_regex_Expect("^(?!ucl\\/by-unid\\/.*\\/State$).*");
+  uic_mqtt_unretain_by_regex_Expect(REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS);
 
   // ACT
   zigpc_ctrl::on_shutdown();
@@ -543,6 +610,7 @@ void test_controller_startup_sanity(void)
       UCL_MQTT_PUBLISH_TYPE_ALL,
       SL_STATUS_OK);
   }
+  zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
 
   // ACT
   zigpc_ctrl::on_startup();

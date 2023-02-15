@@ -9,7 +9,7 @@ Zigbee, and so on) supported by Silicon Labs. The Unify Framework uses the Unify
 Controller Language (UCL) as an internal abstraction layer to seamlessly control
 various end nodes that are enabled with multiple wireless PHY radios. The
 detailed architecture of the Unify Framework is described in the
-[Unify Framework Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+[Unify Framework Specification](./unify_specifications/index.rst).
 
 The Unify Framework uses Unify Framework library to decouple API modules from the PHY
 drivers. This facilitates code reuse and enables easily adding new high-level
@@ -59,7 +59,7 @@ hidden:
 
 Each protocol controller interfaces with its radio hardware and implements a
 translation between its own wireless protocol and the _Unified Command Language_
-(UCL), which is defined in the [Unify Framework Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+(UCL), which is defined in the [Unify Framework Specification](./unify_specifications/index.rst).
 In addition, these protocol controllers implement best practices regarding
 message delivery and adherence to regulatory requirements. Protocol-specific
 implementation details can be found in the user guide for each protocol
@@ -212,6 +212,6 @@ The developer guides for the Unify Framework includes the [Unify Developer Guide
 maxdepth: 3
 titlesonly:
 ---
-Unify Specifications <https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html>
+Unify Specifications <unify_specifications/index.rst>
 standards/known-abbreviations.md
 ```

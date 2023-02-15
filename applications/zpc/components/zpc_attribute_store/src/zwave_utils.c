@@ -19,17 +19,13 @@
 #include "zpc_attribute_store_network_helper.h"
 #include "zwave_controller_utils.h"
 #include "zwave_command_class_indices.h"
+#include "zwave_helper_macros.h"
 
 // Generic includes
 #include <stdio.h>
 
 #include "sl_log.h"
 #define LOG_TAG "zwave_utils"
-
-// Macros
-#define STR_CASE(x) \
-  case x:           \
-    return #x;
 
 zwave_operating_mode_t zwave_get_operating_mode(zwave_node_id_t node_id)
 {

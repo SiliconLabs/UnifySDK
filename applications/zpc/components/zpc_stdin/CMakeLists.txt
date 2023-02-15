@@ -9,15 +9,13 @@ target_include_directories(
 target_link_libraries(
   zpc_stdin
   PUBLIC zpc_utils
-         zwave_controller
          zwave_tx_groups
-         uic_attribute_resolver
-         unify_attribute_poll
          zwave_command_classes
          zwave_command_handler
          ucl_mqtt
-         uic_stdin
-         uic_mqtt
-  PRIVATE uic_ota zwave_s2)
+         unify
+  PRIVATE zwave_s2)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
+endif()

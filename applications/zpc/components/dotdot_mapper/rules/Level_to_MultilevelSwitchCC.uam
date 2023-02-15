@@ -1,4 +1,4 @@
-// Multilevel Switch CC <-> OnOff + Level
+// Multilevel Switch CC <-> Level
 
 // Multilevel Switch CC defines
 def zwVERSION   0x2601
@@ -14,6 +14,7 @@ def zwCOLOR_COMPONENT_ID       0x3304
 // OnOff and Level Cluster
 def zbON_OFF_CLUSTER_ON_OFF 0x00060000
 def zbLEVEL_CLUSTER_LEVEL   0x00080000
+def zbLEVEL_CLUSTER_REMAINING_TIME    0x00080001
 def zbLEVEL_CLUSTER_TRANSITION_TIME   0x00080010
 
 // Additional read-only Level cluster properties
@@ -27,44 +28,73 @@ def zwave_color_switch_exists (((r'zwCOLOR_STATE.zwCOLOR_COMPONENT_ID) or 1000) 
 def min_level 0
 def max_level 99
 
-scope 0 {
+scope 0 chain_reaction(0) clear_desired(0) {
 
-// Constants. Trick around else they get mapped in random other nodes.
-r'zbLEVEL_CLUSTER_MIN_LEVEL = if ( e'zwSTATE.zwVALUE ) min_level undefined
-r'zbLEVEL_CLUSTER_MAX_LEVEL = if ( e'zwSTATE.zwVALUE ) max_level undefined
+  // Constants.
+  r'zbLEVEL_CLUSTER_MIN_LEVEL = if (e'zwSTATE) min_level undefined
+  r'zbLEVEL_CLUSTER_MAX_LEVEL = if (e'zwSTATE) max_level undefined
 
-// Linking reported attributes zwave -> zigbee
-r'zbON_OFF_CLUSTER_ON_OFF =
-  if (zwave_color_switch_exists) undefined
-  r'zwSTATE.zwON_OFF
+  // Linking reported attributes zwave -> zigbee
+  d'zbLEVEL_CLUSTER_LEVEL =
+    if (d'zwSTATE.zwON_OFF == 0) min_level
+    if (d'zwSTATE.zwVALUE < min_level) min_level
+    if (d'zwSTATE.zwVALUE > max_level) max_level
+    d'zwSTATE.zwVALUE
 
-r'zbLEVEL_CLUSTER_LEVEL =
-  if (zwave_color_switch_exists) undefined
-  if (r'zwSTATE.zwVALUE < min_level) min_level
-  if (r'zwSTATE.zwVALUE > max_level) max_level
-  r'zwSTATE.zwVALUE
+  r'zbLEVEL_CLUSTER_TRANSITION_TIME =
+    if ( r'zwSTATE.zwDURATION == 0 ) 0
+    if ( r'zwSTATE.zwDURATION == 0xFF ) 0
+    if ( r'zwSTATE.zwDURATION == 0xFE ) 0
+    if ( r'zwSTATE.zwDURATION < 0x80 ) (r'zwSTATE.zwDURATION * 10)
+    if ( r'zwSTATE.zwDURATION < 0xEC ) ((r'zwSTATE.zwDURATION-127) * 600)
+    if ( r'zwSTATE.zwDURATION > 0xEB ) 65535
+    undefined
+  d'zbLEVEL_CLUSTER_TRANSITION_TIME =
+    if ( d'zwSTATE.zwDURATION == 0 ) 0
+    if ( d'zwSTATE.zwDURATION == 0xFF ) 0
+    if ( d'zwSTATE.zwDURATION == 0xFE ) 0
+    if ( d'zwSTATE.zwDURATION < 0x80 ) (d'zwSTATE.zwDURATION * 10)
+    if ( d'zwSTATE.zwDURATION < 0xEC ) ((d'zwSTATE.zwDURATION-127) * 600)
+    if ( d'zwSTATE.zwDURATION > 0xEB ) 65535
+    undefined
 
-r'zbLEVEL_CLUSTER_TRANSITION_TIME =
-  if ( r'zwSTATE.zwDURATION == 0 ) 0
-  if ( r'zwSTATE.zwDURATION == 0xFF ) 0
-  if ( r'zwSTATE.zwDURATION == 0xFE ) 0
-  if ( r'zwSTATE.zwDURATION < 0x80 ) (r'zwSTATE.zwDURATION * 10)
-  if ( r'zwSTATE.zwDURATION < 0xEC ) ((r'zwSTATE.zwDURATION-127) * 600)
-  if ( r'zwSTATE.zwDURATION > 0xEB ) 65535
-  undefined
+  r'zbLEVEL_CLUSTER_REMAINING_TIME =
+    if ( r'zwSTATE.zwDURATION == 0 ) 0
+    if ( r'zwSTATE.zwDURATION == 0xFF ) 0
+    if ( r'zwSTATE.zwDURATION == 0xFE ) 0
+    if ( r'zwSTATE.zwDURATION < 0x80 ) (r'zwSTATE.zwDURATION * 10)
+    if ( r'zwSTATE.zwDURATION < 0xEC ) ((r'zwSTATE.zwDURATION-127) * 600)
+    if ( r'zwSTATE.zwDURATION > 0xEB ) 65535
+    undefined
 
-// Linking desired attributes zigbee -> zwave
-d'zwSTATE.zwVALUE =
-  if (zwave_color_switch_exists) undefined
-  if (d'zbLEVEL_CLUSTER_LEVEL > r'zbLEVEL_CLUSTER_MAX_LEVEL) r'zbLEVEL_CLUSTER_MAX_LEVEL
-  if (d'zbLEVEL_CLUSTER_LEVEL < r'zbLEVEL_CLUSTER_MIN_LEVEL) r'zbLEVEL_CLUSTER_MIN_LEVEL
-  d'zbLEVEL_CLUSTER_LEVEL
+  d'zbLEVEL_CLUSTER_REMAINING_TIME =
+    if ( d'zwSTATE.zwDURATION == 0 ) 0
+    if ( d'zwSTATE.zwDURATION == 0xFF ) 0
+    if ( d'zwSTATE.zwDURATION == 0xFE ) 0
+    if ( d'zwSTATE.zwDURATION < 0x80 ) (d'zwSTATE.zwDURATION * 10)
+    if ( d'zwSTATE.zwDURATION < 0xEC ) ((d'zwSTATE.zwDURATION-127) * 600)
+    if ( d'zwSTATE.zwDURATION > 0xEB ) 65535
+    undefined
 
-d'zwSTATE.zwON_OFF =
-  if (zwave_color_switch_exists) undefined d'zbON_OFF_CLUSTER_ON_OFF
+  // Linking desired attributes zigbee -> zwave
+  d'zwSTATE.zwVALUE =
+    if (d'zbLEVEL_CLUSTER_LEVEL > r'zbLEVEL_CLUSTER_MAX_LEVEL) r'zbLEVEL_CLUSTER_MAX_LEVEL
+    if (d'zbLEVEL_CLUSTER_LEVEL < r'zbLEVEL_CLUSTER_MIN_LEVEL) r'zbLEVEL_CLUSTER_MIN_LEVEL
+    d'zbLEVEL_CLUSTER_LEVEL
 
-d'zwSTATE.zwDURATION =
-  if ( d'zbLEVEL_CLUSTER_TRANSITION_TIME == 1) 0xFF
-  if ( d'zbLEVEL_CLUSTER_TRANSITION_TIME < 1270 ) (d'zbLEVEL_CLUSTER_TRANSITION_TIME / 10)
-  (127 + d'zbLEVEL_CLUSTER_TRANSITION_TIME / 600)
+  d'zwSTATE.zwDURATION =
+    if ( d'zbLEVEL_CLUSTER_TRANSITION_TIME == 1) 0xFF
+    if ( d'zbLEVEL_CLUSTER_TRANSITION_TIME < 1270 ) (d'zbLEVEL_CLUSTER_TRANSITION_TIME / 10)
+    (127 + d'zbLEVEL_CLUSTER_TRANSITION_TIME / 600)
+}
+
+scope 0 clear_desired(0) {
+  // Here the Multilevel Switch CC attribute is mirroring the OnOff cluster
+  d'zwSTATE.zwON_OFF = d'zbON_OFF_CLUSTER_ON_OFF
+
+  r'zbLEVEL_CLUSTER_LEVEL =
+    if (r'zwSTATE.zwON_OFF == 0) min_level
+    if (r'zwSTATE.zwVALUE < min_level) min_level
+    if (r'zwSTATE.zwVALUE > max_level) max_level
+    r'zwSTATE.zwVALUE
 }

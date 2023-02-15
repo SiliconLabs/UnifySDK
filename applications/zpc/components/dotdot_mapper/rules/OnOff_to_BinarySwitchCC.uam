@@ -4,18 +4,18 @@ def zwSWITCH_BINARY_STATE 0x2502
 def zwSWITCH_BINARY_VALUE 0x2503
 def zwSWITCH_BINARY_DURATION 0x2504
 
-
 // OnOff Cluster
 def zbON_OFF_CLUSTER_SWITCH 0x00060000
 
-scope 0 {
+scope 0 chain_reaction(0) clear_desired(0) {
+  // Linking attributes zwave -> zigbee
+  r'zbON_OFF_CLUSTER_SWITCH = if (r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
+  d'zbON_OFF_CLUSTER_SWITCH = if (d'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
 
-// Linking reported attributes zwave -> zigbee
-r'zbON_OFF_CLUSTER_SWITCH = if (r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
-
-// Linking desired attributes zigbee -> zwave
-d'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE =
-  if (d'zbON_OFF_CLUSTER_SWITCH == 0) 0
-  if (d'zbON_OFF_CLUSTER_SWITCH == 1) 255
-  undefined
+  // Linking attributes zigbee -> zwave
+  d'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE =
+    if (d'zbON_OFF_CLUSTER_SWITCH == 0) 0
+    if (d'zbON_OFF_CLUSTER_SWITCH == 1) 255
+    undefined
 }
+

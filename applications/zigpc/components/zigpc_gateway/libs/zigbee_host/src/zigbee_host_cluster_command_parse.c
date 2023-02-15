@@ -18,6 +18,8 @@
 
 #include "zigbee_host_common.h"
 
+extern struct zigbeeHostState z3gwState;
+
 /**
  * @brief Parse ZCL Cluster specific command frames received.
  *

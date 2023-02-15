@@ -2,5 +2,6 @@
 
 members = [
     "unify_portable_core",
-    "unify_portable_cli"
+    "unify_portable_cli",
+    "unify_portable_gui/src-tauri"
 ]

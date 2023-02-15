@@ -169,6 +169,16 @@ void substract_association_lists(const association_set &set_1,
   }
 }
 
+void merge_association_lists(const association_set &set_1,
+                                 const association_set &set_2,
+                                 association_set &result)
+{
+
+    result.insert(set_1.begin(),set_1.end());
+    result.insert(set_2.begin(),set_2.end());
+ 
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,11 @@
 # AoXPC Release Notes
 
+## [1.3.0] - Feb 2023
+
+### Added (1.3.0)
+
+* Enabled the minimum required attributes for ApplicationMonitoring.
+
 ## [1.2.1] - Sep 2022
 
 The AoXPC relies on the latest Gecko SDK release. For a complete list of release notes,
@@ -23,6 +29,7 @@ Some of the highlights are listed below.
 * NCP firmware update for the antenna array board
 * Support for new dual-polarized antenna array board BRD4191A
 * Angle standard deviation values
+
 
 ## [1.1.1] - Mar 2022
 

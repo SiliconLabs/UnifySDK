@@ -21,6 +21,7 @@ use std::ffi::CString;
 use std::str;
 mod upvl_db;
 mod upvl_json;
+use unify_application_monitoring_sys::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
 use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
@@ -32,6 +33,7 @@ use mqtt_handler::*;
 declare_app_name!("unify-upvl-main");
 
 const DB_FILE: &str = "/var/lib/uic/upvl.db";
+const FULL_APPLICATION_NAME: &str = "UPVL (Unify Framework Provisioning List)";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
 fn main() -> Result<(), sl_status_t> {
@@ -51,6 +53,7 @@ fn main() -> Result<(), sl_status_t> {
 }
 
 fn run(upvl_config: UpvlConfig) -> Result<(), sl_status_t> {
+    unify_application_monitoring_set_application_name(FULL_APPLICATION_NAME);
     let mqtt_client = UnifyMqttClient::default();
     mqtt_client.initialize()?;
     let handler = MqttHandler::new(mqtt_client, upvl_config)?;

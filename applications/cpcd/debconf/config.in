@@ -52,5 +52,6 @@ if [ -e $UIC_CONFFILE ]; then
   fi
 fi
 
+
 db_input critical uic-cpcd/serial_port || true
 db_go

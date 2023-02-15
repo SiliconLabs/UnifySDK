@@ -28,6 +28,7 @@
 
 #include <stdbool.h>
 #include "sl_status.h"
+#include "attribute_store.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,9 +54,45 @@ bool attribute_mapper_has_pending_evaluations();
 /**
  * @brief Adds the required configuration to the @ref unify_config for the
  * @ref unify_attribute_mapper.
- *
  */
 void attribute_mapper_config_init();
+
+/**
+ * @brief Sets the Attribute Store type for endpoint IDs, under which the the
+ * mapper performs its evaluations.
+ *
+ * @param endpoint_id_type      Attribute Store type representing Endpoints.
+ */
+void attribute_mapper_set_endpoint_id_attribute_type(
+  attribute_store_type_t endpoint_id_type);
+
+/**
+ * @brief Instructs the attribute mapper not to evaluate dependencies for a
+ * given Attribute ID.
+ *
+ * @param node  Attribute ID whose updates will not trigger the mapper.
+ */
+void attribute_mapper_pause_reactions_to_attribute_updates(
+  attribute_store_node_t node);
+
+/**
+ * @brief Instructs the attribute mapper to evaluate dependencies for a
+ * given Attribute ID.
+ *
+ * @param node  Attribute ID whose updates will trigger the mapper.
+ */
+void attribute_mapper_resume_reactions_to_attribute_updates(
+  attribute_store_node_t node);
+
+/**
+ * @brief Instructs the attribute mapper to pause any mapping
+ */
+void attribute_mapper_pause_mapping();
+
+/**
+ * @brief Instructs the attribute mapper to resume mapping
+ */
+void attribute_mapper_resume_mapping();
 
 #ifdef __cplusplus
 }

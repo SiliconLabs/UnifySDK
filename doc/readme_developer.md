@@ -17,7 +17,6 @@ readme_rust.md
 unify_library_overview.md
 standards/coding-standard.md
 api.md
-Docker <../docker/readme_developer.md>
 ```
 
 ## Directory Structure and File Naming Conventions
@@ -72,6 +71,7 @@ i.e. "unify_my_sample_component".
 |   |   `--                     // Various CMake includes e.g. compiler_options.cmake, doxygen.cmake, ...
 |   |-- modules/                // CMake modules
 |   |-- armhf_debian.cmake      // Toolchain files goes here in the format `<arch>(_<dist>).cmake`
+|   |-- arm64_debian.cmake      // Toolchain file for AARCH64/arm64
 |-- components/                 // Shared components (components shared between Unify applications)
 |   |-- uic_config/             // config component
 |   |   |-- platform/
@@ -81,7 +81,7 @@ i.e. "unify_my_sample_component".
 |   |   |-- test/               // Unittests for the component goes in here
 |   |   `-- CMakeLists.txt
 |   |-- uic_log/                // Logging framework
-|   |-- uic_mqtt_client/        // MQTT client library
+|   |-- uic_mqtt/               // MQTT client library
 |   |-- ...
 |   `-- CMakeLists.txt
 |-- dist/                       // Files for the "target" platform goes here e.g. init scripts, config files, etc.
@@ -92,56 +92,6 @@ i.e. "unify_my_sample_component".
 |-- CMakeLists.txt              // Root CMakeLists.txt
 `-- Jenkinsfile                 // Jenkinsfile for CI on Jenkins
 ```
-
-## Component Templates
-
-A [cookiecutter](https://cookiecutter.readthedocs.io/) template helps
-to quickly add the boilerplate code for ZPC components.
-
-Cookiecutter is written in Python and the simplest way to install it is from PyPI using
-[pipx](https://pipxproject.github.io/pipx/).
-
-```bash
-pip install --user pipx
-```
-
-pipx is a utility for installing executable packages (i.e., packages with an entry-point)
-from PyPI and should be kept in their virtualenv.
-When configured correctly, they are placed in your PATH.
-The pipx installation will tell you what PATH-changes you need
-to perform.
-
-After installing and configuring pipx, you can install cookiecutter:
-
-``` bash
-pipx install cookiecutter
-```
-
-Then, from your `components` directory, execute cookiecutter and point it to
-the template repository (assuming you have your SSH-keys all set up, but you can also
-use HTTPS):
-
-``` bash
-cookiecutter ssh://git@stash.silabs.com/uic/zpc_cookiecutter.git
-```
-
-You will be asked some questions regarding your component, with default values in
-square brackets.
-
-After this is done, manually add your new component subdirectory to the
-`CMakeLists.txt` in the `components` directory.
-
-### Demo
-
-Here you can see a demo-session of adding a component with cookiecutter.
-
-*Note! This Git-repository used in the demo is outdated and did only exist
-to demonstrate this functionality for the team to consider.*
-
-<a href=https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1>
-  Here is a small video demonstrating how to use the cookiecutter<br/>
-  <img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.png" width="60%">
-</a>
 
 ## Clang-Format (autoformat code)
 
@@ -285,10 +235,10 @@ From now on, all new files will be formatted before they are committed.
     > [Docker](../docker/readme_developer.md))
 
     ```bash
-    docker run -it --rm  -v`pwd`:`pwd` -w `pwd` uic_armhf
+    docker run -it --rm  -v`pwd`:`pwd` -w `pwd` uic_arm64
     mkdir build
     cd build
-    cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../cmake/armhf_debian.cmake ..
+    cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../cmake/arm64_debian.cmake ..
     ninja
     ninja deb
     ```
@@ -306,3 +256,17 @@ The following sequence diagram shows how the Unify Main loop triggers events bas
 
 Additional information on this is available in the
 <a href="../doxygen_uic/index.html">Unify Library API</a>
+
+## Nix (Experimental)
+
+We are adding support for [`nix flakes`](https://nixos.wiki/wiki/Flakes) to make use of the [nix package manager](https://nixos.org/manual/nix/stable/).
+This aims to let developers leverage the benefits of using a [purely functional package manager](https://nixos.org/manual/nix/stable/).
+
+If you have `nix` installed and `flakes` enabled, you can run an application with one command without checking out the repo or installing any dependencies.
+
+```
+> nix run github:SiliconLabs/UnifySDK#zpc
+```
+
+We elaborate on this in the [nix readme](readme_nix.md).
+

@@ -88,7 +88,6 @@ attribute_store_node_t zwave_command_class_get_endpoint_node(
 attribute_store_node_t zwave_command_class_get_node_id_node(
   const zwave_controller_connection_info_t *connection_info);
 
-
 /**
  * @brief Find the version of the command class by navigating up to the
  * endpoint from a given attribute store node.
@@ -130,6 +129,17 @@ reports_to_follow_t get_reports_to_follow(attribute_store_node_t node);
  */
 sl_status_t set_reports_to_follow(attribute_store_node_t node,
                                   reports_to_follow_t reports_to_follow);
+
+/**
+ * @brief Set the desired and reported value of a command_status_t type of node
+ *
+ * @param command_status_node     Attribute Store node to set
+ * @param reported                Reported value to set.
+ * @param desired                 Desired value to set.
+ */
+void set_command_status_value(attribute_store_node_t command_status_node,
+                              command_status_values_t reported,
+                              command_status_values_t desired);
 
 /**
  * @brief function to send report frames with default tx options.
@@ -209,7 +219,7 @@ uint32_t get_unsigned_value_from_frame_and_size(const uint8_t *frame,
  * byte
  *
  * Refer to "Duration encoding" in the Application Command Class specifications
- * note that value 0xFE is interpreted as unkonwn here.
+ * note that value 0xFE is interpreted as unknown here.
  *
  * @param time            The system time duration
  * @returns uint8_t       The corresponding Z-Wave duration encoding.
@@ -221,7 +231,7 @@ uint8_t time_to_zwave_duration(clock_time_t time);
  * its corresponding value in clock_time_t
  *
  * Refer to "Duration encoding" in the Application Command Class specifications
- * note that value 0xFE is interpreted as unkonwn here.
+ * note that value 0xFE is interpreted as unknown here.
  *
  * @param zwave_duration  The value used in the Set / Report.
  * @returns clock_time_t  The corresponding system duration.

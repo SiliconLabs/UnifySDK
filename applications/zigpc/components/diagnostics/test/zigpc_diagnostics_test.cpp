@@ -62,7 +62,6 @@ int suiteTearDown(int numfail)
 // and return the appropriate vector of split parsed strings
 void test_uic_diagnostic_request_to_strings_correct_return()
 {
-  printf("test_uic_diagnostic_request_to_strings_correct_return\n");
   std::string input_json_string_payload
     = "[\"FirstMetricId\",\"SecondMetricID\",\"ThirdMetricID\"]";
   std::vector<std::string> expected_vector;
@@ -91,7 +90,6 @@ class zigpc_stub_metric : public zigpc_diagnostics_metric
   void update_value()
   {
     stub_metric_invoked_flag = true;
-    printf("Stub Metric update called\n");
   }
 };
 
@@ -169,7 +167,6 @@ void test_uic_diagnostics_publish_all_metric()
       "SupportedMetrics";
   std::string stub_metric_id   = "SYS_HEALTH_STUB_SYNC";
   std::string expected_message = R"({"value":["SYS_HEALTH_STUB_SYNC"]})";
-  printf(expected_full_topic.c_str());
 
   // prepare manager
 
@@ -253,6 +250,31 @@ void test_uic_diagnostics_ram_usage_metric(void)
 
   // ASSERT
   TEST_ASSERT_TRUE(metric.get_value() > 0.0);
+}
+
+void test_uic_diagnostics_neighbor_table(void){
+  zigpc_diagnostics_stub_manager notif;
+  zigpc_neighbor_metric metric(notif, "NeighborTable");
+
+  // ARRANGE
+  uint8_t mock_neighbor_eui64[] = {1, 2, 3,4,5,6,7,8};
+
+  // ACT
+  
+
+  zigpc_gateway_get_neighbor_count_ExpectAndReturn(1);
+
+  zigpc_gateway_get_neighbor_eui64_ExpectAndReturn(0, NULL, SL_STATUS_OK);
+  zigpc_gateway_get_neighbor_eui64_IgnoreArg_eui64();
+  zigpc_gateway_get_neighbor_eui64_ReturnArrayThruPtr_eui64(mock_neighbor_eui64,
+                                                          8);
+
+  metric.update_value();                                                        
+  // ASSERT
+  std::string expected_message = R"([[1,2,3,4,5,6,7,8]])";
+  TEST_ASSERT_TRUE(stub_manager_invoked_flag);
+  TEST_ASSERT_EQUAL_JSON(expected_message.c_str(),
+                         metric.get_serialized_value().c_str());
 }
 
 }  // extern "C"

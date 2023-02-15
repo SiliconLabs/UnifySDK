@@ -13,12 +13,12 @@
 #include "zpc_attribute_resolver_fixt.h"
 #include "attribute_store_fixt.h"
 #include "attribute_store.h"
-#include "uic_dotdot_attribute_store_registration.h"
+#include "unify_dotdot_attribute_store.h"
 #include "attribute_transitions.h"
 #include "attribute_timeouts.h"
 #include "attribute_mapper.h"
+#include "zpc_attribute_mapper.h"
 #include "datastore_fixt.h"
-#include "dotdot_mqtt_topics_handler.h"
 #include "dotdot_mapper_fixt.h"
 #include "dotdot_mqtt.h"
 #include "network_monitor_fixt.h"
@@ -37,6 +37,7 @@
 #include "zwave_tx_fixt.h"
 #include "zwave_transports_fixt.h"
 #include "zcl_cluster_servers.h"
+#include "zpc_application_monitoring.h"
 #include "zpc_dotdot_mqtt.h"
 #include "zpc_datastore_fixt.h"
 #include "zwave_rust_handlers.h"
@@ -53,6 +54,8 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   /** Initialize zpc_config. NB: This shall be first in the setup fixtures list */
   {&zpc_config_fixt_setup, "ZPC Config"},
   {&zpc_ncp_update_fixt_setup, "ZPC NCP update"},
+  /** Configures data for the ApplicationMonitoring cluster */
+  {&zpc_application_monitoring_init, "ZPC ApplicationMonitoring"},
   /** Initialize data store.  The data-store component depends on the
    * configuration component for file locations. */
   {&zpc_datastore_fixt_setup, "Datastore"},
@@ -122,7 +125,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   /**
    * Initialize DotDot MQTT Topics handler
    */
-  {&zpc_dodot_mqtt_init, "ZPC DotDot MQTT Topics"},
+  {&zpc_dotdot_mqtt_init, "ZPC DotDot MQTT Topics"},
   /**
    * Initialize OnOff cluster mapper.
    * The cluster_serializer and attribute store MUST be initialized first.
@@ -139,6 +142,12 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    * UCL MQTT initialize all ucl mqtt handlers.
    */
   {&ucl_mqtt_setup_fixt, "UCL MQTT"},
+
+  /**
+   * Initializes the ZCL/DotDot specialization of the Attribute Store.
+   * MUST be initialized before uic_mqtt_dotdot_init
+   */
+  {&unify_dotdot_attribute_store_init, "Unify DotDot Attribute Store"},
 
   /**
    * Initialize DotDot MQTT handler that serializes and deserializes
@@ -161,12 +170,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   {&zwave_smartstart_management_setup_fixt, "Z-Wave SmartStart Management"},
 
   {&zpc_stdin_setup_fixt, "ZPC Stdin"},
-  {&attribute_mapper_init, "Attribute Mapper"},
-
-  /**
-   * Registers all supported ZCL attributes to the Attribute Store.
-   */
-  {&uic_dotdot_attribute_store_registration_init, "ZCL Attribute Registration"},
+  {&zpc_attribute_mapper_init, "ZPC Attribute Mapper"},
 
   /**
    * Initialize attribute_store specifically for ZPC.
@@ -186,19 +190,19 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
  * function are executed in order, after all contiki processes have
  * been stopped.
  */
-static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
-  {&zcl_cluster_servers_teardown, "ZCL Cluster servers"},
-  {&zpc_attribute_resolver_teardown, "ZPC attribute resolver"},
-  {&zwave_command_handler_teardown, "Z-Wave Command Handler framework"},
-  {&zwave_network_management_fixt_teardown, "Z-Wave Network Management"},
-  {&zwave_rx_fixt_teardown, "Z-Wave RX"},
-  {&attribute_transitions_teardown, "Attribute transitions"},
-  {&attribute_timeouts_teardown, "Attribute timeouts"},
-  {&rust_contiki_teardown, "Rust Mainloop"},
-  {&attribute_store_teardown, "Attribute store"},
-  {&datastore_fixt_teardown, "Datastore"},
-  {&dotdot_mapper_teardown, "DotDot mapper"},
-  {NULL, "Terminator"}};
+static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[]
+  = {{&zcl_cluster_servers_teardown, "ZCL Cluster servers"},
+     {&zpc_attribute_resolver_teardown, "ZPC attribute resolver"},
+     {&zwave_command_handler_teardown, "Z-Wave Command Handler framework"},
+     {&zwave_network_management_fixt_teardown, "Z-Wave Network Management"},
+     {&zwave_rx_fixt_teardown, "Z-Wave RX"},
+     {&attribute_transitions_teardown, "Attribute transitions"},
+     {&attribute_timeouts_teardown, "Attribute timeouts"},
+     {&rust_contiki_teardown, "Rust Mainloop"},
+     {&attribute_store_teardown, "Attribute store"},
+     {&datastore_fixt_teardown, "Datastore"},
+     {&dotdot_mapper_teardown, "DotDot mapper"},
+     {NULL, "Terminator"}};
 
 int main(int argc, char **argv)
 {

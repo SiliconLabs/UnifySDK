@@ -859,7 +859,8 @@ static sl_status_t zwave_command_class_version_software_get(
 static void on_version_command_class_found_attribute_update(
   attribute_store_node_t updated_node, attribute_store_change_t change)
 {
-  if (change != ATTRIBUTE_CREATED) {
+  if ((change != ATTRIBUTE_CREATED)
+      || attribute_store_is_reported_defined(updated_node)) {
     return;
   }
 
@@ -897,6 +898,9 @@ static void on_version_command_class_found_attribute_update(
                                                endpoint_index);
     endpoint_index++;
   }
+
+  // Set the reported value, so we don't do this again.
+  attribute_store_set_reported_number(updated_node, 1);
 }
 
 static void on_nif_attribute_update(attribute_store_node_t updated_node,

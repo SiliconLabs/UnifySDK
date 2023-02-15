@@ -1,24 +1,35 @@
 let supportedClusters = [
     "AoXLocator",
-    "Binding",
-    "ConfigurationParameters",
     "AoXPositionEstimation",
+    "BarrierControl",
     "Basic",
+    "Binding",
     "ColorControl",
+    "ConcentrationMeasurement",
+    "ConfigurationParameters",
     "DoorLock",
+    "ElectricalConductivityMeasurement",
     "ElectricalMeasurement",
+    "FlowMeasurement",
     "IASZone",
     "Identify",
+    "IlluminanceMeasurement",
     "Level",
+    "Metering",
     "NameAndLocation",
     "OccupancySensing",
     "OnOff",
-    "Scenes",
-    "Thermostat",
-    "ProtocolController-RFTelemetry",
+    "PhMeasurement",
+    "PressureMeasurement",
     "ProtocolController-NetworkManagement",
+    "ProtocolController-RFTelemetry",
+    "Scenes",
     "SystemMetrics",
-    "Metering",
+    "TemperatureMeasurement",
+    "Thermostat",
+    "WaterContentMeasurement",
+    "WindSpeedMeasurement",
+    "WindowCovering",
     "PowerConfiguration"
 ];
 
@@ -166,6 +177,7 @@ function castType(arg) {
             return "boolean"
         case "octstr":
         case "string":
+        case "SSceneName":
             return "text"
         case "uint8":
         case "uint16":
@@ -179,6 +191,7 @@ function castType(arg) {
         case "int64":
         case "attribId":
         case "double":
+        case "SGroupId":
             return "number"
         case "enum8":
         case "enum16":

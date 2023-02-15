@@ -1,5 +1,11 @@
 # AoX Positioning application Release Notes
 
+## [1.3.0] - Feb 2023
+
+### Added (1.3.0)
+
+* Enabled the minimum required attributes for ApplicationMonitoring.
+
 ## [1.2.1] - Sep 2022
 
 The AoX Positioning application relies on the latest Gecko SDK release. For a complete list of release notes,
@@ -17,6 +23,7 @@ Some of the highlights are listed below.
 ### Changed (1.2.0)
 
 * Take most shared resources from Gecko SDK
+
 
 ## [1.1.1] - Mar 2022
 

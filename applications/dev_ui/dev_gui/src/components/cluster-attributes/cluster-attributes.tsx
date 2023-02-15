@@ -16,24 +16,28 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
             PristineSupportedAttributes: {},
             ShowModal: false,
             HideUnSup: true,
-            SupportedCommands: []
+            SupportedCommands: [],
+            ForceRead: false
         };
         this.changedAttrList = new Map<string, any>();
+        this.forceReadAttrs = new Set<string>();
     }
     changedAttrList: Map<string, any>;
+    forceReadAttrs: Set<string>;
 
     toggleModal(value: boolean) {
         this.setState({ ShowModal: value });
     }
 
-    updateState(unid: string, supAttr: any[], supportedCommands: string[]) {
+    updateState(unid: string, supAttr: any[], supportedCommands: string[], forceRead: boolean) {
         this.changedAttrList = new Map<string, any>();
         this.setState({
             Unid: unid,
             PristineSupportedAttributes: supAttr,
             SupportedAttributes: (JSON.parse(JSON.stringify(supAttr))),
             SupportedCommands: supportedCommands,
-            ShowModal: true
+            ShowModal: true,
+            ForceRead: forceRead
         },
             () => this.validateModel());
     }
@@ -146,7 +150,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
         return hints.length ? <Form.Text className="hint">{hints.join("; ")}</Form.Text> : null;
     }
 
-    forceRead(attrName?: any) {
+    forceRead(attrName?: any[]) {
         this.props.SocketServer.send(JSON.stringify(
             {
                 type: "force-read-cluster-attr",
@@ -155,16 +159,23 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                     ClusterType: this.props.ClusterType,
                     Payload: {
                         value:
-                            attrName ? [attrName] : []
+                            attrName ? attrName : []
                     }
                 }
             }));
     }
 
+    addToForceRead = (name: string, checked: boolean) => {
+        checked ? this.forceReadAttrs.add(name) : this.forceReadAttrs.delete(name);
+    }
+
     getAdornment(prefixNames: string[], name: string, type: string, isSupported: boolean) {
         let tooltip = prefixNames.length > 0 ? <></> : <Tooltip title={`Force Read Attribute ${isSupported ? "" : "(maybe not supported)"}`}>
-            <span className={`${isSupported ? "" : "disabled pointer"} icon`}>
-                <MdIcons.MdRefresh onClick={() => this.forceRead(name)} />
+            <span className={`${isSupported || this.state.ForceRead ? "" : "disabled pointer"} icon`}>
+                {this.state.ForceRead
+                    ? <Form.Check className='force-read-checkbox' onChange={(event) => this.addToForceRead(name, event.target.checked)} />
+                    : <MdIcons.MdRefresh onClick={() => this.forceRead([name])} />
+                }
             </span>
         </Tooltip>;
         return type === "boolean" || type === "bitmap"
@@ -184,15 +195,15 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
             return <span key={index} hidden={true}></span>;
         switch (i.type) {
             case "boolean":
-                return <div key={index} className="col-sm-6 inline margin-v-10">
-                    <div className={`col-sm-12 no-padding-r ${writable ? "writable" : ""}`}>
+                return <div key={index} className="col-sm-6 inline margin-v-10 attr-item">
+                    <div className={`col-sm-12 no-padding-r boolean-container ${writable ? "writable" : ""}`}>
                         <Form.Label column sm="11" className={supported ? "" : "disabled"}>
                             <div className="check-container">
-                                {writable && supported
+                                {writable && supported && !this.state.ForceRead
                                     ? <Form.Check name={i.name} disabled={!supported} defaultChecked={attr} onChange={this.handleChange.bind(this, prefixNames, true, false)} />
                                     : <Form.Check name={i.name} readOnly={true} disabled={!supported} checked={attr} />}
                             </div>
-                            {i.name}</Form.Label>
+                            <span className='word-break'>{i.name}</span></Form.Label>
                         {adornment}
                     </div>
                     {this.getHintText(i)}
@@ -207,8 +218,8 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 value = attr[b.name]
                             switch (b.type) {
                                 case "enum":
-                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
-                                        {writable && b.enum
+                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
+                                        {writable && b.enum && !this.state.ForceRead
                                             ? <TextField size="small" className="writable flex-input" fullWidth={true} select={b.enum && b.enum.length > 0} label={b.name} name={b.name} disabled={!supported}
                                                 value={value ?? 0} defaultValue={value ?? 0}
                                                 onChange={this.handleBitmapChange.bind(this, prefixNames, i, false, false)} variant="outlined" onBlur={this.validateAttr.bind(this, b, prefixNames.concat(i.name))} >
@@ -223,11 +234,11 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                         }
                                     </div>
                                 case "boolean":
-                                    return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10">
-                                        <div className={`col-sm-12 no-padding-r ${writable ? "writable" : ""}`}>
+                                    return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10 attr-item">
+                                        <div className={`col-sm-12 no-padding-r boolean-container ${writable ? "writable" : ""}`}>
                                             <Form.Label column sm="12" className="flex">
                                                 <div className="check-container">
-                                                    {writable
+                                                    {writable && !this.state.ForceRead
                                                         ? <Form.Check name={b.name} disabled={!supported} defaultChecked={value ?? false} onChange={this.handleBitmapChange.bind(this, prefixNames, i, true, false)} />
                                                         : <Form.Check name={b.name} disabled={!supported} readOnly={true} checked={value ?? false} />}
                                                 </div>
@@ -236,8 +247,8 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                         </div>
                                     </div>
                                 default:
-                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
-                                        {writable && supported
+                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
+                                        {writable && supported && !this.state.ForceRead
                                             ? <TextField size="small" className="writable flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type}
                                                 defaultValue={value || ""} onChange={this.handleBitmapChange.bind(this, prefixNames, i, false, b.type === "number")}
                                                 disabled={!supported} onBlur={this.validateAttr.bind(this, b, prefixNames.concat(i.name))} onFocus={(event) => event.target.select()} />
@@ -251,8 +262,8 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                 </Card>
             case "enum":
                 return (
-                    <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
-                        {writable && supported
+                    <div key={index} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
+                        {writable && supported && !this.state.ForceRead
                             ? <TextField size="small" className="writable flex-input" fullWidth={true} select={i.enum && i.enum.length > 0} label={i.name} name={i.name} value={attr ?? ""}
                                 onChange={this.handleChange.bind(this.props, prefixNames, false, false)} variant="outlined" onBlur={this.validateAttr.bind(this, i, prefixNames)} InputProps={adornment} >
                                 {i.enum.map((option: any) => {
@@ -271,7 +282,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                 return <Card key={index} className="inline margin-v-10">
                     <Card.Header>{i.name} {i.isArray
                         ? <span className="pointer icon">
-                            {writable && supported
+                            {writable && supported && !this.state.ForceRead
                                 ? <Tooltip title={`Add Item`} className="float-right">
                                     <span className="pointer icon">
                                         <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
@@ -295,7 +306,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                     return <div key={`${index}-${arrayIndex}`} className='col-sm-6 inline'>
                                         <Card className="margin-v-10 flex-input">
                                             <Card.Header className='padding-2'>[{arrayIndex}]
-                                                {writable
+                                                {writable && !this.state.ForceRead
                                                     ? <span className="pointer icon"><FiIcons.FiMinus className="float-right" onClick={this.removeArrayItem.bind(this, prefixNames.concat(i.name), attr, arrayIndex)} /></span>
                                                     : null}
                                             </Card.Header>
@@ -317,13 +328,13 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                     </Card.Body>
                 </Card>
             default:
-                return writable && supported
+                return writable && supported && !this.state.ForceRead
                     ? (i.isArray ?
                         (attr?.length === undefined || attr.length === 0
                             ? <div key={index}></div>
                             : <Card key={index} className="inline margin-v-10">
                                 <Card.Header>{i.name}
-                                    {writable && supported
+                                    {writable && supported && !this.state.ForceRead
                                         ? <Tooltip title={`Add Item`} className="float-right">
                                             <span className="pointer icon">
                                                 <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
@@ -343,7 +354,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                                 value={arrayItem} onChange={this.handleChange.bind(this, prefixNames.concat(i.name), false, i.type === "number")} onBlur={this.validateAttr.bind(this, i, prefixNames)}
                                                 onFocus={(event) => event.target.select()} InputProps={{
                                                     endAdornment: <InputAdornment position="end">
-                                                        {writable
+                                                        {writable && !this.state.ForceRead
                                                             ? <Tooltip title={`Remove Item`}>
                                                                 <span className="pointer icon">
                                                                     <FiIcons.FiMinus onClick={this.removeArrayItem.bind(this, prefixNames.concat(i.name), attr, arrayIndex)} />
@@ -357,14 +368,14 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 </div>
                             </Card>
                         )
-                        : <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                        : <div key={index} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
                             <TextField size="small" className="writable flex-input" fullWidth={true} label={i.name} name={i.name} variant="outlined" type={i.type}
                                 value={attr || ""} onChange={this.handleChange.bind(this, prefixNames, false, i.type === "number")} onBlur={this.validateAttr.bind(this, i, prefixNames)}
                                 onFocus={(event) => event.target.select()} InputProps={adornment} />
                             {this.getHintText(i)}
                         </div>
                     )
-                    : <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                    : <div key={index} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
                         <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} disabled={!supported} label={i.name} variant="outlined" type="text"
                             value={i.isArray && attr !== undefined ? attr.join("; ") : (attr || "")} InputProps={adornment} />
                         {this.getHintText(i)}
@@ -388,7 +399,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 : <Tooltip title="Hide Unsupported Attributes">
                                     <span className="icon"><AiIcons.AiOutlineEyeInvisible color="green" onClick={() => this.setState({ HideUnSup: true })} /></span>
                                 </Tooltip>}
-                            <Tooltip title={`Force Read Attributes ${isForceReadAttrSupported ? "" : "(maybe not supported)"}`} className="margin-h-5">
+                            <Tooltip hidden={this.state.ForceRead} title={`Force Read Attributes ${isForceReadAttrSupported ? "" : "(maybe not supported)"}`} className="margin-h-5">
                                 <span className={`${isForceReadAttrSupported ? "" : "disabled pointer"} icon`}><MdIcons.MdRefresh onClick={() => this.forceRead()} /></span>
                             </Tooltip>
                             <div className="col-sm-12 writable-hint">
@@ -419,13 +430,27 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Tooltip title={`${isWriteAttrSupported ? "" : "Maybe not supported"}`}>
-                            <Button variant="outline-primary" className={`${isWriteAttrSupported ? "" : "disabled"}`} onClick={() => this.saveAttr()}>
-                                Save
-                            </Button>
-                        </Tooltip>
+                        {this.state.ForceRead
+                            ? <>
+                                <Tooltip title="Froce Read Selected Attributes">
+                                    <Button variant="outline-primary" className={`${isWriteAttrSupported ? "" : "disabled"}`} onClick={() => this.forceRead([...this.forceReadAttrs])}>
+                                        Read
+                                    </Button>
+                                </Tooltip>
+                                <Tooltip title="Force Read All Attributes">
+                                    <Button variant="outline-primary" className={`${isWriteAttrSupported ? "" : "disabled"}`} onClick={() => this.forceRead()}>
+                                        Read All
+                                    </Button>
+                                </Tooltip>
+                            </>
+                            : <Tooltip title={`${isWriteAttrSupported ? "" : "Maybe not supported"}`}>
+                                <Button variant="outline-primary" className={`${isWriteAttrSupported ? "" : "disabled"}`} onClick={() => this.saveAttr()}>
+                                    Save
+                                </Button>
+                            </Tooltip>
+                        }
                         <Button variant="primary" onClick={() => this.toggleModal(false)}>
-                            Cancel
+                            {this.state.ForceRead ? "Close" : "Cancel"}
                         </Button>
                     </Modal.Footer>
                 </Modal >

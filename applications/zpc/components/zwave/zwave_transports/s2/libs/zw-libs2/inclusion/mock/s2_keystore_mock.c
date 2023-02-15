@@ -27,6 +27,18 @@ void keystore_public_key_read(uint8_t *buf)
   MOCK_CALL_SET_OUTPUT_ARRAY(p_mock->output_arg[0].pointer, buf, 32, uint8_t);
 }
 
+void keystore_dynamic_public_key_read(uint8_t *buf)
+{
+  mock_t * p_mock;
+
+  MOCK_CALL_RETURN_VOID_IF_USED_AS_STUB();
+  MOCK_CALL_FIND_RETURN_VOID_ON_FAILURE(p_mock);
+
+  MOCK_CALL_ACTUAL(p_mock, buf);
+
+  MOCK_CALL_SET_OUTPUT_ARRAY(p_mock->output_arg[0].p, buf, 32, uint8_t);
+}
+
 void keystore_private_key_read(uint8_t *buf)
 {
   mock_t * p_mock;
@@ -37,6 +49,18 @@ void keystore_private_key_read(uint8_t *buf)
   MOCK_CALL_ACTUAL(p_mock, buf);
 
   MOCK_CALL_SET_OUTPUT_ARRAY(p_mock->output_arg[0].pointer, buf, 32, uint8_t);
+}
+
+void keystore_dynamic_private_key_read(uint8_t *buf)
+{
+  mock_t * p_mock;
+
+  MOCK_CALL_RETURN_VOID_IF_USED_AS_STUB();
+  MOCK_CALL_FIND_RETURN_VOID_ON_FAILURE(p_mock);
+
+  MOCK_CALL_ACTUAL(p_mock, buf);
+
+  MOCK_CALL_SET_OUTPUT_ARRAY(p_mock->output_arg[0].p, buf, 32, uint8_t);
 }
 
 bool keystore_network_key_read(uint8_t keyclass, uint8_t *buf)

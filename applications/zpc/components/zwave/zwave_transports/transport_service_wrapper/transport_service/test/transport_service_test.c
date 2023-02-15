@@ -1,46 +1,35 @@
-#include "string.h"
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
 #include "transport_service.h"
-#include "stdio.h"
 #include "unity.h"
-#include "zwave_tx_scheme_selector_mock.h"
+
+// Generic includes
+#include <string.h>
+#include <stdio.h>
+
+// Unify includes
 #include "sl_log.h"
+
+// Mocks
+#include "zwave_tx_scheme_selector_mock.h"
+#include "contiki_test_helper.h"
 
 #define MAX_MSDU_SIZE   158
 #define SMALL_MSDU_SIZE 47
+#define RESET_TIME      (5001)
 
-ts_node_id_t my_node_id     = 1;
-ts_node_id_t source_node_id = 2;
-
-/* -------------- ctimer stub begin -------------------------*/
-typedef uint16_t clock_time_t;
-struct ctimer {
-  struct ctimer *next;
-  clock_time_t tickCounts;
-  clock_time_t startValue;
-  void (*f)(void *);
-  void *ptr;
-};
-
-uint32_t clock_time(void)
-{
-  return 0;
-}
-typedef void (*timer_callback_t)(void *nthing);
-// Call this function when timer needs to be off and the callback function
-// needs to be called. For e.g. if TS has sent
-//  ctimer_set(&scb.reset_timer, RESET_TIME, reset_transport_service, 0);
-//  Calling test_timer_callback() will call reset_transport_service()
-static timer_callback_t test_timer_callback;
-static void *ctimer_user_ptr;
-void ctimer_set(struct ctimer *c, clock_time_t t, void (*f)(void *), void *ptr)
-{
-  test_timer_callback = f;
-  ctimer_user_ptr     = ptr;
-  return;
-}
-int fc_timer_counter = 0;
-void ctimer_stop(struct ctimer *c) {}
-/* -------------- ctimer stub end -------------------------*/
+static ts_node_id_t my_node_id     = 1;
+static ts_node_id_t source_node_id = 2;
 
 // This is the complete datagagram (payload of fragments 1, 2 & 3)
 unsigned char test_complete_datagram[] = {
@@ -451,7 +440,7 @@ uint8_t send_data_frag_req_rx_timeout(
   const on_lower_layer_send_data_complete_t on_lower_layer_send_data_complete)
 {
   TEST_ASSERT_EQUAL_HEX8_ARRAY(payload, test_frag_req, sizeof(test_frag_req));
-  test_timer_callback(ctimer_user_ptr);
+  contiki_test_helper_run(RESET_TIME);
   return 1;
 }
 
@@ -493,7 +482,7 @@ uint8_t send_data_frag_req(
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
-  //contiki_test_helper_run(5000); //Reset the State machine
+  //contiki_test_helper_run(RESET_TIME); //Reset the State machine
   TEST_ASSERT_EQUAL(
     transport_service_on_frame_received(source_node_id,
                                         my_node_id,
@@ -565,6 +554,11 @@ uint8_t send_data_frag_wait_three_pending(
                                test_frag_wait_three_pending,
                                sizeof(test_frag_wait_three_pending));
   return 0;
+}
+
+void setUp()
+{
+  contiki_test_helper_init();
 }
 
 /* -------------- Test transport service's Receiving functionality ---------------------------------------*/
@@ -749,7 +743,7 @@ void test_dont_send_one_frag()
                                         test_subseq_frag2,
                                         sizeof(test_subseq_frag2)),
     false);
-  test_timer_callback(ctimer_user_ptr);
+  contiki_test_helper_run(RESET_TIME);
 }
 
 void test_dont_send_one_frag_rx_timeout()
@@ -798,7 +792,7 @@ void test_miss_one_frag()
                                         sizeof(test_subseq_frag3)),
     false);
 
-  //contiki_test_helper_run(5000); //Reset the State machine
+  //contiki_test_helper_run(RESET_TIME); //Reset the State machine
 }
 
 ///*
@@ -825,7 +819,7 @@ void test_miss_one_frag()
 //                                        sizeof(test_subseq_frag3)),
 //    false);
 //
-//  //contiki_test_helper_run(5000); //Reset the State machine
+//  //contiki_test_helper_run(RESET_TIME); //Reset the State machine
 //}
 //
 /*
@@ -972,7 +966,7 @@ uint8_t send_data_test_subseq_frag2(
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3);
   on_lower_layer_send_data_complete(0, 0);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -991,7 +985,7 @@ uint8_t send_data_test_first_frag1(
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2);
   on_lower_layer_send_data_complete(0, 0);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1020,7 +1014,7 @@ void test_send_whole_payload()
                               sizeof(raw_data2),
                               SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return;
 }
 
@@ -1050,7 +1044,7 @@ uint8_t send_data_test_first_frag11(
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2);
   on_lower_layer_send_data_complete(0, 0);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1066,7 +1060,7 @@ void test_send_frag_req_from_different_session_id()
                               sizeof(raw_data2),
                               SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1074,12 +1068,12 @@ void test_send_frag_req_from_different_session_id()
  * segment
 steps:
 1. set source node as more than destination node
-2. ask transport service to send 
+2. ask transport service to send
 3. set source node as less than destination node
 4. ask TS to receive first frag
         At this point tie must be broken on receiving side as
         - TS is in Sending mode (step 1)
-        - We, the sender of the new fragment(step 4) is receiver of 
+        - We, the sender of the new fragment(step 4) is receiver of
           current datagram transmission(step 1) from TS in progress
         - Node id of TS is less than ours
 5. check the flag_tie_broken
@@ -1147,7 +1141,7 @@ void test_tie_break()
                               sizeof(raw_data2),
                               SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
-  test_timer_callback(0);
+  contiki_test_helper_run(1);
 }
 /*--------------------------------------------------------------------------*/
 /* Purpose of this test is to check if the on_lower_layer_send_data_complete
@@ -1190,7 +1184,7 @@ uint8_t send_data_test_subseq_frag2_variant(
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_variant);
   on_lower_layer_send_data_complete(0, 0);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1209,7 +1203,7 @@ uint8_t send_data_test_first_frag1_variant(
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_variant);
   on_lower_layer_send_data_complete(0, 0);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1226,12 +1220,12 @@ void test_two_last_fragments_failed_callback()
     sizeof(raw_data2),
     SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return;
 }
 
 /*--------------------------------------------------------------------------*/
-/* Purpose of this test is to check if the on timeout of fc_timer does 
+/* Purpose of this test is to check if the on timeout of fc_timer does
  * transport service
    send the last fragment again
 */
@@ -1267,11 +1261,11 @@ uint8_t send_data_test_subseq_frag3_fc_timer_expired_again(
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_final);
-  /* Send success callback for the fragment TS tried to send 
+  /* Send success callback for the fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send next fragment*/
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1288,18 +1282,18 @@ uint8_t send_data_test_subseq_frag3_fc_timer_expired(
   TEST_ASSERT_EQUAL_HEX8_ARRAY(payload,
                                test_subseq_frag3,
                                sizeof(test_subseq_frag3));
-  /* Resister send_data_test_subseq_frag3_fc_timer_expired_again() as the next 
+  /* Resister send_data_test_subseq_frag3_fc_timer_expired_again() as the next
    * function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_fc_timer_expired_again);
-  /* Send success callback for the third fragment TS tried to send 
+  /* Send success callback for the third fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Tell TS that fc_timer expired */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1317,18 +1311,18 @@ uint8_t send_data_test_subseq_frag2_fc_timer_expired(
                                test_subseq_frag2,
                                sizeof(test_subseq_frag2));
 
-  /* Resister send_data_test_subseq_frag3_fc_timer_expired() as the next 
+  /* Resister send_data_test_subseq_frag3_fc_timer_expired() as the next
    * function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_fc_timer_expired);
-  /* Send success callback for the second fragment TS tried to send 
+  /* Send success callback for the second fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send third fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1345,25 +1339,25 @@ uint8_t send_data_test_first_fc_timer_expired(
   TEST_ASSERT_EQUAL_HEX8_ARRAY(payload,
                                test_first_frag1,
                                sizeof(test_first_frag1));
-  /* Resister send_data_test_subseq_frag2_fc_timer_expired() as the next 
+  /* Resister send_data_test_subseq_frag2_fc_timer_expired() as the next
    * function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_fc_timer_expired);
-  /* Send success callback for the first fragment TS tried to send 
+  /* Send success callback for the first fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send second fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
 void test_two_last_fragments_fc_timer_expired()
 {
   /* Resister send_data_test_first_fc_timer_expired() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
@@ -1378,8 +1372,8 @@ void test_two_last_fragments_fc_timer_expired()
     SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
 
-  test_timer_callback(0);
-  test_timer_callback(0);  //Reset TS
+  contiki_test_helper_run(RESET_TIME);
+  contiki_test_helper_run(RESET_TIME);  //Reset TS
   return;
 }
 /*--------------------------------------------------------------------------*/
@@ -1402,13 +1396,13 @@ uint8_t send_data_test_first_frag_transport_service_busy_sending(
                                sizeof(test_first_frag1));
 
   /* Resister send_data_test_subseq_frag2() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2);  //<- continue
 
-  /* Try sending another raw data attempt and check if TS returns 
+  /* Try sending another raw data attempt and check if TS returns
    * TRANSPORT_SERVICE_BUSY
    */
   TEST_ASSERT_EQUAL(transport_service_send_data(my_node_id,
@@ -1419,19 +1413,19 @@ uint8_t send_data_test_first_frag_transport_service_busy_sending(
                                                 0),
                     TRANSPORT_SERVICE_BUSY);
 
-  /* Send success callback for the first fragment TS tried to send 
+  /* Send success callback for the first fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
 
   /* Ask TS to send second fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
 void test_transport_service_busy_sending()
 {
-  /* Resister send_data_test_first_frag_transport_service_busy_sending() as 
-   * the next function which will be called 
+  /* Resister send_data_test_first_frag_transport_service_busy_sending() as
+   * the next function which will be called
    */
   transport_service_init(
     my_node_id,
@@ -1444,13 +1438,13 @@ void test_transport_service_busy_sending()
                               sizeof(raw_data2),
                               SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
-  test_timer_callback(0);  //Reset TS
+  contiki_test_helper_run(RESET_TIME);  //Reset TS
   return;
 }
 /*--------------------------------------------------------------------------*/
 /* Purpose of this test is to check if the on transport service
    sends TRANSPORT_SERVICE_BUSY for send request in the middle of another
-   TS receiving session 
+   TS receiving session
 */
 
 void test_transport_service_busy_receiving()
@@ -1475,7 +1469,7 @@ void test_transport_service_busy_receiving()
                       stubbed_on_transport_service_send_data_complete),
                     TRANSPORT_SERVICE_BUSY);
 
-  test_timer_callback(0);  //Reset TS
+  contiki_test_helper_run(1);
   return;
 }
 
@@ -1496,7 +1490,7 @@ void test_transport_service_long_frame()
 }
 
 /*--------------------------------------------------------------------------*/
-/* Purpose of this test is to test the sending functionality of TS on 
+/* Purpose of this test is to test the sending functionality of TS on
  * receiving fragment request for a missing fragment
 */
 uint8_t send_data_test_subseq_frag2_fc_timer_after_frag_req_resend(
@@ -1512,10 +1506,10 @@ uint8_t send_data_test_subseq_frag2_fc_timer_after_frag_req_resend(
                                test_subseq_frag2,
                                sizeof(test_subseq_frag2));
 
-  /* Send success callback for the second fragment TS tried to send 
+  /* Send success callback for the second fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1532,8 +1526,8 @@ uint8_t send_data_test_subseq_frag3_fc_timer_after_frag_req(
                                test_subseq_frag3,
                                sizeof(test_subseq_frag3));
 
-  /* Resister send_data_test_subseq_frag2_fc_timer_after_frag_req_resend() as 
-   * the next function which will be called 
+  /* Resister send_data_test_subseq_frag2_fc_timer_after_frag_req_resend() as
+   * the next function which will be called
    */
   transport_service_init(
     my_node_id,
@@ -1547,11 +1541,11 @@ uint8_t send_data_test_subseq_frag3_fc_timer_after_frag_req(
                                                         test_frag_req,
                                                         sizeof(test_frag_req)),
                     false);
-  /* Send success callback for the third fragment TS tried to send 
+  /* Send success callback for the third fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
 
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1568,18 +1562,18 @@ uint8_t send_data_test_subseq_frag2_fc_timer_after_frag_req(
                                test_subseq_frag2,
                                sizeof(test_subseq_frag2));
 
-  /* Resister send_data_test_subseq_frag3_fc_timer_after_frag_req() as the next 
+  /* Resister send_data_test_subseq_frag3_fc_timer_after_frag_req() as the next
    * function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_fc_timer_after_frag_req);
-  /* Send success callback for the second fragment TS tried to send 
+  /* Send success callback for the second fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send third fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1595,26 +1589,26 @@ uint8_t send_data_test_first_frag_fc_timer_after_frag_req(
   TEST_ASSERT_EQUAL_HEX8_ARRAY(payload,
                                test_first_frag1,
                                sizeof(test_first_frag1));
-  /* Resister send_data_test_subseq_frag2_fc_timer_after_frag_req() as the next 
+  /* Resister send_data_test_subseq_frag2_fc_timer_after_frag_req() as the next
    * function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_fc_timer_after_frag_req);
-  /* Send success callback for the first fragment TS tried to send 
+  /* Send success callback for the first fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send second fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
 void test_fc_timer_after_frag_req()
 {
-  /* Resister send_data_test_first_frag_fc_timer_after_frag_req() as the next 
+  /* Resister send_data_test_first_frag_fc_timer_after_frag_req() as the next
    * function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
@@ -1630,7 +1624,7 @@ void test_fc_timer_after_frag_req()
     SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
   /* Reset the TS */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return;
 }
 /*--------------------------------------------------------------------------*/
@@ -1669,16 +1663,16 @@ uint8_t send_data_test_subseq_frag2_failed_send_data(
                                sizeof(test_subseq_frag2));
 
   /* Resister send_data_test_subseq_frag3_failed_send_data() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_failed_send_data);
-  /* Send success callback for the subseq fragment TS tried to send 
+  /* Send success callback for the subseq fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send third fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
@@ -1696,24 +1690,24 @@ uint8_t send_data_test_first_frag1_failed_send_data(
                                sizeof(test_first_frag1));
 
   /* Resister send_data_test_subseq_frag2_failed_send_data() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_failed_send_data);
 
-  /* Send success callback for the first fragment TS tried to send 
+  /* Send success callback for the first fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send second fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
 void test_two_last_fragments_failed_send_data()
 {
   /* Resister send_data_test_first_frag1_failed_send_data() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
@@ -1728,15 +1722,15 @@ void test_two_last_fragments_failed_send_data()
     SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
 
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   /* Reset the TS */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return;
 }
 
 /*--------------------------------------------------------------------------*/
 
-/* Purpose of this test is to test the Fragment wait frame sending 
+/* Purpose of this test is to test the Fragment wait frame sending
  * functionality of TS
 */
 uint8_t send_data_test_subseq_frag2_with_one_wait(
@@ -1753,11 +1747,11 @@ uint8_t send_data_test_subseq_frag2_with_one_wait(
                                test_subseq_frag2,
                                sizeof(test_subseq_frag2));
 
-  /* Send success callback for the second fragment TS tried to send 
+  /* Send success callback for the second fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Resister send_data_test_first_frag1() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
@@ -1789,23 +1783,23 @@ uint8_t send_data_test_first_frag1_with_one_wait(
                                test_first_frag1,
                                sizeof(test_first_frag1));
   /* Resister send_data_test_subseq_frag2_with_one_wait() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_with_one_wait);
-  /* Send success callback for the first fragment TS tried to send 
+  /* Send success callback for the first fragment TS tried to send
    */
   on_lower_layer_send_data_complete(0, 0);
   /* Ask TS to send second fragment */
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return 0;
 }
 
 void test_send_whole_payload_with_one_wait()
 {
   /* Resister send_data_test_first_frag1_with_one_wait() as the next function
-   * which will be called 
+   * which will be called
    */
   transport_service_init(my_node_id,
                          stubbed_upper_layer_command_handler,
@@ -1819,6 +1813,6 @@ void test_send_whole_payload_with_one_wait()
                               sizeof(raw_data2),
                               SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
-  test_timer_callback(0);
+  contiki_test_helper_run(RESET_TIME);
   return;
 }

@@ -2,78 +2,89 @@ import React, { Fragment } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Autocomplete, MenuItem, TextField, Tooltip } from '@mui/material';
-import { SceneProps, SceneState } from './scene-types';
-import { SceneItem } from '../scene-list/scene-list-types';
-import * as FiIcons from 'react-icons/fi';
+import { SceneItem, SceneProps, SceneState } from './scene-types';
 import ConfirmDlg from '../../../components/confirm-dlg/confirm-dlg';
-import SceneCommandDlg from '../scene-command-dlg/scene-command-dlg';
-import { toast } from 'react-toastify';
+import { ClusterTypeAttrs } from '../../../cluster-types/cluster-type-attributes';
+import SceneAttributes from '../scene-attributes/scene-attributes';
+import AddAttribute from '../../../components/add-attribute/add-attribute';
+import { ClusterTypes } from '../../../cluster-types/cluster-types';
+import './scene.css';
 
 class Scene extends React.Component<SceneProps, SceneState> {
   constructor(props: SceneProps) {
     super(props);
     this.state = {
-      Scene: this.getScene(props, props.GroupID, props.SceneID),
+      Scene: this.getScene(props),
       GetScene: this.getScene,
       Cluster: "",
-      Cmd: "",
-      IsSceneListReceived: false
+      ClusterToAdd: "",
+      IsEdit: props.GroupID === "new" || props.SceneID === "new",
+      AvailableClusters: []
     };
+
     this.changeConfirmDlg = React.createRef();
-    this.editSceneDlg = React.createRef();
   }
   changeConfirmDlg: any;
-  editSceneDlg: any;
 
   static getDerivedStateFromProps(props: SceneProps, state: SceneState) {
-    let scene: any;
-    if (props.SceneList != undefined && Object.keys(props.SceneList).length && !state.IsSceneListReceived) {
-      state.IsSceneListReceived = true;
-      if (props.GroupID !== "new" && props.SceneID !== "new")
-        scene = state.GetScene(props, props.GroupID, props.SceneID);
-    }
+    let scene = state.Scene ?? state.GetScene(props);
+    let availableClusters = Object.keys(ClusterTypeAttrs).filter(cluster => !(scene?.SceneTableExtensions && scene?.SceneTableExtensions[cluster]) && ClusterTypeAttrs[cluster].server.attributes.find((attr: any) => attr.sceneRequired));
     return {
-      Scene: scene ?? (state.Scene?.GroupID === undefined && state.Scene?.SceneID === undefined ? state.GetScene(props) : state.Scene)
+      Scene: scene,
+      AvailableClusters: availableClusters,
+      ClusterToAdd: (state.ClusterToAdd && availableClusters.indexOf(state.ClusterToAdd) > -1) ? state.ClusterToAdd : ((availableClusters && availableClusters[0]) || "")
     };
   }
 
-  getScene(props: SceneProps, groupID: string, sceneID: string) {
-    if (groupID && sceneID && props.SceneList && props.SceneList[groupID] && props.SceneList[groupID][sceneID])
-      return props.SceneList[groupID][sceneID]
-    else {
-      let groupId = props.GroupList?.length > 0 ? props.GroupList[0].GroupId : undefined;
-      if (groupId === undefined) return {} as SceneItem;
-      let groupScenes = (props.SceneList && props.SceneList[groupId]) ? Object.keys(props.SceneList[groupId]) : undefined;
-      return {
-        GroupID: groupId,
-        SceneID: groupScenes && groupScenes.length > 0 ? Number(groupScenes[groupScenes.length - 1]) + 1 : null,
-        SceneName: "",
-        SceneTableExtensions: {}
-      } as SceneItem
+  getScene(props: any) {
+    let scene: any = null;
+    if (props.Unid && props.Ep) {
+      if (props.GroupID && props.SceneID && props.GroupID !== "new" && props.SceneID !== "new") {
+        let node = props.NodeList.find((i: any) => i.Unid === props.Unid);
+        let scenes = node && node.ep && node.ep[props.Ep]?.Clusters?.Scenes?.Attributes?.SceneTable?.Reported;
+        if (scenes && scenes.length) {
+          scene = scenes.find((i: any) => i.GroupID === Number(props.GroupID) && i.SceneID === Number(props.SceneID));
+          scene = scene && JSON.parse(JSON.stringify(scene));
+        }
+      } else if (props.GroupID === "new" && props.SceneID === "new") {
+        scene = {
+          GroupID: 0,
+          SceneID: 0,
+          SceneName: "",
+          TransitionTime: 0,
+          TransitionTime100ms: 0,
+          SceneTableExtensions: {},
+          IsEdit: true
+        } as SceneItem;
+      }
     }
+    return scene;
   }
 
   handleGroupChange = (event: any) => {
     let val = event.target.value?.match(/[0-9]{1,8}/g);
-    val = val && val[0] !== undefined ? Number(val[0]) : null;
+    val = val && val[0] !== undefined ? Number(val[0]) : 0;
     this.setGroup(val);
   }
 
   onChangeAuto = (event: any, newValue: any) => {
-    this.setGroup(newValue?.GroupId ?? newValue ?? null);
+    this.setGroup(newValue?.GroupId ?? newValue ?? 0);
   }
 
   setGroup = (groupId: number) => {
     let scene = this.state.Scene;
     scene.GroupID = groupId;
-    let groupScenes = this.props.SceneList && groupId !== undefined && this.props.SceneList[groupId] && Object.keys(this.props.SceneList[groupId]);
-    scene.SceneID = groupScenes?.length > 0 ? Number(groupScenes[groupScenes.length - 1]) + 1 : scene.SceneID;
     this.setState({ Scene: scene });
   }
 
-  handleNameChange = (event: any) => {
-    let scene = this.state.Scene;
-    scene.SceneName = event.target.value;
+  handleSceneChange = (event: any) => {
+    let scene = this.state.Scene as any;
+    if (event.target.type === "number") {
+      let val = event.target.value?.match(/[0-9]{1,8}/g);
+      val = val && val[0] !== undefined ? Number(val[0]) : 0;
+      scene[event.target.name] = val;
+    } else
+      scene[event.target.name] = event.target.value;
     this.setState({ Scene: scene });
   }
 
@@ -85,126 +96,177 @@ class Scene extends React.Component<SceneProps, SceneState> {
     this.setState({ Scene: scene });
   }
 
+  confirmSave() {
+    if (this.props.GroupID === "new" && this.props.SceneID === "new") {
+      let node = this.props.NodeList.find((i: any) => i.Unid === this.props.Unid);
+      let scenes = node && node.ep && node.ep[this.props.Ep]?.Clusters?.Scenes?.Attributes?.SceneTable?.Reported;
+      if (scenes.filter((i: any) => i.GroupID === this.state.Scene.GroupID && i.SceneID === this.state.Scene.SceneID)?.length) {
+        this.changeConfirmDlg?.current.update(
+          `Save GroupID:[${this.state.Scene.GroupID}] SceneID:[${this.state.Scene.SceneID}]`,
+          `Key {GroupID, SceneID} already exists. Do you want to overwrite it?`,
+          this.save);
+        return;
+      }
+    }
+    this.save();
+  }
+
   save = () => {
-    if (this.props.GroupID !== "new")
-      this.props.SocketServer.send(JSON.stringify(
-        {
-          type: "save-scene",
-          data: {
+    this.props.SocketServer.send(JSON.stringify(
+      {
+        type: "run-cluster-command",
+        data: {
+          Unid: `${this.props.Unid}/${this.props.Ep}`,
+          ClusterType: ClusterTypes.Scenes,
+          Cmd: "AddScene",
+          Payload: {
             GroupID: this.state.Scene.GroupID,
             SceneID: this.state.Scene.SceneID,
-            Payload: this.state.Scene
+            TransitionTime: this.state.Scene.TransitionTime,
+            TransitionTime100ms: this.state.Scene.TransitionTime100ms,
+            SceneName: this.state.Scene.SceneName,
+            ExtensionFieldSets: this.state.Scene.SceneTableExtensions
           }
-        }));
+        }
+      }));
+    history.back();
   }
 
-  edit = (clusterType?: string, command?: string, payload?: any) => {
-    if (this.state.Scene.GroupID === undefined || this.state.Scene.SceneID === undefined || this.state.Scene.GroupID === null || this.state.Scene.SceneID === null) {
-      toast("'GroupId' and 'SceneId' are required", { type: "warning" });
-      return;
-    }
-    this.editSceneDlg.current.updateState(clusterType, command, payload);
+  addCluster = () => {
+    let scene = this.state.Scene;
+    if (!scene.SceneTableExtensions[this.state.ClusterToAdd])
+      scene.SceneTableExtensions[this.state.ClusterToAdd] = {};
+    this.setState({ Scene: scene, AvailableClusters: Object.keys(ClusterTypeAttrs).filter(cluster => !(scene?.SceneTableExtensions && scene?.SceneTableExtensions[cluster]) && ClusterTypeAttrs[cluster].server.attributes.find((attr: any) => attr.sceneRequired)) });
   }
 
-  remove(cluster: string, cmd: string) {
-    this.setState({ Cluster: cluster, Cmd: cmd }, () => {
+  confirmRemove(cluster: string) {
+    this.setState({ Cluster: cluster }, () => {
       this.changeConfirmDlg?.current.update(
-        `Remove ${this.state.Cluster} -> [${this.state.Cmd}]`,
-        `Are you sure, you want to remove this command?`
+        `Remove ${this.state.Cluster}`,
+        `Are you sure, you want to remove this cluster?`,
+        this.remove
       );
     });
   }
 
-  sendScene = () => {
-    if (!this.state.Scene?.SceneTableExtensions)
-      return;
-    Object.keys(this.state.Scene.SceneTableExtensions).forEach(cluster => {
-      Object.keys(this.state.Scene.SceneTableExtensions[cluster])?.forEach(cmd => {
-        this.sendCommand(cluster, cmd, this.state.Scene.SceneTableExtensions[cluster][cmd]);
-      });
-    });
-  }
-
-  sendCommand = (clusterType: string, cmd: string, payload: any) => {
-    this.props.SocketServer.send(JSON.stringify(
-      {
-        type: "run-group-command",
-        data: {
-          GroupId: this.state.Scene.GroupID,
-          ClusterType: clusterType,
-          Cmd: cmd,
-          Payload: payload
-        }
-      }))
-  }
-
-  confirmRemove = () => {
+  remove = () => {
     let scene = this.state.Scene;
-    delete (scene.SceneTableExtensions[this.state.Cluster][this.state.Cmd]);
-    if (!Object.keys(scene.SceneTableExtensions[this.state.Cluster]).length)
-      delete (scene.SceneTableExtensions[this.state.Cluster]);
+    delete (scene.SceneTableExtensions[this.state.Cluster]);
+  }
+
+  recall = () => {
     this.props.SocketServer.send(JSON.stringify(
       {
-        type: "save-scene",
+        type: "run-cluster-command",
         data: {
-          GroupID: this.state.Scene.GroupID,
-          SceneID: this.state.Scene.SceneID,
-          Payload: this.state.Scene
+          Unid: `${this.props.Unid}/${this.props.Ep}`,
+          ClusterType: ClusterTypes.Scenes,
+          Cmd: "RecallScene",
+          Payload: {
+            GroupID: this.state.Scene.GroupID,
+            SceneID: this.state.Scene.SceneID,
+            TransitionTime: this.state.Scene.TransitionTime
+          }
         }
-      }))
+      }));
+  }
+
+  addAttribute = (cluster: string, attr: any) => {
+    if (attr && attr.name) {
+      this.state.Scene.SceneTableExtensions[cluster][attr.name] = attr.type === "struct" ? {} : attr.type === "number" ? 0 : "";
+      this.setState({ Scene: this.state.Scene });
+    }
+  }
+
+  removeAttribute = (cluster: string, attr: any) => {
+    delete (this.state.Scene.SceneTableExtensions[cluster][attr]);
+    this.setState({ Scene: this.state.Scene });
   }
 
   render() {
     return (
       <>
-        <h3>{`Group: [ID: ${this.state.Scene.GroupID ?? ""}] ${this.props.GroupList.find(i => i.GroupId === this.state.Scene.GroupID)?.GroupName ?? ""}, Scene: ${this.state.Scene.SceneName ?? ""} [ID: ${this.state.Scene.SceneID ?? ""}]`}</h3>
+        <h3>{`Group: [ID: ${this.state.Scene?.GroupID ?? ""}] ${(this.state.Scene && this.props.GroupList.find(i => i.GroupId === this.state.Scene.GroupID)?.GroupName) ?? ""}, Scene: ${this.state.Scene?.SceneName ?? ""} [ID: ${this.state.Scene?.SceneID ?? ""}]`}</h3>
         <Row>
-          <div className='col-sm-12 margin-b-10'>
-            <Link to={`/scenes`} className="margin-r-10">
+          <div className='col-sm-12 margin-b-10 inline'>
+            <Link to={`/scenes/${this.props.Unid}/${this.props.Ep}`} className="margin-r-10">
               <Button variant="outline-primary">Back</Button>
             </Link>
-            {!this.props.IsConnected ? <></>
+            {!this.state.Scene || !this.props.IsConnected
+              ? <Row>
+                <Col xs={12} className="text-center">
+                  <span className="no-content">No Content</span>
+                </Col>
+              </Row>
               : <>
-                {
-                  this.props.GroupList?.length && this.props.GroupID === "new"
-                    ? <Autocomplete
-                      selectOnFocus
-                      defaultValue={this.props.GroupList?.find(i => i.GroupId === this.state.Scene.GroupID) || {}}
-                      getOptionLabel={(option) => `${option?.GroupId}`}
-                      options={this.props.GroupList}
-                      onChange={this.onChangeAuto}
-                      onKeyDownCapture={(event: any) => {
-                        if (event.keyCode !== 9 && event.keyCode !== 8 && event.keyCode !== 46 && (isNaN(event.key) || event.keyCode === 13)) {
-                          event.stopPropagation();
-                          event.preventDefault();
-                        }
-                      }}
-
-                      freeSolo
-                      className='display-inline'
-                      renderInput={(params) => <TextField {...params}
-                        onChange={this.handleGroupChange}
-                        size="small" variant="outlined" label="Group ID" className="col-sm-3 margin-l-5 margin-r-10" onFocus={(event) => event.target.select()} />}
-                    />
-                    : <TextField size="small" disabled={this.props.GroupID !== "new"} variant="outlined" label="Group ID" className="col-sm-3 margin-l-5 margin-r-10" value={this.state.Scene.GroupID ?? null} onChange={this.handleGroupChange} onFocus={(event) => event.target.select()} />
-
-                }
-                <TextField size="small" className="col-sm-3 margin-l-5 margin-r-10" label="Scene ID" disabled={this.props.GroupID !== "new"} value={this.state.Scene.SceneID ?? null} onChange={this.handleIdChange} variant="outlined" onFocus={(event) => event.target.select()}
-                  onKeyDownCapture={(event: any) => {
-                    if (event.keyCode !== 9 && event.keyCode !== 8 && event.keyCode !== 46 && (isNaN(event.key) || event.keyCode === 13)) {
-                      event.stopPropagation();
-                      event.preventDefault();
-                    }
-                  }} />
-                <TextField size="small" className="col-sm-3 margin-l-5" label="Scene Name" onBlur={this.save} value={this.state.Scene.SceneName} onChange={this.handleNameChange} variant="outlined" onFocus={(event) => event.target.select()} />
-                <Button variant="primary" className="margin-h-10" onClick={() => this.edit()}>Add Command</Button>
-                <Button hidden={!this.state.Scene?.SceneTableExtensions || !Object.keys(this.state.Scene.SceneTableExtensions)?.length} variant="outline-primary" className="margin-h-10" onClick={this.sendScene}>
-                  Send
+                <Button hidden={this.props.GroupID === "new" || this.props.SceneID === "new" || !this.state.Scene?.SceneTableExtensions || !Object.keys(this.state.Scene.SceneTableExtensions)?.length} variant="outline-primary" className="margin-h-10" onClick={this.recall}>
+                  Recall
                 </Button>
+                {this.state.IsEdit
+                  ? <>
+                    <Button hidden={!this.state.IsEdit} variant="outline-primary" className="float-right" onClick={() => this.setState({ Scene: this.getScene(this.props), IsEdit: false })}>
+                      Cancel
+                    </Button>
+                    <Button hidden={!this.state.IsEdit} variant="primary" className="margin-r-10 float-right" onClick={() => this.confirmSave()}>
+                      Save
+                    </Button>
+                  </>
+                  : <Button hidden={this.state.IsEdit} variant="primary" className="margin-r-10 float-right" onClick={() => this.setState({ IsEdit: true })}>
+                    Edit
+                  </Button>
+                }
               </>
             }
           </div>
         </Row>
+        {!this.state.Scene || !this.props.IsConnected
+          ? <></>
+          : <><Row>
+            <div className="col-sm-12 inline margin-v-10">
+              <Autocomplete hidden={this.props.GroupID !== "new"}
+                selectOnFocus
+                value={this.props.GroupList?.find(i => i.GroupId === this.state.Scene.GroupID) || {}}
+                getOptionLabel={(option) => `${option && option.GroupId !== undefined ? `${option.GroupName} [ID: ${option.GroupId}]` : 0}`}
+                options={this.props.GroupList}
+                onChange={this.onChangeAuto}
+                onKeyDownCapture={(event: any) => {
+                  if (event.keyCode !== 9 && event.keyCode !== 8 && event.keyCode !== 46 && (isNaN(event.key) || event.keyCode === 13)) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                  }
+                }}
+                freeSolo
+                className='display-inline'
+                renderInput={(params) => <TextField {...params}
+                  onChange={this.handleGroupChange}
+                  variant="outlined" label="Group ID" className="col-sm-2 margin-r-10 small" onFocus={(event) => event.target.select()} />}
+              />
+              <TextField size="small" className="col-sm-2 margin-r-10" label="Scene ID" hidden={this.props.GroupID !== "new"} value={this.state.Scene.SceneID ?? null} onChange={this.handleIdChange} variant="outlined" onFocus={(event) => event.target.select()}
+                onKeyDownCapture={(event: any) => {
+                  if (event.keyCode !== 9 && event.keyCode !== 8 && event.keyCode !== 46 && (isNaN(event.key) || event.keyCode === 13)) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                  }
+                }} />
+              <TextField size="small" disabled={!this.state.IsEdit} className="col-sm-2 margin-r-10" label="Scene Name" value={this.state.Scene.SceneName} name="SceneName" onChange={this.handleSceneChange} variant="outlined" onFocus={(event) => event.target.select()} />
+              <TextField size="small" disabled={!this.state.IsEdit} className="col-sm-2 margin-r-10" label="Transition Time" value={this.state.Scene.TransitionTime} name="TransitionTime" onChange={this.handleSceneChange} variant="outlined" onFocus={(event) => event.target.select()} type="number" />
+              <TextField size="small" disabled={!this.state.IsEdit} className="col-sm-2 margin-r-10" label="Transition Time 100ms" value={this.state.Scene.TransitionTime100ms} name="TransitionTime100ms" onChange={this.handleSceneChange} variant="outlined" onFocus={(event) => event.target.select()} type="number" />
+            </div>
+          </Row>
+            <Row hidden={!this.state.IsEdit || !this.state.AvailableClusters || !this.state.AvailableClusters.length}>
+              <div className="col-sm-12 inline margin-b-10">
+                <TextField size="small" className="col-sm-4 margin-r-10" fullWidth={true} select label="Cluster Type" name="ClusterType" value={this.state.ClusterToAdd} onChange={(event: any) => this.setState({ ClusterToAdd: event?.target?.value })} variant="outlined">
+                  {this.state.AvailableClusters?.map((cluster: any, index: number) => {
+                    return <MenuItem key={index} value={cluster}>
+                      {cluster}
+                    </MenuItem>
+                  })}
+                </TextField>
+                <Button variant="primary" onClick={() => this.addCluster()} disabled={!this.state.ClusterToAdd}>Add Cluster</Button>
+              </div>
+            </Row>
+          </>
+        }
         {
           !this.props.IsConnected
             ? <Row>
@@ -213,38 +275,36 @@ class Scene extends React.Component<SceneProps, SceneState> {
               </Col>
             </Row>
             : this.state.Scene && this.state.Scene.SceneTableExtensions && Object.keys(this.state.Scene.SceneTableExtensions)?.map((cluster, clusterIndex) => {
-              return Object.keys(this.state.Scene.SceneTableExtensions[cluster])?.map((cmd: any, cmdIndex: number) => {
-                return <Fragment key={`${clusterIndex}-${cmdIndex}`}>
-                  <Card>
-                    <Card.Header>{cluster} -&gt; [{cmd}]
-                      <Tooltip title="Remove" className='float-right'>
-                        <span className="icon">
-                          <FiIcons.FiTrash2 className="margin-h-5" color="#dc3545" onClick={() => this.remove(cluster, cmd)} />
-                        </span>
-                      </Tooltip>
-                      <Tooltip title="Send" className='float-right'>
-                        <span className="icon">
-                          <FiIcons.FiSend className="margin-h-5" onClick={() => this.sendCommand(cluster, cmd, this.state.Scene.SceneTableExtensions[cluster][cmd])} />
-                        </span>
-                      </Tooltip>
-                      <Tooltip title="View/Edit" className='float-right'>
-                        <span className="icon">
-                          <FiIcons.FiEdit className="margin-h-5" onClick={() => this.edit(cluster, cmd, this.state.Scene.SceneTableExtensions[cluster][cmd])} />
-                        </span>
-                      </Tooltip>
-                    </Card.Header>
-                    <Card.Body className='inline no-padding' hidden={!Object.keys(this.state.Scene.SceneTableExtensions[cluster][cmd]).length}>
-                      <div className='col-sm-12 padding-v-20 line-h-20'>
-                        {JSON.stringify(this.state.Scene.SceneTableExtensions[cluster][cmd])}
+              let attrs = Object.keys(this.state.Scene.SceneTableExtensions[cluster]) || [];
+              return <Fragment key={clusterIndex}>
+                <Card>
+                  <Card.Header className='inline'><span className={this.state.IsEdit ? "line27" : ""}><b className='mr-3'>{cluster}</b></span>
+                    {this.state.IsEdit
+                      ? <>
+                        <Tooltip title="Remove Cluster">
+                          <Button hidden={!this.state.IsEdit} size="sm" variant="outline-primary" className="float-right" onClick={() => this.confirmRemove(cluster)}>Remove</Button>
+                        </Tooltip>
+                        <AddAttribute Cluster={cluster} AddAttributeFunc={this.addAttribute} AttrList={this.state.Scene?.SceneTableExtensions && this.state.Scene.SceneTableExtensions[cluster]} />
+                      </>
+                      : <>
+                      </>
+                    }
+                  </Card.Header>
+                  {attrs.length
+                    ? <Card.Body className='inline no-padding' hidden={!attrs.length}>
+                      <div className="col-sm-12 cluster-attributes">
+                        <SceneAttributes Scene={this.state.Scene} Cluster={cluster} IsEdit={this.state.IsEdit} RemoveAttribute={this.removeAttribute} />
                       </div>
                     </Card.Body>
-                  </Card><br />
-                </Fragment>
-              })
+                    : <></>
+                  }
+                </Card>
+                <br />
+              </Fragment>
             })
         }
-        <ConfirmDlg ConfirmAction={this.confirmRemove} ref={this.changeConfirmDlg} />
-        <SceneCommandDlg ref={this.editSceneDlg} SocketServer={this.props.SocketServer} Scene={this.state.Scene} />
+
+        <ConfirmDlg ref={this.changeConfirmDlg} />
       </>
     )
   }

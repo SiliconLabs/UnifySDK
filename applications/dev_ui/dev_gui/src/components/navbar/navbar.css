@@ -40,7 +40,7 @@
 .split-container .pro-sidebar {
     position: fixed;
     border-right: 1px solid #dddddd;
-    margin-top: 139px;
+    margin-top: 165px;
     transition: 0.3s;
 }
 
@@ -126,4 +126,31 @@
 .split-container .pro-sidebar .pro-menu>ul>.pro-sub-menu>.pro-inner-list-item>div>ul {
     padding-top: 0px;
     padding-bottom: 0px;
+}
+
+.mobile .header.collapsed+.split-container .pro-sidebar {
+    margin-top: 110px;
+}
+
+.mobile .split-container .pro-sidebar {
+    margin-top: 255px;
+}
+
+.mobile .split-container .pro-sidebar .pro-menu .pro-menu-item,
+.mobile .split-container .pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item>.pro-icon-wrapper {
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.mobile .split-container .pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item {
+    padding: 25px 30px 25px 25px;
+}
+
+.mobile .split-container .pro-sidebar.collapsed {
+    width: 85px;
+    min-width: 85px;
+}
+
+.mobile .split-container .pro-sidebar.collapsed .pro-menu>ul>.pro-menu-item.pro-sub-menu:hover>.pro-inner-list-item.popper-element {
+    display: none;
 }

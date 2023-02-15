@@ -9,9 +9,11 @@ target_include_directories(
 target_link_libraries(
   aoxpc_unid
   PUBLIC aoa_util
-  PRIVATE uic_log)
+  PRIVATE unify)
 
-# Mocks
-target_add_mock(aoxpc_unid)
+if(BUILD_TESTING)
+  # Mocks
+  target_add_mock(aoxpc_unid)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

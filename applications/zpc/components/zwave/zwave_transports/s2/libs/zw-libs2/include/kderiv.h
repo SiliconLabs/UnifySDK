@@ -2,6 +2,9 @@
  */
 #ifndef KDERIV_H
 #define KDERIV_H
+
+#include <stdint.h>
+
 /**
  * \ingroup crypto
  * @{

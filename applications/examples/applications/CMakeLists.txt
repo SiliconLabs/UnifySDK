@@ -1,11 +1,11 @@
-if (BUILD_UIC_DEMO MATCHES ON)
+if(BUILD_UIC_DEMO MATCHES ON)
   add_subdirectory(demo_uic_lib)
   message(STATUS "Unify Library Demo will build")
 else()
   message(STATUS "Unify Library Demo will NOT build")
 endif()
 
-if (BUILD_EPC MATCHES ON)
+if(BUILD_EPC MATCHES ON)
   add_subdirectory(epc)
   message(STATUS "Example Protocol Controller will build")
 else()

@@ -19,6 +19,7 @@
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
+#include "zpc_attribute_store_type_registration.h"
 
 // Test helpers
 #include "zpc_attribute_store_test_helper.h"
@@ -42,6 +43,7 @@ void setUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
   zpc_attribute_store_test_helper_create_network();
   zwave_unid_set_home_id(home_id);
 }

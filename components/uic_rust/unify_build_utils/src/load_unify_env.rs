@@ -10,82 +10,68 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
+use super::*;
+use anyhow::{ensure, Context, Result};
+use std::{fmt::Display, path::PathBuf};
 
-/// this macro exports link information in order for the compiler to
-/// successfully link against the specified native C libraries. More
-/// specifically, the unify_env.source is used to setup the following:
-/// - link search paths         specifies to the linker where various native
-///   libraries can be found
-/// - rpath's                   the linker uses this to write the library paths
-///     into rust binaries to the dynamic runtime linker knows where to load
-///     these libraries from
-/// - user specified libraries  tell the linker which libraries to link against
-///
-/// NOTE: if a search path is missing, they should be appended in the
-/// unify_env.source file and not here!
+/// This function loads the build command for a given ninja target into a
+/// structure named [CompilerArguments]. The target name is fuzzy matched,
+/// meaning that there is no guarantees of getting back an exclusive list. This
+/// function implies a hard dependency on Ninja build files.
+/// > this function relies on the environment variable `UNIFY_BINARY_DIR`
 ///
 /// # Arguments
 ///
-/// this macro accepts a combination of arguments which are all optional. Not
-/// specifying any arguments means that at least the unify environment is
-/// correctly loaded. Use one of the following arguments to complete your setup:
-/// * dylib "<lib>"  token to specify which library to link against
-/// * or staticlib "<lib>" token to specify a static lib to link against.
-/// >note that any variadic length of tokens is accepted by this macro!
+/// * `ninja_target` a target name that is fuzzed against ninja compile units
 ///
-/// # Usage
-///
-/// ```rust
-/// # use unify_build_utils::load_unify_environment;
-/// load_unify_environment!(
-///     dylib "foo",
-///     staticlib "bar",
-///     dylib "baz"
-/// );
-/// ```
-///
-/// * for rust compilation targets that in theory do not need linkage in order
-/// to build. e.g. shared libraries, link libraries are ignored.
-/// * link libraries are transitivity propagated to the final binary, rpath's
-/// are not. read more here: <https://github.com/rust-lang/cargo/pull/7811>.
-/// * this macro relies on environment UNIFY_BINARY_DIR to be set correctly.
-#[macro_export]
-macro_rules! load_unify_environment {
-    // base case for dylib declarations
-    (@internal dylib $name:literal) => {{
-        println!("cargo:rustc-link-lib=dylib={}", $name);
-    }};
+pub fn load_environment<S: AsRef<str> + Display>(ninja_target: S) -> Result<CompilerArguments> {
+    let build_dir: PathBuf = std::env::var("UNIFY_BINARY_DIR")
+        .context("missing `UNIFY_BINARY_DIR` environment variable")?
+        .into();
 
-    // base case for static lib declarations
-    (@internal staticlib $name:literal) => {{
-        println!("cargo:rustc-link-lib=static={}", $name);
-    }};
+    ensure!(
+        build_dir.exists(),
+        "cannot find `UNIFY_BINARY_DIR`{}",
+        build_dir.to_string_lossy()
+    );
 
-    (@internal ) => {{
-        // this match is here to support macro invocation with no arguments
-    }};
+    let mut deps = CompilerArguments::from_ninja(&build_dir, ninja_target.as_ref())?;
+    deps.filter_forbidden_words(&["test", "mock", "stub", "unity"]);
 
-    // take one lib argument of the variable argument list and call the base
-    // case for it repeat recursively for the others until we reached the base
-    // case as well
-    (@internal $t:ident $name:literal, $($t2:ident $name2:literal),+) => {{
-        load_unify_environment!(@internal $t $name);
-        load_unify_environment!(@internal $($t2 $name2),+)
-    }};
+    if let Ok(s) = std::env::var("CARGO_LIBUNIFY_DIR") {
+        //deps.include_directories.clear();
+        deps.include_directories
+            .push(PathBuf::from(&s).join("include/uic"));
+        deps.include_directories
+            .push(PathBuf::from(&s).join("include/uic/sys"));
+        deps.include_directories
+            .push(PathBuf::from(&s).join("include/uic/lib"));
+    }
 
-    // this is the entry point of this macro
-    ($($t2:ident $name2:literal),*) => {{
-        if let Ok(rpaths) = std::env::var("UNIFY_LIB_PATH") {
-            for path in rpaths.split(':') {
-                println!("cargo:rustc-link-arg=-Wl,-rpath,{}", path);
-                println!("cargo:rustc-link-search=native={}", path);
-            }
-        } else {
-            println!(
-                "cargo:warning=Skipping loading of Unify build environment. UNIFY_LIB_PATH not set!"
-            );
-        }
+    dump_as_yaml(&deps, &build_dir)?;
+    // make sure this build script is called again when the ninja file changes
+    println!(
+        "cargo:rerun-if-changed={}",
+        build_dir.join("build.ninja").to_string_lossy()
+    );
 
-        load_unify_environment!(@internal $($t2 $name2),*);
-    }};
+    Ok(deps)
+}
+
+// for debug purposes
+fn dump_as_yaml(build_ninja: &CompilerArguments, build_dir: &std::path::Path) -> Result<()> {
+    let file_name = build_dir.join(format!(
+        "{}/{}.yaml",
+        std::env::var("OUT_DIR")?,
+        std::env::var("CARGO_PKG_NAME")?
+    ));
+
+    std::fs::create_dir_all(file_name.parent().expect("yaml has at least one parent"))?;
+    println!(
+        "cargo:warning=load_unify_env.rs: Writing compiler arguments for {} to {}",
+        std::env::var("CARGO_PKG_NAME")?,
+        file_name.to_string_lossy()
+    );
+    let yaml_file = std::fs::File::create(file_name)?;
+    build_ninja.to_writer(yaml_file)
 }

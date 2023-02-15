@@ -13,6 +13,15 @@
 #include "unity.h"
 #include "curve25519.h"
 #include "s2_keystore.h"
+
+void setUpSuite(void) {
+
+}
+
+void tearDownSuite(void) {
+
+}
+
 #define ELEM_COUNT(ARRAY)  (sizeof(ARRAY)/(sizeof(ARRAY[0])))
 #define UNIT_TEST_TEMP_KEY_SECURE             5       //< Value identifying index for the temporary key in S2 network key when transmitting secure frames.
 #define UNIT_TEST_NETWORK_KEY                 6       //< Value identifying index for the temporary key in S2 network key when transmitting secure frames.
@@ -133,16 +142,16 @@ void test_kex_joining_node_state_machine() {
   mock_call_expect(TO_STR(keystore_network_key_clear), &p_keystore_clear);
   p_keystore_clear->expect_arg[0].value = 0xFF;
 
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_keystore_read_pub_b);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_keystore_read_pub_b);
   p_keystore_read_pub_b->output_arg[0].pointer = m_test_public_key_b;
 
   mock_call_expect(TO_STR(keystore_public_key_read), &p_keystore_read_pub_a);
   p_keystore_read_pub_a->output_arg[0].pointer = m_test_public_key_a;
 
   // When calculating the shared secret - Joining node.
-  mock_call_expect(TO_STR(keystore_private_key_read), &p_keystore_read_priv_b);
+  mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_keystore_read_priv_b);
   p_keystore_read_priv_b->output_arg[0].pointer = m_test_private_key_b;
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_keystore_read_pub_b);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_keystore_read_pub_b);
   p_keystore_read_pub_b->output_arg[0].pointer = m_test_public_key_b;
   mock_call_expect(TO_STR(S2_network_key_update), &p_network_key_joining_update_temp_key_mock);
   compare_any_all_args(p_network_key_joining_update_temp_key_mock);

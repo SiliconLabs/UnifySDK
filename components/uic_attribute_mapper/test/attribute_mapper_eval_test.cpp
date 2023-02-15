@@ -14,12 +14,7 @@
 #include "attribute_store_fixt.h"
 #include "attribute_store_type_registration.h"
 #include "datastore.h"
-#include "attribute_mapper_engine.hpp"
-#include "attribute_mapper_parser.hpp"
-#include "attribute_mapper_ast_eval.hpp"
-#include "attribute_mapper_ast_reducer.hpp"
-#include "attribute_mapper_ast_print.hpp"
-#include "attribute_mapper_ast_complexity.hpp"
+#include "workaround.hpp"
 #include "sl_log.h"
 using namespace attribute_store;
 
@@ -151,9 +146,64 @@ void test_dep_eval()
     eval.get_dependencies().begin(),
     eval.get_dependencies().end());
 
-  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(1234, 'r')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(1234, 'r')));
   TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(42, 'r')));
   TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(3333, 'r')));
+  TEST_ASSERT_EQUAL(2, dependencies.size());
+}
+
+void test_dep_eval_complicated_expression()
+{
+  ast::ast_tree ast;
+  ast::dep_eval dep_path_evaluator;
+  TEST_ASSERT_TRUE(ast::Parse(
+    "scope 0 { r'5555 = if (e'1234) (3+r'34.5) ((d'4.6.7 * r'1) or e'12) }",
+    ast));
+  ast::scope scope    = boost::get<ast::scope>(ast[0]);
+  ast::assignment ass = scope.assignments[0];
+
+  ast::dep_eval eval;
+  eval(ass.rhs);
+
+  std::set<ast::attribute_dependency_t> dependencies(
+    eval.get_dependencies().begin(),
+    eval.get_dependencies().end());
+
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(1234, 'e')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(34, 'r')));
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(5, 'r')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(4, 'd')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(6, 'd')));
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(7, 'd')));
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(1, 'r')));
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(12, 'e')));
+  TEST_ASSERT_EQUAL(5, dependencies.size());
+}
+
+void test_dep_eval_with_built_in_function()
+{
+  ast::ast_tree ast;
+  ast::dep_eval dep_path_evaluator;
+  TEST_ASSERT_TRUE(ast::Parse("scope 0 { r'5555 = if (e'1234) "
+                              "fn_min_value(3+r'34.5,0) fn_max_value(e'12) }",
+                              ast));
+  ast::scope scope    = boost::get<ast::scope>(ast[0]);
+  ast::assignment ass = scope.assignments[0];
+
+  ast::dep_eval eval;
+  eval(ass.rhs);
+
+  std::set<ast::attribute_dependency_t> dependencies(
+    eval.get_dependencies().begin(),
+    eval.get_dependencies().end());
+
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(1234, 'e')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(34, 'r')));
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(5, 'r')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(4, 'd')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(3, 'r')));
+  TEST_ASSERT_EQUAL(0, dependencies.count(std::make_pair(1, 'r')));
+  TEST_ASSERT_EQUAL(1, dependencies.count(std::make_pair(12, 'e')));
   TEST_ASSERT_EQUAL(3, dependencies.size());
 }
 
@@ -224,6 +274,133 @@ void test_if()
 
   val = eval_simple("if ((r'1 or 1000) == 1000) 2 3");
   TEST_ASSERT_EQUAL(2, val.value());
+}
+
+void test_min_value_built_in_function()
+{
+  auto val = eval_simple("fn_min_value( 3 , 4 )");
+  TEST_ASSERT_EQUAL(3, val.value());
+
+  val = eval_simple("fn_min_value(3,4,6,7,8,-3.6f)");
+  TEST_ASSERT_EQUAL(-3.6, val.value());
+
+  val = eval_simple("fn_min_value(3,4,undefined)");
+  TEST_ASSERT_FALSE(val);
+}
+
+void test_max_value_built_in_function()
+{
+  auto val = eval_simple("fn_max_value( 3 , 4 )");
+  TEST_ASSERT_EQUAL(4, val.value());
+
+  val = eval_simple("fn_max_value( 0 ,4,6,7,8,-3.6f)");
+  TEST_ASSERT_EQUAL(8, val.value());
+
+  val = eval_simple("fn_max_value(3,4,undefined)");
+  TEST_ASSERT_FALSE(val);
+}
+
+void test_average_value_built_in_function()
+{
+  auto val = eval_simple("fn_average_value( 3 , 4 )");
+  TEST_ASSERT_EQUAL(3.5, val.value());
+
+  val = eval_simple("fn_average_value( 0 ,4,6+2,7,8,-3.6f)");
+  TEST_ASSERT_EQUAL_FLOAT(3.9, val.value());
+
+  val = eval_simple("fn_average_value(3,4,undefined)");
+  TEST_ASSERT_FALSE(val);
+}
+
+void test_is_all_defined_built_in_function()
+{
+  auto val = eval_simple("fn_are_all_defined( 3 , 4, undefined )");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("fn_are_all_defined( 3 , 4, 5 )");
+  TEST_ASSERT_EQUAL(1, val.value());
+}
+
+void test_are_all_undefined_built_in_function()
+{
+  auto val = eval_simple(
+    "fn_are_all_undefined( 3 * undefined, undefined, undefined )");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("fn_are_all_undefined( undefined, 4, 5 )");
+  TEST_ASSERT_EQUAL(0, val.value());
+}
+
+void test_is_any_defined_built_in_function()
+{
+  auto val
+    = eval_simple("fn_is_any_defined( 3 * undefined, undefined, undefined )");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("fn_is_any_defined( undefined, 4, 5 )");
+  TEST_ASSERT_EQUAL(1, val.value());
+}
+
+void test_are_all_defined_built_in_function()
+{
+  auto val = eval_simple("fn_are_all_defined( 3 * 4, 5, 6)");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("fn_are_all_defined( undefined, 4, 5 )");
+  TEST_ASSERT_EQUAL(0, val.value());
+}
+
+void test_is_any_undefined_built_in_function()
+{
+  auto val
+    = eval_simple("fn_is_any_undefined( 3 * undefined, undefined, undefined )");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("fn_is_any_undefined( undefined, 4, 5 )");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("fn_is_any_undefined( 4, 4, 5 )");
+  TEST_ASSERT_EQUAL(0, val.value());
+}
+
+void test_absolute_value_built_in_function()
+{
+  auto val = eval_simple("fn_absolute_value( 3 * undefined, undefined, -6 )");
+  TEST_ASSERT_EQUAL(6, val.value());
+
+  val = eval_simple("fn_absolute_value( 0, 4, 5 )");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("fn_absolute_value( 4.9f )");
+  TEST_ASSERT_EQUAL(4.9, val.value());
+}
+
+void test_encapsulated_built_in_function()
+{
+  auto val
+    = eval_simple("fn_min_value(fn_absolute_value(-5),fn_max_value(-2, -1))");
+  TEST_ASSERT_EQUAL(-1, val.value());
+
+  val = eval_simple("fn_absolute_value(fn_are_all_undefined(undefined, 0))");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple(
+    "fn_is_any_undefined(fn_is_any_undefined(undefined, 0),undefined)");
+  TEST_ASSERT_EQUAL(1, val.value());
+}
+
+void test_execute_unknown_function()
+{
+  // The mapper engine normally filters out unknown functions, but let's
+  // say one slipped in the AST anyway.
+  ast::ast_tree ast;
+  TEST_ASSERT_TRUE(
+    ast::Parse("scope 0 { d'6 = fn_unknown_function(r'1)}", ast));
+
+  ast::scope scope = boost::get<ast::scope>(ast[0]);
+  ast::eval<result_type_t> evaluator(attribute::root());
+  auto value = evaluator(scope.assignments[0].rhs);
+  TEST_ASSERT_FALSE(value);
 }
 
 void test_option()
@@ -318,6 +495,24 @@ void test_operators()
 
   val = eval_simple("0.4f != (2/5)");
   TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("2 <= 2");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("2 <= 3");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("3 <= 2");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("2 >= 3");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("2 >= 2");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("4 >= 3");
+  TEST_ASSERT_EQUAL(1, val.value());
 }
 
 void test_comparison_operator()

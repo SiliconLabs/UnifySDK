@@ -37,4 +37,15 @@ EmberStatus emberBindRequest(EmberNodeId target,
                              uint8_t destinationEndpoint,
                              EmberApsOption options);
 
+EmberStatus emberUnbindRequest(EmberNodeId target,
+                             EmberEUI64 source,
+                             uint8_t sourceEndpoint,
+                             uint16_t clusterId,
+                             uint8_t type,
+                             EmberEUI64 destination,
+                             EmberMulticastId groupAddress,
+                             uint8_t destinationEndpoint,
+                             EmberApsOption options);
+
+uint8_t emberGetLastAppZigDevRequestSequence();
 #endif  // SILABS_ZIGBEE_DEVICE_COMMON_H

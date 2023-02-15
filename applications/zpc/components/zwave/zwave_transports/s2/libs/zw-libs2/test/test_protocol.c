@@ -254,17 +254,17 @@ my_setup()
 
   S2_init_prng();
 
-  S2_network_key_update(ctx1,ZWAVE_KEY_ID_NONE,0,key,0);
-  S2_network_key_update(ctx2,ZWAVE_KEY_ID_NONE,0,key,0);
-  S2_network_key_update(ctx3,ZWAVE_KEY_ID_NONE,0,key,0);
+  S2_network_key_update(ctx1,ZWAVE_KEY_ID_NONE,0,key,0, false);
+  S2_network_key_update(ctx2,ZWAVE_KEY_ID_NONE,0,key,0, false);
+  S2_network_key_update(ctx3,ZWAVE_KEY_ID_NONE,0,key,0, false);
 
-  S2_network_key_update(ctx1,ZWAVE_KEY_ID_NONE,1,key2,0);
-  S2_network_key_update(ctx2,ZWAVE_KEY_ID_NONE,1,key2,0);
-  S2_network_key_update(ctx3,ZWAVE_KEY_ID_NONE,1,key2,0);
+  S2_network_key_update(ctx1,ZWAVE_KEY_ID_NONE,1,key2,0, false);
+  S2_network_key_update(ctx2,ZWAVE_KEY_ID_NONE,1,key2,0, false);
+  S2_network_key_update(ctx3,ZWAVE_KEY_ID_NONE,1,key2,0, false);
 
-  S2_network_key_update(ctx1,ZWAVE_KEY_ID_NONE,2,key3,0);
-  S2_network_key_update(ctx2,ZWAVE_KEY_ID_NONE,2,key3,0);
-  S2_network_key_update(ctx3,ZWAVE_KEY_ID_NONE,2,key3,0);
+  S2_network_key_update(ctx1,ZWAVE_KEY_ID_NONE,2,key3,0, false);
+  S2_network_key_update(ctx2,ZWAVE_KEY_ID_NONE,2,key3,0, false);
+  S2_network_key_update(ctx3,ZWAVE_KEY_ID_NONE,2,key3,0, false);
 
 }
 
@@ -2408,7 +2408,17 @@ void keystore_public_key_read(uint8_t *buf)
   UNUSED(buf);
 }
 
+void keystore_dynamic_public_key_read(uint8_t *buf)
+{
+  UNUSED(buf);
+}
+
 void keystore_private_key_read(uint8_t *buf)
+{
+  UNUSED(buf);
+}
+
+void keystore_dynamic_private_key_read(uint8_t *buf)
 {
   UNUSED(buf);
 }

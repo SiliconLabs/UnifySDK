@@ -16,7 +16,7 @@ The following documentation explains how to install and set up Docker.
 To build the docker image enter the `docker` folder and run:
 
 ``` bash
-./build_docker.sh armhf uic_armhf
+./build_docker.sh arm64 uic_arm64
 ```
 
-This will build the Unify toolchain docker images and name it *uic_armhf*.
+This will build the Unify toolchain docker images and name it *uic_arm64*.

@@ -11,6 +11,7 @@ target_link_libraries(
   PRIVATE zigpc_attribute_management
           zigpc_zcl_util
           zigpc_datastore
+          zigpc_binding
           zigpc_discovery
           zigpc_ota_zigbee
           zigpc_gateway
@@ -19,11 +20,10 @@ target_link_libraries(
           zigpc_config
           zigpc_net_mgmt
           zigpc_ucl
-          uic_log
-          uic_dotdot_mqtt
-          uic_mqtt
-          uic_contiki)
+          unify)
 
-target_add_mock(zigpc_controller)
+if(BUILD_TESTING)
+  target_add_mock(zigpc_controller)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

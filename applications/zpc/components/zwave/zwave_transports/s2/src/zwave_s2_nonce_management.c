@@ -21,6 +21,9 @@
 
 // Includes from the Z-Wave Controller
 #include "zwave_network_management.h"
+#include "sl_log.h"
+
+#define LOG_TAG "zwave_s2_nonce_management"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
@@ -94,6 +97,36 @@ sl_status_t zwave_s2_get_span_data(zwave_node_id_t node_id,
     }
   }
   return SL_STATUS_NOT_FOUND;
+}
+
+void zwave_s2_reset_span(zwave_node_id_t node_id)
+{
+  for (size_t i = 0; i < SPAN_TABLE_SIZE; i++) {
+    if (s2_ctx->span_table[i].rnode == node_id) {
+      s2_ctx->span_table[i].state = SPAN_NOT_USED;
+      sl_log_debug(LOG_TAG,
+                   "Success with reset of SPAN with NodeID: %d\n",
+                   node_id);
+      return;
+    }
+  }
+}
+
+void zwave_s2_reset_mpan(zwave_node_id_t owner_node_id,
+                                  zwave_multicast_group_id_t group_id)
+{
+  for (size_t i = 0; i < MPAN_TABLE_SIZE; i++) {
+    if (s2_ctx->mpan_table[i].owner_id == owner_node_id
+        && s2_ctx->mpan_table[i].group_id == group_id) {
+      s2_ctx->mpan_table[i].state = MPAN_NOT_USED;
+      sl_log_debug(
+        LOG_TAG,
+        "Success with reset of MPAN with NodeID: %d and GroupID: %d\n",
+        owner_node_id,
+        group_id);
+      return;
+    }
+  }
 }
 
 void zwave_s2_set_span_table(zwave_node_id_t node_id,

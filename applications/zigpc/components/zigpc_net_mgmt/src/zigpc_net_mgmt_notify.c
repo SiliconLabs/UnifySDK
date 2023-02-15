@@ -24,10 +24,14 @@
 
 static const char LOG_TAG[] = "zigpc_net_mgmt_notify";
 
-struct zigpc_observable zigpc_net_mgmt_observable;
-
 static struct zigpc_net_mgmt_on_network_state_update
   zigpc_net_mgmt_notify_state_update_data;
+
+/**
+ * @brief Network Management observable instance
+ *
+ */
+static struct zigpc_observable zigpc_net_mgmt_observable;
 
 sl_status_t
   zigpc_net_mgmt_register_observer(enum zigpc_net_mgmt_notify_event event,
@@ -71,6 +75,7 @@ sl_status_t zigpc_net_mgmt_reset_observable(void)
 
 void zigpc_net_mgmt_notify_network_init(const zigbee_eui64_t pc_eui64)
 {
+
   static struct zigpc_net_mgmt_on_network_init notify_data = {0};
 
   memcpy(notify_data.pc_eui64, pc_eui64, sizeof(zigbee_eui64_t));

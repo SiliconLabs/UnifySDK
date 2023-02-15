@@ -32,7 +32,6 @@ constexpr char LOG_TAG[] = "attribute_store_callbacks";
  * - Callback when matching the type of a node only
  * - Callback when matching the value-state and type of a node
  */
-
 using attribute_store_value_callback_setting_t
   = std::pair<attribute_store_type_t, attribute_store_node_value_state_t>;
 
@@ -97,7 +96,9 @@ void attribute_store_invoke_generic_callbacks(
   attribute_changed_event_t *change_event)
 {
   // Call all these functions:
-  for (auto callback_function: generic_callbacks) {
+  std::set<attribute_store_node_update_callback_t> callbacks_to_invoke
+    = generic_callbacks;
+  for (auto &callback_function: callbacks_to_invoke) {
     callback_function(change_event);
   }
 }
@@ -106,7 +107,9 @@ void attribute_store_invoke_touch_generic_callbacks(
   attribute_store_node_t touched_node)
 {
   // Call all these functions:
-  for (auto callback_function: touch_generic_callbacks) {
+  std::set<attribute_store_node_touch_callback_t> callbacks_to_invoke
+    = touch_generic_callbacks;
+  for (auto &callback_function: callbacks_to_invoke) {
     callback_function(touched_node);
   }
 }
@@ -116,10 +119,15 @@ void attribute_store_invoke_type_callbacks(attribute_store_node_t updated_node,
                                            attribute_store_change_t change)
 {
   // Make the type callbacks:
+  std::set<attribute_store_node_changed_callback_t> callbacks_to_invoke;
   if (type_callbacks.count(type)) {
     for (auto callback_function: type_callbacks[type]) {
-      callback_function(updated_node, change);
+      callbacks_to_invoke.insert(callback_function);
     }
+  }
+
+  for (auto &callback_function: callbacks_to_invoke) {
+    callback_function(updated_node, change);
   }
 }
 
@@ -129,12 +137,16 @@ void attribute_store_invoke_value_callbacks(
   attribute_store_node_value_state_t value_state,
   attribute_store_change_t change)
 {
+  std::set<attribute_store_node_changed_callback_t> callbacks_to_invoke;
   attribute_store_value_callback_setting_t setting = {type, value_state};
   // Make the type callbacks:
   if (value_callbacks.count(setting)) {
     for (auto callback_function: value_callbacks[setting]) {
-      callback_function(updated_node, change);
+      callbacks_to_invoke.insert(callback_function);
     }
+  }
+  for (auto &callback_function: callbacks_to_invoke) {
+    callback_function(updated_node, change);
   }
 }
 
@@ -142,7 +154,9 @@ void attribute_store_invoke_delete_callbacks(
   attribute_store_node_t deleted_node)
 {
   // Make the delete callbacks:
-  for (auto callback_function: delete_callbacks) {
+  std::set<attribute_store_node_delete_callback_t> callbacks_to_invoke
+    = delete_callbacks;
+  for (auto &callback_function: callbacks_to_invoke) {
     callback_function(deleted_node);
   }
 }

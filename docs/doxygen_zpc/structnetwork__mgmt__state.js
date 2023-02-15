@@ -20,6 +20,7 @@ var structnetwork__mgmt__state =
     [ "reported_dsk_blanked", "structnetwork__mgmt__state.html#ae5d8a1c4ee2104c1ecb0841dfa2f5ebd", null ],
     [ "requested_csa", "structnetwork__mgmt__state.html#af055f6a32f583ed10afe96b7140ffc64", null ],
     [ "requested_keys", "structnetwork__mgmt__state.html#a15a3338950bd6e8f388a311b603381c3", null ],
+    [ "s0_inclusion_enabled", "structnetwork__mgmt__state.html#a3d346188919aa823597427947063d530", null ],
     [ "s2_bootstrapping_started", "structnetwork__mgmt__state.html#ac982e713954712b2238f28273170b1ba", null ],
     [ "smart_start_add_mode_enabled", "structnetwork__mgmt__state.html#ad8c32fbc8aa671befaf91544dfc3ba97", null ],
     [ "smart_start_learn_mode_enabled", "structnetwork__mgmt__state.html#aaa219e2e38c43ce7cb80c4430de92a82", null ],

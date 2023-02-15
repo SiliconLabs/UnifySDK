@@ -4,7 +4,7 @@ message(STATUS "Components of Unify which will have deb packages"
 include(CPack)
 
 foreach(PKG_NAME IN LISTS CPACK_COMPONENTS_ALL)
-  string(TOUPPER ${PKG_NAME} PKG_NAME_UPPER)
+      string(TOUPPER ${PKG_NAME} PKG_NAME_UPPER)
   cpack_add_component(
     PKG_NAME
     DISPLAY_NAME ${PKG_NAME}

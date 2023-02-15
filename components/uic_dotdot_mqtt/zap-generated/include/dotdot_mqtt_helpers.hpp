@@ -23,6 +23,8 @@
 #ifndef DOTDOT_MQTT_HELPERS_HPP
 #define DOTDOT_MQTT_HELPERS_HPP
 
+#include "uic_typedefs.h"
+
 #include <string>
 #include <functional>
 #include <map>
@@ -1558,57 +1560,6 @@ std::string squawk_configuration_squawk_mode_get_enum_value_name(
  */
 uint32_t squawk_configuration_squawk_mode_get_enum_value_number(const std::string &str);
 
-#define TL_KEY_INDEX_ENUM_NAME_AVAILABLE 1
-
-/**
- * @brief Finds the name of a field for the TLKeyIndex enum
- *
- * @returns A string representation of the value.
- */
-std::string tl_key_index_get_enum_value_name(
-  uint32_t value);
-
-/**
- * @brief Finds the enum number of a string representation for the TLKeyIndex enum
- *
- * @returns A number enum value.
- */
-uint32_t tl_key_index_get_enum_value_number(const std::string &str);
-
-#define TL_STATUS_ENUM_NAME_AVAILABLE 1
-
-/**
- * @brief Finds the name of a field for the TLStatus enum
- *
- * @returns A string representation of the value.
- */
-std::string tl_status_get_enum_value_name(
-  uint32_t value);
-
-/**
- * @brief Finds the enum number of a string representation for the TLStatus enum
- *
- * @returns A number enum value.
- */
-uint32_t tl_status_get_enum_value_number(const std::string &str);
-
-#define TL_ZIGBEE_INFORMATION_LOGICAL_TYPE_ENUM_NAME_AVAILABLE 1
-
-/**
- * @brief Finds the name of a field for the TLZigbeeInformationLogicalType enum
- *
- * @returns A string representation of the value.
- */
-std::string tl_zigbee_information_logical_type_get_enum_value_name(
-  uint32_t value);
-
-/**
- * @brief Finds the enum number of a string representation for the TLZigbeeInformationLogicalType enum
- *
- * @returns A number enum value.
- */
-uint32_t tl_zigbee_information_logical_type_get_enum_value_number(const std::string &str);
-
 #define THERMOSTATAC_CAPACITY_FORMAT_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -2000,6 +1951,37 @@ std::string zcl_type_get_enum_value_name(
  */
 uint32_t zcl_type_get_enum_value_number(const std::string &str);
 
+
+/**
+ * @brief Generic function to get the Value Name of a Cluster/Attribute/Value
+ *
+ * @param cluster_id      The ID of the cluster for which we are trying to get
+ *                        a value name
+ * @param attribute_id    The ID of the Attribute within the Cluster for which
+ *                        we are tying to get a value name
+ * @param value           Value of the Attribute
+ * @return std::string. Empty if something wrong happened or no string
+ *         exists for this value.
+ */
+std::string get_enum_value_name(
+  dotdot_cluster_id_t cluster_id,
+  dotdot_attribute_id_t attribute_id,
+  uint32_t value);
+
+/**
+ * @brief Generic function to get the Value from a Value Name of a Cluster/Attribute
+ *
+ * @param cluster_id      The ID of the cluster for which we are trying to get
+ *                        a value name
+ * @param attribute_id    The ID of the Attribute within the Cluster for which
+ *                        we are tying to get a value name
+ * @param name            Name of the Value for the Attribute
+ * @return uint32_t value. std::numeric_limits<uint32_t>::max() if something does not exist
+ */
+uint32_t get_enum_name_value(
+  dotdot_cluster_id_t cluster_id,
+  dotdot_attribute_id_t attribute_id,
+  const std::string &name);
 
 namespace unify {
 /**

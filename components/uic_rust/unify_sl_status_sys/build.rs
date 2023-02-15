@@ -26,7 +26,15 @@ fn main() {
     let mut status_codes: Vec<(String, String)> = Vec::new();
     let re = Regex::new(r"^#define\s+(SL_STATUS_\w+).+(0[xX][0-9a-fA-F]+)").unwrap();
 
-    let file = File::open("../../../include/sl_status.h").unwrap();
+    let mut path = PathBuf::new();
+    if let Ok(v) = env::var("COMMON_LOCATION") {
+        path.push(v);
+    } else {
+        path.push("../../../");
+    }
+    path.push("include");
+    path.push("sl_status.h");
+    let file = File::open(path).unwrap();
     let reader = BufReader::new(file);
     for line in reader.lines() {
         for cap in re.captures_iter(&line.unwrap()) {
@@ -59,8 +67,8 @@ fn write_file(status_codes: Vec<(String, String)>) -> std::io::Result<()> {
         file.write_all(line.as_bytes())?;
     }
 
-    let line = format!("\t\t _ => \"UNKNOWN_STATUS_CODE\",\n");
-    file.write_all(line.as_bytes())?;
+    let line = b"\t\t _ => \"UNKNOWN_STATUS_CODE\",\n";
+    file.write_all(line)?;
     file.write_all(b"\t}\t}")?;
 
     file.write_all(generate_map_functions(status_codes).as_bytes())?;

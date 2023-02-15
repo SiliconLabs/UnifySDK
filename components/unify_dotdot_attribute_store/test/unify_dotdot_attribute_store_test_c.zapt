@@ -1,0 +1,323 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+// clang-format off
+{{zap_header}}
+// clang-format on
+#include "unify_dotdot_attribute_store.h"
+#include "unify_dotdot_attribute_store_helpers.h"
+#include "unify_dotdot_defined_attribute_types.h"
+
+// Test includes
+#include "unity.h"
+#include "unify_dotdot_attribute_store_test.h"
+
+// Unify components
+#include "datastore.h"
+#include "attribute_store_fixt.h"
+#include "attribute_store_helper.h"
+#include "sl_log.h"
+
+// Mock includes
+#include "dotdot_mqtt_mock.h"
+#include "uic_mqtt_mock.h"
+#include "contiki_test_helper.h"
+
+// Generic includes
+#include <string.h>
+
+// clang-format off
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+static {{asForceReadAttributesCallback this}}_t test_{{asForceReadAttributesCallback this}} = NULL;
+static {{asWriteAttributesCallback this}}_t test_{{asWriteAttributesCallback this}} = NULL;
+
+{{asForceReadAttributesCallback this}}_t get_{{asForceReadAttributesCallback this}}(){
+  return test_{{asForceReadAttributesCallback this}};
+}
+{{asWriteAttributesCallback this}}_t get_{{asWriteAttributesCallback this}}(){
+  return test_{{asWriteAttributesCallback this}};
+}
+
+{{#zcl_commands}}
+static {{asCommandCallback this}}_t test_{{asCommandCallback this}} = NULL;
+{{asCommandCallback this}}_t get_{{asCommandCallback this}}(){
+  return test_{{asCommandCallback this}};
+}
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+// clang-format on
+
+#define TEST_UNID "test-unid-123"
+dotdot_unid_t expected_unid               = TEST_UNID;
+dotdot_endpoint_id_t expected_endpoint_id = 23;
+attribute_store_node_t expected_node_id   = ATTRIBUTE_STORE_INVALID_NODE;
+unify_dotdot_attribute_store_configuration_t test_configuration = {};
+
+// These declarations are for unity to include tests from other source file into
+// test runner. target_add_unittest() function does not run tests from other
+// source file than main source fils in SOURCES list
+void test_barrier_control_go_to_percent_command_support();
+void test_barrier_control_stop_command_support();
+void test_color_control_move_to_hue_command();
+void test_color_control_move_hue_command();
+void test_color_control_step_hue_command();
+void test_color_control_move_to_hue_and_saturation_command();
+void test_color_control_move_to_saturation_command();
+void test_color_control_move_saturation_command();
+void test_color_control_step_saturation_command();
+void test_color_control_move_to_color_temperature_command();
+void test_color_control_move_color_temperature_command();
+void test_color_control_step_color_temperature_command();
+void test_color_control_stop_move_step_command();
+void test_on_off_on_command_support();
+void test_on_off_toggle_command_support();
+void test_on_off_on_command_update_desired();
+void test_on_off_on_command_clear_reported();
+void test_on_off_off_command_update_desired();
+void test_on_off_off_command_clear_reported();
+void test_on_off_toggle_command_update_desired();
+void test_on_off_toggle_command_clear_reported();
+void test_on_off_off_command_support();
+void test_no_get_endpoint_function_registered();
+void test_publish_no_get_unid_function_registered();
+void test_publish_reported_value();
+void test_publish_desired_value();
+void test_unretain_published_values();
+void test_level_move_to_level_command();
+void test_level_move_command();
+void test_level_step_command();
+void test_level_stop_command();
+void test_level_move_to_level_with_on_off_command();
+void test_level_move_with_on_off_command();
+void test_level_step_with_on_off_command();
+void test_level_stop_with_on_off_command();
+void test_level_current_level_validation();
+void test_level_remaining_time_countdown();
+void test_door_lock_lock_unlock_command();
+void test_identify_no_get_endpoint_function_registered();
+void test_identify_identify_query_command_support();
+void test_identify_identify_query_command_clear_reported();
+void test_identify_identify_command_support();
+void test_identify_identify_command_update_desired();
+void test_identify_identify_command_clear_reported();
+void test_identify_time_countdown();
+void test_identify_publish_no_get_unid_function_registered();
+void test_identify_publish_reported_value();
+void test_identify_publish_desired_value();
+void test_identify_unretain_published_values();
+void test_thermostat_no_get_endpoint_function_registered();
+void test_thermostat_setpoint_raise_or_lower_command_support();
+void test_thermostat_setpoint_raise_or_lower_command_update_desired();
+void test_thermostat_setpoint_raise_or_lower_command_clear_reported();
+void test_thermostat_publish_reported_value();
+void test_thermostat_publish_desired_value();
+void test_thermostat_unretain_published_values();
+
+/// Setup the test suite (called once before all test_xxx functions are called)
+void suiteSetUp()
+{
+  datastore_init(":memory:");
+  attribute_store_init();
+  contiki_test_helper_init();
+}
+
+/// Teardown the test suite (called once after all test_xxx functions are called)
+int suiteTearDown(int num_failures)
+{
+  attribute_store_teardown();
+  datastore_teardown();
+  return num_failures;
+}
+
+// Stub functions
+// clang-format off
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+void set_{{asForceReadAttributesCallback this}}_stub(
+  const {{asForceReadAttributesCallback this}}_t callback, int cmock_num_calls)
+{
+  test_{{asForceReadAttributesCallback this}} = callback;
+}
+void set_{{asWriteAttributesCallback this}}_stub(
+  const {{asWriteAttributesCallback this}}_t callback, int cmock_num_calls)
+{
+  test_{{asWriteAttributesCallback this}} = callback;
+}
+{{#zcl_commands}}
+void {{asCommandCallback this}}_set_stub(
+  const {{asCommandCallback this}}_t callback, int cmock_num_calls)
+{
+  test_{{asCommandCallback this}} = callback;
+}
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+// clang-format on
+
+// Test functions
+attribute_store_node_t test_get_endpoint_node(const dotdot_unid_t unid,
+                                              dotdot_endpoint_id_t endpoint_id)
+{
+  TEST_ASSERT_EQUAL_STRING(expected_unid, unid);
+  TEST_ASSERT_EQUAL(expected_endpoint_id, endpoint_id);
+  return attribute_store_get_root();
+}
+
+// Test functions
+sl_status_t test_get_unid_endpoint(attribute_store_node_t node,
+                                   char *unid,
+                                   dotdot_endpoint_id_t *endpoint_id)
+{
+  if (expected_node_id != ATTRIBUTE_STORE_INVALID_NODE) {
+    TEST_ASSERT_EQUAL(expected_node_id, node);
+  }
+  snprintf(unid, sizeof(TEST_UNID), "%s", expected_unid);
+  *endpoint_id = expected_endpoint_id;
+  return SL_STATUS_OK;
+}
+
+/// Called before each and every test
+void setUp()
+{
+  // clang-format off
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+  test_{{asForceReadAttributesCallback this}} = NULL;
+  {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_force_read_attributes_callback_Stub(
+    &set_{{asForceReadAttributesCallback this}}_stub);
+  test_{{asWriteAttributesCallback this}} = NULL;
+  {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_write_attributes_callback_Stub(
+    &set_{{asWriteAttributesCallback this}}_stub);
+{{#zcl_commands}}
+  test_{{asCommandCallback this}} = NULL;
+  {{asCommandCallback this}}_set_Stub(
+    &{{asCommandCallback this}}_set_stub);
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+  // clang-format on
+
+  // Call init
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, unify_dotdot_attribute_store_init());
+
+  // Unset the configuration
+  memset(&test_configuration, 0, sizeof(test_configuration));
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  // Reset the Network:
+  expected_node_id = ATTRIBUTE_STORE_INVALID_NODE;
+  attribute_store_delete_node(attribute_store_get_root());
+}
+
+/// Called after each and every test
+void tearDown()
+{
+  // Reset configuration before deleting the attribute store.
+  unify_dotdot_attribute_store_set_configuration(NULL);
+  attribute_store_delete_node(attribute_store_get_root());
+}
+
+void test_double_init()
+{
+  test_configuration.get_unid_endpoint_function = &test_get_unid_endpoint;
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  // Attribute registration must not happen more than once. (safety mechanism)
+  // Init many times should not break anything
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, unify_dotdot_attribute_store_init());
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, unify_dotdot_attribute_store_init());
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, unify_dotdot_attribute_store_init());
+}
+
+void test_automatic_deduction_of_supported_commands()
+{
+  test_configuration.get_unid_endpoint_function = &test_get_unid_endpoint;
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  test_configuration.automatic_deduction_of_supported_commands = false;
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  // Create all possible ZCL attributes under the root node:
+  // clang-format off
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  {{#zcl_attributes}}
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, {{asAttributeCreateFunction parent.label label}}(expected_unid,expected_endpoint_id) );
+  {{/zcl_attributes}}
+  {{/if}}
+  {{/zcl_clusters}}
+
+  // clang-format on
+  // ColorControl checks the value in the bitmask:
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    dotdot_set_color_control_color_capabilities(expected_unid,
+                                                expected_endpoint_id,
+                                                REPORTED_ATTRIBUTE,
+                                                0xFFFF));
+  // clang-format off
+
+  // Invoke all commands with support check, they should return SL_STATUS_FAIL
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  {{#zcl_commands}}
+  if (NULL != test_{{asCommandCallback this}}) {
+    // Dummy command parameters
+    {{#zcl_command_arguments}}
+    {{#unless isArray}}
+      {{asUnderlyingType type}} {{asSnakeCaseLower label}}_value;
+      memset(&{{asSnakeCaseLower label}}_value, 0x00, sizeof({{asSnakeCaseLower label}}_value));
+    {{/unless}}
+  {{/zcl_command_arguments}}
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_{{asCommandCallback this}}(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      {{#zcl_command_arguments}}{{#first}},{{/first}}
+      {{#if isArray}}
+        0, NULL{{listComma this}}
+      {{else}}
+        {{asSnakeCaseLower label}}_value{{listComma this}}
+      {{/if}}{{/zcl_command_arguments}}
+      ));
+  }
+  {{/zcl_commands}}
+  {{/if}}
+  {{/zcl_clusters}}
+
+  // Invoke all commands with support check, they should return SL_STATUS_OK
+  // because all ZCL attributes are supported
+  test_configuration.automatic_deduction_of_supported_commands = true;
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  {{#zcl_commands}}
+  if (NULL != test_{{asCommandCallback this}}) {
+    // Dummy command parameters
+    {{#zcl_command_arguments}}
+    {{#unless isArray}}
+      {{asUnderlyingType type}} {{asSnakeCaseLower label}}_value;
+      memset(&{{asSnakeCaseLower label}}_value, 0x00, sizeof({{asSnakeCaseLower label}}_value));
+    {{/unless}}
+  {{/zcl_command_arguments}}
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_{{asCommandCallback this}}(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      {{#zcl_command_arguments}}{{#first}},{{/first}}
+      {{#if isArray}}
+        0, NULL{{listComma this}}
+      {{else}}
+        {{asSnakeCaseLower label}}_value{{listComma this}}
+      {{/if}}{{/zcl_command_arguments}}
+      ));
+  }
+  {{/zcl_commands}}
+  {{/if}}
+  {{/zcl_clusters}}
+
+}

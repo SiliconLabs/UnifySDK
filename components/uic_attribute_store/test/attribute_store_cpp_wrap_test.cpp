@@ -15,7 +15,7 @@
 
 #include "attribute_store_fixt.h"
 #include "datastore_fixt.h"
-#include "attribute_store_cpp_wrap_test_help.hpp"
+#include "workaround.hpp"
 
 extern "C" {
 using namespace attribute_store;

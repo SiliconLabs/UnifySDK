@@ -26,6 +26,8 @@
 
 #define EMBER_INSTALL_CODE_MAX_SIZE (16 + EMBER_INSTALL_CODE_CRC_SIZE)
 
+extern struct zigbeeHostState z3gwState;
+
 /** @brief ZigbeeHost handler for Zigbee Key Establishment
  *
  * A callback to the application to notify it of the status of the request for
@@ -274,14 +276,6 @@ void emAfPluginGatewayInterfaceTrustCenterLeaveHandler(const EmberEUI64 eui64)
     appDebugPrint(LOG_FMTSTR_UNREGISTERED_CALLBACK, "Network device leave");
     return;
   }
-
-  // Prevent duplicate Device Leave events from being passed up
-  static EmberEUI64 cachedEui64 = EMBER_NULL_EUI64;
-  if (!memcmp(cachedEui64, eui64, sizeof(EmberEUI64))) {
-    appDebugPrint("Ignoring duplicate device leave event\n");
-    return;
-  }
-  memcpy(cachedEui64, eui64, sizeof(EmberEUI64));
 
   z3gwState.callbacks->onNetworkDeviceLeaveResponse(eui64);
 }

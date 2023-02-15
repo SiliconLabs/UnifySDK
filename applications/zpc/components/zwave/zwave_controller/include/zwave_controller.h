@@ -86,14 +86,12 @@ void zwave_controller_get_dsk(zwave_dsk_t *dsk);
  */
 void zwave_controller_reset();
 
-
 /**
  * @brief Tells if we are currently reseting the ZPC.
  *
  * @returns true if we are in the middle of a reset operation, false otherwise.
  */
 bool zwave_controller_is_reset_ongoing();
-
 
 #ifdef __cplusplus
 }

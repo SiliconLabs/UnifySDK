@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['system_22888',['System',['../group__sys.html',1,'']]],
-  ['signal_20handler_20for_20unify_20main_22889',['Signal handler for Unify Main',['../group__uic__main__signal.html',1,'']]],
-  ['status_20codes_22890',['Status Codes',['../group__unify__sl__status__codes.html',1,'']]]
+  ['real_2dtime_20task_20scheduling_36694',['Real-time task scheduling',['../group__rt.html',1,'']]],
+  ['ring_20buffer_20library_36695',['Ring buffer library',['../group__ringbuf.html',1,'']]]
 ];

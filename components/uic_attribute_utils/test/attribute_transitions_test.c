@@ -159,3 +159,54 @@ void test_attribute_transitions_node_deleted_during_transition()
 
   TEST_ASSERT_FALSE(is_attribute_transition_ongoing(value_node));
 }
+
+
+
+
+void test_attribute_transitions_fixed_transition()
+{
+  // Start with a transition on undefined values:
+  value_node    = attribute_store_add_node(0x02, attribute_store_get_root());
+  int32_t value = 100;
+  attribute_store_set_reported(value_node, &value, sizeof(value));
+
+  //Check that we can go down and hit the target
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_transition(value_node,REPORTED_ATTRIBUTE,70,-10,100));  
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(90.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(80.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(70.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(70.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+
+  //Check that we can go down and hit the target
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_transition(value_node,REPORTED_ATTRIBUTE,100,10,100));  
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(80.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(90.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(100.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(100.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+
+  //Check if we are clamping to the target if the step in not an multiple of the diffrence
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_transition(value_node,REPORTED_ATTRIBUTE,90,-8.0,100));  
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(92.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(90.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+
+  //Ensure that we always end up on the target
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_transition(value_node,REPORTED_ATTRIBUTE,50, 8.0,100));  
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(50.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+
+}
+

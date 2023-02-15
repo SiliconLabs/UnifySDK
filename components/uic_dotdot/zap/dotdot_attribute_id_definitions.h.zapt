@@ -1,0 +1,115 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+// clang-format off
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_attribute_id_definitions DotDot Attribute ID definitions
+ * @ingroup unify_components
+ * @brief Header with Attribute ID definitions
+ *
+ * Attribute identifier defines (e.g. OnOff::OnOff ID is 0x0000)
+ *
+ * @{
+ */
+
+// clang-format on
+#ifndef DOTDOT_ATTRIBUTE_ID_DEFINITIONS_H
+#define DOTDOT_ATTRIBUTE_ID_DEFINITIONS_H
+
+#include <stdbool.h>
+#include "uic_typedefs.h"
+
+/**
+ * @brief ZCL data types.
+ */
+typedef enum {
+  JSON_TYPE_NUMBER,
+  JSON_TYPE_BOOL,
+  JSON_TYPE_STRING,
+  JSON_TYPE_OBJECT,
+  JSON_TYPE_ARRAY,
+  JSON_TYPE_UNKNOWN
+} dotdot_attribute_json_type_t;
+
+// Special value to use when the Cluster ID cannot be found.
+#define DOTDOT_INVALID_ATTRIBUTE_ID ((dotdot_attribute_id_t) {0xFFFF})
+// clang-format off
+
+{{#zcl_clusters}}
+// Definitions for cluster: {{label}}
+{{#zcl_attributes}}
+#define DOTDOT_{{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ATTRIBUTE_ID ((dotdot_attribute_id_t){{asHex code}})
+{{/zcl_attributes}}
+{{/zcl_clusters}}
+
+// clang-format on
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Get the cluster name based on the cluster ID.
+ *
+ * @param cluster_id        Cluster ID, for example 0x0006 or DOTDOT_ON_OFF_CLUSTER_ID
+ * @param attribute_id      Attribute ID, for example 0x0000 or DOTDOT_ON_OFF_ON_OFF_ATTRIBUTE_ID
+ * @returns const char*      Name of the attribute ("OnOff"). "Unknown" if it does not exist.
+ */
+const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
+                                          dotdot_attribute_id_t attribute_id);
+
+/**
+ * @brief Get the Attribute ID based on the cluster ID and Attribute Name.
+ *
+ * @param cluster_id              Cluster ID, for example 0x0006
+ * @param attribute_name          Attribute Name, for example "CurrentLevel"
+ * @returns dotdot_cluster_id_t  ID of the cluster (e.g. 0x0006),
+ *          DOTDOT_INVALID_ATTRIBUTE_ID if it does not exist.
+ */
+dotdot_attribute_id_t
+  uic_dotdot_get_attribute_id(dotdot_cluster_id_t cluster_id,
+                              const char *attribute_name);
+
+/**
+ * @brief Get the JSON type of an Attribute ID name based on the cluster ID.
+ *
+ * @param cluster_id        Cluster ID, for example 0x0006 or DOTDOT_ON_OFF_CLUSTER_ID
+ * @param attribute_id      Attribute ID, for example 0x0000 or DOTDOT_ON_OFF_ON_OFF_ATTRIBUTE_ID
+ *
+ * @returns const char*      Name of the attribute ("OnOff"). "Unknown" if it does not exist.
+ * @returns dotdot_attribute_json_type_t  JSON type of the attribute
+ *          JSON_TYPE_UNKNOWN if we do not know
+ */
+dotdot_attribute_json_type_t
+  uic_dotdot_get_attribute_id_json_type(dotdot_cluster_id_t cluster_id,
+                                        dotdot_attribute_id_t attribute_id);
+
+/**
+ * @brief Checks if the Attribute ID is an enum, i.e. has name strings for values.
+ *
+ * @param cluster_id        Cluster ID, for example 0x0006 or DOTDOT_ON_OFF_CLUSTER_ID
+ * @param attribute_id      Attribute ID, for example 0x0000 or DOTDOT_ON_OFF_ON_OFF_ATTRIBUTE_ID
+ *
+ * @returns true if the Attribute ID is an enum, false otherwise
+ */
+bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
+                                  dotdot_attribute_id_t attribute_id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  //DOTDOT_ATTRIBUTE_ID_DEFINITIONS_H
+/** @} end dotdot_attribute_id_definitions */

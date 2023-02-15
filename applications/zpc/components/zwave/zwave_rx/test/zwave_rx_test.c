@@ -123,6 +123,7 @@ static void rx_init_successful_test_helper()
                                             &zwave_rx_process,
                                             SL_STATUS_OK);
 
+  zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RX_TEST_RF_REGION_INT);
   // Everything should be functional now.
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_rx_fixt_setup());
 }
@@ -231,6 +232,7 @@ void test_zwave_rx_init_not_gecko_chip()
                                             SL_STATUS_OK);
   uic_main_ext_register_rfd_IgnoreArg_fdr();
 
+  zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RX_TEST_RF_REGION_INT);
   // After this, the setup should return true (success)
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_rx_fixt_setup());
 }
@@ -273,6 +275,66 @@ void test_zwave_rx_init_cannot_set_rf_resgion()
   // After this, the setup should return true (success)
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwave_rx_fixt_setup());
 }
+
+/// Test of rx init for with failure to set tx power / reporting
+void test_zwave_rx_init_failure_lr_max_power()
+{
+  // Intialize Z-Wave RX, we expect it to call zwapi functions.
+  zwapi_init_ExpectAndReturn(ZWAVE_RX_TEST_SERIAL_PORT, 0, 0, SL_STATUS_OK);
+  zwapi_init_IgnoreArg_callbacks();
+  zwapi_init_IgnoreArg_serial_fd();
+  zwapi_log_to_file_enable_ExpectAndReturn("", SL_STATUS_OK);
+
+  // 2. zwapi_get_chip_data returns a controller library type
+  zwapi_get_chip_data_Stub(
+    (CMOCK_zwapi_get_chip_data_CALLBACK)zwapi_get_chip_data_stub);
+  test_chip_data.library_type = ZWAVE_LIBRARY_TYPE_CONTROLLER;
+  test_chip_data.chip_type    = ZW_GECKO_CHIP_700;
+
+  zwapi_get_protocol_version_ExpectAndReturn(NULL, SL_STATUS_NOT_SUPPORTED);
+  zwapi_get_protocol_version_IgnoreArg_protocol_version();
+
+  // 3. zwapi_set_tx_power_level just fails
+  zwapi_set_tx_power_level_ExpectAndReturn(test_zwave_tx_powerlevel,
+                                           SL_STATUS_FAIL);
+
+  // 4. zwapi_set_tx_status_reporting fails
+  zwapi_set_tx_status_reporting_ExpectAndReturn(true, SL_STATUS_FAIL);
+
+  //Indicate that the module is set to another frequency
+  zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RX_TEST_RF_REGION_INT + 1);
+
+  // 5. zwapi_set_rf_region works, else we stop
+  zwapi_set_rf_region_ExpectAndReturn(ZWAVE_RX_TEST_RF_REGION_INT,
+                                      SL_STATUS_OK);
+  zwapi_soft_reset_ExpectAndReturn(SL_STATUS_FAIL);
+  // zwave_rx_wait_for_zwave_api_to_be_ready will keep asking if we have completed
+  // soft reset.
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(true);
+  zwapi_poll_ExpectAndReturn(true);
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(true);
+  zwapi_poll_ExpectAndReturn(true);
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(true);
+  zwapi_poll_ExpectAndReturn(false);
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(false);
+
+  // 6. zwapi_set_node_id_basetype fails
+  zwapi_set_node_id_basetype_ExpectAndReturn(NODEID_16BITS, SL_STATUS_FAIL);
+
+  // 7. finally proceed with the fd registration, using the Z-Wave RX process.
+  uic_main_ext_register_rfd_ExpectAndReturn(0,
+                                            NULL,
+                                            &zwave_rx_process,
+                                            SL_STATUS_OK);
+  uic_main_ext_register_rfd_IgnoreArg_fdr();
+
+  zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RF_REGION_US_LR);
+  zwapi_set_max_lr_tx_power_level_ExpectAndReturn(0, SL_STATUS_FAIL);
+  zwapi_get_max_lr_tx_power_level_ExpectAndReturn(0);
+  // After this, the setup should return true (success)
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_rx_fixt_setup());
+}
+
 
 /// Test of rx init for with failure to set tx power / reporting
 void test_zwave_rx_init_non_critical_failures()
@@ -326,6 +388,9 @@ void test_zwave_rx_init_non_critical_failures()
                                             SL_STATUS_OK);
   uic_main_ext_register_rfd_IgnoreArg_fdr();
 
+  zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RF_REGION_US_LR);
+  zwapi_set_max_lr_tx_power_level_ExpectAndReturn(0, SL_STATUS_OK);
+  zwapi_get_max_lr_tx_power_level_ExpectAndReturn(0);
   // After this, the setup should return true (success)
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_rx_fixt_setup());
 }

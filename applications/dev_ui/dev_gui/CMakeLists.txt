@@ -6,7 +6,9 @@ if(APPLE)
 elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
   set(NPM_TARGET linux-x64)
 elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "armhf")
-  set(NPM_TARGET linux-armv7)
+  set(NPM_TARGET linuxstatic-armv7)
+elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "arm64")
+  set(NPM_TARGET linux-arm64)
 else()
   message(ERROR "Unsuported target")
 endif()
@@ -23,10 +25,9 @@ add_custom_command(
           ${ZAP_CURRENT_OUTPUT_DIR}/src/cluster-types/supported-clusters.js
   COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/. .
   COMMAND cp -r ${ZAP_CURRENT_OUTPUT_DIR}/. .
-  COMMAND ${NPM_EXECUTABLE} version
+  COMMAND ${NPM_EXECUTABLE} version --allow-same-version
           ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV}
-  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps # With yarn 38s with npm
-                                                       # 69s change
+  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps --allow-same-version # With yarn 38s with npm 69s change
   COMMAND ${NPM_EXECUTABLE} run build
   USES_TERMINAL)
 
@@ -51,7 +52,7 @@ add_custom_target(
 )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/public/index.html.in
-               ${CMAKE_CURRENT_SOURCE_DIR}/public/index.html)
+               ${CMAKE_CURRENT_BINARY_DIR}/public/index.html)
 
 if("${CMAKE_INSTALL_PREFIX}" STREQUAL "/usr")
   # Package as .debian
@@ -105,6 +106,7 @@ add_component_to_uic(
   uic-dev-gui
   "Universal IOT controller - Developer GUI"
   "${CMAKE_PROJECT_NAME}-dev-gui"
+  ""
   ""
   "${CMAKE_BINARY_DIR}/applications/dev_ui/dev_gui/debconf/postinst;\
     ${CMAKE_BINARY_DIR}/applications/dev_ui/dev_gui/debconf/prerm;\

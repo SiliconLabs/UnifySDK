@@ -1,3 +1,9 @@
+if (NOT VERSION_CMAKE_FILE)
+  set(VERSION_CMAKE_FILE ${CMAKE_CURRENT_LIST_DIR})
+else()
+  return()
+endif()
+
 # CMAKE_PROJECT_VERSION AND GIT_VERSION logic.
 # 1. If ${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake is present
 # (For source zip file)
@@ -16,11 +22,9 @@
 # 3. find MAJOR MINOR REV PATCH from $GIT_VERSION
 #  set CMAKE_PROJECT_VERSION to MAJOR.MINOR.REV
 #
-
 # Generate GIT_VERSION from "git describe"
-
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake")
-  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake)
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/../release-version.cmake")
+  include(${CMAKE_CURRENT_LIST_DIR}/../release-version.cmake)
   MESSAGE(STATUS "GIT_VERSION from cmake/release-version.cmake: "
           ${GIT_VERSION})
 endif()
@@ -33,7 +37,16 @@ if ("${GIT_VERSION}" STREQUAL "")
         COMMAND ${GIT_EXECUTABLE} describe
         OUTPUT_VARIABLE GIT_VERSION
         ERROR_QUIET
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     )
+    if ("${GIT_VERSION}" STREQUAL "")
+      execute_process (
+          COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD
+          OUTPUT_VARIABLE GIT_VERSION_SHA1
+          ERROR_QUIET
+      )
+      string(CONCAT GIT_VERSION "ver_0.0.0-" ${GIT_VERSION_SHA1})
+    endif()
 
   endif()
   if ("${GIT_VERSION}" STREQUAL "")
@@ -41,7 +54,7 @@ if ("${GIT_VERSION}" STREQUAL "")
     # For e.g. if someone ACCIDENTALY does make package_source instead of make
     # uic_source and tries to build that source zip file
     set(GIT_VERSION "ver_0.0.0-0-xxxx")
-    message(WARNING "${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake "
+    message(WARNING "${DIR_OF_VERSION_CMAKE}/cmake/release-version.cmake "
                     " and "
                     "git describe not available")
   else()
@@ -71,9 +84,9 @@ if ("${OUT}" STREQUAL "")
   endif()
 endif()
 
-# Sanitize the patch component of the symantic versioning. According debian
+# Sanitize the patch component of the symantic versioning. According Debian
 # spec only  + . ~ (plus, full stop, tilde) are allowed inside the patch
-# version. We should update our code to align with the debian spec
+# version. We should update our code to align with the Debian spec
 # (simplicity) untill then, we sanitize the patch version.
 string(REGEX MATCH "(^ver_[0-9]+.[0-9]+.[0-9]+-?)(.*)" GIT_VERSION "${GIT_VERSION}")
 if (${CMAKE_MATCH_2})
@@ -89,10 +102,11 @@ string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.([0-9]+).*" "\\1" VERSION_REV "${GIT_VE
 string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.[0-9]+-?(.*)" "\\1" VERSION_PATCH "${GIT_VERSION}")
 
 # Generating version info file for CI and release packaging
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version-info.json.in
-               ${CMAKE_BINARY_DIR}/cmake/version-info.json)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/../version-info.json.in
+               ${CMAKE_CURRENT_BINARY_DIR}/cmake/version-info.json)
 
 message(STATUS "MAJOR: " ${VERSION_MAJOR})
 message(STATUS "MINOR: " ${VERSION_MINOR})
 message(STATUS "REVISION: " ${VERSION_REV})
 message(STATUS "PATCH: " ${VERSION_PATCH})
+

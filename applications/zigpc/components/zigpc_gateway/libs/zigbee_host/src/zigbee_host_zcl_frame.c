@@ -26,8 +26,8 @@
 EmberApsFrame globalApsFrame;
 bool zclCmdIsBuilt = false;
 */
-uint16_t appZclBufferLen;
-uint8_t appZclBuffer[ZCL_BUFFER_SIZE];
+uint16_t zclMessageBufferLen;
+uint8_t zclMessageBuffer[ZCL_BUFFER_SIZE];
 /**
  * @brief Setup source and destination endpoint for APS Frame
  *
@@ -62,9 +62,9 @@ EmberStatus zigbeeHostFillZclFrame(const uint8_t *buffer,
     status = EMBER_INDEX_OUT_OF_RANGE;
     appDebugPrint("Error: Invalid ZCL buffer size: 0x%X\n", status);
   } else {
-    memcpy(appZclBuffer, buffer, bufferSize);
-    appZclBuffer[bufferSequenceIndex] = emberAfNextSequence();
-    appZclBufferLen                   = bufferSize;
+    memcpy(zclMessageBuffer, buffer, bufferSize);
+    zclMessageBuffer[bufferSequenceIndex] = emberAfNextSequence();
+    zclMessageBufferLen                   = bufferSize;
   }
 
   return status;
@@ -94,8 +94,8 @@ EmberStatus zigbeeHostSendZclFrameUnicast(const EmberEUI64 eui64,
 
     status = emberAfSendUnicastToEui64(eui64Dup,
                                        &localApsFrame,
-                                       appZclBufferLen,
-                                       appZclBuffer);
+                                       zclMessageBufferLen,
+                                       zclMessageBuffer);
     if (status == EMBER_INVALID_CALL) {
       status = EMBER_NOT_FOUND;
       appDebugPrint(LOG_FMTSTR_EUI64_NODEID_RES_FAIL,
@@ -130,8 +130,8 @@ EmberStatus zigbeeHostSendZclFrameMulticast(EmberMulticastId multicastId,
 
     status = emberAfSendMulticast(multicastId,
                                   &localApsFrame,
-                                  appZclBufferLen,
-                                  appZclBuffer);
+                                  zclMessageBufferLen,
+                                  zclMessageBuffer);
     if (status != EMBER_SUCCESS) {
       appDebugPrint("Error: Failed to send ZCL buffer as multicast to groupID: "
                     "0x%X: 0x%X\n",

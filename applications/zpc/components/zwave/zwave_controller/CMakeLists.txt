@@ -11,11 +11,13 @@ target_link_libraries(
   zwave_controller
   PUBLIC zwave_rx zwave_tx zwave_network_management zwave_tx_scheme_selector
          zwave_definitions zwave_tx_groups zpc_config
-  PRIVATE uic_log zwave_s0 zwave_s2 zpc_utils)
+  PRIVATE unify zwave_s0 zwave_s2 zpc_utils)
 install(TARGETS zwave_controller LIBRARY DESTINATION lib)
 
-target_add_mock(zwave_controller)
+if(BUILD_TESTING)
+  target_add_mock(zwave_controller)
 
-target_include_directories(zwave_controller_mock PUBLIC src)
+  target_include_directories(zwave_controller_mock PUBLIC src)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

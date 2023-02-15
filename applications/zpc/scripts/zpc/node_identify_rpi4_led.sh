@@ -20,9 +20,11 @@
 #                 configuring the LED. I.e. the LED will blink "forever" or
 #                 until re-configured.
 #############################################################################
+set -e
 
 # Make sure SCRIPTNAME points to where the script is installed
-SCRIPTNAME=@CMAKE_INSTALL_PREFIX@/zpc/node_identify_rpi4_led.sh
+SCRIPTNAME="${BASH_SOURCE:-${0}}"
+
 # The LED to control. On Raspberry Pi 4, led0 (the one next to power led) is available.
 LEDPATH=/sys/class/leds/led0
 PIDFILE=/var/lib/uic/node-identify.pid

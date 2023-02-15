@@ -1,5 +1,7 @@
 {
   "scopeName": "source.uam",
+  "foldingStartMarker" : "\\{\\s*$",
+  "foldingStopMarker" : "^\\s*\\}",
   "patterns": [
     {
       "include": "#expression"
@@ -12,10 +14,16 @@
           "include": "#keyword"
         },
         {
-          "include": "#paren-expression"
+          "include": "#parent-expression"
         },
         {
           "include": "#comment"
+        },
+        {
+          "include": "#multi-line-comment"
+        },
+        {
+          "include": "#scope-settings"
         },
         {
           "include": "#rep_attribute"
@@ -25,8 +33,13 @@
         },
         {
           "include": "#existence_of_attribute"
+        },
+        {
+          "include": "#function"
+        },
+        {
+          "include": "#numeric_constants"
         }
-
       ]
     },
     "rep_attribute": {
@@ -39,27 +52,44 @@
     },
     "existence_of_attribute": {
       "match": "e'[\\.\\[\\]\\w]+",
-      "name": "support.type"
+      "name": "variable.language"
     },
     "comment": {
       "match": "\\/\\/.*",
-      "name": "keyword.comment"
+      "name": "comment"
+    },
+    "numeric_constants": {
+      "match": "\\b(0x[0-9a-fA-F]+|[0-9]+|[0-9]+\\.?[0-9]?f)\\b",
+      "name": "constant.numeric"
+    },
+    "function": {
+      "match": "fn_[\\w]+[^\\w]",
+      "name": "entity.name.function"
     },
     "keyword": {
-      "match": "if|def|scope|undefined|or",
+      "match": "\\b(if|def|scope|or|undefined)\\b",
       "name": "keyword.control"
     },
-    "paren-expression": {
+    "scope-settings": {
+      "match": "\\b(chain_reaction|clear_desired|create_attributes|common_parent_type)\\b",
+      "name": "markup.heading"
+    },
+    "multi-line-comment": {
+      "begin": "\\/\\*",
+      "end": "\\*\\/",
+      "name":"comment"
+    },
+    "parent-expression": {
       "begin": "\\(",
       "end": "\\)",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.paren.open"
+          "name": "punctuation.parent.open"
         }
       },
       "endCaptures": {
         "0": {
-          "name": "punctuation.paren.close"
+          "name": "punctuation.parent.close"
         }
       },
       "name": "expression.group",

@@ -24,17 +24,18 @@
 // Unify Components
 #include "attribute_store_helper.h"
 #include "process.h"
+#include "ctimer.h"
 #include "sl_log.h"
 
-constexpr char LOG_TAG[]             = "attribute_resolver_rule";
-constexpr int DEFAULT_GROUPING_DEPTH = 1;
+constexpr char LOG_TAG[]                   = "attribute_resolver_rule";
+constexpr int DEFAULT_GROUPING_DEPTH       = 1;
+constexpr size_t MAX_FRAME_LEN             = 255;
+constexpr clock_time_t MAX_RESOLUTION_TIME = 60 * CLOCK_CONF_SECOND;
 
 struct attribute_rule {
   attribute_resolver_function_t set_func;
   attribute_resolver_function_t get_func;
 };
-
-constexpr size_t MAX_FRAME_LEN = 255;
 
 static enum {
   RESOLVER_IDLE,
@@ -57,6 +58,8 @@ static attribute_rule_complete_t compl_func;
 static attribute_store_node_t node_pending_resolution
   = ATTRIBUTE_STORE_INVALID_NODE;
 static bool node_needs_more_frames = false;
+// Timer to limit how long we try to execute a rule
+static struct ctimer rule_execution_timer;
 
 // We have a list of "callback" functions,
 // that we notify when we get new "set" rules
@@ -111,6 +114,20 @@ static const char *
         = "Unknown rule type: " + std::to_string(rule_type);
       return message.c_str();
   }
+}
+
+void on_rule_execution_timeout(void *user)
+{
+  sl_log_error(LOG_TAG,
+               "Rule execution timed out for Attribute ID %d. "
+               "Considering rule execution failed.",
+               node_pending_resolution);
+  on_resolver_send_data_complete(RESOLVER_SEND_STATUS_FAIL,
+                                 MAX_RESOLUTION_TIME,
+                                 node_pending_resolution,
+                                 resolver_state == RESOLVER_EXECUTING_SET_RULE
+                                   ? RESOLVER_SET_RULE
+                                   : RESOLVER_GET_RULE);
 }
 
 /**
@@ -282,6 +299,7 @@ void on_resolver_send_data_complete(resolver_send_status_t status,
     node_pending_resolution = ATTRIBUTE_STORE_INVALID_NODE;
     resolver_state          = RESOLVER_IDLE;
     compl_func(_node, transmission_time);
+    ctimer_stop(&rule_execution_timer);
   }
 }
 
@@ -334,8 +352,12 @@ sl_status_t attribute_resolver_rule_execute(attribute_store_node_t node,
                                                  frame_size,
                                                  set_rule)
             == SL_STATUS_OK) {
-          resolver_state          = set_rule ? RESOLVER_EXECUTING_SET_RULE
-                                             : RESOLVER_EXECUTING_GET_RULE;
+          resolver_state = set_rule ? RESOLVER_EXECUTING_SET_RULE
+                                    : RESOLVER_EXECUTING_GET_RULE;
+          ctimer_set(&rule_execution_timer,
+                     MAX_RESOLUTION_TIME,
+                     &on_rule_execution_timeout,
+                     nullptr);
           node_pending_resolution = node;
           if (frame_status == SL_STATUS_IN_PROGRESS) {
             node_needs_more_frames = true;
@@ -422,6 +444,7 @@ void attribute_resolver_rule_abort(attribute_store_node_t node)
     node_pending_resolution = ATTRIBUTE_STORE_INVALID_NODE;
     resolver_state          = RESOLVER_IDLE;
     compl_func(node, 0);
+    ctimer_stop(&rule_execution_timer);
   }
 }
 

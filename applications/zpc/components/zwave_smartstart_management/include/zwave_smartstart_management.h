@@ -30,6 +30,28 @@
 #ifndef ZWAVE_SMARTSTART_MANAGEMENT_H
 #define ZWAVE_SMARTSTART_MANAGEMENT_H
 
+#include "zwave_controller_types.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/**
+ * @brief Verify if the device DSK is in smart list by comparing
+ * DSK sent in the param with full DSK in smart start list 
+ *
+ * @param dsk DSK which will be searched in the smartstart list.
+ * @param obfuscated_bytes no of bytes obfuscated in the dsk. These many bytes
+ *                          are skipped in comparing the DSKs
+ * @returns true if dsk is in SmartStart. And fill the indicated number of 
+ *              obfuscated bytes in the dsk from the smart list and return true.
+ *          false otherwise.
+ */
+
+bool find_dsk_obfuscated_bytes_from_smart_start_list(zwave_dsk_t dsk,
+                                                     uint8_t obfuscated_bytes);
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //ZWAVE_SMARTSTART_MANAGEMENT_H
-/** @} end zwave_smartstart_management */
+        /** @} end zwave_smartstart_management */

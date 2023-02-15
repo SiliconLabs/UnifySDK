@@ -1,5 +1,6 @@
 import React from 'react';
 import * as CgIcons from 'react-icons/cg';
+import * as TbIcons from 'react-icons/tb';
 import * as MdIcons from 'react-icons/md';
 import * as IoIcons from 'react-icons/io';
 import * as AiIcons from 'react-icons/ai';
@@ -31,6 +32,22 @@ export const NavbarItems: NavbarItem[] = [
     icon: <CgIcons.CgSmartphoneShake />,
     cName: 'nav-text',
     subMenu: SideMenu.NetworkManagement
+  },
+  {
+    name: 'Commissionable Devices',
+    title: 'Commissionable Devices',
+    path: '/commissionabledevices',
+    icon: <TbIcons.TbQrcode />,
+    cName: 'nav-text',
+    subMenu: SideMenu.NetworkManagement
+  },
+  {
+    name: 'Application Monitoring',
+    title: 'Application Monitoring',
+    path: '/app-monitoring',
+    icon: <TbIcons.TbHeartRateMonitor />,
+    cName: 'nav-text',
+    subMenu: SideMenu.Debugging
   },
   {
     name: 'RF Telemetry',
@@ -65,14 +82,6 @@ export const NavbarItems: NavbarItem[] = [
     subMenu: SideMenu.NodesConfiguration
   },
   {
-    name: 'Scenes',
-    title: 'Scenes',
-    path: '/scenes',
-    icon: <MdIcons.MdOutlineDeveloperBoard />,
-    cName: 'nav-text',
-    subMenu: SideMenu.NodesConfiguration
-  },
-  {
     name: 'Configuration Parameters',
     title: 'Configuration Parameters',
     path: '/configurationparameters',
@@ -103,6 +112,14 @@ export const NavbarItems: NavbarItem[] = [
     icon: <CgIcons.CgSoftwareUpload />,
     cName: 'nav-text',
     subMenu: SideMenu.NodeManagement
+  },
+  {
+    name: 'Measurements',
+    title: 'Measurements',
+    path: '/measurements',
+    icon: <MdIcons.MdAutoGraph />,
+    cName: 'nav-text',
+    subMenu: SideMenu.Sensors
   },
   ...Object.keys(ClusterTypes).map((item) => (ClusterViewOverrides as any)[item]?.NavbarItem || {
     name: item,

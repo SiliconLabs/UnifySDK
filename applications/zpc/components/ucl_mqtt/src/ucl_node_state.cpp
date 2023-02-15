@@ -29,8 +29,8 @@
 #include "zwave_utils.h"
 #include "dotdot_mqtt.h"
 
-// Interfaces (only using typedefs from here)
-#include "zwave_controller_keyset.h"
+// Interfaces
+#include "zwave_keyset_definitions.h"
 #include "ucl_definitions.h"
 
 //Generic include
@@ -41,6 +41,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <string>
+#include <iomanip>
 
 #include <boost/algorithm/string.hpp>
 
@@ -49,13 +50,6 @@
 
 using namespace attribute_store;
 constexpr char LOG_TAG[] = "ucl_node_state_topic";
-
-/**
- * @brief Name the of @ref contiki process for the Ucl Network Management.
- *
- * This is used to register the name of the Ucl Network Management Process.
- */
-PROCESS_NAME(ucl_network_management_process);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Defines and types
@@ -114,7 +108,7 @@ static node_state_topic_security_t
 {
   attribute_store_node_t granted_keys_node
     = attribute_store_get_first_child_by_type(node_id_node,
-                                             ATTRIBUTE_GRANTED_SECURITY_KEYS);
+                                              ATTRIBUTE_GRANTED_SECURITY_KEYS);
 
   zwave_keyset_t granted_keys = 0;
   attribute_store_read_value(granted_keys_node,
@@ -197,6 +191,22 @@ static uint32_t
   }
 }
 
+/**
+ * @brief Retrieves the network status of a node based on its UNID
+ *
+ * @param unid                      UNID of the node
+ * @return node_state_topic_state_t value for hte node
+ */
+static node_state_topic_state_t
+  get_node_network_status(const dotdot_unid_t unid)
+{
+  attribute_store_node_t endpoint_id_node
+    = attribute_store_network_helper_get_endpoint_node(unid, 0);
+  return get_node_network_status(
+    attribute_store_get_first_parent_with_type(endpoint_id_node,
+                                               ATTRIBUTE_NODE_ID));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // MQTT callback functions
 //////////////////////////////////////////////////////////////////////////////
@@ -210,7 +220,14 @@ static sl_status_t ucl_node_state_interview_command(
   }
 
   if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == callback_type) {
-    return SL_STATUS_OK;
+    // Interview always supported unless the node is offline/unavailable
+    node_state_topic_state_t network_status = get_node_network_status(unid);
+    sl_status_t support                     = SL_STATUS_OK;
+    if ((network_status == NODE_STATE_TOPIC_STATE_OFFLINE)
+        || (network_status == NODE_STATE_TOPIC_STATE_UNAVAILABLE)) {
+      support = SL_STATUS_FAIL;
+    }
+    return support;
   }
 
   return ucl_mqtt_initiate_node_interview(unid);
@@ -226,7 +243,13 @@ static sl_status_t ucl_node_state_remove_offline_command(
   }
 
   if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == callback_type) {
-    return SL_STATUS_OK;
+    // RemoveOffline supported unless the node is unavailable
+    node_state_topic_state_t network_status = get_node_network_status(unid);
+    sl_status_t support                     = SL_STATUS_OK;
+    if (network_status == NODE_STATE_TOPIC_STATE_UNAVAILABLE) {
+      support = SL_STATUS_FAIL;
+    }
+    return support;
   }
 
   zwave_node_id_t node_id = 0x00;
@@ -247,7 +270,14 @@ static sl_status_t ucl_node_state_discover_neighbors_command(
   }
 
   if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == callback_type) {
-    return SL_STATUS_OK;
+    // DiscoverNeighbors always supported unless the node is offline/unavailale
+    node_state_topic_state_t network_status = get_node_network_status(unid);
+    sl_status_t support                     = SL_STATUS_OK;
+    if ((network_status == NODE_STATE_TOPIC_STATE_OFFLINE)
+        || (network_status == NODE_STATE_TOPIC_STATE_UNAVAILABLE)) {
+      support = SL_STATUS_FAIL;
+    }
+    return support;
   }
 
   zwave_node_id_t node_id = 0x00;
@@ -326,7 +356,7 @@ static void publish_endpoint_list(attribute_store_node_t node_id_node)
   std::vector<zwave_endpoint_id_t> endpoint_list;
   attribute attr_node(node_id_node);
   for (attribute endpoint_node: attr_node.children(ATTRIBUTE_ENDPOINT_ID)) {
-    if (endpoint_node.reported_exists()) {
+    if (endpoint_node.is_valid() && endpoint_node.reported_exists()) {
       try {
         zwave_endpoint_id_t ep = endpoint_node.reported<zwave_endpoint_id_t>();
         endpoint_list.push_back(ep);
@@ -352,6 +382,28 @@ static void unretain_node_publications(attribute_store_node_t node)
   std::string pattern = "ucl/by-unid/";
   pattern.append(unid);
   uic_mqtt_unretain(pattern.data());
+}
+
+/**
+ * @brief Helper function unretaining everything that has been published for a Endpoint
+ *
+ * @param node  Attribute Store node for the Endpoint ID
+ */
+static void unretain_endpoint_publications(attribute_store_node_t node)
+{
+  unid_t unid;
+  zwave_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != attribute_store_network_helper_get_unid_endpoint_from_node(
+        node,
+        unid,
+        &endpoint_id)) {
+    return;
+  }
+  std::ostringstream pattern;
+  pattern << "ucl/by-unid/" << unid << "/ep"
+          << static_cast<unsigned int>(endpoint_id);
+  uic_mqtt_unretain(pattern.str().c_str());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -401,6 +453,69 @@ static void on_pan_node_update(attribute_store_node_t node_id_node,
   }
 }
 
+/**
+ * @brief callback function for if Endpoints ID are deleted
+ */
+static void on_endpoint_id_node_update(attribute_store_node_t endpoint_id_node,
+                                       attribute_store_change_t change)
+{
+  if (change == ATTRIBUTE_DELETED) {
+    unretain_endpoint_publications(endpoint_id_node);
+    publish_endpoint_list(
+      attribute_store_get_first_parent_with_type(endpoint_id_node,
+                                                 ATTRIBUTE_NODE_ID));
+  }
+}
+
+/**
+ * @brief callback function for network status
+ *
+ * Listens to the Network Status and decides if we should publish
+ * (updated) SupportedCommands and Node state topics.
+ */
+static void on_pan_node_network_status_attribute_update(
+  attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+
+  // Check on the network status:
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  attribute_store_get_reported(updated_node,
+                               &network_status,
+                               sizeof(network_status));
+
+  attribute_store::attribute node_id_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_NODE_ID);
+  unid_t unid;
+  if (SL_STATUS_OK
+      != attribute_store_network_helper_get_unid_from_node(node_id_node,
+                                                           unid)) {
+    return;
+  }
+  for (attribute_store::attribute endpoint_node:
+       node_id_node.children(ATTRIBUTE_ENDPOINT_ID)) {
+    // Publish the SupportedCommands if the node has just become functional
+    zwave_endpoint_id_t endpoint_id = 0;
+    attribute_store_get_reported(endpoint_node,
+                                 &endpoint_id,
+                                 sizeof(endpoint_id));
+    if ((network_status == NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL)
+        || (network_status == NODE_STATE_TOPIC_INTERVIEWING)
+        || (network_status == NODE_STATE_TOPIC_STATE_OFFLINE)) {
+      // Clear the SupportedCommands
+      uic_mqtt_dotdot_publish_empty_supported_commands(unid, endpoint_id);
+    } else if (network_status == NODE_STATE_TOPIC_STATE_INCLUDED) {
+      uic_mqtt_dotdot_publish_supported_commands(unid, endpoint_id);
+    }
+  }
+
+  uic_mqtt_dotdot_state_publish_supported_commands(unid, 0);
+  on_pan_node_state_attribute_update(updated_node, change);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //  Init and teardown functions.
 //////////////////////////////////////////////////////////////////////////////
@@ -409,6 +524,10 @@ sl_status_t ucl_node_state_init()
   attribute_store_register_callback_by_type_and_state(on_pan_node_update,
                                                       ATTRIBUTE_NODE_ID,
                                                       REPORTED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    on_endpoint_id_node_update,
+    ATTRIBUTE_ENDPOINT_ID,
+    REPORTED_ATTRIBUTE);
 
   attribute_store_register_callback_by_type_and_state(
     on_pan_node_state_attribute_update,
@@ -416,7 +535,7 @@ sl_status_t ucl_node_state_init()
     REPORTED_ATTRIBUTE);
 
   attribute_store_register_callback_by_type_and_state(
-    on_pan_node_state_attribute_update,
+    &on_pan_node_network_status_attribute_update,
     ATTRIBUTE_NETWORK_STATUS,
     REPORTED_ATTRIBUTE);
 
@@ -426,13 +545,13 @@ sl_status_t ucl_node_state_init()
     REPORTED_ATTRIBUTE);
 
   uic_mqtt_dotdot_state_interview_callback_set(
-    ucl_node_state_interview_command);
+    &ucl_node_state_interview_command);
 
   uic_mqtt_dotdot_state_remove_offline_callback_set(
-    ucl_node_state_remove_offline_command);
+    &ucl_node_state_remove_offline_command);
 
   uic_mqtt_dotdot_state_discover_neighbors_callback_set(
-    ucl_node_state_discover_neighbors_command);
+    &ucl_node_state_discover_neighbors_command);
 
   return SL_STATUS_OK;
 }
@@ -450,8 +569,8 @@ void ucl_node_state_teardown()
     publish_node_state(node_id_node, false);
   }
 
-  //Remove all retained topics except ucl/by-unid/<xxxxx>/State
-  uic_mqtt_unretain_by_regex("^(?!ucl\\/by-unid\\/.*\\/State$).*");
+  //Remove all retained topics except ucl/by-unid/<xxxxx>/State and ucl/by-mqtt-client
+  uic_mqtt_unretain_by_regex(REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -465,7 +584,7 @@ node_state_topic_state_t
 
   attribute_store_node_t network_status_node
     = attribute_store_get_first_child_by_type(node_id_node,
-                                             ATTRIBUTE_NETWORK_STATUS);
+                                              ATTRIBUTE_NETWORK_STATUS);
   attribute_store_get_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
@@ -476,7 +595,6 @@ node_state_topic_state_t
 ///////////////////////////////////////////////////////////////////////////////
 // Contiki process
 //////////////////////////////////////////////////////////////////////////////
-
 PROCESS(ucl_node_state_process, "ucl_node_state_process");
 
 PROCESS_THREAD(ucl_node_state_process, ev, data)

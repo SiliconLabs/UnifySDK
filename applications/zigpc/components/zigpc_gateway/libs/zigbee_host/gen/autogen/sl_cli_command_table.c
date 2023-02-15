@@ -817,7 +817,7 @@ static const sl_cli_command_info_t cli_cmd_network_rejoin = \
   SL_CLI_COMMAND(networkRejoinCommand,
                  "ReJoins a network.",
                   "Boolean network key availability" SL_CLI_UNIT_SEPARATOR "Channel mask" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_INT32, SL_CLI_ARG_END, });
+                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT32, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_rejoin_hyphen_diff_hyphen_device_hyphen_type = \
   SL_CLI_COMMAND(networkRejoinDiffDeviceTypeCommand,
@@ -894,8 +894,8 @@ static const sl_cli_command_info_t cli_cmd_network_timeout_hyphen_option_hyphen_
 static const sl_cli_command_info_t cli_cmd_network_multi_hyphen_phy_hyphen_start = \
   SL_CLI_COMMAND(networkMultiPhyStartCommand,
                  "Used to start multi-PHY interface other than native and form the network. The stack uses same PanId as native radio network.",
-                  "page" SL_CLI_UNIT_SEPARATOR "channel" SL_CLI_UNIT_SEPARATOR "power" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_INT8, SL_CLI_ARG_END, });
+                  "page" SL_CLI_UNIT_SEPARATOR "channel" SL_CLI_UNIT_SEPARATOR "power" SL_CLI_UNIT_SEPARATOR "optionsMask (Bit 0 = Routers allowed, Bit 1 = Broadcast allowed)" SL_CLI_UNIT_SEPARATOR,
+                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_INT8, SL_CLI_ARG_UINT8OPT, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_multi_hyphen_phy_hyphen_stop = \
   SL_CLI_COMMAND(networkMultiPhyStopCommand,

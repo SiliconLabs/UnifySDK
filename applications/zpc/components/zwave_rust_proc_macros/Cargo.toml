@@ -11,7 +11,7 @@ once_cell="1.9.*"
 convert_case="0.5.*"
 quote="1.0.15"
 syn={version="1.0.*", features=["extra-traits", "parsing"]}
-proc-macro2="*"
+proc-macro2="1.0.49"
 unify_proc_macro = { path = "../../../../components/uic_rust/unify_proc_macro" }
 unify_sl_status_sys = { path = "../../../../components/uic_rust/unify_sl_status_sys" }
 

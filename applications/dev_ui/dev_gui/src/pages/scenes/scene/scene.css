@@ -1,0 +1,9 @@
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon,
+.css-bpeome-MuiSvgIcon-root-MuiSelect-icon {
+    margin-right: 20px;
+}
+
+.mobile .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon,
+.mobile .css-bpeome-MuiSvgIcon-root-MuiSelect-icon {
+    margin-right: 40px;
+}

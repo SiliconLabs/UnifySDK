@@ -25,8 +25,6 @@ Host SDK for greater accessibility. Here is an overview of the components delive
 You will find complete documentation for quickly evaluating the Unify Host SDK in the [Unify Host SDK documentation](https://siliconlabs.github.io/UnifySDK).
 Here you will also learn how to build and run the various components that make up the Unify Host SDK.
 
-## License
-
 **Copyright 2021 Silicon Laboratories Inc. www.silabs.com**
 
 The licensor of this software is Silicon Laboratories Inc. Your use of this software is governed by the terms of Silicon Labs Master Software License Agreement (MSLA) available at www.silabs.com/about-us/legal/master-software-license-agreement. This software is distributed to you in Source Code format and is governed by the sections of the MSLA applicable to Source Code.

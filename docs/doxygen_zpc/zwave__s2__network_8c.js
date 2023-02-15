@@ -1,7 +1,6 @@
 var zwave__s2__network_8c =
 [
     [ "LOG_TAG", "zwave__s2__network_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
-    [ "STR_CASE", "zwave__s2__network_8c.html#aa9c745028f5403752ba3dcb66ee80fae", null ],
     [ "event_handler", "zwave__s2__network_8c.html#a825285685f41a3ccbab132180aaec83d", null ],
     [ "s2_inclusion_event_name", "zwave__s2__network_8c.html#a1319880e240357d22001bd9ae7d125e7", null ],
     [ "zwave_s2_abort_join", "group__zwave__s2__network.html#ga074221d8ef753fa390a9313612d2fde8", null ],

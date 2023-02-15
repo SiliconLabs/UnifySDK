@@ -4735,6 +4735,27 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_set_parameter_co
   const uic_mqtt_dotdot_configuration_parameters_command_set_parameter_fields_t *fields
   
 );
+/**
+ * @brief Publishes an incoming/generated DiscoverParameterRange command for
+ * the ConfigurationParameters cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/ConfigurationParameters/GeneratedCommands/DiscoverParameterRange
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_configuration_parameters_publish_generated_discover_parameter_range_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
+  
+);
 
 /**
  * @brief Publishes an incoming/generated WriteAttributes command for

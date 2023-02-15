@@ -1,4 +1,4 @@
-find_package(GeckoSDK 4.1.1 REQUIRED)
+find_package(GeckoSDK 4.2.0 REQUIRED)
 
 add_subdirectory(components)
 add_subdirectory(applications)
@@ -10,6 +10,7 @@ target_link_libraries(
   zigpc_attribute_management
   zigpc_command_mapper
   zigpc_config
+  zigpc_application_monitoring
   zigpc_common
   zigpc_controller
   zigpc_diagnostics
@@ -25,17 +26,15 @@ target_link_libraries(
   zigpc_zcl_command_parser
   zigpc_ota_zigbee
   zigpc_ncp_updater
-  uic_attribute_store
-  uic_datastore
-  uic_dotdot_mqtt
-  uic_main)
+  zigpc_binding
+  unify)
 
 target_compile_definitions(
   zigpc PRIVATE CMAKE_PROJECT_VERSION="${CMAKE_PROJECT_VERSION}")
 
 install(
-    TARGETS zigpc 
-    RUNTIME DESTINATION "bin" 
+    TARGETS zigpc
+    RUNTIME DESTINATION "bin"
     PERMISSIONS
      OWNER_READ
      OWNER_WRITE
@@ -47,15 +46,29 @@ install(
      WORLD_EXECUTE
     COMPONENT uic-zigpc)
 
+set(DEFAULT_ZIGPC_RUNTIME_PATH /var/lib/zigpc)
+if(NOT CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(ZIGPC_RUNTIME_PATH ${CMAKE_INSTALL_PREFIX}${DEFAULT_ZIGPC_RUNTIME_PATH})
+else()
+  set(ZIGPC_RUNTIME_PATH ${DEFAULT_ZIGPC_RUNTIME_PATH})
+endif()
+
 install(
   DIRECTORY
-  DESTINATION /var/lib/zigpc
+  DESTINATION ${ZIGPC_RUNTIME_PATH}
   COMPONENT uic-zigpc)
 
 if(NOT APPLE)
+  set(DEFAULT_ZIGPC_SERVICE_PATH /lib/systemd/system)
+  if(NOT CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(ZIGPC_SERVICE_PATH ${CMAKE_INSTALL_PREFIX}${DEFAULT_ZIGPC_SERVICE_PATH})
+  else()
+    set(ZIGPC_SERVICE_PATH ${DEFAULT_ZIGPC_SERVICE_PATH})
+  endif()
+
   install(
     FILES scripts/systemd/uic-zigpc.service
-    DESTINATION /lib/systemd/system/
+    DESTINATION ${ZIGPC_SERVICE_PATH}
     COMPONENT uic-zigpc)
 endif()
 
@@ -76,7 +89,8 @@ add_component_to_uic(
   uic-zigpc # Package Name
   "Universal IOT Controller - Zigbee Protocol Controller"
   "${CMAKE_PROJECT_NAME}-zigpc" # Package Debian filename
-  "libuic" # Package Depends on
+  "libunify" # Package Depends on
+  ""
   "${CMAKE_BINARY_DIR}/applications/zigpc/debconf/config;\
     ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/templates;\
     ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/conffiles;\

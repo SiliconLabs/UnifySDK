@@ -1,16 +1,3 @@
-# Autogeneration using ZAP
-run_zap(zap/gen-templates.json)
-
-add_library(dotdot_attributes
-            ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_attributes.cpp)
-
-target_include_directories(
-  dotdot_attributes
-  PUBLIC include ${ZAP_CURRENT_OUTPUT_DIR}/include
-  PRIVATE src)
-
-target_link_libraries(dotdot_attributes uic_dotdot zpc_attribute_store)
-
 # Binding cluster mapper helper
 add_library(dotdot_mapper_binding_cluster_helper
             src/binding_cluster_mapper_helper.cpp)
@@ -20,21 +7,13 @@ target_include_directories(
   PRIVATE src)
 target_link_libraries(
   dotdot_mapper_binding_cluster_helper
-  PUBLIC uic_definitions zwave_definitions
-  PRIVATE zpc_attribute_store uic_dotdot)
+  PUBLIC unify zwave_definitions
+  PRIVATE zpc_attribute_store)
 
 # DotDot Cluster Attribute Mappers
 add_library(
-  dotdot_mapper
-  src/basic_cluster_mapper.cpp
-  src/binding_cluster_mapper.c
-  src/color_control_cluster_mapper.cpp
-  src/door_lock_cluster_mapper.cpp
-  src/dotdot_mapper_fixt.c
-  src/identify_cluster_mapper.cpp
-  src/level_cluster_mapper.cpp
-  src/on_off_cluster_mapper.cpp
-  src/thermostat_cluster_mapper.cpp)
+  dotdot_mapper src/basic_cluster_mapper.cpp src/binding_cluster_mapper.c
+                src/dotdot_mapper_fixt.c src/on_off_cluster_basic_mapper.cpp)
 
 target_include_directories(
   dotdot_mapper
@@ -43,8 +22,13 @@ target_include_directories(
 
 target_link_libraries(
   dotdot_mapper
-  PUBLIC dotdot_mapper_binding_cluster_helper uic_dotdot_mqtt dotdot_attributes
-         dotdot_mqtt_topics_handler zpc_attribute_store
-  PRIVATE zwave_handlers zwave_controller ucl_definitions)
+  PUBLIC dotdot_mapper_binding_cluster_helper unify zpc_dotdot_mqtt
+         zpc_attribute_store
+  PRIVATE zwave_handlers ucl_definitions)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
+endif()
+
+# Copy rules to binary dir as they are runtime dependencies for the tests.
+file(COPY rules DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

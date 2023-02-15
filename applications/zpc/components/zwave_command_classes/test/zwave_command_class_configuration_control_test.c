@@ -23,12 +23,13 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zpc_attribute_store_network_helper.h"
+#include "zpc_attribute_store_type_registration.h"
 #include "sl_log.h"
+#include "zwave_utils.h"
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
 #include "ZW_classcmd.h"
-#include "zwave_utils.h"
 #include "zwave_controller_types.h"
 #include "zwave_command_class_configuration_types.h"
 
@@ -57,6 +58,7 @@ static zpc_resolver_event_notification_function_t
   = NULL;
 static void (*on_next_supported_parameter_id_not_found)(attribute_store_node_t)
   = NULL;
+static void (*on_configuration_get_failure)(attribute_store_node_t) = NULL;
 
 static zwave_command_handler_t configuration_handler      = {};
 static zwave_controller_connection_info_t connection_info = {};
@@ -131,16 +133,28 @@ static void attribute_resolver_set_resolution_give_up_listener_stub(
   attribute_resolver_callback_t callback,
   int cmock_num_calls)
 {
-  TEST_ASSERT_EQUAL(ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID), node_type);
-  on_next_supported_parameter_id_not_found = callback;
+  if (ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID) == node_type) {
+    on_next_supported_parameter_id_not_found = callback;
+  } else if (ATTRIBUTE(PARAMETER_VALUE) == node_type) {
+    on_configuration_get_failure = callback;
+  } else {
+    TEST_FAIL_MESSAGE("Attribute resolver give up setting on a wrong type");
+  }
 }
 
 /// Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp() {}
+void suiteSetUp()
+{
+  datastore_init(":memory:");
+  attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
+}
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -165,8 +179,6 @@ static void zwave_command_class_configuration_init_verification()
 /// Called before each and every test
 void setUp()
 {
-  datastore_init(":memory:");
-  attribute_store_init();
   zpc_attribute_store_test_helper_create_network();
   zwave_unid_set_home_id(home_id);
   zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
@@ -185,6 +197,7 @@ void setUp()
   configuration_default_reset              = NULL;
   on_configuration_set_default_complete    = NULL;
   on_next_supported_parameter_id_not_found = NULL;
+  on_configuration_get_failure             = NULL;
   memset(&configuration_handler, 0, sizeof(zwave_command_handler_t));
 
   zwave_command_class_configuration_init_verification();
@@ -200,11 +213,7 @@ void setUp()
 }
 
 /// Called after each and every test
-void tearDown()
-{
-  attribute_store_teardown();
-  datastore_teardown();
-}
+void tearDown() {}
 
 void test_zwave_command_class_version_2_node_discover_parameter()
 {
@@ -1188,14 +1197,14 @@ void test_zwave_command_class_version_1_node_receive_report_set_default_values()
   configuration_parameter_size_t parameter_size = 4;
   int32_t parameter_value                       = 1234567;
   uint8_t incoming_frame[]                      = {
-    COMMAND_CLASS_CONFIGURATION_V4,
-    CONFIGURATION_REPORT_V4,
-    (uint8_t)parameter_id,
-    (uint8_t)parameter_size,
-    (parameter_value >> 24) & 0xFF,  // value MSB
-    (parameter_value >> 16) & 0xFF,
-    (parameter_value >> 8) & 0xFF,
-    parameter_value & 0xFF,  // value LSB
+                         COMMAND_CLASS_CONFIGURATION_V4,
+                         CONFIGURATION_REPORT_V4,
+                         (uint8_t)parameter_id,
+                         (uint8_t)parameter_size,
+                         (parameter_value >> 24) & 0xFF,  // value MSB
+                         (parameter_value >> 16) & 0xFF,
+                         (parameter_value >> 8) & 0xFF,
+                         parameter_value & 0xFF,  // value LSB
   };
 
   TEST_ASSERT_NOT_NULL(configuration_handler.control_handler);
@@ -1903,4 +1912,60 @@ void test_give_up_on_finding_next_parameter_id()
   on_next_supported_parameter_id_not_found(next_id_node);
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(next_id_node, REPORTED_ATTRIBUTE));
+}
+
+void test_give_up_on_configuration_get_v2_node()
+{
+  TEST_ASSERT_NOT_NULL(on_configuration_get_failure);
+
+  // Simulate a version 2 node.
+  const zwave_cc_version_t version = 2;
+  attribute_store_set_child_reported(
+    endpoint_id_node,
+    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_CONFIGURATION_V4),
+    &version,
+    sizeof(version));
+
+  configuration_parameter_id_t parameter_id = 20;
+  attribute_store_node_t parameter_id_node
+    = attribute_store_emplace(endpoint_id_node,
+                              ATTRIBUTE(PARAMETER_ID),
+                              &parameter_id,
+                              sizeof(parameter_id));
+
+  attribute_store_node_t test_node
+    = attribute_store_add_node(ATTRIBUTE(PARAMETER_VALUE), parameter_id_node);
+
+  // Invoke the give up listener. It will delete the parent.
+  on_configuration_get_failure(test_node);
+  TEST_ASSERT_FALSE(attribute_store_node_exists(parameter_id_node));
+  TEST_ASSERT_FALSE(attribute_store_node_exists(test_node));
+}
+
+void test_give_up_on_configuration_get_v3_node()
+{
+  TEST_ASSERT_NOT_NULL(on_configuration_get_failure);
+
+  // Simulate a version 3 node.
+  const zwave_cc_version_t version = 3;
+  attribute_store_set_child_reported(
+    endpoint_id_node,
+    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_CONFIGURATION_V4),
+    &version,
+    sizeof(version));
+
+  configuration_parameter_id_t parameter_id = 20;
+  attribute_store_node_t parameter_id_node
+    = attribute_store_emplace(endpoint_id_node,
+                              ATTRIBUTE(PARAMETER_ID),
+                              &parameter_id,
+                              sizeof(parameter_id));
+
+  attribute_store_node_t test_node
+    = attribute_store_add_node(ATTRIBUTE(PARAMETER_VALUE), parameter_id_node);
+
+  // Invoke the give up listener. Nothing gets deleted
+  on_configuration_get_failure(test_node);
+  TEST_ASSERT_TRUE(attribute_store_node_exists(parameter_id_node));
+  TEST_ASSERT_TRUE(attribute_store_node_exists(test_node));
 }

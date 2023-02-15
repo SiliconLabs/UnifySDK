@@ -40,5 +40,6 @@ void test_unid_happy_case()
   TEST_ASSERT_EQUAL_STRING(expected_unid, unid);
 
   TEST_ASSERT_TRUE(is_aoxpc_unid(unid));
-  TEST_ASSERT_FALSE(is_aoxpc_unid("ble-pd-12345"));
+  aoa_id_t no_a_unid = "ble-pd-12345";
+  TEST_ASSERT_FALSE(is_aoxpc_unid(no_a_unid));
 }

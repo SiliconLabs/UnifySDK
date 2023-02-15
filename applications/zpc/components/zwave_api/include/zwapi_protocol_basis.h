@@ -43,7 +43,9 @@ typedef enum {
   SERIAL_API_SETUP_CMD_UNSUPPORTED                 = 0x00,
   SERIAL_API_SETUP_CMD_SUPPORTED                   = 0x01,
   SERIAL_API_SETUP_CMD_TX_STATUS_REPORT            = 0x02,
+  SERIAL_API_SETUP_CMD_MAX_LR_TX_PWR_SET           = 0x03,
   SERIAL_API_SETUP_CMD_TX_POWERLEVEL_SET           = 0x04,
+  SERIAL_API_SETUP_CMD_MAX_LR_TX_PWR_GET           = 0x05,
   SERIAL_API_SETUP_CMD_TX_POWERLEVEL_GET           = 0x08,
   SERIAL_API_SETUP_CMD_MAXIMUM_PAYLOAD_SIZE_GET    = 0x10,
   SERIAL_API_SETUP_CMD_LR_MAXIMUM_PAYLOAD_SIZE_GET = 0x11,
@@ -300,6 +302,42 @@ sl_status_t zwapi_set_tx_power_level(tx_power_level_t zw_txpowerlevel);
  * @zgw_name ZW_TXPowerLevelGet
  */
 tx_power_level_t zwapi_get_tx_power_level(void);
+/**
+ * @brief Set the current MAX Long Range TX power level.
+ *
+ * @param level TX power level settings
+ *    The power level is in deci dBm. E.g. 1dBm output power will be 10 in
+ *    and -2dBm will be -20
+ * @returns SL_STATUS_OK if the power level was set successfully.
+ * @returns SL_STATUS_NOT_SUPPORTED if the Z-Wave module does not
+ * support this function.
+ * @returns SL_STATUS_FAIL if the power level could not be set.
+ *
+ * @note This API is available as of serial API version 7
+ *
+ * @serial_tx{REQ | 0x0B | 0x03 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}
+ *
+ * @serial_rx{RES | 0x0B | 0x03 | CmdRes}
+ *
+ * @zgw_name ZW_MAXLRTXPowerLevelSet 
+ */
+sl_status_t zwapi_set_max_lr_tx_power_level(int16_t level);
+/**
+ * @brief Get the current MAX Long Range TX power level in effect.
+ *
+ * @returns MAX Long Range TX power level settings
+ *    The power level is in deci dBm. E.g. 1dBm output power will be 10 in
+ *    and -2dBm will be -20
+ *
+ * @note This API is available as of serial API version 7
+ *
+ * @serial_tx{REQ | 0x0B | 0x05}
+ *
+ * @serial_rx{RES | 0x0B | 0x05 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}
+ *
+ * @zgw_name ZW_MAXLRTXPowerLevelGet 
+ */
+int16_t zwapi_get_max_lr_tx_power_level(void);
 
 /**
  * @brief Set the current RF region.

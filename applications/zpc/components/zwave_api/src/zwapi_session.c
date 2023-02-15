@@ -89,8 +89,8 @@ static void zwapi_session_enqueue_frame(void)
       }
       // Make an additional poll request to ensure
       // that are no pending frames unread.
-      if (callbacks->poll_request) {
-        callbacks->poll_request();
+      if (zwave_api_get_callbacks()->poll_request) {
+        zwave_api_get_callbacks()->poll_request();
       }
     } else {  // it is a RESPONSE (or other?) frame type, do not enqueue
       free(new_elem->data);

@@ -45,7 +45,6 @@ class complexity
     return 1;
   }
 
-
   inline int operator()(const attribute &a);
   inline int operator()(const signed_ &x)
   {
@@ -69,7 +68,7 @@ class complexity
   inline int operator()(const expression &x)
   {
     int n = boost::apply_visitor(*this, x.first);
-    for (auto terms: x.rest) {
+    for (const auto &terms: x.rest) {
       n += (*this)(terms);
     }
     return n;
@@ -80,6 +79,15 @@ class complexity
     int n = 0;
     n += (*this)(a.lhs);
     n += (*this)(a.rhs);
+    return n;
+  }
+
+  inline int operator()(const function_invokation &f)
+  {
+    int n = 0;
+    for (auto &argument: f.arguments) {
+      n += (*this)(argument);
+    }
     return n;
   }
 

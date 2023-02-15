@@ -20,13 +20,19 @@
 #include "state_logging.h"
 #include "nm_state_machine.h"
 #include "zwave_network_management.h"
-#include "zwave_network_management_state.h"
+#include "zwave_network_management_types.h"
+#include "zwave_rx.h"
+
 #include "zwave_network_management_process.h"
 #include "zwave_network_management_helpers.h"
 #include "zwave_network_management_callbacks.h"
 #include "zwave_network_management_return_route_queue.h"
 
-#include "sl_log.h"
+// Interfaces
+#include "zwave_helper_macros.h"
+#include "ZW_classcmd.h"
+
+// Z-Wave/ZPC Components
 #include "zwapi_protocol_controller.h"
 #include "zwapi_protocol_mem.h"
 #include "zwapi_init.h"
@@ -37,17 +43,22 @@
 #include "zwave_s0_network.h"
 #include "zwave_s2_network.h"
 #include "zwave_s2_keystore.h"
-#include "zpc_endian.h"
+#include "zwave_tx.h"
+#include "zwave_smartstart_management.h"
+
+// Unify components
+#include "sl_log.h"
 #include "process.h"
 #include "sys/etimer.h"
-#include "zwave_tx.h"
-#include "ZW_classcmd.h"
 
 #define LOG_TAG "nm_state_machine"
 
 #define ADD_NODE_HOME_ID     8
 #define ADD_NODE_STOP        5
 #define ADD_NODE_STOP_FAILED 6
+#define OBFUSCATED_DSK_LEN   2
+#define ACCEPT_DSK           1
+#define REJECT_DSK           0
 
 network_mgmt_state_t nms;
 static LEARN_INFO inf_bkup;
@@ -299,6 +310,7 @@ void nm_state_machine_init()
   zwave_s2_set_network_callbacks(&cb);
   zwave_s0_set_network_callbacks(on_secure_inclusion_complete);
   memset(&nms, 0, sizeof(nms));
+  nms.s0_inclusion_enabled = true;
   nms.state = NM_IDLE;
 
   network_management_refresh_network_information();
@@ -423,7 +435,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
             == zwapi_request_neighbor_update(
               node_id,
               &on_request_node_neighbor_update_completed)) {
-          nms.state = NM_NEIGHBOR_DISCOVERY_ONGOING;
+          nms.state                 = NM_NEIGHBOR_DISCOVERY_ONGOING;
           nms.node_id_being_handled = node_id;
         }
       } else if (ev == NM_EV_START_PROXY_INCLUSION) {
@@ -672,7 +684,8 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           zwave_s2_start_add_node(nms.node_id_being_handled);
           zwave_controller_storage_as_set_node_s2_capable(
             nms.node_id_being_handled);
-        } else if (is_command_class_in_nif(
+        }
+        else if (nms.s0_inclusion_enabled && is_command_class_in_nif(
                      nms.node_info.command_class_list,
                      nms.node_info.command_class_list_length,
                      COMMAND_CLASS_SECURITY)) {
@@ -736,7 +749,9 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
             memcpy(nms.reported_dsk,
                    nms.expected_dsk,
                    nms.reported_dsk_blanked);
-            zwave_s2_dsk_accept(1, nms.expected_dsk, 2);
+            zwave_s2_dsk_accept(ACCEPT_DSK,
+                                nms.expected_dsk,
+                                OBFUSCATED_DSK_LEN);
           } else {
             sl_log_debug(
               LOG_TAG,
@@ -752,25 +767,41 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
                             sizeof(zwave_dsk_t));
             // Abort S2 inclusion since we do not have a matching PVL
             // entry after all
-            zwave_s2_dsk_accept(0, 0, 0);
+            zwave_s2_dsk_accept(REJECT_DSK, 0, 0);
           }
         } else {
-          // Non-SmartStart inclusions sends the request upwards
-          zwave_controller_on_dsk_report(nms.reported_dsk_blanked,
-                                         nms.reported_dsk,
-                                         nms.requested_keys);
+          if (find_dsk_obfuscated_bytes_from_smart_start_list(
+                nms.reported_dsk,
+                OBFUSCATED_DSK_LEN)) {
+            sl_log_debug(LOG_TAG,
+                         "SmartStart: Input DSK found in provisioning list\n");
+            sl_log_byte_arr(LOG_TAG,
+                            SL_LOG_DEBUG,
+                            nms.reported_dsk,
+                            sizeof(zwave_dsk_t))
+              zwave_s2_dsk_accept(ACCEPT_DSK,
+                                  nms.reported_dsk,
+                                  OBFUSCATED_DSK_LEN);
+          } else {
+            // Non-SmartStart inclusions sends the request upwards
+            zwave_controller_on_dsk_report(nms.reported_dsk_blanked,
+                                           nms.reported_dsk,
+                                           nms.requested_keys);
+          }
         }
       } else if (ev == NM_EV_ADD_SECURITY_KEYS_SET) {
         zwave_s2_key_grant(nms.accepted_s2_bootstrapping,
                            nms.requested_keys & nms.granted_keys,
                            nms.accepted_csa);
       } else if (ev == NM_EV_ADD_SECURITY_DSK_SET) {
-        zwave_s2_dsk_accept(1, nms.verified_dsk_input, 2);
-        memcpy(nms.reported_dsk, nms.verified_dsk_input, 2);
+        zwave_s2_dsk_accept(ACCEPT_DSK,
+                            nms.verified_dsk_input,
+                            OBFUSCATED_DSK_LEN);
+        memcpy(nms.reported_dsk, nms.verified_dsk_input, OBFUSCATED_DSK_LEN);
       } else if (ev == NM_EV_ABORT
                  && !(nms.flags & NMS_FLAG_SMART_START_INCLUSION)) {
         // If Event is Abort and it isn't SmartStart inclusion, Reject the DSK
-        zwave_s2_dsk_accept(0, nms.verified_dsk_input, 0);
+        zwave_s2_dsk_accept(REJECT_DSK, 0, 0);
       }
       break;
     case NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL:
@@ -895,7 +926,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
       break;
     case NM_WAIT_FOR_SECURE_LEARN:
       if (ev == NM_EV_ADD_SECURITY_KEY_CHALLENGE) {
-        zwave_s2_dsk_accept(1, 0, 0);
+        zwave_s2_dsk_accept(ACCEPT_DSK, 0, 0);
 
         //Now we assume that the sender knows S2
         zwave_controller_storage_as_set_node_s2_capable(

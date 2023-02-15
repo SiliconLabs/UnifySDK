@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How To Make an IoT Service &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -61,6 +66,7 @@
 <li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html#packaging-framework">Packaging Framework</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html#coding-standard">Coding Standard</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="unify_library_overview.html#how-tos">How To’s</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="how_to_write_uam_files.html">How to write UAM files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="how_to_develop_a_protocol_controller.html">How to develop a Protocol Controller</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">How To Make an IoT Service</a></li>
 </ul>
@@ -68,17 +74,17 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html">Api documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#component-templates">Component Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -121,16 +127,16 @@ to choose a client that supports certificate-based TLS.</p></li>
 <li><p>Discover nodes using MQTT topics. Discovering nodes and resources that can be
 displayed or manipulated is fundamental to any IoT Service. This is achieved
 by subscribing to particular MQTT topics. See the Service Discovery chapter
-of the <a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Specification</a>.</p></li>
+of the <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Specification</span></a>.</p></li>
 <li><p>Implement Network Management. If the IoT Service needs to do network
 management, consider which operations are needed and implement them as
 described in the Network Management chapter of the
-<a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Specification</a>.</p></li>
+<a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Specification</span></a>.</p></li>
 <li><p>Interact with nodes using MQTT topics. Interacting with the nodes by either
 reading out status or controlling their state is fundamental to most IoT
 services. Subscribe and publish to the relevant MQTT topics as described in
 the Application Level Control chapter of the
-<a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Specification</a>.</p></li>
+<a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Specification</span></a>.</p></li>
 <li><p>Consider re-using appropriate shared components from the Unify Framework codebase.
 A valuable feature of Unify is the common components shared by many modules
 of the SDK. Code reuse saves both development time and offers IoT Service
@@ -161,7 +167,7 @@ and <code class="docutils literal notranslate"><span class="pre">applications/up
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

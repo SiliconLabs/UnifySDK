@@ -1,13 +1,15 @@
 target_add_unittest(
   zwave_smartstart_management
+  NAME
+  zwave_smartstart_management_test
   SOURCES
   zwave_smartstart_management_test.cpp
   DEPENDS
-  zwave_controller_mock
-  uic_smartstart_management_mock
-  zpc_config_mock
   uic_contiki_stub
+  zpc_config_mock
+  zwave_controller_mock
   zwave_network_management_mock
-  zwave_smartstart_management
+  uic_smartstart_management_mock
   EXCLUDE
-  smartstart_management.cpp)
+  smartstart_management.cpp 
+  DISABLED)

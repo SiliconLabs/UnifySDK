@@ -49,13 +49,11 @@
 
 #ifndef ZWAVE_CONTROLLER_CALLBACKS_H
 #define ZWAVE_CONTROLLER_CALLBACKS_H
-
-#include "zwave_controller_types.h"
-#include "zwave_rx.h"
-#include "zwave_network_management.h"
-#include "zwapi_protocol_transport.h"
-
+#include "zwave_rx_definitions.h"
+#include "zwave_network_management_types.h"
+#include "zwave_keyset_definitions.h"
 #include "zwave_generic_types.h"
+#include "zwapi_protocol_transport.h"
 
 /**
  * @brief The following structure holds all the callbacks this module will emit.

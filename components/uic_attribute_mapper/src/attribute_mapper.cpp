@@ -13,6 +13,7 @@
 #include "attribute_mapper.h"
 #include "attribute_mapper_engine.hpp"
 #include "attribute_mapper_process.h"
+#include "attribute_mapper_built_in_functions.hpp"
 
 #include "config.h"
 #include "uic_version.h"
@@ -24,7 +25,6 @@ sl_status_t attribute_mapper_init()
 
   MapperEngine::get_instance().reset();
   if (MapperEngine::get_instance().load_path(path)) {
-    MapperEngine::get_instance().set_ep_type(0x0004);
     process_start(&unify_attribute_mapper_process, nullptr);
     return SL_STATUS_OK;
   } else {
@@ -37,4 +37,10 @@ void attribute_mapper_config_init()
   config_add_string("mapdir",
                     "directory for attribute mapping files(*.uam)",
                     DEFAULT_RULES_MAPPING_DIR);
+}
+
+void attribute_mapper_set_endpoint_id_attribute_type(
+  attribute_store_type_t endpoint_id_type)
+{
+  MapperEngine::get_instance().set_common_parent_type(endpoint_id_type);
 }

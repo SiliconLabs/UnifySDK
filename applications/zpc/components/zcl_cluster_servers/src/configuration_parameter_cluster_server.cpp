@@ -271,7 +271,7 @@ static sl_status_t configuration_parameter_discover_parameter_command(
     = attribute_store_network_helper_get_endpoint_node(unid, endpoint);
   uint8_t version = get_configuration_command_class_version(endpoint_node);
   if (version == 0 || version > 2) {
-    // Regardless of the call type, do not go furhter if the node is not
+    // Regardless of the call type, do not go further if the node is not
     // supposed to support this command
     return SL_STATUS_FAIL;
   }
@@ -289,39 +289,81 @@ static sl_status_t configuration_parameter_discover_parameter_command(
 
   // Store the "wish" for parameter discover under the PARAMETERS_TO_DISCOVER attribute
   attribute_store_node_t parameter_list_node
-    = attribute_store_get_first_child_by_type(
+    = attribute_store_create_child_if_missing(
       endpoint_node,
       ATTRIBUTE(PARAMETERS_TO_DISCOVER));
-  if (parameter_list_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    parameter_list_node
-      = attribute_store_add_node(ATTRIBUTE(PARAMETERS_TO_DISCOVER),
-                                 endpoint_node);
-  }
 
   // Check if we parameter ID that is requested already exists
   configuration_parameter_id_t parameter_id_to_discover
     = (configuration_parameter_id_t)parameter_id;
-  attribute_store_node_t parameter_id_node
-    = attribute_store_get_node_child_by_value(
-      parameter_list_node,
-      ATTRIBUTE(PARAMETER_ID),
-      REPORTED_ATTRIBUTE,
-      (uint8_t *)&parameter_id_to_discover,
-      sizeof(parameter_id_to_discover),
-      0);
+  attribute_store_emplace(parameter_list_node,
+                          ATTRIBUTE(PARAMETER_ID),
+                          &parameter_id_to_discover,
+                          sizeof(parameter_id_to_discover));
 
-  if (parameter_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
-    // Nothing to do, it's alread there!
+  // At the end make sure to kick start the discovery.
+  attribute_store_node_t next_parameter_id_node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID));
+  on_next_parameter_id_update(next_parameter_id_node, ATTRIBUTE_UPDATED);
+
+  return SL_STATUS_OK;
+}
+
+static sl_status_t configuration_parameter_discover_parameter_range_command(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uint16_t first_parameter_id,
+  uint16_t last_parameter_id)
+{
+  attribute_store_node_t endpoint_node
+    = attribute_store_network_helper_get_endpoint_node(unid, endpoint);
+  uint8_t version = get_configuration_command_class_version(endpoint_node);
+  if (version == 0 || version > 2) {
+    // Regardless of the call type, do not go furhter if the node is not
+    // supposed to support this command
+    return SL_STATUS_FAIL;
+  }
+
+  // Now that we know that the command is supported, return here if it is
+  // a support check type of call.
+  if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == call_type) {
     return SL_STATUS_OK;
   }
 
-  // Add the parameter and check if we want to push it to the Next parameter ID:
-  parameter_id_node
-    = attribute_store_add_node(ATTRIBUTE(PARAMETER_ID), parameter_list_node);
-  attribute_store_set_reported(parameter_id_node,
-                               &parameter_id_to_discover,
-                               sizeof(parameter_id_to_discover));
+  if (first_parameter_id > last_parameter_id) {
+    // Be nice to tinkering IoT services and swap these values, so that first_parameter_id < last_parameter_id
+    sl_log_debug(LOG_TAG,
+                 "Swapping first parameter ID (%d) and last parameter ID (%d)",
+                 first_parameter_id,
+                 last_parameter_id);
+    first_parameter_id = first_parameter_id - last_parameter_id;
+    last_parameter_id  = last_parameter_id + first_parameter_id;
+    first_parameter_id = last_parameter_id - first_parameter_id;
+  }
+  // Do not try to discover parameter ID 0.
+  if (first_parameter_id == 0) {
+    first_parameter_id = 1;
+  }
 
+  // Store the "wish" for parameter discover under the PARAMETERS_TO_DISCOVER attribute
+  attribute_store_node_t parameter_list_node
+    = attribute_store_create_child_if_missing(
+      endpoint_node,
+      ATTRIBUTE(PARAMETERS_TO_DISCOVER));
+
+  for (configuration_parameter_id_t i = first_parameter_id;
+       ((i <= last_parameter_id) && (i != 0));
+       ++i) {
+    attribute_store_emplace(parameter_list_node,
+                            ATTRIBUTE(PARAMETER_ID),
+                            &i,
+                            sizeof(i));
+  }
+
+  // At the end make sure to kick start the discovery.
   attribute_store_node_t next_parameter_id_node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
@@ -341,32 +383,54 @@ static sl_status_t configuration_parameter_set_parameter_command(
   attribute_store_node_t endpoint_node
     = attribute_store_network_helper_get_endpoint_node(unid, endpoint);
 
-  if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == call_type) {
-    if (get_configuration_command_class_version(endpoint_node) != 0) {
-      return SL_STATUS_OK;
-    } else {
-      return SL_STATUS_FAIL;
-    }
+  zwave_cc_version_t supporting_node_version
+    = get_configuration_command_class_version(endpoint_node);
+  if (supporting_node_version == 0) {
+    return SL_STATUS_FAIL;
   }
 
-  attribute_store_node_t configuration_parameter_id
-    = attribute_store_get_node_child_by_value(
-      endpoint_node,
-      ATTRIBUTE(PARAMETER_ID),
-      REPORTED_ATTRIBUTE,
-      reinterpret_cast<uint8_t *>(&parameter_id),
-      sizeof(parameter_id),
-      0);
+  if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == call_type) {
+    return SL_STATUS_OK;
+  }
 
-  attribute_store_node_t configuration_parameter_value_node
-    = attribute_store_get_first_child_by_type(configuration_parameter_id,
-                                              ATTRIBUTE(PARAMETER_VALUE));
-  configuration_parameter_value_t new_value
-    = (configuration_parameter_value_t)value;
+  // For v1-v2 nodes, incoming set commands will trigger to try to discover
+  // the parameters too. Just create it.
+  if (supporting_node_version < 3) {
+    attribute_store_node_t parameter_id_node
+      = attribute_store_emplace(endpoint_node,
+                                ATTRIBUTE(PARAMETER_ID),
+                                &parameter_id,
+                                sizeof(parameter_id));
 
-  attribute_store_set_desired(configuration_parameter_value_node,
-                              &new_value,
-                              sizeof(new_value));
+    attribute_store_add_if_missing(
+      parameter_id_node,
+      configuration_parameter_attributes,
+      COUNT_OF(configuration_parameter_attributes));
+
+    configuration_parameter_value_t new_value = value;
+    attribute_store_set_child_desired(parameter_id_node,
+                                      ATTRIBUTE(PARAMETER_VALUE),
+                                      &new_value,
+                                      sizeof(new_value));
+  } else {
+    // For v3 and above, do not create parameters
+    attribute_store_node_t configuration_parameter_id
+      = attribute_store_get_node_child_by_value(
+        endpoint_node,
+        ATTRIBUTE(PARAMETER_ID),
+        REPORTED_ATTRIBUTE,
+        reinterpret_cast<uint8_t *>(&parameter_id),
+        sizeof(parameter_id),
+        0);
+
+    attribute_store_node_t configuration_parameter_value_node
+      = attribute_store_get_first_child_by_type(configuration_parameter_id,
+                                                ATTRIBUTE(PARAMETER_VALUE));
+    configuration_parameter_value_t new_value = value;
+    attribute_store_set_desired(configuration_parameter_value_node,
+                                &new_value,
+                                sizeof(new_value));
+  }
 
   return SL_STATUS_OK;
 }
@@ -620,11 +684,13 @@ sl_status_t configuration_parameter_cluster_server_init(void)
   sl_log_debug(LOG_TAG, "Configuration Parameter server initialization");
   // Register the callback for handling commands from IoT service
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback_set(
-    configuration_parameter_discover_parameter_command);
+    &configuration_parameter_discover_parameter_command);
   uic_mqtt_dotdot_configuration_parameters_set_parameter_callback_set(
-    configuration_parameter_set_parameter_command);
+    &configuration_parameter_set_parameter_command);
   uic_mqtt_dotdot_configuration_parameters_default_reset_all_parameters_callback_set(
-    configuration_parameter_default_reset_command);
+    &configuration_parameter_default_reset_command);
+  uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set(
+    &configuration_parameter_discover_parameter_range_command);
 
   // Register attribute updates
   attribute_store_register_callback_by_type_and_state(&on_network_status_update,

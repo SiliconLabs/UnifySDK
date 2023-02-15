@@ -188,6 +188,7 @@ var NAVTREE =
         [ "Scenes/SceneValid Attribute", "scenes.html#scenes_attr_scene_valid", null ],
         [ "Scenes/NameSupport Attribute", "scenes.html#scenes_attr_name_support", null ],
         [ "Scenes/LastConfiguredBy Attribute", "scenes.html#scenes_attr_last_configured_by", null ],
+        [ "Scenes/SceneTable Attribute", "scenes.html#scenes_attr_scene_table", null ],
         [ "Scenes/ClusterRevision Attribute", "scenes.html#scenes_attr_cluster_revision", null ]
       ] ],
       [ "Scenes Command Support", "scenes.html#scenes_recv_cmd_support", null ],
@@ -1352,6 +1353,7 @@ var NAVTREE =
         [ "ConfigurationParameters/DiscoverParameter Command", "configuration_parameters.html#configuration_parameters_discover_parameter_cmd", null ],
         [ "ConfigurationParameters/DefaultResetAllParameters Command", "configuration_parameters.html#configuration_parameters_default_reset_all_parameters_cmd", null ],
         [ "ConfigurationParameters/SetParameter Command", "configuration_parameters.html#configuration_parameters_set_parameter_cmd", null ],
+        [ "ConfigurationParameters/DiscoverParameterRange Command", "configuration_parameters.html#configuration_parameters_discover_parameter_range_cmd", null ],
         [ "ConfigurationParameters/WriteAttributes Command", "configuration_parameters.html#configuration_parameters_write_attr_cmd", null ],
         [ "ConfigurationParameters/ForceReadAttributes Command", "configuration_parameters.html#configuration_parameters_force_read_attr_cmd", null ]
       ] ]
@@ -1420,6 +1422,7 @@ var NAVTREE =
       [ "EstimatedPosition Struct", "ucl_structs.html#struct_estimated_position", null ],
       [ "MinMaxPair Struct", "ucl_structs.html#struct_min_max_pair", null ],
       [ "NetworkInterfaceData Struct", "ucl_structs.html#struct_network_interface_data", null ],
+      [ "SExtensionFieldSetList Struct", "ucl_structs.html#struct_s_extension_field_set_list", null ],
       [ "SphericalCoordinates Struct", "ucl_structs.html#struct_spherical_coordinates", null ],
       [ "TransitionType Struct", "ucl_structs.html#struct_transition_type", null ],
       [ "WirelessNetworkInterfaceData Struct", "ucl_structs.html#struct_wireless_network_interface_data", null ]
@@ -1515,9 +1518,6 @@ var NAVTREE =
       [ "SirenConfigurationStrobe Enum", "ucl_enums.html#enum_siren_configuration_strobe", null ],
       [ "SirenConfigurationWarningMode Enum", "ucl_enums.html#enum_siren_configuration_warning_mode", null ],
       [ "SquawkConfigurationSquawkMode Enum", "ucl_enums.html#enum_squawk_configuration_squawk_mode", null ],
-      [ "TLKeyIndex Enum", "ucl_enums.html#enum_tl_key_index", null ],
-      [ "TLStatus Enum", "ucl_enums.html#enum_tl_status", null ],
-      [ "TLZigbeeInformationLogicalType Enum", "ucl_enums.html#enum_tl_zigbee_information_logical_type", null ],
       [ "ThermostatACCapacityFormat Enum", "ucl_enums.html#enum_thermostatac_capacity_format", null ],
       [ "ThermostatACCompressorType Enum", "ucl_enums.html#enum_thermostatac_compressor_type", null ],
       [ "ThermostatACLouverPosition Enum", "ucl_enums.html#enum_thermostatac_louver_position", null ],
@@ -1590,14 +1590,10 @@ var NAVTREE =
       [ "QueryNextImageRequestFieldControl Bitmap", "ucl_bitmaps.html#enum_query_next_image_request_field_control", null ],
       [ "ResetStartupParametersOptions Bitmap", "ucl_bitmaps.html#enum_reset_startup_parameters_options", null ],
       [ "RestartDeviceOptions Bitmap", "ucl_bitmaps.html#enum_restart_device_options", null ],
-      [ "ScanResponseKeyBitmask Bitmap", "ucl_bitmaps.html#enum_scan_response_key_bitmask", null ],
       [ "ScenesNameSupport Bitmap", "ucl_bitmaps.html#enum_scenes_name_support", null ],
       [ "ShadeConfigurationStatus Bitmap", "ucl_bitmaps.html#enum_shade_configuration_status", null ],
       [ "SquawkSquawkConfiguration Bitmap", "ucl_bitmaps.html#enum_squawk_squawk_configuration", null ],
       [ "StartWarningSirenConfiguration Bitmap", "ucl_bitmaps.html#enum_start_warning_siren_configuration", null ],
-      [ "TLTouchlinkInformation Bitmap", "ucl_bitmaps.html#enum_tl_touchlink_information", null ],
-      [ "TLVersion Bitmap", "ucl_bitmaps.html#enum_tl_version", null ],
-      [ "TLZigbeeInformation Bitmap", "ucl_bitmaps.html#enum_tl_zigbee_information", null ],
       [ "ThermostatACErrorCode Bitmap", "ucl_bitmaps.html#enum_thermostatac_error_code", null ],
       [ "ThermostatAlarmMask Bitmap", "ucl_bitmaps.html#enum_thermostat_alarm_mask", null ],
       [ "ThermostatHVACSystemTypeConfiguration Bitmap", "ucl_bitmaps.html#enum_thermostathvac_system_type_configuration", null ],
@@ -1618,10 +1614,10 @@ var NAVTREEINDEX =
 [
 "alarms.html",
 "color_control.html#color_control_step_color_temperature_cmd",
-"electrical_measurement.html#electrical_measurement_attr_dc_current_overload",
-"metering.html#metering_attrs",
-"relativity_humidity.html#relativity_humidity_force_read_attr_cmd",
-"ucl_bitmaps.html#enum_thermostat_remote_sensing"
+"electrical_measurement.html#electrical_measurement_attr_dc_current_multiplier",
+"metering.html#metering_attr_unitof_measure",
+"relativity_humidity.html#relativity_humidity_cmds",
+"ucl_bitmaps.html#enum_thermostat_occupancy"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

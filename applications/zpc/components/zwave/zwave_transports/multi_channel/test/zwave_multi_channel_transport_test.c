@@ -23,6 +23,7 @@
 
 // Mocks
 #include "zwave_controller_transport_mock.h"
+
 #include "zwave_controller_internal_mock.h"
 #include "zwave_tx_mock.h"
 
@@ -419,8 +420,8 @@ void test_encapsulation_multi_channel_aggregated_member_get()
   zwave_controller_connection_info_t connection_info = {};
   zwave_tx_options_t tx_options                      = {};
   const uint8_t frame_data[]              = {COMMAND_CLASS_MULTI_CHANNEL_V4,
-                                MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V4,
-                                0x05};
+                                             MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V4,
+                                             0x05};
   connection_info.remote.endpoint_id      = 5;
   connection_info.local.endpoint_id       = 1;
   zwave_tx_session_id_t parent_session_id = (void *)23;

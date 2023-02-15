@@ -713,6 +713,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_last_configured_by_callba
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   EUI64 last_configured_by
 );
+typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_scene_table_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  size_t scene_table_count,
+  const SSceneTable* scene_table
+);
 // Callback types used by the on_off cluster
 typedef sl_status_t (*uic_mqtt_dotdot_on_off_attribute_on_off_callback_t)(
   dotdot_unid_t unid,
@@ -5680,6 +5688,12 @@ void uic_mqtt_dotdot_scenes_attribute_name_support_callback_set(const uic_mqtt_d
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_scenes_attribute_last_configured_by_callback_set(const uic_mqtt_dotdot_scenes_attribute_last_configured_by_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * Scenes/Attributes/scene_table/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_scenes_attribute_scene_table_callback_set(const uic_mqtt_dotdot_scenes_attribute_scene_table_callback_t callback);
 
 
 /**

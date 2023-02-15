@@ -5,13 +5,23 @@ let state = {
     Groups: [],
     Certificates: {},
     OTA: [],
-    Scenes: {},
     UPTI: { List: [], Trace: {} },
     SystemMetrics: {},
+    AppMonitoringList: {},
+    CommissionableDevices: [],
     updateNodeList: true
 };
-let sendClusterTimeout = null;
-let sendOTATimeout = null;
+let queue = new Map();
+
+async function runQueueHandler() {
+    while (true) {
+        queue.forEach((value, key, map) => {
+            map.delete(key);
+            sendToAll({ type: key, data: value });
+        });
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+}
 
 exports.processSmartStart = (topic, message) => {
     console.log(`Received SmartStart List: '${message}'`);
@@ -25,7 +35,7 @@ exports.processSmartStart = (topic, message) => {
             data: state.SmartStart
         };
     } catch (error) {
-        return getErrorResponse(`Failed Parsing SmartStart List: ${error}`);
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -49,23 +59,21 @@ exports.processCluster = (topic, message) => {
             return;
         let node = getNodeByUnid(unid);
         let endpoint = initEp(node, ep);
-        if (!endpoint.Clusters[clusterType])
-            endpoint.Clusters[clusterType] = {};
-
-        if (node.ClusterTypes.indexOf(clusterType) === -1)
-            node.ClusterTypes.push(clusterType);
         let payload = message.toString() === "" ? null : JSON.parse(message);
         payload = payload && payload.value !== undefined ? payload.value : payload;
-        initProp(endpoint.Clusters[clusterType], path, payload);
-        if (clusterType === "AoXLocator" || clusterType === "AoXPositionEstimation") {
-            setTimeoutProt(sendClusterTimeout, {
-                type: "nodes-list",
-                data: state.Nodes
-            });
-            state.updateNodeList = false;
+        if (clusterType.endsWith("Measurement")) {
+            if (!endpoint.Measurements[clusterType])
+                endpoint.Measurements[clusterType] = {};
+            initProp(endpoint.Measurements[clusterType], path, payload);
+        } else {
+            if (!endpoint.Clusters[clusterType])
+                endpoint.Clusters[clusterType] = {};
+            if (node.ClusterTypes.indexOf(clusterType) === -1)
+                node.ClusterTypes.push(clusterType);
+            initProp(endpoint.Clusters[clusterType], path, payload);
         }
     } catch (error) {
-        return getErrorResponse(`Failed Parsing Cluster ${clusterType}`);
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -94,7 +102,7 @@ exports.processSystemMetrics = (topic, message) => {
             data: state.SystemMetrics
         };
     } catch (error) {
-        return getErrorResponse(`Failed Parsing Cluster SystemMetrics`);
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -124,12 +132,9 @@ exports.processOTAByUnid = (topic, message) => {
                 endpoint.OTA[uiid] = {};
             initProp(endpoint.OTA[uiid], path, payload && payload.value);
         }
-        setTimeoutProt(sendClusterTimeout, {
-            type: "nodes-list",
-            data: state.Nodes
-        });
-    } catch (err) {
-        return getErrorResponse("Cluster OTA info error: " + err);
+        addToQueue("nodes-list", state.Nodes);
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -176,12 +181,9 @@ exports.processOTAInfo = (topic, message) => {
                     state.OTA[index].Unid.push(unid);
             }
         }
-        setTimeoutProt(sendOTATimeout, {
-            type: "ota",
-            data: state.OTA
-        });
+        addToQueue("ota", state.OTA);
     } catch (error) {
-        return getErrorResponse(`Failed Parsing OTA`);
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -204,8 +206,8 @@ exports.processClusterGroup = (topic, message) => {
         if (!ep.Groups)
             ep.Groups = {};
         initProp(ep.Groups, path, payload && payload.value);
-    } catch (err) {
-        return getErrorResponse(`Failed Parsing Cluster Group: ${err}`);
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -236,8 +238,8 @@ exports.processGroup = (topic, message) => {
             type: "groups",
             data: state.Groups
         }
-    } catch (err) {
-        return getErrorResponse(`Failed Parsing Group: ${err}`);
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -275,7 +277,7 @@ exports.processLocator = (topic, message) => {
         let payload = message.toString() === "" ? null : JSON.parse(message);
         endpoint.Clusters[clusterType][attr][tag] = payload;
     } catch (error) {
-        return getErrorResponse(`Failed Parsing ${clusterType}`);
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -298,8 +300,8 @@ exports.processProtocolController = (topic, message) => {
             type: "protocol-controller-state",
             data: data
         };
-    } catch (err) {
-        return getErrorResponse("Failed Parsing State of Controller.");
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -317,8 +319,8 @@ exports.processUPTIList = (topic, message) => {
             type: "upti-list",
             data: state.UPTI.List
         }
-    } catch (err) {
-        return getErrorResponse(`Failed Parsing UPTI List: ${err}`);
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -350,8 +352,8 @@ exports.processUPTITrace = (topic, message) => {
                 Trace: payload
             }
         }
-    } catch (err) {
-        return getErrorResponse(`Failed Parsing Group: ${err}`);
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -385,8 +387,8 @@ exports.processNodeState = (topic, message) => {
                 data: node
             };
         }
-    } catch (err) {
-        return getErrorResponse("Failed parsing State: " + err);
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -413,7 +415,7 @@ exports.processRFTelemetry = (topic, message) => {
                 TxReport: {
                     Statistics: {
                         Count: 0,
-                        SuccessRate: 0,
+                        SuccessRate: null,
                         AverageTime: 0,
                         AverageRepeaters: 0
                     },
@@ -426,7 +428,7 @@ exports.processRFTelemetry = (topic, message) => {
                 node.RFTelemetry.TxReport.Destinations[payload.DestinationUNID] = {
                     Statistics: {
                         Count: 0,
-                        SuccessRate: 0,
+                        SuccessRate: null,
                         AverageTime: 0,
                         AverageRepeaters: 0
                     },
@@ -439,12 +441,61 @@ exports.processRFTelemetry = (topic, message) => {
         } else {
             initProp(node.RFTelemetry, path, payload && payload.value);
         }
-        setTimeoutProt(sendClusterTimeout, {
-            type: "nodes-list",
-            data: state.Nodes
-        });
+        addToQueue("nodes-list", state.Nodes);
     } catch (error) {
-        return getErrorResponse(`Failed Parsing RFTelemetry`);
+        return getErrorResponse(topic, message, error);
+    }
+}
+
+exports.processAppMonitoringList = (topic, message) => {
+    let match = topic.match(/ucl\/by-mqtt-client\/(.*)\/ApplicationMonitoring\/Attributes\/(.*)/);
+    if (match === null || match.length < 3) {
+        console.log(`Unknown topic: '${topic}'; data: '${message}'`);
+        return;
+    }
+
+    let client = match[1];
+    let path = match[2].split('/');
+    try {
+        console.log(`Received ApplicationMonitoring: cliend='${client}', topic='${topic}', mes='${message}'`);
+        if (message.toString() === "")
+            return;
+        if (!state.AppMonitoringList[client])
+            state.AppMonitoringList[client] = {};
+
+        let payload = message.toString() === "" ? null : JSON.parse(message);
+        initProp(state.AppMonitoringList[client], path, payload && payload.value);
+        addToQueue("app-monitoring", state.AppMonitoringList);
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
+    }
+}
+
+exports.processCommissionableDevices = (topic, message) => {
+    let match = topic.match(/ucl\/SmartStart\/CommissionableDevice\/(.*)/);
+    if (message.toString() == "")
+        return;
+    if (match === null || match.length < 2) {
+        console.log(`Unknown topic: '${topic}'; data: '${message}'`);
+        return;
+    }
+    try {
+        console.log(`Received Commissionable Device: topic='${topic}', mes='${message}'`);
+        let identifier = match[1];
+        let payload = JSON.parse(message);
+        let item = state.CommissionableDevices.find(i => i.Id === identifier);
+        if (item) {
+            item.QRCode = payload.QRCode;
+            item.DSK = payload.DSK;
+        } else {
+            state.CommissionableDevices.push({ Id: identifier, QRCode: payload.QRCode, DSK: payload.DSK });
+        }
+        return {
+            type: "commissionable-device",
+            data: state.CommissionableDevices
+        };
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
     }
 }
 
@@ -515,6 +566,7 @@ exports.resetState = () => {
     state.Groups = [];
     state.OTA = [];
     state.UPTI = { List: [], Trace: {} };
+    state.CommissionableDevices = [];
 }
 
 exports.getInitState = (mqttConnectionProps) => {
@@ -530,13 +582,18 @@ exports.getInitState = (mqttConnectionProps) => {
             OTA: state.OTA,
             UPTI: state.UPTI,
             SystemMetrics: state.SystemMetrics,
-            Scenes: state.Scenes
+            AppMonitoringList: state.AppMonitoringList,
+            CommissionableDevices: state.CommissionableDevices
         }
     };
 }
 
 exports.setUpdateNodeList = (value) => {
     state.updateNodeList = value;
+}
+
+function addToQueue(type, data) {
+    queue.set(type, data);
 }
 
 function sendToAll(response) {
@@ -547,11 +604,12 @@ function sendToAll(response) {
     }
 }
 
-function getErrorResponse(message) {
-    console.log(message);
+function getErrorResponse(topic, message = null, error = null) {
+    let data = message === null || error === null ? [topic] : ["Failed Parsing Topic:", `${topic} ${message}`, `Error: ${error}`];
+    console.log(JSON.stringify(error));
     return {
         type: "error",
-        data: message
+        data: data
     }
 }
 
@@ -568,7 +626,7 @@ function removeAttr(unid, ep, cluster, attr, attrName) {
 
 function setRFTelemetryStatistics(statistics, payload) {
     let count = statistics.Count++;
-    let successTx = Math.round(count * statistics.SuccessRate);
+    let successTx = statistics.SuccessRate === null ? 0 : Math.round(count * statistics.SuccessRate);
     statistics.SuccessRate = (payload.TransmissionSuccessful ? ++successTx : successTx) / statistics.Count;
     statistics.AverageTime = ((statistics.AverageTime * count) + payload.TransmissionTimeMs) / statistics.Count;
     statistics.AverageRepeaters = ((statistics.AverageRepeaters * count) + payload.LastRouteRepeaters.length) / statistics.Count;
@@ -578,7 +636,7 @@ function initEp(node, ep) {
     if (!node.ep)
         node.ep = {};
     if (!node.ep[ep])
-        node.ep[ep] = { Clusters: {}, OTA: {} };
+        node.ep[ep] = { Clusters: {}, OTA: {}, Measurements: {} };
     return node.ep[ep];
 }
 
@@ -614,16 +672,9 @@ function getNodeByUnid(unid) {
     return state.Nodes[index];
 }
 
-function setTimeoutProt(sendTimeout, payload) {
-    if (!sendTimeout) {
-        sendTimeout = setTimeout(() => {
-            sendToAll(payload);
-            sendTimeout = null;
-        }, 1000);
-    }
-}
-
 exports.sendToAll = sendToAll;
+exports.addToQueue = addToQueue;
+exports.runQueueHandler = runQueueHandler;
 exports.getErrorResponse = getErrorResponse;
 exports.clients = clients;
 exports.state = state;

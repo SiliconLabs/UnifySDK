@@ -2,10 +2,11 @@ var classast_1_1reducer =
 [
     [ "reducer", "classast_1_1reducer.html#affbbe0cca4a56fcd2b339d7281ddf393", null ],
     [ "operator()", "classast_1_1reducer.html#acff0740f4b87e281fce1a0bbf32ad9d5", null ],
-    [ "operator()", "classast_1_1reducer.html#af5f2223d44e6ca1500253e1852484e8e", null ],
+    [ "operator()", "classast_1_1reducer.html#a3e26e9d193097dd2c079b4451a306096", null ],
     [ "operator()", "classast_1_1reducer.html#a853c7de962bc0fe32447eff338b2d432", null ],
     [ "operator()", "classast_1_1reducer.html#afccfbdb8f12ab93332dd9ade95808469", null ],
     [ "operator()", "classast_1_1reducer.html#a028f2197eb0f563aa50cd185be37d4dc", null ],
+    [ "operator()", "classast_1_1reducer.html#a140f3e321468ee4b993edc847b3f3608", null ],
     [ "operator()", "classast_1_1reducer.html#aa803dcb67f99e8a049969d165b4730ec", null ],
     [ "operator()", "classast_1_1reducer.html#a8fbca11f5f33f0e1ed5b7fc1c451dd19", null ],
     [ "operator()", "classast_1_1reducer.html#a3ff179c95dedee80cdb70de36b942ae4", null ],

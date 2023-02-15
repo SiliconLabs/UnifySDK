@@ -100,8 +100,6 @@ const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
     return "ElectricalMeasurement";
   case DOTDOT_DIAGNOSTICS_CLUSTER_ID:
     return "Diagnostics";
-  case DOTDOT_TOUCHLINK_COMMISSIONING_CLUSTER_ID:
-    return "TouchlinkCommissioning";
   case DOTDOT_PROTOCOL_CONTROLLER_RF_TELEMETRY_CLUSTER_ID:
     return "ProtocolController-RFTelemetry";
   case DOTDOT_STATE_CLUSTER_ID:
@@ -250,9 +248,6 @@ dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
  }
  if (strcmp ("Diagnostics", cluster_name) == 0) {
    return DOTDOT_DIAGNOSTICS_CLUSTER_ID;
- }
- if (strcmp ("TouchlinkCommissioning", cluster_name) == 0) {
-   return DOTDOT_TOUCHLINK_COMMISSIONING_CLUSTER_ID;
  }
  if (strcmp ("ProtocolController-RFTelemetry", cluster_name) == 0) {
    return DOTDOT_PROTOCOL_CONTROLLER_RF_TELEMETRY_CLUSTER_ID;

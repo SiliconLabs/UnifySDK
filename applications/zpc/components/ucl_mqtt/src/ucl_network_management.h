@@ -97,10 +97,20 @@
 
 #ifndef UCL_NETWORK_MANAGEMENT_H
 #define UCL_NETWORK_MANAGEMENT_H
+
 #include "sl_status.h"
 #include "zwave_node_id_definitions.h"
+#include "process.h"
+
 // Timeout before triggering remove failed node process
 #define UCL_NM_REMOVE_FAILED_NODE_TIMEOUT_DEFAULT 1000
+
+/**
+ * @brief Name the of @ref contiki process for the Ucl Network Management.
+ *
+ * This is used to register the name of the Ucl Network Management Process.
+ */
+PROCESS_NAME(ucl_network_management_process);
 
 #ifdef __cplusplus
 extern "C" {

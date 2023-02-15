@@ -382,6 +382,9 @@ sl_status_t EndpointDiscoverResponse::handle(void)
                                             endpoint_id,
                                             ZCL_CLUSTER_SERVER_SIDE,
                                             cluster_id);
+    sl_log_debug(LOG_TAG, 
+                "Added server cluster: 0x%04X", cluster_id);
+
     if (status != SL_STATUS_OK) {
       sl_log_error(LOG_TAG,
                    LOG_FMT_CLUSTER_FAIL,
@@ -400,6 +403,10 @@ sl_status_t EndpointDiscoverResponse::handle(void)
                                             endpoint_id,
                                             ZCL_CLUSTER_CLIENT_SIDE,
                                             cluster_id);
+    
+    sl_log_debug(LOG_TAG, 
+                "Added client cluster: 0x%04X", cluster_id);
+    
     if (status != SL_STATUS_OK) {
       sl_log_error(LOG_TAG,
                    LOG_FMT_CLUSTER_FAIL,

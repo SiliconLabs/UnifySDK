@@ -44,6 +44,7 @@
 namespace zigpc_ucl
 {
 constexpr char LOG_TAG[] = "zigpc_ucl";
+constexpr char LOG_FMT_JSON_ERROR[] = "%s: Unable to parse JSON payload: %s";
 
 /**
  * @brief UCL utility functions available to build and parse MQTT topics and

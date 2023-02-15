@@ -111,7 +111,10 @@ static size_t send_block(int serial_fd, int block_n, std::ifstream &gbl_file)
   uint16_t crc             = calcrc(&data[3], block_size);
   data[3 + block_size]     = (crc >> 8) & 0xff;
   data[3 + block_size + 1] = (crc >> 0) & 0xff;
-  write(serial_fd, data, block_size + 5);
+  if (write(serial_fd, data, block_size + 5) < (block_size + 5)) {
+    sl_log_error(LOG_TAG, "Block number:%d not written fully", block_n);
+  }
+
   size_t data_len = gbl_file.gcount();
   return data_len;
 }
@@ -163,13 +166,12 @@ static sl_status_t
 
     switch (cmd) {
       case C:
-        if (state == XMODEMState::WAIT_FOR_C) {
-          state = XMODEMState::SEND_BLOCK;
-          block = 1;
-        } else {
+        if (state != XMODEMState::WAIT_FOR_C) {
           sl_log_error(LOG_TAG, "Got unexpected C");
           return SL_STATUS_ABORT;
         }
+        state = XMODEMState::SEND_BLOCK;
+        block = 1;
         break;
       case CAN:
         sl_log_error(LOG_TAG, "The bootloader rejected the image");
@@ -197,20 +199,25 @@ static sl_status_t
       break;
     }
 
-    if (state == XMODEMState::SEND_BLOCK) {
-      //Send progress callback after 1kb of transmitted data
-      if (progress_callback && ((block & 7) == 1)) {
-        progress_callback((block - 1) * block_size, file_size);
+    if (state != XMODEMState::SEND_BLOCK) {
+      return SL_STATUS_FAIL;
+    }
+    //Send progress callback after 1kb of transmitted data
+    if (progress_callback && ((block & 7) == 1)) {
+      progress_callback((block - 1) * block_size, file_size);
+    }
+
+    if (send_block(serial_fd, block, gbl) == 0) {
+      sl_log_info(LOG_TAG, "Transmission is done");
+
+      //We are done
+      char eot = EOT;
+      if (write(serial_fd, &eot, 1) < 1) {
+        sl_log_error(LOG_TAG, "EOT was not written");
+        return SL_STATUS_FAIL;
       }
 
-      if (send_block(serial_fd, block, gbl) == 0) {
-        sl_log_info(LOG_TAG, "Transmission is done");
-
-        //We are done
-        char eot = EOT;
-        write(serial_fd, &eot, 1);
-        state = XMODEMState::DONE;
-      }
+      state = XMODEMState::DONE;
     }
   }
 
@@ -224,9 +231,12 @@ sl_status_t uic_gbl_interface_detect_bootloader(int serial_fd)
   read_timeout(serial_fd, 100);
 
   //Trigger an update
-  write(serial_fd, "3\n", 2);
+  if (write(serial_fd, "3\n", 2) < 2) {
+    sl_log_error(LOG_TAG, "Bootloader 3 command was not written fully");
+    return SL_STATUS_NOT_FOUND;
+  }
 
-  // The bootload er menu looks like this
+  // The bootloader menu looks like this
   //
   // Gecko Bootloader v1.5.1
   // 1. upload gbl
@@ -251,8 +261,14 @@ sl_status_t uic_gbl_interface_transfer_image(
 {
   if (SL_STATUS_OK == uic_gbl_interface_detect_bootloader(serial_fd)) {
     //Start the XMODEM transfer
-    write(serial_fd, "1\n", 2);
-    xmodem_transfer(gbl_filename, serial_fd, progress_callback);
+    if (write(serial_fd, "1\n", 2) < 2) {
+      sl_log_error(LOG_TAG,
+                     "Bootloader Upload gbl command was not written fully");
+    }
+    if (xmodem_transfer(gbl_filename, serial_fd, progress_callback)
+        != SL_STATUS_OK) {
+      return SL_STATUS_FAIL;
+    }
 
     std::string line = read_timeout(serial_fd, 100);
     sl_log_debug(LOG_TAG, "Bootloader says:\n %s", line.c_str());
@@ -261,7 +277,10 @@ sl_status_t uic_gbl_interface_transfer_image(
   sl_log_debug(LOG_TAG, "Running application");
 
   //Reboot into application
-  write(serial_fd, "2\n", 2);
+  if (write(serial_fd, "2\n", 2) < 2) {
+    sl_log_error(LOG_TAG, "Bootloader run command was not written fully");
+    return SL_STATUS_FAIL;
+  }
   read_timeout(serial_fd, 100);
 
   return SL_STATUS_OK;

@@ -1,6 +1,5 @@
-# Library
 add_library(
-  uic_attribute_store SHARED
+  uic_attribute_store OBJECT
   src/attribute_store.cpp
   src/attribute_store_callbacks.cpp
   src/attribute_store_helper.c
@@ -12,26 +11,26 @@ add_library(
 
 target_include_directories(
   uic_attribute_store
-  PUBLIC include
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
   PRIVATE src)
 
-target_link_libraries(uic_attribute_store
-  PUBLIC  uic_datastore
-  PRIVATE uic_contiki uic_contiki_platform)
+target_link_libraries(
+  uic_attribute_store PUBLIC uic_datastore uic_log uic_config uic_contiki
+                             uic_contiki_platform)
 
-add_library(uic_attribute_store_test_helpers
-            src/attribute_store_test_helpers.cpp)
+install_headers(uic_attribute_store uic libuic-dev)
 
-target_include_directories(uic_attribute_store_test_helpers PUBLIC ../src)
+if(BUILD_TESTING)
+  add_library(uic_attribute_store_test_helpers
+              src/attribute_store_test_helpers.cpp)
 
-target_link_libraries(uic_attribute_store_test_helpers
-                      PUBLIC uic_datastore uic_attribute_store)
+  target_include_directories(uic_attribute_store_test_helpers PUBLIC ../src)
 
-# For using static library:
-disable_target_check(uic_attribute_store_test_helpers)
+  target_link_libraries(uic_attribute_store_test_helpers
+                        PUBLIC uic_datastore uic_attribute_store)
+  # Mocks
+  target_add_mock(uic_attribute_store)
 
-# Mocks
-target_add_mock(uic_attribute_store)
-
-# Unit test subdirectory
-add_subdirectory(test)
+  # Unit test subdirectory
+  add_subdirectory(test)
+endif()

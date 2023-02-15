@@ -1,16 +1,25 @@
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  # "--allow-multiple-definition" can cause some weird symptons as we leave it
+  # up to the linker which symbol gets merged into the test binary.
+  add_link_options("-Wl,--unresolved-symbols=ignore-in-object-files"
+                   "-Wl,--allow-multiple-definition")
+endif()
 set(MOCK_LIBS
-  uic_attribute_store_mock
-  zpc_attribute_store_mock
-  zwave_command_handler_mock
-  zwave_controller_mock
-  uic_attribute_resolver_mock
-  uic_attribute_resolver_rule_mock
-  zpc_config_mock
-  zwave_tx_scheme_selector_mock
-  zwave_tx_mock
-  zwave_network_management_mock
-  zwave_api_mock
-  zwave_unid_mock)
+    uic_attribute_store_mock
+    zpc_attribute_store_mock
+    zwave_command_handler_mock
+    zwave_controller_mock
+    uic_attribute_resolver_mock
+    uic_attribute_resolver_rule_mock
+    zpc_config_mock
+    zwave_tx_scheme_selector_mock
+    zwave_tx_mock
+    zwave_network_management_mock
+    zwave_api_mock
+    zwave_unid_mock)
+
+add_library(zwave_command_classes_test $<TARGET_OBJECTS:zwave_command_classes>)
+target_link_libraries(zwave_command_classes_test PUBLIC zwave_command_classes)
 
 add_library(zwave_command_class_test_helper zwave_command_class_test_helper.c)
 target_link_libraries(
@@ -22,12 +31,8 @@ target_link_libraries(
   uic_attribute_store_mock
   zpc_attribute_store_mock)
 
-target_add_unittest(
-  zwave_command_classes
-  NAME
-  zwave_command_classes_fixt_test
-  SOURCES
-  zwave_command_classes_fixt_test.c)
+target_add_unittest(zwave_command_classes NAME zwave_command_classes_fixt_test
+                    SOURCES zwave_command_classes_fixt_test.c)
 
 target_add_unittest(
   zwave_command_classes
@@ -73,11 +78,10 @@ target_add_unittest(
   zpc_utils
   zwave_controller
   zwave_command_handler_mock
-  zwave_tx_scheme_selector_mock
-)
+  zwave_tx_scheme_selector_mock)
 
 target_add_unittest(
-  zwave_command_classes
+  zwave_command_classes_test
   NAME
   zwave_command_class_indicator_test
   SOURCES
@@ -144,8 +148,7 @@ target_add_unittest(
   zpc_attribute_store_test_helper
   zwave_controller
   zwave_command_handler_mock
-  zwave_tx_scheme_selector_mock
-)
+  zwave_tx_scheme_selector_mock)
 
 target_add_unittest(
   zwave_command_classes
@@ -174,8 +177,7 @@ target_add_unittest(
   zpc_utils
   zwave_controller_mock
   uic_attribute_resolver_mock
-  zwave_network_management_mock
-)
+  zwave_network_management_mock)
 
 target_add_unittest(
   zwave_command_classes
@@ -186,8 +188,7 @@ target_add_unittest(
   DEPENDS
   zpc_attribute_store_test_helper
   uic_attribute_resolver_mock
-  zpc_attribute_resolver_mock
-)
+  zpc_attribute_resolver_mock)
 
 target_add_unittest(
   zwave_command_classes
@@ -224,8 +225,7 @@ target_add_unittest(
   zwave_controller
   zwave_command_handler_mock
   uic_attribute_resolver_mock
-  zpc_attribute_resolver_mock
-)
+  zpc_attribute_resolver_mock)
 
 # Basic test
 target_add_unittest(
@@ -291,8 +291,7 @@ target_add_unittest(
   zpc_attribute_resolver_mock
   zpc_config_mock
   zwave_tx_scheme_selector_mock
-  zwave_tx_mock
-)
+  zwave_tx_mock)
 
 # Central Scene Command Class test
 target_add_unittest(
@@ -341,6 +340,22 @@ target_add_unittest(
   uic_attribute_resolver_mock
   zpc_attribute_resolver_mock
   zwave_network_management_mock)
+
+  # Barrier Operator Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_barrier_operator_test
+  SOURCES
+  zwave_command_class_barrier_operator_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zwave_network_management_mock
+  uic_dotdot_mqtt_mock)
 
 # Meter Command Class test
 target_add_unittest(
@@ -524,6 +539,48 @@ target_add_unittest(
   zwave_controller_mock
   zwave_network_management_mock)
 
+# Scene Activation Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_scene_activation_test
+  SOURCES
+  zwave_command_class_scene_activation_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
+
+# Scene Controller Configuration Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_scene_controller_configuration_test
+  SOURCES
+  zwave_command_class_scene_controller_configuration_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zwave_network_management_mock)
+
+# Scene Actuator Configuration Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_scene_actuator_configuration_test
+  SOURCES
+  zwave_command_class_scene_actuator_configuration_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_command_handler_mock
+  uic_dotdot_mqtt_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock)
+
 # Thermostat mode test
 target_add_unittest(
   zwave_command_classes
@@ -551,13 +608,12 @@ target_add_unittest(
   zwave_controller
   zwave_command_handler_mock
   uic_attribute_resolver_mock
-  zpc_attribute_resolver_mock
-)
+  zpc_attribute_resolver_mock)
 
 # Tests for generated command classes
 set(GEN_TEST_INCLUDES
-  "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include ${CMAKE_SOURCE_DIR}/include"
-)
+    "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include"
+    "${CMAKE_SOURCE_DIR}/include")
 
 # Generated Command Class Door Lock test
 target_add_unittest(
@@ -571,13 +627,13 @@ target_add_unittest(
   zwave_handlers
   ${MOCK_LIBS})
 target_include_directories(generated_door_lock_test
-  PRIVATE ${GEN_TEST_INCLUDES})
+                           PRIVATE ${GEN_TEST_INCLUDES})
 target_compile_options(generated_door_lock_test PRIVATE -Wno-unused-variable
-  -Wno-unused-function)
+                                                        -Wno-unused-function)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(generated_door_lock_test
-    PRIVATE -Wno-unused-but-set-variable)
+                         PRIVATE -Wno-unused-but-set-variable)
 endif()
 
 # Generated Command Class Basic Tariff Info test
@@ -592,13 +648,13 @@ target_add_unittest(
   zwave_handlers
   ${MOCK_LIBS})
 target_include_directories(generated_basic_tariff_info_test
-  PRIVATE ${GEN_TEST_INCLUDES})
+                           PRIVATE ${GEN_TEST_INCLUDES})
 target_compile_options(generated_basic_tariff_info_test
-  PRIVATE -Wno-unused-variable -Wno-unused-function)
+                       PRIVATE -Wno-unused-variable -Wno-unused-function)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(generated_basic_tariff_info_test
-    PRIVATE -Wno-unused-but-set-variable)
+                         PRIVATE -Wno-unused-but-set-variable)
 endif()
 
 # Class Indicator control test

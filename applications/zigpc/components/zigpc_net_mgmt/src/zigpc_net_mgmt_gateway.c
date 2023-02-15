@@ -19,7 +19,7 @@
 #include <sl_status.h>
 
 #include <zigpc_discovery.h>
-#include "zigpc_net_mgmt_fsm.h"
+#include "zigpc_net_mgmt_internal.h"
 #include "zigpc_net_mgmt_gateway.h"
 #include "zigpc_net_mgmt_process.h"
 #include "zigpc_net_mgmt_process_send.h"
@@ -32,113 +32,87 @@ static const char LOG_TAG[] = "zigpc_net_mgmt_gateway";
 
 void zigpc_net_mgmt_callback_on_network_initialized(void *event_data)
 {
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  zigpc_gateway_on_network_init_t *init_data
-    = &process_data_fsm.fsm_data.on_net_init_complete;
-
   const zigpc_gateway_on_network_init_t *net_init
     = (zigpc_gateway_on_network_init_t *)event_data;
 
-  if (zigpc_net_mgmt_fsm_get_state() == ZIGPC_NET_MGMT_FSM_STATE_INIT) {
-    memcpy(init_data->zigpc_eui64,
-           net_init->zigpc_eui64,
-           sizeof(zigbee_eui64_t));
-    init_data->zigpc_endpoint_id = net_init->zigpc_endpoint_id;
-    memcpy(init_data->zigpc_ext_panid,
-           net_init->zigpc_ext_panid,
-           sizeof(zigbee_eui64_t));
-    init_data->zigpc_panid         = net_init->zigpc_panid;
-    init_data->zigpc_radio_channel = net_init->zigpc_radio_channel;
+    sl_status_t status  =
+        zigpc_net_mgmt_init_complete(
+            net_init->zigpc_eui64,
+            net_init->zigpc_endpoint_id,
+            net_init->zigpc_panid,
+            net_init->zigpc_ext_panid,
+            net_init->zigpc_radio_channel);
 
-    process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_INIT_COMPLETE;
+    if (status != SL_STATUS_OK) 
+    {
+        sl_log_warning(
+                LOG_TAG,
+                 "Network Initialization failed with status: 0x%X",
+                 status);
+    }
 
-    zigpc_net_mgmt_process_send_event(
-      ZIGPC_NET_MGMT_EVENT_FSM,
-      (void *)&process_data_fsm,
-      sizeof(zigpc_net_mgmt_process_data_fsm_t));
-  }
 }
+
 void zigpc_net_mgmt_callback_on_node_add_start(void *event_data)
 {
-  const zigpc_gateway_on_node_add_t *node_add
-    = (zigpc_gateway_on_node_add_t *)event_data;
+        
+  sl_log_info(LOG_TAG, "Device announce");
 
-  if (node_add != NULL) {
-    zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-    zigpc_gateway_on_node_add_t *node_add_start
-      = &process_data_fsm.fsm_data.on_node_add_start;
-
-    memcpy(node_add_start->eui64, node_add->eui64, sizeof(zigbee_eui64_t));
-
-    process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_START;
-
-    zigpc_net_mgmt_process_send_event(
-      ZIGPC_NET_MGMT_EVENT_FSM,
-      (void *)&process_data_fsm,
-      sizeof(zigpc_net_mgmt_process_data_fsm_t));
-  }
 }
 
 void zigpc_net_mgmt_callback_on_node_add_complete(void *event_data)
 {
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  struct zigpc_gateway_on_node_add *node_add_complete
-    = &process_data_fsm.fsm_data.on_node_add_complete;
+    const struct zigpc_gateway_on_node_add *node_add
+        = (struct zigpc_gateway_on_node_add *)event_data;
 
-  const struct zigpc_gateway_on_node_add *node_add
-    = (struct zigpc_gateway_on_node_add *)event_data;
+    sl_status_t status = zigpc_net_mgmt_node_add_complete(node_add->eui64);
+    if (status != SL_STATUS_OK) 
+    {
+        sl_log_warning(
+                LOG_TAG,
+                 "Node add failed with status: 0x%X",
+                 status);
+    }
 
-  if (zigpc_net_mgmt_fsm_get_state() == ZIGPC_NET_MGMT_FSM_STATE_NODE_ADD) {
-    memcpy(node_add_complete->eui64, node_add->eui64, sizeof(zigbee_eui64_t));
-
-    process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_COMPLETE;
-
-    zigpc_net_mgmt_process_send_event(
-      ZIGPC_NET_MGMT_EVENT_FSM,
-      (void *)&process_data_fsm,
-      sizeof(zigpc_net_mgmt_process_data_fsm_t));
-  }
 }
 
 void zigpc_net_mgmt_on_discovery_status(
-  zigbee_eui64_uint_t eui64, zigpc_discovery_status_t discovery_status)
+  zigbee_eui64_uint_t eui64_uint, zigpc_discovery_status_t discovery_status)
 {
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm = {};
+    zigbee_eui64_t eui64;
+    zigbee_uint_to_eui64(eui64_uint, eui64);
 
-  zigpc_net_mgmt_fsm_interview_status_t *on_node_interview_status
-    = &process_data_fsm.fsm_data.on_node_interview_status;
-
-  zigbee_uint_to_eui64(eui64, on_node_interview_status->eui64);
-  on_node_interview_status->discovery_status = discovery_status;
-
-  process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_STATUS;
-
-  zigpc_net_mgmt_process_send_event(ZIGPC_NET_MGMT_EVENT_FSM,
-                                    (void *)&process_data_fsm,
-                                    sizeof(zigpc_net_mgmt_process_data_fsm_t));
+    sl_status_t status =
+        zigpc_net_mgmt_publish_interview_status(
+            eui64,
+            discovery_status);
+    
+    if (status != SL_STATUS_OK) 
+    {
+        sl_log_warning(
+                LOG_TAG,
+                 "Node interview failed with status: 0x%X",
+                 status);
+    }
 }
 
 void zigpc_net_mgmt_callback_on_node_removed(void *event_data)
 {
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  zigpc_gateway_on_node_removed_t *node_removed_data
-    = &process_data_fsm.fsm_data.on_node_remove_complete;
 
   const zigpc_gateway_on_node_removed_t *node_removed
     = (zigpc_gateway_on_node_removed_t *)event_data;
 
-  if (zigpc_net_mgmt_fsm_get_state() == ZIGPC_NET_MGMT_FSM_STATE_NODE_REMOVE) {
-    memcpy(node_removed_data->eui64,
-           node_removed->eui64,
-           sizeof(zigbee_eui64_t));
-
-    process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_REMOVE_COMPLETE;
-
-    zigpc_net_mgmt_process_send_event(
-      ZIGPC_NET_MGMT_EVENT_FSM,
-      (void *)&process_data_fsm,
-      sizeof(zigpc_net_mgmt_process_data_fsm_t));
-  }
+    sl_status_t status = 
+        zigpc_net_mgmt_node_remove_complete(
+            node_removed->eui64);
+    
+    if (status != SL_STATUS_OK) 
+    {
+        sl_log_warning(
+                LOG_TAG,
+                 "Node remove failed with status: 0x%X",
+                 status);
+    }
 }
 
 sl_status_t zigpc_net_mgmt_gateway_init_observer(void)

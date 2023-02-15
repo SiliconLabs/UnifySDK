@@ -49,7 +49,7 @@ class dep_eval
   {
     return dependencies;
   }
-  const dependencies_t &operator()(uint32_t )
+  const dependencies_t &operator()(uint32_t)
   {
     return dependencies;
   }
@@ -63,6 +63,7 @@ class dep_eval
   const dependencies_t &operator()(const operation &x);
   const dependencies_t &operator()(const signed_ &x);
   const dependencies_t &operator()(const condition &x);
+  const dependencies_t &operator()(const function_invokation &f);
 
   /**
    * @brief This is the normal entry point of the evaluator.

@@ -34,6 +34,10 @@ ri
 Remix Icon - https://github.com/Remix-Design/RemixIcon
 License: Apache License Version 2.0 https://github.com/Remix-Design/RemixIcon/blob/master/License
 
+tb
+Tablet Icon - https://tabler-icons.io/
+License: MIT https://github.com/tabler/tabler-icons/blob/master/LICENSE
+
 WebSockets
 Apache License 2.0 https://github.com/theturtle32/WebSocket-Node/blob/master/LICENSE
 
@@ -75,3 +79,6 @@ MIT License https://github.com/defunctzombie/node-process/blob/master/LICENSE
 
 recharts
 MIT License https://github.com/recharts/recharts/blob/master/LICENSE
+
+react-qr-code
+MIT License https://github.com/rosskhanas/react-qr-code/blob/master/LICENSE

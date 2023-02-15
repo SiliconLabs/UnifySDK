@@ -22,5 +22,6 @@ var group__zwave__command__class__supervision__process =
     [ "zwave_command_class_supervision_close_session", "group__zwave__command__class__supervision__process.html#ga76afa571a1b7e0f43fd6e417266e47a0", null ],
     [ "zwave_command_class_supervision_create_session", "group__zwave__command__class__supervision__process.html#gaa40921f99821f9336ae8b49bd10849b1", null ],
     [ "zwave_command_class_supervision_find_session", "group__zwave__command__class__supervision__process.html#ga82915680357c49b850517be161425e93", null ],
-    [ "zwave_command_class_supervision_find_session_by_unique_id", "group__zwave__command__class__supervision__process.html#ga5c928fd044a89889f309c7aa785871ff", null ]
+    [ "zwave_command_class_supervision_find_session_by_unique_id", "group__zwave__command__class__supervision__process.html#ga5c928fd044a89889f309c7aa785871ff", null ],
+    [ "zwave_command_class_supervision_process_log", "group__zwave__command__class__supervision__process.html#gafcf27d707708434ed099675c564a4b6c", null ]
 ];

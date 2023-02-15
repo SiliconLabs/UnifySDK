@@ -16,6 +16,7 @@
 
 /**
  * @defgroup dotdot_cluster_id_definitions DotDot Cluster ID definitions
+ * @ingroup unify_components
  * @brief Header with Cluster ID definitions
  *
  * Cluster identifier defines (e.g. OnOff ID is 0x0006)

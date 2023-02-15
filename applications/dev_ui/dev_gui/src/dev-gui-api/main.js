@@ -21,6 +21,7 @@ let mqttConnectionProps = {
 };
 
 let topics = ["ucl/SmartStart/List",
+    "ucl/SmartStart/CommissionableDevice/#",
     "ucl/by-unid/+/State",
     "ucl/by-unid/+/State/SupportedCommands",
     "ucl/by-unid/+/ProtocolController/NetworkManagement",
@@ -29,12 +30,10 @@ let topics = ["ucl/SmartStart/List",
     "ucl/by-unid/+/+/OTA/#",
     "ucl/OTA/info/+/+",
     "ucl/by-group/#",
-    "ucl/UPTICap/List",
-    "ucl/UPTICap/+/TracePackage",
+    "ucl/UPTICap/#",
     "ucl/by-machine-id/+/SystemMetrics/SupportedCommands",
     "ucl/by-machine-id/+/SystemMetrics/Attributes/#",
-    "ucl/by-unid/+/+/Scenes/GeneratedCommands/RecallScene"
-
+    "ucl/by-mqtt-client/+/ApplicationMonitoring/Attributes/#"
 ];
 Object.keys(supportedClusters).forEach((i) => {
     topics.push(`ucl/by-unid/+/+/${i}/SupportedCommands`);
@@ -57,6 +56,7 @@ if (process.env && process.env.HTTPS !== undefined && JSON.parse(process.env.HTT
         });
 
         (new webSocketServer({ httpServer: secureServer })).on('request', onRequest);
+
     } catch (e) {
         console.log(`Could not start https api: ${e.message}`);
         process.exit(1);
@@ -74,6 +74,8 @@ try {
     console.log(`Could not start https api: ${e.message}`);
     process.exit(1);
 }
+
+handler.runQueueHandler();
 
 function onRequest(request) {
     let connection = request.accept(undefined, request.origin);
@@ -133,10 +135,6 @@ function onRequest(request) {
                     console.log(`Run Cluster Group Command: ucl/by-unid/${mes.data.Unid}/Groups/Commands/${mes.data.Cmd} ${JSON.stringify(mes.data.Payload)}`);
                     mqttConnection.publish(`ucl/by-unid/${mes.data.Unid}/Groups/Commands/${mes.data.Cmd}`, JSON.stringify(mes.data.Payload));
                     break;
-                case "run-cluster-scene-command":
-                    console.log(`Run Cluster Scene Command: ucl/by-unid/${mes.data.Unid}/Cluster/Scenes/${mes.data.Cmd} ${JSON.stringify(mes.data.Payload)}`);
-                    mqttConnection.publish(`ucl/by-unid/${mes.data.Unid}/Cluster/Scenes/${mes.data.Cmd}`, JSON.stringify(mes.data.Payload));
-                    break;
                 case "update-cluster-attr":
                     console.log(`Update ${mes.data.ClusterType} Attribute: ucl/by-unid/${mes.data.Unid}/${mes.data.ClusterType}/Commands/WriteAttributes ${JSON.stringify(mes.data.Payload)}`);
                     mqttConnection.publish(`ucl/by-unid/${mes.data.Unid}/${mes.data.ClusterType}/Commands/WriteAttributes`, JSON.stringify(mes.data.Payload));
@@ -174,33 +172,15 @@ function onRequest(request) {
                     mqttConnection.publish(`ucl/UPTICap/${mes.data.SerialNumber}/Toggle`, JSON.stringify(mes.data.Payload));
                     if (mes.data.Payload.Enable) {
                         handler.state.UPTI.Trace[mes.data.SerialNumber] = [];
-                        handler.sendToAll({
-                            type: "upti-trace",
-                            data: {
-                                SerialNumber: mes.data.SerialNumber,
-                                Trace: []
-                            }
+                        handler.addToQueue("upti-trace", {
+                            SerialNumber: mes.data.SerialNumber,
+                            Trace: []
                         });
                     }
                     break;
                 case "discovery-upti":
                     console.log(`Discovery UPTI: ucl/UPTICap/Discovery`);
                     mqttConnection.publish(`ucl/UPTICap/Discovery`, '{}');
-                    break;
-                case "save-scene":
-                    console.log(`Save Scene: ${JSON.stringify(mes.data)}`);
-                    if (!mes.data.Payload) {
-                        if (handler.state.Scenes[mes.data.GroupID] && handler.state.Scenes[mes.data.GroupID][mes.data.SceneID])
-                            delete(handler.state.Scenes[mes.data.GroupID][mes.data.SceneID]);
-                    } else {
-                        if (!handler.state.Scenes[mes.data.GroupID])
-                            handler.state.Scenes[mes.data.GroupID] = {};
-                        handler.state.Scenes[mes.data.GroupID][mes.data.SceneID] = mes.data.Payload;
-                    }
-                    handler.sendToAll({
-                        type: "scenes-list",
-                        data: handler.state.Scenes
-                    });
                     break;
             }
         } catch {
@@ -269,87 +249,42 @@ function onMqttMessage(topic, message) {
     let response = {};
     if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/OTA\/(.*)/)) {
         response = handler.processOTAByUnid(topic, message);
-        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(.*)\/Groups/)) {
         response = handler.processClusterGroup(topic, message);
-        handler.setUpdateNodeList(true);
+        handler.addToQueue("nodes-list", handler.state.Nodes);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/Location\/Attributes\/(.*)\/(.*)\/Reported/)) {
         response = processLocator(topic, message);
-        handler.setUpdateNodeList(true);
-    } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/Scenes\/GeneratedCommands\/RecallScene/)) {
-        recallScene(topic, message);
-        handler.setUpdateNodeList(false);
+        handler.addToQueue("nodes-list", handler.state.Nodes);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/(.*)/)) {
-        handler.setUpdateNodeList(true);
         response = handler.processCluster(topic, message);
+        handler.addToQueue("nodes-list", handler.state.Nodes);
     } else if (topic.match(/ucl\/by-unid\/.*\/ProtocolController\/NetworkManagement/)) {
         response = handler.processProtocolController(topic, message);
-        handler.setUpdateNodeList(true);
+        handler.addToQueue("nodes-list", handler.state.Nodes);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/ProtocolController\/RFTelemetry\/(.*)/)) {
         response = handler.processRFTelemetry(topic, message);
-        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/by-unid\/.*\/State/)) {
         response = handler.processNodeState(topic, message);
-        handler.setUpdateNodeList(true);
+        handler.addToQueue("nodes-list", handler.state.Nodes);
     } else if (topic.match(/ucl\/by-machine-id\/(.*)\/SystemMetrics\/(.*)/)) {
         response = handler.processSystemMetrics(topic, message);
-        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/UPTICap\/.*\/TracePackage/)) {
         response = handler.processUPTITrace(topic, message);
-        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/by-group\/.*/)) {
         response = handler.processGroup(topic, message);
-        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/OTA\/info\/(.*)\/(.*)/)) {
         response = handler.processOTAInfo(topic, message);
-        handler.setUpdateNodeList(false);
     } else if (topic === "ucl/SmartStart/List") {
         response = handler.processSmartStart(topic, message);
-        handler.setUpdateNodeList(false);
     } else if (topic === "ucl/UPTICap/List") {
         response = handler.processUPTIList(topic, message);
-        handler.setUpdateNodeList(false);
+    } else if (topic.match(/ucl\/by-mqtt-client\/(.*)\/ApplicationMonitoring\/Attributes\/(.*)/)) {
+        response = handler.processAppMonitoringList(topic, message);
+    } else if (topic.match(/ucl\/SmartStart\/CommissionableDevice\/(.*)/)) {
+        response = handler.processCommissionableDevices(topic, message);
     }
-
-    handler.sendToAll(response);
-
-    if (handler.state.updateNodeList === true) {
-        response = {
-            type: "nodes-list",
-            data: handler.state.Nodes
-        };
-        handler.sendToAll(response);
-    }
-}
-
-function recallScene(topic, message) {
-    try {
-        console.log(`Received Scenes: topic='${topic}', mes='${message}'`);
-        if (message.toString() === "") return;
-        let payload = JSON.parse(message);
-        if (payload.GroupID !== 0) {
-            if (handler.state.Scenes[payload.GroupID] && handler.state.Scenes[payload.GroupID][payload.SceneID])
-                runSceneByGroup(payload.GroupID, handler.state.Scenes[payload.GroupID][payload.SceneID]);
-        } else if (payload.GroupID === 0) {
-            handler.state.Groups.forEach(group => {
-                if (handler.state.Scenes[group.GroupId] && handler.state.Scenes[group.GroupId][payload.SceneID])
-                    runSceneByGroup(group.GroupId, handler.state.Scenes[group.GroupId][payload.SceneID]);
-            });
-        }
-    } catch (err) {
-        return handler.sendToAll(handler.getErrorResponse(`Failed Parsing Recall Scene: ${err}`));
-    }
-}
-
-function runSceneByGroup(groupId, scene) {
-    if (!scene.SceneTableExtensions)
-        return;
-    Object.keys(scene.SceneTableExtensions).forEach(cluster => {
-        scene.SceneTableExtensions[cluster] && Object.keys(scene.SceneTableExtensions[cluster]).forEach(cmd => {
-            console.log(`Run Group Command: ucl/by-group/${groupId}/${cluster}/Commands/${cmd} ${JSON.stringify(scene.SceneTableExtensions[cluster][cmd])}`);
-            mqttConnection.publish(`ucl/by-group/${groupId}/${cluster}/Commands/${cmd}`, JSON.stringify(scene.SceneTableExtensions[cluster][cmd]));
-        });
-    });
+    if (response && Object.keys(response).length > 0)
+        handler.addToQueue(response.type, response.data);
 }
 
 function saveFile(file) {

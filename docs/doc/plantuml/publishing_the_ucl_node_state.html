@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/plantuml/publishing_the_ucl_node_state.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <figure class="align-center">
+<p class="plantuml">
+<img src="../../_images/plantuml-845737819a5adb5d8782ab81264d940923064c66.png" alt="legend top
+    |Background color | description |
+    |&lt;#ff9999&gt;| Unify Component |
+    |&lt;#acffa0&gt;| Protocol Controller Component |
+endlegend
+
+!theme plain
+title Publishing the UCL node state
+
+Package &quot;Attribute Store&quot; &lt;&lt;Database&gt;&gt; #ff9999 {
+
+  object &quot;Root&quot; as root #DEDEDE
+  object &quot;UNID Attribute&quot; as unid #f2ffe6
+
+  unid : Attribute Type = ATTRIBUTE_UNID
+  unid : value = Desired: [] - Reported: [&quot;unid-123&quot;]
+
+  object &quot;Endpoint Attribute&quot; as ep #e6fff7
+  ep : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  ep : value = Desired: [] - Reported: [01]
+
+  root *- unid
+  unid *- ep
+
+  Package &quot;DotDot\nAttribute Space&quot; #f3acb1 {
+    map &quot;DotDot Attribute 1&quot; as dotdot_attribute_1 {
+      Reported =&gt; [00]
+      Desired  =&gt; [01]
+    }
+    map &quot;DotDot Attribute 2&quot; as dotdot_attribute_2 {
+      Reported =&gt; [00 01]
+      Desired  =&gt; []
+    }
+    ep *-- dotdot_attribute_1
+    ep *-- dotdot_attribute_2
+  }
+
+  Package &quot;Protocol Controller\nAttribute Space&quot; #acffa0 {
+    map &quot;Proprietary Attribute 1&quot; as attribute_1 #FFFFFF {
+      Reported =&gt; [FF]
+      Desired  =&gt; [00]
+    }
+    map &quot;Proprietary Attribute 2&quot; as attribute_2 #FFFFFF {
+      Reported =&gt; [3C]
+      Desired  =&gt; []
+    }
+    ep *-- attribute_1
+    ep *-- attribute_2
+  }
+}
+
+Package &quot;Other\nComponent&quot; as other_component #acffa0 {
+  object &quot;Other component&quot; as other_component #FFFFFF
+  other_component : May generate relevant events to the
+  other_component : node states, like when the Protocol
+  other_component : Controller shuts down
+}
+
+Package &quot;UCL\nNode State&quot; as ucl_node_state #acffa0 {
+  object &quot;Node State publisher&quot; as ucl_node_state_publisher #FFFFFF
+  ucl_node_state_publisher : Listens to events from the Attribute
+  ucl_node_state_publisher : store or from other components
+  ucl_node_state_publisher : to publish node states.
+}
+
+Package &quot;MQTT Client&quot; as mqtt_client #ff9999 {
+  map &quot;Publication queue&quot; as mqtt_client_publications #FFFFFF {
+    topic1 =&gt; payload1
+    topic2 =&gt; payload2
+    topic3 =&gt; payload2
+  }
+}
+
+skinparam {
+ArrowColor #5566FF
+ArrowFontColor #5566FF
+}
+
+ucl_node_state_publisher -&gt; mqtt_client_publications : Publish node state
+
+skinparam {
+ArrowColor #FF6655
+ArrowFontColor #FF6655
+}
+
+attribute_1 --&gt; ucl_node_state_publisher : Read
+attribute_2 --&gt; ucl_node_state_publisher
+dotdot_attribute_1 --&gt; ucl_node_state_publisher
+dotdot_attribute_2 --&gt; ucl_node_state_publisher
+other_component -&gt; ucl_node_state_publisher : Relevant events"/>
+</p>
+</figure>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

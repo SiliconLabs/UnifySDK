@@ -27,10 +27,10 @@ target_link_libraries(
           zigpc_common
           zigpc_config
           zigpc_ucl
-          uic_contiki
-          uic_log
-          uic_dotdot_mqtt)
+          unify)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
 
-target_add_mock(zigpc_attribute_management)
+  target_add_mock(zigpc_attribute_management)
+endif()

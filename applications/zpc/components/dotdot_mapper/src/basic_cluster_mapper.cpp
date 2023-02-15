@@ -11,7 +11,6 @@
  *
  *****************************************************************************/
 #include "basic_cluster_mapper.h"
-#include "dotdot_attributes.h"
 
 // ZPC includes
 #include "zwave_utils.h"
@@ -25,6 +24,7 @@
 #include "attribute_store_helper.h"
 #include "sl_log.h"
 #include "ucl_definitions.h"
+#include "unify_dotdot_defined_attribute_types.h"
 #include <sstream>
 #include <iomanip>
 // Interfaces
@@ -75,72 +75,6 @@ static void set_basic_cluster_serial_num(attribute endpoint_node)
         = endpoint_node.add_node(DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
     }
     attribute_store_set_reported_string(dotdot_serial, ss.str().c_str());
-  }
-}
-
-/**
- * @brief Create and set the value for the Basic Cluster HW version attribute
- *        if HARDWARE_VERSION attribute exist under endpoint attribute on Z-Wave domain
- * @param endpoint_node Attribute Store node for a Z-Wave node endpoint.
- */
-static void set_basic_cluster_hardware_version(attribute endpoint_node)
-{
-  attribute version_report_node
-    = endpoint_node.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA);
-  attribute hardware_version_node
-    = version_report_node.child_by_type(ATTRIBUTE_CC_VERSION_HARDWARE_VERSION);
-
-  try {
-    zwave_version_hardware_version_t hardware_version
-      = hardware_version_node.reported<zwave_version_hardware_version_t>();
-    uint8_t zcl_hardware_version = (uint8_t)hardware_version;
-    attribute_store_set_child_reported(endpoint_node,
-                                       DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION,
-                                       &zcl_hardware_version,
-                                       sizeof(zcl_hardware_version));
-  } catch (const std::exception &e) {
-    sl_log_debug(
-      LOG_TAG,
-      "Cannot get the hardware version value from attribute store node %d. "
-      "Basic Hardware version will not be published for Endpoint Node %d",
-      hardware_version_node,
-      endpoint_node);
-  }
-}
-
-/**
- * @brief Set the value of the Basic cluster Power Source.
- *
- * @param endpoint_node The endpoint attribute node.
- * @param node_id The Z-Wave Node ID.
- */
-static void set_basic_cluster_power_source(attribute endpoint_id,
-                                           zwave_node_id_t node_id)
-{
-  // We only set the Basic cluster power source if Listening/Optional protocol
-  // bits are configured in a Z-Wave node NIF.
-  attribute node_id_node = endpoint_id.first_parent(ATTRIBUTE_NODE_ID);
-  if (node_id_node.child_by_type(ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING)
-        .reported_exists()
-      || node_id_node.child_by_type(ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL)
-           .reported_exists()) {
-    uint8_t power_source = 0;
-    switch (zwave_get_operating_mode(node_id)) {
-      case OPERATING_MODE_AL:
-        power_source = 1;
-        break;
-      case OPERATING_MODE_NL:
-      case OPERATING_MODE_FL:
-        power_source = 3;
-        break;
-      default:
-        power_source = 0;
-        break;
-    }
-    attribute_store_set_child_reported(endpoint_id,
-                                       DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE,
-                                       &power_source,
-                                       sizeof(power_source));
   }
 }
 
@@ -209,11 +143,6 @@ static void network_status_attribute_update(attribute_store_node_t updated_node,
     set_manufacturer_name(endpoint_node);
     // Set the Basic Cluster serial number attribute value.
     set_basic_cluster_serial_num(endpoint_node);
-    // Create and set the value for the Basic Cluster hardware version attribute value
-    set_basic_cluster_hardware_version(endpoint_node);
-
-    // Set the Basic cluster Power Source attribute value for all endpoints.
-    set_basic_cluster_power_source(endpoint_node, node_id);
   }
 }
 

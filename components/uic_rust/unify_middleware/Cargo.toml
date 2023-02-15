@@ -7,7 +7,7 @@ license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor
 description = "rust unify_middleware component"
 
 [dependencies]
-mosquitto-client = { git = "https://github.com/jsloth/mosquitto-client" }
+mosquitto-client = { version= "*" }
 mockall= "0.11.*"
 once_cell= "1.9.*"
 serde = { version="1.0.*", features = ["derive"] }
@@ -21,7 +21,7 @@ unify_contiki_sys = { path = "../unify_contiki_sys" }
 unify_mqtt_sys = { path=  "../unify_mqtt_sys" }
 unify_attribute_store_sys = { path = "../unify_attribute_store_sys" }
 unify_attribute_utils_sys = { path = "../unify_attribute_utils_sys" }
-futures = "0.3.*"
+futures = "0.3.25"
 mockall_double= "0.2.*"
 cstr_core = "0.2.*"
 paste = "*"
@@ -31,3 +31,5 @@ serial_test = "0.5.*"
 
 [build-dependencies]
 unify_build_utils = { path = "../unify_build_utils" }
+anyhow ="*"
+

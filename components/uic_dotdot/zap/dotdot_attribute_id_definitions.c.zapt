@@ -1,0 +1,126 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+// clang-format off
+{{zap_header}}
+// clang-format on
+#include "dotdot_attribute_id_definitions.h"
+#include "dotdot_cluster_id_definitions.h"
+#include <string.h>
+
+const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
+                                          dotdot_attribute_id_t attribute_id)
+{
+  switch (cluster_id) {
+    // clang-format off
+{{#zcl_clusters}}
+    case DOTDOT_{{asSnakeCaseUpper label}}_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+{{#zcl_attributes}}
+        case DOTDOT_{{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ATTRIBUTE_ID:
+          return "{{label}}";
+{{/zcl_attributes}}
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
+{{/zcl_clusters}}
+      // clang-format on
+    default:
+      return "Unknown";
+  }
+}
+
+dotdot_attribute_id_t
+  uic_dotdot_get_attribute_id(dotdot_cluster_id_t cluster_id,
+                              const char *attribute_name)
+{
+  switch (cluster_id) {
+    // clang-format off
+{{#zcl_clusters}}
+    case DOTDOT_{{asSnakeCaseUpper label}}_CLUSTER_ID:
+{{#zcl_attributes}}
+      if (strcmp ("{{label}}", attribute_name) == 0) {
+        return DOTDOT_{{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ATTRIBUTE_ID;
+      }
+{{/zcl_attributes}}
+    break;
+{{/zcl_clusters}}
+    default:
+    return DOTDOT_INVALID_ATTRIBUTE_ID;
+  }
+  // clang-format on
+  // Return an invalid ID if we did not get any match.
+  return DOTDOT_INVALID_ATTRIBUTE_ID;
+}
+
+dotdot_attribute_json_type_t
+  uic_dotdot_get_attribute_id_json_type(dotdot_cluster_id_t cluster_id,
+                                        dotdot_attribute_id_t attribute_id)
+{
+  switch (cluster_id) {
+    // clang-format off
+{{#zcl_clusters}}
+    case DOTDOT_{{asSnakeCaseUpper label}}_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+{{#zcl_attributes}}
+        case DOTDOT_{{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ATTRIBUTE_ID:
+        {{#if (isString type)}}
+          return JSON_TYPE_STRING;
+        {{else if (isBool type)}}
+          return JSON_TYPE_BOOL;
+        {{else if (isStruct type)}}
+          return JSON_TYPE_OBJECT;
+        {{else}}
+          return JSON_TYPE_NUMBER;
+        {{/if}}
+{{/zcl_attributes}}
+          // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
+{{/zcl_clusters}}
+      // clang-format on
+    default:
+      return JSON_TYPE_UNKNOWN;
+  }
+}
+
+bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
+                                  dotdot_attribute_id_t attribute_id)
+{
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  {{#zcl_attributes}}
+  {{#first}}
+  if ({{parent.code}} == cluster_id) {
+  {{/first}}
+  {{#if_is_enum type}}
+    if ({{code}} == attribute_id) {
+      return true;
+    }
+  {{/if_is_enum}}
+  {{#last}}
+  }
+  {{/last}}
+  {{/zcl_attributes}}
+
+  {{/if}}
+  {{/zcl_clusters}}
+  return false;
+}

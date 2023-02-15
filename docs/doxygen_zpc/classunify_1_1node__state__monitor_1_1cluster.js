@@ -1,6 +1,6 @@
 var classunify_1_1node__state__monitor_1_1cluster =
 [
-    [ "cluster", "classunify_1_1node__state__monitor_1_1cluster.html#a3606af06347eb20d8ad75af214146d23", null ],
+    [ "cluster", "classunify_1_1node__state__monitor_1_1cluster.html#aea331ffd9fd58183b95d991841c76ebd", null ],
     [ "to_string", "classunify_1_1node__state__monitor_1_1cluster.html#af69e17b9908cb1cc75f1441c147548a8", null ],
     [ "attributes", "classunify_1_1node__state__monitor_1_1cluster.html#af6491d2d32de7700182d1211b892742e", null ],
     [ "cluster_name", "classunify_1_1node__state__monitor_1_1cluster.html#a8a913fc6fd65ce8376b41429072b1fd3", null ],

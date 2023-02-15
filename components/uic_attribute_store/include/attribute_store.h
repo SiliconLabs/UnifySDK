@@ -101,7 +101,7 @@ typedef uint32_t attribute_store_type_t;
 typedef datastore_attribute_id_t attribute_store_node_t;
 
 /// Maximum length for a value associated to an attribute
-#define ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH 255
+#define ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH DATASTORE_ATTRIBUTE_VALUE_SIZE
 /// Special attribute_store_node_t value indicating that it does not exist.
 #define ATTRIBUTE_STORE_INVALID_NODE (attribute_store_node_t)0
 
@@ -308,6 +308,17 @@ attribute_store_node_t
  * @returns int       Number of children
  */
 size_t attribute_store_get_node_child_count(attribute_store_node_t node);
+
+/**
+ * @brief Get the number of children of a certain type for a node.
+ *
+ * @param node        The tree handle of the node for which
+ *                    the child with a type will be returned
+ * @param child_type  The attribute type of the children.
+ * @returns int       Number of children that have the type
+ */
+size_t attribute_store_get_node_child_count_by_type(
+  attribute_store_node_t node, attribute_store_type_t child_type);
 
 /**
  * @brief Get the number of total children of the given node.

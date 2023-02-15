@@ -19,6 +19,9 @@
 #include "zigpc_net_mgmt_gateway.h"
 #include "zigpc_net_mgmt_notify_int.h"
 
+
+struct zigpc_observable zigpc_net_mgmt_observable;
+
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are
  * called)

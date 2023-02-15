@@ -17,13 +17,8 @@
 // Includes from this component
 #include "dotdot_mapper_fixt.h"
 #include "basic_cluster_mapper.h"
-#include "on_off_cluster_mapper.h"
-#include "level_cluster_mapper.h"
-#include "color_control_cluster_mapper.h"
-#include "thermostat_cluster_mapper.h"
+#include "on_off_cluster_basic_mapper.h"
 #include "sl_status.h"
-#include "door_lock_cluster_mapper.h"
-#include "identify_cluster_mapper.h"
 #include "binding_cluster_mapper.h"
 
 sl_status_t dotdot_mapper_init()
@@ -33,12 +28,7 @@ sl_status_t dotdot_mapper_init()
 
   // Basic Cluster
   init_status &= basic_cluster_mapper_init();
-  init_status &= on_off_cluster_mapper_init();
-  init_status &= level_cluster_mapper_init();
-  init_status &= color_control_cluster_mapper_init();
-  init_status &= thermostat_cluster_mapper_init();
-  init_status &= door_lock_cluster_mapper_init();
-  init_status &= identify_cluster_mapper_init();
+  init_status &= on_off_cluster_basic_mapper_init();
   init_status &= binding_cluster_mapper_init();
 
   return (init_status == true) ? SL_STATUS_OK : SL_STATUS_FAIL;
@@ -47,9 +37,5 @@ sl_status_t dotdot_mapper_init()
 int dotdot_mapper_teardown()
 {
   basic_cluster_mapper_teardown();
-  on_off_cluster_mapper_teardown();
-  level_cluster_mapper_teardown();
-  thermostat_cluster_mapper_teardown();
-  door_lock_cluster_mapper_teardown();
   return 0;
 }

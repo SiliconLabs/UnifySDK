@@ -43,7 +43,7 @@ void tearDown() {}
  */
 void test_dsk_parsing_sanity(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01-02-03-04-05-06-07-08-01-02-03-04-05-06-07-08-AA-BB",
     10,
     {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08},
@@ -57,7 +57,7 @@ void test_dsk_parsing_sanity(void)
     true);
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+  zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -81,14 +81,14 @@ void test_dsk_parsing_sanity(void)
  */
 void test_dsk_parsing_dsk_empty(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "",
   };
 
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+    zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -104,14 +104,14 @@ void test_dsk_parsing_dsk_empty(void)
  */
 void test_dsk_parsing_dsk_shorter_than_eui64(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01-02-03-04-05-06-07",
   };
 
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+  zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -126,14 +126,14 @@ void test_dsk_parsing_dsk_shorter_than_eui64(void)
  */
 void test_dsk_parsing_dsk_only_eui64(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+  zigpc_common::dsk_install_code_t test_data = {
     "01-02-03-04-05-06-07-09",
   };
 
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+  zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -148,7 +148,7 @@ void test_dsk_parsing_dsk_only_eui64(void)
  */
 void test_dsk_parsing_dsk_odd_install_code_size(void)
 {
-  zigpc_dsk_install_code_t test_data
+    zigpc_common::dsk_install_code_t test_data
     = {"01-02-03-04-05-06-07-09-01", 1, {0}, {0x01}};
 
   // ARRANGE
@@ -158,7 +158,7 @@ void test_dsk_parsing_dsk_odd_install_code_size(void)
     false);
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+  zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -173,7 +173,7 @@ void test_dsk_parsing_dsk_odd_install_code_size(void)
  */
 void test_dsk_parsing_dsk_even_install_code_size_invalid(void)
 {
-  zigpc_dsk_install_code_t test_data
+    zigpc_common::dsk_install_code_t test_data
     = {"01-02-03-04-05-06-07-09-01-02", 2, {0}, {0x01, 0x02}};
 
   // ARRANGE
@@ -183,7 +183,7 @@ void test_dsk_parsing_dsk_even_install_code_size_invalid(void)
     false);
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+  zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -198,7 +198,7 @@ void test_dsk_parsing_dsk_even_install_code_size_invalid(void)
  */
 void test_dsk_parsing_dsk_max_install_code_size_valid(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01-02-03-04-05-06-07-09-00-10-20-30-40-50-60-70-80-90-A0-B0-C0-D0-E0-F0-"
     "AA-BB",
     18,
@@ -230,7 +230,7 @@ void test_dsk_parsing_dsk_max_install_code_size_valid(void)
     true);
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+  zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -253,7 +253,7 @@ void test_dsk_parsing_dsk_max_install_code_size_valid(void)
  */
 void test_dsk_parsing_dsk_longer_than_install_code_size(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01-02-03-04-05-06-07-09-00-10-20-30-40-50-60-70-80-90-A0-B0-C0-D0-E0-F0-"
     "AA-BB-CC",
   };
@@ -261,7 +261,7 @@ void test_dsk_parsing_dsk_longer_than_install_code_size(void)
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+    zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -276,14 +276,14 @@ void test_dsk_parsing_dsk_longer_than_install_code_size(void)
  */
 void test_dsk_parsing_invalid_format(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01020304050607080102030405060708AABB",
   };
 
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+    zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -298,14 +298,14 @@ void test_dsk_parsing_invalid_format(void)
  */
 void test_dsk_parsing_invalid_format_zwave(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01020-30405-06070-80102-03040-50607-08AAB-BCCDD",
   };
 
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+   zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -320,14 +320,14 @@ void test_dsk_parsing_invalid_format_zwave(void)
  */
 void test_dsk_parsing_invalid_eui64_format(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01020304050607-08-01-02-03-04-05-06-07-08-AA-BB",
   };
 
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+    zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 
@@ -342,14 +342,14 @@ void test_dsk_parsing_invalid_eui64_format(void)
  */
 void test_dsk_parsing_invalid_ic_format(void)
 {
-  zigpc_dsk_install_code_t test_data = {
+    zigpc_common::dsk_install_code_t test_data = {
     "01-02-03-04-05-06-07-08-01-02030405060708AABB",
   };
 
   // ARRANGE
 
   // ACT
-  zigpc_dsk_install_code_t parsed_dsk;
+    zigpc_common::dsk_install_code_t parsed_dsk;
   sl_status_t status
     = zigpc_smartstart_dsk_parse_install_code(test_data.dsk, parsed_dsk);
 

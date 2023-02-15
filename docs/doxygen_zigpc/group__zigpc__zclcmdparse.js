@@ -181,6 +181,16 @@ var group__zigpc__zclcmdparse =
       [ "time_of_day", "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8383c1898e729528b589e3b5e61d09ad", null ],
       [ "unread_entries", "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8d68f9fb05ab687636640050a584a9dc", null ]
     ] ],
+    [ "zigpc_zclcmdparse_ias_zone_zone_status_change_notification_t", "structzigpc__zclcmdparse__ias__zone__zone__status__change__notification__t.html", [
+      [ "delay", "structzigpc__zclcmdparse__ias__zone__zone__status__change__notification__t.html#abe23d7e29963473df9bca33bbfbe461b", null ],
+      [ "extended_status", "structzigpc__zclcmdparse__ias__zone__zone__status__change__notification__t.html#a5feed95476f53bb5bd8c2bf38350528d", null ],
+      [ "zone_status", "structzigpc__zclcmdparse__ias__zone__zone__status__change__notification__t.html#a885e6b80e29d9d84b3ad82c896f8d576", null ],
+      [ "zoneid", "structzigpc__zclcmdparse__ias__zone__zone__status__change__notification__t.html#a42a7fc16162fc3a931b34ac9288472ff", null ]
+    ] ],
+    [ "zigpc_zclcmdparse_ias_zone_zone_enroll_request_t", "structzigpc__zclcmdparse__ias__zone__zone__enroll__request__t.html", [
+      [ "manufacturer_code", "structzigpc__zclcmdparse__ias__zone__zone__enroll__request__t.html#afdf331f1b0caa63b2d192c8677e97ac3", null ],
+      [ "zone_type", "structzigpc__zclcmdparse__ias__zone__zone__enroll__request__t.html#a6be85cb7f7833e86c1dbaee051cc74e7", null ]
+    ] ],
     [ "zigpc_zclcmdparse_callback_data_t", "unionzigpc__zclcmdparse__callback__data__t.html", [
       [ "door_lock_clear_allpin_codes_response", "unionzigpc__zclcmdparse__callback__data__t.html#a00c7f1e0946e5e9fa654829ae5195bb6", null ],
       [ "door_lock_clear_allrfid_codes_response", "unionzigpc__zclcmdparse__callback__data__t.html#a9ac3850ce712f0ae071c4c0fcff87d7a", null ],
@@ -214,6 +224,8 @@ var group__zigpc__zclcmdparse =
       [ "groups_get_group_membership_response", "unionzigpc__zclcmdparse__callback__data__t.html#a7482276f78e83815dbc20e3386cd75eb", null ],
       [ "groups_remove_group_response", "unionzigpc__zclcmdparse__callback__data__t.html#ab6417546e3c117bf53f8cdffded5bb05", null ],
       [ "groups_view_group_response", "unionzigpc__zclcmdparse__callback__data__t.html#a3d419dc5c625ccb90ab6985d0ba39a7f", null ],
+      [ "ias_zone_zone_enroll_request", "unionzigpc__zclcmdparse__callback__data__t.html#ad7a9e4ed5a3d62dfb2ecaa345527372d", null ],
+      [ "ias_zone_zone_status_change_notification", "unionzigpc__zclcmdparse__callback__data__t.html#a6330c0cfa06b71032c81674fa043789d", null ],
       [ "identify_identify_query_response", "unionzigpc__zclcmdparse__callback__data__t.html#a0b25dd27a6c1616a4978f2d07464e516", null ],
       [ "poll_control_check_in_response", "unionzigpc__zclcmdparse__callback__data__t.html#a571a7ef9013384bc0f04cd77950fd989", null ],
       [ "poll_control_fast_poll_stop", "unionzigpc__zclcmdparse__callback__data__t.html#abd60784505fcf44eaa9279bde82677a7", null ],

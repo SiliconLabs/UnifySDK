@@ -1,0 +1,65 @@
+{
+  "name": "Unify Attribute store type registration for ZCL / Dotdot attributes",
+  "version": "Unify-dotdot-v1",
+  "override": "../../uic_dotdot/zap/addon-override.js",
+  "helpers": [
+    "../../uic_dotdot/zap/addon-helper.js"
+  ],
+  "templates": [
+    {
+      "path": "unify_dotdot_defined_attribute_types_h.zapt",
+      "name": "Interface for the ZCL/DotDot attributes for the attribute store",
+      "output": "include/unify_dotdot_defined_attribute_types.h"
+    },
+    {
+      "path": "dotdot_attributes_uam.zapt",
+      "name": "UAM snippets for the ZCL/DotDot attributes types",
+      "output": "include/dotdot_attributes.uam"
+    },
+    {
+      "path": "dotdot_attributes_camel_case_uam.zapt",
+      "name": "UAM snippets for the ZCL/DotDot attributes types",
+      "output": "include/dotdot_attributes_camel_case.uam"
+    },
+    {
+      "path": "unify_dotdot_attribute_store_registration_cpp.zapt",
+      "name": "Implementation for registering ZCL dotdot attributes",
+      "output": "src/unify_dotdot_attribute_store_registration.cpp"
+    },
+    {
+      "path": "unify_dotdot_attribute_store_helpers_cpp.zapt",
+      "name": "Implementation of Attribute Store Dotdot helpers",
+      "output": "src/unify_dotdot_attribute_store_helpers.cpp"
+    },
+    {
+      "path": "unify_dotdot_attribute_store_force_read_attributes_command_callbacks_c.zapt",
+      "name": "Implementation of Attribute Store Dotdot ForceReadAttributes callbacks",
+      "output": "src/unify_dotdot_attribute_store_force_read_attributes_command_callbacks.c"
+    },
+    {
+      "path": "unify_dotdot_attribute_store_write_attributes_command_callbacks_c.zapt",
+      "name": "Implementation of Attribute Store Dotdot WriteAttributes callbacks",
+      "output": "src/unify_dotdot_attribute_store_write_attributes_command_callbacks.c"
+    },
+    {
+      "path": "unify_dotdot_attribute_store_helpers_h.zapt",
+      "name": "Header of Attribute Store Dotdot helpers",
+      "output": "include/unify_dotdot_attribute_store_helpers.h"
+    },
+    {
+      "path": "unify_dotdot_attribute_store_attribute_publisher_cpp.zapt",
+      "name": "Implementation of Attribute Store Dotdot Attribute Publisher",
+      "output": "src/unify_dotdot_attribute_store_attribute_publisher.cpp"
+    },
+    {
+      "path": "../test/unify_dotdot_attribute_store_test_c.zapt",
+      "name": "Unit test for the ZCL/DotDot attributes for the attribute store",
+      "output": "test/unify_dotdot_attribute_store_test.c"
+    },
+    {
+      "path": "../test/unify_dotdot_attribute_store_test_h.zapt",
+      "name": "Header for the unit test for the ZCL/DotDot attributes for the attribute store",
+      "output": "test/unify_dotdot_attribute_store_test.h"
+    }
+  ]
+}

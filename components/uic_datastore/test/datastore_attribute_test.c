@@ -328,4 +328,6 @@ void test_datastore_attribute_not_initialized()
                     datastore_store_attribute(1, 1, 1, NULL, 3, NULL, 4));
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     datastore_store_attribute(4, 1, 3, NULL, 3, NULL, 4));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_fetch_all_attributes(NULL));
 }

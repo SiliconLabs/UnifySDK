@@ -109,6 +109,7 @@ function isBool(type) {
 function isStruct(type) {
   switch (type) {
     case 'TransitionType': return true
+    case 'SExtensionFieldSetList': return true
     case 'BindingObject': return true
     case 'CoordinateAndOrientation': return true
     case 'MinMaxPair': return true
@@ -153,6 +154,8 @@ function isMonotonousArray(label) {
     // ProtocolController-NetworkManagement
     case 'SupportedStateList': return true
     case 'RequestedStateParameters': return true
+    // Scenes cluster:
+    case 'SceneTable': return true
     default: return false
   }
 }
@@ -268,6 +271,20 @@ function asAttributeIsSupportedFunction(parentLabel, label) {
     "_" + asSnakeCaseLower(label)
 }
 
+function asAttributeCreateFunction(parentLabel, label) {
+  return "dotdot_create_" + asSnakeCaseLower(parentLabel) + "_" + asSnakeCaseLower(label)
+}
+
+function asAttributeUndefineReportedFunction(parentLabel, label) {
+  return "dotdot_" + asSnakeCaseLower(parentLabel) +
+    "_" + asSnakeCaseLower(label) + "_undefine_reported"
+}
+
+function asAttributeUndefineDesiredFunction(parentLabel, label) {
+  return "dotdot_" + asSnakeCaseLower(parentLabel) +
+    "_" + asSnakeCaseLower(label) + "_undefine_desired"
+}
+
 function asCommandCallback(zclCommand) {
   return dotdot_prefix() + "_" + asSnakeCaseLower(zclCommand.parent.label) +
     "_" + asSnakeCaseLower(zclCommand.label) + "_callback"
@@ -380,6 +397,9 @@ exports.asAttributeGetFunction = asAttributeGetFunction
 exports.asAttributeGetCountFunction = asAttributeGetCountFunction
 exports.asAttributeSetFunction = asAttributeSetFunction
 exports.asAttributeIsSupportedFunction = asAttributeIsSupportedFunction
+exports.asAttributeUndefineReportedFunction = asAttributeUndefineReportedFunction
+exports.asAttributeUndefineDesiredFunction = asAttributeUndefineDesiredFunction
+exports.asAttributeCreateFunction = asAttributeCreateFunction
 exports.asJSONType = asJSONType
 exports.attributeID = attributeID
 exports.asCommandCallback = asCommandCallback

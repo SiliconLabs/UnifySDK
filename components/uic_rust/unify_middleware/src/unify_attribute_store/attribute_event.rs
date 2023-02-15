@@ -10,7 +10,7 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-/// 
+///
 use crate::{AttributeEventType, AttributeTrait, AttributeValueState};
 
 /// Attribute are structs used by attribute change streams,

@@ -159,7 +159,7 @@ certificates need to be installed.
 In the event that the firmware upload process gets interrupted, the NCP may be
 left in bootloader. The ZPC will not be able to re-flash because it requires a
 functional serial API. In this case the device can be flashed manually using the
-XModem tool _sx_ from the debian package lrzsx:
+XModem tool _sx_ from the Debian package lrzsx:
 
 ```bash
   sudo apt install lrzsz
@@ -496,7 +496,7 @@ The Z-Wave attribute lists configuration file example:
 Attribute types can be provided either as their name like above, or with their
 type id, like _attribute_type:0x002502_
 
-When the ZPC is installed on the Debian Buster platform the sample configuration
+When the ZPC is installed on the Debian Bullseye platform the sample configuration
 (i.e., the sample contains the recommended attribute types that may require periodic
 polling based on the device type) file will be located in:
 
@@ -543,6 +543,7 @@ forward incoming controlling commands on MQTT.
 | COMMAND_CLASS_SWITCH_MULTILEVEL      | SWITCH_MULTILEVEL_STOP_LEVEL_CHANGE   |  Level::Stop                 |
 | COMMAND_CLASS_INDICATOR              | INDICATOR_SET                         |  Identify::Identify          |
 | COMMAND_CLASS_THERMOSTAT_MODE        | THERMOSTAT_MODE_SET                   |  Thermostat::WriteAttributes |
+| COMMAND_CLASS_BARRIER_OPERATOR       | BARRIER_OPERATOR_SET                  |  BarrierControl::GoToPercent |
 
 For example, if the ZPC receives a Multilevel Switch Set with value = 50,
 it will publish:

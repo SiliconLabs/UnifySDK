@@ -190,5 +190,5 @@ structured overview of your MQTT topics.
 
 Configure [MQTT Explorer](https://mqtt-explorer.com/) to connect to the host
 where your MQTT broker is located and the topics can be observed. Use the
-[Unify Specifications](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html)
+[Unify Specifications](./unify_specifications/index.rst)
 if you need assistance to understand what topics and they data represent.

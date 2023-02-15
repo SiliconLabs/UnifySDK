@@ -23,6 +23,7 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zpc_attribute_store_network_helper.h"
+#include "zpc_attribute_store_type_registration.h"
 #include "sl_log.h"
 #include "zwave_command_class_alarm_sensor_types.h"
 
@@ -89,11 +90,18 @@ static sl_status_t zwave_command_handler_register_handler_stub(
 }
 
 /// Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp() {}
+void suiteSetUp()
+{
+  datastore_init(":memory:");
+  attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
+}
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -113,8 +121,6 @@ static void zwave_command_class_sensor_alarm_init_verification()
 /// Called before each and every test
 void setUp()
 {
-  datastore_init(":memory:");
-  attribute_store_init();
   zpc_attribute_store_test_helper_create_network();
   zwave_unid_set_home_id(home_id);
   zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
@@ -139,11 +145,7 @@ void setUp()
 }
 
 /// Called after each and every test
-void tearDown()
-{
-  attribute_store_teardown();
-  datastore_teardown();
-}
+void tearDown() {}
 
 void test_zwave_command_class_alarm_sensor_get_happy_case()
 {
@@ -409,10 +411,10 @@ void test_zwave_command_class_alarm_sensor_report_smaller_frame()
   alarm_sensor_type_t type   = 25;
   alarm_sensor_state_t state = 40;
   uint8_t incoming_frame[]   = {COMMAND_CLASS_SENSOR_ALARM,
-                                SENSOR_ALARM_REPORT,
-                                id & 0xFF,
-                                type & 0xFF,
-                                state & 0xFF};
+                              SENSOR_ALARM_REPORT,
+                              id & 0xFF,
+                              type & 0xFF,
+                              state & 0xFF};
 
   TEST_ASSERT_NOT_NULL(alarm_sensor_handler.control_handler);
   TEST_ASSERT_EQUAL(

@@ -29,6 +29,9 @@
 #include "attribute.hpp"
 #include "attribute_mapper_ast.hpp"
 #include "attribute_mapper_ast_path_eval.hpp"
+#include "attribute_mapper_built_in_functions.hpp"
+
+#include "sl_log.h"
 
 namespace ast
 {
@@ -139,9 +142,13 @@ template<typename T> struct eval {
           return lhs.value() / rhs.value();
         case operator_equals:
           return trunc(1000. * lhs.value()) == trunc(1000. * rhs.value());
-        case operator_left_shift:
+        case operator_less_than_or_eq:
+          return lhs.value() <= rhs.value();
+        case operator_greater_than_or_eq:
+          return lhs.value() >= rhs.value();
+        case operator_less_than:
           return lhs.value() < rhs.value();
-        case operator_right_shift:
+        case operator_greater_than:
           return lhs.value() > rhs.value();
         case operator_bitand:
           return ((int)round(lhs.value())) & ((int)round(rhs.value()));
@@ -220,7 +227,8 @@ template<typename T> struct eval {
     attribute_store::attribute node = ape(a.attribute_path);
 
     if (a.value_type == 'e') {  //existence evaluation
-      //If all elements have bee parsed this means that we have found the attribute
+      // If all elements have bee parsed this means that we have found the attribute
+      // if the attribute gets deleted, it gets caught above in "!context.is_valid()"
       return ape.all_elements_parsed();
     } else if (ape.all_elements_parsed()) {
       T result = 0;
@@ -234,6 +242,30 @@ template<typename T> struct eval {
       }
     }
     return result_type();
+  }
+
+  /**
+   * @brief Evaluates Function invokation.
+   */
+  result_type operator()(const function_invokation &f) const
+  {
+    // Evaluate all expressions in arguments and put them into a vector
+    std::vector<result_type> results;
+    for (auto &argument: f.arguments) {
+      results.push_back((*this)(argument));
+    }
+
+    // look up our built-in function library
+    const auto &functions = get_built_in_functions<T>();
+
+    if (functions.count(f.function_name) == 0) {
+      sl_log_error("attribute_mapper_ast_eval",
+                   "Unknown function (%s), returning undefined",
+                   f.function_name.c_str());
+      return result_type();
+    }
+    // Invoke the function
+    return functions.at(f.function_name)(results);
   }
 
   private:

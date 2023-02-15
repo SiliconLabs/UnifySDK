@@ -11,5 +11,7 @@ target_link_libraries(zwave_multi_channel
   PUBLIC zwave_controller
 )
 
-target_add_mock(zwave_multi_channel)
-add_subdirectory(test)
+if(BUILD_TESTING)
+  target_add_mock(zwave_multi_channel)
+  add_subdirectory(test)
+endif()

@@ -57,7 +57,7 @@ struct zigbeeHostState {
   struct zigbeeHostCallbacks *callbacks;
 };
 
-struct zigbeeHostState z3gwState;
+extern struct zigbeeHostState z3gwState;
 
 /**
   * @brief Cluster discovery handler for endpoint requested.

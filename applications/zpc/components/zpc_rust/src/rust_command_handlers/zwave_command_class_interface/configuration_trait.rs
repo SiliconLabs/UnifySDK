@@ -11,7 +11,10 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-use crate::{zwave_controller_sys::sl_status_t, rust_command_handlers::zwave_command_class_definitions::ZwaveControllerEncapsulationScheme};
+use crate::{
+    rust_command_handlers::zwave_command_class_definitions::ZwaveControllerEncapsulationScheme,
+    zwave_controller_sys::sl_status_t,
+};
 
 use super::FrameControlSupportTrait;
 

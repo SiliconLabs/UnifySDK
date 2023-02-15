@@ -22,9 +22,11 @@
 #include "zigpc_gateway.h"
 #include "zcl_util.h"
 #include "zigpc_group_mgmt.h"
+#include "attribute_management.h"
 
 #include "zigpc_command_mapper.h"
 #include "zigpc_command_mapper_int.h"
+
 
 static const char LOG_TAG[] = "zigpc_cmdmapper";
 
@@ -127,6 +129,15 @@ sl_status_t zigpc_command_mapper_send_unicast(
                                                 command_id,
                                                 command_arg_count,
                                                 command_arg_list);
+  }
+
+  if(status == SL_STATUS_OK)
+  {
+    zigpc_attrmgmt_send_delayed_read_command(
+          eui64,
+          endpoint,
+          cluster_id,
+          1000);
   }
 
   sl_log_debug(LOG_TAG,

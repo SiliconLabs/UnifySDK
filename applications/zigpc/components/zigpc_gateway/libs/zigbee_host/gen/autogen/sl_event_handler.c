@@ -18,7 +18,9 @@ void sl_service_init(void)
 {
   sl_iostream_init_instances();
   sl_cli_instances_init();
-  sli_cli_threaded_host_init();
+  // mpbreton 2022-09-03 : Enabling the threaded cli causes interference.
+  // Do no re-enable those lines in future autogeneration.
+  //sli_cli_threaded_host_init();
 }
 
 void sl_stack_init(void)

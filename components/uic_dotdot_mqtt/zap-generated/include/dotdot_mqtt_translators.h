@@ -408,6 +408,40 @@ inline void to_json(nlohmann::json& jsn, const SExtensionFieldSetList& field)
 
 
 /**
+ * Parse SSceneTable type from json object.
+ *
+ * @param jsn     JSON object to parse from.
+ * @param field  field to be populated from JSON object.
+ */
+inline void from_json(const nlohmann::json& jsn, SSceneTable& field)
+{
+  jsn.at("SceneID").get_to(field.SceneID);
+  jsn.at("GroupID").get_to(field.GroupID);
+  field.SceneName = jsn.at("SceneName").get_ptr<const std::string*>()->c_str();
+  jsn.at("TransitionTime").get_to(field.TransitionTime);
+  jsn.at("TransitionTime100ms").get_to(field.TransitionTime100ms);
+  field.SceneTableExtensions = jsn.at("SceneTableExtensions").get_ptr<const std::string*>()->c_str();
+}
+
+
+/**
+ * Build JSON object from SSceneTable type.
+ *
+ * @param jsn     JSON object to be populated.
+ * @param field   Reference data.
+ */
+inline void to_json(nlohmann::json& jsn, const SSceneTable& field)
+{
+  jsn["SceneID"] = field.SceneID;
+  jsn["GroupID"] = field.GroupID;
+  jsn["SceneName"] = field.SceneName;
+  jsn["TransitionTime"] = field.TransitionTime;
+  jsn["TransitionTime100ms"] = field.TransitionTime100ms;
+  jsn["SceneTableExtensions"] = field.SceneTableExtensions;
+}
+
+
+/**
  * Parse SphericalCoordinates type from json object.
  *
  * @param jsn     JSON object to parse from.
@@ -432,100 +466,6 @@ inline void to_json(nlohmann::json& jsn, const SphericalCoordinates& field)
   jsn["Azimuth"] = field.Azimuth;
   jsn["Elevation"] = field.Elevation;
   jsn["Distance"] = field.Distance;
-}
-
-
-/**
- * Parse TLDeviceInformationRecord type from json object.
- *
- * @param jsn     JSON object to parse from.
- * @param field  field to be populated from JSON object.
- */
-inline void from_json(const nlohmann::json& jsn, TLDeviceInformationRecord& field)
-{
-  jsn.at("IEEEAddress").get_to(field.IEEEAddress);
-  jsn.at("EndpointIdentifier").get_to(field.EndpointIdentifier);
-  jsn.at("ProfileIndentifier").get_to(field.ProfileIndentifier);
-  jsn.at("DeviceIdentifier").get_to(field.DeviceIdentifier);
-  jsn.at("Version").get_to(field.Version);
-  jsn.at("GroupIdentifierCount").get_to(field.GroupIdentifierCount);
-  jsn.at("Sort").get_to(field.Sort);
-}
-
-
-/**
- * Build JSON object from TLDeviceInformationRecord type.
- *
- * @param jsn     JSON object to be populated.
- * @param field   Reference data.
- */
-inline void to_json(nlohmann::json& jsn, const TLDeviceInformationRecord& field)
-{
-  jsn["IEEEAddress"] = field.IEEEAddress;
-  jsn["EndpointIdentifier"] = field.EndpointIdentifier;
-  jsn["ProfileIndentifier"] = field.ProfileIndentifier;
-  jsn["DeviceIdentifier"] = field.DeviceIdentifier;
-  jsn["Version"] = field.Version;
-  jsn["GroupIdentifierCount"] = field.GroupIdentifierCount;
-  jsn["Sort"] = field.Sort;
-}
-
-
-/**
- * Parse TLEndpointInformationRecord type from json object.
- *
- * @param jsn     JSON object to parse from.
- * @param field  field to be populated from JSON object.
- */
-inline void from_json(const nlohmann::json& jsn, TLEndpointInformationRecord& field)
-{
-  jsn.at("NetworkAddress").get_to(field.NetworkAddress);
-  jsn.at("EndpointIdentifier").get_to(field.EndpointIdentifier);
-  jsn.at("ProfileIdentifier").get_to(field.ProfileIdentifier);
-  jsn.at("DeviceIdentifier").get_to(field.DeviceIdentifier);
-  jsn.at("Version").get_to(field.Version);
-}
-
-
-/**
- * Build JSON object from TLEndpointInformationRecord type.
- *
- * @param jsn     JSON object to be populated.
- * @param field   Reference data.
- */
-inline void to_json(nlohmann::json& jsn, const TLEndpointInformationRecord& field)
-{
-  jsn["NetworkAddress"] = field.NetworkAddress;
-  jsn["EndpointIdentifier"] = field.EndpointIdentifier;
-  jsn["ProfileIdentifier"] = field.ProfileIdentifier;
-  jsn["DeviceIdentifier"] = field.DeviceIdentifier;
-  jsn["Version"] = field.Version;
-}
-
-
-/**
- * Parse TLGroupInformationRecord type from json object.
- *
- * @param jsn     JSON object to parse from.
- * @param field  field to be populated from JSON object.
- */
-inline void from_json(const nlohmann::json& jsn, TLGroupInformationRecord& field)
-{
-  jsn.at("GroupIdentifier").get_to(field.GroupIdentifier);
-  jsn.at("GroupType").get_to(field.GroupType);
-}
-
-
-/**
- * Build JSON object from TLGroupInformationRecord type.
- *
- * @param jsn     JSON object to be populated.
- * @param field   Reference data.
- */
-inline void to_json(nlohmann::json& jsn, const TLGroupInformationRecord& field)
-{
-  jsn["GroupIdentifier"] = field.GroupIdentifier;
-  jsn["GroupType"] = field.GroupType;
 }
 
 

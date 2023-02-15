@@ -26,7 +26,7 @@
 
 #include "dotdot_mqtt.h"
 #include "dotdot_mqtt.hpp"
-#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_parsing_helpers.hpp"
 #include "dotdot_mqtt_attributes.h"
 #include "dotdot_mqtt_translators.h"
 

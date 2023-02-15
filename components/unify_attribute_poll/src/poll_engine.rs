@@ -17,20 +17,20 @@ use crate::attribute_watcher_trait::AttributeWatcherTrait;
 use crate::poll_queue_trait::PollQueueTrait;
 use crate::PollEngineConfig;
 use futures::channel::mpsc::UnboundedReceiver;
-use futures::{select_biased, FutureExt, StreamExt};
-
-use unify_attribute_store_sys::{attribute_resolver_register_rule, sl_status_t};
+use futures::{FutureExt, StreamExt};
+use futures_concurrency::Race;
+use unify_attribute_resolver_sys::attribute_resolver_register_rule;
+use unify_attribute_store_sys::sl_status_t;
 use unify_log_sys::*;
 use unify_middleware::contiki::PlatformTrait;
 use unify_middleware::{
     Attribute, AttributeEvent, AttributeEventType, AttributeStoreError, AttributeTrait,
+    ATTRIBUTE_STORE_INVALID_TYPE, ATTRIBUTE_TREE_ROOT,
 };
 use unify_proc_macro::{as_extern_c, generate_resolver_callback};
-use unify_sl_status_sys::SL_STATUS_ALREADY_EXISTS;
+use unify_sl_status_sys::{SL_STATUS_ALREADY_EXISTS, SL_STATUS_FAIL};
 
 declare_app_name!("poll_engine");
-
-pub const ATTRIBUTE_POLL_ENGINE_MARK: u32 = 0x0018;
 
 #[derive(Debug)]
 /// Enum with commands send send to the PollEngine
@@ -50,6 +50,7 @@ pub enum PollEngineCommand {
     },
     Enable,
     Disable,
+    PrintQueue,
 }
 
 enum PollEngineDispatch {
@@ -91,9 +92,12 @@ pub(crate) struct PollEngine {
 #[generate_resolver_callback]
 fn poll_engine_mark(a: Attribute) -> Result<(sl_status_t, Vec<u8>), AttributeStoreError> {
     // Clear the reported attribute of the the parent to trigger a resolution
-    // and delete this meta attribute
+    // and set the mark attribute to a random value, so it does not need to be get resolved.
     a.parent().set_reported::<u32>(None)?;
-    a.delete()?;
+    if let Err(e) = a.set_reported::<u8>(Some(0)) {
+        log_warning!("Cannot set the reported value of the poll-mark for attribute: {a} : {e}");
+        return Ok((SL_STATUS_FAIL, vec![]));
+    }
     // This meta rule does not produce a frame
     Ok((SL_STATUS_ALREADY_EXISTS, vec![]))
 }
@@ -104,8 +108,15 @@ impl PollEngine {
         poll_queue: impl PollQueueTrait + 'static,
         config: PollEngineConfig,
     ) -> Self {
+        // Check the Attribute Poll Mark type configuration
+        if (config.poll_mark_attribute_type == ATTRIBUTE_STORE_INVALID_TYPE)
+            || (config.poll_mark_attribute_type == ATTRIBUTE_TREE_ROOT)
+        {
+            log_error!("Poll Engine configured with an incorrect/reserved Attribute Type ({}) for the Poll Mark. Polling will not work properly!", config.poll_mark_attribute_type);
+        }
+
         attribute_resolver_register_rule(
-            ATTRIBUTE_POLL_ENGINE_MARK,
+            config.poll_mark_attribute_type,
             None,
             as_extern_c!(poll_engine_mark),
         );
@@ -114,7 +125,6 @@ impl PollEngine {
             config,
             poll_queue: Box::new(poll_queue),
             platform: Box::new(platform),
-
             last_poll: 0,
             running: true,
         }
@@ -149,7 +159,7 @@ impl PollEngine {
         mut command_receiver: UnboundedReceiver<PollEngineCommand>,
     ) {
         loop {
-            // select_biased! awaits 3 functions:
+            // [futures_concurrency::race] awaits 3 functions:
             // * a wait function until there is an incoming [PollEngineCommand]
             //   send to the pollEngine. e.g to register an attribute for
             //   polling
@@ -159,42 +169,23 @@ impl PollEngine {
             // * wait until a scheduled poll timer goes off. in this case we
             //   want to clear the value for the upcoming attribute in the queue
             //
-            // select_biased functions the same as a select! block. The only
-            // difference is that when multiple items are ready, the item
-            // highest in the order of declaration will be picked. for select!
-            // on the other hand its undefined which item will be picked.
+            // when one of the awaited functions produces an value, the race
+            // block returns the result. This means that the other functions
+            // inside the select block will not be polled anymore and go out of
+            // scope as well. for instance, the timer inside the schedule poll
+            // will be stopped and all the stack allocations made inside of
+            // the `schedule_poll()` will be released.
             //
-            // when one of the awaited functions produces an value, we exit the
-            // selected_biased block so we can process it. This means that the
-            // other functions inside the select block will not be polled
-            // anymore and go out of scope as well. for instance, the timer
-            // inside the schedule poll will be stopped and all the stack
-            // allocations made inside of the `schedule_poll()` will be
-            // released.
-            //
-            // we cannot process the selected future inside of the
-            // selected_biased block since we require to have an mutable borrow
-            // of the context object. And according rust we can have only one
-            // mutable borrower or several immutable borrowers at once. Doing
-            // something immutable inside of the select_biased block in our case
-            // would be completely fine.
-            //
-            // functions that are being awaited inside `select!` blocks need to
-            // be `fused`. A requirement enforced by select!. Fusing an future
-            // means that after the future completed and is returned, its fuse
-            // is to be broken and will therefore not be polled anymore by the
-            // select! block. In our case its not relevant since we create
-            // and fuse our futures inside the select block. i.e. we always have
-            // a fresh `FusedFuture`. Would one of the futures for instance be
-            // initialized outside of the loop, and its returned by the
-            // select block, then it will never be polled anymore in successive
-            // iterations of the while loop and therefore never be triggered
-            // again.
-            let dispatch_cmd = select_biased! {
-                res = command_receiver.select_next_some() => PollEngineDispatch::PollEngineCommand(res),
-                res = PollEngine::find_updated_attribute(&context, &mut attribute_watcher).fuse() => res,
-                res = PollEngine::schedule_poll(&context).fuse() => res,
-            };
+            let receive_commad_fut = command_receiver
+                .select_next_some()
+                .map(PollEngineDispatch::PollEngineCommand);
+            let attribute_updated_fut =
+                PollEngine::find_updated_attribute(&context, &mut attribute_watcher);
+            let poll_timeout_fut = PollEngine::schedule_poll(&context);
+
+            let dispatch_cmd = (receive_commad_fut, attribute_updated_fut, poll_timeout_fut)
+                .race()
+                .await;
 
             // At this point one of the awaited functions went off and produced
             // an [PollEngineDispatch] command which needs to be executed. since
@@ -222,7 +213,7 @@ impl PollEngine {
     /// # Returns
     ///
     /// `Some(PollTimeout)`    when an timeout on the poll timer occurred
-    /// `BLOCKING`             nothing to be polled or the engine is paused     
+    /// `BLOCKING`             nothing to be polled or the engine is paused
     async fn schedule_poll(&self) -> PollEngineDispatch {
         if let Some(timeout) = self.is_running_and_upcoming_timeout() {
             // the timer stops automatically when the timer object goes out of
@@ -273,9 +264,10 @@ impl PollEngine {
         self.running.then(|| self.next_poll_timeout()).flatten()
     }
 
-    /// This function does 2 things:
-    /// * Clears the reported value of the attribute that needs polling.
-    /// * Stores te last time this poll action was executed.
+    /// This function does the following:
+    /// * Makes sure that a Poll Engine Mark is present under the attribute to be polled
+    /// * Undefines the reported value of the Poll Engine Mark
+    /// * Stores the last time this poll action was executed.
     fn do_poll(&mut self) {
         let (attribute, interval) = match self.poll_queue.pop_next() {
             Some(x) => x,
@@ -288,36 +280,50 @@ impl PollEngine {
         };
 
         // In order to support cases where the resolver tree is paused, attribute are marked for polling
-        // by placing the meta attribute ATTRIBUTE_POLL_ENGINE_MARK under the attribute to be polled.
+        // by placing the meta Poll Mark attribute under the attribute to be polled.
         // An attribute resolver rule will then clear the reported value of the parent, ensuring that
         // the device is polled when its ready. In this way we even persist poll request over reboots.
-        if let Err(e) = attribute.emplace::<u32>(ATTRIBUTE_POLL_ENGINE_MARK, None, None) {
-            log_warning!("Failed to clear reported for {} {}", attribute, e);
+        let poll_mark_attribute = attribute.get_child_by_type(self.config.poll_mark_attribute_type);
+        if false == poll_mark_attribute.valid() {
+            if let Err(e) =
+                attribute.emplace::<u8>(self.config.poll_mark_attribute_type, None, None)
+            {
+                log_warning!(
+                    "Failed to create a poll mark for Attribute ID {}, {}",
+                    attribute,
+                    e
+                );
+                return;
+            }
         } else {
-            let now = self.platform.clock_seconds();
-            self.last_poll = now;
-            self.poll_queue.queue(attribute, interval, now);
-            log_debug!("Marking {} for poll", attribute);
+            if let Err(e) = poll_mark_attribute.set_reported::<u8>(None) {
+                log_warning!("Failed to clear reported for {} {}", attribute, e);
+                return;
+            }
         }
+
+        let now = self.platform.clock_seconds();
+        self.last_poll = now;
+        self.poll_queue.queue(attribute, interval, now);
+        log_debug!("Marking {} for poll", attribute);
     }
 
     /// handles the incoming commands of the engine.
     fn on_handle_command(&mut self, cmd: PollEngineCommand) {
+        use crate::poll_engine::PollEngineCommand::*;
+
         match cmd {
-            PollEngineCommand::Register {
+            Register {
                 attribute,
                 interval,
             } => self.on_register(attribute, interval),
-            PollEngineCommand::Deregister { attribute } => self.on_deregister(attribute),
-            PollEngineCommand::Schedule { attribute } => self.on_schedule(attribute),
-            PollEngineCommand::Restart { attribute } => self.on_restart(attribute),
-            PollEngineCommand::Enable => self.on_enable(),
-            PollEngineCommand::Disable => self.on_disable(),
+            Deregister { attribute } => self.on_deregister(attribute),
+            Schedule { attribute } => self.on_schedule(attribute),
+            Restart { attribute } => self.on_restart(attribute),
+            Enable => self.on_enable(),
+            Disable => self.on_disable(),
+            PrintQueue => println!("{}", self.poll_queue),
         }
-
-        // Comment this in to get poll_engine to print the entire configuration
-        //#[cfg(not(test))]
-        //log_debug!("{}", self.poll_queue);
     }
 
     fn on_handle_attribute_update(&mut self, event: AttributeEvent<Attribute>) {
@@ -361,7 +367,7 @@ impl PollEngine {
     }
 
     fn on_schedule(&mut self, attribute: Attribute) {
-        log_debug!("Register {} with interval {}s", attribute, 0);
+        log_debug!("Scheduling {} now", attribute);
         let now = self.platform.clock_seconds();
         self.poll_queue.queue(attribute, 0, now);
     }
@@ -427,10 +433,11 @@ mod tests {
     use unify_middleware::contiki::MockPlatformTrait;
     use unify_middleware::contiki::MockTimerTrait;
     use unify_middleware::contiki::TimeoutSuccess;
-    use unify_middleware::AttributeStore;
-    use unify_middleware::AttributeStoreTrait;
-    use unify_middleware::AttributeValueState;
+    use unify_middleware::{
+        AttributeStore, AttributeStoreTrait, AttributeTypeId, AttributeValueState,
+    };
     struct NoValueAttributeWatcher;
+    const POLL_MARK_TYPE: AttributeTypeId = 123;
 
     #[async_trait]
     impl AttributeWatcherTrait for NoValueAttributeWatcher {
@@ -460,6 +467,7 @@ mod tests {
         let cfg = PollEngineConfig {
             backoff: 3,
             default_interval: 1,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
         };
         assert_eq!(default_if_zero(&cfg, 0), 1);
         assert_eq!(default_if_zero(&cfg, 44), 44);
@@ -467,7 +475,6 @@ mod tests {
 
     #[test]
     #[serial(poll_engine)]
-
     fn engine_does_nothing_on_creation() {
         let contiki_clock_mock = MockPlatformTrait::new();
         let mut poll_queue_mock = MockPollQueueTrait::new();
@@ -475,6 +482,7 @@ mod tests {
         let cfg = PollEngineConfig {
             backoff: 0,
             default_interval: 0,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
         };
 
         let mut sequence = Sequence::new();
@@ -486,7 +494,7 @@ mod tests {
             .in_sequence(&mut sequence)
             .return_const(None);
 
-        let (_, receiver) = unbounded();
+        let (sender, receiver) = unbounded();
         let engine = PollEngine::new(contiki_clock_mock, poll_queue_mock, cfg);
 
         let stream =
@@ -499,6 +507,8 @@ mod tests {
         assert_stream_pending!(stream);
         assert_stream_pending!(stream);
         assert_stream_pending!(stream);
+        drop(stream);
+        drop(sender);
     }
 
     #[test]
@@ -527,6 +537,7 @@ mod tests {
         let cfg = PollEngineConfig {
             backoff: 0,
             default_interval: 0,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
         };
 
         let mut sequence = Sequence::new();
@@ -587,6 +598,7 @@ mod tests {
         let cfg = PollEngineConfig {
             backoff: 0,
             default_interval: 0,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
         };
 
         let mut poll_queue_mock = MockPollQueueTrait::new();
@@ -637,6 +649,7 @@ mod tests {
         let cfg = PollEngineConfig {
             backoff: 0,
             default_interval: 0,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
         };
 
         let mut sequence = Sequence::new();
@@ -690,22 +703,26 @@ mod tests {
     #[test]
     #[serial(poll_engine)]
     fn poll_engine_mark_test() {
+        use unify_middleware::AttributeStorageType;
         let store = AttributeStore::new().unwrap();
-        let mut a = store.root().add(11111, Some(42), Some(24)).unwrap();
+        let a = store.root().add(11111, Some(42), Some(24)).unwrap();
 
         let cfg = PollEngineConfig {
             backoff: 0,
             default_interval: 0,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
         };
 
-        let mut poll_queue = PollEntries::new();
-        let mut sequence = Sequence::new();
+        let poll_queue = PollEntries::new();
         let mut contiki_clock_mock = MockPlatformTrait::new();
 
         contiki_clock_mock
             .expect_clock_seconds()
             .with()
             .return_const(0u64);
+
+        // Poll mark does not exist yet.
+        assert_eq!(a.get_child_by_type(POLL_MARK_TYPE), Attribute::invalid());
 
         let mut engine = PollEngine::new(contiki_clock_mock, poll_queue, cfg);
         engine.on_register(a, 1111);
@@ -715,7 +732,7 @@ mod tests {
         assert_eq!(a.get_reported::<u32>(), Ok(42));
         assert_eq!(a.get_desired::<u32>(), Ok(24));
 
-        let mark = a.get_child_by_type(ATTRIBUTE_POLL_ENGINE_MARK);
+        let mark = a.get_child_by_type(POLL_MARK_TYPE);
         assert_ne!(mark, Attribute::invalid());
         assert_eq!(
             poll_engine_mark_rust(mark),
@@ -724,6 +741,37 @@ mod tests {
 
         assert_eq!(a.is_reported_set(), false);
         assert_eq!(a.get_desired::<u32>(), Ok(24));
+
+        // Test the resolving function with invalid attributes:
+        assert_eq!(
+            poll_engine_mark_rust(Attribute::invalid()),
+            Err(AttributeStoreError::StaleOrNoneExisting)
+        );
+
+        // Get the set_reported for the mark to fail by constraining which
+        // storage type can be written to that attribute type:
+        assert_eq!(Ok(()), a.set_reported::<u8>(Some(1)));
+        assert_eq!(Ok(()), mark.set_reported::<i32>(None));
+        assert_eq!(
+            Ok(()),
+            store.register_attribute_type(
+                POLL_MARK_TYPE,
+                "Poll Mark",
+                0,
+                AttributeStorageType::U32_STORAGE_TYPE
+            )
+        );
+        store.log_type_information(POLL_MARK_TYPE);
+        store.set_type_validation(true);
+
+        assert_eq!(poll_engine_mark_rust(mark), Ok((SL_STATUS_FAIL, vec! {})));
+
+        assert_eq!(a.is_reported_set(), false);
+        assert_eq!(a.get_desired::<u32>(), Ok(24));
+        assert_eq!(mark.is_reported_set(), false); // Here instead of true it is false due to type validation.
+
+        // Remove type validation from our Attribute Store.
+        store.set_type_validation(false);
     }
 
     #[test]
@@ -734,9 +782,11 @@ mod tests {
         let (mut attribute_watcher_sender, attribute_watcher_receiver) = unbounded();
 
         let attribute_watcher_stub = AttributeWatcherStub::new(attribute_watcher_receiver);
+
         let cfg = PollEngineConfig {
             backoff: 0,
             default_interval: 0,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
         };
 
         let mut poll_queue_mock = MockPollQueueTrait::new();
@@ -794,5 +844,37 @@ mod tests {
             .start_send(attribute_event)
             .unwrap();
         assert_stream_pending!(stream);
+    }
+
+    #[test]
+    #[serial(poll_engine)]
+    fn poll_engine_wrong_configuration() {
+        let store = AttributeStore::new().unwrap();
+        let a = store.root().add(11111, Some(42), Some(24)).unwrap();
+
+        const POLL_MARK_TYPE: AttributeTypeId = ATTRIBUTE_STORE_INVALID_TYPE;
+        let cfg = PollEngineConfig {
+            backoff: 0,
+            default_interval: 0,
+            poll_mark_attribute_type: POLL_MARK_TYPE,
+        };
+
+        let poll_queue = PollEntries::new();
+        let mut contiki_clock_mock = MockPlatformTrait::new();
+
+        contiki_clock_mock
+            .expect_clock_seconds()
+            .with()
+            .return_const(0u64);
+
+        // Poll mark does not exist yet.
+        assert_eq!(a.get_child_by_type(POLL_MARK_TYPE), Attribute::invalid());
+
+        let mut engine = PollEngine::new(contiki_clock_mock, poll_queue, cfg);
+        engine.on_register(a, 1111);
+        engine.do_poll();
+
+        // Attribute Store should refuse to create the poll mark.
+        assert_eq!(a.get_child_by_type(POLL_MARK_TYPE), Attribute::invalid());
     }
 }

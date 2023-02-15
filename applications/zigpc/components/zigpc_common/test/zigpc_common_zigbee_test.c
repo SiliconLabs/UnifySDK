@@ -96,7 +96,7 @@ void test_zigbee_eui64_to_str_should_process_zero_eui64(void)
 {
   zigbee_eui64_t test_eui64 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
   char *expected_eui64      = "0000000000000000";
-  char buffer[(ZIGBEE_EUI64_SIZE * 2) + 1];
+  char buffer[(ZIGBEE_EUI64_SIZE * 2) + 1] = {0};
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     zigbee_eui64_to_str(test_eui64, buffer, sizeof(buffer)));
@@ -105,8 +105,8 @@ void test_zigbee_eui64_to_str_should_process_zero_eui64(void)
 
 void test_zigbee_eui64_to_str_should_reject_insufficient_buffer_lengths(void)
 {
-  zigbee_eui64_t test_eui64;
-  char buffer[10];
+  zigbee_eui64_t test_eui64 = {0};
+  char buffer[10] = {0};
 
   TEST_ASSERT_EQUAL(SL_STATUS_WOULD_OVERFLOW,
                     zigbee_eui64_to_str(test_eui64, buffer, sizeof(buffer)));

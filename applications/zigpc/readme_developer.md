@@ -38,7 +38,7 @@ for more details.
 
 ### Cross Compiling for Raspberry Pi Using Docker
 
-> Cross compilation builds currently supports only the Raspberry Pi OS Buster.
+> Cross compilation builds currently supports only the Raspberry Pi OS Bullseye.
 
 From the root of the Unify source directory, run the following:
 
@@ -46,7 +46,7 @@ From the root of the Unify source directory, run the following:
 
 ``` bash
 cd docker
-./build_docker.sh armhf uic_armhf
+./build_docker.sh arm64 uic_arm64
 cd ..
 ```
 
@@ -58,7 +58,7 @@ docker run -it --rm \
   -v`pwd`:`pwd` \
   -w `pwd` \
   -v ${GSDK_LOCATION}:${GSDK_LOCATION} \
-  uic_armhf
+  uic_arm64
 ```
 
 Alternatively, use the provided runDocker.sh script in the docker directory.
@@ -73,7 +73,7 @@ Docker container:
 ``` bash
 mkdir build
 cd build
-cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../cmake/armhf_debian.cmake ..
+cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../cmake/arm64_debian.cmake ..
 ninja               # Build binaries
 ninja deb           # Build Debian Installers (optional)
 ```
@@ -89,13 +89,13 @@ To run the unit tests within Docker on the Host machine, run the following
 command in the Host (not in the Docker container):
 
 ``` bash
-docker run --user 0 --privileged --rm -it uic_armhf update-binfmts --enable
+docker run --user 0 --privileged --rm -it uic_arm64 update-binfmts --enable
 ```
 
 > NB: This command needs to be run once after each restart of the Host machine.
 
 After enabling this you can run the unittests by issuing following command in
-the `uic_armhf` docker image in the build directory:
+the `uic_arm64` docker image in the build directory:
 
 ```bash
 ninja test
@@ -262,9 +262,9 @@ overview of messages sent on the network.
 ### Decrypting Network Traffic in Simplicity Studio
 
 ZigPC uses Network key (NWK key) based on the install code. In typical Zigbee
-applications, the Ember CLI can be used to get this key. However, because the
-Ember CLI has been disabled in ZigPC, the NWK Key is logged in the ZigPC
-debug console after the network is opened for joining:
+applications, the Ember CLI can be used to get this key. The CLI can be
+re-enabled at compilation time, however, the network information is also
+printed out at startup.
 
 Look for the following pattern:
 
@@ -292,3 +292,65 @@ addition is performed to add an end device to the PAN using the Install
 Code based DSK:
 
 ![](doc/assets/user_guide-network-analyzer-node-add.png)
+
+### Adding custom clusters
+
+It is possible to add custom ZCL info to ZigPC to add natively unsupported 
+clusters or to override the functionality of default clusters. This step must 
+be run at compilation time in order to properly include the necessary MQTT
+topics and other related ZCL information.
+
+* Step 1: Adding the custom cluster to the Unify framework
+
+Add a custom XML file (or modify an existing XML file) in the shared components
+of the Unify framework. All XML files defining ZCL clusters are stored in the
+'uic-dotdot' component under the 'dotdot-xml' folder. If a new XML file is
+added or if the name of an XML file changes, that change must be reflected in
+the library.xml file
+
+* Step 2: Adding the custom cluster in the ZigPC
+
+ZigPC generates ZCL-cluster code and structures using ZAP. Ensure that the ZAP
+templates will generate for the new cluster by adding the name to:
+'uic/applications/zigpc/components/zcl\_util/zap/addon-helper.js
+Specifically, the 'SUPPORTED\_CLUSTERS' and 'SUPPORTED\_CLUSTER\_ATTRIBUTES'
+lists must reference the new cluster.
+
+* Step 3: Adding the custom clusters in the zigbeeHost gateway level
+
+ZigPC uses a custom zigbeeHost layer to manage the zigbee stack. Ensure that
+this layer can also access the new ZCL cluster by modifying the slcp file
+in 'uic/applications/zigpc/components/zigpc\_gateway/libs/zigbee\_host/src/libzigbee\_host.slcp'
+Add the new cluster in the same format as all the existing clusters at this layer.
+
+*Step 4: Re-generate all ZAP templates
+
+Unify uses ZAP to generate ZCL cluster information (as discussed in step #2).
+Make sure that zap can find the library by modifying its configuration file.
+
+Alternatively, compile with the cmake option 'ZAP_GENERATE' set to 'ON' to
+automatically re-generate zap output files as part of the compilation process.
+
+Re-generate all zap output in the top level uic for the following components:
+uic_dotdot, uic_dotdot_mqtt, unify_dotdot_attribute_store
+
+Re-generate all zap output in the zigpc level for the following components:
+command_mapper, zcl_util, zcl_command_parser, zcl_profiles, attribute_management
+
+Please take a look at [https://github.com/SiliconLabs/zap] for more detailed
+information.
+
+* Step 5: Re-generate the zigbee_host
+
+Re-generate the zigbee_host slcp, in the autogen folder. Set the
+STUDIO_ADAPTER_PATH to point to zap, which should already be configured
+to point to the custom xml. Otherwise, it will be necessary to edit the
+zap-config of the zigbee_host folder.
+
+Please read [https://siliconlabs.github.io/slc-specification/1.0/] and 
+[https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf]
+for more information on using the slc_cli.
+
+* Step 6:
+
+Compile ZigPC as normal. ZigPC should now support your custom cluster

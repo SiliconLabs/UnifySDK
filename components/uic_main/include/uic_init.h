@@ -16,12 +16,22 @@
 /**
  * @addtogroup uic_main
  */
-struct uic_fixt_setup_step_t;
+struct uic_fixt_setup_step;
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
+/**
+ * @brief Read in the configuration parameters. Initialize and start up contiki
+ * OS and start up the Unify processes.
+ *
+ * @param fixt_app_setup    array of fixtures for the program.
+ * @param argc              argc for the running program
+ * @param argv              argv for the running program
+ * @param version
+ * @returns sl_status_t
+ */
+sl_status_t uic_init(const struct uic_fixt_setup_step *fixt_app_setup,
                      int argc,
                      char **argv,
                      const char *version);

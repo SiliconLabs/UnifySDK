@@ -15,7 +15,7 @@ use crate::zwave_controller_sys::zwave_controller_encapsulation_scheme_t;
 
 /// The [ZwaveControllerEncapsulationScheme] is a rust version of
 /// [crate::zwave_command_handler_sys::zwave_controller_encapsulation_scheme_t] hiding
-/// logic and quirks needed for dealing with C/C++ types. 
+/// logic and quirks needed for dealing with C/C++ types.
 #[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
 pub enum ZwaveControllerEncapsulationScheme {
     ZwaveControllerEncapsulationNetworkScheme,
@@ -61,15 +61,25 @@ impl From<ZwaveControllerEncapsulationScheme> for zwave_controller_encapsulation
 
 #[cfg(test)]
 mod tests {
-    use super::{ZwaveControllerEncapsulationScheme, zwave_controller_encapsulation_scheme_t};
-    
+    use super::{zwave_controller_encapsulation_scheme_t, ZwaveControllerEncapsulationScheme};
+
     #[test]
     fn type_conversion() {
         // Conversion from binding encapsulation scheme to rust encapsulation scheme.
-        let network_encapsulation_scheme = ZwaveControllerEncapsulationScheme::from(zwave_controller_encapsulation_scheme_t::ZWAVE_CONTROLLER_ENCAPSULATION_NETWORK_SCHEME);
-        assert_eq!(network_encapsulation_scheme, ZwaveControllerEncapsulationScheme::ZwaveControllerEncapsulationNetworkScheme);
+        let network_encapsulation_scheme = ZwaveControllerEncapsulationScheme::from(
+            zwave_controller_encapsulation_scheme_t::ZWAVE_CONTROLLER_ENCAPSULATION_NETWORK_SCHEME,
+        );
+        assert_eq!(
+            network_encapsulation_scheme,
+            ZwaveControllerEncapsulationScheme::ZwaveControllerEncapsulationNetworkScheme
+        );
 
-        let network_encapsulation_scheme = zwave_controller_encapsulation_scheme_t::from(ZwaveControllerEncapsulationScheme::ZwaveControllerEncapsulationSecurity0);
-        assert_eq!(network_encapsulation_scheme, zwave_controller_encapsulation_scheme_t::ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0);
+        let network_encapsulation_scheme = zwave_controller_encapsulation_scheme_t::from(
+            ZwaveControllerEncapsulationScheme::ZwaveControllerEncapsulationSecurity0,
+        );
+        assert_eq!(
+            network_encapsulation_scheme,
+            zwave_controller_encapsulation_scheme_t::ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0
+        );
     }
 }

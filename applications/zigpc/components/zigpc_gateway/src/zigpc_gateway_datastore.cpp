@@ -86,15 +86,19 @@ sl_status_t zigpc_gateway_persist_address_table_info(void)
     if (status == SL_STATUS_OK) {
       zigbee_eui64_copy_switch_endian(dev_id.eui64, eui64);
 
+      EmberNodeId node_id = 0;
+
       EmberStatus em_status
-        = zigbeeHostGetAddressTableEntry(dev_id.eui64, &dev_id.node_id);
+        = zigbeeHostGetAddressTableEntry(dev_id.eui64, &node_id);
       if (em_status != EMBER_SUCCESS) {
-        dev_id.node_id = EMBER_UNKNOWN_NODE_ID;
+        node_id = EMBER_UNKNOWN_NODE_ID;
         sl_log_warning(LOG_TAG,
                        "EmberAf address-table entry cannot be read, setting "
                        "nodeId to 0x%04X",
-                       dev_id.node_id);
+                       node_id);
       }
+      
+      dev_id.node_id = node_id;
     }
 
     sl_log_debug(LOG_TAG,

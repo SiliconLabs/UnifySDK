@@ -22,6 +22,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "sl_status.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -110,6 +111,29 @@ bool zwapi_serial_is_file_available(void);
  * @zgw_name SerialFlush
  */
 void zwapi_serial_drain_buffer(void);
+
+/**
+ * @brief Disable/stop logging serial data to file.
+ *
+ * This will stop the logging of serial data to file.
+ *
+ * @return \ref SL_STATUS_OK on success
+ */
+sl_status_t zwapi_serial_log_to_file_disable();
+
+/**
+ * @brief Enable logging of serial data to a file.
+ *
+ * The log will append to the file, it is up to the user to handle log rotation,
+ * free disk space monitoring etc.
+ *
+ * @param filename file to log serial trace to, log will append to this file.
+ * @return \ref SL_STATUS_OK on success.
+ * @return \ref SL_STATUS_ALREADY_INITIALIZED if log to file is already enabled.
+ * @return \ref SL_STATUS_FAIL if other failure (e.g. folder doesn't exist,
+ *              lacking permissions, etc.).
+ */
+sl_status_t zwapi_serial_log_to_file_enable(const char *filename);
 
 #ifdef __cplusplus
 }

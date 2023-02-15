@@ -299,3 +299,8 @@ bool datastore_contains_arr(const datastore_key_t key)
 {
   return datastore_contains_internal(DATASTORE_TABLE_BLOB, key);
 }
+
+bool datastore_is_initialized()
+{
+  return (NULL != db);
+}

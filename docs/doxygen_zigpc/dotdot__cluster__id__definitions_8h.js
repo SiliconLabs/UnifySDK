@@ -50,7 +50,6 @@ var dotdot__cluster__id__definitions_8h =
     [ "DOTDOT_THERMOSTAT_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gaaaf90fdbb579ebe87224c73859fb65f7", null ],
     [ "DOTDOT_THERMOSTAT_USER_INTERFACE_CONFIGURATION_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#ga16564cd3b6d733bbe5916330118b649c", null ],
     [ "DOTDOT_TIME_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gac8292badce3f903358009a0cf99415e0", null ],
-    [ "DOTDOT_TOUCHLINK_COMMISSIONING_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gaba1b091fcb6865bb67a7f461adaa469c", null ],
     [ "DOTDOT_WIND_SPEED_MEASUREMENT_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gacd53c8af154a88abbaf54133f713b84d", null ],
     [ "DOTDOT_WINDOW_COVERING_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gab661e81ea29443cb6195dec1829667c5", null ],
     [ "uic_dotdot_get_cluster_id", "group__dotdot__cluster__id__definitions.html#ga6e7f501345ec80660e63e228a7272f22", null ],

@@ -77,20 +77,6 @@ static void align_current_to_target_value(attribute_store_node_t value_node)
   attribute_store_set_reported_as_desired(value_node);
 }
 
-static void set_state_value(attribute_store_node_t state_node,
-                            command_status_values_t reported,
-                            command_status_values_t desired)
-{
-  attribute_store_set_node_attribute_value(state_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&reported,
-                                           sizeof(command_status_values_t));
-  attribute_store_set_node_attribute_value(state_node,
-                                           DESIRED_ATTRIBUTE,
-                                           (uint8_t *)&desired,
-                                           sizeof(command_status_values_t));
-}
-
 static void get_state(attribute_store_node_t state_node,
                       binary_switch_state_t *state)
 {
@@ -287,7 +273,7 @@ static sl_status_t zwave_command_class_binary_switch_handle_report(
 
   // Current/target value adjustments based on the reported duration.
   attribute_timeout_cancel_callback(state_node, &align_current_to_target_value);
-  if (attribute_store_is_value_defined(value_node, DESIRED_ATTRIBUTE)
+  if (attribute_store_is_desired_defined(value_node)
       && false == attribute_store_is_value_matched(value_node)) {
     attribute_timeout_set_callback(state_node,
                                    zwave_duration_to_time((uint8_t)duration),
@@ -295,7 +281,16 @@ static sl_status_t zwave_command_class_binary_switch_handle_report(
   }
 
   // Set the reported of the state node, so that it does not "get" again.
-  set_state_value(state_node, FINAL_STATE, FINAL_STATE);
+  set_command_status_value(state_node, FINAL_STATE, FINAL_STATE);
+
+  // Log the state of the node
+  sl_log_debug(LOG_TAG,
+               "NodeID %d:%d Binary Switch current "
+               "value %d, duration %d",
+               connection_info->remote.node_id,
+               connection_info->remote.endpoint_id,
+               current_value,
+               duration);
 
   return SL_STATUS_OK;
 }
@@ -327,7 +322,7 @@ static void on_state_send_data_complete(attribute_store_node_t state_node,
       set_reported_duration(state_node, state.desired_duration);
 
       // After a success, no more commands to send.
-      set_state_value(state_node, FINAL_STATE, FINAL_STATE);
+      set_command_status_value(state_node, FINAL_STATE, FINAL_STATE);
       break;
 
     case FRAME_SENT_EVENT_OK_NO_SUPERVISION:
@@ -455,7 +450,7 @@ static void zwave_command_class_binary_switch_on_desired_sub_state_update(
       && !attribute_store_is_value_matched(node)) {
     attribute_store_node_t state_node
       = attribute_store_get_first_parent_with_type(node, ATTRIBUTE(STATE));
-    set_state_value(state_node, FINAL_STATE, NEEDS_ONE_COMMAND);
+    set_command_status_value(state_node, FINAL_STATE, NEEDS_ONE_COMMAND);
 
     if (true == is_node_pending_set_resolution(state_node)) {
       sl_log_debug(LOG_TAG, "Restarting Set resolution on node %d", state_node);

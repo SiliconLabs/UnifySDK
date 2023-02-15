@@ -44,12 +44,9 @@ extern "C" {
  * ucl/by-unid/&lt;unid&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Desired
  *
  * @param endpoint_id_node   Attribute Store node of the endpoint
- *
- * @returns SL_STATUS_OK if the data from the attribute store was coherent and a
- * call to mqtt_publish has been made, any other code otherwise
  */
-sl_status_t
-  publish_group_list_cluster_attribute(attribute_store_node_t endpoint_id_node);
+void publish_group_list_cluster_attribute(
+  attribute_store_node_t endpoint_id_node);
 
 /**
  * @brief Publishes the Groups NameSupport attribute for an unid/endpoint
@@ -57,11 +54,8 @@ sl_status_t
  * ucl/by-unid/&lt;unid&gt;/ep&lt;id&gt;/Groups/Attributes/NameSupport/Desired
  *
  * @param [in] endpoint_id_node   Attribute Store node of the endpoint
- *
- * @returns SL_STATUS_OK if the data from the attribute store was coherent and a
- * call to mqtt_publish has been made, any other code otherwise
  */
-sl_status_t publish_name_support_cluster_attribute(
+void publish_name_support_cluster_attribute(
   attribute_store_node_t endpoint_id_node);
 
 /**
@@ -102,12 +96,9 @@ void publish_group_cluster_cluster_revision(const std::string &unid,
  * verification will be made and it will just be published as such.
  *
  * @param [in] group_name_node    Attribute Store Node containing the group name string
- *
- * @returns SL_STATUS_OK if the data from the attribute store was coherent and a
- * call to mqtt_publish has been made, any other code otherwise
  */
-sl_status_t
-  publish_group_name_cluster_attribute(attribute_store_node_t group_name_node);
+void publish_group_name_cluster_attribute(
+  attribute_store_node_t group_name_node);
 
 /**
  * @brief Removes the the Groups Name attribute publications for an unid/endpoint
@@ -137,12 +128,9 @@ void unretain_group_name_publications(const std::string &unid,
  * verification will be made and it will just be published as such.
  *
  * @param [in] endpoint_id_node   Attribute Store node of the endpoint
- *
- * @returns SL_STATUS_OK if the data from the attribute store was coherent and a
- * call to mqtt_publish has been made, any other code otherwise
  */
-sl_status_t
-  publish_group_list_cluster_attribute(attribute_store_node_t endpoint_id_node);
+void publish_group_list_cluster_attribute(
+  attribute_store_node_t endpoint_id_node);
 
 #ifdef __cplusplus
 }

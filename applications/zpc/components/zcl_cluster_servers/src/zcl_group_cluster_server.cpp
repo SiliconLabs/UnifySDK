@@ -18,14 +18,16 @@
 // Unify components
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
+#include "attribute_timeouts.h"
 #include "uic_mqtt.h"
 #include "sl_log.h"
+#include "unify_dotdot_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_helpers.h"
 
 // ZPC Components
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
-#include "dotdot_attributes.h"
 #include "zpc_dotdot_mqtt_group_dispatch.h"
 #include "ucl_node_state.h"
 
@@ -84,41 +86,26 @@ sl_status_t add_group(const std::string &unid,
   }
 
   attribute_store_node_t group_id_node
-    = attribute_store_get_node_child_by_value(
-      endpoint_id_node,
-      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
-      REPORTED_ATTRIBUTE,
-      reinterpret_cast<uint8_t *>(&group_id),
-      sizeof(uint16_t),
-      0);
-
-  if (group_id_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    group_id_node
-      = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
-                                 endpoint_id_node);
-    attribute_store_set_node_attribute_value(
-      group_id_node,
-      REPORTED_ATTRIBUTE,
-      reinterpret_cast<uint8_t *>(&group_id),
-      sizeof(group_id));
-  }
+    = attribute_store_emplace(endpoint_id_node,
+                              DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
+                              &group_id,
+                              sizeof(group_id));
 
   attribute_store_node_t group_name_node
-    = attribute_store_get_first_child_by_type(
+    = attribute_store_create_child_if_missing(
       group_id_node,
       DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME);
 
-  if (group_name_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    group_name_node
-      = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,
-                                 group_id_node);
-  }
   // Save the group name
   attribute_store_set_reported_string(group_name_node, group_name.c_str());
 
   // Make MQTT publications
-  publish_group_list_cluster_attribute(endpoint_id_node);
-  publish_group_name_cluster_attribute(group_name_node);
+  attribute_timeout_set_callback(endpoint_id_node,
+                                 1,
+                                 &publish_group_list_cluster_attribute);
+  attribute_timeout_set_callback(group_name_node,
+                                 1,
+                                 &publish_group_name_cluster_attribute);
   return SL_STATUS_OK;
 }
 
@@ -160,7 +147,9 @@ sl_status_t remove_group(const std::string &unid,
 
   // Make MQTT publications
   unretain_group_name_publications(unid, endpoint_id, group_id);
-  publish_group_list_cluster_attribute(endpoint_id_node);
+  attribute_timeout_set_callback(endpoint_id_node,
+                                 1,
+                                 &publish_group_list_cluster_attribute);
   return SL_STATUS_OK;
 }
 
@@ -207,7 +196,9 @@ sl_status_t remove_all_groups(const std::string &unid,
   }
 
   // Make a list publication only when we are done with deletion
-  publish_group_list_cluster_attribute(endpoint_id_node);
+  attribute_timeout_set_callback(endpoint_id_node,
+                                 1,
+                                 &publish_group_list_cluster_attribute);
   return SL_STATUS_OK;
 }
 
@@ -266,11 +257,15 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
                                                   const char *message,
                                                   size_t message_length)
 {
+  sl_log_debug(LOG_TAG, "Incoming command %s %s", topic, message);
   std::vector<std::string> topic_elements;
   boost::algorithm::split(topic_elements, topic, boost::is_any_of("/"));
   std::string unid                = topic_elements[2];
   zwave_endpoint_id_t endpoint_id = 0;
   if (0 == sscanf(topic_elements[3].c_str(), "ep%2" SCNu8, &endpoint_id)) {
+    sl_log_debug(LOG_TAG,
+                 "Error parsing endpoint value from topic %s. Ignoring.",
+                 topic);
     return;
   }
 
@@ -316,6 +311,10 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
                                                       endpoint_id,
                                                       REPORTED_ATTRIBUTE);
     if (identify_time == 0) {
+      sl_log_debug(LOG_TAG,
+                   "UNID %s Ep %d is not identifying. Ignoring command.",
+                   unid.c_str(),
+                   endpoint_id);
       return;
     }
     // The node is identifying. Same procedure as the Add Group command.
@@ -380,8 +379,8 @@ void on_zcl_by_group_group_cluster_server_command_received(
 ///////////////////////////////////////////////////////////////////////////////
 // MQTT Publication functions
 //////////////////////////////////////////////////////////////////////////////
-sl_status_t
-  publish_group_name_cluster_attribute(attribute_store_node_t group_name_node)
+void publish_group_name_cluster_attribute(
+  attribute_store_node_t group_name_node)
 {
   zwave_endpoint_id_t endpoint_id = 0;
   std::string unid;
@@ -394,7 +393,7 @@ sl_status_t
       != zcl_cluster_servers_get_unid_endpoint(endpoint_id_node,
                                                endpoint_id,
                                                unid)) {
-    return SL_STATUS_FAIL;
+    return;
   }
 
   attribute_store_node_t group_id_node
@@ -404,11 +403,13 @@ sl_status_t
 
   uint16_t group_id = 0;
   if (SL_STATUS_OK
-      != attribute_store_read_value(group_id_node,
-                                    REPORTED_ATTRIBUTE,
-                                    &group_id,
-                                    sizeof(uint16_t))) {
-    return SL_STATUS_FAIL;
+      != attribute_store_get_reported(group_id_node,
+                                      &group_id,
+                                      sizeof(uint16_t))) {
+    sl_log_debug(LOG_TAG,
+                 "Error reading Group ID value for attribute ID %d",
+                 group_id_node);
+    return;
   }
 
   char group_name[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
@@ -419,8 +420,10 @@ sl_status_t
         REPORTED_ATTRIBUTE,
         reinterpret_cast<uint8_t *>(group_name),
         &group_name_size)) {
-    sl_log_debug(LOG_TAG, "Error reading group name value");
-    return SL_STATUS_FAIL;
+    sl_log_debug(LOG_TAG,
+                 "Error reading Group Name value for attribute ID %d",
+                 group_name_node);
+    return;
   }
   // We save the null termination in the attribute store, but better safe than sorry
   group_name[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH - 1] = '\0';
@@ -441,11 +444,10 @@ sl_status_t
                    message.c_str(),
                    message.size(),
                    true);
-  return SL_STATUS_OK;
 }
 
-sl_status_t
-  publish_group_list_cluster_attribute(attribute_store_node_t endpoint_id_node)
+void publish_group_list_cluster_attribute(
+  attribute_store_node_t endpoint_id_node)
 {
   zwave_endpoint_id_t endpoint_id = 0;
   std::string unid;
@@ -454,7 +456,7 @@ sl_status_t
       != zcl_cluster_servers_get_unid_endpoint(endpoint_id_node,
                                                endpoint_id,
                                                unid)) {
-    return SL_STATUS_FAIL;
+    return;
   }
 
   std::string reported_topic = "ucl/by-unid/" + std::string(unid) + "/ep"
@@ -508,10 +510,9 @@ sl_status_t
                    message.c_str(),
                    message.size(),
                    true);
-  return SL_STATUS_OK;
 }
 
-sl_status_t publish_name_support_cluster_attribute(
+void publish_name_support_cluster_attribute(
   attribute_store_node_t endpoint_id_node)
 {
   zwave_endpoint_id_t endpoint_id = 0;
@@ -521,7 +522,7 @@ sl_status_t publish_name_support_cluster_attribute(
       != zcl_cluster_servers_get_unid_endpoint(endpoint_id_node,
                                                endpoint_id,
                                                unid)) {
-    return SL_STATUS_FAIL;
+    return;
   }
 
   std::string reported_topic = "ucl/by-unid/" + unid + "/ep"
@@ -543,7 +544,6 @@ sl_status_t publish_name_support_cluster_attribute(
                    message.c_str(),
                    message.size(),
                    true);
-  return SL_STATUS_OK;
 }
 
 void publish_group_cluster_supported_commands(const std::string &unid,
@@ -777,12 +777,12 @@ sl_status_t zcl_group_cluster_server_init()
   sl_status_t init_status = SL_STATUS_OK;
 
   init_status |= attribute_store_register_callback_by_type_and_state(
-    on_endpoint_deletion,
+    &on_endpoint_deletion,
     ATTRIBUTE_ENDPOINT_ID,
     REPORTED_ATTRIBUTE);
 
   init_status |= attribute_store_register_callback_by_type_and_state(
-    on_network_status_update,
+    &on_network_status_update,
     ATTRIBUTE_NETWORK_STATUS,
     REPORTED_ATTRIBUTE);
 

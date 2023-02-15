@@ -41,6 +41,10 @@ function(get_target_triple CARGO_TARGET_TRIPLE)
     set(CARGO_TARGET_TRIPLE
         "armv7-unknown-linux-gnueabihf"
         PARENT_SCOPE)
+  elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
+    set(CARGO_TARGET_TRIPLE
+        "aarch64-unknown-linux-gnu"
+        PARENT_SCOPE)
   else()
     if(CMAKE_SIZEOF_VOID_P EQUAL 8)
       set(CARGO_TARGET_TRIPLE
@@ -92,35 +96,26 @@ function(rust_output_filename CARGO_META_PACKAGE OUT_FILE)
   endif()
 endfunction()
 
-function(rust_output_file CARGO_META_PACKAGE OUT_FILE)
-  rust_output_dir(${CARGO_META_PACKAGE} OUT_DIR)
-  rust_output_filename(${CARGO_META_PACKAGE} OUT_FILENAME)
-  set(${OUT_FILE}
-      ${OUT_DIR}/${OUT_FILENAME}
-      PARENT_SCOPE)
-endfunction()
-
-function(rust_native_target_dir CARGO_META_PACKAGE OUT_DIR)
+function(rust_native_target_dir CARGO_TARGET_DIR OUT_DIR)
   rust_build_profile(CARGO_PROFILE)
   if(CARGO_PROFILE MATCHES "dev")
     set(CARGO_PROFILE "debug")
   endif()
 
-  string(JSON CARGO_NATIVE_TARGET_DIR GET ${CARGO_METADATA} "target_directory")
   set(${OUT_DIR}
-      "${CMAKE_BINARY_DIR}/cargo/${CARGO_TARGET_TRIPLE}/${CARGO_PROFILE}"
+      "${CARGO_TARGET_DIR}/${CARGO_TARGET_TRIPLE}/${CARGO_PROFILE}"
       PARENT_SCOPE)
 endfunction()
 
-function(rust_native_target_file CARGO_META_PACKAGE NATIVE_OUT)
-  rust_native_target_dir(${CARGO_META_PACKAGE} OUT_DIR)
+function(rust_native_target_file CARGO_TARGET_DIR CARGO_META_PACKAGE NATIVE_OUT)
+  rust_native_target_dir(${CARGO_TARGET_DIR} OUT_DIR)
   rust_output_filename(${CARGO_META_PACKAGE} OUT_FILENAME)
   set(${NATIVE_OUT}
       "${OUT_DIR}/${OUT_FILENAME}"
       PARENT_SCOPE)
 endfunction()
 
-function(rust_target_meta CARGO_TARGET_MANIFEST CARGO_META_PACKAGE)
+function(rust_package_meta CARGO_METADATA CARGO_PACKAGE_NAME PACKAGE_JSON)
   string(
     JSON
     CARGO_PACKAGES
@@ -129,6 +124,7 @@ function(rust_target_meta CARGO_TARGET_MANIFEST CARGO_META_PACKAGE)
     GET
     ${CARGO_METADATA}
     "packages")
+
   if(PACKAGES_ERROR)
     message(FATAL_ERROR "Error parsing rust meta: ${PACKAGES_ERROR}")
   endif()
@@ -148,10 +144,9 @@ function(rust_target_meta CARGO_TARGET_MANIFEST CARGO_META_PACKAGE)
       message(FATAL_ERROR "Error parsing rust meta: ${PACKAGES_ERROR}")
     endif()
 
-    get_filename_component(FULL_PATH ${CARGO_TARGET_MANIFEST} REALPATH)
-    string(JSON CARGO_PACKAGE_MANIFEST GET ${CARGO_PACKAGE} "manifest_path")
-    if(${FULL_PATH} STREQUAL ${CARGO_PACKAGE_MANIFEST})
-      set(CARGO_META_PACKAGE
+    string(JSON CARGO_PACKAGE_NAME GET ${CARGO_PACKAGE} "name")
+    if(${CARGO_NAME} STREQUAL ${CARGO_PACKAGE_NAME})
+      set(${PACKAGE_JSON}
           ${CARGO_PACKAGE}
           PARENT_SCOPE)
       return()
@@ -159,7 +154,7 @@ function(rust_target_meta CARGO_TARGET_MANIFEST CARGO_META_PACKAGE)
   endforeach()
   message(
     FATAL_ERROR
-      "could not find meta data for ${CARGO_TARGET_MANIFEST}. Did you add the project to the top level Cargo.toml?"
+      "could not find meta data for ${CARGO_PACKAGE_NAME}. Did you add the project to the top level Cargo.toml?"
   )
 endfunction()
 
@@ -323,15 +318,6 @@ function(rust_rel_output_dir CARGO_META_PACKAGE OUT_DIR)
       PARENT_SCOPE)
 endfunction()
 
-function(rust_output_dir CARGO_META_PACKAGE OUT_DIR)
-  string(JSON manifest_path GET ${CARGO_META_PACKAGE} "manifest_path")
-  get_filename_component(base_path ${manifest_path} DIRECTORY)
-  file(RELATIVE_PATH COMPONENT_PATH ${PROJECT_SOURCE_DIR} ${base_path})
-  set(${OUT_DIR}
-      ${CMAKE_BINARY_DIR}/${COMPONENT_PATH}
-      PARENT_SCOPE)
-endfunction()
-
 function(rust_glob_sources CARGO_META_PACKAGE RUST_SOURCES)
   rust_source_paths(${CARGO_META_PACKAGE} SOURCE_PATHS)
   foreach(SOURCE_PATH ${SOURCE_PATHS})
@@ -372,13 +358,20 @@ function(rust_is_configured_for_deb CARGO_META_PACKAGE CONFIGURED)
 endfunction()
 
 get_target_triple(CARGO_TARGET_TRIPLE)
+set(DIR_OF_CARGO_META
+    ${CMAKE_CURRENT_LIST_DIR}
+    CACHE INTERNAL "DIR_OF_CARGO_META")
 
-if(CMAKE_Rust_COMPILER)
-  # This command reads metadata of all rust projects into the var
-  # CARGO_METADATA.
-  execute_process(
-    COMMAND ${CARGO_EXECUTABLE} "metadata" "--format-version" "1"
-            "--filter-platform" "${CARGO_TARGET_TRIPLE}"
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    OUTPUT_VARIABLE CARGO_METADATA COMMAND_ERROR_IS_FATAL ANY)
-endif()
+function(rust_workspace_metadata CARGO_MANIFEST_DIR CARGO_METADATA)
+  if(CMAKE_Rust_COMPILER)
+    execute_process(
+      COMMAND
+        ${CARGO_EXECUTABLE} "metadata" "--manifest-path"
+        "${CARGO_MANIFEST_DIR}/Cargo.toml" "--format-version" "1"
+        "--filter-platform" "${CARGO_TARGET_TRIPLE}"
+      OUTPUT_VARIABLE METADATA COMMAND_ERROR_IS_FATAL ANY)
+    set(${CARGO_METADATA}
+        ${METADATA}
+        PARENT_SCOPE)
+  endif()
+endfunction()

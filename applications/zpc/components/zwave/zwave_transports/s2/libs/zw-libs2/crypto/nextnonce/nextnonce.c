@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <ctr_drbg.h>
 #include <aes_cmac.h>
+#ifdef ZWAVE_PSA_SECURE_VAULT
+#include "s2_psa.h"
+#endif
 
 /**
  * Outputs 32 bytes of data
@@ -26,13 +29,24 @@ static void ckdf_nonce0_expand(uint8_t *prk, uint8_t *mei)
     /*T1 = CMAC(K NONCE , T0 | Constant NK | 0x01)*/
     memcpy(t0+16, constant_ei, 15);
     t0[16+15] = 1;
+#if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
+    uint32_t key_id = ZWAVE_CMAC_TEMP_KEY_ID;
+    zw_wrap_aes_key_secure_vault(&key_id, prk, ZW_PSA_ALG_CMAC);
+    zw_psa_aes_cmac(key_id, t0, 32, t1);
+#else
     aes_cmac_calculate(prk, t0, 32, t1); /* TODO t1 will be 16 byte after this? */
+#endif
 
     /*T2 = CMAC(K NONCE , T1 | Constant NK | 0x02)*/
     memcpy(t0, t1, 16);  // backup t1 inside t0
     memcpy(t0+16, constant_ei, 15);
     t0[16+15] = 2;
+#if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
+    zw_psa_aes_cmac(key_id, t0, 32, t2);
+    zw_psa_destroy_key(key_id);
+#else
     aes_cmac_calculate(prk, t0, 32, t2);
+#endif
 
     /* MEI = T1 | T2 */
     memcpy(mei, t1, 16);
@@ -62,7 +76,14 @@ void next_nonce_instantiate(CTR_DRBG_CTX* ctx,const uint8_t* ei_sender,const uin
     memcpy(temp, ei_sender, 16);
 
     memcpy(temp+16, ei_receiver, 16);
+#if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
+    uint32_t key_id = ZWAVE_CMAC_TEMP_KEY_ID;
+    zw_wrap_aes_key_secure_vault(&key_id, constant_nonce, ZW_PSA_ALG_CMAC);
+    zw_psa_aes_cmac(key_id, temp, 32, X);
+    zw_psa_destroy_key(key_id);
+#else
     aes_cmac_calculate(constant_nonce, temp, 32, X);
+#endif
     ckdf_nonce0_expand(X, mei);
 
     /*puts(__FUNCTION__);

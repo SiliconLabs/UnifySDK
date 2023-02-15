@@ -15,7 +15,10 @@ use proc_macro2::TokenStream;
 use quote::ToTokens;
 use syn::parse_quote;
 
-use super::{command_class_handler_composer::CommandClassHandlerComposer, init_handler_composer::InitHandlerComposer};
+use super::{
+    command_class_handler_composer::CommandClassHandlerComposer,
+    init_handler_composer::InitHandlerComposer,
+};
 
 macro_rules! get_rvalue_handler_expr {
     ($handler_name: ident, $enabled: ident) => {

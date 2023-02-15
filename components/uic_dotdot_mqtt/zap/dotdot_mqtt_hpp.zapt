@@ -10,8 +10,9 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-
+// clang-format off
 {{zap_header}}
+// clang-format on
 
 /**
  * @defgroup dotdot_mqtt_hpp Internal C++ ZAP definitions
@@ -27,9 +28,11 @@
 #include "dotdot_bitmap.hpp"
 #include "dotdot_mqtt_helpers.hpp"
 
+#include <set>
 #include <map>
 #include <string>
 
+// clang-format off
 {{#zcl_clusters}}{{#if (supportedCluster label)}}{{#unless (clusterWithoutEndpoints label)}}
 /**
  * @brief Initialize {{asPublicationName label}} dotdot bygroup command handlers
@@ -40,33 +43,42 @@ sl_status_t {{dotdot_prefix}}_by_group_{{asSnakeCaseLower label}}_init();
 {{/unless}}{{/if}}{{/zcl_clusters}}
 
 {{#zcl_clusters}}{{#if (supportedCluster label)}}
-
 {{#zcl_commands}}
+// clang-format on
 
 /**
- * @brief Callback pointer for by-unid {{parent.label}}/Commands/{{label}} messages
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid {{parent.label}}/Commands/{{label}} messages
+ *
+ * @returns std::set of callbacks.
  */
-extern {{asCommandCallback this}}_t {{asCommandCallback this}};
+std::set<{{asCommandCallback this}}_t> &get_{{asCommandCallback this}}();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/{{parent.label}}/Commands/{{label}}
  */
+// clang-format off
 void {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
   const char *topic,
   const char *message,
   const size_t message_length);
 {{/zcl_commands}}
+// clang-format on
 
 /**
- * @brief Callback pointer for by-unid {{parent.label}}/Commands/WriteAttributes messages
+ * @brief Retrieves the container with callback pointers for by-unid
+ * {{parent.label}}/Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
  */
-extern {{asWriteAttributesCallback this}}_t {{asWriteAttributesCallback this}};
+std::set<{{asWriteAttributesCallback this}}_t> & get_{{asWriteAttributesCallback this}}();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/{{label}}/Commands/WriteAttributes
  */
+// clang-format off
 void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes(
   const char *topic,
   const char *message,

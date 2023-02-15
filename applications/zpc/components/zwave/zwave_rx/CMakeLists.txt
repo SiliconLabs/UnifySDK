@@ -14,15 +14,17 @@ target_include_directories(zwave_rx PUBLIC include)
 target_link_libraries(zwave_rx
   PRIVATE zwave_controller
           zwave_definitions
-          uic_contiki)
+          unify)
 
 IF(NOT ZWAVE_BUILD_SYSTEM EQUAL 1)
   target_link_libraries(zwave_rx
     PUBLIC zpc_config
-    PRIVATE uic_main_fd)
+    PRIVATE unify)
 ENDIF()
 
-# CMock for Z - Wave RX
-target_add_mock(zwave_rx)
+if(BUILD_TESTING)
+  # CMock for Z - Wave RX
+  target_add_mock(zwave_rx)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

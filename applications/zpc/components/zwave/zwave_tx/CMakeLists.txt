@@ -16,10 +16,12 @@ target_include_directories(
 
 target_link_libraries(
   zwave_tx
-  PUBLIC uic_contiki uic_log zwave_tx_groups zwave_definitions zwave_api
+  PUBLIC unify zwave_tx_groups zwave_definitions zwave_api
   PRIVATE zwave_controller)
 install(TARGETS zwave_tx LIBRARY DESTINATION lib)
 
-target_add_mock(zwave_tx)
+if(BUILD_TESTING)
+  target_add_mock(zwave_tx)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

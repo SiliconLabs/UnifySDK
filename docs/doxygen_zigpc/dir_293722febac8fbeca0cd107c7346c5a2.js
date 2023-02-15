@@ -10,6 +10,9 @@ var dir_293722febac8fbeca0cd107c7346c5a2 =
       [ "zigpc_example_metric", "classzigpc__example__metric.html", "classzigpc__example__metric" ]
     ] ],
     [ "zigpc_mem_usage_metric.hpp", "zigpc__mem__usage__metric_8hpp.html", "zigpc__mem__usage__metric_8hpp" ],
+    [ "zigpc_neighbor_table_metric.hpp", "zigpc__neighbor__table__metric_8hpp.html", [
+      [ "zigpc_neighbor_metric", "classzigpc__neighbor__metric.html", "classzigpc__neighbor__metric" ]
+    ] ],
     [ "zigpc_uptime.hpp", "zigpc__uptime_8hpp.html", [
       [ "zigpc_uptime_metric", "classzigpc__uptime__metric.html", "classzigpc__uptime__metric" ]
     ] ]

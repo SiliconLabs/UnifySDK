@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>cpc-hci-bridge User Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -54,8 +59,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/multiprotocol.html#applications">Applications</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../cpcd/readme_user.html">CPC Daemon</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../zigbeed/readme_user.html">Zigbee</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html">OpenThread Border Router User Guide</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html#openthread-boarder-router-user-guide">OpenThread Boarder Router User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html">OpenThread</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-cpc-hci-bridge">Running cpc-hci-bridge</a></li>
@@ -69,6 +73,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -116,7 +121,7 @@ and creates a numbered virtual serial device, for example /dev/pts/2.
 The actual number may vary. For convenience, cpc-hci-bridge also creates
 a symlink to the device from <code class="docutils literal notranslate"><span class="pre">pts_hci</span></code> in the working directory.</p>
 <p>To start cpc-hci-bridge as a system service:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start uic-cpc-hci-bridge
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-cpc-hci-bridge
 </pre></div>
 </div>
 <p>Or from the command line, simply start the application:</p>
@@ -125,12 +130,12 @@ a symlink to the device from <code class="docutils literal notranslate"><span cl
 </div>
 <p>Next, the BlueZ stack must be attached to the newly created virtual serial device,
 where <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> is the name of the virtual serial device:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo hciattach &lt;device&gt; any
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>hciattach<span class="w"> </span>&lt;device&gt;<span class="w"> </span>any
 </pre></div>
 </div>
 <p>Now BlueZ is running and any of the standard BlueZ tools may be used.
 For example, to start the BlueZ CLI utility:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo bluetoothctl
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>bluetoothctl
 </pre></div>
 </div>
 <p>Another utility that comes with the standard Bluetooth tools, called <code class="docutils literal notranslate"><span class="pre">btmon</span></code>,
@@ -149,7 +154,7 @@ can be used to view the traffic going through the Bluetooth device.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

@@ -20,7 +20,6 @@
 #include "attribute_store_fixt.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store_network_helper.h"
-#include "dotdot_attributes.h"
 
 // Test Helpers
 #include "zpc_attribute_store_test_helper.h"
@@ -39,6 +38,8 @@
 #include "dotdot_mqtt_supported_generated_commands_mock.h"
 #include "zwapi_protocol_basis_mock.h"
 #include "zwave_api_transport_mock.h"
+#include "unify_dotdot_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_helpers_mock.h"
 
 #include "sl_log.h"
 
@@ -187,8 +188,8 @@ void test_update_desired_value()
   attribute_store_get_reported(tx_report_enabled_node, &value, sizeof(value));
   TEST_ASSERT_EQUAL(false, value);
 
-  zwapi_is_pti_enabled_ExpectAndReturn(true);
   // Set the desired, the reported should follow.
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
   pti_enabled_t pti_value = true;
   attribute_store_set_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
   attribute_store_get_reported(pti_enabled_node, &pti_value, sizeof(pti_value));

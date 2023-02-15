@@ -21,15 +21,17 @@ target_include_directories(
 target_link_libraries(
   zigpc_command_mapper
   PRIVATE zigpc_zcl_util
+          zigpc_attribute_management
           zigpc_gateway
           zigpc_common
           zigpc_datastore
           zigpc_group_mgmt
           zigpc_ucl
           zigpc_zcl_command_parser
-          uic_dotdot_mqtt
-          uic_log)
+          unify)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
 
-target_add_mock(zigpc_command_mapper)
+  target_add_mock(zigpc_command_mapper)
+endif()

@@ -91,7 +91,6 @@ sl_status_t zwave_network_management_set_default()
   sl_log_info(LOG_TAG,
               "Reset step: Initiating a Z-Wave "
               "API Set Default / Reset operation\n");
-
   process_post(&zwave_network_management_process, NM_EV_SET_DEFAULT, 0);
   return SL_STATUS_OK;
 }

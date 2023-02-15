@@ -11,7 +11,6 @@
  *
  *****************************************************************************/
 #include "zwave_unid.h"
-#include "zpc_endian.h"
 #include "unity.h"
 
 void setUp()

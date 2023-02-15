@@ -2,8 +2,6 @@ var zwapi__serial_8c =
 [
     [ "LOG_TAG", "zwapi__serial_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "SERIAL_LOG", "zwapi__serial_8c.html#a7a82d1f72af2430fc6067e8f1a2f6754", null ],
-    [ "zwapi_log_to_file_disable", "group__ZWAPI__INIT.html#ga256d0ca55a0e5388cf665a3630d28fe0", null ],
-    [ "zwapi_log_to_file_enable", "group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887", null ],
     [ "zwapi_open_serial_port", "zwapi__serial_8c.html#aefeac5909b0bf6411db1492f69c3bc68", null ],
     [ "zwapi_serial_close", "zwapi__serial_8c.html#aae586785021ac9a605cd77651429f0c9", null ],
     [ "zwapi_serial_drain_buffer", "zwapi__serial_8c.html#a3f2b3bd848e9fe0e6e137482bed06b46", null ],
@@ -12,6 +10,8 @@ var zwapi__serial_8c =
     [ "zwapi_serial_init", "zwapi__serial_8c.html#a07b09de97f4932d882fc77e191c44638", null ],
     [ "zwapi_serial_is_file_available", "zwapi__serial_8c.html#a9a952dc2b34d92960246f6dc4e7d58f7", null ],
     [ "zwapi_serial_log_timestamp", "zwapi__serial_8c.html#a0accbbf7ddb7aeab10f5df1fe3df6642", null ],
+    [ "zwapi_serial_log_to_file_disable", "zwapi__serial_8c.html#aace970ac426fe88b9a6e61b275726e17", null ],
+    [ "zwapi_serial_log_to_file_enable", "zwapi__serial_8c.html#a9be54f19266fab28cce5d6b7cf65e3db", null ],
     [ "zwapi_serial_put_buffer", "zwapi__serial_8c.html#af9054824651df422bab5076d16a80fda", null ],
     [ "zwapi_serial_put_byte", "zwapi__serial_8c.html#a7762d0358e9f398b92edbfd6a550984a", null ],
     [ "zwapi_serial_restart", "zwapi__serial_8c.html#aadf3397d0bd2c1657d4b1a373599acfe", null ],

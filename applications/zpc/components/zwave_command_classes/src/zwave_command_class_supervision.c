@@ -168,6 +168,11 @@ static sl_status_t zwave_command_class_supervision_handle_supervision_report(
   const uint8_t *frame_data,
   uint16_t frame_length)
 {
+  // Make sure the supervision timer is running if needed
+  process_post(&zwave_command_class_supervision_process,
+               ZWAVE_COMMAND_CLASS_SUPERVISION_START_TIMER,
+               NULL);
+
   // We expect all fields up to "duration" to be present, also in v1.
   if (frame_length <= SUPERVISION_REPORT_DURATION_INDEX) {
     return SL_STATUS_FAIL;
@@ -194,6 +199,7 @@ static sl_status_t zwave_command_class_supervision_handle_supervision_report(
                  connection_info->remote.endpoint_id,
                  frame_data[SUPERVISION_REPORT_SESSION_ID_INDEX]
                    & SUPERVISION_REPORT_PROPERTIES1_SESSION_ID_MASK);
+    zwave_command_class_supervision_process_log();
     return SL_STATUS_OK;
   }
 
@@ -422,6 +428,7 @@ sl_status_t zwave_command_class_supervision_send_data(
     = zwave_command_class_supervision_find_session_by_unique_id(supervision_id);
 
   if (ongoing_session == NULL) {
+    zwave_command_class_supervision_process_log();
     sl_log_warning(LOG_TAG,
                    "Cannot allocate Supervision ID for sending session. "
                    "Dropping send data call.");
@@ -453,14 +460,16 @@ sl_status_t zwave_command_class_supervision_send_data(
   if (connection->remote.is_multicast == false) {
     user_parameter = (intptr_t)supervision_id;
   }
-  sl_status_t zwave_tx_status
-    = zwave_tx_send_data(connection,
-                         supervision_frame_size,
-                         (uint8_t *)&frame,
-                         &supervision_tx_options,
-                         zwave_command_class_supervision_on_send_data_complete,
-                         (void *)user_parameter,
-                         session);
+  sl_status_t zwave_tx_status = zwave_tx_send_data(
+    connection,
+    supervision_frame_size,
+    (uint8_t *)&frame,
+    &supervision_tx_options,
+    connection->remote.is_multicast
+      ? NULL
+      : &zwave_command_class_supervision_on_send_data_complete,
+    (void *)user_parameter,
+    session);
 
   if (zwave_tx_status != SL_STATUS_OK) {
     // Abort the supervision session, no callback to the user
@@ -468,11 +477,13 @@ sl_status_t zwave_command_class_supervision_send_data(
   } else if (session != NULL) {
     zwave_command_class_supervision_assign_session_tx_id(supervision_id,
                                                          *session);
-    //Ensure a timer is running for the newly created sessions.
-    process_post(&zwave_command_class_supervision_process,
-                 ZWAVE_COMMAND_CLASS_SUPERVISION_START_TIMER,
-                 NULL);
   }
+  //Ensure a timer is running for the newly created sessions.
+  // (if we created mulitcast sessions, the session == NULL but we still
+  // want to start that timer)
+  process_post(&zwave_command_class_supervision_process,
+               ZWAVE_COMMAND_CLASS_SUPERVISION_START_TIMER,
+               NULL);
 
   return zwave_tx_status;
 }
@@ -483,6 +494,10 @@ sl_status_t
   // Just try to cancel the transmission at the TX level and
   // close the supervision session. Supervision status updates received subsequently
   // will be ignored
+  sl_log_debug(LOG_TAG,
+               "Attempting to abort Supervision "
+               "sesssion associated with Tx Session %p",
+               session);
   zwave_command_class_supervision_close_session_by_tx_session(session);
   return zwave_tx_abort_transmission(session);
 }

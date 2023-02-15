@@ -1469,6 +1469,7 @@ typedef struct _uic_mqtt_dotdot_configuration_parameters_supported_commands_ {
   bool discover_parameter;
   bool default_reset_all_parameters;
   bool set_parameter;
+  bool discover_parameter_range;
   bool write_attributes;
 } uic_mqtt_dotdot_configuration_parameters_supported_commands_t;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZigPC Developer Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -75,6 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -132,26 +138,26 @@ for more details.</p>
 <section id="cross-compiling-for-raspberry-pi-using-docker">
 <h3>Cross Compiling for Raspberry Pi Using Docker<a class="headerlink" href="#cross-compiling-for-raspberry-pi-using-docker" title="Permalink to this heading"></a></h3>
 <blockquote>
-<div><p>Cross compilation builds currently supports only the Raspberry Pi OS Buster.</p>
+<div><p>Cross compilation builds currently supports only the Raspberry Pi OS Bullseye.</p>
 </div></blockquote>
 <p>From the root of the Unify source directory, run the following:</p>
 <ul class="simple">
 <li><p>Build the Docker container image:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> docker
-./build_docker.sh armhf uic_armhf
-<span class="nb">cd</span> ..
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docker
+./build_docker.sh<span class="w"> </span>arm64<span class="w"> </span>uic_arm64
+<span class="nb">cd</span><span class="w"> </span>..
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Run the container with the GSDK locations mounted:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -it --rm <span class="se">\</span>
-  --env GSDK_LOCATION <span class="se">\</span>
-  -v<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="se">\</span>
-  -w <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="se">\</span>
-  -v <span class="si">${</span><span class="nv">GSDK_LOCATION</span><span class="si">}</span>:<span class="si">${</span><span class="nv">GSDK_LOCATION</span><span class="si">}</span> <span class="se">\</span>
-  uic_armhf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--env<span class="w"> </span>GSDK_LOCATION<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-w<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="si">${</span><span class="nv">GSDK_LOCATION</span><span class="si">}</span>:<span class="si">${</span><span class="nv">GSDK_LOCATION</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>uic_arm64
 </pre></div>
 </div>
 <p>Alternatively, use the provided <a class="reference external" href="http://runDocker.sh">runDocker.sh</a> script in the docker directory.
@@ -162,11 +168,11 @@ the docker image.</p>
 <h3>Compiling<a class="headerlink" href="#compiling" title="Permalink to this heading"></a></h3>
 <p>To compile, run these commands from the top level Unify directory, inside the
 Docker container:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir build
-<span class="nb">cd</span> build
-cmake -GNinja -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>../cmake/armhf_debian.cmake ..
-ninja               <span class="c1"># Build binaries</span>
-ninja deb           <span class="c1"># Build Debian Installers (optional)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>-GNinja<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>../cmake/arm64_debian.cmake<span class="w"> </span>..
+ninja<span class="w">               </span><span class="c1"># Build binaries</span>
+ninja<span class="w"> </span>deb<span class="w">           </span><span class="c1"># Build Debian Installers (optional)</span>
 </pre></div>
 </div>
 </section>
@@ -178,15 +184,15 @@ architecture, and binfmt in the kernel, to tell Linux OS to run the ARM binaries
 within QEMU.</p>
 <p>To run the unit tests within Docker on the Host machine, run the following
 command in the Host (not in the Docker container):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --user <span class="m">0</span> --privileged --rm -it uic_armhf update-binfmts --enable
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--user<span class="w"> </span><span class="m">0</span><span class="w"> </span>--privileged<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>uic_arm64<span class="w"> </span>update-binfmts<span class="w"> </span>--enable
 </pre></div>
 </div>
 <blockquote>
 <div><p>NB: This command needs to be run once after each restart of the Host machine.</p>
 </div></blockquote>
 <p>After enabling this you can run the unittests by issuing following command in
-the <code class="docutils literal notranslate"><span class="pre">uic_armhf</span></code> docker image in the build directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ninja <span class="nb">test</span>
+the <code class="docutils literal notranslate"><span class="pre">uic_arm64</span></code> docker image in the build directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ninja<span class="w"> </span><span class="nb">test</span>
 </pre></div>
 </div>
 </section>
@@ -215,7 +221,7 @@ level, and a tag in the following format:</p>
 <p>NOTE: Any log that doesn’t follow the above format is assumed to be part of
 printed output from the Ember Application framework.</p>
 <p>The following snippet is a snippet of example logs to expect:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host <span class="m">0</span>.0.0.0 --mqtt.port <span class="m">1883</span> --zigpc.datastore_file zigpc.db
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zigpc<span class="w"> </span>--zigpc.serial<span class="w"> </span>/dev/ttyACM0<span class="w"> </span>--mqtt.host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>--mqtt.port<span class="w"> </span><span class="m">1883</span><span class="w"> </span>--zigpc.datastore_file<span class="w"> </span>zigpc.db
 <span class="c1"># 2020-11-05 10:55:36:314815 &lt;d&gt; [sl_log] Setting log level to debug</span>
 <span class="c1"># 2020-11-05 10:55:36:315475 &lt;d&gt; [uic_component_fixtures] Completed: UIC Signal Handler</span>
 <span class="c1"># ...</span>
@@ -234,16 +240,16 @@ printed output from the Ember Application framework.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ZigPC&gt;</span></code> prompt can be used to carry out common Protocol Controller functions.
 Typing “help” brings up the currently supported functions:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ZigPC&gt; <span class="nb">help</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ZigPC&gt;<span class="w"> </span><span class="nb">help</span>
 <span class="o">==================================================</span>
-Unify Command line interface Help:
+Unify<span class="w"> </span>Command<span class="w"> </span>line<span class="w"> </span>interface<span class="w"> </span>Help:
 <span class="o">==================================================</span>
-<span class="nb">exit</span>  :Exit the application
-<span class="nb">help</span>  :Prints <span class="nb">help</span>
-info  :Execute <span class="s1">&#39;info&#39;</span> <span class="nb">command</span> accessible from the EmberAf CLI
-log_level d<span class="p">|</span>i<span class="o">||</span>w<span class="p">|</span>e<span class="p">|</span>c:Set log levelDEBUG <span class="p">|</span> INFO <span class="p">|</span> WARNING <span class="p">|</span> ERROR <span class="p">|</span> <span class="nv">CRITICAL</span>
+<span class="nb">exit</span><span class="w">  </span>:Exit<span class="w"> </span>the<span class="w"> </span>application
+<span class="nb">help</span><span class="w">  </span>:Prints<span class="w"> </span><span class="nb">help</span>
+info<span class="w">  </span>:Execute<span class="w"> </span><span class="s1">&#39;info&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>accessible<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>EmberAf<span class="w"> </span>CLI
+log_level<span class="w"> </span>d<span class="p">|</span>i<span class="o">||</span>w<span class="p">|</span>e<span class="p">|</span>c:Set<span class="w"> </span>log<span class="w"> </span>levelDEBUG<span class="w"> </span><span class="p">|</span><span class="w"> </span>INFO<span class="w"> </span><span class="p">|</span><span class="w"> </span>WARNING<span class="w"> </span><span class="p">|</span><span class="w"> </span>ERROR<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">CRITICAL</span>
 <span class="o">==================================================</span>
-Tip: log_level c to reduce the verbosity of <span class="nv">log</span>
+Tip:<span class="w"> </span>log_level<span class="w"> </span>c<span class="w"> </span>to<span class="w"> </span>reduce<span class="w"> </span>the<span class="w"> </span>verbosity<span class="w"> </span>of<span class="w"> </span><span class="nv">log</span>
 <span class="o">==================================================</span>
 </pre></div>
 </div>
@@ -332,11 +338,11 @@ overview of messages sent on the network.</p>
 <section id="decrypting-network-traffic-in-simplicity-studio">
 <h3>Decrypting Network Traffic in Simplicity Studio<a class="headerlink" href="#decrypting-network-traffic-in-simplicity-studio" title="Permalink to this heading"></a></h3>
 <p>ZigPC uses Network key (NWK key) based on the install code. In typical Zigbee
-applications, the Ember CLI can be used to get this key. However, because the
-Ember CLI has been disabled in ZigPC, the NWK Key is logged in the ZigPC
-debug console after the network is opened for joining:</p>
+applications, the Ember CLI can be used to get this key. The CLI can be
+re-enabled at compilation time, however, the network information is also
+printed out at startup.</p>
 <p>Look for the following pattern:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>DEBUG<span class="o">]</span> NWK Key:: ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>DEBUG<span class="o">]</span><span class="w"> </span>NWK<span class="w"> </span>Key::<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ<span class="w"> </span>ZZ
 </pre></div>
 </div>
 <p>Extract the NWK key value ( <code class="docutils literal notranslate"><span class="pre">ZZ</span> <span class="pre">ZZ</span> <span class="pre">ZZ</span> <span class="pre">...</span></code> sequence in the log above) and add
@@ -357,6 +363,61 @@ addition is performed to add an end device to the PAN using the Install
 Code based DSK:</p>
 <p><img alt="" src="../../_images/user_guide-network-analyzer-node-add.png" /></p>
 </section>
+<section id="adding-custom-clusters">
+<h3>Adding custom clusters<a class="headerlink" href="#adding-custom-clusters" title="Permalink to this heading"></a></h3>
+<p>It is possible to add custom ZCL info to ZigPC to add natively unsupported
+clusters or to override the functionality of default clusters. This step must
+be run at compilation time in order to properly include the necessary MQTT
+topics and other related ZCL information.</p>
+<ul class="simple">
+<li><p>Step 1: Adding the custom cluster to the Unify framework</p></li>
+</ul>
+<p>Add a custom XML file (or modify an existing XML file) in the shared components
+of the Unify framework. All XML files defining ZCL clusters are stored in the
+‘uic-dotdot’ component under the ‘dotdot-xml’ folder. If a new XML file is
+added or if the name of an XML file changes, that change must be reflected in
+the library.xml file</p>
+<ul class="simple">
+<li><p>Step 2: Adding the custom cluster in the ZigPC</p></li>
+</ul>
+<p>ZigPC generates ZCL-cluster code and structures using ZAP. Ensure that the ZAP
+templates will generate for the new cluster by adding the name to:
+‘uic/applications/zigpc/components/zcl_util/zap/addon-helper.js
+Specifically, the ‘SUPPORTED_CLUSTERS’ and ‘SUPPORTED_CLUSTER_ATTRIBUTES’
+lists must reference the new cluster.</p>
+<ul class="simple">
+<li><p>Step 3: Adding the custom clusters in the zigbeeHost gateway level</p></li>
+</ul>
+<p>ZigPC uses a custom zigbeeHost layer to manage the zigbee stack. Ensure that
+this layer can also access the new ZCL cluster by modifying the slcp file
+in ‘uic/applications/zigpc/components/zigpc_gateway/libs/zigbee_host/src/libzigbee_host.slcp’
+Add the new cluster in the same format as all the existing clusters at this layer.</p>
+<p>*Step 4: Re-generate all ZAP templates</p>
+<p>Unify uses ZAP to generate ZCL cluster information (as discussed in step #2).
+Make sure that zap can find the library by modifying its configuration file.</p>
+<p>Alternatively, compile with the cmake option ‘ZAP_GENERATE’ set to ‘ON’ to
+automatically re-generate zap output files as part of the compilation process.</p>
+<p>Re-generate all zap output in the top level uic for the following components:
+uic_dotdot, uic_dotdot_mqtt, unify_dotdot_attribute_store</p>
+<p>Re-generate all zap output in the zigpc level for the following components:
+command_mapper, zcl_util, zcl_command_parser, zcl_profiles, attribute_management</p>
+<p>Please take a look at [<a class="reference external" href="https://github.com/SiliconLabs/zap">https://github.com/SiliconLabs/zap</a>] for more detailed
+information.</p>
+<ul class="simple">
+<li><p>Step 5: Re-generate the zigbee_host</p></li>
+</ul>
+<p>Re-generate the zigbee_host slcp, in the autogen folder. Set the
+STUDIO_ADAPTER_PATH to point to zap, which should already be configured
+to point to the custom xml. Otherwise, it will be necessary to edit the
+zap-config of the zigbee_host folder.</p>
+<p>Please read [<a class="reference external" href="https://siliconlabs.github.io/slc-specification/1.0/">https://siliconlabs.github.io/slc-specification/1.0/</a>] and
+[<a class="reference external" href="https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf">https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf</a>]
+for more information on using the slc_cli.</p>
+<ul class="simple">
+<li><p>Step 6:</p></li>
+</ul>
+<p>Compile ZigPC as normal. ZigPC should now support your custom cluster</p>
+</section>
 </section>
 </section>
 
@@ -365,7 +426,7 @@ Code based DSK:</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

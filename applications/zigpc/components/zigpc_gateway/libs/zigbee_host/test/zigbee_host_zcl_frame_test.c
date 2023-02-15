@@ -19,8 +19,8 @@
 #include "zigbee_host.h"
 #include "zigbee_host_common.h"
 
-extern uint16_t appZclBufferLen;
-extern uint8_t appZclBuffer[ZCL_BUFFER_SIZE];
+extern uint16_t zclMessageBufferLen;
+extern uint8_t zclMessageBuffer[ZCL_BUFFER_SIZE];
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are
@@ -114,7 +114,7 @@ void test_fill_zcl_frame_should_copy_buffer()
   // ASSERT
   buffer[bufferSequenceIdIndex] = SEQUENCE_ID_RETURN;
   TEST_ASSERT_EQUAL(EMBER_SUCCESS, status);
-  TEST_ASSERT_EQUAL_UINT8_ARRAY(buffer, appZclBuffer, ZCL_BUFFER_SIZE);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(buffer, zclMessageBuffer, ZCL_BUFFER_SIZE);
 }
 
 /************************************************************
@@ -149,8 +149,8 @@ void test_send_zcl_frame_unicast_should_handle_unknown_device()
 
   emberAfSendUnicastToEui64_ExpectAndReturn(eui64,
                                             NULL,
-                                            appZclBufferLen,
-                                            appZclBuffer,
+                                            zclMessageBufferLen,
+                                            zclMessageBuffer,
                                             EMBER_INVALID_CALL);
   emberAfSendUnicastToEui64_IgnoreArg_apsFrame();
 
@@ -172,8 +172,8 @@ void test_send_zcl_frame_unicast_should_handle_happy_path()
 
   emberAfSendUnicastToEui64_ExpectAndReturn(eui64,
                                             NULL,
-                                            appZclBufferLen,
-                                            appZclBuffer,
+                                            zclMessageBufferLen,
+                                            zclMessageBuffer,
                                             EMBER_SUCCESS);
   emberAfSendUnicastToEui64_IgnoreArg_apsFrame();
 
@@ -212,8 +212,8 @@ void test_send_zcl_frame_multicast_should_handle_happy_path()
 
   emberAfSendMulticast_ExpectAndReturn(multicastId,
                                        NULL,
-                                       appZclBufferLen,
-                                       appZclBuffer,
+                                       zclMessageBufferLen,
+                                       zclMessageBuffer,
                                        EMBER_SUCCESS);
   emberAfSendMulticast_IgnoreArg_apsFrame();
 

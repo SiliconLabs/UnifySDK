@@ -7,5 +7,6 @@ var zpc__attribute__store_8c =
     [ "invoke_update_callbacks_in_network", "zpc__attribute__store_8c.html#aebdd95d6a01728cc094e969460ac397b", null ],
     [ "is_zpc_unid", "group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9", null ],
     [ "zpc_attribute_store_init", "group__zpc__attribute__store.html#ga1f08b0b6d9756d2620808216f0961a54", null ],
-    [ "zpc_attribute_store_update_all_network_statuses", "zpc__attribute__store_8c.html#a78448575395f9b85aff5200fb1d9ce16", null ]
+    [ "zpc_attribute_store_update_all_network_statuses", "zpc__attribute__store_8c.html#a78448575395f9b85aff5200fb1d9ce16", null ],
+    [ "zpc_configuration", "zpc__attribute__store_8c.html#a36f9d1e546ef8d8747dff0625dea82d4", null ]
 ];

@@ -18,14 +18,12 @@
 
 #include <stdio.h>
 #include "nm_state_machine.h"
-#include "zwave_network_management_state.h"
+#include "zwave_network_management_types.h"
+
+#include "zwave_helper_macros.h"
 
 #include "sl_log.h"
 #define LOG_TAG "network_management_state_logging"
-
-#define STR_CASE(x) \
-  case x:           \
-    return #x;
 
 const char *nm_state_name(zwave_network_management_state_t state)
 {

@@ -36,7 +36,7 @@
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a {{asPublicationName parent.label}}::{{label}} command
+ * fields of a {{asPublicationName parent.label}} {{label}} command
  * {{#zcl_command_arguments}}{{#first}}
  * @param fields       Struct pointer with the list of fields for the command
  * {{/first}}{{/zcl_command_arguments}}
@@ -50,16 +50,24 @@ std::string get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCase
 
 {{#zcl_command_arguments}}{{#first}}
 /**
- * @brief JSON parser for {{parent.parent.label}}::{{parent.label}} command arguments.
+ * @brief JSON parser for {{parent.parent.label}} {{parent.label}} command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
 void {{asCommandParseFunction parent}}(
   nlohmann::json &jsn,{{/first}}
-{{#if isArray}}
+  {{#if isArray}}
+    {{#if (isString type)}}
+  std::vector<std::string> &{{asSnakeCaseLower label}}{{listComma this}}
+    {{else}}
   std::vector<{{asUnderlyingType type}}> &{{asSnakeCaseLower label}}{{listComma this}}
-{{else}}
+    {{/if}}
+  {{else}}
+    {{#if (isString type)}}
+  std::string &{{asSnakeCaseLower label}}{{listComma this}}
+    {{else}}
   {{asUnderlyingType type}} &{{asSnakeCaseLower label}}{{listComma this}}
+    {{/if}}
 {{/if}}{{#last}}
 );
 {{/last}}{{/zcl_command_arguments}}
@@ -67,7 +75,7 @@ void {{asCommandParseFunction parent}}(
 {{/zcl_commands}}
 
 /**
- * @brief JSON parser for {{label}}::WriteAttributes command arguments.
+ * @brief JSON parser for {{label}} WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */

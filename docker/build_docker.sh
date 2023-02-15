@@ -9,7 +9,7 @@ if [ "$#" -lt 2 ]; then
 	echo "  tag:         tag that docker image will be build with"
 	echo "  docker_args: addition arguments passed to docker build command (optional)"
 	echo ""
-	echo "Example: $0 armhf uic_armhf"
+	echo "Example: $0 arm64 uic_arm64"
 	exit 1
 fi
 

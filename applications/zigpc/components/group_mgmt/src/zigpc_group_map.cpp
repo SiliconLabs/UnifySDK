@@ -10,7 +10,7 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-
+#include <string>
 #include <unordered_map>
 #include <list>
 #include <algorithm>

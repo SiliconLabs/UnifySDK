@@ -28,6 +28,7 @@ var group__zpc__config =
       [ "zpc_basic_device_type", "structzpc__config__t.html#ac9b9b4cc2e388b6ef0c7c308f5e2d429", null ],
       [ "zpc_generic_device_type", "structzpc__config__t.html#a141e0433f0b30a6844161257a1b0c5ab", null ],
       [ "zpc_specific_device_type", "structzpc__config__t.html#abb53937fe98160764f47f7c46fcfd2e8", null ],
+      [ "zwave_max_lr_tx_power_dbm", "structzpc__config__t.html#a22a603858d8667390238807f862315e7", null ],
       [ "zwave_measured_0dbm_power", "structzpc__config__t.html#ab9b826b5a3f21d370901f4e171427f07", null ],
       [ "zwave_normal_tx_power_dbm", "structzpc__config__t.html#a8a461c5ea918036482de96bde79b30f9", null ],
       [ "zwave_rf_region", "structzpc__config__t.html#afc6e06c70499276d7392f8fd04caa61d", null ]

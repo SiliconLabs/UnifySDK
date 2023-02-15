@@ -1,0 +1,22 @@
+[workspace]
+
+members = [
+    "components/zwave_rust_proc_macros",
+    "components/zwave_rust_proc_macros_legacy",
+    "components/rust_command_class_frame_types",
+    "components/zpc_rust",
+]
+
+# create a release profile with debug settings
+# release bins are required to package .deb files.
+[profile.release]
+debug-assertions = true
+lto = true
+
+[profile.RelWithDebInfo]
+inherits = "dev"
+opt-level = 3
+
+[profile.dev]
+rpath = true
+

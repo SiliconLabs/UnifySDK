@@ -5879,6 +5879,49 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/LastConfiguredBy/Reported { "value": <
 
 <br><br>
 
+\subsection scenes_attr_scene_table Scenes/SceneTable Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/Scenes/Attributes/SceneTable/Reported
+[PREFIX]/Scenes/Attributes/SceneTable/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scenes Cluster SceneTable Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array",
+      "items": {
+        "type": "SSceneTable"
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SceneTable attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneTable/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneTable/Desired { "value": <DESIRED_SCENE_TABLE> }
+ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneTable/Reported { "value": <REPORTED_SCENE_TABLE> }
+```
+
+<br><br>
+
 
 \subsection scenes_attr_cluster_revision Scenes/ClusterRevision Attribute
 
@@ -6047,14 +6090,18 @@ ucl/by-unid/<UNID>/<EP>/Scenes/SupportedGeneratedCommands { "value": ["AddSceneR
       "items": {
         "type": "SExtensionFieldSetList"
       }
-
+,
+    "TransitionTime100ms": {
+      "type": "integer"
+    }
   },
   "required": [
     "GroupID",
     "SceneID",
     "TransitionTime",
     "SceneName",
-    "ExtensionFieldSets"
+    "ExtensionFieldSets",
+    "TransitionTime100ms"
   ]
 }
 ```
@@ -6064,7 +6111,7 @@ ucl/by-unid/<UNID>/<EP>/Scenes/SupportedGeneratedCommands { "value": ["AddSceneR
 To send a Scenes/AddScene command under the by-unid topic space:
 
 ```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/AddScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"SceneName": <SCENE_NAME_VALUE>,"ExtensionFieldSets": <EXTENSION_FIELD_SETS_VALUE> }'
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/AddScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"SceneName": <SCENE_NAME_VALUE>,"ExtensionFieldSets": <EXTENSION_FIELD_SETS_VALUE>,"TransitionTime100ms": <TRANSITION_TIME100MS_VALUE> }'
 ```
 
 To receive a Scenes/AddScene generated command from a UNID/endpoint:
@@ -7074,7 +7121,8 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/WriteAttributes' -m  '
           "CurrentGroup",
           "SceneValid",
           "NameSupport",
-          "LastConfiguredBy"
+          "LastConfiguredBy",
+          "SceneTable"
         ]
       }
     }
@@ -48056,6 +48104,7 @@ ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ClusterRevision/Repor
               "DiscoverParameter",
               "DefaultResetAllParameters",
               "SetParameter",
+              "DiscoverParameterRange",
               "WriteAttributes",
               "ForceReadAttributes"
             ]
@@ -48076,7 +48125,7 @@ To see supported commands for ConfigurationParameters cluster under the by-unid 
 ```
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedCommands'
 # Example output
-ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedCommands { "value": ["DiscoverParameter","DefaultResetAllParameters","SetParameter","WriteAttributes", "ForceReadAttributes"] }
+ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedCommands { "value": ["DiscoverParameter","DefaultResetAllParameters","SetParameter","DiscoverParameterRange","WriteAttributes", "ForceReadAttributes"] }
 ```
 
 To see supported generated commands for ConfigurationParameters cluster under the by-unid topic space:
@@ -48226,6 +48275,53 @@ To receive a ConfigurationParameters/SetParameter generated command from a UNID/
 
 ```
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedCommands/SetParameter'
+```
+
+<br><br>
+
+\subsection configuration_parameters_discover_parameter_range_cmd ConfigurationParameters/DiscoverParameterRange Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ConfigurationParameters/Commands/DiscoverParameterRange
+[PREFIX]/ConfigurationParameters/GeneratedCommands/DiscoverParameterRange
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConfigurationParameters Cluster DiscoverParameterRange Command Properties",
+  "type": "object",
+  "properties": {
+    "FirstParameterId": {
+      "type": "integer"
+    },
+    "LastParameterId": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "FirstParameterId",
+    "LastParameterId"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a ConfigurationParameters/DiscoverParameterRange command under the by-unid topic space:
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/DiscoverParameterRange' -m  '{ "FirstParameterId": <FIRST_PARAMETER_ID_VALUE>,"LastParameterId": <LAST_PARAMETER_ID_VALUE> }'
+```
+
+To receive a ConfigurationParameters/DiscoverParameterRange generated command from a UNID/endpoint:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedCommands/DiscoverParameterRange'
 ```
 
 <br><br>
@@ -50429,6 +50525,33 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
 
 <!-- -->
 <!-- END OF Struct NetworkInterfaceData Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Struct SExtensionFieldSetList Section -->
+<!-- -->
+\section struct_s_extension_field_set_list SExtensionFieldSetList Struct
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SExtensionFieldSetList Struct Properties",
+  "type": "object",
+  "properties": {
+    "ClusterId": {
+      "type": "integer"
+    }
+    "ExtensionFieldSet": {
+      "type": "string"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Struct SExtensionFieldSetList Section -->
 <!-- -->
 
 <br><br>
@@ -52969,77 +53092,6 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
 <br><br>
 
 <!-- -->
-<!-- START OF Enum TLKeyIndex Section -->
-<!-- -->
-\section enum_tl_key_index TLKeyIndex Enum
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TLKeyIndex Enum Properties",
-  "type": "string",
-  "enum": [
-    "DevelopmentKey",
-    "MasterKey",
-    "CertificationKey"
-  ]
-}
-```
-
-<!-- -->
-<!-- END OF Enum TLKeyIndex Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
-<!-- START OF Enum TLStatus Section -->
-<!-- -->
-\section enum_tl_status TLStatus Enum
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TLStatus Enum Properties",
-  "type": "string",
-  "enum": [
-    "Success",
-    "Failure"
-  ]
-}
-```
-
-<!-- -->
-<!-- END OF Enum TLStatus Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
-<!-- START OF Enum TLZigbeeInformationLogicalType Section -->
-<!-- -->
-\section enum_tl_zigbee_information_logical_type TLZigbeeInformationLogicalType Enum
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TLZigbeeInformationLogicalType Enum Properties",
-  "type": "string",
-  "enum": [
-    "Coordinator",
-    "Router",
-    "EndDevice"
-  ]
-}
-```
-
-<!-- -->
-<!-- END OF Enum TLZigbeeInformationLogicalType Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
 <!-- START OF Enum ThermostatACCapacityFormat Section -->
 <!-- -->
 \section enum_thermostatac_capacity_format ThermostatACCapacityFormat Enum
@@ -55320,36 +55372,6 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
 <br><br>
 
 <!-- -->
-<!-- START OF Bitmap ScanResponseKeyBitmask Section -->
-<!-- -->
-\section enum_scan_response_key_bitmask ScanResponseKeyBitmask Bitmap
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "ScanResponseKeyBitmask Enum Properties",
-  "type": "object",
-  "properties": {
-    "DevelopmentKey": {
-        "type": "boolean"
-    },
-    "MasterKey": {
-        "type": "boolean"
-    },
-    "CertificationKey": {
-        "type": "boolean"
-    }
-  }
-}
-```
-
-<!-- -->
-<!-- END OF Bitmap ScanResponseKeyBitmask Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
 <!-- START OF Bitmap ScenesNameSupport Section -->
 <!-- -->
 \section enum_scenes_name_support ScenesNameSupport Bitmap
@@ -55462,93 +55484,6 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
 
 <!-- -->
 <!-- END OF Bitmap StartWarningSirenConfiguration Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
-<!-- START OF Bitmap TLTouchlinkInformation Section -->
-<!-- -->
-\section enum_tl_touchlink_information TLTouchlinkInformation Bitmap
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TLTouchlinkInformation Enum Properties",
-  "type": "object",
-  "properties": {
-    "FactoryNew": {
-        "type": "boolean"
-    },
-    "AddressAssignment": {
-        "type": "boolean"
-    },
-    "LinkInitiator": {
-        "type": "boolean"
-    },
-    "TouchlinkPriorityRequest": {
-        "type": "boolean"
-    },
-    "ProfileInterop": {
-        "type": "boolean"
-    }
-  }
-}
-```
-
-<!-- -->
-<!-- END OF Bitmap TLTouchlinkInformation Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
-<!-- START OF Bitmap TLVersion Section -->
-<!-- -->
-\section enum_tl_version TLVersion Bitmap
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TLVersion Enum Properties",
-  "type": "object",
-  "properties": {
-    "ApplicationDeviceVersion": {
-        "type": "boolean"
-    }
-  }
-}
-```
-
-<!-- -->
-<!-- END OF Bitmap TLVersion Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
-<!-- START OF Bitmap TLZigbeeInformation Section -->
-<!-- -->
-\section enum_tl_zigbee_information TLZigbeeInformation Bitmap
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TLZigbeeInformation Enum Properties",
-  "type": "object",
-  "properties": {
-    "LogicalType": {
-        "type": "boolean"
-    },
-    "RxOnWhenIdle": {
-        "type": "boolean"
-    }
-  }
-}
-```
-
-<!-- -->
-<!-- END OF Bitmap TLZigbeeInformation Section -->
 <!-- -->
 
 <br><br>

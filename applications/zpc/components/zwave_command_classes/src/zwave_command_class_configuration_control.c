@@ -138,20 +138,10 @@ static attribute_store_node_t
                                  configuration_parameter_id_t parameter_id)
 {
   attribute_store_node_t parameter_id_node
-    = attribute_store_get_node_child_by_value(endpoint_node,
-                                              ATTRIBUTE(PARAMETER_ID),
-                                              REPORTED_ATTRIBUTE,
-                                              (const uint8_t *)&parameter_id,
-                                              sizeof(parameter_id),
-                                              0);
-
-  if (parameter_id_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    parameter_id_node
-      = attribute_store_add_node(ATTRIBUTE(PARAMETER_ID), endpoint_node);
-    attribute_store_set_reported(parameter_id_node,
-                                 &parameter_id,
-                                 sizeof(parameter_id));
-  }
+    = attribute_store_emplace(endpoint_node,
+                              ATTRIBUTE(PARAMETER_ID),
+                              &parameter_id,
+                              sizeof(parameter_id));
 
   attribute_store_add_if_missing(parameter_id_node,
                                  configuration_parameter_attributes,
@@ -807,7 +797,8 @@ static sl_status_t zwave_command_class_configuration_handle_info_report_command(
   }
   set_reports_to_follow(parameter_info_node, reports);
 
-  if (reports < previous_reports_to_follow) {
+  if ((previous_reports_to_follow != 0)
+      && (reports == (previous_reports_to_follow - 1))) {
     // We received a report with a decrement of a previous Report To Follow
     // state. Concatenate the value.
     concatenate_with_previous_value = true;
@@ -870,7 +861,8 @@ static sl_status_t zwave_command_class_configuration_handle_name_report_command(
   }
   set_reports_to_follow(parameter_name_node, reports);
 
-  if (reports < previous_reports_to_follow) {
+  if ((previous_reports_to_follow != 0)
+      && (reports == (previous_reports_to_follow - 1))) {
     // We received a report with a decrement of a previous Report To Follow
     // state. Concatenate the value.
     concatenate_with_previous_value = true;
@@ -1405,6 +1397,32 @@ static void
   attribute_store_set_reported(node, &next_parameter, sizeof(next_parameter));
 }
 
+/**
+ * @brief Deletes the Configuration Parameter ID if we could not get its value
+ * for v1-v2 nodes.
+ *
+ * @param parameter_value_node    Attribute store node for the Parameter Value
+ */
+static void
+  on_configuration_get_failure(attribute_store_node_t parameter_value_node)
+{
+  zwave_cc_version_t supporting_node_version
+    = zwave_command_class_get_version_from_node(parameter_value_node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
+
+  if ((supporting_node_version > 0) && (supporting_node_version < 3)) {
+    attribute_store_node_t parameter_id_node
+      = attribute_store_get_first_parent_with_type(parameter_value_node,
+                                                   ATTRIBUTE(PARAMETER_ID));
+    attribute_store_delete_node(parameter_id_node);
+    sl_log_debug(LOG_TAG,
+                 "Failed to Get parameter value for Attribute ID %d, "
+                 "deleting Parameter ID (ID %d).",
+                 parameter_value_node,
+                 parameter_id_node);
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update callbacks
 ///////////////////////////////////////////////////////////////////////////////
@@ -1452,9 +1470,7 @@ static void zwave_command_class_configuration_on_version_attribute_update(
   attribute_store_node_t bulk_support_node
     = attribute_store_get_first_child_by_type(endpoint_node,
                                               ATTRIBUTE(BULK_SUPPORT));
-  if (false
-      == attribute_store_is_value_defined(bulk_support_node,
-                                          REPORTED_ATTRIBUTE)) {
+  if (false == attribute_store_is_reported_defined(bulk_support_node)) {
     configuration_bulk_support_t bulk_support = false;
     if (supporting_node_version == 2 || supporting_node_version == 3) {
       bulk_support = true;
@@ -1536,6 +1552,10 @@ sl_status_t zwave_command_class_configuration_init()
   attribute_resolver_set_resolution_give_up_listener(
     ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID),
     &on_next_supported_parameter_id_not_found);
+
+  attribute_resolver_set_resolution_give_up_listener(
+    ATTRIBUTE(PARAMETER_VALUE),
+    &on_configuration_get_failure);
 
   // Attribute store callbacks
   attribute_store_register_callback_by_type(

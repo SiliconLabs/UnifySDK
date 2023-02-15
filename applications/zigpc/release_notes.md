@@ -1,5 +1,22 @@
 # ZigPC Release Notes
 
+## [1.3.0] - February 2023
+
+### Added (1.3.0)
+
+* Enabled the minimum required attributes for ApplicationMonitoring.
+* Add the possiblity of enabling emberCLI at compile time. Use command embercli in Zigpc CLI to send command to the z3gateway cli.
+* Added CLI option to configure attribute polling rate, can be set in uic.cfg under zigpc.attr_polling_rate_ms.
+* Added support for bindings through MQTT.
+
+### Changed (1.3.0)
+
+* Reference platform updated to Bullseye 64-bit based Raspberry Pi OS.
+* Migrated to Gecko SDK version to v4.2.0.
+* General network improvements.
+* JSON Parsing bugfix
+* Attribute polling bugfix
+
 ## [1.2.0] - August 2022
 
 ### Added (1.2.0)
@@ -139,6 +156,7 @@ devices after ZigPC reboots
 | ZigPC can fail at initialization if the NCP image is based on GSDK 4.1 without ADDRESS_TABLE being set to 32                                          | Set macro `EMBER_ADDRESS_TABLE_SIZE=32` in NCP studio project before building NCP image.    |
 | ZigPC can fail at initialization if the NCP image is based on a different version of the GeckoSDK than ZigPC                                          | Update the NCP image to the same GeckoSDK version as the one used to compile the ZigPC.     |
 | ZigPC sends the default response to a sleepy check-in command instead of the expected acknowledge message                                             | Disable the poll control cluster when managing sleepy devices to use the default behaviour. |
+| ZigPC may take longer than expected to perform an OTA upgrade                                                                                         | Minimize the size of the image and leave sufficient time to update end devices.             |
 
 ### Zigbee Devices Used for Testing
 

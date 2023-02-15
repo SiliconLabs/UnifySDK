@@ -27,6 +27,9 @@ const SUPPORTED_CLUSTERS = [
   'PollControl',
   'DoorLock',
   'Thermostat',
+  'IASZone',
+  'IASACE,',
+  'IASWD',
 ]
 
 const SUPPORTED_CLUSTER_ATTRIBUTES = [
@@ -40,6 +43,9 @@ const SUPPORTED_CLUSTER_ATTRIBUTES = [
   'DoorLock',
   'OTAUpgrade',
   'Thermostat',
+  'IASZone',
+  'IASACE,',
+  'IASWD',
 ]
 
 const supportedCluster = (clusterName) => {

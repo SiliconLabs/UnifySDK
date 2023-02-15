@@ -156,7 +156,10 @@ void test_zigpc_gateway_persist_address_table_info_multiple(void)
                                                    nullptr,
                                                    EMBER_SUCCESS);
     zigbeeHostGetAddressTableEntry_IgnoreArg_nodeId();
-    zigbeeHostGetAddressTableEntry_ReturnThruPtr_nodeId(&mappings[i].node_id);
+
+    EmberNodeId node_id = 0;
+    zigbeeHostGetAddressTableEntry_ReturnThruPtr_nodeId(&node_id);
+    mappings[i].node_id = node_id;
   }
 
   datastore_store_arr_ExpectAndReturn(ZIGPC_GATEWAY_NODEID_LIST_KEY,

@@ -14,6 +14,7 @@
 #include <map>
 #include <functional>
 #include <string>
+#include <string.h>
 
 // System-wide libraries
 #include <mosquitto.h>
@@ -38,8 +39,10 @@ typedef std::function<void(void *, void *, const struct mqtt_message *)>
 static std::map<struct mosquitto *, on_connect_callback_t> on_connect_map;
 static std::map<struct mosquitto *, on_disconnect_callback_t> on_disconnect_map;
 static std::map<struct mosquitto *, on_message_callback_t> on_message_map;
-#define LOG_TAG "mqtt_wrapper_mosquitto"
 
+// Constants
+constexpr const char WILL_MESSAGE_PAYLOAD[] = R"({"value": false})";
+constexpr const char *LOG_TAG               = "mqtt_wrapper_mosquitto";
 
 // Private declaration of a function that converts between mosq_err_t and sl_status_t.
 sl_status_t mqtt_wrapper_err_lut(int err);
@@ -63,10 +66,10 @@ void *mqtt_wrapper_new(const char *id, bool clean_session, void *obj)
 
 static int pw_callback(char *buf, int size, int rwflag, void *userdata)
 {
-    std::string passphrase = "";
-    buf = (char *)passphrase.c_str();
-    size = passphrase.size();
-    return size;
+  std::string passphrase = "";
+  buf                    = (char *)passphrase.c_str();
+  size                   = passphrase.size();
+  return size;
 }
 
 sl_status_t mqtt_wrapper_tls_set(void *instance,
@@ -74,7 +77,7 @@ sl_status_t mqtt_wrapper_tls_set(void *instance,
                                  const char *certfile,
                                  const char *keyfile)
 {
-    sl_log_debug(LOG_TAG, "mqtt_wrapper_tls_set\n");
+  sl_log_debug(LOG_TAG, "mqtt_wrapper_tls_set\n");
   return mqtt_wrapper_err_lut(
     mosquitto_tls_set(static_cast<struct mosquitto *>(instance),
                       cafile,
@@ -89,7 +92,7 @@ sl_status_t mqtt_wrapper_tls_psk_set(void *instance,
                                      const char *id,
                                      const char *ciphers)
 {
-    sl_log_debug(LOG_TAG, "id: %s psk: %s\n", id, psk);
+  sl_log_debug(LOG_TAG, "id: %s psk: %s\n", id, psk);
   return mqtt_wrapper_err_lut(
     mosquitto_tls_psk_set(static_cast<struct mosquitto *>(instance),
                           psk,
@@ -136,7 +139,8 @@ sl_status_t mqtt_wrapper_loop(void *instance, int timeout)
     mosquitto_loop(static_cast<struct mosquitto *>(instance), timeout, 1));
 }
 
-sl_status_t mqtt_wrapper_loop_read(void *instance) {
+sl_status_t mqtt_wrapper_loop_read(void *instance)
+{
   return mqtt_wrapper_err_lut(
     mosquitto_loop_read(static_cast<struct mosquitto *>(instance), 1));
 }
@@ -151,6 +155,28 @@ sl_status_t mqtt_wrapper_loop_misc(void *instance)
 {
   return mqtt_wrapper_err_lut(
     mosquitto_loop_misc(static_cast<struct mosquitto *>(instance)));
+}
+
+sl_status_t mqtt_wrapper_set_will_message(void *instance,
+                                          const char *mqtt_client_id,
+                                          int qos)
+{
+  // Configure the Will message using the MQTT client ID
+  std::string will_topic
+    = "ucl/by-mqtt-client/" + std::string(mqtt_client_id)
+      + "/ApplicationMonitoring/Attributes/ApplicationConnected/Reported";
+
+  sl_log_info(LOG_TAG,
+              "Configuring MQTT Will Message using topic: %s",
+              will_topic.c_str());
+
+  return mqtt_wrapper_err_lut(
+    mosquitto_will_set(static_cast<struct mosquitto *>(instance),
+                       will_topic.c_str(),
+                       strlen(WILL_MESSAGE_PAYLOAD),
+                       WILL_MESSAGE_PAYLOAD,
+                       qos,
+                       true));
 }
 
 sl_status_t mqtt_wrapper_publish(void *instance,

@@ -1,3 +1,3 @@
 add_library(app_log_wrapper INTERFACE)
 target_include_directories(app_log_wrapper INTERFACE include)
-target_link_libraries(app_log_wrapper INTERFACE uic_log)
+target_link_libraries(app_log_wrapper INTERFACE unify)

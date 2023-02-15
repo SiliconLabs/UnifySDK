@@ -118,11 +118,6 @@ extern "C" {
 #define TRANSMIT_COMPLETE_NOROUTE  0x04
 #define TRANSMIT_COMPLETE_VERIFIED 0x05  ///< Verified delivery
 
-// Helper macro that will indicate if a transmission is successful.
-#define IS_TRANSMISSION_SUCCESSFUL(status) \
-  ((status == TRANSMIT_COMPLETE_OK) || (status == TRANSMIT_COMPLETE_VERIFIED))
-///@}
-
 /// @name ZW_REDISCOVERY_NEEDED callback values
 /// Note that they are different from zwapi_request_network_update() callbacks
 ///@{

@@ -30,8 +30,9 @@
 #include "sl_log.h"
 
 // Log tag
-#define LOG_TAG                                "zwave_command_class_security_0"
-#define SECURE_SUPPORTED_COMMAND_CLASSES_INDEX 3
+#define LOG_TAG                                  "zwave_command_class_security_0"
+#define SECURE_SUPPORTED_COMMAND_CLASSES_INDEX   3
+#define SECURE_SUPPORTED_COMMAND_CLASSES_REPORTS 2
 
 ///////////////////////////////////////////////////////////////////////////////
 // Command Handler functions
@@ -63,14 +64,48 @@ static sl_status_t zwave_command_class_security_0_commands_supported_report(
         connection->remote.node_id)) {
     return SL_STATUS_OK;
   }
-  // Note that Securely Supported CC list will not be larger than 255
+
   uint8_t supported_cc_len
     = frame_length - SECURE_SUPPORTED_COMMAND_CLASSES_INDEX;
-  attribute_store_set_child_reported(
-    endpoint_node,
-    ATTRIBUTE_ZWAVE_SECURE_NIF,
-    &frame_data[SECURE_SUPPORTED_COMMAND_CLASSES_INDEX],
-    supported_cc_len);
+
+  attribute_store_node_t report_node
+    = attribute_store_create_child_if_missing(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+
+  // Check if we just received a "Report To Follow"
+  bool concatenate_with_previous_value = false;
+  reports_to_follow_t previous_reports_to_follow
+    = get_reports_to_follow(report_node);
+
+  reports_to_follow_t reports = 0;
+  if (frame_length >= SECURE_SUPPORTED_COMMAND_CLASSES_INDEX) {
+    reports = frame_data[SECURE_SUPPORTED_COMMAND_CLASSES_REPORTS];
+  }
+
+  set_reports_to_follow(report_node, reports);
+  if (reports < previous_reports_to_follow) {
+    // We received a report with a decrement of a previous Report To Follow
+    // state. Concatenate the value.
+    concatenate_with_previous_value = true;
+  }
+
+  uint8_t array[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  if ((supported_cc_len > 0)
+      && (supported_cc_len < ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH)) {
+    for (int i = 0; i < supported_cc_len; i++) {
+      array[i] = frame_data[i + SECURE_SUPPORTED_COMMAND_CLASSES_INDEX];
+    }
+  }
+
+  if (concatenate_with_previous_value == true) {
+    attribute_store_append_to_reported(report_node, array, supported_cc_len);
+  } else {
+    // Note that Securely Supported CC list will not be larger than 255
+    attribute_store_set_reported(
+      report_node,
+      &frame_data[SECURE_SUPPORTED_COMMAND_CLASSES_INDEX],
+      supported_cc_len);
+  }
 
   // We are done parsing the security 0 commands supported report frame
   return SL_STATUS_OK;

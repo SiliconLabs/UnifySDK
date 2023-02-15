@@ -37,7 +37,8 @@
 #include <boost/phoenix/bind.hpp>
 #include "attribute_mapper_ast.hpp"
 
-namespace qi = boost::spirit::qi;
+namespace qi    = boost::spirit::qi;
+using defines_t = qi::symbols<char, ast::expression>;
 
 // Operators in the term rule have higher precedence than
 // those in expression rule.
@@ -47,8 +48,6 @@ struct term_rule_operators_ : qi::symbols<char, ast::operator_ids> {
     // clang-format off
     add("*",  ast::operator_ids::operator_mult)
        ("/",  ast::operator_ids::operator_div)
-       ("<",  ast::operator_ids::operator_left_shift)
-       (">",  ast::operator_ids::operator_right_shift)
        ("|",  ast::operator_ids::operator_bitor)
        ("&",  ast::operator_ids::operator_bitand)
        ("^",  ast::operator_ids::operator_bitxor)
@@ -68,7 +67,11 @@ struct expr_rule_operators_ : qi::symbols<char, ast::operator_ids> {
     add("+",    ast::operator_ids::operator_plus)
        ("-",    ast::operator_ids::operator_minus)
        ("==",   ast::operator_ids::operator_equals)
-       ("!=",   ast::operator_ids::operator_neq);
+       ("!=",   ast::operator_ids::operator_neq)
+       ("<=",   ast::operator_ids::operator_less_than_or_eq)
+       (">=",   ast::operator_ids::operator_greater_than_or_eq)
+       ("<",    ast::operator_ids::operator_less_than)
+       (">",    ast::operator_ids::operator_greater_than);
     // clang-format on
   }
 } expr_rule_operators;
@@ -130,7 +133,10 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     using qi::alnum;
     using qi::alpha;
     using qi::char_;
+    using qi::eol;
     using qi::hex;
+    using qi::lit;
+    using qi::string;
     using qi::uint_;
 
     using qi::fail;
@@ -142,6 +148,9 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     using boost::spirit::qi::strict_ureal_policies;
     //This parser parses real numbers, real numbers must contain a dot
     real_parser<float, strict_ureal_policies<float>> ureal;
+
+    // Parser operators: https://www.boost.org/doc/libs/1_80_0/libs/spirit/doc/html/spirit/qi/reference/operator.html
+
     // definitions, example: def my_var 1234
     // note that here we use a schematic action to build the defs parser.
     // in this way when the parse later passes an identifier the defs parser
@@ -167,7 +176,7 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     operand_rule = "undefined" | ("0x" > hex) | (ureal >> 'f') | uint_
                    | attribute_rule | condition_rule | defs
                    | ('(' > expression_rule > ')') | (char_('-') > operand_rule)
-                   | (char_('+') > operand_rule);
+                   | (char_('+') > operand_rule) | built_in_function_rule;
 
     // a term is made of 1 or more operators combined by a strong binding operator like * / | &
     term_rule = operand_rule >> *(term_rule_operators > operand_rule);
@@ -175,11 +184,27 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     // an experssion is made of 1 or more operators combined by a weak binding operator like + and -
     expression_rule = (term_rule >> *(expr_rule_operators > term_rule));
 
+    // Functions can be put in assignments, and they contain an expression themselves
+    // fn_at_least_one_value_defined(r'2,r'3,r'5)
+    // fn_min_value(r'2,d'3 or r'3,r'5)
+    built_in_function_rule = "fn_" >> identifier_rule >> "("
+                             >> (expression_rule > *("," >> expression_rule))
+                             >> ")";
+
     // an assignment, example r'1234 = r'6666
     assignment_rule = attribute_rule >> "=" >> expression_rule;
 
+    // Scope configuration is used assign configurations for a scope
+    scope_setting_name = string("chain_reaction") | string("clear_desired")
+                         | string("create_attributes")
+                         | string("common_parent_type");
+    scope_setting_value = ("0x" > hex) | uint_;
+    scope_configuration_rule
+      = scope_setting_name > "(" > -scope_setting_value > ")";
+
     // the scope rule is used to group assignments and assign them a priority.
-    scope_rule = "scope" > uint_ >> "{" >> +assignment_rule >> "}";
+    scope_rule = "scope" > uint_ > *scope_configuration_rule > "{"
+                 >> +assignment_rule >> "}";
 
     // This is the entry rule for the grammer, definitions must come first, then scopes
     start_rule = *def_rule > *scope_rule;
@@ -190,6 +215,10 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     condition_rule.name("condition");
     attribute_rule.name("attribute");
     assignment_rule.name("assignment");
+    built_in_function_rule.name("function");
+    scope_setting_name.name("scope_setting_name");
+    scope_setting_value.name("scope_setting_value");
+    scope_configuration_rule.name("scope_configuration_rule");
     scope_rule.name("scope");
     def_rule.name("def");
     identifier_rule.name("identifier");
@@ -207,7 +236,7 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
   }
 
   private:
-  qi::symbols<char, ast::expression> defs;
+  defines_t defs;
 
   // Rules ( small parsers ) used by the main parser.
   // note that the second template argument is the data type of the output of the
@@ -224,7 +253,14 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
   qi::rule<IteratorType, ast::attribute_path_element(), Skipper>
     attribute_path_element_rule;
   qi::rule<IteratorType, std::string()> identifier_rule;
+  qi::rule<IteratorType, ast::function_invokation(), Skipper>
+    built_in_function_rule;
   qi::rule<IteratorType, ast::assignment(), Skipper> assignment_rule;
+  qi::rule<IteratorType, std::string()> scope_setting_name;
+  qi::rule<IteratorType, boost::optional<unsigned int>, Skipper>
+    scope_setting_value;
+  qi::rule<IteratorType, ast::scope_setting(), Skipper>
+    scope_configuration_rule;
   qi::rule<IteratorType, ast::scope(), Skipper> scope_rule;
   qi::rule<IteratorType, Skipper> def_rule;
   qi::rule<IteratorType, ast::ast_tree(), Skipper> start_rule;

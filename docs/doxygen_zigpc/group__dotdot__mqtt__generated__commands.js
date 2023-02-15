@@ -48,6 +48,7 @@ var group__dotdot__mqtt__generated__commands =
     [ "uic_mqtt_dotdot_color_control_publish_generated_write_attributes_command", "group__dotdot__mqtt__generated__commands.html#gaf6a89e020b49ebfb79143382f445a829", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_generated_default_reset_all_parameters_command", "group__dotdot__mqtt__generated__commands.html#ga6aebd00bcf39358195435fe194053e57", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_generated_discover_parameter_command", "group__dotdot__mqtt__generated__commands.html#ga41697231fdf0b95e22b0ed9496d931d0", null ],
+    [ "uic_mqtt_dotdot_configuration_parameters_publish_generated_discover_parameter_range_command", "group__dotdot__mqtt__generated__commands.html#ga61e2eba27d03626c4526f37733886c46", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_generated_set_parameter_command", "group__dotdot__mqtt__generated__commands.html#gae4d711bdb1beb42191e4d37df9b2005a", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_publish_generated_write_attributes_command", "group__dotdot__mqtt__generated__commands.html#ga805d97c12398392e16bb7a5fa9e7970e", null ],
     [ "uic_mqtt_dotdot_dehumidification_control_publish_generated_write_attributes_command", "group__dotdot__mqtt__generated__commands.html#gaae9cce4d7c6ecb3e742ac5ac3717fdf7", null ],

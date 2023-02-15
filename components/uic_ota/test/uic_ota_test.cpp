@@ -22,7 +22,6 @@
 
 // This component
 #include "workaround.hpp"
-#include "ota.hpp"
 
 // Unify imports
 #include "contiki_test_helper.h"

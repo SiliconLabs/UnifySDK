@@ -12,8 +12,10 @@ target_include_directories(
 target_link_libraries(
   zigpc_discovery
   INTERFACE zigpc_common
-  PRIVATE zigpc_datastore zigpc_gateway uic_contiki uic_log)
+  PRIVATE zigpc_datastore zigpc_gateway unify)
 
-target_add_mock(zigpc_discovery)
+if(BUILD_TESTING)
+  target_add_mock(zigpc_discovery)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

@@ -21,6 +21,7 @@
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
+#include "zpc_attribute_store_type_registration.h"
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
@@ -79,6 +80,7 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)

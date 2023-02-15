@@ -49,6 +49,7 @@ void emAfZDOMessageReceived(EmberNodeId sender, EmberApsFrame* apsFrame, uint8_t
   (void)apsFrame;
   (void)message;
   (void)length;
+  emAfZDOHandleBindingResponseCallback(sender, apsFrame, message, length);
 }
 
 // Retrieve attribute and craft response

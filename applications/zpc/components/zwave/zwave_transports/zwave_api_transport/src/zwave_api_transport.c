@@ -17,6 +17,9 @@
 #include <stdbool.h>
 #include <string.h>
 
+// Interfaces
+#include "zwave_helper_macros.h"
+
 // Includes from the Z-Wave Controller
 #include "zwave_command_class_indices.h"
 #include "zwave_controller_connection_info.h"

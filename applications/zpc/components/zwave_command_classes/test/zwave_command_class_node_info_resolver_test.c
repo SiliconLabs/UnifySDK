@@ -21,6 +21,7 @@
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
+#include "zpc_attribute_store_type_registration.h"
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
@@ -42,6 +43,7 @@
 // Static variables
 static attribute_resolver_function_t resolve_secure_node_info = NULL;
 static attribute_resolver_function_t resolve_node_info        = NULL;
+static attribute_resolver_callback_t on_nif_resolution_abort  = NULL;
 
 static const zwave_controller_callbacks_t *controller_callbacks = NULL;
 
@@ -66,6 +68,16 @@ static sl_status_t
   return SL_STATUS_OK;
 }
 
+void attribute_resolver_set_resolution_give_up_listener_stub(
+  attribute_store_type_t node_type,
+  attribute_resolver_callback_t callback,
+  int cmock_num_calls)
+{
+  TEST_ASSERT_EQUAL(ATTRIBUTE_ZWAVE_NIF, node_type);
+  on_nif_resolution_abort = callback;
+  return;
+}
+
 sl_status_t zwave_controller_register_callbacks_stub(
   const zwave_controller_callbacks_t *callbacks, int cmock_num_calls)
 {
@@ -79,6 +91,7 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -97,8 +110,13 @@ static void init_verification()
   // Rule registration
   attribute_resolver_register_rule_Stub(&attribute_resolver_register_rule_stub);
 
+  // Give up listener registration
+  attribute_resolver_set_resolution_give_up_listener_Stub(
+    &attribute_resolver_set_resolution_give_up_listener_stub);
+
   resolve_secure_node_info = NULL;
   resolve_node_info        = NULL;
+  on_nif_resolution_abort  = NULL;
   controller_callbacks     = NULL;
   memset(received_frame, 0, sizeof(received_frame));
   received_frame_size = 0;
@@ -427,4 +445,33 @@ void test_on_node_information_update_downgrade()
   zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(node_id, true);
   is_command_class_in_supported_list_IgnoreAndReturn(false);
   controller_callbacks->on_node_information(node_id, &node_info);
+}
+
+void test_on_nif_resolution_aborted()
+{
+  TEST_ASSERT_NOT_NULL(on_nif_resolution_abort);
+
+  // Add 2 NIFs, one under endpoint 0 and one under endpoint 2
+  zwave_endpoint_id_t endpoint_id_value = 0;
+  attribute_store_node_t endpoint_0_node
+    = attribute_store_emplace(node_id_node,
+                              ATTRIBUTE_ENDPOINT_ID,
+                              &endpoint_id_value,
+                              sizeof(endpoint_id_value));
+  attribute_store_node_t nif_0_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_0_node);
+  endpoint_id_value = 2;
+  attribute_store_node_t endpoint_2_node
+    = attribute_store_emplace(node_id_node,
+                              ATTRIBUTE_ENDPOINT_ID,
+                              &endpoint_id_value,
+                              sizeof(endpoint_id_value));
+  attribute_store_node_t nif_2_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_2_node);
+
+  // Now check what happens when endpoint 0 NIF cannot be resolved:
+  on_nif_resolution_abort(nif_0_node);
+  TEST_ASSERT_EQUAL(true, attribute_store_node_exists(nif_0_node));
+  on_nif_resolution_abort(nif_2_node);
+  TEST_ASSERT_EQUAL(false, attribute_store_node_exists(nif_2_node));
 }

@@ -34,6 +34,9 @@
 // Unify definitions
 #include "sl_status.h"
 
+// Other component includes
+#include "attribute_store.h"
+
 /**
  * @brief Arguments type
  */
@@ -82,6 +85,18 @@ int uic_stdin_get_output_fd();
  *
  */
 sl_status_t uic_stdin_handle_command(const char *command);
+
+/**
+ * @brief Pretty-print a tree of nodes in attribute store. Show nodes' ID, data
+ * type and value in a similar fashion to tree command.
+ *
+ * @param node A root node to print its attributes and children.
+ * @param print_total_child_count Print the number of children for each node.
+ * @param print_only_n_node Limit the number of nodes printed.
+ */
+sl_status_t unify_stdin_attribute_store_log_node(attribute_store_node_t node,
+                                                 bool print_total_child_count = false,
+                                                 bool print_only_n_node       = false);
 
 #endif /** @} */
 //UIC_STDIN_HPP

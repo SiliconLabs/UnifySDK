@@ -37,6 +37,7 @@
 #define DEFAULT_ZWAVE_RF_REGION                             "EU"
 #define DEFAULT_ZWAVE_NORMAL_TX_POWER_DBM                   0
 #define DEFAULT_ZWAVE_MEASURED_0DBM_POWER                   0
+#define DEFAULT_ZWAVE_MAX_LR_TX_POWER_DBM                   0
 #define DEFAULT_SERIAL_PORT                                 "/dev/ttyUSB0"
 #define DEFAULT_WAKE_UP_INTERVAL                            4200
 #define DEFAULT_MANUFACTURER_ID                             0x0000
@@ -62,6 +63,7 @@
 #define ZPC_DEVICE_ID                     "zpc.device_id"
 #define ZPC_NORMAL_TX_POWER_DBM           "zpc.normal_tx_power_dbm"
 #define ZPC_MEASURED_0DBM_POWER           "zpc.measured_0dbm_power"
+#define ZPC_MAX_LR_TX_POWER_DBM           "zpc.max_lr_tx_power_dbm"
 #define ZPC_SERIAL_LOG_FILE               "zpc.serial_log_file"
 #define ZPC_ACCEPTED_TRANSMIT_FAILURE     "zpc.accepted_transmit_failure"
 #define ZPC_HARDWARE_VERSION              "zpc.hardware_version"
@@ -143,6 +145,14 @@ int zpc_config_init()
                            "it will be applied only with compatible Z-Wave "
                            "APIs.",
                            DEFAULT_ZWAVE_MEASURED_0DBM_POWER);
+  status |= config_add_int(ZPC_MAX_LR_TX_POWER_DBM,
+                           "Z-Wave Long Range Transmit power (deci dBm),"
+                           " power level is in deci dBm. E.g. 1dBm output power"
+                           "will be 10 in max_lr_tx_power_dbm and -2dBm  will "
+                           "be -20 in max_lr_tx_power_dbm. Not all Z-Wave "
+                           "modules support this setting and it will be "
+                           "applied only with compatible Z-Wave APIs.",
+                           DEFAULT_ZWAVE_MAX_LR_TX_POWER_DBM);
   status |= config_add_int(ZPC_DEFAULT_WAKE_UP_INTERVAL,
                            "Default wake up interval in seconds, which will be "
                            "configured on sleeping (NL) Z-Wave nodes after "
@@ -306,6 +316,8 @@ sl_status_t zpc_config_fixt_setup()
     = config_get_int_safe(ZPC_MEASURED_0DBM_POWER);
   config.zwave_normal_tx_power_dbm
     = config_get_int_safe(ZPC_NORMAL_TX_POWER_DBM);
+  config.zwave_max_lr_tx_power_dbm
+    = config_get_int_safe(ZPC_MAX_LR_TX_POWER_DBM);
   config.default_wake_up_interval
     = config_get_int_safe(ZPC_DEFAULT_WAKE_UP_INTERVAL);
   config.hardware_version = config_get_int_safe(ZPC_HARDWARE_VERSION);

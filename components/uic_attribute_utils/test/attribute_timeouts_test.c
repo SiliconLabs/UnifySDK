@@ -287,6 +287,15 @@ void test_attribute_timeouts_register_null_pointer()
                     attribute_timeout_set_callback(node_2, 1000, NULL));
 }
 
+void test_attribute_timeouts_register_invalid_attribute()
+{
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_timeout_set_callback(ATTRIBUTE_STORE_INVALID_NODE,
+                                   1000,
+                                   &attribute_store_undefine_reported));
+}
+
 void test_attribute_timeouts_nothing_works_after_teardown()
 {
   TEST_ASSERT_EQUAL(

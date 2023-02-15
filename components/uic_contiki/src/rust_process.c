@@ -1,6 +1,8 @@
 #include "request_poller.h"
 #include <stdio.h>
 
+#include "contiki.h"
+PROCESS_NAME(request_poller_process);
 static void(*process_contiki_poll_cb)() = NULL;
 
 void register_poll_handler(void(*handler)()) {

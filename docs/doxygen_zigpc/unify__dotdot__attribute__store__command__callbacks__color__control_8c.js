@@ -1,0 +1,27 @@
+var unify__dotdot__attribute__store__command__callbacks__color__control_8c =
+[
+    [ "HANDLE_SUPPORT_CHECK", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a883775616255fa26efe030d1c3d2026d", null ],
+    [ "LOG_TAG", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
+    [ "color_control_cluster_mapper_init", "group__color__control__cluster__mapper.html#gaf57fed6f99cbe8c81609105011f9c431", null ],
+    [ "color_control_move_color_temperature_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a8a870f1492ef4abe3d4b2649463576fe", null ],
+    [ "color_control_move_hue_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ac8571cedf246e25df008458673534d60", null ],
+    [ "color_control_move_saturation_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ad03f0b9841adb4008b9c6f048f598177", null ],
+    [ "color_control_move_to_color_temperature_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a32d0bda34002499955d21bea7ce069b5", null ],
+    [ "color_control_move_to_hue_and_saturation_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ab4f8e5594b86d100d3502ba94c581663", null ],
+    [ "color_control_move_to_hue_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a47e48049c1c44b18917fa450721c3996", null ],
+    [ "color_control_move_to_saturation_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#afef63645287899242a20548f4895879c", null ],
+    [ "color_control_step_color_temperature_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a90ab66b186b809e048e2e7585af30acd", null ],
+    [ "color_control_step_hue_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a070ad9f4649cbbf7bbdbeef3b79d736d", null ],
+    [ "color_control_step_saturation_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#aa54257588b4657bea040fd50702c6cad", null ],
+    [ "color_control_stop_move_step_callback", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a8cfaa267630570e8cc271fd1aecab62b", null ],
+    [ "dotdot_set_color_control_hue_saturation_remaining_time", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ac2961246db204c6937debb6dea29ddb8", null ],
+    [ "dotdot_set_color_control_temperature_mireds_remaining_time", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ade1da473fe7c9a7f690441198a548823", null ],
+    [ "set_color_modes", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a3e13f5f1c0dd0056b000f4705af881b3", null ],
+    [ "validated_color_value", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a9b3687d1e55033971f690984034a3f60", null ],
+    [ "COLOR_COLOR_MODE", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a5e10c3d5c77de2fd0f83b1eb2152d588", null ],
+    [ "DEFAULT_MAX_COLOR", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a20ddf17eeb8b02a2160fb8464b243870", null ],
+    [ "DEFAULT_MIN_COLOR", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a7d6cbf1352ae360396c1001930d71e42", null ],
+    [ "HUE_SATURATION_BITMASK", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a7fc0579a18f29bd18a01c299584de5fa", null ],
+    [ "TEMPERATURE_BITMASK", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a06a5b839fed60f2630ff9c1129813e7c", null ],
+    [ "TEMPERATURE_COLOR_MODE", "unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a8d383d37742a7b8313c8cec1de36a50f", null ]
+];

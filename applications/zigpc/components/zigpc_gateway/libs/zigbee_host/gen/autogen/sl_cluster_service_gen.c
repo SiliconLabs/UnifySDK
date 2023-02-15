@@ -61,6 +61,18 @@ extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
                                                 sl_service_function_context_t *context);
 extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
                                                 sl_service_function_context_t *context);
+extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
+                                                sl_service_function_context_t *context);
+extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
+                                                sl_service_function_context_t *context);
+extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
+                                                sl_service_function_context_t *context);
+extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
+                                                sl_service_function_context_t *context);
+extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
+                                                sl_service_function_context_t *context);
+extern uint32_t emberAfClusterServiceCallback(sl_service_opcode_t opcode,
+                                                sl_service_function_context_t *context);
 
 
 const sl_service_function_entry_t sli_cluster_service_entries[] = {
@@ -83,4 +95,10 @@ const sl_service_function_entry_t sli_cluster_service_entries[] = {
   { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0300, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_CLIENT << 16)), emberAfClusterServiceCallback },
   { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0406, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_SERVER << 16)), emberAfClusterServiceCallback },
   { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0406, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_CLIENT << 16)), emberAfClusterServiceCallback },
+  { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0500, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_SERVER << 16)), emberAfClusterServiceCallback },
+  { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0500, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_CLIENT << 16)), emberAfClusterServiceCallback },
+  { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0501, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_SERVER << 16)), emberAfClusterServiceCallback },
+  { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0501, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_CLIENT << 16)), emberAfClusterServiceCallback },
+  { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0502, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_SERVER << 16)), emberAfClusterServiceCallback },
+  { SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND, 0x0502, (NOT_MFG_SPECIFIC | (SL_CLUSTER_SERVICE_SIDE_CLIENT << 16)), emberAfClusterServiceCallback },
   };

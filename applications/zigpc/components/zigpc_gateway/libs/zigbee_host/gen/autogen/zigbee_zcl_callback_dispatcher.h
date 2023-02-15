@@ -34,6 +34,7 @@ bool emberAfPreZDOMessageReceivedCallback(EmberNodeId nodeId, EmberApsFrame* aps
 
 // ZDO message received
 void emAfZDOMessageReceived(EmberNodeId sender, EmberApsFrame* apsFrame, uint8_t* message, uint16_t length);
+void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* apsFrame, uint8_t* message, uint16_t length);
 
 // Retrieve attribute and craft response
 bool emAfRetrieveAttributeAndCraftResponse(uint8_t endpoint, EmberAfClusterId clusterId, EmberAfAttributeId attrId, uint8_t mask, uint16_t maunfacturerCode, uint16_t readLength);

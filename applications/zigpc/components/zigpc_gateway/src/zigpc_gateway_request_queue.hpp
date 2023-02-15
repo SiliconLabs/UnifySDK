@@ -67,6 +67,7 @@
 
 #include <memory>
 #include <queue>
+#include <string>
 
 // ZigPC includes
 #include <zigpc_common_zigbee.h>
@@ -324,14 +325,20 @@ class DeviceRemoveRequest : public RequestQueue::Entry
 class BindingRequestRequest : public RequestQueue::Entry
 {
   private:
-  zigbee_eui64_t eui64;             /**< Device ID */
-  zigbee_endpoint_id_t endpoint_id; /**< Endpoint ID */
+  zigbee_eui64_t source_eui64;             /**< Device ID */
+  zigbee_endpoint_id_t source_endpoint_id; /**< Endpoint ID */
   zcl_cluster_id_t cluster_id;      /**< Cluster ID */
+  zigbee_eui64_t dest_eui64;             /**< Device ID */
+  zigbee_endpoint_id_t dest_endpoint_id; /**< Endpoint ID */
+  bool is_binding_req;                  /**True if bind, False if unbind */
 
   public:
-  explicit BindingRequestRequest(const zigbee_eui64_t eui64,
-                                 zigbee_endpoint_id_t endpoint_id,
-                                 zcl_cluster_id_t cluster_id);
+  explicit BindingRequestRequest(const zigbee_eui64_t source_eui64,
+                                 zigbee_endpoint_id_t source_endpoint_id,
+                                 zcl_cluster_id_t cluster_id,
+                                 const zigbee_eui64_t dest_eui64,
+                                 zigbee_endpoint_id_t dest_endpoint_id,
+                                 bool is_binding_req);
   ~BindingRequestRequest() override = default;
 
   EmberStatus invoke(void) override;

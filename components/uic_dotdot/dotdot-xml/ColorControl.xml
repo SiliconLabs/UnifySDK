@@ -65,7 +65,7 @@ applicable to this document can be found in the LICENSE.md file.
   <server>
     <attributes>
       <!-- Color Information Attribute Set -->
-      <attribute id="0000" name="CurrentHue" type="uint8" max="254" reportRequired="true" default="0" requiredIf="ColorCapabilities.HueSaturationSupported = true" />
+      <attribute id="0000" name="CurrentHue" type="uint8" max="254" reportRequired="true" default="0" requiredIf="ColorCapabilities.HueSaturationSupported = true" sceneRequired="true" />
       <attribute id="0001" name="CurrentSaturation" type="uint8" max="254" reportRequired="true" sceneRequired="true" default="0" requiredIf="ColorCapabilities.HueSaturationSupported = true" />
       <attribute id="0002" name="RemainingTime" type="uint16" max="65534" default="0" />
       <attribute id="0003" name="CurrentX" type="uint16" max="65279" reportRequired="true" sceneRequired="true" default="24939" requiredIf="ColorCapabilities.XYSupported = true" />
@@ -101,7 +101,7 @@ applicable to this document can be found in the LICENSE.md file.
       </attribute>
       <attribute id="000F" name="Options" type="CCColorOptions" writable="true" default="0" required="true" />
       <attribute id="4000" name="EnhancedCurrentHue" type="uint16" max="65535" sceneRequired="true" default="0" requiredIf="ColorCapabilities.EnhancedHueSupported = true" />
-      <attribute id="4001" name="EnhancedColorMode" type="enum8" default="1" required="true">
+      <attribute id="4001" name="EnhancedColorMode" type="enum8" default="1" required="true" sceneRequired="true">
         <restriction>
           <type:enumeration value="00" name="CurrentHueAndCurrentSaturation" />
           <type:enumeration value="01" name="CurrentXAndCurrentY" />

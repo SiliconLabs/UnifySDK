@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Unify Common OTA service" name="description" />
+<meta content="OTA, Firmware, Upgrade" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. Common OTA FW Update Service &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/Chapter05-common-ota.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. Service Discovery" href="Chapter06-service-discovery.html" />
+    <link rel="prev" title="4. Scenario Mapping to Specific PHYs: Z-Wave, BLE and ZigBee" href="Chapter04-scenario-mappings.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-applications-overview">Unify Applications Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../UnifySDK.html#resources">Resources</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Unify Specifications</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter08-aox-application.html">8. AoX Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter09-binding.html">9. Binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter11-system-metrics.html">11. System Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="common-ota-fw-update-service">
+<span id="unify-specifications-chapter-common-ota"></span><h1><span class="section-number">5. </span>Common OTA FW Update Service<a class="headerlink" href="#common-ota-fw-update-service" title="Permalink to this heading"></a></h1>
+<p>This chapter describes a common firmware update mechanism for all wireless
+technologies supported by the Unify framework. The design goal of this framework
+is to provide a common interface for applying firmware images to Unify end
+nodes.</p>
+<p>The overall design is that there is an OTA Image Provider, which has a
+database of firmware images and that each protocol controller implements a
+firmware consumer on behalf of its PAN nodes. The Image consumer monitors
+the images provided by the image provider and compares the firmware versions
+of the running devices. If a mismatch of versions is identified, the
+consumer will poll the image file from the consumer and transfer the image
+to the PAN device using a protocol-specific OTA method.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-9e3fdf48945ad14c4049ddfcc4584e366df0d8c2.png" alt="database ImageProvider
+node MQTT
+node ProtocolController {
+  node ImageConsumer
+}
+node PanDevice
+
+ImageProvider --&gt; MQTT
+MQTT --&gt; ImageConsumer
+ProtocolController--&gt; PanDevice"/>
+</p>
+<section id="ucl-ota-framework">
+<h2><span class="section-number">5.1. </span>UCL OTA Framework<a class="headerlink" href="#ucl-ota-framework" title="Permalink to this heading"></a></h2>
+<p>The UCL OTA framework supports updating the firmware PAN devices connected
+to the MQTT broker through protocol controllers. Each PAN device can have
+any number of firmware images needed to operate the device. Examples of
+firmware images are Protocol Stack code, Application code, and a bitmap
+image used as background in a display. The framework supports updating
+both individual nodes and all nodes, which may support a given firmware image.</p>
+<p>Because each image can be anything, the format of the firmware data file is
+not mandated by this specification. Examples of firmware file data
+are the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Gecko Boot loader(GBL)</p></li>
+<li><p>Z-Wave 500 series boot loader files</p></li>
+<li><p>PNG image</p></li>
+<li><p>others…</p></li>
+</ul>
+</div></blockquote>
+<p>This framework does not in itself provide a way to verify the integrity
+of firmware images. Each protocol controller / end node needs to ensure that
+the image verification takes place, i.e., allowing only signed firmware
+images to be activated in the end device.</p>
+<p>It is assumed that the firmware provider MQTT client is authenticated with
+the MQTT broker. The Unify Access Control system must prevent unauthenticated
+firmware providers from publishing on the OTA namespaces (see below).</p>
+<p>Each firmware image is identified by a <strong>Unique Image Identifier (UIID)</strong>.
+The <strong>UIID</strong> is a literal string that messages where this firmware image
+belongs. In other words, this is the application firmware of
+manufacturer A product B and hardware rev C. The UIID identifies a specific
+image <em>destination</em> but it does not identify the image version. In other
+words, version 1.00 and version 1.12 of the firmware image of a particular
+light bulb have the same UIID.</p>
+<p>The table below shows suggestions how to generate different UIID strings.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This specification only dictates that the UIID should be prefixed with a
+protocol-specific code. How the string is constructed is protocol specific.</p>
+</div>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-uiid-examples">
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">UIID examples</span><a class="headerlink" href="#table-unify-specifications-uiid-examples" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 60%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Technology</p></th>
+<th class="head"><p>UIID components</p></th>
+<th class="head"><p>Suggestion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ZigBee</p></td>
+<td><p>“ZigBee”+ManufacturerCode+ImageType</p></td>
+<td><p>ZigBee010103</p></td>
+</tr>
+<tr class="row-odd"><td><p>Z-Wave</p></td>
+<td><p>ZWave-ManufacturerID-ProductType-ProductID-FirmwareTarget-HardwareVersion</p></td>
+<td><p>ZWave-0000-0002-0004-00-01</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ucl-ota-communication-protocol">
+<h2><span class="section-number">5.2. </span>UCL OTA Communication Protocol<a class="headerlink" href="#ucl-ota-communication-protocol" title="Permalink to this heading"></a></h2>
+<p>The OTA communication protocol is between two types of components,
+<em>image providers</em> and <em>image consumers</em>.
+The image provider is responsible for keeping a repository of firmware images
+and announce which images are available.
+The image provider also manages MQTT topics in the ucl/OTA namespace.
+This is an independent MQTT client. The image provider operates with two topic namespaces. One namespace is used to apply firmware images to a specific device, while the other namespace is for applying firmware one firmware image to all devices which support the image.
+The image consumers manages topics in the
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/OTA/&lt;UIID&gt;</span></code> namespace, which provide information about
+the firmware download progress.</p>
+<p>The following MQTT topics are relevant for the firmware update process:</p>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-ota-mqt-topic-space-overview">
+<caption><span class="caption-number">Table 5.2 </span><span class="caption-text">OTA MQTT topic space overview</span><a class="headerlink" href="#table-unify-specifications-ota-mqt-topic-space-overview" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Image Providers</p></th>
+<th class="head"><p>Image Consumers</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/OTA/info/&lt;UIID&gt;/all</p></td>
+<td><p>Publish(retained)</p></td>
+<td><p>Subscribe</p></td>
+<td><p>Meta info for general images</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/OTA/info/&lt;UIID&gt;/&lt;UNID&gt;</p></td>
+<td><p>Publish(retained)</p></td>
+<td><p>Subscribe</p></td>
+<td><p>Meta info for an image to be pushed to a particular device.</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/OTA/data/&lt;UIID&gt;/all/get</p></td>
+<td><p>Subscribe</p></td>
+<td><p>Publish(un-retained)</p></td>
+<td><p>Trigger data publish for general images</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/OTA/data/&lt;UIID&gt;/&lt;UNID&gt;/get</p></td>
+<td><p>Subscribe</p></td>
+<td><p>Publish(un-retained)</p></td>
+<td><p>Trigger data publish to a particular device.</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/OTA/data/&lt;UIID&gt;/all</p></td>
+<td><p>Publish(un-retained)</p></td>
+<td><p>Subscribe</p></td>
+<td><p>Data for general images</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/OTA/data/&lt;UIID&gt;/&lt;UNID&gt;</p></td>
+<td><p>Publish(un-retained)</p></td>
+<td><p>Subscribe</p></td>
+<td><p>Data for an image to be pushed to a particular device.</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/#</p></td>
+<td><p>N/A</p></td>
+<td><p>Publish(un-retained)</p></td>
+<td><p>Status of firmware update of a particular device.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/ClusterRevision</p></td>
+<td><p>N/A</p></td>
+<td><p>OTA Cluster revision</p></td>
+<td><p>Publish(retained)</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/SupportedCommands</p></td>
+<td><p>N/A</p></td>
+<td><p>Publish(retained)</p></td>
+<td><p>List of commands that can be executed for a device.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="announcing-images">
+<h3><span class="section-number">5.2.1. </span>Announcing Images<a class="headerlink" href="#announcing-images" title="Permalink to this heading"></a></h3>
+<p>When an image is available, the Image Provider publishes meta information
+about available images on the general topic <code class="docutils literal notranslate"><span class="pre">ucl/OTA/info/&lt;UIID&gt;/all</span></code>
+or optionally on the <code class="docutils literal notranslate"><span class="pre">ucl/OTA/info/&lt;UIID&gt;/&lt;UNID&gt;</span></code>. The latter topic is
+device specific and can be used to provide an image for a specific device.
+The two firmware info messages have the same format, but the device-specific
+image has precedence over the general topic.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA Image Info&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information about a firmware image&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;ApplyAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;date-time&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;Filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Version&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are two fields in the firmware info object:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Version</strong> A string that identifies the version of the firmware image.
+If the a PAN node is running a lower version of the firmware, it
+should apply the image. Comparing image versions is not defined by this
+specification because this may be protocol controller specific.</p></li>
+<li><p><strong>ApplyAfter</strong> This is the minimum timestamp when to apply this image.
+A possible use case is as follows:
+<em>I want to upgrade all my light bulbs at 1AM as everyone is sleeping</em>.
+A protocol controller may start to transfer the image before this
+timestamp, if the device does not activate the image by itself.
+This value MUST comply with the RFC 3339.
+If this parameter is omitted, the Firmware Update should take place as soon
+as possible.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="retrieving-images">
+<h3><span class="section-number">5.2.2. </span>Retrieving Images<a class="headerlink" href="#retrieving-images" title="Permalink to this heading"></a></h3>
+<p>Protocol controllers must subscribe to the ucl/OTA/info/+ topic to monitor the
+availability of new firmware images. When a protocol controller identifies
+that a new image is available, it must request the image data from the image
+provider. It does so by temporarily subscribing to
+<code class="docutils literal notranslate"><span class="pre">ucl/OTA/data&lt;UIID&gt;/all</span></code> or <code class="docutils literal notranslate"><span class="pre">ucl/OTA/data&lt;UIID&gt;/&lt;UNID&gt;</span></code>, and then publishing
+an empty JSON object <em>{}</em> message on <code class="docutils literal notranslate"><span class="pre">ucl/OTA/data&lt;UIID&gt;/all/get</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ucl/OTA/data&lt;UIID&gt;/&lt;UNID&gt;/get</span></code>. This MUST trigger the image provider to do
+a publication of the entire image on the <code class="docutils literal notranslate"><span class="pre">ucl/OTA/data/&lt;UIID&gt;/all</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ucl/OTA/data&lt;UIID&gt;/&lt;UNID&gt;</span></code> topics.
+If the image provider does not recognize the UIID, the get command must be ignored.
+The publish of the <em>data</em> topic MUST not be retained. MQTT allows for a
+maximum payload of 256 MB which should be enough for the firmware image.</p>
+<p>After getting the firmware image, the protocol controller must start updating
+the devices affected. If the protocol controller needs to send the same
+image to multiple devices, the protocol controller SHOULD cache the
+image and not request the same image multiple times.</p>
+</section>
+<section id="providing-firmware-status">
+<h3><span class="section-number">5.2.3. </span>Providing Firmware Status<a class="headerlink" href="#providing-firmware-status" title="Permalink to this heading"></a></h3>
+<p>Protocol controllers must announce the current firmware status for all devices
+and all active firmware images. The protocol controller publishes retained on
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/OTA/&lt;UIID&gt;/+</span></code> topic pattern. The firmware update status
+is used by IoT services to monitor the firmware download progress.
+If a device firmware update leads to an UIID no longer there, the protocol
+controller must un-retain all attributes on the given UIID.
+For example, <em>the display background in now contained in the firmware file</em>.</p>
+<p>The following attributes are defined as regular DotDot attributes.
+An endpoint prefix is also used. If the Firmware Update functionality applies
+for the entire device, it should be reported under endpoint 0.</p>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-ota-mqtt-topic-attributes-overview" style="width: 80%">
+<caption><span class="caption-number">Table 5.3 </span><span class="caption-text">OTA MQTT Topic attributes overview</span><a class="headerlink" href="#table-unify-specifications-ota-mqtt-topic-attributes-overview" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>JSON data type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/CurrentVersion/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/CurrentVersion/Reported</p>
+</td>
+<td><p>String. Example: <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">&quot;0x070F01&quot;}</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/TargetVersion/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/TargetVersion/Reported</p>
+</td>
+<td><p>String. Example: <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">&quot;0x070F02&quot;}</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/ApplyAfter/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/ApplyAfter/Reported</p>
+</td>
+<td><p>Data-time formatted String. Example: <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">&quot;2021-04-15T23:59:59+00:00&quot;}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported</p>
+</td>
+<td><p>String with enumeration. Possible values are :</p>
+<p><code class="docutils literal notranslate"><span class="pre">[&quot;Idle&quot;,&quot;DownloadInProgress&quot;,&quot;WaitingToUpgrade&quot;,&quot;WaitForMore&quot;,&quot;WaitingToUpgradeViaExternalEvent&quot;]</span></code></p>
+<p>Example <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">&quot;DownloadInProgress&quot;}</span></code>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/Size/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/Size/Reported</p>
+</td>
+<td><p>Integer value. Example: <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">80000}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Reported</p>
+</td>
+<td><p>Integer value. Example: <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">1250}</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Reported</p>
+</td>
+<td><p>String with enumeration. Possible values are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[&quot;Success&quot;,&quot;Abort&quot;,&quot;NotAuthorized&quot;,&quot;InvalidImage&quot;,`</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;RequireMoreImage&quot;,&quot;NotSupported&quot;]</span></code></p>
+<blockquote>
+<div><p>Example: <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">&quot;Success&quot;}</span></code></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/ClusterRevision/Desired</p>
+<p>ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/ClusterRevision/Reported</p>
+</td>
+<td><p>Integer value. This value MUST be set to 1 for this Cluster.</p>
+<p>Future Unify Specifications may add functionalities to this cluster</p>
+<p>and increment this value. JSON payload Example: <code class="docutils literal notranslate"><span class="pre">{&quot;value&quot;:</span> <span class="pre">1}</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The descriptions of the attributes are the following:</p>
+<ul>
+<li><p><em>CurrentVersion</em>: The current version of the running image</p></li>
+<li><p><em>TargetVersion</em>:  The version which will be installed. If this is identical
+to CurrentVersion, the Status must be <em>Idle</em>.</p></li>
+<li><p><em>ApplyAfter</em>:     Timestamp for when to start the firmware transfer,
+which is obtained form the image provider via the info topic.</p></li>
+<li><p><em>Status</em>: Status of the transfer.</p>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-ota-status-attribute-description" style="width: 80%">
+<caption><span class="caption-number">Table 5.4 </span><span class="caption-text">OTA Status attribute description</span><a class="headerlink" href="#table-unify-specifications-ota-status-attribute-description" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Status value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Idle</p></td>
+<td><p>The device is not currently participating in any part of an OTA process.</p></td>
+</tr>
+<tr class="row-odd"><td><p>DownloadInProgress</p></td>
+<td><p>One ore more firmware fragments has been sent but the transfer is not complete.</p></td>
+</tr>
+<tr class="row-even"><td><p>WaitingToUpgrade</p></td>
+<td><p>Indicates that device has transferred the image but has not yet updated.</p>
+<p>Possibly because of the ApplyAfter timestamp has not yet passed.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>WaitingToUpgradeViaExternalEvent</p></td>
+<td><p>Device needs external/manual activation to complete the update.</p></td>
+</tr>
+<tr class="row-even"><td><p>WaitForMore</p></td>
+<td><p>Indicates that the client is still waiting to receive more OTA upgrade</p>
+<p>image files from the server. This is true for a client device that is</p>
+<p>composed of multiple processors and each processor requires different</p>
+<p>image. The client MUST be in this state until it has received all</p>
+<p>necessary OTA upgrade images, then it MUST transition to Download</p>
+<p>complete state.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p><em>Size</em>: Size of the image which is to be transferred in bytes.</p></li>
+<li><p><em>Offset</em>: Offset of the next chunk to transfer.</p></li>
+<li><p><em>LastError</em>: Error code, if any, of the last operation,
+the following codes are available</p>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-ota-last-error-attribute-description" style="width: 80%">
+<caption><span class="caption-number">Table 5.5 </span><span class="caption-text">OTA LastError attribute description</span><a class="headerlink" href="#table-unify-specifications-ota-last-error-attribute-description" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>LastError value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUCCESS</p></td>
+<td><p>The operation was successful.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ABORT</p></td>
+<td><p>Failed case when a client or a server decides to abort the upgrade process.</p></td>
+</tr>
+<tr class="row-even"><td><p>NOT_AUTHORIZED</p></td>
+<td><p>The Node expected some additional authorization (e.g. out of band activation) to accept updating its firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INVALID_IMAGE</p></td>
+<td><p>Invalid OTA upgrade image (ex. failed signature validation or signer information check or CRC check)</p></td>
+</tr>
+<tr class="row-even"><td><p>NOT_SUPPORTED</p></td>
+<td><p>The node does not support upgrading this firmware.</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p><em>ClusterRevision</em>  The Cluster Revision for the generic OTA cluster.</p></li>
+</ul>
+</section>
+</section>
+<section id="z-wave-firmware-update-example">
+<h2><span class="section-number">5.3. </span>Z-Wave Firmware Update Example<a class="headerlink" href="#z-wave-firmware-update-example" title="Permalink to this heading"></a></h2>
+<p>The ZPC (Z-Wave Protocol Controller) MUST provide the /OTA topic for all Z-Wave
+nodes supporting the Firmware Update Command Class.</p>
+<p>It must gather a list of UIID for all images using information from the
+Version Command Class as well as information from the Firmware Update Command
+Class and subscribe the <code class="docutils literal notranslate"><span class="pre">ucl/OTA/info/&lt;UIID&gt;/all</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ucl/OTA/info&lt;UIID&gt;/&lt;UNID&gt;</span></code> topics for all its nodes
+(or uses a wildcard and filters on incoming messages).</p>
+<p>The version of the announced images are compared to the version of the
+running images. If a version mismatch is found, the ZPC requests the
+image by issuing a <code class="docutils literal notranslate"><span class="pre">/OTA/data/.../get</span></code> publish.</p>
+<p>When the image is received on the <code class="docutils literal notranslate"><span class="pre">/OTA/data/...</span></code> topic, the ZPC MUST calculate
+the CRC16 checksum of the image before starting the transfer the data to the
+Z-Wave node.
+The <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/Attributes/UIID/&lt;UIID&gt;</span></code> topic is updated by the ZPC
+as the firmware transfer and update progresses.</p>
+<p>The Z-Wave node will start requesting firmware fragments.
+Because the Z-Wave node is requesting fragments, the ZPC MUST update the
+“offset” attribute.</p>
+<p>The firmware transfer is done on the Z-Wave side after receiving a
+Firmware Update Firmware Update Meta Data Status Report Command.
+If the Z-Wave node sends the command with the status code set to 0xFD
+(wait for activation), the ZPC MUST wait to the time noted in the apply_after
+attribute to send the Firmware Update Activation Set Command to the Z-Wave node.</p>
+<p>If the device supports activation, the image will be applied immediately
+and the UUID status attribute must be update immediately.</p>
+<p>If the node does not support delayed activations, the ZPC SHOULD indicate it.</p>
+<section id="z-wave-ota-example-with-activation-support">
+<h3><span class="section-number">5.3.1. </span>Z-Wave OTA Example with Activation Support<a class="headerlink" href="#z-wave-ota-example-with-activation-support" title="Permalink to this heading"></a></h3>
+<p class="plantuml">
+<img src="../../_images/plantuml-ab771cbabfb27b7cf32592e71982497edec02a3c.png" alt="' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+title Z-Wave OTA update with activation
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;Image Provider&quot; as IS
+participant &quot;MQTT Broker&quot; as MQTT
+participant &quot;Z-Wave Protocol Controller&quot; as PC
+participant &quot;Z-Wave Node&quot; as Node
+
+IS -&gt; MQTT: &lt;font color=#0039FB&gt;ucl/ota/data/&lt;UIID&gt;/all/get
+IS -&gt; MQTT: &lt;font color=#0039FB&gt;ucl/ota/data/&lt;UIID&gt;/+/get
+
+PC -&gt; MQTT: &lt;font color=#0039FB&gt;ucl/OTA/info/+/all
+PC -&gt; MQTT: &lt;font color=#0039FB&gt; ucl/ota/data/&lt;UIID&gt;/all
+
+note over PC, Node: Z-Wave Firmware Update \nand Version interview
+note over IS, Node: Skipping Desired attributes\npublications in this diagram for simplicity.
+
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/ClusterRevision/Reported \n{&quot;value&quot;:1}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/CurrentVersion/Reported \n{&quot;value&quot;:&quot;0x070F01&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/TargetVersion/Reported \n{&quot;value&quot;:&quot;0x070F01&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/ApplyAfter/Reported \n{&quot;value&quot;:&quot;2020-12-12T03:29:09+00:00&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported \n{&quot;value&quot; : &quot;Idle&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Size/Reported \n{&quot;value&quot;: 0}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Reported \n{&quot;value&quot;: 0}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Reported \n{&quot;value&quot;: &quot;Success&quot;}
+
+note right of IS: New image is available to all
+IS -&gt; MQTT: &lt;font color=#00003C&gt;ucl/OTA/info/&lt;UIID&gt;/all \n\t{&quot;Version&quot;:&quot;0x070F03&quot;, \n\t&quot;ApplyAfter&quot;:&quot;2021-04-15T23:59:59+00:00&quot;, \n\t&quot;Filename&quot;:&quot;ZW_PowerStrip_7.16.0_90_ZGM130S_REGION_US_LR.gbl&quot;}
+&amp;MQTT-&gt;PC:
+
+note over PC: UIID is matching for Z-Wave Node UNID.\nPull the image.
+PC -&gt; MQTT: &lt;font color=#6C2A0D&gt;ucl/ota/data/&lt;UIID&gt;/all/get {}
+&amp;MQTT-&gt;IS:
+IS -&gt; MQTT: &lt;font color=#6C2A0D&gt;ucl/ota/data/&lt;UIID&gt;/all \n//binary data//
+&amp;MQTT-&gt;PC:
+
+note right of PC: Accepts the new data\nStart the Firmware Update procedure
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/TargetVersion/Reported \n{&quot;value&quot;:&quot;0x070F03&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/ApplyAfter/Reported \n{&quot;value&quot;:&quot;2021-04-15T23:59:59+00:00&quot;}
+
+PC -&gt; Node: Firmware Meta Data Request Get\n(Firmware ID value based on UIID)
+Node -&gt; PC: Firmware Meta Data Request Report\n(Status = OK)
+
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported \n{&quot;value&quot;:&quot;DownloadInProgress&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Size/Reported \n{&quot;value&quot;: 100000}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Reported \n{&quot;value&quot;:0}
+
+loop For each firmware fragment i = 1..X
+  Node -&gt; PC: Firmware Update Meta Data Get\n(Report Number = i)
+  PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Reported \n{&quot;value&quot;: i*fragment_size}
+  PC -&gt; Node: Firmware Update Meta Data Report\n(Report Number = i, data)
+end
+
+Node -&gt; PC: Firmware Update Meta Data Status Report\n(Status = 0xFD (wait for activation)
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported \n{&quot;value&quot;:&quot;WaitingToUpgrade&quot;}
+
+...
+note over PC: Timestamp for activation passes
+
+PC -&gt; Node: Firmware Update Activation Set\n(Firmware ID value based on UIID)
+Node -&gt; PC: Firmware Update Activation Status Report\n(Status = Compeleted, Wait Time = 30s)
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Reported \n{&quot;value&quot;: &quot;Success&quot;}
+note over Node: reboots and applies firmware
+Node -&gt; PC: Firmware Update Activation Status Report\n(Status = Compeleted, Wait Time = 0s)
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Reported \n{&quot;value&quot;: &quot;Success&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported \n{&quot;value&quot;:&quot;Idle&quot;}
+PC -&gt; MQTT: &lt;font color=#00003C&gt;ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/CurrentVersion/Reported \n{&quot;value&quot;:&quot;0x070F03&quot;}"/>
+</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

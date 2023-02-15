@@ -41,3 +41,13 @@ target_add_unittest(
   zigpc_gateway_counters_test.cpp
   DEPENDS
   zigbee_host_mock)
+
+  target_add_unittest(
+    zigpc_gateway
+    NAME
+    zigpc_gateway_neighbor_table_test
+    SOURCES
+    zigpc_gateway_neighbor_test.cpp
+    DEPENDS
+    zigbee_host_mock
+  )

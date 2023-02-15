@@ -22,7 +22,7 @@ This document is version **0.1**.
 
 The latest version of this document can always be found in Stash:
 
-[coding_standard](https://stash.silabs.com/projects/UIC/repos/uic/browse/doc/standards/coding-standard.md)
+[coding_standard](https://siliconlabs.github.io/UnifySDK/doc/standards/coding-standard.html)
 
 **Note:** The reason why this document is in git is so that we can use pull-
 requests for changes and make it easier for people to track changes to the

@@ -6,10 +6,12 @@ add_library(
   src/zigpc_gateway.cpp
   src/zigpc_gateway_bookkeeping.cpp
   src/zigpc_gateway_counters.cpp
+  src/zigpc_gateway_neighbor_table.cpp
   src/zigpc_gateway_datastore.cpp
   src/zigpc_gateway_notify.c
   src/zigpc_gateway_process.cpp
-  src/zigpc_gateway_request_queue.cpp)
+  src/zigpc_gateway_request_queue.cpp
+  src/zigpc_gateway_sli.cpp)
 
 target_include_directories(
   zigpc_gateway
@@ -25,14 +27,14 @@ target_link_libraries(
           zigpc_datastore
           zigpc_zcl_util
           zigpc_datastore
-          uic_contiki
-          uic_datastore
-          uic_log)
+          unify)
 
-# create mocks
-add_mock(zigpc_gateway_mock include/zigpc_gateway.h
-         include/zigpc_gateway_notify.h)
-target_interface_libraries(zigpc_gateway_mock zigpc_common_mock
-                           zigpc_zcl_util_mock)
+if(BUILD_TESTING)
+  # create mocks
+  add_mock(zigpc_gateway_mock include/zigpc_gateway.h
+          include/zigpc_gateway_notify.h)
+  target_interface_libraries(zigpc_gateway_mock zigpc_common_mock
+                            zigpc_zcl_util_mock)
 
-add_subdirectory(test)
+  add_subdirectory(test)
+endif()

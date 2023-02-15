@@ -158,7 +158,7 @@ static void zwapi_serial_log_timestamp(const struct timeval *cur_time) {
   }
 }
 
-sl_status_t zwapi_log_to_file_enable(const char *filename)
+sl_status_t zwapi_serial_log_to_file_enable(const char *filename)
 {
   // ignore empty filename, as this is the default config for not enabling log
   if (strcmp(filename, "") == 0) {
@@ -181,7 +181,7 @@ sl_status_t zwapi_log_to_file_enable(const char *filename)
   return SL_STATUS_OK;
 }
 
-sl_status_t zwapi_log_to_file_disable()
+sl_status_t zwapi_serial_log_to_file_disable()
 {
   if (log_fd) {
     fflush(log_fd);
@@ -256,7 +256,6 @@ void zwapi_serial_put_buffer(uint8_t *c, int len)
     int res = write(serial_fd, c, len);
     if (res < 0) {
       sl_log_error(LOG_TAG, "Serial Write Error: %s", strerror(errno));
-      assert(0); // TODO: Should we rather exit here?
     }
     else {
       n += res;

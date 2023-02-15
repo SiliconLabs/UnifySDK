@@ -13,8 +13,8 @@
 #include "config.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/program_options.hpp>
-#include <unistd.h>
 #include <libgen.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -62,7 +62,7 @@ class Config
                      std::string("i"));
     this->config_add(
       CONFIG_KEY_LOG_TAG_LEVEL,
-      "Tag based log level\nFormat: <tag>:<severity>, <tag>:<severity>, ...",
+      "Tag-based log level\nFormat: <tag>:<severity>, <tag>:<severity>, ...",
       std::string(""));
   }
 
@@ -88,30 +88,23 @@ class Config
                      std::string("localhost"));
     this->config_add(CONFIG_KEY_MQTT_PORT, "MQTT broker port", 1883);
     this->config_add(CONFIG_KEY_MQTT_CAFILE,
-                     "Path to file containing the PEM encoded CA certificate "
+                     "Path to file containing the PEM-encoded CA certificate "
                      "to connect to Mosquitto MQTT broker for TLS "
                      "encryption",
                      std::string(""));
     this->config_add(CONFIG_KEY_MQTT_CERTFILE,
-                     "Path to file containing the PEM encoded client "
+                     "Path to file containing the PEM-encoded client "
                      "certificate to connect to Mosquitto "
                      "MQTT broker for TLS "
                      "encryption",
                      std::string(""));
     this->config_add(CONFIG_KEY_MQTT_KEYFILE,
-                     "Path to a file containing the PEM encoded unencrypted "
+                     "Path to a file containing the PEM-encoded unencrypted "
                      "private key for this client",
                      std::string(""));
-
-    char mqtt_client_id[64];
-    snprintf(mqtt_client_id,
-             sizeof(mqtt_client_id),
-             "%s_%i",
-             basename(argv[0]),
-             getpid());
     this->config_add(CONFIG_KEY_MQTT_CLIENT_ID,
                      "Set the MQTT client ID of the application.",
-                     std::string(mqtt_client_id));
+                     std::string(basename(argv[0])));
   }
 
   /**
@@ -227,7 +220,7 @@ class Config
         po::value<std::string>()->default_value(DEFAULT_CONFIG_PATH),
         "Config file in YAML format. UIC_CONF env variable can be set to override the default config file path")
       ("help", "Print this help message and quit")
-      ("dump-config", "Dumps the current configuration on a YAML config file format that can be passed to --conf option")
+      ("dump-config", "Dump the current configuration in a YAML config file format that can be passed to the --conf option")
       ("version", "Print version information and quit");
 
     // MQTT Default Config

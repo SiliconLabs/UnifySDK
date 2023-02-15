@@ -1,5 +1,12 @@
+add_library(uic_ota_shared SHARED
+            $<TARGET_OBJECTS:uic_ota>)
+target_link_libraries(uic_ota_shared unify)
+target_include_directories(
+  uic_ota_shared
+  PUBLIC $<TARGET_PROPERTY:uic_ota,INCLUDE_DIRECTORIES>)
+
 target_add_unittest(
-  uic_ota
+  uic_ota_shared
   NAME
   uic_ota_test
   SOURCES

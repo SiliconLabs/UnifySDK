@@ -86,6 +86,9 @@ source:
   - path: "zigbee_host_trust_center.c"
   - path: "zigbee_host_util.c"
   - path: "zigbee_host_zcl_frame.c"
+  - path: "zigbee_host_neighbor_table.c"
+  - path: "zigbee_host_sl_cli.c"
+
 
 toolchain_settings:
 - option: gcc_c_compiler_option
@@ -106,6 +109,10 @@ template_contribution:
     value:
       callback_type: report_attributes
       function_name: emberAfReportAttributesCallback
+  - name: zigbee_af_callback
+    value:
+      callback_type: zdo_message_received
+      function_name: emAfZDOHandleBindingResponseCallback
 ##########################
 # ZCL Command Parse Handler Registration
 # Redirect the following cluster commands to the collector function:
@@ -137,3 +144,12 @@ template_contribution:
   # OccupancySensing
   - {name: cluster_service, value: {cluster_id: "0x0406", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
   - {name: cluster_service, value: {cluster_id: "0x0406", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  #IASZone
+  - {name: cluster_service, value: {cluster_id: "0x0500", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0500", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  #IASACE
+  - {name: cluster_service, value: {cluster_id: "0x0501", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0501", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  #IASWD
+  - {name: cluster_service, value: {cluster_id: "0x0502", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0502", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}

@@ -10,11 +10,29 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-#include "container_retain_test.hpp"
+#include "workaround.hpp"
+#include "network_monitor_utils.h"
 
+#ifdef __cplusplus
 extern "C" {
-void test_buffered_retain()
+#endif // __cplusplus
+#include "unity.h"
+
+void test_buffered_delete()
 {
-  test_buffered_delete();
+  constexpr int size = 266;
+  std::vector<int> vec;
+  for (int i = 0; i < size; ++i) {
+    vec.push_back(i);
+  }
+
+  retain(vec, [](std::vector<int>::const_iterator i) { return !(*i) % 2; });
+
+  for (int i = 0; i < size / 2; i += 2) {
+    TEST_ASSERT_EQUAL(i, vec[i]);
+  }
 }
+#ifdef __cplusplus
 }
+#endif // __cplusplus
+

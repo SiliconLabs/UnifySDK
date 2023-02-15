@@ -1,9 +1,11 @@
 add_library(zigpc_config src/zigpc_config.c)
 target_include_directories(zigpc_config PUBLIC include)
-target_link_libraries(zigpc_config PRIVATE uic_config)
+target_link_libraries(zigpc_config PRIVATE unify)
 
-# Testing
-add_subdirectory(test)
+if(BUILD_TESTING)
+  # Testing
+  add_subdirectory(test)
 
-# Mocks
-target_add_mock(zigpc_config)
+  # Mocks
+  target_add_mock(zigpc_config)
+endif()

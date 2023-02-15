@@ -182,6 +182,34 @@ std::string ClusterAttributeListAccessor::to_str(attribute_store_node_t parent,
   return ss.str();
 }
 
+BindingListAccessor::BindingListAccessor() :
+  StoreListAccessor<std::string>(ZIGPC_DS_TYPE_BINDING,
+                                        get_label_type())
+{}
+
+std::string BindingListAccessor::to_str(attribute_store_node_t parent,
+                                                 size_t list_count)
+{
+  std::ostringstream ss;
+  ss << get_label_type() << "List:[";
+  if (list_count > 0) {
+      std::vector<std::string> bindings(list_count);
+    sl_status_t status
+      = this->read_list(parent, bindings.data(), bindings.size());
+    
+    if(SL_STATUS_OK == status)
+    {
+        for(const std::string &bind: bindings)
+        {
+            ss << bind << ",";
+        }
+    }
+  }
+
+  ss << "]";
+  return ss.str();
+}
+
 ClusterCommandListAccessor::ClusterCommandListAccessor(
   zcl_command_type_t command_type) :
   StoreListAccessor<zcl_command_id_t>(get_entity_type(command_type),

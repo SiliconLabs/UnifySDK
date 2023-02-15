@@ -1,6 +1,7 @@
 var group__zwave__controller__utils =
 [
     [ "CRC-16 Calculation Utility", "group__zwave__controller__crc16.html", "group__zwave__controller__crc16" ],
+    [ "Z-Wave Controller endian functions", "group__zwave__controller__endian.html", "group__zwave__controller__endian" ],
     [ "is_command_class_in_supported_list", "group__zwave__controller__utils.html#ga4b9cc899709547a170141ba7e0583e16", null ],
     [ "zpc_highest_security_class", "group__zwave__controller__utils.html#ga088b992329c434ce47df6a017f20ecb3", null ],
     [ "zwave_command_class_list_pack", "group__zwave__controller__utils.html#gac6028ff4c772ca1a731dffaf4b530e15", null ],

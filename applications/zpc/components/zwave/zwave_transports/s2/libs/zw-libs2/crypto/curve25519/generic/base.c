@@ -1,3 +1,8 @@
+/**
+ * @file base.c
+ * @copyright 2022 Silicon Laboratories Inc.
+ */
+
 /*
 version 20081011
 Matthew Dempsky
@@ -6,7 +11,7 @@ Derived from public domain code by D. J. Bernstein.
 */
 
 //#include "crypto_scalarmult.h"
-#ifndef ZWAVE_PSA_SECURE_VAULT
+#if !defined(ZWAVE_PSA_SECURE_VAULT) || (defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZW_CONTROLLER))
 extern int crypto_scalarmult_curve25519(unsigned char *q,
                                         const unsigned char *n,
                                         const unsigned char *p);

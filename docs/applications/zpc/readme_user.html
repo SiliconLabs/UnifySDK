@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZPC User’s Guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -75,6 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
 </ul>
 
@@ -165,41 +171,41 @@ Z-Wave controller.</p>
 The ZPC can dump the running configuration using the command line option <code class="docutils literal notranslate"><span class="pre">--dump-config</span></code>.
 The dumped file can be used as a starting point a config file.</p>
 <p>Configuration file example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ zpc --dump-config
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>zpc<span class="w"> </span>--dump-config
 <span class="c1"># Unify sample conf file</span>
 
 log:
-  - level:<span class="s1">&#39;d&#39;</span>
-  - tag_level:<span class="s1">&#39;uic_main:debug&#39;</span>
-mapdir: <span class="s1">&#39;/usr/share/uic/rules&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>level:<span class="s1">&#39;d&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>tag_level:<span class="s1">&#39;uic_main:debug&#39;</span>
+mapdir:<span class="w"> </span><span class="s1">&#39;/usr/share/uic/rules&#39;</span>
 mqtt:
-  - host:<span class="s1">&#39;localhost&#39;</span>
-  - port:1883
+<span class="w">  </span>-<span class="w"> </span>host:<span class="s1">&#39;localhost&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>port:1883
 zpc:
-  - datastore_file: <span class="s1">&#39;/var/lib/uic/zpc.db&#39;</span>
-  - accepted_transmit_failure:2
-  - default_wakeup_interval:4200
-  - device_id:<span class="s1">&#39;36833760FCEF5E5C8E66077764918592&#39;</span>
-  - hardware_version:1
-  - manufacturer_id:0
-  - measured_0dbm_power:0
-  - missing_wakeup_notification:2
-  - normal_tx_power_dbm:0
-  - product_id:1
-  - product_type:1
-  - rf_region:<span class="s1">&#39;EU&#39;</span>
-  - serial:<span class="s1">&#39;/dev/ttyUSB0&#39;</span>
-  - serial_log_file:<span class="s1">&#39;&#39;</span>
-  - poll:
-    - attribute_list_file:<span class="s1">&#39;/usr/share/uic/zwave_poll_config.yaml&#39;</span>
-    - backoff: <span class="m">30</span>
-    - default_interval: <span class="m">60</span>
+<span class="w">  </span>-<span class="w"> </span>datastore_file:<span class="w"> </span><span class="s1">&#39;/var/lib/uic/zpc.db&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>accepted_transmit_failure:2
+<span class="w">  </span>-<span class="w"> </span>default_wakeup_interval:4200
+<span class="w">  </span>-<span class="w"> </span>device_id:<span class="s1">&#39;36833760FCEF5E5C8E66077764918592&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>hardware_version:1
+<span class="w">  </span>-<span class="w"> </span>manufacturer_id:0
+<span class="w">  </span>-<span class="w"> </span>measured_0dbm_power:0
+<span class="w">  </span>-<span class="w"> </span>missing_wakeup_notification:2
+<span class="w">  </span>-<span class="w"> </span>normal_tx_power_dbm:0
+<span class="w">  </span>-<span class="w"> </span>product_id:1
+<span class="w">  </span>-<span class="w"> </span>product_type:1
+<span class="w">  </span>-<span class="w"> </span>rf_region:<span class="s1">&#39;EU&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>serial:<span class="s1">&#39;/dev/ttyUSB0&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>serial_log_file:<span class="s1">&#39;&#39;</span>
+<span class="w">  </span>-<span class="w"> </span>poll:
+<span class="w">    </span>-<span class="w"> </span>attribute_list_file:<span class="s1">&#39;/usr/share/uic/zwave_poll_config.yaml&#39;</span>
+<span class="w">    </span>-<span class="w"> </span>backoff:<span class="w"> </span><span class="m">30</span>
+<span class="w">    </span>-<span class="w"> </span>default_interval:<span class="w"> </span><span class="m">60</span>
 </pre></div>
 </div>
 <p>A special environment variable called UIC_CONF can be set to a path of a custom config file
 which will override the default config file. This can be used in a development environment.
 For example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">UIC_CONF</span><span class="o">=</span>../custom_uic.conf sudo -E ./applications/zpc/zpc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">UIC_CONF</span><span class="o">=</span>../custom_uic.conf<span class="w"> </span>sudo<span class="w"> </span>-E<span class="w"> </span>./applications/zpc/zpc
 </pre></div>
 </div>
 </section>
@@ -237,7 +243,7 @@ commands, type <code class="docutils literal notranslate"><span class="pre">help
 created upon installation). If you run the zpc as another user,
 select a different database location.</p>
 <p>For example,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --zpc.datastore_file mydatabase.db --mapdir rules
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>--zpc.rf_region<span class="w"> </span>EU<span class="w"> </span>--zpc.datastore_file<span class="w"> </span>mydatabase.db<span class="w"> </span>--mapdir<span class="w"> </span>rules
 </pre></div>
 </div>
 </section>
@@ -251,20 +257,20 @@ command line when booting the ZPC.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_version</span></code> will print the chip and software version of the
 SerialAPI and exit immediately. This can be used to determine if the firmware
 should be applied or not.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/tty.usbserial-14310<span class="w"> </span>--zpc.ncp_version
 <span class="c1"># Unify build: ver_1.0.2_cert-196-g7d2caffd</span>
-<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728069 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify Signal Handler
-<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728548 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify MQTT Client
-<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728627 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify STDIN
-<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728714 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: ZPC Config
-<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.765728 &lt;i&gt; <span class="o">[</span>zpc_ncp_update<span class="o">]</span> chip_hardware_type     :     <span class="m">7</span>
-<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.765847 &lt;i&gt; <span class="o">[</span>zpc_ncp_update<span class="o">]</span> chip_hardware_revision :     <span class="m">0</span>
-<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.765908 &lt;i&gt; <span class="o">[</span>zpc_ncp_update<span class="o">]</span> chip_serial_api_version:  <span class="m">7</span>.15
+<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728069<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>Unify<span class="w"> </span>Signal<span class="w"> </span>Handler
+<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728548<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>Unify<span class="w"> </span>MQTT<span class="w"> </span>Client
+<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728627<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>Unify<span class="w"> </span>STDIN
+<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728714<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>ZPC<span class="w"> </span>Config
+<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.765728<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>zpc_ncp_update<span class="o">]</span><span class="w"> </span>chip_hardware_type<span class="w">     </span>:<span class="w">     </span><span class="m">7</span>
+<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.765847<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>zpc_ncp_update<span class="o">]</span><span class="w"> </span>chip_hardware_revision<span class="w"> </span>:<span class="w">     </span><span class="m">0</span>
+<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.765908<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>zpc_ncp_update<span class="o">]</span><span class="w"> </span>chip_serial_api_version:<span class="w">  </span><span class="m">7</span>.15
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_update</span></code> performs a firmware update and exits the application when the
 update is completed.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>--zpc.ncp_update<span class="w"> </span>new_firmware.gbl
 </pre></div>
 </div>
 <p>If the firmware update succeeds the the exit code of the zpc will be <em>2</em> and if
@@ -276,12 +282,12 @@ certificates need to be installed.</p>
 <p>In the event that the firmware upload process gets interrupted, the NCP may be
 left in bootloader. The ZPC will not be able to re-flash because it requires a
 functional serial API. In this case the device can be flashed manually using the
-XModem tool <em>sx</em> from the debian package lrzsx:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>  sudo apt install lrzsz
-  stty -F /dev/ttyUSB0 <span class="m">115200</span>
-  <span class="nb">echo</span> <span class="m">1</span> &gt; /dev/ttyUSB0
-  sx ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl &lt; /dev/ttyUSB0 &gt; /dev/ttyUSB0
-  <span class="nb">echo</span> <span class="m">2</span> &gt; /dev/ttyUSB0
+XModem tool <em>sx</em> from the Debian package lrzsx:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>lrzsz
+<span class="w">  </span>stty<span class="w"> </span>-F<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span><span class="m">115200</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
+<span class="w">  </span>sx<span class="w"> </span>ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl<span class="w"> </span>&lt;<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
 </pre></div>
 </div>
 </section>
@@ -381,7 +387,7 @@ installed to access binaries with older or newer versions.</p>
 <p>You can also perform the operation with an identical firmware image (or older)
 but the end node will reject the upgrade operation after the transfer.</p>
 <p>Verify that your images are ready and readable:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic-image-provider/updates $ </span>ls -l
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic-image-provider/updates $ </span>ls<span class="w"> </span>-l
 <span class="go">-rw-r--r-- 1 pi  pi   171380 Aug 17 14:52 powerstrip.gbl</span>
 <span class="go">-rw-r--r-- 1 pi  pi   168036 Aug 17 14:52 sensor_pir.gbl</span>
 </pre></div>
@@ -389,19 +395,19 @@ but the end node will reject the upgrade operation after the transfer.</p>
 <p>Then, use the found UIID to configure the <em>image.json</em> file from the image
 provider. Remember to set a version string as well as calculate the Md5 as
 described in the <a class="reference internal" href="../image_provider/readme_user.html"><span class="doc std std-doc">Image Provider User Guide</span></a>:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;Images&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;FileName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updates/powerstrip.gbl&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;Uiid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZWave-0000-0005-0004-0000&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;zw-DB9E8293-0002&quot;</span><span class="p">],</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.16.4&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;ApplyAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-06-29T16:39:57+02:00&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;Md5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4XbdcGq2iXOD1EcZ905XxQ==&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Images&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;FileName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updates/powerstrip.gbl&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Uiid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZWave-0000-0005-0004-0000&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;zw-DB9E8293-0002&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.16.4&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ApplyAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-06-29T16:39:57+02:00&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Md5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4XbdcGq2iXOD1EcZ905XxQ==&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Shortly after, the Image Provider will announce the image(s) over MQTT and the
@@ -560,18 +566,18 @@ interval should not be specified in the configuration file. It is also
 important here to specify attribute types that have a resolver <em>get</em> rule
 registered.</p>
 <p>The Z-Wave attribute lists configuration file example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">attribute_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE</span><span class="w"></span>
-<span class="w">  </span><span class="nt">polling_interval_zwave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w"></span>
-<span class="w">  </span><span class="nt">polling_interval_zwave_v1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">attribute_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE</span><span class="w"></span>
-<span class="w">  </span><span class="nt">polling_interval_zwave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w"></span>
-<span class="w">  </span><span class="nt">polling_interval_zwave_v1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w"></span>
-<span class="w">  </span><span class="nt">polling_interval_zwave_v2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">attribute_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE</span>
+<span class="w">  </span><span class="nt">polling_interval_zwave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span>
+<span class="w">  </span><span class="nt">polling_interval_zwave_v1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">attribute_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE</span>
+<span class="w">  </span><span class="nt">polling_interval_zwave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span>
+<span class="w">  </span><span class="nt">polling_interval_zwave_v1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span>
+<span class="w">  </span><span class="nt">polling_interval_zwave_v2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span>
 </pre></div>
 </div>
 <p>Attribute types can be provided either as their name like above, or with their
 type id, like <em>attribute_type:0x002502</em></p>
-<p>When the ZPC is installed on the Debian Buster platform the sample configuration
+<p>When the ZPC is installed on the Debian Bullseye platform the sample configuration
 (i.e., the sample contains the recommended attribute types that may require periodic
 polling based on the device type) file will be located in:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/share/uic/zwave_poll_config.yaml
@@ -657,22 +663,27 @@ forward incoming controlling commands on MQTT.</p>
 <td>THERMOSTAT_MODE_SET</td>
 <td>Thermostat::WriteAttributes</td>
 </tr>
+<tr>
+<td>COMMAND_CLASS_BARRIER_OPERATOR</td>
+<td>BARRIER_OPERATOR_SET</td>
+<td>BarrierControl::GoToPercent</td>
+</tr>
 </tbody>
 </table>
 <p>For example, if the ZPC receives a Multilevel Switch Set with value = 50,
 it will publish:</p>
 <div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-&lt;HomeID&gt;-&lt;NodeID&gt;/ep0/Level/GeneratedCommands/MoveToLevel</span> -
-{<span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;Level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;OptionsMask&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">  </span>}<span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;OptionsOverride&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">  </span>}<span class="w"></span>
+{
+<span class="w">  </span><span class="nt">&quot;Level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;OptionsMask&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">    </span><span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span>}<span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;OptionsOverride&quot;</span><span class="p">:</span><span class="w"> </span>{
+<span class="w">    </span><span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span>}
 }
 </pre></div>
 </div>
@@ -681,11 +692,11 @@ AGI data. For example, if a node shows Multilevel Switch Start Level Change and
 Multilevel Switch Stop Level Change in association groups, the following
 publication will take place:</p>
 <div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-&lt;HomeID&gt;-&lt;NodeID&gt;/ep0/Level/SupportedGeneratedCommands</span> -
-{<span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;Move&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;Stop&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+{
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Move&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Stop&quot;</span>
+<span class="w">  </span><span class="p">]</span>
 }
 </pre></div>
 </div>
@@ -750,7 +761,7 @@ removed. Endpoint 0 should only contain the ATTRIBUTE_ZWAVE_NIF with no
 desired or reported values.</p></li>
 <li><p>ATTRIBUTE_GRANTED_SECURITY_KEYS is a bitmask of which network keys a node
 have been granted the following keys are currently defined:</p>
-<table class="docutils align-default">
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Key</p></th>
 <th class="head"><p>Mask</p></th>
@@ -772,10 +783,10 @@ have been granted the following keys are currently defined:</p>
 </tbody>
 </table>
 <p>Ie if a node has all keys the granted keys attribute should be</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;87&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span>
+<span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;87&quot;</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -787,86 +798,86 @@ when they wake up.</p></li>
 </ol>
 <section id="zpc-database-json-example">
 <h3>ZPC Database JSON Example<a class="headerlink" href="#zpc-database-json-example" title="Permalink to this heading"></a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00000001&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_HOME_ID&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2ab89dc4&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_ID&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0100&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ENDPOINT_ID&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_NIF&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">              </span><span class="p">]</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9f&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">          </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_ID&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0500&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ENDPOINT_ID&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_NIF&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">              </span><span class="p">]</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_KEX_FAIL_TYPE&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_S2_DSK&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123498a7ac59a1b9096f99a0edb95e06&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d3&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9c&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00000000&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_IS_S2_CAPABLE&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">          </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00000001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_HOME_ID&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2ab89dc4&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_ID&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0100&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ENDPOINT_ID&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_NIF&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">]</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9f&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_ID&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0500&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ENDPOINT_ID&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_NIF&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">]</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_KEX_FAIL_TYPE&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_S2_DSK&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123498a7ac59a1b9096f99a0edb95e06&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d3&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9c&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00000000&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_IS_S2_CAPABLE&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -926,12 +937,12 @@ endpoints and keep the minimum in the datastore.</p>
 <p>After running the recover tool, the ZPC will re-interview all devices in the
 network, as if a step migration was performed.</p>
 <p>Stop the ZPC and make a database backup:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>service uic-zpc stop
-<span class="gp">pi@unify:/var/lib/uic $ </span>cp zpc.db zpc_back_up.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>service<span class="w"> </span>uic-zpc<span class="w"> </span>stop
+<span class="gp">pi@unify:/var/lib/uic $ </span>cp<span class="w"> </span>zpc.db<span class="w"> </span>zpc_back_up.db
 </pre></div>
 </div>
 <p>Run the recover tool. Specifying the target version is optional:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>zpc_database_recover_tool --target_version <span class="m">2</span> --zpc.datastore_file /var/lib/uic/zpc.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>zpc_database_recover_tool<span class="w"> </span>--target_version<span class="w"> </span><span class="m">2</span><span class="w"> </span>--zpc.datastore_file<span class="w"> </span>/var/lib/uic/zpc.db
 
 <span class="go">&lt;i&gt; [datastore_fixt] Using datastore file: /var/lib/uic/zpc.db</span>
 <span class="go">&lt;d&gt; [datastore_fixt] SQLITE Version: 3.28.0</span>
@@ -942,7 +953,7 @@ network, as if a step migration was performed.</p>
 </pre></div>
 </div>
 <p>Finally, restart the ZPC.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>service uic-zpc start
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>service<span class="w"> </span>uic-zpc<span class="w"> </span>start
 </pre></div>
 </div>
 <p>If this step does not work and the network cannot be used, you have 2 options:</p>
@@ -982,11 +993,11 @@ is incompatible with a US gateway. Information on the region can be found on
 the packaging of the device.</p>
 <p>To verify the RF region on your gateway, execute the following command in
 your gateway terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/uic/uic.cfg
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/etc/uic/uic.cfg
 </pre></div>
 </div>
 <p>It outputs the configured rf_region:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:/etc/uic $ </span>cat uic.cfg
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:/etc/uic $ </span>cat<span class="w"> </span>uic.cfg
 <span class="go">zpc:</span>
 <span class="go">  serial: /dev/ttyUSB0</span>
 <span class="go">  rf_region: US</span>
@@ -1016,11 +1027,11 @@ command to a cluster for a particular node.</p></li>
 </li>
 <li><p><em>How do I run the ZPC in isolation?</em></p>
 <p>Stop the ZPC systemd service:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl stop uic-zpc
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>uic-zpc
 </pre></div>
 </div>
 <p>run:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/usr/bin/zpc --zpc.serial /dev/ttyUSB0 --mapdir<span class="o">=</span>/usr/share/uic/rules
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/usr/bin/zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>--mapdir<span class="o">=</span>/usr/share/uic/rules
 </pre></div>
 </div>
 <p>Replace the serial argument with the port the Z-Wave controller is connected to.
@@ -1035,7 +1046,7 @@ the state gets updated correctly.</p>
 <p>This means your probably running the ZPC as an executable and not as a
 <code class="docutils literal notranslate"><span class="pre">systemd</span></code> service. Advised is to run ZPC with a database path that is writable
 in this case:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/usr/bin/zpc --zpc.datastore_file ~/zpc.db
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/usr/bin/zpc<span class="w"> </span>--zpc.datastore_file<span class="w"> </span>~/zpc.db
 </pre></div>
 </div>
 </li>
@@ -1048,7 +1059,7 @@ in this case:</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

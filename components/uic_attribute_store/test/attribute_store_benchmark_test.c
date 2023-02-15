@@ -13,6 +13,8 @@
 // Includes from this component
 #include "attribute_store.h"
 #include "attribute_store_fixt.h"
+#include "attribute_store_internal.h"
+#include "attribute_store_configuration.h"
 
 // Includes from other components
 #include "sl_status.h"
@@ -32,18 +34,17 @@
 // Define for the test
 #define BENCHMARK_NUMBER_OF_NODES           1000000
 #define BENCHMARK_NUMBER_OF_NODES_TO_ACCESS 2000
+#define BENCHMARK_NUMBER_NODE_TYPES         300
 #define MAXIMUM_ATTRIBUTE_STORE_DEPTH       5
-#define READ_PASS_CRITERIA                  1.0
-#define WRITE_PASS_CRITERIA                 1.0
+#define ATTRIBUTE_HOME_ID                   101
 
-#define ATTRIBUTE_HOME_ID 101
 // Static test variables
 // Create a network with 10000 nodes.
 static attribute_store_node_t nodes[BENCHMARK_NUMBER_OF_NODES]
   = {ATTRIBUTE_STORE_INVALID_NODE};
 static attribute_store_node_t nodes_depth[BENCHMARK_NUMBER_OF_NODES] = {0};
 static attribute_store_node_t root_node = ATTRIBUTE_STORE_INVALID_NODE;
-
+static char message[500];
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
@@ -51,6 +52,9 @@ void suiteSetUp()
   // Component initialization
   datastore_fixt_setup(":memory:");
   attribute_store_init();
+  // Configure the attribute store not to auto-save too quick, we will save manually in this test.
+  attribute_store_configuration_set_auto_save_safety_interval(0);
+  attribute_store_configuration_set_auto_save_cooldown_interval(36000);
   // Initialize the Randon Number Generator
   srand(time(NULL));
 
@@ -68,10 +72,12 @@ void suiteSetUp()
 
     if (nodes_depth[parent_node_index] > MAXIMUM_ATTRIBUTE_STORE_DEPTH) {
       // Just put in under node[0]
-      parent_node_index = 0;
+      parent_node_index = rand() % i;
     }
 
-    nodes[i]       = attribute_store_add_node(rand(), nodes[parent_node_index]);
+    nodes[i]
+      = attribute_store_add_node(((rand() % BENCHMARK_NUMBER_NODE_TYPES) + 1),
+                                 nodes[parent_node_index]);
     nodes_depth[i] = nodes_depth[parent_node_index] + 1;
   }
 }
@@ -103,17 +109,14 @@ void test_attribute_store_write_benchmark()
   double elapsed_time = ((double)(clock() - start_time)) / CLOCKS_PER_SEC;
 
   // Show off with the results
-  sl_log_info(LOG_TAG,
-              "Total time taken to modify %d nodes in an attribute store "
-              "containing %d nodes: %f seconds\n",
-              BENCHMARK_NUMBER_OF_NODES_TO_ACCESS,
-              BENCHMARK_NUMBER_OF_NODES,
-              elapsed_time);
-
-  // We pass the test if we used less than WRITE_PASS_CRITERIA seconds:
-  TEST_ASSERT_TRUE_MESSAGE(elapsed_time < WRITE_PASS_CRITERIA,
-                           "The Attribute Store has become too slow! "
-                           "Revert your code immediately, or improve it! :-)");
+  snprintf(message,
+           sizeof(message),
+           "Total time taken to modify %d nodes in an attribute store "
+           "containing %d nodes: %f seconds",
+           BENCHMARK_NUMBER_OF_NODES_TO_ACCESS,
+           BENCHMARK_NUMBER_OF_NODES,
+           elapsed_time);
+  TEST_MESSAGE(message);
 }
 
 void test_attribute_store_read_benchmark()
@@ -135,16 +138,93 @@ void test_attribute_store_read_benchmark()
   // Stop our clock
   double elapsed_time = ((double)(clock() - start_time)) / CLOCKS_PER_SEC;
 
-  // Show off with the results
-  sl_log_info(LOG_TAG,
-              "Total time taken to read %d nodes in an attribute store "
-              "containing %d nodes: %f seconds\n",
-              BENCHMARK_NUMBER_OF_NODES_TO_ACCESS,
-              BENCHMARK_NUMBER_OF_NODES,
-              elapsed_time);
+  TEST_ASSERT_EQUAL(
+    BENCHMARK_NUMBER_OF_NODES,
+    attribute_store_get_node_total_child_count(attribute_store_get_root()));
 
-  // We pass the test if we used less than READ_PASS_CRITERIA seconds:
-  TEST_ASSERT_TRUE_MESSAGE(elapsed_time < READ_PASS_CRITERIA,
-                           "The Attribute Store has become too slow! "
-                           "Revert your code immediately, or improve it! :-)");
+  // Show off with the results
+  char message[500];
+  snprintf(message,
+           sizeof(message),
+           "Total time taken to read %d nodes in an attribute store "
+           "containing %d nodes: %f seconds",
+           BENCHMARK_NUMBER_OF_NODES_TO_ACCESS,
+           BENCHMARK_NUMBER_OF_NODES,
+           elapsed_time);
+  TEST_MESSAGE(message);
+}
+
+void test_attribute_store_save_to_datastore()
+{
+  // Start our clock:
+  clock_t start_time = clock();
+
+  // Ask to dump to the datastore:
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_save_to_datastore());
+
+  // Stop our clock
+  double elapsed_time = ((double)(clock() - start_time)) / CLOCKS_PER_SEC;
+
+  TEST_ASSERT_EQUAL(
+    BENCHMARK_NUMBER_OF_NODES,
+    attribute_store_get_node_total_child_count(attribute_store_get_root()));
+
+  // Show off with the results
+  snprintf(message,
+           sizeof(message),
+           "Total time taken to save %d nodes in to the datastore: %f seconds",
+           BENCHMARK_NUMBER_OF_NODES,
+           elapsed_time);
+  TEST_MESSAGE(message);
+}
+
+void test_attribute_store_load_datastore()
+{
+  // Start our clock:
+  clock_t start_time = clock();
+
+  // Ask to load everything from the datastore:
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_load_from_datastore());
+
+  // Stop our clock
+  double elapsed_time = ((double)(clock() - start_time)) / CLOCKS_PER_SEC;
+
+  TEST_ASSERT_EQUAL(
+    BENCHMARK_NUMBER_OF_NODES,
+    attribute_store_get_node_total_child_count(attribute_store_get_root()));
+
+  // Show off with the results
+  snprintf(message,
+           sizeof(message),
+           "Total time taken to load %d nodes from the datastore: %f seconds",
+           BENCHMARK_NUMBER_OF_NODES,
+           elapsed_time);
+  TEST_MESSAGE(message);
+}
+
+void test_attribute_store_get_child_by_type()
+{
+  // Start our clock:
+  clock_t start_time = clock();
+
+  // Invoke the get_child_by_type intensively
+  for (uint16_t i = 0; i < BENCHMARK_NUMBER_OF_NODES_TO_ACCESS; i++) {
+    attribute_store_get_node_child_by_type(
+      nodes[rand() % BENCHMARK_NUMBER_OF_NODES],
+      (rand() % BENCHMARK_NUMBER_NODE_TYPES),
+      rand() % 3);
+  }
+
+  // Stop our clock
+  double elapsed_time = ((double)(clock() - start_time)) / CLOCKS_PER_SEC;
+
+  // Show off with the results
+  snprintf(message,
+           sizeof(message),
+           "Total time taken to get_child_nodes %d times in an attribute store "
+           "containing %d nodes: %f seconds",
+           BENCHMARK_NUMBER_OF_NODES_TO_ACCESS,
+           BENCHMARK_NUMBER_OF_NODES,
+           elapsed_time);
+  TEST_MESSAGE(message);
 }

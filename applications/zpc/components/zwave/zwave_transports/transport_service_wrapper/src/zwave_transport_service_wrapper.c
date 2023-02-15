@@ -99,6 +99,7 @@ static uint8_t send_data(ts_node_id_t source,
   options.number_of_responses               = no_of_expected_responses;
   options.transport.valid_parent_session_id = zwave_tx_valid_parent_session_id;
   options.transport.parent_session_id       = zwave_tx_parent_session_id;
+  options.transport.ignore_incoming_frames_back_off = true;
 
   // FIXME: Here the concept of parent session id is quite dangerous
   // in this context, the thing is that tranport service can

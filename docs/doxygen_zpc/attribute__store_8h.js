@@ -31,6 +31,7 @@ var attribute__store_8h =
     [ "attribute_store_get_node_child_by_type", "group__attribute__store__api.html#ga57917747cf871f8053e3c5f213d2388e", null ],
     [ "attribute_store_get_node_child_by_value", "group__attribute__store__api.html#ga75cb79c1e772c4a0396c7887929ecdb0", null ],
     [ "attribute_store_get_node_child_count", "group__attribute__store__api.html#gab88fe49c92ab2b88f03db2a31a1c838a", null ],
+    [ "attribute_store_get_node_child_count_by_type", "group__attribute__store__api.html#ga5200156b352d8bc1b49937a11415d57d", null ],
     [ "attribute_store_get_node_parent", "group__attribute__store__api.html#ga2d26761e26d14154029710bea435ae85", null ],
     [ "attribute_store_get_node_total_child_count", "group__attribute__store__api.html#ga9c76be28e95124621df1f9c0c2a2cd43", null ],
     [ "attribute_store_get_node_type", "group__attribute__store__api.html#gaa56b6047b70100c29aa666e9b5fe893e", null ],

@@ -8,7 +8,15 @@ set(CURVE_SRC curve25519/generic/smult.c curve25519/generic/base.c
 
 set_source_files_properties(kderiv/kderiv.c PROPERTIES COMPILE_FLAGS
                                                        -Wno-unused-parameter)
-set(CRYPTO_SRC
+
+if (PLATFORM_VARIANT STREQUAL "800s")
+  set(CRYPTO_SRC
+    ctr_drbg/ctr_drbg.c
+    kderiv/kderiv.c
+    curve25519/generic/bigint.c
+    nextnonce/nextnonce.c)
+else()
+  set(CRYPTO_SRC
     ccm/ccm.c
     aes-cmac/aes_cmac.c
     ctr_drbg/ctr_drbg.c
@@ -16,6 +24,7 @@ set(CRYPTO_SRC
     kderiv/kderiv.c
     ${CURVE_SRC}
     ${SCRAMBLER_SRC})
+endif()
 
 if(NOT "${CMAKE_PROJECT_NAME}" STREQUAL "SDK")
   add_library(aes aes/aes.c)
@@ -26,7 +35,9 @@ if(NOT "${CMAKE_PROJECT_NAME}" STREQUAL "SDK")
   endif()
   # zwave-protocol support
 else(NOT "${CMAKE_PROJECT_NAME}" STREQUAL "SDK")
+if (NOT PLATFORM_VARIANT STREQUAL "800s")
   add_library(aes OBJECT aes/aes.c)
+endif()
   add_library(s2crypto OBJECT ${CRYPTO_SRC})
 endif(NOT "${CMAKE_PROJECT_NAME}" STREQUAL "SDK")
 

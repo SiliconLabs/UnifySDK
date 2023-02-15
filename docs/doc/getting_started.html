@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started with the Unify Host SDK &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -71,6 +76,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -107,7 +113,7 @@ services on a RPi4.</p>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p>An RPi4 preinstalled with <a class="reference external" href="https://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-14">Raspberry Pi OS Linux Version 10, Buster</a></p></li>
+<li><p>An RPi4 preinstalled with <a class="reference external" href="https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-09-26/">Raspberry Pi OS Linux Version 11, Bullseye 64-bit</a></p></li>
 <li><p>At least one of the following, supported wireless radios is connected to the RPi4 via USB:</p>
 <ul>
 <li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
@@ -121,8 +127,8 @@ services on a RPi4.</p>
 and ensure a supported radio module is attached to your RPi4.</p>
 <p>For running Unify Framework it is required to have a running MQTT broker to which the Unify Framework can connect.
 To get an MQTT broker installed on the RPi4:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt update
-<span class="gp">pi@raspberrypi:~ $ </span>sudo apt install mosquitto
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mosquitto
 </pre></div>
 </div>
 <p>For more information regarding logging and configuration of eg. the Mosquitto
@@ -132,30 +138,30 @@ broker, see the <a class="reference internal" href="unify_readme_user.html"><spa
 </section>
 <section id="how-to-install-packages">
 <span id="how-to-install"></span><h2>How to install packages<a class="headerlink" href="#how-to-install-packages" title="Permalink to this heading"></a></h2>
-<p>The Unify Host SDK distribution targets the reference platform Debian Buster
+<p>The Unify Host SDK distribution targets the reference platform Debian Bullseye
 platform. Binary Debian packages are provided with the SDK and they are
-available in a Zip file eg. unify_x.y.z_armhf.zip on
+available in a Zip file eg. unify_x.y.z_arm64.zip on
 <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>.</p>
 <p>The simplest way to install the Unify components is to use the <code class="docutils literal notranslate"><span class="pre">apt</span></code> tool.
 Transfer the <code class="docutils literal notranslate"><span class="pre">.deb</span></code> packages to the target via eg. SCP. Make sure to use either
 a local relative path with <code class="docutils literal notranslate"><span class="pre">./</span></code> or absolute paths. Otherwise apt will look
 for the package in the wrong place and fail.</p>
 <p>Install a specific Unify package:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt install uic-sdk-dir/uic-&lt;component&gt;_&lt;version&gt;_armhf.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>uic-sdk-dir/uic-&lt;component&gt;_&lt;version&gt;_arm64.deb
 </pre></div>
 </div>
 <p>Install all packages:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt install uic-sdk-dir/*.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>uic-sdk-dir/*.deb
 </pre></div>
 </div>
 <p>Update installed packages:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt reinstall uic-sdk-dir/*.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>reinstall<span class="w"> </span>uic-sdk-dir/*.deb
 </pre></div>
 </div>
 <section id="verify-the-configuration">
 <h3>Verify the configuration<a class="headerlink" href="#verify-the-configuration" title="Permalink to this heading"></a></h3>
 <p>After installing the desired Unify Host SDK packages, make sure the configuration is set correctly.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>cat /etc/uic/uic.cfg
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>cat<span class="w"> </span>/etc/uic/uic.cfg
 <span class="go">zpc:</span>
 <span class="go">  serial: /dev/ttyUSB0</span>
 <span class="go">  rf_region: EU</span>
@@ -169,7 +175,7 @@ for the package in the wrong place and fail.</p>
 </div>
 <p>If your configuration is wrong, you can either edit the file directly or reconfigure a specific package.
 After making changes to the configuration make sure to either reboot or restart the service.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo dpkg-reconfigure uic-zpc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>dpkg-reconfigure<span class="w"> </span>uic-zpc
 </pre></div>
 </div>
 </section>
@@ -179,7 +185,7 @@ After making changes to the configuration make sure to either reboot or restart 
 You can check if a Unify Host SDK application is running by using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>.
 For information on how to handle SystemD services using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>, see <a class="reference external" href="https://man7.org/linux/man-pages/man1/systemctl.1.html">the systemctl man pages</a>.</p>
 <p>Here we can see that the <code class="docutils literal notranslate"><span class="pre">uic-zpc</span></code> service is loaded and active:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>systemctl status uic-zpc.service
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-zpc.service
 <span class="go">* uic-zpc.service - Unify Z-Wave protocol controller</span>
 <span class="go">   Loaded: loaded (/lib/systemd/system/uic-zpc.service; enabled; vendor preset: enabled)</span>
 <span class="go">   Active: active (running) since Tue 2022-08-02 14:14:58 CEST; 8s ago</span>
@@ -216,7 +222,7 @@ see the <a class="reference internal" href="getting_started_multiprotocol_cpc.ht
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

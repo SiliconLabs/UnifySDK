@@ -109,12 +109,18 @@ void zigpc_discovery_on_endpoint_discovered(void *data)
   std::vector<zcl_cluster_id_t> server_clusters(ev.endpoint.cluster_count);
   for (size_t i = 0U; i < ev.endpoint.cluster_count; i++) {
     server_clusters[i] = ev.endpoint.cluster_list[i].cluster_id;
+    
+    sl_log_debug(LOG_TAG, 
+                "Discovered server cluster: 0x%04X", server_clusters[i]);
   }
 
   std::vector<zcl_cluster_id_t> client_clusters(
     ev.endpoint.client_cluster_count);
   for (size_t i = 0U; i < ev.endpoint.client_cluster_count; i++) {
     client_clusters[i] = ev.endpoint.client_cluster_list[i].cluster_id;
+    
+    sl_log_debug(LOG_TAG, 
+                "Discovered client cluster: 0x%04X", client_clusters[i]);
   }
 
   zigpc_discovery::process::enqueue_event(

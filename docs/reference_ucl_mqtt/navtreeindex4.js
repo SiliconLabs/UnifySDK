@@ -1,17 +1,19 @@
 var NAVTREEINDEX4 =
 {
+"relativity_humidity.html#relativity_humidity_cmds":[29,2],
 "relativity_humidity.html#relativity_humidity_force_read_attr_cmd":[29,2,1],
 "relativity_humidity.html#relativity_humidity_recv_cmd_support":[29,1],
 "relativity_humidity.html#relativity_humidity_write_attr_cmd":[29,2,0],
 "scenes.html":[6],
 "scenes.html#scenes_add_scene_cmd":[6,2,0],
 "scenes.html#scenes_add_scene_response_cmd":[6,2,1],
-"scenes.html#scenes_attr_cluster_revision":[6,0,6],
+"scenes.html#scenes_attr_cluster_revision":[6,0,7],
 "scenes.html#scenes_attr_current_group":[6,0,2],
 "scenes.html#scenes_attr_current_scene":[6,0,1],
 "scenes.html#scenes_attr_last_configured_by":[6,0,5],
 "scenes.html#scenes_attr_name_support":[6,0,4],
 "scenes.html#scenes_attr_scene_count":[6,0,0],
+"scenes.html#scenes_attr_scene_table":[6,0,6],
 "scenes.html#scenes_attr_scene_valid":[6,0,3],
 "scenes.html#scenes_attrs":[6,0],
 "scenes.html#scenes_cmds":[6,2],
@@ -243,11 +245,9 @@ var NAVTREEINDEX4 =
 "ucl_bitmaps.html#enum_query_next_image_request_field_control":[52,44],
 "ucl_bitmaps.html#enum_reset_startup_parameters_options":[52,45],
 "ucl_bitmaps.html#enum_restart_device_options":[52,46],
-"ucl_bitmaps.html#enum_scan_response_key_bitmask":[52,47],
-"ucl_bitmaps.html#enum_scenes_name_support":[52,48],
-"ucl_bitmaps.html#enum_shade_configuration_status":[52,49],
-"ucl_bitmaps.html#enum_squawk_squawk_configuration":[52,50],
-"ucl_bitmaps.html#enum_start_warning_siren_configuration":[52,51],
-"ucl_bitmaps.html#enum_thermostat_alarm_mask":[52,56],
-"ucl_bitmaps.html#enum_thermostat_occupancy":[52,58]
+"ucl_bitmaps.html#enum_scenes_name_support":[52,47],
+"ucl_bitmaps.html#enum_shade_configuration_status":[52,48],
+"ucl_bitmaps.html#enum_squawk_squawk_configuration":[52,49],
+"ucl_bitmaps.html#enum_start_warning_siren_configuration":[52,50],
+"ucl_bitmaps.html#enum_thermostat_alarm_mask":[52,52]
 };

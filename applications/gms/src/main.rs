@@ -19,11 +19,13 @@
 mod cache;
 mod mqtt_handler;
 use mqtt_handler::*;
+use unify_application_monitoring_sys::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
 use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 
 declare_app_name!("unify-gms");
+const FULL_APPLICATION_NAME: &str = "GMS (Group Management Service)";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
 fn main() -> std::result::Result<(), sl_status_t> {
@@ -36,6 +38,7 @@ fn main() -> std::result::Result<(), sl_status_t> {
 }
 
 fn run() -> Result<(), sl_status_t> {
+    unify_application_monitoring_set_application_name(FULL_APPLICATION_NAME);
     let mqtt_client = UnifyMqttClient::default();
     mqtt_client.initialize()?;
     let handler = MqttGroupHandler::new(mqtt_client)?;

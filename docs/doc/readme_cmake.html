@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CMake Integration &mdash; Unify Host SDK</title>
@@ -18,11 +18,16 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="CMake coding standard" href="standards/cmake-standard.html" />
-    <link rel="prev" title="Unify Build Guide" href="readme_building.html" /> 
+    <link rel="prev" title="Nix (Experimental)" href="readme_nix.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -80,17 +85,17 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_rust.html">Unify Rust Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html">Api documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#component-templates">Component Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -274,11 +279,11 @@ implied because of the first argument. you can leave it out. e.g. don’t do thi
 <h3>Unit Test Example<a class="headerlink" href="#unit-test-example" title="Permalink to this heading"></a></h3>
 <p>Define all test cases in a file, where each test case is a function
 with the prefix test_,</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unity.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;foo.h&quot;</span><span class="cp"></span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">foo_case1_test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">TEST_ASSERT_TRUE</span><span class="p">(</span><span class="w"> </span><span class="n">foo_true</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unity.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;foo.h&quot;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">foo_case1_test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">TEST_ASSERT_TRUE</span><span class="p">(</span><span class="w"> </span><span class="n">foo_true</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -296,7 +301,7 @@ with the prefix test_,</p>
 When building the Unify project, enable code coverage by adding setting the CMAKE flags: <code class="docutils literal notranslate"><span class="pre">CMAKE_GCOV=True</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_BUILD_TYPE=Debug</span></code> by running <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">&lt;other</span> <span class="pre">CMAKE</span> <span class="pre">flags&gt;</span> <span class="pre">-DCMAKE_BUILD_TYPE=Debug</span> <span class="pre">-DCMAKE_GCOV=True</span> <span class="pre">..</span></code> when building.
 After building and running the unit tests, the tool <code class="docutils literal notranslate"><span class="pre">gcovr</span></code> can be used to generate coverage reports.</p>
 <p>Within the build folder run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir -p gcovr <span class="o">&amp;&amp;</span> gcovr -r . -e <span class="s1">&#39;.+mock.+&#39;</span> -e <span class="s1">&#39;.+test.+&#39;</span> -e <span class="s1">&#39;.+unity.+&#39;</span> --html-details --html --output gcovr/gcovr.html
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>gcovr<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>gcovr<span class="w"> </span>-r<span class="w"> </span>.<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.+mock.+&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.+test.+&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.+unity.+&#39;</span><span class="w"> </span>--html-details<span class="w"> </span>--html<span class="w"> </span>--output<span class="w"> </span>gcovr/gcovr.html
 </pre></div>
 </div>
 <p>Then, open <code class="docutils literal notranslate"><span class="pre">&lt;build_folder&gt;/gcovr/gcovr.html</span></code> in your favorite browser.</p>
@@ -322,7 +327,8 @@ install artifacts of the package with the component name:</p>
 <span class="w">  </span><span class="s">uic-zpc</span><span class="w"> </span><span class="c"># Package Name</span>
 <span class="w">  </span><span class="s2">&quot;Universal IOT controller - Z-Wave protocol Controller&quot;</span>
 <span class="w">  </span><span class="s2">&quot;${CMAKE_PROJECT_NAME}-zpc&quot;</span><span class="w"> </span><span class="c"># Package Debian filename</span>
-<span class="w">  </span><span class="s2">&quot;libuic&quot;</span><span class="w"> </span><span class="c"># Package Depends on</span>
+<span class="w">  </span><span class="s2">&quot;libfoo&quot;</span><span class="w"> </span><span class="c"># Package Depends on</span>
+<span class="w">  </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="c"># Package replaces</span>
 <span class="w">  </span><span class="s2">&quot;debconf/config;\</span>
 <span class="s2">   debconf/templates;\</span>
 <span class="s2">   debconf/conffiles;\</span>
@@ -336,11 +342,11 @@ install artifacts of the package with the component name:</p>
 <p>The Unify repository includes config-files for the formatting of CMake files using
 the Python module cmake-format. cmake-format can be installed using the pip
 installation utility.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install cmake_format
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>cmake_format
 </pre></div>
 </div>
 <p>To auto-format a CMake file run the command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m cmake_format -i ./&lt;some dir&gt;/CMakeLists.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>cmake_format<span class="w"> </span>-i<span class="w"> </span>./&lt;some<span class="w"> </span>dir&gt;/CMakeLists.txt
 </pre></div>
 </div>
 </section>
@@ -351,7 +357,7 @@ installation utility.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

@@ -1,0 +1,30 @@
+[workspace]
+
+members = [
+    "uic_rust/unify_tools",
+    "uic_rust/unify_build_utils",
+    "uic_rust/unify_config_sys",
+    "uic_rust/unify_sl_status_sys",
+    "uic_rust/unify_log_sys",
+    "uic_rust/unify_middleware",
+    "uic_rust/unify_proc_macro",
+    "uic_rust/unify_attribute_store_sys",
+    "uic_rust/unify_attribute_utils_sys",
+    "uic_rust/unify_attribute_resolver_sys",
+    "uic_rust/unify_mqtt_sys",
+    "uic_rust/unify_main_sys",
+    "unify_attribute_poll",
+]
+
+# create a release profile with debug settings
+# release bins are required to package .deb files.
+[profile.release]
+debug-assertions = true
+lto = true
+
+[profile.RelWithDebInfo]
+inherits = "dev"
+opt-level = 3
+
+[profile.dev]
+rpath = true

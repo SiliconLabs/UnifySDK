@@ -34,16 +34,14 @@
 #include "zwave_command_class_supervision_mock.h"
 #include "zpc_attribute_store_network_helper_mock.h"
 #include "attribute_store_mock.h"
-#include "attribute_store_configuration_mock.h"
 #include "attribute_store_helper_mock.h"
 #include "attribute_store_type_registration_mock.h"
-#include "attribute_resolver_mock.h"
 #include "ucl_mqtt_node_interview_mock.h"
 #include "zwave_tx_groups_mock.h"
 #include "zwave_command_class_association_send_mock.h"
 #include "zwave_command_class_firmware_update_mock.h"
 #include "zwave_s2_keystore_mock.h"
-#include "attribute_poll_mock.h"
+#include "zwave_s2_nonce_management_mock.h"
 
 // Standard
 #include <stdbool.h>
@@ -76,21 +74,21 @@ void test_zwave_set_default()
 void test_callbacks()
 {
   zwave_dsk_t dsk                                 = {0x00,
-                                                     0x00,
-                                                     0xad,
-                                                     0xde,
-                                                     0xef,
-                                                     0xbe,
-                                                     0x10,
-                                                     0x01,
-                                                     0xad,
-                                                     0xde,
-                                                     0xef,
-                                                     0xbe,
-                                                     0xee,
-                                                     0xff,
-                                                     0x01,
-                                                     0x00};
+                     0x00,
+                     0xad,
+                     0xde,
+                     0xef,
+                     0xbe,
+                     0x10,
+                     0x01,
+                     0xad,
+                     0xde,
+                     0xef,
+                     0xbe,
+                     0xee,
+                     0xff,
+                     0x01,
+                     0x00};
   const zwave_controller_callbacks_t nm_callbacks = get_zpc_stdin_callbacks();
   nm_callbacks.on_keys_report(true, 0x87);
   nm_callbacks.on_dsk_report(2, dsk, 0x87);
@@ -189,33 +187,6 @@ void test_add_zwave_node()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
-void test_attribute_store_log()
-{
-  attribute_store_get_root_IgnoreAndReturn(ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_get_node_type_IgnoreAndReturn(1);
-  attribute_store_get_storage_type_IgnoreAndReturn(UNKNOWN_STORAGE_TYPE);
-  attribute_store_is_value_defined_IgnoreAndReturn(false);
-  attribute_store_get_type_name_IgnoreAndReturn("Hest");
-  sl_status_t state = uic_stdin_handle_command("attribute_store_log");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_store_node_t node_id = 1;
-  zwave_unid_from_node_id_Ignore();
-  attribute_store_network_helper_get_node_id_node_IgnoreAndReturn(node_id);
-  attribute_store_get_node_attribute_value_IgnoreAndReturn(SL_STATUS_OK);
-  attribute_store_get_node_child_count_ExpectAndReturn(node_id, 1);
-  attribute_store_get_node_child_ExpectAndReturn(node_id,
-                                                 0,
-                                                 ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_get_node_child_count_ExpectAndReturn(node_id, 0);
-
-  state = uic_stdin_handle_command("attribute_store_log 0");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  state = uic_stdin_handle_command("attribute_store_log FAIL");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-}
-
 void test_attribute_store_log_network()
 {
   attribute_store_get_root_IgnoreAndReturn(ATTRIBUTE_STORE_INVALID_NODE);
@@ -224,64 +195,6 @@ void test_attribute_store_log_network()
   attribute_store_is_value_defined_IgnoreAndReturn(false);
   attribute_store_get_type_name_IgnoreAndReturn("Hest");
   sl_status_t state = uic_stdin_handle_command("attribute_store_log_network");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_store_node_t node_id = 1;
-  zwave_unid_from_node_id_Ignore();
-  attribute_store_network_helper_get_node_id_node_IgnoreAndReturn(node_id);
-  attribute_store_get_node_attribute_value_IgnoreAndReturn(SL_STATUS_OK);
-  attribute_store_get_node_child_count_ExpectAndReturn(node_id, 1);
-  attribute_store_get_node_child_ExpectAndReturn(node_id,
-                                                 0,
-                                                 ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_get_node_child_count_ExpectAndReturn(node_id, 0);
-
-  state = uic_stdin_handle_command("attribute_store_log 0");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  state = uic_stdin_handle_command("attribute_store_log NEXT");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-}
-
-void test_attribute_store_log_search()
-{
-  attribute_store_get_root_IgnoreAndReturn(ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_get_node_type_IgnoreAndReturn(1);
-  attribute_store_get_storage_type_IgnoreAndReturn(UNKNOWN_STORAGE_TYPE);
-  attribute_store_is_value_defined_IgnoreAndReturn(false);
-  attribute_store_get_type_name_IgnoreAndReturn("Hest");
-  sl_status_t state
-    = uic_stdin_handle_command("attribute_store_log_search Hest");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_log_search");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-}
-
-void test_attribute_store_log_node()
-{
-  attribute_store_log_node_Ignore();
-  sl_status_t state = uic_stdin_handle_command("attribute_store_log_node 1");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  state = uic_stdin_handle_command("attribute_store_log_node");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_log_node FAIL");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-}
-
-void test_attribute_store_resolve_attribute()
-{
-  attribute_store_set_node_attribute_value_IgnoreAndReturn(SL_STATUS_OK);
-  sl_status_t state
-    = uic_stdin_handle_command("attribute_store_resolve_attribute 1");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  state = uic_stdin_handle_command("attribute_store_resolve_attribute");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_resolve_attribute FAIL");
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
 }
 
@@ -336,73 +249,6 @@ void test_accept_dsk()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
-void test_attribute_store_set_desired()
-{
-  sl_status_t state = uic_stdin_handle_command("attribute_store_set_desired");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_set_desired 34");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_set_desired 3fdsa083");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_set_desired 34,hello");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_store_set_desired_number_ExpectAndReturn(2394,
-                                                     124,
-                                                     SL_STATUS_NOT_READY);
-
-  state = uic_stdin_handle_command("attribute_store_set_desired 2394,124");
-  TEST_ASSERT_EQUAL(SL_STATUS_NOT_READY, state);
-}
-
-void test_attribute_store_set_all_desired_types()
-{
-  sl_status_t state;
-  state = uic_stdin_handle_command("attribute_store_set_all_desired_types");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_set_all_desired_types 34");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_store_get_root_IgnoreAndReturn(ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_set_node_attribute_value_IgnoreAndReturn(SL_STATUS_OK);
-  attribute_store_get_node_child_count_IgnoreAndReturn(0);
-  attribute_store_get_node_child_IgnoreAndReturn(ATTRIBUTE_STORE_INVALID_NODE);
-
-  state
-    = uic_stdin_handle_command("attribute_store_set_all_desired_types 34,49");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  state = uic_stdin_handle_command(
-    "attribute_store_set_all_desired_types 3adsæfkm4,34fdahhtn4553");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}
-
-void test_attribute_store_set_reported()
-{
-  attribute_store_set_node_attribute_value_StopIgnore();
-
-  sl_status_t state = uic_stdin_handle_command("attribute_store_set_reported");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_set_reported 34");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_set_reported 3fdsa083");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_store_set_reported 34,hello");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_store_set_reported_number_ExpectAndReturn(2394, 124, SL_STATUS_OK);
-
-  state = uic_stdin_handle_command("attribute_store_set_reported 2394,124");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}
-
 void test_zwave_wake_up()
 {
   sl_status_t state = uic_stdin_handle_command("zwave_wake_up");
@@ -417,18 +263,6 @@ void test_zwave_wake_up()
   zwave_command_class_supervision_wake_on_demand_ExpectAndReturn(23,
                                                                  SL_STATUS_OK);
   state = uic_stdin_handle_command("zwave_wake_up 23");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}
-
-void test_attribute_resolver_log()
-{
-  sl_status_t state;
-  attribute_resolver_state_log_Expect();
-  state = uic_stdin_handle_command("attribute_resolver_log");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  attribute_resolver_state_log_Expect();
-  state = uic_stdin_handle_command("attribute_resolver_log 1,23,4,6");
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
@@ -500,6 +334,65 @@ void test_handle_zwave_s2_log_security_keys()
   zwave_s2_log_security_keys_Expect(1);
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     uic_stdin_handle_command("zwave_log_security_keys"));
+}
+
+void test_handle_zwave_save_security_keys_to_file()
+{
+  zwave_s2_save_security_keys_Expect("test.txt");
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    uic_stdin_handle_command("zwave_save_security_keys_to_file test.txt"));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    uic_stdin_handle_command("zwave_save_security_keys_to_file"));
+}
+
+void test_handle_zwave_home_id()
+{
+  zwave_network_management_get_home_id_ExpectAndReturn(SL_STATUS_OK);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, uic_stdin_handle_command("zwave_home_id"));
+}
+
+void test_handle_zwave_reset_mpan()
+{
+  zwave_network_management_get_node_id_IgnoreAndReturn(2);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command("zwave_reset_mpan"));
+
+  zwave_network_management_get_node_id_IgnoreAndReturn(2);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command("zwave_reset_mpan x"));
+
+  zwave_network_management_get_node_id_IgnoreAndReturn(2);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command("zwave_reset_mpan x,y"));
+
+  zwave_network_management_get_node_id_IgnoreAndReturn(2);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command("zwave_reset_mpan 1,2,3,4"));
+
+  zwave_network_management_get_node_id_IgnoreAndReturn(2);
+  zwave_s2_reset_mpan_Expect(2, 1);
+  zwave_network_management_get_node_id_IgnoreAndReturn(2);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_stdin_handle_command("zwave_reset_mpan 1 2"));
+  zwave_s2_reset_mpan_Expect(2, 1);
+  zwave_network_management_get_node_id_IgnoreAndReturn(2);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_stdin_handle_command("zwave_reset_mpan 1"));
+}
+
+void test_handle_zwave_reset_span()
+{
+  zwave_s2_reset_span_Expect(1);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_stdin_handle_command("zwave_reset_span 1"));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command("zwave_reset_span"));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command("zwave_reset_span x"));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command("zwave_reset_span 1,2"));
 }
 
 void test_zwave_tx_association()
@@ -628,32 +521,3 @@ void test_zwave_command_handler_dispatch()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
-void test_attribute_poll_register()
-{
-  sl_status_t state = uic_stdin_handle_command("attribute_poll_register");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_poll_register fish");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_poll_register_ExpectAndReturn(42, 0, SL_STATUS_OK);
-  state = uic_stdin_handle_command("attribute_poll_register 42");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  attribute_poll_register_ExpectAndReturn(1234, 42, SL_STATUS_OK);
-  state = uic_stdin_handle_command("attribute_poll_register 1234,42");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}
-
-void test_attribute_poll_deregister()
-{
-  sl_status_t state = uic_stdin_handle_command("attribute_poll_deregister");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command("attribute_poll_deregister fish");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_poll_deregister_ExpectAndReturn(42, SL_STATUS_OK);
-  state = uic_stdin_handle_command("attribute_poll_deregister 42");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}

@@ -65,6 +65,17 @@ void on_reported_attribute_update(attribute_store_node_t updated_node,
 void on_desired_attribute_update(attribute_store_node_t updated_node,
                                  attribute_store_change_t change);
 
+/**
+ * @brief Indicates if the attribute store update reactions are paused for
+ * a Given Attribute ID
+ *
+ * @param node      Attribute ID to check
+ * @return true     If Attribute Store updates for that attribute will be ignored
+ * @return false    If Attribute Store updates for that attribute will not be ignored
+ */
+bool attribute_mapper_is_attribute_reactions_paused(
+  attribute_store_node_t node);
+
 #ifdef __cplusplus
 }
 #endif

@@ -25,7 +25,7 @@
 #include "zwapi_utils.h"
 
 // Includes from other components
-#include "zpc_endian.h"
+#include "zwave_controller_endian.h"
 #include "sl_log.h"
 
 #define LOG_TAG "zwapi_protocol_rx_dispatch"
@@ -175,14 +175,14 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
   }
 
   // If the user did not register any callback, just exit.
-  if (callbacks == NULL) {
+  if (zwave_api_get_callbacks() == NULL) {
     return;
   }
 
   switch (pData[IDX_CMD]) {
     case FUNC_ID_ZW_APPLICATION_CONTROLLER_UPDATE: {
       uint8_t bStatus;
-      if (callbacks->application_controller_update == NULL) {
+      if (zwave_api_get_callbacks()->application_controller_update == NULL) {
         break;
       }
 
@@ -204,7 +204,7 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         index += 1;  // brxStatus field. We do not use
 
         memcpy(&nwi_home_id, &pData[index], sizeof(nwi_home_id));
-        nwi_home_id = zpc_ntohl(nwi_home_id);
+        nwi_home_id = zwave_controller_ntohl(nwi_home_id);
         index += sizeof(nwi_home_id);
 
         length = pData[index++];
@@ -213,11 +213,12 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         }
         memcpy(zwapi_command_buffer, &pData[index], length);
 
-        callbacks->application_controller_update(bStatus,
-                                                 source_node_id,
-                                                 zwapi_command_buffer,
-                                                 length,
-                                                 nwi_home_id);
+        zwave_api_get_callbacks()->application_controller_update(
+          bStatus,
+          source_node_id,
+          zwapi_command_buffer,
+          length,
+          nwi_home_id);
 
       } else if (bStatus == UPDATE_STATE_INCLUDED_NODE_INFO_RECEIVED) {
         /* ZW-HOST: FUNC_ID_ZW_APPLICATION_UPDATE | UPDATE_STATE_INCLUDED_NODE_INFO_RECEIVED
@@ -233,15 +234,15 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
 
         if (len >= (index + sizeof(nwi_home_id))) {
           memcpy(&nwi_home_id, &pData[index], sizeof(nwi_home_id));
-          nwi_home_id = zpc_ntohl(nwi_home_id);
+          nwi_home_id = zwave_controller_ntohl(nwi_home_id);
           index += sizeof(nwi_home_id);
         }
 
-        callbacks->application_controller_update(bStatus,
-                                                 source_node_id,
-                                                 NULL,
-                                                 0,
-                                                 nwi_home_id);
+        zwave_api_get_callbacks()->application_controller_update(bStatus,
+                                                                 source_node_id,
+                                                                 NULL,
+                                                                 0,
+                                                                 nwi_home_id);
 
       } else {
         /* ZW->HOST: 0x49 | bStatus | srcID | bLen
@@ -260,16 +261,17 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
           zwapi_command_buffer[i] = pData[current_index + i];
         }
         learnNodeInfo.pCmd = zwapi_command_buffer;
-        callbacks->application_controller_update(learnNodeInfo.bStatus,
-                                                 learnNodeInfo.bSource,
-                                                 learnNodeInfo.pCmd,
-                                                 learnNodeInfo.bLen,
-                                                 0);
+        zwave_api_get_callbacks()->application_controller_update(
+          learnNodeInfo.bStatus,
+          learnNodeInfo.bSource,
+          learnNodeInfo.pCmd,
+          learnNodeInfo.bLen,
+          0);
       }
     } break;
 
     case FUNC_ID_APPLICATION_COMMAND_HANDLER: {
-      if (callbacks->application_command_handler != NULL) {
+      if (zwave_api_get_callbacks()->application_command_handler != NULL) {
         // Parse the frame: ZW->HOST: REQ | 0x04 | rxStatus | sourceNode | cmdLength | pCmd[] | rxRSSIVal
         uint8_t current_index               = IDX_DATA;
         uint8_t rx_status                   = pData[current_index++];
@@ -287,17 +289,18 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         if (len > current_index) {
           rssi_value = pData[current_index++];
         }
-        callbacks->application_command_handler(rx_status,
-                                               destination_node_id,
-                                               source_node_id,
-                                               zwapi_command_buffer,
-                                               command_length,
-                                               rssi_value);
+        zwave_api_get_callbacks()->application_command_handler(
+          rx_status,
+          destination_node_id,
+          source_node_id,
+          zwapi_command_buffer,
+          command_length,
+          rssi_value);
       }
     } break;
 
     case FUNC_ID_PROMISCUOUS_APPLICATION_COMMAND_HANDLER: {
-      if (callbacks->application_command_handler) {
+      if (zwave_api_get_callbacks()->application_command_handler) {
         // Parse the frame: ZW->HOST: REQ | 0xD1 | rxStatus | sourceNode | cmdLength | pCmd[] | destNode | multiNodeMaskLen [| multiNodeMask[multiNodeMaskLen]] | rxRSSIVal
         uint8_t current_index  = IDX_DATA;
         uint8_t rx_status      = pData[current_index++];
@@ -315,17 +318,18 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         if (len > current_index) {
           rssi_value = pData[current_index++];
         }
-        callbacks->application_command_handler(rx_status,
-                                               destination_node_id,
-                                               source_node_id,
-                                               zwapi_command_buffer,
-                                               command_length,
-                                               rssi_value);
+        zwave_api_get_callbacks()->application_command_handler(
+          rx_status,
+          destination_node_id,
+          source_node_id,
+          zwapi_command_buffer,
+          command_length,
+          rssi_value);
       }
     } break;
 
     case FUNC_ID_APPLICATION_COMMAND_HANDLER_BRIDGE: {
-      if (callbacks->application_command_handler_bridge) {
+      if (zwave_api_get_callbacks()->application_command_handler_bridge) {
         // Parse the frame: ZW->HOST: REQ | 0xA8 | rxStatus | destNodeID | srcNodeID | cmdLength | pCmd[ ] | multiDestsOffset_NodeMaskLen | multiDestsNodeMask | rxRSSIVal
         uint8_t current_index = IDX_DATA;
         uint8_t rx_status     = pData[current_index++];
@@ -346,12 +350,13 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         if (len > current_index) {
           rssi_value = pData[current_index++];
         }
-        callbacks->application_command_handler_bridge(rx_status,
-                                                      destination_node_id,
-                                                      source_node_id,
-                                                      zwapi_command_buffer,
-                                                      command_length,
-                                                      rssi_value);
+        zwave_api_get_callbacks()->application_command_handler_bridge(
+          rx_status,
+          destination_node_id,
+          source_node_id,
+          zwapi_command_buffer,
+          command_length,
+          rssi_value);
       }
     } break;
 
@@ -627,14 +632,15 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
     case FUNC_ID_SERIAL_API_STARTED:
       /* ZW->HOST: bWakeupReason | bWatchdogStarted | deviceOptionMask | */
       /*           node_type.generic | node_type.specific | cmdClassLength | cmdClass[] */
-      awaiting_zwave_api_started = false;
-      if (callbacks->zwapi_started != NULL) {
+      zwapi_set_awaiting_zwave_api_started(false);
+      if (zwave_api_get_callbacks()->zwapi_started != NULL) {
         uint8_t data_length
           = len - IDX_DATA - 1;  //-1 to strip off the checksum field
         for (i = 0; i < data_length; i++) {
           zwapi_command_buffer[i] = pData[IDX_DATA + i];
         }
-        callbacks->zwapi_started(zwapi_command_buffer, data_length);
+        zwave_api_get_callbacks()->zwapi_started(zwapi_command_buffer,
+                                                 data_length);
       }
       break;
 

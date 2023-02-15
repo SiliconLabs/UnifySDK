@@ -36,9 +36,10 @@
 
 #include "zwave_controller_types.h"
 #include "zwave_generic_types.h"
-#include "zwave_network_management_state.h"
-#include "zwave_controller_keyset.h"
+#include "zwave_network_management_types.h"
 
+#include "zwave_controller_keyset.h"
+#include "zwave_network_management_types.h"
 // Interfaces
 #include "zwave_generic_types.h"
 
@@ -48,93 +49,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef enum {
-  /// The process failed, no new node was added in the network.
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_FAIL,
-  /// Node has been included but the security bootstrapping failed.
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_SECURITY_FAIL,
-  /// The remove process failed (no node was removed)
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_REMOVE_FAIL,
-  /// The learn process failed in some general way
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_LEARN_MODE_FAIL,
-  /// The learn process is complete and the controller was included in a network but
-  /// security bootstrapping failed. The node is not operating securely.
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_LEARN_MODE_SECURITY_FAIL,
-  /// The node responded to a NOP; thus the node is no longer failing.
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_FAILED_NODE_REMOVE_FAIL,
-  /// The node responded to a NOP; thus the node is no longer failing.
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_REPLACE_FAIL,
-  /// We were in SmartStart Learn mode but did not get a successful
-  /// security bootstrapping. We will reset oureslves now.
-  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_SMART_START_INCLUSION_SECURITY_FAIL,
-} zwave_network_management_error_t;
-
-/**
- * @brief Error codes used in S2 inclusion
- *
- */
-typedef enum {
-  /// Bootstrapping was successful
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE,
-
-  /// Key failure indicating that no match exists between requested/granted
-  /// keys in the network.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_KEX_KEY,
-
-  ///Scheme failure indicating that no scheme is supported by
-  ///controller or joining node specified an invalid scheme.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_KEX_SCHEME,
-
-  //Curve failure indicating that no curve is supported by controller
-  //or joining node specified an invalid curve.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_KEX_CURVES,
-
-  /// Node failed to decrypt received frame.
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_DECRYPT,
-
-  /// User has canceled the S2 bootstrapping.
-  ///
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_CANCEL,
-
-  /// The Echo KEX Set/Report frame did not match the earlier
-  /// exchanged frame.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_AUTH,
-
-  /// The joining node has requested a key, which was not granted by
-  /// the including node at an earlier stage.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_KEY_GET,
-
-  /// Including node failed to decrypt and hence verify the received
-  /// frame encrypted with exchanged key.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_KEY_VERIFY,
-
-  /// The including node has transmitted a frame containing a
-  /// different key than what is currently being exchanged.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_KEY_REPORT,
-
-  /// Unknown KEX fail type.
-  ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN,
-} zwave_kex_fail_type_t;
-
-typedef enum {
-  /// No Learn mode intent.
-  ZWAVE_NETWORK_MANAGEMENT_LEARN_NONE,
-  /// Network Wide Inclusion learn mode
-  ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI,
-  /// Enable Network Wide Exclusion
-  ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE,
-  /// SmartStart Learn mode
-  ZWAVE_NETWORK_MANAGEMENT_LEARN_SMART_START,
-} zwave_learn_mode_t;
 
 /**
  * @brief Get the current state of the network management module.

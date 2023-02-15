@@ -13,7 +13,7 @@ add_subdirectory(zwave_tx_scheme_selector)
 # Network management module needs it for some logging. We should consider fixing
 # that.
 #
-# zwave_rx has not been included since it very serial api specfic We should mabe
+# zwave_rx is included, however its very serial api specfic. We should
 # consider collecting zwave_rx and zwave_api into a seperate library
 uic_add_shared_library(
   zwave
@@ -23,6 +23,7 @@ uic_add_shared_library(
   zwave_network_management
   zwave_security_validation
   zwave_tx
+  zwave_rx
   zwave_tx_scheme_selector
   zwave_s2
   zwave_s0
@@ -34,7 +35,10 @@ uic_add_shared_library(
   zwave_multi_channel
   transport_service_wrapper
   transport_service
-  zwave_api
-  zpc_utils)
+  zpc_utils
+  zpc_config
+  zwave_api)
 
-rust_add_native_libs(zwave)
+  target_link_libraries(zwave PUBLIC
+	  zwave_definitions unify)
+

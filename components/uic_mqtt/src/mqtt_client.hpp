@@ -24,6 +24,7 @@
 
 // Unify components
 #include "sl_status.h"
+#include "uic_version.h"
 
 // This component
 #include "mqtt_client.h"
@@ -37,16 +38,18 @@ typedef struct {
   bool retain;
 } message_queue_element_t;
 
-typedef void (*message_callback_t)(const char *topic,
-                                   const char *message,
-                                   const size_t message_length);
-
-typedef std::function<void(mqtt_client_t instance, const int file_descriptor)>
-  connection_callback_t;
-typedef std::function<void()> connection_status_callback_t;
-
 struct mqtt_client {
   public:
+  struct callback_info {
+    message_callback_ex_t callback;
+    void *user;
+
+    inline bool operator==(const callback_info &rhs) const
+    {
+      return ((callback == rhs.callback) && (user == rhs.user));
+    }
+  };
+
   mqtt_client(
     const std::string &hostname,
     const uint32_t port,
@@ -105,15 +108,15 @@ struct mqtt_client {
    */
   int count_topics(const std::string &prefix_pattern);
 
-  void subscribe(const std::string &topic, message_callback_t callback);
+  void subscribe(const std::string &topic, const callback_info &callback);
   void resubscribe();
-  void unsubscribe(const std::string &topic, message_callback_t callback);
+  void unsubscribe(const std::string &topic, const callback_info &callback);
 
   // Callbacks to the outside world
-  void on_connect_callback_set(connection_callback_t);
-  void on_disconnect_callback_set(connection_callback_t);
-  void before_disconnect_callback_set(connection_status_callback_t);
-  void after_connect_callback_set(connection_status_callback_t);
+  void on_connect_callback_set(mqtt_connection_callback_t);
+  void on_disconnect_callback_set(mqtt_connection_callback_t);
+  void before_disconnect_callback_set(mqtt_simple_callback_t);
+  void after_connect_callback_set(mqtt_simple_callback_t);
 
   // The MQTT callbacks. Those are called (through wrappers) from
   // the Mosquitto library.
@@ -129,23 +132,27 @@ struct mqtt_client {
   void after_connect_callback_call();
   void before_disconnect_callback_call();
 
+  const char *get_client_id() const;
+
+  bool is_connected_to_broker() const;
+
   private:
   const std::string hostname;
   const uint32_t port;
   int socket_file_descriptor;
   std::chrono::milliseconds next_reconnect_backoff;
   std::chrono::milliseconds max_reconnect_backoff;
-  connection_callback_t on_connect_callback               = nullptr;
-  connection_callback_t on_disconnect_callback            = nullptr;
-  connection_status_callback_t before_disconnect_callback = nullptr;
-  connection_status_callback_t after_connect_callback     = nullptr;
+  std::set<mqtt_connection_callback_t> on_connect_callbacks;
+  std::set<mqtt_connection_callback_t> on_disconnect_callbacks;
+  std::set<mqtt_simple_callback_t> before_disconnect_callbacks;
+  std::set<mqtt_simple_callback_t> after_connect_callbacks;
 
   // Message-queueing and routing: Containers and arbitrators. The arbitrators are
   // what allows for an asynchronous implementation of the client.
   std::deque<message_queue_element_t> publishing_queue;
   std::queue<std::string> subscription_queue;
   std::queue<std::string> unsubscription_queue;
-  std::map<std::string, std::vector<message_callback_t>> subscription_callbacks;
+  std::map<std::string, std::vector<callback_info>> subscription_callbacks;
   std::set<std::string> retained_topics;
 
   bool publish_messages_waiting();
@@ -162,6 +169,7 @@ struct mqtt_client {
   std::string mqtt_cafile;
   std::string mqtt_certfile;
   std::string mqtt_keyfile;
+  bool connected_to_broker = false;
 
   // FSM functionality
   friend class mqtt_client_fsm_disconnected;

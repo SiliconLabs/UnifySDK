@@ -56,7 +56,12 @@ This is a manufacturer specific cluster.
           <field name="Value" type="int64" />
         </fields>
       </command>
-
+      <command id="04" name="DiscoverParameterRange">
+        <fields>
+          <field name="FirstParameterId" type="uint16" />
+          <field name="LastParameterId" type="uint16" />
+        </fields>
+      </command>
     </commands>
   </server>
 </zcl:cluster>

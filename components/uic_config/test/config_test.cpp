@@ -414,7 +414,7 @@ log:
 mqtt:
   cafile: ''
   certfile: ''
-  client_id: 'test_config_$pid'
+  client_id: 'test_config'
   host: 'localhost'
   keyfile: ''
   port: 1883
@@ -424,11 +424,7 @@ zpc:
     default_interval: 44
   serial: '/dev/ttyUSB0'
 )");
-  expected.find("$pid_number");
-  getpid();
-  char pid[16];
-  snprintf(pid, sizeof(pid), "%i", getpid());
-  expected.replace(expected.find("$pid"), 4, pid);
+
   TEST_ASSERT_EQUAL(CONFIG_STATUS_OK,
                     config_add_string("zpc.serial", "TTY", "/dev/ttyUSB0"));
   TEST_ASSERT_EQUAL(
@@ -437,6 +433,10 @@ zpc:
   TEST_ASSERT_EQUAL(
     CONFIG_STATUS_OK,
     config_add_int("zpc.poll.default_interval", "level 3 configuration", 44));
+  TEST_ASSERT_EQUAL(CONFIG_STATUS_OK,
+                    config_add_string("mqtt.client_id",
+                                      "Client ID Configuration",
+                                      "test_config"));
 
   const char *argv_inject[] = {"test_config", "--dump-config"};
   std::ostringstream output;

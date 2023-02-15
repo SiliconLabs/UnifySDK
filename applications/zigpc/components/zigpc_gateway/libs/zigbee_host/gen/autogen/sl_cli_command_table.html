@@ -2523,7 +2523,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header">
       <span class="command-name"> network rejoin</span>
         <span class="command-argument">u8</span>
-        <span class="command-argument">i32</span>
+        <span class="command-argument">u32</span>
       <span class="command-handler">networkRejoinCommand</span>
     </div>
     <div class="command-info">
@@ -2542,7 +2542,7 @@ Example syntax (.slcc or .slcp) for populating this file:
         <span class="argument-name">u8</span>Boolean network key availability
         </li>
         <li>
-        <span class="argument-name">i32</span>Channel mask
+        <span class="argument-name">u32</span>Channel mask
         </li>
       </ul>
       </div>
@@ -2837,6 +2837,7 @@ Example syntax (.slcc or .slcp) for populating this file:
         <span class="command-argument">u8</span>
         <span class="command-argument">u8</span>
         <span class="command-argument">i8</span>
+        <span class="command-argument">[u8]</span>
       <span class="command-handler">networkMultiPhyStartCommand</span>
     </div>
     <div class="command-info">
@@ -2859,6 +2860,9 @@ Example syntax (.slcc or .slcp) for populating this file:
         </li>
         <li>
         <span class="argument-name">i8</span>power
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> optionsMask (Bit 0 = Routers allowed, Bit 1 = Broadcast allowed)
         </li>
       </ul>
       </div>

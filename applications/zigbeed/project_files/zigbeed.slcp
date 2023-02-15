@@ -17,7 +17,7 @@ include:
   file_list:
   - {path: zigbeed_configuration.h}
   - {path: openthread-config-generic.h}
-sdk: {id: gecko_sdk, version: 4.1.1}
+sdk: {id: gecko_sdk, version: 4.2.0}
 toolchain_settings: []
 component:
 - {id: zigbee_app_framework_common}

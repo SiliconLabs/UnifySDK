@@ -47,6 +47,7 @@
                             &root_node->desired_value[0],     \
                             root_node->desired_value.size())
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['clock_20library_19807',['Clock library',['../group__clock.html',1,'']]],
-  ['callback_20timer_19808',['Callback timer',['../group__ctimer.html',1,'']]],
-  ['contiki_20processes_19809',['Contiki processes',['../group__process.html',1,'']]]
+  ['barrier_20control_20cluster_20mapper_33484',['Barrier Control Cluster Mapper',['../group__barrier__control__cluster__mapper.html',1,'']]]
 ];

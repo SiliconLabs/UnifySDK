@@ -172,10 +172,11 @@ void test_set_values_to_root_node_and_restore()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_load_from_datastore());
 
   // Check that the attribute store is as it should be.
-  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_store_get_root(),
-                                                    REPORTED_ATTRIBUTE));
-  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_store_get_root(),
-                                                    DESIRED_ATTRIBUTE));
+  // Root gets wiped when force loading from the attribute store runtime.
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_store_get_root(),
+                                                     REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_store_get_root(),
+                                                     DESIRED_ATTRIBUTE));
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(node_1, REPORTED_ATTRIBUTE));
   TEST_ASSERT_TRUE(attribute_store_is_value_defined(node_1, DESIRED_ATTRIBUTE));
@@ -293,10 +294,11 @@ void test_auto_save_cooldown_interval_reached()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_load_from_datastore());
 
   // Check that the attribute store is as it should be.
-  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_store_get_root(),
-                                                    REPORTED_ATTRIBUTE));
-  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_store_get_root(),
-                                                    DESIRED_ATTRIBUTE));
+  // Root gets wiped when force loading from the attribute store runtime.
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_store_get_root(),
+                                                     REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_store_get_root(),
+                                                     DESIRED_ATTRIBUTE));
   TEST_ASSERT_TRUE(attribute_store_node_exists(node_1));
   TEST_ASSERT_TRUE(attribute_store_node_exists(node_2));
   TEST_ASSERT_TRUE(attribute_store_node_exists(node_3));

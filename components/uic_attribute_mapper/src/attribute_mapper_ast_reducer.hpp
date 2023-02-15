@@ -99,6 +99,12 @@ class reducer
     }
   }
 
+  operand operator()(const function_invokation &f) const
+  {
+    // Not supported for now
+    return operand(f);
+  }
+
   operand operator()(const expression &x) const
   {
     return operand(reduce_expression(x));
@@ -225,7 +231,7 @@ class reducer
   }
 
   //Go though the ast an reduce each element
-  ast_tree operator()(const ast_tree ast) const
+  ast_tree operator()(const ast_tree &ast) const
   {
     ast_tree reduced = ast;
     for (auto &ast_element: reduced) {

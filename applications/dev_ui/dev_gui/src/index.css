@@ -8,3 +8,8 @@ body {
 .Toastify__toast-body {
     line-height: 20px;
 }
+
+.Toastify__toast-container {
+    width: auto;
+    max-width: 90%;
+}

@@ -153,12 +153,21 @@ class MapperEngine
   bool update_dependencies(const ast::ast_tree &ast);
 
   /**
-   * @brief Set the endpoint type which should be used as start context for all
-   * attribute evaluations
+   * @brief Checks the AST for built-in function names and return true
+   * if one or more functions are unknown.
+   *
+   * @param ast AST loaded from the UAM files.
+   * @return true if there are some unknown functions in the AST, false otherwise
+   */
+  bool has_unknown_functions_in_tree(const ast::ast_tree &ast);
+
+  /**
+   * @brief Set the Common Attribute type which should be used as start
+   * context for all attribute evaluations
    *
    * @param t Type to use as start context
    */
-  void set_ep_type(attribute_store_type_t t);
+  void set_common_parent_type(attribute_store_type_t t);
 
   /**
    * @brief Get the singletron
@@ -200,7 +209,10 @@ class MapperEngine
   //Lookup table for which assignments depend on which attributes
   std::multimap<ast::attribute_dependency_t, std::shared_ptr<ast::assignment>>
     relations;
-  attribute_store_type_t ep_type;
+  std::map<std::shared_ptr<ast::assignment>,
+           std::shared_ptr<ast::scope_settings_t>>
+    assignment_settings;
+  attribute_store_type_t common_parent_type = ATTRIBUTE_STORE_INVALID_NODE;
 };
 
 #endif  //ATTRIBUTE_MAPPER_ENGINE_H

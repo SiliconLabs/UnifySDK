@@ -6,11 +6,12 @@
     background: #f7f7f7;
     cursor: pointer;
     line-height: 15px;
-    height: 139px;
+    height: 165px;
     transition: height 0.3s;
     overflow: hidden;
     position: fixed;
     z-index: 4;
+    min-width: 720px;
 }
 
 .header.collapsed {
@@ -46,4 +47,27 @@ img {
 
 .header.collapsed .logo-title {
     font-size: 0px;
+}
+
+.mobile .collapsed img {
+    height: 70px;
+}
+
+.mobile .header {
+    line-height: 40px;
+    height: 255px;
+}
+
+.mobile .header.collapsed {
+    height: 110px;
+}
+
+.mobile .version {
+    font-size: 25px;
+}
+
+@media screen and (max-width: 720px) {
+    .logo-container {
+        display: none;
+    }
 }

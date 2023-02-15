@@ -20,17 +20,12 @@ target_include_directories(
 target_link_libraries(
   network_monitor
   INTERFACE zwave_definitions ucl_definitions
-  PUBLIC zpc_attribute_store
-         uic_attribute_utils
-         uic_attribute_resolver
-         uic_mqtt
-         ucl_mqtt_node_interview
-         ucl_node_state
-         zcl_cluster_servers
-         uic_smartstart_management
-  PRIVATE zwave_controller zwave_command_classes zwave_s2)
+  PUBLIC zpc_attribute_store unify ucl_mqtt zcl_cluster_servers
+  PRIVATE zwave_command_classes zwave_s2)
 
-add_subdirectory(test)
-add_mock(failing_node_monitor_mock src/failing_node_monitor.h)
+if(BUILD_TESTING)
+  add_subdirectory(test)
+  add_mock(failing_node_monitor_mock src/failing_node_monitor.h)
 
-target_interface_libraries(failing_node_monitor_mock zwave_definitions uic_contiki)
+  target_interface_libraries(failing_node_monitor_mock zwave_definitions unify)
+endif()

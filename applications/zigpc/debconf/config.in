@@ -59,6 +59,7 @@ if [ -e $UIC_CONFFILE ]; then
   fi
 fi
 
+
 db_input critical uic-zigpc/serial_port || true
 db_input critical uic-zigpc/datastore_file || true
 db_go

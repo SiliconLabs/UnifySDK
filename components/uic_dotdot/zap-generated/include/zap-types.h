@@ -1060,26 +1060,6 @@ typedef enum {
   ZCL_SQUAWK_CONFIGURATION_SQUAWK_MODE_SOUND_FOR_SYSTEM_IS_DISARMED = 1,
 } SquawkConfigurationSquawkMode;
 
-// Enum for TLKeyIndex
-typedef enum {
-  ZCL_TL_KEY_INDEX_DEVELOPMENT_KEY = 0,
-  ZCL_TL_KEY_INDEX_MASTER_KEY = 4,
-  ZCL_TL_KEY_INDEX_CERTIFICATION_KEY = 15,
-} TLKeyIndex;
-
-// Enum for TLStatus
-typedef enum {
-  ZCL_TL_STATUS_SUCCESS = 0,
-  ZCL_TL_STATUS_FAILURE = 1,
-} TLStatus;
-
-// Enum for TLZigbeeInformationLogicalType
-typedef enum {
-  ZCL_TL_ZIGBEE_INFORMATION_LOGICAL_TYPE_COORDINATOR = 0,
-  ZCL_TL_ZIGBEE_INFORMATION_LOGICAL_TYPE_ROUTER = 1,
-  ZCL_TL_ZIGBEE_INFORMATION_LOGICAL_TYPE_END_DEVICE = 2,
-} TLZigbeeInformationLogicalType;
-
 // Enum for ThermostatACCapacityFormat
 typedef enum {
   ZCL_THERMOSTAT_AC_CAPACITY_FORMAT_BT_UH = 0,
@@ -1763,12 +1743,6 @@ typedef enum {
 #define RESTART_DEVICE_OPTIONS_STARTUP_MODE_OFFSET (0)
 #define RESTART_DEVICE_OPTIONS_IMMEDIATE (0x08)
 #define RESTART_DEVICE_OPTIONS_IMMEDIATE_OFFSET (3)
-#define SCAN_RESPONSE_KEY_BITMASK_DEVELOPMENT_KEY (0x0001)
-#define SCAN_RESPONSE_KEY_BITMASK_DEVELOPMENT_KEY_OFFSET (0)
-#define SCAN_RESPONSE_KEY_BITMASK_MASTER_KEY (0x0010)
-#define SCAN_RESPONSE_KEY_BITMASK_MASTER_KEY_OFFSET (4)
-#define SCAN_RESPONSE_KEY_BITMASK_CERTIFICATION_KEY (0x8000)
-#define SCAN_RESPONSE_KEY_BITMASK_CERTIFICATION_KEY_OFFSET (15)
 #define SCENES_NAME_SUPPORT_SCENE_NAMES_SUPPORTED (0x80)
 #define SCENES_NAME_SUPPORT_SCENE_NAMES_SUPPORTED_OFFSET (7)
 #define SHADE_CONFIGURATION_STATUS_SHADE_OPERATIONAL (0x01)
@@ -1791,22 +1765,6 @@ typedef enum {
 #define START_WARNING_SIREN_CONFIGURATION_STROBE_OFFSET (2)
 #define START_WARNING_SIREN_CONFIGURATION_WARNING_MODE (0xF0)
 #define START_WARNING_SIREN_CONFIGURATION_WARNING_MODE_OFFSET (4)
-#define TL_TOUCHLINK_INFORMATION_FACTORY_NEW (0x01)
-#define TL_TOUCHLINK_INFORMATION_FACTORY_NEW_OFFSET (0)
-#define TL_TOUCHLINK_INFORMATION_ADDRESS_ASSIGNMENT (0x02)
-#define TL_TOUCHLINK_INFORMATION_ADDRESS_ASSIGNMENT_OFFSET (1)
-#define TL_TOUCHLINK_INFORMATION_LINK_INITIATOR (0x10)
-#define TL_TOUCHLINK_INFORMATION_LINK_INITIATOR_OFFSET (4)
-#define TL_TOUCHLINK_INFORMATION_TOUCHLINK_PRIORITY_REQUEST (0x20)
-#define TL_TOUCHLINK_INFORMATION_TOUCHLINK_PRIORITY_REQUEST_OFFSET (5)
-#define TL_TOUCHLINK_INFORMATION_PROFILE_INTEROP (0x80)
-#define TL_TOUCHLINK_INFORMATION_PROFILE_INTEROP_OFFSET (7)
-#define TL_VERSION_APPLICATION_DEVICE_VERSION (0x0F)
-#define TL_VERSION_APPLICATION_DEVICE_VERSION_OFFSET (0)
-#define TL_ZIGBEE_INFORMATION_LOGICAL_TYPE (0x03)
-#define TL_ZIGBEE_INFORMATION_LOGICAL_TYPE_OFFSET (0)
-#define TL_ZIGBEE_INFORMATION_RX_ON_WHEN_IDLE (0x04)
-#define TL_ZIGBEE_INFORMATION_RX_ON_WHEN_IDLE_OFFSET (2)
 #define THERMOSTAT_AC_ERROR_CODE_COMPRESSOR_FAILURE_OR_REFRIGERANT_LEAKAGE (0x01)
 #define THERMOSTAT_AC_ERROR_CODE_COMPRESSOR_FAILURE_OR_REFRIGERANT_LEAKAGE_OFFSET (0)
 #define THERMOSTAT_AC_ERROR_CODE_ROOM_TEMPERATURE_SENSOR_FAILURE (0x02)
@@ -2020,38 +1978,22 @@ typedef struct _SExtensionFieldSetList {
   const char* ExtensionFieldSet;
 } SExtensionFieldSetList;
 
+// Struct for SSceneTable
+typedef struct _SSceneTable {
+  uint16_t SceneID;
+  uint16_t GroupID;
+  const char* SceneName;
+  uint16_t TransitionTime;
+  uint8_t TransitionTime100ms;
+  const char* SceneTableExtensions;
+} SSceneTable;
+
 // Struct for SphericalCoordinates
 typedef struct _SphericalCoordinates {
   double Azimuth;
   double Elevation;
   double Distance;
 } SphericalCoordinates;
-
-// Struct for TLDeviceInformationRecord
-typedef struct _TLDeviceInformationRecord {
-  EUI64 IEEEAddress;
-  uint8_t EndpointIdentifier;
-  uint16_t ProfileIndentifier;
-  uint16_t DeviceIdentifier;
-  uint8_t Version;
-  uint8_t GroupIdentifierCount;
-  uint8_t Sort;
-} TLDeviceInformationRecord;
-
-// Struct for TLEndpointInformationRecord
-typedef struct _TLEndpointInformationRecord {
-  uint16_t NetworkAddress;
-  uint8_t EndpointIdentifier;
-  uint16_t ProfileIdentifier;
-  uint16_t DeviceIdentifier;
-  uint8_t Version;
-} TLEndpointInformationRecord;
-
-// Struct for TLGroupInformationRecord
-typedef struct _TLGroupInformationRecord {
-  uint16_t GroupIdentifier;
-  uint8_t GroupType;
-} TLGroupInformationRecord;
 
 // Struct for TransitionType
 typedef struct _TransitionType {

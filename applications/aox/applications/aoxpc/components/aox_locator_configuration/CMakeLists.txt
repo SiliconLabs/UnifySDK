@@ -13,7 +13,9 @@ target_include_directories(
 
 target_link_libraries(
   aox_locator_configuration
-  PUBLIC uic_log uic_definitions
-  PRIVATE uic_dotdot_mqtt aoxpc_unid aoxpc_attribute_store)
+  PUBLIC unify
+  PRIVATE aoxpc_unid aoxpc_attribute_store)
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
+endif()

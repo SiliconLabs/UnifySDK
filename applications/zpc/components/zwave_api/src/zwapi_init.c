@@ -14,11 +14,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include "zwapi_init.h"
 #include "zwapi_func_ids.h"
 #include "zwapi_protocol_basis.h"
 #include "zwapi_session.h"
+#include "zwapi_serial.h"
 #include "zwapi_internal.h"
 #include "sl_log.h"
 
@@ -36,14 +36,14 @@ const char *zw_lib_names[] = {
   "Installer library",
 };
 
-// Module shared variables
-zwapi_callbacks_t *callbacks;
-bool awaiting_zwave_api_started;
+// Private variables.
+static zwapi_callbacks_t *callbacks;
+static bool awaiting_zwave_api_started;
 
 static void zwapi_init_local_variables()
 {
   memset(&chip, 0, sizeof(chip));
-  awaiting_zwave_api_started = false;
+  zwapi_set_awaiting_zwave_api_started(false);
 }
 
 bool zwapi_support_command_func(uint8_t func_id)
@@ -57,14 +57,38 @@ bool zwapi_support_command_func(uint8_t func_id)
   }
 }
 
-bool zwapi_support_setup_func(serial_api_setup_cmd_t setup_cmd)
+static bool is_bit_num_set_in_byte(uint8_t bit_num, uint8_t byte)
 {
-  uint8_t cmd = setup_cmd;
-  if (chip.supported_setup_bitmask & cmd) {
+  if (byte & (1 << bit_num)) {
     return true;
   } else {
     return false;
   }
+}
+
+bool zwapi_support_setup_func(serial_api_setup_cmd_t setup_cmd)
+{
+  uint16_t cmd = setup_cmd;
+  bool ret     = false;
+  // check if the setup_cmd being checked has two bits set for e.g. 3(0011), 5(0101)
+  // Where we need to check the Extended Z-Wave API Setup Supported Sub Commands bitmask
+  if (cmd & (cmd - 1)) {
+    if (cmd > 16) {
+      sl_log_info(LOG_TAG,
+                  "Error: Checking if 0x%02X is supported, requires checking "
+                  "beyond 2 bytes of Extended Z-Wave API Setup Supported Sub"
+                  "Commands bitmask, which is not supported.\n",
+                  cmd);
+    } else if (cmd > 8) {
+      ret
+        = (is_bit_num_set_in_byte((cmd - 8), chip.supported_setup_bitmask[2]));
+    } else if (cmd > 0) {
+      ret = (is_bit_num_set_in_byte(cmd, chip.supported_setup_bitmask[1]));
+    }
+  } else {
+    ret = cmd & chip.supported_setup_bitmask[0];
+  }
+  return ret;
 }
 
 sl_status_t zwapi_init(const char *serial_port,
@@ -92,6 +116,16 @@ sl_status_t zwapi_init(const char *serial_port,
 void zwapi_destroy(void)
 {
   zwapi_session_shutdown();
+}
+
+sl_status_t zwapi_log_to_file_enable(const char *filename)
+{
+  return zwapi_serial_log_to_file_enable(filename);
+}
+
+sl_status_t zwapi_log_to_file_disable()
+{
+  return zwapi_serial_log_to_file_disable();
 }
 
 bool zwapi_poll()
@@ -125,7 +159,6 @@ sl_status_t zwapi_refresh_capabilities(void)
   if (capabilities_status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG,
                  "Failed to fetch capabilities from the Z-Wave module\n");
-    assert(false);
     return capabilities_status;
   }
   if (response_length > (IDX_DATA + 7)) {
@@ -161,13 +194,15 @@ sl_status_t zwapi_refresh_capabilities(void)
       sl_log_error(
         LOG_TAG,
         "Failed to fetch supported setup commands from the Z-Wave module\n");
-      assert(false);
       return setup_status;
     }
 
     if (response_length > (IDX_DATA + 1)
         && response_buffer[IDX_DATA] == ZW_COMMAND_RETURN_VALUE_TRUE) {
-      chip.supported_setup_bitmask = response_buffer[IDX_DATA + 1];
+      uint8_t current_index = IDX_DATA + 1;
+      memcpy(chip.supported_setup_bitmask,
+             &(response_buffer[current_index]),
+             response_length - (current_index - 1));
     } else {
       return SL_STATUS_FAIL;
     }
@@ -525,8 +560,19 @@ sl_status_t zwapi_send_command_no_ack(uint8_t command,
                                          payload_buffer_length);
 }
 
-bool zwapi_is_awaiting_zwave_api_started(){
+bool zwapi_is_awaiting_zwave_api_started()
+{
   return awaiting_zwave_api_started;
+}
+
+void zwapi_set_awaiting_zwave_api_started(bool value)
+{
+  awaiting_zwave_api_started = value;
+}
+
+zwapi_callbacks_t *zwave_api_get_callbacks()
+{
+  return callbacks;
 }
 
 zwave_lr_channel_t zwapi_get_zwave_lr_channel()

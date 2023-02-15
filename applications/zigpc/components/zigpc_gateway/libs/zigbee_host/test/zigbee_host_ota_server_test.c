@@ -24,6 +24,8 @@
 
 #include "test_zigbee_host_callbacks_mock.h"
 
+extern struct zigbeeHostState z3gwState;
+
 /**
  * @brief  Setup the test suite
  * (called once before all test_xxx functions are called)

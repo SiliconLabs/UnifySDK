@@ -1,3 +1,9 @@
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  # "--allow-multiple-definition" can cause some weird symptons as we leave it
+  # up to the linker which symbol gets merged into the test binary.
+  add_link_options("-Wl,--unresolved-symbols=ignore-in-object-files"
+                   "-Wl,--allow-multiple-definition")
+endif()
 # Network monitor test (with real attribute store)
 target_add_unittest(
   network_monitor
@@ -67,8 +73,7 @@ target_add_unittest(
   zwave_definitions
   uic_contiki_stub
   zpc_attribute_store_test_helper
-  uic_attribute_utils_test_helper
-)
+  uic_attribute_utils_test_helper)
 
 # Sleeping nodes keep alive test
 target_add_unittest(
@@ -83,6 +88,17 @@ target_add_unittest(
   uic_contiki_stub
   zwave_controller_mock)
 
+# Network Monitor Utils test
+target_add_unittest(
+  network_monitor
+  NAME
+  network_monitor_utils_test
+  SOURCES
+  network_monitor_utils_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  uic_contiki_stub
+  uic_attribute_resolver_mock)
 
 # Fixture test
 target_add_unittest(
@@ -92,9 +108,9 @@ target_add_unittest(
   SOURCES
   failing_node_monitor_fixt_test.c
   DEPENDS
-  uic_contiki_stub
-)
-
+  uic_contiki_stub)
 
 target_add_unittest(network_monitor NAME container_retain_test SOURCES
                     container_retain_test.cpp)
+target_link_libraries(container_retain_test
+                      PRIVATE uic_smartstart_management_mock)

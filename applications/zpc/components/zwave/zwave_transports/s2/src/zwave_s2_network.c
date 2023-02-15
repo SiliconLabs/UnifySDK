@@ -19,16 +19,11 @@
 #include "s2_protocol.h"
 
 #include "sl_log.h"
-#include "zpc_endian.h"
-#include "zwapi_protocol_transport.h"
 #include "zwave_s2_internal.h"
 #include "zwave_s2_keystore_int.h"
+#include "zwave_helper_macros.h"
 
 #define LOG_TAG "zwave_s2_network"
-
-#define STR_CASE(x) \
-  case x:           \
-    return #x;
 
 static zwave_s2_network_callbacks_t callbacks;
 const char *s2_inclusion_event_name(zwave_event_codes_t ev)

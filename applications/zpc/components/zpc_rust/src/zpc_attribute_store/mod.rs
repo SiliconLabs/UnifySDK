@@ -14,13 +14,15 @@
 use futures::stream::LocalBoxStream;
 use unify_log_sys::*;
 use unify_middleware::{
-    attribute_store_or_return_with, attribute_stream_ext::ForceUpdateAttributeStream,
-    Attribute, AttributeEvent, AttributeTrait,
+    attribute_store_or_return_with, attribute_stream_ext::ForceUpdateAttributeStream, Attribute,
+    AttributeEvent, AttributeTrait,
 };
-use unify_tools::*;
-declare_app_name!("networkAttributesTrait");
 
-include_binding!(zpc_attribute_store);
+declare_app_name!("networkAttributesTrait");
+unify_tools::include_binding!(
+    concat!(env!("OUT_DIR"), "/zpc_attribute_store.rs"),
+    zpc_attribute_store
+);
 
 #[cfg_attr(test, mockall::automock)]
 pub trait NetworkAttributesTrait {

@@ -1,24 +1,71 @@
-#!/bin/sh
-# postinst script for uic-matter-bridge
+#!/bin/bash
+# postinst script for uic-otbr
 #
 # see: dh_installdeb(1)
 
 set -e
 
-setup_target_for_otbr() {
-    bash -c "cd /usr/share/otbr && INFRA_IF_NAME=@OTBR_INFRA_IF_NAME@ BACKBONE_ROUTER=0 WEB_GUI=0 RELEASE=1 REFERENCE_DEVICE=1 RADIO_URL=spinel+cpc://cpcd_0?iid=2 ./script/setup"
-    bash -c "sed -i \"s/spinel.* /spinel+cpc:\/\/cpcd_0?iid=2 /\" /etc/default/otbr-agent"
+OTBR_SCRIPTS_DIR=/usr/share/otbr/script
+
+configure_otbr_install() {
+    export INFRA_IF_NAME=@OTBR_INFRA_IF_NAME@
+    export RADIO_URL=@OTBR_RADIO_URL@
+
+    export OTBR_MDNS=@OTBR_MDNS@
+    export NAT64_SERVICE=@OTBR_NAT64_SERVICE@
+    
+    export RELEASE=$<BOOL:@UIC_OTBR_RELEASE@>
+    export REFERENCE_DEVICE=$<BOOL:@UIC_OTBR_REFERENCE_DEVICE@>
+
+    export BORDER_ROUTING=$<BOOL:@UIC_OTBR_BORDER_ROUTING@>
+    export BACKBONE_ROUTER=$<BOOL:@UIC_OTBR_BACKBONE_ROUTER@>
+    export NAT64=$<BOOL:@UIC_OTBR_NAT64@>
+    export DNS64=$<BOOL:@UIC_OTBR_DNS64@>
+    export DHCPV6_PD=$<BOOL:@UIC_OTBR_DHCPV6_PD@>
+    export NETWORK_MANAGER=$<BOOL:@UIC_OTBR_NETWORK_MANAGER@>
+    export WEB_GUI=$<BOOL:@UIC_OTBR_WEB_GUI@>
+    export REST_API=$<BOOL:@UIC_OTBR_REST_API@>
 }
 
-enable_otbr_agent_service() {
+init_otbr_scripts() {
+    . $OTBR_SCRIPTS_DIR/_initrc
+    . $OTBR_SCRIPTS_DIR/_border_routing
+    #. $OTBR_SCRIPTS_DIR/_otbr - intentionally omitted
+    . $OTBR_SCRIPTS_DIR/_ipforward
+    . $OTBR_SCRIPTS_DIR/_nat64
+    . $OTBR_SCRIPTS_DIR/_dns64
+    . $OTBR_SCRIPTS_DIR/_dhcpv6_pd
+    . $OTBR_SCRIPTS_DIR/_network_manager
+    . $OTBR_SCRIPTS_DIR/_rt_tables
+    . $OTBR_SCRIPTS_DIR/_swapfile
+    . $OTBR_SCRIPTS_DIR/_sudo_extend
+    . $OTBR_SCRIPTS_DIR/_disable_services
+    . $OTBR_SCRIPTS_DIR/_firewall
+}
+
+install_services() {
+    cd $OTBR_SCRIPTS_DIR/..
+    firewall_install
+    ipforward_install
+    rt_tables_install
+    nat64_install
+    dns64_install
+    network_manager_install
+    dhcpv6_pd_install
+    border_routing_install
+    #otbr_install - intentionally omitted
+}
+
+enable_otbr_services() {
     if type "systemctl" >/dev/null; then
         systemctl --system daemon-reload || true
-        systemctl enable otbr-agent.service || true
-        systemctl start otbr-agent.service || true
     fi
+    #$OTBR_SCRIPTS_DIR/server
 }
 
-setup_target_for_otbr
-# enable_otbr_agent_service
+configure_otbr_install
+init_otbr_scripts
+install_services
+enable_otbr_services
 
 exit 0

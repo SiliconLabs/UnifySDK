@@ -24,7 +24,9 @@
 #include "attribute_store.h"
 
 // Test constants
-#define AOXPC_UNID        "AoXPCUNID_TeST"
+const aoa_id_t AOXPC_UNID = "AoXPCUNID_TeST";
+const aoa_id_t ANOTHER_UNID = "another UNID";
+
 #define AOXPC_ENDPOINT_ID 3
 
 /// Setup the test suite (called once before all test_xxx functions are called)
@@ -65,7 +67,7 @@ void test_aoxpc_attribute_store_dotdot_attributes_cte_mode()
   TEST_ASSERT_TRUE(
     dotdot_is_supported_aox_locator_cte_mode(AOXPC_UNID, AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
-    dotdot_is_supported_aox_locator_cte_mode("another UNID",
+    dotdot_is_supported_aox_locator_cte_mode(ANOTHER_UNID,
                                              AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
     dotdot_is_supported_aox_locator_cte_mode(AOXPC_UNID,
@@ -102,7 +104,7 @@ void test_aoxpc_attribute_store_dotdot_attributes_position_and_orientation_valid
       AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
     dotdot_is_supported_aox_locator_position_and_orientation_valid(
-      "another UNID",
+      ANOTHER_UNID,
       AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
     dotdot_is_supported_aox_locator_position_and_orientation_valid(
@@ -146,7 +148,7 @@ void test_aoxpc_attribute_store_dotdot_attributes_position_and_orientation()
     AOXPC_UNID,
     AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(dotdot_is_supported_aox_locator_position_and_orientation(
-    "another UNID",
+    ANOTHER_UNID,
     AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(dotdot_is_supported_aox_locator_position_and_orientation(
     AOXPC_UNID,
@@ -202,7 +204,7 @@ void test_aoxpc_attribute_store_dotdot_attributes_allow_list()
   TEST_ASSERT_TRUE(
     dotdot_is_supported_aox_locator_allow_list(AOXPC_UNID, AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
-    dotdot_is_supported_aox_locator_allow_list("another UNID",
+    dotdot_is_supported_aox_locator_allow_list(ANOTHER_UNID,
                                                AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
     dotdot_is_supported_aox_locator_allow_list(AOXPC_UNID,
@@ -253,7 +255,7 @@ void test_aoxpc_attribute_store_dotdot_attributes_azimuth_mask()
     dotdot_is_supported_aox_locator_azimuth_mask(AOXPC_UNID,
                                                  AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
-    dotdot_is_supported_aox_locator_azimuth_mask("another UNID",
+    dotdot_is_supported_aox_locator_azimuth_mask(ANOTHER_UNID,
                                                  AOXPC_ENDPOINT_ID));
   TEST_ASSERT_FALSE(
     dotdot_is_supported_aox_locator_azimuth_mask(AOXPC_UNID,

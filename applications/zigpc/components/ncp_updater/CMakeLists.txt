@@ -12,6 +12,4 @@ add_library(
     zigpc_gateway 
     zigpc_common
     zigpc_config
-    uic_gbl_interface  
-    uic_contiki 
-    uic_log)
+    unify)

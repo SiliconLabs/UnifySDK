@@ -20,6 +20,7 @@
 #define KEY_CLASS_S2_ACCESS           0x04
 #define KEY_CLASS_S2_AUTHENTICATED_LR 0x08
 #define KEY_CLASS_S2_ACCESS_LR        0x10
+#define KEY_CLASS_S2_NOT_VALID        0x60
 
 #define KEY_CLASS_ALL                 0xFF
 
@@ -42,16 +43,60 @@
  */
 
 /**
- * Fetches public Curve25519 key from NVM and copies it to buf
- * \param[out] buf      Public key
+ * Fetches public Curve25519 key from persistent storage and copies it to buf
+ * This public key must match the private key returned by \ref keystore_private_key_read.
+* \param[out] buf      Public key
  */
 void keystore_public_key_read(uint8_t *buf);
 
+ /**
+  * Fetches the dynamic public Curve25519 key and copies it to buf
+  *
+  * The dynamic public key is used for no grant and unauthenticated key exchanges, where the
+  * full public key (without blanking the initial 16 bits) is sent over the radio.
+  * It must match the private key returned by \ref keystore_dynamic_private_key_read.
+  * NOTE: It is expected that this component can decide to return either the dynamic or the persisted public key
+  * \param[out] buf     Public key
+  */
+void keystore_dynamic_public_key_read(uint8_t *buf);
+
+#ifdef ZWAVE_PSA_SECURE_VAULT
+
 /**
- * Fetches private Curve25519 key from NVM and copies it to buf
+ * Fetches psa keyid on the persisted Curve25519 keypair and copies it to keyid
+ * 
+ * \param[out] keyid    psa keyid on persisted keypair
+ */
+void keystore_keyid_read(uint32_t *keyid);
+
+/**
+ * Fetches psa keyid on the dynamic Curve25519 keypair and copies it to keyid
+ * NOTE: It is expected that this component can decide to return either the dynamic or the persisted keypair keyid
+ * \param[out] keyid 
+ */
+void keystore_dynamic_keyid_read(uint32_t *keyid);
+
+#else
+
+/**
+ * Fetches private Curve25519 key from persistent storage and copies it to buf
+ * This private key must match the public key returned by \ref keystore_public_key_read.
  * \param[out] buf      Private key
  */
 void keystore_private_key_read(uint8_t *buf);
+
+/**
+ * Fetches the dynamic private Curve25519 key and copies it to buf
+ *
+ * The dynamic private key is used for no grant and unauthenticated key exchanges, where the
+ * full public key (without blanking the initial 16 bits) is sent over the radio,
+ * It must match the public key returned by \ref keystore_dynamic_public_key_read.
+  * NOTE: It is expected that this component can decide to return either the dynamic or the persisted private key
+ * \param[out] buf      Private key
+ */
+void keystore_dynamic_private_key_read(uint8_t *buf);
+
+#endif
 
 /**
  * Fetches network key from NVM and copies it to buf

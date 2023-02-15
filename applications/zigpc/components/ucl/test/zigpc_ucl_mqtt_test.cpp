@@ -74,6 +74,72 @@ void test_mqtt_parse_unid_sanity(void)
   TEST_ASSERT_EQUAL_HEX64(0x0D0E0AAD0B0E0E0F, eui64);
 }
 
+void test_parse_endpoint(void)
+{
+    sl_status_t status = SL_STATUS_OK;
+    std::string endpoint_str = "ep001";
+    zigbee_endpoint_id_t endpoint = 0;
+
+    status = zigpc_ucl::mqtt::parse_endpoint(endpoint_str,endpoint);
+
+    TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+    TEST_ASSERT_EQUAL_HEX(1, endpoint);
+}
+
+void  test_parse_topic_eui64(void)
+{
+    std::string topic = "ucl/by-unid/zb-1234567812345678/ep1/OnOff/DoThings";
+    zigbee_eui64_uint_t eui64;
+    sl_status_t status = zigpc_ucl::mqtt::parse_topic_eui64(topic, eui64);
+    TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+    TEST_ASSERT_EQUAL_HEX(0x1234567812345678 , eui64);
+}
+
+void  test_parse_topic_endpoint(void)
+{
+    std::string topic = "ucl/by-unid/zb-1234567812345678/ep1/OnOff/DoThings";
+    zigbee_endpoint_id_t endpoint;
+    sl_status_t status = zigpc_ucl::mqtt::parse_topic_endpoint(topic, endpoint);
+    TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+    TEST_ASSERT_EQUAL_HEX(1,endpoint );
+}
+
+void  test_parse_topic_cluster(void)
+{
+    std::string topic = "ucl/by-unid/zb-1234567812345678/ep1/OnOff/DoThings";
+    std::string cluster_name;
+    sl_status_t status = zigpc_ucl::mqtt::parse_topic_cluster(topic, cluster_name);
+    TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+    TEST_ASSERT_EQUAL_STRING("OnOff",cluster_name.c_str() );
+}
+
+void  test_parse_binding(void)
+{
+    const std::string topic = "ucl/by-unid/zb-1234567812345678/ep1/Binding/Commands/Bind"; 
+    const std::string payload = "{\"ClusterName\":\"OnOff\",\"DestinationUnid\":\"zb-2345678123456789\",\"DestinationEp\":2}";
+    zigbee_eui64_uint_t source_eui64 = 0;
+    zigbee_endpoint_id_t source_ep =0 ;
+    std::string cluster_name = "";
+    zigbee_eui64_uint_t dest_eui64 = 0;
+    zigbee_endpoint_id_t dest_ep = 0;
+
+    sl_status_t status = zigpc_ucl::mqtt::parse_binding(
+                topic, 
+                payload, 
+                source_eui64,
+                source_ep,
+                cluster_name,
+                dest_eui64,
+                dest_ep);
+
+    TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+    TEST_ASSERT_EQUAL_HEX(0x1234567812345678, source_eui64);
+    TEST_ASSERT_EQUAL_HEX(1, source_ep);
+    TEST_ASSERT_EQUAL_STRING("OnOff",cluster_name.c_str());
+    TEST_ASSERT_EQUAL_HEX(0x2345678123456789, dest_eui64);
+    TEST_ASSERT_EQUAL_HEX(2, dest_ep);
+}
+
 void test_mqtt_parse_unid_should_detect_invalid_signature(void)
 {
   // ACT

@@ -383,7 +383,7 @@ class attribute
    */
   bool is_valid() const
   {
-    return _n != ATTRIBUTE_STORE_INVALID_NODE;
+    return attribute_store_node_exists(_n);
   }
 
   /**

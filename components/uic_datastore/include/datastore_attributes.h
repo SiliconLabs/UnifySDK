@@ -33,11 +33,30 @@
 #include <stdbool.h>
 #include "sl_status.h"
 
+/**
+ * @brief Maximum length that the value (desired or reported) of an attribute
+ * can take (in bytes)
+ */
+#define DATASTORE_ATTRIBUTE_VALUE_SIZE 255
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef uint32_t datastore_attribute_id_t;
+
+/**
+ * @brief Struct used to store all the data associated to an attribute.
+ */
+typedef struct _datastore_attribute_ {
+  datastore_attribute_id_t id;
+  uint32_t type;
+  datastore_attribute_id_t parent_id;
+  uint8_t reported_value[DATASTORE_ATTRIBUTE_VALUE_SIZE];
+  uint8_t reported_value_size;
+  uint8_t desired_value[DATASTORE_ATTRIBUTE_VALUE_SIZE];
+  uint8_t desired_value_size;
+} datastore_attribute_t;
 
 /**
  * @brief Store an attribute in the persistent datastore.
@@ -107,6 +126,24 @@ sl_status_t datastore_fetch_attribute(const datastore_attribute_id_t id,
                                       uint8_t *reported_value_size,
                                       uint8_t *desired_value,
                                       uint8_t *desired_value_size);
+
+/**
+ * @brief Fetch all attributes from the datastore.
+ *
+ * Invoking this function will initialize an iteration to a SQL query retrieving
+ * all attributes from the SQLite database
+ *
+ * This function must be invoked repeatedly until it returns SL_STATUS_OK or
+ * SL_STATUS_FAIL
+ *
+ * @param attribute           Pointer to copy the data received from the SQLite
+ *                            database
+ *
+ * @returns SL_STATUS_OK if it was the last row and there is no more data.
+ * @returns SL_STATUS_IN_PROGRESS if data was copied to the pointer and an iteration is ongoing.
+ * @returns SL_STATUS_FAIL if an error happened
+ */
+sl_status_t datastore_fetch_all_attributes(datastore_attribute_t *attribute);
 
 /**
  * @brief Fetch the child of an attribute from the persistent datastore.

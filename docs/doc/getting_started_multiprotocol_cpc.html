@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multiprotocol Setup &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -69,6 +74,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -100,7 +106,7 @@ to set up your Raspberry Pi 4 and install the Unify Host SDK Debian packages.</p
 single-protocol Zigbee NCP. This service runs the Unify Framework Zigbee Protocol
 Controller. It can be configured to run with the multiprotocol RCP, as described
 below. For now, stop the service using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl stop uic-zigpc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>uic-zigpc
 </pre></div>
 </div>
 </section>
@@ -121,19 +127,19 @@ connecting the Raspberry Pi to the WSTK with a USB cable, verify that the
 <h2>CPCd Setup<a class="headerlink" href="#cpcd-setup" title="Permalink to this heading"></a></h2>
 <p>CPCd must be running before any of the protocol services can be started.
 Start the <code class="docutils literal notranslate"><span class="pre">uic-cpcd</span></code> service using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start uic-cpcd
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-cpcd
 </pre></div>
 </div>
 <p>Check to make sure it is running and successfully connected to the RCP:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl status uic-cpcd
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-cpcd
 </pre></div>
 </div>
 <p>If the connection was successful you will see the following lines at the end
 of the CPCd logs:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Feb <span class="m">14</span> <span class="m">12</span>:35:25 raspberrypi cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>: <span class="o">[</span><span class="m">12</span>:35:24:783<span class="o">]</span> Info : Daemon startup was successful. Waiting <span class="k">for</span> client connections
-Feb <span class="m">14</span> <span class="m">12</span>:35:25 raspberrypi cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>: <span class="o">[</span><span class="m">12</span>:35:24:863<span class="o">]</span> Info : Client is using library v2
-Feb <span class="m">14</span> <span class="m">12</span>:35:25 raspberrypi cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>: <span class="o">[</span><span class="m">12</span>:35:24:878<span class="o">]</span> Info : Opened connection socket <span class="k">for</span> ep#1
-Feb <span class="m">14</span> <span class="m">12</span>:35:25 raspberrypi cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>: <span class="o">[</span><span class="m">12</span>:35:24:878<span class="o">]</span> Info : Endpoint socket <span class="c1">#1: Client connected. 1 connections</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Feb<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">12</span>:35:25<span class="w"> </span>raspberrypi<span class="w"> </span>cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>:<span class="w"> </span><span class="o">[</span><span class="m">12</span>:35:24:783<span class="o">]</span><span class="w"> </span>Info<span class="w"> </span>:<span class="w"> </span>Daemon<span class="w"> </span>startup<span class="w"> </span>was<span class="w"> </span>successful.<span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>client<span class="w"> </span>connections
+Feb<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">12</span>:35:25<span class="w"> </span>raspberrypi<span class="w"> </span>cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>:<span class="w"> </span><span class="o">[</span><span class="m">12</span>:35:24:863<span class="o">]</span><span class="w"> </span>Info<span class="w"> </span>:<span class="w"> </span>Client<span class="w"> </span>is<span class="w"> </span>using<span class="w"> </span>library<span class="w"> </span>v2
+Feb<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">12</span>:35:25<span class="w"> </span>raspberrypi<span class="w"> </span>cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>:<span class="w"> </span><span class="o">[</span><span class="m">12</span>:35:24:878<span class="o">]</span><span class="w"> </span>Info<span class="w"> </span>:<span class="w"> </span>Opened<span class="w"> </span>connection<span class="w"> </span>socket<span class="w"> </span><span class="k">for</span><span class="w"> </span>ep#1
+Feb<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">12</span>:35:25<span class="w"> </span>raspberrypi<span class="w"> </span>cpcd<span class="o">[</span><span class="m">8170</span><span class="o">]</span>:<span class="w"> </span><span class="o">[</span><span class="m">12</span>:35:24:878<span class="o">]</span><span class="w"> </span>Info<span class="w"> </span>:<span class="w"> </span>Endpoint<span class="w"> </span>socket<span class="w"> </span><span class="c1">#1: Client connected. 1 connections</span>
 </pre></div>
 </div>
 <p>If the connection failed, make sure the proper RCP image and bootloader are
@@ -147,7 +153,7 @@ and there are security error messages in the logs, there may be a problem with
 the binding keys. If this is the case, the best solution is to
 delete the binding keys on the host and the RCP and restart the <code class="docutils literal notranslate"><span class="pre">uic-cpcd</span></code>
 service. To delete the host binding key:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo rm /var/lib/uic/binding-key.key
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>rm<span class="w"> </span>/var/lib/uic/binding-key.key
 </pre></div>
 </div>
 <p>(Note that the location of the host binding key differs in the Unify Host SDK
@@ -164,11 +170,11 @@ for security reasons. For more information, see the <a class="reference internal
 <section id="zigbeed-and-socat">
 <h3>Zigbeed and Socat<a class="headerlink" href="#zigbeed-and-socat" title="Permalink to this heading"></a></h3>
 <p>Start the zigbeed service using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start uic-zigbeed
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-zigbeed
 </pre></div>
 </div>
 <p>Verify that it is active:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl status uic-zigbeed
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-zigbeed
 </pre></div>
 </div>
 <p>If there are problems, make sure that CPCd is properly connected to the RCP.</p>
@@ -190,11 +196,11 @@ the correct PTY device name.</p>
 and ZigPC.</p>
 <p>Z3Gateway is the traditional Zigbee sample gateway application. Start it as
 follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo /usr/bin/Z3Gateway -p /dev/ttyZigbeeNCP
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>/usr/bin/Z3Gateway<span class="w"> </span>-p<span class="w"> </span>/dev/ttyZigbeeNCP
 </pre></div>
 </div>
 <p>ZigPC is the Unify Framework’s Zigbee Protocol Controller.  Start it like this:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo /usr/bin/zigpc --log.level d --zigpc.serial /dev/ttyZigbeeNCP --zigpc.datastore_file my_test.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>/usr/bin/zigpc<span class="w"> </span>--log.level<span class="w"> </span>d<span class="w"> </span>--zigpc.serial<span class="w"> </span>/dev/ttyZigbeeNCP<span class="w"> </span>--zigpc.datastore_file<span class="w"> </span>my_test.db
 </pre></div>
 </div>
 <p>In both cases, if the host application successfully connects to zigbeed,
@@ -203,14 +209,17 @@ a CLI prompt will appear.</p>
 </section>
 <section id="openthread-border-router">
 <h2>OpenThread Border Router<a class="headerlink" href="#openthread-border-router" title="Permalink to this heading"></a></h2>
-<p>To run the OpenThread Border Router (OTBR), start the <code class="docutils literal notranslate"><span class="pre">otbr-agent</span></code> service:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start otbr-agent
+<p>To run the OpenThread Border Router (OTBR), start the <code class="docutils literal notranslate"><span class="pre">uic-otbr</span></code> service:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-otbr
 </pre></div>
 </div>
-<p>As usual, verify that it is running using <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">status</span></code>. Next, run the
+<p>Verify that the ‘otbr-agent’ service is running using <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">status</span></code>. Next, run the
 <code class="docutils literal notranslate"><span class="pre">ot-ctl</span></code> CLI application.  This connects to OTBR and provides a CLI for
 entering OpenThread commands:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo ot-ctl
+<p>Alternatively, verify that the ‘otbr-web’ service is running using <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">status</span></code>. Next, connect to the host
+using a web browser to access the OTBR Web UI application. This provides a visual interface to configure a set of
+network operations in conjunction with the <code class="docutils literal notranslate"><span class="pre">ot-ctl</span></code> CLI.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>ot-ctl
 </pre></div>
 </div>
 </section>
@@ -229,7 +238,7 @@ started to connect BlueZ to CPCd. See the <a class="reference internal" href="..
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

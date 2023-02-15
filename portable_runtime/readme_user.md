@@ -83,7 +83,7 @@ Failing to specify a serial number, a list of all the connected devices will be 
 ```console
 C:\portable_runtime_windows> unify_portable_cli.exe
 Multiple devices detected and no device string was given.
-Please provide the device serial number of the controller device eg. '-d 440262195'.
+Please provide the device serial number of the controller device eg. '-s 440262195'.
 Here is a list of connected devices:
 deviceCount=2
 device(440262195) {
@@ -142,3 +142,46 @@ user@portable_runtime_environment:~$ unify_portable_cli --device /dev/ttyUSB0.
 
 In case you run into any issues, two log files are produced.
 The two files, `docker.log` and `silink.log`, can be used during support.
+
+## Additional subcommands
+
+The portable runtime CLI includes additonal convenience functions that allow to reflash the application firmwares and query the DSK values of the connected devices.
+
+### Flash application
+
+It is possible to flash the devices with the `flash-app` subcommand. You can reach the help for the subcommand as follows:
+```console
+C:\portable_runtime_windows> unify_portable_cli.exe flash-app -h
+```
+
+The package contains three pre-built application firmwares. It is possible to flashing the pre-built applications using `-n` flag and one of the following names: `switch-on-off`, `multilevel-sensor`, `serial-api`.
+```console
+C:\portable_runtime_windows> unify_portable_cli.exe -s 440262211 flash-app -n switch-on-off
+```
+
+Or a relative path can be specified as an argument for an arbitrary application firmware using the `-p` flag.
+```console
+unify_portable_cli.exe -s 440262176 flash-app -u zwave_soc_switch_on_off-brd2603a-us.hex
+```
+
+If the RF region is not defined by the `--zwave-rf` argument, then default value will be flashed (EU). It is possible to define the rf-region to be flashed to device from the region list: EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.
+```console
+unify_portable_cli.exe --zwave-rf US_LR -s 440262138 flash-app -n switch-on-off
+```
+
+After the application firmware is flashed to the device, the DSK key of the End Device will be printed.
+Note: In case of flashing serial-api, the DSK key is empty.
+
+### Read DSK key
+
+The `read-dsk` subcommand print out the DSK key of a device, specified by the serial number `-s` flag before the subcommand. This DSK value can be used for secure inclusion.
+```console
+C:\portable_runtime_windows> unify_portable_cli.exe -s 440262138 read-dsk
+```
+
+### List connected devices
+
+The `list-devices` subcommand allows to query the serial number and the board number of the connected devices as follows:
+```console
+C:\portable_runtime_windows> unify_portable_cli.exe list-devices
+```

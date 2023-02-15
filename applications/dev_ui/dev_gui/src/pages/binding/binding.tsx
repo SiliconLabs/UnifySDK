@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import * as FiIcons from 'react-icons/fi';
 import * as BsIcons from 'react-icons/bs';
-import { Button, Col, Dropdown, DropdownButton, Modal, Row, Table } from 'react-bootstrap';
+import * as RiIcons from 'react-icons/ri';
+import { Button, Card, Col, Dropdown, DropdownButton, Modal, Row, Table } from 'react-bootstrap';
 import EditableAttribute from '../../components/editable-attribute/editable-attribute';
 import CommandDlg from '../../components/command-dlg/command-dlg';
 import { ClusterTypeAttrs } from '../../cluster-types/cluster-type-attributes';
@@ -200,6 +201,7 @@ export class Binding extends React.Component<BindingProps, BindingState> {
   }
 
   render() {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3>Binding</h3>
@@ -209,77 +211,157 @@ export class Binding extends React.Component<BindingProps, BindingState> {
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table>
-            <thead>
-              <tr>
-                <th className="no-padding-h">
-                  <span className='icon small' onClick={this.toggleIsAllExpanded}>
-                    {this.state.IsAllExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}
-                  </span>
-                </th>
-                <th>Node</th>
-                <th>Bindable Cluster List</th>
-                <th>Table Full</th>
-                <th>Destination</th>
-                <th>Cluster Name</th>
-                <th>&ensp;</th>
-                <th>&ensp;</th>
-              </tr>
-            </thead>
-            <tbody>
+          : (isMobile
+            ? <div className='table-content'>
               {[...this.state.List.values()].map((item: any, index: number) => {
                 let isOffline = item.Node.NetworkStatus === "Offline" || item.Node.NetworkStatus === "Unavailable";
+                let className = isOffline ? "disabled" : "";
                 let commands = item.Node.ep[item.EndPoint].Clusters.Binding.SupportedCommands && item.Node.ep[item.EndPoint].Clusters.Binding.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes");
                 return (
-                  <Fragment key={index}>
-                    <Tooltip key={index} title={isOffline ? "Node is Offline" : ""}>
-                      <tr className={isOffline ? "disabled" : ""}>
-                        <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1} className="no-padding-h">
-                          <span className='icon small' onClick={() => { item.IsExpanded = !item.IsExpanded; }} hidden={!item.BindingTable?.length}>
-                            {item.IsExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}</span>
-                        </td>
-                        <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1}>
-                          <EditableAttribute Node={item.Node} EpName={item.EndPoint} Cluster={item.Node.ep[item.EndPoint].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
-                            SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={isOffline} />
-                        </td>
-                        <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1}>
-                          {item.BindableClusterList?.join(", ")}
-                        </td>
-                        <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1}>
-                          {item.BindingTableFull === true ? <FiIcons.FiCheck color="#28a745" /> : (item.BindingTableFull === false ? <FiIcons.FiXCircle color="#6c757d" /> : "")}
-                        </td>
-                        {item.BindingTable?.length && item.IsExpanded
-                          ? this.getRow(item, item.BindingTable[0])
-                          : <td colSpan={3} className="cluster-info text-center"><i><b>Binding Table Count:</b> {item.BindingTable?.length || 0}</i></td>
-                        }
-                        <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1} className="padding-v-5">
+                  <Tooltip key={index} title={isOffline ? "Node is Offline" : ""}>
+                    <Card key={index} className="inline margin-v-10">
+                      <Card.Header className='flex'>
+                        <div className={`col-sm-6 ${className}`}>
+                          <span hidden={!isOffline} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+                          <b>
+                            <EditableAttribute Node={item.Node} EpName={item.EndPoint} Cluster={item.Node.ep[item.EndPoint].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
+                              SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={isOffline} />
+                          </b>
+                        </div>
+                        <div className="col-sm-6 float-right">
                           {commands && commands.length
-                            ? <DropdownButton variant="outline-primary" title="Commands" className="float-right" disabled={isOffline} size="sm">
+                            ? <DropdownButton menuAlign={'right'} variant="outline-primary" title="Commands" className="float-right" disabled={isOffline} size="sm">
                               <Dropdown.Item onClick={this.preBindCommand.bind(this, item)} hidden={commands.indexOf("Bind") === -1}>Bind</Dropdown.Item>
                               <Dropdown.Item onClick={this.preUnBindCommand.bind(this, item)} hidden={commands.indexOf("Unbind") === -1 || !item.BindingTable?.length}>Unbind</Dropdown.Item>
                               <Dropdown.Item onClick={this.preSendCommand.bind(this, item.Node.Unid, item.EndPoint, "BindToProtocolController")} hidden={commands.indexOf("BindToProtocolController") === -1}>Bind To Protocol Controller</Dropdown.Item>
                               <Dropdown.Item onClick={this.preSendCommand.bind(this, item.Node.Unid, item.EndPoint, "UnbindFromProtocolController")} hidden={commands.indexOf("UnbindFromProtocolController") === -1}>Unbind From Protocol Controller</Dropdown.Item>
                             </DropdownButton>
                             : <></>}
-                        </td>
-                      </tr>
-                    </Tooltip>
-                    {
-                      item.BindingTable?.length && item.IsExpanded
-                        ? item.BindingTable.map((cluster: any, clusterIndex: number) => {
-                          if (clusterIndex === 0) return null;
-                          return (
-                            <tr key={`${index}-${clusterIndex}`} className={isOffline ? "disabled" : ""}>
-                              {this.getRow(item, cluster)}
-                            </tr>)
-                        })
-                        : null
-                    }
-                  </Fragment>
-                )
+                        </div>
+                      </Card.Header>
+                      <Card.Body className={className}>
+                        <div className='col-sm-12'>
+                          <div className="col-sm-9 inline"><b><i>Bindable Cluster List: </i></b>{item.BindableClusterList?.join(", ")}</div>
+                          <div className="col-sm-3 inline"><b><i>Table Full: </i></b>{item.BindingTableFull === true ? <FiIcons.FiCheck color="#28a745" /> : (item.BindingTableFull === false ? <FiIcons.FiXCircle color="#6c757d" /> : "")}</div>
+                          <div className='col-sm-12 flex'>
+                            <span className='icon small padding-r-10' onClick={() => { item.IsExpanded = !item.IsExpanded; }} hidden={!item.BindingTable?.length}>
+                              {item.IsExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}</span>
+                            <div className='flex'><b><i>Binding Table Count: </i></b>{item.BindingTable?.length || 0}
+                            </div>
+                          </div>
+                          {
+                            item.BindingTable?.length && item.IsExpanded
+                              ? item.BindingTable.map((cluster: any, clusterIndex: number) => {
+                                return (
+                                  <Card key={clusterIndex} className="inline margin-v-10 small">
+                                    <Card.Header className='flex'>
+                                      <div className="col-sm-6" style={{ color: cluster.color }}><b>{cluster.title}</b></div>
+                                      <div className="col-sm-6 float-right">
+                                        <span hidden={item.Node.ep[item.EndPoint].Clusters.Binding.SupportedCommands?.indexOf("Unbind") === -1} className="float-right">
+                                          <Tooltip title="Unbind">
+                                            <span className="icon">
+                                              <FiIcons.FiTrash2 color="#dc3545" onClick={() => this.sendCommand(item.Node.Unid, item.EndPoint, "Unbind",
+                                                {
+                                                  ClusterName: cluster.ClusterName,
+                                                  DestinationUnid: cluster.DestinationUnid,
+                                                  DestinationEp: cluster.DestinationEp
+                                                }
+                                              )} />
+                                            </span>
+                                          </Tooltip>
+                                        </span>
+                                      </div>
+                                    </Card.Header>
+                                    <Card.Body>
+                                      <div className='col-sm-12'>
+                                        <div className="col-sm-6 inline"><b><i>Destination: </i></b>{`${cluster.DestinationUnid}/ep${cluster.DestinationEp}`}</div>
+                                        <div className="col-sm-6 inline"><b><i>Cluster Name: </i></b>{cluster.ClusterName}</div>
+                                      </div>
+                                    </Card.Body>
+                                  </Card>
+                                )
+                              })
+                              : null
+                          }
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Tooltip>
+                );
               })}
-            </tbody>
-          </Table>
+            </div>
+            : <Table>
+              <thead>
+                <tr>
+                  <th className="no-padding-h">
+                    <span className='icon small' onClick={this.toggleIsAllExpanded}>
+                      {this.state.IsAllExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}
+                    </span>
+                  </th>
+                  <th>Node</th>
+                  <th>Bindable Cluster List</th>
+                  <th>Table Full</th>
+                  <th>Destination</th>
+                  <th>Cluster Name</th>
+                  <th>&ensp;</th>
+                  <th>&ensp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...this.state.List.values()].map((item: any, index: number) => {
+                  let isOffline = item.Node.NetworkStatus === "Offline" || item.Node.NetworkStatus === "Unavailable";
+                  let commands = item.Node.ep[item.EndPoint].Clusters.Binding.SupportedCommands && item.Node.ep[item.EndPoint].Clusters.Binding.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes");
+                  return (
+                    <Fragment key={index}>
+                      <Tooltip key={index} title={isOffline ? "Node is Offline" : ""}>
+                        <tr className={isOffline ? "disabled" : ""}>
+                          <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1} className="no-padding-h">
+                            <span className='icon small' onClick={() => { item.IsExpanded = !item.IsExpanded; }} hidden={!item.BindingTable?.length}>
+                              {item.IsExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}</span>
+                          </td>
+                          <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1}>
+                            <EditableAttribute Node={item.Node} EpName={item.EndPoint} Cluster={item.Node.ep[item.EndPoint].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
+                              SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={isOffline} />
+                          </td>
+                          <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1}>
+                            {item.BindableClusterList?.join(", ")}
+                          </td>
+                          <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1}>
+                            {item.BindingTableFull === true ? <FiIcons.FiCheck color="#28a745" /> : (item.BindingTableFull === false ? <FiIcons.FiXCircle color="#6c757d" /> : "")}
+                          </td>
+                          {item.BindingTable?.length && item.IsExpanded
+                            ? this.getRow(item, item.BindingTable[0])
+                            : <td colSpan={3} className="cluster-info text-center"><i><b>Binding Table Count:</b> {item.BindingTable?.length || 0}</i></td>
+                          }
+                          <td rowSpan={(item.IsExpanded && item.BindingTable?.length) || 1} className="padding-v-5">
+                            {commands && commands.length
+                              ? <DropdownButton menuAlign={'right'} variant="outline-primary" title="Commands" className="float-right" disabled={isOffline} size="sm">
+                                <Dropdown.Item onClick={this.preBindCommand.bind(this, item)} hidden={commands.indexOf("Bind") === -1}>Bind</Dropdown.Item>
+                                <Dropdown.Item onClick={this.preUnBindCommand.bind(this, item)} hidden={commands.indexOf("Unbind") === -1 || !item.BindingTable?.length}>Unbind</Dropdown.Item>
+                                <Dropdown.Item onClick={this.preSendCommand.bind(this, item.Node.Unid, item.EndPoint, "BindToProtocolController")} hidden={commands.indexOf("BindToProtocolController") === -1}>Bind To Protocol Controller</Dropdown.Item>
+                                <Dropdown.Item onClick={this.preSendCommand.bind(this, item.Node.Unid, item.EndPoint, "UnbindFromProtocolController")} hidden={commands.indexOf("UnbindFromProtocolController") === -1}>Unbind From Protocol Controller</Dropdown.Item>
+                              </DropdownButton>
+                              : <></>}
+                          </td>
+                        </tr>
+                      </Tooltip>
+                      {
+                        item.BindingTable?.length && item.IsExpanded
+                          ? item.BindingTable.map((cluster: any, clusterIndex: number) => {
+                            if (clusterIndex === 0) return null;
+                            return (
+                              <tr key={`${index}-${clusterIndex}`} className={isOffline ? "disabled" : ""}>
+                                {this.getRow(item, cluster)}
+                              </tr>)
+                          })
+                          : null
+                      }
+                    </Fragment>
+                  )
+                })}
+              </tbody>
+            </Table>
+          )
         }
 
         <CommandDlg ref={this.changeCommandDlg}

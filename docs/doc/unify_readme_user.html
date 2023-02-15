@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unify Host SDK User guide &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -68,6 +73,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -95,16 +101,16 @@ For a having a general setup running, it assumes you have gone over the <a class
 Details about each application can be found in the application specific user guides.</p>
 <section id="running-using-systemd">
 <h2>Running Using Systemd<a class="headerlink" href="#running-using-systemd" title="Permalink to this heading"></a></h2>
-<p>Normally, the Unify components should be run as a service. When the debian packages
+<p>Normally, the Unify components should be run as a service. When the Debian packages
 are installed they automatically enables themselves as systemd services.</p>
 <p>The the components can be started and stopped using the <code class="docutils literal notranslate"><span class="pre">systemctl</span></code> command (see systemctl
 linux manual for details).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start uic-&lt;component-name&gt;
-sudo systemctl stop uic-&lt;component-name&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-&lt;component-name&gt;
+sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>uic-&lt;component-name&gt;
 </pre></div>
 </div>
 <p>To see the logs of the the components when it runs as a service, use the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>journalctl -u uic-&lt;component-name&gt;.service
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>journalctl<span class="w"> </span>-u<span class="w"> </span>uic-&lt;component-name&gt;.service
 </pre></div>
 </div>
 </section>
@@ -118,19 +124,19 @@ different ways.</p>
 <p>The logging of each unify component can be controlled by the two common
 configuration parameters, <strong>log.level</strong> and <strong>log.tag_level</strong>-</p>
 <p>When a component starts, the log is printed to stdout, as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>+ <span class="m">2020</span>-11-11 <span class="m">14</span>:18:52:276827 &lt;d&gt; <span class="o">[</span>sl_log<span class="o">]</span> Setting log level to debug
-+ <span class="m">2020</span>-11-11 <span class="m">14</span>:18:52:277573 &lt;d&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: UIC Signal Handler
-+ <span class="m">2020</span>-11-11 <span class="m">14</span>:18:52:277631 &lt;d&gt; <span class="o">[</span>mqtt_client<span class="o">]</span> Constructing new mqtt_client instance.
-+ <span class="m">2020</span>-11-11 <span class="m">14</span>:18:52:277696 &lt;d&gt; <span class="o">[</span>mqtt_wrapper_mosquitto<span class="o">]</span> Initializing Mosquitto library.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>+<span class="w"> </span><span class="m">2020</span>-11-11<span class="w"> </span><span class="m">14</span>:18:52:276827<span class="w"> </span>&lt;d&gt;<span class="w"> </span><span class="o">[</span>sl_log<span class="o">]</span><span class="w"> </span>Setting<span class="w"> </span>log<span class="w"> </span>level<span class="w"> </span>to<span class="w"> </span>debug
++<span class="w"> </span><span class="m">2020</span>-11-11<span class="w"> </span><span class="m">14</span>:18:52:277573<span class="w"> </span>&lt;d&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>UIC<span class="w"> </span>Signal<span class="w"> </span>Handler
++<span class="w"> </span><span class="m">2020</span>-11-11<span class="w"> </span><span class="m">14</span>:18:52:277631<span class="w"> </span>&lt;d&gt;<span class="w"> </span><span class="o">[</span>mqtt_client<span class="o">]</span><span class="w"> </span>Constructing<span class="w"> </span>new<span class="w"> </span>mqtt_client<span class="w"> </span>instance.
++<span class="w"> </span><span class="m">2020</span>-11-11<span class="w"> </span><span class="m">14</span>:18:52:277696<span class="w"> </span>&lt;d&gt;<span class="w"> </span><span class="o">[</span>mqtt_wrapper_mosquitto<span class="o">]</span><span class="w"> </span>Initializing<span class="w"> </span>Mosquitto<span class="w"> </span>library.
 </pre></div>
 </div>
 <p>The general log format is as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;timestamp&gt; &lt;severity&gt; <span class="o">[</span>tag<span class="o">]</span> &lt;message&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;timestamp&gt;<span class="w"> </span>&lt;severity&gt;<span class="w"> </span><span class="o">[</span>tag<span class="o">]</span><span class="w"> </span>&lt;message&gt;
 </pre></div>
 </div>
 <p>The log level can be set globally and per tag.</p>
 <p>For example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc  --log.level i --log.tag_level uic_component_fixtures:d,mqtt_client:d
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w">  </span>--log.level<span class="w"> </span>i<span class="w"> </span>--log.tag_level<span class="w"> </span>uic_component_fixtures:d,mqtt_client:d
 </pre></div>
 </div>
 <p>This will set the global log level to info but it enables the debug on the two
@@ -148,7 +154,7 @@ This file contains several parameters, but we only need a few. For detailed desc
 Also, you should know there are two logs storages in Linux: <strong>persistent</strong> and <strong>volatile</strong>. Settings for each of them are configured separately.
 Parameters, started with <code class="docutils literal notranslate"><span class="pre">System</span></code> applies to persistent storage, located in <code class="docutils literal notranslate"><span class="pre">/var/log/</span></code>.
 Parameters, started with <code class="docutils literal notranslate"><span class="pre">Runtime</span></code> applies to volatile storage, located in <code class="docutils literal notranslate"><span class="pre">/run/log/journal</span></code>.</p>
-<table class="docutils align-default">
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
@@ -192,7 +198,7 @@ found <a class="reference external" href="https://manpages.debian.org/stretch/lo
 <section id="setting-up-mosquitto">
 <h2>Setting up Mosquitto<a class="headerlink" href="#setting-up-mosquitto" title="Permalink to this heading"></a></h2>
 <p>The Unify framework need to the mosquitto MQTT broker to work. For this reason
-mosquitto is a dependency of all the provided debian packages. The Unify
+mosquitto is a dependency of all the provided Debian packages. The Unify
 framework works with the default mosquitto installation but it may be
 desireable to change the mosquito broker installation, eg. to enable TLS
 support.</p>
@@ -202,14 +208,14 @@ on two different ports. For example, in the following mosquitto.conf, Mosquitto 
 will accept non-TLS communication on port 1883.</p>
 <section id="mosquitto-conf">
 <h3>mosquitto.conf<a class="headerlink" href="#mosquitto-conf" title="Permalink to this heading"></a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>listener <span class="m">1883</span>
-allow_anonymous <span class="nb">true</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>listener<span class="w"> </span><span class="m">1883</span>
+allow_anonymous<span class="w"> </span><span class="nb">true</span>
 
-listener <span class="m">8883</span>
-cafile ca/ca.crt
-certfile broker/broker.crt
-keyfile broker/broker.key
-require_certificate <span class="nb">true</span>
+listener<span class="w"> </span><span class="m">8883</span>
+cafile<span class="w"> </span>ca/ca.crt
+certfile<span class="w"> </span>broker/broker.crt
+keyfile<span class="w"> </span>broker/broker.key
+require_certificate<span class="w"> </span><span class="nb">true</span>
 </pre></div>
 </div>
 <p>Having the config options: <code class="docutils literal notranslate"><span class="pre">&quot;cafile&quot;</span> <span class="pre">(client/ca.crt)</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;certfile&quot;</span> <span class="pre">(broker/broker.crt)</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;keyfile&quot;</span> <span class="pre">(broker/broker.key)</span></code> in Mosquitto Broker
@@ -219,21 +225,21 @@ provided to create test certificates, for a TLS connection between the Unify com
 <blockquote>
 <div><p>WARNING: Don’t use this this script in making production certificates</p>
 </div></blockquote>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scripts/tls-certificates-generation.sh &lt;broker IP/hostname&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scripts/tls-certificates-generation.sh<span class="w"> </span>&lt;broker<span class="w"> </span>IP/hostname&gt;
 </pre></div>
 </div>
 <p><em>localhost</em> may be provided when the MQTT broker and Unify Components are running on the same machine. The script will output the following files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ tree .
-<span class="p">|</span> broker
-   <span class="p">|</span> broker.crt
-   <span class="p">|</span> broker.key
-<span class="p">|</span> ca
-   <span class="p">|</span> ca.crt
-   <span class="p">|</span> ca.key
-   <span class="p">|</span> ca.srl
-<span class="p">|</span> client
-    <span class="p">|</span> client.crt
-    <span class="p">|</span> client.key
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree<span class="w"> </span>.
+<span class="p">|</span><span class="w"> </span>broker
+<span class="w">   </span><span class="p">|</span><span class="w"> </span>broker.crt
+<span class="w">   </span><span class="p">|</span><span class="w"> </span>broker.key
+<span class="p">|</span><span class="w"> </span>ca
+<span class="w">   </span><span class="p">|</span><span class="w"> </span>ca.crt
+<span class="w">   </span><span class="p">|</span><span class="w"> </span>ca.key
+<span class="w">   </span><span class="p">|</span><span class="w"> </span>ca.srl
+<span class="p">|</span><span class="w"> </span>client
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>client.crt
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>client.key
 </pre></div>
 </div>
 <p>Each Unify component must use the <em>mqtt.cafile</em>, <em>mqtt.certfile</em> and <em>mqtt.keyfile</em> options
@@ -262,7 +268,7 @@ information about using this interface.</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

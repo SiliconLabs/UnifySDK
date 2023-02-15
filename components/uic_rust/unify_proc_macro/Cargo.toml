@@ -9,7 +9,7 @@ description = "unify proc macros"
 [dependencies]
 quote="1.0.15"
 syn={version = "*", features = ["full"]}
-proc-macro2="*"
+proc-macro2="1.0.49"
 
 [lib]
 proc-macro = true

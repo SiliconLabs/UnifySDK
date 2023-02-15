@@ -1,0 +1,22 @@
+// Special maps to help controlling the Aeotec Multisensor 7
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE              0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def zwNIF_PROTOCOL_LISTENING 0x0008
+def zwNIF_OPTIONAL_PROTOCOL 0x0009
+
+def aeotec_multisensor_7 ((r'zwMANUFACTURER_ID == 0x0371) & (r'zwPRODUCT_TYPE == 2) & (r'zwPRODUCT_ID == 24))
+
+scope 0 {
+  // The sensor changes its NIF flags if connected to a USB cable
+  // We want to keep the NIF flags as if battery powered, else the
+  // Maximum command delay gets set to 1.
+  r'^.zwNIF_PROTOCOL_LISTENING =
+    if aeotec_multisensor_7 0x53
+    undefined
+
+  r'^.zwNIF_OPTIONAL_PROTOCOL =
+    if aeotec_multisensor_7 0x9C
+    undefined
+}

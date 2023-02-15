@@ -1,3 +1,4 @@
+add_subdirectory(positioning_application_monitoring)
 add_subdirectory(positioning_id)
 
 # Components from GSDK
@@ -24,3 +25,7 @@ target_include_directories(loc
   PRIVATE ${GeckoSDK_ROOT_DIR}/platform/common/inc
 )
 target_link_libraries(loc rtl_lib aoa_util)
+
+target_compile_options(loc
+                       PUBLIC
+                       -Wno-maybe-uninitialized)

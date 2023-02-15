@@ -10,6 +10,7 @@ import { ClusterTypes } from '../../cluster-types/cluster-types';
 import { ClusterViewOverride } from './base-cluster-types';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
+import { Button } from 'react-bootstrap';
 
 //Here you can find icons that can be used to customize you page: https://react-icons.github.io/react-icons/
 //Don`t forgot to check licence if you use something that is not in Licence.txt
@@ -221,7 +222,7 @@ export let ClusterViewOverrides = {
                     let capabilities = item.Attributes?.ColorCapabilities?.Reported;
                     let capabilitiesKeys = capabilities && Object.keys(capabilities);
                     return capabilitiesKeys ? <ul className='padding-l-15'> {capabilitiesKeys.map((i: string, index: number) => {
-                        return <Tooltip title={capabilities[i] ? "Supported": "Not Supported"}><li key={index} className={capabilities[i] ? "supported": "not-supported"}>{i}</li></Tooltip>
+                        return <Tooltip title={capabilities[i] ? "Supported" : "Not Supported"}><li key={index} className={capabilities[i] ? "supported" : "not-supported"}>{i}</li></Tooltip>
                     })}
                     </ul> : "-"
                 }
@@ -534,6 +535,21 @@ export let ClusterViewOverrides = {
                     </Link>
                 </span>
             </Tooltip>,
+        CustomActions: (unid: string, ep: string) => {
+            return <Tooltip title="View/Edit Scenes">
+                <span className="margin-h-5 icon">
+                    <Link to={`/scenes/${unid}/${ep}`}><FiIcons.FiEdit /></Link>
+                </span>
+            </Tooltip>
+        },
+        NavbarItem: {
+            name: 'Scenes',
+            title: 'Scenes',
+            path: '/scenes',
+            icon: <MdIcons.MdOutlineDeveloperBoard />,
+            cName: 'nav-text',
+            subMenu: SideMenu.NodesConfiguration
+        } as NavbarItem
     } as ClusterViewOverride,
     Binding: {
         NodesTooltip: (endpoint: string) =>
@@ -591,5 +607,116 @@ export let ClusterViewOverrides = {
             subMenu: SideMenu.Sensors
         } as NavbarItem,
         IsExpandable: true
-    } as ClusterViewOverride
+    } as ClusterViewOverride,
+    BarrierControl: {
+        ViewTable: [
+            {
+                Name: `Moving State`,
+                Value: (item: any) => item.Attributes?.MovingState?.Reported !== undefined ?
+                    <Tooltip title={item.Attributes.MovingState.Reported}><span className='icon'>
+                        {(item.Attributes.MovingState.Reported === "Opening"
+                            ? <MdIcons.MdLockOpen color="#dc3545" />
+                            : (item.Attributes.MovingState.Reported === "Closing"
+                                ? <MdIcons.MdLockOutline color="#28a745" />
+                                : <AiIcons.AiOutlineStop color="orange" />))}
+                    </span>
+                    </Tooltip>
+                    : "-"
+            },
+            {
+                Name: `Safety Status`,
+                Value: (item: any) => {
+                    let status = item.Attributes?.SafetyStatus?.Reported;
+                    let statusKeys = status && Object.keys(status);
+                    return statusKeys ? <ul className='padding-l-15'> {statusKeys.map((i: string, index: number) => {
+                        return <li key={index}>{i}: {(status[i] === true
+                            ? <FiIcons.FiCheck color="#28a745" />
+                            : <FiIcons.FiXCircle color="#6c757d" />)}</li>
+                    })}
+                    </ul> : "-"
+                }
+            },
+            {
+                Name: `Partial Barrier`,
+                Value: (item: any) => item.Attributes?.Capabilities?.Reported && item.Attributes.Capabilities.Reported.PartialBarrier !== undefined ?
+                    (item.Attributes.Capabilities.Reported.PartialBarrier === true
+                        ? <FiIcons.FiCheck color="#28a745" />
+                        : <FiIcons.FiXCircle color="#6c757d" />)
+                    : "-"
+            },
+            {
+                Name: `Position`,
+                Value: (item: any) => item.Attributes?.BarrierPosition?.Reported ?? "-"
+            }
+        ],
+        NodesTooltip: (endpoint: string) =>
+            <Tooltip title={`Endpoint ${endpoint}: Barrier Control`}>
+                <span className="cursor-default">
+                    <Link to={`/barriercontrol`}>
+                        <MdIcons.MdLockOutline color="#212529" />
+                    </Link>
+                </span>
+            </Tooltip>,
+        NavbarItem: {
+            name: ClusterTypes.BarrierControl,
+            title: 'Barrier Control',
+            path: '/barriercontrol',
+            icon: <MdIcons.MdLockOutline />,
+            cName: 'nav-text',
+            subMenu: SideMenu.Actuators
+        } as NavbarItem,
+        IsExpandable: true
+    } as ClusterViewOverride,
+    WindowCovering: {
+        ViewTable: [
+            {
+                Name: `Type`,
+                Value: (item: any) => item.Attributes?.WindowCoveringType?.Reported ?? "-"
+            },
+            {
+                Name: `Current Lift`,
+                Value: (item: any) => item.Attributes?.CurrentPositionLift?.Reported ?? "-"
+            },
+            {
+                Name: `Current Tilt`,
+                Value: (item: any) => item.Attributes?.CurrentPositionTilt?.Reported ?? "-"
+            },
+            {
+                Name: `Operational`,
+                Value: (item: any) => item.Attributes?.ConfigOrStatus?.Reported?.Operational !== undefined ?
+                    (item.Attributes.ConfigOrStatus.Reported.Operational === true
+                        ? <FiIcons.FiCheck color="#28a745" />
+                        : <FiIcons.FiXCircle color="#6c757d" />)
+                    : "-"
+            },
+            {
+                Name: `Online`,
+                Value: (item: any) => item.Attributes?.ConfigOrStatus?.Reported?.Online !== undefined ?
+                    (item.Attributes.ConfigOrStatus.Reported.Online === true
+                        ? <FiIcons.FiCheck color="#28a745" />
+                        : <FiIcons.FiXCircle color="#6c757d" />)
+                    : "-"
+            }
+        ],
+        NodesTooltip: (endpoint: string, attr: any) => {
+            return (
+                <Tooltip title={`Endpoint ${endpoint}: Window Covering`}>
+                    <span className="cursor-default">
+                        <Link to={`/windowcovering`}>
+                            <MdIcons.MdWindow color="#212529" />
+                        </Link>
+                    </span>
+                </Tooltip>
+            )
+        },
+        NavbarItem: {
+            name: ClusterTypes.WindowCovering,
+            title: 'Window Covering',
+            path: '/windowcovering',
+            icon: <MdIcons.MdWindow />,
+            cName: 'nav-text',
+            subMenu: SideMenu.Actuators
+        } as NavbarItem,
+        IsExpandable: true
+    } as ClusterViewOverride,
 }

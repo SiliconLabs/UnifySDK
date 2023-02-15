@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 #include "attribute_store_defined_attribute_types.h"
-#include "dotdot_attributes_id.h"
+#include "unify_dotdot_defined_attribute_types.h"
 
 #include "zwave_COMMAND_CLASS_BASIC_TARIFF_INFO_attribute_id.h"
 #include "zwave_COMMAND_CLASS_BATTERY_attribute_id.h"

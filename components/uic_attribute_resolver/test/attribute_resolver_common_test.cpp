@@ -15,7 +15,7 @@
 #include "unity.h"
 #include "attribute_resolver_rule.h"
 #include "attribute_resolver_rule_internal.h"
-#include "attribute_resolver_rule_internal.hpp"
+#include "workaround.hpp"
 #include "attribute_resolver.h"
 #include "attribute_resolver_internal.h"
 
@@ -54,6 +54,7 @@ static int test_send_function_call_count                 = 0;
 static int test_abort_function_call_count                = 0;
 static int test_set_function_call_count                  = 0;
 static int test_get_function_call_count                  = 0;
+static int test_get_function_waiting_call_count          = 0;
 static int test_resolution_listener_function_call_count  = 0;
 static int test_set_rule_listener_function_call_count    = 0;
 static int test_get_give_up_listener_function_call_count = 0;
@@ -119,6 +120,14 @@ static sl_status_t test_get_resolution_function(attribute_store_node_t node,
   return get_function_return_code;
 }
 
+static sl_status_t test_get_waiting_resolution_function(
+  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
+{
+  *frame_len = 0;
+  test_get_function_waiting_call_count += 1;
+  return SL_STATUS_IS_WAITING;
+}
+
 static void test_resolution_listener_function(attribute_store_node_t node)
 {
   //sl_log_debug("TEST", "Resolution listener function called %d", node);
@@ -179,7 +188,7 @@ void create_test_attribute_store_network()
 {
   // root ------
   //  |         |
-  //  1-----    8
+  //  10----    8
   //  |     |
   //  2--   3
   //  |  |
@@ -267,6 +276,7 @@ void setUp()
   get_function_return_code                      = SL_STATUS_OK;
   test_set_function_call_count                  = 0;
   test_get_function_call_count                  = 0;
+  test_get_function_waiting_call_count          = 0;
   test_resolution_listener_function_call_count  = 0;
   value                                         = 0;
   expected_value                                = 0;
@@ -289,6 +299,7 @@ void setUp()
   TEST_ASSERT_EQUAL(0, test_send_function_call_count);
   TEST_ASSERT_EQUAL(0, test_set_function_call_count);
   TEST_ASSERT_EQUAL(0, test_get_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_get_function_waiting_call_count);
   TEST_ASSERT_EQUAL(0, test_set_rule_listener_function_call_count);
   TEST_ASSERT_EQUAL(0, test_resolution_listener_function_call_count);
   TEST_ASSERT_EQUAL(0, test_abort_function_call_count);
@@ -1167,6 +1178,50 @@ void test_attribute_resolver_multi_frame_resolution()
   contiki_test_helper_run(1);
 }
 
+void test_attribute_resolver_multi_get_frame_resolution()
+{
+  // Register a rule for type 10
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_10),
+                                   NULL,
+                                   &test_get_resolution_function);
+
+  // Expect a Get resolution, function will return IN_PROGRESS
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_IN_PROGRESS;
+  expected_node_for_resolution = node_10;
+  attribute_store_undefine_reported(node_10);
+  contiki_test_helper_run(0);
+
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  // Simulate a send data complete
+  on_resolver_send_data_complete(RESOLVER_SEND_STATUS_OK_EXECUTION_VERIFIED,
+                                 TEST_TRANSMISSION_TIME,
+                                 node_10,
+                                 RESOLVER_GET_RULE);
+
+  // In progress for get commands will behave like SL_STATUS_OK, we retry after the retry timer.
+  contiki_test_helper_run(1);
+
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  // Now pass the retry timer:
+  contiki_test_helper_run(TEST_TRANSMISSION_TIME + TEST_GET_RETRY_TIMEOUT);
+
+  TEST_ASSERT_EQUAL(2, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(2, test_get_function_call_count);
+  contiki_test_helper_run(1);
+
+  // Set the reported now:
+  value = 34;
+  attribute_store_set_reported(node_10, &value, sizeof(value));
+}
+
 void test_attribute_resolver_multi_frame_no_supervision()
 {
   // Register a rule for type 10
@@ -1843,5 +1898,191 @@ void test_attribute_resumption_listener()
   TEST_ASSERT_EQUAL(5, test_resumption_listener_function_call_count);
   attribute_resolver_resume_node_resolution(attribute_store_get_root());
   TEST_ASSERT_EQUAL(6, test_resumption_listener_function_call_count);
+}
+
+void test_resolver_has_get_set_rule()
+{
+  // register some rules and check if they are reported correctly:
+  TEST_ASSERT_FALSE(
+    attribute_resolver_has_get_rule(attribute_store_get_node_type(node_10)));
+  TEST_ASSERT_FALSE(
+    attribute_resolver_has_set_rule(attribute_store_get_node_type(node_10)));
+
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_10),
+                                   &test_set_resolution_function,
+                                   &test_get_resolution_function);
+
+  TEST_ASSERT_TRUE(
+    attribute_resolver_has_get_rule(attribute_store_get_node_type(node_10)));
+  TEST_ASSERT_TRUE(
+    attribute_resolver_has_set_rule(attribute_store_get_node_type(node_10)));
+
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_10),
+                                   NULL,
+                                   NULL);
+
+  TEST_ASSERT_FALSE(
+    attribute_resolver_has_get_rule(attribute_store_get_node_type(node_10)));
+  TEST_ASSERT_FALSE(
+    attribute_resolver_has_set_rule(attribute_store_get_node_type(node_10)));
+}
+
+void test_attribute_is_waiting_try_again_after_other_resolutions()
+{
+  // Register a Get rule for nodes 10 and 5.
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_10),
+                                   NULL,
+                                   &test_get_resolution_function);
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_5),
+                                   NULL,
+                                   &test_get_waiting_resolution_function);
+
+  // Regular get resolution is to be done for both.
+  // Node 5 gets resolved first as it is deeper in the tree (children first).
+  attribute_store_undefine_reported(node_10);
+  attribute_store_undefine_reported(node_5);
+
+  // Expect a get resolution
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_OK;
+  expected_node_for_resolution = node_10;
+  contiki_test_helper_run(1);
+
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_waiting_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  // Simulate a send data complete
+  on_resolver_send_data_complete(RESOLVER_SEND_STATUS_OK,
+                                 TEST_TRANSMISSION_TIME,
+                                 node_10,
+                                 RESOLVER_GET_RULE);
+  contiki_test_helper_run(1);
+
+  // Now waiting for node_10 to get defined
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_waiting_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  uint8_t value = 1;
+  attribute_store_set_reported(node_10, &value, sizeof(value));
+
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_waiting_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  contiki_test_helper_run(1000);
+
+  // Is waiting means we don't retry until new attribute store events or timeout
+  // happened.
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(2, test_get_function_waiting_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  // Set and unset the reported for node_5: it should trigger the resolver to
+  // give yet another try:
+  attribute_store_set_reported(node_5, &value, sizeof(value));
+  attribute_store_undefine_reported(node_5);
+  contiki_test_helper_run(1);
+
+  // Is waiting means we don't retry until new attribute store events happened.
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(3, test_get_function_waiting_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+}
+
+void test_rule_timeout_for_set_command()
+{
+  // Register a set rule for type 7
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_7),
+                                   &test_set_resolution_function,
+                                   NULL);
+  // Register a get rule for type 9
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_9),
+                                   NULL,
+                                   &test_get_resolution_function);
+
+  // Get the resolver to resolve:
+  value = 1;
+  attribute_store_set_desired(node_7, &value, sizeof(value));
+  attribute_store_undefine_reported(node_9);
+
+  // Expect the set resolution first (node 7)
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_OK;
+  expected_node_for_resolution = node_7;
+
+  contiki_test_helper_run(1);  // execute the set
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_get_function_call_count);
+
+  // Now the resolver is waiting for a rule complete callback. Pretend it never happens
+
+  contiki_test_helper_run(60 * CLOCK_CONF_SECOND - 5);  // Still nothing
+
+  // Expect the resolver to move on and resolve node 9
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_OK;
+  expected_node_for_resolution = node_9;
+
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(node_7, DESIRED_ATTRIBUTE));
+
+  contiki_test_helper_run(5);  // Pass the timeout
+  TEST_ASSERT_EQUAL(2, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(node_7, DESIRED_ATTRIBUTE));
+}
+
+void test_rule_timeout_for_get_command()
+{
+  // Register a get rule for type 7
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_7),
+                                   NULL,
+                                   &test_get_resolution_function);
+  // Register a set rule for type 9
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_9),
+                                   &test_set_resolution_function,
+                                   NULL);
+
+  // Get the resolver to resolve:
+  value = 1;
+  attribute_store_undefine_reported(node_7);
+  attribute_store_set_desired(node_9, &value, sizeof(value));
+
+  // Expect the get resolution first (node 7)
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_OK;
+  expected_node_for_resolution = node_7;
+
+  contiki_test_helper_run(1);  // execute the set
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  // Now the resolver is waiting for a rule complete callback. Pretend it never happens
+  contiki_test_helper_run(60 * CLOCK_CONF_SECOND - 5);  // Still nothing
+
+  // Expect the resolver to move on and resolve node 9
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_OK;
+  expected_node_for_resolution = node_9;
+
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(node_7, REPORTED_ATTRIBUTE));
+
+  contiki_test_helper_run(5);  // Pass the timeout
+  TEST_ASSERT_EQUAL(2, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(node_7, REPORTED_ATTRIBUTE));
 }
 }

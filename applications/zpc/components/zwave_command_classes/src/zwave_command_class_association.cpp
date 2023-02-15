@@ -98,17 +98,9 @@ static sl_status_t
                                &group_count,
                                sizeof(group_count));
 
-  attribute_store_node_t group_node;
-  for (association_group_id_t i = 1; i <= group_count; i++) {
-    group_node = attribute_store_emplace(endpoint_node,
-                                         ATTRIBUTE(GROUP_ID),
-                                         &i,
-                                         sizeof(i));
+  // zwave_command_class_association_on_supported_groupings_update callback
+  // will take care of creating the groups based on the groupings update
 
-    attribute_store_add_if_missing(group_node,
-                                   group_attributes,
-                                   COUNT_OF(group_attributes));
-  }
   // We are done parsing the frame
   return SL_STATUS_OK;
 }
@@ -166,10 +158,41 @@ static sl_status_t zwave_command_class_association_handle_report_command(
   association_set list;
   get_node_id_association_list(bytes, list);
 
-  // Convert back into bytes to save in the attribute store
+  // Check if we just received a "Report To Follow"
+  bool concatenate_with_previous_value = false;
+  reports_to_follow_t previous_reports_to_follow
+    = get_reports_to_follow(group_content_node);
+
+  reports_to_follow_t reports =
+    frame_data[ASSOCIATION_REPORTS_REPORTS_TO_FOLLOW];
+  
+  set_reports_to_follow(group_content_node, reports);
+
+  if (reports < previous_reports_to_follow) {
+    // We received a report with a decrement of a previous Report To Follow
+    // state. Concatenate the value.
+    concatenate_with_previous_value = true;
+  }
+
+  // Convert into an association list:
+  get_node_id_association_list(bytes, list);
+  // Set back into bytes to save it in our attribute store.
   bytes.clear();
   get_association_bytestream(list, bytes);
+
   attribute group(group_content_node);
+  if (concatenate_with_previous_value == true) {
+    association_set existing_list;
+    association_bytes existing_bytes = 
+    group.get<association_bytes>(REPORTED_ATTRIBUTE);
+
+    get_node_id_association_list(existing_bytes, existing_list);
+    association_set merged_list;
+    merge_association_lists(list, existing_list, merged_list);
+    bytes.clear();
+    get_association_bytestream(merged_list, bytes);
+  }
+
   group.set<association_bytes>(REPORTED_ATTRIBUTE, bytes);
 
   for (auto association: list) {
@@ -502,6 +525,33 @@ static void zwave_command_class_association_on_version_attribute_update(
                                  COUNT_OF(attributes));
 }
 
+void zwave_command_class_association_on_supported_groupings_update(
+  attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_ENDPOINT_ID);
+
+  association_group_count_t group_count = 0;
+  attribute_store_get_reported(updated_node, &group_count, sizeof(group_count));
+
+  for (association_group_id_t i = 1; (i <= group_count) && (i != 0); i++) {
+    attribute_store_node_t group_node
+      = attribute_store_emplace(endpoint_node,
+                                ATTRIBUTE(GROUP_ID),
+                                &i,
+                                sizeof(i));
+
+    attribute_store_add_if_missing(group_node,
+                                   group_attributes,
+                                   COUNT_OF(group_attributes));
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute resolutions functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -605,7 +655,8 @@ sl_status_t zwave_command_class_association_set(attribute_store_node_t node,
 
   sl_log_warning(
     LOG_TAG,
-    "Nothing to add or remove from the association group, but they were still "
+    "Nothing to add or remove from the association group, but they were "
+    "still "
     "mismatched. Please use the helper functions to add/remove assocations.");
   attribute_store_log_node(node, false);
   attribute_store_set_desired_as_reported(node);
@@ -669,6 +720,11 @@ sl_status_t zwave_command_class_association_init()
   attribute_store_register_callback_by_type(
     zwave_command_class_association_on_version_attribute_update,
     ATTRIBUTE(VERSION));
+
+  attribute_store_register_callback_by_type_and_state(
+    &zwave_command_class_association_on_supported_groupings_update,
+    ATTRIBUTE(SUPPORTED_GROUPINGS),
+    REPORTED_ATTRIBUTE);
 
   // Tell the Z-Wave Controller that we have to do something on reset
   zwave_controller_register_reset_step(

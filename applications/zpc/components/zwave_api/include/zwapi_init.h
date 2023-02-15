@@ -110,7 +110,7 @@ typedef struct {
   ///< Bitmask of supported FUNC_ID for the Z-Wave API.
   uint8_t supported_bitmask[ZWAPI_MAXIMUM_BITMASK_LENGTH];
   ///< Bitmask of supported subcommands for the setup function.
-  uint8_t supported_setup_bitmask;
+  uint8_t supported_setup_bitmask[ZWAPI_MAXIMUM_BITMASK_LENGTH];
   ///< Current RF Region setting
   zwave_rf_region_t rf_region;
   ///< Z-Wave module capabilities
@@ -350,6 +350,12 @@ bool zwapi_support_command_func(uint8_t func_id);
 /**
  * @brief Check if one of the serial API setup commands is supported.
  *
+ * If the setup command is not bit flag which means it is not part of the one
+ * byte in Z-Wave API Setup Supported Sub Commands flags, then the command will
+ * be checked in Extended Z-Wave API Setup Supported Sub Commands bitmask.
+ * Please note that checking of only one byte of Extended Z-Wave API Setup Supported Sub
+ * Commands bitmask is supported right now.
+ *
  * @param setup_cmd The command from @ref serial_api_setup_cmd_t to check.
  * @returns true if the command is supported, false otherwise.
  *
@@ -491,6 +497,22 @@ sl_status_t zwapi_set_zwave_lr_channel(zwave_lr_channel_t new_channel);
  * @returns true if we are awaiting for it, false otherwise
  */
 bool zwapi_is_awaiting_zwave_api_started();
+
+/**
+ * @brief Sets the value of "awaiting a Z-Wave API started callback"
+ *
+ * @param value
+ * @return true
+ * @return false
+ */
+void zwapi_set_awaiting_zwave_api_started(bool value);
+
+/**
+ * @brief Returns the pointer to the callbacks registered at init.
+ *
+ * @return zwapi_callbacks_t*
+ */
+zwapi_callbacks_t *zwave_api_get_callbacks();
 
 // CLEANUP: Moved form sdk_versioning.h
 /**

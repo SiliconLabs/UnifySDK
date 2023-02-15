@@ -22,7 +22,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <ctr_drbg.h>
 #include <unity.h>
 uint8_t dbgCTRDRBG = 0;
@@ -292,8 +291,8 @@ void test_ctr_dbrg(void)
         size = elen + nlen;
         __data = malloc(size);
         personal = malloc(size);
-        assert(__data);
-        assert(personal);
+        TEST_ASSERT_NOT_NULL(__data);
+        TEST_ASSERT_NOT_NULL(personal);
         d = __data;
         p = personal;
         AJ_HexToRaw(testVector[i].entropy, 2 * elen, d, size);
@@ -317,7 +316,7 @@ void test_ctr_dbrg(void)
         if (rlen) {
             size = rlen;
             __data = malloc(size);
-            assert(__data);
+            TEST_ASSERT_NOT_NULL(__data);
             AJ_HexToRaw(testVector[i].reseed, 2 * rlen, __data, size);
             AES_CTR_DRBG_Reseed(&ctx, __data);
             free(__data);

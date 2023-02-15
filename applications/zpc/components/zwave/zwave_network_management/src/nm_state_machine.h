@@ -2,7 +2,8 @@
 #define NM_STATE_MACHINE_H
 
 //#include <nm_stub.h>
-#include "zwave_network_management_state.h"
+#include "zwave_network_management_types.h"
+
 #include "zwave_network_management.h"
 #include "zwave_network_management_process.h"
 #include "zwapi_protocol_controller.h"
@@ -64,7 +65,7 @@ typedef struct network_mgmt_state {
   sl_status_t status;
 
   zwave_node_info_t node_info;
-  ///True if SmartStart should be enabled after returning to idle.
+  /// True if SmartStart should be enabled after returning to idle.
   bool smart_start_add_mode_enabled;
   /// Configures if we enter SmartStart learn mode when we are alone
   /// in our network and are idle.
@@ -79,6 +80,9 @@ typedef struct network_mgmt_state {
   /// Proxy inclusion step for identifying if the
   /// request inclusion step is INCLUSION or INCLUSION_REPLACE
   uint8_t proxy_inclusion_step;
+
+  /// Whether S0 inclusion/bootstrapping is enabled.
+  bool s0_inclusion_enabled;
 } network_mgmt_state_t;
 
 extern network_mgmt_state_t nms;

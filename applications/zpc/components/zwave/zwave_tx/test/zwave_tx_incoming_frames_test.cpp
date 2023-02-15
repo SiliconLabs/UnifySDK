@@ -12,8 +12,7 @@
  *****************************************************************************/
 // Test includes
 #include "unity.h"
-#include "zwave_tx_incoming_frames.hpp"
-
+#include "workaround.hpp"
 extern "C" {
 
 void test_imcoming_frames()

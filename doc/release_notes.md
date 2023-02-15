@@ -1,8 +1,10 @@
 # Unify Release Notes
 
-Below are descriptions of the changes to our shared components, packaged in the _libuic_ Debian package. These changes affects all applications based on the Unify Host SDK.
+Below are descriptions of the changes to our shared components.
+These changes affects all applications based on the Unify Host SDK.
 
-For the full documentation of this latest release, go to [Unify Host SDK documentation](https://siliconlabs.github.io/UnifySDK).
+For the full documentation of this latest release, go to
+[Unify Host SDK documentation](https://siliconlabs.github.io/UnifySDK).
 
 For the application specific release notes, please follow these links:
 
@@ -21,6 +23,37 @@ For the application specific release notes, please follow these links:
 * [OpenThread Border Router](applications/openthread_border_router/release_notes.md)
 * [Zigbeed](applications/zigbeed/release_notes.md)
 * [Portable Runtime](portable_runtime/release_notes.md)
+
+## [1.3.0] - February 2023
+
+### Added (1.3.0)
+
+* Attribute Mapper new functionalities:
+  * Support for a set of built-in functions that can be used in UAM files.
+  * Support for invididual scope configuration
+  * Support for >= and <= operators
+* MQTT client automatically configure the ApplicationMonitoring Will message when
+  connecting to the broker.
+* Shared Unify ApplicationMonitoring component allowing applications to
+  configure their attributes.
+* Experimental support for using Nix to handle dependencies, eventually allowing us to cut the ties with the build host.
+
+### Changed (1.3.0)
+
+* Reference platform updated to Bullseye 64-bit based Raspberry Pi OS.
+  * _Note_: Migration from a 32-bit installation is not supported.
+* Migrated to Gecko SDK version to v4.2.0.
+* Updated Rust compiler from 1.60 to 1.64.
+* MQTT Client ID configuration is now mandatory for applications, it is used
+  for ApplicationMonitoring and defaults to the application name.
+* The Debian packages libuic*.deb has been renamed to libunify*.deb, to reflect
+  the name of the binary /usr/lib/libunify.so. Be aware that it should replace the
+  old package during upgrade, but it might require a manual reinstall of the packages
+  that depend on it - eg. uic-zpc or uic-zigpc.
+* The shared library *libunify.so* is now also available as a static library *libunify.a*
+  in the development package libunify-dev_*.deb.
+* The Portable Runtime is packaged with the previous release of Unify SDK 1.2.1.
+  * _Note_: The package can be updated by downloading the release artifact `unify_1.3.0_x86_64.zip` and replacing the old package in `./resources/docker-files/`.
 
 ## [1.2.1] - Sep 2022
 

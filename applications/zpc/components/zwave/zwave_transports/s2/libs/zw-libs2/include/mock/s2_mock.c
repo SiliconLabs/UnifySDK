@@ -125,14 +125,14 @@ void S2_send_frame_done_notify(struct S2* ctxt, s2_tx_status_t status, uint16_t 
   MOCK_CALL_COMPARE_INPUT_UINT32(p_mock, ARG1, status);
 }
 #include <stdio.h>
-uint8_t S2_network_key_update(struct S2 *ctx, uint32_t key_id, security_class_t class_id,const network_key_t net_key, uint8_t temp_key_expand)
+uint8_t S2_network_key_update(struct S2 *ctx, uint32_t key_id, security_class_t class_id,const network_key_t net_key, uint8_t temp_key_expand, bool make_keys_persist_se)
 {
   mock_t * p_mock;
 
 //  printf("%p Netkey %x class id %i\n",ctx,net_key[0],class_id);
   MOCK_CALL_RETURN_IF_USED_AS_STUB(1);
   MOCK_CALL_FIND_RETURN_ON_FAILURE(p_mock,0);
-  MOCK_CALL_ACTUAL(p_mock, ctx, class_id, net_key, temp_key_expand);
+  MOCK_CALL_ACTUAL(p_mock, ctx, class_id, net_key, temp_key_expand,make_keys_persist_se);
 
   MOCK_CALL_COMPARE_INPUT_STRUCT_S2(p_mock, ARG0, ctx);
   MOCK_CALL_COMPARE_INPUT_UINT8(p_mock, ARG1, class_id);

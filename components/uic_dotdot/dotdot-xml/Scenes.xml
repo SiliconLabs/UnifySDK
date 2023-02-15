@@ -35,6 +35,18 @@ applicable to this document can be found in the LICENSE.md file.
       <type:maxInclusive value="fff7" />
     </restriction>
   </type:type>
+  <type:type short="SSceneTable" name="SSceneTable" id="22">
+    <restriction>
+       <type:sequence>
+        <field name="SceneID" type="uint16" />
+        <field name="GroupID" type="uint16" min="0" max="65535"/>
+        <field name="SceneName" type="string" />
+        <field name="TransitionTime" type="uint16" />
+        <field name="TransitionTime100ms" type="uint8" />
+        <field name="SceneTableExtensions" type="string"/>
+      </type:sequence>
+    </restriction>
+  </type:type>
 
   <server>
     <attributes>
@@ -52,6 +64,8 @@ applicable to this document can be found in the LICENSE.md file.
           <type:special value="ffffffffffffffff" name="UnknownOrNotConfigured" />
         </restriction>
       </attribute>
+      <!-- Unify SDK attribute extension -->
+      <attribute id="0f01" name="SceneTable" type="SSceneTable" array="true"/>
     </attributes>
     <commands>
       <command id="00" name="AddScene" required="true">
@@ -61,6 +75,7 @@ applicable to this document can be found in the LICENSE.md file.
           <field name="TransitionTime" type="uint16" />
           <field name="SceneName" type="SSceneName" />
           <field name="ExtensionFieldSets" type="SExtensionFieldSetList" array="true" arrayLengthSize="0" />
+          <field name="TransitionTime100ms" type="uint8" />
         </fields>
       </command>
       <command id="01" name="ViewScene" required="true">

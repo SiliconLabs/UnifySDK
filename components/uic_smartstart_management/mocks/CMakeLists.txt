@@ -4,16 +4,11 @@ find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 
 add_library(uic_smartstart_management_mock smartstart_management_mock.cpp)
 
-target_include_directories(uic_smartstart_management PUBLIC
-  .
-  ../include
-  PRIVATE
-  ${nlohmann_json_include}
-)
+target_include_directories(
+  uic_smartstart_management_mock
+  PUBLIC . ../include
+  PRIVATE ${nlohmann_json_include})
 
-target_link_libraries(uic_smartstart_management_mock
-  PRIVATE
-    uic_contiki_platform
-    uic_smartstart_management
-)
-
+# Assuming that the contiki stub will always be used  with the mock here
+target_link_libraries(uic_smartstart_management_mock PRIVATE uic_contiki_stub
+                                                             uic_log)

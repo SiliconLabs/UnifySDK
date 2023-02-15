@@ -10,6 +10,9 @@
     <div id="root"></div>
     <script>
         localStorage.Version = "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV}"
+        localStorage.Patch = "${VERSION_PATCH}"
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+            document.body.classList.add('mobile');
     </script>
 </body>
 

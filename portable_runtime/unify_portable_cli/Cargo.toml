@@ -1,6 +1,6 @@
 [package]
 name = "unify_portable_cli"
-version = "0.0.1"
+version = "0.2.0"
 edition = "2021"
 authors = ["Thomas Bowley <thomas.bowley@silabs.com>"]
 license = "Copyright 2022 Silicon Laboratories Inc. www.silabs.com\nThe licensor of this software is Silicon Laboratories Inc.\nYour use of this software is governed by the terms of Silicon Labs Master Software License Agreement (MSLA) available at www.silabs.com/about-us/legal/master-software-license-agreement.\nThis software is distributed to you in Source Code format and is governed by the sections of the MSLA applicable to Source Code."
@@ -12,3 +12,4 @@ unify_portable_core = { path = "../unify_portable_core" }
 ctrlc = "3.2.2"
 clap = { version = "3.1.17", features = ["derive"] }
 cfg-if = "1.0"
+exitcode = "1.1.2"

@@ -11,13 +11,14 @@
  *
  *****************************************************************************/
 
-#include "zwapi_protocol_mem.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "sl_status.h"
+#include "zwave_node_id_definitions.h"
 
 #ifndef ZWAPI_APPLICATION_NVM_MOCK_FILE
 #define ZWAPI_APPLICATION_NVM_MOCK_FILE "zwapi_protocol_mem.dat"
@@ -26,6 +27,14 @@
 /// Use weak attribute on all functions in mock,
 /// to allow to override funtions in tests
 #define WEAK_ATTRIBUTE __attribute__((weak))
+
+WEAK_ATTRIBUTE sl_status_t zwapi_memory_get_buffer(uint16_t offset,
+                                                   uint8_t *buffer,
+                                                   uint8_t length);
+WEAK_ATTRIBUTE uint8_t zwapi_memory_put_buffer(uint16_t offset,
+                                               const uint8_t *buffer,
+                                               uint16_t length,
+                                               void (*callback_function)(void));
 
 WEAK_ATTRIBUTE int zwapi_memory_get_open_and_seek(unsigned int offset)
 {

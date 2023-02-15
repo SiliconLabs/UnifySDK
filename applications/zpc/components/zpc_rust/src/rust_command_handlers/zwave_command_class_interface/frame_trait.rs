@@ -11,7 +11,10 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-use crate::{zwave_command_classes_sys::sl_status_t, rust_command_handlers::zwave_command_class_definitions::ConnectionInfoTrait};
+use crate::{
+    rust_command_handlers::zwave_command_class_definitions::ConnectionInfoTrait,
+    zwave_command_classes_sys::sl_status_t,
+};
 use unify_sl_status_sys::SL_STATUS_NOT_SUPPORTED;
 /// The [FrameControlSupportTrait] exposes trait for implementing logic handling
 /// support and control of frames. This trait should be used for implementing

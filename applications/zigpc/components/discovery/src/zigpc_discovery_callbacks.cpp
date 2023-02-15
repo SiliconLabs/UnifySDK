@@ -14,7 +14,7 @@
 #include <cinttypes>
 #include <list>
 #include <unordered_map>
-
+#include <string>
 // Unify includes
 #include <sl_log.h>
 

@@ -39,7 +39,7 @@ impl AttributePollTrait for AttributePoll {
             return;
         }
 
-        let ( sender, receiver) = unbounded();
+        let (sender, receiver) = unbounded();
         SENDER
             .set(sender.clone())
             .expect("should only be called once");
@@ -105,6 +105,15 @@ impl AttributePollTrait for AttributePoll {
             sender
                 .clone()
                 .start_send(PollEngineCommand::Enable)
+                .unwrap();
+        }
+    }
+
+    fn print_queue(&self) {
+        if let Some(sender) = SENDER.get() {
+            sender
+                .clone()
+                .start_send(PollEngineCommand::PrintQueue)
                 .unwrap();
         }
     }

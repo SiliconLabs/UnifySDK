@@ -25,11 +25,14 @@
 #include "zigpc_gateway.h"
 #include "zigpc_gateway_notify.h"
 
+#include "attribute_management.h"
 #include "attribute_management_int.h"
 #include "attribute_management_process.h"
 
 #include "zcl_attribute_info.h"
 #include "attribute_map.h"
+
+#include "zigpc_config.h"
 
 static const char LOG_TAG[] = "attribute_management";
 
@@ -90,7 +93,7 @@ PROCESS_THREAD(attribute_management_process, ev, data)
 
   PROCESS_BEGIN();
 
-  etimer_set(&zigpc_attrmgmt_poll_timer, ZIGPC_ATTR_MGMT_POLL_PERIOD_MS);
+  etimer_set(&zigpc_attrmgmt_poll_timer, zigpc_get_config()->attr_polling_rate_ms);
 
   while (1) {
     sl_status_t status = SL_STATUS_INVALID_TYPE;
@@ -152,6 +155,13 @@ PROCESS_THREAD(attribute_management_process, ev, data)
         receive_data->endpoint_id,
         receive_data->cluster_id,
         &receive_data->frame);
+
+      zigpc_attrmgmt_send_delayed_read_command(
+              receive_data->eui64,
+              receive_data->endpoint_id,
+              receive_data->cluster_id,
+              ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES);
+
     } else if ((ev == PROCESS_EVENT_TIMER)
                && (data == &zigpc_attrmgmt_poll_timer)) {
       status = zigpc_attrmgmt_send_poll_attributes();

@@ -91,6 +91,13 @@ uint8_t zigbeeHostGetPrimaryEndpointId(void);
 void zigbeeHostCommandPrintInfo(void);
 
 /**
+ * @brief Sends a command to the geck-sdk
+ * 
+ * @param array Null terminated array containing the command
+ */
+void zigbeeHostSendSlCliCommand(char* array);
+
+/**
  * @brief Populate the list of counters plugin entries into the list paseed
  * in.
  *
@@ -105,6 +112,22 @@ EmberStatus zigbeeHostGetCountersList(uint16_t *const list, size_t count);
  *
  */
 void zigbeeHostClearCounters(void);
+
+/**
+ * @brief get count of active neighbors
+ * 
+ * @return uint8_t number of active neighbors in the neighbors adresse table
+ */
+uint8_t zigbeeHostGetNeighborCount();
+
+/**
+ * @brief Get a specific neighbor from the neighbor address table
+ * 
+ * @param index index of the neighbor
+ * @param eui64 Destination eui64 to copy data to
+ * @return EmberStatus 
+ */
+EmberStatus zigbeeHostGetNeighborEUI64(uint8_t index,EmberEUI64 eui64);
 
 /**
  * @brief Initialize the Trust Center network
@@ -320,17 +343,23 @@ EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
  * zigbee-specific management options. Can be used to configure unicast or multicast
  * bindings. If a unicast binding, groupId should be set to 0
  *
- * @param eui64               Identifier of the Zigbee end device
- * @param endpoint            Identifier of the endpoint on the Zigbee end device.
+ * @param sourceEui64         Identifier of the Zigbee end device
+ * @param sourceEndpoint      Identifier of the endpoint on the Zigbee end device.
  * @param clusterId           Identifier corresponding to the ZCL cluster.
  * @param groupId             Identifier for the groupId (if multicast binding)
+ * @param destEui64           Destination address for the binding 
+ * @param destEndpoint        Destination endpoint for the binding
+ * @param isBindRequest       True if a binding request, otherwise an unbinding request 
  * @return EmberStatus        EMBER_SUCCESS if message is sent successfully,
  * EMBER_NOT_FOUND if the end device EUI64 is not found.
  */
-EmberStatus zigbeeHostInitBinding(const EmberEUI64 eui64,
-                                  uint8_t endpoint,
+EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
+                                  uint8_t sourceEndpoint,
                                   uint16_t clusterId,
-                                  uint16_t groupId);
+                                  uint16_t groupId,
+                                  EmberEUI64 destEui64,
+                                  uint8_t destEndpoint,
+                                  bool isBindRequest);
 
 /**
  * @brief zigbeeHostSendPollingCheckInResponse
@@ -339,7 +368,7 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 eui64,
  *
  * @return EMBER_SUCCESS if the response was sent
 **/
-EmberStatus zigbeeHostSendPollingCheckInResponse(void);
+EmberStatus zigbeeHostSendPollingCheckInResponse(bool startFastPolling);
 
 /**
  * @brief zigbeeHostAddOtaImage

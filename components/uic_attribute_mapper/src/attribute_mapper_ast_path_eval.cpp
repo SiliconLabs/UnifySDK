@@ -11,7 +11,6 @@
  *
  *****************************************************************************/
 
-
 // Includes from this component
 #include "attribute_mapper_ast.hpp"
 #include "attribute_mapper_ast_eval.hpp"
@@ -26,20 +25,21 @@
 namespace ast
 {
 
-  /// hat operator ^ (parent)
-  attribute_store::attribute attribute_path_eval::operator()(const nil& )
-  {
-    return context.parent();
-  }
+/// hat operator ^ (parent)
+attribute_store::attribute attribute_path_eval::operator()(const nil &)
+{
+  return context.parent();
+}
 
-  /// just given by type
-  attribute_store::attribute attribute_path_eval::operator()(const attribute_store_type_t type_id)
-  {
-    last_type_id                  = type_id;
-    attribute_store_node_t new_id = context.child_by_type(type_id);
+/// just given by type
+attribute_store::attribute
+  attribute_path_eval::operator()(const attribute_store_type_t type_id)
+{
+  last_type_id                  = type_id;
+  attribute_store_node_t new_id = context.child_by_type(type_id);
 
-    return attribute_store::attribute(new_id);
-  }
+  return attribute_store::attribute(new_id);
+}
 
 //Evaluates numbers and expressions
 attribute_store::attribute
@@ -55,19 +55,19 @@ attribute_store::attribute
   }
 }
 
-
 // Subscript operator
 attribute_store::attribute attribute_path_eval::operator()(
   const attribute_path_subscript &subscript) const
 {
   eval<uint32_t> evaluator(context);
-  auto index = boost::apply_visitor(evaluator, subscript.index);
+  auto index   = boost::apply_visitor(evaluator, subscript.index);
   auto type_id = boost::apply_visitor(evaluator, subscript.identifier);
-  if (index && type_id) {    
+  if (index && type_id) {
     for (attribute_store::attribute child:
-          context.children(static_cast<uint32_t>(type_id.value()))) {
+         context.children(static_cast<uint32_t>(type_id.value()))) {
       result_type_t value = attribute_store_get_reported_number(child);
-      if (static_cast<uint32_t>(value) == static_cast<uint32_t>(index.value())) {
+      if (static_cast<uint32_t>(value)
+          == static_cast<uint32_t>(index.value())) {
         return child;
       }
     }

@@ -24,6 +24,23 @@
 #include "zigbee_host.h"
 #include "zigbee_host_common.h"
 
+//The binding response does not contain cluster information
+//Use the sequence number and buffer outgoing messages
+#define MAX_BUFFER_SIZE 256
+
+extern struct zigbeeHostState z3gwState;
+
+typedef struct {
+    EmberEUI64 sourceEui64;
+    uint8_t sourceEndpoint;
+    uint16_t clusterId;
+    EmberEUI64 destEui64;
+    uint8_t destEndpoint;
+    bool isBindResponse;
+} binding_entry_t;
+
+static binding_entry_t binding_buffer[MAX_BUFFER_SIZE];
+
 bool emberAfReportAttributesCallback(EmberAfClusterId clusterId,
                                      uint8_t *buffer,
                                      uint16_t bufLen)
@@ -33,8 +50,8 @@ bool emberAfReportAttributesCallback(EmberAfClusterId clusterId,
   }
 
   EmberStatus status = EMBER_SUCCESS;
-  EmberEUI64 sourceEui64;
-  uint8_t sourceEndpoint;
+  EmberEUI64 sourceEui64 = {0};
+  uint8_t sourceEndpoint = 0;
 
   if (!ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks,
                                    onReportedAttributeChange)) {
@@ -81,9 +98,9 @@ bool emberAfReadAttributesResponseCallback(EmberAfClusterId clusterId,
   }
 
   EmberStatus status = EMBER_SUCCESS;
-  EmberEUI64 sourceEui64;
-  uint8_t sourceEndpoint;
-  uint8_t sourceCommandId;
+  EmberEUI64 sourceEui64 = {0};
+  uint8_t sourceEndpoint = 0;
+  uint8_t sourceCommandId = 0;
 
   if (!ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks,
                                    onReadAttributesResponse)) {
@@ -133,9 +150,9 @@ bool emberAfConfigureReportingResponseCallback(EmberAfClusterId clusterId,
   }
 
   EmberStatus status = EMBER_SUCCESS;
-  EmberEUI64 sourceEui64;
-  uint8_t sourceEndpoint;
-  uint8_t sourceCommandId;
+  EmberEUI64 sourceEui64 = {0};
+  uint8_t sourceEndpoint = 0;
+  uint8_t sourceCommandId = 0;
 
   if (!ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks,
                                    onConfigureReportingResponse)) {
@@ -216,24 +233,22 @@ EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
  * END OF Globals defined in CLI-related functions needed by ZigbeeHost
  */
 
-EmberStatus zigbeeHostInitBinding(const EmberEUI64 eui64,
-                                  uint8_t endpoint,
+EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
+                                  uint8_t sourceEndpoint,
                                   uint16_t clusterId,
-                                  uint16_t group_id)
+                                  uint16_t group_id,
+                                  EmberEUI64 destEui64,
+                                  uint8_t destEndpoint,
+                                  bool isBindRequest)
 {
-  if (eui64 == NULL) {
+  if ((sourceEui64 == NULL) || (destEui64 == NULL)) {
     return EMBER_BAD_ARGUMENT;
   }
-
-  EmberEUI64 gatewayEui64;
-  EmberNodeId targetNodeId;
-
-  // Get our eui64
-  zigbeeHostGetEui64(gatewayEui64);
-  uint8_t gatewayEndpoint = emberAfPrimaryEndpointForCurrentNetworkIndex();
+  
+  EmberNodeId targetNodeId = 0;
 
   // Get target NodeId
-  EmberStatus status = zigbeeHostGetAddressTableEntry(eui64, &targetNodeId);
+  EmberStatus status = zigbeeHostGetAddressTableEntry(sourceEui64, &targetNodeId);
   if (status != EMBER_SUCCESS) {
     status = EMBER_NOT_FOUND;
     appDebugPrint(LOG_FMTSTR_EUI64_NODEID_RES_FAIL,
@@ -250,16 +265,86 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 eui64,
       type = MULTICAST_BINDING;
     }
 
-    emberBindRequest(targetNodeId,
-                     (uint8_t *)eui64,
-                     endpoint,
+    if(isBindRequest)
+    {
+        appDebugPrint("Sending zdo bind command");
+        status = emberBindRequest(targetNodeId,
+                     (uint8_t *)sourceEui64,
+                     sourceEndpoint,
                      clusterId,
                      type,
-                     gatewayEui64,
+                     destEui64,
                      group_id,
-                     gatewayEndpoint,
+                     destEndpoint,
                      options);
-  }
+    }
+    else
+    {
+        appDebugPrint("Sending zdo unbind command");
+        status = emberUnbindRequest(targetNodeId,
+                     (uint8_t *)sourceEui64,
+                     sourceEndpoint,
+                     clusterId,
+                     type,
+                     destEui64,
+                     group_id,
+                     destEndpoint,
+                     options);
+    }
 
+    //Need to store outgoing message info
+    //Response does not contain all binding info
+    //Therefore, need to keep track of transaction sequence
+    
+    //use the sequence number as the index in the buffer
+    uint8_t index = emberGetLastAppZigDevRequestSequence(); 
+
+    memcpy(binding_buffer[index].sourceEui64, sourceEui64, sizeof(EmberEUI64));
+    memcpy(binding_buffer[index].destEui64, destEui64, sizeof(EmberEUI64));
+    binding_buffer[index].sourceEndpoint = sourceEndpoint;
+    binding_buffer[index].clusterId = clusterId;
+    binding_buffer[index].destEndpoint = destEndpoint;
+    binding_buffer[index].isBindResponse = isBindRequest;
+    
+  }
   return status;
+ }
+
+void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* apsFrame, uint8_t* message, uint16_t length)
+{
+  (void)sender;
+  (void)length;
+  
+
+  //only respond to bind and unbind response
+  uint16_t clusterId = apsFrame->clusterId;
+  if( BIND_RESPONSE == clusterId || UNBIND_RESPONSE == clusterId)
+  {
+    appDebugPrint("Received bind/unbind response");
+    uint8_t index = apsFrame->sequence;
+    uint8_t status = message[1];
+ 
+    //check to see if entry is in the binding buffer
+    if( (binding_buffer[index].sourceEui64 != NULL) &&
+        (binding_buffer[index].destEui64 != NULL))
+    {
+    
+        appDebugPrint("Pushing bind/unbind response to zigpc_gateway");
+
+        EmberEUI64 sourceEui64;
+        EmberEUI64 destEui64;
+
+        memcpy(sourceEui64, binding_buffer[index].sourceEui64, sizeof(EmberEUI64));
+        memcpy(destEui64, binding_buffer[index].destEui64, sizeof(EmberEUI64));
+    
+        z3gwState.callbacks->onBindUnbindResponse(
+                sourceEui64,
+                binding_buffer[index].sourceEndpoint,
+                binding_buffer[index].clusterId,
+                destEui64,
+                binding_buffer[index].destEndpoint,
+                binding_buffer[index].isBindResponse,
+                status);
+    }
+  }
 }

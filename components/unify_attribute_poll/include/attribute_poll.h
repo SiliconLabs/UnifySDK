@@ -60,7 +60,7 @@ sl_status_t attribute_poll_deregister(attribute_store_node_t node);
 /**
  * @brief Schedule a poll as soon as possible
  *
- * @param node
+ * @param node    Attribute store Node to add to the poll list.
  * @returns sl_status_t
  */
 sl_status_t attribute_poll_schedule(attribute_store_node_t node);
@@ -68,9 +68,21 @@ sl_status_t attribute_poll_schedule(attribute_store_node_t node);
 /**
  * @brief Initialize the attribute poll engine
  *
+ * @param backoff                  The minimum time in seconds between 2 polls.
+ * @param default_interval         Default interval in secoénd, at which
+ *                                 attributes will be polled, if no value is
+ *                                 provided for a specific attribute type
+ * @param poll_mark_attribute_type The Attribute Store type to use to mark attributes
+ *        as pollable. Note that this attribute must not be registered with a
+ *        fixed parent (use ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) or
+ *        storage data type (use UNKNOWN_STORAGE_TYPE).
+ *
  * @returns sl_status_t SL_STATUS_OK on success
  */
-sl_status_t attribute_poll_init(uint32_t backoff, uint32_t default_interval);
+sl_status_t
+  attribute_poll_init(uint32_t backoff,
+                      uint32_t default_interval,
+                      attribute_store_type_t poll_mark_attribute_type);
 
 /**
  * @brief Disable the Poll Engine
@@ -90,6 +102,12 @@ sl_status_t attribute_poll_disable();
  * @return sl_status_t
  */
 sl_status_t attribute_poll_enable();
+
+/**
+ * @brief print the entries present in the attribute poll list
+ *
+ */
+void attribute_poll_print();
 
 #ifdef __cplusplus
 }

@@ -27,7 +27,6 @@
 // Component includes
 #include "zigpc_ucl_int.hpp"
 
-static constexpr char LOG_FMT_JSON_ERROR[] = "%s: Unable to parse JSON payload: %s";
 
 /**
  * @brief Map between the Network Management FSM states and the
@@ -85,9 +84,6 @@ static sl_status_t helper_parse_requested_state(
     sl_log_warning(zigpc_ucl::LOG_TAG,
                    "Failed to parse the JSON payload: 0x%X",
                    status);
-    sl_log_debug(zigpc_ucl::LOG_TAG,
-                 LOG_FMT_JSON_ERROR,
-                 e.what());
     return status;
   }
 
@@ -148,9 +144,6 @@ static sl_status_t helper_parse_state_parameters(
     sl_log_warning(zigpc_ucl::LOG_TAG,
                    "Failed to parse the JSON payload: 0x%X",
                    status);
-    sl_log_debug(zigpc_ucl::LOG_TAG,
-                 LOG_FMT_JSON_ERROR,
-                 e.what());
     return status;
   }
 
@@ -209,6 +202,10 @@ void zigpc_ucl::pc_nwmgmt::on_write_mqtt(const char *topic,
   }
 
   if (status == SL_STATUS_OK) {
+
+      //IDLE
+      //ADD NODE
+      //REMOVE NODE
     status = zigpc_net_mgmt_state_change_request(&state_change);
     if (status != SL_STATUS_OK) {
       sl_log_error(zigpc_ucl::LOG_TAG,
@@ -224,6 +221,7 @@ void zigpc_ucl::pc_nwmgmt::on_write_mqtt(const char *topic,
 sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
   zigpc_net_mgmt_on_network_state_update_t &state)
 {
+  sl_log_debug(zigpc_ucl::LOG_TAG, "Update network state");
   sl_status_t status = SL_STATUS_OK;
 
   nlohmann::json payload_jsn;
@@ -297,7 +295,20 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
   }
 
   if (status == SL_STATUS_OK) {
-    std::string payload_str = payload_jsn.dump();
+
+    std::string payload_str = "";
+    try
+    {
+        payload_str = payload_jsn.dump();
+    }
+    catch(const nlohmann::json::exception& e)
+    {
+        status = SL_STATUS_OBJECT_READ;
+        sl_log_warning(zigpc_ucl::LOG_TAG,
+                   "Failed to parse the JSON payload: 0x%X",
+                   status);
+        return status;
+    }
 
     boost::replace_all(payload_str, "\"[]\"", "[]");
     boost::replace_all(payload_str, "\n", "");
@@ -314,6 +325,8 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
 
 sl_status_t zigpc_ucl::pc_nwmgmt::on_net_init(zigbee_eui64_uint_t pc_eui64)
 {
+      
+  sl_log_debug(zigpc_ucl::LOG_TAG, "Subscribe to MQTT at network initialization");
   zigpc_ucl::mqtt::topic_data_t topic_data;
 
   topic_data.eui64 = pc_eui64;
@@ -322,5 +335,6 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_init(zigbee_eui64_uint_t pc_eui64)
     zigpc_ucl::mqtt::topic_type_t::BY_UNID_PC_NWMGMT_WRITE,
     topic_data,
     zigpc_ucl::pc_nwmgmt::on_write_mqtt);
-  return status;
+  
+      return status;
 }

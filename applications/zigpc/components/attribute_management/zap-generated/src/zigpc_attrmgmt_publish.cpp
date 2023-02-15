@@ -1539,6 +1539,108 @@ sl_status_t zigpc_attrmgmt_occupancy_sensing_publish(const char* unid_ep_topic, 
 
   return status;
 }
+sl_status_t zigpc_attrmgmt_ias_zone_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_ias_zone_zone_state_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_TYPE:
+      {
+        IasZoneType value;
+        memcpy(&value, attr_value, sizeof(IasZoneType));
+        status = uic_mqtt_dotdot_ias_zone_zone_type_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATUS:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_ias_zone_zone_status_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_IASCIE_ADDRESS:
+      {
+        EUI64 value;
+        memcpy(&value, attr_value, sizeof(EUI64));
+        status = uic_mqtt_dotdot_ias_zone_iascie_address_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONEID:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_ias_zone_zoneid_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_CURRENT_ZONE_SENSITIVITY_LEVEL:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_ias_zone_current_zone_sensitivity_level_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 2) {
+          value = 2; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_ias_zone_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
+sl_status_t zigpc_attrmgmt_iaswd_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_IASWD_ATTR_MAX_DURATION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_iaswd_max_duration_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 2) {
+          value = 2; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_iaswd_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
 
 sl_status_t zigpc_attrmgmt_publish_reported(const zigbee_eui64_uint_t eui64, const zigbee_endpoint_id_t endpoint_id, const zcl_cluster_id_t cluster_id, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
 {
@@ -1584,6 +1686,12 @@ sl_status_t zigpc_attrmgmt_publish_reported(const zigbee_eui64_uint_t eui64, con
       break;
     case ZIGPC_ZCL_CLUSTER_OCCUPANCY_SENSING:
       status = zigpc_attrmgmt_occupancy_sensing_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
+    case ZIGPC_ZCL_CLUSTER_IAS_ZONE:
+      status = zigpc_attrmgmt_ias_zone_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
+    case ZIGPC_ZCL_CLUSTER_IASWD:
+      status = zigpc_attrmgmt_iaswd_publish(unid_ep_topic.c_str(), attr_id, attr_value);
       break;
     default:
       status = SL_STATUS_NOT_FOUND;

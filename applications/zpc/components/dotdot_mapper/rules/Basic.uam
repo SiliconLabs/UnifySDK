@@ -19,8 +19,11 @@ def DOTDOT_ATTRIBUTE_ID_BASIC_DEVICE_ENABLED 0xba5c0012
 def DOTDOT_ATTRIBUTE_ID_BASIC_ALARM_MASK 0xba5c0013
 def DOTDOT_ATTRIBUTE_ID_BASIC_DISABLE_LOCAL_CONFIG 0xba5c0014
 def DOTDOT_ATTRIBUTE_ID_BASIC_SW_BUILDID 0xba5c4000
+def zb_HWVersion 0xba5c0003
+
 
 // Z-Wave Attributes
+def ep 0x04
 def zwSUPPORTED_NOTIFICATION_TYPES              0x7102
 def zwNOTIFICATION_TYPE                         0x7103
 def zwNOTIFICATION_SUPPORTED_STATES_OR_EVENTS   0x7104
@@ -31,8 +34,16 @@ def NOTIFICATION_SYSTEM_TYPE 0x09
 def NOTIFICATION_SYSTEM_STATE_HARDWARE_FAILURE 0x01
 def NOTIFICATION_SYSTEM_STATE_SOFTWARE_FAILURE 0x02
 
+// NIF flags
 def zwLISTENING 0x0008
 def zwOPTIONAL 0x0009
+
+// Version CC data
+def zw_VERSION_REPORT 0x8602
+def zw_HW_VERSION     0x860F
+
+// Higher level attributes
+def NodeID 0x03
 
 scope 0 {
 
@@ -41,10 +52,23 @@ r'DOTDOT_ATTRIBUTE_ID_BASIC_ALARM_MASK =
   if (r'zwNOTIFICATION_TYPE[NOTIFICATION_SYSTEM_TYPE].zwNOTIFICATION_STATE_OR_EVENT == NOTIFICATION_SYSTEM_STATE_SOFTWARE_FAILURE) 2
   undefined
 
-// UIC-1341: This should work too
-//r'zbPOWER_SOURCE =
-// if (r'^.zwLISTENING & 0x80) 4 // AL Nodes: DCSource
-//  if (r'^.zwOPTIONAL & 0x60) 3 // FL or NL nodes: Battery
-//  0 // Unknown power source
-
 }
+
+// Map at the NodeID level
+scope 0 common_parent_type(0x03) {
+  // TBD: UIC-1717 can we somehow get the path evaluation of the left-hand
+  // side return a set of possible matches for path evaluation ? Child by type
+  // always takes the first (ep 0 here), but it would be powerful to get a set
+  // of ep for the lhs, so if we have several matches, we can make a map to
+  // all of them simultaneously.
+  r'ep.zbPOWER_SOURCE =
+    if(fn_is_any_undefined(r'ep)) undefined // This adds a dependency that will trigger re-evaluation of this rule when a new endpoint is created.
+    if (r'zwLISTENING & 0x80) 1 // AL Nodes: SinglePhaseMains
+    if (e'zwOPTIONAL) 3 undefined // FL or NL nodes: Battery
+
+    // Basic HWVersion
+  r'ep.zb_HWVersion =
+    if(fn_is_any_undefined(r'ep)) undefined // This adds a dependency that will trigger re-evaluation of this rule when a new endpoint is created/updated.
+    r'ep[0].zw_VERSION_REPORT.zw_HW_VERSION
+}
+

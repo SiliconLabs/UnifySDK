@@ -1,0 +1,112 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+#include "unify_dotdot_attribute_store.h"
+#include "unify_dotdot_attribute_store_registration.h"
+#include "unify_dotdot_defined_attribute_types.h"
+
+// Unify components
+#include "attribute_store_type_registration.h"
+#include "sl_log.h"
+
+// Generic includes
+#include <string>
+constexpr const char *LOG_TAG = "unify_dotdot_attribute_store_registration";
+
+attribute_store_storage_type_t
+  attribute_storage_type_conversion(std::string &attribute_type_string)
+{
+  attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+  // clang-format on
+  if ((attribute_type_string == "uint8_t") || (attribute_type_string == "bool")
+      || (attribute_type_string == "BatterySize")
+      || (attribute_type_string == "DrlkOperMode")
+      || (attribute_type_string == "CCColorLoopDirection")) {
+    storage_type = U8_STORAGE_TYPE;
+  } else if ((attribute_type_string == "uint16_t")
+             || (attribute_type_string == "SGroupId")) {
+    storage_type = U16_STORAGE_TYPE;
+  } else if ((attribute_type_string == "uint32_t")
+             || (attribute_type_string == "UTC")) {
+    storage_type = U32_STORAGE_TYPE;
+  } else if (attribute_type_string == "uint64_t") {
+    storage_type = U64_STORAGE_TYPE;
+  } else if (attribute_type_string == "int8_t") {
+    storage_type = I8_STORAGE_TYPE;
+  } else if (attribute_type_string == "int16_t") {
+    storage_type = I16_STORAGE_TYPE;
+  } else if (attribute_type_string == "int32_t") {
+    storage_type = I32_STORAGE_TYPE;
+  } else if (attribute_type_string == "uint64_t") {
+    storage_type = I64_STORAGE_TYPE;
+  } else if (attribute_type_string == "float") {
+    storage_type = FLOAT_STORAGE_TYPE;
+  } else if (attribute_type_string == "double") {
+    storage_type = DOUBLE_STORAGE_TYPE;
+  } else if (attribute_type_string == "EUI64") {
+    storage_type = FIXED_SIZE_STRUCT_STORAGE_TYPE;
+  } else if ((attribute_type_string == "PumpOperationMode")
+             || (attribute_type_string == "PumpControlMode")
+             || (attribute_type_string == "IasZoneType")
+             || (attribute_type_string == "LoggingLevelEnum")) {
+    storage_type = ENUM_STORAGE_TYPE;
+  }
+  return storage_type;
+}
+
+sl_status_t unify_dotdot_attribute_store_registration_init()
+{
+  sl_status_t status = SL_STATUS_OK;
+  // clang-format off
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_attributes}}
+  // clang-format on
+
+  {
+    // {{type}} // {{asType type}} // {{asUnderlyingType type}}
+    std::string attribute_type_string           = "{{asUnderlyingType type}}";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+  {{#if (isString type)}}
+    storage_type = C_STRING_STORAGE_TYPE;
+  {{else}}
+  {{#if_is_struct type}}
+    storage_type = BYTE_ARRAY_STORAGE_TYPE;
+  {{else}}
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+  {{/if_is_struct}}
+  {{/if}}
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL {{parent.label}} {{label}}, "
+                     "type:  {{type}} // {{asUnderlyingType type}}");
+    }
+
+    status |= attribute_store_register_type(
+      {{asAttributeIdDefine parent.label label}},
+      "ZCL {{parent.label}} {{label}}",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+{{/zcl_attributes}}
+{{/if}}
+{{/zcl_clusters}}
+  // clang-format on
+
+  return status;
+}

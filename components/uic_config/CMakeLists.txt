@@ -13,18 +13,20 @@ endif()
 
 # Library
 set(CONFIG_SRC platform/${COMPATIBLE_PLATFORM}/config.cpp)
-set(CONFIG_INCLUDE include/)
+set(CONFIG_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/include/)
 set(CONFIG_DEPS Boost::program_options ${YAML_CPP_LIBRARIES})
-add_library(uic_config SHARED ${CONFIG_SRC})
+add_library(uic_config OBJECT ${CONFIG_SRC})
 target_include_directories(
   uic_config
-  PUBLIC ${CONFIG_INCLUDE}
+  PUBLIC $<BUILD_INTERFACE:${CONFIG_INCLUDE}>
   PRIVATE platform/${COMPATIBLE_PLATFORM})
 target_link_libraries(uic_config ${CONFIG_DEPS})
 target_compile_definitions(
   uic_config PRIVATE CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
+install_headers(uic_config uic libuic-dev)
 
+if(BUILD_TESTING)
+  add_subdirectory(test)
 
-add_subdirectory(test)
-
-target_add_mock(uic_config)
+  target_add_mock(uic_config)
+endif()

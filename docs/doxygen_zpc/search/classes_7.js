@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['learn_5finfo_17125',['LEARN_INFO',['../structLEARN__INFO.html',1,'']]],
-  ['list_17126',['list',['../structlist.html',1,'']]],
-  ['list_5felem_17127',['list_elem',['../structlist__elem.html',1,'']]]
+  ['incoming_5fframe_5fitem_5fcompare_21635',['incoming_frame_item_compare',['../structincoming__frame__item__compare.html',1,'']]]
 ];

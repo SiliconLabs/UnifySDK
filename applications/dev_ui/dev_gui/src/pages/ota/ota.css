@@ -5,3 +5,8 @@
 .tab-content {
     margin-top: -1px;
 }
+
+.ota-content .progress {
+    height: 2rem;
+    font-size: 1.75rem;
+}

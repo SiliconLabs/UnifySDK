@@ -1,5 +1,44 @@
 # ZPC Release Notes
 
+## [1.3.0] - Feb 2023
+
+### Added (1.3.0)
+
+* Enabled the minimum required attributes for ApplicationMonitoring.
+* Added "full" support for the Scene Cluster, including the Scene Table for devices
+  supporting SceneRequired ZCL attributes.
+* Added Control of Barrier Operator Command Class
+* Added Control of Scene Activation Command Class
+* Added Control of Scene Actuator Configuration Command Class
+* Added Control of Scene Controller Configuration Command Class
+* Added mappings to more attributes for the Level Cluster
+* Added a few helper cli commands:
+  * Reset MPAN/SPAN
+  * Export Security keys to Zniffer format
+* Added a Z-Wave LR Max Power Configuration
+* Added a few Device Specific UAM maps:
+  * ZDB5100
+  * Aeotec MultiSensor 7
+
+### Changed (1.3.0)
+
+* Updated the Color Switch mapping from HSL to HSV. Resulting color will differ
+  for a given set of Level/Hue/Saturation values.
+* Refactored UAM default files using the new Attribute Mapper functionalities
+* Updated cluster Attribute behaviors:
+  * Level cluster store and use previous level, if OnOff cluster (simulation) is used to turn Level device on/off
+  * OnOff cluster changes to Off, when Level cluster Current Level changes to 0, when OnOff cluster is simulated
+
+### Fixed (1.3.0)
+
+* Fixed an issue with S0 transport, that would lock up if it needed to send
+  streamed messages
+* SetParameter Commands sent via MQTT will also attempt to discover parameters
+  for Configuration CC v1-v2 supporting nodes.
+* Updated the Tx Queue to be able to break back-offs when transports
+  need to send a frame despite expecting incoming frames
+* IdentifyTime/Level RemainingTimes are now countdowns instead of fixed values
+
 ## [1.2.1] - Sep 2022
 
 ### Changed (1.2.1)
@@ -206,11 +245,6 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
   * Packages may overwrite configuration parameters during installation of none
     related packages. Updated documentation to mitigate this issue.
 
-* **UIC-2232**:
-  A node with capabilities mapping to Level and OnOff cluster
-  may stop responding to Toggle commands after a MoveToLevelWithOnOff command.
-  _Note_: Avoid using Toggle and use On or Off instead.
-
 * **UIC-2219**:
   Bindings command processing do not validate the full UNID.
   This may trigger to establish spurious associations if having several
@@ -225,18 +259,8 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
   Color Switch Command Class durations are completely ignored.
   _Note_: Set the colors instantaneously to avoid issues.
 
-* **UIC-1780**:
-  Security 0 Supported Commands Report reports to follow set
-  to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
-  _Note_: No workaround, wait for the nodes to recover.
-
 * **UIC-1779**:
   Multi Channel Endpoint Find Reports reports to follow set
-  to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
-  _Note_: No workaround, wait for the nodes to recover.
-
-* **UIC-1778**:
-  Multi Channel Association / Association Report reports to follow set
   to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
   _Note_: No workaround, wait for the nodes to recover.
 
@@ -244,11 +268,6 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
   The ZPC silently ignores incorrect YAML and uses default values
   if it cannot parse the YAML content for its configuration.
   _Note_: Verify the validity of the YAML in the configuration file.
-
-* **UIC-1271**
-  IdentifyTime from the Identify cluster stays fixed, even
-  though it should be a countdown.
-  _Note_: Avoid using large IdentifyTime values.
 
 * **UIC-1162**:
   When a device have multiple Z-Wave functionalities mapped to
@@ -259,10 +278,6 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 * **UIC-1088**:
   Potentially wrong controller NIF after controller migration.
   _Note_: Usually not a problem in practice
-
-* **UIC-729**
-  Assigned Group cluster attributes are erased at re-interview.
-  _Note_: Re-setup all group membership after a node re-interview
 
 ## Z-Wave Certification information
 
@@ -281,14 +296,15 @@ with an **-**.
 | Aeotec           | Water sensor (6 GEN)          | -                              | Non-Secure         |
 | Aeotec           | Range extender 6              | x                              | S0                 |
 | Aeotec           | Door/Window sensor 6          | x                              | S0                 |
-| Hank             | Door/Window Sensor            | x                              | S2-Unauthenticated |
+| Aeotec           | MultiSsensor 7                | x                              | S2 Authenticated   |
+| Hank             | Door/Window Sensor            | x                              | S2 Unauthenticated |
 | Hank             | RGB Bulb                      | x                              | Non-Secure         |
 | Hank             | Smart plug                    | x                              | S0                 |
 | Fibaro           | Fibaro Flood Sensor           | x                              | S0                 |
-| Fibaro           | Heat Controller               | x                              | S2-Authenticated   |
+| Fibaro           | Heat Controller               | x                              | S2 Authenticated   |
 | Philio           | Smart energy plug-in switch   | x                              | S0                 |
 | Secure           | Smart Plug 302                | x                              | Non-Secure         |
-| Ring             | Alarm motion detector (1 Gen) | -                              | S2-Authenticated   |
+| Ring             | Alarm motion detector (1 Gen) | -                              | S2 Authenticated   |
 | Yale real living | Door Lock                     | x                              | S0                 |
 | Alarm.com        | Smart water valve             | x                              | S2 Authenticated   |
 | Alarm.com        | Dry contact sensor            | -                              | Non-Secure         |

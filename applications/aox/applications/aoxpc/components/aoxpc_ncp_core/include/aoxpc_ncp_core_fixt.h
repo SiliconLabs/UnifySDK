@@ -29,11 +29,4 @@
  */
 sl_status_t aoxpc_ncp_core_fixt_setup(void);
 
-/**
- * @brief Fixture for shutting down the NCP core component.
- *
- * @return 0 on success
- */
-int aoxpc_ncp_core_fixt_shutdown(void);
-
 #endif // AOXPC_NCP_CORE_FIXT_H

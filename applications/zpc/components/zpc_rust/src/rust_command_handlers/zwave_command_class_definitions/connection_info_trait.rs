@@ -11,8 +11,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-use unify_middleware::Attribute;
 use crate::zwave_controller_sys::zwave_controller_endpoint_t;
+use unify_middleware::Attribute;
 
 use super::ZwaveControllerEncapsulationScheme;
 

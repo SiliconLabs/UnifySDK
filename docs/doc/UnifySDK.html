@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unify Framework &mdash; Unify Host SDK</title>
@@ -18,6 +18,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.1
+                ver_1.3.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -89,7 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#unify-framework-release-notes">Unify Framework Release Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a><ul>
-<li class="toctree-l3"><a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Specifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
 </ul>
 </li>
@@ -99,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -130,7 +136,7 @@ Zigbee, and so on) supported by Silicon Labs. The Unify Framework uses the Unify
 Controller Language (UCL) as an internal abstraction layer to seamlessly control
 various end nodes that are enabled with multiple wireless PHY radios. The
 detailed architecture of the Unify Framework is described in the
-<a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Framework Specification</a>.</p>
+<a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a>.</p>
 <p>The Unify Framework uses Unify Framework library to decouple API modules from the PHY
 drivers. This facilitates code reuse and enables easily adding new high-level
 APIs without the need to modify the PHY drivers. The library provides a number
@@ -162,7 +168,7 @@ The old name can still be found in some parts of the Framework.</p>
 </ul>
 <p>Each protocol controller interfaces with its radio hardware and implements a
 translation between its own wireless protocol and the <em>Unified Command Language</em>
-(UCL), which is defined in the <a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Framework Specification</a>.
+(UCL), which is defined in the <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a>.
 In addition, these protocol controllers implement best practices regarding
 message delivery and adherence to regulatory requirements. Protocol-specific
 implementation details can be found in the user guide for each protocol
@@ -338,7 +344,21 @@ object (e.g., {}).</p>
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter08-aox-application.html">8. AoX Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter09-binding.html">9. Binding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter11-system-metrics.html">11. System Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
 </ul>
 </div>
@@ -350,7 +370,7 @@ object (e.g., {}).</p>
           </div>
           <footer>
     <hr/>
-    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
 </footer>
         </div>
       </div>

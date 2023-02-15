@@ -39,6 +39,9 @@ pub type AttributeValueState = attribute_store_node_value_state_t;
 /// Type that stores if the changed attribute was added,removed or updated.
 pub type AttributeEventType = attribute_store_change_t;
 
+/// Type that stores if the changed attribute was added,removed or updated.
+pub type AttributeStorageType = attribute_store_storage_type_t;
+
 /// Static struct that book-keeps attribute change subscriptions.
 static mut CHANGE_LISTENER: Option<Box<dyn WakerCacheTrait<AttributeEvent<Attribute>>>> = None;
 

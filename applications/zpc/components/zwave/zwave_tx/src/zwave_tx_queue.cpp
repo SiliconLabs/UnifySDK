@@ -62,10 +62,12 @@ sl_status_t zwave_tx_queue::enqueue(const zwave_tx_queue_element_t &new_element,
   e.transmission_time      = 0;
   e.queue_timestamp        = clock_time();
 
+  bool insert_status = queue.insert(std::move(e));
+
   // Make a console message about our new frame
   this->simple_log(&e);
 
-  if (!queue.insert(std::move(e))) {
+  if (!insert_status) {
     return SL_STATUS_FULL;
   }
   return SL_STATUS_OK;
@@ -93,6 +95,11 @@ void zwave_tx_queue::clear()
 bool zwave_tx_queue::empty() const
 {
   return queue.empty();
+}
+
+int zwave_tx_queue::size() const noexcept
+{
+  return queue.size();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -317,10 +324,11 @@ void zwave_tx_queue::log(bool log_messages_payload) const
                  it->options.transport.valid_parent_session_id);
     sl_log_debug(LOG_TAG,
                  "\tMulticast group: %p, is first follow-up: %d, send "
-                 "follow-ups: %d\n",
+                 "follow-ups: %d - Skip back-off %d\n",
                  it->options.transport.group_id,
                  it->options.transport.is_first_follow_up,
-                 it->options.send_follow_ups);
+                 it->options.send_follow_ups,
+                 it->options.transport.ignore_incoming_frames_back_off);
     sl_log_debug(LOG_TAG,
                  "\tTimestamps: queued %lu - transmitted %lu - Transmission "
                  "time (ms): %lu\n",
@@ -353,7 +361,7 @@ void zwave_tx_queue::log_element(const zwave_tx_session_id_t session_id,
         LOG_TAG,
         "Entry (id=%p): (address %p), Qos: %u, discard timeout: %d ms, responses: %d\
  Addresses: (NodeID:Endpoint) %d:%d -> %d:%d. Multicast = %d\
- Parent frame: %p, parent frame valid: %d\
+ Parent frame: %p, parent frame valid: %d Ignore back-off: %d\
  fasttrack: %d, Queue timestamp: %lu, transmission timestamp: %lu, transmission time (ms): %lu\n",
         it->zwave_tx_session_id,
         &(*it),
@@ -367,6 +375,7 @@ void zwave_tx_queue::log_element(const zwave_tx_session_id_t session_id,
         it->connection_info.remote.is_multicast,
         it->options.transport.parent_session_id,
         it->options.transport.valid_parent_session_id,
+        it->options.transport.ignore_incoming_frames_back_off,
         it->options.fasttrack,
         it->queue_timestamp,
         it->transmission_timestamp,
@@ -441,7 +450,7 @@ void zwave_tx_queue::simple_log(zwave_tx_queue_element_t *e) const
                       "%02X ",
                       e->data[i]);
   }
-  sl_log_debug(LOG_TAG, "%s]\n", message);
+  sl_log_debug(LOG_TAG, "%s] - Tx Queue size: %d\n", message, queue.size());
 }
 
 zwave_tx_queue::queue_iterator

@@ -13,9 +13,7 @@ var dotdot__mqtt__translators_8h =
     [ "from_json", "dotdot__mqtt__translators_8h.html#a2e39b2675f9d0d01063567651fae3318", null ],
     [ "from_json", "dotdot__mqtt__translators_8h.html#aad9bd680e9162a191677e1eb26c5cb88", null ],
     [ "from_json", "dotdot__mqtt__translators_8h.html#a8aa01249a479bbbbed66a2305fc19119", null ],
-    [ "from_json", "dotdot__mqtt__translators_8h.html#a179a60bf71ace6cf85ba58117cca377b", null ],
-    [ "from_json", "dotdot__mqtt__translators_8h.html#a8feb241adfac3f3a040519fe6fd3468c", null ],
-    [ "from_json", "dotdot__mqtt__translators_8h.html#a71ba301efe718e67bde066be3df005d2", null ],
+    [ "from_json", "dotdot__mqtt__translators_8h.html#a677d738743e80ea57773847b0ec6e8f1", null ],
     [ "from_json", "dotdot__mqtt__translators_8h.html#a1a5ea766d8165e679872bc53a994dce0", null ],
     [ "from_json", "dotdot__mqtt__translators_8h.html#a20205d91e01c94ab0226eca18ed8f09d", null ],
     [ "to_json", "dotdot__mqtt__translators_8h.html#aa1f564904d5cd4c8dd0d7933a39ff13d", null ],
@@ -31,9 +29,7 @@ var dotdot__mqtt__translators_8h =
     [ "to_json", "dotdot__mqtt__translators_8h.html#a6f0ac2293992655ae96debdd59fca6e0", null ],
     [ "to_json", "dotdot__mqtt__translators_8h.html#af963c61d4c63833ed4678d63164c6bec", null ],
     [ "to_json", "dotdot__mqtt__translators_8h.html#a7bae93b202777ff7e8a5abf8f40c6265", null ],
-    [ "to_json", "dotdot__mqtt__translators_8h.html#ab949e5a11dce33afbcd54b19f44cfa9f", null ],
-    [ "to_json", "dotdot__mqtt__translators_8h.html#ae7f390e279b29893ba61ad4722e88f7a", null ],
-    [ "to_json", "dotdot__mqtt__translators_8h.html#a5c7ab19fc3eda88d02e2a9e41de51b23", null ],
+    [ "to_json", "dotdot__mqtt__translators_8h.html#a6136ff8b2f6049a51359975d020f9ab3", null ],
     [ "to_json", "dotdot__mqtt__translators_8h.html#aa95723f78c72b1721a289b2d6470f9a6", null ],
     [ "to_json", "dotdot__mqtt__translators_8h.html#aa333d72e5be6e9cf09e6224823152839", null ]
 ];

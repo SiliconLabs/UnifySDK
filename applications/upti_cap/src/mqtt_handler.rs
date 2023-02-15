@@ -12,6 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 use crate::pti_sniffer;
+use unify_application_monitoring_sys::unify_application_monitoring_init;
 use unify_log_sys::*;
 use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
@@ -41,6 +42,7 @@ impl MqttClientCallbacksTrait for MqttHandler {
     }
 
     fn after_connect(&mut self) {
+        unify_application_monitoring_init();
         pti_sniffer::discovery_adapters().unwrap()
     }
 }

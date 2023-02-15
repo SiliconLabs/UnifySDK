@@ -136,6 +136,7 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Alarm Sensor                   |       1 |         |       x | N/A                         |         |
 | Association                    |       2 |       x |       x | Network Scheme              |         |
 | Association Group Info (AGI)   |       3 |       x |       x | Network Scheme              |         |
+| Barrier Operator               |       1 |         |       x | N/A                         |         |
 | Basic                          |       2 |         |       x | N/A                         |         |
 | Battery                        |       3 |         |       x | N/A                         | Control Part is auto-generated. |
 | Binary Sensor                  |       1 |         |       x | N/A                         | Control Part is auto-generated. |
@@ -149,7 +150,7 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Inclusion Controller           |       1 |       x |       x | Unencrypted                 |         |
 | Indicator                      |       3 |       x |       x | Network Scheme              |         |
 | Manufacturer Specific          |       2 |       x |       x | Network Scheme              |         |
-| Meter                          |       6 |         |       x | N/A                         | Partial control: <br>1. Meter Reset Command is not supported since there were not a corresponding command on dotdot ZCl data model. <br> |
+| Meter                          |       6 |         |       x | N/A                         | Partial control: <br>1. Meter Reset Command is not supported due to missing dotdot ZCL equivalent functionality. |
 | Multi Channel                  |       4 |         |       x | N/A                         |         |
 | Multi Channel Association      |       3 |       x |       x | Network Scheme              |         |
 | Multi Command                  |       1 |       x |         | Unencrypted                 |         |
@@ -157,6 +158,9 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Multilevel Switch              |       4 |         |       x | N/A                         | Partial Control: The value 0xFF cannot be used in Multilevel Switch Set Commands |
 | Notification                   |       8 |         |       x | N/A                         | Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.  |
 | Powerlevel                     |       1 |       x |         | Network Scheme              |         |
+| Scene Activation               |       1 |         |       x | N/A                         |         |
+| Scene Actuator Configuration   |       1 |         |       x | N/A                         | No interview performed automatically. |
+| Scene Controller Configuration |       1 |         |       x | N/A                         |         |
 | Security 0                     |       1 |       x |       x | Unencrypted                 |         |
 | Security 2                     |       1 |       x |       x | Unencrypted                 |         |
 | Supervision                    |       2 |       x |       x | Unencrypted                 |         |
@@ -225,6 +229,7 @@ if the following conditions are fulfilled:
 | COMMAND_CLASS_THERMOSTAT_FAN_MODE    | THERMOSTAT_FAN_MODE_SET               |  FanControl                |
 | COMMAND_CLASS_HUMIDITY_CONTROL_MODE  | HUMIDITY_CONTROL_MODE_SET             |  DehumidificationControl   |
 | COMMAND_CLASS_SWITCH_COLOR           | SWITCH_COLOR_SET                      |  ColorControl              |
+| COMMAND_CLASS_SCENE_ACTIVATION       | SCENE_ACTIVATION_SET                  |  Scenes                    |
 
 Note that it will be allowed to establish bindings towards
 the ZPC in most cases.
@@ -258,6 +263,38 @@ these commands.
 The Bind/Unbind commands will send Association Set/Remove commands.
 
 ![Dev GUI Binding commands](./doc/assets/img/dev_gui_binding_cluster_commands.png)
+
+### Barrier Operator Command Class Information
+
+The ZPC controls the Barrier Operator Command Class. It is possible to request
+a Barrier Operator node to open/close and see its last known state.
+
+It is not possible to control the state of subsystems, due to the lack of
+equivalent functionality on the UCL data model.
+
+#### Node status
+
+To see the state of the Barrier Operator Command Class.
+Select the BarrierControl page from the left menu on the Dev GUI.
+
+![Dev GUI BarrierControl Cluster](./doc/assets/img/dev_gui_barrier_control_cluster.png)
+
+The Position attribute indicate the percentage open.
+
+* 0 Represents a closed barrier
+* 100 Represents a fully open barrier
+
+![Dev GUI BarrierControl node State](./doc/assets/img/dev_gui_barrier_control_node_state.png)
+
+#### Sending commands
+
+The GoToPercent command can be used to initiate opening or closing of the
+Barrier Operator Command Class.
+
+* GoToPercent with value 0 will issue a Barrier Operator Set (Target Value = 0x00)
+* GoToPercent with value >0 will issue a Barrier Operator Set (Target Value = 0xFF)
+
+The Stop command has no effect.
 
 ### Basic Command Class Information
 
@@ -393,10 +430,12 @@ Command Class, but they will be emulated if the supporting node does not support
 these Command Classes.
 
 Note that the Level value depends on the OnOff value, and the Color values
-depend on the Level value.
+depend on the Level value. Also note that the maximum level is 99 if the
+Level Cluster is mapped to Multilevel Switch, and 255 if the Level Cluster
+is emulated.
 
 The ColorControl cluster will operate using the
-[Hue Saturation Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV)
+[Hue Saturation Lightness (HSV)](https://en.wikipedia.org/wiki/HSL_and_HSV)
 system to determine colors.
 
 The lightness is taken from the Multilevel Switch value, or if the node supports
@@ -453,28 +492,30 @@ will be 99, if all color components are set to 127, Multilevel Switch value will
 be 49.
 If the highest color component is set to 64, Multilevel Switch will be set at 25, etc.
 
-When both Multilevel Switch and Color Switch are supported, the Level cluster
-value will be scaled by a factor between 1 and 2. In HSL, full brightness with a color
-component can be achieved with the CurrentLevel = 50, whereas the Multilevel
-Switch value will be set to the maximum value (99). This scaling factor only applies
-when running with the **CurrentHueAndCurrentSaturation** **Color Mode**.
-Note that if the **Saturation** is close to 0, the Multilevel Switch value will
-get scaled by a factor closer to 1 and as **Saturation** gets close to 254,
-the Multilevel Switch level value will be closer to 2.
-[See the Hue Saturation Lightness (HSL) wikipedia page for more details](https://en.wikipedia.org/wiki/HSL_and_HSV)
-
 Note that with **Saturation** set to 0, the color settings will be ambiguous,
 as any hue value will result in a white color. RGB component combination of
 equal values will trigger the Saturation to be 0.
 
-Here are a few mappings:
+Here are a few mappings, assuming that the ZCL MaxLevel value is 99:
 
-* HSL(0,254,50) <=> RGB (255,0,0), Multilevel Switch value = 99, Binary Switch = 0xFF
-* HSL(85,254,50) <=> RGB (0,255,0), Multilevel Switch value = 99, Binary Switch = 0xFF
-* HSL(170,254,50) <=> RGB (0,0,255), Multilevel Switch value = 99, Binary Switch = 0xFF
-* HSL(212,254,25) <=> RGB (128,0,120), Multilevel Switch value = 50, Binary Switch = 0xFF
-* HSL(214,254,50) <=> RGB (255,0,253), Multilevel Switch value = 99, Binary Switch = 0xFF
-* HSL(212,254,75) <=> RGB (253,112,255), Multilevel Switch value = 99, Binary Switch = 0xFF
+* HSV(0,254,50) <=> RGB (129,0,0)
+* HSV(43,254,50) <=> RGB (127,129,0)
+* HSV(149,250,99) <=> RGB (4,125,255)
+* HSV(0,0,50) <=> RGB (129,129,129)
+* HSV(0,254,99) <=> RGB (255,0,0)
+* HSV(85,254,99) <=> RGB (0,255,2)
+* HSV(170,254,99) <=> RGB (4,0,255)
+
+Instead, if the ZCL MaxLevel is for example 255, the following mappings would
+apply:
+
+* HSV(0,254,128) <=> RGB (128,0,0)
+* HSV(43,254,128) <=> RGB (127,128,0)
+* HSV(149,250,255) <=> RGB (4,125,255)
+* HSV(0,0,128) <=> RGB (128,128,128)
+* HSV(0,254,255) <=> RGB (255,0,0)
+* HSV(85,254,255) <=> RGB (0,255,2)
+* HSV(170,254,255) <=> RGB (4,0,255)
 
 ##### Sending commands
 
@@ -816,6 +857,55 @@ The following notification will be mapped to the following bits:
 #### Sending commands
 
 It is not possible to send commands for the Notification Command Class.
+
+### Scene Activation Command Class Information
+
+The Scene Activation Command Class is fully controlled by the ZPC.
+Nodes supporting the Scene Activation Command Class will be presented
+in the Scenes page on the Dev GUI.
+
+![Dev GUI Scenes Cluster](./doc/assets/img/dev_gui_scenes_cluster.png)
+
+It will be assumed that 255 scenes are supported. Note that the UI will
+allow to activate scenes 1..255 by setting values 0..254.
+
+The *RecallScene* Command will issue a Scene Activation Set Command.
+
+TransitionTime is specified in deci-seconds. (i.e. 10 = 1 second).
+It is possible to specify the 0xFF duration for the Scene Activation Set
+Command by setting the TransitionTime to 1.
+Else the duration will match the floored value of the specified transition time.
+
+### Scene Actuator Configuration Command Class Information
+
+The Scene Actuator Configuration Command Class is controlled by the ZPC.
+
+Nodes supporting the Scene Actuator Configuration Command Class will be
+presented in the Scenes page on the Dev GUI.
+
+![Dev GUI Scenes Cluster](./doc/assets/img/dev_gui_scenes_cluster.png)
+
+Note that no interview will be performed automatically, i.e. the
+*Scene Actuator Configuration Get Command* for each of the 255 Scene IDs
+are skipped.
+
+It is possible to instruct the ZPC to issue a
+*Scene Actuator Configuration Get Command* by using the *ViewScene* Command
+in the DevGUI. It will not be possible to see the contents of the report via
+the DevGUI.
+
+It will be assumed that 255 scenes are supported. Note that the UI will
+associate scenes 1..255 to values 0..254.
+
+It is possible to issue a *Scene Actuator Configuration Set Command* using the
+*StoreScene* Command in the DevGUI.
+
+### Scene Controller Configuration Class Information
+
+The Scene Controller Configuration Command Class is controlled by the ZPC.
+
+No interaction with this Command Class is available via the DevGUI at the
+moment.
 
 ### Security 0 - Security 2 Command Classes Information
 
@@ -1165,4 +1255,3 @@ rnote over zpc, node: <b>Cycle detected for supported protocols\n<b>Stopping Pro
 
 rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
 ```
-

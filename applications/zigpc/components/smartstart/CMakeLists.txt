@@ -6,9 +6,11 @@ target_include_directories(
   PRIVATE src
   PUBLIC include)
 target_link_libraries(
-  zigpc_smartstart PRIVATE zigpc_common zigpc_ucl zigpc_net_mgmt uic_log
-                           zigpc_gateway uic_smartstart_management)
+  zigpc_smartstart PRIVATE zigpc_common zigpc_ucl zigpc_net_mgmt unify
+                           zigpc_gateway )
 
-add_subdirectory(test)
+if(BUILD_TESTING)
+  add_subdirectory(test)
 
-target_add_mock(zigpc_smartstart)
+  target_add_mock(zigpc_smartstart)
+endif()

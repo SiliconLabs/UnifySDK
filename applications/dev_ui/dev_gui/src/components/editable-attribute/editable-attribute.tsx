@@ -36,7 +36,7 @@ class EditableAttribute extends React.Component<EditableAttributeProps, Editable
             data: {
                 Unid: `${this.props.Node.Unid}/${epName}`,
                 ClusterType: this.props.ClusterName,
-                Payload: { [this.props.FieldName]: this.state.Value.trim() }
+                Payload: { [this.props.FieldName]: this.state.Value?.trim() ?? "" }
             }
         }));
     }

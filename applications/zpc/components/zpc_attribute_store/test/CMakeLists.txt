@@ -1,17 +1,28 @@
-add_mock(zpc_attribute_store_network_helper_mock ../include/zpc_attribute_store_network_helper.h)
+cmake_path(SET path "${CMAKE_CURRENT_LIST_DIR}")
+cmake_path(GET path PARENT_PATH include_dir)
+cmake_path(APPEND include_dir include)
+if(NOT EXISTS ${include_dir}/zpc_attribute_store_network_helper.h)
+  message(FATAL_ERROR "The file ${include_dir}/zpc_attribute_store_network_helper.h does not exist")
+endif()
+
+add_mock(zpc_attribute_store_network_helper_mock
+         ${include_dir}/zpc_attribute_store_network_helper.h)
 target_include_directories(
   zpc_attribute_store_network_helper_mock
-  PUBLIC "$<TARGET_PROPERTY:uic_attribute_store,INTERFACE_INCLUDE_DIRECTORIES>"
-  "$<TARGET_PROPERTY:zpc_utils,INTERFACE_INCLUDE_DIRECTORIES>")
-target_link_libraries(zpc_attribute_store_network_helper_mock PUBLIC ucl_definitions)
+  PUBLIC "$<TARGET_PROPERTY:unify,INTERFACE_INCLUDE_DIRECTORIES>"
+         "$<TARGET_PROPERTY:zpc_utils,INTERFACE_INCLUDE_DIRECTORIES>")
+target_link_libraries(zpc_attribute_store_network_helper_mock
+                      PUBLIC ucl_definitions)
 
 # Attribute store network helper Unit Test
 target_add_unittest(
   zpc_attribute_store
-  NAME zpc_attribute_store_network_helper_test
-  SOURCES zpc_attribute_store_network_helper_test.c
-  DEPENDS zwave_network_management_mock
-)
+  NAME
+  zpc_attribute_store_network_helper_test
+  SOURCES
+  zpc_attribute_store_network_helper_test.c
+  DEPENDS
+  zwave_network_management_mock)
 
 target_add_unittest(
   zpc_attribute_store
@@ -44,5 +55,4 @@ target_add_unittest(
   zwave_association_toolbox_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zwave_network_management_mock
-)
+  zwave_network_management_mock)

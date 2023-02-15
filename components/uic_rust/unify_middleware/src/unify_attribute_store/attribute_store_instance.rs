@@ -13,7 +13,7 @@
 use crate::{Attribute, AttributeStore, AttributeStoreError, AttributeStoreTrait};
 /// private helper macro to easily switch between an concrete and mock
 /// attributestore. It creates an function with the following signature:
-/// ```rust
+/// ```rust, ignore
 ///   pub fn attribute_store_instance() -> Result<&'static AttributeStoreType, AttributeStoreError>;
 /// ```
 ///

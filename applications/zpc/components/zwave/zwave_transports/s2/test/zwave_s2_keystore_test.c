@@ -14,8 +14,6 @@
 #include "s2_keystore.h"
 #include "zwave_s2_keystore_int.h"
 
-#include "S2.h"
-
 #include "zwapi_protocol_mem.h"
 #include "zwapi_protocol_basis.h"
 #include "zwapi_init_mock.h"
@@ -26,7 +24,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-
+#include <string.h>
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp() {}
 
@@ -101,6 +99,9 @@ void test_sl_log_keys()
 {
   // Nothing to test here really.
   zwave_s2_log_security_keys(SL_LOG_INFO);
+  uint8_t assigned_keys = 0xFF;
+  nvm_config_set(assigned_keys, &assigned_keys);
+  zwave_s2_save_security_keys("/tmp/test.txt");
 }
 
 void test_zwave_s2_keystore_reset_and_get_assigned_keys()

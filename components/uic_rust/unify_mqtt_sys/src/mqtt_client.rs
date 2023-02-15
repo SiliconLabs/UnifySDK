@@ -19,10 +19,11 @@ use std::{
 };
 
 pub use crate::uic_mqtt::{
-    size_t, sl_status_t, uic_mqtt_publish, uic_mqtt_set_after_connect_callback,
+    sl_status_t, uic_mqtt_publish, uic_mqtt_set_after_connect_callback,
     uic_mqtt_set_before_disconnect_callback, uic_mqtt_setup, uic_mqtt_subscribe,
     uic_mqtt_unsubscribe,
 };
+
 use crate::{
     MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherTrait, TopicMatcherType,
 };
@@ -63,7 +64,7 @@ pub struct UnifyMqttClient {}
 unsafe extern "C" fn message_callback(
     topic: *const ::std::os::raw::c_char,
     message: *const ::std::os::raw::c_char,
-    _message_length: size_t,
+    _message_length: usize,
 ) {
     let topic = CStr::from_ptr(topic).to_string_lossy();
     let message = CStr::from_ptr(message).to_string_lossy();
@@ -126,14 +127,13 @@ impl MqttClientTrait for UnifyMqttClient {
     }
 
     fn publish(&self, topic: &str, payload: &[u8], retain: bool) -> Result<(), sl_status_t> {
-        let message_length: size_t = payload.len() as size_t;
         let topic = CString::new(topic).expect("Failed converting topic string");
 
         unsafe {
             uic_mqtt_publish(
                 topic.as_ptr(),
                 payload.as_ptr() as *const std::os::raw::c_char,
-                message_length,
+                payload.len(),
                 retain,
             );
         }

@@ -1,8 +1,8 @@
 //This file is generated automatically. Don't try to change something here.
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
     Basic: {
@@ -1285,15 +1285,13 @@ export let ClusterTypeAttrs: any = {
             {                
               id: 2,
               name: "CurrentGroup",
-              type: "struct",            
+              type: "number",            
               required: true,
               reportRequired: false,
               sceneRequired: false,
               writable: false,
               isArray: false,
               default: 0,
-              struct:[
-              ],
             },
             {                
               id: 3,
@@ -1330,6 +1328,48 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               struct:[
               ],
+            },
+            {                
+              id: 3841,
+              name: "SceneTable",
+              type: "struct",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+                {
+                  name:"SceneID",
+                  type:"number",
+                  isArray: false,
+                },
+                {
+                  name:"GroupID",
+                  type:"number",
+                  isArray: false,
+                },
+                {
+                  name:"SceneName",
+                  type:"text",
+                  isArray: false,
+                },
+                {
+                  name:"TransitionTime",
+                  type:"number",
+                  isArray: false,
+                },
+                {
+                  name:"TransitionTime100ms",
+                  type:"number",
+                  isArray: false,
+                },
+                {
+                  name:"SceneTableExtensions",
+                  type:"text",
+                  isArray: false,
+                }
+              ],
             }
         ],
         commands: [
@@ -1340,10 +1380,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -1357,10 +1395,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "SceneName",
-                    type: "struct",
+                    type: "text",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "ExtensionFieldSets",
@@ -1378,6 +1414,11 @@ export let ClusterTypeAttrs: any = {
                         isArray: true
                       }
                     ],
+                  },
+                  {
+                    name: "TransitionTime100ms",
+                    type: "number",
+                    isArray: false,
                   }
               ]              
             },
@@ -1535,10 +1576,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -1554,10 +1593,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -1720,10 +1757,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -1737,10 +1772,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "SceneName",
-                    type: "struct",
+                    type: "text",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "ExtensionFieldSets",
@@ -1768,10 +1801,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -1934,10 +1965,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -1953,10 +1982,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -2114,10 +2141,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -2128,10 +2153,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -2294,10 +2317,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -2313,10 +2334,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -2337,10 +2356,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -2503,10 +2520,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneList",
@@ -2522,10 +2537,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -2539,10 +2552,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "SceneName",
-                    type: "struct",
+                    type: "text",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "ExtensionFieldSets",
@@ -2717,10 +2728,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -2736,10 +2745,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -2902,10 +2909,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneID",
@@ -2919,10 +2924,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "SceneName",
-                    type: "struct",
+                    type: "text",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "ExtensionFieldSets",
@@ -2963,10 +2966,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupIdentifierFrom",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneIdentifierFrom",
@@ -2975,10 +2976,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupIdentifierTo",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneIdentifierTo",
@@ -3141,10 +3140,8 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "GroupIdentifierFrom",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "SceneIdentifierFrom",
@@ -7331,6 +7328,478 @@ export let ClusterTypeAttrs: any = {
         ] 
       }
     },
+    WindowCovering: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "WindowCoveringType",
+              type: "enum",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+              enum: [
+                { name: "Rollershade", value: 0},
+																{ name: "Rollershade2Motor", value: 1},
+																{ name: "RollershadeExterior", value: 2},
+																{ name: "RollershadeExterior2Motor", value: 3},
+																{ name: "Drapery", value: 4},
+																{ name: "Awning", value: 5},
+																{ name: "Shutter", value: 6},
+																{ name: "TiltBlindTiltOnly", value: 7},
+																{ name: "TiltBlindLiftAndTilt", value: 8},
+																{ name: "ProjectorScreen", value: 9}
+              ],
+            },
+            {                
+              id: 1,
+              name: "PhysicalClosedLimitLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 2,
+              name: "PhysicalClosedLimitTilt",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 3,
+              name: "CurrentPositionLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 4,
+              name: "CurrentPositionTilt",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 5,
+              name: "NumberOfActuationsLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 6,
+              name: "NumberOfActuationsTilt",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 7,
+              name: "ConfigOrStatus",
+              type: "bitmap",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 3,
+              bitmap: [
+                { name: "Operational", mask: 0x01, type: "boolean", offset: 0 },
+								{ name: "Online", mask: 0x02, type: "boolean", offset: 1 },
+								{ name: "OpenAndUpCommandsReversed", mask: 0x04, type: "boolean", offset: 2 },
+								{ name: "LiftClosedLoop", mask: 0x08, type: "boolean", offset: 3 },
+								{ name: "TiltClosedLoop", mask: 0x10, type: "boolean", offset: 4 },
+								{ name: "LiftEncoderControlled", mask: 0x20, type: "boolean", offset: 5 },
+								{ name: "TiltEncoderControlled", mask: 0x40, type: "boolean", offset: 6 }
+              ]
+            },
+            {                
+              id: 8,
+              name: "CurrentPositionLiftPercentage",
+              type: "number",            
+              max: 100,
+              required: false,
+              reportRequired: true,
+              sceneRequired: true,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 9,
+              name: "CurrentPositionTiltPercentage",
+              type: "number",            
+              max: 100,
+              required: false,
+              reportRequired: true,
+              sceneRequired: true,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 256,
+              name: "InstalledOpenLimitLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 257,
+              name: "InstalledClosedLimitLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 258,
+              name: "InstalledOpenLimitTilt",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 259,
+              name: "InstalledClosedLimitTilt",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 260,
+              name: "VelocityLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 261,
+              name: "AccelerationTimeLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 262,
+              name: "DecelerationTimeLift",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 263,
+              name: "Mode",
+              type: "bitmap",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 4,
+              bitmap: [
+                { name: "MotorDirectionReversed", mask: 0x01, type: "boolean", offset: 0 },
+								{ name: "CalibrationMode", mask: 0x02, type: "boolean", offset: 1 },
+								{ name: "MaintenanceMode", mask: 0x04, type: "boolean", offset: 2 },
+								{ name: "LEDFeedback", mask: 0x08, type: "boolean", offset: 3 }
+              ]
+            },
+            {                
+              id: 264,
+              name: "IntermediateSetpointsLift",
+              type: "text",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: NaN,
+            },
+            {                
+              id: 265,
+              name: "IntermediateSetpointsTilt",
+              type: "text",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: NaN,
+            }
+        ],
+        commands: [
+            {
+              id: 0,
+              name: "UpOrOpen",
+              required: true,
+              fields: [
+              ]              
+            },
+            {
+              id: 1,
+              name: "DownOrClose",
+              required: true,
+              fields: [
+              ]              
+            },
+            {
+              id: 2,
+              name: "Stop",
+              required: true,
+              fields: [
+              ]              
+            },
+            {
+              id: 4,
+              name: "GoToLiftValue",
+              required: false,
+              fields: [
+                  {
+                    name: "LiftValue",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 5,
+              name: "GoToLiftPercentage",
+              required: false,
+              fields: [
+                  {
+                    name: "PercentageLiftValue",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 7,
+              name: "GoToTiltValue",
+              required: false,
+              fields: [
+                  {
+                    name: "TiltValue",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 8,
+              name: "GoToTiltPercentage",
+              required: false,
+              fields: [
+                  {
+                    name: "PercentageTiltValue",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            }
+        ] 
+      }
+    },
+    BarrierControl: {
+      server:{
+        attributes: [
+            {                
+              id: 1,
+              name: "MovingState",
+              type: "enum",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              enum: [
+                { name: "Stopped", value: 0},
+																{ name: "Closing", value: 1},
+																{ name: "Opening", value: 2}
+              ],
+            },
+            {                
+              id: 2,
+              name: "SafetyStatus",
+              type: "bitmap",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              bitmap: [
+                { name: "RemoteLockout", mask: 0x0001, type: "boolean", offset: 0 },
+								{ name: "TamperDetected", mask: 0x0002, type: "boolean", offset: 1 },
+								{ name: "FailedCommunication", mask: 0x0004, type: "boolean", offset: 2 },
+								{ name: "PositionFailure", mask: 0x0008, type: "boolean", offset: 3 }
+              ]
+            },
+            {                
+              id: 3,
+              name: "Capabilities",
+              type: "bitmap",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              bitmap: [
+                { name: "PartialBarrier", mask: 0x01, type: "boolean", offset: 0 }
+              ]
+            },
+            {                
+              id: 4,
+              name: "OpenEvents",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 5,
+              name: "CloseEvents",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 6,
+              name: "CommandOpenEvents",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 7,
+              name: "CommandCloseEvents",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 8,
+              name: "OpenPeriod",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+            },
+            {                
+              id: 9,
+              name: "ClosePeriod",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+            },
+            {                
+              id: 10,
+              name: "BarrierPosition",
+              type: "number",            
+              max: 100,
+              required: true,
+              reportRequired: true,
+              sceneRequired: true,
+              writable: false,
+              isArray: false,
+            }
+        ],
+        commands: [
+            {
+              id: 0,
+              name: "GoToPercent",
+              required: true,
+              fields: [
+                  {
+                    name: "PercentOpen",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 1,
+              name: "Stop",
+              required: true,
+              fields: [
+              ]              
+            }
+        ] 
+      }
+    },
     Thermostat: {
       server:{
         attributes: [
@@ -8430,7 +8899,7 @@ export let ClusterTypeAttrs: any = {
               max: 254,
               required: false,
               reportRequired: true,
-              sceneRequired: false,
+              sceneRequired: true,
               writable: false,
               isArray: false,
               default: 0,
@@ -8899,7 +9368,7 @@ export let ClusterTypeAttrs: any = {
               type: "enum",            
               required: true,
               reportRequired: false,
-              sceneRequired: false,
+              sceneRequired: true,
               writable: false,
               isArray: false,
               default: 1,
@@ -10124,6 +10593,304 @@ export let ClusterTypeAttrs: any = {
         ] 
       }
     },
+    IlluminanceMeasurement: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              max: 65535,
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              max: 65533,
+              min: 1,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 65534,
+              min: 2,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 2048,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 4,
+              name: "LightSensorType",
+              type: "enum",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 255,
+              enum: [
+                { name: "Photodiode", value: 0},
+																{ name: "CMOS", value: 1},
+																{ name: "Unknown", value: 255}
+              ],
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    TemperatureMeasurement: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              max: 32766,
+              min: -27315,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 32767,
+              min: -27314,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 2048,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    PressureMeasurement: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              max: 32766,
+              min: -32767,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 32767,
+              min: -32766,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 2048,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 16,
+              name: "ScaledValue",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
+              id: 17,
+              name: "MinScaledValue",
+              type: "number",            
+              max: 32766,
+              min: -32767,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 18,
+              name: "MaxScaledValue",
+              type: "number",            
+              max: 32767,
+              min: -32766,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: -32768,
+            },
+            {                
+              id: 19,
+              name: "ScaledTolerance",
+              type: "number",            
+              max: 2048,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 20,
+              name: "Scale",
+              type: "number",            
+              max: 127,
+              min: -127,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    FlowMeasurement: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              max: 65533,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 65534,
+              min: 1,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 2048,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
     OccupancySensing: {
       server:{
         attributes: [
@@ -10282,6 +11049,167 @@ export let ClusterTypeAttrs: any = {
               writable: true,
               isArray: false,
               default: 1,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    PhMeasurement: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 1400,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 200,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    ElectricalConductivityMeasurement: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 65534,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 100,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    WindSpeedMeasurement: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 65534,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 776,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
             }
         ],
         commands: [
@@ -13458,6 +14386,23 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "Value",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 4,
+              name: "DiscoverParameterRange",
+              required: false,
+              fields: [
+                  {
+                    name: "FirstParameterId",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "LastParameterId",
                     type: "number",
                     isArray: false,
                   }

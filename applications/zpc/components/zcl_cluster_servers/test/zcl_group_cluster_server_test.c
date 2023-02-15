@@ -19,9 +19,11 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "attribute_store_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
-#include "dotdot_attributes.h"
+#include "unify_dotdot_defined_attribute_types.h"
 #include "ucl_node_state.h"
+#include "sl_log.h"
 
 // Interfaces
 #include "sl_status.h"
@@ -32,6 +34,9 @@
 #include "uic_mqtt_mock.h"
 #include "zpc_dotdot_mqtt_group_dispatch_mock.h"
 #include "zwave_network_management_mock.h"
+
+// Test helpers
+#include "contiki_test_helper.h"
 
 // Generic includes
 #include <string.h>
@@ -44,11 +49,22 @@ static zwave_endpoint_id_t endpoint_id = 0;
 
 static attribute_store_node_t home_id_node     = ATTRIBUTE_STORE_INVALID_NODE;
 static attribute_store_node_t node_id_node     = ATTRIBUTE_STORE_INVALID_NODE;
-static attribute_store_node_t my_node_id_node  = ATTRIBUTE_STORE_INVALID_NODE;
 static attribute_store_node_t endpoint_id_node = ATTRIBUTE_STORE_INVALID_NODE;
 
 static mqtt_message_callback_t incoming_publication_callback_save       = NULL;
 static mqtt_message_callback_t incoming_group_publication_callback_save = NULL;
+
+static const unify_dotdot_attribute_store_configuration_t test_configuration
+  = {.get_endpoint_node_function
+     = &attribute_store_network_helper_get_endpoint_node,
+     .get_unid_endpoint_function
+     = &attribute_store_network_helper_get_unid_endpoint_from_node,
+     .update_attribute_desired_values_on_commands = false,
+     .clear_reported_on_desired_updates           = false,
+     .automatic_deduction_of_supported_commands   = false,
+     .force_read_attributes_enabled               = false,
+     .write_attributes_enabled                    = false,
+     .publish_attribute_values_to_mqtt            = false};
 
 // Expected publications
 const char name_support_message[]     = "{\"value\":{\"Supported\":true}}";
@@ -65,113 +81,102 @@ static void create_test_network()
   //            NodeID 4 - EP 0. It has a GroupID attribute with undefined value []
   //            NodeID 5 - EP [] with undefined value
 
-  home_id_node
-    = attribute_store_add_node(ATTRIBUTE_HOME_ID, attribute_store_get_root());
-
-  attribute_store_set_node_attribute_value(home_id_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&home_id,
-                                           sizeof(zwave_home_id_t));
+  home_id_node = attribute_store_emplace(attribute_store_get_root(),
+                                         ATTRIBUTE_HOME_ID,
+                                         (uint8_t *)&home_id,
+                                         sizeof(zwave_home_id_t));
 
   // NodeID 1
-  node_id_node    = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
-  my_node_id_node = node_id_node;
+  node_id      = 1;
+  node_id_node = attribute_store_emplace(home_id_node,
+                                         ATTRIBUTE_NODE_ID,
+                                         &node_id,
+                                         sizeof(zwave_node_id_t));
 
-  node_id = 1;
-  attribute_store_set_reported(node_id_node, &node_id, sizeof(zwave_node_id_t));
+  endpoint_id      = 0;
+  endpoint_id_node = attribute_store_emplace(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             &endpoint_id,
+                                             sizeof(zwave_endpoint_id_t));
 
-  endpoint_id_node
-    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
-  endpoint_id = 0;
-  attribute_store_set_reported(endpoint_id_node,
-                               &endpoint_id,
-                               sizeof(zwave_endpoint_id_t));
+  endpoint_id      = 1;
+  endpoint_id_node = attribute_store_emplace(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             &endpoint_id,
+                                             sizeof(zwave_endpoint_id_t));
 
-  endpoint_id_node
-    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
-  endpoint_id = 1;
-  attribute_store_set_reported(endpoint_id_node,
-                               &endpoint_id,
-                               sizeof(zwave_endpoint_id_t));
-
-  attribute_store_node_t network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
   node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
-  attribute_store_set_reported(network_status_node,
-                               &network_status,
-                               sizeof(network_status));
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
 
   // NodeID 2
-  node_id_node = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
+  node_id      = 2;
+  node_id_node = attribute_store_emplace(home_id_node,
+                                         ATTRIBUTE_NODE_ID,
+                                         &node_id,
+                                         sizeof(zwave_node_id_t));
 
-  node_id = 2;
-  attribute_store_set_reported(node_id_node, &node_id, sizeof(zwave_node_id_t));
+  endpoint_id      = 1;
+  endpoint_id_node = attribute_store_emplace(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             &endpoint_id,
+                                             sizeof(zwave_endpoint_id_t));
 
-  endpoint_id_node
-    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
-  endpoint_id = 1;
-  attribute_store_set_reported(endpoint_id_node,
-                               &endpoint_id,
-                               sizeof(zwave_endpoint_id_t));
-
-  attribute_store_node_t identify_node
-    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME,
-                               endpoint_id_node);
   uint16_t identify_time = 3;
-  attribute_store_set_reported(identify_node,
-                               &identify_time,
-                               sizeof(identify_time));
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME,
+                                     &identify_time,
+                                     sizeof(identify_time));
 
-  endpoint_id_node
-    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
-  endpoint_id = 2;
-  attribute_store_set_reported(endpoint_id_node,
-                               &endpoint_id,
-                               sizeof(zwave_endpoint_id_t));
+  endpoint_id      = 2;
+  endpoint_id_node = attribute_store_emplace(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             &endpoint_id,
+                                             sizeof(zwave_endpoint_id_t));
 
-  network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
   network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
-  attribute_store_set_reported(network_status_node,
-                               &network_status,
-                               sizeof(network_status));
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
 
   // NodeID 4
-  node_id_node = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
+  node_id      = 4;
+  node_id_node = attribute_store_emplace(home_id_node,
+                                         ATTRIBUTE_NODE_ID,
+                                         &node_id,
+                                         sizeof(zwave_node_id_t));
 
-  node_id = 4;
-  attribute_store_set_reported(node_id_node, &node_id, sizeof(zwave_node_id_t));
-
-  endpoint_id_node
-    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
-  endpoint_id = 0;
-  attribute_store_set_reported(endpoint_id_node,
-                               &endpoint_id,
-                               sizeof(zwave_endpoint_id_t));
+  endpoint_id      = 0;
+  endpoint_id_node = attribute_store_emplace(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             &endpoint_id,
+                                             sizeof(zwave_endpoint_id_t));
   attribute_store_add_node(0x00040001, node_id_node);
 
-  network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
   network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
-  attribute_store_set_reported(network_status_node,
-                               &network_status,
-                               sizeof(network_status));
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
 
   // NodeID 5, with undefined EP
-  node_id_node = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
-
-  node_id = 5;
-  attribute_store_set_reported(node_id_node, &node_id, sizeof(zwave_node_id_t));
+  node_id      = 5;
+  node_id_node = attribute_store_emplace(home_id_node,
+                                         ATTRIBUTE_NODE_ID,
+                                         &node_id,
+                                         sizeof(zwave_node_id_t));
 
   endpoint_id_node
     = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
 
-  network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
   network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
-  attribute_store_set_reported(network_status_node,
-                               &network_status,
-                               sizeof(network_status));
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
 }
 
 void uic_mqtt_subscribe_callback(const char *topic,
@@ -191,7 +196,10 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+  unify_dotdot_attribute_store_init();
   create_test_network();
+  contiki_test_helper_init();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -378,6 +386,7 @@ void test_zcl_group_cluster_server_init_test()
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     attribute_store_refresh_node_and_children_callbacks(home_id_node));
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_add_group_command_test()
@@ -389,30 +398,35 @@ void test_zcl_group_cluster_server_add_group_command_test()
     "ucl/by-unid/zw-00000000-0004/ep0/Groups/Commands/AddGroup",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 
   // Add Group with non-valid JSON
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0004/ep0/Groups/Commands/AddGroup",
     "{ewrewqr]37\"{",
     sizeof("{ewrewqr]37\"{") - 1);
+  contiki_test_helper_run(15);
 
   // Add group without Group ID
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroup",
     "{\"GroupName\":\"\"}",
     sizeof("{\"GroupName\":\"\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Add group without a group name
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroup",
     "{\"GroupId\":1}",
     sizeof("{\"GroupId\":1}") - 1);
+  contiki_test_helper_run(15);
 
   // Try to add Group ID 0
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroup",
     "{\"GroupId\":0,\"GroupName\":\"Test Group\"}",
     sizeof("{\"GroupId\":0,\"GroupName\":\"Test Group\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Add Group 1 with no name on NodeID 2, Ep 1
   uic_mqtt_publish_Expect(
@@ -442,6 +456,7 @@ void test_zcl_group_cluster_server_add_group_command_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroup",
     "{\"GroupId\":1,\"GroupName\":\"\"}",
     sizeof("{\"GroupId\":1,\"GroupName\":\"\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Add Group 2 with name on NodeID 2, Ep 1
   uic_mqtt_publish_Expect(
@@ -471,6 +486,7 @@ void test_zcl_group_cluster_server_add_group_command_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroup",
     "{\"GroupId\":2,\"GroupName\":\"Test Group\"}",
     sizeof("{\"GroupId\":2,\"GroupName\":\"Test Group\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Add group to non-existing endpoint
   incoming_publication_callback_save(
@@ -478,12 +494,14 @@ void test_zcl_group_cluster_server_add_group_command_test()
     "{\"GroupId\":3,\"GroupName\":\"Test Group invalid endpoint\"}",
     sizeof("{\"GroupId\":3,\"GroupName\":\"Test Group invalid endpoint\"}")
       - 1);
+  contiki_test_helper_run(15);
 
   // Add group to non-existing NodeID
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0034/ep0/Groups/Commands/AddGroup",
     "{\"GroupId\":3,\"GroupName\":\"Test Group invalid NodeID\"}",
     sizeof("{\"GroupId\":3,\"GroupName\":\"Test Group invalid NodeID\"}") - 1);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_remove_group_command_test()
@@ -495,18 +513,21 @@ void test_zcl_group_cluster_server_remove_group_command_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/RemoveGroup",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 
   // Remove Group with non-valid JSON
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0004/ep0/Groups/Commands/RemoveGroup",
     "{ewrewqr]37\"{",
     sizeof("{ewrewqr]37\"{") - 1);
+  contiki_test_helper_run(15);
 
   // Remove group to non-existing NodeID
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0034/ep0/Groups/Commands/RemoveGroup",
     "{\"GroupId\":3}",
     sizeof("{\"GroupId\":3}") - 1);
+  contiki_test_helper_run(15);
 
   // Remove Group 2 with name on NodeID 2, Ep 1
   uic_mqtt_publish_Expect(
@@ -527,6 +548,7 @@ void test_zcl_group_cluster_server_remove_group_command_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/RemoveGroup",
     "{\"GroupId\":2}",
     sizeof("{\"GroupId\":2}") - 1);
+  contiki_test_helper_run(15);
 
   // Try to non-existing group 2 again on NodeID 2, Ep1. Nothing bad should happen.
   uic_mqtt_publish_Expect(
@@ -547,6 +569,7 @@ void test_zcl_group_cluster_server_remove_group_command_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/RemoveGroup",
     "{\"GroupId\":2}",
     sizeof("{\"GroupId\":2}") - 1);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_commands_with_no_effect_test()
@@ -558,16 +581,19 @@ void test_zcl_group_cluster_server_commands_with_no_effect_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/ViewGroup",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/GetGroupMembership",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/ThisIsNotAValidCommand",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_add_if_identifying_command_test()
@@ -602,42 +628,49 @@ void test_zcl_group_cluster_server_add_if_identifying_command_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroupIfIdentifying",
     "{\"GroupId\":3,\"GroupName\":\"Test Idenfifying Group\"}",
     sizeof("{\"GroupId\":3,\"GroupName\":\"Test Idenfifying Group\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Add group to non-existing endpoint
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep8/Groups/Commands/AddGroupIfIdentifying",
     "{\"GroupId\":4,\"GroupName\":\"Test Invalid Group\"}",
     sizeof("{\"GroupId\":4,\"GroupName\":\"Test Invalid Group\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Add group to non-existing NodeID
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-00AA/ep0/Groups/Commands/AddGroupIfIdentifying",
     "{\"GroupId\":4,\"GroupName\":\"Test Invalid Group\"}",
     sizeof("{\"GroupId\":4,\"GroupName\":\"Test Invalid Group\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Add group on a non-identifying endpoint
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep2/Groups/Commands/AddGroupIfIdentifying",
     "{\"GroupId\":4,\"GroupName\":\"Test non-identifying Group\"}",
     sizeof("{\"GroupId\":4,\"GroupName\":\"Test non-identifying Group\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Missing Group ID
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroupIfIdentifying",
     "{\"GroupName\":\"Test Idenfifying Group\"}",
     sizeof("{\"GroupName\":\"Test Idenfifying Group\"}") - 1);
+  contiki_test_helper_run(15);
 
   // Missing Group Name
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroupIfIdentifying",
     "{\"GroupId\":6}",
     sizeof("{\"GroupId\":6}") - 1);
+  contiki_test_helper_run(15);
 
   // With non-valid JSON
   incoming_publication_callback_save(
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/AddGroupIfIdentifying",
     "{ewrewqr]37\"{",
     sizeof("{ewrewqr]37\"{") - 1);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_is_unid_endpoint_in_group_test()
@@ -663,6 +696,7 @@ void test_zcl_group_cluster_server_by_group_command_dispatch()
     "ucl/by-group/zxmcnv/Groups/Commands/AddfdsfGroup",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 
   // This should go through to the dispatch component
   zpc_dotdot_mqtt_group_dispatch_Expect(12,
@@ -676,6 +710,7 @@ void test_zcl_group_cluster_server_by_group_command_dispatch()
     "ucl/by-group/12/Groups/Commands/TestCommand",
     "TestMessage",
     sizeof("TestMessage") - 1);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_remove_all_groups_command_test()
@@ -703,6 +738,7 @@ void test_zcl_group_cluster_server_remove_all_groups_command_test()
     "ucl/by-unid/zw-00000000-0002/ep1/Groups/Commands/RemoveAllGroups",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 
   // Call it on NodeID 4, ep 0, No group deleted, but publication will happen
   uic_mqtt_publish_Expect(
@@ -725,6 +761,7 @@ void test_zcl_group_cluster_server_remove_all_groups_command_test()
     "ucl/by-unid/zw-00000000-00AA/ep0/Groups/Commands/RemoveAllGroups",
     "{}",
     sizeof("{}") - 1);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_delete_network_status_test()
@@ -744,6 +781,7 @@ void test_zcl_group_cluster_server_delete_network_status_test()
                                              ATTRIBUTE_NETWORK_STATUS,
                                              0);
   attribute_store_delete_node(network_status_2);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_delete_endpoint_test()
@@ -768,10 +806,12 @@ void test_zcl_group_cluster_server_delete_endpoint_test()
                                               0);
   uic_mqtt_unretain_Expect("ucl/by-unid/zw-00000000-0002/ep2/Groups");
   attribute_store_delete_node(endpoint_2_node);
+  contiki_test_helper_run(15);
 }
 
 void test_zcl_group_cluster_server_teardown_test()
 {
   // Teardown the Group Server cluster, nothing should happen
   zcl_group_cluster_server_teardown();
+  contiki_test_helper_run(15);
 }

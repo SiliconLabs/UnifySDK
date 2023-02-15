@@ -18,6 +18,7 @@
 #include "attribute_store_fixt.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_defined_attribute_types.h"
+#include "zwave_smartstart_management.h"
 
 // Contiki
 #include "contiki_test_helper.h"
@@ -42,11 +43,12 @@ extern "C" {
 #include "zwave_unid.h"
 #include "s2_keystore.h"
 
-int ctimer_expired(struct ctimer *c)
+bool is_command_class_in_supported_list(zwave_command_class_t command_class,
+                                        const uint8_t *nif,
+                                        uint8_t nif_length)
 {
-  return 1;
+    return false;
 }
-
 // clang-format off
 // Device 4
 zwave_dsk_t device_4_dsk_array = {0x76, 0xF7, 0xFE, 0xA7, 0xA7, 0xCA, 0x39, 0xF7
@@ -264,11 +266,6 @@ void test_zwave_smartstart_on_inclusion_request()
   zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   add_device_4();
-  zwave_network_management_add_node_with_dsk_ExpectAndReturn(device_4_dsk_array,
-                                                             KEY_CLASS_ALL,
-                                                             PROTOCOL_ZWAVE,
-                                                             SL_STATUS_OK);
-
   smartstart_callbacks->on_smart_start_inclusion_request(nwi_home_id,
                                                          false,
                                                          NULL,
@@ -520,6 +517,17 @@ void test_zwave_smartstart_inclusion_all_dsk_already_in_network()
     // clang-format on
     Management::get_instance()->update_smartstart_cache(smartstart_list);
   }
+  // Hex conversion of "11161-14532-28714-35861-02690-50097-47954-03920"
+  zwave_dsk_t dsk = {0x00, 0x00, 0x38, 0xC4, 0x70, 0x2A, 0x8C, 0x15, 0x0A, 0x82, 0xC3, 0xB1, 0xBB, 0x52, 0x0F, 0x50};
+
+  TEST_ASSERT_EQUAL(find_dsk_obfuscated_bytes_from_smart_start_list(dsk, 2), true);
+  TEST_ASSERT_EQUAL_CHAR(dsk[0], 0x2B);
+  TEST_ASSERT_EQUAL_CHAR(dsk[1], 0x99);
+  // Garbled DS                    VV
+  zwave_dsk_t gdsk = {0x00, 0x00, 0x00, 0xC4, 0x70, 0x2A, 0x8C, 0x15, 0x0A, 0x82, 0xC3, 0xB1, 0xBB, 0x52, 0x0F, 0x50};
+  TEST_ASSERT_EQUAL(find_dsk_obfuscated_bytes_from_smart_start_list(gdsk, 2), false);
+  TEST_ASSERT_EQUAL_CHAR(gdsk[0], 0x00);
+  TEST_ASSERT_EQUAL_CHAR(gdsk[1], 0x00);
 }
 
 void test_zwave_smartstart_inclusion_one_dsk_already_in_network()
@@ -595,6 +603,69 @@ void test_zwave_smartstart_inclusion_all_dsk_already_in_network_but_reset_ongoin
                                   ",\"Unid\":\"\"}]";
     // clang-format on
     Management::get_instance()->update_smartstart_cache(smartstart_list);
+  }
+}
+
+void test_update_smartstart_cache_invalid_format()
+{
+  {
+    zwave_network_management_enable_smart_start_add_mode_Ignore();
+    std::string smartstart_list
+      = "{\"value\": "
+        "[\"DSK\",\"24859-64107-46202-12845-60475-62452-54892-59867\"]}";
+    TEST_ASSERT_EQUAL_UINT32(
+      SL_STATUS_FAIL,
+      Management::get_instance()->update_smartstart_cache(smartstart_list));
+  }
+  {
+    zwave_network_management_enable_smart_start_add_mode_Ignore();
+    std::string smartstart_list
+      = "{\"value\": "
+        "[{\"DSK\":\"24859-64107-46202-12845-60475-62452-54892-59867\"}]}";
+    TEST_ASSERT_EQUAL_UINT32(
+      SL_STATUS_FAIL,
+      Management::get_instance()->update_smartstart_cache(smartstart_list));
+  }
+  {
+    zwave_network_management_enable_smart_start_add_mode_Ignore();
+    std::string smartstart_list = "{\"value\": [{\"Include\":true}]}";
+    TEST_ASSERT_EQUAL_UINT32(
+      SL_STATUS_FAIL,
+      Management::get_instance()->update_smartstart_cache(smartstart_list));
+  }
+  {
+    zwave_network_management_enable_smart_start_add_mode_Ignore();
+    std::string smartstart_list = "{\"value\": null}";
+    TEST_ASSERT_EQUAL_UINT32(
+      SL_STATUS_FAIL,
+      Management::get_instance()->update_smartstart_cache(smartstart_list));
+  }
+  {
+    zwave_network_management_enable_smart_start_add_mode_Ignore();
+    std::string smartstart_list = "{[null]}";
+    TEST_ASSERT_EQUAL_UINT32(
+      SL_STATUS_FAIL,
+      Management::get_instance()->update_smartstart_cache(smartstart_list));
+  }
+  {
+    zwave_network_management_enable_smart_start_add_mode_Ignore();
+    std::string smartstart_list
+      = " {"
+        "["
+        "{"
+        "\"DSK\":\"24859-64107-46202-12845-60475-62452-54892-59867\","
+        "\"Include\":true,"
+        "\"ProtocolControllerUnid\":\"zw-BEEFFEEB-001\","
+        "\"Unid\":\"\","
+        "\"PreferredProtocols\":["
+        "\"Z-Wave\""
+        "]"
+        "}"
+        "]"
+        "}";
+    TEST_ASSERT_EQUAL_UINT32(
+      SL_STATUS_FAIL,
+      Management::get_instance()->update_smartstart_cache(smartstart_list));
   }
 }
 }

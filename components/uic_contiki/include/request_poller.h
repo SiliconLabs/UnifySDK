@@ -12,12 +12,11 @@
  *****************************************************************************/
 #ifndef REQUEST_POLLER_H
 #define REQUEST_POLLER_H
-
-#include "contiki.h"
 #include "sl_status.h"
 
-PROCESS_NAME(request_poller_process);
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 /**
  * @brief Start rust process. This process drives the task executor in rust
  */
@@ -34,4 +33,7 @@ void register_poll_handler(void (*handler)());
  */
 void request_poller_poll_request();
 
+#ifdef __cplusplus
+}
+#endif
 #endif

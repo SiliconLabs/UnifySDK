@@ -20,16 +20,16 @@ detailed requirements of the IoT Service.
 3. Discover nodes using MQTT topics. Discovering nodes and resources that can be
    displayed or manipulated is fundamental to any IoT Service. This is achieved
    by subscribing to particular MQTT topics. See the Service Discovery chapter
-   of the [Unify Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+   of the [Unify Specification](./unify_specifications/index.rst).
 4. Implement Network Management. If the IoT Service needs to do network
    management, consider which operations are needed and implement them as
    described in the Network Management chapter of the
-   [Unify Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+   [Unify Specification](./unify_specifications/index.rst).
 5. Interact with nodes using MQTT topics. Interacting with the nodes by either
    reading out status or controlling their state is fundamental to most IoT
    services. Subscribe and publish to the relevant MQTT topics as described in
    the Application Level Control chapter of the
-   [Unify Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+   [Unify Specification](./unify_specifications/index.rst).
 6. Consider re-using appropriate shared components from the Unify Framework codebase.
    A valuable feature of Unify is the common components shared by many modules
    of the SDK. Code reuse saves both development time and offers IoT Service

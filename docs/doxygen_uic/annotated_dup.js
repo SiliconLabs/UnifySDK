@@ -1,12 +1,50 @@
 var annotated_dup =
 [
-    [ "ast", "namespaceast.html", "namespaceast" ],
-    [ "smartstart", "namespacesmartstart.html", "namespacesmartstart" ],
-    [ "uic_ota", "namespaceuic__ota.html", "namespaceuic__ota" ],
-    [ "unify", "namespaceunify.html", "namespaceunify" ],
+    [ "ast", "namespaceast.html", [
+      [ "nil", "structast_1_1nil.html", null ],
+      [ "ast_tree", "structast_1_1ast__tree.html", null ],
+      [ "signed_", "structast_1_1signed__.html", "structast_1_1signed__" ],
+      [ "operation", "structast_1_1operation.html", "structast_1_1operation" ],
+      [ "expression", "structast_1_1expression.html", "structast_1_1expression" ],
+      [ "condition", "structast_1_1condition.html", "structast_1_1condition" ],
+      [ "attribute_path_subscript", "structast_1_1attribute__path__subscript.html", "structast_1_1attribute__path__subscript" ],
+      [ "attribute", "structast_1_1attribute.html", "structast_1_1attribute" ],
+      [ "assignment", "structast_1_1assignment.html", "structast_1_1assignment" ],
+      [ "function_invokation", "structast_1_1function__invokation.html", "structast_1_1function__invokation" ],
+      [ "scope_setting", "structast_1_1scope__setting.html", "structast_1_1scope__setting" ],
+      [ "scope", "structast_1_1scope.html", "structast_1_1scope" ],
+      [ "complexity", "classast_1_1complexity.html", "classast_1_1complexity" ],
+      [ "path_complexity", "classast_1_1path__complexity.html", "classast_1_1path__complexity" ],
+      [ "dep_eval", "classast_1_1dep__eval.html", "classast_1_1dep__eval" ],
+      [ "dep_eval_path", "classast_1_1dep__eval__path.html", "classast_1_1dep__eval__path" ],
+      [ "eval", "structast_1_1eval.html", "structast_1_1eval" ],
+      [ "attribute_path_eval", "structast_1_1attribute__path__eval.html", "structast_1_1attribute__path__eval" ],
+      [ "print", "classast_1_1print.html", "classast_1_1print" ],
+      [ "path_printer", "classast_1_1path__printer.html", "classast_1_1path__printer" ],
+      [ "reducer", "classast_1_1reducer.html", "classast_1_1reducer" ],
+      [ "built_in_function_check", "classast_1_1built__in__function__check.html", "classast_1_1built__in__function__check" ]
+    ] ],
+    [ "smartstart", "namespacesmartstart.html", [
+      [ "Query", "classsmartstart_1_1Query.html", "classsmartstart_1_1Query" ],
+      [ "Entry", "classsmartstart_1_1Entry.html", "classsmartstart_1_1Entry" ],
+      [ "Management", "classsmartstart_1_1Management.html", "classsmartstart_1_1Management" ]
+    ] ],
+    [ "uic_ota", "namespaceuic__ota.html", [
+      [ "meta_t", "structuic__ota_1_1meta__t.html", "structuic__ota_1_1meta__t" ]
+    ] ],
+    [ "unify", "namespaceunify.html", [
+      [ "node_state_monitor", "namespaceunify_1_1node__state__monitor.html", [
+        [ "cluster", "classunify_1_1node__state__monitor_1_1cluster.html", "classunify_1_1node__state__monitor_1_1cluster" ],
+        [ "endpoint", "classunify_1_1node__state__monitor_1_1endpoint.html", "classunify_1_1node__state__monitor_1_1endpoint" ],
+        [ "node", "classunify_1_1node__state__monitor_1_1node.html", "classunify_1_1node__state__monitor_1_1node" ],
+        [ "node_state_monitor_interface", "classunify_1_1node__state__monitor_1_1node__state__monitor__interface.html", "classunify_1_1node__state__monitor_1_1node__state__monitor__interface" ],
+        [ "node_state_monitor", "classunify_1_1node__state__monitor_1_1node__state__monitor.html", "classunify_1_1node__state__monitor_1_1node__state__monitor" ]
+      ] ]
+    ] ],
     [ "_BindingObject", "struct__BindingObject.html", "struct__BindingObject" ],
     [ "_ConfigurationParameter", "struct__ConfigurationParameter.html", "struct__ConfigurationParameter" ],
     [ "_CoordinateAndOrientation", "struct__CoordinateAndOrientation.html", "struct__CoordinateAndOrientation" ],
+    [ "_datastore_attribute_", "struct__datastore__attribute__.html", "struct__datastore__attribute__" ],
     [ "_DiskIOCounters", "struct__DiskIOCounters.html", "struct__DiskIOCounters" ],
     [ "_DiskUsageData", "struct__DiskUsageData.html", "struct__DiskUsageData" ],
     [ "_EstimatedPosition", "struct__EstimatedPosition.html", "struct__EstimatedPosition" ],
@@ -17,9 +55,7 @@ var annotated_dup =
     [ "_NM_StateParameters", "struct__NM__StateParameters.html", "struct__NM__StateParameters" ],
     [ "_SExtensionFieldSetList", "struct__SExtensionFieldSetList.html", "struct__SExtensionFieldSetList" ],
     [ "_SphericalCoordinates", "struct__SphericalCoordinates.html", "struct__SphericalCoordinates" ],
-    [ "_TLDeviceInformationRecord", "struct__TLDeviceInformationRecord.html", "struct__TLDeviceInformationRecord" ],
-    [ "_TLEndpointInformationRecord", "struct__TLEndpointInformationRecord.html", "struct__TLEndpointInformationRecord" ],
-    [ "_TLGroupInformationRecord", "struct__TLGroupInformationRecord.html", "struct__TLGroupInformationRecord" ],
+    [ "_SSceneTable", "struct__SSceneTable.html", "struct__SSceneTable" ],
     [ "_TransitionType", "struct__TransitionType.html", "struct__TransitionType" ],
     [ "_uic_mqtt_dotdot_alarms_supported_commands_", "struct__uic__mqtt__dotdot__alarms__supported__commands__.html", "struct__uic__mqtt__dotdot__alarms__supported__commands__" ],
     [ "_uic_mqtt_dotdot_aox_locator_supported_commands_", "struct__uic__mqtt__dotdot__aox__locator__supported__commands__.html", "struct__uic__mqtt__dotdot__aox__locator__supported__commands__" ],
@@ -156,6 +192,7 @@ var annotated_dup =
     [ "uic_mqtt_dotdot_color_control_state_t", "structuic__mqtt__dotdot__color__control__state__t.html", "structuic__mqtt__dotdot__color__control__state__t" ],
     [ "uic_mqtt_dotdot_color_control_updated_state_t", "structuic__mqtt__dotdot__color__control__updated__state__t.html", "structuic__mqtt__dotdot__color__control__updated__state__t" ],
     [ "uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_fields_t", "structuic__mqtt__dotdot__configuration__parameters__command__discover__parameter__fields__t.html", "structuic__mqtt__dotdot__configuration__parameters__command__discover__parameter__fields__t" ],
+    [ "uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t", "structuic__mqtt__dotdot__configuration__parameters__command__discover__parameter__range__fields__t.html", "structuic__mqtt__dotdot__configuration__parameters__command__discover__parameter__range__fields__t" ],
     [ "uic_mqtt_dotdot_configuration_parameters_command_set_parameter_fields_t", "structuic__mqtt__dotdot__configuration__parameters__command__set__parameter__fields__t.html", "structuic__mqtt__dotdot__configuration__parameters__command__set__parameter__fields__t" ],
     [ "uic_mqtt_dotdot_configuration_parameters_state_t", "structuic__mqtt__dotdot__configuration__parameters__state__t.html", "structuic__mqtt__dotdot__configuration__parameters__state__t" ],
     [ "uic_mqtt_dotdot_configuration_parameters_updated_state_t", "structuic__mqtt__dotdot__configuration__parameters__updated__state__t.html", "structuic__mqtt__dotdot__configuration__parameters__updated__state__t" ],
@@ -361,5 +398,6 @@ var annotated_dup =
     [ "uic_mqtt_dotdot_window_covering_command_go_to_tilt_value_fields_t", "structuic__mqtt__dotdot__window__covering__command__go__to__tilt__value__fields__t.html", "structuic__mqtt__dotdot__window__covering__command__go__to__tilt__value__fields__t" ],
     [ "uic_mqtt_dotdot_window_covering_state_t", "structuic__mqtt__dotdot__window__covering__state__t.html", "structuic__mqtt__dotdot__window__covering__state__t" ],
     [ "uic_mqtt_dotdot_window_covering_updated_state_t", "structuic__mqtt__dotdot__window__covering__updated__state__t.html", "structuic__mqtt__dotdot__window__covering__updated__state__t" ],
+    [ "unify_dotdot_attribute_store_configuration_t", "structunify__dotdot__attribute__store__configuration__t.html", "structunify__dotdot__attribute__store__configuration__t" ],
     [ "yaml_parser", "classyaml__parser.html", "classyaml__parser" ]
 ];

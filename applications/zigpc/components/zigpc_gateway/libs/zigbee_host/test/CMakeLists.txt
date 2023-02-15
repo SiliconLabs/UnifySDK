@@ -1,3 +1,10 @@
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  # "--allow-multiple-definition" can cause some weird symptons as we leave it
+  # up to the linker which symbol gets merged into the test binary.
+  add_link_options("-Wl,--unresolved-symbols=ignore-in-object-files"
+                   "-Wl,--allow-multiple-definition")
+endif()
+
 add_definitions(
   -DSILABS_AF_API -DSILABS_EMBER_CONFIGURATION_DEFAULTS_H
   -DZCL_DIRECTION_SERVER_TO_CLIENT=1 -DZCL_NULL_CLUSTER_ID=0xFFFF -DUC_BUILD=1
@@ -151,3 +158,4 @@ target_add_unittest(
 target_compile_definitions(
   zigbee_host_poll_checkin_test
   PRIVATE EMBER_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT=32)
+

@@ -1,0 +1,208 @@
+{
+  "nodes": {
+    "cpcd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1675415860,
+        "narHash": "sha256-VF38Ef3MgHVVsvNQ3TUTORM36dh1q5SHca7c6ebt9a0=",
+        "owner": "SiliconLabs",
+        "repo": "unify-sdk-flakes",
+        "rev": "7de893c04150bfcb0f25823fc105bcae514cb2bc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SiliconLabs",
+        "repo": "unify-sdk-flakes",
+        "rev": "7de893c04150bfcb0f25823fc105bcae514cb2bc",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "gecko-sdk": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1670905245,
+        "narHash": "sha256-2lF0r/OPehulKzAGx1pCrEYIohjdqYRxjhYlUAaxBRQ=",
+        "owner": "SiliconLabs",
+        "repo": "gecko_sdk",
+        "rev": "d4854d2ff06a828161d7032efb1736d0deda40b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SiliconLabs",
+        "repo": "gecko_sdk",
+        "rev": "d4854d2ff06a828161d7032efb1736d0deda40b1",
+        "type": "github"
+      }
+    },
+    "nix-filter": {
+      "locked": {
+        "lastModified": 1666547822,
+        "narHash": "sha256-razwnAybPHyoAyhkKCwXdxihIqJi1G6e1XP4FQOJTEs=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "1a3b735e13e90a8d2fd5629f2f8363bd7ffbbec7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1674459583,
+        "narHash": "sha256-L0UZl/u2H3HGsrhN+by42c5kNYeKtdmJiPzIRvEVeiM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1b1f50645af2a70dc93eae18bfd88d330bfbcf7f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1665296151,
+        "narHash": "sha256-uOB0oxqxN9K7XGF1hcnY+PQnlQJ+3bP2vCn/+Ru/bbc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "14ccaaedd95a488dd7ae142757884d8e125b3363",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "cpcd": "cpcd",
+        "flake-utils": "flake-utils",
+        "gecko-sdk": "gecko-sdk",
+        "nix-filter": "nix-filter",
+        "nixpkgs": "nixpkgs",
+        "rust-overlay": "rust-overlay",
+        "ths-cmock": "ths-cmock",
+        "ths-unity": "ths-unity",
+        "zw-testframework": "zw-testframework"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1674527079,
+        "narHash": "sha256-WqehnSvo9YYfAoh7HMTxp6YVwq5eyLz663vPufeSsQs=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "187b7835d59b9c040e0782b5b129de113207c2d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "ths-cmock": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-YbOhXrMsAp6J/9iS+c2Kxh2eJhMCge7V0JfmFvryk6w=",
+        "path": "/nix/store/3pz9fpivi29g9dhbss8xn7mp89xg21v2-source/components/testframework/libs/cmock",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/3pz9fpivi29g9dhbss8xn7mp89xg21v2-source/components/testframework/libs/cmock",
+        "type": "path"
+      }
+    },
+    "ths-unity": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-5IrsA05R0GUZT8uG6cSrgy8LbFqb2Brock8amrwxuO8=",
+        "path": "/nix/store/3pz9fpivi29g9dhbss8xn7mp89xg21v2-source/components/testframework/libs/cmock/vendor/unity",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/3pz9fpivi29g9dhbss8xn7mp89xg21v2-source/components/testframework/libs/cmock/vendor/unity",
+        "type": "path"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "zw-testframework": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-MdAeLTIbF6XlFCAReWba8qHQcBzP0dRjR/SYJ/PMClM=",
+        "path": "/nix/store/3pz9fpivi29g9dhbss8xn7mp89xg21v2-source/components/testframework/libs/testframework",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/3pz9fpivi29g9dhbss8xn7mp89xg21v2-source/components/testframework/libs/testframework",
+        "type": "path"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

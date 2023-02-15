@@ -18,6 +18,7 @@
 mod log_formatter;
 mod mqtt_handler;
 use mqtt_handler::*;
+use unify_application_monitoring_sys::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
 use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
@@ -29,6 +30,7 @@ use std::str;
 declare_app_name!("unify-upti-writer");
 const UNID: &'static str = "upti_w";
 const IPS: &'static str = "";
+const FULL_APPLICATION_NAME: &str = "UPTI-Writer (Unify Packet Trace Interface Writer)";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 const LOG_PATH: &str = "/var/lib/uic-upti-writer";
 
@@ -52,11 +54,7 @@ fn parse_application_arguments() -> std::result::Result<(), config_status_t> {
         .map(|arg| CString::new(arg).unwrap())
         .collect::<Vec<CString>>();
 
-        config_add_string(
-            "upti_writer.unid",
-            "Controller unid",
-            UNID,
-        )
+    config_add_string("upti_writer.unid", "Controller unid", UNID)
         .and(config_add_string(
             "upti_writer.log_path",
             "Log path",
@@ -81,6 +79,7 @@ fn ok_or_exit_with_message<T, E: std::fmt::Display>(
 }
 
 fn run(writer_config: UptiWriterConfig) -> Result<(), sl_status_t> {
+    unify_application_monitoring_set_application_name(FULL_APPLICATION_NAME);
     let mqtt_client = UnifyMqttClient::default();
     mqtt_client.initialize()?;
     let handler = MqttHandler::new(mqtt_client, writer_config)?;

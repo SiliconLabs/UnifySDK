@@ -28,6 +28,7 @@
 #include "uic_mqtt.h"
 #include "uic_mqtt_int.h"
 #include "mqtt_client.h"
+#include "mqtt_client_id.h"
 
 #define LOG_TAG "uic_mqtt"
 
@@ -35,13 +36,13 @@ PROCESS(uic_mqtt_process, "Unify MQTT Client");
 
 // An instance of our C++ struct/class. We need to pass this to all of
 // its wrapper-functions.
-mqtt_client_t client_instance;
+mqtt_client_t client_instance = NULL;
 
 // Timer for making sure we poll the client regularly for keepalive, etc.
 static struct etimer uic_mqtt_loop_timer;
 static struct etimer uic_mqtt_post_delay_timer;
 static bool uic_mqtt_post_delay_timer_flag = false;
-static int delayed_event;
+static int delayed_event                   = 0;
 
 // A wrapper for the Contiki's process_post. This is done so the mqtt_client
 // doesn't need to know about the uic_mqtt_process or any other Contiki-specifics.
@@ -100,7 +101,6 @@ void uic_mqtt_process_on_disconnect(mqtt_client_t instance,
 sl_status_t uic_mqtt_setup()
 {
   const char *mqtt_host;
-  const char *mqtt_client_id;
   const char *cafile;
   const char *certfile;
   const char *keyfile;
@@ -113,17 +113,13 @@ sl_status_t uic_mqtt_setup()
   if (CONFIG_STATUS_OK != config_get_as_int(CONFIG_KEY_MQTT_PORT, &mqtt_port)) {
     return SL_STATUS_FAIL;
   }
-  if (CONFIG_STATUS_OK != config_get_as_string(CONFIG_KEY_MQTT_CLIENT_ID, &mqtt_client_id)) {
-    sl_log_error(LOG_TAG, "MQTT client ID not set");
-    return SL_STATUS_FAIL;
-  }
   config_get_as_string(CONFIG_KEY_MQTT_CAFILE, &cafile);
   config_get_as_string(CONFIG_KEY_MQTT_CERTFILE, &certfile);
   config_get_as_string(CONFIG_KEY_MQTT_KEYFILE, &keyfile);
 
   client_instance = mqtt_client_new(mqtt_host,
                                     mqtt_port,
-                                    mqtt_client_id,
+                                    mqtt_client_id_get_from_config(),
                                     cafile,
                                     certfile,
                                     keyfile,
@@ -145,15 +141,20 @@ int uic_mqtt_teardown()
 {
   int retval = mqtt_client_teardown(client_instance);
   mqtt_client_delete(client_instance);
+  client_instance = NULL;
   return retval;
 }
 
-void uic_mqtt_subscribe(const char *topic,
-                        void (*callBack)(const char *topic,
-                                         const char *message,
-                                         const size_t message_length))
+void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callBack)
 {
   mqtt_client_subscribe(client_instance, topic, callBack);
+}
+
+void uic_mqtt_subscribe_ex(const char *topic,
+                           mqtt_message_callback_ex_t callBack,
+                           void *user)
+{
+  mqtt_client_subscribe_ex(client_instance, topic, callBack, user);
 }
 
 void uic_mqtt_publish(const char *topic,
@@ -186,23 +187,39 @@ void uic_mqtt_unretain_by_regex(const char *regex)
   mqtt_client_unretain_by_regex(client_instance, regex);
 }
 
-void uic_mqtt_unsubscribe(const char *topic,
-                          void (*callBack)(const char *topic,
-                                           const char *message,
-                                           const size_t message_length))
+void uic_mqtt_unsubscribe(const char *topic, mqtt_message_callback_t callback)
 {
-  mqtt_client_unsubscribe(client_instance, topic, callBack);
+  mqtt_client_unsubscribe(client_instance, topic, callback);
 }
 
-void uic_mqtt_set_before_disconnect_callback(void (*before_disconnect)())
+void uic_mqtt_unsubscribe_ex(const char *topic,
+                             mqtt_message_callback_ex_t callback,
+                             void *user)
+{
+  mqtt_client_unsubscribe_ex(client_instance, topic, callback, user);
+}
+
+void uic_mqtt_set_before_disconnect_callback(
+  mqtt_connection_callbacks_t before_disconnect)
 {
   mqtt_client_before_disconnect_callback_set(client_instance,
                                              before_disconnect);
 }
 
-void uic_mqtt_set_after_connect_callback(void (*after_connect)())
+void uic_mqtt_set_after_connect_callback(
+  mqtt_connection_callbacks_t after_connect)
 {
   mqtt_client_after_connect_callback_set(client_instance, after_connect);
+}
+
+const char *uic_mqtt_get_client_id()
+{
+  return mqtt_client_get_client_id(client_instance);
+}
+
+bool uic_mqtt_is_connected_to_broker()
+{
+  return mqtt_client_is_connected_to_broker(client_instance);
 }
 
 // Contiki process implementation

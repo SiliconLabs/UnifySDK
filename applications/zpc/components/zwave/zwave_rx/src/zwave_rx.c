@@ -104,6 +104,7 @@ sl_status_t zwave_rx_init(const char *serial_port,
                           int *serial_port_fd,
                           int8_t normal_tx_power_dbm,
                           int8_t measured_0dBm_power,
+                          int16_t max_lr_tx_power_dbm,
                           zwave_controller_region_t region)
 {
   // Register the local Z-Wave RX callbacks to the Z-Wave API callbacks
@@ -170,8 +171,8 @@ sl_status_t zwave_rx_init(const char *serial_port,
   // Set the RF Region if the configuration requested it.
   // if the module does not support it, we still try and fail, we should not run
   // if the user config indicates an RF region and the Z-Wave API runs another.
+  sl_log_info(LOG_TAG, "Setting the Z-Wave RF region to %d\n", region);
   if (region != zwapi_get_rf_region()) {
-    sl_log_info(LOG_TAG, "Setting the Z-Wave RF region to %d\n", region);
     command_status = zwapi_set_rf_region(region);
     if (command_status == SL_STATUS_NOT_SUPPORTED) {
       sl_log_critical(
@@ -194,10 +195,30 @@ sl_status_t zwave_rx_init(const char *serial_port,
     } else {
       sl_log_info(LOG_TAG, "Applying soft reset of the Z-Wave Module\n");
       zwapi_soft_reset();
-
       // Wait for Z-Wave API started
       zwave_rx_wait_for_zwave_api_to_be_ready();
     }
+  }
+
+  if (IS_RF_REGION_LR(zwapi_get_rf_region())) {
+    command_status = zwapi_set_max_lr_tx_power_level(max_lr_tx_power_dbm);
+    if (command_status != SL_STATUS_OK
+        && command_status != SL_STATUS_NOT_SUPPORTED) {
+      sl_log_warning(
+        LOG_TAG,
+        "Z-Wave module Max Long Range transmit power setting could not be "
+        "applied. Command status: %d.\n",
+        command_status);
+    } else if (command_status == SL_STATUS_OK) {
+      sl_log_debug(
+        LOG_TAG,
+        "Success setting Z-Wave module Max Long Range transmit power: %d",
+        max_lr_tx_power_dbm);
+    }
+    sl_log_debug(
+      LOG_TAG,
+      "Current Z-Wave module Max Long Range transmit power in dbm: %d",
+      zwapi_get_max_lr_tx_power_level());
   }
 
   // Try to set the node ID basetype to 16 bits disregarding the RF region

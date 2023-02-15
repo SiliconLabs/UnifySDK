@@ -12,7 +12,7 @@
             "label": "build_and_launch_debug_on_rpi",
             "type": "shell",
             "dependsOn": "build_rpi",
-            "command": "scp build_armhf/components/libuic.so build_armhf/applications/zpc/zpc pi@${input:rpi_ip}:. && ssh -t pi@${input:rpi_ip} \"gdbserver localhost:3001 ./zpc --zpc.datastore_file uic.db\"",
+            "command": "scp build_armhf/applications/zpc/zpc pi@${input:rpi_ip}:. && ssh -t pi@${input:rpi_ip} \"gdbserver localhost:3001 ./zpc --zpc.datastore_file uic.db\"",
             "problemMatcher": []
         }
     ],

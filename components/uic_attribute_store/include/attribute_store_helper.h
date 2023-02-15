@@ -52,6 +52,31 @@ bool attribute_store_is_value_defined(
   attribute_store_node_t node, attribute_store_node_value_state_t value_state);
 
 /**
+ * @brief Indicate whether the reported value of a node is defined
+ * in the attribute store.
+ *
+ * @param node        The Attribute store node under
+ *                    which the reported value must be retrieved
+ *
+ * @returns true  If the reported value is defined (its size > 0)
+ * @returns false If the reported value is undefined (its size == 0)
+ */
+bool attribute_store_is_reported_defined(attribute_store_node_t node);
+
+/**
+ * @brief Indicate whether the desired value of a node is defined
+ * in the attribute store.
+ *
+ * @param node        The Attribute store node under
+ *                    which the desired value must be retrieved
+ *
+ * @returns true  If the desired value is defined (its size > 0)
+ * @returns false If the desired value is undefined (its size == 0)
+ */
+
+bool attribute_store_is_desired_defined(attribute_store_node_t node);
+
+/**
  * @brief Indicate whether reported and desired values are matched in the attribute store.
  *
  * @param node        The Attribute store node under
@@ -270,6 +295,21 @@ sl_status_t
                                                  const char *string);
 
 /**
+ * @brief Safely append a new byte array to a byte array attribute in the Attribute Store
+ *
+ * @param node          The Attribute store node under
+ *                      which the value must be appended
+ * @param array         byte array containing bytes
+ *
+ * @param extra_array_length Size of the new array which will be append to the existing
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ */
+sl_status_t attribute_store_append_to_reported(attribute_store_node_t node,
+                                               const uint8_t *array,
+                                               uint8_t extra_array_length);
+
+/**
  * @brief Set the Desired value to "undefined" (0 size no value)
  *
  * @param node        The Attribute store node for which DESIRED
@@ -453,6 +493,46 @@ sl_status_t attribute_store_set_child_reported_only_if_missing(
   uint8_t value_size);
 
 /**
+ * @brief Sets the value of the child node, only if the child node already
+ * exists in the Attribute Store.
+ *
+ * @param parent        The Attribute store node under
+ *                      which the child's reported value must be written
+ * @param type          The type of the child
+ * @param value         A pointer to a variable containing
+ *                      the data to be written for the node.
+ * @param value_size    The number of bytes to read from the value pointer.
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ *          SL_STATUS_FAIL if the child not was not present.
+ */
+sl_status_t attribute_store_set_child_reported_only_if_exists(
+  attribute_store_node_t parent,
+  attribute_store_type_t type,
+  const void *value,
+  uint8_t value_size);
+
+/**
+ * @brief Sets the value of the child node, only if the child node already
+ * exists in the Attribute Store.
+ *
+ * @param parent        The Attribute store node under
+ *                      which the child's desired value must be written
+ * @param type          The type of the child
+ * @param value         A pointer to a variable containing
+ *                      the data to be written for the node.
+ * @param value_size    The number of bytes to read from the value pointer.
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ *          SL_STATUS_FAIL if the child not was not present.
+ */
+sl_status_t attribute_store_set_child_desired_only_if_exists(
+  attribute_store_node_t parent,
+  attribute_store_type_t type,
+  const void *value,
+  uint8_t value_size);
+
+/**
  * @brief Visit all nodes in the tree.
  *
  * This function visits all the attribute store nodes under the "top" node and
@@ -462,6 +542,17 @@ sl_status_t attribute_store_set_child_reported_only_if_missing(
  */
 void attribute_store_walk_tree(attribute_store_node_t top,
                                void (*function)(attribute_store_node_t));
+
+/**
+ * @brief Visit all nodes in the tree, applying a function.
+ *
+ * This function visits all the attribute store nodes under the "top" node and
+ * applies the function passed in parameter.
+ * @param top First node to be visited
+ * @param func function to execute
+ */
+void attribute_store_walk_tree_with_return_value(
+  attribute_store_node_t top, sl_status_t (*function)(attribute_store_node_t));
 
 /**
  * @brief Add multiple nodes to a parent if they are not already present.
@@ -544,6 +635,55 @@ sl_status_t attribute_store_register_callback_by_type_to_array(
  *          and a child could not be deleted.
  */
 sl_status_t attribute_store_delete_all_children(attribute_store_node_t node);
+
+/**
+ * @brief Finds and returns the first child with a type under a node, creates it
+ * if missing
+ *
+ * This is a helper function that will return the first child with a type under
+ * a node and create it if needed.
+ *
+ * @param node    Attribute Store Node under which the child of a type is to be
+ *                returned
+ * @param type    Attribute Store type of the child we are looking for
+ *
+ * @returns attribute_store_node_t ID of the child with the type.
+ *          ATTRIBUTE_STORE_INVALID_NODE if the parent does not exist of the
+ *          child could not be created.
+ */
+attribute_store_node_t
+  attribute_store_create_child_if_missing(attribute_store_node_t node,
+                                          attribute_store_type_t type);
+
+
+/**
+ * @brief Helper function that sets the Reported or Desired value of a number
+ *
+ * Note: Does not work with the DESIRED_OR_REPORTED attribute value type.
+ *
+ * @param node            Attribute Store node to read the value from
+ * @param value           The value to set
+ * @return sl_status_t
+ */
+number_t
+  attribute_store_get_number(attribute_store_node_t node,
+                             attribute_store_node_value_state_t value_state);
+
+
+/**
+ * @brief Helper function that sets the Reported or Desired value of a number
+ *
+ * Note: Does not work with the DESIRED_OR_REPORTED attribute value type.
+ *
+ * @param node            Attribute Store node to read the value from
+ * @param value           The value to set
+ * @param value_state     The value state/type to set (desired or reported)
+ * @return sl_status_t
+ */
+sl_status_t
+  attribute_store_set_number(attribute_store_node_t node,
+                             number_t value,
+                             attribute_store_node_value_state_t value_state);
 
 #ifdef __cplusplus
 }

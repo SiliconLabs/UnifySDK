@@ -12,6 +12,7 @@ var zigpc__datastore__id_8h =
       [ "ZIGPC_DS_TYPE_CLUSTER_GENERATED_COMMAND", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358addc740f9d38c2f79a1e010a73f3a3621", null ],
       [ "ZIGPC_DS_TYPE_CLUSTER_RECEIVED_COMMAND", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ae5fd79c728ac0ee9acb8d3674b9b365d", null ],
       [ "ZIGPC_DS_TYPE_GROUP_REPORTED", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a2cedf272caa50b28d6e11dd0110eb9c7", null ],
-      [ "ZIGPC_DS_TYPE_GROUP_DESIRED", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ada96b98f6079d25f1de27223b0e2e63c", null ]
+      [ "ZIGPC_DS_TYPE_GROUP_DESIRED", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ada96b98f6079d25f1de27223b0e2e63c", null ],
+      [ "ZIGPC_DS_TYPE_BINDING", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a4a697502466057f40099532c15bcd4c2", null ]
     ] ]
 ];

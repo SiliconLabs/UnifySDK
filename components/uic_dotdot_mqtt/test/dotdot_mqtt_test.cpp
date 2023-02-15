@@ -19,8 +19,9 @@
 #include "cmock.h"
 
 #include "sl_status.h"
-
 #include "mqtt_test_helper.h"
+
+#include "stdint.h"
 
 extern "C" {
 #include "dotdot_mqtt.h"
@@ -621,6 +622,52 @@ void test_dotdot_mqtt_supported_commands()
     result);
   TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor", "ToggleResponse"]})",
                            result);
+}
+
+void test_dotdot_mqtt_supported_commands_for_individual_clusters()
+{
+  char result[1000];
+  uic_mqtt_dotdot_init();
+  // Test that supported commands isn't published, if no callbacks are registered
+  uic_mqtt_dotdot_publish_supported_commands("zw-test-unid", 0);
+  TEST_ASSERT_EQUAL(
+    0,
+    mqtt_test_helper_get_num_publish(
+      "ucl/by-unid/zw-test-unid/ep0/DoorLock/SupportedCommands"));
+
+  // Set 1 command to ColorControl and one to Door Lock
+  uic_mqtt_dotdot_color_control_color_loop_set_callback_set(
+    &uic_mqtt_dotdot_color_control_color_loop_set_test_callback);
+  uic_mqtt_dotdot_door_lock_lock_door_callback_set(
+    &uic_mqtt_dotdot_door_lock_lock_door_callback_func);
+  uic_mqtt_dotdot_door_lock_publish_supported_commands("zw-test-unid", 0);
+  TEST_ASSERT_EQUAL(
+    1,
+    mqtt_test_helper_get_num_publish(
+      "ucl/by-unid/zw-test-unid/ep0/DoorLock/SupportedCommands"));
+  TEST_ASSERT_EQUAL(
+    0,
+    mqtt_test_helper_get_num_publish(
+      "ucl/by-unid/zw-test-unid/ep0/ColorControl/SupportedCommands"));
+  mqtt_test_helper_pop_publish(
+    "ucl/by-unid/zw-test-unid/ep0/DoorLock/SupportedCommands",
+    result);
+  TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor"]})", result);
+
+  uic_mqtt_dotdot_color_control_publish_supported_commands("zw-test-unid", 0);
+  TEST_ASSERT_EQUAL(
+    1,
+    mqtt_test_helper_get_num_publish(
+      "ucl/by-unid/zw-test-unid/ep0/DoorLock/SupportedCommands"));
+  TEST_ASSERT_EQUAL(
+    1,
+    mqtt_test_helper_get_num_publish(
+      "ucl/by-unid/zw-test-unid/ep0/ColorControl/SupportedCommands"));
+
+  mqtt_test_helper_pop_publish(
+    "ucl/by-unid/zw-test-unid/ep0/ColorControl/SupportedCommands",
+    result);
+  TEST_ASSERT_EQUAL_STRING(R"({"value": ["ColorLoopSet"]})", result);
 }
 
 void test_dotdot_mqtt_write_attributes_badtopic()
@@ -1542,5 +1589,108 @@ void test_dotdot_mqtt_incoming_command_with_null_json_object()
   mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
 
   TEST_ASSERT_EQUAL(3, callback_count);
+}
+
+// Test command with multiple callbacks attached
+sl_status_t toggle_callback_1(dotdot_unid_t unid,
+                              dotdot_endpoint_id_t endpoint,
+                              uic_mqtt_dotdot_callback_call_type_t call_type)
+{
+  callback_count += 1;
+  return SL_STATUS_OK;
+}
+sl_status_t toggle_callback_2(dotdot_unid_t unid,
+                              dotdot_endpoint_id_t endpoint,
+                              uic_mqtt_dotdot_callback_call_type_t call_type)
+{
+  callback_count += 1;
+  return SL_STATUS_OK;
+}
+
+void test_dotdot_mqtt_incoming_command_with_multiple_callbacks()
+{
+  uic_mqtt_dotdot_on_off_toggle_callback_set(&toggle_callback_1);
+  uic_mqtt_dotdot_on_off_toggle_callback_set(&toggle_callback_2);
+  uic_mqtt_dotdot_init();
+  const char topic[] = "ucl/by-unid/test_unid/ep92/OnOff/Commands/Toggle";
+
+  // test DestinationUnid is a Null object.
+  std::string payload = R"({})";
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+
+  TEST_ASSERT_EQUAL(2, callback_count);
+}
+
+void test_generic_get_enum_value_name()
+{
+  std::string result = get_enum_value_name(0, 0, 0);
+  TEST_ASSERT_EQUAL_STRING("", result.c_str());
+
+  // Door Lock, "DoorState"
+  result = get_enum_value_name(0x0101, 3, 0);
+  TEST_ASSERT_EQUAL_STRING("Open", result.c_str());
+  result = get_enum_value_name(0x0101, 3, 1);
+  TEST_ASSERT_EQUAL_STRING("Closed", result.c_str());
+  result = get_enum_value_name(0x0101, 3, 0xFF);
+  TEST_ASSERT_EQUAL_STRING("Undefined", result.c_str());
+  result = get_enum_value_name(0x0101, 3, 0xFF01);
+  TEST_ASSERT_EQUAL_STRING("65281", result.c_str());
+
+  // Color mode:
+  result = get_enum_value_name(0x300, 8, 0);
+  TEST_ASSERT_EQUAL_STRING("CurrentHueAndCurrentSaturation", result.c_str());
+  result = get_enum_value_name(0x300, 8, 1);
+  TEST_ASSERT_EQUAL_STRING("CurrentXAndCurrentY", result.c_str());
+  result = get_enum_value_name(0x300, 8, 2);
+  TEST_ASSERT_EQUAL_STRING("ColorTemperatureMireds", result.c_str());
+
+  // ColorCapbilities 400A
+  result = get_enum_value_name(0x300, 0x4002, 0);
+  TEST_ASSERT_EQUAL_STRING("ColorLoopInactive", result.c_str());
+  result = get_enum_value_name(0x300, 0x4002, 1);
+  TEST_ASSERT_EQUAL_STRING("ColorLoopActive", result.c_str());
+  result = get_enum_value_name(0x300, 0x4002, 2);
+  TEST_ASSERT_EQUAL_STRING("2", result.c_str());
+}
+
+void test_generic_get_enum_name_value()
+{
+  std::string test_name = std::string("Open");
+  uint32_t result       = 0xFFFF;
+
+  // Door Lock, "DoorState"
+  result = get_enum_name_value(0x0101, 3, test_name);
+  TEST_ASSERT_EQUAL(0, result);
+  test_name = std::string("Closed");
+  result    = get_enum_name_value(0x0101, 3, test_name);
+  TEST_ASSERT_EQUAL(1, result);
+  test_name = std::string("Undefined");
+  result    = get_enum_name_value(0x0101, 3, test_name);
+  TEST_ASSERT_EQUAL(0xFF, result);
+  test_name = std::string("65281");
+  result    = get_enum_name_value(0x0101, 3, test_name);
+  TEST_ASSERT_EQUAL(UINT32_MAX, result);
+
+  // Color mode:
+  test_name = std::string("CurrentHueAndCurrentSaturation");
+  result    = get_enum_name_value(0x300, 8, test_name);
+  TEST_ASSERT_EQUAL(0, result);
+  test_name = std::string("CurrentXAndCurrentY");
+  result    = get_enum_name_value(0x300, 8, test_name);
+  TEST_ASSERT_EQUAL(1, result);
+  test_name = std::string("ColorTemperatureMireds");
+  result    = get_enum_name_value(0x300, 8, test_name);
+  TEST_ASSERT_EQUAL(2, result);
+
+  // ColorCapbilities 400A
+  test_name = std::string("ColorLoopInactive");
+  result    = get_enum_name_value(0x300, 0x4002, test_name);
+  TEST_ASSERT_EQUAL(0, result);
+  test_name = std::string("ColorLoopActive");
+  result    = get_enum_name_value(0x300, 0x4002, test_name);
+  TEST_ASSERT_EQUAL(1, result);
+  test_name = std::string("2");
+  result    = get_enum_name_value(0x300, 0x4002, test_name);
+  TEST_ASSERT_EQUAL(UINT32_MAX, result);
 }
 }

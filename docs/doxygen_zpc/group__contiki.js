@@ -5,5 +5,5 @@ var group__contiki =
     [ "Library", "group__lib.html", "group__lib" ],
     [ "Memory", "group__mem.html", "group__mem" ],
     [ "Device", "group__dev.html", null ],
-    [ "Test", "group__contiki__test.html", "group__contiki__test" ]
+    [ "Test", "group__contiki__test.html", null ]
 ];

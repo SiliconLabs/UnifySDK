@@ -20,6 +20,7 @@ var zwave__command__class__configuration__control_8c =
     [ "get_parameter_id_node", "zwave__command__class__configuration__control_8c.html#a2aadb212696a0652df63fec1b6d0a6b6", null ],
     [ "is_bulk_supported", "zwave__command__class__configuration__control_8c.html#af292e55991d5074417182a6fdec5337b", null ],
     [ "is_parameter_read_only", "zwave__command__class__configuration__control_8c.html#a9f749ae4cecc27243961595d0b1467d4", null ],
+    [ "on_configuration_get_failure", "zwave__command__class__configuration__control_8c.html#aacc59e6472079d4ee7ee9f445ad656d6", null ],
     [ "on_default_reset_send_data_complete", "zwave__command__class__configuration__control_8c.html#aa4a2284532427f782bc7350e7b477519", null ],
     [ "on_next_supported_parameter_id_not_found", "zwave__command__class__configuration__control_8c.html#af8395be8e37784a3797a897b8c23c3f7", null ],
     [ "save_parameter_value", "zwave__command__class__configuration__control_8c.html#a244ada7bd51321a86eb2b03a88a957cd", null ],

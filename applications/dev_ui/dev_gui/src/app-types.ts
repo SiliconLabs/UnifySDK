@@ -11,10 +11,17 @@ export type AppState = {
   OTAImageList: Image[],
   UPTI: UPTI,
   SystemMetrics: any,
-  SceneList: any
+  CommissionableDevices: CommissionableDevice[],
+  AppMonitoringList: any
 }
 
 export type LocalStorage = {
   Get: any,
   Set: any
+}
+
+export type CommissionableDevice = {
+  Id: string,
+  QRCode: string,
+  DSK: string
 }

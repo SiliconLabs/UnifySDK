@@ -16,6 +16,7 @@
 
 /**
  * @defgroup dotdot_cluster_command_id_definitions DotDot Cluster Commands ID definitions
+ * @ingroup unify_components
  * @brief Header with Cluster Command ID definitions
  *
  * Cluster command identifier defines (e.g. OnOff On Command ID is 0x01)

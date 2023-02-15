@@ -2,7 +2,10 @@ var struct____attribute____ =
 [
     [ "attribute_identifier", "struct____attribute____.html#a8671a4a508085fb8a2a31257083ad7d1", null ],
     [ "attribute_type", "struct____attribute____.html#a5b65dc3cdb4827b969b66b605f9bbedf", null ],
+    [ "cluster_id", "struct____attribute____.html#a759da1189c1e247eda93c37388156621", null ],
     [ "cool_set_point", "struct____attribute____.html#aa69d51c561b879270a03c85062efa3a2", null ],
+    [ "dest_endpoint", "struct____attribute____.html#ae05781ed3a58f7f96d162069c31a6b36", null ],
+    [ "dest_eui64", "struct____attribute____.html#a7a55fb5c462a7624980995e4b73b6dea", null ],
     [ "direction", "struct____attribute____.html#a255907e60c2339bd2e64c281e9f4899c", null ],
     [ "dummy", "struct____attribute____.html#ae0b7746cd2a5ecc22d8875fa742406e7", null ],
     [ "endpoint_discovered_count", "struct____attribute____.html#a125987996db5dff05507bd41a5a71e66", null ],
@@ -20,6 +23,7 @@ var struct____attribute____ =
     [ "panid", "struct____attribute____.html#a9244fa8defd1aeb3002f77150afd9db1", null ],
     [ "radio_channel", "struct____attribute____.html#aaea3dad6b8bc3039382e3eaa4fc01bb2", null ],
     [ "reportable_change", "struct____attribute____.html#acb90ecdaaaa4910031e50f56ae26bb73", null ],
+    [ "timeout_period", "struct____attribute____.html#a0011107547ad333250ccb85cafe01a2b", null ],
     [ "transition_time", "struct____attribute____.html#a48964041a6d059e5d5e6af338af7a0a9", null ],
     [ "zcl_version", "struct____attribute____.html#ad8ae956dcee71dfb05afa7440f6f5d92", null ]
 ];

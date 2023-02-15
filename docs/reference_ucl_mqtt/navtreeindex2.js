@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"electrical_measurement.html#electrical_measurement_attr_dc_current_multiplier":[38,0,12],
 "electrical_measurement.html#electrical_measurement_attr_dc_current_overload":[38,0,71],
 "electrical_measurement.html#electrical_measurement_attr_dc_overload_alarms_mask":[38,0,69],
 "electrical_measurement.html#electrical_measurement_attr_dc_power":[38,0,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "metering.html#metering_attr_summation_formatting":[37,0,17],
 "metering.html#metering_attr_supply_status":[37,0,9],
 "metering.html#metering_attr_temperature_formatting":[37,0,25],
-"metering.html#metering_attr_temperature_unit_of_measure":[37,0,24],
-"metering.html#metering_attr_unitof_measure":[37,0,14]
+"metering.html#metering_attr_temperature_unit_of_measure":[37,0,24]
 };

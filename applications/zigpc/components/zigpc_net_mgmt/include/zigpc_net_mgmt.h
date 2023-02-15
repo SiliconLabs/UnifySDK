@@ -59,6 +59,8 @@ typedef struct {
   enum zigpc_net_mgmt_fsm_state requested_state;
   bool param_eui64_filled;
   zigbee_eui64_t param_eui64;
+  zigbee_install_code_t param_install_code;
+  unsigned int param_install_code_length;
 } zigpc_net_mgmt_state_change_request_t;
 
 /**

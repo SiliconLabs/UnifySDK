@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /**
- * @defgroup aoxpc_config
+ * @defgroup aoxpc_config AoXPC Configuration
  * @brief Component initializing all AoXPC parameters.
  *
  * This component register all configuration keys and default values specific

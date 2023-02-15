@@ -65,4 +65,14 @@ bool operator==(const assignment &a, const assignment &b)
   return a.lhs == b.lhs && a.rhs == b.rhs;
 }
 
+bool operator==(const function_invokation &a, const function_invokation &b)
+{
+  return a.function_name == b.function_name && a.arguments == b.arguments;
+}
+
+bool operator==(const scope_setting &a, const scope_setting &b)
+{
+  return a.setting_name == b.setting_name;
+}
+
 }  // namespace ast

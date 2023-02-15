@@ -2522,6 +2522,9 @@ void uic_mqtt_dotdot_configuration_parameters_publish_supported_generated_comman
   if (command_list->set_parameter == true) {
     command_vector.emplace_back("SetParameter");
   }
+  if (command_list->discover_parameter_range == true) {
+    command_vector.emplace_back("DiscoverParameterRange");
+  }
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");
   }

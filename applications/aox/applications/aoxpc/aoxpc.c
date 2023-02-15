@@ -301,8 +301,8 @@ static void aoxpc_teardown(void)
   if (SL_STATUS_OK == get_aoxpc_unid(locator_unid)) {
     publish_node_state(locator_unid, false);
   }
-  // Remove all retained topics except ucl/by-unid/<aoxpc_unid>/State
-  uic_mqtt_unretain_by_regex("^(?!ucl\\/by-unid\\/.*\\/State$).*");
+  // Remove all retained topics except ucl/by-unid/<aoxpc_unid>/State and ucl/by-mqtt-client/
+  uic_mqtt_unretain_by_regex(REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS);
 }
 
 /**************************************************************************/ /**

@@ -450,6 +450,7 @@ static void give_up_get_resolution_on_group(attribute_store_node_t node)
  */
 static sl_status_t execute_get(attribute_store_node_t node)
 {
+  sl_status_t execution_status = SL_STATUS_OK;
   if (pending_get_resolutions.count(node)) {
     if (pending_get_resolutions[node].count
         >= attribute_resolver_config.get_retry_count) {
@@ -464,6 +465,7 @@ static sl_status_t execute_get(attribute_store_node_t node)
                    node,
                    pending_get_resolutions[node].count,
                    attribute_resolver_config.get_retry_count);
+      execution_status = attribute_resolver_rule_execute(node, false);
     } else {
       // We have to wait before a retry.
       return SL_STATUS_IS_WAITING;
@@ -471,12 +473,24 @@ static sl_status_t execute_get(attribute_store_node_t node)
   } else {
     if (resolution_already_queued(RESOLVER_GET_RULE, node)) {
       return SL_STATUS_IS_WAITING;
-    } else {
+    }
+    // Send for the first time.
+    execution_status = attribute_resolver_rule_execute(node, false);
+    if ((SL_STATUS_OK == execution_status)
+        || (SL_STATUS_IN_PROGRESS == execution_status)) {
       pending_get_resolutions[node] = {.send_timeout = 0, .count = 1};
+    } else if (SL_STATUS_IS_WAITING == execution_status) {
+      sl_log_debug(LOG_TAG,
+                   "Rule status is waiting. "
+                   "Scheduling re-resolution of Attribute ID %d in 1000 ms.",
+                   node);
+      pending_get_resolutions[node]
+        = {.send_timeout = clock_time() + 1000, .count = 0};
+      attribute_resolver_restart_pending_get_nodes_timer();
     }
   }
 
-  return attribute_resolver_rule_execute(node, false);
+  return execution_status;
 }
 
 /**

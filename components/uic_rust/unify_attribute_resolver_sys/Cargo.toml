@@ -1,0 +1,13 @@
+[package]
+name = "unify_attribute_resolver_sys"
+version = "0.0.1"
+authors = ["root"]
+edition = "2021"
+description = "Unify attribute resolver rust wrapper"
+
+[build-dependencies]
+unify_build_utils = { path = "../unify_build_utils" }
+anyhow = "*"
+
+[dependencies]
+unify_tools = { path = "../unify_tools" }

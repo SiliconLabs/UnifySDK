@@ -25,10 +25,7 @@ extern "C" {
 
 static const unsigned int ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES
   = CLOCK_SECOND * 5;
-
-static const unsigned int ZIGPC_ATTR_MGMT_POLL_PERIOD_MS
-  = CLOCK_SECOND/2;  //500ms
-
+  
 /**
  * @brief Limit of Read Attribute Records to send per ZCL Message
  *
@@ -62,7 +59,7 @@ static const unsigned int ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE = 5;
  * in the future.
  *
  */
-static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT = 10;
+static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT = 1000;
 
 /**
  * @brief Default Configure Reporting Record Maximum Interval (Seconds).
@@ -71,7 +68,7 @@ static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT = 10;
  * in the future.
  *
  */
-static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT = 60;
+static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT = 10000;
 
 /**
  * @brief Default Configure Reporting Record Reportable Change to allow
@@ -81,7 +78,7 @@ static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT = 60;
  * in the future.
  *
  */
-static const uint32_t ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT = 0x0000;
+static const uint32_t ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT = 0x0001;
 
 /**
  * @brief Default poll list size. The maximum number of clusters that
@@ -271,18 +268,6 @@ sl_status_t zigpc_attribute_management_read_cluster_attributes(
  */
 void zigpc_attrmgmt_send_delayed_read_command_callback(void *read_data);
 
-/**
- * @brief Handler for a ZCL Global Read attribute command after a delay of
- * ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES. This handler will call
- * zigpc_attrmgmt_send_delayed_read_command_callback after the delay.
- *
- * @param eui64         Target device identifier.
- * @param endpoint_id   Target endpoint identifier.
- * @param cluster_id    Target ZCL cluster identifier.
- */
-void zigpc_attrmgmt_send_delayed_read_command(const zigbee_eui64_t eui64,
-                                              zigbee_endpoint_id_t endpoint_id,
-                                              zcl_cluster_id_t cluster_id);
 
 /**
  * @brief Send a ZCL Global Read Attribute Command to the associated device,

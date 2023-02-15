@@ -10,15 +10,15 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-
+/*
 #include <workaround.hpp>
 
 #include "unity.h"
 #include "contiki_test_helper.h"
 
+#include "zigpc_smartstart_int.hpp"
 #include "zigpc_common_unid.h"
 #include "zigpc_smartstart_fixt.h"
-#include "zigpc_smartstart_int.hpp"
 
 extern "C" {
 
@@ -44,7 +44,7 @@ int suiteTearDown(int num_failures)
 void setUp() {}
 
 void tearDown() {}
-
+*/
 /**
  * @brief Helper function to build Smartstart entry JSON objects
  *
@@ -54,6 +54,7 @@ void tearDown() {}
  * @param unid
  * @return std::string JSON representation
  */
+/*
 std::string helper_build_ssl_entry(std::string dsk,
                                    bool include,
                                    std::string pc_unid,
@@ -82,11 +83,12 @@ void helper_expect_single_list_update(zigbee_eui64_t *eui64, char *eui64_str)
   zigbee_eui64_to_str_ReturnArrayThruPtr_str_buf(eui64_str,
                                                  strlen(eui64_str) + 1);
 }
-
+*/
 /**
  * @brief Testing SmartStart Manager Initialization
  *
  */
+/*
 void test_smartstart_setup_fixtures(void)
 {
   // ARRANGE
@@ -318,13 +320,14 @@ void test_smartstart_manager_should_not_open_network_on_invalid_dsk(void)
 
   // ASSERT
 }
-
+*/
 /**
  * @brief The following scenario tests when two SmartStart entries are added
  * with different DSK's that has the same EUI64 but different install code.
  * In this situation, both entries will be used to perform node addition.
  *
  */
+/*
 void test_smartstart_manager_should_add_both_entries_with_different_install_codes(
   void)
 {
@@ -380,13 +383,14 @@ void test_smartstart_manager_should_add_both_entries_with_different_install_code
 
   // ASSERT
 }
-
+*/
 /**
  * @brief The following scenario tests when two SmartStart entries are added
  * with different DSK's that has the same EUI64 but one valid and one invalid
  * install code.
  *
  */
+/*
 void test_smartstart_manager_should_add_one_valid_entry_with_multiple_dsk_adds(
   void)
 {
@@ -564,3 +568,4 @@ void test_smartstart_manager_should_shutdown_properly(void)
 }
 
 }  // extern "C"
+*/

@@ -6,5 +6,6 @@ var dir_a0d683a24e7dff25c3602744bd1f23f9 =
     [ "zcl_group_cluster_server.hpp", "zcl__group__cluster__server_8hpp.html", "zcl__group__cluster__server_8hpp" ],
     [ "zcl_OTA_cluster_server.hpp", "zcl__OTA__cluster__server_8hpp.html", "zcl__OTA__cluster__server_8hpp" ],
     [ "zcl_rf_telemetry_cluster_server.c", "zcl__rf__telemetry__cluster__server_8c.html", "zcl__rf__telemetry__cluster__server_8c" ],
-    [ "zcl_rf_telemetry_cluster_server.h", "zcl__rf__telemetry__cluster__server_8h.html", "zcl__rf__telemetry__cluster__server_8h" ]
+    [ "zcl_rf_telemetry_cluster_server.h", "zcl__rf__telemetry__cluster__server_8h.html", "zcl__rf__telemetry__cluster__server_8h" ],
+    [ "zcl_scenes_cluster_server.h", "zcl__scenes__cluster__server_8h.html", "zcl__scenes__cluster__server_8h" ]
 ];

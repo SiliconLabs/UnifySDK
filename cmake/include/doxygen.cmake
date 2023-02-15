@@ -1,3 +1,8 @@
+if(NOT DOXYGEN_INCLUDED)
+  set(DOXYGEN_INCLUDED True)
+else()
+  return()
+endif()
 find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
@@ -6,7 +11,14 @@ if(DOXYGEN_FOUND)
   # Shared doxygen options
   # ############################################################################
   # Excluding a few large items to reduce the doxygen build time
-  set(DOXYGEN_FILE_PATTERNS *.h *.c *.dox *.doxygen *.hpp *.md)
+  set(DOXYGEN_FILE_PATTERNS
+      *.h
+      *.c
+      *.dox
+      *.doxygen
+      *.hpp
+      *attribute_mapper_built_in_functions.cpp
+      *.md)
   set(DOXYGEN_EXCLUDE_PATTERNS
       */test/*
       */libs/*
@@ -213,6 +225,21 @@ if(DOXYGEN_FOUND)
     ${CMAKE_SOURCE_DIR}/applications/zigpc
     ${CMAKE_CURRENT_BINARY_DIR}/applications/zigpc/components/zcl_command_parser/include
     ${CMAKE_CURRENT_BINARY_DIR}/applications/zigpc/components/zcl_util/include
+    ${LIBUIC_DOXYGEN_SRC})
+
+  # ############################################################################
+  # Configure Doxygen for AoX (AoXPC and Positioning application)
+  # ############################################################################
+  add_doxygen_target(
+    TARGET
+    doxygen_aox
+    PROJECT_NAME
+    "AoX Applications"
+    IMAGE_PATHS
+    doc/assets/img/
+    SRC_PATHS
+    ${CMAKE_SOURCE_DIR}/applications/aox/applications/aoxpc/components
+    ${CMAKE_SOURCE_DIR}/applications/aox/applications/positioning/components
     ${LIBUIC_DOXYGEN_SRC})
 
 else()

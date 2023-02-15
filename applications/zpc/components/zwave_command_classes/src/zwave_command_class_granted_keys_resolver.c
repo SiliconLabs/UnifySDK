@@ -16,6 +16,7 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "zwave_keyset_definitions.h"
 #include "zwave_node_id_definitions.h"
+#include "zwave_helper_macros.h"
 
 // ZPC components
 #include "zwave_utils.h"
@@ -23,7 +24,6 @@
 #include "zpc_attribute_store_network_helper.h"
 #include "zwave_tx.h"
 #include "zwave_tx_scheme_selector.h"
-#include "zwapi_protocol_transport.h"
 
 // Includes from Unify Components
 #include "attribute_store.h"

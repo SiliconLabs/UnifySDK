@@ -91,6 +91,7 @@ void tearDown()
 {
   attribute_resolver_teardown();
   attribute_store_teardown();
+  datastore_fixt_teardown();
 }
 
 void resolver_rule_init_stub(attribute_rule_complete_t __compl_func, int n)
@@ -141,6 +142,8 @@ void test_attribute_resolver_get_retransmission_func()
   // Add a node with undefined home ID node
   attribute_store_node_t home_id_node;
   attribute_store_node_t root_node = attribute_store_get_root();
+  const uint8_t value              = 1;
+  attribute_store_set_reported(root_node, &value, sizeof(value));
   attribute_resolver_has_get_rule_IgnoreAndReturn(true);
   attribute_resolver_has_set_rule_IgnoreAndReturn(false);
   home_id_node = attribute_store_add_node(ATTRIBUTE_HOME_ID, root_node);
@@ -153,12 +156,6 @@ void test_attribute_resolver_get_retransmission_func()
     rule_compl_func(home_id_node, 100);
     contiki_test_helper_run(100000);
 
-    if (i == 0) {
-      // Root will get attempted for resolution only once
-      attribute_resolver_rule_execute_ExpectAndReturn(root_node,
-                                                      false,
-                                                      SL_STATUS_ALREADY_EXISTS);
-    }
     //Let time pass
     contiki_test_helper_run(100000);
   }

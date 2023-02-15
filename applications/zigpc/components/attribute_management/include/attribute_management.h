@@ -60,6 +60,21 @@ sl_status_t configure_attributes_node(const zigbee_node_t node);
 sl_status_t configure_attributes_endpoint(const zigbee_eui64_t eui64,
                                           const zigbee_endpoint_t endpoint);
 
+/**
+ * @brief Handler for a ZCL Global Read attribute command after a delay of
+ * ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES. This handler will call
+ * zigpc_attrmgmt_send_delayed_read_command_callback after the delay.
+ *
+ * @param eui64         Target device identifier.
+ * @param endpoint_id   Target endpoint identifier.
+ * @param cluster_id    Target ZCL cluster identifier.
+ * @param delay_ms      Delay in ms before sending command.
+ */
+void zigpc_attrmgmt_send_delayed_read_command(const zigbee_eui64_t eui64,
+                                              zigbee_endpoint_id_t endpoint_id,
+                                              zcl_cluster_id_t cluster_id,
+                                              unsigned int delay_ms);
+
 #ifdef __cplusplus
 }
 #endif

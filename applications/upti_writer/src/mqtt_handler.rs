@@ -12,6 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 use crate::log_formatter;
+use unify_application_monitoring_sys::unify_application_monitoring_init;
 use unify_config_sys::*;
 use unify_log_sys::*;
 use unify_mqtt_sys::{
@@ -91,7 +92,9 @@ impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttHandler<T> {
     fn before_disconnect(&mut self) {
         self.close_file();
     }
-    fn after_connect(&mut self) {}
+    fn after_connect(&mut self) {
+        unify_application_monitoring_init();
+    }
 }
 
 #[automock]

@@ -173,6 +173,8 @@ typedef enum {
   ZIGPC_ZCL_CLUSTER_THERMOSTAT = 0x0201,
   ZIGPC_ZCL_CLUSTER_COLOR_CONTROL = 0x0300,
   ZIGPC_ZCL_CLUSTER_OCCUPANCY_SENSING = 0x0406,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE = 0x0500,
+  ZIGPC_ZCL_CLUSTER_IASWD = 0x0502,
   ZIGPC_ZCL_CLUSTER_OTA_UPGRADE = 0x0019
 } zigpc_zcl_cluster_type_t;
 
@@ -679,6 +681,69 @@ typedef enum {
   ZIGPC_ZCL_CLUSTER_OCCUPANCY_SENSING_ATTR_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD = 0x32,
 } zigpc_zcl_occupancy_sensing_attr_type_t;
 
+/*****************************************************************
+ *
+ * ZCL attributes for IASZone cluster
+ *
+ *****************************************************************/
+
+/**
+ * @brief ZCL attribute types for IASZone cluster
+ */
+typedef enum {
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATE = 0x00,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_TYPE = 0x01,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATUS = 0x02,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_IASCIE_ADDRESS = 0x10,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONEID = 0x11,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED = 0x12,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_CURRENT_ZONE_SENSITIVITY_LEVEL = 0x13,
+} zigpc_zcl_ias_zone_attr_type_t;
+
+/*****************************************************************
+ *
+ * ZCL Command support for IASZone cluster
+ *
+ *****************************************************************/
+
+/**
+ * @brief ZCL command types for IASZone cluster
+ */
+typedef enum {
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_RESPONSE = 0x00,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION = 0x00,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_NORMAL_OPERATION_MODE = 0x01,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST = 0x01,
+  ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_TEST_MODE = 0x02,
+} zigpc_zcl_ias_zone_command_type_t;
+
+/*****************************************************************
+ *
+ * ZCL attributes for IASWD cluster
+ *
+ *****************************************************************/
+
+/**
+ * @brief ZCL attribute types for IASWD cluster
+ */
+typedef enum {
+  ZIGPC_ZCL_CLUSTER_IASWD_ATTR_MAX_DURATION = 0x00,
+} zigpc_zcl_iaswd_attr_type_t;
+
+/*****************************************************************
+ *
+ * ZCL Command support for IASWD cluster
+ *
+ *****************************************************************/
+
+/**
+ * @brief ZCL command types for IASWD cluster
+ */
+typedef enum {
+  ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_START_WARNING = 0x00,
+  ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_SQUAWK = 0x01,
+} zigpc_zcl_iaswd_command_type_t;
+
 
 /**
  * @brief Struct for TransitionType
@@ -700,6 +765,7 @@ typedef struct {
   uint16_t minimum_reporting_interval;
   uint16_t maximum_reporting_interval;
   uint32_t reportable_change;
+  uint16_t  timeout_period;
 } __attribute__((__packed__)) zigpc_zcl_configure_reporting_record_t;
 
 #ifdef __cplusplus

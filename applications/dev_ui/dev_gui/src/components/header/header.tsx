@@ -24,12 +24,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     render() {
         return (
             <div className={`header ${this.state.IsCollapsed ? "collapsed" : ""}`} onMouseDown={() => this.toggleCollapse(null)}>
-                <div className={`${this.state.IsCollapsed ? "col-sm-2" : "col-sm-2"} float-left margin-t-10`}>
+                <div className="col-sm-2 float-left margin-t-10 no-padding-r logo-container">
                     <div className="float-left">
-                        <img src={logo} alt="logo" />
+                        <img src={logo} alt="logo" className='margin-b-10' />
                         <h4 className="logo-title">Unified IoT</h4>
                         <h4 className="logo-title">Controller</h4>
-                        <span className='version'>v{localStorage.Version}</span>
+                        <span className='version'>v{localStorage.Version}{localStorage.Patch ? `-${localStorage.Patch}`: ""}</span>
                     </div>
                 </div>
                 <Connect ref={this.changeConnect} {...this.props} IsCollapsed={this.state.IsCollapsed} />

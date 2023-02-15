@@ -51,7 +51,7 @@ sl_status_t zwapi_soft_reset(void)
     sl_log_info(LOG_TAG,
                 "Z-Wave API module has been Soft Reset. "
                 "Now awaiting for Z-Wave API started callback.");
-    awaiting_zwave_api_started = true;
+    zwapi_set_awaiting_zwave_api_started(true);
     // Roll back our NodeID base type setting, it may be different again after reset.
     node_id_basetype_setting = NODEID_8BITS;
   }
@@ -199,6 +199,33 @@ sl_status_t zwapi_set_tx_status_reporting(bool enable)
   return frame_status;
 }
 
+sl_status_t zwapi_set_max_lr_tx_power_level(int16_t level)
+{
+  if (!zwapi_support_command_func(FUNC_ID_SERIAL_API_SETUP)
+      || !zwapi_support_setup_func(SERIAL_API_SETUP_CMD_MAX_LR_TX_PWR_SET)) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+  uint8_t response_length = 0, index = 0;
+  uint8_t request_buffer[REQUEST_BUFFER_SIZE] = {0},
+          response_buffer[FRAME_LENGTH_MAX]   = {0};
+  request_buffer[index++] = SERIAL_API_SETUP_CMD_MAX_LR_TX_PWR_SET;
+  request_buffer[index++] = level >> 8;
+  request_buffer[index++] = level & 0xff;
+  sl_status_t send_command_status
+    = zwapi_send_command_with_response(FUNC_ID_SERIAL_API_SETUP,
+                                       request_buffer,
+                                       index,
+                                       response_buffer,
+                                       &response_length);
+
+  if (send_command_status == SL_STATUS_OK && response_length > (IDX_DATA + 1)
+      && response_buffer[IDX_DATA] == SERIAL_API_SETUP_CMD_MAX_LR_TX_PWR_SET
+      && response_buffer[IDX_DATA + 1] == ZW_COMMAND_RETURN_VALUE_TRUE) {
+    return SL_STATUS_OK;
+  }
+  return SL_STATUS_FAIL;
+}
+
 sl_status_t zwapi_set_tx_power_level(tx_power_level_t txpowerlevel)
 {
   if (!zwapi_support_command_func(FUNC_ID_SERIAL_API_SETUP)
@@ -224,6 +251,34 @@ sl_status_t zwapi_set_tx_power_level(tx_power_level_t txpowerlevel)
     return SL_STATUS_OK;
   }
   return SL_STATUS_FAIL;
+}
+
+int16_t zwapi_get_max_lr_tx_power_level(void)
+{
+  int16_t level = 0;
+
+  if (zwapi_support_command_func(FUNC_ID_SERIAL_API_SETUP)
+      && zwapi_support_setup_func(SERIAL_API_SETUP_CMD_MAX_LR_TX_PWR_GET)) {
+    uint8_t response_length = 0, index = 0;
+    uint8_t request_buffer[REQUEST_BUFFER_SIZE] = {0},
+            response_buffer[FRAME_LENGTH_MAX]   = {0};
+
+    request_buffer[index++] = SERIAL_API_SETUP_CMD_MAX_LR_TX_PWR_GET;
+    sl_status_t send_command_status
+      = zwapi_send_command_with_response(FUNC_ID_SERIAL_API_SETUP,
+                                         request_buffer,
+                                         index,
+                                         response_buffer,
+                                         &response_length);
+
+    if (send_command_status == SL_STATUS_OK) {
+      if (response_length > (IDX_DATA + 2)) {
+        level = response_buffer[IDX_DATA + 1] << 8;
+        level |= level + response_buffer[IDX_DATA + 2];
+      }
+    }
+  }
+  return level;
 }
 
 tx_power_level_t zwapi_get_tx_power_level(void)

@@ -17,6 +17,8 @@
 
 #include "zigbee_host_common.h"
 
+extern struct zigbeeHostState z3gwState;
+
 void zigbeeHostZdoActiveEndpointsResponseCallback(
   const EmberAfServiceDiscoveryResult *result)
 {

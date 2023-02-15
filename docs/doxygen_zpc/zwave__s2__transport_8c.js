@@ -9,6 +9,8 @@ var zwave__s2__transport_8c =
     [ "LR_ACCESS_KEY_SLOT", "zwave__s2__transport_8c.html#ae909358c5d63a9566520fb064ce116a4", null ],
     [ "LR_AUTHENTICATED_KEY_SLOT", "zwave__s2__transport_8c.html#a28b49a1612deaa3798bf5db3beda98cf", null ],
     [ "NONCE_REP_TIME", "zwave__s2__transport_8c.html#af745d97a8d46d76cc16d1c542c07c9b0", null ],
+    [ "S2_NONCE_REPORT_MOS_SOS_INDEX", "zwave__s2__transport_8c.html#a681f528d62fd4ad9fb8ec94c540f85f6", null ],
+    [ "S2_NONCE_REPORT_MOS_SOS_MASK", "zwave__s2__transport_8c.html#ab69854ef1a32a3968f1699f6d9c26c41", null ],
     [ "SECURITY_2_COMMANDS_SUPPORTED_REPORT", "zwave__s2__transport_8c.html#a2b98a62ea70f01156d5cffe001cf5167", null ],
     [ "SECURITY_2_NONCE_GET", "zwave__s2__transport_8c.html#abea833ec9ff4f3a00bb0ee3a48e2776f", null ],
     [ "UNAUTHENTICATED_KEY_SLOT", "zwave__s2__transport_8c.html#a734ee331d8332130496b98b5ed19bfe6", null ],

@@ -2,6 +2,7 @@
 legacy_common_ash_config.h=1625781519
 lower-mac-spinel-config.h=-1860547414
 mbedtls_config.h=-1710232477
+sl_mbedtls_config.h=-1710232477
 sl_zigbee_binding_table_config.h=-473333154
 sl_zigbee_green_power_config.h=1126681692
 sl_zigbee_light_link_config.h=1596753037

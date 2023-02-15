@@ -22,7 +22,7 @@
 #include "zigpc_gateway_notify_mock.h"
 
 #include "zigpc_net_mgmt_notify_int_mock.h"
-#include "zigpc_net_mgmt_fsm.h"
+#include "zigpc_net_mgmt_internal.h"
 
 extern struct zigpc_net_mgmt_fsm fsm;
 

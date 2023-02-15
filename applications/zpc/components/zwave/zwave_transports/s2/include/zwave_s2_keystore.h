@@ -27,13 +27,10 @@
 #define ZWAVE_S2_KEYSTORE_H
 
 #include "zwave_controller_types.h"
+
 #include "sl_log.h"
 
 #include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief ECDH key mode types
@@ -49,6 +46,10 @@ typedef enum {
   ///    must be regenerated after each S2 bootstrapping attempt
   ZWAVE_S2_KEYSTORE_DYNAMIC_ECDH_KEY,
 } zwave_s2_keystore_ecdh_key_mode_t;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * @brief Return one of the DSKs of the controller.
@@ -89,6 +90,12 @@ void zwave_s2_create_new_network_keys();
  * @param log_level   The Log leve to use to log the keys.
  */
 void zwave_s2_log_security_keys(sl_log_level_t log_level);
+
+/**
+ * Save the Z-Wave Security Keys in a file in Zniffer friendly format.
+ * @param filename Name/path of the file where keys should be saved 
+ */
+void zwave_s2_save_security_keys(const char *filename);
 
 #ifdef __cplusplus
 }

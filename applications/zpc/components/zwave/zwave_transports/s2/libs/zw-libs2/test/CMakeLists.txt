@@ -5,8 +5,10 @@ add_definitions( -DUNIT_TEST )
 #add_executable( test_ccm test_ccm.c ../crypto/ccm/ccm.c ../crypto/aes/aes.c )
 #add_test( test_ccm test_ccm )
 
-# Add test for protocol
-add_unity_test(NAME test_protocol FILES test_protocol.c LIBRARIES s2_controller s2crypto aes)
+if(ENABLE_CONTROLLER)
+  # Add test for protocol
+  add_unity_test(NAME test_protocol FILES test_protocol.c LIBRARIES s2_controller s2crypto aes)
+endif(ENABLE_CONTROLLER)
 
 # Add test for AES-CMAC
 add_unity_test(NAME test_aes_cmac FILES test_aes_cmac.c LIBRARIES s2crypto aes)

@@ -14,14 +14,27 @@
 #include "unity.h"
 #include "ucl_mqtt_node_interview.h"
 
-// Mocks
-#include "attribute_store_mock.h"
-#include "zpc_attribute_store_mock.h"
-#include "zpc_attribute_store_network_helper_mock.h"
+// Test helpers
+#include "zpc_attribute_store_test_helper.h"
 
-// Regular includes
+// Other components
+#include "datastore.h"
+#include "attribute_store.h"
+#include "attribute_store_helper.h"
+#include "attribute_store_fixt.h"
+#include "attribute_resolver.h"
 #include "attribute_store_defined_attribute_types.h"
 
+const static unid_t not_valid_unid = "Not a UNID";
+
+// Test function, stub get resolution function
+sl_status_t get_resolution_function(attribute_store_node_t node,
+                                    uint8_t *frame,
+                                    uint16_t *frame_length)
+{
+  *frame_length = 0;
+  return SL_STATUS_OK;
+}
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp() {}
 
@@ -32,206 +45,118 @@ int suiteTearDown(int num_failures)
 }
 
 /// Called before each and every test
-void setUp() {}
+void setUp()
+{
+  datastore_init(":memory:");
+  attribute_store_init();
+  zpc_attribute_store_test_helper_create_network();
+  zwave_unid_set_home_id(home_id);
+}
+
+/// Called after each and every test
+void tearDown()
+{
+  attribute_store_teardown();
+  datastore_teardown();
+}
 
 void test_ucl_mqtt_initiate_node_interview_happy_case()
 {
-  unid_t test_unid = "qwerty";
-  is_zpc_unid_ExpectAndReturn(test_unid, false);
-  attribute_store_node_t test_node = 349;
-  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(test_unid,
-                                                                  test_node);
+  // Create a few attributes under the endpoint
+  // clang-format off
+  attribute_store_node_t attribute_1 = attribute_store_add_node(0x1001,endpoint_id_node);
+  attribute_store_node_t attribute_2 = attribute_store_add_node(0x1002,attribute_1);
+  attribute_store_node_t attribute_3 = attribute_store_add_node(0x1003,attribute_1);
+  attribute_store_node_t attribute_4 = attribute_store_add_node(0x1004,attribute_3);
+  attribute_store_node_t attribute_5 = attribute_store_add_node(0x1005,attribute_2);
+  // clang-format on
 
-  attribute_store_node_t test_current_node = 1;
-  attribute_store_get_node_child_by_type_ExpectAndReturn(test_node,
-                                                         ATTRIBUTE_ENDPOINT_ID,
-                                                         0,
-                                                         test_current_node);
-  attribute_store_delete_node_ExpectAndReturn(test_current_node, SL_STATUS_OK);
+  attribute_resolver_register_rule(0x1001, NULL, NULL);
+  attribute_resolver_register_rule(0x1002, NULL, &get_resolution_function);
+  attribute_resolver_register_rule(0x1003, NULL, &get_resolution_function);
+  attribute_resolver_register_rule(0x1004, NULL, &get_resolution_function);
+  attribute_resolver_register_rule(0x1005, NULL, &get_resolution_function);
 
-  for (test_current_node = 2; test_current_node < 5; test_current_node++) {
-    attribute_store_get_node_child_by_type_ExpectAndReturn(
-      test_node,
-      ATTRIBUTE_ENDPOINT_ID,
-      0,
-      test_current_node);
-    attribute_store_delete_node_ExpectAndReturn(test_current_node,
-                                                SL_STATUS_OK);
-  }
+  uint8_t value = 1;
+  attribute_store_set_reported(attribute_1, &value, sizeof(value));
+  attribute_store_set_reported(attribute_2, &value, sizeof(value));
+  attribute_store_set_reported(attribute_3, &value, sizeof(value));
+  attribute_store_set_reported(attribute_4, &value, sizeof(value));
+  attribute_store_set_reported(attribute_5, &value, sizeof(value));
+  attribute_store_log();
 
-  attribute_store_get_node_child_by_type_ExpectAndReturn(
-    test_node,
-    ATTRIBUTE_ENDPOINT_ID,
-    0,
-    ATTRIBUTE_STORE_INVALID_NODE);
+  // clang-format off
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_2, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_3, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_4, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_5, REPORTED_ATTRIBUTE));
+  // clang-format on
 
-  // Detetion is done. Now creating again
-  test_current_node = 1;
-  attribute_store_network_helper_create_endpoint_node_ExpectAndReturn(
-    test_unid,
-    0,
-    test_current_node);
-  attribute_store_add_node_ExpectAndReturn(ATTRIBUTE_ZWAVE_NIF,
-                                           test_current_node,
-                                           SL_STATUS_OK);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, ucl_mqtt_initiate_node_interview(zpc_unid));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    ucl_mqtt_initiate_node_interview(supporting_node_unid));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    ucl_mqtt_initiate_node_interview(not_valid_unid));
 
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, ucl_mqtt_initiate_node_interview(test_unid));
+  // clang-format off
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_2, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_3, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_4, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_5, REPORTED_ATTRIBUTE));
+  // clang-format on
 }
 
-void test_ucl_mqtt_initiate_node_interview_node_id_error()
+void test_ucl_mqtt_initiate_endpoint_interview()
 {
-  unid_t test_unid = "qwerty";
-  is_zpc_unid_ExpectAndReturn(test_unid, false);
-  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(
-    test_unid,
-    ATTRIBUTE_STORE_INVALID_NODE);
+  // Create a few attributes under the endpoint
+  // clang-format off
+  attribute_store_node_t attribute_1 = attribute_store_add_node(0x1001,endpoint_id_node);
+  attribute_store_node_t attribute_2 = attribute_store_add_node(0x1002,attribute_1);
+  attribute_store_node_t attribute_3 = attribute_store_add_node(0x1003,attribute_1);
+  attribute_store_node_t attribute_4 = attribute_store_add_node(0x1004,attribute_3);
+  attribute_store_node_t attribute_5 = attribute_store_add_node(0x1005,attribute_2);
+  // clang-format on
 
-  TEST_ASSERT_EQUAL(SL_STATUS_NOT_FOUND,
-                    ucl_mqtt_initiate_node_interview(test_unid));
-}
+  attribute_resolver_register_rule(0x1001, NULL, NULL);
+  attribute_resolver_register_rule(0x1002, NULL, &get_resolution_function);
+  attribute_resolver_register_rule(0x1003, NULL, &get_resolution_function);
+  attribute_resolver_register_rule(0x1004, NULL, &get_resolution_function);
+  attribute_resolver_register_rule(0x1005, NULL, &get_resolution_function);
 
-void test_ucl_mqtt_initiate_node_interview_delete_error()
-{
-  unid_t test_unid = "azerty";
-  is_zpc_unid_ExpectAndReturn(test_unid, false);
-  attribute_store_node_t test_node = 349;
-  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(test_unid,
-                                                                  test_node);
+  uint8_t value = 1;
+  attribute_store_set_reported(attribute_1, &value, sizeof(value));
+  attribute_store_set_reported(attribute_2, &value, sizeof(value));
+  attribute_store_set_reported(attribute_3, &value, sizeof(value));
+  attribute_store_set_reported(attribute_4, &value, sizeof(value));
+  attribute_store_set_reported(attribute_5, &value, sizeof(value));
 
-  attribute_store_node_t test_current_node = 1;
-  attribute_store_get_node_child_by_type_ExpectAndReturn(test_node,
-                                                         ATTRIBUTE_ENDPOINT_ID,
-                                                         0,
-                                                         test_current_node);
-  attribute_store_delete_node_ExpectAndReturn(test_current_node,
-                                              SL_STATUS_NOT_INITIALIZED);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    ucl_mqtt_initiate_endpoint_interview(zpc_unid, 0));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    ucl_mqtt_initiate_endpoint_interview(supporting_node_unid, 2));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    ucl_mqtt_initiate_endpoint_interview(not_valid_unid, 3));
 
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
-                    ucl_mqtt_initiate_node_interview(test_unid));
-}
-
-void test_ucl_mqtt_initiate_node_interview_zpc_unid()
-{
-  unid_t test_unid = "MyUNID";
-  is_zpc_unid_ExpectAndReturn(test_unid, true);
-
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, ucl_mqtt_initiate_node_interview(test_unid));
-}
-
-void test_ucl_mqtt_initiate_endpoint_interview_happy_case()
-{
-  unid_t test_unid = "qwerty";
-  is_zpc_unid_ExpectAndReturn(test_unid, false);
-  zwave_endpoint_id_t test_endpoint_id = 25;
-
-  attribute_store_node_t test_node = 349;
-  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(test_unid,
-                                                                  test_node);
-
-  attribute_store_node_t test_endpoint_node = 1;
-  attribute_store_get_node_child_by_value_ExpectAndReturn(
-    test_node,
-    ATTRIBUTE_ENDPOINT_ID,
-    REPORTED_ATTRIBUTE,
-    NULL,
-    sizeof(zwave_endpoint_id_t),
-    0,
-    test_endpoint_node);
-  attribute_store_get_node_child_by_value_IgnoreArg_value();
-
-  attribute_store_delete_node_ExpectAndReturn(test_endpoint_node, SL_STATUS_OK);
-
-  // Detetion is done. Now creating again
-  test_endpoint_node = 2;
-  attribute_store_network_helper_create_endpoint_node_ExpectAndReturn(
-    test_unid,
-    test_endpoint_id,
-    test_endpoint_node);
-  attribute_store_add_node_ExpectAndReturn(ATTRIBUTE_ZWAVE_NIF,
-                                           test_endpoint_node,
-                                           SL_STATUS_OK);
+  // clang-format off
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_2, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_3, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_4, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_5, REPORTED_ATTRIBUTE));
+  // clang-format on
 
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
-    ucl_mqtt_initiate_endpoint_interview(test_unid, test_endpoint_id));
-}
+    ucl_mqtt_initiate_endpoint_interview(supporting_node_unid, endpoint_id));
 
-void test_ucl_mqtt_initiate_endpoint_interview_node_id_error()
-{
-  unid_t test_unid = "qwerty";
-  is_zpc_unid_ExpectAndReturn(test_unid, false);
-  zwave_endpoint_id_t test_endpoint_id = 25;
-
-  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(
-    test_unid,
-    ATTRIBUTE_STORE_INVALID_NODE);
-
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_NOT_FOUND,
-    ucl_mqtt_initiate_endpoint_interview(test_unid, test_endpoint_id));
-}
-
-void test_ucl_mqtt_initiate_endpoint_interview_endpoint_node_error()
-{
-  unid_t test_unid = "qwerty";
-  is_zpc_unid_ExpectAndReturn(test_unid, false);
-  zwave_endpoint_id_t test_endpoint_id = 25;
-
-  attribute_store_node_t test_node = 349;
-  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(test_unid,
-                                                                  test_node);
-
-  attribute_store_get_node_child_by_value_ExpectAndReturn(
-    test_node,
-    ATTRIBUTE_ENDPOINT_ID,
-    REPORTED_ATTRIBUTE,
-    NULL,
-    sizeof(zwave_endpoint_id_t),
-    0,
-    ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_get_node_child_by_value_IgnoreArg_value();
-
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_NOT_FOUND,
-    ucl_mqtt_initiate_endpoint_interview(test_unid, test_endpoint_id));
-}
-
-void test_ucl_mqtt_initiate_endpoint_interview_delete_error()
-{
-  unid_t test_unid = "qwerty";
-  is_zpc_unid_ExpectAndReturn(test_unid, false);
-  zwave_endpoint_id_t test_endpoint_id = 25;
-
-  attribute_store_node_t test_node = 349;
-  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(test_unid,
-                                                                  test_node);
-
-  attribute_store_node_t test_endpoint_node = 1;
-  attribute_store_get_node_child_by_value_ExpectAndReturn(
-    test_node,
-    ATTRIBUTE_ENDPOINT_ID,
-    REPORTED_ATTRIBUTE,
-    NULL,
-    sizeof(zwave_endpoint_id_t),
-    0,
-    test_endpoint_node);
-  attribute_store_get_node_child_by_value_IgnoreArg_value();
-
-  attribute_store_delete_node_ExpectAndReturn(test_endpoint_node,
-                                              SL_STATUS_NOT_INITIALIZED);
-
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_FAIL,
-    ucl_mqtt_initiate_endpoint_interview(test_unid, test_endpoint_id));
-}
-
-void test_ucl_mqtt_initiate_endpoint_interview_zpc_unid()
-{
-  unid_t test_unid = "MyUNID";
-  is_zpc_unid_ExpectAndReturn(test_unid, true);
-  zwave_endpoint_id_t test_endpoint_id = 4;
-
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_OK,
-    ucl_mqtt_initiate_endpoint_interview(test_unid, test_endpoint_id));
+  // clang-format off
+  TEST_ASSERT_TRUE(attribute_store_is_value_defined(attribute_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_2, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_3, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_4, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_defined(attribute_5, REPORTED_ATTRIBUTE));
+  // clang-format on
 }

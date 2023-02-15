@@ -27,7 +27,6 @@ extern "C" {
 #endif
 
 #include "sl_status.h"
-// FIXME: Find another way to get zwave_dsk_t
 #include "zwave_controller_types.h"
 #include <stdint.h>
 #include <stdbool.h>

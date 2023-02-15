@@ -35,6 +35,7 @@
 #include <zigpc_net_mgmt.h>
 #include <zigpc_ota_zigbee.h>
 #include <zigpc_ucl.hpp>
+#include <zigpc_binding_mqtt.h>
 
 #include "zigpc_controller_int.hpp"
 
@@ -162,12 +163,39 @@ sl_status_t on_device_interviewed(const zigbee_eui64_t eui64,
         endpoint_id,
         status);
     }
+  
+    std::vector<zcl_cluster_id_t> server_cluster_list
+        = zigpc_datastore::cluster::get_id_list(eui64, endpoint_id, ZCL_CLUSTER_SERVER_SIDE );
+    
+    for(const zcl_cluster_id_t &cluster_id: server_cluster_list)
+    {
+      sl_log_debug(
+        LOG_TAG,
+        "Device: %016" PRIX64 " has Endpoint: %d, server cluster:  0x%04X",
+        zigbee_eui64_to_uint(eui64),
+        endpoint_id,
+        &cluster_id);
+    }
+    
+    std::vector<zcl_cluster_id_t> client_cluster_list
+        = zigpc_datastore::cluster::get_id_list(eui64, endpoint_id, ZCL_CLUSTER_CLIENT_SIDE );
+    
+    for(const zcl_cluster_id_t &cluster_id: client_cluster_list)
+    {
+      sl_log_debug(
+        LOG_TAG,
+        "Device: %016" PRIX64 " has Endpoint: %d, client cluster:  0x%04X",
+        zigbee_eui64_to_uint(eui64),
+        endpoint_id,
+        &cluster_id);
+    }
   }
 
   status = update_device_capabilities(eui64, endpoint_list);
   if (status != SL_STATUS_OK) {
     sl_log_warning(LOG_TAG, "Failed to update device capabilities");
   }
+  
 
   return status;
 }
@@ -179,23 +207,55 @@ sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
 
   zigbee_endpoint_t ep_data = {};
 
-  std::vector<zcl_cluster_id_t> server_cluster_list
-    = zigpc_datastore::cluster::get_id_list(eui64,
-                                            endpoint_id,
-                                            ZCL_CLUSTER_SERVER_SIDE);
 
-  ep_data.endpoint_id   = endpoint_id;
-  ep_data.cluster_count = server_cluster_list.size();
-  for (size_t i = 0; i < ep_data.cluster_count; i++) {
-    ep_data.cluster_list[i].cluster_id = server_cluster_list[i];
+  ep_data.cluster_count
+      = zigpc_datastore_get_cluster_count(eui64,endpoint_id, ZCL_CLUSTER_SERVER_SIDE);
+
+  ep_data.endpoint_id  = endpoint_id;
+  
+  for (size_t i = 0; i < ep_data.cluster_count; i++) 
+  {
+      zcl_cluster_id_t cluster_id;
+    status = 
+      zigpc_datastore_find_cluster_by_index(
+              eui64,
+              endpoint_id,
+              ZCL_CLUSTER_SERVER_SIDE,
+              i,
+              &cluster_id);
+
+    if(SL_STATUS_OK == status)
+    {
+        ep_data.cluster_list[i].cluster_id = cluster_id;
+    }
+    else
+    {
+        sl_log_warning(LOG_TAG, "Failed to read cluster");
+    }
   }
 
   const zigpc_config_t *const config = zigpc_get_config();
   bool request_binding = !config->poll_attr_only;
 
-  if(request_binding)
+  zigpc_network_data_t network_data;
+  status = zigpc_datastore_read_network(&network_data);
+
+  if(SL_STATUS_OK == status)
   {
-    status = zigpc_gateway_request_binding_endpoint(eui64, ep_data);
+    zigbee_eui64_uint_t eui64_uint = zigbee_eui64_to_uint(eui64); 
+    status =
+        zigpc_binding_init_mqtt(
+            eui64_uint,
+            endpoint_id);
+  }
+
+  if(request_binding && (SL_STATUS_OK == status))
+  {
+      sl_log_info(LOG_TAG,
+                   "EUI64:%016" PRIX64 ": 0x%X",
+                   network_data.gateway_eui64,
+                   status);
+    status = zigpc_gateway_request_binding_endpoint(eui64, ep_data, network_data.gateway_eui64);
   }
 
   if (status == SL_STATUS_OK) {
@@ -226,10 +286,20 @@ sl_status_t update_endpoint_capabilities(const zigbee_eui64_t eui64,
 {
   sl_status_t status = SL_STATUS_OK;
 
+  zigbee_eui64_uint_t eui64_uint =
+      zigbee_eui64_to_uint(eui64);
+
   // Setup supported commands for endpoint
   if (status == SL_STATUS_OK) {
     std::string unid = zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64));
     uic_mqtt_dotdot_publish_supported_commands(unid.c_str(), endpoint_id);
+  }
+
+  if(status == SL_STATUS_OK)
+  { 
+    status = zigpc_ucl::mqtt::publish_supported_generated(
+                                eui64_uint,
+                                endpoint_id);
   }
 
   // Setup OTA for capable devices

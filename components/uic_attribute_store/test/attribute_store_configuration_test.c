@@ -40,6 +40,8 @@ void setUp()
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_fixt_teardown();
   return num_failures;
 }
 
@@ -68,7 +70,7 @@ void test_uic_attribute_store_configuration_auto_save_teardown_test()
                                            &value,
                                            sizeof(value));
 
-  // Reload the attribute stoer from the persistent memory,
+  // Reload the attribute store from the datastore
   // the test_node value will be reverted back:
   attribute_store_load_from_datastore();
 

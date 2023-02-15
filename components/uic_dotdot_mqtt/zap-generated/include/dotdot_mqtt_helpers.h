@@ -657,27 +657,6 @@ char *squawk_configuration_squawk_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get squawk_configuration_squawk_mode enum representation from string. */
 uint32_t squawk_configuration_squawk_mode_get_enum_value_number_c(const char *str);
-#define TL_KEY_INDEX_ENUM_NAME_AVAILABLE 1
-
-/** Get tl_key_index string representation from enum. */
-char *tl_key_index_get_enum_value_name_c(
-  uint32_t value, char *result, size_t max_result_size);
-/** Get tl_key_index enum representation from string. */
-uint32_t tl_key_index_get_enum_value_number_c(const char *str);
-#define TL_STATUS_ENUM_NAME_AVAILABLE 1
-
-/** Get tl_status string representation from enum. */
-char *tl_status_get_enum_value_name_c(
-  uint32_t value, char *result, size_t max_result_size);
-/** Get tl_status enum representation from string. */
-uint32_t tl_status_get_enum_value_number_c(const char *str);
-#define TL_ZIGBEE_INFORMATION_LOGICAL_TYPE_ENUM_NAME_AVAILABLE 1
-
-/** Get tl_zigbee_information_logical_type string representation from enum. */
-char *tl_zigbee_information_logical_type_get_enum_value_name_c(
-  uint32_t value, char *result, size_t max_result_size);
-/** Get tl_zigbee_information_logical_type enum representation from string. */
-uint32_t tl_zigbee_information_logical_type_get_enum_value_number_c(const char *str);
 #define THERMOSTATAC_CAPACITY_FORMAT_ENUM_NAME_AVAILABLE 1
 
 /** Get thermostatac_capacity_format string representation from enum. */

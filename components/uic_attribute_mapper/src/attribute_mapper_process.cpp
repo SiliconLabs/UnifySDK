@@ -16,6 +16,7 @@
 
 // Generic includes
 #include <set>
+#include <stdbool.h>
 
 // Unify components
 #include "attribute.hpp"
@@ -49,7 +50,9 @@ struct attribute_update_compare {
 namespace
 {
 std::set<attribute_update_t, attribute_update_compare> pending_updates;
-}
+std::set<attribute_store_node_t> paused_reactions;
+bool mapper_paused = false;
+}  // namespace
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helper functions
@@ -78,6 +81,23 @@ static void
 void on_reported_attribute_update(attribute_store_node_t updated_node,
                                   attribute_store_change_t change)
 {
+  if (mapper_paused == true) {
+    sl_log_debug(LOG_TAG,
+                 "Ignoring Attribute ID %d event as the mapper is paused.",
+                 updated_node);
+    return;
+  }
+  if (paused_reactions.count(updated_node) != 0) {
+    if (change == ATTRIBUTE_DELETED) {
+      paused_reactions.erase(updated_node);
+    }
+    sl_log_debug(LOG_TAG,
+                 "Ignoring update to Attribute ID %d as the mapper"
+                 " was instructed to ignore it.",
+                 updated_node);
+    return;
+  }
+
   if (change == ATTRIBUTE_CREATED) {
     // Evaluate immediately if the attribute got created
     MapperEngine::get_instance().on_attribute_updated(updated_node,
@@ -108,6 +128,20 @@ void on_reported_attribute_update(attribute_store_node_t updated_node,
 void on_desired_attribute_update(attribute_store_node_t updated_node,
                                  attribute_store_change_t)
 {
+  if (mapper_paused == true) {
+    sl_log_debug(LOG_TAG,
+                 "Ignoring Attribute ID %d event as the mapper is paused.",
+                 updated_node);
+    return;
+  }
+  if (paused_reactions.count(updated_node) != 0) {
+    sl_log_debug(LOG_TAG,
+                 "Ignoring update to Attribute ID %d as the mapper"
+                 " was instructed to ignore it.",
+                 updated_node);
+    return;
+  }
+
   if (pending_updates.empty()) {
     process_post(&unify_attribute_mapper_process,
                  MAPPER_EVALUATE_PENDING_UPDATES_EVENT,
@@ -147,11 +181,40 @@ void attribute_mapper_engine_evaluate_next_update()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Functions shared within the mapper
+////////////////////////////////////////////////////////////////////////////////
+bool attribute_mapper_is_attribute_reactions_paused(attribute_store_node_t node)
+{
+  return paused_reactions.count(node);
+}
+////////////////////////////////////////////////////////////////////////////////
 // Public functions
 ////////////////////////////////////////////////////////////////////////////////
+void attribute_mapper_pause_reactions_to_attribute_updates(
+  attribute_store_node_t node)
+{
+  paused_reactions.insert(node);
+}
+
+void attribute_mapper_resume_reactions_to_attribute_updates(
+  attribute_store_node_t node)
+{
+  paused_reactions.erase(node);
+}
+
 bool attribute_mapper_has_pending_evaluations()
 {
   return !pending_updates.empty();
+}
+
+void attribute_mapper_pause_mapping()
+{
+  mapper_paused = true;
+}
+
+void attribute_mapper_resume_mapping()
+{
+  mapper_paused = false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -166,10 +229,11 @@ PROCESS_THREAD(unify_attribute_mapper_process, ev, data)
   while (true) {
     if (ev == PROCESS_EVENT_INIT) {
       sl_log_info(LOG_TAG, "Process started.\n");
-
+      mapper_paused = false;
     } else if (ev == PROCESS_EVENT_EXIT) {
       sl_log_info(LOG_TAG, "Process exited.\n");
       pending_updates.clear();
+      paused_reactions.clear();
 
     } else if (ev == PROCESS_EVENT_EXITED) {
       // Do not do anything with this event, just wait to go down.

@@ -1,0 +1,47 @@
+// This file holds the generic Level cluster mapper configuration
+
+// Level Cluster
+def zbLEVEL_CLUSTER_LEVEL       0x00080000
+def zbLEVEL_CLUSTER_OPTIONS     0x0008000F
+def zbLEVEL_ON_LEVEL            0x00080011
+def zbSTARTUP_CURRENT_LEVEL     0x00084000
+def zbLEVEL_CLUSTER_MIN_LEVEL   0x00080002
+def zbLEVEL_CLUSTER_MAX_LEVEL   0x00080003
+def zbLEVEL_LAST_NON_ZERO_VALUE 0x00080f01
+// OnOff Cluster
+def zbON_OFF_CLUSTER_ON_OFF     0x00060000
+
+// Constants
+def on_level_default 0xFF
+
+scope 0 {
+  // Attribute: OPTIONS
+  r'zbLEVEL_CLUSTER_OPTIONS =
+    if (e'zbLEVEL_CLUSTER_LEVEL & e'zbON_OFF_CLUSTER_ON_OFF) 1
+    if (e'zbLEVEL_CLUSTER_LEVEL) 0
+    undefined
+
+  // Attribute: ON_LEVEL
+  // ON_LEVEL set to 0xFF is disabled, this is also the default value for ON_LEVEL
+  r'zbLEVEL_ON_LEVEL =
+    if (e'zbLEVEL_CLUSTER_LEVEL & (d'zbLEVEL_ON_LEVEL == on_level_default)) on_level_default
+    if (e'zbLEVEL_CLUSTER_LEVEL & (d'zbLEVEL_ON_LEVEL < r'zbLEVEL_CLUSTER_MIN_LEVEL)) r'zbLEVEL_CLUSTER_MIN_LEVEL
+    if (e'zbLEVEL_CLUSTER_LEVEL & (d'zbLEVEL_ON_LEVEL > r'zbLEVEL_CLUSTER_MAX_LEVEL)) r'zbLEVEL_CLUSTER_MAX_LEVEL
+    if (e'zbLEVEL_CLUSTER_LEVEL) (d'zbLEVEL_ON_LEVEL or on_level_default)
+    undefined
+
+  // Store last non zero value for Level
+  r'zbLEVEL_LAST_NON_ZERO_VALUE = if (r'zbLEVEL_CLUSTER_LEVEL > 0) r'zbLEVEL_CLUSTER_LEVEL undefined
+
+  // If ON_OFF is ON and LEVEL is 0, and ON_LEVEL is set and enabled, set LEVEL to that.
+  // If zbLEVEL_ON_LEVEL is disabled use zbLEVEL_LAST_NON_ZERO_VALUE.
+  // This makes a Level Cluster where LEVEL is 0 turn on when triggering ON_OFF On command.
+  d'zbLEVEL_CLUSTER_LEVEL =
+    if ((d'zbON_OFF_CLUSTER_ON_OFF == 1) & (r'zbON_OFF_CLUSTER_ON_OFF == 0) & (r'zbLEVEL_CLUSTER_LEVEL == 0) & (d'zbLEVEL_CLUSTER_LEVEL == 0))
+        (if (r'zbLEVEL_ON_LEVEL != 0xFF) r'zbLEVEL_ON_LEVEL r'zbLEVEL_LAST_NON_ZERO_VALUE)
+      undefined
+
+  // Attribute: STARTUP_CURRENT_LEVEL, Z-Wave doesn't officially support this feature,
+  // some devices may have quirks to support this, default will set it to "SetToPreviousValue"
+  r'zbSTARTUP_CURRENT_LEVEL = if (e'zbLEVEL_CLUSTER_LEVEL) 255 undefined
+}

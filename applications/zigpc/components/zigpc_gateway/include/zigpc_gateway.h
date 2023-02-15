@@ -103,10 +103,17 @@ sl_status_t zigpc_gateway_configure_reports(const zigbee_eui64_t eui64,
  * @return sl_status_t          SL_STATUS_OK on request accepted by ZigPC
  * Gateway, or error in reading and preparing data to be sent to ZigPC Gateway.
 **/
-sl_status_t zigpc_gateway_request_binding(const zigbee_eui64_t eui64,
-                                          uint8_t endpoint_id,
-                                          zcl_cluster_id_t cluster_id);
+sl_status_t zigpc_gateway_request_binding(const zigbee_eui64_t source_eui64,
+                                          uint8_t source_endpoint_id,
+                                          zcl_cluster_id_t cluster_id,
+                                          const zigbee_eui64_t dest_eui64,
+                                          uint8_t dest_endpoint_id);
 
+sl_status_t zigpc_gateway_request_unbind(const zigbee_eui64_t source_eui64,
+                                          uint8_t source_endpoint_id,
+                                          zcl_cluster_id_t cluster_id,
+                                          const zigbee_eui64_t dest_eui64,
+                                          uint8_t dest_endpoint_id);
 /**
  *@brief Request to send a ZCL Configure Reporting command to an end device.
  *
@@ -120,7 +127,8 @@ sl_status_t zigpc_gateway_request_binding(const zigbee_eui64_t eui64,
 **/
 sl_status_t
   zigpc_gateway_request_binding_endpoint(const zigbee_eui64_t eui64,
-                                         const zigbee_endpoint_t endpoint);
+                                         const zigbee_endpoint_t endpoint,
+                                         const zigbee_eui64_t gateway_eui64);
 
 /**
  * @brief Validate if install code can be accepted by EmberAf layer.
@@ -209,6 +217,14 @@ sl_status_t zigpc_gateway_add_ota_image(const char *filename,
 void zigpc_gateway_command_print_info(void);
 
 /**
+ * @brief Send command to the ember CLI
+ * 
+ * @param array 
+ * @param length 
+ */
+void zigpc_gateway_send_emberaf_command(char* array);
+
+/**
  * @brief Send command to print Ember NWK key.
  *
  */
@@ -247,6 +263,18 @@ size_t zigpc_gateway_get_counters_capacity();
 void zigpc_gateway_clear_counters();
 
 sl_status_t zigpc_gateway_bootload_restart();
+
+/**
+ * @brief Get current active count in the neighbor adress table
+ * 
+ */
+uint8_t zigpc_gateway_get_neighbor_count();
+
+/**
+ * @brief Get a specific neighbor EUI64 from its index
+ * 
+ */
+sl_status_t zigpc_gateway_get_neighbor_eui64(uint8_t index, zigbee_eui64_t eui64);
 
 #ifdef __cplusplus
 }

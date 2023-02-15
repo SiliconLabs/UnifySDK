@@ -27,7 +27,7 @@
 #include "aoxpc_unid_mock.h"
 
 // Test constants
-#define AOXPC_UNID "AoXPCUNID_TeST"
+const aoa_id_t AOXPC_UNID = "AoXPCUNID_TeST";
 
 // Static variables
 static sl_status_t get_aoxpc_unid_return_value = SL_STATUS_OK;

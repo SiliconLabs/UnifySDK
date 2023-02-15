@@ -14,12 +14,12 @@
 
 // Includes from the Z-Wave controller
 #include "zwave_controller_callbacks.h"
+#include "zwave_network_management.h"
 #include "zwave_rx.h"
 
 // ZPC Includes
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
-#include "dotdot_attributes.h"
 #include "zwapi_protocol_basis.h"
 #include "zwave_api_transport.h"
 
@@ -29,6 +29,8 @@
 #include "dotdot_mqtt_supported_generated_commands.h"
 #include "dotdot_mqtt_generated_commands.h"
 #include "attribute_store_helper.h"
+#include "unify_dotdot_attribute_store_helpers.h"
+#include "unify_dotdot_defined_attribute_types.h"
 
 // Generic includes
 #include <string.h>

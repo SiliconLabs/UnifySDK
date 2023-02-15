@@ -69,6 +69,11 @@ extern "C" {
  * measured_0dBm_power.
  * @note On a protocols prior to 7.xx, measured_0dBm_power is ignored.
  *
+ * @param max_lr_tx_power_dbm 
+ * The Z-Wave Max Long Range Transmit power level. The power
+ * level is in deci dBm, for example 1 dBm output power will be 10 in
+ * max_lr_tx_power_dbm and -2 dBm will be -20 in max_lr_tx_power_dbm.
+ *
  * @param region
  * The region/frequency for the radio.
  * @note On a protocols prior to 7.xx the rf region is ignored.
@@ -79,6 +84,7 @@ sl_status_t zwave_rx_init(const char *serial_port,
                           int *serial_port_fd,
                           int8_t normal_tx_power_dbm,
                           int8_t measured_0dBm_power,
+                          int16_t max_lr_tx_power_dbm,
                           zwave_controller_region_t region);
 
 /**

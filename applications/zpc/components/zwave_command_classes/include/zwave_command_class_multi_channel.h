@@ -101,7 +101,7 @@ attribute_4 -[hidden]--> attribute_6
 #include "sl_status.h"
 #include "zwave_controller_connection_info.h"
 #include "attribute_store.h"
-#include "zwave_rx.h"
+#include "zwave_rx_definitions.h"
 
 // Other components (like the transport) will use this define
 // to keep the version aligned.

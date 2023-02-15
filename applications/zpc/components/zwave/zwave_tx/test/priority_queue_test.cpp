@@ -14,8 +14,8 @@
 // Includes from other components
 #include "sl_log.h"
 #include "unity.h"
-#include "priority_queue.hpp"
-#include "zwave_tx_queue.hpp"
+#include "workaround.hpp"
+
 extern "C" {
 
 void test_reversed_priority_queue()

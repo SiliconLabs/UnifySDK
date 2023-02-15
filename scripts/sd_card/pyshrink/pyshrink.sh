@@ -332,69 +332,68 @@ fi
 minsize=$(cut -d ':' -f 2 <<< "$minsize" | tr -d ' ')
 logVariables $LINENO currentsize minsize
 if [[ $currentsize -eq $minsize ]]; then
-  error $LINENO "Image already shrunk to smallest size"
-  exit 11
-fi
+  info "Image already shrunk to smallest size"
+else
+  #Add some free space to the end of the filesystem
+  extra_space=$(($currentsize - $minsize))
+  logVariables $LINENO extra_space
+  for space in 5000 1000 100; do
+    if [[ $extra_space -gt $space ]]; then
+      minsize=$(($minsize + $space))
+      break
+    fi
+  done
+  logVariables $LINENO minsize
 
-#Add some free space to the end of the filesystem
-extra_space=$(($currentsize - $minsize))
-logVariables $LINENO extra_space
-for space in 5000 1000 100; do
-  if [[ $extra_space -gt $space ]]; then
-    minsize=$(($minsize + $space))
-    break
+  #Shrink filesystem
+  info "Shrinking filesystem"
+  resize2fs -p "$loopback" $minsize
+  rc=$?
+  if (( $rc )); then
+    error $LINENO "resize2fs failed with rc $rc"
+    mount "$loopback" "$mountdir"
+    mv "$mountdir/etc/rc.local.bak" "$mountdir/etc/rc.local"
+    umount "$mountdir"
+    losetup -d "$loopback"
+    exit 12
   fi
-done
-logVariables $LINENO minsize
+  sleep 1
 
-#Shrink filesystem
-info "Shrinking filesystem"
-resize2fs -p "$loopback" $minsize
-rc=$?
-if (( $rc )); then
-  error $LINENO "resize2fs failed with rc $rc"
-  mount "$loopback" "$mountdir"
-  mv "$mountdir/etc/rc.local.bak" "$mountdir/etc/rc.local"
-  umount "$mountdir"
-  losetup -d "$loopback"
-  exit 12
-fi
-sleep 1
+  #Shrink partition
+  partnewsize=$(($minsize * $blocksize))
+  newpartend=$(($partstart + $partnewsize))
+  logVariables $LINENO partnewsize newpartend
+  parted -s -a minimal "$img" rm "$partnum"
+  rc=$?
+  if (( $rc )); then
+    error $LINENO "parted failed with rc $rc"
+    exit 13
+  fi
 
-#Shrink partition
-partnewsize=$(($minsize * $blocksize))
-newpartend=$(($partstart + $partnewsize))
-logVariables $LINENO partnewsize newpartend
-parted -s -a minimal "$img" rm "$partnum"
-rc=$?
-if (( $rc )); then
-	error $LINENO "parted failed with rc $rc"
-	exit 13
-fi
+  parted -s "$img" unit B mkpart "$parttype" "$partstart" "$newpartend"
+  rc=$?
+  if (( $rc )); then
+    error $LINENO "parted failed with rc $rc"
+    exit 14
+  fi
 
-parted -s "$img" unit B mkpart "$parttype" "$partstart" "$newpartend"
-rc=$?
-if (( $rc )); then
-	error $LINENO "parted failed with rc $rc"
-	exit 14
-fi
+  #Truncate the file
+  info "Shrinking image"
+  endresult=$(parted -ms "$img" unit B print free)
+  rc=$?
+  if (( $rc )); then
+    error $LINENO "parted failed with rc $rc"
+    exit 15
+  fi
 
-#Truncate the file
-info "Shrinking image"
-endresult=$(parted -ms "$img" unit B print free)
-rc=$?
-if (( $rc )); then
-	error $LINENO "parted failed with rc $rc"
-	exit 15
-fi
-
-endresult=$(tail -1 <<< "$endresult" | cut -d ':' -f 2 | tr -d 'B')
-logVariables $LINENO endresult
-truncate -s "$endresult" "$img"
-rc=$?
-if (( $rc )); then
-	error $LINENO "trunate failed with rc $rc"
-	exit 16
+  endresult=$(tail -1 <<< "$endresult" | cut -d ':' -f 2 | tr -d 'B')
+  logVariables $LINENO endresult
+  truncate -s "$endresult" "$img"
+  rc=$?
+  if (( $rc )); then
+    error $LINENO "truncate failed with rc $rc"
+    exit 16
+  fi
 fi
 
 # handle compression

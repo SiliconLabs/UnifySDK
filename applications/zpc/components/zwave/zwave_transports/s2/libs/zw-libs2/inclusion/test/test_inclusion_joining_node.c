@@ -18,6 +18,15 @@
 
 #include "ZW_classcmd.h"
 #include "s2_classcmd.h"
+#include "s2_keystore.h"
+
+void setUpSuite(void) {
+
+}
+
+void tearDownSuite(void) {
+
+}
 
 #define ELEM_COUNT(ARRAY)  (sizeof(ARRAY)/(sizeof(ARRAY[0])))
 #ifdef ZW_CONTROLLER
@@ -207,7 +216,7 @@ void test_kex_joining_node_state_machine_csa(void) {
     p_mock->return_code.value     = 1;
 
     // Before exchange of public keys, then we expect that our public key is requested from the keystore.
-    mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
     p_mock->output_arg[0].pointer = public_key_b;
 
     uint8_t s2_public_key_frame[3 + sizeof(public_key_b)] = {COMMAND_CLASS_SECURITY_2, PUBLIC_KEY_REPORT, 0x00, 0x00, 0x00}; // Key exchange received from slave - public key for secure exchange of LTK. Note the first two bytes should not be transmitted on authenticated/access keys.
@@ -230,9 +239,9 @@ void test_kex_joining_node_state_machine_csa(void) {
     mock_call_expect(TO_STR(s2_event_handler), &p_mock);
     p_mock->expect_arg[0].pointer = p_expected_inc_req_event;
 
-    mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+    mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
     p_mock->output_arg[0].pointer = private_key_b;
-    mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
     p_mock->output_arg[0].pointer = public_key_b;
 
     // Expect Echo(KEX Report) to be sent.
@@ -1072,7 +1081,7 @@ void test_kex_joining_node_state_machine_unauthenticated() {
   p_mock->return_code.value     = 1;
 
   // Before exchange of public keys, then we expect that our public key is requested from the keystore.
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   uint8_t s2_public_key_frame[3 + sizeof(public_key_b)] = {COMMAND_CLASS_SECURITY_2, PUBLIC_KEY_REPORT, 0x00}; // Key exchange received from slave - public key for secure exchange of LTK.
@@ -1094,9 +1103,9 @@ void test_kex_joining_node_state_machine_unauthenticated() {
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_inc_req_event;
 
-  mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
   p_mock->output_arg[0].pointer = private_key_b;
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   // Expect Echo(KEX Report) to be sent.
@@ -1269,15 +1278,9 @@ void test_kex_joining_timer_handling() {
   /** Timer start expected on every transmitted frame.
     * For flow chart, see SDS11274.
     * Timer values:
-    * - TB0, TB1, TB2, TB3, TB5, TB6, TB7 : 10s
+    * - TB1, TB2, TB3, TB5, TB6, TB7 : 10s
     * - TBI1                         : 240s
     */
-
-  // After non-secure inclusion of the node we expect to receive neighbor discovery complete within 60 seconds.
-  mock_call_expect(TO_STR(s2_inclusion_set_timeout), &p_mock);
-  p_mock->compare_rule_arg[0] = COMPARE_ANY;
-  p_mock->expect_arg[1].value = 6000;
-  p_mock->return_code.value   = 1;
 
   // When neighbour discovery completes we expect the timer to be stopped.
   mock_call_expect(TO_STR(s2_inclusion_stop_timeout), &p_mock);
@@ -2936,7 +2939,15 @@ void test_kex_inclusion_error_echo_kex_report() {
     p_mock->expect_arg[3].value   = sizeof(S2_kex_report_frame);
 
     // When the KEX Set is received, we expect a call to the keystore in order to obtain our public key.
-    mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    // Use dynamic keypair if only S0 and/or S2 unauthenticated are requested
+    if(0 != (echo_kex_report_fail_test_vector[i][0] & ~(KEY_CLASS_S0 | KEY_CLASS_S2_UNAUTHENTICATED)))
+    {
+      mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    }
+    else
+    {
+      mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
+    }
     p_mock->output_arg[0].pointer = public_key_b;
 
     // When the KEX Set is received, we expect public keys to be exchanges.
@@ -2977,9 +2988,26 @@ void test_kex_inclusion_error_echo_kex_report() {
     p_mock->expect_arg[0].pointer = p_expected_inc_req_event;
 
     // When receiving public key A, then we expect that both our public and private keys are requested from the keystore.
-    mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+    // Use dynamic keypair if only S0 and/or S2 unauthenticated are requested
+    if(0 != (echo_kex_report_fail_test_vector[i][0] & ~(KEY_CLASS_S0 | KEY_CLASS_S2_UNAUTHENTICATED)))
+    {
+      mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+    }
+    else
+    {
+      mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
+    }
     p_mock->output_arg[0].pointer = private_key_b;
-    mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+
+    // Use dynamic keypair if only S0 and/or S2 unauthenticated are requested
+    if(0 != (echo_kex_report_fail_test_vector[i][0] & ~(KEY_CLASS_S0 | KEY_CLASS_S2_UNAUTHENTICATED)))
+    {
+      mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    }
+    else
+    {
+      mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
+    }
     p_mock->output_arg[0].pointer = public_key_b;
 
     // When public key is received we expect an echo(KEX Set) to be sent.
@@ -3106,7 +3134,16 @@ void test_kex_inclusion_invalid_key_report_set() {
     p_mock->expect_arg[3].value   = sizeof(S2_kex_report_frame);
 
     // When the KEX Set is received, we expect a call to the keystore in order to obtain our public key.
-    mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    // If any of the authenticated keys are requested, we expect the primary keypair to be used. Otherwise
+    // the dynamic keypair.
+    if ((KEY_CLASS_S2_ACCESS | KEY_CLASS_S2_AUTHENTICATED) & key_report_fail_test_vector[i][0])
+    {
+      mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    }
+    else
+    {
+      mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
+    }
     p_mock->output_arg[0].pointer = public_key_b;
 
     // When the KEX Set is received, we expect public keys to be exchanges.
@@ -3116,7 +3153,7 @@ void test_kex_inclusion_invalid_key_report_set() {
                                     0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22,
                                     0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22};
     // If the node uses only unauthenticated keys, then full public key is expected, else the first two bytes are zero'ed out.
-    if (0x06 & key_report_fail_test_vector[i][0])
+    if ((KEY_CLASS_S2_ACCESS | KEY_CLASS_S2_AUTHENTICATED) & key_report_fail_test_vector[i][0])
     {
       S2_pub_key_B_frame[3] = 0x00;
       S2_pub_key_B_frame[4] = 0x00;
@@ -3146,9 +3183,23 @@ void test_kex_inclusion_invalid_key_report_set() {
     p_mock->expect_arg[0].pointer = p_expected_inc_req_event;
 
     // When receiving public key A, then we expect that both our public and private keys are requested from the keystore.
-    mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+    if ((KEY_CLASS_S2_ACCESS | KEY_CLASS_S2_AUTHENTICATED) & key_report_fail_test_vector[i][0])
+    {
+      mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+    }
+    else
+    {
+      mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
+    }
     p_mock->output_arg[0].pointer = private_key_b;
-    mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    if ((KEY_CLASS_S2_ACCESS | KEY_CLASS_S2_AUTHENTICATED) & key_report_fail_test_vector[i][0])
+    {
+      mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    }
+    else
+    {
+      mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
+    }
     p_mock->output_arg[0].pointer = public_key_b;
 
     // When public key is received we expect an echo(KEX Set) to be sent.
@@ -3299,13 +3350,22 @@ void test_kex_inclusion_valid_keys() {
     p_mock->expect_arg[3].value   = sizeof(s2_kex_report_frame);
 
     // Before exchange of public keys, then we expect that our public key is requested from the keystore.
-    mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    // If any of the authenticated keys are requested, we expect the primary keypair to be used. Otherwise
+    // the dynamic keypair.
+    if ((KEY_CLASS_S2_ACCESS | KEY_CLASS_S2_AUTHENTICATED) & key_request_pass_test_vector[i][3])
+    {
+      mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+    }
+    else
+    {
+      mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
+    }
     p_mock->output_arg[0].pointer = public_key_b;
 
     uint8_t s2_public_key_frame[3 + sizeof(public_key_b)] = {COMMAND_CLASS_SECURITY_2, PUBLIC_KEY_REPORT, 0x00}; // Key exchange received from slave - public key for secure exchange of LTK.
     memcpy(&s2_public_key_frame[3], public_key_b, sizeof(public_key_b));
     // If the node uses only unauthenticated keys, then full public key is expected, else the first two bytes are zero'ed out.
-    if (0x06 & key_request_pass_test_vector[i][3])
+    if ((KEY_CLASS_S2_ACCESS | KEY_CLASS_S2_AUTHENTICATED) & key_request_pass_test_vector[i][3])
     {
       s2_public_key_frame[3] = 0x00;
       s2_public_key_frame[4] = 0x00;
@@ -3478,7 +3538,7 @@ void test_kex_inclusion_echo_kex_set_retry() {
   p_mock->expect_arg[3].value   = sizeof(S2_kex_report_frame);
 
   // When the KEX Set is received, we expect a call to the keystore in order to obtain our public key.
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   // When the KEX Set is received, we expect public keys to be exchanges.
@@ -3507,9 +3567,9 @@ void test_kex_inclusion_echo_kex_set_retry() {
   p_mock->expect_arg[0].pointer = p_expected_inc_req_event;
 
   // When receiving public key A, then we expect that both our public and private keys are requested from the keystore.
-  mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
   p_mock->output_arg[0].pointer = private_key_b;
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   // When public key is received we expect an echo(KEX Set) to be sent.
@@ -3651,15 +3711,15 @@ void test_inclusion_keystore_handling() {
   p_mock->expect_arg[0].value = 0xFF;
 
   // When exchanging public keys, we expect a call to keystore.
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   // When the KEX Set is received, we expect a call to the keystore in order to obtain our public key.
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   // After receiving public key A, we expect calls to keystore and crypto lib to extract temporary key.
-  mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
   p_mock->output_arg[0].pointer = private_key_b;
 
   mock_call_expect(TO_STR(crypto_scalarmult_curve25519), &p_mock);
@@ -4630,10 +4690,20 @@ void test_kex_inclusion_transfer_end_key_not_verified_TO7507() {
   p_mock->expect_arg[3].value   = sizeof(S2_network_key_verify_frame);
   p_mock->return_code.value     = 1;
 
+  // Expect KEX FAIL to be sent.
+  uint8_t S2_network_kex_fail_frame[] = {COMMAND_CLASS_SECURITY_2, KEX_FAIL, KEX_FAIL_KEY_VERIFY};
+  mock_call_expect(TO_STR(S2_send_frame), &p_mock);
+  p_mock->compare_rule_arg[0]   = COMPARE_ANY;  // For the outline, we just expect any/null pointers now.
+  p_mock->compare_rule_arg[1]   = COMPARE_NOT_NULL; // This shall be updated once excact frame is defined for S2 frames.
+  p_mock->expect_arg[2].pointer = S2_network_kex_fail_frame;
+  p_mock->expect_arg[3].value   = sizeof(S2_network_kex_fail_frame);
+  p_mock->return_code.value     = 1;
+
+
   // When S2 Transfer End is received, we expect a corresponding Node inclusion complete event from libs2.
   zwave_event_t  * p_expected_inc_fail_event = (zwave_event_t *)m_test_mem_pool[1];
   p_expected_inc_fail_event->event_type = S2_NODE_INCLUSION_FAILED_EVENT;
-  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = 0x00;
+  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = KEX_FAIL_KEY_VERIFY;
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_inc_fail_event;
 
@@ -4788,10 +4858,20 @@ void test_kex_inclusion_transfer_end_key_request_complete_error() {
   p_mock->expect_arg[3].value   = sizeof(S2_network_key_verify_frame);
   p_mock->return_code.value     = 1;
 
+  // Expect KEX FAIL to be sent.
+  uint8_t S2_network_kex_fail_frame[] = {COMMAND_CLASS_SECURITY_2, KEX_FAIL, KEX_FAIL_KEY_VERIFY};
+  mock_call_expect(TO_STR(S2_send_frame), &p_mock);
+  p_mock->compare_rule_arg[0]   = COMPARE_ANY;  // For the outline, we just expect any/null pointers now.
+  p_mock->compare_rule_arg[1]   = COMPARE_NOT_NULL; // This shall be updated once excact frame is defined for S2 frames.
+  p_mock->expect_arg[2].pointer = S2_network_kex_fail_frame;
+  p_mock->expect_arg[3].value   = sizeof(S2_network_kex_fail_frame);
+  p_mock->return_code.value     = 1;
+
+
   // When S2 Transfer End is received, we expect a corresponding Node inclusion complete event from libs2.
   zwave_event_t  * p_expected_inc_fail_event = (zwave_event_t *)m_test_mem_pool[1];
   p_expected_inc_fail_event->event_type = S2_NODE_INCLUSION_FAILED_EVENT;
-  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = 0x00;
+  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = KEX_FAIL_KEY_VERIFY;
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_inc_fail_event;
 
@@ -4914,7 +4994,7 @@ void test_kex_joining_node_state_machine_csa_rejected_S2_unauth_S0_TO7654(void) 
   p_mock->return_code.value     = 1;
 
   // Before exchange of public keys, then we expect that our public key is requested from the keystore.
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   uint8_t s2_public_key_frame[3 + sizeof(public_key_b)] = {COMMAND_CLASS_SECURITY_2, PUBLIC_KEY_REPORT, 0x00, 0x00, 0x00}; // Key exchange received from slave - public key for secure exchange of LTK. Note the first two bytes should not be transmitted on authenticated/access keys.
@@ -4937,9 +5017,9 @@ void test_kex_joining_node_state_machine_csa_rejected_S2_unauth_S0_TO7654(void) 
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_inc_req_event;
 
-  mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
   p_mock->output_arg[0].pointer = private_key_b;
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   // Expect Echo(KEX Report) to be sent.
@@ -5185,7 +5265,7 @@ void test_kex_joining_node_state_machine_retry_all_states(void) {
   }
 
   // Before exchange of public keys, then we expect that our public key is requested from the keystore.
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   uint8_t s2_public_key_frame[3 + sizeof(public_key_b)] = {COMMAND_CLASS_SECURITY_2, PUBLIC_KEY_REPORT, 0x00}; // Key exchange received from slave - public key for secure exchange of LTK.
@@ -5210,9 +5290,9 @@ void test_kex_joining_node_state_machine_retry_all_states(void) {
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_inc_req_event;
 
-  mock_call_expect(TO_STR(keystore_private_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_private_key_read), &p_mock);
   p_mock->output_arg[0].pointer = private_key_b;
-  mock_call_expect(TO_STR(keystore_public_key_read), &p_mock);
+  mock_call_expect(TO_STR(keystore_dynamic_public_key_read), &p_mock);
   p_mock->output_arg[0].pointer = public_key_b;
 
   // Expect Echo(KEX Set) to be sent.
@@ -5959,6 +6039,7 @@ void test_kex_joining_node_error_transfer_end(void) {
   zwave_event_t  * p_expected_complete_event = (zwave_event_t *)m_test_mem_pool[1];
   p_expected_complete_event->event_type = S2_NODE_INCLUSION_FAILED_EVENT;
   p_expected_complete_event->evt.s2_event.s2_data.inclusion_complete.exchanged_keys = 0x0;
+  p_expected_complete_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = KEX_FAIL_KEY_VERIFY;
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_complete_event ;
 
@@ -6047,6 +6128,15 @@ void test_kex_joining_node_error_transfer_end(void) {
   s2_context.length = sizeof(s2_net_key_report_0_frame);
   s2_con.class_id = UNIT_TEST_TEMP_KEY_SECURE;
   s2_inclusion_post_event(&s2_context, &s2_con);
+
+  // Expect KEX FAIL to be sent.
+  uint8_t S2_network_kex_fail_frame[] = {COMMAND_CLASS_SECURITY_2, KEX_FAIL, KEX_FAIL_KEY_VERIFY};
+  mock_call_expect(TO_STR(S2_send_frame), &p_mock);
+  p_mock->compare_rule_arg[0]   = COMPARE_ANY;  // For the outline, we just expect any/null pointers now.
+  p_mock->compare_rule_arg[1]   = COMPARE_NOT_NULL; // This shall be updated once excact frame is defined for S2 frames.
+  p_mock->expect_arg[2].pointer = S2_network_kex_fail_frame;
+  p_mock->expect_arg[3].value   = sizeof(S2_network_kex_fail_frame);
+  p_mock->return_code.value     = 1;
 
   // Set Key Verify to 0 and verify that inclusion gets aborted after it.
 

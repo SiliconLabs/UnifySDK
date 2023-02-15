@@ -4,106 +4,40 @@ find_package(Boost REQUIRED)
 # cross compiling, thus we use the simplified method find_path instead
 find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 
-# ZCL Group cluster server
-add_library(zcl_group_cluster_server src/zcl_group_cluster_server.cpp)
+# ZCL Cluster server library
+add_library(
+  zcl_cluster_servers
+  src/configuration_parameter_cluster_server.cpp
+  src/zcl_binding_cluster_server.cpp
+  src/zcl_cluster_servers.cpp
+  src/zcl_cluster_servers_helpers.cpp
+  src/zcl_group_cluster_server.cpp
+  src/zcl_OTA_cluster_server.cpp
+  src/zcl_rf_telemetry_cluster_server.c
+  src/zcl_scenes_cluster_server.cpp)
+
 target_include_directories(
-  zcl_group_cluster_server
-  PUBLIC include ${Boost_INCLUDE_DIRS}
-  PRIVATE src ${nlohmann_json_include})
+  zcl_cluster_servers
+  PUBLIC include
+  PRIVATE src ${nlohmann_json_include} ${Boost_INCLUDE_DIRS})
+
 target_link_libraries(
-  zcl_group_cluster_server
-  PUBLIC zcl_cluster_servers
-  PRIVATE uic_attribute_store
+  zcl_cluster_servers
+  PUBLIC zwave_handlers zwave_definitions
+  PRIVATE unify
           zpc_attribute_store
           zpc_utils
-          dotdot_mqtt_topics_handler
-          dotdot_attributes
-          uic_mqtt
-          ucl_node_state)
-target_interface_libraries(zcl_group_cluster_server zwave_controller)
+          zpc_dotdot_mqtt
+          ucl_mqtt
+          zwave_command_classes
+          zwave_api_transport
+          dotdot_mapper
+          zwave_network_management)
 
-# ZCL OTA Cluster Server
-add_library(zcl_OTA_cluster_server src/zcl_OTA_cluster_server.cpp)
+if(BUILD_TESTING)
+  # Unit tests
+  add_subdirectory(test)
 
-target_include_directories(
-  zcl_OTA_cluster_server
-  PUBLIC include
-  PRIVATE src)
-
-target_link_libraries(
-  zcl_OTA_cluster_server
-  PUBLIC uic_attribute_store
-         zwave_handlers
-         uic_ota
-         zpc_attribute_store
-         zwave_command_classes
-)
-target_interface_libraries(zcl_OTA_cluster_server zwave_controller)
-
-
-# Protocol Controller / RF Telemetry Cluster server library
-add_library(zcl_rf_telemetry_cluster_server src/zcl_rf_telemetry_cluster_server.c)
-
-target_include_directories(
-  zcl_rf_telemetry_cluster_server
-  PUBLIC include
-  PRIVATE src)
-
-target_link_libraries(
-  zcl_rf_telemetry_cluster_server
-  PRIVATE
-    uic_dotdot_mqtt
-    dotdot_mapper
-    dotdot_attributes
-    zwave_controller
-    zwave_api_transport)
-
-
-# Configuration parameters Cluster Server
-add_library(configuration_parameter_cluster_server
-  src/configuration_parameter_cluster_server.cpp
-  src/zcl_cluster_servers_helpers.cpp)
-target_include_directories(
-  configuration_parameter_cluster_server
-  PUBLIC include
-  PRIVATE src)
-target_link_libraries(
-  configuration_parameter_cluster_server
-  PUBLIC uic_dotdot_mqtt zpc_attribute_store
-  PRIVATE zwave_definitions zwave_controller)
-
-
-# Binding Cluster server
-add_library(zcl_binding_cluster_server src/zcl_binding_cluster_server.cpp)
-
-target_include_directories(
-  zcl_binding_cluster_server
-  PUBLIC include
-  PRIVATE src)
-
-target_link_libraries(zcl_binding_cluster_server
-  PUBLIC uic_dotdot_mqtt zpc_attribute_store
-  PRIVATE zwave_definitions dotdot_mapper zwave_network_management)
-
-# ZCL Cluster server library
-add_library(zcl_cluster_servers src/zcl_cluster_servers.cpp
-src/zcl_cluster_servers_helpers.cpp)
-target_include_directories(
-  zcl_cluster_servers
-  PUBLIC include
-  PRIVATE src)
-
-target_link_libraries(
-  zcl_cluster_servers
-  PRIVATE zcl_OTA_cluster_server
-          zcl_group_cluster_server
-          zcl_rf_telemetry_cluster_server
-          configuration_parameter_cluster_server
-          zcl_binding_cluster_server
-          zwave_handlers)
-
-# Unit tests
-add_subdirectory(test)
-
-# Mocks
-target_add_mock(zcl_cluster_servers)
+  # Mocks
+  target_add_mock(zcl_cluster_servers)
+endif()

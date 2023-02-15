@@ -23,6 +23,7 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zwave_unid.h"
+#include "zpc_attribute_store_type_registration.h"
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
@@ -121,6 +122,7 @@ void suiteSetUp()
 
   datastore_init(":memory:");
   attribute_store_init();
+  zpc_attribute_store_register_known_attribute_types();
   zpc_attribute_store_test_helper_create_network();
   zwave_unid_set_home_id(home_id);
 }
@@ -279,6 +281,7 @@ void test_zwave_command_class_switch_multilevel_probe_state()
 
   is_attribute_transition_ongoing_IgnoreAndReturn(false);
 
+  attribute_stop_transition_IgnoreAndReturn(SL_STATUS_OK);
   is_node_pending_set_resolution_ExpectAndReturn(state_node, true);
   attribute_resolver_restart_set_resolution_ExpectAndReturn(state_node,
                                                             SL_STATUS_OK);
@@ -407,6 +410,7 @@ void test_zwave_command_class_switch_multilevel_switch_off_during_transition()
   // First check the frame creation.
   TEST_ASSERT_NOT_NULL(multilevel_set);
   is_node_pending_set_resolution_IgnoreAndReturn(false);
+  attribute_stop_transition_IgnoreAndReturn(SL_STATUS_OK);
 
   attribute_store_node_t state_node
     = attribute_store_get_node_child_by_type(endpoint_id_node,
@@ -452,7 +456,6 @@ void test_zwave_command_class_switch_multilevel_switch_off_during_transition()
 
   // Now simulate that we get a Supervision OK:
   TEST_ASSERT_NOT_NULL(on_send_complete);
-  attribute_stop_transition_ExpectAndReturn(value_node, SL_STATUS_OK);
   on_send_complete(state_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS);
@@ -482,6 +485,7 @@ void test_zwave_command_class_switch_multilevel_switch_on_during_transition()
     = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(ON_OFF), 0);
 
   is_node_pending_set_resolution_IgnoreAndReturn(false);
+  attribute_stop_transition_IgnoreAndReturn(SL_STATUS_OK);
 
   // We want OnOff to be On
   u32_value = 0x00;
@@ -542,6 +546,7 @@ void test_zwave_command_class_switch_multilevel_virtual_transition()
   attribute_store_node_t on_off_node
     = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(ON_OFF), 0);
 
+  attribute_stop_transition_IgnoreAndReturn(SL_STATUS_OK);
   is_node_pending_set_resolution_IgnoreAndReturn(false);
 
   // We want OnOff to be OFF
@@ -584,6 +589,7 @@ void test_zwave_command_class_switch_multilevel_supervision_success_when_we_want
   attribute_store_node_t value_node
     = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
   is_node_pending_set_resolution_IgnoreAndReturn(false);
+  attribute_stop_transition_IgnoreAndReturn(SL_STATUS_OK);
 
   uint32_t desired_value = 30;
   attribute_store_set_desired(value_node,
@@ -594,7 +600,6 @@ void test_zwave_command_class_switch_multilevel_supervision_success_when_we_want
                                              ATTRIBUTE(DURATION),
                                              0);
   uint32_t desired_duration = 50;
-  is_node_pending_set_resolution_IgnoreAndReturn(false);
   attribute_store_set_desired(duration_node,
                               &desired_duration,
                               sizeof(desired_duration));
