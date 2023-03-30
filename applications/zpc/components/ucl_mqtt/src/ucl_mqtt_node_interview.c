@@ -32,7 +32,10 @@
 void undefine_attribute_with_get_rule(attribute_store_node_t node)
 {
   if (attribute_resolver_has_get_rule(attribute_store_get_node_type(node))) {
-    attribute_store_undefine_reported(node);
+   // If node is already under resolution, we should just retry
+   if(SL_STATUS_NOT_FOUND == attribute_resolver_restart_get_resolution(node)) {
+        attribute_store_undefine_reported(node);
+   }
   }
 }
 

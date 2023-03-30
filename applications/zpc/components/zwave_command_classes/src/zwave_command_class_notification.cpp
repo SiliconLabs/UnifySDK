@@ -30,6 +30,7 @@
 #include "attribute_resolver.h"
 #include "zwave_controller_utils.h"
 #include "zwave_utils.h"
+#include "attribute_timeouts.h"
 
 // Generic includes
 #include <assert.h>
@@ -52,6 +53,21 @@ static constexpr unsigned int NOTIFICATION_REPORT_EVENT_STATE_PARAMETER_OFFSET
 using namespace attribute_store;
 
 #include "zwave_command_class_notification_types.inc"
+
+static void prevent_more_get_resolutions(attribute_store_node_t notification_event_node)
+{
+  if(attribute_store_is_reported_defined(notification_event_node)){
+    return;
+  }
+  sl_log_notice(LOG_TAG,
+                "Notification Event ID: %d report not received,"
+                " assume idle state", notification_event_node);
+  int32_t notification_event = 0x00;
+  attribute_store_set_node_attribute_value(notification_event_node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)&notification_event,
+                                           sizeof(notification_event));
+}
 
 static sl_status_t zwave_command_class_notification_update_state_event(
   const attribute &notification_type_node,
@@ -222,6 +238,23 @@ static sl_status_t zwave_command_class_notification_report_cmd_handler(
       // If no state is looked up it is an event, write to LAST_EVENT attribute
       state = NOTIFICATION_STATE_LAST_EVENT;
     }
+
+    // If events are pushed, we can not pull them, so set all unresolved to idle.
+    if(event == NOTIFICATION_REPORT_NO_PENDING_NOTIFICATIONS_V4
+       && state == NOTIFICATION_STATE_LAST_EVENT) {
+      for (attribute notification_state_node:
+         attribute(notification_type_node).children(ATTRIBUTE(STATE))) {
+        attribute notification_event_node
+          = attribute_store_get_first_child_by_type(notification_state_node,
+                                                    ATTRIBUTE(EVENT));
+        if (notification_event_node.is_valid() == true
+            && notification_event_node.reported_exists() == false) {
+          const int32_t notification_event = 0;
+          notification_event_node.set_reported(notification_event);
+        }
+      }
+    }
+
     zwave_command_class_notification_update_state_event(notification_type_node,
                                                         state,
                                                         frame,
@@ -701,12 +734,10 @@ static sl_status_t zwave_command_class_notification_get(
 
   // Just in case the supporting node does not answer Notification
   // Get commands, we set the reported value to 0 to prevent
-  // more resolutions.
-  int32_t notification_event = 0;
-  attribute_store_set_node_attribute_value(node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&notification_event,
-                                           sizeof(notification_event));
+  // more resolutions. Add backoff delay, in case node answers with
+  // NOTIFICATION_REPORT_NO_PENDING_NOTIFICATIONS.
+  attribute_timeout_set_callback(node, 1000, &prevent_more_get_resolutions);
+  attribute_store_log_node(node, true);
 
   return SL_STATUS_OK;
 }
