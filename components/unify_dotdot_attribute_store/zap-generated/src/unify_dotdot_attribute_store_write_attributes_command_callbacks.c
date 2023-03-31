@@ -1690,6 +1690,36 @@ static sl_status_t occupancy_sensing_cluster_write_attributes_callback(
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
+// Start of cluster SoilMoisture
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks soil_moisture
+static sl_status_t soil_moisture_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_soil_moisture_state_t attributes,
+  uic_mqtt_dotdot_soil_moisture_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_soil_moisture_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "soil_moisture: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
 // Start of cluster PhMeasurement
 ////////////////////////////////////////////////////////////////////////////////
 // WriteAttribute Callbacks ph_measurement
@@ -1805,6 +1835,66 @@ static sl_status_t carbon_monoxide_cluster_write_attributes_callback(
 
   sl_log_debug(LOG_TAG,
                "carbon_monoxide: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster CarbonDioxide
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks carbon_dioxide
+static sl_status_t carbon_dioxide_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_carbon_dioxide_state_t attributes,
+  uic_mqtt_dotdot_carbon_dioxide_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_carbon_dioxide_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "carbon_dioxide: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster PM25
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks pm25
+static sl_status_t pm25_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_pm25_state_t attributes,
+  uic_mqtt_dotdot_pm25_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_pm25_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "pm25: Incoming WriteAttributes command for %s, endpoint %d.\n",
                unid,
                endpoint_id);
   return SL_STATUS_OK;
@@ -2588,6 +2678,9 @@ sl_status_t
   uic_mqtt_dotdot_set_occupancy_sensing_write_attributes_callback(
     &occupancy_sensing_cluster_write_attributes_callback);
   
+  uic_mqtt_dotdot_set_soil_moisture_write_attributes_callback(
+    &soil_moisture_cluster_write_attributes_callback);
+  
   uic_mqtt_dotdot_set_ph_measurement_write_attributes_callback(
     &ph_measurement_cluster_write_attributes_callback);
   
@@ -2599,6 +2692,12 @@ sl_status_t
   
   uic_mqtt_dotdot_set_carbon_monoxide_write_attributes_callback(
     &carbon_monoxide_cluster_write_attributes_callback);
+  
+  uic_mqtt_dotdot_set_carbon_dioxide_write_attributes_callback(
+    &carbon_dioxide_cluster_write_attributes_callback);
+  
+  uic_mqtt_dotdot_set_pm25_write_attributes_callback(
+    &pm25_cluster_write_attributes_callback);
   
   uic_mqtt_dotdot_set_ias_zone_write_attributes_callback(
     &ias_zone_cluster_write_attributes_callback);

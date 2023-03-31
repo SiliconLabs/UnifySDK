@@ -45,7 +45,7 @@ export class CommissionableDevices extends React.Component<CommissionableDevices
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
-        <h3>Commisionable Devices</h3>
+        <h3>Commissionable Devices</h3>
         {(!this.props.List || !this.props.List.length || !this.props.IsConnected)
           ? <Row>
             <Col xs={12} className="text-center">

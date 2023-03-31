@@ -46,7 +46,6 @@ void suiteSetUp()
   attribute_store_init();
   zpc_attribute_store_register_known_attribute_types();
   zwave_unid_set_home_id(home_id);
-  zpc_attribute_store_test_helper_create_network();
   contiki_test_helper_init();
 }
 
@@ -61,9 +60,17 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void setUp()
 {
+  uic_mqtt_unretain_Ignore();
+  uic_mqtt_publish_Ignore();
   uic_mqtt_dotdot_state_interview_callback_set_Ignore();
   uic_mqtt_dotdot_state_remove_offline_callback_set_Ignore();
   uic_mqtt_dotdot_state_discover_neighbors_callback_set_Ignore();
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_IgnoreAndReturn(SL_STATUS_OK);
+  attribute_store_delete_node(attribute_store_get_root());
+  zpc_attribute_store_test_helper_create_network();
+  uic_mqtt_unretain_StopIgnore();
+  uic_mqtt_publish_StopIgnore();
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_StopIgnore();
   process_start(&ucl_node_state_process, NULL);
   contiki_test_helper_run(0);
 }
@@ -71,7 +78,7 @@ void setUp()
 /// Called after each and every test
 void tearDown()
 {
-  uic_mqtt_unretain_by_regex_Expect(REGEX_NOT_STATE_OR_MQTT_CLIENT_TOPICS);
+  uic_mqtt_unretain_by_regex_Ignore();
   process_exit(&ucl_node_state_process);
   contiki_test_helper_run(0);
 }
@@ -149,6 +156,29 @@ void test_ucl_node_state_network_status_test()
 
 void test_ucl_node_endpoint_id_deleted()
 {
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  uic_mqtt_publish_Ignore();
+  uic_mqtt_dotdot_publish_supported_commands_Expect(supporting_node_unid,
+                                                    endpoint_id);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+  uic_mqtt_dotdot_state_publish_supported_commands_Expect(supporting_node_unid,
+                                                          0);
+  uic_mqtt_dotdot_state_publish_supported_commands_IgnoreArg_unid();
+
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_ExpectAndReturn(
+    NULL,
+    1,
+    NULL,
+    UCL_MQTT_PUBLISH_TYPE_ALL,
+    SL_STATUS_OK);
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_IgnoreArg_base_topic();
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_IgnoreArg_value();
+
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
+
   // Now delete the endpoint, it should trigger a publication removal and update in the EndpointIdList:
   uic_mqtt_dotdot_state_endpoint_id_list_publish_ExpectAndReturn(
     NULL,
@@ -161,4 +191,38 @@ void test_ucl_node_endpoint_id_deleted()
 
   uic_mqtt_unretain_Expect("ucl/by-unid/zw-CAFECAFE-0004/ep3");
   attribute_store_delete_node(endpoint_id_node);
+}
+
+void test_cannot_retrieve_unid_values()
+{
+  attribute_store_node_t value_less_node_id_node
+    = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
+
+  // Add an endpoint:
+  attribute_store_set_child_reported(value_less_node_id_node,
+                                     ATTRIBUTE_ENDPOINT_ID,
+                                     &endpoint_id,
+                                     sizeof(endpoint_id));
+
+  // Nothing should be published, we cannot find the NodeID value:
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_set_child_reported(value_less_node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
+
+  // Set also the granted keys:
+  attribute_store_set_child_reported(value_less_node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
+
+  zwave_keyset_t granted_keys = 138;
+  attribute_store_set_child_reported(value_less_node_id_node,
+                                     ATTRIBUTE_GRANTED_SECURITY_KEYS,
+                                     &granted_keys,
+                                     sizeof(granted_keys));
+
+  // finally delete the node, won't be unretained either:
+  attribute_store_delete_node(value_less_node_id_node);
 }

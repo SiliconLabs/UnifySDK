@@ -6,6 +6,7 @@ add_library(
   src/attribute_mapper_ast.cpp
   src/attribute_mapper_ast_path_eval.cpp
   src/attribute_mapper_ast_dep_eval.cpp
+  src/attribute_mapper_ast_path_match_eval.cpp
   src/attribute_mapper_cyclic_check.cpp
   src/attribute_mapper_engine.cpp
   src/attribute_mapper_process.cpp
@@ -24,8 +25,9 @@ target_link_libraries(
           Boost::filesystem
           unify_version)
 
-target_include_directories(uic_attribute_mapper
-                           PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/>)
+target_include_directories(
+  uic_attribute_mapper
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/>)
 
 install_headers(uic_attribute_mapper uic libuic-dev)
 

@@ -3962,6 +3962,28 @@ void uic_mqtt_dotdot_occupancy_sensing_publish_generated_write_attributes_comman
 
 /**
  * @brief Publishes an incoming/generated WriteAttributes command for
+ * the SoilMoisture cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/SoilMoisture/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_soil_moisture_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_soil_moisture_state_t attribute_values,
+  uic_mqtt_dotdot_soil_moisture_updated_state_t attribute_list
+);
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
  * the PhMeasurement cluster.
  *
  * Publication will be made at the following topic
@@ -4045,6 +4067,50 @@ void uic_mqtt_dotdot_carbon_monoxide_publish_generated_write_attributes_command(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_carbon_monoxide_state_t attribute_values,
   uic_mqtt_dotdot_carbon_monoxide_updated_state_t attribute_list
+);
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the CarbonDioxide cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/CarbonDioxide/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_carbon_dioxide_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_carbon_dioxide_state_t attribute_values,
+  uic_mqtt_dotdot_carbon_dioxide_updated_state_t attribute_list
+);
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the PM25 cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/PM25/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_pm25_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_pm25_state_t attribute_values,
+  uic_mqtt_dotdot_pm25_updated_state_t attribute_list
 );
 
 /**

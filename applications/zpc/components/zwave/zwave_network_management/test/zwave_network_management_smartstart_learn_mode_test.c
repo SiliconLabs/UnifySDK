@@ -136,7 +136,7 @@ void test_zwave_network_management_activate_smartstart_learn_mode_disabled()
   // Now if SmartStart Add mode is enabled, we do not start SmartStart Learn mode
   zwave_network_management_enable_smart_start_learn_mode(false);
 
-  // Expectations are duplicated because events are posted twice
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
   zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
   reset_nms_last_operation_data_Expect();
 

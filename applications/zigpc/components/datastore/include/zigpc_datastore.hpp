@@ -28,6 +28,7 @@
 #define ZIGPC_DATASTORE_HPP
 
 #include <vector>
+#include <list>
 
 // ZigPC includes
 #include <zigpc_common_zigbee.h>
@@ -167,6 +168,69 @@ inline std::vector<zigbee_group_id_t> get_group_list(const zigbee_eui64_t eui64,
   return group_list;
 }
 }  // namespace group
+
+namespace binding
+{
+/**
+ * @brief datastore::binding::add_binding
+ * Add a binding to the stored binding table of a given source address.
+ * Note, while the current implementation expects the source node to host the
+ * binding table, it is technically possible to store the binding table on a
+ * different node. This is why the source address is included in the interface.
+ *
+ * @param source -  the address of the source/client sending the command to
+ *                  a given destination
+ * @param binding-  the binding information to store
+ *
+ * @return SL_STATUS_OK if the binding could be successfully stored
+ */ 
+    sl_status_t 
+        add_binding( 
+            zigbee_eui64_uint_t source,
+            zigbee_binding_t binding);
+
+/**
+ * @brief datastore::binding::remove_binding
+ * Remove a binding from the binding table of a given source address.
+ *
+ * @param source -  the address of the source/client sending the command to
+ *                  a given destination
+ * @param binding-  the binding to remove
+ *
+ * @return SL_STATUS_OK if the binding could be removed
+ */ 
+    sl_status_t remove_binding(
+        zigbee_eui64_uint_t source,
+        zigbee_binding_t binding);
+
+/**
+ * @brief datastore::binding::read_binding_table
+ * Reads the stored binding table of a given node.
+ *
+ * @param source -  the address of the source/client sending the command to
+ *                  a given destination
+ * @param binding_table_dest - a list of bindings, passed in by reference, to
+ *                             read the binding table into
+ *
+ * @return SL_STATUS_OK if the binding_table could be read
+ */ 
+    sl_status_t read_binding_table(
+        zigbee_eui64_uint_t source,
+        std::list<zigbee_binding_t>& binding_table_dest);
+
+/**
+ * @brief datastore::binding::add_binding
+ * Remove a binding from the binding table of a given source address.
+ *
+ * @param source -  the address of the source/client sending the command to
+ *                  a given destination
+ *
+ * @return the number of bindings attached to a given node. 0 if none or address
+ * not found
+ */ 
+    size_t read_binding_count(zigbee_eui64_uint_t source);
+}
+
 
 }  // namespace zigpc_datastore
 

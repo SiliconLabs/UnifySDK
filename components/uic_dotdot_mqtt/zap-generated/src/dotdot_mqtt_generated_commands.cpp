@@ -8895,6 +8895,46 @@ void uic_mqtt_dotdot_occupancy_sensing_publish_generated_write_attributes_comman
 
 /**
  * @brief Publishes an incoming/generated WriteAttributes command for
+ * the SoilMoisture cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/SoilMoisture/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_soil_moisture_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_soil_moisture_state_t attribute_values,
+  uic_mqtt_dotdot_soil_moisture_updated_state_t attribute_list
+){
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "SoilMoisture/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
  * the PhMeasurement cluster.
  *
  * Publication will be made at the following topic
@@ -9037,6 +9077,86 @@ void uic_mqtt_dotdot_carbon_monoxide_publish_generated_write_attributes_command(
   std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
                       std::to_string(endpoint) + "/";
   topic += "CarbonMonoxide/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the CarbonDioxide cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/CarbonDioxide/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_carbon_dioxide_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_carbon_dioxide_state_t attribute_values,
+  uic_mqtt_dotdot_carbon_dioxide_updated_state_t attribute_list
+){
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "CarbonDioxide/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the PM25 cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/PM25/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_pm25_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_pm25_state_t attribute_values,
+  uic_mqtt_dotdot_pm25_updated_state_t attribute_list
+){
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "PM25/GeneratedCommands/WriteAttributes";
 
   nlohmann::json json_object = nlohmann::json::object();
 

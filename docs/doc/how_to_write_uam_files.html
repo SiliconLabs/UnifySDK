@@ -41,7 +41,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.0
+                ver_1.3.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -517,10 +517,71 @@ Note that the priority value has no effect at the moment.</p>
 <span class="nb">scope</span> <span class="no">3</span> <span class="no">chain_reaction</span>(<span class="no">1</span>) <span class="no">clear_desired</span>(<span class="no">1</span>) <span class="no">common_parent_type</span>(<span class="no">3</span>) {
   <span class="nv">r&#39;8</span> <span class="o">=</span>  <span class="nv">d&#39;9</span>
   <span class="nv">r&#39;9</span> <span class="o">=</span>  <span class="nv">r&#39;8</span>
-  <span class="nv">r&#39;10</span> <span class="o">=</span>  <span class="nv">r&#39;9</span>
+  <span class="nv">r&#39;10</span> <span class="o">=</span> <span class="nv">r&#39;9</span>
 }
 </pre></div>
 </div>
+<section id="scope-priority">
+<span id="how-to-write-uam-files-scope-priority"></span><h4>Scope priority<a class="headerlink" href="#scope-priority" title="Permalink to this heading"></a></h4>
+<p>The Scope priority is used to rank rules by priority, and let overlapping rules
+co-exist. Let’s take the following example:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;3</span>
+}
+<span class="nb">scope</span> <span class="no">1</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;4</span>
+}
+</pre></div>
+</div>
+<p>The reported value of Attribute Type 2 is assigned in several maps. Whenever
+an attribute of type 3 or 4 is updated, the mapper will try to execute rules
+with the highest priority first, and will stop at the first one that return
+assigns a value.</p>
+<ul class="simple">
+<li><p>If r’3 is set to 3, then r’2 will be 3.</p></li>
+<li><p>If r’3 is set to 3, attribute 4 exists but has no reported, then r’2 will be 3.</p></li>
+<li><p>If r’4 is set to 20, then r’2 will be 20 regardless of the value set in r’3.</p></li>
+</ul>
+<p>Here is another scope priority example:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">10</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;3</span>
+}
+<span class="nb">scope</span> <span class="no">100</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nb">if</span> (<span class="nv">r&#39;4</span><span class="ow">&gt;</span><span class="no">0</span>) <span class="nv">r&#39;4</span> <span class="no">undefined</span>
+}
+</pre></div>
+</div>
+<p>First, if neither Attribute 3 and 4 exist, then attribute 2 does not exist either.</p>
+<p>If r’3 is created and assigned a value, the scope 10 rule will trigger the creation
+of r’2. The mapper will verify if the scope 100 rule (which prevails) would lead
+to an attribute deletion, and if so, would cancel the scope 10 rule.</p>
+<p>Whenever r’4 value is defined and positive, r’2 will be set to the value of r’4.
+Else r’2 would fallback on the r’3 value.</p>
+<p>For the scope priority to cancel lower priority maps, the mapper checks that
+the “destination” attribute to be the same. Taking this map:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">1</span> {
+  <span class="nv">r&#39;3.2</span> <span class="o">=</span> <span class="nv">r&#39;10</span>
+}
+<span class="nb">scope</span> <span class="no">2</span> {
+  <span class="nv">r&#39;3[0].2</span> <span class="o">=</span> <span class="nv">r&#39;11</span>
+}
+</pre></div>
+</div>
+<p>Scope 2 will take precedence only if we have an attribute 2 placed under an
+attribute 3 with value 0. In other cases, scope 2 will not affect scope 1.</p>
+<p>Note that if 2 equivalent mappings have the same priority, it will be
+unpredictable which mapping prevails. If possible, all maps to a given
+attribute type should have a unique scope priority.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline">// This is strongly NOT RECOMMENDED:</span>
+<span class="nb">scope</span> <span class="no">1</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;3</span>
+}
+<span class="nb">scope</span> <span class="no">1</span> {
+  <span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;4</span>
+}
+</pre></div>
+</div>
+</section>
 <section id="automatic-desired-value-clearance">
 <span id="how-to-write-uam-files-clear-desired-subsection"></span><h4>Automatic desired value clearance<a class="headerlink" href="#automatic-desired-value-clearance" title="Permalink to this heading"></a></h4>
 <p>By default, the Attribute Mapper will clear (undefine) the desired value of
@@ -689,29 +750,35 @@ Make sure to run with the debug log level enabled for the <code class="docutils 
 logging tag.</p>
 <p>For debug builds, it will by default print the left-hand side of the assignment,
 the Attribute ID that triggered the change and the calculated value.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_attribute_mapper_process] 1 pending attribute updates to evaluate.</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Multilevel Switch State ) ).( ( OnOff (virtual state) ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1138 - Result value: 1</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x2 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1186 - Result value: 0</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x3 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1188 - Result value: 64.3939</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x4 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1190 - Result value: 61.3517</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: r&#39;( ( ZCL ColorControl CurrentHue ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1219 - Result value: 125.566</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_attribute_mapper_process] Ignoring update to Attribute ID 1219 as the mapper was instructed to ignore it.</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: r&#39;( ( ZCL ColorControl CurrentSaturation ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1220 - Result value: 254</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: r&#39;( ( ZCL OnOff OnOff ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1231 - Result value: 1</span>
-<span class="go">&lt;timestamp&gt; &lt;d&gt; [poll_engine] updated Multilevel Switch State[1133] in poll-queue</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;timestamp&gt; &lt;d&gt; [mqtt_client] mqtt_client::on_message: ucl/by-unid/zw-F4DC26FF-000D/ep0/Level/Commands/MoveToLevelWithOnOff - {&quot;Level&quot;:85,&quot;TransitionTi..., QoS: 0</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_dotdot_attribute_store_level_commands_callbacks] Updating ZCL desired values after Level:CurrentLevel command</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_dotdot_attribute_store_level_commands_callbacks] Updating ZCL desired values after Level:OnOffTransitionTime command</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_store_process] Restarting Attribute Store auto-save cooldown timer for 10 seconds.</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_attribute_mapper_process] 1 pending attribute updates to evaluate.</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Checking assignments for Destination ID 2808 (Value), Original Node 2841 (ZCL Level CurrentLevel). (1 candidate(s))</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Multilevel Switch State ) ).( ( Value ) ) triggered by Attribute ID 2841 (ZCL Level CurrentLevel) affecting Attribute ID 2808 - Result value: 85</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [unify_attribute_mapper_process] Ignoring update to Attribute ID 2808 as the mapper was instructed to ignore it.</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Assigment with priority 0 executed successfully.</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Checking assignments for Destination ID 2841 (ZCL Level CurrentLevel), Original Node 2841 (ZCL Level CurrentLevel). (3 candidate(s))</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: r&#39;( ( ZCL Level CurrentLevel ) ) triggered by Attribute ID 2841 (ZCL Level CurrentLevel) affecting Attribute ID 2841 - Result value: 50.0824</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Assigment with priority 100 executed successfully.</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Checking assignments for Destination ID 2849 (Value), Original Node 2841 (ZCL Level CurrentLevel). (5 candidate(s))</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Match expression: d&#39;( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x0 ) )].( ( Value ) ) triggered by Attribute ID 2841 (ZCL Level CurrentLevel) affecting Attribute ID 2849 - Result value: 0</span>
+<span class="go">&lt;timestamp&gt; &lt;d&gt; [attribute_mapper] Assigment with priority 100 executed successfully.</span>
 </pre></div>
 </div>
 <p>If the same attribute ID has several assignments, the full expression can
-be logged, by changing <code class="docutils literal notranslate"><span class="pre">assignment.lhs</span></code> to <code class="docutils literal notranslate"><span class="pre">assignment</span></code> in the
-<code class="docutils literal notranslate"><span class="pre">mapper_engine.cpp</span></code>:</p>
+be logged, by changing <code class="docutils literal notranslate"><span class="pre">assignment-&gt;lhs</span></code> to <code class="docutils literal notranslate"><span class="pre">assignment</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">attribute_mapper_engine.cpp</span></code>. Assigning different priority to each assignment
+is also a good method to identify which assignment was run.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef NDEBUG</span>
 <span class="w">  </span><span class="c1">// Debug build will print the matched expressions</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="w"> </span><span class="n">ss</span><span class="p">;</span>
-<span class="w">  </span><span class="n">ss</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Match expression: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">assignment</span>
-<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; triggered by Attribute ID &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">dec</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">original_node</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; (&quot;</span>
-<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">attribute_store_get_type_name</span><span class="p">(</span><span class="n">original_node</span><span class="p">.</span><span class="n">type</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;)&quot;</span>
-<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; affecting Attribute ID &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">dec</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">destination_node</span>
-<span class="w">      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; - Result value: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+<span class="w">  </span><span class="n">ss</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Match expression: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">assignment</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; triggered by Attribute ID &quot;</span>
+<span class="w">    </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">dec</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">original_node</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; (&quot;</span>
+<span class="w">    </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">attribute_store_get_type_name</span><span class="p">(</span><span class="n">original_node</span><span class="p">.</span><span class="n">type</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;)&quot;</span>
+<span class="w">    </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; affecting Attribute ID &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">dec</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">destination</span>
+<span class="w">    </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; - Result value: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
 <span class="w">  </span><span class="n">sl_log_debug</span><span class="p">(</span><span class="n">LOG_TAG</span><span class="p">,</span><span class="w"> </span><span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
 <span class="cp">#endif</span>
 </pre></div>

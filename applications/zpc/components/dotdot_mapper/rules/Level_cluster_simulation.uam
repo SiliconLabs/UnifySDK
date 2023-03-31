@@ -48,5 +48,9 @@ scope 0 chain_reaction(1) clear_desired(0) {
     (d'zbLEVEL_CLUSTER_REMAINING_TIME or 0)
 
   r'zbLEVEL_CLUSTER_TRANSITION_TIME = if (simulate_level) 0 undefined
-  d'zbLEVEL_CLUSTER_TRANSITION_TIME = if (simulate_level) 0 undefined
+  // Here we keep the attribute depending on itself, so that it gets rolled back if modified, because we do not support this.
+  d'zbLEVEL_CLUSTER_TRANSITION_TIME =
+    if (simulate_level == 0) undefined
+    if (d'zbLEVEL_CLUSTER_TRANSITION_TIME > 0) 0
+    undefined
 }

@@ -37,10 +37,10 @@ static const char *CONFIG_FLAG_ZIGPC_NCP_UPDATE = "zigpc.ncp_update";
 static const char *CONFIG_KEY_ZIGPC_OTA_PATH        = "zigpc.ota_path";
 static const char *ZIGPC_DEFAULT_OTA_PATH           = "./ota-files/";
 static const char *CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY = "zigpc.poll_attr_only";
-static const bool DEFAULT_POLL_ATTR_ONLY            = false;
+static const bool DEFAULT_POLL_ATTR_ONLY            = true;
 
 static const char *CONFIG_KEY_ZIGPC_POLLING_RATE = "zigpc.attr_polling_rate_ms";
-static const int ZIGPC_DEFAULT_POLLING_RATE_MS  = 20000;
+static const int ZIGPC_DEFAULT_POLLING_RATE_MS  = 10000;
 
 static zigpc_config_t config;
 int zigpc_config_init()

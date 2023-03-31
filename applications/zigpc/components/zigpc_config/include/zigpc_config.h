@@ -45,7 +45,6 @@ typedef struct {
   const char *datastore_file; /**< Path to the SQLite datastore used by ZigPC */
   bool tc_use_well_known_key; /**< Allow Trust Center joins using
                                            well-known link key */
-  
   int attr_polling_rate_ms;
 
   bool poll_attr_only;

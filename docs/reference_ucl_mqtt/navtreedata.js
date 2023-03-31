@@ -905,6 +905,20 @@ var NAVTREE =
         [ "OccupancySensing/ForceReadAttributes Command", "occupancy_sensing.html#occupancy_sensing_force_read_attr_cmd", null ]
       ] ]
     ] ],
+    [ "SoilMoisture Cluster", "soil_moisture.html", [
+      [ "SoilMoisture Attributes", "soil_moisture.html#soil_moisture_attrs", [
+        [ "SoilMoisture/MeasuredValue Attribute", "soil_moisture.html#soil_moisture_attr_measured_value", null ],
+        [ "SoilMoisture/MinMeasuredValue Attribute", "soil_moisture.html#soil_moisture_attr_min_measured_value", null ],
+        [ "SoilMoisture/MaxMeasuredValue Attribute", "soil_moisture.html#soil_moisture_attr_max_measured_value", null ],
+        [ "SoilMoisture/Tolerance Attribute", "soil_moisture.html#soil_moisture_attr_tolerance", null ],
+        [ "SoilMoisture/ClusterRevision Attribute", "soil_moisture.html#soil_moisture_attr_cluster_revision", null ]
+      ] ],
+      [ "SoilMoisture Command Support", "soil_moisture.html#soil_moisture_recv_cmd_support", null ],
+      [ "SoilMoisture Commands", "soil_moisture.html#soil_moisture_cmds", [
+        [ "SoilMoisture/WriteAttributes Command", "soil_moisture.html#soil_moisture_write_attr_cmd", null ],
+        [ "SoilMoisture/ForceReadAttributes Command", "soil_moisture.html#soil_moisture_force_read_attr_cmd", null ]
+      ] ]
+    ] ],
     [ "PhMeasurement Cluster", "ph_measurement.html", [
       [ "PhMeasurement Attributes", "ph_measurement.html#ph_measurement_attrs", [
         [ "PhMeasurement/MeasuredValue Attribute", "ph_measurement.html#ph_measurement_attr_measured_value", null ],
@@ -959,6 +973,34 @@ var NAVTREE =
       [ "CarbonMonoxide Commands", "carbon_monoxide.html#carbon_monoxide_cmds", [
         [ "CarbonMonoxide/WriteAttributes Command", "carbon_monoxide.html#carbon_monoxide_write_attr_cmd", null ],
         [ "CarbonMonoxide/ForceReadAttributes Command", "carbon_monoxide.html#carbon_monoxide_force_read_attr_cmd", null ]
+      ] ]
+    ] ],
+    [ "CarbonDioxide Cluster", "carbon_dioxide.html", [
+      [ "CarbonDioxide Attributes", "carbon_dioxide.html#carbon_dioxide_attrs", [
+        [ "CarbonDioxide/MeasuredValue Attribute", "carbon_dioxide.html#carbon_dioxide_attr_measured_value", null ],
+        [ "CarbonDioxide/MinMeasuredValue Attribute", "carbon_dioxide.html#carbon_dioxide_attr_min_measured_value", null ],
+        [ "CarbonDioxide/MaxMeasuredValue Attribute", "carbon_dioxide.html#carbon_dioxide_attr_max_measured_value", null ],
+        [ "CarbonDioxide/Tolerance Attribute", "carbon_dioxide.html#carbon_dioxide_attr_tolerance", null ],
+        [ "CarbonDioxide/ClusterRevision Attribute", "carbon_dioxide.html#carbon_dioxide_attr_cluster_revision", null ]
+      ] ],
+      [ "CarbonDioxide Command Support", "carbon_dioxide.html#carbon_dioxide_recv_cmd_support", null ],
+      [ "CarbonDioxide Commands", "carbon_dioxide.html#carbon_dioxide_cmds", [
+        [ "CarbonDioxide/WriteAttributes Command", "carbon_dioxide.html#carbon_dioxide_write_attr_cmd", null ],
+        [ "CarbonDioxide/ForceReadAttributes Command", "carbon_dioxide.html#carbon_dioxide_force_read_attr_cmd", null ]
+      ] ]
+    ] ],
+    [ "PM25 Cluster", "pm25.html", [
+      [ "PM25 Attributes", "pm25.html#pm25_attrs", [
+        [ "PM25/MeasuredValue Attribute", "pm25.html#pm25_attr_measured_value", null ],
+        [ "PM25/MinMeasuredValue Attribute", "pm25.html#pm25_attr_min_measured_value", null ],
+        [ "PM25/MaxMeasuredValue Attribute", "pm25.html#pm25_attr_max_measured_value", null ],
+        [ "PM25/Tolerance Attribute", "pm25.html#pm25_attr_tolerance", null ],
+        [ "PM25/ClusterRevision Attribute", "pm25.html#pm25_attr_cluster_revision", null ]
+      ] ],
+      [ "PM25 Command Support", "pm25.html#pm25_recv_cmd_support", null ],
+      [ "PM25 Commands", "pm25.html#pm25_cmds", [
+        [ "PM25/WriteAttributes Command", "pm25.html#pm25_write_attr_cmd", null ],
+        [ "PM25/ForceReadAttributes Command", "pm25.html#pm25_force_read_attr_cmd", null ]
       ] ]
     ] ],
     [ "IASZone Cluster", "ias_zone.html", [
@@ -1613,11 +1655,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "alarms.html",
-"color_control.html#color_control_step_color_temperature_cmd",
-"electrical_measurement.html#electrical_measurement_attr_dc_current_multiplier",
-"metering.html#metering_attr_unitof_measure",
-"relativity_humidity.html#relativity_humidity_cmds",
-"ucl_bitmaps.html#enum_thermostat_occupancy"
+"color_control.html#color_control_move_color_cmd",
+"electrical_measurement.html#electrical_measurement_attr_averagerms_under_voltage_counter",
+"metering.html#metering_attr_historical_consumption_formatting",
+"pump_configuration_and_control.html#pump_configuration_and_control_attr_max_speed",
+"ucl_bitmaps.html#enum_door_lockrf_operation_event_mask"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

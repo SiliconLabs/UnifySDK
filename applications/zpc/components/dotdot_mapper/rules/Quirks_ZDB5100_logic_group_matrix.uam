@@ -11,7 +11,7 @@ def ep 4
 
 def ZDB5100_logic_group_matrix ((r'ep[0].zwMANUFACTURER_ID == 0x0234) & (r'ep[0].zwPRODUCT_TYPE_ID == 0x0003) & (r'ep[0].zwPRODUCT_ID == 0x0121))
 
-scope 0 common_parent_type(3) {
+scope 500 common_parent_type(3) {
 
   // ZDB5100
   // Delete OnOff on EP5 as it supports both Level and OnOff Command Class, and we want to handle it through Level

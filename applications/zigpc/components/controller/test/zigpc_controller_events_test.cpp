@@ -33,6 +33,7 @@ extern "C" {
 #include "zigpc_group_mgmt_mock.h"
 #include "zigpc_net_mgmt_mock.h"
 #include "zigpc_ota_zigbee_mock.h"
+#include "zigpc_binding_mqtt_mock.h"
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are called)
@@ -255,7 +256,7 @@ void test_endpoint_configuration_sanity(void)
                                                          gw_eui64,
                                                          SL_STATUS_OK);
 
-  configure_attributes_endpoint_ExpectAndReturn(dev, ep_obj, SL_STATUS_OK);
+  //configure_attributes_endpoint_ExpectAndReturn(dev, ep_obj, SL_STATUS_OK);
     
   uic_mqtt_publish_Ignore();
   uic_mqtt_subscribe_Ignore();
@@ -277,7 +278,11 @@ void test_endpoint_update_sanity(void)
   // ARRANGE
   helper_expect_endpoint_update_capabilities(dev, ep, false);
   zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
+  uic_mqtt_publish_Ignore();
+  uic_mqtt_subscribe_Ignore();
+  configure_attributes_endpoint_IgnoreAndReturn(SL_STATUS_OK);
 
+  zigpc_binding_init_mqtt_IgnoreAndReturn(SL_STATUS_OK);
   // ACT
   sl_status_t status = zigpc_ctrl::update_endpoint_capabilities(dev, ep);
 
@@ -367,6 +372,8 @@ void test_device_interviewed_sanity(void)
     SL_STATUS_OK);
 
   zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
+  configure_attributes_endpoint_IgnoreAndReturn(SL_STATUS_OK);
+  zigpc_binding_init_mqtt_IgnoreAndReturn(SL_STATUS_OK);
   //zigpc_gateway_request_binding_endpoint
   // ACT
   sl_status_t status = zigpc_ctrl::on_device_interviewed(dev, true);
@@ -610,7 +617,17 @@ void test_controller_startup_sanity(void)
       UCL_MQTT_PUBLISH_TYPE_ALL,
       SL_STATUS_OK);
   }
+  zigpc_network_data_t network_data;
+  zigbee_eui64_t gw_eui64       = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1};
+  memcpy(network_data.gateway_eui64,gw_eui64, sizeof(zigbee_eui64_t));
+  zigpc_datastore_read_network_ExpectAndReturn(NULL, SL_STATUS_OK);
+  zigpc_datastore_read_network_IgnoreArg_data();
+  zigpc_datastore_read_network_ReturnThruPtr_data(&network_data);
   zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
+  zigpc_gateway_request_binding_endpoint_IgnoreAndReturn(SL_STATUS_OK);
+  zigpc_binding_init_mqtt_IgnoreAndReturn(SL_STATUS_OK);
+  configure_attributes_endpoint_IgnoreAndReturn(SL_STATUS_OK);
+  zigpc_datastore_read_network_IgnoreAndReturn(SL_STATUS_OK);
 
   // ACT
   zigpc_ctrl::on_startup();

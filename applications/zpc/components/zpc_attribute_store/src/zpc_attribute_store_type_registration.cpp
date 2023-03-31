@@ -223,7 +223,7 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   {ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE,   "Multilevel Switch State",   ATTRIBUTE_ENDPOINT_ID,   ENUM_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_VALUE,   "Value",   ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE,   U32_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_DURATION,   "Duration",   ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE,   U32_STORAGE_TYPE},
-  {ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_ON_OFF,   "OnOff (virtual state)",   ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE,   U32_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_ON_OFF,   "[Deprecated] OnOff (virtual state)",   ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE,   U32_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_SUBSTATE_UPDATE,   "Substate update",   ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE,   U8_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_CAPABILITIES_REQUESTED,   "Multilevel Switch capabilities requested",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
   /////////////////////////////////////////////////////////////////////
@@ -389,20 +389,6 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   /////////////////////////////////////////////////////////////////////
   {DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,   "ZCL Group ID",   ATTRIBUTE_ENDPOINT_ID,   U16_STORAGE_TYPE},
   {DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,   "Name",   DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,   C_STRING_STORAGE_TYPE},
-
-  /////////////////////////////////////////////////////////////////////
-  //         ZCL Scenes cluster attributes
-  /////////////////////////////////////////////////////////////////////
-  //{DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE,                  "ZCL Scenes SceneTable",  ATTRIBUTE_ENDPOINT_ID,                            EMPTY_STORAGE_TYPE},
-  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,            "Scene ID / Group ID",    DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE,           FIXED_SIZE_STRUCT_STORAGE_TYPE},
-  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME,        "Transition Time",        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     U16_STORAGE_TYPE},
-  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME_100MS,  "Transition Time 100ms",  DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     U8_STORAGE_TYPE},
-  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_NAME,                   "Name",                   DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     C_STRING_STORAGE_TYPE},
-  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_FIELD_SETS,             "Extension FieldSets",    DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     EMPTY_STORAGE_TYPE},
-  /////////////////////////////////////////////////////////////////////
-  //         ZCL Level cluster attributes
-  /////////////////////////////////////////////////////////////////////
-  {DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,   "ZCL Level Last Non Zero Level",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
 };
 // clang-format on
 

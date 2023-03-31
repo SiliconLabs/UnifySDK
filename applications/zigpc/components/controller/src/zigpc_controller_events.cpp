@@ -203,6 +203,13 @@ sl_status_t on_device_interviewed(const zigbee_eui64_t eui64,
 sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
                                            zigbee_endpoint_id_t endpoint_id)
 {
+        
+  sl_log_info(
+        LOG_TAG,
+        "Configuring Device: %016" PRIX64 " with Endpoint: %d",
+        zigbee_eui64_to_uint(eui64),
+        endpoint_id);
+
   sl_status_t status = SL_STATUS_OK;
 
   zigbee_endpoint_t ep_data = {};
@@ -240,27 +247,17 @@ sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
   zigpc_network_data_t network_data;
   status = zigpc_datastore_read_network(&network_data);
 
-  if(SL_STATUS_OK == status)
-  {
-    zigbee_eui64_uint_t eui64_uint = zigbee_eui64_to_uint(eui64); 
-    status =
-        zigpc_binding_init_mqtt(
-            eui64_uint,
-            endpoint_id);
-  }
 
   if(request_binding && (SL_STATUS_OK == status))
   {
       sl_log_info(LOG_TAG,
-                   "EUI64:%016" PRIX64 ": 0x%X",
+                   "Request binding to gateway EUI64:%016" PRIX64 ": 0x%X",
                    network_data.gateway_eui64,
                    status);
+
     status = zigpc_gateway_request_binding_endpoint(eui64, ep_data, network_data.gateway_eui64);
   }
 
-  if (status == SL_STATUS_OK) {
-    status = configure_attributes_endpoint(eui64, ep_data);
-  }
 
   return status;
 }
@@ -288,6 +285,48 @@ sl_status_t update_endpoint_capabilities(const zigbee_eui64_t eui64,
 
   zigbee_eui64_uint_t eui64_uint =
       zigbee_eui64_to_uint(eui64);
+  
+  if(SL_STATUS_OK == status)
+  {
+  
+    status =
+        zigpc_binding_init_mqtt(
+            eui64_uint,
+            endpoint_id);
+  }
+  
+  if (status == SL_STATUS_OK) {
+  
+      zigbee_endpoint_t ep_data = {};
+
+
+    ep_data.cluster_count
+        = zigpc_datastore_get_cluster_count(eui64,endpoint_id, ZCL_CLUSTER_SERVER_SIDE);
+
+    ep_data.endpoint_id  = endpoint_id;
+  
+    for (size_t i = 0; i < ep_data.cluster_count; i++) 
+    {
+      zcl_cluster_id_t cluster_id;
+    status = 
+      zigpc_datastore_find_cluster_by_index(
+              eui64,
+              endpoint_id,
+              ZCL_CLUSTER_SERVER_SIDE,
+              i,
+              &cluster_id);
+
+    if(SL_STATUS_OK == status)
+    {
+        ep_data.cluster_list[i].cluster_id = cluster_id;
+    }
+    else
+    {
+        sl_log_warning(LOG_TAG, "Failed to read cluster");
+    }
+  }
+    status = configure_attributes_endpoint(eui64, ep_data);
+  }
 
   // Setup supported commands for endpoint
   if (status == SL_STATUS_OK) {
@@ -338,7 +377,7 @@ void on_startup(void)
       status = zigpc_datastore_write_device(eui64, &eui64_data);
     }
     if (status == SL_STATUS_OK) {
-      status = on_device_interviewed(eui64, false);
+      status = on_device_interviewed(eui64, true);
     }
     if (status != SL_STATUS_OK) {
       sl_log_warning(zigpc_ctrl::LOG_TAG,

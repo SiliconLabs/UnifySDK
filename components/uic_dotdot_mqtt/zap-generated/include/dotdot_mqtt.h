@@ -26672,6 +26672,253 @@ void uic_mqtt_dotdot_occupancy_sensing_publish_supported_commands(
 void uic_mqtt_dotdot_occupancy_sensing_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the soil_moisture cluster
+
+typedef struct {
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
+} uic_mqtt_dotdot_soil_moisture_state_t;
+
+typedef struct {
+  bool measured_value;
+  bool min_measured_value;
+  bool max_measured_value;
+  bool tolerance;
+} uic_mqtt_dotdot_soil_moisture_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_soil_moisture_state_t,
+    uic_mqtt_dotdot_soil_moisture_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_soil_moisture_updated_state_t
+);
+
+
+
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/soil_moisture/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_soil_moisture_write_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/soil_moisture/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_soil_moisture_write_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/soil_moisture/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_soil_moisture_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/soil_moisture/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_soil_moisture_force_read_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/soil_moisture/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_soil_moisture_force_read_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/soil_moisture/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_soil_moisture_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; SoilMoisture/Attributes/MeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; SoilMoisture/Attributes/MeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; SoilMoisture/Attributes/MinMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /min_measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; SoilMoisture/Attributes/MinMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /min_measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; SoilMoisture/Attributes/MaxMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /max_measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; SoilMoisture/Attributes/MaxMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /max_measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; SoilMoisture/Attributes/Tolerance
+ *
+ * @param base_topic    topic prefix to publish, /tolerance
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_tolerance_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; SoilMoisture/Attributes/Tolerance
+ *
+ * @param base_topic    topic prefix to publish, /tolerance
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_tolerance_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the SoilMoisture/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /SoilMoisture/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_soil_moisture_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to SoilMoisture/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /SoilMoisture/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_soil_moisture_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the SoilMoisture Cluster
+ *
+ * This function will iterate over all Commands in the SoilMoisture Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_soil_moisture_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the SoilMoisture Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_soil_moisture_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
 // Callback types used by the ph_measurement cluster
 
 typedef struct {
@@ -27658,6 +27905,500 @@ void uic_mqtt_dotdot_carbon_monoxide_publish_supported_commands(
  * @param endpoint )
  */
 void uic_mqtt_dotdot_carbon_monoxide_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the carbon_dioxide cluster
+
+typedef struct {
+  float measured_value;
+  float min_measured_value;
+  float max_measured_value;
+  float tolerance;
+} uic_mqtt_dotdot_carbon_dioxide_state_t;
+
+typedef struct {
+  bool measured_value;
+  bool min_measured_value;
+  bool max_measured_value;
+  bool tolerance;
+} uic_mqtt_dotdot_carbon_dioxide_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_carbon_dioxide_state_t,
+    uic_mqtt_dotdot_carbon_dioxide_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_carbon_dioxide_updated_state_t
+);
+
+
+
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/carbon_dioxide/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_carbon_dioxide_write_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/carbon_dioxide/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_carbon_dioxide_write_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/carbon_dioxide/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_carbon_dioxide_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/carbon_dioxide/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_carbon_dioxide_force_read_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/carbon_dioxide/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_carbon_dioxide_force_read_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/carbon_dioxide/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_carbon_dioxide_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; CarbonDioxide/Attributes/MeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; CarbonDioxide/Attributes/MeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; CarbonDioxide/Attributes/MinMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /min_measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_min_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; CarbonDioxide/Attributes/MinMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /min_measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_min_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; CarbonDioxide/Attributes/MaxMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /max_measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_max_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; CarbonDioxide/Attributes/MaxMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /max_measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_max_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; CarbonDioxide/Attributes/Tolerance
+ *
+ * @param base_topic    topic prefix to publish, /tolerance
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_tolerance_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; CarbonDioxide/Attributes/Tolerance
+ *
+ * @param base_topic    topic prefix to publish, /tolerance
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_tolerance_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the CarbonDioxide/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /CarbonDioxide/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_carbon_dioxide_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to CarbonDioxide/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /CarbonDioxide/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_carbon_dioxide_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the CarbonDioxide Cluster
+ *
+ * This function will iterate over all Commands in the CarbonDioxide Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_carbon_dioxide_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the CarbonDioxide Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_carbon_dioxide_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the pm25 cluster
+
+typedef struct {
+  float measured_value;
+  float min_measured_value;
+  float max_measured_value;
+  float tolerance;
+} uic_mqtt_dotdot_pm25_state_t;
+
+typedef struct {
+  bool measured_value;
+  bool min_measured_value;
+  bool max_measured_value;
+  bool tolerance;
+} uic_mqtt_dotdot_pm25_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_pm25_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_pm25_state_t,
+    uic_mqtt_dotdot_pm25_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_pm25_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_pm25_updated_state_t
+);
+
+
+
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/pm25/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_pm25_write_attributes_callback(
+  const uic_mqtt_dotdot_pm25_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/pm25/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_pm25_write_attributes_callback(
+  const uic_mqtt_dotdot_pm25_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/pm25/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_pm25_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/pm25/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_pm25_force_read_attributes_callback(
+  const uic_mqtt_dotdot_pm25_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/pm25/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_pm25_force_read_attributes_callback(
+  const uic_mqtt_dotdot_pm25_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/pm25/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_pm25_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; PM25/Attributes/MeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; PM25/Attributes/MeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; PM25/Attributes/MinMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /min_measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_min_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; PM25/Attributes/MinMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /min_measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_min_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; PM25/Attributes/MaxMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /max_measured_value
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_max_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; PM25/Attributes/MaxMeasuredValue
+ *
+ * @param base_topic    topic prefix to publish, /max_measured_value
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_max_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; PM25/Attributes/Tolerance
+ *
+ * @param base_topic    topic prefix to publish, /tolerance
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_tolerance_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; PM25/Attributes/Tolerance
+ *
+ * @param base_topic    topic prefix to publish, /tolerance
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_pm25_tolerance_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the PM25/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /PM25/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_pm25_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to PM25/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /PM25/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_pm25_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the PM25 Cluster
+ *
+ * This function will iterate over all Commands in the PM25 Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_pm25_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the PM25 Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_pm25_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
 // Callback types used by the ias_zone cluster

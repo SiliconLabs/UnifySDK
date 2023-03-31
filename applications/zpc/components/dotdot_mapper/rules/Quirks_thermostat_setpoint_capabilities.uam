@@ -15,7 +15,7 @@ def zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE   0x4309
 
 def alarm_dot_com_thermostat ((r'zwMANUFACTURER_ID == 0x0190) & (r'zwPRODUCT_TYPE_ID == 0x1) & (r'zwPRODUCT_ID == 0x01))
 
-scope 0 {
+scope 500 {
 
 // To fingerprint this device, we match the following:
 // * Manufacturer ID

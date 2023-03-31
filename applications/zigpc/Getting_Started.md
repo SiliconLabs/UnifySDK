@@ -159,6 +159,68 @@ This value must match EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE in zigpc/components/zig
 
 Once you have both .s37 files, flash using simplicity commander / simplicity studio
 
+###Troubleshooting NCP issues and versioning
+
+There are some common issues faced when updating to a new version of ZigPC or
+a new version of the GeckoSDK
+
+#### Issue #1: NCP and Gateway mismatch
+
+After upgrading, it is possible to see ZigPC fail to start with the error:
+
+>  ERROR: ezspErrorHandler 0x30
+
+Or an equivalent error.
+
+Usually this occurs because the version of the GeckoSDK on the gateway and the 
+version on the NCP do not match. It's important that version matches so that the
+EZSP communication libraries are the same on both the host and the radio.
+
+This issue can be resolved in 2 ways: downgrading the version of the GeckoSDK to
+match with the NCP or updating the NCP firmware to match the gateway.
+
+To change the version of the GeckoSDK used by the gateway, download the desired
+version of the GeckoSDK and keep note of the directory it is stored in. By
+default, the provided Docker container downloads the latest version to the
+'externals' folder in the uic project. This can be overridden by setting the
+"GSDK\_LOCATION" environment variable with the new GeckoSDK and re-compiling the
+ZigPC gateway.
+
+To update the NCP firmware, re-generate the firmware as described above with the
+matching version of the GeckoSDK. If you have hardware access, re-flash the NCP
+as usual. However, if only remote access is possible, ZigPC can be used to
+update the NCP firmware as described in the User Guide (section 'Updating NCP
+Firmware'
+
+####Issue #2: addressTable mismatch
+
+When running the ZigPC, its possible for the gateway to fail to start with an
+error describing:
+
+> ASSERT addressTableSize mismatch
+
+or a similar error.
+
+Usually, this occurs because the address table size was not properly set in the
+NCP. Some information is shared between the gateway and the NCP, specifically
+related to the network information. In this case, the address table is used to
+resolve the global EUI64 with the short ID commonly used on zigbee networks. The
+size of these tables should match on both the gateway and NCP to ensure that no
+data is lost when handling too many devices.
+
+There are two ways of solving this: reducing the address table on the gateway or
+increasing the address table size on the NCP.
+
+The recommended method is to increase the address table size on the NCP. This
+can be done by adding the "EMBER\_ADDRESS\_TABLE\_SIZE" to the .slcp file, as 
+described in the section above. Alternatively, add a definition to the NCP
+makefile setting the above define. Compiling with -DEMBER\_ADDRESS\_TABLE\_SIZE=
+32 will also work.
+
+It is possible to solve this by reducing EMBER\_AF\_ADDRESS\_TABLE\_SIZE on the
+gateway, however this is NOT recommended as it can reduce the number of devices
+that ZigPC will support
+
 ## Debugging with visual studio code, Cleaning the code
 
 From phase 6 you should now have the ability to generate custom zigpc executables.

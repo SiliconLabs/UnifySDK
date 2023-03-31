@@ -27,6 +27,73 @@
 #define ACCEPT_ONLY_WHEN_ON_MASK 1
 
 ////////////////////////////////////////////////////////////////////////////////
+// Private helper functions
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Updates the desired value of the CurrentLevel attribute if supported
+ * when we receive an On Command.
+ *
+ * @param unid        UNID for which the CurrentLevel desired value is to be adjusted
+ * @param endpoint    Endpoint for which the CurrentLevel desired value is to be adjusted
+ */
+static void update_current_level_attribute_after_on_command(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint)
+{
+  attribute_store_node_t endpoint_node
+    = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint);
+  attribute_store_node_t current_level_node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL);
+  if (attribute_store_is_reported_defined(current_level_node)
+      && attribute_store_get_reported_number(current_level_node) != 0) {
+    return;
+  }
+  if (attribute_store_is_desired_defined(current_level_node)
+      && attribute_store_get_desired_number(current_level_node) != 0) {
+    return;
+  }
+
+  uint8_t desired_level = 0xFF;
+  if (dotdot_is_supported_level_on_level(unid, endpoint)) {
+    desired_level
+      = dotdot_get_level_on_level(unid, endpoint, REPORTED_ATTRIBUTE);
+  }
+  if (desired_level == 0xFF) {
+    // try the last non-zero value cache:
+    attribute_store_node_t endpoint_node
+      = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint);
+    attribute_store_node_t zcl_last_non_zero_level
+      = attribute_store_get_first_child_by_type(endpoint_node, 0x00080f01);
+    attribute_store_get_reported(zcl_last_non_zero_level,
+                                 &desired_level,
+                                 sizeof(desired_level));
+  }
+
+  // Issue a move to level command internally.
+  level_cluster_mapper_move_to_level(unid,
+                                     endpoint,
+                                     UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                     desired_level,
+                                     0,
+                                     0,
+                                     0);
+}
+
+static void update_current_level_attribute_after_off_command(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint)
+{
+  // Issue a move to level command internally, no harm if the command is not supported, nothing will happen.
+  level_cluster_mapper_move_to_level(unid,
+                                     endpoint,
+                                     UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                     0,
+                                     0,
+                                     0,
+                                     0);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // Private component callback functions for DotDot MQTT
 ////////////////////////////////////////////////////////////////////////////////
 sl_status_t
@@ -49,6 +116,11 @@ sl_status_t
     sl_log_debug(LOG_TAG,
                  "Updating ZCL desired values after OnOff::On command");
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, true);
+
+    // If we are turning on, level is supported, the device should go
+    // back to the ON_LEVEL attribute, and if set to 0xFF, to the last cached non-zero level.
+    update_current_level_attribute_after_on_command(unid, endpoint);
+
     if (is_clear_reported_enabled()) {
       sl_log_debug(LOG_TAG, "Clearing OnOff::OnOff reported value");
       dotdot_on_off_on_off_undefine_reported(unid, endpoint);
@@ -86,6 +158,10 @@ sl_status_t
     sl_log_debug(LOG_TAG,
                  "Updating ZCL desired values after OnOff::Off command");
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, false);
+
+    // If we are turning off, level is supported, the device should go to 0
+    update_current_level_attribute_after_off_command(unid, endpoint);
+
     if (is_clear_reported_enabled()) {
       sl_log_debug(LOG_TAG, "Clearing OnOff::OnOff reported value");
       dotdot_on_off_on_off_undefine_reported(unid, endpoint);
@@ -93,7 +169,7 @@ sl_status_t
   }
 
   if (dotdot_is_supported_on_off_on_time(unid, endpoint)) {
-      dotdot_set_on_off_on_time(unid, endpoint, REPORTED_ATTRIBUTE, 0);
+    dotdot_set_on_off_on_time(unid, endpoint, REPORTED_ATTRIBUTE, 0);
   }
 
   return SL_STATUS_OK;
@@ -113,10 +189,10 @@ sl_status_t on_off_cluster_toggle_command(
     }
   }
 
-  if(dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE)) {
-    on_off_cluster_off_command(unid, endpoint,callback_type);
+  if (dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE)) {
+    on_off_cluster_off_command(unid, endpoint, callback_type);
   } else {
-    on_off_cluster_on_command(unid, endpoint,callback_type);
+    on_off_cluster_on_command(unid, endpoint, callback_type);
   }
 
   return SL_STATUS_OK;

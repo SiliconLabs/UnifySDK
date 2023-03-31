@@ -3074,6 +3074,23 @@ void uic_mqtt_dotdot_by_group_occupancy_sensing_write_attributes_callback_set(
 
 
 
+typedef void (*uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback_t)(
+    const dotdot_group_id_t group_id,
+    uic_mqtt_dotdot_soil_moisture_state_t,
+    uic_mqtt_dotdot_soil_moisture_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/soil_moisture/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback_t callback
+);
+
+
+
 typedef void (*uic_mqtt_dotdot_by_group_ph_measurement_write_attributes_callback_t)(
     const dotdot_group_id_t group_id,
     uic_mqtt_dotdot_ph_measurement_state_t,
@@ -3138,6 +3155,40 @@ typedef void (*uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callbac
  */
 void uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback_set(
   const uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback_t callback
+);
+
+
+
+typedef void (*uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback_t)(
+    const dotdot_group_id_t group_id,
+    uic_mqtt_dotdot_carbon_dioxide_state_t,
+    uic_mqtt_dotdot_carbon_dioxide_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/carbon_dioxide/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback_t callback
+);
+
+
+
+typedef void (*uic_mqtt_dotdot_by_group_pm25_write_attributes_callback_t)(
+    const dotdot_group_id_t group_id,
+    uic_mqtt_dotdot_pm25_state_t,
+    uic_mqtt_dotdot_pm25_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/pm25/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void uic_mqtt_dotdot_by_group_pm25_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_pm25_write_attributes_callback_t callback
 );
 
 

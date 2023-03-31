@@ -73,8 +73,7 @@ typedef enum attribute_store_storage_type {
   INVALID_STORAGE_TYPE
 } attribute_store_storage_type_t;
 
-// UIC-2214: Find a clean way to have the ENUM_STORAGE_TYPE automatically
-// determined depending on the platform
+// There is a unit test that should fail if this value is not correct.
 #define ENUM_STORAGE_TYPE U32_STORAGE_TYPE
 
 #ifdef __cplusplus

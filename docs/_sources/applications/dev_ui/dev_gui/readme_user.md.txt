@@ -4,6 +4,8 @@ The _Unify Framework Developer GUI_ is a Web service that runs on the
 _Unify_ gateway. It provides a graphical interface to operate the various features
 of the _Unify_ gateway, such as network management, smartstart, multicast, and so on.
 
+**NOTE**: This guide illustrates the capabilities of the Dev GUI. Screenshots and information may be outdated.
+
 ## Access Developer GUI
 
 The developer GUI (_Dev GUI_) can be accessed via any browser that can
@@ -94,7 +96,7 @@ Z-Wave QR Code are encoded as a string of digits. For example:
 `9001165290030142138707174462303349713080650447059259001001793030790220000000000400003025780803003`
 
 Use the
-[Z-Wave Alliance QR Code decoding tool](https://github.com/Z-Wave-Alliance/qr_code_tool)
+[Z-Wave Alliance QR Code decoding tool](https://siliconlabs.github.io/UnifySDK/doc/qr_code_scanner.html)
 to parse the digits and show what they represent.
 If you do not have access, you can request it at the
 [Z-Wave Alliance member portal](https://sdomembers.z-wavealliance.org/).
@@ -157,51 +159,59 @@ There is currently no support for BLE DSKs in the SmartStart List.
 
 The following are the currently (2022-02-09) supported clusters of the _Dev GUI_:
 
-- On/Off switch
-- Binary sensor
-- Door lock
-- Thermostat
-- Color Control
-- Level Control
-- Identify
-- Name and Location
-- Scenes
-- Locator and Position Estimation
+- AoXLocator
+- AoXPositionEstimation
+- BarrierControl
 - Basic
+- Binding
+- ColorControl
+- ConcentrationMeasurement
+- ConfigurationParameters
+- DoorLock
+- ElectricalConductivityMeasurement
+- ElectricalMeasurement
+- FlowMeasurement
 - IASZone
-- Power Configuration
+- Identify
+- IlluminanceMeasurement
+- Level
+- Metering
+- NameAndLocation
+- NetworkManagement
+- OccupancySensing
+- OnOff
+- PhMeasurement
+- PowerConfiguration
+- PressureMeasurement
+- RFTelemetry
+- Scenes
+- SystemMetrics
+- TemperatureMeasurement
+- Thermostat
+- WaterContentMeasurement
+- WindSpeedMeasurement
+- WindowCovering
 
-### On/Off Switch
+After inclusion of the node and navigating to the corresponding cluster page,
+you have the ability to view/edit cluster attributes and send commands that supported by the cluster.
 
-After inclusion of an **On/Off** switch and navigating to the switches page, the
-page will look something like this:
-
+Cluster page examples:
 ![On/Off Switch](doc/assets/img/on_off.PNG)
-
-This can control an **On/Off** switch.
-
-### Binary Sensor
-
-After including a **Binary sensor**, a page will look like this:
-
 ![Occupancy Sensor](doc/assets/img/occupancy_sensor.PNG)
-
-### Door Lock
-
-The door lock requires secure inclusion to work. The page will look like this:
-
 ![Door Lock](doc/assets/img/door_lock.PNG)
 
-When unlocking or locking the door lock, a pop up will ask for a pin to the door
-lock:
+If the attribute is writable it can be edited by the Dev GUI. Writable attributes are highlighted in yellow:
+![Thermostat Set attributes](doc/assets/img/thermostat_modes.PNG)
 
+In case the running command requires a list of params they can be entered in a pop-up window
 ![Door Lock Pin](doc/assets/img/door_lock_pin.PNG)
 
-### Thermostat
+## Measurements
 
-The thermostat can change mode and change set point temperatures.
-
-![Thermostat Set attributes](doc/assets/img/thermostat_modes.PNG)
+All *Measurement clusters collected on one "Measurements" page. The first tab on this page is a list of all measurement clusters per node,
+the rest provide a list of nodes that support the corresponding cluster:
+![All Measurements](doc/assets/img/all_measurements.png)
+![Nodes per Measurement](doc/assets/img/nodes_per_measurement.png)
 
 ## Groups
 
@@ -244,3 +254,54 @@ location column.
 After clicking _Update_, the page will look like this.
 
 ![Name and Location Overview](doc/assets/img/name_location_nodes.PNG)
+
+## Application Monitoring
+
+All Unify services have the ability to notify client about their start/stop.
+So the Application Monitoring page represents the status and version of each application running on the _Unify_ gateway.
+![Application Monitoring](doc/assets/img/application_monitoring.png)
+
+## OTA
+
+The OTA page provides information about the device's current firmware:
+![OTA](doc/assets/img/ota.png)
+
+If a new version of the firmware is ability, devices can be flashed:
+![OTA Flash](doc/assets/img/ota_flash.png)
+
+## Commissionable Devices
+
+Represents a list of commissinable devices provided by Matter Bridge:
+![Commissionable Devices](doc/assets/img/commissionable_devices.png)
+
+If DSK is available, the device can be added to the SmartStart list:
+![Add Commissionable Devices](doc/assets/img/commissionable_devices_add.png)
+
+## UPTI
+
+Dev GUI application allows user to initiate adapters discovery,
+to start/stop trace packages capturing and visualize trace packages.
+
+* Enable/Disable PTI on the Protocol Controller
+    To `Enable` or `Disable` the PTI functionality for controllers with NCP that support this, you need to toggle `On\Off PTI` switch to the desired position on the `RFTelemetry` page
+    ![ToggleSerialApiPTI](../../upti_cap/assets/enable_serial_api_pti.png).
+    Note: An enabled pti produces a large number of messages sent via mqtt, so to prevent mqtt overload it is recommended to keep PTI disabled at all times while not in use.
+    Note: This functionality is available when running the [ZPC](../../zpc/readme_user.md).
+
+* Discovery PTI
+    To discover the network and identify all PTIs, press `Discovery` button on the `UPTI` page. After some time, all PTIs will be available in a table with information about `Serial Number`, `IP Address` and connection status
+    ![Discovery](../../upti_cap/assets/discover.png).
+
+* Enable/Disable data capture
+    To `Toggle` capturing data, press `Enable` or `Disable` button. If you `Enable` capturing, you can choose in the pop-up window whether you want to parse additional data or only capture raw data.
+    ![TogglePTI](../../upti_cap/assets/toggle_pti.png)
+    ![EnabledPTI](../../upti_cap/assets/enabled_pti.png)
+
+* View Trace Package
+    To view a list of trace packages press the `View Trace` button.
+    You will see the table of captured trace packages with additional data:
+
+    ![WithAdditionalData](../../upti_cap/assets/with_additional_data.png)
+
+    or without additional data:
+    ![WithoutAdditionalData](../../upti_cap/assets/without_additional_data.png)

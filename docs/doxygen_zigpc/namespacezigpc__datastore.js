@@ -1,5 +1,11 @@
 var namespacezigpc__datastore =
 [
+    [ "binding", "namespacezigpc__datastore_1_1binding.html", [
+      [ "add_binding", "namespacezigpc__datastore_1_1binding.html#a8ba9d1d4a6ebd3a006a605107613d60e", null ],
+      [ "read_binding_count", "namespacezigpc__datastore_1_1binding.html#a667fcf5813753cdf43518f2754fb4221", null ],
+      [ "read_binding_table", "namespacezigpc__datastore_1_1binding.html#a47f54f03305a8d2705f6ab398d100d57", null ],
+      [ "remove_binding", "namespacezigpc__datastore_1_1binding.html#aa7bb491baf5819feef2b6b57fbf162ea", null ]
+    ] ],
     [ "cluster", "namespacezigpc__datastore_1_1cluster.html", [
       [ "get_id_list", "namespacezigpc__datastore_1_1cluster.html#a398b628399a1a366455c13739fc5df11", null ]
     ] ],

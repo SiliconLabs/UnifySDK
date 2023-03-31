@@ -20,7 +20,7 @@ def NO_LIFELINE           0xFFFF
 // device fingerprint
 def powerstrip_sample_app ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05))
 
-scope 0 {
+scope 500 {
 // Simple fingerprints should be composed as a minimum of:
 // * Manufacturer ID
 // * Product Type ID

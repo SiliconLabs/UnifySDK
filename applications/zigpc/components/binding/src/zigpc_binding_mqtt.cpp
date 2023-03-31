@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <iomanip>
 
 #include "sl_log.h"
 
@@ -23,10 +24,11 @@ std::string
             zigbee_endpoint_id_t endpoint)
 {
     std::string unid = zigpc_ucl::mqtt::build_unid(eui64); 
-    std::string endpoint_string = std::string(UCL_EP_PREFIX) + std::to_string(endpoint);
+    std::string endpoint_string = std::string(UCL_EP_PREFIX) + 
+        std::to_string(endpoint);
     std::string topic_string =
         std::string(UCL_TOP_LEVEL) + std::string(UCL_BY_UNID) + unid 
-        + std::string(UCL_EP_PREFIX) + endpoint_string + BINDING_CLUSTER_NAME
+        + endpoint_string + BINDING_CLUSTER_NAME
         + std::string(UCL_ATTRIBUTE_TOPIC) ;
 
     return topic_string;
@@ -53,17 +55,28 @@ sl_status_t zigpc_binding_init_mqtt(
         return status;
     }
 
-    status = zigpc_binding_mqtt_publish_table_full(eui64, endpoint, ATTR_DIRECTION_REPORTED, false );
+    status = 
+        zigpc_binding_mqtt_publish_table_full(
+                eui64, 
+                endpoint, 
+                ATTR_DIRECTION_REPORTED, 
+                false );
+
     if(SL_STATUS_OK != status)
     {
-        sl_log_warning(LOG_TAG, "Error initializing BindingTableFull attribute");
+        sl_log_warning(LOG_TAG, "Error initializing BindingTableFull REPORTED attribute");
         return status;
     }
 
-    status = zigpc_binding_mqtt_publish_table_full(eui64, endpoint, ATTR_DIRECTION_DESIRED, false );
+    status = 
+        zigpc_binding_mqtt_publish_table_full(
+            eui64, 
+            endpoint, 
+            ATTR_DIRECTION_DESIRED, 
+            false);
     if(SL_STATUS_OK != status)
     {
-        sl_log_warning(LOG_TAG, "Error initializing the BindingTableFull attribute");
+        sl_log_warning(LOG_TAG, "Error initializing the BindingTableFull DESIRED attribute");
         return status;
     }
 
@@ -97,53 +110,25 @@ sl_status_t zigpc_publish_binding_table(zigbee_eui64_uint_t eui64, zigbee_endpoi
             UCL_ATTRIBUTE_REPORTED_TOPIC;
 
     //retrieve bindings
-    zigbee_eui64_t eui64_array;
-
+    std::list<zigbee_binding_t> binding_table;
+    
     sl_status_t status = 
-        zigbee_uint_to_eui64(eui64, eui64_array);
-
-    if(SL_STATUS_OK != status)
-    {
-        sl_log_warning(LOG_TAG, "Error using the source eui64 address");
-        return status;
-    }
-
-    size_t binding_list_size =
-                zigpc_datastore_get_binding_count(
-                    eui64_array,
-                    endpoint);
-
-    if(binding_list_size == 0)
-    {
-        binding_list_size = 1;
-    }
-    
-    zigbee_binding_t binding_list[binding_list_size]; //NOSONAR - need to c array to interact with datastore
-
-    status = zigpc_datastore_read_binding_list( 
-                eui64_array,
-                endpoint,
-                binding_list,
-                binding_list_size);
-    
-    if(SL_STATUS_OK != status)
-    {
-        sl_log_warning(LOG_TAG, "Error reading the binding list from the datastore");
-        return status;
-    }
+        zigpc_datastore::binding::read_binding_table(
+            eui64,
+            binding_table);
     
     //build payload
     std::stringstream payload("{\"value\":[");
-    for(size_t i = 0; i<binding_list_size; i++)
+    for(zigbee_binding_t binding : binding_table)
     {
         std::string cluster_name = 
             uic_dotdot_get_cluster_name(
-                    binding_list[i].source_cluster);
+                    binding.source_cluster);
         std::string dest_unid = 
             zigpc_ucl::mqtt::build_unid(
-                    binding_list[i].dest_address);
+                    binding.dest_address);
         std::string ep_string = std::to_string(
-                binding_list[i].dest_endpoint);
+                binding.dest_endpoint);
 
         payload << 
             "{\"ClusterName\" : " << "\"" << cluster_name << "\"" << "," <<
@@ -187,6 +172,16 @@ sl_status_t
             BINDING_TABLE_FULL_TOPIC + 
             direction_str;
     
+    std::stringstream stream;
+    stream << std::hex<< eui64;
+
+    sl_log_info(
+            LOG_TAG, 
+            "Publish tablefull attribute for eui: %s, ep:%s, dir: %s",
+            stream.str().c_str(),
+            std::to_string(endpoint).c_str(),
+            direction_str.c_str() );
+    
     std::string table_full_payload = 
         "{" + std::string(UCL_VALUE) + ":" + table_full_value_str +"}";
     
@@ -207,7 +202,15 @@ sl_status_t
     std::string topic_string =  
         zigpc_binding_serialize_attribute_topic(eui64,endpoint) + 
         BINDABLE_CLUSTERS_TOPIC  + UCL_ATTRIBUTE_REPORTED_TOPIC ;
+    
+    std::stringstream stream;
+    stream << std::hex<< eui64;
 
+    sl_log_info(
+            LOG_TAG, 
+            "Publish bindable cluster list for eui: %s, ep:%s",
+            stream.str().c_str(),
+            std::to_string(endpoint).c_str());
 
     zigbee_eui64_t eui64_array;
 

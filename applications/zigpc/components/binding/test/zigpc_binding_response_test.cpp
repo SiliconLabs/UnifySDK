@@ -39,11 +39,11 @@ void test_zigpc_handle_bind_response(void)
     
     zigbee_uint_to_eui64_IgnoreAndReturn(SL_STATUS_OK);
     zigbee_eui64_to_uint_IgnoreAndReturn(test_binding.source_address);
-
+/*
     zigpc_datastore_get_binding_count_IgnoreAndReturn(0);
     zigpc_datastore_read_binding_list_IgnoreAndReturn(SL_STATUS_OK);
     zigpc_datastore_write_binding_list_IgnoreAndReturn(SL_STATUS_OK);
-
+*/
     status = 
         zigpc_binding_handle_bind_unbind_reponse(
                 test_binding,
@@ -66,11 +66,11 @@ void test_zigpc_handle_unbind_response(void)
     
     zigbee_uint_to_eui64_IgnoreAndReturn(SL_STATUS_OK);
     zigbee_eui64_to_uint_IgnoreAndReturn(test_binding.source_address);
-
+/*
     zigpc_datastore_get_binding_count_IgnoreAndReturn(0);
     zigpc_datastore_read_binding_list_IgnoreAndReturn(SL_STATUS_OK);
     zigpc_datastore_write_binding_list_IgnoreAndReturn(SL_STATUS_OK);
-
+*/
     status = 
         zigpc_binding_handle_bind_unbind_reponse(
                 test_binding,
@@ -93,11 +93,11 @@ void test_zigpc_handle_bind_table_full_response(void)
     
     zigbee_uint_to_eui64_IgnoreAndReturn(SL_STATUS_OK);
     zigbee_eui64_to_uint_IgnoreAndReturn(test_binding.source_address);
-
+/*
     zigpc_datastore_get_binding_count_IgnoreAndReturn(0);
     zigpc_datastore_read_binding_list_IgnoreAndReturn(SL_STATUS_OK);
     zigpc_datastore_write_binding_list_IgnoreAndReturn(SL_STATUS_OK);
-
+*/
     status = 
         zigpc_binding_handle_bind_unbind_reponse(
                 test_binding,
@@ -120,11 +120,11 @@ void test_zigpc_handle_bind_error_response(void)
     
     zigbee_uint_to_eui64_IgnoreAndReturn(SL_STATUS_OK);
     zigbee_eui64_to_uint_IgnoreAndReturn(test_binding.source_address);
-
+/*
     zigpc_datastore_get_binding_count_IgnoreAndReturn(0);
     zigpc_datastore_read_binding_list_IgnoreAndReturn(SL_STATUS_OK);
     zigpc_datastore_write_binding_list_IgnoreAndReturn(SL_STATUS_OK);
-
+*/
     status = 
         zigpc_binding_handle_bind_unbind_reponse(
                 test_binding,

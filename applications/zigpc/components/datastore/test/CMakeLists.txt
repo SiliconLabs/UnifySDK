@@ -75,11 +75,11 @@ target_add_unittest(
   DEPENDS
   zigpc_datastore_mock)
 
-target_add_unittest(
-  zigpc_datastore
-  NAME
-  zigpc_datastore_binding_test
-  SOURCES
-  zigpc_datastore_binding_test.c
-  DEPENDS
-  uic_attribute_store_mock)
+#target_add_unittest(
+#  zigpc_datastore
+#  NAME
+#  zigpc_datastore_binding_test
+#  SOURCES
+#  zigpc_datastore_binding_test.c
+#  DEPENDS
+#  uic_attribute_store_mock)

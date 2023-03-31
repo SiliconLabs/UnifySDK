@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.3.1</span>
    </div>
   </td>
  </tr>
@@ -336,110 +336,116 @@ $(document).ready(function(){initNavTree('dotdot__cluster__command__id__definiti
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">// Commands for cluster: OccupancySensing</span></div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">// Commands for cluster: PhMeasurement</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">// Commands for cluster: SoilMoisture</span></div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">// Commands for cluster: ElectricalConductivityMeasurement</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">// Commands for cluster: PhMeasurement</span></div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">// Commands for cluster: WindSpeedMeasurement</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">// Commands for cluster: ElectricalConductivityMeasurement</span></div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">// Commands for cluster: CarbonMonoxide</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">// Commands for cluster: WindSpeedMeasurement</span></div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">// Commands for cluster: IASZone</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga7dbf79143bc9a6f8e5f9acfcf793ef02">  269</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_ZONE_ENROLL_RESPONSE_COMMAND_ID (0x0)</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gadec2f79b4540096d5124d899d62930f2">  270</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_ZONE_STATUS_CHANGE_NOTIFICATION_COMMAND_ID (0x0)</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga14ab8c4c04a0dffebf10b21fa5647f8e">  271</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_INITIATE_NORMAL_OPERATION_MODE_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gab84fcae563f32f89c4adbe805ba17473">  272</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_ZONE_ENROLL_REQUEST_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga0a416ef6c1e80c4592f1fb0c2f503206">  273</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_INITIATE_TEST_MODE_COMMAND_ID (0x2)</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">// Commands for cluster: IASACE</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga78f9c5a32c0adfb66aaedd53c90b1d4a">  276</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_ARM_COMMAND_ID (0x0)</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gad1e3513a6302e6532877e2a023d7430e">  277</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_ARM_RESPONSE_COMMAND_ID (0x0)</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga44d810dd3b328382b49948d902572c29">  278</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_BYPASS_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga19ea1d55165f43aa7c12d4941a269bf9">  279</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONEID_MAP_RESPONSE_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga2b80ae14976949609c6b593fe3d7e6fb">  280</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_EMERGENCY_COMMAND_ID (0x2)</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga0676761d2cc158fd9859e43faf8ceb17">  281</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_INFORMATION_RESPONSE_COMMAND_ID (0x2)</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga29d70bd7111464f65221acff9a7210cd">  282</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_FIRE_COMMAND_ID (0x3)</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga802e4d9f077097bb886314271b18caa0">  283</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_ZONE_STATUS_CHANGED_COMMAND_ID (0x3)</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga85a911013846668519f36ed9d15dcb71">  284</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_PANIC_COMMAND_ID (0x4)</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gac7a6cffa96405bbf52ecf70df38a8678">  285</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_PANEL_STATUS_CHANGED_COMMAND_ID (0x4)</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gafedb6a3ef2d4b43cb7482651337a037a">  286</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONEID_MAP_COMMAND_ID (0x5)</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gac4ab16d7b41f333917a59b3292819fa6">  287</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_PANEL_STATUS_RESPONSE_COMMAND_ID (0x5)</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gae92a7d0a65b4aefa2979a6afda698a29">  288</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_INFORMATION_COMMAND_ID (0x6)</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga9c5d833f733f976281dc66f2200527a7">  289</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_SET_BYPASSED_ZONE_LIST_COMMAND_ID (0x6)</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabafef0f7eb774dcbc5ed67080ac55bb3">  290</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_PANEL_STATUS_COMMAND_ID (0x7)</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gab183a092d8df97e6474c7d3e598da265">  291</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_BYPASS_RESPONSE_COMMAND_ID (0x7)</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga53c2ac38ad462cb702b2eee3fd7f4b12">  292</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_BYPASSED_ZONE_LIST_COMMAND_ID (0x8)</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gadc882bd64de4ba19831402d261bbb110">  293</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_STATUS_RESPONSE_COMMAND_ID (0x8)</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gaa2f244bcc0b9be22ecb0d483b8683fdb">  294</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_STATUS_COMMAND_ID (0x9)</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">// Commands for cluster: IASWD</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabd46dbdb7aaa3ea5bf62a0d7f48146a1">  297</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASWD_START_WARNING_COMMAND_ID (0x0)</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga39616b8e3b67067d0e740d3abb96ca92">  298</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASWD_SQUAWK_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">// Commands for cluster: Metering</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">// Commands for cluster: CarbonMonoxide</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">// Commands for cluster: CarbonDioxide</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">// Commands for cluster: PM25</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">// Commands for cluster: IASZone</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga7dbf79143bc9a6f8e5f9acfcf793ef02">  275</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_ZONE_ENROLL_RESPONSE_COMMAND_ID (0x0)</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gadec2f79b4540096d5124d899d62930f2">  276</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_ZONE_STATUS_CHANGE_NOTIFICATION_COMMAND_ID (0x0)</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga14ab8c4c04a0dffebf10b21fa5647f8e">  277</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_INITIATE_NORMAL_OPERATION_MODE_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gab84fcae563f32f89c4adbe805ba17473">  278</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_ZONE_ENROLL_REQUEST_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga0a416ef6c1e80c4592f1fb0c2f503206">  279</a></span>&#160;<span class="preprocessor">#define DOTDOT_IAS_ZONE_INITIATE_TEST_MODE_COMMAND_ID (0x2)</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">// Commands for cluster: IASACE</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga78f9c5a32c0adfb66aaedd53c90b1d4a">  282</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_ARM_COMMAND_ID (0x0)</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gad1e3513a6302e6532877e2a023d7430e">  283</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_ARM_RESPONSE_COMMAND_ID (0x0)</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga44d810dd3b328382b49948d902572c29">  284</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_BYPASS_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga19ea1d55165f43aa7c12d4941a269bf9">  285</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONEID_MAP_RESPONSE_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga2b80ae14976949609c6b593fe3d7e6fb">  286</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_EMERGENCY_COMMAND_ID (0x2)</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga0676761d2cc158fd9859e43faf8ceb17">  287</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_INFORMATION_RESPONSE_COMMAND_ID (0x2)</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga29d70bd7111464f65221acff9a7210cd">  288</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_FIRE_COMMAND_ID (0x3)</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga802e4d9f077097bb886314271b18caa0">  289</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_ZONE_STATUS_CHANGED_COMMAND_ID (0x3)</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga85a911013846668519f36ed9d15dcb71">  290</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_PANIC_COMMAND_ID (0x4)</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gac7a6cffa96405bbf52ecf70df38a8678">  291</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_PANEL_STATUS_CHANGED_COMMAND_ID (0x4)</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gafedb6a3ef2d4b43cb7482651337a037a">  292</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONEID_MAP_COMMAND_ID (0x5)</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gac4ab16d7b41f333917a59b3292819fa6">  293</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_PANEL_STATUS_RESPONSE_COMMAND_ID (0x5)</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gae92a7d0a65b4aefa2979a6afda698a29">  294</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_INFORMATION_COMMAND_ID (0x6)</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga9c5d833f733f976281dc66f2200527a7">  295</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_SET_BYPASSED_ZONE_LIST_COMMAND_ID (0x6)</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabafef0f7eb774dcbc5ed67080ac55bb3">  296</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_PANEL_STATUS_COMMAND_ID (0x7)</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gab183a092d8df97e6474c7d3e598da265">  297</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_BYPASS_RESPONSE_COMMAND_ID (0x7)</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga53c2ac38ad462cb702b2eee3fd7f4b12">  298</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_BYPASSED_ZONE_LIST_COMMAND_ID (0x8)</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gadc882bd64de4ba19831402d261bbb110">  299</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_STATUS_RESPONSE_COMMAND_ID (0x8)</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gaa2f244bcc0b9be22ecb0d483b8683fdb">  300</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASACE_GET_ZONE_STATUS_COMMAND_ID (0x9)</span></div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">// Commands for cluster: ElectricalMeasurement</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga6bcfed116e293d60d3dc172a33f5ad50">  303</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_PROFILE_INFO_RESPONSE_COMMAND_ID (0x0)</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gacac18a6f77f8164c76e95461a3834418">  304</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_PROFILE_INFO_COMMAND_ID (0x0)</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga1776edff2468fac61f3fa05f136dab61">  305</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_MEASUREMENT_PROFILE_RESPONSE_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga81fc9050bb852344cd60aca05aa52566">  306</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_MEASUREMENT_PROFILE_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">// Commands for cluster: IASWD</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabd46dbdb7aaa3ea5bf62a0d7f48146a1">  303</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASWD_START_WARNING_COMMAND_ID (0x0)</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga39616b8e3b67067d0e740d3abb96ca92">  304</a></span>&#160;<span class="preprocessor">#define DOTDOT_IASWD_SQUAWK_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">// Commands for cluster: Metering</span></div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">// Commands for cluster: Diagnostics</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">// Commands for cluster: ProtocolController-RFTelemetry</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabc8643e529228a59137edc0c036ba85a">  311</a></span>&#160;<span class="preprocessor">#define DOTDOT_PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">// Commands for cluster: State</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga10f9e6c33feb2f83fc85f7d59d5febb9">  314</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_REMOVE_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gad569782cdce74c89c44f2fb131cb5798">  315</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_REMOVE_OFFLINE_COMMAND_ID (0x2)</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gac87cfdda90b1164ff51b5a54c0e986a0">  316</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_DISCOVER_NEIGHBORS_COMMAND_ID (0x3)</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga7803546304e6e70a53f38adc681b3097">  317</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_INTERVIEW_COMMAND_ID (0x4)</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">// Commands for cluster: ElectricalMeasurement</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga6bcfed116e293d60d3dc172a33f5ad50">  309</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_PROFILE_INFO_RESPONSE_COMMAND_ID (0x0)</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gacac18a6f77f8164c76e95461a3834418">  310</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_PROFILE_INFO_COMMAND_ID (0x0)</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga1776edff2468fac61f3fa05f136dab61">  311</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_MEASUREMENT_PROFILE_RESPONSE_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga81fc9050bb852344cd60aca05aa52566">  312</a></span>&#160;<span class="preprocessor">#define DOTDOT_ELECTRICAL_MEASUREMENT_GET_MEASUREMENT_PROFILE_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">// Commands for cluster: Diagnostics</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">// Commands for cluster: ProtocolController-RFTelemetry</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabc8643e529228a59137edc0c036ba85a">  317</a></span>&#160;<span class="preprocessor">#define DOTDOT_PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_COMMAND_ID (0x1)</span></div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">// Commands for cluster: Binding</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gaee6cbab585ac296318a1795622c91c35">  320</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_BIND_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gab4b428e8bf2cfc2f9ec132329d8a39b1">  321</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_UNBIND_COMMAND_ID (0x2)</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabf478e687f6092b2966762a30174f725">  322</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_BIND_TO_PROTOCOL_CONTROLLER_COMMAND_ID (0x3)</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gaf6edb0da76859555634fe14bdb5f45e5">  323</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_UNBIND_FROM_PROTOCOL_CONTROLLER_COMMAND_ID (0x4)</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">// Commands for cluster: State</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga10f9e6c33feb2f83fc85f7d59d5febb9">  320</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_REMOVE_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gad569782cdce74c89c44f2fb131cb5798">  321</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_REMOVE_OFFLINE_COMMAND_ID (0x2)</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gac87cfdda90b1164ff51b5a54c0e986a0">  322</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_DISCOVER_NEIGHBORS_COMMAND_ID (0x3)</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga7803546304e6e70a53f38adc681b3097">  323</a></span>&#160;<span class="preprocessor">#define DOTDOT_STATE_INTERVIEW_COMMAND_ID (0x4)</span></div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">// Commands for cluster: SystemMetrics</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">// Commands for cluster: ApplicationMonitoring</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga2c9f76eca39517d60e1aeec8bac7fab2">  328</a></span>&#160;<span class="preprocessor">#define DOTDOT_APPLICATION_MONITORING_LOG_ENTRY_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">// Commands for cluster: NameAndLocation</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">// Commands for cluster: ConfigurationParameters</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gafa2a972501a0495f66ac357d3a607f3a">  333</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_DISCOVER_PARAMETER_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga922b5f9325002a186bb5db8f27f2d34a">  334</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_DEFAULT_RESET_ALL_PARAMETERS_COMMAND_ID (0x2)</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga769cd9eebcda685ad99ba2ff9b17e917">  335</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_SET_PARAMETER_COMMAND_ID (0x3)</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga93159b7ae5f9a4900816be1a584b218c">  336</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_DISCOVER_PARAMETER_RANGE_COMMAND_ID (0x4)</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">// Commands for cluster: Binding</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gaee6cbab585ac296318a1795622c91c35">  326</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_BIND_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gab4b428e8bf2cfc2f9ec132329d8a39b1">  327</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_UNBIND_COMMAND_ID (0x2)</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gabf478e687f6092b2966762a30174f725">  328</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_BIND_TO_PROTOCOL_CONTROLLER_COMMAND_ID (0x3)</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gaf6edb0da76859555634fe14bdb5f45e5">  329</a></span>&#160;<span class="preprocessor">#define DOTDOT_BINDING_UNBIND_FROM_PROTOCOL_CONTROLLER_COMMAND_ID (0x4)</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">// Commands for cluster: SystemMetrics</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">// Commands for cluster: ApplicationMonitoring</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga2c9f76eca39517d60e1aeec8bac7fab2">  334</a></span>&#160;<span class="preprocessor">#define DOTDOT_APPLICATION_MONITORING_LOG_ENTRY_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">// Commands for cluster: NameAndLocation</span></div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">// Commands for cluster: AoXLocator</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga2c326fd8c54f25dd17f73a8bf5d23b4b">  339</a></span>&#160;<span class="preprocessor">#define DOTDOT_AOX_LOCATOR_IQ_REPORT_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga392bf760039adbdff328dee68b5ac268">  340</a></span>&#160;<span class="preprocessor">#define DOTDOT_AOX_LOCATOR_ANGLE_REPORT_COMMAND_ID (0x2)</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga4f70b8935b3c42ce9aca2664a4453435">  341</a></span>&#160;<span class="preprocessor">#define DOTDOT_AOX_LOCATOR_ANGLE_CORRECTION_COMMAND_ID (0x3)</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">// Commands for cluster: AoXPositionEstimation</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">// Commands for cluster: ProtocolController-NetworkManagement</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga371de15e267ebb39de0ae188dee53292">  346</a></span>&#160;<span class="preprocessor">#define DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_WRITE_COMMAND_ID (0x1)</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;}</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">//DOTDOT_CLUSTER_COMMAND_ID_DEFINITIONS_H</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">// Commands for cluster: ConfigurationParameters</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#gafa2a972501a0495f66ac357d3a607f3a">  339</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_DISCOVER_PARAMETER_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga922b5f9325002a186bb5db8f27f2d34a">  340</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_DEFAULT_RESET_ALL_PARAMETERS_COMMAND_ID (0x2)</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga769cd9eebcda685ad99ba2ff9b17e917">  341</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_SET_PARAMETER_COMMAND_ID (0x3)</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga93159b7ae5f9a4900816be1a584b218c">  342</a></span>&#160;<span class="preprocessor">#define DOTDOT_CONFIGURATION_PARAMETERS_DISCOVER_PARAMETER_RANGE_COMMAND_ID (0x4)</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">// Commands for cluster: AoXLocator</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga2c326fd8c54f25dd17f73a8bf5d23b4b">  345</a></span>&#160;<span class="preprocessor">#define DOTDOT_AOX_LOCATOR_IQ_REPORT_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga392bf760039adbdff328dee68b5ac268">  346</a></span>&#160;<span class="preprocessor">#define DOTDOT_AOX_LOCATOR_ANGLE_REPORT_COMMAND_ID (0x2)</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga4f70b8935b3c42ce9aca2664a4453435">  347</a></span>&#160;<span class="preprocessor">#define DOTDOT_AOX_LOCATOR_ANGLE_CORRECTION_COMMAND_ID (0x3)</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">// Commands for cluster: AoXPositionEstimation</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">// Commands for cluster: ProtocolController-NetworkManagement</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno"><a class="line" href="group__dotdot__cluster__command__id__definitions.html#ga371de15e267ebb39de0ae188dee53292">  352</a></span>&#160;<span class="preprocessor">#define DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_WRITE_COMMAND_ID (0x1)</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;}</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">//DOTDOT_CLUSTER_COMMAND_ID_DEFINITIONS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_8b0157f983fac506bb8c308a55642aa4.html">uic_dotdot</a></li><li class="navelem"><a class="el" href="dir_9a625b2ed7246a34d515db0f7b819060.html">zap-generated</a></li><li class="navelem"><a class="el" href="dir_270a414ac6b05bcedc31a1f864551cc9.html">include</a></li><li class="navelem"><a class="el" href="dotdot__cluster__command__id__definitions_8h.html">dotdot_cluster_command_id_definitions.h</a></li>
-    <li class="footer">Generated on Wed Feb 15 2023 14:24:27 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Mar 31 2023 03:46:39 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

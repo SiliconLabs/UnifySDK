@@ -311,7 +311,7 @@ void nm_state_machine_init()
   zwave_s0_set_network_callbacks(on_secure_inclusion_complete);
   memset(&nms, 0, sizeof(nms));
   nms.s0_inclusion_enabled = true;
-  nms.state = NM_IDLE;
+  nms.state                = NM_IDLE;
 
   network_management_refresh_network_information();
   network_management_stop_ongoing_operations();
@@ -322,7 +322,7 @@ void nm_state_machine_init()
               "ZPC HomeID %08X - NodeID %d",
               nms.cached_home_id,
               nms.cached_local_node_id);
-  zwave_dsk_t dsk;
+  zwave_dsk_t dsk = {};
   zwave_s2_keystore_get_dsk(ZWAVE_S2_KEYSTORE_STATIC_ECDH_KEY, dsk);
   zwave_sl_log_dsk(LOG_TAG, dsk);
 
@@ -378,7 +378,17 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           // If its enabled then we will enable this when this function exits.
           zwapi_add_node_to_network(ADD_NODE_STOP, NULL);
         }
+        if (!nms.smart_start_learn_mode_enabled) {
+          // Make sure to stop SmartStart learn mode if it got disabled.
+          zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
+        }
       } else if (ev == NM_EV_NODE_ADD_SMART_START) {
+        if (false == network_management_is_ready_for_a_new_operation()) {
+          sl_log_debug(LOG_TAG,
+                       "Ignoring SmartStart inclusion "
+                       "request due to reset ongoing.");
+          return;
+        }
         nms.inclusion_protocol     = PROTOCOL_ZWAVE;
         smartstart_event_data_t *e = (smartstart_event_data_t *)event_data;
         uint8_t inclusion_mode     = ADD_NODE_HOME_ID;
@@ -684,8 +694,8 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           zwave_s2_start_add_node(nms.node_id_being_handled);
           zwave_controller_storage_as_set_node_s2_capable(
             nms.node_id_being_handled);
-        }
-        else if (nms.s0_inclusion_enabled && is_command_class_in_nif(
+        } else if (nms.s0_inclusion_enabled
+                   && is_command_class_in_nif(
                      nms.node_info.command_class_list,
                      nms.node_info.command_class_list_length,
                      COMMAND_CLASS_SECURITY)) {

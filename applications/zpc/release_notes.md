@@ -1,5 +1,21 @@
 # ZPC Release Notes
 
+## [1.3.1] - Mar 2023
+
+### Added (1.3.1)
+
+* Added a few Multilevel Sensor Command Class maps.
+
+### Changed (1.3.1)
+
+* Refactored the UAM files to work with the Attribute Mapper scope priority
+* Refactored the Multilevel Switch Command Class to be simpler.
+
+### Fixed (1.3.1)
+
+* Removed a race condition that occurs if being reset while including a
+  node using SmartStart
+
 ## [1.3.0] - Feb 2023
 
 ### Added (1.3.0)

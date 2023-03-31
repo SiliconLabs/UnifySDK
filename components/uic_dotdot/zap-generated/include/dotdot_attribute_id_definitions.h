@@ -522,6 +522,11 @@ typedef enum {
 #define DOTDOT_OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x30)
 #define DOTDOT_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x31)
 #define DOTDOT_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x32)
+// Definitions for cluster: SoilMoisture
+#define DOTDOT_SOIL_MOISTURE_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+#define DOTDOT_SOIL_MOISTURE_MIN_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_SOIL_MOISTURE_MAX_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_SOIL_MOISTURE_TOLERANCE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
 // Definitions for cluster: PhMeasurement
 #define DOTDOT_PH_MEASUREMENT_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
 #define DOTDOT_PH_MEASUREMENT_MIN_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
@@ -542,6 +547,16 @@ typedef enum {
 #define DOTDOT_CARBON_MONOXIDE_MIN_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
 #define DOTDOT_CARBON_MONOXIDE_MAX_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
 #define DOTDOT_CARBON_MONOXIDE_TOLERANCE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
+// Definitions for cluster: CarbonDioxide
+#define DOTDOT_CARBON_DIOXIDE_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+#define DOTDOT_CARBON_DIOXIDE_MIN_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_CARBON_DIOXIDE_MAX_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_CARBON_DIOXIDE_TOLERANCE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
+// Definitions for cluster: PM25
+#define DOTDOT_PM25_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+#define DOTDOT_PM25_MIN_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_PM25_MAX_MEASURED_VALUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_PM25_TOLERANCE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
 // Definitions for cluster: IASZone
 #define DOTDOT_IAS_ZONE_ZONE_STATE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
 #define DOTDOT_IAS_ZONE_ZONE_TYPE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)

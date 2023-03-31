@@ -37,7 +37,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.0
+                ver_1.3.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -211,6 +211,56 @@ Thunderboard sense 2  : brd4166a</p>
 </div>
 <p>This value must match EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE in zigpc/components/zigpc_gateway/libs/zigbee_host/gen/config</p>
 <p>Once you have both .s37 files, flash using simplicity commander / simplicity studio</p>
+<p>###Troubleshooting NCP issues and versioning</p>
+<p>There are some common issues faced when updating to a new version of ZigPC or
+a new version of the GeckoSDK</p>
+<section id="issue-1-ncp-and-gateway-mismatch">
+<h3>Issue #1: NCP and Gateway mismatch<a class="headerlink" href="#issue-1-ncp-and-gateway-mismatch" title="Permalink to this heading"></a></h3>
+<p>After upgrading, it is possible to see ZigPC fail to start with the error:</p>
+<blockquote>
+<div><p>ERROR: ezspErrorHandler 0x30</p>
+</div></blockquote>
+<p>Or an equivalent error.</p>
+<p>Usually this occurs because the version of the GeckoSDK on the gateway and the
+version on the NCP do not match. It’s important that version matches so that the
+EZSP communication libraries are the same on both the host and the radio.</p>
+<p>This issue can be resolved in 2 ways: downgrading the version of the GeckoSDK to
+match with the NCP or updating the NCP firmware to match the gateway.</p>
+<p>To change the version of the GeckoSDK used by the gateway, download the desired
+version of the GeckoSDK and keep note of the directory it is stored in. By
+default, the provided Docker container downloads the latest version to the
+‘externals’ folder in the uic project. This can be overridden by setting the
+“GSDK_LOCATION” environment variable with the new GeckoSDK and re-compiling the
+ZigPC gateway.</p>
+<p>To update the NCP firmware, re-generate the firmware as described above with the
+matching version of the GeckoSDK. If you have hardware access, re-flash the NCP
+as usual. However, if only remote access is possible, ZigPC can be used to
+update the NCP firmware as described in the User Guide (section ‘Updating NCP
+Firmware’</p>
+<p>####Issue #2: addressTable mismatch</p>
+<p>When running the ZigPC, its possible for the gateway to fail to start with an
+error describing:</p>
+<blockquote>
+<div><p>ASSERT addressTableSize mismatch</p>
+</div></blockquote>
+<p>or a similar error.</p>
+<p>Usually, this occurs because the address table size was not properly set in the
+NCP. Some information is shared between the gateway and the NCP, specifically
+related to the network information. In this case, the address table is used to
+resolve the global EUI64 with the short ID commonly used on zigbee networks. The
+size of these tables should match on both the gateway and NCP to ensure that no
+data is lost when handling too many devices.</p>
+<p>There are two ways of solving this: reducing the address table on the gateway or
+increasing the address table size on the NCP.</p>
+<p>The recommended method is to increase the address table size on the NCP. This
+can be done by adding the “EMBER_ADDRESS_TABLE_SIZE” to the .slcp file, as
+described in the section above. Alternatively, add a definition to the NCP
+makefile setting the above define. Compiling with -DEMBER_ADDRESS_TABLE_SIZE=
+32 will also work.</p>
+<p>It is possible to solve this by reducing EMBER_AF_ADDRESS_TABLE_SIZE on the
+gateway, however this is NOT recommended as it can reduce the number of devices
+that ZigPC will support</p>
+</section>
 </section>
 <section id="debugging-with-visual-studio-code-cleaning-the-code">
 <h2>Debugging with visual studio code, Cleaning the code<a class="headerlink" href="#debugging-with-visual-studio-code-cleaning-the-code" title="Permalink to this heading"></a></h2>

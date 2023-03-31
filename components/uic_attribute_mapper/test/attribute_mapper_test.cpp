@@ -21,6 +21,7 @@
 // Unify components
 #include "attribute_store_fixt.h"
 #include "attribute_store_type_registration.h"
+#include "sl_log.h"
 #include "datastore.h"
 #include "uic_version.h"
 
@@ -123,14 +124,14 @@ void test_mapper_engine_test()
 
   n1235.set_desired<uint32_t>(1);
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(5, n1234.desired<uint32_t>());
-  TEST_ASSERT_EQUAL(101, n4444.desired<uint32_t>());
+  TEST_ASSERT_EQUAL(5, attribute_store_get_desired_number(n1234));
+  TEST_ASSERT_EQUAL(101, attribute_store_get_desired_number(n4444));
 
   //  Check that we can create non existing attributes
   auto n11118888 = n0.child_by_type(11118888);
   contiki_test_helper_run(0);
   TEST_ASSERT_TRUE(n11118888.is_valid());
-  TEST_ASSERT_EQUAL(1, n11118888.reported<int32_t>());
+  TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(n11118888));
 
   // Check that we evaluate the right hand side dependencies
 
@@ -140,7 +141,7 @@ void test_mapper_engine_test()
   // should succseed.
   auto n3_n11118888 = n3.child_by_type(11118888);
   TEST_ASSERT_TRUE(n3_n11118888.is_valid());
-  TEST_ASSERT_EQUAL(1, n3_n11118888.reported<int32_t>());
+  TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(n3_n11118888));
 
   //Check that we delete the created node when we are deleting the n3 attribute
   n3.delete_node();
@@ -179,16 +180,16 @@ void test_mapper_clear_desired()
   contiki_test_helper_run(0);
 
   //Check that both attributes have the same desired value
-  TEST_ASSERT_EQUAL(1, n1234.desired<int32_t>());
-  TEST_ASSERT_EQUAL(1, n1235.desired<int32_t>());
-  TEST_ASSERT_EQUAL(0, n1234.reported<int32_t>());
-  TEST_ASSERT_EQUAL(0, n1235.reported<int32_t>());
+  TEST_ASSERT_EQUAL(1, attribute_store_get_desired_number(n1234));
+  TEST_ASSERT_EQUAL(1, attribute_store_get_desired_number(n1235));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_reported_number(n1234));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_reported_number(n1235));
 
   //Setting the repported value should clear the desired value
   n1234.set_reported<uint32_t>(1);
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(1, n1234.reported<int32_t>());
-  TEST_ASSERT_EQUAL(1, n1235.reported<int32_t>());
+  TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(n1234));
+  TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(n1235));
 
   //Check that the repported value has been cleared
   try {
@@ -780,20 +781,20 @@ void test_mapper_engine_multi_scopes_with_different_configurations()
 
   TEST_ASSERT_TRUE(e.add_expression(R"(
     scope 1 chain_reaction(0) clear_desired(0) {
-      r'1 =  r'2
-      r'2 =  r'1
-      d'1 =  d'2
-      d'2 =  d'1
+      r'11 =  r'2
+      r'2  =  r'11
+      d'11 =  d'2
+      d'2  =  d'11
     }
-    scope 1 chain_reaction(0) clear_desired(1) {
+    scope 2 chain_reaction(0) clear_desired(1) {
       r'3 =  d'4
       r'4 =  d'3
     }
-    scope 1 chain_reaction(1) clear_desired(0) {
+    scope 3 chain_reaction(1) clear_desired(0) {
       d'6 =  r'5
       r'6 =  d'6
     }
-    scope 1 chain_reaction(2) clear_desired(2) {
+    scope 4 chain_reaction(2) clear_desired(2) {
       r'8 =  d'9
       r'9 =  r'8
       r'10 =  r'9
@@ -801,35 +802,35 @@ void test_mapper_engine_multi_scopes_with_different_configurations()
   )"));
 
   // Testing scope 0
-  auto attribute_1 = attribute::root().add_node(1);
-  attribute_store_set_reported_number(attribute_1, 5);
+  auto attribute_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_11, 5);
   contiki_test_helper_run(0);
   auto attribute_2 = attribute::root().child_by_type(2);
   TEST_ASSERT_TRUE(attribute_2.is_valid());
   TEST_ASSERT_EQUAL(5, attribute_store_get_reported_number(attribute_2));
 
-  attribute_store_set_desired_number(attribute_1, 6);
+  attribute_store_set_desired_number(attribute_11, 6);
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(5, attribute_store_get_reported_number(attribute_1));
+  TEST_ASSERT_EQUAL(5, attribute_store_get_reported_number(attribute_11));
   TEST_ASSERT_EQUAL(5, attribute_store_get_reported_number(attribute_2));
-  TEST_ASSERT_EQUAL(6, attribute_store_get_desired_number(attribute_1));
+  TEST_ASSERT_EQUAL(6, attribute_store_get_desired_number(attribute_11));
   TEST_ASSERT_EQUAL(6, attribute_store_get_desired_number(attribute_2));
 
   attribute_store_set_desired_number(attribute_2, 7);
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(5, attribute_store_get_reported_number(attribute_1));
+  TEST_ASSERT_EQUAL(5, attribute_store_get_reported_number(attribute_11));
   TEST_ASSERT_EQUAL(5, attribute_store_get_reported_number(attribute_2));
-  TEST_ASSERT_EQUAL(7, attribute_store_get_desired_number(attribute_1));
+  TEST_ASSERT_EQUAL(7, attribute_store_get_desired_number(attribute_11));
   TEST_ASSERT_EQUAL(7, attribute_store_get_desired_number(attribute_2));
 
   attribute_store_set_reported_number(attribute_2, 2);
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_1));
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_11));
   TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_2));
-  TEST_ASSERT_EQUAL(7, attribute_store_get_desired_number(attribute_1));
+  TEST_ASSERT_EQUAL(7, attribute_store_get_desired_number(attribute_11));
   TEST_ASSERT_EQUAL(7, attribute_store_get_desired_number(attribute_2));
 
-  // Testing scope 1
+  // Testing second scope 1
   auto attribute_3 = attribute::root().add_node(3);
   attribute_store_set_desired_number(attribute_3, 3);
   contiki_test_helper_run(0);
@@ -845,7 +846,7 @@ void test_mapper_engine_multi_scopes_with_different_configurations()
   TEST_ASSERT_EQUAL(4, attribute_store_get_reported_number(attribute_3));
   TEST_ASSERT_EQUAL(4, attribute_store_get_desired_number(attribute_4));
 
-  // Testing scope 2
+  // Testing third scope 2
   auto attribute_5 = attribute::root().add_node(5);
   auto attribute_6 = attribute::root().add_node(6);
   attribute_store_set_reported_number(attribute_5, 5);
@@ -953,15 +954,15 @@ void test_mapper_engine_reported_create_attributes_setting()
 
   TEST_ASSERT_TRUE(e.add_expression(R"(
     scope 0 create_attributes(0) {
-      r'2 =  r'1
-      e'3 =  r'1
-      d'4 =  r'1
+      r'2 =  r'11
+      e'3 =  r'11
+      d'4 =  r'11
     }
   )"));
 
   // Testing setting 0. (existence only)
-  auto attribute_1 = attribute::root().add_node(1);
-  attribute_store_set_reported_number(attribute_1, 5);
+  auto attribute_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_11, 5);
   contiki_test_helper_run(0);
   auto attribute_2 = attribute::root().child_by_type(2);
   auto attribute_3 = attribute::root().child_by_type(3);
@@ -974,15 +975,15 @@ void test_mapper_engine_reported_create_attributes_setting()
   attribute::root().delete_node();
   TEST_ASSERT_TRUE(e.add_expression(R"(
     scope 0 create_attributes(2) {
-      r'2 =  r'1
-      e'3 =  r'1
-      d'4 =  r'1
+      r'2 =  r'11
+      e'3 =  r'11
+      d'4 =  r'11
     }
   )"));
 
   // Testing setting 2. (DRE)
-  attribute_1 = attribute::root().add_node(1);
-  attribute_store_set_reported_number(attribute_1, 5);
+  attribute_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_11, 5);
   contiki_test_helper_run(0);
   attribute_2 = attribute::root().child_by_type(2);
   attribute_3 = attribute::root().child_by_type(3);
@@ -995,15 +996,15 @@ void test_mapper_engine_reported_create_attributes_setting()
   attribute::root().delete_node();
   TEST_ASSERT_TRUE(e.add_expression(R"(
     scope 0 create_attributes(1) {
-      r'2 =  r'1
-      e'3 =  r'1
-      d'4 =  r'1
+      r'2 =  r'11
+      e'3 =  r'11
+      d'4 =  r'11
     }
   )"));
 
   // Testing setting 1. (RE)
-  attribute_1 = attribute::root().add_node(1);
-  attribute_store_set_reported_number(attribute_1, 5);
+  attribute_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_11, 5);
   contiki_test_helper_run(0);
   attribute_2 = attribute::root().child_by_type(2);
   attribute_3 = attribute::root().child_by_type(3);
@@ -1021,22 +1022,22 @@ void test_mapper_engine_common_parent_type_override()
 
   TEST_ASSERT_TRUE(e.add_expression(R"(
     scope 0 common_parent_type(3) {
-      r'2 =  r'1
+      r'2 =  r'11
     }
   )"));
 
   // Maps need to happen under a node of type 3.
-  // Adding r'1 under the root will not do anything.
-  auto attribute_0_1 = attribute::root().add_node(1);
-  attribute_store_set_reported_number(attribute_0_1, 5);
+  // Adding r'11 under the root will not do anything.
+  auto attribute_0_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_0_11, 5);
   contiki_test_helper_run(0);
   auto attribute_0_2 = attribute::root().child_by_type(2);
   TEST_ASSERT_FALSE(attribute_0_2.is_valid());
 
   // Now add Node Type 3:
-  auto attribute_3   = attribute::root().add_node(3);
-  auto attribute_3_1 = attribute_3.add_node(1);
-  attribute_store_set_reported_number(attribute_3_1, 5);
+  auto attribute_3    = attribute::root().add_node(3);
+  auto attribute_3_11 = attribute_3.add_node(11);
+  attribute_store_set_reported_number(attribute_3_11, 5);
   contiki_test_helper_run(0);
   auto attribute_3_2 = attribute_3.child_by_type(2);
   TEST_ASSERT_TRUE(attribute_3_2.is_valid());
@@ -1050,11 +1051,11 @@ void test_mapper_engine_number_and_expression_defines()
   e.reset();
   TEST_ASSERT_TRUE(e.add_expression(R"(
     // Number def
-    def number_1 1
-    def expression_1 fn_max_value(r'number_1)
+    def number_11 11
+    def expression_1 fn_max_value(r'number_11)
     def number_2 0x2
     def expression_2 (number_2 * expression_1)
-    def expression_3 (0x4 + r'1)
+    def expression_3 (0x4 + r'11)
     scope 0 {
       r'2 = expression_1
       r'3 = fn_min_value(r'2*30, number_2)
@@ -1062,8 +1063,8 @@ void test_mapper_engine_number_and_expression_defines()
     }
   )"));
 
-  auto attribute_1 = attribute::root().add_node(1);
-  attribute_store_set_reported_number(attribute_1, 1);
+  auto attribute_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_11, 1);
   contiki_test_helper_run(0);
   auto attribute_2 = attribute::root().child_by_type(2);
   TEST_ASSERT_TRUE(attribute_2.is_valid());
@@ -1087,13 +1088,13 @@ void test_use_number_def_in_scope_settings()
     // Number def
     def parent 0x02
     scope 0 common_parent_type(parent) {
-      r'3 = r'1
+      r'3 = r'11
     }
   )"));
 
-  auto attribute_2 = attribute::root().add_node(2);
-  auto attribute_1 = attribute_2.add_node(1);
-  attribute_store_set_reported_number(attribute_1, 1111);
+  auto attribute_2  = attribute::root().add_node(2);
+  auto attribute_11 = attribute_2.add_node(11);
+  attribute_store_set_reported_number(attribute_11, 1111);
   contiki_test_helper_run(0);
   auto attribute_3 = attribute_2.child_by_type(3);
   TEST_ASSERT_TRUE(attribute_3.is_valid());
@@ -1130,29 +1131,29 @@ void test_dependency_trigger_with_wrong_path()
   e.reset();
   TEST_ASSERT_TRUE(e.add_expression(R"(
     scope 0 {
-      r'3 = r'1
+      r'3 = r'11
     }
   )"));
 
   // Here we try to trick the mapper, by creating attribute 1 at the wrong place
   // root -> 2 -> 1. Mapping happens under the root node parent type
-  auto attribute_21 = attribute::root().add_node(2).add_node(1);
-  attribute_store_set_reported_number(attribute_21, 21);
+  auto attribute_2_11 = attribute::root().add_node(2).add_node(11);
+  attribute_store_set_reported_number(attribute_2_11, 21);
   contiki_test_helper_run(0);
   auto attribute_3 = attribute::root().child_by_type(3);
   TEST_ASSERT_FALSE(attribute_3.is_valid());
 
   // Now pause the mapper, create the right attribute 1
   attribute_mapper_pause_mapping();
-  auto attribute_1 = attribute::root().add_node(1);
-  attribute_store_set_reported_number(attribute_1, 1);
+  auto attribute_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_11, 1);
   attribute_mapper_resume_mapping();
   // Should still not have happened due to the mapping pause:
   attribute_3 = attribute::root().child_by_type(3);
   TEST_ASSERT_FALSE(attribute_3.is_valid());
 
   // Update the Attribute 1 under attribute 2:
-  attribute_store_set_reported_number(attribute_21, 21);
+  attribute_store_set_reported_number(attribute_2_11, 21);
   contiki_test_helper_run(0);
 
   // Modified an attribute with non-matching paths, so no eval.
@@ -1160,7 +1161,7 @@ void test_dependency_trigger_with_wrong_path()
   TEST_ASSERT_FALSE(attribute_3.is_valid());
 
   // Update the right Attribute 1:
-  attribute_store_set_reported_number(attribute_1, 2);
+  attribute_store_set_reported_number(attribute_11, 2);
   contiki_test_helper_run(0);
   attribute_3 = attribute::root().child_by_type(3);
   TEST_ASSERT_TRUE(attribute_3.is_valid());
@@ -1168,7 +1169,7 @@ void test_dependency_trigger_with_wrong_path()
 
   // Now pause mapping, modify attribute 3:
   attribute_mapper_pause_mapping();
-  attribute_store_set_reported_number(attribute_1, 3);
+  attribute_store_set_reported_number(attribute_11, 3);
   attribute_mapper_resume_mapping();
   // Expecting unchanged value:
   contiki_test_helper_run(0);
@@ -1176,7 +1177,7 @@ void test_dependency_trigger_with_wrong_path()
 
   // Now try to modify the wrong attribute 1. what happens to Attribute 3?
   // It actually gets re-evaluated, which is kind of undesirable.
-  attribute_store_set_reported_number(attribute_21, 22);
+  attribute_store_set_reported_number(attribute_2_11, 22);
   contiki_test_helper_run(0);
   TEST_MESSAGE("Ideally here we still have the value 2");
   //TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_3));
@@ -1190,15 +1191,15 @@ void test_reevaluation_after_deletion()
   e.reset();
   TEST_ASSERT_TRUE(e.add_expression(R"(
     scope 0 {
-      e'3 = r'1
+      e'3 = r'5
       r'2 = r'3 or r'4
     }
   )"));
 
   // Here we check that r'2 gets set to r'4 after the mapper itself deletes r'3.
-  auto attribute_1 = attribute::root().add_node(1);
+  auto attribute_5 = attribute::root().add_node(5);
   // Here attribute 3 becomes alive.
-  attribute_store_set_reported_number(attribute_1, 1);
+  attribute_store_set_reported_number(attribute_5, 1);
   contiki_test_helper_run(0);
   auto attribute_3 = attribute::root().child_by_type(3);
   TEST_ASSERT_TRUE(attribute_3.is_valid());
@@ -1214,11 +1215,294 @@ void test_reevaluation_after_deletion()
   TEST_ASSERT_TRUE(attribute_2.is_valid());
   TEST_ASSERT_EQUAL(30, attribute_store_get_reported_number(attribute_2));
 
-  // Now set r'1 to 0, meaning that the mapper deletes Attribute 3
-  attribute_store_set_reported_number(attribute_1, 0);
+  // Now set r'5 to 0, meaning that the mapper deletes Attribute 3
+  attribute_store_set_reported_number(attribute_5, 0);
   contiki_test_helper_run(0);
 
   // Check that r'2 got updated to the value of r'4
   TEST_ASSERT_EQUAL(40, attribute_store_get_reported_number(attribute_4));
+}
+
+void test_scope_priority_simple_case()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 0 {
+      r'1 = r'10
+    }
+    scope 1 {
+      r'1 = r'2
+    }
+  )"));
+
+  // Scope 1 should prevail. Let's first create attribute 10:
+  auto attribute_10 = attribute::root().add_node(10);
+  // Here attribute 1 becomes alive.
+  attribute_store_set_reported_number(attribute_10, 10);
+  contiki_test_helper_run(0);
+  auto attribute_1 = attribute::root().child_by_type(1);
+  TEST_ASSERT_TRUE(attribute_1.is_valid());
+  TEST_ASSERT_TRUE(attribute_1.reported_exists());
+  TEST_ASSERT_EQUAL(10, attribute_store_get_reported_number(attribute_1));
+
+  // Now create attribute 2, it has higher priority:
+  auto attribute_2 = attribute::root().add_node(2);
+  attribute_store_set_reported_number(attribute_2, 2);
+  contiki_test_helper_run(0);
+  // Now attribute 1 has the attribute 2 value:
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_1));
+
+  // Now test changing attribute 10, it will have 2 effect as attribute 2 provides a valid mapping:
+  attribute_store_set_reported_number(attribute_10, 11);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_1));
+
+  // Delete attribute 2, the value will fall back on Attribute 10:
+  attribute_2.delete_node();
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(11, attribute_store_get_reported_number(attribute_1));
+}
+
+void test_scope_priority_tricky_paths()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 10 {
+      r'3.2 = r'10
+    }
+    scope 20 common_parent_type(3) {
+      r'2 = r'11
+    }
+  )"));
+
+  // Create attribute 3, which is the mapping base-point for both maps basically:
+  auto attribute_3 = attribute::root().add_node(3);
+
+  // Scope 20 should prevail. Let's first create attribute 10:
+  auto attribute_10 = attribute::root().add_node(10);
+  // Here attribute 2 becomes alive.
+  attribute_store_set_reported_number(attribute_10, 10);
+  contiki_test_helper_run(0);
+  auto attribute_2 = attribute_3.child_by_type(2);
+  TEST_ASSERT_TRUE(attribute_2.is_valid());
+  TEST_ASSERT_TRUE(attribute_2.reported_exists());
+  TEST_ASSERT_EQUAL(10, attribute_store_get_reported_number(attribute_2));
+
+  // Now create attribute 11, it has higher priority under the other scope:
+  auto attribute_11 = attribute_3.add_node(11);
+  attribute_store_set_reported_number(attribute_11, 11);
+  contiki_test_helper_run(0);
+  // Now attribute 2 has the attribute 11 value (scope 20):
+  TEST_ASSERT_EQUAL(11, attribute_store_get_reported_number(attribute_2));
+
+  // Now test changing attribute 10, it will have no effect as attribute 11 provides a valid mapping:
+  attribute_store_set_reported_number(attribute_10, 20);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(11, attribute_store_get_reported_number(attribute_2));
+
+  // Delete attribute 11, the value will fall back on Attribute 10:
+  attribute_11.delete_node();
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(20, attribute_store_get_reported_number(attribute_2));
+}
+
+void test_scope_priority_tricky_paths_part_2()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 1 {
+      r'3.2 = r'10
+    }
+    scope 2 {
+      r'3[0].2 = r'11
+    }
+  )"));
+
+  // Create attribute 3, which is the mapping base-point for both maps basically:
+  auto attribute_3 = attribute::root().add_node(3);
+
+  // Attribute 11 has no value, so the scope 2 map does not match:
+  auto attribute_11 = attribute::root().add_node(11);
+  attribute_store_set_reported_number(attribute_11, 11);
+  contiki_test_helper_run(0);
+  auto attribute_2 = attribute_3.child_by_type(2);
+  TEST_ASSERT_FALSE(attribute_2.is_valid());
+
+  // Scope 1 map should work:
+  auto attribute_10 = attribute::root().add_node(10);
+  // Here attribute 2 becomes alive.
+  attribute_store_set_reported_number(attribute_10, 10);
+  contiki_test_helper_run(0);
+  attribute_2 = attribute_3.child_by_type(2);
+  TEST_ASSERT_TRUE(attribute_2.is_valid());
+  TEST_ASSERT_EQUAL(10, attribute_store_get_reported_number(attribute_2));
+
+  // Now get scope 2 to work:
+  attribute_store_set_reported_number(attribute_3, 0);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(11, attribute_store_get_reported_number(attribute_2));
+
+  // Update attribute 10, it should be ignored:
+  attribute_store_set_reported_number(attribute_10, 100);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(11, attribute_store_get_reported_number(attribute_2));
+}
+
+void test_scope_priority_parent_type_mismatched()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  // Use attribute 10 as the common parent type:
+  e.set_common_parent_type(10);
+  e.reset();
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 1 {
+      r'3.2.11 = r'4
+    }
+    scope 2 {
+      r'3.2[0].11 = r'4+1
+    }
+    scope 3 {
+      r'3.2[20].11 = r'4+2
+    }
+  )"));
+
+  // Create LHS attributes
+  auto attribute_3  = attribute::root().add_node(3);
+  auto attribute_2  = attribute_3.add_node(2);
+  auto attribute_11 = attribute_2.add_node(11);
+
+  // Create attribute 4 : nothing will happen as the common parent type is mismatched.
+  auto attribute_4 = attribute::root().add_node(4);
+  attribute_store_set_reported_number(attribute_4, 4);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute_11.reported_exists());
+
+  // Try at different levels:
+  attribute_4 = attribute_3.add_node(4);
+  attribute_store_set_reported_number(attribute_4, 4);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute_11.reported_exists());
+
+  attribute_4 = attribute_2.add_node(4);
+  attribute_store_set_reported_number(attribute_4, 4);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute_11.reported_exists());
+}
+
+void test_scope_priority_many_assignments_same_dependency()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+
+  // Let's have everything depend on attribute 4:
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 1 {
+      r'3.2.11 = r'4
+    }
+    scope 2 {
+      r'3.11 = r'4
+    }
+    scope 3 {
+      r'2.11 = r'4
+    }
+    scope 4 {
+     r'11 = r'4
+    }
+  )"));
+
+  // Create LHS attributes
+  auto attribute_3   = attribute::root().add_node(3);
+  auto attribute_3_2 = attribute_3.add_node(2);
+  auto attribute_2   = attribute::root().add_node(2);
+
+  // Create attributes 4 : Actually here none of the LHS targets the same destination, so they should all apply regardless of priority:
+  auto attribute_4 = attribute::root().add_node(4);
+  attribute_store_set_reported_number(attribute_4, 4);
+  contiki_test_helper_run(0);
+
+  // Check all these attributes
+  // Scope 1:
+  auto attribute_11 = attribute_3_2.child_by_type(11);
+  TEST_ASSERT_TRUE(attribute_11.is_valid());
+  TEST_ASSERT_EQUAL(4, attribute_store_get_reported_number(attribute_11));
+
+  // Scope 2:
+  attribute_11 = attribute_3.child_by_type(11);
+  TEST_ASSERT_TRUE(attribute_11.is_valid());
+  TEST_ASSERT_EQUAL(4, attribute_store_get_reported_number(attribute_11));
+
+  // Scope 3:
+  attribute_11 = attribute_2.child_by_type(11);
+  TEST_ASSERT_TRUE(attribute_11.is_valid());
+  TEST_ASSERT_EQUAL(4, attribute_store_get_reported_number(attribute_11));
+
+  // Scope 3:
+  attribute_11 = attribute::root().child_by_type(11);
+  TEST_ASSERT_TRUE(attribute_11.is_valid());
+  TEST_ASSERT_EQUAL(4, attribute_store_get_reported_number(attribute_11));
+}
+
+void test_scope_priority_create_delete_schizophrenia()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 12 {
+      e'3 = r'10
+    }
+    scope 200 {
+      e'3 =
+        if (r'11 == 1) 1
+        if (r'11 == 0) 0
+        undefined
+    }
+  )"));
+
+  // Here we have a "destination" that would be created or deleted based on the
+  // priority.
+  auto attribute_10 = attribute::root().add_node(10);
+  attribute_store_set_reported_number(attribute_10, 10);
+  contiki_test_helper_run(0);
+
+  auto attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_TRUE(attribute_3.is_valid());
+
+  // Now create r'11, will not do anything without a value (scope 12 prevails):
+  auto attribute_11 = attribute::root().add_node(11);
+  contiki_test_helper_run(0);
+  attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_TRUE(attribute_3.is_valid());
+
+  // Now set r'11 to 0, attribute 3 should be dead (scope 200):
+  attribute_store_set_reported_number(attribute_11, 0);
+  contiki_test_helper_run(0);
+  attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_FALSE(attribute_3.is_valid());
+
+  // Now set r'11 to 3, attribute 3 should be alive again (scope 12):
+  attribute_store_set_reported_number(attribute_11, 3);
+  contiki_test_helper_run(0);
+  attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_TRUE(attribute_3.is_valid());
+
+  // Now set r'10 to 0, attribute 3 should be dead (scope 12):
+  attribute_store_set_reported_number(attribute_10, 0);
+  contiki_test_helper_run(0);
+  attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_FALSE(attribute_3.is_valid());
+
+  // Now set r'11 to 1, attribute 3 should be alive (scope 200):
+  attribute_store_set_reported_number(attribute_11, 1);
+  contiki_test_helper_run(0);
+  attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_TRUE(attribute_3.is_valid());
 }
 }

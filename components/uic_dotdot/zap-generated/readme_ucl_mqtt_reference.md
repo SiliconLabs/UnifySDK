@@ -32484,6 +32484,389 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Commands/ForceReadAtt
 <!-- NEW Page Cluster Support -->
 <!-- -->
 <!-- -->
+\page soil_moisture SoilMoisture Cluster
+The following commands and attributes are accepted as JSON payloads for the
+SoilMoisture cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF SoilMoisture Attributes Section -->
+<!-- -->
+\section soil_moisture_attrs SoilMoisture Attributes
+The following attribute topics are used to retrieve the SoilMoisture cluster state.
+
+<br>
+
+\subsection soil_moisture_attr_measured_value SoilMoisture/MeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/Attributes/MeasuredValue/Reported
+[PREFIX]/SoilMoisture/Attributes/MeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Cluster MeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection soil_moisture_attr_min_measured_value SoilMoisture/MinMeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/Attributes/MinMeasuredValue/Reported
+[PREFIX]/SoilMoisture/Attributes/MinMeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Cluster MinMeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MinMeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection soil_moisture_attr_max_measured_value SoilMoisture/MaxMeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/Attributes/MaxMeasuredValue/Reported
+[PREFIX]/SoilMoisture/Attributes/MaxMeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Cluster MaxMeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MaxMeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection soil_moisture_attr_tolerance SoilMoisture/Tolerance Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/Attributes/Tolerance/Reported
+[PREFIX]/SoilMoisture/Attributes/Tolerance/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Cluster Tolerance Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Tolerance attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/Tolerance/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+```
+
+<br><br>
+
+
+\subsection soil_moisture_attr_cluster_revision SoilMoisture/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/Attributes/ClusterRevision/Reported
+[PREFIX]/SoilMoisture/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF SoilMoisture Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF SoilMoisture Supported Commands Section -->
+<!-- -->
+\section soil_moisture_recv_cmd_support SoilMoisture Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/SupportedCommands
+[PREFIX]/SoilMoisture/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for SoilMoisture cluster under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedCommands { "value": [] }
+```
+
+To see supported generated commands for SoilMoisture cluster under the by-unid topic space:
+
+```
+
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF SoilMoisture Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF SoilMoisture Commands Section -->
+<!-- -->
+\section soil_moisture_cmds SoilMoisture Commands
+
+<br><br>
+
+\subsection soil_moisture_write_attr_cmd SoilMoisture/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all SoilMoisture attributes under the by-unid topic space:
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Commands/WriteAttributes' -m  '{  }'
+```
+
+> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+
+<br><br>
+
+\subsection soil_moisture_force_read_attr_cmd SoilMoisture/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/SoilMoisture/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoilMoisture Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "MeasuredValue",
+          "MinMeasuredValue",
+          "MaxMeasuredValue",
+          "Tolerance"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all SoilMoisture attributes under the by-unid topic space (by sending an empty array):
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the SoilMoisture attributes under the by-unid topic space:
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
+```
+
+<!-- -->
+<!-- END OF SoilMoisture Commands Section -->
+<!-- -->
+
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
 \page ph_measurement PhMeasurement Cluster
 The following commands and attributes are accepted as JSON payloads for the
 PhMeasurement cluster.
@@ -34006,6 +34389,772 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Commands/ForceReadAttri
 
 <!-- -->
 <!-- END OF CarbonMonoxide Commands Section -->
+<!-- -->
+
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page carbon_dioxide CarbonDioxide Cluster
+The following commands and attributes are accepted as JSON payloads for the
+CarbonDioxide cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF CarbonDioxide Attributes Section -->
+<!-- -->
+\section carbon_dioxide_attrs CarbonDioxide Attributes
+The following attribute topics are used to retrieve the CarbonDioxide cluster state.
+
+<br>
+
+\subsection carbon_dioxide_attr_measured_value CarbonDioxide/MeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/Attributes/MeasuredValue/Reported
+[PREFIX]/CarbonDioxide/Attributes/MeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Cluster MeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection carbon_dioxide_attr_min_measured_value CarbonDioxide/MinMeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/Attributes/MinMeasuredValue/Reported
+[PREFIX]/CarbonDioxide/Attributes/MinMeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Cluster MinMeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MinMeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection carbon_dioxide_attr_max_measured_value CarbonDioxide/MaxMeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/Attributes/MaxMeasuredValue/Reported
+[PREFIX]/CarbonDioxide/Attributes/MaxMeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Cluster MaxMeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MaxMeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection carbon_dioxide_attr_tolerance CarbonDioxide/Tolerance Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/Attributes/Tolerance/Reported
+[PREFIX]/CarbonDioxide/Attributes/Tolerance/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Cluster Tolerance Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Tolerance attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/Tolerance/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+```
+
+<br><br>
+
+
+\subsection carbon_dioxide_attr_cluster_revision CarbonDioxide/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/Attributes/ClusterRevision/Reported
+[PREFIX]/CarbonDioxide/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF CarbonDioxide Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF CarbonDioxide Supported Commands Section -->
+<!-- -->
+\section carbon_dioxide_recv_cmd_support CarbonDioxide Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/SupportedCommands
+[PREFIX]/CarbonDioxide/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for CarbonDioxide cluster under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedCommands { "value": [] }
+```
+
+To see supported generated commands for CarbonDioxide cluster under the by-unid topic space:
+
+```
+
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF CarbonDioxide Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF CarbonDioxide Commands Section -->
+<!-- -->
+\section carbon_dioxide_cmds CarbonDioxide Commands
+
+<br><br>
+
+\subsection carbon_dioxide_write_attr_cmd CarbonDioxide/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all CarbonDioxide attributes under the by-unid topic space:
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Commands/WriteAttributes' -m  '{  }'
+```
+
+> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+
+<br><br>
+
+\subsection carbon_dioxide_force_read_attr_cmd CarbonDioxide/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/CarbonDioxide/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarbonDioxide Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "MeasuredValue",
+          "MinMeasuredValue",
+          "MaxMeasuredValue",
+          "Tolerance"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all CarbonDioxide attributes under the by-unid topic space (by sending an empty array):
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the CarbonDioxide attributes under the by-unid topic space:
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
+```
+
+<!-- -->
+<!-- END OF CarbonDioxide Commands Section -->
+<!-- -->
+
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page pm25 PM25 Cluster
+The following commands and attributes are accepted as JSON payloads for the
+PM25 cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF PM25 Attributes Section -->
+<!-- -->
+\section pm25_attrs PM25 Attributes
+The following attribute topics are used to retrieve the PM25 cluster state.
+
+<br>
+
+\subsection pm25_attr_measured_value PM25/MeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/Attributes/MeasuredValue/Reported
+[PREFIX]/PM25/Attributes/MeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Cluster MeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection pm25_attr_min_measured_value PM25/MinMeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/Attributes/MinMeasuredValue/Reported
+[PREFIX]/PM25/Attributes/MinMeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Cluster MinMeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MinMeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection pm25_attr_max_measured_value PM25/MaxMeasuredValue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/Attributes/MaxMeasuredValue/Reported
+[PREFIX]/PM25/Attributes/MaxMeasuredValue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Cluster MaxMeasuredValue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MaxMeasuredValue/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+```
+
+<br><br>
+
+\subsection pm25_attr_tolerance PM25/Tolerance Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/Attributes/Tolerance/Reported
+[PREFIX]/PM25/Attributes/Tolerance/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Cluster Tolerance Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Tolerance attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/Tolerance/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+```
+
+<br><br>
+
+
+\subsection pm25_attr_cluster_revision PM25/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/Attributes/ClusterRevision/Reported
+[PREFIX]/PM25/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/PM25/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF PM25 Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF PM25 Supported Commands Section -->
+<!-- -->
+\section pm25_recv_cmd_support PM25 Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/SupportedCommands
+[PREFIX]/PM25/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for PM25 cluster under the by-unid topic space:
+
+```
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/PM25/SupportedCommands { "value": [] }
+```
+
+To see supported generated commands for PM25 cluster under the by-unid topic space:
+
+```
+
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/PM25/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF PM25 Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF PM25 Commands Section -->
+<!-- -->
+\section pm25_cmds PM25 Commands
+
+<br><br>
+
+\subsection pm25_write_attr_cmd PM25/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all PM25 attributes under the by-unid topic space:
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Commands/WriteAttributes' -m  '{  }'
+```
+
+> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+
+<br><br>
+
+\subsection pm25_force_read_attr_cmd PM25/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/PM25/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PM25 Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "MeasuredValue",
+          "MinMeasuredValue",
+          "MaxMeasuredValue",
+          "Tolerance"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all PM25 attributes under the by-unid topic space (by sending an empty array):
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the PM25 attributes under the by-unid topic space:
+
+```
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
+```
+
+<!-- -->
+<!-- END OF PM25 Commands Section -->
 <!-- -->
 
 <br><br><br>

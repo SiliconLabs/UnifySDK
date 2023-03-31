@@ -7822,6 +7822,33 @@ std::string get_enum_value_name(
   #endif
   }
 
+  if (1032 == cluster_id) {
+  #ifdef SOIL_MOISTURE_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturemeasured_value instead of this: soil_moisture_measured_value
+      return soil_moisture_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SOIL_MOISTURE_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturemin_measured_value instead of this: soil_moisture_min_measured_value
+      return soil_moisture_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SOIL_MOISTURE_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturemax_measured_value instead of this: soil_moisture_max_measured_value
+      return soil_moisture_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef SOIL_MOISTURE_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturetolerance instead of this: soil_moisture_tolerance
+      return soil_moisture_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
   if (1033 == cluster_id) {
   #ifdef PH_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
     if (0 == attribute_id) {
@@ -7926,6 +7953,60 @@ std::string get_enum_value_name(
     if (3 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidetolerance instead of this: carbon_monoxide_tolerance
       return carbon_monoxide_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1037 == cluster_id) {
+  #ifdef CARBON_DIOXIDE_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidemeasured_value instead of this: carbon_dioxide_measured_value
+      return carbon_dioxide_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef CARBON_DIOXIDE_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidemin_measured_value instead of this: carbon_dioxide_min_measured_value
+      return carbon_dioxide_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef CARBON_DIOXIDE_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidemax_measured_value instead of this: carbon_dioxide_max_measured_value
+      return carbon_dioxide_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef CARBON_DIOXIDE_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidetolerance instead of this: carbon_dioxide_tolerance
+      return carbon_dioxide_tolerance_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (1066 == cluster_id) {
+  #ifdef PM25_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25measured_value instead of this: pm25_measured_value
+      return pm25_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PM25_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25min_measured_value instead of this: pm25_min_measured_value
+      return pm25_min_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PM25_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25max_measured_value instead of this: pm25_max_measured_value
+      return pm25_max_measured_value_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef PM25_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25tolerance instead of this: pm25_tolerance
+      return pm25_tolerance_get_enum_value_name(value);
     }
   #endif
   }
@@ -12227,6 +12308,33 @@ uint32_t get_enum_name_value(
   #endif
   }
 
+  if (1032 == cluster_id) {
+  #ifdef SOIL_MOISTURE_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturemeasured_value instead of this: soil_moisture_measured_value
+      return soil_moisture_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SOIL_MOISTURE_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturemin_measured_value instead of this: soil_moisture_min_measured_value
+      return soil_moisture_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SOIL_MOISTURE_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturemax_measured_value instead of this: soil_moisture_max_measured_value
+      return soil_moisture_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef SOIL_MOISTURE_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: soil_moisturetolerance instead of this: soil_moisture_tolerance
+      return soil_moisture_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
   if (1033 == cluster_id) {
   #ifdef PH_MEASUREMENT_MEASURED_VALUE_ENUM_NAME_AVAILABLE
     if (0 == attribute_id) {
@@ -12331,6 +12439,60 @@ uint32_t get_enum_name_value(
     if (3 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_monoxidetolerance instead of this: carbon_monoxide_tolerance
       return carbon_monoxide_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1037 == cluster_id) {
+  #ifdef CARBON_DIOXIDE_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidemeasured_value instead of this: carbon_dioxide_measured_value
+      return carbon_dioxide_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef CARBON_DIOXIDE_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidemin_measured_value instead of this: carbon_dioxide_min_measured_value
+      return carbon_dioxide_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef CARBON_DIOXIDE_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidemax_measured_value instead of this: carbon_dioxide_max_measured_value
+      return carbon_dioxide_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef CARBON_DIOXIDE_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: carbon_dioxidetolerance instead of this: carbon_dioxide_tolerance
+      return carbon_dioxide_tolerance_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (1066 == cluster_id) {
+  #ifdef PM25_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25measured_value instead of this: pm25_measured_value
+      return pm25_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PM25_MIN_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25min_measured_value instead of this: pm25_min_measured_value
+      return pm25_min_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PM25_MAX_MEASURED_VALUE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25max_measured_value instead of this: pm25_max_measured_value
+      return pm25_max_measured_value_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef PM25_TOLERANCE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: pm25tolerance instead of this: pm25_tolerance
+      return pm25_tolerance_get_enum_value_number(name);
     }
   #endif
   }

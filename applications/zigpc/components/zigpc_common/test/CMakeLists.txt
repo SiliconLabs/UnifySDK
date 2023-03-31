@@ -16,3 +16,10 @@ target_add_unittest(
   zigpc_common_observable_test.c
   DEPENDS
   zigpc_common_observable_test_mock)
+
+target_add_unittest(
+  zigpc_common 
+  NAME 
+  zigpc_common_util_test 
+  SOURCES
+  zigpc_common_util_test.c)

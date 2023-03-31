@@ -13,9 +13,12 @@
 // Includes from this component
 #include "attribute_store_fixt.h"
 #include "attribute_store_type_registration.h"
+#include "attribute_store_helper.h"
 
 // Test includes
 #include "unity.h"
+
+typedef enum _test_enum_t_ { ZERO, ONE, TWO, THREE } test_enum_t;
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp() {}
@@ -115,4 +118,29 @@ void test_attribute_store_type_registration()
   TEST_ASSERT_EQUAL(3, attribute_store_get_registered_parent_type(2));
   TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
                     attribute_store_get_registered_parent_type(3));
+
+  // Test registering enums
+  const attribute_store_type_t enum_type = 11;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(enum_type,
+                                  "Enum",
+                                  ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                  ENUM_STORAGE_TYPE));
+
+  attribute_store_node_t enum_node
+    = attribute_store_add_node(enum_type, attribute_store_get_root());
+  test_enum_t my_test_enum = ONE;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported(enum_node,
+                                                 &my_test_enum,
+                                                 sizeof(my_test_enum)));
+  TEST_ASSERT_EQUAL_FLOAT(ONE, attribute_store_get_reported_number(enum_node));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_number(enum_node, TWO));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_get_reported(enum_node,
+                                                 &my_test_enum,
+                                                 sizeof(my_test_enum)));
+  TEST_ASSERT_EQUAL(TWO, my_test_enum);
 }

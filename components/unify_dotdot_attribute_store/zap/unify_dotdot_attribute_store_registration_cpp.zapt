@@ -20,7 +20,35 @@
 
 // Generic includes
 #include <string>
+#include <vector>
+
 constexpr const char *LOG_TAG = "unify_dotdot_attribute_store_registration";
+
+typedef struct {
+  attribute_store_type_t type;
+  const char *name;
+  attribute_store_type_t parent_type;
+  attribute_store_storage_type_t storage_type;
+} attribute_schema_t;
+
+// clang-format off
+static const std::vector<attribute_schema_t> zcl_additional_attribute_schema = {
+  /////////////////////////////////////////////////////////////////////
+  //         ZCL Scenes cluster attributes
+  /////////////////////////////////////////////////////////////////////
+  // SceneTable attribute is present in the XML files.
+  //{DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE,                  "ZCL Scenes SceneTable",  ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,                            EMPTY_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,            "Scene ID / Group ID",    DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE,           FIXED_SIZE_STRUCT_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME,        "Transition Time",        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     U16_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME_100MS,  "Transition Time 100ms",  DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     U8_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_NAME,                   "Name",                   DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     C_STRING_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_FIELD_SETS,             "Extension FieldSets",    DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     EMPTY_STORAGE_TYPE},
+  /////////////////////////////////////////////////////////////////////
+  //         ZCL Level cluster attributes
+  /////////////////////////////////////////////////////////////////////
+  {DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,   "ZCL Level Last Non Zero Level",   ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,   U8_STORAGE_TYPE},
+};
+// clang-format on
 
 attribute_store_storage_type_t
   attribute_storage_type_conversion(std::string &attribute_type_string)
@@ -107,6 +135,14 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
 {{/if}}
 {{/zcl_clusters}}
   // clang-format on
+
+  // Additional attributes:
+  for (auto const &a: zcl_additional_attribute_schema) {
+    status |= attribute_store_register_type(a.type,
+                                            a.name,
+                                            a.parent_type,
+                                            a.storage_type);
+  }
 
   return status;
 }

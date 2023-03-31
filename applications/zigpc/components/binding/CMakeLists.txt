@@ -13,7 +13,7 @@ target_include_directories(
 target_link_libraries(
  zigpc_binding 
   INTERFACE zigpc_common
-  PRIVATE zigpc_datastore zigpc_gateway zigpc_ucl uic_dotdot uic_mqtt uic_log)
+  PRIVATE zigpc_datastore zigpc_gateway zigpc_ucl unify)
 
 if(BUILD_TESTING)
   target_add_mock(zigpc_binding)

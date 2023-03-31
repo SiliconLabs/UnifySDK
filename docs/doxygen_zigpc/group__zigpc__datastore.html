@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.3.1</span>
    </div>
   </td>
  </tr>
@@ -166,12 +166,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ga26f22fb89f4ef790dc52d71d45101793"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore.html#ga26f22fb89f4ef790dc52d71d45101793">zigpc_datastore_remove_endpoint</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id)</td></tr>
 <tr class="memdesc:ga26f22fb89f4ef790dc52d71d45101793"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove persisted endpoint entity.  <a href="group__zigpc__datastore.html#ga26f22fb89f4ef790dc52d71d45101793">More...</a><br /></td></tr>
 <tr class="separator:ga26f22fb89f4ef790dc52d71d45101793"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8920a8e43a495ec6728a819ea3755035"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore.html#ga8920a8e43a495ec6728a819ea3755035">zigpc_datastore_get_binding_count</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id)</td></tr>
-<tr class="separator:ga8920a8e43a495ec6728a819ea3755035"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae79732a822ba3ff810131bb4a8f52325"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore.html#gae79732a822ba3ff810131bb4a8f52325">zigpc_datastore_read_binding_list</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, <a class="el" href="structzigbee__binding__t.html">zigbee_binding_t</a> *const binding_list, size_t binding_list_size)</td></tr>
-<tr class="separator:gae79732a822ba3ff810131bb4a8f52325"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga643f8d530032426d9afd57cbb1d18470"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore.html#ga643f8d530032426d9afd57cbb1d18470">zigpc_datastore_write_binding_list</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, const <a class="el" href="structzigbee__binding__t.html">zigbee_binding_t</a> *binding_list, size_t binding_list_size)</td></tr>
-<tr class="separator:ga643f8d530032426d9afd57cbb1d18470"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacc7a68f0ecef07d009358e7a209c97b4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore.html#gacc7a68f0ecef07d009358e7a209c97b4">zigpc_datastore_get_group_count</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, bool is_reported)</td></tr>
 <tr class="memdesc:gacc7a68f0ecef07d009358e7a209c97b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get count of groups persisted under an endpoint.  <a href="group__zigpc__datastore.html#gacc7a68f0ecef07d009358e7a209c97b4">More...</a><br /></td></tr>
 <tr class="separator:gacc7a68f0ecef07d009358e7a209c97b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -852,34 +846,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga8920a8e43a495ec6728a819ea3755035"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8920a8e43a495ec6728a819ea3755035">&#9670;&nbsp;</a></span>zigpc_datastore_get_binding_count()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t zigpc_datastore_get_binding_count </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
-          <td class="paramname"><em>eui64</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
-          <td class="paramname"><em>endpoint_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="gad465bd17b12e1e030e3b8ddcc06827df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad465bd17b12e1e030e3b8ddcc06827df">&#9670;&nbsp;</a></span>zigpc_datastore_get_cluster_count()</h2>
 
@@ -1263,46 +1229,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on success, SL_STATUS_NULL_POINTER if invalid list provided, SL_STATUS_NOT_FOUND if the cluster node does not exist, SL_STATUS_INVALID_COUNT if the attribute list passed in has insufficient capacity, SL_STATUS_NOT_INITIALIZED if attribute store is not initialized, or SL_STATUS_FAIL if the read process fails. </dd></dl>
-
-</div>
-</div>
-<a id="gae79732a822ba3ff810131bb4a8f52325"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae79732a822ba3ff810131bb4a8f52325">&#9670;&nbsp;</a></span>zigpc_datastore_read_binding_list()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_datastore_read_binding_list </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
-          <td class="paramname"><em>eui64</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
-          <td class="paramname"><em>endpoint_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structzigbee__binding__t.html">zigbee_binding_t</a> *const&#160;</td>
-          <td class="paramname"><em>binding_list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>binding_list_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -1890,46 +1816,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga643f8d530032426d9afd57cbb1d18470"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga643f8d530032426d9afd57cbb1d18470">&#9670;&nbsp;</a></span>zigpc_datastore_write_binding_list()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_datastore_write_binding_list </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
-          <td class="paramname"><em>eui64</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
-          <td class="paramname"><em>endpoint_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structzigbee__binding__t.html">zigbee_binding_t</a> *&#160;</td>
-          <td class="paramname"><em>binding_list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>binding_list_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="gaf681b4e99051857243c2f58b47ce6e22"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf681b4e99051857243c2f58b47ce6e22">&#9670;&nbsp;</a></span>zigpc_datastore_write_cluster()</h2>
 
@@ -2236,7 +2122,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 15 2023 14:24:28 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Mar 31 2023 03:46:40 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

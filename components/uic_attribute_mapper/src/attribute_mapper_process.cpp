@@ -167,10 +167,16 @@ void attribute_mapper_engine_evaluate_next_update()
   }
   auto update = pending_updates.begin();
 
-  MapperEngine::get_instance().on_attribute_updated(update->node,
-                                                    update->value_type,
-                                                    ATTRIBUTE_UPDATED);
-
+  if (attribute_store_node_exists(update->node)) {
+    sl_log_debug(LOG_TAG,
+                 "Processing %s update to Attribute ID %d",
+                 update->value_type == REPORTED_ATTRIBUTE ? "Reported"
+                                                          : "Desired",
+                 update->node);
+    MapperEngine::get_instance().on_attribute_updated(update->node,
+                                                      update->value_type,
+                                                      ATTRIBUTE_UPDATED);
+  }
   pending_updates.erase(update);
 
   if (!pending_updates.empty()) {

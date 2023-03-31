@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.0
+                ver_1.3.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -59,10 +59,10 @@
 <li class="toctree-l3"><a class="reference internal" href="readme_nix.html">Nix (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#build-instructions">Build Instructions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#install-docker">Install Docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-the-source">Getting the source</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#build-docker-image">Build Docker Image</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#getting-the-source">Getting the source</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cross-compiling-for-raspberry-pi-using-docker">Cross Compiling for Raspberry Pi Using Docker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#disabling-the-build-of-a-unify-application">Disabling the build of a Unify Application</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#advanced-feature-run-raspberry-pi-unit-tests-in-docker-on-the-host">Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host</a></li>
@@ -131,16 +131,6 @@ As a prerequisite Docker must be installed on the build host.</p>
 <li><p><a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">Debian/Ubuntu Linux Linux</a></p></li>
 </ul>
 </section>
-</section>
-<section id="build-docker-image">
-<h2>Build Docker Image<a class="headerlink" href="#build-docker-image" title="Permalink to this heading"></a></h2>
-<p>The <em>Dockerfile</em>  in <code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code> supports building all target applications
-(protocol controllers, UPVL, Developer GUI, etc.).
-To build the Docker image with support for the 64-bit Bullseye reference platform, you can run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./docker/build_docker.sh<span class="w"> </span>arm64<span class="w"> </span>uic_arm64
-</pre></div>
-</div>
-<p>This will build the Unify toolchain docker images and name it <em>uic_arm64</em>.</p>
 <section id="getting-the-source">
 <h3>Getting the source<a class="headerlink" href="#getting-the-source" title="Permalink to this heading"></a></h3>
 <p>There are two ways to obtain the Unify source code, the simplest way is
@@ -155,6 +145,16 @@ git clients need to have <em>git-lfs</em> support.</p>
 online.</p>
 </div></blockquote>
 </section>
+</section>
+<section id="build-docker-image">
+<h2>Build Docker Image<a class="headerlink" href="#build-docker-image" title="Permalink to this heading"></a></h2>
+<p>The <em>Dockerfile</em>  in <code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code> supports building all target applications
+(protocol controllers, UPVL, Developer GUI, etc.).
+To build the Docker image with support for the 64-bit Bullseye reference platform, you can run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./docker/build_docker.sh<span class="w"> </span>arm64<span class="w"> </span>uic_arm64
+</pre></div>
+</div>
+<p>This will build the Unify toolchain docker images and name it <em>uic_arm64</em>.</p>
 <section id="cross-compiling-for-raspberry-pi-using-docker">
 <h3>Cross Compiling for Raspberry Pi Using Docker<a class="headerlink" href="#cross-compiling-for-raspberry-pi-using-docker" title="Permalink to this heading"></a></h3>
 <blockquote>

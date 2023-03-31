@@ -41,7 +41,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.0
+                ver_1.3.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -666,16 +666,73 @@ ALL the attributes of a given cluster</p>
 </div>
 <p>In response, the Protocol Controller should update ALL available attributes
 for <em>ClusterName</em>, as specified in <a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a>.</p>
-<p>Note that Protocol Controller may not support the <em>ForceReadAttribute</em>
+<p>Note that Protocol Controller may not support the <em>ForceReadAttributes</em>
 for any attribute under a cluster. For example, it can be that a Protocol Controller
 is able to force read Scenes Cluster attributes but not the SceneTable.</p>
-<p><em>ForceReadAttribute</em> is EXPLICITLY not supported for groups or multicast due
+<p><em>ForceReadAttributes</em> is EXPLICITLY not supported for groups or multicast due
 to network performance considerations.</p>
 </section>
 </section>
 </section>
+<section id="observing-the-effects-of-a-command">
+<h2><span class="section-number">2.3. </span>Observing the effects of a command<a class="headerlink" href="#observing-the-effects-of-a-command" title="Permalink to this heading"></a></h2>
+<p>An IoT service MAY follow the effect of a published (write-type) command by
+observing the associated attributes.</p>
+<p>Read type of commands, like ForceReadAttributes, ViewGroup, ViewScene, MAY trigger
+Protocol Controllers to interact with PAN nodes, but there will be no guaranteed
+feedback on MQTT.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a> is not always fully explicit on how commands and their fields will
+affect the value of cluster attributes. The Unify SDK provides a shared
+components that links incoming commands to attribute updates, so updates to
+desired will be uniform across Protocol Controllers.</p>
+</div>
+<p>Let’s consider an OnOff Server PAN node. The Protocol Controller MUST publish
+its supported attributes and supported commands as a minimum:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># Initial publications by the Protocol Controller</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/SupportedCommands</span> -  {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Off&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;On&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Toggle&quot;</span><span class="p">]</span>}
+
+<span class="c c-Singleline"># IoT Service publishes:</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Commands/Off</span> -  {<span class="w"> </span>}
+
+<span class="c c-Singleline"># Protocol Controller MUST acknowledge reception of the command by updating all affected attributes</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+
+<span class="c c-Singleline"># Protocol Controller Communicates with the node...</span>
+
+<span class="c c-Singleline"># Protocol Controller MUST update the affected attributes again, as part of the outcome of the command</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+</pre></div>
+</div>
+<p>If a Protocol Controller fails to execute a command or if the node reports that
+the OnOff attribute is still On (true), the Protocol Controller MUST roll back
+the desired value, so that the desired and reported values match again.</p>
+<p>Whenever an attribute has a Desired/Reported value mismatch, an IoT Service
+can assume that either:</p>
+<ul class="simple">
+<li><p>The Protocol Controller is trying to communicate with the node to set the values</p></li>
+<li><p>The PAN node is performing a transition to the desired value that takes time.</p></li>
+</ul>
+<p>IoT Services SHOULD use the WriteAttributes commands whenever available if they
+wish to keep a high level of certainty between issued commands and their effect
+on attributes.</p>
+</section>
+<section id="pan-nodes-capabilities-vs-zcl-compliance">
+<h2><span class="section-number">2.4. </span>PAN Nodes capabilities vs ZCL Compliance<a class="headerlink" href="#pan-nodes-capabilities-vs-zcl-compliance" title="Permalink to this heading"></a></h2>
+<p>Protocol Controllers SHOULD do their best to have the devices they expose
+resemble devices that comply with the <a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a>.
+It can be simulating attributes, entire clusters, or manipulating values
+sent by end nodes.</p>
+<p>Protocol Controllers SHOULD simulate cluster servers if needed, so that devices
+behave as closely to the actual set of defined Device Types in <a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a>.</p>
+</section>
 <section id="clusters-for-lights-switches-doorlock-thermostat-and-occupancy-sensor-applications">
-<h2><span class="section-number">2.3. </span>Clusters for Lights, Switches, DoorLock, Thermostat, and Occupancy Sensor Applications<a class="headerlink" href="#clusters-for-lights-switches-doorlock-thermostat-and-occupancy-sensor-applications" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.5. </span>Clusters for Lights, Switches, DoorLock, Thermostat, and Occupancy Sensor Applications<a class="headerlink" href="#clusters-for-lights-switches-doorlock-thermostat-and-occupancy-sensor-applications" title="Permalink to this heading"></a></h2>
 <p>The following subsections provide specific cluster examples using the Cluster
 state and Commands topics, such as Dimmer lighting, Switch, Door Lock,
 Thermostat, and Occupancy Sensor applications. The detailed description of each
@@ -685,7 +742,7 @@ attributes in a given cluster MUST be advertised by a Protocol Controller for
 all devices/endpoints. All mandatory Commands SHOULD be advertised in the
 SupportedCommand topic, when possible.</p>
 <section id="groups-cluster-0x0004">
-<h3><span class="section-number">2.3.1. </span>Groups Cluster (0x0004)<a class="headerlink" href="#groups-cluster-0x0004" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.5.1. </span>Groups Cluster (0x0004)<a class="headerlink" href="#groups-cluster-0x0004" title="Permalink to this heading"></a></h3>
 <p>This cluster is used to define group memberships for PAN nodes.</p>
 <p>This cluster requires additional attributes, because the <em>Group list</em> is not captured
 by its defined attributes. See <a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a> for the
@@ -707,10 +764,12 @@ Below is an example of a PAN node Group Cluster server:</p>
 <p>The only mandatory attribute in the group cluster is the NameSupport attribute.
 If a PAN node supports name for groups, it will advertise the assigned names
 for each of its groups under the following topics:</p>
-<p>&gt; <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Reported</span></code>
-&gt; <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Desired</span></code></p>
-<p>The names assigned to each group will be a value containing a string as if
-the name was a regular string attribute.</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Reported</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Desired</span>
+</pre></div>
+</div>
+<p>The names assigned to each group will be a value containing a string
+as in the AddGroup Command GroupName field.</p>
 <p><strong>JSON Schema:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
@@ -730,7 +789,10 @@ the name was a regular string attribute.</p>
 </div>
 <p>The list of groups that a node is part of will be advertised under the GroupList
 topic. Note that GroupID 0 is not a valid group and MUST NOT be used.</p>
-<p><strong>Topic:</strong> <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Desired</span></code></p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Desired</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Reported</span>
+</pre></div>
+</div>
 <p><strong>JSON Schema:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
@@ -755,72 +817,71 @@ topic. Note that GroupID 0 is not a valid group and MUST NOT be used.</p>
 </div>
 </section>
 <section id="scenes-cluster-0x0005">
-<h3><span class="section-number">2.3.2. </span>Scenes Cluster (0x0005)<a class="headerlink" href="#scenes-cluster-0x0005" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.5.2. </span>Scenes Cluster (0x0005)<a class="headerlink" href="#scenes-cluster-0x0005" title="Permalink to this heading"></a></h3>
 <p>The usage of this cluster for application level control is described in
 <a class="reference internal" href="Chapter07-scenes.html#unify-specifications-chapter-scenes"><span class="std std-ref">The Dotdot Scenes Cluster (0x0005) in the Unify Framework</span></a>.</p>
 </section>
 <section id="on-off-cluster-0x0006">
-<h3><span class="section-number">2.3.3. </span>On/Off Cluster (0x0006)<a class="headerlink" href="#on-off-cluster-0x0006" title="Permalink to this heading"></a></h3>
-<p>Mandatory Attributes:</p>
-<ul class="simple">
-<li><p>OnOff(0x0000); expected state values Off(0x00) and On(0x01).</p></li>
-</ul>
-<p>Mandatory Commands:</p>
-<ul class="simple">
-<li><p>Off (0x00): when a device receive this command, the device should enter to “Off” state.</p></li>
-<li><p>On (0x01): when a device receive this command, the device should enter to “On” state.</p></li>
-<li><p>Toggle (0x02): when a device receive this command, the device should enter to “On” state if it was on ” Off” state and vice versa.</p></li>
-</ul>
+<h3><span class="section-number">2.5.3. </span>On/Off Cluster (0x0006)<a class="headerlink" href="#on-off-cluster-0x0006" title="Permalink to this heading"></a></h3>
+<p>Here is an example of OnOff Server PAN node with the minimum required attributes
+and commands.</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/SupportedCommands</span> -  {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Off&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;On&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Toggle&quot;</span><span class="p">]</span>}
+</pre></div>
+</div>
 </section>
 <section id="level-cluster-0x0008">
-<h3><span class="section-number">2.3.4. </span>Level Cluster(0x0008)<a class="headerlink" href="#level-cluster-0x0008" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.5.4. </span>Level Cluster(0x0008)<a class="headerlink" href="#level-cluster-0x0008" title="Permalink to this heading"></a></h3>
 <p>The level cluster controls the light brightness level,
 the door closure level, or the heater power output.</p>
-<p>Mandatory attributes:</p>
-<ul class="simple">
-<li><p>CurrentLevel 0x0000 (accepted value range: MinLevel … MaxLevel)
-represents the current level of the device (the meaning of ‘level’ is device
-dependent). Current Level is read only and cannot be updated using the
-WriteAttributes command.</p></li>
-</ul>
-<p>Some Optional attributes that define the minimum and maximum level supported by the device:</p>
-<ul class="simple">
-<li><p>MinLevel (0x0002): the minimum level the device supports.</p></li>
-<li><p>MaxLevel (0x0003): the maximum level the device supports.</p></li>
-<li><p>onLevel (0x0010): determines the value that the CurrentLevel attribute is set
-to when the OnOff attribute is set to “On”, as a result of processing an On/Off
-cluster command. If the OnLevel attribute is not implemented or is set to 0xff,
-the CurrentLevel value is not modified when the OnOff attribute of the OnOff
-Cluster is modified.</p></li>
-</ul>
-<p>Mandatory Commands:</p>
-<ul class="simple">
-<li><p>MoveToLevel (0x00): should contain a Level and TransitionTime
-[in tenths of seconds] in the command JSON payload.</p></li>
-<li><p>Move (0x01): should contain a MoveMode (Up or Down) and the Rate (define the
-rate of the movement in units per second) in the command JSON payload.</p></li>
-<li><p>Step (0x02): should contain StepMode (Up or Down), StepSize, and
-TransitionTime in the command JSON payload.</p></li>
-<li><p>Stop (0x03): command that stops the level changes that was triggered by the
-MoveToLevel, Move and Step commands.</p></li>
-</ul>
-<p>Commands that will affect the On/Off Attribute of the device if On/Off Cluster
-also supported:</p>
-<ul class="simple">
-<li><p>MoveToLevelWithOnOff (0x04)</p></li>
-<li><p>MovewithOnOff (0x05)</p></li>
-<li><p>StepWithOnOff (0x06)</p></li>
-</ul>
-<p>Note that the the behavior of these commands is similar to the above mandatory
-commands. The main difference is the MoveToLevelWithOnOff, MovewithOnOff,
-and StepWithOnOff commands impact the On/Off Attribute of the device
-if On/Off Cluster is also supported. If the targeted level value is higher
-than the minimum level, the On/Off attribute should be set to “On” (light bulb).
-If the target level is set to the minimum level allowed by the device,
-the OnOff attribute should be set to “Off” (grey lightbulb).</p>
+<p><a class="reference external" href="https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf">ZCL 2019</a> indicates that Level Servers must also be OnOff servers.
+Here is a minimal example:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># OnOff Cluster</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/SupportedCommands</span> -  {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Off&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;On&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Toggle&quot;</span><span class="p">]</span>}
+
+<span class="c c-Singleline"># Level Cluster</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/ClusterRevision/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/ClusterRevision/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/SupportedCommands</span> -  {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;MoveToLevel&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Move&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Step&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Stop&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MoveToLevelWithOnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MoveWithOnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;StepWithOnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;StopWithOnOff&quot;</span><span class="p">]</span>}
+</pre></div>
+</div>
+<p>Note that the OnOff cluster command will affect the level value.</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># IoT Service publishes:</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Commands/Off</span> - {<span class="w"> </span>}
+
+<span class="c c-Singleline"># Protocol Controller acknowledges:</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+
+<span class="c c-Singleline"># Communication ongoing ...</span>
+
+<span class="c c-Singleline"># Protocol Controller updates the state of the PAN node:</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>}
+
+<span class="c c-Singleline"># Alternatively, Level commands May affect OnOff attributes:</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Commands/MoveToLevelWithOnOff</span> - {<span class="nt">&quot;Level&quot;</span><span class="p">:</span><span class="mi">45</span><span class="p">,</span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;OptionsMask&quot;</span><span class="p">:</span>{<span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="kc">false</span>}<span class="p">,</span><span class="nt">&quot;OptionsOverride&quot;</span><span class="p">:</span>{<span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="kc">false</span>}}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span>}
+<span class="c c-Singleline"># Communication ongoing ...</span>
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Level/Attributes/CurrentLevel/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span>}
+</pre></div>
+</div>
+<p>Note that the IoT Service SHOULD assume default values for the MinLevel/MaxLevel
+if they are not published/advertised for a node.</p>
 </section>
 <section id="door-lock-cluster-0x0101">
-<h3><span class="section-number">2.3.5. </span>Door Lock Cluster (0x0101)<a class="headerlink" href="#door-lock-cluster-0x0101" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.5.5. </span>Door Lock Cluster (0x0101)<a class="headerlink" href="#door-lock-cluster-0x0101" title="Permalink to this heading"></a></h3>
 <p>This cluster is used as a generic interface to secure a door. The ZCL Door Lock
 cluster contains a lot of optional attributes, such as logging events,
 alarms, security setting, and so on and commands, such as setting user PIN, getting
@@ -840,7 +901,7 @@ attributes and commands used for basic door operations.</p>
 <p>Note if the PIN or RFID is not defined on the device, the PINOrRFIDCode field value can be empty string (i.e., ” “).</p>
 </section>
 <section id="thermostat-cluster-0x0201">
-<h3><span class="section-number">2.3.6. </span>Thermostat Cluster (0x0201)<a class="headerlink" href="#thermostat-cluster-0x0201" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.5.6. </span>Thermostat Cluster (0x0201)<a class="headerlink" href="#thermostat-cluster-0x0201" title="Permalink to this heading"></a></h3>
 <p>This cluster defines the interface to thermostats.
 The ZCL Thermostat cluster contains a lot of optional attributes, such as
 Outdoor Temperature, Occupancy, PID configuration, and so on, and a few
@@ -854,27 +915,8 @@ Setpoint Raise/Lower.</p>
 and any necessary conversion to/from, for example, Fahrenheit °F must be
 done by the Unify components (Protocol Controllers and GUI).</p>
 </div>
-<section id="fingerprinting-of-z-wave-nodes">
-<h4><span class="section-number">2.3.6.1. </span>Fingerprinting of Z-Wave Nodes<a class="headerlink" href="#fingerprinting-of-z-wave-nodes" title="Permalink to this heading"></a></h4>
-<p>For example, to map a Z-Wave node’s functionalities to the Thermostat
-Cluster, a protocol Controller may expect the following conditions to be met
-before it exposes a Node as a Thermostat Cluster server:</p>
-<ul class="simple">
-<li><p>Node supports the Multilevel Sensor Command Class, version 1 or newer</p>
-<ul>
-<li><p>Node supports the Multilevel sensor type 0x01 (Air Temperature)</p></li>
-</ul>
-</li>
-<li><p>Node supports the Thermostat Setpoint Command Class, version 1 or newer</p></li>
-<li><p>Node supports the Thermostat Mode Command Class, version 1 or newer</p>
-<ul>
-<li><p>Node supports at least one of the following modes: 0x01 (HEAT), 0x02 (COOL), 0x03 (AUTO).</p></li>
-</ul>
-</li>
-</ul>
-</section>
 <section id="mandatory-attributes">
-<h4><span class="section-number">2.3.6.2. </span>Mandatory Attributes<a class="headerlink" href="#mandatory-attributes" title="Permalink to this heading"></a></h4>
+<h4><span class="section-number">2.5.6.1. </span>Mandatory Attributes<a class="headerlink" href="#mandatory-attributes" title="Permalink to this heading"></a></h4>
 <p>The following attributes are mandatory for the ZigBee thermostat cluster.</p>
 <ul class="simple">
 <li><p>LocalTemperature (0x0000): The temperature in <strong>Celsius (°C)</strong> multiplied
@@ -927,7 +969,7 @@ is supported, the Schedule bit will be updated to 1.</p></li>
 </div>
 </section>
 <section id="mandatory-commands">
-<h4><span class="section-number">2.3.6.3. </span>Mandatory Commands<a class="headerlink" href="#mandatory-commands" title="Permalink to this heading"></a></h4>
+<h4><span class="section-number">2.5.6.2. </span>Mandatory Commands<a class="headerlink" href="#mandatory-commands" title="Permalink to this heading"></a></h4>
 <p>Only one command is mandatory command (alongside WriteAttributes), which allows
 changing the operating mode and applying an offset to the currently-configured
 setpoints.</p>
@@ -970,7 +1012,7 @@ cluster state topic will reflect back that no change was applied.</p>
 </section>
 </section>
 <section id="occupancy-sensing-cluster-0x0406">
-<h3><span class="section-number">2.3.7. </span>Occupancy Sensing Cluster (0x0406)<a class="headerlink" href="#occupancy-sensing-cluster-0x0406" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.5.7. </span>Occupancy Sensing Cluster (0x0406)<a class="headerlink" href="#occupancy-sensing-cluster-0x0406" title="Permalink to this heading"></a></h3>
 <p>The cluster defines an interface to occupancy sensing functionality including
 configuration and getting the occupancy status. Here, only the mandatory
 attributes that can enable the basic functionality of occupancy sensing are
@@ -988,9 +1030,9 @@ Physical contact(0x03).</p></li>
 </section>
 </section>
 <section id="examples-of-application-level-control-using-unify-framework">
-<h2><span class="section-number">2.4. </span>Examples of Application Level Control Using Unify Framework<a class="headerlink" href="#examples-of-application-level-control-using-unify-framework" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.6. </span>Examples of Application Level Control Using Unify Framework<a class="headerlink" href="#examples-of-application-level-control-using-unify-framework" title="Permalink to this heading"></a></h2>
 <section id="turning-on-the-on-off-light-device-using-unify-framework">
-<h3><span class="section-number">2.4.1. </span>Turning On the On/Off Light Device using Unify Framework<a class="headerlink" href="#turning-on-the-on-off-light-device-using-unify-framework" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.6.1. </span>Turning On the On/Off Light Device using Unify Framework<a class="headerlink" href="#turning-on-the-on-off-light-device-using-unify-framework" title="Permalink to this heading"></a></h3>
 <p>The following diagram shows an example of On/Off Cluster control using the
 Unify framework.</p>
 <p class="plantuml">
@@ -1044,7 +1086,7 @@ protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw
 </p>
 </section>
 <section id="changing-the-brightness-level-of-the-light-using-unify-framework">
-<h3><span class="section-number">2.4.2. </span>Changing the Brightness Level of the Light Using Unify Framework<a class="headerlink" href="#changing-the-brightness-level-of-the-light-using-unify-framework" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.6.2. </span>Changing the Brightness Level of the Light Using Unify Framework<a class="headerlink" href="#changing-the-brightness-level-of-the-light-using-unify-framework" title="Permalink to this heading"></a></h3>
 <p>The following diagram shows an example of a device with both On/Off and Level
 Clusters server.</p>
 <p class="plantuml">
@@ -1189,7 +1231,7 @@ protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw
 </p>
 </section>
 <section id="doorlockcontroller-operation-using-unify-framework">
-<h3><span class="section-number">2.4.3. </span>DoorLockController Operation Using Unify Framework<a class="headerlink" href="#doorlockcontroller-operation-using-unify-framework" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.6.3. </span>DoorLockController Operation Using Unify Framework<a class="headerlink" href="#doorlockcontroller-operation-using-unify-framework" title="Permalink to this heading"></a></h3>
 <p>The following diagram shows an example of a Door Lock Controller being used in the
 Unify Framework.</p>
 <p class="plantuml">
@@ -1236,7 +1278,7 @@ rnote over iot_service, pan_node: IoT Service processes LockDoor command (assumi
 </p>
 </section>
 <section id="pir-sensor-notification-application-using-unify-framework">
-<h3><span class="section-number">2.4.4. </span>PIR Sensor Notification Application Using Unify Framework<a class="headerlink" href="#pir-sensor-notification-application-using-unify-framework" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.6.4. </span>PIR Sensor Notification Application Using Unify Framework<a class="headerlink" href="#pir-sensor-notification-application-using-unify-framework" title="Permalink to this heading"></a></h3>
 <p>The following diagram shows an example of PIR Sensor device
 represented as an OccupancySensing Cluster server with the Unify framework.</p>
 <p class="plantuml">
@@ -1304,7 +1346,7 @@ protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw
 </p>
 </section>
 <section id="using-the-writeattributes-generic-command">
-<h3><span class="section-number">2.4.5. </span>Using the WriteAttributes Generic Command<a class="headerlink" href="#using-the-writeattributes-generic-command" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.6.5. </span>Using the WriteAttributes Generic Command<a class="headerlink" href="#using-the-writeattributes-generic-command" title="Permalink to this heading"></a></h3>
 <p>Scenario: A device supports the <code class="docutils literal notranslate"><span class="pre">ManufacturerName</span></code> and <code class="docutils literal notranslate"><span class="pre">LocationDescription</span></code>
 attributes in the Basic Cluster. An MQTT Client wants to update the location of
 the device using the <em>WriteAttributes</em> Command.</p>
@@ -1352,7 +1394,7 @@ protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw
 </p>
 </section>
 <section id="manipulating-pan-node-group-membership">
-<h3><span class="section-number">2.4.6. </span>Manipulating PAN Node Group Membership<a class="headerlink" href="#manipulating-pan-node-group-membership" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.6.6. </span>Manipulating PAN Node Group Membership<a class="headerlink" href="#manipulating-pan-node-group-membership" title="Permalink to this heading"></a></h3>
 <p>The following diagram shows an example of adding/removing groups for a PAN
 node</p>
 <p class="plantuml">

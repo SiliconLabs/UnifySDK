@@ -357,6 +357,13 @@ static sl_status_t attribute_store_delete_pending_deletions_from_datastore()
 ///////////////////////////////////////////////////////////////////////////////
 sl_status_t attribute_store_init(void)
 {
+  // Announce an issue with the type storage at start if we detect it.
+  if (sizeof(attribute_store_change_t) != 4) {
+    sl_log_error(LOG_TAG,
+                 "Enum type is not 32-bits. "
+                 "Please adjust ENUM_STORAGE_TYPE to be the right type");
+  }
+
   // Prepare our root node, if not ready
   if (root_node == nullptr) {
     root_node = new attribute_store_node(nullptr,

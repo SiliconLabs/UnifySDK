@@ -24,6 +24,40 @@ For the application specific release notes, please follow these links:
 * [Zigbeed](applications/zigbeed/release_notes.md)
 * [Portable Runtime](portable_runtime/release_notes.md)
 
+
+## [1.3.1] - March 2023
+
+### Added (1.3.1)
+
+* Attribute Mapper updated to handle scope priorities
+  * :exclamation: **NOTE**: make sure that existing maps have undefined banches
+    in if statements, as they may trigger evaluations even if dependencies
+    do not exist. For example:
+
+    ```uam
+    r'2 = if(r'3 > 0) 1 0
+    ```
+
+    If Attribute Type 3 does not exist, `if(r'3>0)` returns `false` and
+    therefore the map above would assign the value 0 in `r'2`. Use something
+    like this instead:
+
+    ```uam
+    r'2 = if(e'3 == 0) undefined
+          if(r'3 > 0) 1 0
+    ```
+
+### Known Issues (1.3.1)
+
+* **UIC-2261**: Attribute Mapper parent operator navigation does not always work (only on left hand sides)
+  _Note_: Avoid using the parent operator in UAM files, use the common_parent_type scope setting instead
+* **UIC-2228**: Attribute Mapper reducer is disabled due to errors. The mapper will not successfully reduce constant expressions.
+  _Note_: Avoid unnecessary calculations in the UAM files. e.g. write 100 instead of 10*10
+* **UIC-1725**: Resize a terminal with a running Unify application and a few error messages regarding file descriptors will be displayed.
+  _Note_: The errors can be ignored, there is no consequence
+* **UIC-1593**: The Dotdot MQTT library does not always use enum names, even though the Unify Specification indicates that it should.
+  _Note_: Be tolerant to numbers instead of strings for enums.
+
 ## [1.3.0] - February 2023
 
 ### Added (1.3.0)
@@ -109,19 +143,6 @@ attribute store based on type registration.
 ### Fixed (1.2.0)
 
 * The naming convention of MQTT client IDs is updated for all Unify applications to `<unify_application>_<pid-of-application>`. Previously this was `uic_<incremented-number>`.
-
-### Known Issues (1.2.0)
-
-* **UIC-2261**/**UIC-1341**: Attribute Mapper parent operator navigation does not always work (only on left hand sides)
-  _Note_: Avoid using the parent operator in UAM files, and if necessary, double check if it works.
-* **UIC-2228**: Attribute Mapper reducer is disabled due to errors. The mapper will not successfully reduce constant expressions.
-  _Note_: Avoid unnecessary calculations in the UAM files. e.g. write 100 instead of 10*10
-* **UIC-2171**: SmartStart manager prints some errors if no SmartStart list is published.
-  _Note_: The errors can be ignored, there is no consequence
-* **UIC-1725**: Resize a terminal with a running Unify application and a few error messages regarding file descriptors will be displayed.
-  _Note_: The errors can be ignored, there is no consequence
-* **UIC-1593**: The Dotdot MQTT library does not always use enum names, even though the Unify Specification indicates that it should.
-  _Note_: Be tolerant to numbers instead of strings for enums.
 
 ## [1.1.1] - Mar 2022
 

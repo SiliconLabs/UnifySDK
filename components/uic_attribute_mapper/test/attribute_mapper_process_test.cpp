@@ -104,11 +104,12 @@ void test_attribute_mapper_process_deletion_test()
   on_reported_attribute_update(node_1, ATTRIBUTE_DELETED);
   attribute_store_delete_node(node_1);
 
-  // Delete should cancel out immediately the updated
+  // Node 3 was created while r'1 was alive and updated.
+  // It should keep existing now
   contiki_test_helper_run(0);
   attribute_store_node_t node_3
     = attribute_store_get_first_child_by_type(root_node, 3);
-  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, node_3);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, node_3);
 }
 
 void test_attribute_mapper_has_pending_evaluations()
@@ -173,5 +174,32 @@ void test_attribute_mapper_process_unknown_event_test()
   // Nothing much to test here.
   process_post(&unify_attribute_mapper_process, 0xFF, nullptr);
   contiki_test_helper_run(0);
+}
+
+void test_attribute_mapper_process_pending_update_on_deleted_node()
+{
+  // Load a rule
+  MapperEngine &e = MapperEngine::get_instance();
+  e.add_expression(R"(scope 0 {
+    r'3 = r'1
+    r'4 = r'2
+  })");
+
+  attribute_store_delete_node(node_1);
+  contiki_test_helper_run(0);
+
+  on_reported_attribute_update(node_1, ATTRIBUTE_UPDATED);
+  on_reported_attribute_update(node_2, ATTRIBUTE_UPDATED);
+  contiki_test_helper_run(0);
+
+  // Node 3 should not exist, the Attribute Update notification
+  // was processed when node 3 did not exist.
+  attribute_store_node_t node_3
+    = attribute_store_get_first_child_by_type(root_node, 3);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, node_3);
+  attribute_store_node_t node_4
+    = attribute_store_get_first_child_by_type(root_node, 4);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, node_4);
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(node_4));
 }
 }

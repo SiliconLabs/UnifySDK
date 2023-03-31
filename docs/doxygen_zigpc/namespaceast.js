@@ -18,6 +18,7 @@ var namespaceast =
     [ "dep_eval_path", "classast_1_1dep__eval__path.html", "classast_1_1dep__eval__path" ],
     [ "eval", "structast_1_1eval.html", "structast_1_1eval" ],
     [ "attribute_path_eval", "structast_1_1attribute__path__eval.html", "structast_1_1attribute__path__eval" ],
+    [ "path_match_eval", "classast_1_1path__match__eval.html", "classast_1_1path__match__eval" ],
     [ "print", "classast_1_1print.html", "classast_1_1print" ],
     [ "path_printer", "classast_1_1path__printer.html", "classast_1_1path__printer" ],
     [ "reducer", "classast_1_1reducer.html", "classast_1_1reducer" ],

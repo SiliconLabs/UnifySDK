@@ -1,6 +1,6 @@
 include(FetchContent)
-find_package(GeckoSDK 4.2.0 REQUIRED)
-find_package(CPCD 4.2.0 REQUIRED)
+find_package(GeckoSDK 4.2.2 REQUIRED)
+find_package(CPCD 4.2.2 REQUIRED)
 
 set(FETCHCONTENT_QUIET False)
 set(CMAKE_INSTALL_DEFAULT_COMPONENT_NAME uic-otbr)
@@ -19,7 +19,6 @@ FetchContent_Populate(ot-br-posix)
 
 FetchContent_Declare(
   openthread
-  PATCH_COMMAND patch -p1 < ${CMAKE_CURRENT_SOURCE_DIR}/cmake/patches/ot-cpcd-include.patch
   URL ${GeckoSDK_ROOT_DIR}/util/third_party/openthread
   SOURCE_DIR "${ot-br-posix_SOURCE_DIR}/third_party/openthread/repo"
 )
@@ -27,8 +26,12 @@ FetchContent_Declare(
 FetchContent_Populate(openthread)
 
 # Install compile-time configuration constants header file
-file(GLOB POSIX_CONFIG_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/includes/openthread-core-silabs-posix-config.h")
+set(SILABS_POSIX_CONFIG_PATH "${GeckoSDK_ROOT_DIR}/protocol/openthread/platform-abstraction/posix")
+file(GLOB POSIX_CONFIG_HEADERS "${SILABS_POSIX_CONFIG_PATH}/openthread-core-silabs-posix-config.h")
 file(COPY ${POSIX_CONFIG_HEADERS} DESTINATION ${openthread_SOURCE_DIR}/src/posix/platform)
+
+# Set CPCD_SOURCE_DIR to source path exported from FetchContent in FindCPCD
+set(CPCD_SOURCE_DIR ${cpcd_SOURCE_DIR} CACHE STRING "Root path to cpc daemon source files")
 
 # Compilation settings defined
 set(OT_CONFIG openthread-core-silabs-posix-config.h CACHE STRING "Project-specific openthread config file")

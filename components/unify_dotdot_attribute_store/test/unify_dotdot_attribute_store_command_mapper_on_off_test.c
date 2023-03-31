@@ -610,3 +610,149 @@ void test_on_off_off_command_support()
                       expected_endpoint_id,
                       UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK));
 }
+
+void test_on_off_off_command_update_desired_with_level_supported()
+{
+  // Configure auto-desired update
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  test_configuration.update_attribute_desired_values_on_commands = true;
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  // Check that the dispatch on_off_command exists.
+  uic_mqtt_dotdot_on_off_off_callback
+    = get_uic_mqtt_dotdot_on_off_off_callback();
+  TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_on_off_off_callback);
+
+  // Add the OnOff attribute
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  bool value = true;
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));
+
+  // Add a level capability
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL,
+                           attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME,
+                           attribute_store_get_root());
+
+  // Now the desired value gets set to On when receiving the On Command:
+  expected_endpoint_id = 4;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    uic_mqtt_dotdot_on_off_off_callback(expected_unid,
+                                        expected_endpoint_id,
+                                        UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL));
+  TEST_ASSERT_TRUE(attribute_store_is_desired_defined(on_off_node));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(on_off_node));
+  TEST_ASSERT_FALSE(dotdot_get_on_off_on_off(expected_unid,
+                                             expected_endpoint_id,
+                                             DESIRED_ATTRIBUTE));
+
+  // Check the level got moved down to 0:
+  TEST_ASSERT_EQUAL(0,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
+}
+
+void test_on_off_on_command_update_desired_with_level_supported_on_level()
+{
+  // Configure auto-desired update
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  test_configuration.update_attribute_desired_values_on_commands = true;
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  // Check that the dispatch on_off_command exists.
+  uic_mqtt_dotdot_on_off_on_callback = get_uic_mqtt_dotdot_on_off_on_callback();
+  TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_on_off_on_callback);
+
+  // Add the OnOff attribute
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  bool value = false;
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));
+
+  // Add a level capability
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL,
+                           attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME,
+                           attribute_store_get_root());
+
+  // Configure the OnLevel to 33:
+  dotdot_create_level_on_level(expected_unid, expected_endpoint_id);
+  dotdot_set_level_on_level(expected_unid,
+                            expected_endpoint_id,
+                            REPORTED_ATTRIBUTE,
+                            33);
+
+  // Now the desired value gets set to On when receiving the On Command:
+  expected_endpoint_id = 4;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    uic_mqtt_dotdot_on_off_on_callback(expected_unid,
+                                       expected_endpoint_id,
+                                       UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL));
+  TEST_ASSERT_TRUE(attribute_store_is_desired_defined(on_off_node));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(on_off_node));
+  TEST_ASSERT_TRUE(dotdot_get_on_off_on_off(expected_unid,
+                                            expected_endpoint_id,
+                                            DESIRED_ATTRIBUTE));
+
+  // Check the level got moved to 33:
+  TEST_ASSERT_EQUAL(33,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
+}
+
+void test_on_off_on_command_update_desired_with_level_supported_last_non_zero_level()
+{
+  // Configure auto-desired update
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  test_configuration.update_attribute_desired_values_on_commands = true;
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  // Check that the dispatch on_off_command exists.
+  uic_mqtt_dotdot_on_off_on_callback = get_uic_mqtt_dotdot_on_off_on_callback();
+  TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_on_off_on_callback);
+
+  // Add the OnOff attribute
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  bool value = false;
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));
+
+  // Add a level capability
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL,
+                           attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME,
+                           attribute_store_get_root());
+
+  // Configure the Last non zero level to 66:
+  attribute_store_node_t last_non_zero_level_node = attribute_store_add_node(
+    DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,
+    attribute_store_get_root());
+  attribute_store_set_reported_number(last_non_zero_level_node, 66);
+
+  // Now the desired value gets set to On when receiving the On Command:
+  expected_endpoint_id = 4;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    uic_mqtt_dotdot_on_off_on_callback(expected_unid,
+                                       expected_endpoint_id,
+                                       UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL));
+  TEST_ASSERT_TRUE(attribute_store_is_desired_defined(on_off_node));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(on_off_node));
+  TEST_ASSERT_TRUE(dotdot_get_on_off_on_off(expected_unid,
+                                            expected_endpoint_id,
+                                            DESIRED_ATTRIBUTE));
+
+  // Check the level got moved to 66:
+  TEST_ASSERT_EQUAL(66,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
+}

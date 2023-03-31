@@ -1189,6 +1189,23 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "Unknown";
       }
       // clang-format off
+    case DOTDOT_SOIL_MOISTURE_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_SOIL_MOISTURE_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MeasuredValue";
+        case DOTDOT_SOIL_MOISTURE_MIN_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MinMeasuredValue";
+        case DOTDOT_SOIL_MOISTURE_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MaxMeasuredValue";
+        case DOTDOT_SOIL_MOISTURE_TOLERANCE_ATTRIBUTE_ID:
+          return "Tolerance";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
     case DOTDOT_PH_MEASUREMENT_CLUSTER_ID:
       // clang-format on
       switch (attribute_id) {
@@ -1251,6 +1268,40 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
         case DOTDOT_CARBON_MONOXIDE_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
           return "MaxMeasuredValue";
         case DOTDOT_CARBON_MONOXIDE_TOLERANCE_ATTRIBUTE_ID:
+          return "Tolerance";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
+    case DOTDOT_CARBON_DIOXIDE_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_CARBON_DIOXIDE_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MeasuredValue";
+        case DOTDOT_CARBON_DIOXIDE_MIN_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MinMeasuredValue";
+        case DOTDOT_CARBON_DIOXIDE_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MaxMeasuredValue";
+        case DOTDOT_CARBON_DIOXIDE_TOLERANCE_ATTRIBUTE_ID:
+          return "Tolerance";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
+    case DOTDOT_PM25_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_PM25_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MeasuredValue";
+        case DOTDOT_PM25_MIN_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MinMeasuredValue";
+        case DOTDOT_PM25_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
+          return "MaxMeasuredValue";
+        case DOTDOT_PM25_TOLERANCE_ATTRIBUTE_ID:
           return "Tolerance";
           // clang-format on
         default:
@@ -3351,6 +3402,20 @@ dotdot_attribute_id_t
         return DOTDOT_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_ATTRIBUTE_ID;
       }
     break;
+    case DOTDOT_SOIL_MOISTURE_CLUSTER_ID:
+      if (strcmp ("MeasuredValue", attribute_name) == 0) {
+        return DOTDOT_SOIL_MOISTURE_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("MinMeasuredValue", attribute_name) == 0) {
+        return DOTDOT_SOIL_MOISTURE_MIN_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("MaxMeasuredValue", attribute_name) == 0) {
+        return DOTDOT_SOIL_MOISTURE_MAX_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Tolerance", attribute_name) == 0) {
+        return DOTDOT_SOIL_MOISTURE_TOLERANCE_ATTRIBUTE_ID;
+      }
+    break;
     case DOTDOT_PH_MEASUREMENT_CLUSTER_ID:
       if (strcmp ("MeasuredValue", attribute_name) == 0) {
         return DOTDOT_PH_MEASUREMENT_MEASURED_VALUE_ATTRIBUTE_ID;
@@ -3405,6 +3470,34 @@ dotdot_attribute_id_t
       }
       if (strcmp ("Tolerance", attribute_name) == 0) {
         return DOTDOT_CARBON_MONOXIDE_TOLERANCE_ATTRIBUTE_ID;
+      }
+    break;
+    case DOTDOT_CARBON_DIOXIDE_CLUSTER_ID:
+      if (strcmp ("MeasuredValue", attribute_name) == 0) {
+        return DOTDOT_CARBON_DIOXIDE_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("MinMeasuredValue", attribute_name) == 0) {
+        return DOTDOT_CARBON_DIOXIDE_MIN_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("MaxMeasuredValue", attribute_name) == 0) {
+        return DOTDOT_CARBON_DIOXIDE_MAX_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Tolerance", attribute_name) == 0) {
+        return DOTDOT_CARBON_DIOXIDE_TOLERANCE_ATTRIBUTE_ID;
+      }
+    break;
+    case DOTDOT_PM25_CLUSTER_ID:
+      if (strcmp ("MeasuredValue", attribute_name) == 0) {
+        return DOTDOT_PM25_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("MinMeasuredValue", attribute_name) == 0) {
+        return DOTDOT_PM25_MIN_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("MaxMeasuredValue", attribute_name) == 0) {
+        return DOTDOT_PM25_MAX_MEASURED_VALUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Tolerance", attribute_name) == 0) {
+        return DOTDOT_PM25_TOLERANCE_ATTRIBUTE_ID;
       }
     break;
     case DOTDOT_IAS_ZONE_CLUSTER_ID:
@@ -5436,6 +5529,23 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_UNKNOWN;
       }
       // clang-format off
+    case DOTDOT_SOIL_MOISTURE_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_SOIL_MOISTURE_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_SOIL_MOISTURE_MIN_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_SOIL_MOISTURE_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_SOIL_MOISTURE_TOLERANCE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
     case DOTDOT_PH_MEASUREMENT_CLUSTER_ID:
       // clang-format on
       switch (attribute_id) {
@@ -5498,6 +5608,40 @@ dotdot_attribute_json_type_t
                 case DOTDOT_CARBON_MONOXIDE_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_CARBON_MONOXIDE_TOLERANCE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
+    case DOTDOT_CARBON_DIOXIDE_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_CARBON_DIOXIDE_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_CARBON_DIOXIDE_MIN_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_CARBON_DIOXIDE_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_CARBON_DIOXIDE_TOLERANCE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
+    case DOTDOT_PM25_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_PM25_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_PM25_MIN_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_PM25_MAX_MEASURED_VALUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_PM25_TOLERANCE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                   // clang-format on
         default:
@@ -6441,6 +6585,9 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
     }
   }
 
+  if (1032 == cluster_id) {
+  }
+
   if (1033 == cluster_id) {
   }
 
@@ -6451,6 +6598,12 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   }
 
   if (1036 == cluster_id) {
+  }
+
+  if (1037 == cluster_id) {
+  }
+
+  if (1066 == cluster_id) {
   }
 
   if (1280 == cluster_id) {

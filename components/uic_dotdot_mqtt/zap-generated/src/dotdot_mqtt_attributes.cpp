@@ -36981,6 +36981,373 @@ void uic_mqtt_dotdot_occupancy_sensing_attribute_physical_contact_unoccupied_to_
 // End of supported cluster.
 
 ///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for SoilMoisture
+///////////////////////////////////////////////////////////////////////////////
+static uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback_t uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback_t uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback_t uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback_t uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for SoilMoisture
+///////////////////////////////////////////////////////////////////////////////
+static void uic_mqtt_dotdot_on_soil_moisture_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "SoilMoisture::MeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      measured_value = json_payload.at("value").get<uint16_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_soil_moisture_min_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t min_measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "SoilMoisture::MinMeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      min_measured_value = json_payload.at("value").get<uint16_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    min_measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_soil_moisture_max_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t max_measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "SoilMoisture::MaxMeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      max_measured_value = json_payload.at("value").get<uint16_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    max_measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_soil_moisture_tolerance_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t tolerance = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "SoilMoisture::Tolerance: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      tolerance = json_payload.at("value").get<uint16_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    tolerance
+  );
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for SoilMoisture
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t uic_mqtt_dotdot_soil_moisture_attributes_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback) {
+    subscription_topic = base_topic + "SoilMoisture/Attributes/MeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_soil_moisture_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback) {
+    subscription_topic = base_topic + "SoilMoisture/Attributes/MinMeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_soil_moisture_min_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback) {
+    subscription_topic = base_topic + "SoilMoisture/Attributes/MaxMeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_soil_moisture_max_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback) {
+    subscription_topic = base_topic + "SoilMoisture/Attributes/Tolerance/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_soil_moisture_tolerance_attribute_update);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for SoilMoisture
+///////////////////////////////////////////////////////////////////////////////
+void uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback_t callback)
+{
+  uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback = callback;
+}
+
+// End of supported cluster.
+
+///////////////////////////////////////////////////////////////////////////////
 // Callback pointers for PhMeasurement
 ///////////////////////////////////////////////////////////////////////////////
 static uic_mqtt_dotdot_ph_measurement_attribute_measured_value_callback_t uic_mqtt_dotdot_ph_measurement_attribute_measured_value_callback = nullptr;
@@ -38444,6 +38811,740 @@ void uic_mqtt_dotdot_carbon_monoxide_attribute_max_measured_value_callback_set(c
 void uic_mqtt_dotdot_carbon_monoxide_attribute_tolerance_callback_set(const uic_mqtt_dotdot_carbon_monoxide_attribute_tolerance_callback_t callback)
 {
   uic_mqtt_dotdot_carbon_monoxide_attribute_tolerance_callback = callback;
+}
+
+// End of supported cluster.
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for CarbonDioxide
+///////////////////////////////////////////////////////////////////////////////
+static uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback_t uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback_t uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback_t uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback_t uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for CarbonDioxide
+///////////////////////////////////////////////////////////////////////////////
+static void uic_mqtt_dotdot_on_carbon_dioxide_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "CarbonDioxide::MeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      measured_value = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_carbon_dioxide_min_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float min_measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "CarbonDioxide::MinMeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      min_measured_value = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    min_measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_carbon_dioxide_max_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float max_measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "CarbonDioxide::MaxMeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      max_measured_value = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    max_measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_carbon_dioxide_tolerance_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float tolerance = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "CarbonDioxide::Tolerance: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      tolerance = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    tolerance
+  );
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for CarbonDioxide
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_attributes_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback) {
+    subscription_topic = base_topic + "CarbonDioxide/Attributes/MeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_carbon_dioxide_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback) {
+    subscription_topic = base_topic + "CarbonDioxide/Attributes/MinMeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_carbon_dioxide_min_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback) {
+    subscription_topic = base_topic + "CarbonDioxide/Attributes/MaxMeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_carbon_dioxide_max_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback) {
+    subscription_topic = base_topic + "CarbonDioxide/Attributes/Tolerance/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_carbon_dioxide_tolerance_attribute_update);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for CarbonDioxide
+///////////////////////////////////////////////////////////////////////////////
+void uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback_t callback)
+{
+  uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback = callback;
+}
+
+// End of supported cluster.
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for PM25
+///////////////////////////////////////////////////////////////////////////////
+static uic_mqtt_dotdot_pm25_attribute_measured_value_callback_t uic_mqtt_dotdot_pm25_attribute_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback_t uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback_t uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback = nullptr;
+static uic_mqtt_dotdot_pm25_attribute_tolerance_callback_t uic_mqtt_dotdot_pm25_attribute_tolerance_callback = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for PM25
+///////////////////////////////////////////////////////////////////////////////
+static void uic_mqtt_dotdot_on_pm25_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_pm25_attribute_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "PM25::MeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      measured_value = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_pm25_attribute_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_pm25_min_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float min_measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "PM25::MinMeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      min_measured_value = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    min_measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_pm25_max_measured_value_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float max_measured_value = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "PM25::MaxMeasuredValue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      max_measured_value = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    max_measured_value
+  );
+
+}
+static void uic_mqtt_dotdot_on_pm25_tolerance_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_pm25_attribute_tolerance_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  float tolerance = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "PM25::Tolerance: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      tolerance = json_payload.at("value").get<float>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_pm25_attribute_tolerance_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    tolerance
+  );
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for PM25
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t uic_mqtt_dotdot_pm25_attributes_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(uic_mqtt_dotdot_pm25_attribute_measured_value_callback) {
+    subscription_topic = base_topic + "PM25/Attributes/MeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_pm25_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback) {
+    subscription_topic = base_topic + "PM25/Attributes/MinMeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_pm25_min_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback) {
+    subscription_topic = base_topic + "PM25/Attributes/MaxMeasuredValue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_pm25_max_measured_value_attribute_update);
+  }
+  if(uic_mqtt_dotdot_pm25_attribute_tolerance_callback) {
+    subscription_topic = base_topic + "PM25/Attributes/Tolerance/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_pm25_tolerance_attribute_update);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for PM25
+///////////////////////////////////////////////////////////////////////////////
+void uic_mqtt_dotdot_pm25_attribute_measured_value_callback_set(const uic_mqtt_dotdot_pm25_attribute_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_pm25_attribute_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback_set(const uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback_set(const uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback_t callback)
+{
+  uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback = callback;
+}
+void uic_mqtt_dotdot_pm25_attribute_tolerance_callback_set(const uic_mqtt_dotdot_pm25_attribute_tolerance_callback_t callback)
+{
+  uic_mqtt_dotdot_pm25_attribute_tolerance_callback = callback;
 }
 
 // End of supported cluster.

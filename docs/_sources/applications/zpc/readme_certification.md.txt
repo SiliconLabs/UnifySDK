@@ -1,4 +1,7 @@
-# ZPC Certification Information
+# ZPC - Z-Wave (certification) Information
+
+This guide contains Z-Wave specific information and instructions.
+This document can also be used for certification information.
 
 ## Z-Wave Protocol Interoperability
 
@@ -26,6 +29,15 @@ If commands do not seem to be sent out after an update (spinny wheel on the UI)
 
 It is recommended to try to modify more attributes by issuing more commands or
 the same command with slightly different parameters.
+
+### Dev GUI and other protocols
+
+Note that the Development UI is built for multiple protocol controllers to be
+displayed in the same way, together with Z-Wave.
+
+The Development UI does not reflect all the ZPC and Z-Wave capabilities, and
+some functionalities may be present on the Dev UI despite not implemented in
+the ZPC.
 
 ## Device Type and Role Type
 
@@ -70,8 +82,7 @@ The ZPC uses the following Z-Wave Plus Info information:
 
 ### Network Management
 
-The [Dev GUI User's Guide](../dev_ui/dev_gui/readme_user.md)
-describes how to perform the following operations:
+The ZPC can perform the following operations using the Development UI:
 
 * Direct range and Network-Wide Inclusion (Add) of other nodes in the network.
 * Direct range and Network-Wide Exclusion (remove) of other nodes (in any network).
@@ -155,7 +166,7 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Multi Channel Association      |       3 |       x |       x | Network Scheme              |         |
 | Multi Command                  |       1 |       x |         | Unencrypted                 |         |
 | Multilevel Sensor              |      11 |         |       x | N/A                         | Partial control: <br>1. Not all scales are supported<br>2. Not all types are shown in the UI. |
-| Multilevel Switch              |       4 |         |       x | N/A                         | Partial Control: The value 0xFF cannot be used in Multilevel Switch Set Commands |
+| Multilevel Switch              |       4 |         |       x | N/A                         |         |
 | Notification                   |       8 |         |       x | N/A                         | Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.  |
 | Powerlevel                     |       1 |       x |         | Network Scheme              |         |
 | Scene Activation               |       1 |         |       x | N/A                         |         |
@@ -201,7 +212,8 @@ By default, it establishes lifeline associations or establishes associations if
 some controlled Command Classes require it. (i.e. Notification, Central Scene,
 etc.)
 
-It is also possible to establish associations between 2 nodes in the network
+It is not possible to establish arbitrary associations between 2 nodes.
+However, it is possible to establish bulk associations between 2 nodes in the network
 if the following conditions are fulfilled:
 
 * The 2 nodes operate using Z-Wave (and not LR) and have identical highest security levels.
@@ -263,6 +275,26 @@ these commands.
 The Bind/Unbind commands will send Association Set/Remove commands.
 
 ![Dev GUI Binding commands](./doc/assets/img/dev_gui_binding_cluster_commands.png)
+
+To make an Association (Binding) the following fields have to be provided:
+
+* **DestinationUnid**: This is the NodeID/destination of the association
+* **DestinationEp**: This is the Endpoint destination of the association, set
+  to 0 to send to the Root Device. The ZPC will select NodeID/Endpoint
+  Associations types automatically
+* **ClusterName**: The ZCL type of functionality to be associated. Refer to the
+  table above to see how ZCL clusters map to AGI Commands.
+
+Note that if the "Bindable Cluster List" is empty, there will not be any
+available clusters in the "Cluster Name" dropdown and no associations will be
+established.
+
+This could happen because of there is no AGI. The list of clusters are populated
+when nodes provide AGI information.
+Further, some bind commands will have no effect due to association restrictions.
+Refer to the list of conditions described at the beginning of the section.
+
+![Dev GUI Bind commands](./doc/assets/img/dev_gui_bin_cluster_commands.png)
 
 ### Barrier Operator Command Class Information
 
@@ -721,10 +753,28 @@ forwarded to the Dev GUI.
 Sensors values (known and unknown) are probed every 6 hours if no update was
 received from the end nodes.
 
-At the moment, the only displayed type of sensor in the DevGUI will be
-temperature sensors, shown in the Thermostat attribute page.
+The following Sensor Types/Scales and their values are presented to the UI:
+
+| Sensor Type                          | Scale                   | Mapped measurement                         |
+| ------------------------------------ | ----------------------- | ------------------------------------------ |
+| Carbon dioxide (0x11)                | 0x00 (ppm)              | Carbon dioxide (ppm)                       |
+| Carbon monoxide (0x28)               | 0x01 (ppm)              | Carbon monoxide (ppm)                      |
+| Carbon monoxide (0x28)               | 0x00 (mol.m-3)          | Carbon monoxide (ppm)                      |
+| Air Temperature (0x01)               | 0x00 and 0x01 (C and F) | Temperature (C * 100)                      |
+| Humidity (0x05)                      | 0x00 (%)                | Relative Humidity (Percent * 100)          |
+| Soil Humidity (0x29)                 | 0x00 (%)                | Soil Moisture (Percent * 100)              |
+| Water Acidity (0x43)                 | 0x00 (pH)               | pH Measurement (pH * 100)                  |
+| Soil Reactivity (0x2A)               | 0x00 (pH)               | pH Measurement (pH * 100)                  |
+| Atmospheric Pressure (0x08)          | 0x00 (kPa)              | Pressure Measurement (kPa * 10)            |
+| Barometric Pressure (0x09)           | 0x00 (kPa)              | Pressure Measurement (kPa * 10)            |
+| Water Pressure (0x39)                | 0x00 (kPa)              | Pressure Measurement (kPa * 10)            |
+| Suction Pressure (0x4E)              | 0x00 (kPa)              | Pressure Measurement (kPa * 10)            |
+| Discharge Pressure (0x4F)            | 0x00 (kPa)              | Pressure Measurement (kPa * 10)            |
 
 Unknown values are not presented in the Dev GUI.
+The screenshot belows shows an example with temperature measurements:
+
+![Dev GUI Temperature Measurement](./doc/assets/img/dev_gui_temperature_measurement.png)
 
 ##### Sending commands
 
@@ -847,12 +897,9 @@ table, with a JSON representation:
 
 The following notification will be mapped to the following bits:
 
-* CO alarm - Carbon Monoxide detected -> Alarm1
-* Smoke alarm - Smoke detected -> Alarm1
 * Home Security - Motion detected -> Alarm2
 * Home Security - Intrusion -> Alarm1
 * Home Security - Tampering -> Tamper
-* Water Alarm - Leak detected -> Alarm1
 
 #### Sending commands
 
@@ -1254,4 +1301,27 @@ rnote left of zpc: known protocols:\n1. Z-Wave
 rnote over zpc, node: <b>Cycle detected for supported protocols\n<b>Stopping Protocol discovery.
 
 rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
+```
+
+## Removing stale nodes from Dev Gui
+
+Note that if you remove the Z-Wave API module from the Raspberry Pi, the ZPC
+will crash. There is a risk to create stale MQTT topics, i.e. the UI or MQTT
+clients will see nodes that are no longer available, and they will not react
+to commands.
+
+Stale topics can also happen if starting/stopping the ZPC quickly.
+
+To remove stale topics, the mosquitto broker database can be reset.
+Follow the simple steps below to clean the stale nodes/topics:
+
+```console
+sudo service uic-zpc stop
+sudo service uic-nal stop
+sudo service mosquitto stop
+sudo rm /var/lib/uic/nal.db
+sudo rm /var/lib/mosquitto/mosquitto.db
+sudo service mosquitto start
+sudo service uic-nal start
+sudo service uic-zpc start
 ```

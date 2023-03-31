@@ -12717,6 +12717,22 @@ void uic_mqtt_dotdot_parse_occupancy_sensing_write_attributes(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
+void uic_mqtt_dotdot_parse_soil_moisture_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_soil_moisture_state_t &new_state,
+  uic_mqtt_dotdot_soil_moisture_updated_state_t &new_updated_state
+) {
+
+
+
+}
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
 void uic_mqtt_dotdot_parse_ph_measurement_write_attributes(
   nlohmann::json &jsn,
   uic_mqtt_dotdot_ph_measurement_state_t &new_state,
@@ -12769,6 +12785,38 @@ void uic_mqtt_dotdot_parse_carbon_monoxide_write_attributes(
   nlohmann::json &jsn,
   uic_mqtt_dotdot_carbon_monoxide_state_t &new_state,
   uic_mqtt_dotdot_carbon_monoxide_updated_state_t &new_updated_state
+) {
+
+
+
+}
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_carbon_dioxide_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_carbon_dioxide_state_t &new_state,
+  uic_mqtt_dotdot_carbon_dioxide_updated_state_t &new_updated_state
+) {
+
+
+
+}
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_pm25_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_pm25_state_t &new_state,
+  uic_mqtt_dotdot_pm25_updated_state_t &new_updated_state
 ) {
 
 

@@ -2,12 +2,16 @@
 #include <list>
 #include "uic_mqtt.h"
 
+#include "sl_log.h"
+
 #include "zigpc_common_unid.h"
 #include "zigpc_ucl.hpp"
 
 #include "zigpc_binding_mqtt_helpers.h"
  
 static const std::string supported_commands_string ="[\"Bind\", \"Unbind\"]";
+
+const char LOG_TAG[] = "bind_mqtt_helper";
 
 sl_status_t zigpc_binding_mqtt_sub_bind(
         zigbee_eui64_uint_t eui64,
@@ -24,6 +28,12 @@ sl_status_t zigpc_binding_mqtt_sub_bind(
         std::string(UCL_TOP_LEVEL) + std::string(UCL_BY_UNID) + unid 
         + std::string(UCL_EP_PREFIX) + std::to_string(endpoint) + BINDING_CLUSTER_NAME + 
         std::string(UCL_COMMAND_TOPIC)  + "/Bind"; 
+    
+    sl_log_info(
+            LOG_TAG, 
+            "Subscribe to BIND command for eui: %s, ep:%s",
+            unid.c_str(),
+            std::to_string(endpoint).c_str());
 
     uic_mqtt_subscribe(bind_cmd_topic.c_str(), callback);
 
@@ -45,6 +55,12 @@ sl_status_t zigpc_binding_mqtt_sub_unbind(
         std::string(UCL_TOP_LEVEL) + std::string(UCL_BY_UNID) + unid 
         + std::string(UCL_EP_PREFIX) + std::to_string(endpoint) + BINDING_CLUSTER_NAME + 
         std::string(UCL_COMMAND_TOPIC)  + "/Unbind"; 
+    
+    sl_log_info(
+            LOG_TAG, 
+            "Subscribe to UNBIND command for eui: %s, ep:%s",
+            unid.c_str(),
+            std::to_string(endpoint).c_str());
 
 
     uic_mqtt_subscribe(unbind_cmd_topic.c_str(), callback);
@@ -55,6 +71,7 @@ sl_status_t zigpc_binding_mqtt_pub_supported(
         zigbee_eui64_uint_t eui64,
         zigbee_endpoint_id_t endpoint)
 {
+
     if(eui64 == 0)
     {
         //0 is considered invalid input
@@ -71,6 +88,13 @@ sl_status_t zigpc_binding_mqtt_pub_supported(
         + std::string(UCL_EP_PREFIX) + std::to_string(endpoint) + BINDING_CLUSTER_NAME + 
         std::string(UCL_SUPPORTED_COMMAND_TOPIC );
 
+    
+    sl_log_info(
+            LOG_TAG, 
+            "Publish supported binding commands for eui: %s, ep:%s",
+            unid.c_str(),
+            std::to_string(endpoint).c_str());
+    
     std::string supported_commands_payload = "";
 
     supported_commands_payload = "{" + std::string(UCL_VALUE) + ":" 
@@ -101,6 +125,12 @@ sl_status_t zigpc_binding_mqtt_pub_generated(
 
     std::string generated_commands_payload = 
         "{" + std::string(UCL_VALUE) + ": []}";
+    
+    sl_log_info(
+            LOG_TAG, 
+            "Publish generated binding commands for eui: %s, ep:%s",
+            unid.c_str(),
+            std::to_string(endpoint).c_str());
 
     uic_mqtt_publish(
             generated_commands_topic.c_str(),

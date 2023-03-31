@@ -164,12 +164,6 @@ typedef struct {
   uint8_t zcl_version;
 } __attribute__((__packed__)) zigpc_endpoint_data_t;
 
-typedef struct {
-  zcl_cluster_id_t cluster_id;
-  zigbee_eui64_uint_t dest_eui64;
-  zigbee_endpoint_id_t dest_endpoint;
-} __attribute__((__packed__)) zigpc_binding_data_t;
-
 /**
  * @brief Device endpoint cluster information.
  *
@@ -411,24 +405,6 @@ sl_status_t zigpc_datastore_write_endpoint(const zigbee_eui64_t eui64,
  */
 sl_status_t zigpc_datastore_remove_endpoint(const zigbee_eui64_t eui64,
                                             zigbee_endpoint_id_t endpoint_id);
-/**************/
-
-size_t zigpc_datastore_get_binding_count(
-                const zigbee_eui64_t eui64,
-                const zigbee_endpoint_id_t endpoint_id);
-
-sl_status_t zigpc_datastore_read_binding_list( 
-                const zigbee_eui64_t eui64,
-                const zigbee_endpoint_id_t endpoint_id,
-                zigbee_binding_t *const binding_list,
-                size_t binding_list_size);
-
-sl_status_t zigpc_datastore_write_binding_list( 
-                const zigbee_eui64_t eui64,
-                const zigbee_endpoint_id_t endpoint_id,
-                const zigbee_binding_t *binding_list,
-                size_t binding_list_size);
-
 
 /**********************************
  **********************************

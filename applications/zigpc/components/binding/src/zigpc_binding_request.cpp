@@ -144,8 +144,8 @@ sl_status_t zigpc_binding_parse_cmd_args(
         return status;
     }
     
-    sl_log_debug(LOG_TAG, "Attempting to parse topic: %s", topic);
-    sl_log_debug(LOG_TAG, "Attempting to parse payload: %s", message);
+    sl_log_info(LOG_TAG, "Attempting to parse topic: %s", topic);
+    sl_log_info(LOG_TAG, "Attempting to parse payload: %s", message);
 
     std::string topic_str(topic);
     std::string payload_str(message);

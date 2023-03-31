@@ -1,0 +1,42 @@
+// Multilevel Sensor Command Class
+def zwTYPE          0x3102
+def zwSCALE         0x3104
+def zwVALUE         0x3105 // Value is int32 with 3 decimal points, i.e. 1000 means 1
+
+// We have have 2 sensor types reporting a pH Scale:
+// Soil reactivity
+def SENSOR_TYPE_SOIL_REACTIVITY           0x2A
+def SENSOR_SCALE_SOIL_REACTIVITY_PH       0
+
+// Water Acidity
+def SENSOR_TYPE_WATER_ACIDITY             0x43
+def SENSOR_SCALE_WATER_ACIDITY_PH         0
+
+// We will apply the mapping in this order of priority:
+// 1. Water Acidity
+// 2. Soil Reactivity
+
+// ZCL attributes for pH measurement. It will be in the range [0;1400] representing [0;14]
+def zbPH_MEASUREMENT_MEASURED_VALUE     0x04090000
+def zbPH_MEASUREMENT_MIN_MEASURED_VALUE 0x04090001
+def zbPH_MEASUREMENT_MAX_MEASURED_VALUE 0x04090002
+def zbPH_MEASUREMENT_TOLERANCE          0x04090003
+
+scope 0 {
+
+  // ZPC stores (pH * 1000) from Z-Wave, we need to indicate pH*100 in ZCL, so we just divide by 10
+  r'zbPH_MEASUREMENT_MEASURED_VALUE =
+    if (r'zwTYPE[SENSOR_TYPE_WATER_ACIDITY].zwSCALE == SENSOR_SCALE_WATER_ACIDITY_PH) (r'zwTYPE[SENSOR_TYPE_WATER_ACIDITY].zwVALUE / 10)
+    if (r'zwTYPE[SENSOR_TYPE_SOIL_REACTIVITY].zwSCALE == SENSOR_SCALE_SOIL_REACTIVITY_PH) (r'zwTYPE[SENSOR_TYPE_SOIL_REACTIVITY].zwVALUE / 10)
+    undefined
+
+  r'zbPH_MEASUREMENT_MIN_MEASURED_VALUE =
+    if (r'zbPH_MEASUREMENT_MEASURED_VALUE > r'zbPH_MEASUREMENT_MIN_MEASURED_VALUE) undefined r'zbPH_MEASUREMENT_MEASURED_VALUE
+
+  r'zbPH_MEASUREMENT_MAX_MEASURED_VALUE =
+    if (r'zbPH_MEASUREMENT_MEASURED_VALUE < r'zbPH_MEASUREMENT_MAX_MEASURED_VALUE) undefined r'zbPH_MEASUREMENT_MEASURED_VALUE
+
+  // Let's say the tolerance is 10 ? Z-Wave devices do not provide this information
+  r'zbPH_MEASUREMENT_TOLERANCE =
+    if (e'zbPH_MEASUREMENT_MEASURED_VALUE) 10 undefined
+}

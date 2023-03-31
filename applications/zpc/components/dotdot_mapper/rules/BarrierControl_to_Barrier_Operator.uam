@@ -42,6 +42,11 @@ scope 0 chain_reaction(0) clear_desired(0) {
     if (r'zw_BARRIER_OPERATOR_STATE == 0xFF) 100
     if ((r'zw_BARRIER_OPERATOR_STATE >= 0xFC) & (r'zw_BARRIER_OPERATOR_STATE <= 0xFE)) 0xFF undefined
 
+  // Z-Wave can 0 or 100, nothing in between. Adjust to 100 if the desired gets set in the range 1..99
+  d'zb_BARRIER_POSITION =
+    if ((d'zb_BARRIER_POSITION > 0) & (d'zb_BARRIER_POSITION < 100)) 100
+    undefined
+
   // Map ZCL Desired to Z-Wave Desired.
   d'zw_BARRIER_OPERATOR_STATE =
     if (d'zb_BARRIER_POSITION == 0) 0

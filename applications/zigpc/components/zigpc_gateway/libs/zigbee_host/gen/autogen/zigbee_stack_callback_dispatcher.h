@@ -374,11 +374,23 @@ void emAfPoll(
       bool transmitExpected)
 ;
 
+#ifdef EZSP_HOST
+// Debug
+void emAfDebug(
+      // debug message length
+      uint8_t messageLength,
+      // debug message
+      uint8_t *messageContents)
+;
+#else // !EZSP_HOST
 // Debug
 void emAfDebug(
       // debug message
       EmberMessageBuffer message)
 ;
+#endif // EZSP_HOST
+
+
 
 // Incoming Many To One Route Request
 void emAfIncomingManyToOneRouteRequest(
@@ -434,6 +446,21 @@ void emAfIdConflict(
       EmberNodeId conflictingId)
 ;
 
+#ifdef EZSP_HOST
+// Mac Passthrough Message
+void emAfMacPassthroughMessage(
+      // The type of MAC passthrough message received.
+      EmberMacPassthroughType messageType,
+      // last hop lqi.
+      uint8_t lastHopLqi,
+      // last hop rssi.
+      int8_t lastHopRssi,
+      // message length.
+      uint8_t messageLength,
+      // The raw message that was received.
+      uint8_t *messageContents)
+;
+#else // !EZSP_HOST
 // Mac Passthrough Message
 void emAfMacPassthroughMessage(
       // The type of MAC passthrough message received.
@@ -441,6 +468,9 @@ void emAfMacPassthroughMessage(
       // The raw message that was received.
       EmberMessageBuffer message)
 ;
+#endif // EZSP_HOST
+
+
 
 // Stack Token Changed
 void emAfStackTokenChanged(
@@ -456,6 +486,10 @@ void emAfTimer(
 
 // Counter Rollover
 void emAfCounterRollover(
+      // Type of Counter
+      EmberCounterType type)
+;
+void emAfCounterRolloverCallback(
       // Type of Counter
       EmberCounterType type)
 ;
@@ -549,6 +583,21 @@ void emAfDsaVerify(
       EmberStatus status)
 ;
 
+#ifdef EZSP_HOST
+// Incoming Bootload Message
+void emAfIncomingBootloadMessage(
+      // The EUI64 of the sending node.
+      EmberEUI64 longId,
+      // last hop lqi.
+      uint8_t lastHopLqi,
+      // last hop rssi.
+      int8_t lastHopRssi,
+      // message length.
+      uint8_t messageLength,
+      // The bootload message that was sent.
+      uint8_t *messageContents)
+;
+#else // !EZSP_HOST
 // Incoming Bootload Message
 void emAfIncomingBootloadMessage(
       // The EUI64 of the sending node.
@@ -556,7 +605,22 @@ void emAfIncomingBootloadMessage(
       // The bootload message that was sent.
       EmberMessageBuffer message)
 ;
+#endif // EZSP_HOST
 
+
+
+#ifdef EZSP_HOST
+// Bootload Transmit Complete
+void emAfBootloadTransmitComplete(
+      // An EmberStatus value of EMBER_SUCCESS if an ACK was received from the
+      // destination or EMBER_DELIVERY_FAILED if no ACK was received.
+      EmberStatus status,
+      // message length.
+      uint8_t messageLength,
+      // The bootload message that was sent.
+      uint8_t *messageContents)
+;
+#else // !EZSP_HOST
 // Bootload Transmit Complete
 void emAfBootloadTransmitComplete(
       // The bootload message that was sent.
@@ -565,7 +629,25 @@ void emAfBootloadTransmitComplete(
       // destination or EMBER_DELIVERY_FAILED if no ACK was received.
       EmberStatus status)
 ;
+#endif // EZSP_HOST
 
+
+
+#ifdef EZSP_HOST
+// Zll Network Found
+void emAfZllNetworkFound(
+      // Information about the network.
+      EmberZllNetwork *networkInfo,
+      // Used to interpret deviceInfo field.
+      bool isDeviceInfoNull,
+      // Device specific information.
+      EmberZllDeviceInfoRecord *deviceInfo,
+      // The link quality from the node that last relayed the message.
+      uint8_t lastHopLqi,
+      // The energy level (in units of dBm) observed during reception.
+      int8_t lastHopRssi)
+;
+#else // !EZSP_HOST
 // Zll Network Found
 void emAfZllNetworkFound(
       // Return: Information about the network.
@@ -573,6 +655,9 @@ void emAfZllNetworkFound(
       // Return: Device specific information.
       const EmberZllDeviceInfoRecord *deviceInfo)
 ;
+#endif // EZSP_HOST
+
+
 
 // Zll Scan Complete
 void emAfZllScanComplete(
@@ -580,11 +665,25 @@ void emAfZllScanComplete(
       EmberStatus status)
 ;
 
+#ifdef EZSP_HOST
+// Zll Address Assignment
+void emAfZllAddressAssignment(
+      // Address assignment information.
+      EmberZllAddressAssignment *addressInfo,
+      // The link quality from the node that last relayed the message.
+      uint8_t lastHopLqi,
+      // The energy level (in units of dBm) observed during reception.
+      int8_t lastHopRssi)
+;
+#else // !EZSP_HOST
 // Zll Address Assignment
 void emAfZllAddressAssignment(
       // Return: Address assignment information.
       const EmberZllAddressAssignment *addressInfo)
 ;
+#endif // EZSP_HOST
+
+
 
 // Zll Touch Link Target
 void emAfZllTouchLinkTarget(
@@ -592,11 +691,31 @@ void emAfZllTouchLinkTarget(
       const EmberZllNetwork *networkInfo)
 ;
 
+#ifdef EZSP_HOST
+// Mac Filter Match Message
+void emAfMacFilterMatchMessage(
+      // filter index match.
+      uint8_t filterIndexMatch,
+      // message type.
+      EmberMacPassthroughType messageType,
+      // last hop lqi.
+      uint8_t lastHopLqi,
+      // last hop rssi.
+      int8_t lastHopRssi,
+      // message length.
+      uint8_t messageLength,
+      // message contents.
+      uint8_t *messageContents)
+;
+#else // !EZSP_HOST
 // Mac Filter Match Message
 void emAfMacFilterMatchMessage(
       // Return: macFilterMatchStruct.
       const EmberMacFilterMatchStruct *macFilterMatchStruct)
 ;
+#endif // EZSP_HOST
+
+
 
 // D Gp Sent
 void emAfDGpSent(

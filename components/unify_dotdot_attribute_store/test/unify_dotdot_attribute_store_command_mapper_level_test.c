@@ -95,8 +95,14 @@ void test_level_move_to_level_command()
                       0,
                       0));
 
-  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
-                           attribute_store_get_root());
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  bool on_off_value = true;
+  attribute_store_set_reported(on_off_node,
+                               &on_off_value,
+                               sizeof(on_off_value));
+
   attribute_store_node_t transition_node
     = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME,
                                attribute_store_get_root());
@@ -177,8 +183,13 @@ void test_level_move_command()
                       0,
                       0));
 
-  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
-                           attribute_store_get_root());
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  bool on_off_value = true;
+  attribute_store_set_reported(on_off_node,
+                               &on_off_value,
+                               sizeof(on_off_value));
 
   // Still not supported:
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
@@ -264,8 +275,13 @@ void test_level_step_command()
                       0,
                       0));
 
-  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
-                           attribute_store_get_root());
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  bool on_off_value = true;
+  attribute_store_set_reported(on_off_node,
+                               &on_off_value,
+                               sizeof(on_off_value));
 
   // Still not supported:
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
@@ -464,6 +480,10 @@ void test_level_move_to_level_with_on_off_command()
   attribute_store_node_t on_off_node
     = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
                                attribute_store_get_root());
+  bool on_off_value = true;
+  attribute_store_set_reported(on_off_node,
+                               &on_off_value,
+                               sizeof(on_off_value));
 
   // Now it is supported:
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
@@ -844,8 +864,13 @@ void test_level_current_level_validation()
   attribute_store_node_t level_node
     = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL,
                                attribute_store_get_root());
-  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
-                           attribute_store_get_root());
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  bool on_off_value = true;
+  attribute_store_set_reported(on_off_node,
+                               &on_off_value,
+                               sizeof(on_off_value));
 
   // Try to set the level to 0:
   uint8_t level = 1;

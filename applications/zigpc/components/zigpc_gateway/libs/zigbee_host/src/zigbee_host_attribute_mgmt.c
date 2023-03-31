@@ -253,7 +253,7 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
     status = EMBER_NOT_FOUND;
     appDebugPrint(LOG_FMTSTR_EUI64_NODEID_RES_FAIL,
                   "EUI64 to NodeId",
-                  "Bind Request Send");
+                  "Bind Request Send\n");
   } else {
     //Bind
     EmberApsOption options = EMBER_AF_DEFAULT_APS_OPTIONS;
@@ -267,7 +267,7 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
 
     if(isBindRequest)
     {
-        appDebugPrint("Sending zdo bind command");
+        appDebugPrint("Sending zdo bind command\n");
         status = emberBindRequest(targetNodeId,
                      (uint8_t *)sourceEui64,
                      sourceEndpoint,
@@ -280,7 +280,7 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
     }
     else
     {
-        appDebugPrint("Sending zdo unbind command");
+        appDebugPrint("Sending zdo unbind command\n");
         status = emberUnbindRequest(targetNodeId,
                      (uint8_t *)sourceEui64,
                      sourceEndpoint,
@@ -305,6 +305,8 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
     binding_buffer[index].clusterId = clusterId;
     binding_buffer[index].destEndpoint = destEndpoint;
     binding_buffer[index].isBindResponse = isBindRequest;
+        
+    appDebugPrint("Storing binding at index: %d\n", index );
     
   }
   return status;
@@ -320,8 +322,8 @@ void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* aps
   uint16_t clusterId = apsFrame->clusterId;
   if( BIND_RESPONSE == clusterId || UNBIND_RESPONSE == clusterId)
   {
-    appDebugPrint("Received bind/unbind response");
-    uint8_t index = apsFrame->sequence;
+    appDebugPrint("Received bind/unbind response\n");
+    uint8_t index = emberGetLastAppZigDevRequestSequence();
     uint8_t status = message[1];
  
     //check to see if entry is in the binding buffer
@@ -329,7 +331,7 @@ void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* aps
         (binding_buffer[index].destEui64 != NULL))
     {
     
-        appDebugPrint("Pushing bind/unbind response to zigpc_gateway");
+        appDebugPrint("Pushing bind/unbind response to zigpc_gateway\n");
 
         EmberEUI64 sourceEui64;
         EmberEUI64 destEui64;

@@ -848,12 +848,15 @@ If this step does not work and the network cannot be used, you have 2 options:
 Not all versions of the ZPC are certified. The list of versions that have passed
 [Z-Wave certification](https://certification.z-wavealliance.org/) is:
 
+* ZPC v1.3.1
 * ZPC v1.2.1
 * ZPC v1.1.1
 * ZPC v1.0.1
 
 For information relevant to Z-Wave certification, please read the
 [ZPC Z-Wave Certification Guide](readme_certification.md)
+It is recommended to use this guide as a template for your Z-Wave certification
+documentation, when using the Unify SDK.
 
 ## Developer resources
 

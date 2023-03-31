@@ -24,7 +24,7 @@ elseif(DEFINED ENV{GSDK_LOCATION})
 else()
   if(NOT FETCH_GSDK_VERSION)
     # fetch from HEAD to retrieve latest GeckoSDK
-    set(FETCH_GSDK_VERSION "v4.2.0")
+    set(FETCH_GSDK_VERSION "v4.2.2")
   endif()
   message(STATUS "Fetching GeckoSDK ${FETCH_GSDK_VERSION} from public repository")
 endif()

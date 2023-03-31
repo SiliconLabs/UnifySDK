@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.3.1</span>
    </div>
   </td>
  </tr>
@@ -132,11 +132,11 @@ Variables</h2></td></tr>
 <tr class="separator:a7791ce7e12f8b8d4dd7d973db8253c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5242548808dc8bd7e4d5eb50fc8f0bdc"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a5242548808dc8bd7e4d5eb50fc8f0bdc">CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY</a> = &quot;zigpc.poll_attr_only&quot;</td></tr>
 <tr class="separator:a5242548808dc8bd7e4d5eb50fc8f0bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fdca44881420da5d2da08787d0f4113"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a8fdca44881420da5d2da08787d0f4113">DEFAULT_POLL_ATTR_ONLY</a> = false</td></tr>
+<tr class="memitem:a8fdca44881420da5d2da08787d0f4113"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a8fdca44881420da5d2da08787d0f4113">DEFAULT_POLL_ATTR_ONLY</a> = true</td></tr>
 <tr class="separator:a8fdca44881420da5d2da08787d0f4113"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99382a15fdb218336b4a9f6c8585159d"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a99382a15fdb218336b4a9f6c8585159d">CONFIG_KEY_ZIGPC_POLLING_RATE</a> = &quot;zigpc.attr_polling_rate_ms&quot;</td></tr>
 <tr class="separator:a99382a15fdb218336b4a9f6c8585159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b69430639f93a76a62f373ff5f34d6b"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a9b69430639f93a76a62f373ff5f34d6b">ZIGPC_DEFAULT_POLLING_RATE_MS</a> = 20000</td></tr>
+<tr class="memitem:a9b69430639f93a76a62f373ff5f34d6b"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a9b69430639f93a76a62f373ff5f34d6b">ZIGPC_DEFAULT_POLLING_RATE_MS</a> = 10000</td></tr>
 <tr class="separator:a9b69430639f93a76a62f373ff5f34d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd8f3a54ad32cdaf11de346297362859"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structzigpc__config__t.html">zigpc_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#afd8f3a54ad32cdaf11de346297362859">config</a></td></tr>
 <tr class="separator:afd8f3a54ad32cdaf11de346297362859"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -350,7 +350,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool DEFAULT_POLL_ATTR_ONLY = false</td>
+          <td class="memname">const bool DEFAULT_POLL_ATTR_ONLY = true</td>
         </tr>
       </table>
   </td>
@@ -460,7 +460,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int ZIGPC_DEFAULT_POLLING_RATE_MS = 20000</td>
+          <td class="memname">const int ZIGPC_DEFAULT_POLLING_RATE_MS = 10000</td>
         </tr>
       </table>
   </td>
@@ -478,7 +478,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_dfd589449ec80b8bfaf793b62bd7da62.html">zigpc_config</a></li><li class="navelem"><a class="el" href="dir_6ad7f00040ebed4321e5af4b28de275f.html">src</a></li><li class="navelem"><a class="el" href="zigpc__config_8c.html">zigpc_config.c</a></li>
-    <li class="footer">Generated on Wed Feb 15 2023 14:24:27 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Mar 31 2023 03:46:40 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

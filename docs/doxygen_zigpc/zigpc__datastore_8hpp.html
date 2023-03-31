@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.3.1</span>
    </div>
   </td>
  </tr>
@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('zigpc__datastore_8hpp.html',''); initR
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
 <code>#include &lt;<a class="el" href="zigpc__common__zigbee_8h_source.html">zigpc_common_zigbee.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__datastore_8h_source.html">zigpc_datastore.h</a>&quot;</code><br />
 </div>
@@ -108,6 +109,8 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacezigpc__datastore_1_1group"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1group.html">zigpc_datastore::group</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacezigpc__datastore_1_1binding"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1binding.html">zigpc_datastore::binding</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -123,6 +126,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a836355e78881abdccbf866ac293515c2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="group__zigpc__common__zigbee.html#gabe5a6a6a4b79e78e775b6cc6efd57c67">zigbee_group_id_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1group.html#a836355e78881abdccbf866ac293515c2">zigpc_datastore::group::get_group_list</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> ep_id, bool is_reported)</td></tr>
 <tr class="memdesc:a836355e78881abdccbf866ac293515c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get list of group IDs under an endpoint based on the report/desired state.  <a href="namespacezigpc__datastore_1_1group.html#a836355e78881abdccbf866ac293515c2">More...</a><br /></td></tr>
 <tr class="separator:a836355e78881abdccbf866ac293515c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ba9d1d4a6ebd3a006a605107613d60e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1binding.html#a8ba9d1d4a6ebd3a006a605107613d60e">zigpc_datastore::binding::add_binding</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> source, <a class="el" href="structzigbee__binding__t.html">zigbee_binding_t</a> binding)</td></tr>
+<tr class="memdesc:a8ba9d1d4a6ebd3a006a605107613d60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">datastore::binding::add_binding Add a binding to the stored binding table of a given source address. Note, while the current implementation expects the source node to host the binding table, it is technically possible to store the binding table on a different node. This is why the source address is included in the interface.  <a href="namespacezigpc__datastore_1_1binding.html#a8ba9d1d4a6ebd3a006a605107613d60e">More...</a><br /></td></tr>
+<tr class="separator:a8ba9d1d4a6ebd3a006a605107613d60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7bb491baf5819feef2b6b57fbf162ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1binding.html#aa7bb491baf5819feef2b6b57fbf162ea">zigpc_datastore::binding::remove_binding</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> source, <a class="el" href="structzigbee__binding__t.html">zigbee_binding_t</a> binding)</td></tr>
+<tr class="memdesc:aa7bb491baf5819feef2b6b57fbf162ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">datastore::binding::remove_binding Remove a binding from the binding table of a given source address.  <a href="namespacezigpc__datastore_1_1binding.html#aa7bb491baf5819feef2b6b57fbf162ea">More...</a><br /></td></tr>
+<tr class="separator:aa7bb491baf5819feef2b6b57fbf162ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47f54f03305a8d2705f6ab398d100d57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1binding.html#a47f54f03305a8d2705f6ab398d100d57">zigpc_datastore::binding::read_binding_table</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> source, std::list&lt; <a class="el" href="structzigbee__binding__t.html">zigbee_binding_t</a> &gt; &amp;binding_table_dest)</td></tr>
+<tr class="memdesc:a47f54f03305a8d2705f6ab398d100d57"><td class="mdescLeft">&#160;</td><td class="mdescRight">datastore::binding::read_binding_table Reads the stored binding table of a given node.  <a href="namespacezigpc__datastore_1_1binding.html#a47f54f03305a8d2705f6ab398d100d57">More...</a><br /></td></tr>
+<tr class="separator:a47f54f03305a8d2705f6ab398d100d57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a667fcf5813753cdf43518f2754fb4221"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1binding.html#a667fcf5813753cdf43518f2754fb4221">zigpc_datastore::binding::read_binding_count</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> source)</td></tr>
+<tr class="memdesc:a667fcf5813753cdf43518f2754fb4221"><td class="mdescLeft">&#160;</td><td class="mdescRight">datastore::binding::add_binding Remove a binding from the binding table of a given source address.  <a href="namespacezigpc__datastore_1_1binding.html#a667fcf5813753cdf43518f2754fb4221">More...</a><br /></td></tr>
+<tr class="separator:a667fcf5813753cdf43518f2754fb4221"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -130,7 +145,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_fd74d2cee03cec1d978c7e6c3dd4b8d0.html">datastore</a></li><li class="navelem"><a class="el" href="dir_80fe3481d5903cb87f5f36bba7d2331b.html">include</a></li><li class="navelem"><a class="el" href="zigpc__datastore_8hpp.html">zigpc_datastore.hpp</a></li>
-    <li class="footer">Generated on Wed Feb 15 2023 14:24:27 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Mar 31 2023 03:46:40 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

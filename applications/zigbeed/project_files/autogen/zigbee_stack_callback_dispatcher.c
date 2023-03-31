@@ -486,6 +486,19 @@ emAfPollCallback(childId, transmitExpected);
 
 
 
+#ifdef EZSP_HOST
+// Debug
+void emAfDebug(
+      // debug message length
+      uint8_t messageLength,
+      // debug message
+      uint8_t *messageContents)
+{
+(void)messageLength;
+(void)messageContents;
+
+}
+#else // !EZSP_HOST
 // Debug
 void emAfDebug(
       // debug message
@@ -494,6 +507,7 @@ void emAfDebug(
 (void)message;
 
 }
+#endif // EZSP_HOST
 
 
 
@@ -583,6 +597,29 @@ emAfIdConflictCallback(conflictingId);
 
 
 
+#ifdef EZSP_HOST
+// Mac Passthrough Message
+void emAfMacPassthroughMessage(
+      // The type of MAC passthrough message received.
+      EmberMacPassthroughType messageType,
+      // last hop lqi.
+      uint8_t lastHopLqi,
+      // last hop rssi.
+      int8_t lastHopRssi,
+      // message length.
+      uint8_t messageLength,
+      // The raw message that was received.
+      uint8_t *messageContents)
+{
+(void)messageType;
+(void)lastHopLqi;
+(void)lastHopRssi;
+(void)messageLength;
+(void)messageContents;
+
+emAfMacPassthroughMessageCallback(messageType, lastHopLqi, lastHopRssi, messageLength, messageContents);
+}
+#else // !EZSP_HOST
 // Mac Passthrough Message
 void emAfMacPassthroughMessage(
       // The type of MAC passthrough message received.
@@ -595,6 +632,7 @@ void emAfMacPassthroughMessage(
 
 emAfMacPassthroughMessageCallback(messageType, message);
 }
+#endif // EZSP_HOST
 
 
 
@@ -753,6 +791,29 @@ void emAfDsaVerify(
 
 
 
+#ifdef EZSP_HOST
+// Incoming Bootload Message
+void emAfIncomingBootloadMessage(
+      // The EUI64 of the sending node.
+      EmberEUI64 longId,
+      // last hop lqi.
+      uint8_t lastHopLqi,
+      // last hop rssi.
+      int8_t lastHopRssi,
+      // message length.
+      uint8_t messageLength,
+      // The bootload message that was sent.
+      uint8_t *messageContents)
+{
+(void)longId;
+(void)lastHopLqi;
+(void)lastHopRssi;
+(void)messageLength;
+(void)messageContents;
+
+emAfIncomingBootloadMessageCallback(longId, lastHopLqi, lastHopRssi, messageLength, messageContents);
+}
+#else // !EZSP_HOST
 // Incoming Bootload Message
 void emAfIncomingBootloadMessage(
       // The EUI64 of the sending node.
@@ -765,9 +826,28 @@ void emAfIncomingBootloadMessage(
 
 emAfIncomingBootloadMessageCallback(longId, message);
 }
+#endif // EZSP_HOST
 
 
 
+#ifdef EZSP_HOST
+// Bootload Transmit Complete
+void emAfBootloadTransmitComplete(
+      // An EmberStatus value of EMBER_SUCCESS if an ACK was received from the
+      // destination or EMBER_DELIVERY_FAILED if no ACK was received.
+      EmberStatus status,
+      // message length.
+      uint8_t messageLength,
+      // The bootload message that was sent.
+      uint8_t *messageContents)
+{
+(void)status;
+(void)messageLength;
+(void)messageContents;
+
+emAfBootloadTransmitCompleteCallback(status, messageLength, messageContents);
+}
+#else // !EZSP_HOST
 // Bootload Transmit Complete
 void emAfBootloadTransmitComplete(
       // The bootload message that was sent.
@@ -781,9 +861,32 @@ void emAfBootloadTransmitComplete(
 
 emAfBootloadTransmitCompleteCallback(message, status);
 }
+#endif // EZSP_HOST
 
 
 
+#ifdef EZSP_HOST
+void emAfZllNetworkFound(
+      // Information about the network.
+      EmberZllNetwork *networkInfo,
+      // Used to interpret deviceInfo field.
+      bool isDeviceInfoNull,
+      // Device specific information.
+      EmberZllDeviceInfoRecord *deviceInfo,
+      // The link quality from the node that last relayed the message.
+      uint8_t lastHopLqi,
+      // The energy level (in units of dBm) observed during reception.
+      int8_t lastHopRssi)
+{
+(void)networkInfo;
+(void)isDeviceInfoNull;
+(void)deviceInfo;
+(void)lastHopLqi;
+(void)lastHopRssi;
+
+emAfZllNetworkFoundCallback(networkInfo, isDeviceInfoNull, deviceInfo, lastHopLqi, lastHopRssi);
+}
+#else // !EZSP_HOST
 // Zll Network Found
 void emAfZllNetworkFound(
       // Return: Information about the network.
@@ -796,6 +899,7 @@ void emAfZllNetworkFound(
 
 emAfZllNetworkFoundCallback(networkInfo, deviceInfo);
 }
+#endif // EZSP_HOST
 
 
 
@@ -811,6 +915,23 @@ emAfZllScanCompleteCallback(status);
 
 
 
+#ifdef EZSP_HOST
+// Zll Address Assignment
+void emAfZllAddressAssignment(
+      // Address assignment information.
+      EmberZllAddressAssignment *addressInfo,
+      // The link quality from the node that last relayed the message.
+      uint8_t lastHopLqi,
+      // The energy level (in units of dBm) observed during reception.
+      int8_t lastHopRssi)
+{
+(void)addressInfo;
+(void)lastHopLqi;
+(void)lastHopRssi;
+
+emAfZllAddressAssignmentCallback(addressInfo, lastHopLqi, lastHopRssi);
+}
+#else // !EZSP_HOST
 // Zll Address Assignment
 void emAfZllAddressAssignment(
       // Return: Address assignment information.
@@ -820,6 +941,7 @@ void emAfZllAddressAssignment(
 
 emAfZllAddressAssignmentCallback(addressInfo);
 }
+#endif // EZSP_HOST
 
 
 
@@ -835,6 +957,32 @@ emAfZllTouchLinkTargetCallback(networkInfo);
 
 
 
+#ifdef EZSP_HOST
+// Mac Filter Match Message
+void emAfMacFilterMatchMessage(
+      // filter index match.
+      uint8_t filterIndexMatch,
+      // message type.
+      EmberMacPassthroughType messageType,
+      // last hop lqi.
+      uint8_t lastHopLqi,
+      // last hop rssi.
+      int8_t lastHopRssi,
+      // message length.
+      uint8_t messageLength,
+      // message contents.
+      uint8_t *messageContents)
+{
+(void)filterIndexMatch;
+(void)messageType;
+(void)lastHopLqi;
+(void)lastHopRssi;
+(void)messageLength;
+(void)messageContents;
+
+emAfMacFilterMatchMessageCallback (filterIndexMatch, messageType, lastHopLqi, lastHopRssi, messageLength, messageContents);
+}
+#else // !EZSP_HOST
 // Mac Filter Match Message
 void emAfMacFilterMatchMessage(
       // Return: macFilterMatchStruct.
@@ -844,6 +992,7 @@ void emAfMacFilterMatchMessage(
 
 emAfMacFilterMatchMessageCallback(macFilterMatchStruct);
 }
+#endif // EZSP_HOST
 
 
 

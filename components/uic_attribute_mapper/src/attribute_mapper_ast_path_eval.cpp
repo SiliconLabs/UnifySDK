@@ -65,6 +65,12 @@ attribute_store::attribute attribute_path_eval::operator()(
   if (index && type_id) {
     for (attribute_store::attribute child:
          context.children(static_cast<uint32_t>(type_id.value()))) {
+      if (child.reported_exists() == false) {
+        // Do not try to read the value if the reported value is undefined, as the
+        // attribute_store_get_reported_number would return FLT_MIN,
+        // and this would cast as 0 in uint32_t.
+        continue;
+      }
       result_type_t value = attribute_store_get_reported_number(child);
       if (static_cast<uint32_t>(value)
           == static_cast<uint32_t>(index.value())) {

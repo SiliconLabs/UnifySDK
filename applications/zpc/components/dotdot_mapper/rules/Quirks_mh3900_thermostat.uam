@@ -10,7 +10,7 @@ def zwTHERMOSTAT_SETPOINT_VERSION 0x4301
 
 def mh3900_heating_thermostat ((r'zwMANUFACTURER_ID == 0x015F) & (r'zwPRODUCT_TYPE_ID == 0x3900) & (r'zwPRODUCT_ID == 0x5102))
 
-scope 0 {
+scope 500 {
 
 // The thermostat reports in its NIF that it is listening/routing, despite being a sleeping node.
 r'^.zwNIF_PROTOCOL_LISTENING =

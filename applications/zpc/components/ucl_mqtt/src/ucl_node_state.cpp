@@ -302,7 +302,15 @@ static sl_status_t publish_node_state(attribute_store_node_t node_id_node,
 
   std::string topic = "ucl/by-unid/";
   unid_t unid;
-  attribute_store_network_helper_get_unid_from_node(node_id_node, unid);
+  if (SL_STATUS_OK
+      != attribute_store_network_helper_get_unid_from_node(node_id_node,
+                                                           unid)) {
+    sl_log_warning(LOG_TAG,
+                   "Cannot derive UNID for NodeID node %d. "
+                   "Node state topic will not be published.",
+                   node_id_node);
+    return SL_STATUS_FAIL;
+  }
   topic.append(unid);
   topic.append("/State");
   std::string cmd_delay;
@@ -350,7 +358,15 @@ static void publish_endpoint_list(attribute_store_node_t node_id_node)
   }
   std::string topic_basic = "ucl/by-unid/";
   unid_t unid;
-  attribute_store_network_helper_get_unid_from_node(node_id_node, unid);
+  if (SL_STATUS_OK
+      != attribute_store_network_helper_get_unid_from_node(node_id_node,
+                                                           unid)) {
+    sl_log_warning(LOG_TAG,
+                   "Cannot derive UNID for NodeID node %d. "
+                   "Node state Endpoint List will not be published.",
+                   node_id_node);
+    return;
+  }
   topic_basic.append(unid);
   // Get endpoint lists
   std::vector<zwave_endpoint_id_t> endpoint_list;
@@ -378,7 +394,14 @@ static void publish_endpoint_list(attribute_store_node_t node_id_node)
 static void unretain_node_publications(attribute_store_node_t node)
 {
   unid_t unid;
-  attribute_store_network_helper_get_unid_from_node(node, unid);
+  if (SL_STATUS_OK
+      != attribute_store_network_helper_get_unid_from_node(node, unid)) {
+    sl_log_warning(LOG_TAG,
+                   "Cannot derive UNID for NodeID node %d. "
+                   "Unretaining node publications may fail.",
+                   node);
+    return;
+  }
   std::string pattern = "ucl/by-unid/";
   pattern.append(unid);
   uic_mqtt_unretain(pattern.data());

@@ -245,6 +245,13 @@ sl_status_t uic_mqtt_dotdot_by_group_relativity_humidity_init();
 sl_status_t uic_mqtt_dotdot_by_group_occupancy_sensing_init();
 
 /**
+ * @brief Initialize SoilMoisture dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_soil_moisture_init();
+
+/**
  * @brief Initialize PhMeasurement dotdot bygroup command handlers
  *
  * @returns SL_STATUS_OK on success, error otherwise.
@@ -271,6 +278,20 @@ sl_status_t uic_mqtt_dotdot_by_group_wind_speed_measurement_init();
  * @returns SL_STATUS_OK on success, error otherwise.
  */
 sl_status_t uic_mqtt_dotdot_by_group_carbon_monoxide_init();
+
+/**
+ * @brief Initialize CarbonDioxide dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_carbon_dioxide_init();
+
+/**
+ * @brief Initialize PM25 dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_pm25_init();
 
 /**
  * @brief Initialize IASZone dotdot bygroup command handlers
@@ -4003,6 +4024,27 @@ void uic_mqtt_dotdot_on_occupancy_sensing_WriteAttributes(
  *
  * @returns std::set of callbacks.
  */
+std::set<uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t> & get_uic_mqtt_dotdot_soil_moisture_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/SoilMoisture/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_soil_moisture_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
 std::set<uic_mqtt_dotdot_ph_measurement_write_attributes_callback_t> & get_uic_mqtt_dotdot_ph_measurement_write_attributes_callback();
 
 /**
@@ -4074,6 +4116,48 @@ std::set<uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback_t> & get_uic_
  */
 // clang-format off
 void uic_mqtt_dotdot_on_carbon_monoxide_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t> & get_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/CarbonDioxide/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_carbon_dioxide_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_pm25_write_attributes_callback_t> & get_uic_mqtt_dotdot_pm25_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/PM25/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_pm25_WriteAttributes(
   const char *topic,
   const char *message,
   const size_t message_length);

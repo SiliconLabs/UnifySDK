@@ -3013,6 +3013,35 @@ typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_physical_conta
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint8_t physical_contact_unoccupied_to_occupied_threshold
 );
+// Callback types used by the soil_moisture cluster
+typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t min_measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t max_measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t tolerance
+);
 // Callback types used by the ph_measurement cluster
 typedef sl_status_t (*uic_mqtt_dotdot_ph_measurement_attribute_measured_value_callback_t)(
   dotdot_unid_t unid,
@@ -3123,6 +3152,64 @@ typedef sl_status_t (*uic_mqtt_dotdot_carbon_monoxide_attribute_max_measured_val
   float max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_carbon_monoxide_attribute_tolerance_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float tolerance
+);
+// Callback types used by the carbon_dioxide cluster
+typedef sl_status_t (*uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float min_measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float max_measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float tolerance
+);
+// Callback types used by the pm25 cluster
+typedef sl_status_t (*uic_mqtt_dotdot_pm25_attribute_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float min_measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  float max_measured_value
+);
+typedef sl_status_t (*uic_mqtt_dotdot_pm25_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
@@ -7833,6 +7920,38 @@ void uic_mqtt_dotdot_occupancy_sensing_attribute_physical_contact_unoccupied_to_
 
 
 /**
+ *  Initializes the attributes features for the SoilMoisture cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_soil_moisture_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * SoilMoisture/Attributes/measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * SoilMoisture/Attributes/min_measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * SoilMoisture/Attributes/max_measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * SoilMoisture/Attributes/tolerance/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback_set(const uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback_t callback);
+
+
+/**
  *  Initializes the attributes features for the PhMeasurement cluster,
  *  allowing to receive attribute updates from other UNIDs.
  */
@@ -7958,6 +8077,70 @@ void uic_mqtt_dotdot_carbon_monoxide_attribute_max_measured_value_callback_set(c
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_carbon_monoxide_attribute_tolerance_callback_set(const uic_mqtt_dotdot_carbon_monoxide_attribute_tolerance_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the CarbonDioxide cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * CarbonDioxide/Attributes/measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * CarbonDioxide/Attributes/min_measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_min_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * CarbonDioxide/Attributes/max_measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_max_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * CarbonDioxide/Attributes/tolerance/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback_set(const uic_mqtt_dotdot_carbon_dioxide_attribute_tolerance_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the PM25 cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_pm25_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * PM25/Attributes/measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_pm25_attribute_measured_value_callback_set(const uic_mqtt_dotdot_pm25_attribute_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * PM25/Attributes/min_measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback_set(const uic_mqtt_dotdot_pm25_attribute_min_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * PM25/Attributes/max_measured_value/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback_set(const uic_mqtt_dotdot_pm25_attribute_max_measured_value_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * PM25/Attributes/tolerance/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_pm25_attribute_tolerance_callback_set(const uic_mqtt_dotdot_pm25_attribute_tolerance_callback_t callback);
 
 
 /**

@@ -22,8 +22,8 @@
 #ifndef ATTRIBUTE_MAPPER_AST_DEP_EVAL_HPP
 #define ATTRIBUTE_MAPPER_AST_DEP_EVAL_HPP
 
-#include "attribute.hpp"
 #include <set>
+#include "attribute.hpp"
 #include "attribute_mapper_ast_eval.hpp"
 
 namespace ast
@@ -101,7 +101,7 @@ class dep_eval_path
   dep_eval_path(value_type_t value_type);
 
   /// operand, usually a literal constant number
-  const dependencies_t &operator()(const ast::operand &operand);
+  const dependencies_t &operator()(const operand &operand);
   /// hat operator ^ (parent)
   const dependencies_t &operator()(const nil &nul)
   {

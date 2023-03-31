@@ -257,6 +257,8 @@
 
 // Commands for cluster: OccupancySensing
 
+// Commands for cluster: SoilMoisture
+
 // Commands for cluster: PhMeasurement
 
 // Commands for cluster: ElectricalConductivityMeasurement
@@ -264,6 +266,10 @@
 // Commands for cluster: WindSpeedMeasurement
 
 // Commands for cluster: CarbonMonoxide
+
+// Commands for cluster: CarbonDioxide
+
+// Commands for cluster: PM25
 
 // Commands for cluster: IASZone
 #define DOTDOT_IAS_ZONE_ZONE_ENROLL_RESPONSE_COMMAND_ID (0x0)

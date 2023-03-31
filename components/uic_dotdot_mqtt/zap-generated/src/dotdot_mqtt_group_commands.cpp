@@ -293,6 +293,9 @@ static uic_mqtt_dotdot_by_group_relativity_humidity_write_attributes_callback_t 
 static uic_mqtt_dotdot_by_group_occupancy_sensing_write_attributes_callback_t uic_mqtt_dotdot_by_group_occupancy_sensing_write_attributes_callback = nullptr;
 
 
+static uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback_t uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback = nullptr;
+
+
 static uic_mqtt_dotdot_by_group_ph_measurement_write_attributes_callback_t uic_mqtt_dotdot_by_group_ph_measurement_write_attributes_callback = nullptr;
 
 
@@ -303,6 +306,12 @@ static uic_mqtt_dotdot_by_group_wind_speed_measurement_write_attributes_callback
 
 
 static uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback_t uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback = nullptr;
+
+
+static uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback_t uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback = nullptr;
+
+
+static uic_mqtt_dotdot_by_group_pm25_write_attributes_callback_t uic_mqtt_dotdot_by_group_pm25_write_attributes_callback = nullptr;
 
 
 static uic_mqtt_dotdot_by_group_ias_zone_zone_enroll_response_callback_t uic_mqtt_dotdot_by_group_ias_zone_zone_enroll_response_callback = nullptr;
@@ -1583,6 +1592,15 @@ void uic_mqtt_dotdot_by_group_occupancy_sensing_write_attributes_callback_set(
 
 
 // Callbacks setters
+void uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
 void uic_mqtt_dotdot_by_group_ph_measurement_write_attributes_callback_set(
   const uic_mqtt_dotdot_by_group_ph_measurement_write_attributes_callback_t callback)
 {
@@ -1614,6 +1632,24 @@ void uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback_set(
   const uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
+void uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
+void uic_mqtt_dotdot_by_group_pm25_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_pm25_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_pm25_write_attributes_callback = callback;
 }
 
 
@@ -20098,6 +20134,91 @@ sl_status_t uic_mqtt_dotdot_by_group_occupancy_sensing_init()
 
 
 
+static void uic_mqtt_dotdot_on_by_group_soil_moisture_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_soil_moisture_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "SoilMoisture",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_soil_moisture_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "SoilMoisture: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_soil_moisture_state_t new_state = {};
+    uic_mqtt_dotdot_soil_moisture_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_soil_moisture_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "SoilMoisture", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_soil_moisture_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_soil_moisture_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "SoilMoisture/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_soil_moisture_WriteAttributes);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
+
 static void uic_mqtt_dotdot_on_by_group_ph_measurement_WriteAttributes(
   const char *topic,
   const char *message,
@@ -20430,6 +20551,176 @@ sl_status_t uic_mqtt_dotdot_by_group_carbon_monoxide_init()
   if(uic_mqtt_dotdot_by_group_carbon_monoxide_write_attributes_callback) {
     subscription_topic = topic_bygroup + "CarbonMonoxide/Commands/WriteAttributes";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_carbon_monoxide_WriteAttributes);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
+
+static void uic_mqtt_dotdot_on_by_group_carbon_dioxide_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "CarbonDioxide",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_carbon_dioxide_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "CarbonDioxide: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_carbon_dioxide_state_t new_state = {};
+    uic_mqtt_dotdot_carbon_dioxide_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_carbon_dioxide_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "CarbonDioxide", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_carbon_dioxide_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_carbon_dioxide_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "CarbonDioxide/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_carbon_dioxide_WriteAttributes);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
+
+static void uic_mqtt_dotdot_on_by_group_pm25_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_pm25_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_pm25_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "PM25",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_pm25_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "PM25: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_pm25_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_pm25_state_t new_state = {};
+    uic_mqtt_dotdot_pm25_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_pm25_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "PM25", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_pm25_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_pm25_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_pm25_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "PM25/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_pm25_WriteAttributes);
   }
 
   return SL_STATUS_OK;
@@ -23689,6 +23980,8 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
 
     uic_mqtt_subscribe("ucl/by-group/+/OccupancySensing/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_occupancy_sensing_WriteAttributes);
 
+    uic_mqtt_subscribe("ucl/by-group/+/SoilMoisture/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_soil_moisture_WriteAttributes);
+
     uic_mqtt_subscribe("ucl/by-group/+/PhMeasurement/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_ph_measurement_WriteAttributes);
 
     uic_mqtt_subscribe("ucl/by-group/+/ElectricalConductivityMeasurement/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_electrical_conductivity_measurement_WriteAttributes);
@@ -23696,6 +23989,10 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/WindSpeedMeasurement/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_wind_speed_measurement_WriteAttributes);
 
     uic_mqtt_subscribe("ucl/by-group/+/CarbonMonoxide/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_carbon_monoxide_WriteAttributes);
+
+    uic_mqtt_subscribe("ucl/by-group/+/CarbonDioxide/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_carbon_dioxide_WriteAttributes);
+
+    uic_mqtt_subscribe("ucl/by-group/+/PM25/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_pm25_WriteAttributes);
 
     uic_mqtt_subscribe("ucl/by-group/+/IASZone/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_ias_zone_WriteAttributes);
     uic_mqtt_subscribe("ucl/by-group/+/IASZone/Commands/ZoneEnrollResponse", uic_mqtt_dotdot_on_by_group_ias_zone_zone_enroll_response);

@@ -27,6 +27,35 @@
 #include "attribute_mapper_ast_dep_eval.hpp"
 #include <map>
 #include <memory>
+
+// Sort priority from high to low.
+struct scope_priority_compare {
+  bool operator()(const int &lhs, const int &rhs) const
+  {
+    return lhs > rhs;
+  }
+};
+
+/**
+ * @brief Set of unique assignments, sorted by their scope priority
+ */
+using equivalent_assignments_t = std::
+  multimap<int, std::shared_ptr<ast::assignment>, scope_priority_compare>;
+
+/**
+ * @brief Map of equivalent assignments associated with a destination attributes.
+ */
+using assignments_to_run_t
+  = std::map<attribute_store::attribute, equivalent_assignments_t>;
+
+/**
+ * @brief assignment_properties_t keeps track of various
+ * - int is the scope priority
+ * - char is the value type (r, d, e...) assigned
+ * - attribute_type_t is the attribute type
+ */
+using assignment_properties_t = std::tuple<int, char, attribute_store_type_t>;
+
 /**
  * @brief Mapper Engine
  *
@@ -205,13 +234,85 @@ class MapperEngine
     get_destination_for_attribute(const attribute_store::attribute &endpoint,
                                   const ast::attribute &attribute,
                                   bool create_if_missing) const;
+  /**
+   * @brief Checks if the engine has other assigments assigning the same
+   * attribute type / value type
+   *
+   * Try to resolve the attribute node from the AST attribute path.
+   *
+   * @param assignment     The assignment to take for a start. comparing with all others
+   * @return A map of assignments assigning the same value tyep and attribute type, sorted by priority.
+   */
+  equivalent_assignments_t
+    get_equivalent_assignments(std::shared_ptr<ast::assignment> assignment);
+
+  /**
+   * @brief Checks what would be the destination attribute affected by an
+   * assigment, if applied
+   *
+   * Returns INVALID_NODE if the destination
+   *
+   * @param assignment     The assignment to look for a destination
+   * @returns Attribute Store node
+   */
+  attribute_store::attribute get_assigment_potential_destination(
+    std::shared_ptr<ast::assignment> assignment,
+    attribute_store::attribute original_node);
+
+  /**
+   * @brief Checks if an assignment (lhs) path matches the attribute for a destination.
+   *
+   * @param assignment    Assignemnt to check if the lhs path matches the
+   *                      destination attribute
+   * @param destination   Destination attribute to match with the assignment LHS.
+   * @return true   If it matches
+   * @return false  if it does not match
+   */
+  bool
+    assignment_matches_destination(std::shared_ptr<ast::assignment> assignment,
+                                   attribute_store::attribute destination);
+
+  /**
+   * @brief Takes a list of assignments with a possible destination, and run
+   * 1. the highest priority assigment if the destination exists
+   * 2. All of them from low to high priority if the destination does not exist
+   *
+   * @param assignments_to_check    List of assigment to execute
+   * @param assigment_destination   Destination attribute
+   */
+  void run_assignments(equivalent_assignments_t assignments_to_check,
+                       attribute_store::attribute assigment_destination,
+                       attribute_store::attribute original_node);
+  /**
+   * @brief Runs a single assigment and verifies if a value was applied.
+   *
+   * @param assignment              
+   * @param assigment_destination
+   * @param original_node
+   * @return true
+   * @return false
+   */
+  bool run_assignment(std::shared_ptr<ast::assignment> assignment,
+                      attribute_store::attribute assigment_destination,
+                      attribute_store::attribute original_node);
 
   //Lookup table for which assignments depend on which attributes
   std::multimap<ast::attribute_dependency_t, std::shared_ptr<ast::assignment>>
     relations;
+
+  /* Saves the scopes settings for an assignment.
+     e.g 'scope 2 chain_reaction(0) clear_desired(0) { assignment1 }' will associate
+     chain_reaction = 3 and clear_desired = 0 to assignment 1.
+  */
   std::map<std::shared_ptr<ast::assignment>,
            std::shared_ptr<ast::scope_settings_t>>
     assignment_settings;
+
+  /* Stores properties associated to assignments. */
+  std::map<std::shared_ptr<ast::assignment>, assignment_properties_t>
+    assignment_properties;
+
+  // Default mapper configured comment parent attribute type.
   attribute_store_type_t common_parent_type = ATTRIBUTE_STORE_INVALID_NODE;
 };
 

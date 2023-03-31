@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<!-- 
-Zigbee Alliance owns the copyright to the text and content displayed or 
-included in this document (including in PDF, XML files and other formats) in 
-all forms of media, which copyright is protected by the copyright laws of the 
-United States and by international treaties.  Full text of licensing terms 
+<!--
+Zigbee Alliance owns the copyright to the text and content displayed or
+included in this document (including in PDF, XML files and other formats) in
+all forms of media, which copyright is protected by the copyright laws of the
+United States and by international treaties.  Full text of licensing terms
 applicable to this document can be found in the LICENSE.md file.
 -->
 <?xml-stylesheet type="text/xsl" href="zcldisplay.xsl"?>
@@ -12,7 +12,7 @@ applicable to this document can be found in the LICENSE.md file.
   xmlns:type="http://zigbee.org/zcl/types"
   xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd">
 
-  <!-- Tools need to process XML includes first see https://stackoverflow.com/questions/1098116/xinclude-schema-namespace-validation 
+  <!-- Tools need to process XML includes first see https://stackoverflow.com/questions/1098116/xinclude-schema-namespace-validation
     for how to enable this in the eclipse validation config. -->
   <!-- types? -->
   <type:type id="00" short="nodata" name="No data" />
@@ -159,7 +159,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:invalid value="65535" />
     </restriction>
   </type:type>
-  
+
   <!-- Floating Point -->
   <type:type id="38" short="semi" name="Semi-precision">
     <!-- Not sure how to restrict as it's not really a standard type -->
@@ -192,7 +192,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:special name="NegativeInfinity" value="fff0000000000000" />
     </restriction>
   </type:type>
-  
+
   <!-- String Discrete -->
   <type:type id="41" short="octstr" name="Octet string" discrete="true" />
   <type:type id="42" short="string" name="Character string" discrete="true" />
@@ -202,11 +202,11 @@ applicable to this document can be found in the LICENSE.md file.
   <!-- Sequences (Not Used By Standard Zigbee Clusters, unavailable in ZCL over IP) -->
   <type:type id="48" short="array" name="Array" discrete="true" />
   <type:type id="49" short="struct" name="Structure" discrete="true" />
-  
+
   <!-- Collections -->
   <type:type id="50" short="set" name="Set" discrete="true" />
   <type:type id="51" short="bag" name="Bag" discrete="true" />
-  
+
   <!-- Time -->
   <type:type id="e0" short="ToD" name="Time of day">
     <restriction>
@@ -327,7 +327,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:enumeration name="unk" value="ff" />
     </restriction>
   </type:type>
-  
+
   <!-- AttributeReportingStatus Enum Values -->
   <type:type id="30" short="attributeReportingStatus" name="Attribute Reporting Status" discrete="true" inheritsFrom="enum8">
     <restriction>
@@ -450,6 +450,7 @@ applicable to this document can be found in the LICENSE.md file.
   <xi:include href="PressureMeasurement.xml" parse="xml" />
   <xi:include href="FlowMeasurement.xml" parse="xml" />
   <xi:include href="WaterContentMeasurement.xml" parse="xml" />
+  <xi:include href="WaterContentMeasurement_SoilMoisture.xml" parse="xml" />
   <xi:include href="OccupancySensing.xml" parse="xml" />
   <xi:include href="ElectricalMeasurement.xml" parse="xml" />
   <xi:include href="ElectricalConductivityMeasurement.xml" parse="xml" />
@@ -473,6 +474,8 @@ applicable to this document can be found in the LICENSE.md file.
 <!-- Removed as it causes issues with ZAP, and we don't use it. <xi:include href="TouchlinkCommissioning.xml" parse="xml" /> -->
   <xi:include href="OTAUpgrade.xml" parse="xml" />
   <xi:include href="ConcentrationMeasurement.xml" parse="xml"/>
+  <xi:include href="ConcentrationMeasurement_CarbonDioxide.xml" parse="xml"/>
+  <xi:include href="ConcentrationMeasurement_PM25.xml" parse="xml"/>
   <xi:include href="Metering.xml" parse="xml"/>
 
   <xi:include href="Unify_ProtocolController_RFTelemetry.xml" parse="xml"/>

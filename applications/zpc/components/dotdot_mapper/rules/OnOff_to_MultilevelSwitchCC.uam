@@ -8,7 +8,6 @@ def zwBASIC_VALUE  0x2002
 def zwMULTILEVEL_STATE  0x2602
 def zwVALUE             0x2603
 def zwDURATION          0x2604
-def zwON_OFF            0x2605
 
 // OnOff Cluster
 def zbON_OFF 0x00060000
@@ -20,6 +19,19 @@ def zwave_multilevel_exists (e'zwMULTILEVEL_STATE)
 // We map OnOff to Multilevel_switch if there is no Basic or Binary Switch
 def on_off_to_multilevel_mapping (no_basic_or_binary_switch & zwave_multilevel_exists)
 
-scope 0 chain_reaction(0) clear_desired(1) {
-  r'zbON_OFF = if (on_off_to_multilevel_mapping) r'zwMULTILEVEL_STATE.zwON_OFF undefined
+// Align back from Multilevel Switch only if we are not setting, i.e. ZCL has a mismatch.
+def zcl_on_off_no_mismatch (fn_are_all_defined(r'zbON_OFF,d'zbON_OFF) & (r'zbON_OFF ==d'zbON_OFF))
+
+// Map to Multilevel only if no Binary Switch. This map has less priority.
+scope 15 chain_reaction(1) clear_desired(0) create_attributes(0) {
+  // Align the OnOff value to the Multilevel Switch value, if positive.
+  r'zbON_OFF =
+    if (on_off_to_multilevel_mapping & zcl_on_off_no_mismatch & (r'zwMULTILEVEL_STATE.zwVALUE>0)) 1
+    if (on_off_to_multilevel_mapping & zcl_on_off_no_mismatch & (r'zwMULTILEVEL_STATE.zwVALUE==0)) 0
+    undefined
+
+  d'zbON_OFF =
+    if (on_off_to_multilevel_mapping & zcl_on_off_no_mismatch & (d'zwMULTILEVEL_STATE.zwVALUE>0)) 1
+    if (on_off_to_multilevel_mapping & zcl_on_off_no_mismatch & (d'zwMULTILEVEL_STATE.zwVALUE==0)) 0
+    undefined
 }

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.3.1</span>
    </div>
   </td>
  </tr>
@@ -137,6 +137,21 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:ac7bd4f2fad327ac372685d361f1a74a6"><td class="memItemLeft" align="right" valign="top">attribute_store::attribute&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#ac7bd4f2fad327ac372685d361f1a74a6">get_destination_for_attribute</a> (const attribute_store::attribute &amp;endpoint, const <a class="el" href="structast_1_1attribute.html">ast::attribute</a> &amp;attribute, bool create_if_missing) const</td></tr>
 <tr class="memdesc:ac7bd4f2fad327ac372685d361f1a74a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the destination for attribute.  <a href="classMapperEngine.html#ac7bd4f2fad327ac372685d361f1a74a6">More...</a><br /></td></tr>
 <tr class="separator:ac7bd4f2fad327ac372685d361f1a74a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639ae3aca8dbb0cae245a3e4903ed18a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#a639ae3aca8dbb0cae245a3e4903ed18a">get_equivalent_assignments</a> (std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment)</td></tr>
+<tr class="memdesc:a639ae3aca8dbb0cae245a3e4903ed18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the engine has other assigments assigning the same attribute type / value type.  <a href="classMapperEngine.html#a639ae3aca8dbb0cae245a3e4903ed18a">More...</a><br /></td></tr>
+<tr class="separator:a639ae3aca8dbb0cae245a3e4903ed18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad760ef887ffed523f4c290c11dbe46bb"><td class="memItemLeft" align="right" valign="top">attribute_store::attribute&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#ad760ef887ffed523f4c290c11dbe46bb">get_assigment_potential_destination</a> (std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment, attribute_store::attribute original_node)</td></tr>
+<tr class="memdesc:ad760ef887ffed523f4c290c11dbe46bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks what would be the destination attribute affected by an assigment, if applied.  <a href="classMapperEngine.html#ad760ef887ffed523f4c290c11dbe46bb">More...</a><br /></td></tr>
+<tr class="separator:ad760ef887ffed523f4c290c11dbe46bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f7445804f00f882b027d0d75ca8fc1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#a5f7445804f00f882b027d0d75ca8fc1d">assignment_matches_destination</a> (std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment, attribute_store::attribute destination)</td></tr>
+<tr class="memdesc:a5f7445804f00f882b027d0d75ca8fc1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an assignment (lhs) path matches the attribute for a destination.  <a href="classMapperEngine.html#a5f7445804f00f882b027d0d75ca8fc1d">More...</a><br /></td></tr>
+<tr class="separator:a5f7445804f00f882b027d0d75ca8fc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe06cd167737c438827a90173cf57046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#abe06cd167737c438827a90173cf57046">run_assignments</a> (<a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a> assignments_to_check, attribute_store::attribute assigment_destination, attribute_store::attribute original_node)</td></tr>
+<tr class="memdesc:abe06cd167737c438827a90173cf57046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes a list of assignments with a possible destination, and run.  <a href="classMapperEngine.html#abe06cd167737c438827a90173cf57046">More...</a><br /></td></tr>
+<tr class="separator:abe06cd167737c438827a90173cf57046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab034cf278bae51c4f73b43c49657bb02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#ab034cf278bae51c4f73b43c49657bb02">run_assignment</a> (std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment, attribute_store::attribute assigment_destination, attribute_store::attribute original_node)</td></tr>
+<tr class="memdesc:ab034cf278bae51c4f73b43c49657bb02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a single assigment and verifies if a value was applied.  <a href="classMapperEngine.html#ab034cf278bae51c4f73b43c49657bb02">More...</a><br /></td></tr>
+<tr class="separator:ab034cf278bae51c4f73b43c49657bb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -144,6 +159,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:af122c9ca8dd2666fdd220a900cd90beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a783337aacd2fa0cf920d5e90bcd370d5"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;, std::shared_ptr&lt; <a class="el" href="namespaceast.html#aef0d3c13d88a76613ad4519f04810f4b">ast::scope_settings_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#a783337aacd2fa0cf920d5e90bcd370d5">assignment_settings</a></td></tr>
 <tr class="separator:a783337aacd2fa0cf920d5e90bcd370d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae640c03ab4beb46fb4e650c44dfc93e3"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;, <a class="el" href="group__attribute__mapper__engine.html#ga8464bd651a8a81b4945ae593ff47661c">assignment_properties_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#ae640c03ab4beb46fb4e650c44dfc93e3">assignment_properties</a></td></tr>
+<tr class="separator:ae640c03ab4beb46fb4e650c44dfc93e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2672111a117d96def897cf8e0a7b0aa6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#a2672111a117d96def897cf8e0a7b0aa6">common_parent_type</a> = <a class="el" href="group__attribute__store__api.html#gad8f68eed88ca297167f815f46297ad7c">ATTRIBUTE_STORE_INVALID_NODE</a></td></tr>
 <tr class="separator:a2672111a117d96def897cf8e0a7b0aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -198,6 +215,100 @@ false Some error occurred in parsing of AST validation </dd></dl>
 
 </div>
 </div>
+<a id="a5f7445804f00f882b027d0d75ca8fc1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f7445804f00f882b027d0d75ca8fc1d">&#9670;&nbsp;</a></span>assignment_matches_destination()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MapperEngine::assignment_matches_destination </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;&#160;</td>
+          <td class="paramname"><em>assignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>destination</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if an assignment (lhs) path matches the attribute for a destination. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assignment</td><td>Assignemnt to check if the lhs path matches the destination attribute </td></tr>
+    <tr><td class="paramname">destination</td><td>Destination attribute to match with the assignment LHS. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true If it matches </dd>
+<dd>
+false if it does not match </dd></dl>
+
+</div>
+</div>
+<a id="ad760ef887ffed523f4c290c11dbe46bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad760ef887ffed523f4c290c11dbe46bb">&#9670;&nbsp;</a></span>get_assigment_potential_destination()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute_store::attribute MapperEngine::get_assigment_potential_destination </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;&#160;</td>
+          <td class="paramname"><em>assignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>original_node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks what would be the destination attribute affected by an assigment, if applied. </p>
+<p>Returns INVALID_NODE if the destination</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assignment</td><td>The assignment to look for a destination </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Attribute Store node </dd></dl>
+
+</div>
+</div>
 <a id="ac7bd4f2fad327ac372685d361f1a74a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac7bd4f2fad327ac372685d361f1a74a6">&#9670;&nbsp;</a></span>get_destination_for_attribute()</h2>
 
@@ -249,6 +360,42 @@ false Some error occurred in parsing of AST validation </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>destination attribute, if no destination is found we return INVALID_ATTRIBUTE </dd></dl>
+
+</div>
+</div>
+<a id="a639ae3aca8dbb0cae245a3e4903ed18a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639ae3aca8dbb0cae245a3e4903ed18a">&#9670;&nbsp;</a></span>get_equivalent_assignments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a> MapperEngine::get_equivalent_assignments </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;&#160;</td>
+          <td class="paramname"><em>assignment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the engine has other assigments assigning the same attribute type / value type. </p>
+<p>Try to resolve the attribute node from the AST attribute path.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assignment</td><td>The assignment to take for a start. comparing with all others </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A map of assignments assigning the same value tyep and attribute type, sorted by priority. </dd></dl>
 
 </div>
 </div>
@@ -429,6 +576,117 @@ false Some error occurred in parsing of AST validation </dd></dl>
 
 </div>
 </div>
+<a id="ab034cf278bae51c4f73b43c49657bb02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab034cf278bae51c4f73b43c49657bb02">&#9670;&nbsp;</a></span>run_assignment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MapperEngine::run_assignment </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;&#160;</td>
+          <td class="paramname"><em>assignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>assigment_destination</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>original_node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a single assigment and verifies if a value was applied. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assignment</td><td><br  />
+ </td></tr>
+    <tr><td class="paramname">assigment_destination</td><td></td></tr>
+    <tr><td class="paramname">original_node</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="abe06cd167737c438827a90173cf57046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe06cd167737c438827a90173cf57046">&#9670;&nbsp;</a></span>run_assignments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MapperEngine::run_assignments </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a>&#160;</td>
+          <td class="paramname"><em>assignments_to_check</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>assigment_destination</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>original_node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Takes a list of assignments with a possible destination, and run. </p>
+<ol type="1">
+<li>the highest priority assigment if the destination exists</li>
+<li>All of them from low to high priority if the destination does not exist</li>
+</ol>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assignments_to_check</td><td>List of assigment to execute </td></tr>
+    <tr><td class="paramname">assigment_destination</td><td>Destination attribute </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a3745c19c18c4e6502af8073eca8cb1f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3745c19c18c4e6502af8073eca8cb1f4">&#9670;&nbsp;</a></span>set_common_parent_type()</h2>
 
@@ -480,6 +738,28 @@ false Some error occurred in parsing of AST validation </dd></dl>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae640c03ab4beb46fb4e650c44dfc93e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae640c03ab4beb46fb4e650c44dfc93e3">&#9670;&nbsp;</a></span>assignment_properties</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::shared_ptr&lt;<a class="el" href="structast_1_1assignment.html">ast::assignment</a>&gt;, <a class="el" href="group__attribute__mapper__engine.html#ga8464bd651a8a81b4945ae593ff47661c">assignment_properties_t</a>&gt; MapperEngine::assignment_properties</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a783337aacd2fa0cf920d5e90bcd370d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a783337aacd2fa0cf920d5e90bcd370d5">&#9670;&nbsp;</a></span>assignment_settings</h2>
 
@@ -555,7 +835,7 @@ false Some error occurred in parsing of AST validation </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMapperEngine.html">MapperEngine</a></li>
-    <li class="footer">Generated on Wed Feb 15 2023 14:24:30 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Mar 31 2023 03:46:43 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

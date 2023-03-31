@@ -43,7 +43,7 @@ class EditableAttribute extends React.Component<EditableAttributeProps, Editable
 
     onChange = (event: any) => {
         //removing invalid characters and limiting the maximum string length to 256 characters
-        let val = event.target.value?.match(/[a-zA-Z0-9-_:. )(]{1,256}/g);
+        let val = event.target.value?.match(/[a-zA-Z0-9-_:.æøåÆØÅ )(]{1,256}/g);
         this.setState({ Value: val && val[0] });
     }
 

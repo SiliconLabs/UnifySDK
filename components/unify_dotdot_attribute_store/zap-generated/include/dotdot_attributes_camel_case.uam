@@ -505,6 +505,12 @@ def zb_PhysicalContactOccupiedToUnoccupiedDelay 0x04060030
 def zb_PhysicalContactUnoccupiedToOccupiedDelay 0x04060031
 def zb_PhysicalContactUnoccupiedToOccupiedThreshold 0x04060032
 
+// This represents short CamelCase labels the attributes in the DotDot SoilMoisture cluster
+def zb_MeasuredValue 0x04080000
+def zb_MinMeasuredValue 0x04080001
+def zb_MaxMeasuredValue 0x04080002
+def zb_Tolerance 0x04080003
+
 // This represents short CamelCase labels the attributes in the DotDot PhMeasurement cluster
 def zb_MeasuredValue 0x04090000
 def zb_MinMeasuredValue 0x04090001
@@ -528,6 +534,18 @@ def zb_MeasuredValue 0x040c0000
 def zb_MinMeasuredValue 0x040c0001
 def zb_MaxMeasuredValue 0x040c0002
 def zb_Tolerance 0x040c0003
+
+// This represents short CamelCase labels the attributes in the DotDot CarbonDioxide cluster
+def zb_MeasuredValue 0x040d0000
+def zb_MinMeasuredValue 0x040d0001
+def zb_MaxMeasuredValue 0x040d0002
+def zb_Tolerance 0x040d0003
+
+// This represents short CamelCase labels the attributes in the DotDot PM25 cluster
+def zb_MeasuredValue 0x042a0000
+def zb_MinMeasuredValue 0x042a0001
+def zb_MaxMeasuredValue 0x042a0002
+def zb_Tolerance 0x042a0003
 
 // This represents short CamelCase labels the attributes in the DotDot IASZone cluster
 def zb_ZoneState 0x05000000

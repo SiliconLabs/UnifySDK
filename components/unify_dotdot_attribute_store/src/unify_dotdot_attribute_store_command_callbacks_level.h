@@ -41,7 +41,6 @@ void level_cluster_mapper_init(void);
  */
 void level_cluster_mapper_teardown(void);
 
-
 /**
  * Move to level command used by the on/off cluster
  */
@@ -54,6 +53,14 @@ sl_status_t level_cluster_mapper_move_to_level_with_on_off(
   uint8_t options_mask,
   uint8_t options_override);
 
+sl_status_t level_cluster_mapper_move_to_level(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uint8_t level,
+  uint16_t transition_time,
+  uint8_t options_mask,
+  uint8_t options_override);
 
 #ifdef __cplusplus
 }

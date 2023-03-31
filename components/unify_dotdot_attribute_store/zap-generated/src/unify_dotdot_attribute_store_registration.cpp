@@ -20,7 +20,35 @@
 
 // Generic includes
 #include <string>
+#include <vector>
+
 constexpr const char *LOG_TAG = "unify_dotdot_attribute_store_registration";
+
+typedef struct {
+  attribute_store_type_t type;
+  const char *name;
+  attribute_store_type_t parent_type;
+  attribute_store_storage_type_t storage_type;
+} attribute_schema_t;
+
+// clang-format off
+static const std::vector<attribute_schema_t> zcl_additional_attribute_schema = {
+  /////////////////////////////////////////////////////////////////////
+  //         ZCL Scenes cluster attributes
+  /////////////////////////////////////////////////////////////////////
+  // SceneTable attribute is present in the XML files.
+  //{DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE,                  "ZCL Scenes SceneTable",  ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,                            EMPTY_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,            "Scene ID / Group ID",    DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE,           FIXED_SIZE_STRUCT_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME,        "Transition Time",        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     U16_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME_100MS,  "Transition Time 100ms",  DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     U8_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_NAME,                   "Name",                   DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     C_STRING_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_FIELD_SETS,             "Extension FieldSets",    DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID,     EMPTY_STORAGE_TYPE},
+  /////////////////////////////////////////////////////////////////////
+  //         ZCL Level cluster attributes
+  /////////////////////////////////////////////////////////////////////
+  {DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,   "ZCL Level Last Non Zero Level",   ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,   U8_STORAGE_TYPE},
+};
+// clang-format on
 
 attribute_store_storage_type_t
   attribute_storage_type_conversion(std::string &attribute_type_string)
@@ -10160,6 +10188,102 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
 
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL SoilMoisture MeasuredValue, "
+                     "type:  uint16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MEASURED_VALUE,
+      "ZCL SoilMoisture MeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL SoilMoisture MinMeasuredValue, "
+                     "type:  uint16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MIN_MEASURED_VALUE,
+      "ZCL SoilMoisture MinMeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL SoilMoisture MaxMeasuredValue, "
+                     "type:  uint16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MAX_MEASURED_VALUE,
+      "ZCL SoilMoisture MaxMeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL SoilMoisture Tolerance, "
+                     "type:  uint16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_TOLERANCE,
+      "ZCL SoilMoisture Tolerance",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PhMeasurement MeasuredValue, "
                      "type:  uint16 // uint16_t");
     }
@@ -10527,6 +10651,198 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_TOLERANCE,
       "ZCL CarbonMonoxide Tolerance",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL CarbonDioxide MeasuredValue, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MEASURED_VALUE,
+      "ZCL CarbonDioxide MeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL CarbonDioxide MinMeasuredValue, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MIN_MEASURED_VALUE,
+      "ZCL CarbonDioxide MinMeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL CarbonDioxide MaxMeasuredValue, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MAX_MEASURED_VALUE,
+      "ZCL CarbonDioxide MaxMeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL CarbonDioxide Tolerance, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_TOLERANCE,
+      "ZCL CarbonDioxide Tolerance",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL PM25 MeasuredValue, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_PM25_MEASURED_VALUE,
+      "ZCL PM25 MeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL PM25 MinMeasuredValue, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_PM25_MIN_MEASURED_VALUE,
+      "ZCL PM25 MinMeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL PM25 MaxMeasuredValue, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_PM25_MAX_MEASURED_VALUE,
+      "ZCL PM25 MaxMeasuredValue",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // single // single // float
+    std::string attribute_type_string           = "float";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL PM25 Tolerance, "
+                     "type:  single // float");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_PM25_TOLERANCE,
+      "ZCL PM25 Tolerance",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }
@@ -17061,6 +17377,14 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
 
   // clang-format off
   // clang-format on
+
+  // Additional attributes:
+  for (auto const &a: zcl_additional_attribute_schema) {
+    status |= attribute_store_register_type(a.type,
+                                            a.name,
+                                            a.parent_type,
+                                            a.storage_type);
+  }
 
   return status;
 }

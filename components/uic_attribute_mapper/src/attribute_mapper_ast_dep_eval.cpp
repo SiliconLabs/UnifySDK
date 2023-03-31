@@ -12,6 +12,7 @@
  *****************************************************************************/
 
 #include "attribute_mapper_ast_dep_eval.hpp"
+#include "attribute_store_helper.h"
 
 namespace ast
 {
@@ -71,7 +72,7 @@ const dependencies_t &dep_eval::get_dependencies() const
 dep_eval_path::dep_eval_path(value_type_t value_type) : value_type(value_type)
 {}
 
-const dependencies_t &dep_eval_path::operator()(const ast::operand &operand)
+const dependencies_t &dep_eval_path::operator()(const operand &operand)
 {
   ast::eval<uint32_t> evaluator;
   auto value = boost::apply_visitor(evaluator, operand);

@@ -281,6 +281,8 @@ sl_status_t zigpc_ucl::mqtt::parse_binding(
                 zigbee_endpoint_id_t &dest_ep)
 {
     sl_status_t status = SL_STATUS_OK;
+        
+    sl_log_info(zigpc_ucl::LOG_TAG,"Attempting to parse topic:%s", topic.c_str());
 
     nlohmann::json json_object;
 
@@ -328,6 +330,8 @@ sl_status_t zigpc_ucl::mqtt::parse_binding(
     }
     catch(nlohmann::json::parse_error& ex)
     {
+        sl_log_warning(zigpc_ucl::LOG_TAG,
+                     "Failed to parse JSON with status:%x and topic:%s", status, topic.c_str());
         status = SL_STATUS_FAIL;
     }
 

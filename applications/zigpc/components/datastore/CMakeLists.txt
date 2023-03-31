@@ -3,7 +3,7 @@ find_package(Threads REQUIRED)
 
 add_library(
   zigpc_datastore src/zigpc_datastore.cpp src/zigpc_datastore_accessor.cpp
-                  src/zigpc_datastore_util.cpp)
+                  src/zigpc_datastore_util.cpp src/zigpc_datastore_bindings.cpp)
 
 target_include_directories(
   zigpc_datastore

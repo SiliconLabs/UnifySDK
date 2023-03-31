@@ -34,5 +34,28 @@ DEFINE_ATTRIBUTE({{asAttributeIdDefine parent.label label}} , 0x{{attributeID th
 {{/if}}
 {{/zcl_clusters}}
 
+// Additional manually defined types:
+
+// Scenes Cluster
+/// This is an umbrella attribute for the Scene Table. Empty storage type.
+// It's also in the XML files, so defined in the dotdot unify attribute store.
+//DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE, 0x00050f01)
+///< This represents a Scene ID and Group ID, as a pair, to identify each entry
+/// of the Scene table. uint8_t / uint16_t in a struct (scene_id_group_id_t).
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID, 0x00050f02)
+///< This represents a Scene Name. C String.
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_NAME, 0x00050f03)
+///< This represents a Scene actuator configuration (set of ZCL Attributes with values)
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_FIELD_SETS, 0x00050f04)
+///< This represents a Scene Transition Time.
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME, 0x00050f05)
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME_100MS,
+                 0x00050f06)
+
+///< This value is used to store last non zero level, this is used when turning
+///  a Light on/off using on_off cluster. uint32_t
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,
+                 0x00080f01)
+
 #endif // UNIFY_DOTDOT_DEFINED_ATTRIBUTE_TYPES_H
 /** @} end unify_dotdot_defined_attribute_types */

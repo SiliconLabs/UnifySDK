@@ -39,7 +39,7 @@
             <img src="../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.0
+                ver_1.3.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -100,6 +100,7 @@
 <p>The <em>Unify Framework Developer GUI</em> is a Web service that runs on the
 <em>Unify</em> gateway. It provides a graphical interface to operate the various features
 of the <em>Unify</em> gateway, such as network management, smartstart, multicast, and so on.</p>
+<p><strong>NOTE</strong>: This guide illustrates the capabilities of the Dev GUI. Screenshots and information may be outdated.</p>
 <section id="access-developer-gui">
 <h2>Access Developer GUI<a class="headerlink" href="#access-developer-gui" title="Permalink to this heading"></a></h2>
 <p>The developer GUI (<em>Dev GUI</em>) can be accessed via any browser that can
@@ -173,7 +174,7 @@ QR Code. Use a QR Code scanning application and retrieve the data from the code.
 Z-Wave QR Code are encoded as a string of digits. For example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">9001165290030142138707174462303349713080650447059259001001793030790220000000000400003025780803003</span></code></p>
 <p>Use the
-<a class="reference external" href="https://github.com/Z-Wave-Alliance/qr_code_tool">Z-Wave Alliance QR Code decoding tool</a>
+<a class="reference external" href="https://siliconlabs.github.io/UnifySDK/doc/qr_code_scanner.html">Z-Wave Alliance QR Code decoding tool</a>
 to parse the digits and show what they represent.
 If you do not have access, you can request it at the
 <a class="reference external" href="https://sdomembers.z-wavealliance.org/">Z-Wave Alliance member portal</a>.
@@ -236,45 +237,56 @@ before they will seek inclusion in a new network.</p>
 <h2>Clusters<a class="headerlink" href="#clusters" title="Permalink to this heading"></a></h2>
 <p>The following are the currently (2022-02-09) supported clusters of the <em>Dev GUI</em>:</p>
 <ul class="simple">
-<li><p>On/Off switch</p></li>
-<li><p>Binary sensor</p></li>
-<li><p>Door lock</p></li>
-<li><p>Thermostat</p></li>
-<li><p>Color Control</p></li>
-<li><p>Level Control</p></li>
-<li><p>Identify</p></li>
-<li><p>Name and Location</p></li>
-<li><p>Scenes</p></li>
-<li><p>Locator and Position Estimation</p></li>
+<li><p>AoXLocator</p></li>
+<li><p>AoXPositionEstimation</p></li>
+<li><p>BarrierControl</p></li>
 <li><p>Basic</p></li>
+<li><p>Binding</p></li>
+<li><p>ColorControl</p></li>
+<li><p>ConcentrationMeasurement</p></li>
+<li><p>ConfigurationParameters</p></li>
+<li><p>DoorLock</p></li>
+<li><p>ElectricalConductivityMeasurement</p></li>
+<li><p>ElectricalMeasurement</p></li>
+<li><p>FlowMeasurement</p></li>
 <li><p>IASZone</p></li>
-<li><p>Power Configuration</p></li>
+<li><p>Identify</p></li>
+<li><p>IlluminanceMeasurement</p></li>
+<li><p>Level</p></li>
+<li><p>Metering</p></li>
+<li><p>NameAndLocation</p></li>
+<li><p>NetworkManagement</p></li>
+<li><p>OccupancySensing</p></li>
+<li><p>OnOff</p></li>
+<li><p>PhMeasurement</p></li>
+<li><p>PowerConfiguration</p></li>
+<li><p>PressureMeasurement</p></li>
+<li><p>RFTelemetry</p></li>
+<li><p>Scenes</p></li>
+<li><p>SystemMetrics</p></li>
+<li><p>TemperatureMeasurement</p></li>
+<li><p>Thermostat</p></li>
+<li><p>WaterContentMeasurement</p></li>
+<li><p>WindSpeedMeasurement</p></li>
+<li><p>WindowCovering</p></li>
 </ul>
-<section id="on-off-switch">
-<h3>On/Off Switch<a class="headerlink" href="#on-off-switch" title="Permalink to this heading"></a></h3>
-<p>After inclusion of an <strong>On/Off</strong> switch and navigating to the switches page, the
-page will look something like this:</p>
-<p><img alt="On/Off Switch" src="../../../_images/on_off.PNG" /></p>
-<p>This can control an <strong>On/Off</strong> switch.</p>
+<p>After inclusion of the node and navigating to the corresponding cluster page,
+you have the ability to view/edit cluster attributes and send commands that supported by the cluster.</p>
+<p>Cluster page examples:
+<img alt="On/Off Switch" src="../../../_images/on_off.PNG" />
+<img alt="Occupancy Sensor" src="../../../_images/occupancy_sensor.PNG" />
+<img alt="Door Lock" src="../../../_images/door_lock.PNG" /></p>
+<p>If the attribute is writable it can be edited by the Dev GUI. Writable attributes are highlighted in yellow:
+<img alt="Thermostat Set attributes" src="../../../_images/thermostat_modes.PNG" /></p>
+<p>In case the running command requires a list of params they can be entered in a pop-up window
+<img alt="Door Lock Pin" src="../../../_images/door_lock_pin.PNG" /></p>
 </section>
-<section id="binary-sensor">
-<h3>Binary Sensor<a class="headerlink" href="#binary-sensor" title="Permalink to this heading"></a></h3>
-<p>After including a <strong>Binary sensor</strong>, a page will look like this:</p>
-<p><img alt="Occupancy Sensor" src="../../../_images/occupancy_sensor.PNG" /></p>
-</section>
-<section id="door-lock">
-<h3>Door Lock<a class="headerlink" href="#door-lock" title="Permalink to this heading"></a></h3>
-<p>The door lock requires secure inclusion to work. The page will look like this:</p>
-<p><img alt="Door Lock" src="../../../_images/door_lock.PNG" /></p>
-<p>When unlocking or locking the door lock, a pop up will ask for a pin to the door
-lock:</p>
-<p><img alt="Door Lock Pin" src="../../../_images/door_lock_pin.PNG" /></p>
-</section>
-<section id="thermostat">
-<h3>Thermostat<a class="headerlink" href="#thermostat" title="Permalink to this heading"></a></h3>
-<p>The thermostat can change mode and change set point temperatures.</p>
-<p><img alt="Thermostat Set attributes" src="../../../_images/thermostat_modes.PNG" /></p>
-</section>
+<section id="measurements">
+<h2>Measurements<a class="headerlink" href="#measurements" title="Permalink to this heading"></a></h2>
+<p>All *Measurement clusters collected on one “Measurements” page. The first tab on this page is a list of all measurement clusters per node,
+the rest provide a list of nodes that support the corresponding cluster:
+<img alt="All Measurements" src="../../../_images/all_measurements.png" />
+<img alt="Nodes per Measurement" src="../../../_images/nodes_per_measurement.png" /></p>
 </section>
 <section id="groups">
 <h2>Groups<a class="headerlink" href="#groups" title="Permalink to this heading"></a></h2>
@@ -308,6 +320,52 @@ location column.</p>
 <p><img alt="Name and Location Dialog" src="../../../_images/name_location_dialog.PNG" /></p>
 <p>After clicking <em>Update</em>, the page will look like this.</p>
 <p><img alt="Name and Location Overview" src="../../../_images/name_location_nodes.PNG" /></p>
+</section>
+<section id="application-monitoring">
+<h2>Application Monitoring<a class="headerlink" href="#application-monitoring" title="Permalink to this heading"></a></h2>
+<p>All Unify services have the ability to notify client about their start/stop.
+So the Application Monitoring page represents the status and version of each application running on the <em>Unify</em> gateway.
+<img alt="Application Monitoring" src="../../../_images/application_monitoring.png" /></p>
+</section>
+<section id="ota">
+<h2>OTA<a class="headerlink" href="#ota" title="Permalink to this heading"></a></h2>
+<p>The OTA page provides information about the device’s current firmware:
+<img alt="OTA" src="../../../_images/ota.png" /></p>
+<p>If a new version of the firmware is ability, devices can be flashed:
+<img alt="OTA Flash" src="../../../_images/ota_flash.png" /></p>
+</section>
+<section id="commissionable-devices">
+<h2>Commissionable Devices<a class="headerlink" href="#commissionable-devices" title="Permalink to this heading"></a></h2>
+<p>Represents a list of commissinable devices provided by Matter Bridge:
+<img alt="Commissionable Devices" src="../../../_images/commissionable_devices.png" /></p>
+<p>If DSK is available, the device can be added to the SmartStart list:
+<img alt="Add Commissionable Devices" src="../../../_images/commissionable_devices_add.png" /></p>
+</section>
+<section id="upti">
+<h2>UPTI<a class="headerlink" href="#upti" title="Permalink to this heading"></a></h2>
+<p>Dev GUI application allows user to initiate adapters discovery,
+to start/stop trace packages capturing and visualize trace packages.</p>
+<ul>
+<li><p>Enable/Disable PTI on the Protocol Controller
+To <code class="docutils literal notranslate"><span class="pre">Enable</span></code> or <code class="docutils literal notranslate"><span class="pre">Disable</span></code> the PTI functionality for controllers with NCP that support this, you need to toggle <code class="docutils literal notranslate"><span class="pre">On\Off</span> <span class="pre">PTI</span></code> switch to the desired position on the <code class="docutils literal notranslate"><span class="pre">RFTelemetry</span></code> page
+<img alt="ToggleSerialApiPTI" src="../../../_images/enable_serial_api_pti.png" />.
+Note: An enabled pti produces a large number of messages sent via mqtt, so to prevent mqtt overload it is recommended to keep PTI disabled at all times while not in use.
+Note: This functionality is available when running the <a class="reference internal" href="../../zpc/readme_user.html"><span class="doc std std-doc">ZPC</span></a>.</p></li>
+<li><p>Discovery PTI
+To discover the network and identify all PTIs, press <code class="docutils literal notranslate"><span class="pre">Discovery</span></code> button on the <code class="docutils literal notranslate"><span class="pre">UPTI</span></code> page. After some time, all PTIs will be available in a table with information about <code class="docutils literal notranslate"><span class="pre">Serial</span> <span class="pre">Number</span></code>, <code class="docutils literal notranslate"><span class="pre">IP</span> <span class="pre">Address</span></code> and connection status
+<img alt="Discovery" src="../../../_images/discover.png" />.</p></li>
+<li><p>Enable/Disable data capture
+To <code class="docutils literal notranslate"><span class="pre">Toggle</span></code> capturing data, press <code class="docutils literal notranslate"><span class="pre">Enable</span></code> or <code class="docutils literal notranslate"><span class="pre">Disable</span></code> button. If you <code class="docutils literal notranslate"><span class="pre">Enable</span></code> capturing, you can choose in the pop-up window whether you want to parse additional data or only capture raw data.
+<img alt="TogglePTI" src="../../../_images/toggle_pti.png" />
+<img alt="EnabledPTI" src="../../../_images/enabled_pti.png" /></p></li>
+<li><p>View Trace Package
+To view a list of trace packages press the <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Trace</span></code> button.
+You will see the table of captured trace packages with additional data:</p>
+<p><img alt="WithAdditionalData" src="../../../_images/with_additional_data.png" /></p>
+<p>or without additional data:
+<img alt="WithoutAdditionalData" src="../../../_images/without_additional_data.png" /></p>
+</li>
+</ul>
 </section>
 </section>
 

@@ -114,16 +114,30 @@ void test_barrier_control_go_to_percent_command_support()
                                               expected_endpoint_id,
                                               DESIRED_ATTRIBUTE,
                                               45);
-
+  // Try higher than 100%
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     uic_mqtt_dotdot_barrier_control_go_to_percent_callback(
                       expected_unid,
                       expected_endpoint_id,
                       UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-                      100));
+                      120));
 
   TEST_ASSERT_EQUAL(
     100,
+    dotdot_get_barrier_control_barrier_position(expected_unid,
+                                                expected_endpoint_id,
+                                                DESIRED_ATTRIBUTE));
+
+  // Try a valid value
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_mqtt_dotdot_barrier_control_go_to_percent_callback(
+                      expected_unid,
+                      expected_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                      88));
+
+  TEST_ASSERT_EQUAL(
+    88,
     dotdot_get_barrier_control_barrier_position(expected_unid,
                                                 expected_endpoint_id,
                                                 DESIRED_ATTRIBUTE));

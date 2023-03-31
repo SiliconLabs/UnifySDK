@@ -181,16 +181,6 @@ void test_zwave_command_class_switch_multilevel_new_supporting_node()
   // STATE Attribute got created:
   TEST_ASSERT_EQUAL(2, attribute_store_get_node_child_count(endpoint_id_node));
 
-  // Small check on the ON_OFF Attribute :
-  attribute_store_node_t node
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE(STATE),
-                                             0);
-  node = attribute_store_get_node_child_by_type(node, ATTRIBUTE(ON_OFF), 0);
-  uint32_t on_off_value = 0;
-  attribute_store_get_reported(node, &on_off_value, sizeof(on_off_value));
-  TEST_ASSERT_EQUAL(0x01, on_off_value);
-
   u8_value = 3;
   attribute_store_set_reported(version_node, &u8_value, sizeof(u8_value));
 
@@ -234,10 +224,7 @@ void test_zwave_command_class_switch_multilevel_probe_capabilities()
                                              0);
 
   u8_value = 0;
-  attribute_store_read_value(node,
-                             REPORTED_ATTRIBUTE,
-                             &u8_value,
-                             sizeof(u8_value));
+  attribute_store_get_reported(node, &u8_value, sizeof(u8_value));
   TEST_ASSERT_EQUAL(1, u8_value);
 }
 
@@ -341,10 +328,9 @@ void test_zwave_command_class_switch_multilevel_set_state()
     = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
 
   uint32_t desired_value = 0;
-  attribute_store_read_value(value_node,
-                             DESIRED_ATTRIBUTE,
-                             &desired_value,
-                             sizeof(desired_value));
+  attribute_store_get_desired(value_node,
+                              &desired_value,
+                              sizeof(desired_value));
 
   attribute_store_node_t duration_node
     = attribute_store_get_node_child_by_type(state_node,
@@ -358,7 +344,6 @@ void test_zwave_command_class_switch_multilevel_set_state()
 
   // The state of the test node is already "mismatched" in the attribute store.
   // Ask the multilevel Switch Set to make a payload for it:
-
   attribute_transition_get_remaining_duration_ExpectAndReturn(value_node, 0);
   multilevel_set(state_node, received_frame, &received_frame_size);
   const uint8_t expected_frame[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
@@ -383,10 +368,19 @@ void test_zwave_command_class_switch_multilevel_set_state()
   // Now simulate that we get a Supervision OK:
   TEST_ASSERT_NOT_NULL(on_send_complete);
   attribute_stop_transition_ExpectAndReturn(value_node, SL_STATUS_OK);
+  attribute_start_transition_ExpectAndReturn(
+    value_node,
+    zwave_duration_to_time((uint8_t)desired_duration),
+    SL_STATUS_OK);
+  attribute_timeout_set_callback_ExpectAndReturn(
+    state_node,
+    zwave_duration_to_time((uint8_t)desired_duration) + PROBE_BACK_OFF,
+    &attribute_store_undefine_reported,
+    SL_STATUS_OK);
   on_send_complete(state_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS);
-  TEST_ASSERT_FALSE(
+  TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(state_node, REPORTED_ATTRIBUTE));
 
   // Now simulate that we get a Supervision Fail:
@@ -400,12 +394,23 @@ void test_zwave_command_class_switch_multilevel_set_state()
 
   // Now simulate that we get a send data Ok no supervision:
   TEST_ASSERT_NOT_NULL(on_send_complete);
+  attribute_start_transition_ExpectAndReturn(
+    value_node,
+    zwave_duration_to_time((uint8_t)desired_duration),
+    SL_STATUS_OK);
+  attribute_timeout_set_callback_ExpectAndReturn(
+    state_node,
+    zwave_duration_to_time((uint8_t)desired_duration) + PROBE_BACK_OFF,
+    &attribute_store_undefine_reported,
+    SL_STATUS_OK);
   on_send_complete(state_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_NO_SUPERVISION);
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(state_node, REPORTED_ATTRIBUTE));
 }
 
-void test_zwave_command_class_switch_multilevel_switch_off_during_transition()
+void test_zwave_command_class_switch_multilevel_start_transition()
 {
   // First check the frame creation.
   TEST_ASSERT_NOT_NULL(multilevel_set);
@@ -425,155 +430,25 @@ void test_zwave_command_class_switch_multilevel_switch_off_during_transition()
                                              ATTRIBUTE(DURATION),
                                              0);
 
-  attribute_store_node_t on_off_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(ON_OFF), 0);
-
   // We want OnOff to be off
-  u32_value = 0xFF;
-  attribute_store_set_reported(on_off_node, &u32_value, sizeof(u32_value));
-  u32_value = 0x00;
-  attribute_store_set_desired(on_off_node, &u32_value, sizeof(u32_value));
-  // Value at 50:
   u32_value = 50;
   attribute_store_set_reported(value_node, &u32_value, sizeof(u32_value));
-  attribute_store_set_desired_as_reported(value_node);
+  attribute_store_undefine_desired(value_node);
   //Duration at 10
   u32_value = 10;
-  attribute_store_set_reported(duration_node, &u32_value, sizeof(u32_value));
-  attribute_store_set_desired_as_reported(duration_node);
+  attribute_store_set_desired(duration_node, &u32_value, sizeof(u32_value));
 
   attribute_transition_get_remaining_duration_ExpectAndReturn(value_node, 1000);
 
   multilevel_set(state_node, received_frame, &received_frame_size);
   const uint8_t expected_frame[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
                                     SWITCH_MULTILEVEL_SET_V4,
-                                    (uint8_t)0,
-                                    (uint8_t)0};
+                                    (uint8_t)50,
+                                    (uint8_t)10};
   TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
                                 received_frame_size);
-
-  // Now simulate that we get a Supervision OK:
-  TEST_ASSERT_NOT_NULL(on_send_complete);
-  on_send_complete(state_node,
-                   RESOLVER_SET_RULE,
-                   FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS);
-  TEST_ASSERT_TRUE(
-    attribute_store_is_value_defined(state_node, REPORTED_ATTRIBUTE));
-}
-
-void test_zwave_command_class_switch_multilevel_switch_on_during_transition()
-{
-  // First check the frame creation.
-  TEST_ASSERT_NOT_NULL(multilevel_set);
-
-  attribute_store_node_t state_node
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE(STATE),
-                                             0);
-
-  attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
-
-  attribute_store_node_t duration_node
-    = attribute_store_get_node_child_by_type(state_node,
-                                             ATTRIBUTE(DURATION),
-                                             0);
-
-  attribute_store_node_t on_off_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(ON_OFF), 0);
-
-  is_node_pending_set_resolution_IgnoreAndReturn(false);
-  attribute_stop_transition_IgnoreAndReturn(SL_STATUS_OK);
-
-  // We want OnOff to be On
-  u32_value = 0x00;
-  attribute_store_set_reported(on_off_node, &u32_value, sizeof(u32_value));
-  u32_value = 0xFF;
-  attribute_store_set_desired(on_off_node, &u32_value, sizeof(u32_value));
-  //Duration at 10
-  u32_value = 10;
-  attribute_store_set_reported(duration_node, &u32_value, sizeof(u32_value));
-  attribute_store_set_desired(duration_node, &u32_value, sizeof(u32_value));
-  // Value at 50:
-  u32_value = 50;
-  attribute_store_set_reported(value_node, &u32_value, sizeof(u32_value));
-  attribute_store_set_desired(value_node, &u32_value, sizeof(u32_value));
-
-  attribute_transition_get_remaining_duration_ExpectAndReturn(value_node, 1000);
-
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_IN_PROGRESS,
-    multilevel_set(state_node, received_frame, &received_frame_size));
-
-  const uint8_t expected_frame[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
-                                    SWITCH_MULTILEVEL_SET_V4,
-                                    (uint8_t)u32_value,
-                                    (uint8_t)0};
-  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
-  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
-                                received_frame,
-                                received_frame_size);
-
-  // Now simulate that we get a Supervision OK:
-  TEST_ASSERT_NOT_NULL(on_send_complete);
-  on_send_complete(state_node,
-                   RESOLVER_SET_RULE,
-                   FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS);
-  TEST_ASSERT_TRUE(
-    attribute_store_is_value_defined(state_node, REPORTED_ATTRIBUTE));
-}
-
-void test_zwave_command_class_switch_multilevel_virtual_transition()
-{
-  // First check the frame creation.
-  TEST_ASSERT_NOT_NULL(multilevel_set);
-
-  attribute_store_node_t state_node
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE(STATE),
-                                             0);
-
-  attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
-
-  attribute_store_node_t duration_node
-    = attribute_store_get_node_child_by_type(state_node,
-                                             ATTRIBUTE(DURATION),
-                                             0);
-
-  attribute_store_node_t on_off_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(ON_OFF), 0);
-
-  attribute_stop_transition_IgnoreAndReturn(SL_STATUS_OK);
-  is_node_pending_set_resolution_IgnoreAndReturn(false);
-
-  // We want OnOff to be OFF
-  u32_value = 0x00;
-  attribute_store_set_reported(on_off_node, &u32_value, sizeof(u32_value));
-  attribute_store_set_desired(on_off_node, &u32_value, sizeof(u32_value));
-  //Duration at 0 -> 15
-  u32_value = 0;
-  attribute_store_set_reported(duration_node, &u32_value, sizeof(u32_value));
-  u32_value = 15;
-  attribute_store_set_desired(duration_node, &u32_value, sizeof(u32_value));
-  // Value at 0->99:
-  u32_value = 0;
-  attribute_store_set_reported(value_node, &u32_value, sizeof(u32_value));
-  u32_value = 99;
-  attribute_store_set_desired(value_node, &u32_value, sizeof(u32_value));
-
-  attribute_transition_get_remaining_duration_ExpectAndReturn(value_node, 0);
-
-  attribute_start_transition_ExpectAndReturn(value_node,
-                                             zwave_duration_to_time(15),
-                                             SL_STATUS_OK);
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_ALREADY_EXISTS,
-    multilevel_set(state_node, received_frame, &received_frame_size));
-
-  TEST_ASSERT_EQUAL(0, received_frame_size);
 }
 
 void test_zwave_command_class_switch_multilevel_supervision_success_when_we_want_a_transition()
@@ -603,15 +478,9 @@ void test_zwave_command_class_switch_multilevel_supervision_success_when_we_want
   attribute_store_set_desired(duration_node,
                               &desired_duration,
                               sizeof(desired_duration));
-  attribute_store_node_t on_off_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(ON_OFF), 0);
-  u32_value = 0xFF;
-  attribute_store_set_reported(on_off_node, &u32_value, sizeof(u32_value));
-  attribute_store_set_desired(on_off_node, &u32_value, sizeof(u32_value));
 
   // The state of the test node is already "mismatched" in the attribute store.
   // Ask the multilevel Switch Set to make a payload for it:
-
   attribute_transition_get_remaining_duration_ExpectAndReturn(value_node, 0);
   multilevel_set(state_node, received_frame, &received_frame_size);
   const uint8_t expected_frame[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
@@ -642,8 +511,7 @@ void test_zwave_command_class_switch_multilevel_supervision_success_when_we_want
                    FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS);
 
   // Now simulate that we get a Supervision OK:
-  TEST_ASSERT_TRUE(
-    attribute_store_is_value_defined(state_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(state_node));
 }
 
 void test_zwave_command_class_switch_multilevel_generated_level_commands_move()

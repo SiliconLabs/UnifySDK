@@ -5,7 +5,7 @@ var unify__dotdot__attribute__store__command__callbacks__level_8c =
     [ "get_min_level", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a5a7b25e0183861ac7482cd0928f9286f", null ],
     [ "level_cluster_mapper_init", "group__level__cluster__mapper.html#gad8b17107de6e37a08808a8b41878e3d2", null ],
     [ "level_cluster_mapper_move", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a566dc6fc82a729180b611aac1fc3c7e5", null ],
-    [ "level_cluster_mapper_move_to_level", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#aa081c0bf4d36c6ec20dcf88134bd0002", null ],
+    [ "level_cluster_mapper_move_to_level", "group__level__cluster__mapper.html#gaa081c0bf4d36c6ec20dcf88134bd0002", null ],
     [ "level_cluster_mapper_move_to_level_with_on_off", "group__level__cluster__mapper.html#ga71fac9897c4a810b48a742e9483d5b75", null ],
     [ "level_cluster_mapper_move_with_on_off", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#af5d27b353fd25a5f96c12248bf0287e4", null ],
     [ "level_cluster_mapper_step", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#acb80161137b4647bb5202dba28df6af9", null ],

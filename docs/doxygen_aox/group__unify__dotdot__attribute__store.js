@@ -7,7 +7,7 @@ var group__unify__dotdot__attribute__store =
     [ "DotDot Attribute Store Registration", "group__unify__dotdot__attribute__store__registration.html", "group__unify__dotdot__attribute__store__registration" ],
     [ "Command handlers for incoming MQTT UCL/DotDot WriteAttributes commands", "group__unify__dotdot__attribute__store__write__attributes__command__callbacks.html", "group__unify__dotdot__attribute__store__write__attributes__command__callbacks" ],
     [ "DotDot Attributes Helper functions", "group__unify__dotdot__attribute__store__helpers.html", "group__unify__dotdot__attribute__store__helpers" ],
-    [ "DotDot Attribute Store Types", "group__unify__dotdot__defined__attribute__types.html", null ],
+    [ "DotDot Attribute Store Types", "group__unify__dotdot__defined__attribute__types.html", "group__unify__dotdot__defined__attribute__types" ],
     [ "unify_dotdot_attribute_store_configuration_t", "structunify__dotdot__attribute__store__configuration__t.html", [
       [ "automatic_deduction_of_supported_commands", "structunify__dotdot__attribute__store__configuration__t.html#a2caabc657a48a637f48bbf5acbad60f0", null ],
       [ "clear_reported_on_desired_updates", "structunify__dotdot__attribute__store__configuration__t.html#a6fdcbf914fb3551fc3120249b5572622", null ],

@@ -1034,6 +1034,34 @@ void uic_mqtt_dotdot_occupancy_sensing_publish_supported_generated_commands(
 
 
 /**
+ * @brief Struct containing the list of commands for SoilMoisture
+ */
+typedef struct _uic_mqtt_dotdot_soil_moisture_supported_commands_ {
+  bool write_attributes;
+} uic_mqtt_dotdot_soil_moisture_supported_commands_t;
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the SoilMoisture cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/SoilMoisture/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_soil_moisture_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_soil_moisture_supported_commands_t *command_list
+);
+
+
+/**
  * @brief Struct containing the list of commands for PhMeasurement
  */
 typedef struct _uic_mqtt_dotdot_ph_measurement_supported_commands_ {
@@ -1142,6 +1170,62 @@ void uic_mqtt_dotdot_carbon_monoxide_publish_supported_generated_commands(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   const uic_mqtt_dotdot_carbon_monoxide_supported_commands_t *command_list
+);
+
+
+/**
+ * @brief Struct containing the list of commands for CarbonDioxide
+ */
+typedef struct _uic_mqtt_dotdot_carbon_dioxide_supported_commands_ {
+  bool write_attributes;
+} uic_mqtt_dotdot_carbon_dioxide_supported_commands_t;
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the CarbonDioxide cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/CarbonDioxide/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_carbon_dioxide_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_carbon_dioxide_supported_commands_t *command_list
+);
+
+
+/**
+ * @brief Struct containing the list of commands for PM25
+ */
+typedef struct _uic_mqtt_dotdot_pm25_supported_commands_ {
+  bool write_attributes;
+} uic_mqtt_dotdot_pm25_supported_commands_t;
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the PM25 cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/PM25/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_pm25_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_pm25_supported_commands_t *command_list
 );
 
 

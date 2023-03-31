@@ -188,6 +188,12 @@ class App extends Component<{}, AppState> {
   }
 
   handleAppMonitoring(list: any) {
+    list && Object.keys(list).forEach((item: any) => {
+      if (this.state.AppMonitoringList[item]?.ApplicationConnected?.Reported !== undefined && list[item].ApplicationName?.Reported !== undefined && this.state.AppMonitoringList[item]?.ApplicationConnected?.Reported !== list[item].ApplicationConnected?.Reported)
+        if (list[item].ApplicationConnected?.Reported === true)
+          toast(`${list[item].ApplicationName?.Reported} is back online`, { type: "success" });
+        else toast(`${list[item].ApplicationName?.Reported} went offline`, { type: "warning" });
+    });
     this.setState({ AppMonitoringList: list });
   }
 
@@ -245,8 +251,8 @@ class App extends Component<{}, AppState> {
                 <Switch>
                   <Route path='/groups' exact render={() => <Groups ref={this.changeGroups}  {...baseProps} NodeList={this.state.NodeList} GroupList={this.state.GroupList} />} />
                   <Route path='/smartstart' exact render={() => <SmartStart ref={this.changeSmartStart} {...baseProps} SmartStartList={this.state.SmartStartList} />} />
-                  <Route path='/scenes/:unid/:ep' exact render={(pr) => <EpScenes ref={this.changeScenes} {...baseProps} Unid={pr.match.params.unid} Ep={pr.match.params.ep} GroupList={this.state.GroupList} NodeList={this.state.NodeList}/>} />
-                  <Route path='/scenes/:unid/:ep/:gid/:sid' exact render={(pr) => <Scene ref={this.changeScenes} {...baseProps} Unid={pr.match.params.unid} Ep={pr.match.params.ep} GroupID={pr.match.params.gid} SceneID={pr.match.params.sid} GroupList={this.state.GroupList} NodeList={this.state.NodeList}/>} />
+                  <Route path='/scenes/:unid/:ep' exact render={(pr) => <EpScenes ref={this.changeScenes} {...baseProps} Unid={pr.match.params.unid} Ep={pr.match.params.ep} GroupList={this.state.GroupList} NodeList={this.state.NodeList} />} />
+                  <Route path='/scenes/:unid/:ep/:gid/:sid' exact render={(pr) => <Scene ref={this.changeScenes} {...baseProps} Unid={pr.match.params.unid} Ep={pr.match.params.ep} GroupID={pr.match.params.gid} SceneID={pr.match.params.sid} GroupList={this.state.GroupList} NodeList={this.state.NodeList} />} />
                   <Route path='/upti' exact render={() => <UPTI ref={this.changeUPTI}  {...baseProps} UPTI={this.state.UPTI} />} />
                   <Route path='/upti/:serial' render={(pr) => <UPTITrace ref={this.changeUPTITrace}
                     IsConnected={this.state.IsConnected || false} UPTI={this.state.UPTI} SerialNumber={pr.match.params.serial} SocketServer={this.state.SocketServer} />} />

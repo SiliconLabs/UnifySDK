@@ -15,22 +15,21 @@ def zwNOTIFICATION_V1_ALARM_TYPE 0x00007108
 
 def IAS_ZONE_ZONE_STATE_NOT_ENROLLED 0
 
-def IsYaleTouchDoorLock (r'zwMANUFACTURER_ID == 0x0109) & (r'zwPRODUCT_TYPE_ID == 0x02) & (r'zwPRODUCT_ID == 0x00)
+def IsYaleTouchDoorLock ((r'zwMANUFACTURER_ID == 0x0109) & (r'zwPRODUCT_TYPE_ID == 0x02) & (r'zwPRODUCT_ID == 0x00))
 
-scope 0 {
-// For now zbIAS_ZONE_ZONE_STATE is always NOT ENROLLED
-r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATE = 
-  if IsYaleTouchDoorLock
-    (if (e'zwNOTIFICATION_V1_ALARM_TYPE) IAS_ZONE_ZONE_STATE_NOT_ENROLLED undefined)
-  undefined
-// Always set type to Door/Window handle
-r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_TYPE = 
-  if IsYaleTouchDoorLock
-    (if (r'zwNOTIFICATION_V1_ALARM_TYPE == 0x18 | r'zwNOTIFICATION_V1_ALARM_TYPE == 0x19) DOOR_WINDOW_HANDLE_ZONE_TYPE undefined)
-  undefined
-// If CO detected set ALARM1 (bit 0) and ALARM2 (bit 1) to 1, otherwise set to 0
-r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATUS =
-  if IsYaleTouchDoorLock
-    (if (r'zwNOTIFICATION_V1_ALARM_TYPE == 0x19) 0 3)
-  undefined
+scope 25 {
+  // For now zbIAS_ZONE_ZONE_STATE is always NOT ENROLLED
+  r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATE =
+    if (IsYaleTouchDoorLock & (e'zwNOTIFICATION_V1_ALARM_TYPE)) IAS_ZONE_ZONE_STATE_NOT_ENROLLED undefined
+
+  // Always set type to Door/Window handle
+  r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_TYPE =
+    if (IsYaleTouchDoorLock & ((r'zwNOTIFICATION_V1_ALARM_TYPE == 0x18) | (r'zwNOTIFICATION_V1_ALARM_TYPE == 0x19))) DOOR_WINDOW_HANDLE_ZONE_TYPE
+    undefined
+
+  // If CO detected set ALARM1 (bit 0) and ALARM2 (bit 1) to 1, otherwise set to 0
+  r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATUS =
+    if (IsYaleTouchDoorLock & (r'zwNOTIFICATION_V1_ALARM_TYPE == 0x19)) 3
+    if (IsYaleTouchDoorLock) 0
+    undefined
 }

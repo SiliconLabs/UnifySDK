@@ -8,6 +8,7 @@ target_add_unittest(
   zigpc_controller.cpp
   DEPENDS
   zigpc_attribute_management_mock
+  zigpc_binding_mock
   zigpc_datastore_mock
   zigpc_discovery_mock
   zigpc_gateway_mock

@@ -2880,6 +2880,51 @@ static sl_status_t uic_mqtt_dotdot_occupancy_sensing_force_read_attributes_callb
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
+// Start of cluster SoilMoisture
+////////////////////////////////////////////////////////////////////////////////
+static sl_status_t uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback (
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_soil_moisture_updated_state_t attribute_list) {
+
+  if (false == is_force_read_attributes_enabled()){
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_soil_moisture_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Go and undefine everything that needs to be read again:
+  if (true == attribute_list.measured_value) {
+    if (SL_STATUS_OK == dotdot_soil_moisture_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of SoilMoisture::MeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.min_measured_value) {
+    if (SL_STATUS_OK == dotdot_soil_moisture_min_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of SoilMoisture::MinMeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.max_measured_value) {
+    if (SL_STATUS_OK == dotdot_soil_moisture_max_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of SoilMoisture::MaxMeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.tolerance) {
+    if (SL_STATUS_OK == dotdot_soil_moisture_tolerance_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of SoilMoisture::Tolerance under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
 // Start of cluster PhMeasurement
 ////////////////////////////////////////////////////////////////////////////////
 static sl_status_t uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback (
@@ -3055,6 +3100,96 @@ static sl_status_t uic_mqtt_dotdot_carbon_monoxide_force_read_attributes_callbac
   if (true == attribute_list.tolerance) {
     if (SL_STATUS_OK == dotdot_carbon_monoxide_tolerance_undefine_reported(unid, endpoint_id)) {
       sl_log_debug(LOG_TAG, "Undefined Reported value of CarbonMonoxide::Tolerance under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster CarbonDioxide
+////////////////////////////////////////////////////////////////////////////////
+static sl_status_t uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback (
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_carbon_dioxide_updated_state_t attribute_list) {
+
+  if (false == is_force_read_attributes_enabled()){
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_carbon_dioxide_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Go and undefine everything that needs to be read again:
+  if (true == attribute_list.measured_value) {
+    if (SL_STATUS_OK == dotdot_carbon_dioxide_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of CarbonDioxide::MeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.min_measured_value) {
+    if (SL_STATUS_OK == dotdot_carbon_dioxide_min_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of CarbonDioxide::MinMeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.max_measured_value) {
+    if (SL_STATUS_OK == dotdot_carbon_dioxide_max_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of CarbonDioxide::MaxMeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.tolerance) {
+    if (SL_STATUS_OK == dotdot_carbon_dioxide_tolerance_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of CarbonDioxide::Tolerance under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster PM25
+////////////////////////////////////////////////////////////////////////////////
+static sl_status_t uic_mqtt_dotdot_pm25_force_read_attributes_callback (
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_pm25_updated_state_t attribute_list) {
+
+  if (false == is_force_read_attributes_enabled()){
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_pm25_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Go and undefine everything that needs to be read again:
+  if (true == attribute_list.measured_value) {
+    if (SL_STATUS_OK == dotdot_pm25_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of PM25::MeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.min_measured_value) {
+    if (SL_STATUS_OK == dotdot_pm25_min_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of PM25::MinMeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.max_measured_value) {
+    if (SL_STATUS_OK == dotdot_pm25_max_measured_value_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of PM25::MaxMeasuredValue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.tolerance) {
+    if (SL_STATUS_OK == dotdot_pm25_tolerance_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of PM25::Tolerance under %s - Endpoint %d", unid, endpoint_id);
     }
   }
   return SL_STATUS_OK;
@@ -4865,6 +5000,8 @@ sl_status_t
   
   uic_mqtt_dotdot_set_occupancy_sensing_force_read_attributes_callback(&uic_mqtt_dotdot_occupancy_sensing_force_read_attributes_callback);
   
+  uic_mqtt_dotdot_set_soil_moisture_force_read_attributes_callback(&uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback);
+  
   uic_mqtt_dotdot_set_ph_measurement_force_read_attributes_callback(&uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_electrical_conductivity_measurement_force_read_attributes_callback(&uic_mqtt_dotdot_electrical_conductivity_measurement_force_read_attributes_callback);
@@ -4872,6 +5009,10 @@ sl_status_t
   uic_mqtt_dotdot_set_wind_speed_measurement_force_read_attributes_callback(&uic_mqtt_dotdot_wind_speed_measurement_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_carbon_monoxide_force_read_attributes_callback(&uic_mqtt_dotdot_carbon_monoxide_force_read_attributes_callback);
+  
+  uic_mqtt_dotdot_set_carbon_dioxide_force_read_attributes_callback(&uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback);
+  
+  uic_mqtt_dotdot_set_pm25_force_read_attributes_callback(&uic_mqtt_dotdot_pm25_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_ias_zone_force_read_attributes_callback(&uic_mqtt_dotdot_ias_zone_force_read_attributes_callback);
   

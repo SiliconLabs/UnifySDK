@@ -9,5 +9,7 @@ var unify__dotdot__attribute__store__command__callbacks__on__off_8c =
     [ "on_off_cluster_on_command", "unify__dotdot__attribute__store__command__callbacks__on__off_8c.html#a0cdc6fa2398d82a80d4cc2548fc9684a", null ],
     [ "on_off_cluster_toggle_command", "unify__dotdot__attribute__store__command__callbacks__on__off_8c.html#a12f158f6428461b237c4e179fad9db4e", null ],
     [ "on_off_on_with_timed_off_callback_set_command", "unify__dotdot__attribute__store__command__callbacks__on__off_8c.html#ad0409610a841ac7c037397eff4740a2c", null ],
-    [ "on_off_on_with_timed_off_timeout", "unify__dotdot__attribute__store__command__callbacks__on__off_8c.html#a8e9a0516e3042825c0b25e212e308671", null ]
+    [ "on_off_on_with_timed_off_timeout", "unify__dotdot__attribute__store__command__callbacks__on__off_8c.html#a8e9a0516e3042825c0b25e212e308671", null ],
+    [ "update_current_level_attribute_after_off_command", "unify__dotdot__attribute__store__command__callbacks__on__off_8c.html#a5f16f610d16954124e44cc23f95eb4af", null ],
+    [ "update_current_level_attribute_after_on_command", "unify__dotdot__attribute__store__command__callbacks__on__off_8c.html#a79ce86b16f8fe7b0218336728181864d", null ]
 ];

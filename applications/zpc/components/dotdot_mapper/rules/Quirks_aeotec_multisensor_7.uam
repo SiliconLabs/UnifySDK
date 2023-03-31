@@ -8,7 +8,7 @@ def zwNIF_OPTIONAL_PROTOCOL 0x0009
 
 def aeotec_multisensor_7 ((r'zwMANUFACTURER_ID == 0x0371) & (r'zwPRODUCT_TYPE == 2) & (r'zwPRODUCT_ID == 24))
 
-scope 0 {
+scope 500 {
   // The sensor changes its NIF flags if connected to a USB cable
   // We want to keep the NIF flags as if battery powered, else the
   // Maximum command delay gets set to 1.

@@ -432,7 +432,82 @@ Note that the priority value has no effect at the moment.
   scope 3 chain_reaction(1) clear_desired(1) common_parent_type(3) {
     r'8 =  d'9
     r'9 =  r'8
-    r'10 =  r'9
+    r'10 = r'9
+  }
+
+.. _how_to_write_uam_files_scope_priority:
+
+Scope priority
+~~~~~~~~~~~~~~
+
+The Scope priority is used to rank rules by priority, and let overlapping rules
+co-exist. Let's take the following example:
+
+.. code-block:: uam
+
+  scope 0 {
+    r'2 = r'3
+  }
+  scope 1 {
+    r'2 = r'4
+  }
+
+The reported value of Attribute Type 2 is assigned in several maps. Whenever
+an attribute of type 3 or 4 is updated, the mapper will try to execute rules
+with the highest priority first, and will stop at the first one that return
+assigns a value.
+
+* If r'3 is set to 3, then r'2 will be 3.
+* If r'3 is set to 3, attribute 4 exists but has no reported, then r'2 will be 3.
+* If r'4 is set to 20, then r'2 will be 20 regardless of the value set in r'3.
+
+Here is another scope priority example:
+
+.. code-block:: uam
+
+  scope 10 {
+    r'2 = r'3
+  }
+  scope 100 {
+    r'2 = if (r'4>0) r'4 undefined
+  }
+
+First, if neither Attribute 3 and 4 exist, then attribute 2 does not exist either.
+
+If r'3 is created and assigned a value, the scope 10 rule will trigger the creation
+of r'2. The mapper will verify if the scope 100 rule (which prevails) would lead
+to an attribute deletion, and if so, would cancel the scope 10 rule.
+
+Whenever r'4 value is defined and positive, r'2 will be set to the value of r'4.
+Else r'2 would fallback on the r'3 value.
+
+For the scope priority to cancel lower priority maps, the mapper checks that
+the "destination" attribute to be the same. Taking this map:
+
+.. code-block:: uam
+
+  scope 1 {
+    r'3.2 = r'10
+  }
+  scope 2 {
+    r'3[0].2 = r'11
+  }
+
+Scope 2 will take precedence only if we have an attribute 2 placed under an
+attribute 3 with value 0. In other cases, scope 2 will not affect scope 1.
+
+Note that if 2 equivalent mappings have the same priority, it will be
+unpredictable which mapping prevails. If possible, all maps to a given
+attribute type should have a unique scope priority.
+
+.. code-block:: uam
+
+  // This is strongly NOT RECOMMENDED:
+  scope 1 {
+    r'2 = r'3
+  }
+  scope 1 {
+    r'2 = r'4
   }
 
 .. _how_to_write_uam_files_clear_desired_subsection:
@@ -630,32 +705,37 @@ the Attribute ID that triggered the change and the calculated value.
 
 .. code-block:: console
 
+  <timestamp> <d> [mqtt_client] mqtt_client::on_message: ucl/by-unid/zw-F4DC26FF-000D/ep0/Level/Commands/MoveToLevelWithOnOff - {"Level":85,"TransitionTi..., QoS: 0
+  <timestamp> <d> [unify_dotdot_attribute_store_level_commands_callbacks] Updating ZCL desired values after Level:CurrentLevel command
+  <timestamp> <d> [unify_dotdot_attribute_store_level_commands_callbacks] Updating ZCL desired values after Level:OnOffTransitionTime command
+  <timestamp> <d> [attribute_store_process] Restarting Attribute Store auto-save cooldown timer for 10 seconds.
   <timestamp> <d> [unify_attribute_mapper_process] 1 pending attribute updates to evaluate.
-  <timestamp> <d> [attribute_mapper] Match expression: d'( ( Multilevel Switch State ) ).( ( OnOff (virtual state) ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1138 - Result value: 1
-  <timestamp> <d> [attribute_mapper] Match expression: d'( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x2 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1186 - Result value: 0
-  <timestamp> <d> [attribute_mapper] Match expression: d'( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x3 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1188 - Result value: 64.3939
-  <timestamp> <d> [attribute_mapper] Match expression: d'( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x4 ) )].( ( Value ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1190 - Result value: 61.3517
-  <timestamp> <d> [attribute_mapper] Match expression: r'( ( ZCL ColorControl CurrentHue ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1219 - Result value: 125.566
-  <timestamp> <d> [unify_attribute_mapper_process] Ignoring update to Attribute ID 1219 as the mapper was instructed to ignore it.
-  <timestamp> <d> [attribute_mapper] Match expression: r'( ( ZCL ColorControl CurrentSaturation ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1220 - Result value: 254
-  <timestamp> <d> [attribute_mapper] Match expression: r'( ( ZCL OnOff OnOff ) ) triggered by Attribute ID 1231 (ZCL OnOff OnOff) affecting Attribute ID 1231 - Result value: 1
-  <timestamp> <d> [poll_engine] updated Multilevel Switch State[1133] in poll-queue
-
+  <timestamp> <d> [attribute_mapper] Checking assignments for Destination ID 2808 (Value), Original Node 2841 (ZCL Level CurrentLevel). (1 candidate(s))
+  <timestamp> <d> [attribute_mapper] Match expression: d'( ( Multilevel Switch State ) ).( ( Value ) ) triggered by Attribute ID 2841 (ZCL Level CurrentLevel) affecting Attribute ID 2808 - Result value: 85
+  <timestamp> <d> [unify_attribute_mapper_process] Ignoring update to Attribute ID 2808 as the mapper was instructed to ignore it.
+  <timestamp> <d> [attribute_mapper] Assigment with priority 0 executed successfully.
+  <timestamp> <d> [attribute_mapper] Checking assignments for Destination ID 2841 (ZCL Level CurrentLevel), Original Node 2841 (ZCL Level CurrentLevel). (3 candidate(s))
+  <timestamp> <d> [attribute_mapper] Match expression: r'( ( ZCL Level CurrentLevel ) ) triggered by Attribute ID 2841 (ZCL Level CurrentLevel) affecting Attribute ID 2841 - Result value: 50.0824
+  <timestamp> <d> [attribute_mapper] Assigment with priority 100 executed successfully.
+  <timestamp> <d> [attribute_mapper] Checking assignments for Destination ID 2849 (Value), Original Node 2841 (ZCL Level CurrentLevel). (5 candidate(s))
+  <timestamp> <d> [attribute_mapper] Match expression: d'( ( Color Switch State ) ).( ( Component ID ) )[( ( 0x0 ) )].( ( Value ) ) triggered by Attribute ID 2841 (ZCL Level CurrentLevel) affecting Attribute ID 2849 - Result value: 0
+  <timestamp> <d> [attribute_mapper] Assigment with priority 100 executed successfully.
 
 If the same attribute ID has several assignments, the full expression can
-be logged, by changing ``assignment.lhs`` to ``assignment`` in the
-``mapper_engine.cpp``:
+be logged, by changing ``assignment->lhs`` to ``assignment`` in the
+``attribute_mapper_engine.cpp``. Assigning different priority to each assignment
+is also a good method to identify which assignment was run.
 
 .. code-block:: cpp
 
   #ifndef NDEBUG
     // Debug build will print the matched expressions
     std::stringstream ss;
-    ss << "Match expression: " << assignment
-        << " triggered by Attribute ID " << std::dec << original_node << " ("
-        << attribute_store_get_type_name(original_node.type()) << ")"
-        << " affecting Attribute ID " << std::dec << destination_node
-        << " - Result value: " << value.value();
+    ss << "Match expression: " << assignment << " triggered by Attribute ID "
+      << std::dec << original_node << " ("
+      << attribute_store_get_type_name(original_node.type()) << ")"
+      << " affecting Attribute ID " << std::dec << destination
+      << " - Result value: " << value.value();
     sl_log_debug(LOG_TAG, ss.str().c_str());
   #endif
 

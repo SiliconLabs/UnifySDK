@@ -8,7 +8,7 @@ def zwCOLOR_SWITCH_VERSION 0x3301
 
 def ZRB5120_logic_group_matrix ((r'zwMANUFACTURER_ID == 0x0234) & (r'zwPRODUCT_TYPE_ID == 0x0003) & (r'zwPRODUCT_ID == 0x0325))
 
-scope 0 {
+scope 500 {
 
 // ZRB5120 Logic Group Matrix does not answer Command Class Version Get for Color Switch.
 // it supports v1:

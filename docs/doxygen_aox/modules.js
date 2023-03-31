@@ -8,6 +8,7 @@ var modules =
     [ "AoXPC Unid", "group__aoxpc__unid.html", "group__aoxpc__unid" ],
     [ "Positioning Application Monitoring", "group__positioning__application__monitoring.html", "group__positioning__application__monitoring" ],
     [ "Positioning Id", "group__positioning__id.html", "group__positioning__id" ],
+    [ "Mapper path match evaluation", "group__Attribute.html", null ],
     [ "Scope settings helpers", "group__attribute__mapper__scope__settings.html", "group__attribute__mapper__scope__settings" ],
     [ "Unify Components", "group__unify__components.html", "group__unify__components" ],
     [ "Internal C++ ZAP definitions", "group__dotdot__mqtt__hpp.html", "group__dotdot__mqtt__hpp" ],

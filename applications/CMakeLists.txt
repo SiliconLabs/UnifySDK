@@ -1,6 +1,6 @@
 # Fetch dependencies if forced
 if(FETCH_GSDK MATCHES ON)
-  find_package(GeckoSDK 4.2.0 REQUIRED)
+  find_package(GeckoSDK 4.2.2 REQUIRED)
 endif()
 
 # Build options will determine if the applications will be included and build
@@ -84,6 +84,7 @@ if(NOT APPLE )
   if(BUILD_CPCD MATCHES ON)
     add_subdirectory(cpcd)
     add_subdirectory(cpc-hci-bridge)
+    add_subdirectory(bt_host_empty)
     message(STATUS "CPCd daemon and applications will build")
   else()
     message(STATUS "CPCd daemon and applications will NOT build")

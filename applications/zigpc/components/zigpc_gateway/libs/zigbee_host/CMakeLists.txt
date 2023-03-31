@@ -3,7 +3,7 @@
 # ##############################################################################
 
 include(ExternalProject)
-find_package(GeckoSDK 4.2.0 EXACT REQUIRED)
+find_package(GeckoSDK 4.2.2 EXACT REQUIRED)
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
 set(LIB_NAME libzigbee_host)

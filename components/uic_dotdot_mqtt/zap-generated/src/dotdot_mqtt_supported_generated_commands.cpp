@@ -1794,6 +1794,49 @@ void uic_mqtt_dotdot_occupancy_sensing_publish_supported_generated_commands(
 
 /**
  * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the SoilMoisture cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/SoilMoisture/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_soil_moisture_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_soil_moisture_supported_commands_t *command_list)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint);
+  topic +=  "/SoilMoisture/SupportedGeneratedCommands";
+
+  // Assemble of vector of strings for the Supported Commands:
+  std::vector<std::string> command_vector;
+  if (command_list->write_attributes == true) {
+    command_vector.emplace_back("WriteAttributes");
+  }
+
+  // JSONify, then Stringify
+  nlohmann::json json_payload;
+  json_payload["value"] = command_vector;
+  std::string string_payload = json_payload.dump();
+
+  // Publish to MQTT
+  uic_mqtt_publish(topic.c_str(),
+                   string_payload.c_str(),
+                   string_payload.length(),
+                   true);
+
+}
+
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
  * the PhMeasurement cluster for a UNID/Endpoint
  *
  * Publication will be made at the following topic
@@ -1943,6 +1986,92 @@ void uic_mqtt_dotdot_carbon_monoxide_publish_supported_generated_commands(
   std::string topic = "ucl/by-unid/" + std::string(unid);
   topic +=  "/ep"+ std::to_string(endpoint);
   topic +=  "/CarbonMonoxide/SupportedGeneratedCommands";
+
+  // Assemble of vector of strings for the Supported Commands:
+  std::vector<std::string> command_vector;
+  if (command_list->write_attributes == true) {
+    command_vector.emplace_back("WriteAttributes");
+  }
+
+  // JSONify, then Stringify
+  nlohmann::json json_payload;
+  json_payload["value"] = command_vector;
+  std::string string_payload = json_payload.dump();
+
+  // Publish to MQTT
+  uic_mqtt_publish(topic.c_str(),
+                   string_payload.c_str(),
+                   string_payload.length(),
+                   true);
+
+}
+
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the CarbonDioxide cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/CarbonDioxide/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_carbon_dioxide_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_carbon_dioxide_supported_commands_t *command_list)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint);
+  topic +=  "/CarbonDioxide/SupportedGeneratedCommands";
+
+  // Assemble of vector of strings for the Supported Commands:
+  std::vector<std::string> command_vector;
+  if (command_list->write_attributes == true) {
+    command_vector.emplace_back("WriteAttributes");
+  }
+
+  // JSONify, then Stringify
+  nlohmann::json json_payload;
+  json_payload["value"] = command_vector;
+  std::string string_payload = json_payload.dump();
+
+  // Publish to MQTT
+  uic_mqtt_publish(topic.c_str(),
+                   string_payload.c_str(),
+                   string_payload.length(),
+                   true);
+
+}
+
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the PM25 cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/PM25/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_pm25_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_pm25_supported_commands_t *command_list)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint);
+  topic +=  "/PM25/SupportedGeneratedCommands";
 
   // Assemble of vector of strings for the Supported Commands:
   std::vector<std::string> command_vector;

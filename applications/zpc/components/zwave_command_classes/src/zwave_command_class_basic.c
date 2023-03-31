@@ -357,7 +357,7 @@ static sl_status_t zwave_command_class_basic_handle_report(
                                   sizeof(target_value));
     }
   } else {
-    attribute_store_undefine_desired(value_node);
+    attribute_store_set_desired_as_reported(value_node);
   }
 
   // Current/target value adjustments based on the reported duration.

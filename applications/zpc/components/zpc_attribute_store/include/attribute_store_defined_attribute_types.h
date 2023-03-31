@@ -886,27 +886,6 @@ DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
 ///< This represents a Group name. String representation with Null termination.
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
 
-// Scenes Cluster
-/// This is an umbrella attribute for the Scene Table. Empty storage type.
-// It's also in the XML files, so defined in the dotdot unify attribute store.
-//DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE, 0x00050f01)
-///< This represents a Scene ID and Group ID, as a pair, to identify each entry
-/// of the Scene table. uint8_t / uint16_t in a struct (scene_id_group_id_t).
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_ID_GROUP_ID, 0x00050f02)
-///< This represents a Scene Name. C String.
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_NAME, 0x00050f03)
-///< This represents a Scene actuator configuration (set of ZCL Attributes with values)
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_FIELD_SETS, 0x00050f04)
-///< This represents a Scene Transition Time.
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME, 0x00050f05)
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME_100MS,
-                 0x00050f06)
-
-///< This value is used to store last non zero level, this is used when turning
-///  a Light on/off using on_off cluster. uint32_t
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,
-                 0x00080f01)
-
 #endif  //ATTRIBUTE_AUTO_GENERATED
 #endif  //ATTRIBUTE_STORE_TYPES_H
         /** @} end zpc_attribute_types */

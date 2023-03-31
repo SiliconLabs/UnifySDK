@@ -30,18 +30,6 @@ The following documentation explains how to install and set up Docker.
 - [Windows and OSX](https://www.docker.com/products/docker-desktop)
 - [Debian/Ubuntu Linux Linux](https://docs.docker.com/engine/install/ubuntu/)
 
-## Build Docker Image
-
-The *Dockerfile*  in `docker/Dockerfile` supports building all target applications
-(protocol controllers, UPVL, Developer GUI, etc.).
-To build the Docker image with support for the 64-bit Bullseye reference platform, you can run:
-
-``` bash
-./docker/build_docker.sh arm64 uic_arm64
-```
-
-This will build the Unify toolchain docker images and name it *uic_arm64*.
-
 ### Getting the source
 
 There are two ways to obtain the Unify source code, the simplest way is
@@ -55,6 +43,18 @@ git@github.com:SiliconLabs/UnifySDK.git
 
 > Note: During the build, the CMake build system will fetch additional required dependencies
 online.
+
+## Build Docker Image
+
+The *Dockerfile*  in `docker/Dockerfile` supports building all target applications
+(protocol controllers, UPVL, Developer GUI, etc.).
+To build the Docker image with support for the 64-bit Bullseye reference platform, you can run:
+
+``` bash
+./docker/build_docker.sh arm64 uic_arm64
+```
+
+This will build the Unify toolchain docker images and name it *uic_arm64*.
 
 ### Cross Compiling for Raspberry Pi Using Docker
 

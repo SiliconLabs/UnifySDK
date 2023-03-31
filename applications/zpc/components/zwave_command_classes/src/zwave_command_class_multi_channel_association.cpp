@@ -523,7 +523,6 @@ static sl_status_t
 
   reports_to_follow_t reports =
     frame_data[ASSOCIATION_REPORTS_REPORTS_TO_FOLLOW];
-  
 
   set_reports_to_follow(group_content_node, reports);
   if (reports < previous_reports_to_follow) {
@@ -541,11 +540,11 @@ static sl_status_t
   bytes.clear();
   get_association_bytestream(list, bytes);
   attribute group(group_content_node);
-  
+
   if (concatenate_with_previous_value == true) {
     association_set existing_list;
-    association_bytes existing_bytes = 
-    group.get<association_bytes>(REPORTED_ATTRIBUTE);
+    association_bytes existing_bytes
+      = group.get<association_bytes>(REPORTED_ATTRIBUTE);
 
     get_association_list(existing_bytes, existing_list);
     association_set merged_list;
@@ -886,8 +885,8 @@ static void on_group_content_send_data_complete(attribute_store_node_t node,
     case FRAME_SENT_EVENT_OK_SUPERVISION_FAIL:
     default:
       attribute_store_undefine_desired(node);
-      attribute_store_undefine_reported(node);
-      command_count = 0;
+      // Trust the last reported. Do not increment the command count,
+      // we do not want to retry now.
       break;
   }
 

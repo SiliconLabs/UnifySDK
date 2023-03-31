@@ -269,9 +269,9 @@ void on_resolver_send_data_complete(resolver_send_status_t status,
           for (attribute_store::attribute a:
                attribute_resolver_rule_get_group_nodes(rule_type, node)) {
             // Now we can align the reported to the desired value
-            attribute_store_log_node(a, false);
             a.set_reported(a.desired_or_reported<std::vector<uint8_t>>());
             a.clear_desired();
+            attribute_store_log_node(a, false);
           }
         }
       }

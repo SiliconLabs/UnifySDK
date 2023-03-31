@@ -5,17 +5,28 @@ def zwSWITCH_BINARY_VALUE 0x2503
 def zwSWITCH_BINARY_DURATION 0x2504
 
 // OnOff Cluster
-def zbON_OFF_CLUSTER_SWITCH 0x00060000
+def zbON_OFF 0x00060000
 
-scope 0 chain_reaction(0) clear_desired(0) {
+// Capabilities
+def zwave_no_binary_switch (e'zwSWITCH_BINARY_STATE == 0)
+
+// Verify if ZCL OnOff Reported/Desired are both defined and mismatched.
+def zcl_on_off_mismatch (fn_are_all_defined(r'zbON_OFF,d'zbON_OFF) & (r'zbON_OFF !=d'zbON_OFF))
+
+scope 20 chain_reaction(0) clear_desired(0) {
   // Linking attributes zwave -> zigbee
-  r'zbON_OFF_CLUSTER_SWITCH = if (r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
-  d'zbON_OFF_CLUSTER_SWITCH = if (d'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
+  r'zbON_OFF =
+    if (zwave_no_binary_switch) undefined
+    if (r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
+  d'zbON_OFF =
+    if (zwave_no_binary_switch) undefined
+    if (zcl_on_off_mismatch) undefined
+    if (d'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
 
   // Linking attributes zigbee -> zwave
   d'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE =
-    if (d'zbON_OFF_CLUSTER_SWITCH == 0) 0
-    if (d'zbON_OFF_CLUSTER_SWITCH == 1) 255
+    if (d'zbON_OFF == 0) 0
+    if (d'zbON_OFF == 1) 255
     undefined
 }
 

@@ -182,6 +182,15 @@ sl_status_t level_cluster_mapper_move_to_level(
       return SL_STATUS_FAIL;
     }
   }
+
+  // Command has no effect if OnOff::OnOff is Off.
+  if (false
+      == dotdot_get_on_off_on_off(unid,
+                                  endpoint,
+                                  DESIRED_OR_REPORTED_ATTRIBUTE)) {
+    return SL_STATUS_OK;
+  }
+
   // Set the level and transition time as received in the command.
   level = validated_level_value(unid, endpoint, level);
   dotdot_set_level_current_level_and_on_off_transition_time(unid,
@@ -212,6 +221,14 @@ sl_status_t
     } else {
       return SL_STATUS_FAIL;
     }
+  }
+
+  // Command has no effect if OnOff::OnOff is Off.
+  if (false
+      == dotdot_get_on_off_on_off(unid,
+                                  endpoint,
+                                  DESIRED_OR_REPORTED_ATTRIBUTE)) {
+    return SL_STATUS_OK;
   }
 
   // This is the ZigBee equivalent of Z-Wave Start level change.
@@ -269,6 +286,14 @@ sl_status_t
     } else {
       return SL_STATUS_FAIL;
     }
+  }
+
+  // Command has no effect if OnOff::OnOff is Off.
+  if (false
+      == dotdot_get_on_off_on_off(unid,
+                                  endpoint,
+                                  DESIRED_OR_REPORTED_ATTRIBUTE)) {
+    return SL_STATUS_OK;
   }
 
   // Step size 0 will not get us moving.
@@ -333,6 +358,7 @@ sl_status_t
     endpoint,
     current_reported_level,
     0);
+
   // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
@@ -366,7 +392,7 @@ sl_status_t level_cluster_mapper_move_to_level_with_on_off(
                                                             level,
                                                             transition_time);
   // Do the with OnOff magic:
-  if (level > DEFAULT_MIN_LEVEL) {
+  if (level > get_min_level(unid, endpoint)) {
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, ON);
   } else {
     attribute_store_node_t endpoint_node
@@ -412,9 +438,9 @@ sl_status_t level_cluster_mapper_move_with_on_off(
   // with an estimated transition time.
   uint8_t level = DEFAULT_MIN_LEVEL;
   if (move_mode == ZCL_MOVE_STEP_MODE_DOWN) {
-    level = DEFAULT_MIN_LEVEL;
+    level = get_min_level(unid, endpoint);
   } else if (move_mode == ZCL_MOVE_STEP_MODE_UP) {
-    level = DEFAULT_MAX_LEVEL;
+    level = get_max_level(unid, endpoint);
   }
 
   int32_t current_reported_level
@@ -558,25 +584,25 @@ void level_cluster_mapper_init()
   sl_log_debug(LOG_TAG, "Level cluster mapper initialization");
 
   uic_mqtt_dotdot_level_move_to_level_callback_set(
-    level_cluster_mapper_move_to_level);
+    &level_cluster_mapper_move_to_level);
 
-  uic_mqtt_dotdot_level_move_callback_set(level_cluster_mapper_move);
+  uic_mqtt_dotdot_level_move_callback_set(&level_cluster_mapper_move);
 
-  uic_mqtt_dotdot_level_step_callback_set(level_cluster_mapper_step);
+  uic_mqtt_dotdot_level_step_callback_set(&level_cluster_mapper_step);
 
-  uic_mqtt_dotdot_level_stop_callback_set(level_cluster_mapper_stop);
+  uic_mqtt_dotdot_level_stop_callback_set(&level_cluster_mapper_stop);
 
   uic_mqtt_dotdot_level_move_to_level_with_on_off_callback_set(
-    level_cluster_mapper_move_to_level_with_on_off);
+    &level_cluster_mapper_move_to_level_with_on_off);
 
   uic_mqtt_dotdot_level_move_with_on_off_callback_set(
-    level_cluster_mapper_move_with_on_off);
+    &level_cluster_mapper_move_with_on_off);
 
   uic_mqtt_dotdot_level_step_with_on_off_callback_set(
-    level_cluster_mapper_step_with_on_off);
+    &level_cluster_mapper_step_with_on_off);
 
   uic_mqtt_dotdot_level_stop_with_on_off_callback_set(
-    level_cluster_mapper_stop_with_on_off);
+    &level_cluster_mapper_stop_with_on_off);
 
   attribute_store_register_callback_by_type_and_state(
     &on_remaining_time_reported_update,

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['carbonmonoxide_20cluster_63',['CarbonMonoxide Cluster',['../carbon_monoxide.html',1,'']]],
-  ['colorcontrol_20cluster_64',['ColorControl Cluster',['../color_control.html',1,'']]],
-  ['configurationparameters_20cluster_65',['ConfigurationParameters Cluster',['../configuration_parameters.html',1,'']]]
+  ['carbondioxide_20cluster_66',['CarbonDioxide Cluster',['../carbon_dioxide.html',1,'']]],
+  ['carbonmonoxide_20cluster_67',['CarbonMonoxide Cluster',['../carbon_monoxide.html',1,'']]],
+  ['colorcontrol_20cluster_68',['ColorControl Cluster',['../color_control.html',1,'']]],
+  ['configurationparameters_20cluster_69',['ConfigurationParameters Cluster',['../configuration_parameters.html',1,'']]]
 ];

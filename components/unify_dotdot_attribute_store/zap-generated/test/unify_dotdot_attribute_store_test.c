@@ -972,6 +972,16 @@ uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback_t get_uic_mqtt_dotdo
   return test_uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback;
 }
 
+static uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t test_uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t test_uic_mqtt_dotdot_soil_moisture_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t get_uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t get_uic_mqtt_dotdot_soil_moisture_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_soil_moisture_write_attributes_callback;
+}
+
 static uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback_t test_uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_ph_measurement_write_attributes_callback_t test_uic_mqtt_dotdot_ph_measurement_write_attributes_callback = NULL;
 
@@ -1010,6 +1020,26 @@ uic_mqtt_dotdot_carbon_monoxide_force_read_attributes_callback_t get_uic_mqtt_do
 }
 uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback_t get_uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback(){
   return test_uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t test_uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t test_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t get_uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t get_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_pm25_force_read_attributes_callback_t test_uic_mqtt_dotdot_pm25_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_pm25_write_attributes_callback_t test_uic_mqtt_dotdot_pm25_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_pm25_force_read_attributes_callback_t get_uic_mqtt_dotdot_pm25_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_pm25_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_pm25_write_attributes_callback_t get_uic_mqtt_dotdot_pm25_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_pm25_write_attributes_callback;
 }
 
 static uic_mqtt_dotdot_ias_zone_force_read_attributes_callback_t test_uic_mqtt_dotdot_ias_zone_force_read_attributes_callback = NULL;
@@ -1311,6 +1341,9 @@ void test_on_off_off_command_clear_reported();
 void test_on_off_toggle_command_update_desired();
 void test_on_off_toggle_command_clear_reported();
 void test_on_off_off_command_support();
+void test_on_off_off_command_update_desired_with_level_supported();
+void test_on_off_on_command_update_desired_with_level_supported_on_level();
+void test_on_off_on_command_update_desired_with_level_supported_last_non_zero_level();
 void test_no_get_endpoint_function_registered();
 void test_publish_no_get_unid_function_registered();
 void test_publish_reported_value();
@@ -2459,6 +2492,16 @@ void set_uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback_stub(
 {
   test_uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback = callback;
 }
+void set_uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_soil_moisture_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_soil_moisture_write_attributes_callback = callback;
+}
 void set_uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback_t callback, int cmock_num_calls)
 {
@@ -2498,6 +2541,26 @@ void set_uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback_stub(
   const uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback_t callback, int cmock_num_calls)
 {
   test_uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_pm25_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_pm25_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_pm25_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_pm25_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_pm25_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_pm25_write_attributes_callback = callback;
 }
 void set_uic_mqtt_dotdot_ias_zone_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_ias_zone_force_read_attributes_callback_t callback, int cmock_num_calls)
@@ -3479,6 +3542,12 @@ void setUp()
   test_uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback = NULL;
   uic_mqtt_dotdot_set_occupancy_sensing_write_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_occupancy_sensing_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_soil_moisture_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_soil_moisture_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_soil_moisture_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_soil_moisture_write_attributes_callback_stub);
   test_uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_ph_measurement_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback_stub);
@@ -3503,6 +3572,18 @@ void setUp()
   test_uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback = NULL;
   uic_mqtt_dotdot_set_carbon_monoxide_write_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_carbon_monoxide_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_carbon_dioxide_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_carbon_dioxide_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_pm25_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_pm25_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_pm25_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_pm25_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_pm25_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_pm25_write_attributes_callback_stub);
   test_uic_mqtt_dotdot_ias_zone_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_ias_zone_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_ias_zone_force_read_attributes_callback_stub);
@@ -4142,6 +4223,10 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_soil_moisture_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_soil_moisture_min_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_soil_moisture_max_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_soil_moisture_tolerance(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ph_measurement_measured_value(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ph_measurement_min_measured_value(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ph_measurement_max_measured_value(expected_unid,expected_endpoint_id) );
@@ -4158,6 +4243,14 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_carbon_monoxide_min_measured_value(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_carbon_monoxide_max_measured_value(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_carbon_monoxide_tolerance(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_carbon_dioxide_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_carbon_dioxide_min_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_carbon_dioxide_max_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_carbon_dioxide_tolerance(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_pm25_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_pm25_min_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_pm25_max_measured_value(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_pm25_tolerance(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ias_zone_zone_state(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ias_zone_zone_type(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ias_zone_zone_status(expected_unid,expected_endpoint_id) );

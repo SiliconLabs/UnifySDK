@@ -291,7 +291,7 @@ sl_status_t
     return SL_STATUS_NOT_FOUND;
   }
 
-  zwave_node_id_t node_id;
+  zwave_node_id_t node_id = 0;
   if (SL_STATUS_OK
       != attribute_store_get_reported(node,
                                       &node_id,

@@ -14,7 +14,7 @@ def aeon_labs_switch ((r'zwMANUFACTURER_ID == 0x86) & (r'zwPRODUCT_TYPE_ID == 0x
 def LIFELINE_PROFILE 0x0001
 def AGI_PROFILE_CONTROL_KEY_1 0x2001
 
-scope 0 {
+scope 500 {
 
 // Group 1 profile
 r'zwASSOCIATION_GROUP_ID[1].zwASSOCIATION_GROUP_PROFILE =

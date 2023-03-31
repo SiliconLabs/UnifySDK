@@ -24,6 +24,7 @@ var modules =
     [ "Z-Wave Application Command Class Handler", "group__zwave__command__handler.html", "group__zwave__command__handler" ],
     [ "Zwave_command_type", "group__zwave__command__type.html", "group__zwave__command__type" ],
     [ "Z-Wave SmartStart Management", "group__zwave__smartstart__management.html", "group__zwave__smartstart__management" ],
+    [ "Mapper path match evaluation", "group__Attribute.html", null ],
     [ "Scope settings helpers", "group__attribute__mapper__scope__settings.html", "group__attribute__mapper__scope__settings" ],
     [ "Unify Components", "group__unify__components.html", "group__unify__components" ],
     [ "Internal C++ ZAP definitions", "group__dotdot__mqtt__hpp.html", "group__dotdot__mqtt__hpp" ]

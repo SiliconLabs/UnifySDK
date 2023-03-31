@@ -13,7 +13,7 @@ def MAXIMUM_INTERVAL    0x00008405
 // Device fingerprints
 def sensor_pir_sample_app ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x03))
 
-scope 0 {
+scope 500 {
 
 // SensorPIR runs with aggressive Wake Up Interval for testing purposes.
 d'WAKE_UP.INTERVAL =

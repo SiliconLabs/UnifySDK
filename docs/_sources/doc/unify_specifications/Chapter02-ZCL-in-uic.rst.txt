@@ -657,12 +657,77 @@ ALL the attributes of a given cluster
 In response, the Protocol Controller should update ALL available attributes
 for *ClusterName*, as specified in |ZCL2019|.
 
-Note that Protocol Controller may not support the *ForceReadAttribute*
+Note that Protocol Controller may not support the *ForceReadAttributes*
 for any attribute under a cluster. For example, it can be that a Protocol Controller
 is able to force read Scenes Cluster attributes but not the SceneTable.
 
-*ForceReadAttribute* is EXPLICITLY not supported for groups or multicast due
+*ForceReadAttributes* is EXPLICITLY not supported for groups or multicast due
 to network performance considerations.
+
+Observing the effects of a command
+----------------------------------
+
+An IoT service MAY follow the effect of a published (write-type) command by
+observing the associated attributes.
+
+Read type of commands, like ForceReadAttributes, ViewGroup, ViewScene, MAY trigger
+Protocol Controllers to interact with PAN nodes, but there will be no guaranteed
+feedback on MQTT.
+
+.. note::
+
+  |ZCL2019| is not always fully explicit on how commands and their fields will
+  affect the value of cluster attributes. The Unify SDK provides a shared
+  components that links incoming commands to attribute updates, so updates to
+  desired will be uniform across Protocol Controllers.
+
+Let's consider an OnOff Server PAN node. The Protocol Controller MUST publish
+its supported attributes and supported commands as a minimum:
+
+.. code-block:: mqtt
+
+  # Initial publications by the Protocol Controller
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Desired - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Reported - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/SupportedCommands -  {"value": ["Off", "On", "Toggle"]}
+
+  # IoT Service publishes:
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Commands/Off -  { }
+
+  # Protocol Controller MUST acknowledge reception of the command by updating all affected attributes
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - {"value": false}
+
+  # Protocol Controller Communicates with the node...
+
+  # Protocol Controller MUST update the affected attributes again, as part of the outcome of the command
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - {"value": false}
+
+If a Protocol Controller fails to execute a command or if the node reports that
+the OnOff attribute is still On (true), the Protocol Controller MUST roll back
+the desired value, so that the desired and reported values match again.
+
+Whenever an attribute has a Desired/Reported value mismatch, an IoT Service
+can assume that either:
+
+* The Protocol Controller is trying to communicate with the node to set the values
+* The PAN node is performing a transition to the desired value that takes time.
+
+IoT Services SHOULD use the WriteAttributes commands whenever available if they
+wish to keep a high level of certainty between issued commands and their effect
+on attributes.
+
+PAN Nodes capabilities vs ZCL Compliance
+----------------------------------------
+
+Protocol Controllers SHOULD do their best to have the devices they expose
+resemble devices that comply with the |ZCL2019|.
+It can be simulating attributes, entire clusters, or manipulating values
+sent by end nodes.
+
+Protocol Controllers SHOULD simulate cluster servers if needed, so that devices
+behave as closely to the actual set of defined Device Types in |ZCL2019|.
 
 Clusters for Lights, Switches, DoorLock, Thermostat, and Occupancy Sensor Applications
 --------------------------------------------------------------------------------------
@@ -707,11 +772,13 @@ The only mandatory attribute in the group cluster is the NameSupport attribute.
 If a PAN node supports name for groups, it will advertise the assigned names
 for each of its groups under the following topics:
 
-> ``ucl/by-unid/<UNID>/ep<id>/Groups/Attributes/<GroupID>/Name/Reported``
-> ``ucl/by-unid/<UNID>/ep<id>/Groups/Attributes/<GroupID>/Name/Desired``
+.. code-block:: mqtt
 
-The names assigned to each group will be a value containing a string as if
-the name was a regular string attribute.
+  ucl/by-unid/<UNID>/ep<id>/Groups/Attributes/<GroupID>/Name/Reported
+  ucl/by-unid/<UNID>/ep<id>/Groups/Attributes/<GroupID>/Name/Desired
+
+The names assigned to each group will be a value containing a string
+as in the AddGroup Command GroupName field.
 
 **JSON Schema:**
 
@@ -735,7 +802,10 @@ the name was a regular string attribute.
 The list of groups that a node is part of will be advertised under the GroupList
 topic. Note that GroupID 0 is not a valid group and MUST NOT be used.
 
-**Topic:** ``ucl/by-unid/<UNID>/ep<id>/Groups/Attributes/GroupList/Desired``
+.. code-block:: mqtt
+
+  ucl/by-unid/<UNID>/ep<id>/Groups/Attributes/GroupList/Desired
+  ucl/by-unid/<UNID>/ep<id>/Groups/Attributes/GroupList/Reported
 
 **JSON Schema:**
 
@@ -771,15 +841,16 @@ The usage of this cluster for application level control is described in
 On/Off Cluster (0x0006)
 '''''''''''''''''''''''
 
-Mandatory Attributes:
+Here is an example of OnOff Server PAN node with the minimum required attributes
+and commands.
 
-* OnOff(0x0000); expected state values Off(0x00) and On(0x01).
+.. code-block:: mqtt
 
-Mandatory Commands:
-
-* Off (0x00): when a device receive this command, the device should enter to "Off" state.
-* On (0x01): when a device receive this command, the device should enter to "On" state.
-* Toggle (0x02): when a device receive this command, the device should enter to "On" state if it was on " Off" state and vice versa.
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Desired - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Reported - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/SupportedCommands -  {"value": ["Off", "On", "Toggle"]}
 
 Level Cluster(0x0008)
 '''''''''''''''''''''
@@ -787,48 +858,52 @@ Level Cluster(0x0008)
 The level cluster controls the light brightness level,
 the door closure level, or the heater power output.
 
-Mandatory attributes:
+|ZCL2019| indicates that Level Servers must also be OnOff servers.
+Here is a minimal example:
 
-* CurrentLevel 0x0000 (accepted value range: MinLevel ... MaxLevel)
-  represents the current level of the device (the meaning of 'level' is device
-  dependent). Current Level is read only and cannot be updated using the
-  WriteAttributes command.
+.. code-block:: mqtt
 
-Some Optional attributes that define the minimum and maximum level supported by the device:
+  # OnOff Cluster
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Desired - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Reported - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/SupportedCommands -  {"value": ["Off", "On", "Toggle"]}
 
-* MinLevel (0x0002): the minimum level the device supports.
-* MaxLevel (0x0003): the maximum level the device supports.
-* onLevel (0x0010): determines the value that the CurrentLevel attribute is set
-  to when the OnOff attribute is set to "On", as a result of processing an On/Off
-  cluster command. If the OnLevel attribute is not implemented or is set to 0xff,
-  the CurrentLevel value is not modified when the OnOff attribute of the OnOff
-  Cluster is modified.
+  # Level Cluster
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/ClusterRevision/Desired - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/ClusterRevision/Reported - {"value": 2}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Desired - {"value": 255}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Reported - {"value": 255}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/SupportedCommands -  {"value": ["MoveToLevel", "Move", "Step", "Stop", "MoveToLevelWithOnOff", "MoveWithOnOff", "StepWithOnOff", "StopWithOnOff"]}
 
-Mandatory Commands:
+Note that the OnOff cluster command will affect the level value.
 
-* MoveToLevel (0x00): should contain a Level and TransitionTime
-  [in tenths of seconds] in the command JSON payload.
-* Move (0x01): should contain a MoveMode (Up or Down) and the Rate (define the
-  rate of the movement in units per second) in the command JSON payload.
-* Step (0x02): should contain StepMode (Up or Down), StepSize, and
-  TransitionTime in the command JSON payload.
-* Stop (0x03): command that stops the level changes that was triggered by the
-  MoveToLevel, Move and Step commands.
+.. code-block:: mqtt
 
-Commands that will affect the On/Off Attribute of the device if On/Off Cluster
-also supported:
+  # IoT Service publishes:
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Commands/Off - { }
 
-* MoveToLevelWithOnOff (0x04)
-* MovewithOnOff (0x05)
-* StepWithOnOff (0x06)
+  # Protocol Controller acknowledges:
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - {"value": false}
 
-Note that the the behavior of these commands is similar to the above mandatory
-commands. The main difference is the MoveToLevelWithOnOff, MovewithOnOff,
-and StepWithOnOff commands impact the On/Off Attribute of the device
-if On/Off Cluster is also supported. If the targeted level value is higher
-than the minimum level, the On/Off attribute should be set to "On" (light bulb).
-If the target level is set to the minimum level allowed by the device,
-the OnOff attribute should be set to "Off" (grey lightbulb).
+  # Communication ongoing ...
+
+  # Protocol Controller updates the state of the PAN node:
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - {"value": false}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Desired - {"value": 0}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Reported - {"value": 0}
+
+  # Alternatively, Level commands May affect OnOff attributes:
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Commands/MoveToLevelWithOnOff - {"Level":45,"TransitionTime":0,"OptionsMask":{"ExecuteIfOff":false,"CoupleColorTempToLevel":false},"OptionsOverride":{"ExecuteIfOff":false,"CoupleColorTempToLevel":false}}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Desired - {"value": 45}
+  # Communication ongoing ...
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - {"value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Reported - {"value": 255}
+
+Note that the IoT Service SHOULD assume default values for the MinLevel/MaxLevel
+if they are not published/advertised for a node.
 
 Door Lock Cluster (0x0101)
 ''''''''''''''''''''''''''
@@ -868,22 +943,6 @@ Setpoint Raise/Lower.
   In the ZCL Thermostat Cluster, all temperatures are in **Celcius (°C)**
   and any necessary conversion to/from, for example, Fahrenheit °F must be
   done by the Unify components (Protocol Controllers and GUI).
-
-Fingerprinting of Z-Wave Nodes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For example, to map a Z-Wave node's functionalities to the Thermostat
-Cluster, a protocol Controller may expect the following conditions to be met
-before it exposes a Node as a Thermostat Cluster server:
-
-* Node supports the Multilevel Sensor Command Class, version 1 or newer
-
-  * Node supports the Multilevel sensor type 0x01 (Air Temperature)
-
-* Node supports the Thermostat Setpoint Command Class, version 1 or newer
-* Node supports the Thermostat Mode Command Class, version 1 or newer
-
-  * Node supports at least one of the following modes: 0x01 (HEAT), 0x02 (COOL), 0x03 (AUTO).
 
 Mandatory Attributes
 ~~~~~~~~~~~~~~~~~~~~

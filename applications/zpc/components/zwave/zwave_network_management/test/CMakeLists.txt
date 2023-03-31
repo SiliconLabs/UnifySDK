@@ -35,6 +35,24 @@ target_add_unittest(
 target_include_directories(zwave_network_management_smartstart_learn_mode_test
                            PRIVATE ../src)
 
+## SmartStart add mode tests
+target_add_unittest(
+  zwave_network_management
+  NAME
+  zwave_network_management_smartstart_add_mode_test
+  SOURCES
+  zwave_network_management_smartstart_add_mode_test.c
+  DEPENDS
+  uic_contiki_stub
+  zwave_api_mock
+  zwave_s2_mock
+  zwave_s0_mock
+  zwave_network_management_helpers_mock
+  EXCLUDE
+  zwave_network_management_helpers.c)
+target_include_directories(zwave_network_management_smartstart_add_mode_test
+                           PRIVATE ../src)
+
 ## learn mode tests
 target_add_unittest(
   zwave_network_management

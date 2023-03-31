@@ -45,6 +45,10 @@ sl_status_t barrier_control_go_to_percent_command(
     }
   }
 
+  // Bound validation
+  if (percent_open > 100) {
+    percent_open = 100;
+  }
   // Update the desired values:
   if (is_desired_value_update_on_commands_enabled()) {
     dotdot_set_barrier_control_barrier_position(unid,

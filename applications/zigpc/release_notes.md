@@ -1,5 +1,11 @@
 # ZigPC Release Notes
 
+## [1.3.1] - March 2023
+
+### Changed (1.3.1)
+
+* Added a bugfix addressing binding issues
+
 ## [1.3.0] - February 2023
 
 ### Added (1.3.0)
@@ -157,6 +163,7 @@ devices after ZigPC reboots
 | ZigPC can fail at initialization if the NCP image is based on a different version of the GeckoSDK than ZigPC                                          | Update the NCP image to the same GeckoSDK version as the one used to compile the ZigPC.     |
 | ZigPC sends the default response to a sleepy check-in command instead of the expected acknowledge message                                             | Disable the poll control cluster when managing sleepy devices to use the default behaviour. |
 | ZigPC may take longer than expected to perform an OTA upgrade                                                                                         | Minimize the size of the image and leave sufficient time to update end devices.             |
+| When running in a multiprotocol setup, permission issues may cause the setup to fail                                                                  | Use 'sudo' when running both ZigPC and the Zigbeed applications to ensure compatibility     |
 
 ### Zigbee Devices Used for Testing
 

@@ -3668,10 +3668,13 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_clear_flow_measurement_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_relativity_humidity_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_occupancy_sensing_write_attributes_callbacks();
+  uic_mqtt_dotdot_clear_soil_moisture_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_ph_measurement_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_electrical_conductivity_measurement_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_wind_speed_measurement_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_carbon_monoxide_write_attributes_callbacks();
+  uic_mqtt_dotdot_clear_carbon_dioxide_write_attributes_callbacks();
+  uic_mqtt_dotdot_clear_pm25_write_attributes_callbacks();
   uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback_clear();
   uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback_clear();
   uic_mqtt_dotdot_ias_zone_initiate_normal_operation_mode_callback_clear();

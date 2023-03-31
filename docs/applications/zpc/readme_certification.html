@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZPC Certification Information &mdash; Unify Host SDK</title>
+  <title>ZPC - Z-Wave (certification) Information &mdash; Unify Host SDK</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.0
+                ver_1.3.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -62,7 +62,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../zigpc/readme_developer.html">ZigPC Developer Guide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../zigpc/coding_standard.zigpc.html">ZigPC Coding Standard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="readme_user.html">ZPC User’s Guide</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">ZPC Certification Information</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ZPC - Z-Wave (certification) Information</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-services">The Unify Framework Services</a></li>
@@ -101,8 +101,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="zpc-certification-information">
-<h1>ZPC Certification Information<a class="headerlink" href="#zpc-certification-information" title="Permalink to this heading"></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="zpc-z-wave-certification-information">
+<h1>ZPC - Z-Wave (certification) Information<a class="headerlink" href="#zpc-z-wave-certification-information" title="Permalink to this heading"></a></h1>
+<p>This guide contains Z-Wave specific information and instructions.
+This document can also be used for certification information.</p>
 <section id="z-wave-protocol-interoperability">
 <h2>Z-Wave Protocol Interoperability<a class="headerlink" href="#z-wave-protocol-interoperability" title="Permalink to this heading"></a></h2>
 <p>This product can be operated in any Z-Wave network with other Z-Wave-certified
@@ -124,6 +126,14 @@ and multiple states may map to only 1 or vice versa.</p>
 <p><img alt="Dev GUI Waiting for attribute updates" src="../../_images/dev_gui_spinny_wheel.png" /></p>
 <p>It is recommended to try to modify more attributes by issuing more commands or
 the same command with slightly different parameters.</p>
+<section id="dev-gui-and-other-protocols">
+<h3>Dev GUI and other protocols<a class="headerlink" href="#dev-gui-and-other-protocols" title="Permalink to this heading"></a></h3>
+<p>Note that the Development UI is built for multiple protocol controllers to be
+displayed in the same way, together with Z-Wave.</p>
+<p>The Development UI does not reflect all the ZPC and Z-Wave capabilities, and
+some functionalities may be present on the Dev UI despite not implemented in
+the ZPC.</p>
+</section>
 </section>
 <section id="device-type-and-role-type">
 <h2>Device Type and Role Type<a class="headerlink" href="#device-type-and-role-type" title="Permalink to this heading"></a></h2>
@@ -169,8 +179,7 @@ supports and takes the SIS role by default.</p>
 <h2>Network Management Information<a class="headerlink" href="#network-management-information" title="Permalink to this heading"></a></h2>
 <section id="network-management">
 <h3>Network Management<a class="headerlink" href="#network-management" title="Permalink to this heading"></a></h3>
-<p>The <a class="reference internal" href="../dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Dev GUI User’s Guide</span></a>
-describes how to perform the following operations:</p>
+<p>The ZPC can perform the following operations using the Development UI:</p>
 <ul class="simple">
 <li><p>Direct range and Network-Wide Inclusion (Add) of other nodes in the network.</p></li>
 <li><p>Direct range and Network-Wide Exclusion (remove) of other nodes (in any network).</p></li>
@@ -415,7 +424,7 @@ on the UI.</p>
 <td></td>
 <td>x</td>
 <td>N/A</td>
-<td>Partial Control: The value 0xFF cannot be used in Multilevel Switch Set Commands</td>
+<td></td>
 </tr>
 <tr>
 <td>Notification</td>
@@ -578,7 +587,8 @@ will be set to 1.</p>
 By default, it establishes lifeline associations or establishes associations if
 some controlled Command Classes require it. (i.e. Notification, Central Scene,
 etc.)</p>
-<p>It is also possible to establish associations between 2 nodes in the network
+<p>It is not possible to establish arbitrary associations between 2 nodes.
+However, it is possible to establish bulk associations between 2 nodes in the network
 if the following conditions are fulfilled:</p>
 <ul class="simple">
 <li><p>The 2 nodes operate using Z-Wave (and not LR) and have identical highest security levels.</p></li>
@@ -715,6 +725,23 @@ these commands.</p>
 <h4>Sending commands<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
 <p>The Bind/Unbind commands will send Association Set/Remove commands.</p>
 <p><img alt="Dev GUI Binding commands" src="../../_images/dev_gui_binding_cluster_commands.png" /></p>
+<p>To make an Association (Binding) the following fields have to be provided:</p>
+<ul class="simple">
+<li><p><strong>DestinationUnid</strong>: This is the NodeID/destination of the association</p></li>
+<li><p><strong>DestinationEp</strong>: This is the Endpoint destination of the association, set
+to 0 to send to the Root Device. The ZPC will select NodeID/Endpoint
+Associations types automatically</p></li>
+<li><p><strong>ClusterName</strong>: The ZCL type of functionality to be associated. Refer to the
+table above to see how ZCL clusters map to AGI Commands.</p></li>
+</ul>
+<p>Note that if the “Bindable Cluster List” is empty, there will not be any
+available clusters in the “Cluster Name” dropdown and no associations will be
+established.</p>
+<p>This could happen because of there is no AGI. The list of clusters are populated
+when nodes provide AGI information.
+Further, some bind commands will have no effect due to association restrictions.
+Refer to the list of conditions described at the beginning of the section.</p>
+<p><img alt="Dev GUI Bind commands" src="../../_images/dev_gui_bin_cluster_commands.png" /></p>
 </section>
 </section>
 <section id="barrier-operator-command-class-information">
@@ -1111,9 +1138,86 @@ forwarded to the Dev GUI.</p>
 <h5>Node status<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h5>
 <p>Sensors values (known and unknown) are probed every 6 hours if no update was
 received from the end nodes.</p>
-<p>At the moment, the only displayed type of sensor in the DevGUI will be
-temperature sensors, shown in the Thermostat attribute page.</p>
-<p>Unknown values are not presented in the Dev GUI.</p>
+<p>The following Sensor Types/Scales and their values are presented to the UI:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Sensor Type</th>
+<th>Scale</th>
+<th>Mapped measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carbon dioxide (0x11)</td>
+<td>0x00 (ppm)</td>
+<td>Carbon dioxide (ppm)</td>
+</tr>
+<tr>
+<td>Carbon monoxide (0x28)</td>
+<td>0x01 (ppm)</td>
+<td>Carbon monoxide (ppm)</td>
+</tr>
+<tr>
+<td>Carbon monoxide (0x28)</td>
+<td>0x00 (mol.m-3)</td>
+<td>Carbon monoxide (ppm)</td>
+</tr>
+<tr>
+<td>Air Temperature (0x01)</td>
+<td>0x00 and 0x01 (C and F)</td>
+<td>Temperature (C * 100)</td>
+</tr>
+<tr>
+<td>Humidity (0x05)</td>
+<td>0x00 (%)</td>
+<td>Relative Humidity (Percent * 100)</td>
+</tr>
+<tr>
+<td>Soil Humidity (0x29)</td>
+<td>0x00 (%)</td>
+<td>Soil Moisture (Percent * 100)</td>
+</tr>
+<tr>
+<td>Water Acidity (0x43)</td>
+<td>0x00 (pH)</td>
+<td>pH Measurement (pH * 100)</td>
+</tr>
+<tr>
+<td>Soil Reactivity (0x2A)</td>
+<td>0x00 (pH)</td>
+<td>pH Measurement (pH * 100)</td>
+</tr>
+<tr>
+<td>Atmospheric Pressure (0x08)</td>
+<td>0x00 (kPa)</td>
+<td>Pressure Measurement (kPa * 10)</td>
+</tr>
+<tr>
+<td>Barometric Pressure (0x09)</td>
+<td>0x00 (kPa)</td>
+<td>Pressure Measurement (kPa * 10)</td>
+</tr>
+<tr>
+<td>Water Pressure (0x39)</td>
+<td>0x00 (kPa)</td>
+<td>Pressure Measurement (kPa * 10)</td>
+</tr>
+<tr>
+<td>Suction Pressure (0x4E)</td>
+<td>0x00 (kPa)</td>
+<td>Pressure Measurement (kPa * 10)</td>
+</tr>
+<tr>
+<td>Discharge Pressure (0x4F)</td>
+<td>0x00 (kPa)</td>
+<td>Pressure Measurement (kPa * 10)</td>
+</tr>
+</tbody>
+</table>
+<p>Unknown values are not presented in the Dev GUI.
+The screenshot belows shows an example with temperature measurements:</p>
+<p><img alt="Dev GUI Temperature Measurement" src="../../_images/dev_gui_temperature_measurement.png" /></p>
 </section>
 <section id="id24">
 <h5>Sending commands<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h5>
@@ -1218,12 +1322,9 @@ table, with a JSON representation:</p>
 <p><img alt="Dev GUI Occupancy IASZone zone status" src="../../_images/dev_gui_ias_zone_status.png" /></p>
 <p>The following notification will be mapped to the following bits:</p>
 <ul class="simple">
-<li><p>CO alarm - Carbon Monoxide detected -&gt; Alarm1</p></li>
-<li><p>Smoke alarm - Smoke detected -&gt; Alarm1</p></li>
 <li><p>Home Security - Motion detected -&gt; Alarm2</p></li>
 <li><p>Home Security - Intrusion -&gt; Alarm1</p></li>
 <li><p>Home Security - Tampering -&gt; Tamper</p></li>
-<li><p>Water Alarm - Leak detected -&gt; Alarm1</p></li>
 </ul>
 </section>
 </section>
@@ -1605,6 +1706,26 @@ rnote over zpc, node: &lt;b&gt;Cycle detected for supported protocols\n&lt;b&gt;
 rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request."/>
 </p>
 </section>
+</section>
+<section id="removing-stale-nodes-from-dev-gui">
+<h2>Removing stale nodes from Dev Gui<a class="headerlink" href="#removing-stale-nodes-from-dev-gui" title="Permalink to this heading"></a></h2>
+<p>Note that if you remove the Z-Wave API module from the Raspberry Pi, the ZPC
+will crash. There is a risk to create stale MQTT topics, i.e. the UI or MQTT
+clients will see nodes that are no longer available, and they will not react
+to commands.</p>
+<p>Stale topics can also happen if starting/stopping the ZPC quickly.</p>
+<p>To remove stale topics, the mosquitto broker database can be reset.
+Follow the simple steps below to clean the stale nodes/topics:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo service uic-zpc stop</span>
+<span class="go">sudo service uic-nal stop</span>
+<span class="go">sudo service mosquitto stop</span>
+<span class="go">sudo rm /var/lib/uic/nal.db</span>
+<span class="go">sudo rm /var/lib/mosquitto/mosquitto.db</span>
+<span class="go">sudo service mosquitto start</span>
+<span class="go">sudo service uic-nal start</span>
+<span class="go">sudo service uic-zpc start</span>
+</pre></div>
+</div>
 </section>
 </section>
 

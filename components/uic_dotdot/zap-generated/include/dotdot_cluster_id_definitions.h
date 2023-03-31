@@ -158,6 +158,10 @@
 #define DOTDOT_OCCUPANCY_SENSING_CLUSTER_ID ((dotdot_cluster_id_t)0x406)
 
 
+// Definitions for cluster: SoilMoisture
+#define DOTDOT_SOIL_MOISTURE_CLUSTER_ID ((dotdot_cluster_id_t)0x408)
+
+
 // Definitions for cluster: PhMeasurement
 #define DOTDOT_PH_MEASUREMENT_CLUSTER_ID ((dotdot_cluster_id_t)0x409)
 
@@ -172,6 +176,14 @@
 
 // Definitions for cluster: CarbonMonoxide
 #define DOTDOT_CARBON_MONOXIDE_CLUSTER_ID ((dotdot_cluster_id_t)0x40C)
+
+
+// Definitions for cluster: CarbonDioxide
+#define DOTDOT_CARBON_DIOXIDE_CLUSTER_ID ((dotdot_cluster_id_t)0x40D)
+
+
+// Definitions for cluster: PM25
+#define DOTDOT_PM25_CLUSTER_ID ((dotdot_cluster_id_t)0x42A)
 
 
 // Definitions for cluster: IASZone

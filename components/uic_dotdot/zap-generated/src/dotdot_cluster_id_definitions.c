@@ -80,6 +80,8 @@ const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
     return "RelativityHumidity";
   case DOTDOT_OCCUPANCY_SENSING_CLUSTER_ID:
     return "OccupancySensing";
+  case DOTDOT_SOIL_MOISTURE_CLUSTER_ID:
+    return "SoilMoisture";
   case DOTDOT_PH_MEASUREMENT_CLUSTER_ID:
     return "PhMeasurement";
   case DOTDOT_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_CLUSTER_ID:
@@ -88,6 +90,10 @@ const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
     return "WindSpeedMeasurement";
   case DOTDOT_CARBON_MONOXIDE_CLUSTER_ID:
     return "CarbonMonoxide";
+  case DOTDOT_CARBON_DIOXIDE_CLUSTER_ID:
+    return "CarbonDioxide";
+  case DOTDOT_PM25_CLUSTER_ID:
+    return "PM25";
   case DOTDOT_IAS_ZONE_CLUSTER_ID:
     return "IASZone";
   case DOTDOT_IASACE_CLUSTER_ID:
@@ -219,6 +225,9 @@ dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
  if (strcmp ("OccupancySensing", cluster_name) == 0) {
    return DOTDOT_OCCUPANCY_SENSING_CLUSTER_ID;
  }
+ if (strcmp ("SoilMoisture", cluster_name) == 0) {
+   return DOTDOT_SOIL_MOISTURE_CLUSTER_ID;
+ }
  if (strcmp ("PhMeasurement", cluster_name) == 0) {
    return DOTDOT_PH_MEASUREMENT_CLUSTER_ID;
  }
@@ -230,6 +239,12 @@ dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
  }
  if (strcmp ("CarbonMonoxide", cluster_name) == 0) {
    return DOTDOT_CARBON_MONOXIDE_CLUSTER_ID;
+ }
+ if (strcmp ("CarbonDioxide", cluster_name) == 0) {
+   return DOTDOT_CARBON_DIOXIDE_CLUSTER_ID;
+ }
+ if (strcmp ("PM25", cluster_name) == 0) {
+   return DOTDOT_PM25_CLUSTER_ID;
  }
  if (strcmp ("IASZone", cluster_name) == 0) {
    return DOTDOT_IAS_ZONE_CLUSTER_ID;

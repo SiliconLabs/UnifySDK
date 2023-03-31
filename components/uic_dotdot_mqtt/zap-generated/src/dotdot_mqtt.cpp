@@ -62872,6 +62872,466 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_init()
 }
 
 // Callbacks pointers
+static std::set<uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t> uic_mqtt_dotdot_soil_moisture_write_attributes_callback;
+static std::set<uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t> uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback;
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_set_soil_moisture_write_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_soil_moisture_write_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_soil_moisture_write_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_soil_moisture_write_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_soil_moisture_write_attributes_callbacks()
+{
+  uic_mqtt_dotdot_soil_moisture_write_attributes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t>& get_uic_mqtt_dotdot_soil_moisture_write_attributes_callback()
+{
+  return uic_mqtt_dotdot_soil_moisture_write_attributes_callback;
+}
+
+void uic_mqtt_dotdot_set_soil_moisture_force_read_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_soil_moisture_force_read_attributes_callback(
+  const uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_soil_moisture_force_read_attributes_callbacks()
+{
+  uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/SoilMoisture/Commands/WriteAttributes
+void uic_mqtt_dotdot_on_soil_moisture_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (uic_mqtt_dotdot_soil_moisture_write_attributes_callback.empty()) {
+    return;
+  }
+
+  if (message_length == 0) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_soil_moisture_state_t new_state = {};
+  uic_mqtt_dotdot_soil_moisture_updated_state_t new_updated_state = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+    uic_mqtt_dotdot_parse_soil_moisture_write_attributes(
+      jsn,
+      new_state,
+      new_updated_state
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "SoilMoisture", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture", "WriteAttributes", "");
+    return;
+  }
+
+  for (const auto& callback: uic_mqtt_dotdot_soil_moisture_write_attributes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      new_state,
+      new_updated_state
+    );
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_soil_moisture_force_read_attributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  uint8_t endpoint = 0;
+  std::string unid;
+
+  if ((message_length == 0) || (uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback.empty())) {
+    return;
+  }
+
+  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  try {
+    uic_mqtt_dotdot_soil_moisture_updated_state_t force_update = {0};
+    bool trigger_handler = false;
+
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
+
+    // Assume all attributes to be read on empty array received
+    if (attributes.size() == 0) {
+      force_update.measured_value = true;
+      force_update.min_measured_value = true;
+      force_update.max_measured_value = true;
+      force_update.tolerance = true;
+      trigger_handler = true;
+    } else {
+      std::unordered_map<std::string, bool *> supported_attrs = {
+        {"MeasuredValue", &force_update.measured_value },
+        {"MinMeasuredValue", &force_update.min_measured_value },
+        {"MaxMeasuredValue", &force_update.max_measured_value },
+        {"Tolerance", &force_update.tolerance },
+      };
+
+      for (auto& attribute : attributes) {
+        auto found_attr = supported_attrs.find(attribute);
+        if (found_attr != supported_attrs.end()) {
+          *(found_attr->second) = true;
+          trigger_handler = true;
+        }
+      }
+    }
+
+    if (trigger_handler == true) {
+      for (const auto& callback: uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback) {
+        callback(
+          static_cast<dotdot_unid_t>(unid.c_str()),
+          endpoint,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+          force_update
+        );
+      }
+    }
+  } catch (...) {
+    sl_log_debug(LOG_TAG, "SoilMoisture/Commands/ForceReadAttributes: Unable to parse JSON payload");
+    return;
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture/Attributes/MeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/SoilMoisture/Attributes/MeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/SoilMoisture/Attributes/MeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture/Attributes/MinMeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/SoilMoisture/Attributes/MinMeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/SoilMoisture/Attributes/MinMeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture/Attributes/MaxMeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/SoilMoisture/Attributes/MaxMeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/SoilMoisture/Attributes/MaxMeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_tolerance_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "SoilMoisture/Attributes/Tolerance", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/SoilMoisture/Attributes/Tolerance";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_tolerance_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/SoilMoisture/Attributes/Tolerance";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+
+sl_status_t uic_mqtt_dotdot_soil_moisture_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(!uic_mqtt_dotdot_soil_moisture_write_attributes_callback.empty()) {
+    subscription_topic = base_topic + "SoilMoisture/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_soil_moisture_WriteAttributes);
+  }
+
+  if(!uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback.empty()) {
+    subscription_topic = base_topic + "SoilMoisture/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_soil_moisture_force_read_attributes);
+  }
+
+  // Init the attributes for that cluster
+  uic_mqtt_dotdot_soil_moisture_attributes_init();
+
+  uic_mqtt_dotdot_by_group_soil_moisture_init();
+
+  return SL_STATUS_OK;
+}
+
+// Callbacks pointers
 static std::set<uic_mqtt_dotdot_ph_measurement_write_attributes_callback_t> uic_mqtt_dotdot_ph_measurement_write_attributes_callback;
 static std::set<uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback_t> uic_mqtt_dotdot_ph_measurement_force_read_attributes_callback;
 
@@ -64707,6 +65167,926 @@ sl_status_t uic_mqtt_dotdot_carbon_monoxide_init()
   uic_mqtt_dotdot_carbon_monoxide_attributes_init();
 
   uic_mqtt_dotdot_by_group_carbon_monoxide_init();
+
+  return SL_STATUS_OK;
+}
+
+// Callbacks pointers
+static std::set<uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t> uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback;
+static std::set<uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t> uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback;
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_set_carbon_dioxide_write_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_carbon_dioxide_write_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_carbon_dioxide_write_attributes_callbacks()
+{
+  uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback_t>& get_uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback()
+{
+  return uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback;
+}
+
+void uic_mqtt_dotdot_set_carbon_dioxide_force_read_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_carbon_dioxide_force_read_attributes_callback(
+  const uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_carbon_dioxide_force_read_attributes_callbacks()
+{
+  uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/CarbonDioxide/Commands/WriteAttributes
+void uic_mqtt_dotdot_on_carbon_dioxide_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback.empty()) {
+    return;
+  }
+
+  if (message_length == 0) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_carbon_dioxide_state_t new_state = {};
+  uic_mqtt_dotdot_carbon_dioxide_updated_state_t new_updated_state = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+    uic_mqtt_dotdot_parse_carbon_dioxide_write_attributes(
+      jsn,
+      new_state,
+      new_updated_state
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "CarbonDioxide", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide", "WriteAttributes", "");
+    return;
+  }
+
+  for (const auto& callback: uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      new_state,
+      new_updated_state
+    );
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_carbon_dioxide_force_read_attributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  uint8_t endpoint = 0;
+  std::string unid;
+
+  if ((message_length == 0) || (uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback.empty())) {
+    return;
+  }
+
+  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  try {
+    uic_mqtt_dotdot_carbon_dioxide_updated_state_t force_update = {0};
+    bool trigger_handler = false;
+
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
+
+    // Assume all attributes to be read on empty array received
+    if (attributes.size() == 0) {
+      force_update.measured_value = true;
+      force_update.min_measured_value = true;
+      force_update.max_measured_value = true;
+      force_update.tolerance = true;
+      trigger_handler = true;
+    } else {
+      std::unordered_map<std::string, bool *> supported_attrs = {
+        {"MeasuredValue", &force_update.measured_value },
+        {"MinMeasuredValue", &force_update.min_measured_value },
+        {"MaxMeasuredValue", &force_update.max_measured_value },
+        {"Tolerance", &force_update.tolerance },
+      };
+
+      for (auto& attribute : attributes) {
+        auto found_attr = supported_attrs.find(attribute);
+        if (found_attr != supported_attrs.end()) {
+          *(found_attr->second) = true;
+          trigger_handler = true;
+        }
+      }
+    }
+
+    if (trigger_handler == true) {
+      for (const auto& callback: uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback) {
+        callback(
+          static_cast<dotdot_unid_t>(unid.c_str()),
+          endpoint,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+          force_update
+        );
+      }
+    }
+  } catch (...) {
+    sl_log_debug(LOG_TAG, "CarbonDioxide/Commands/ForceReadAttributes: Unable to parse JSON payload");
+    return;
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide/Attributes/MeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/CarbonDioxide/Attributes/MeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/CarbonDioxide/Attributes/MeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_min_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide/Attributes/MinMeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/CarbonDioxide/Attributes/MinMeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_min_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/CarbonDioxide/Attributes/MinMeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_max_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide/Attributes/MaxMeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/CarbonDioxide/Attributes/MaxMeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_max_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/CarbonDioxide/Attributes/MaxMeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_tolerance_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "CarbonDioxide/Attributes/Tolerance", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/CarbonDioxide/Attributes/Tolerance";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_tolerance_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/CarbonDioxide/Attributes/Tolerance";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+
+sl_status_t uic_mqtt_dotdot_carbon_dioxide_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(!uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback.empty()) {
+    subscription_topic = base_topic + "CarbonDioxide/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_carbon_dioxide_WriteAttributes);
+  }
+
+  if(!uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback.empty()) {
+    subscription_topic = base_topic + "CarbonDioxide/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_carbon_dioxide_force_read_attributes);
+  }
+
+  // Init the attributes for that cluster
+  uic_mqtt_dotdot_carbon_dioxide_attributes_init();
+
+  uic_mqtt_dotdot_by_group_carbon_dioxide_init();
+
+  return SL_STATUS_OK;
+}
+
+// Callbacks pointers
+static std::set<uic_mqtt_dotdot_pm25_write_attributes_callback_t> uic_mqtt_dotdot_pm25_write_attributes_callback;
+static std::set<uic_mqtt_dotdot_pm25_force_read_attributes_callback_t> uic_mqtt_dotdot_pm25_force_read_attributes_callback;
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_set_pm25_write_attributes_callback(
+  const uic_mqtt_dotdot_pm25_write_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_pm25_write_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_pm25_write_attributes_callback(
+  const uic_mqtt_dotdot_pm25_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_pm25_write_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_pm25_write_attributes_callbacks()
+{
+  uic_mqtt_dotdot_pm25_write_attributes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_pm25_write_attributes_callback_t>& get_uic_mqtt_dotdot_pm25_write_attributes_callback()
+{
+  return uic_mqtt_dotdot_pm25_write_attributes_callback;
+}
+
+void uic_mqtt_dotdot_set_pm25_force_read_attributes_callback(
+  const uic_mqtt_dotdot_pm25_force_read_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_pm25_force_read_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_pm25_force_read_attributes_callback(
+  const uic_mqtt_dotdot_pm25_force_read_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_pm25_force_read_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_pm25_force_read_attributes_callbacks()
+{
+  uic_mqtt_dotdot_pm25_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/PM25/Commands/WriteAttributes
+void uic_mqtt_dotdot_on_pm25_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (uic_mqtt_dotdot_pm25_write_attributes_callback.empty()) {
+    return;
+  }
+
+  if (message_length == 0) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_pm25_state_t new_state = {};
+  uic_mqtt_dotdot_pm25_updated_state_t new_updated_state = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+    uic_mqtt_dotdot_parse_pm25_write_attributes(
+      jsn,
+      new_state,
+      new_updated_state
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "PM25", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25", "WriteAttributes", "");
+    return;
+  }
+
+  for (const auto& callback: uic_mqtt_dotdot_pm25_write_attributes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      new_state,
+      new_updated_state
+    );
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_pm25_force_read_attributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  uint8_t endpoint = 0;
+  std::string unid;
+
+  if ((message_length == 0) || (uic_mqtt_dotdot_pm25_force_read_attributes_callback.empty())) {
+    return;
+  }
+
+  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  try {
+    uic_mqtt_dotdot_pm25_updated_state_t force_update = {0};
+    bool trigger_handler = false;
+
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
+
+    // Assume all attributes to be read on empty array received
+    if (attributes.size() == 0) {
+      force_update.measured_value = true;
+      force_update.min_measured_value = true;
+      force_update.max_measured_value = true;
+      force_update.tolerance = true;
+      trigger_handler = true;
+    } else {
+      std::unordered_map<std::string, bool *> supported_attrs = {
+        {"MeasuredValue", &force_update.measured_value },
+        {"MinMeasuredValue", &force_update.min_measured_value },
+        {"MaxMeasuredValue", &force_update.max_measured_value },
+        {"Tolerance", &force_update.tolerance },
+      };
+
+      for (auto& attribute : attributes) {
+        auto found_attr = supported_attrs.find(attribute);
+        if (found_attr != supported_attrs.end()) {
+          *(found_attr->second) = true;
+          trigger_handler = true;
+        }
+      }
+    }
+
+    if (trigger_handler == true) {
+      for (const auto& callback: uic_mqtt_dotdot_pm25_force_read_attributes_callback) {
+        callback(
+          static_cast<dotdot_unid_t>(unid.c_str()),
+          endpoint,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+          force_update
+        );
+      }
+    }
+  } catch (...) {
+    sl_log_debug(LOG_TAG, "PM25/Commands/ForceReadAttributes: Unable to parse JSON payload");
+    return;
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_pm25_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25/Attributes/MeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/PM25/Attributes/MeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_pm25_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/PM25/Attributes/MeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_pm25_min_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25/Attributes/MinMeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/PM25/Attributes/MinMeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_pm25_min_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/PM25/Attributes/MinMeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_pm25_max_measured_value_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25/Attributes/MaxMeasuredValue", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/PM25/Attributes/MaxMeasuredValue";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_pm25_max_measured_value_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/PM25/Attributes/MaxMeasuredValue";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_pm25_tolerance_publish(
+  const char *base_topic,
+  float value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = value;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "PM25/Attributes/Tolerance", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/PM25/Attributes/Tolerance";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_pm25_tolerance_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/PM25/Attributes/Tolerance";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+
+sl_status_t uic_mqtt_dotdot_pm25_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(!uic_mqtt_dotdot_pm25_write_attributes_callback.empty()) {
+    subscription_topic = base_topic + "PM25/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_pm25_WriteAttributes);
+  }
+
+  if(!uic_mqtt_dotdot_pm25_force_read_attributes_callback.empty()) {
+    subscription_topic = base_topic + "PM25/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_pm25_force_read_attributes);
+  }
+
+  // Init the attributes for that cluster
+  uic_mqtt_dotdot_pm25_attributes_init();
+
+  uic_mqtt_dotdot_by_group_pm25_init();
 
   return SL_STATUS_OK;
 }
@@ -91575,6 +92955,10 @@ sl_status_t uic_mqtt_dotdot_init() {
   }
 
   if (status_flag == SL_STATUS_OK) {
+    status_flag = uic_mqtt_dotdot_soil_moisture_init();
+  }
+
+  if (status_flag == SL_STATUS_OK) {
     status_flag = uic_mqtt_dotdot_ph_measurement_init();
   }
 
@@ -91588,6 +92972,14 @@ sl_status_t uic_mqtt_dotdot_init() {
 
   if (status_flag == SL_STATUS_OK) {
     status_flag = uic_mqtt_dotdot_carbon_monoxide_init();
+  }
+
+  if (status_flag == SL_STATUS_OK) {
+    status_flag = uic_mqtt_dotdot_carbon_dioxide_init();
+  }
+
+  if (status_flag == SL_STATUS_OK) {
+    status_flag = uic_mqtt_dotdot_pm25_init();
   }
 
   if (status_flag == SL_STATUS_OK) {
@@ -91689,10 +93081,13 @@ void uic_mqtt_dotdot_publish_supported_commands(
   uic_mqtt_dotdot_flow_measurement_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_relativity_humidity_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_occupancy_sensing_publish_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_soil_moisture_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_ph_measurement_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_electrical_conductivity_measurement_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_wind_speed_measurement_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_carbon_monoxide_publish_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_carbon_dioxide_publish_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_pm25_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_ias_zone_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_iaswd_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_metering_publish_supported_commands(unid, endpoint_id);
@@ -91744,10 +93139,13 @@ void uic_mqtt_dotdot_publish_empty_supported_commands(
   uic_mqtt_dotdot_flow_measurement_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_relativity_humidity_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_occupancy_sensing_publish_empty_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_soil_moisture_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_ph_measurement_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_electrical_conductivity_measurement_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_wind_speed_measurement_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_carbon_monoxide_publish_empty_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_carbon_dioxide_publish_empty_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_pm25_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_ias_zone_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_iaswd_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_metering_publish_empty_supported_commands(unid, endpoint_id);
@@ -101214,6 +102612,154 @@ void uic_mqtt_dotdot_occupancy_sensing_publish_empty_supported_commands(
   }
 }
 
+// Publishing Cluster Revision for SoilMoisture Cluster
+void uic_mqtt_dotdot_soil_moisture_publish_cluster_revision(const char* base_topic, uint16_t value)
+{
+  std::string cluster_topic = std::string(base_topic) + "/SoilMoisture/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string pub_topic_des = cluster_topic + "/Desired";
+  std::string payload = std::string(R"({"value": )")
+    + std::to_string(value) + std::string("}");
+  uic_mqtt_publish(pub_topic_des.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+  // Publish Reported
+  std::string pub_topic_rep = cluster_topic + "/Reported";
+  uic_mqtt_publish(pub_topic_rep.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+}
+
+// Unretain Cluster Revision for SoilMoisture Cluster
+void uic_mqtt_dotdot_soil_moisture_unretain_cluster_revision(const char* base_topic)
+{
+  // clang-format on
+  std::string cluster_topic
+    = std::string(base_topic)
+      + "/SoilMoisture/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string desired_topic = cluster_topic + "/Desired";
+  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
+  // Publish Reported
+  std::string reported_topic = cluster_topic + "/Reported";
+  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
+  // clang-format off
+}
+
+
+static inline bool uic_mqtt_dotdot_soil_moisture_write_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_soil_moisture_write_attributes_callback) {
+    uic_mqtt_dotdot_soil_moisture_state_t soil_moisture_new_state = {};
+    uic_mqtt_dotdot_soil_moisture_updated_state_t soil_moisture_new_updated_state = {};
+
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          soil_moisture_new_state,
+          soil_moisture_new_updated_state
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_soil_moisture_force_read_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_soil_moisture_force_read_attributes_callback) {
+    uic_mqtt_dotdot_soil_moisture_updated_state_t soil_moisture_force_update = {0};
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          soil_moisture_force_update
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Publishing Supported Commands for SoilMoisture Cluster
+void uic_mqtt_dotdot_soil_moisture_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  std::stringstream ss;
+  bool first_command = true;
+  ss.str("");
+
+  // check if there is callback for each command
+
+  // Check for a WriteAttributes Callback
+  if(uic_mqtt_dotdot_soil_moisture_write_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("WriteAttributes")";
+  }
+
+  // Check for a ForceReadAttributes Callback
+  if (uic_mqtt_dotdot_soil_moisture_force_read_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ForceReadAttributes")";
+  }
+
+  // Publish supported commands
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/SoilMoisture/SupportedCommands";
+  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+  if (first_command == false) {
+    uic_mqtt_publish(topic.c_str(),
+                      payload_str.c_str(),
+                      payload_str.length(),
+                      true);
+  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+    // There are no supported commands, but make sure we publish some
+    // SupportedCommands = [] if any attribute has been published for a cluster.
+    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
+    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
+    attributes_topic += "/SoilMoisture/Attributes";
+
+    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+      uic_mqtt_publish(topic.c_str(),
+                      EMPTY_VALUE_ARRAY,
+                      strlen(EMPTY_VALUE_ARRAY),
+                      true);
+    }
+  }
+}
+
+// Publishing empty/no Supported Commands for SoilMoisture Cluster
+void uic_mqtt_dotdot_soil_moisture_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  , dotdot_endpoint_id_t endpoint_id)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/SoilMoisture/SupportedCommands";
+
+  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
+    uic_mqtt_publish(topic.c_str(),
+                     EMPTY_VALUE_ARRAY,
+                     strlen(EMPTY_VALUE_ARRAY),
+                     true);
+  }
+}
+
 // Publishing Cluster Revision for PhMeasurement Cluster
 void uic_mqtt_dotdot_ph_measurement_publish_cluster_revision(const char* base_topic, uint16_t value)
 {
@@ -101797,6 +103343,302 @@ void uic_mqtt_dotdot_carbon_monoxide_publish_empty_supported_commands(
   std::string topic = "ucl/by-unid/" + std::string(unid);
   topic +=  "/ep"+ std::to_string(endpoint_id);
   topic +=  "/CarbonMonoxide/SupportedCommands";
+
+  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
+    uic_mqtt_publish(topic.c_str(),
+                     EMPTY_VALUE_ARRAY,
+                     strlen(EMPTY_VALUE_ARRAY),
+                     true);
+  }
+}
+
+// Publishing Cluster Revision for CarbonDioxide Cluster
+void uic_mqtt_dotdot_carbon_dioxide_publish_cluster_revision(const char* base_topic, uint16_t value)
+{
+  std::string cluster_topic = std::string(base_topic) + "/CarbonDioxide/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string pub_topic_des = cluster_topic + "/Desired";
+  std::string payload = std::string(R"({"value": )")
+    + std::to_string(value) + std::string("}");
+  uic_mqtt_publish(pub_topic_des.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+  // Publish Reported
+  std::string pub_topic_rep = cluster_topic + "/Reported";
+  uic_mqtt_publish(pub_topic_rep.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+}
+
+// Unretain Cluster Revision for CarbonDioxide Cluster
+void uic_mqtt_dotdot_carbon_dioxide_unretain_cluster_revision(const char* base_topic)
+{
+  // clang-format on
+  std::string cluster_topic
+    = std::string(base_topic)
+      + "/CarbonDioxide/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string desired_topic = cluster_topic + "/Desired";
+  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
+  // Publish Reported
+  std::string reported_topic = cluster_topic + "/Reported";
+  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
+  // clang-format off
+}
+
+
+static inline bool uic_mqtt_dotdot_carbon_dioxide_write_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_carbon_dioxide_write_attributes_callback) {
+    uic_mqtt_dotdot_carbon_dioxide_state_t carbon_dioxide_new_state = {};
+    uic_mqtt_dotdot_carbon_dioxide_updated_state_t carbon_dioxide_new_updated_state = {};
+
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          carbon_dioxide_new_state,
+          carbon_dioxide_new_updated_state
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_callback) {
+    uic_mqtt_dotdot_carbon_dioxide_updated_state_t carbon_dioxide_force_update = {0};
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          carbon_dioxide_force_update
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Publishing Supported Commands for CarbonDioxide Cluster
+void uic_mqtt_dotdot_carbon_dioxide_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  std::stringstream ss;
+  bool first_command = true;
+  ss.str("");
+
+  // check if there is callback for each command
+
+  // Check for a WriteAttributes Callback
+  if(uic_mqtt_dotdot_carbon_dioxide_write_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("WriteAttributes")";
+  }
+
+  // Check for a ForceReadAttributes Callback
+  if (uic_mqtt_dotdot_carbon_dioxide_force_read_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ForceReadAttributes")";
+  }
+
+  // Publish supported commands
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/CarbonDioxide/SupportedCommands";
+  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+  if (first_command == false) {
+    uic_mqtt_publish(topic.c_str(),
+                      payload_str.c_str(),
+                      payload_str.length(),
+                      true);
+  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+    // There are no supported commands, but make sure we publish some
+    // SupportedCommands = [] if any attribute has been published for a cluster.
+    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
+    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
+    attributes_topic += "/CarbonDioxide/Attributes";
+
+    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+      uic_mqtt_publish(topic.c_str(),
+                      EMPTY_VALUE_ARRAY,
+                      strlen(EMPTY_VALUE_ARRAY),
+                      true);
+    }
+  }
+}
+
+// Publishing empty/no Supported Commands for CarbonDioxide Cluster
+void uic_mqtt_dotdot_carbon_dioxide_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  , dotdot_endpoint_id_t endpoint_id)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/CarbonDioxide/SupportedCommands";
+
+  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
+    uic_mqtt_publish(topic.c_str(),
+                     EMPTY_VALUE_ARRAY,
+                     strlen(EMPTY_VALUE_ARRAY),
+                     true);
+  }
+}
+
+// Publishing Cluster Revision for PM25 Cluster
+void uic_mqtt_dotdot_pm25_publish_cluster_revision(const char* base_topic, uint16_t value)
+{
+  std::string cluster_topic = std::string(base_topic) + "/PM25/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string pub_topic_des = cluster_topic + "/Desired";
+  std::string payload = std::string(R"({"value": )")
+    + std::to_string(value) + std::string("}");
+  uic_mqtt_publish(pub_topic_des.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+  // Publish Reported
+  std::string pub_topic_rep = cluster_topic + "/Reported";
+  uic_mqtt_publish(pub_topic_rep.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+}
+
+// Unretain Cluster Revision for PM25 Cluster
+void uic_mqtt_dotdot_pm25_unretain_cluster_revision(const char* base_topic)
+{
+  // clang-format on
+  std::string cluster_topic
+    = std::string(base_topic)
+      + "/PM25/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string desired_topic = cluster_topic + "/Desired";
+  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
+  // Publish Reported
+  std::string reported_topic = cluster_topic + "/Reported";
+  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
+  // clang-format off
+}
+
+
+static inline bool uic_mqtt_dotdot_pm25_write_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_pm25_write_attributes_callback) {
+    uic_mqtt_dotdot_pm25_state_t pm25_new_state = {};
+    uic_mqtt_dotdot_pm25_updated_state_t pm25_new_updated_state = {};
+
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          pm25_new_state,
+          pm25_new_updated_state
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_pm25_force_read_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_pm25_force_read_attributes_callback) {
+    uic_mqtt_dotdot_pm25_updated_state_t pm25_force_update = {0};
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          pm25_force_update
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Publishing Supported Commands for PM25 Cluster
+void uic_mqtt_dotdot_pm25_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  std::stringstream ss;
+  bool first_command = true;
+  ss.str("");
+
+  // check if there is callback for each command
+
+  // Check for a WriteAttributes Callback
+  if(uic_mqtt_dotdot_pm25_write_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("WriteAttributes")";
+  }
+
+  // Check for a ForceReadAttributes Callback
+  if (uic_mqtt_dotdot_pm25_force_read_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ForceReadAttributes")";
+  }
+
+  // Publish supported commands
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/PM25/SupportedCommands";
+  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+  if (first_command == false) {
+    uic_mqtt_publish(topic.c_str(),
+                      payload_str.c_str(),
+                      payload_str.length(),
+                      true);
+  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+    // There are no supported commands, but make sure we publish some
+    // SupportedCommands = [] if any attribute has been published for a cluster.
+    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
+    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
+    attributes_topic += "/PM25/Attributes";
+
+    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+      uic_mqtt_publish(topic.c_str(),
+                      EMPTY_VALUE_ARRAY,
+                      strlen(EMPTY_VALUE_ARRAY),
+                      true);
+    }
+  }
+}
+
+// Publishing empty/no Supported Commands for PM25 Cluster
+void uic_mqtt_dotdot_pm25_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  , dotdot_endpoint_id_t endpoint_id)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/PM25/SupportedCommands";
 
   if (uic_mqtt_count_topics(topic.c_str()) > 0) {
     uic_mqtt_publish(topic.c_str(),
