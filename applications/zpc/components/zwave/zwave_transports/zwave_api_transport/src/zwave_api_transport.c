@@ -97,6 +97,7 @@ static void zwave_api_transport_emergency_timeout_step()
 
   // Use the Z-Wave API to abort.
   zwapi_abort_send_data();
+  zwave_api_send_data_callback(TRANSMIT_COMPLETE_FAIL, NULL);
 }
 
 // Intercepting Protocol specific commands

@@ -630,6 +630,7 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
       break;
 
     case FUNC_ID_SERIAL_API_STARTED:
+      sl_log_warning(LOG_TAG, "SERIAL API STARTED\n");
       /* ZW->HOST: bWakeupReason | bWatchdogStarted | deviceOptionMask | */
       /*           node_type.generic | node_type.specific | cmdClassLength | cmdClass[] */
       zwapi_set_awaiting_zwave_api_started(false);

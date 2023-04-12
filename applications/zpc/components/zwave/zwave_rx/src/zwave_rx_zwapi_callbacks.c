@@ -25,6 +25,10 @@
 // Includes from other components
 #include "zwapi_protocol_controller.h"
 #include "zwapi_protocol_mem.h"
+#include "zwave_api_transport.h"
+#include "sl_log.h"
+
+#define LOG_TAG "zwave_rx_zwapi_callbacks"
 
 // Static helper function
 static void
@@ -157,6 +161,7 @@ void zwave_rx_zwave_api_started(const uint8_t *buffer, uint8_t buffer_length)
 {
   (void)buffer;
   (void)buffer_length;
+  zwave_api_transport_reset();
   // Make sure we are still running the right settings:
   zwapi_set_node_id_basetype(NODEID_16BITS);
 
@@ -166,6 +171,12 @@ void zwave_rx_zwave_api_started(const uint8_t *buffer, uint8_t buffer_length)
   zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
 
   // I can't think of a reason to do something with our NIF here. (buffer, buffer_length)
+  zwave_network_management_state_t nms_state = zwave_network_management_get_state();
+  if (nms_state != NM_IDLE) {
+    sl_log_warning(LOG_TAG,
+                "Network management is busy.\n");
+    zwave_network_management_abort();
+  }
 }
 
 /**
