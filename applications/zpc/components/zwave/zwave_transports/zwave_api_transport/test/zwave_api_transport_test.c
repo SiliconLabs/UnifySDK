@@ -30,10 +30,12 @@
 #include "zwapi_protocol_basis_mock.h"
 #include "zwapi_protocol_controller_mock.h"
 #include "zwave_tx_groups_mock.h"
+#include "zwave_rx_callbacks_mock.h"
 
 // Static test variables
 static zwave_controller_callbacks_t zwave_controller_callbacks;
 static zwave_controller_transport_t zwave_api_transport;
+static zwave_api_started_callback_t on_zwave_api_started_callback;
 
 static cmock_zwapi_protocol_transport_func_ptr1 zwave_api_send_data_callback;
 static cmock_zwapi_protocol_transport_func_ptr3
@@ -107,6 +109,13 @@ static sl_status_t zwapi_send_test_frame_stub(
   return SL_STATUS_OK;
 }
 
+static sl_status_t zwave_rx_register_zwave_api_started_callback_stub(
+  zwave_api_started_callback_t callback, int cmock_num_calls)
+{
+  on_zwave_api_started_callback = callback;
+  return SL_STATUS_OK;
+}
+
 // test callbacks
 static void on_send_data_complete(uint8_t status,
                                   const zwapi_tx_report_t *tx_report,
@@ -142,6 +151,7 @@ void setUp()
   zwave_api_send_data_callback       = NULL;
   zwave_api_send_data_multi_callback = NULL;
   zwave_api_send_test_frame_callback = NULL;
+  on_zwave_api_started_callback      = NULL;
 
   received_status = 0xFF;
   memset(&received_tx_report, 0, sizeof(received_tx_report));
@@ -152,6 +162,9 @@ void setUp()
 
   zwave_controller_transport_register_Stub(
     zwave_controller_transport_register_stub);
+
+  zwave_rx_register_zwave_api_started_callback_Stub(
+    zwave_rx_register_zwave_api_started_callback_stub);
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_api_transport_init());
 
@@ -1073,4 +1086,54 @@ void test_zwave_api_transport_reset_state()
                                                   &on_send_data_complete,
                                                   user,
                                                   parent_session_id));
+}
+
+void test_zwave_api_transport_zwave_api_restart()
+{
+  TEST_ASSERT_NOT_NULL(on_zwave_api_started_callback);
+
+  // Nothing will happen when we invoke the callback with no ongoing transmissions
+  on_zwave_api_started_callback();
+
+  // Now prepare a session:
+  // Prepare data:
+  info.remote.node_id   = 23;
+  tx_options.fasttrack  = false;
+  const uint8_t frame[] = {0x56, 0x32, 0x9F, 0x22, 0x01, 0xFF};
+  user                  = (void *)34;
+  parent_session_id     = (void *)53;
+
+  uint8_t expected_zwapi_tx_options = TRANSMIT_OPTION_ACK
+                                      | TRANSMIT_OPTION_AUTO_ROUTE
+                                      | TRANSMIT_OPTION_EXPLORE;
+
+  zwapi_send_data_AddCallback(zwapi_send_data_stub);
+  zwapi_send_data_ExpectAndReturn(info.remote.node_id,
+                                  frame,
+                                  sizeof(frame),
+                                  expected_zwapi_tx_options,
+                                  NULL,
+                                  SL_STATUS_OK);
+  zwapi_send_data_IgnoreArg_callback_function();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_api_transport.send_data(&info,
+                                                  sizeof(frame),
+                                                  frame,
+                                                  &tx_options,
+                                                  &on_send_data_complete,
+                                                  user,
+                                                  parent_session_id));
+
+  //Run the contiki events
+  contiki_test_helper_run(0);
+
+  // Z-Wave API tells us it restarted, frame must be considered lost.
+  zwave_controller_on_frame_transmission_Expect(false,
+                                                NULL,
+                                                info.remote.node_id);
+  on_zwave_api_started_callback();
+
+  TEST_ASSERT_EQUAL_PTR(user, received_user);
+  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_FAIL, received_status);
 }

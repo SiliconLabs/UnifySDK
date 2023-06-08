@@ -435,6 +435,15 @@ static void give_up_get_resolution_on_group(attribute_store_node_t node)
 {
   for (attribute a:
        attribute_resolver_rule_get_group_nodes(RESOLVER_GET_RULE, node)) {
+    // If we are not able to get, we will not set either.
+    sl_log_debug(LOG_TAG,
+                 "Undefining Attribute ID %d desired value after "
+                 "failing to resolve the reported value of Attribute ID %d.",
+                 a,
+                 node);
+    attribute_store_undefine_desired(a);
+    // Mark the node as "given up on", do that after undefining the desired as
+    // updating attributes triggers the resolver to retry
     pending_get_resolutions[a]
       = {.send_timeout = 0, .count = attribute_resolver_config.get_retry_count};
   }

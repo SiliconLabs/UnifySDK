@@ -24,6 +24,7 @@ For the application specific release notes, please follow these links:
 * [Zigbeed](applications/zigbeed/release_notes.md)
 * [Portable Runtime](portable_runtime/release_notes.md)
 
+## [1.3.2] - Jun 2023
 
 ## [1.3.1] - March 2023
 

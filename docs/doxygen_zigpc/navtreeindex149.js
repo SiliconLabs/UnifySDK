@@ -1,5 +1,6 @@
 var NAVTREEINDEX149 =
 {
+"structuic__mqtt__dotdot__pm25__updated__state__t.html#a55fb6c6f4d9d20ef228ea48dad00724b":[8,5,11,221,2],
 "structuic__mqtt__dotdot__pm25__updated__state__t.html#a5acfca30b22d134b7837913d082bdcdd":[8,5,11,221,1],
 "structuic__mqtt__dotdot__pm25__updated__state__t.html#a73b9eb0ef48a5374fed902ff4f9bcd4c":[8,5,11,221,0],
 "structuic__mqtt__dotdot__pm25__updated__state__t.html#adc21b60d81829a42fa8f0597fadac063":[8,5,11,221,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX149 =
 "structuic__mqtt__dotdot__relativity__humidity__state__t.html#a77e5aeb13488dc4109aaf10edcec2c6f":[8,5,11,204,1],
 "structuic__mqtt__dotdot__relativity__humidity__state__t.html#a98d94e571855e2e7cd15aed61dc5cac9":[8,5,11,204,2],
 "structuic__mqtt__dotdot__relativity__humidity__state__t.html#aacfc133a81932b2caecdfb6c8d81db77":[8,5,11,204,3],
-"structuic__mqtt__dotdot__relativity__humidity__state__t.html#aec299be42dfe831dae3af2de34905b62":[8,5,11,204,0],
-"structuic__mqtt__dotdot__relativity__humidity__updated__state__t.html":[8,5,11,205]
+"structuic__mqtt__dotdot__relativity__humidity__state__t.html#aec299be42dfe831dae3af2de34905b62":[8,5,11,204,0]
 };

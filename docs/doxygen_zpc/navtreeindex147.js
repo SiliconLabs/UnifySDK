@@ -1,5 +1,17 @@
 var NAVTREEINDEX147 =
 {
+"struct__authdata__.html#a9e3cf60e2555996fe5fd79dbda644936":[4,0,5,2],
+"struct__datastore__attribute__.html":[2,26,6,0,0],
+"struct__datastore__attribute__.html#a1e9686349010160294332fd36d6831aa":[2,26,6,0,0,0],
+"struct__datastore__attribute__.html#a4234e09116df4646c1b69a0e87b3d4ed":[2,26,6,0,0,5],
+"struct__datastore__attribute__.html#a727150994e13a547ae769f23db7ce200":[2,26,6,0,0,1],
+"struct__datastore__attribute__.html#adf8ca0c3f1458c875a3a316316d0dbff":[2,26,6,0,0,3],
+"struct__datastore__attribute__.html#ae2cf27624d06f542e43098b60e953bb9":[2,26,6,0,0,2],
+"struct__datastore__attribute__.html#ae4d71df01ee736016ce4cffc6f73aba3":[2,26,6,0,0,6],
+"struct__datastore__attribute__.html#ae68098f3601d3955def682dc940fc85d":[2,26,6,0,0,4],
+"struct__request__node__info__frame__t__.html":[2,20,26,0],
+"struct__request__node__info__frame__t__.html#a2bd23441a555674c57c9b526fb2c101a":[2,20,26,0,1],
+"struct__request__node__info__frame__t__.html#ab225a2db6c6db842c0f723f2cfa82fd3":[2,20,26,0,0],
 "struct__uic__mqtt__dotdot__alarms__supported__commands__.html":[2,26,11,7,8],
 "struct__uic__mqtt__dotdot__alarms__supported__commands__.html#a0e7eadbd49a7a6de0d8a22a4766e4337":[2,26,11,7,8,4],
 "struct__uic__mqtt__dotdot__alarms__supported__commands__.html#a1daa1db6bf6b41f71be41d400bfe8144":[2,26,11,7,8,6],
@@ -237,17 +249,5 @@ var NAVTREEINDEX147 =
 "struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a095423e6b2e0bb2bab521eec987a92c3":[2,26,11,7,5,7],
 "struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a1da5fb243b43947b155b23117b4c5efc":[2,26,11,7,5,16],
 "struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a25f72dc85dd35aac809853b7dc97f9a4":[2,26,11,7,5,1],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a2eb2c513f4e43e72bcc51ae0dad47ea6":[2,26,11,7,5,9],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a3534c50bac3d9128ec940ebe530cd2e9":[2,26,11,7,5,11],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a366c6f2f6dac128098a125b0fa01a81f":[2,26,11,7,5,15],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a4f48a65ff66bc99de61c2552dd0c06f9":[2,26,11,7,5,13],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a5c022a2001c4e3e89d9f53830041719d":[2,26,11,7,5,18],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a6dd9ac84befe3e7af2641022ea6bedf9":[2,26,11,7,5,4],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a6ecb55f96449e06e6d129a028f1e1b61":[2,26,11,7,5,8],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a8c4e905008fa5a68de0d09f13580fc6d":[2,26,11,7,5,14],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a918926cfb51a08c26d0691f180977cbf":[2,26,11,7,5,10],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#abf287bdb5d3a92820af3ea5381e01864":[2,26,11,7,5,19],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#ac5769334d793b6d022585f08ca76e25a":[2,26,11,7,5,3],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#acf45e24996ec61cd47e77bc5b23ef085":[2,26,11,7,5,6],
-"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#ad1f6b906293807ddcce267d938a766e2":[2,26,11,7,5,2]
+"struct__uic__mqtt__dotdot__scenes__supported__commands__.html#a2eb2c513f4e43e72bcc51ae0dad47ea6":[2,26,11,7,5,9]
 };

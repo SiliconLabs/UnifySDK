@@ -3,7 +3,8 @@ IF(ZWAVE_BUILD_SYSTEM EQUAL 1)
 ELSE()
   SET(SOURCE_LIST "src/zwave_rx.c"
                   "src/zwave_rx_fixt.c"
-                  "src/zwave_rx_process.c")
+                  "src/zwave_rx_process.c"
+                  "src/zwave_rx_callbacks.c")
 ENDIF()
 
 # Library

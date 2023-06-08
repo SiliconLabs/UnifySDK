@@ -3,7 +3,7 @@ var structsec__tx__session =
     [ "buf", "structsec__tx__session.html#a123b8df76d42283a7a6a189a650c310a", null ],
     [ "callback", "structsec__tx__session.html#a2bb877915fd0de7c1a30a7b8972e672b", null ],
     [ "conn_info", "structsec__tx__session.html#acf580e449f15cf645bef76c04450dc0c", null ],
-    [ "crypted_msg", "structsec__tx__session.html#addf320b8e61b6574a7db6f3aa3759555", null ],
+    [ "crypted_msg", "structsec__tx__session.html#a0a56e5fed814341b196216b251843ff6", null ],
     [ "data", "structsec__tx__session.html#ac287873b0a2f5eb6640a53cbe99d4855", null ],
     [ "data_len", "structsec__tx__session.html#a2b831ed7f194cb4f335e5560860b5790", null ],
     [ "seq", "structsec__tx__session.html#aedc406d40840fbede4a7b5ae4a9e60b8", null ],

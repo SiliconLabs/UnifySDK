@@ -1730,6 +1730,8 @@ void test_attribute_resolver_give_up_on_group_get_rule()
   // Regular get resolution.
   attribute_store_undefine_reported(node_7);
   attribute_store_undefine_reported(node_9);
+  attribute_store_set_desired_number(node_7, 7);
+  attribute_store_set_desired_number(node_9, 9);
 
   // Expect a get resolution
   send_function_return_code    = SL_STATUS_OK;
@@ -1766,6 +1768,10 @@ void test_attribute_resolver_give_up_on_group_get_rule()
 
   // Now we should have given up on both Node 7 and Node 9
   TEST_ASSERT_EQUAL(1, test_resolution_listener_function_call_count);
+
+  // And we should have adjusted our hopes of setting as well
+  TEST_ASSERT_FALSE(attribute_store_is_desired_defined(node_7));
+  TEST_ASSERT_FALSE(attribute_store_is_desired_defined(node_9));
 }
 
 void test_attribute_resolver_rule_get_group_node()

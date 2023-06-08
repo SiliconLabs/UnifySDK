@@ -1,5 +1,6 @@
 var NAVTREEINDEX143 =
 {
+"structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a157762c54d5cc2ea69086a75d510e22e":[8,5,11,265,8],
 "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a1b662c85e10c98ecf005f586b24d5b2a":[8,5,11,265,4],
 "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a38ae6e4a0fba59d9ce349c7404497e6c":[8,5,11,265,10],
 "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a44412dd1448fa69570f77fc94939f589":[8,5,11,265,14],
@@ -248,6 +249,5 @@ var NAVTREEINDEX143 =
 "structuic__mqtt__dotdot__color__control__command__enhanced__step__hue__fields__t.html#a8d72c2c880ae8e1b16375e7b00d5940f":[8,5,11,186,4],
 "structuic__mqtt__dotdot__color__control__command__enhanced__step__hue__fields__t.html#a99fbfd264c878120dfbe271843439773":[8,5,11,186,1],
 "structuic__mqtt__dotdot__color__control__command__move__color__fields__t.html":[8,5,11,181],
-"structuic__mqtt__dotdot__color__control__command__move__color__fields__t.html#a044253610b59c7eda59783f877bc1777":[8,5,11,181,1],
-"structuic__mqtt__dotdot__color__control__command__move__color__fields__t.html#a13db5c029ed94150c8aa185c03d2a1fc":[8,5,11,181,2]
+"structuic__mqtt__dotdot__color__control__command__move__color__fields__t.html#a044253610b59c7eda59783f877bc1777":[8,5,11,181,1]
 };

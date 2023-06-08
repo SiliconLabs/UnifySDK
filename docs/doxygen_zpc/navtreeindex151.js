@@ -1,5 +1,17 @@
 var NAVTREEINDEX151 =
 {
+"structuic__mqtt__dotdot__ballast__configuration__updated__state__t.html#aaf4f8be02a9a817ea7ab6a85ba19f1e7":[2,26,11,193,11],
+"structuic__mqtt__dotdot__ballast__configuration__updated__state__t.html#ab243c9cc42b5561066b5b68d642515cf":[2,26,11,193,15],
+"structuic__mqtt__dotdot__ballast__configuration__updated__state__t.html#ab54f710eba29d8571d1b343bcd971eee":[2,26,11,193,10],
+"structuic__mqtt__dotdot__ballast__configuration__updated__state__t.html#aca68599dfa024eb1a2021f89749482b4":[2,26,11,193,7],
+"structuic__mqtt__dotdot__ballast__configuration__updated__state__t.html#add2b2897083fa87db2dab0fac7e79f64":[2,26,11,193,12],
+"structuic__mqtt__dotdot__ballast__configuration__updated__state__t.html#aeff29e24e1b3e2263afaab512f719d44":[2,26,11,193,1],
+"structuic__mqtt__dotdot__barrier__control__command__go__to__percent__fields__t.html":[2,26,11,155],
+"structuic__mqtt__dotdot__barrier__control__command__go__to__percent__fields__t.html#acf18ea9d4dbd3833fb8aa7b211063a17":[2,26,11,155,0],
+"structuic__mqtt__dotdot__barrier__control__state__t.html":[2,26,11,153],
+"structuic__mqtt__dotdot__barrier__control__state__t.html#a22c6e1b280473a17d98ae23d95b868f4":[2,26,11,153,0],
+"structuic__mqtt__dotdot__barrier__control__state__t.html#a3ddeffdbc918b2d2e77a4a823f30f731":[2,26,11,153,9],
+"structuic__mqtt__dotdot__barrier__control__state__t.html#a4a95fdf9304c831176d6074aad007a10":[2,26,11,153,4],
 "structuic__mqtt__dotdot__barrier__control__state__t.html#a72b9d7cd6c5b7a04ea4b892d3b0e8f27":[2,26,11,153,7],
 "structuic__mqtt__dotdot__barrier__control__state__t.html#a93669266482f3aaf06cd34187c982087":[2,26,11,153,1],
 "structuic__mqtt__dotdot__barrier__control__state__t.html#a94b0f491abd11f1d1653bf15b3e7682a":[2,26,11,153,2],
@@ -237,17 +249,5 @@ var NAVTREEINDEX151 =
 "structuic__mqtt__dotdot__color__control__state__t.html#a58f5e8b37b602bf3b9590f891e44642f":[2,26,11,171,28],
 "structuic__mqtt__dotdot__color__control__state__t.html#a599507899991df79fabd9b701527c86e":[2,26,11,171,14],
 "structuic__mqtt__dotdot__color__control__state__t.html#a609ef1247afdb07d39240dcef4a4612f":[2,26,11,171,12],
-"structuic__mqtt__dotdot__color__control__state__t.html#a6267e214c70efacfc958887dae73475d":[2,26,11,171,24],
-"structuic__mqtt__dotdot__color__control__state__t.html#a65a2b50bf53e3c5acd74236c5eb24bdc":[2,26,11,171,8],
-"structuic__mqtt__dotdot__color__control__state__t.html#a6ae75a38837798eafb1cc06226744d34":[2,26,11,171,39],
-"structuic__mqtt__dotdot__color__control__state__t.html#a778a555d65b3b9270af51f487feaeefd":[2,26,11,171,0],
-"structuic__mqtt__dotdot__color__control__state__t.html#a77f2941e1f89031a6941d69cfd4b43ca":[2,26,11,171,22],
-"structuic__mqtt__dotdot__color__control__state__t.html#a9383428b05534900d1b1a0abeb909cf5":[2,26,11,171,17],
-"structuic__mqtt__dotdot__color__control__state__t.html#a9ddf930901a9558496e862d610759cf6":[2,26,11,171,37],
-"structuic__mqtt__dotdot__color__control__state__t.html#a9f0df4fba13bd633988728ece47a5369":[2,26,11,171,44],
-"structuic__mqtt__dotdot__color__control__state__t.html#aa0dee11f8bed05b411d9a1164e790c09":[2,26,11,171,33],
-"structuic__mqtt__dotdot__color__control__state__t.html#ab3bf867d0b1671f22a9d196a44af804d":[2,26,11,171,9],
-"structuic__mqtt__dotdot__color__control__state__t.html#ab5104f89c6a88e59d8b63e67fc050576":[2,26,11,171,43],
-"structuic__mqtt__dotdot__color__control__state__t.html#abdb2e429947530e86e246a39d3219e0b":[2,26,11,171,31],
-"structuic__mqtt__dotdot__color__control__state__t.html#ac3c615a27cccb8d72c4c3aa6b06330cd":[2,26,11,171,13]
+"structuic__mqtt__dotdot__color__control__state__t.html#a6267e214c70efacfc958887dae73475d":[2,26,11,171,24]
 };

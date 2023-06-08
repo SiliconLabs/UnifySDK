@@ -37,7 +37,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.1
+                ver_1.3.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -161,7 +161,7 @@ In advanced options of the Imager (Click the gear icon after selecting the OS), 
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>uic-dev-gui_*_arm64.deb<span class="w"> </span>uic-gms_*_arm64.deb<span class="w"> </span>uic-image-provider_*_arm64.deb<span class="w"> </span>uic-upvl_*_arm64.deb<span class="w"> </span>uic-zigpc_*_arm64.deb
 </pre></div>
 </div>
-<p>See user guide for more info : /projects/UIC/repos/uic/browse/doc/readme_user.md</p>
+<p>See user guide for more info :<a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/blob/main/README.md">README.md</a></p>
 <p>For future MQTT Explorer use, add those lines to /etc/mosquitto/mosquitto.conf</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>listener<span class="w"> </span><span class="m">1883</span>
 allow_anonymous<span class="w"> </span><span class="nb">true</span>
@@ -237,7 +237,9 @@ matching version of the GeckoSDK. If you have hardware access, re-flash the NCP
 as usual. However, if only remote access is possible, ZigPC can be used to
 update the NCP firmware as described in the User Guide (section ‘Updating NCP
 Firmware’</p>
-<p>####Issue #2: addressTable mismatch</p>
+</section>
+<section id="issue-2-addresstable-mismatch">
+<h3>Issue #2: addressTable mismatch<a class="headerlink" href="#issue-2-addresstable-mismatch" title="Permalink to this heading"></a></h3>
 <p>When running the ZigPC, its possible for the gateway to fail to start with an
 error describing:</p>
 <blockquote>

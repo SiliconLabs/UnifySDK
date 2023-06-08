@@ -11,6 +11,8 @@
  *
  *****************************************************************************/
 #include "zwave_network_management_callbacks.h"
+#include "zwave_network_management.h"
+#include "nm_state_machine.h"
 
 // Test includes
 #include "unity.h"
@@ -49,4 +51,15 @@ void test_on_set_suc_node_id_completed()
   set_suc_status = 255;
   network_management_refresh_controller_capabilities_bitmask_Expect();
   on_set_suc_node_id_completed(set_suc_status);
+}
+
+void test_on_zwave_api_started()
+{
+  // IDLE should not trigger anything
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  on_zwave_api_started();
+
+  // Not idle should trigger an abort operation
+  nms.state = NM_WAITING_FOR_ADD;
+  on_zwave_api_started();
 }

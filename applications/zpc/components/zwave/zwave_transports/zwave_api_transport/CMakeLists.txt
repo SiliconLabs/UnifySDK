@@ -13,6 +13,7 @@ target_link_libraries(zwave_api_transport
     zwave_tx_groups
     unify
     zwave_controller
+    zwave_rx
 )
 
 if(BUILD_TESTING)

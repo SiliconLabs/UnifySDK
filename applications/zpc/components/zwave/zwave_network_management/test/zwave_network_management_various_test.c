@@ -28,6 +28,7 @@
 #include "zwapi_protocol_controller_mock.h"
 #include "zwapi_protocol_basis_mock.h"
 #include "zwave_rx_mock.h"
+#include "zwave_rx_callbacks_mock.h"
 
 // Generic includes
 #include <string.h>
@@ -50,6 +51,9 @@ void setUp()
   zwave_s2_set_network_callbacks_Ignore();
   zwave_s0_set_network_callbacks_Ignore();
   zwave_s2_keystore_get_dsk_Ignore();
+  zwave_rx_register_zwave_api_started_callback_ExpectAndReturn(
+    &on_zwave_api_started,
+    SL_STATUS_OK);
   zwave_network_management_fixt_setup();
 
   zwave_s2_set_network_callbacks_StopIgnore();

@@ -1,6 +1,7 @@
 var zwave__api__transport_8c =
 [
     [ "LOG_TAG", "zwave__api__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
+    [ "on_zwave_api_started", "zwave__api__transport_8c.html#adab0ea89230766532c698f3dfe3c211e", null ],
     [ "PROCESS", "zwave__api__transport_8c.html#a792f9d39930825cd3c399b750c21da62", null ],
     [ "PROCESS_NAME", "zwave__api__transport_8c.html#a832cabae907d6fd2f597b74bf7e0a727", null ],
     [ "PROCESS_THREAD", "zwave__api__transport_8c.html#af4d110db034c4c34fbc7b09711dff3d2", null ],

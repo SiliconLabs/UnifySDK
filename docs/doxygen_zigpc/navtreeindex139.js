@@ -1,5 +1,6 @@
 var NAVTREEINDEX139 =
 {
+"namespacezigpc__datastore_1_1binding.html#a8ba9d1d4a6ebd3a006a605107613d60e":[9,0,13,0,0],
 "namespacezigpc__datastore_1_1binding.html#aa7bb491baf5819feef2b6b57fbf162ea":[9,0,13,0,3],
 "namespacezigpc__datastore_1_1cluster.html":[9,0,13,1],
 "namespacezigpc__datastore_1_1cluster.html#a398b628399a1a366455c13739fc5df11":[9,0,13,1,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX139 =
 "rust__process_8c.html#aecc785641b7be9739b7078d060c41f1e":[11,0,1,6,4,0,5],
 "sl__log_8h.html":[11,0,1,12,0,0],
 "sl__log_8h_source.html":[11,0,1,12,0,0],
-"sl__status_8h.html":[11,0,2,0],
-"sl__status_8h_source.html":[11,0,2,0]
+"sl__status_8h.html":[11,0,2,0]
 };

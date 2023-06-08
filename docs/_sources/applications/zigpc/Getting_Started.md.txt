@@ -95,7 +95,7 @@ Install them using (change name as required ) :
 sudo dpkg -i uic-dev-gui_*_arm64.deb uic-gms_*_arm64.deb uic-image-provider_*_arm64.deb uic-upvl_*_arm64.deb uic-zigpc_*_arm64.deb
 ```
 
-See user guide for more info : /projects/UIC/repos/uic/browse/doc/readme_user.md
+See user guide for more info :[README.md](https://github.com/SiliconLabs/UnifySDK/blob/main/README.md)
 
 For future MQTT Explorer use, add those lines to /etc/mosquitto/mosquitto.conf
 
@@ -172,7 +172,7 @@ After upgrading, it is possible to see ZigPC fail to start with the error:
 
 Or an equivalent error.
 
-Usually this occurs because the version of the GeckoSDK on the gateway and the 
+Usually this occurs because the version of the GeckoSDK on the gateway and the
 version on the NCP do not match. It's important that version matches so that the
 EZSP communication libraries are the same on both the host and the radio.
 
@@ -192,7 +192,7 @@ as usual. However, if only remote access is possible, ZigPC can be used to
 update the NCP firmware as described in the User Guide (section 'Updating NCP
 Firmware'
 
-####Issue #2: addressTable mismatch
+#### Issue #2: addressTable mismatch
 
 When running the ZigPC, its possible for the gateway to fail to start with an
 error describing:
@@ -212,7 +212,7 @@ There are two ways of solving this: reducing the address table on the gateway or
 increasing the address table size on the NCP.
 
 The recommended method is to increase the address table size on the NCP. This
-can be done by adding the "EMBER\_ADDRESS\_TABLE\_SIZE" to the .slcp file, as 
+can be done by adding the "EMBER\_ADDRESS\_TABLE\_SIZE" to the .slcp file, as
 described in the section above. Alternatively, add a definition to the NCP
 makefile setting the above define. Compiling with -DEMBER\_ADDRESS\_TABLE\_SIZE=
 32 will also work.

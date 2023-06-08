@@ -1,4 +1,8 @@
 # ZPC Release Notes
+## [1.3.2] - Jun 2023
+### Fixed (1.3.2)
+* Z-Wave API Transport recovers from aborted transactions when an unexpected
+  Z-Wave API started is received.
 
 ## [1.3.1] - Mar 2023
 

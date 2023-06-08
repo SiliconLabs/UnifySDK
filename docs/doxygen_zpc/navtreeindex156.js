@@ -1,5 +1,17 @@
 var NAVTREEINDEX156 =
 {
+"structuic__mqtt__dotdot__occupancy__sensing__state__t.html#aec075c6fe560b2f08a3be800cee4360c":[2,26,11,206,5],
+"structuic__mqtt__dotdot__occupancy__sensing__state__t.html#af8000aa50684e6f836203c34d4a1daf5":[2,26,11,206,10],
+"structuic__mqtt__dotdot__occupancy__sensing__state__t.html#afa348127bbfbb5922704d6d6a60c6d22":[2,26,11,206,2],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html":[2,26,11,207],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a1527b39df22713d857321b9c991605cd":[2,26,11,207,8],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a1757d1da48e2bc474981ccc6171fc2c4":[2,26,11,207,5],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a30cd156520774ad4c818f9b6c5f64c2b":[2,26,11,207,3],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a32572422da691ac231703f4a571298b6":[2,26,11,207,1],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a41d93bb62fd656b2390a4ee7c5486c25":[2,26,11,207,9],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a5f69d4e047cf4bcfbb826759cd81400d":[2,26,11,207,0],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a62862b7811dbd619e0fd4d9d9b363708":[2,26,11,207,6],
+"structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a85b8f887571b76e4ce6000eb2031be9c":[2,26,11,207,7],
 "structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a8649a0035519013c6412d73ae2451217":[2,26,11,207,10],
 "structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#a923c03081b985dd39bcffab45d715e7d":[2,26,11,207,2],
 "structuic__mqtt__dotdot__occupancy__sensing__updated__state__t.html#ab589368038c1fe3fc9d023f8bb952c5d":[2,26,11,207,4],
@@ -237,17 +249,5 @@ var NAVTREEINDEX156 =
 "structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a19828b7313b7f7183cc8f91860858a9b":[2,26,11,12,52],
 "structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a1b3b392015945f11d9a7c5884164cff9":[2,26,11,12,16],
 "structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a1d9937e558e806bc37cd941ef150e1b0":[2,26,11,12,38],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a1f344ea900e46d0cc02d7ef1fd94292d":[2,26,11,12,12],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a2a7aea4018ac80e2f9555250b016702c":[2,26,11,12,18],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a2abf7d286f6c6a24e28694ab186aea9c":[2,26,11,12,25],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a2b4968c22ca15ac4347c41a7c5b24b62":[2,26,11,12,53],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a333d93166035a4137612d3ae6d2d8079":[2,26,11,12,51],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a3398478a76ad264d085e15862e314d99":[2,26,11,12,42],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a3b396a2ffb71add869ffd7982d686bf7":[2,26,11,12,34],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a43baf116c4b07048e97284b95e7fc3fd":[2,26,11,12,9],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a44024aa25402c73fccd9036bb59eb4a9":[2,26,11,12,37],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a4c9cd8c46c84f55e4e2642ca9f2865d4":[2,26,11,12,36],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a50823b465079aa075f430d2ae5c357a4":[2,26,11,12,48],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a5713f8cf9c7beb6f2da4b01257e9d08d":[2,26,11,12,45],
-"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a5894e71256f80f369ead0562af781dce":[2,26,11,12,10]
+"structuic__mqtt__dotdot__power__configuration__updated__state__t.html#a1f344ea900e46d0cc02d7ef1fd94292d":[2,26,11,12,12]
 };

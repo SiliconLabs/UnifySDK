@@ -1,5 +1,6 @@
 var NAVTREEINDEX150 =
 {
+"structuic__mqtt__dotdot__relativity__humidity__updated__state__t.html":[8,5,11,205],
 "structuic__mqtt__dotdot__relativity__humidity__updated__state__t.html#a4b2528bade88b4b94954449079725fb6":[8,5,11,205,1],
 "structuic__mqtt__dotdot__relativity__humidity__updated__state__t.html#ad802e61157c2cb37fa3b6484a69b6433":[8,5,11,205,2],
 "structuic__mqtt__dotdot__relativity__humidity__updated__state__t.html#aea7602eae2f6536277142a4611e93201":[8,5,11,205,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX150 =
 "structuic__mqtt__dotdot__thermostat__state__t.html#a2d1653e160e9d73334c74ddecc9711df":[8,5,11,158,12],
 "structuic__mqtt__dotdot__thermostat__state__t.html#a3194b846b6cc3fb8a4d1b99bbed34569":[8,5,11,158,6],
 "structuic__mqtt__dotdot__thermostat__state__t.html#a375cc319eeb905e3d9c4b42191522d58":[8,5,11,158,15],
-"structuic__mqtt__dotdot__thermostat__state__t.html#a39524feac42d3a0298a69f6ac666af69":[8,5,11,158,30],
-"structuic__mqtt__dotdot__thermostat__state__t.html#a54f0f2c2a63f85e627419a827f0f3497":[8,5,11,158,17]
+"structuic__mqtt__dotdot__thermostat__state__t.html#a39524feac42d3a0298a69f6ac666af69":[8,5,11,158,30]
 };

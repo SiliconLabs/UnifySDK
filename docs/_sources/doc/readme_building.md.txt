@@ -28,7 +28,8 @@ As a prerequisite Docker must be installed on the build host.
 The following documentation explains how to install and set up Docker.
 
 - [Windows and OSX](https://www.docker.com/products/docker-desktop)
-- [Debian/Ubuntu Linux Linux](https://docs.docker.com/engine/install/ubuntu/)
+- [Debian Linux](https://docs.docker.com/engine/install/debian/)
+- [Ubuntu Linux](https://docs.docker.com/engine/install/ubuntu/)
 
 ### Getting the source
 
@@ -80,8 +81,7 @@ ninja deb           # Build Debian Installers (optional)
 
 After running this, the `zpc` binary is located in `./build/applications/zpc/zpc`.
 
-The Debian packages are available at `./build/_CPack_Packages/Linux/DEB/uic-<component>_<version>_arm64.deb`
-or as a Zip of all the Debian packages at `./build/deb-packages/unify_<version>_arm64.zip`.
+The Debian packages are available as a Zip of all the Debian packages at `./build/deb-packages/unify_<version>_arm64.zip`.
 
 ### Disabling the build of a Unify Application
 

@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 # Input arguments
 ARG DEBIAN_PACKAGES=deb-packages.zip
@@ -13,7 +13,7 @@ RUN chmod +x run_zpc.sh
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
- && apt install --no-install-recommends -y socat unzip \
+ && apt install --no-install-recommends -y socat unzip iproute2 \
  && unzip -j *.zip -d deb-packages \
  && echo "deb [trusted=yes] file:///unify/deb-packages ./" > /etc/apt/sources.list.d/uic-packages.list \
  && apt update \

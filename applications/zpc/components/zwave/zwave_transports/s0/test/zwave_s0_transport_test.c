@@ -313,6 +313,201 @@ sl_status_t my_callback(const zwave_controller_connection_info_t *connection,
   return SL_STATUS_OK;
 }
 
+void expect_to_ignore_nonce_report()
+{
+  zwave_tx_send_data_ExpectAndReturn(0, 0, 0, 0, 0, 0, 0, SL_STATUS_OK);
+  zwave_tx_send_data_IgnoreArg_connection();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_session();
+  zwave_tx_send_data_IgnoreArg_data_length();
+  zwave_tx_send_data_IgnoreArg_data();
+}
+
+void test_only_second_frame_in_combined()
+{
+ uint8_t msg2[]
+    = {0x98, 0x81, 0xFC, 0x98, 0x5F, 0x87, 0xBA, 0xF0, 0x9B, 0x92, 0x0f,
+       0x8B, 0xB5, 0xDF, 0x30, 0x3F, 0xA4, 0xBE, 0x90, 0xED, 0xF6, 0x2F,
+       0x69, 0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA, 0xF5, 0x69,
+       0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA, 0xF5, 0x69, 0x36,
+       0x05, 0x76, 0x2A, 0xA1, 0x21, 0x8B, 0x2D, 0x59, 0x3E, 0x4B, 0x18,
+       0x50, 0xC2, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F, 0x2E, 0x16,
+       0xE9, 0xA1, 0x1A, 0x02, 0xc4, 0xb7, 0x58, 0x40, 0xa3, 0x69, 0x86}; 
+  ctr_drbg_run = 0;
+  /* S0 key used
+   * Please Refer UIC-674 JIRA attachment uic-674.zlf */
+  s0_set_key(s0_key);  //Set the security 0 key
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+
+  // Lets not complicate this test. We dont care what nonce report is sent. as long as
+  // the S0 frame is accepted
+  expect_to_ignore_nonce_report();
+
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)nonce_get,
+                                               sizeof(nonce_get)));
+
+  ctr_drbg_run = 1;
+  expect_to_ignore_nonce_report();
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)nonce_get,
+                                               sizeof(nonce_get)));
+
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)msg2,
+                                               sizeof(msg2)));
+}
+
+void test_combined_good_frame()
+{
+  uint8_t msg1[]
+    = {0x98, 0x81, 0xFC, 0x98, 0x5F, 0x87, 0xBA, 0xF0, 0x9B, 0x92, 0xf6, 0xB5,
+       0xDF, 0x30, 0x3F, 0xA4, 0xBE, 0x90, 0xED, 0x84, 0xBF, 0x39, 0xEF, 0xBC,
+       0xD4, 0x7F, 0x2E, 0x16, 0xE9, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F,
+       0x2E, 0x16, 0xE9, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F, 0x2E, 0x16,
+       0xE9, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F, 0x2E, 0x16, 0xE9, 0xA1,
+       0x52, 0x13, 0xc3, 0x59, 0xf7, 0xe7, 0x6a, 0x19, 0xfc};
+  uint8_t msg2[]
+    = {0x98, 0x81, 0xFC, 0x98, 0x5F, 0x87, 0xBA, 0xF0, 0x9B, 0x92, 0x0e,
+       0x8B, 0xB5, 0xDF, 0x30, 0x3F, 0xA4, 0xBE, 0x90, 0xED, 0xF6, 0x2F,
+       0x69, 0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA, 0xF5, 0x69,
+       0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA, 0xF5, 0x69, 0x36,
+       0x05, 0x76, 0x2A, 0xA1, 0x21, 0x8B, 0x2D, 0x59, 0x3E, 0x4B, 0x18,
+       0x50, 0xC2, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F, 0x2E, 0x16,
+       0xE9, 0xA1, 0x1A, 0x8c, 0x28, 0x52, 0x26, 0x61, 0xc6, 0x8f, 0xec};
+  ctr_drbg_run = 0;
+  /* S0 key used
+   * Please Refer UIC-674 JIRA attachment uic-674.zlf */
+  s0_set_key(s0_key);  //Set the security 0 key
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+
+  // Lets not complicate this test. We dont care what nonce report is sent. as long as
+  // the S0 frame is accepted
+  expect_to_ignore_nonce_report();
+
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)nonce_get,
+                                               sizeof(nonce_get)));
+
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)msg1,
+                                               sizeof(msg1)));
+  ctr_drbg_run = 1;
+  expect_to_ignore_nonce_report();
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)nonce_get,
+                                               sizeof(nonce_get)));
+  uint8_t combined_frame[106]
+    = {0x65, 0x93, 0xfc, 0x95, 0x4c, 0x99, 0x6b, 0xc9, 0x24, 0xbe, 0x7a, 0x90,
+       0x0d, 0x2f, 0xf4, 0x55, 0xdb, 0xe7, 0x8c, 0xa4, 0x94, 0xed, 0x83, 0x31,
+       0x58, 0x19, 0x60, 0x50, 0x50, 0xd6, 0x51, 0xda, 0xe0, 0x24, 0x23, 0x8f,
+       0xa9, 0xf4, 0x05, 0xf9, 0xb7, 0x15, 0x31, 0xa0, 0x25, 0x90, 0x1f, 0x00,
+       0x98, 0xa7, 0xdb, 0x7f, 0x97, 0xcd, 0xce, 0xcb, 0x23, 0x75, 0x8e, 0xcb,
+       0xe1, 0x23, 0x2e, 0x5a, 0xf5, 0xae, 0x06, 0x89, 0x83, 0xbd, 0x4e, 0xeb,
+       0x57, 0x53, 0x0f, 0x76, 0x40, 0x8e, 0x7b, 0x6c, 0x8f, 0xe6, 0xf9, 0xfb,
+       0xf3, 0x04, 0xdd, 0x0e, 0x4d, 0xf8, 0x0d, 0xd0, 0xf1, 0x7f, 0x85, 0x98,
+       0x33, 0xd7, 0x5e, 0xc3, 0x1e, 0xef, 0xaa, 0x50, 0xf7, 0x34};
+  zwave_controller_on_frame_received_ExpectWithArray(NULL,
+                                                     0,
+                                                     NULL,
+                                                     0,
+                                                     combined_frame,
+                                                     sizeof(combined_frame),
+                                                     sizeof(combined_frame));
+  zwave_controller_on_frame_received_IgnoreArg_rx_options();
+  zwave_controller_on_frame_received_IgnoreArg_connection_info();
+
+
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)msg2,
+                                               sizeof(msg2)));
+}
+
+void test_long_combined_frame()
+{
+  uint8_t msg1[]
+    = {0x98, 0x81, 0xFC, 0x98, 0x5F, 0x87, 0xBA, 0xF0, 0x9B, 0x92, 0xf6, 0xB5,
+       0xDF, 0x30, 0x3F, 0xA4, 0xBE, 0x90, 0xED, 0x84, 0xBF, 0x39, 0xEF, 0xBC,
+       0xD4, 0x7F, 0x2E, 0x16, 0xE9, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F,
+       0x2E, 0x16, 0xE9, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F, 0x2E, 0x16,
+       0xE9, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F, 0x2E, 0x16, 0xE9, 0xA1,
+       0x52, 0x13, 0xc3, 0x59, 0xf7, 0xe7, 0x6a, 0x19, 0xfc};
+  uint8_t msg2[]
+    = {0x98, 0x81, 0xFC, 0x98, 0x5F, 0x87, 0xBA, 0xF0, 0x9B, 0x92, 0xD6,
+       0x8B, 0xB5, 0xDF, 0x30, 0x3F, 0xA4, 0xBE, 0x90, 0xED, 0xF6, 0x2F,
+       0x70, 0xDA, 0xF5, 0x69, 0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70,
+       0xDA, 0xF5, 0x69, 0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA,
+       0xF5, 0x69, 0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA, 0xF5,
+       0x69, 0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA, 0xF5, 0x69,
+       0x36, 0x05, 0x76, 0x2A, 0xF6, 0x2F, 0x70, 0xDA, 0xF5, 0x69, 0x36,
+       0x05, 0x76, 0x2A, 0xA1, 0x21, 0x8B, 0x2D, 0x59, 0x3E, 0x4B, 0x18,
+       0x50, 0xC2, 0x84, 0xBF, 0x39, 0xEF, 0xBC, 0xD4, 0x7F, 0x2E, 0x16,
+       0xE9, 0xA1, 0x1A, 0xfe, 0x15, 0x60, 0x33, 0x16, 0xb6, 0xc9, 0xcd};
+  ctr_drbg_run = 0;
+  /* S0 key used
+   * Please Refer UIC-674 JIRA attachment uic-674.zlf */
+  s0_set_key(s0_key);  //Set the security 0 key
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+
+  // Lets not complicate this test. We dont care what nonce report is sent. as long as
+  // the S0 frame is accepted
+  expect_to_ignore_nonce_report();
+
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)nonce_get,
+                                               sizeof(nonce_get)));
+
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)msg1,
+                                               sizeof(msg1)));
+  ctr_drbg_run = 1;
+  expect_to_ignore_nonce_report();
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)nonce_get,
+                                               sizeof(nonce_get)));
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)msg2,
+                                               sizeof(msg2)));
+}
+
 /* This test is developed by inspiring from real Security 0 frame flow
  * Please Refer UIC-674 JIRA uic-674.zlf */
 void test_zwave_s0_new()
@@ -752,6 +947,38 @@ void test_zwave_s0_new_short_encrypted_frame()
                                (const uint8_t *)version_get_encrypted,
                                10),  //Wrong length, short frame.
     SL_STATUS_FAIL);
+}
+
+void test_zwave_s0_s0_send_long_but_not_so_long_frame()
+{
+  ctr_drbg_run                  = 0;
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  s0_set_key(s0_key);  //Set the security 0 key
+
+  uint8_t very_long_frame[157] = {11};
+  very_long_frame[0]           = COMMAND_CLASS_SECURITY;
+  very_long_frame[1]           = SECURITY_MESSAGE_ENCAPSULATION;
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)very_long_frame,
+                                               sizeof(very_long_frame)));
+}
+
+void test_zwave_s0_s0_send_very_long_frame()
+{
+  ctr_drbg_run                  = 0;
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  s0_set_key(s0_key);  //Set the security 0 key
+
+  uint8_t very_long_frame[200] = {11};
+  // Send nonce get to s0
+  TEST_ASSERT_EQUAL(SL_STATUS_WOULD_OVERFLOW,
+                    zwave_s0_on_frame_received(&connection_info,
+                                               &rx_options,
+                                               (const uint8_t *)very_long_frame,
+                                               sizeof(very_long_frame)));
 }
 
 void test_zwave_s0_s0_send_nonce_zwave_tx_send_data_failed()

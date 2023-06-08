@@ -148,44 +148,45 @@ var NAVTREE =
       ] ]
     ] ],
     [ "ZigPC Release Notes", "md_applications_zigpc_release_notes.html", [
-      [ "[1.3.1] - March 2023", "md_applications_zigpc_release_notes.html#autotoc_md97", [
-        [ "Changed (1.3.1)", "md_applications_zigpc_release_notes.html#autotoc_md98", null ]
+      [ "[1.3.2] - June 2023", "md_applications_zigpc_release_notes.html#autotoc_md97", null ],
+      [ "[1.3.1] - March 2023", "md_applications_zigpc_release_notes.html#autotoc_md98", [
+        [ "Changed (1.3.1)", "md_applications_zigpc_release_notes.html#autotoc_md99", null ]
       ] ],
-      [ "[1.3.0] - February 2023", "md_applications_zigpc_release_notes.html#autotoc_md99", [
-        [ "Added (1.3.0)", "md_applications_zigpc_release_notes.html#autotoc_md100", null ],
-        [ "Changed (1.3.0)", "md_applications_zigpc_release_notes.html#autotoc_md101", null ]
+      [ "[1.3.0] - February 2023", "md_applications_zigpc_release_notes.html#autotoc_md100", [
+        [ "Added (1.3.0)", "md_applications_zigpc_release_notes.html#autotoc_md101", null ],
+        [ "Changed (1.3.0)", "md_applications_zigpc_release_notes.html#autotoc_md102", null ]
       ] ],
-      [ "[1.2.0] - August 2022", "md_applications_zigpc_release_notes.html#autotoc_md102", [
-        [ "Added (1.2.0)", "md_applications_zigpc_release_notes.html#autotoc_md103", null ],
-        [ "Changed (1.2.0)", "md_applications_zigpc_release_notes.html#autotoc_md104", null ]
+      [ "[1.2.0] - August 2022", "md_applications_zigpc_release_notes.html#autotoc_md103", [
+        [ "Added (1.2.0)", "md_applications_zigpc_release_notes.html#autotoc_md104", null ],
+        [ "Changed (1.2.0)", "md_applications_zigpc_release_notes.html#autotoc_md105", null ]
       ] ],
-      [ "[1.1.1] - March 2022", "md_applications_zigpc_release_notes.html#autotoc_md105", [
-        [ "Added (1.1.1)", "md_applications_zigpc_release_notes.html#autotoc_md106", null ],
-        [ "Changed (1.1.1)", "md_applications_zigpc_release_notes.html#autotoc_md107", null ]
+      [ "[1.1.1] - March 2022", "md_applications_zigpc_release_notes.html#autotoc_md106", [
+        [ "Added (1.1.1)", "md_applications_zigpc_release_notes.html#autotoc_md107", null ],
+        [ "Changed (1.1.1)", "md_applications_zigpc_release_notes.html#autotoc_md108", null ]
       ] ],
-      [ "[1.1.0] - Feb 2022", "md_applications_zigpc_release_notes.html#autotoc_md108", [
-        [ "Added (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md109", null ],
-        [ "Changed (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md110", null ],
-        [ "Removed (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md111", null ],
-        [ "Fixed (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md112", null ]
+      [ "[1.1.0] - Feb 2022", "md_applications_zigpc_release_notes.html#autotoc_md109", [
+        [ "Added (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md110", null ],
+        [ "Changed (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md111", null ],
+        [ "Removed (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md112", null ],
+        [ "Fixed (1.1.0)", "md_applications_zigpc_release_notes.html#autotoc_md113", null ]
       ] ],
-      [ "[1.0.3] - Nov 2021", "md_applications_zigpc_release_notes.html#autotoc_md113", [
-        [ "Added (1.0.3)", "md_applications_zigpc_release_notes.html#autotoc_md114", null ],
-        [ "Changed (1.0.3)", "md_applications_zigpc_release_notes.html#autotoc_md115", null ],
-        [ "Fixed (1.0.3)", "md_applications_zigpc_release_notes.html#autotoc_md116", null ]
+      [ "[1.0.3] - Nov 2021", "md_applications_zigpc_release_notes.html#autotoc_md114", [
+        [ "Added (1.0.3)", "md_applications_zigpc_release_notes.html#autotoc_md115", null ],
+        [ "Changed (1.0.3)", "md_applications_zigpc_release_notes.html#autotoc_md116", null ],
+        [ "Fixed (1.0.3)", "md_applications_zigpc_release_notes.html#autotoc_md117", null ]
       ] ],
-      [ "[1.0.2] - Oct 2021", "md_applications_zigpc_release_notes.html#autotoc_md117", null ],
-      [ "[1.0.1] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md118", [
-        [ "Fixed (1.0.1)", "md_applications_zigpc_release_notes.html#autotoc_md119", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_zigpc_release_notes.html#autotoc_md118", null ],
+      [ "[1.0.1] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md119", [
+        [ "Fixed (1.0.1)", "md_applications_zigpc_release_notes.html#autotoc_md120", null ]
       ] ],
-      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md120", [
-        [ "Added (1.0.0)", "md_applications_zigpc_release_notes.html#autotoc_md121", null ],
-        [ "Changed (1.0.0)", "md_applications_zigpc_release_notes.html#autotoc_md122", null ]
+      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md121", [
+        [ "Added (1.0.0)", "md_applications_zigpc_release_notes.html#autotoc_md122", null ],
+        [ "Changed (1.0.0)", "md_applications_zigpc_release_notes.html#autotoc_md123", null ]
       ] ],
-      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md123", [
-        [ "Zigbee Devices Used for Testing", "md_applications_zigpc_release_notes.html#autotoc_md124", null ]
+      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md124", [
+        [ "Zigbee Devices Used for Testing", "md_applications_zigpc_release_notes.html#autotoc_md125", null ]
       ] ],
-      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md125", null ]
+      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md126", null ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -368,24 +369,24 @@ var NAVTREEINDEX =
 "group__zigpc__zcl__definitions.html#gga548dfa4f1afc477f2655bae3e31fba6fad6626b87ccccacfd618d380aebe4dce9",
 "group__zigpc__zcl__definitions.html#ggaa03d837e0450405c4857b29e7b64d894abcbe69e6bda9f0386adccb2038170a55",
 "md_applications_zigpc_readme_user.html#autotoc_md84",
-"namespacezigpc__datastore_1_1binding.html#aa7bb491baf5819feef2b6b57fbf162ea",
-"smartstart__management_8hpp.html",
-"struct__uic__mqtt__dotdot__door__lock__supported__commands__.html#a755b9ad236e936be06dd498f26d05f5e",
-"structast_1_1scope.html",
-"structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a1b662c85e10c98ecf005f586b24d5b2a",
-"structuic__mqtt__dotdot__color__control__command__move__color__fields__t.html#a15a6c17c7ee2f74d5291125bc0ffd30b",
-"structuic__mqtt__dotdot__diagnostics__state__t.html#a5871f4f21c0d40ee03fd9625aa557895",
-"structuic__mqtt__dotdot__door__lock__state__t.html#a9e810e6de758cdfc68349610aee2d5ca",
-"structuic__mqtt__dotdot__electrical__measurement__updated__state__t.html#a449ad019d5d431b960a91ddf189470af",
-"structuic__mqtt__dotdot__level__state__t.html",
-"structuic__mqtt__dotdot__pm25__updated__state__t.html#a5acfca30b22d134b7837913d082bdcdd",
-"structuic__mqtt__dotdot__relativity__humidity__updated__state__t.html#a4b2528bade88b4b94954449079725fb6",
-"structuic__mqtt__dotdot__thermostat__state__t.html#a5dc3928eecd522988a1506cea68df10c",
-"structzigpc__attrmgmt__on__frame__receive__t.html",
-"structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8d68f9fb05ab687636640050a584a9dc",
-"unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6",
-"zigpc__config_8c.html#a8fdca44881420da5d2da08787d0f4113",
-"zigpc__ucl_8hpp.html#a0ae3f2434936eef3e9855e9437c03292aeb9d70b8abb8cc33ddb33743c528c28c"
+"namespacezigpc__datastore_1_1binding.html#a8ba9d1d4a6ebd3a006a605107613d60e",
+"sl__status_8h_source.html",
+"struct__uic__mqtt__dotdot__door__lock__supported__commands__.html#a6c744de7e8bebc1cb9ad8ffe2fab9fc2",
+"structast_1_1operation.html#aac903cedc5b08569fc4c601c430e2aa4",
+"structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a157762c54d5cc2ea69086a75d510e22e",
+"structuic__mqtt__dotdot__color__control__command__move__color__fields__t.html#a13db5c029ed94150c8aa185c03d2a1fc",
+"structuic__mqtt__dotdot__diagnostics__state__t.html#a56166da19549d39d295e6f584fd6bc09",
+"structuic__mqtt__dotdot__door__lock__state__t.html#a9479ac1af6f3861d4f2e4f244dbe8ae9",
+"structuic__mqtt__dotdot__electrical__measurement__updated__state__t.html#a43f546e2397231ebe17d51c2cf3984f0",
+"structuic__mqtt__dotdot__level__command__stop__with__on__off__fields__t.html#ad8cca7208d3788359de88641da49cfd8",
+"structuic__mqtt__dotdot__pm25__updated__state__t.html#a55fb6c6f4d9d20ef228ea48dad00724b",
+"structuic__mqtt__dotdot__relativity__humidity__updated__state__t.html",
+"structuic__mqtt__dotdot__thermostat__state__t.html#a54f0f2c2a63f85e627419a827f0f3497",
+"structzigpc__attrmgmt__configure__status__record__t.html#ad075742ae1424bd12663e75a99a0ef7d",
+"structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8383c1898e729528b589e3b5e61d09ad",
+"unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a77bafa0117cd1acd2afdbf8c9cafb93e",
+"zigpc__config_8c.html#a7791ce7e12f8b8d4dd7d973db8253c34",
+"zigpc__ucl_8hpp.html#a0ae3f2434936eef3e9855e9437c03292a7612b5b128ffe2c81654261d1359e3fd"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

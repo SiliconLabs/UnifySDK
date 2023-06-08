@@ -1,5 +1,6 @@
 var NAVTREEINDEX153 =
 {
+"structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8383c1898e729528b589e3b5e61d09ad":[8,2,16,39,4],
 "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8d68f9fb05ab687636640050a584a9dc":[8,2,16,39,5],
 "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a9ce647666623c77fcf29bffe4700bde6":[8,2,16,39,1],
 "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#ad73741a737c6988a8e9ef42ac9f3db6d":[8,2,16,39,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX153 =
 "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a5d64bf78a2b5cff24d8799657f85920f":[11,0,1,23,2,1,0,29],
 "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a60efbf0f207cd3a8ce7f0e1b3c30803c":[11,0,1,23,2,1,0,33],
 "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a6613284553b462da66cd4ccbed8af948":[11,0,1,23,2,1,0,43],
-"unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a743a5b8a8ec36cca5b154038ae65307f":[11,0,1,23,2,1,0,50],
-"unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a77bafa0117cd1acd2afdbf8c9cafb93e":[11,0,1,23,2,1,0,35]
+"unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a743a5b8a8ec36cca5b154038ae65307f":[11,0,1,23,2,1,0,50]
 };

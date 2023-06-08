@@ -85,3 +85,14 @@ void on_request_node_neighbor_update_completed(uint8_t status)
                  0);
   }
 }
+
+void on_zwave_api_started()
+{
+  // Ensure that no add/remove/learn mode was active
+  if (zwave_network_management_get_state() != NM_IDLE) {
+    sl_log_warning(LOG_TAG,
+                   "Network management was busy during a Z-Wave API restart. "
+                   "Aborting.");
+    zwave_network_management_abort();
+  }
+}

@@ -1,5 +1,6 @@
 var NAVTREEINDEX152 =
 {
+"structzigpc__attrmgmt__configure__status__record__t.html#ad075742ae1424bd12663e75a99a0ef7d":[8,2,0,1,0,1],
 "structzigpc__attrmgmt__on__frame__receive__t.html":[10,0,404],
 "structzigpc__attrmgmt__on__frame__receive__t.html#a072a337b9de71ec993c9c1c28cb70de9":[10,0,404,4],
 "structzigpc__attrmgmt__on__frame__receive__t.html#a132bf76d2e87e7d3ac415854023c5e3b":[10,0,404,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX152 =
 "structzigpc__zclcmdparse__poll__control__set__short__poll__interval__t.html#af84930cf89dc30b9c2c292f1051b8aa7":[8,2,16,9,0],
 "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html":[8,2,16,39],
 "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a616cc8bb924b5808dbd5cfec6a6b7661":[8,2,16,39,0],
-"structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8100e0b75b6752f5197850eaacd14b0f":[8,2,16,39,2],
-"structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8383c1898e729528b589e3b5e61d09ad":[8,2,16,39,4]
+"structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html#a8100e0b75b6752f5197850eaacd14b0f":[8,2,16,39,2]
 };

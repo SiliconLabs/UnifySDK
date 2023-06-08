@@ -26,3 +26,13 @@ target_add_unittest(
   DEPENDS
   zwave_api_mock)
 target_include_directories(zwave_rx_zwapi_callback_test PRIVATE ../src)
+
+target_add_unittest(
+  zwave_rx
+  NAME
+  zwave_rx_callbacks_test
+  SOURCES
+  zwave_rx_callbacks_test.c
+  DEPENDS
+  zwave_api_mock)
+target_include_directories(zwave_rx_callbacks_test PRIVATE ../src)

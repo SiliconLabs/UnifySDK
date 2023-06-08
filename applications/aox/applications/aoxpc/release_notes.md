@@ -1,5 +1,9 @@
 # AoXPC Release Notes
 
+## [1.3.2] - Jun 2023
+
+## [1.3.1] - Mar 2023
+
 ## [1.3.0] - Feb 2023
 
 ### Added (1.3.0)

@@ -98,8 +98,8 @@ platform_tools = {
 common_resources = [
     {
         'download_name'   : 'Application Firmware',
-        'download_url'    : 'https://github.com/SiliconLabs/gecko_sdk/releases/download/v4.2.0/demo-applications.zip',
-        'download_sha256' : 'da29ebff06a91dc9e80735d7bde17041290bf0e5c35ca702cdcb993dcc135a0c',
+        'download_url'    : 'https://github.com/SiliconLabs/gecko_sdk/releases/download/v4.2.2/demo-applications.zip',
+        'download_sha256' : '229b49a73c43cff7749a26a77487b31d4cef59060d75322b229a6a50f07ba188',
         'extract_details' : [
             {
                 'extract_src' : 'protocol/z-wave/demos/zwave_soc_switch_on_off/zwave_soc_switch_on_off-brd2603a-eu.hex',
@@ -117,8 +117,8 @@ common_resources = [
     },
     {
         'download_name'   : 'Unify Debian packages',
-        'download_url'    : 'https://github.com/SiliconLabs/UnifySDK/releases/download/ver_1.2.1/unify_1.2.1_x86_64.zip',
-        'download_sha256' : '455483c56df277f462118dc442a3351823b38b74a97147b62e804ab4b0e98c76',
+        'download_url'    : 'https://github.com/SiliconLabs/UnifySDK/releases/download/ver_1.3.1/unify_1.3.1_x86_64.zip',
+        'download_sha256' : '21798654079347c79e30735a904dc293e64b0ab691a8fccd9fc660f69364af5e',
         'extract_details' : [
             {
                 'extract_dst' : 'docker-files/',
@@ -221,7 +221,7 @@ def arguments_parsing():
     parser.add_argument("--target", choices=["windows", "linux", "macos"], required=True)
     parser.add_argument("--build_folder", default=os.path.join(os.path.dirname(__file__), "../target"))
     parser.add_argument("--build_type", choices=["debug", "release"], default="release")
-
+    parser.add_argument("--unify_path", type=str, required=False)
     args = parser.parse_args()
     return args
 
@@ -244,5 +244,10 @@ if __name__ == "__main__":
         print()
 
     for resource in common_resources:
-        get_resources(resource, copy_dst)
+        if resource['download_name'] == 'Unify Debian packages' and args.unify_path is not None:
+            # Copy the unifySDK to all the destinations mentioned in common_resources
+            for extract in resource["extract_details"]:
+                shutil.copy(args.unify_path, copy_dst + "/" + extract["extract_dst"])
+        else:
+            get_resources(resource, copy_dst)
         print()

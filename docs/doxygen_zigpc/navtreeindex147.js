@@ -1,5 +1,6 @@
 var NAVTREEINDEX147 =
 {
+"structuic__mqtt__dotdot__electrical__measurement__updated__state__t.html#a43f546e2397231ebe17d51c2cf3984f0":[8,5,11,235,26],
 "structuic__mqtt__dotdot__electrical__measurement__updated__state__t.html#a449ad019d5d431b960a91ddf189470af":[8,5,11,235,32],
 "structuic__mqtt__dotdot__electrical__measurement__updated__state__t.html#a45daf38681745aada8559f519f067845":[8,5,11,235,51],
 "structuic__mqtt__dotdot__electrical__measurement__updated__state__t.html#a475d48718114fc44040b596b4d1be0db":[8,5,11,235,92],
@@ -248,6 +249,5 @@ var NAVTREEINDEX147 =
 "structuic__mqtt__dotdot__level__command__stop__fields__t.html#a16be58e1ce3d937a4535999d7c58bbd8":[8,5,11,61,0],
 "structuic__mqtt__dotdot__level__command__stop__fields__t.html#ae3353a0c9abf62902c877e24d9a1680a":[8,5,11,61,1],
 "structuic__mqtt__dotdot__level__command__stop__with__on__off__fields__t.html":[8,5,11,65],
-"structuic__mqtt__dotdot__level__command__stop__with__on__off__fields__t.html#a2944535bb9dff92150abeb0b338b9551":[8,5,11,65,0],
-"structuic__mqtt__dotdot__level__command__stop__with__on__off__fields__t.html#ad8cca7208d3788359de88641da49cfd8":[8,5,11,65,1]
+"structuic__mqtt__dotdot__level__command__stop__with__on__off__fields__t.html#a2944535bb9dff92150abeb0b338b9551":[8,5,11,65,0]
 };

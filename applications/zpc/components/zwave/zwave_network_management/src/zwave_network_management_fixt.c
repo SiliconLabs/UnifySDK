@@ -20,14 +20,18 @@
 #include "nm_state_machine.h"
 #include "zwave_network_management_process.h"
 #include "zwave_network_management_return_route_queue.h"
+#include "zwave_network_management_callbacks.h"
 #include "sl_status.h"
 #include "zwave_controller_callbacks.h"
+#include "zwave_rx_callbacks.h"
 
 sl_status_t zwave_network_management_fixt_setup(void)
 {
   sl_status_t ret = zwave_controller_register_reset_step(
     &zwave_network_management_set_default,
     ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY);
+
+  ret |= zwave_rx_register_zwave_api_started_callback(&on_zwave_api_started);
 
   nm_state_machine_init();
   process_start(&zwave_network_management_process, NULL);

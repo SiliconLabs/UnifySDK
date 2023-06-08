@@ -25,6 +25,7 @@
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_transport.h"
 #include "zwave_controller_internal.h"
+#include "zwave_rx_callbacks.h"
 #include "zwave_tx.h"
 #include "zwave_tx_groups.h"
 
@@ -216,6 +217,21 @@ void zwave_api_transport_on_node_information(zwave_node_id_t node_id,
 static const zwave_controller_callbacks_t zwave_api_transport_callbacks
   = {.on_node_information     = &zwave_api_transport_on_node_information,
      .on_node_info_req_failed = &zwave_api_transport_on_node_info_req_failed};
+
+///////////////////////////////////////////////////////////////////////////////
+// Z-Wave RX callback functions
+///////////////////////////////////////////////////////////////////////////////
+static void on_zwave_api_started()
+{
+  if (state.transmission_ongoing == false) {
+    return;
+  }
+
+  sl_log_debug(LOG_TAG,
+               "Considering transmission failed due to a Z-Wave API restart "
+               "during an ongoing transmission.");
+  zwave_api_send_data_callback(TRANSMIT_COMPLETE_FAIL, NULL);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Z-Wave Controller transport functions
@@ -411,6 +427,9 @@ sl_status_t zwave_api_transport_init()
 
   // Tell the controller to inform us about NIF events
   zwave_controller_register_callbacks(&zwave_api_transport_callbacks);
+
+  // Get notified when z-Wave API got restarted:
+  zwave_rx_register_zwave_api_started_callback(&on_zwave_api_started);
 
   // Start the Z-Wave API transport process
   process_start(&zwave_api_transport_process, NULL);

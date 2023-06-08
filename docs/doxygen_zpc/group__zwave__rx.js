@@ -1,5 +1,6 @@
 var group__zwave__rx =
 [
+    [ "Z-Wave RX callbacks", "group__zwave__rx__callbacks.html", "group__zwave__rx__callbacks" ],
     [ "Z-Wave RX Internals", "group__zwave__rx__internals.html", "group__zwave__rx__internals" ],
     [ "Z-Wave RX process", "group__zwave__rx__process.html", "group__zwave__rx__process" ],
     [ "Z-Wave RX Z-Wave API Callbacks", "group__zwave__rx__zwapi__callbacks.html", "group__zwave__rx__zwapi__callbacks" ],

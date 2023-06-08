@@ -1,5 +1,9 @@
 # ZigPC Release Notes
 
+## [1.3.2] - June 2023
+
+* No changes
+
 ## [1.3.1] - March 2023
 
 ### Changed (1.3.1)

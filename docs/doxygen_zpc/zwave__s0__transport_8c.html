@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.1</span>
+   &#160;<span id="projectnumber">1.3.2</span>
    </div>
   </td>
  </tr>
@@ -159,7 +159,7 @@ Macros</h2></td></tr>
 <tr class="separator:a6579e680b322e24271e7344bbdfd5561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab80b3a2545338354dcd6d2c4df06911a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#ab80b3a2545338354dcd6d2c4df06911a">S0_MAC_SIZE</a>&#160;&#160;&#160;8</td></tr>
 <tr class="separator:ab80b3a2545338354dcd6d2c4df06911a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5205c8189e42bc8278b3d07762cfb21"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#ac5205c8189e42bc8278b3d07762cfb21">S0_ENCAP_HEADER_LEN</a>&#160;&#160;&#160;  (sizeof(ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME) - 4)</td></tr>
+<tr class="memitem:ac5205c8189e42bc8278b3d07762cfb21"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#ac5205c8189e42bc8278b3d07762cfb21">S0_ENCAP_HEADER_LEN</a>&#160;&#160;&#160;20</td></tr>
 <tr class="separator:ac5205c8189e42bc8278b3d07762cfb21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d500a34c624c2cae56bc25a31b12f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a86d500a34c624c2cae56bc25a31b12f3">UNUSED</a>(x)&#160;&#160;&#160;x = x;</td></tr>
 <tr class="separator:a86d500a34c624c2cae56bc25a31b12f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,8 +234,8 @@ Functions</h2></td></tr>
 <tr class="separator:a5e3b1c19125c57849fb649d1b693609f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb22afea5af0dc149f03d08edb74a44a"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#aeb22afea5af0dc149f03d08edb74a44a">get_node_max_frame_size</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="separator:aeb22afea5af0dc149f03d08edb74a44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace378830bcb99bc729e6fad676c7535b"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#ace378830bcb99bc729e6fad676c7535b">encrypt_msg</a> (<a class="el" href="zwave__s0__transport_8c.html#ad9902c9f4f574f4cfbcd0a7d7f6475db">sec_tx_session_t</a> *s, uint8_t pass2)</td></tr>
-<tr class="separator:ace378830bcb99bc729e6fad676c7535b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfe0a749d5d321ae13b810ea1043d90f"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#abfe0a749d5d321ae13b810ea1043d90f">s0_encrypt_message</a> (<a class="el" href="zwave__s0__transport_8c.html#ad9902c9f4f574f4cfbcd0a7d7f6475db">sec_tx_session_t</a> *s, uint8_t pass2)</td></tr>
+<tr class="separator:abfe0a749d5d321ae13b810ea1043d90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a395227710e5a6b32c1c55b6a389384b3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a395227710e5a6b32c1c55b6a389384b3">reset_tx_session_data</a> (<a class="el" href="zwave__s0__transport_8c.html#ad9902c9f4f574f4cfbcd0a7d7f6475db">sec_tx_session_t</a> *s)</td></tr>
 <tr class="memdesc:a395227710e5a6b32c1c55b6a389384b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the data from the previous S0 Tx Session.  <a href="zwave__s0__transport_8c.html#a395227710e5a6b32c1c55b6a389384b3">More...</a><br /></td></tr>
 <tr class="separator:a395227710e5a6b32c1c55b6a389384b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -253,8 +253,8 @@ Functions</h2></td></tr>
 <tr class="separator:a845ba331fbcadf3e4bf59ddab158e19a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a047cbe5995b9273c435cca80cea6017f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structrx__session__t.html">rx_session_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a047cbe5995b9273c435cca80cea6017f">new_rx_session</a> (uint8_t snode, uint8_t dnode)</td></tr>
 <tr class="separator:a047cbe5995b9273c435cca80cea6017f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fa7eb2e1b4f59e74819a78c133df3f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a5fa7eb2e1b4f59e74819a78c133df3f3">free_rx_session</a> (<a class="el" href="structrx__session__t.html">rx_session_t</a> *s)</td></tr>
-<tr class="separator:a5fa7eb2e1b4f59e74819a78c133df3f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f94cd5d146cd3350af7dc872fb0961"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a69f94cd5d146cd3350af7dc872fb0961">free_rx_session</a> (<a class="el" href="structrx__session__t.html">rx_session_t</a> *s)</td></tr>
+<tr class="separator:a69f94cd5d146cd3350af7dc872fb0961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabcc2e68cff658823698aaf43f2170c3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#gabcc2e68cff658823698aaf43f2170c3f">s0_abort_all_tx_sessions</a> ()</td></tr>
 <tr class="memdesc:gabcc2e68cff658823698aaf43f2170c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort all S0 network TX sessions.  <a href="group__zwave__s0__internal.html#gabcc2e68cff658823698aaf43f2170c3f">More...</a><br /></td></tr>
 <tr class="separator:gabcc2e68cff658823698aaf43f2170c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -263,13 +263,13 @@ Functions</h2></td></tr>
 <tr class="separator:ga883ef7108e614b9324f5bc8f5abc7151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a488fb7aea3d322c624b8f35f26cc46a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structrx__session__t.html">rx_session_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a488fb7aea3d322c624b8f35f26cc46a5">get_rx_session_by_nodes</a> (uint8_t snode, uint8_t dnode)</td></tr>
 <tr class="separator:a488fb7aea3d322c624b8f35f26cc46a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2ef2690e52a41a9ed17ef63aa45c7ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#af2ef2690e52a41a9ed17ef63aa45c7ac">s0_send_nonce</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *conn_info)</td></tr>
-<tr class="separator:af2ef2690e52a41a9ed17ef63aa45c7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae14c5c7ff6720738bf5ca9cc7791619d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#ae14c5c7ff6720738bf5ca9cc7791619d">s0_decrypt_message</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *frame_data1, uint16_t frame_length_2_byte, uint8_t *output_buffer)</td></tr>
-<tr class="separator:ae14c5c7ff6720738bf5ca9cc7791619d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a987885317398d3ebab731d891efe5f99"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a987885317398d3ebab731d891efe5f99">s0_send_nonce</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *conn_info)</td></tr>
+<tr class="separator:a987885317398d3ebab731d891efe5f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a764e435a218a773ffc2d08378a3bcc04"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a764e435a218a773ffc2d08378a3bcc04">s0_decrypt_message</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *encrypted_frame, uint16_t encrypted_frame_len, uint8_t *decrypted_frame, uint16_t decrypted_frame_len)</td></tr>
+<tr class="separator:a764e435a218a773ffc2d08378a3bcc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03d95837da2b91dfbf98786f7e753fe4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#a03d95837da2b91dfbf98786f7e753fe4">s0_application_command_handler</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *c, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="separator:a03d95837da2b91dfbf98786f7e753fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga075cd6959f4f2b9cbd757c5d43f97820"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__transport.html#ga075cd6959f4f2b9cbd757c5d43f97820">zwave_s0_on_frame_received</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *c, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *frame_data1, uint16_t frame_length_2_byte)</td></tr>
+<tr class="memitem:ga075cd6959f4f2b9cbd757c5d43f97820"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__transport.html#ga075cd6959f4f2b9cbd757c5d43f97820">zwave_s0_on_frame_received</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *c, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *encrypted_frame, uint16_t encrypted_frame_len)</td></tr>
 <tr class="memdesc:ga075cd6959f4f2b9cbd757c5d43f97820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Entry point of S0 frames received from the PHY/radio stack.  <a href="group__zwave__s0__transport.html#ga075cd6959f4f2b9cbd757c5d43f97820">More...</a><br /></td></tr>
 <tr class="separator:ga075cd6959f4f2b9cbd757c5d43f97820"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga663245a3c03fdad09e2876bee239376e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#ga663245a3c03fdad09e2876bee239376e">free_all_tx_sessions</a> ()</td></tr>
@@ -498,7 +498,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define S0_ENCAP_HEADER_LEN&#160;&#160;&#160;  (sizeof(ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME) - 4)</td>
+          <td class="memname">#define S0_ENCAP_HEADER_LEN&#160;&#160;&#160;20</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -842,8 +842,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ace378830bcb99bc729e6fad676c7535b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace378830bcb99bc729e6fad676c7535b">&#9670;&nbsp;</a></span>encrypt_msg()</h2>
+<a id="a69f94cd5d146cd3350af7dc872fb0961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69f94cd5d146cd3350af7dc872fb0961">&#9670;&nbsp;</a></span>free_rx_session()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -852,21 +852,11 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static uint8_t encrypt_msg </td>
+          <td class="memname">static void free_rx_session </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__s0__transport_8c.html#ad9902c9f4f574f4cfbcd0a7d7f6475db">sec_tx_session_t</a> *&#160;</td>
-          <td class="paramname"><em>s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="structrx__session__t.html">rx_session_t</a> *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>pass2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -874,25 +864,6 @@ Variables</h2></td></tr>
 <span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
-</div><div class="memdoc">
-<p>Encrypt a message and write the encrypted data into s-&gt;crypted_msg </p>
-
-</div>
-</div>
-<a id="a5fa7eb2e1b4f59e74819a78c133df3f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fa7eb2e1b4f59e74819a78c133df3f3">&#9670;&nbsp;</a></span>free_rx_session()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void free_rx_session </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structrx__session__t.html">rx_session_t</a> *&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
 </div><div class="memdoc">
 
 </div>
@@ -1398,14 +1369,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ae14c5c7ff6720738bf5ca9cc7791619d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae14c5c7ff6720738bf5ca9cc7791619d">&#9670;&nbsp;</a></span>s0_decrypt_message()</h2>
+<a id="a764e435a218a773ffc2d08378a3bcc04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a764e435a218a773ffc2d08378a3bcc04">&#9670;&nbsp;</a></span>s0_decrypt_message()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t s0_decrypt_message </td>
+          <td class="memname">static uint8_t s0_decrypt_message </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection_info</em>, </td>
@@ -1420,19 +1394,25 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>frame_data1</em>, </td>
+          <td class="paramname"><em>encrypted_frame</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>frame_length_2_byte</em>, </td>
+          <td class="paramname"><em>encrypted_frame_len</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>output_buffer</em>&#160;</td>
+          <td class="paramname"><em>decrypted_frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>decrypted_frame_len</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1440,7 +1420,49 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="abfe0a749d5d321ae13b810ea1043d90f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfe0a749d5d321ae13b810ea1043d90f">&#9670;&nbsp;</a></span>s0_encrypt_message()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t s0_encrypt_message </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zwave__s0__transport_8c.html#ad9902c9f4f574f4cfbcd0a7d7f6475db">sec_tx_session_t</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pass2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Encrypt a message and write the encrypted data into s-&gt;crypted_msg </p>
 
 </div>
 </div>
@@ -1579,20 +1601,28 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="af2ef2690e52a41a9ed17ef63aa45c7ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2ef2690e52a41a9ed17ef63aa45c7ac">&#9670;&nbsp;</a></span>s0_send_nonce()</h2>
+<a id="a987885317398d3ebab731d891efe5f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a987885317398d3ebab731d891efe5f99">&#9670;&nbsp;</a></span>s0_send_nonce()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void s0_send_nonce </td>
+          <td class="memname">static void s0_send_nonce </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>conn_info</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Send a nonce from given source to given destination. The nonce is registered internally </p>
 
@@ -1956,7 +1986,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_f4b467f0a960798c9a570e0236e928b5.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_6fba1e772b51ab46cce9ac80a46e75aa.html">s0</a></li><li class="navelem"><a class="el" href="dir_8db2d843763b048529dd52bcc2b9c1b9.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__transport_8c.html">zwave_s0_transport.c</a></li>
-    <li class="footer">Generated on Fri Mar 31 2023 03:46:40 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 7 2023 10:13:54 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

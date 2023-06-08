@@ -6,4 +6,5 @@ DEPENDS
   zwave_api_mock
   zwave_tx_groups_mock
   zwave_controller_mock
+  zwave_rx_mock
 )

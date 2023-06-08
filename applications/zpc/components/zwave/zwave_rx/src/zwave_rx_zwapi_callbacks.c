@@ -155,17 +155,15 @@ void zwave_rx_application_controller_update(uint8_t status,
 
 void zwave_rx_zwave_api_started(const uint8_t *buffer, uint8_t buffer_length)
 {
+  // Not sure what to do with our NIF here. (buffer, buffer_length)
   (void)buffer;
   (void)buffer_length;
+
   // Make sure we are still running the right settings:
   zwapi_set_node_id_basetype(NODEID_16BITS);
 
-  // Ensure that no add/remove/learn mode is active
-  zwapi_add_node_to_network(ADD_NODE_STOP, NULL);
-  zwapi_remove_node_from_network(REMOVE_NODE_STOP, NULL);
-  zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
-
-  // I can't think of a reason to do something with our NIF here. (buffer, buffer_length)
+  // Tell other components that the Z-Wave API just got (re)-started
+  zwave_rx_on_zwave_api_started();
 }
 
 /**

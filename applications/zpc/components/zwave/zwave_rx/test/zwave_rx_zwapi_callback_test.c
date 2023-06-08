@@ -33,11 +33,5 @@ void setUp() {}
 void test_zwave_rx_zwave_api_started()
 {
   zwapi_set_node_id_basetype_ExpectAndReturn(NODEID_16BITS, SL_STATUS_OK);
-  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
-  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
-                                                 NULL,
-                                                 SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
-
   zwave_rx_zwave_api_started(NULL, 0);
 }

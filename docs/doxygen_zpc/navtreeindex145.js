@@ -1,5 +1,17 @@
 var NAVTREEINDEX145 =
 {
+"namespacesmartstart.html#a30905b6ddd0b73b0a63205eb26c99a95a44262242c01bb1b6dfb8419d9b05b4b7":[3,0,4,5,2],
+"namespacesmartstart.html#a30905b6ddd0b73b0a63205eb26c99a95a6398a5d89dcecbbcb7ae7e1a7f5bf809":[3,0,4,5,0],
+"namespacesmartstart.html#a30905b6ddd0b73b0a63205eb26c99a95ad436eb0fd9de10b54a828ce6435f7e81":[3,0,4,5,1],
+"namespacesmartstart.html#adff5df4315ba845db07eefe7cbdda6a4":[3,0,4,3],
+"namespacesmartstart.html#aefc1b5969139cb011494df6c1bed1399":[3,0,4,4],
+"namespaceuic__dotdot__mqtt.html":[3,0,5],
+"namespaceuic__dotdot__mqtt.html#a1f08576cd02c02a0ff2516569120c290":[3,0,5,6],
+"namespaceuic__dotdot__mqtt.html#a2c88534168a098b32ba3aea7a8fd7987":[3,0,5,0],
+"namespaceuic__dotdot__mqtt.html#a8af267ca42992c31053c40fff0ca3f4d":[3,0,5,3],
+"namespaceuic__dotdot__mqtt.html#a9825b506dd640ef11c85f6e22959989d":[3,0,5,1],
+"namespaceuic__dotdot__mqtt.html#aa933017fc5ab241cd91879d5024ae22d":[3,0,5,2],
+"namespaceuic__dotdot__mqtt.html#acf971fbc233326da38af5f5c0d874cb6":[3,0,5,5],
 "namespaceuic__dotdot__mqtt.html#aece7f3b48b5b4e897db7941d1ee8a294":[3,0,5,4],
 "namespaceuic__ota.html":[3,0,6],
 "namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394":[3,0,6,4],
@@ -237,17 +249,5 @@ var NAVTREEINDEX145 =
 "posix_2contiki-conf_8h.html#a4caecabca98b43919dd11be1c0d4cd8e":[5,0,1,6,3,1,1,18],
 "posix_2contiki-conf_8h.html#a646b9304f6310b769e2e869b5173158b":[5,0,1,6,3,1,1,7],
 "posix_2contiki-conf_8h.html#a67300667a43e2ddc14d3ea322892feb9":[5,0,1,6,3,1,1,11],
-"posix_2contiki-conf_8h.html#a77570ac4fcab86864fa1916e55676da2":[5,0,1,6,3,1,1,16],
-"posix_2contiki-conf_8h.html#a93edc24baac4aa567f16f36c8c0e00b6":[5,0,1,6,3,1,1,4],
-"posix_2contiki-conf_8h.html#aae6b659a05d9ff51d4c9fd5bfc94fb17":[5,0,1,6,3,1,1,10],
-"posix_2contiki-conf_8h.html#aca1ff60ac76bc69388fc1c5adc31bc7f":[5,0,1,6,3,1,1,1],
-"posix_2contiki-conf_8h.html#acade3552711bb501c2e728dcb04482b8":[5,0,1,6,3,1,1,6],
-"posix_2contiki-conf_8h.html#ace2c3395110fad22d5d766b6c2b324d1":[5,0,1,6,3,1,1,9],
-"posix_2contiki-conf_8h.html#adb7261224b3fcc1612dd772d8b3c83a8":[5,0,1,6,3,1,1,2],
-"posix_2contiki-conf_8h.html#ae3124953be0bc2a80b1568fb19e6baf1":[5,0,1,6,3,1,1,8],
-"posix_2contiki-conf_8h.html#ae55373e20e09f0e1b81d2b079a4a13c4":[5,0,1,6,3,1,1,0],
-"posix_2contiki-conf_8h.html#ae7ca3e7b1ab4e133d2ec2ba84bdc10b1":[5,0,1,6,3,1,1,12],
-"posix_2contiki-conf_8h_source.html":[5,0,1,6,3,1,1],
-"posix_2uic__main__externals__platform_8c.html":[5,0,1,13,1,1,0],
-"posix_2uic__main__externals__platform_8c.html#a09e21034f62b8102c2534c139cf965e7":[5,0,1,13,1,1,0,5]
+"posix_2contiki-conf_8h.html#a77570ac4fcab86864fa1916e55676da2":[5,0,1,6,3,1,1,16]
 };

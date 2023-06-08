@@ -1,5 +1,6 @@
 var NAVTREEINDEX148 =
 {
+"structuic__mqtt__dotdot__level__command__stop__with__on__off__fields__t.html#ad8cca7208d3788359de88641da49cfd8":[8,5,11,65,1],
 "structuic__mqtt__dotdot__level__state__t.html":[8,5,11,56],
 "structuic__mqtt__dotdot__level__state__t.html#a0b1806017cda1be69d21dec6ae0a6094":[8,5,11,56,6],
 "structuic__mqtt__dotdot__level__state__t.html#a0e05f40e5321c5163a35e22162714ae1":[8,5,11,56,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX148 =
 "structuic__mqtt__dotdot__pm25__state__t.html#a528e1684fc3f27eaac0177837c00a2e4":[8,5,11,220,3],
 "structuic__mqtt__dotdot__pm25__state__t.html#a6c3f244a5c2001629d30fd42c4327ae8":[8,5,11,220,2],
 "structuic__mqtt__dotdot__pm25__state__t.html#ace3c9488d8373a6b6912f3ab19895ca9":[8,5,11,220,0],
-"structuic__mqtt__dotdot__pm25__updated__state__t.html":[8,5,11,221],
-"structuic__mqtt__dotdot__pm25__updated__state__t.html#a55fb6c6f4d9d20ef228ea48dad00724b":[8,5,11,221,2]
+"structuic__mqtt__dotdot__pm25__updated__state__t.html":[8,5,11,221]
 };

@@ -12,7 +12,7 @@ add_library(
 
 target_link_libraries(zwave_network_management
                       PUBLIC unify
-                      PRIVATE zwave_s0 zwave_s2 zwave_smartstart_management)
+                      PRIVATE zwave_s0 zwave_s2 zwave_smartstart_management zwave_rx)
 target_include_directories(zwave_network_management PUBLIC include)
 install(TARGETS zwave_network_management LIBRARY DESTINATION lib)
 

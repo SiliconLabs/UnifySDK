@@ -85,8 +85,13 @@
  */
 #define S0_MAC_SIZE 8
 
-#define S0_ENCAP_HEADER_LEN \
-  (sizeof(ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME) - 4)
+
+// 3 bytes: commandClassIdentifier, commandIdentifier, commandByte is payload in 
+// ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME
+
+//  (sizeof(ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME) - 3)
+//  23 - 3 
+#define S0_ENCAP_HEADER_LEN 20
 
 #ifndef UNUSED
 #define UNUSED(x) x = x;
@@ -148,7 +153,7 @@ typedef struct sec_tx_session {
   tx_state_t state;
   uint8_t tx_code;
   struct ctimer timer;  // Session timer
-  uint8_t crypted_msg[46];
+  uint8_t crypted_msg[ZWAVE_MAX_MAC_PAYLOAD_SIZE];
   uint8_t seq;  // Sequence number used in multisegment messages
   // User supplied pointer which is returned in the callback
   const void *user;
@@ -454,7 +459,7 @@ static uint8_t get_node_max_frame_size(zwave_node_id_t node_id)
 /**
  * Encrypt a message and write the encrypted data into s->crypted_msg
  */
-static uint8_t encrypt_msg(sec_tx_session_t *s, uint8_t pass2)
+static uint8_t s0_encrypt_message(sec_tx_session_t *s, uint8_t pass2)
 {
   uint8_t iv[16] = {0};
   uint8_t tmp[8]; /* Initialization vector for enc, dec,& auth */
@@ -470,12 +475,12 @@ static uint8_t encrypt_msg(sec_tx_session_t *s, uint8_t pass2)
 
   //sl_log_debug(LOG_TAG, "s->data[0]: 0x%02x, s->data[1]: 0x%02x\n",s->data[0],s->data[1]);
   /*Check if we should break this message in two */
-  if (len + 20 > maxlen) {
-    len          = maxlen - 20;
+  if (len + S0_ENCAP_HEADER_LEN > maxlen) {
+    len          = maxlen - S0_ENCAP_HEADER_LEN;
     more_to_send = 1;
   }
 
-  assert(len + 20 <= sizeof(s->crypted_msg));
+  assert((len + S0_ENCAP_HEADER_LEN) <= sizeof(s->crypted_msg));
   /* Make the IV */
 
   do {
@@ -567,7 +572,7 @@ static uint8_t encrypt_msg(sec_tx_session_t *s, uint8_t pass2)
 
   s->data += len;
   s->data_len -= len;
-  return len + 20;
+  return len + S0_ENCAP_HEADER_LEN;
 }
 
 /**
@@ -681,7 +686,7 @@ static void tx_session_state_set(sec_tx_session_t *s, tx_state_t state)
       break;
     case ENC_MSG:
       ctimer_stop(&s->timer);
-      len = encrypt_msg(s, 0);
+      len = s0_encrypt_message(s, 0);
 
       //If there is more data to send.
       if (s->data_len > 0) {
@@ -717,7 +722,7 @@ static void tx_session_state_set(sec_tx_session_t *s, tx_state_t state)
     case ENC_MSG2:
       ctimer_stop(&s->timer);
       //sl_log_debug(LOG_TAG, "ENC_MSG2: s->data[0]: 0x%02x, s->data[1]: 0x%02x\n",s->data[0],s->data[1]);
-      len = encrypt_msg(s, 1);
+      len = s0_encrypt_message(s, 1);
       if ((len == 0)
           || (zwave_tx_send_data(&c2,
                                  len,
@@ -792,7 +797,7 @@ sl_status_t
     return SL_STATUS_OK;
   }
 
-  /*FIXME frame length was uint8_t in GW S0 but the
+  /*frame length was uint8_t in GW S0 but the
    * zwave_s0_on_frame_received has to have 16bit length field because of
    *  zwave_controller_transport_t
    */
@@ -904,7 +909,7 @@ rx_session_t *new_rx_session(uint8_t snode, uint8_t dnode)
   return 0;
 }
 
-void free_rx_session(rx_session_t *s)
+static void free_rx_session(rx_session_t *s)
 {
   s->state = RX_SESSION_DONE;
 }
@@ -944,7 +949,7 @@ rx_session_t *get_rx_session_by_nodes(uint8_t snode, uint8_t dnode)
  * Send a nonce from given source to given destination. The nonce is registered
  * internally
  */
-void s0_send_nonce(const zwave_controller_connection_info_t *conn_info)
+static void s0_send_nonce(const zwave_controller_connection_info_t *conn_info)
 {
   uint8_t nonce[8]       = {0};
   uint8_t temp_nonce[16] = {0};
@@ -993,17 +998,17 @@ void s0_send_nonce(const zwave_controller_connection_info_t *conn_info)
 }
 
 // Returns len of decrypted buffer, 0 on error
-uint8_t
+static uint8_t
   s0_decrypt_message(const zwave_controller_connection_info_t *connection_info,
                      const zwave_rx_receive_options_t *rx_options,
-                     const uint8_t *frame_data1,
-                     uint16_t frame_length_2_byte,
-                     uint8_t *output_buffer)
+                     const uint8_t *encrypted_frame,
+                     uint16_t encrypted_frame_len,
+                     uint8_t *decrypted_frame,
+                     uint16_t decrypted_frame_len)
 {
   (void)rx_options;
   uint8_t iv[16]; /* Initialization vector for enc, dec,& auth */
   uint8_t mac[16];
-  uint8_t *dec_message = output_buffer;
   rx_session_t *s;
   uint8_t *enc_payload;
   uint8_t ri;
@@ -1011,10 +1016,13 @@ uint8_t
   uint8_t flags;
   uint8_t frame_data[ZWAVE_MAX_FRAME_SIZE];
   uint8_t frame_length;
+  // Allocate a buffer that's large enough for the largest frame size that's valid
+  // Maximum valid size is MAX_ENCRYPTED_MSG_SIZE + 20 bytes overhead + auth header size
+  uint8_t auth_buff[MAX_ENCRYPTED_MSG_SIZE + S0_ENCAP_HEADER_LEN + sizeof(auth_data_t)];
 
-  frame_length = frame_length_2_byte & 0xff;  //FIXME as GW S0 code can handle
+  frame_length = encrypted_frame_len & 0xff;  //FIXME as GW S0 code can handle
                                               // only uint8_t len
-  memcpy(frame_data, frame_data1, frame_length);
+  memcpy(frame_data, encrypted_frame, frame_length);
 
   // If there is no payload in Security0 Message Encapsulation Command
   if (frame_length < S0_ENCAP_HEADER_LEN) {
@@ -1022,6 +1030,10 @@ uint8_t
     return 0;
   }
 
+  if ((frame_length - S0_ENCAP_HEADER_LEN) > decrypted_frame_len) {
+    sl_log_error(LOG_TAG, "Encrypted message is too long\n");
+    return 0;
+  }
   ri = frame_data[frame_length - RECEIVER_NONCE_IDENTIFIER_OFFSET_FROM_END];
 
   /*Build the IV*/
@@ -1061,21 +1073,28 @@ uint8_t
       s->state = RX_INIT;
     } else {
       sl_log_warning(LOG_TAG, "No more RX sessions available\n");
-      return false;
+      return 0;
     }
+  }
+
+  // When we get a session that's in progress, verify the size of the data we have and the data we're about
+  // to add do not go over our total output buffer size. If it does, drop the frame and the session pool will free up the
+  // invalid session in a little bit.
+  if(s->state != RX_INIT && (s->msg_len + frame_length - S0_ENCAP_HEADER_LEN) > decrypted_frame_len) {
+    sl_log_error(LOG_TAG, "Combined data for encrypted message is too long\n");
+    return 0;
   }
 
   enc_payload
     = frame_data
       + offsetof(ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME, properties1);
 
-  /*Temporarily use dec_message for auth verification*/
-  auth = (auth_data_t *)dec_message;
+  auth = (auth_data_t *)auth_buff;
   /*Fill in the auth structure*/
   auth->sh             = frame_data[1];
   auth->senderNodeID   = connection_info->remote.node_id;
   auth->receiverNodeID = connection_info->local.node_id;
-  auth->payloadLength  = frame_length - S0_ENCAP_HEADER_LEN;
+  auth->payloadLength  = frame_length - 19;
   memcpy((uint8_t *)auth + sizeof(auth_data_t),
          enc_payload,
          auth->payloadLength);
@@ -1100,7 +1119,7 @@ uint8_t
         == 0) {
       //First frame
       s->seq_nr  = flags & 0xF;
-      s->msg_len = frame_length - 20;
+      s->msg_len = frame_length - S0_ENCAP_HEADER_LEN;
       s->state   = RX_ENC1;
       memcpy(s->msg, enc_payload + 1, s->msg_len);
       return 0;
@@ -1117,22 +1136,21 @@ uint8_t
       } else {
         s->state = RX_ENC2;
       }
-      memcpy(dec_message, s->msg, s->msg_len);
-      memcpy(dec_message + s->msg_len, enc_payload + 1, frame_length - 20);
+      memcpy(decrypted_frame, s->msg, s->msg_len);
+      memcpy(decrypted_frame + s->msg_len, enc_payload + 1, frame_length - S0_ENCAP_HEADER_LEN);
 
       free_rx_session(s);
-      return (s->msg_len + frame_length - 20);
+      return (s->msg_len + frame_length - S0_ENCAP_HEADER_LEN);
     }
   } else {
     /* Single frame message */
-    memcpy(dec_message, enc_payload + 1, frame_length - 20);
+    memcpy(decrypted_frame, enc_payload + 1, frame_length - S0_ENCAP_HEADER_LEN);
     free_rx_session(s);
-    return (frame_length - 20);
+    return (frame_length - S0_ENCAP_HEADER_LEN);
   }
-  return false;
 state_error:
   sl_log_error(LOG_TAG, "Security RX session is not in the right state\n");
-  return false;
+  return 0;
 }
 
 sl_status_t
@@ -1157,7 +1175,7 @@ sl_status_t
   //S0 code decrypts the data in place. So const frame_data is copied here
   memcpy(encrypted_frame_data, frame_data, frame_length);
 
-  uint8_t decrypted_frame[64];
+  uint8_t decrypted_frame[MAX_ENCRYPTED_MSG_SIZE];
   uint8_t len;
 
   sl_log_debug(LOG_TAG,
@@ -1243,11 +1261,12 @@ sl_status_t
                                rx_options,
                                encrypted_frame_data,
                                frame_length,
-                               decrypted_frame);
-      zwave_controller_connection_info_t c2;
-      memcpy(&c2, c, sizeof(zwave_controller_connection_info_t));
-      c2.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
+                               decrypted_frame,
+                               sizeof(decrypted_frame));
       if (len) {
+        zwave_controller_connection_info_t c2;
+        memcpy(&c2, c, sizeof(zwave_controller_connection_info_t));
+        c2.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
         zwave_controller_on_frame_received(&c2,
                                            rx_options,
                                            decrypted_frame,
@@ -1268,13 +1287,13 @@ sl_status_t
 sl_status_t
   zwave_s0_on_frame_received(const zwave_controller_connection_info_t *c,
                              const zwave_rx_receive_options_t *rx_options,
-                             const uint8_t *frame_data1,
-                             uint16_t frame_length_2_byte)
+                             const uint8_t *encrypted_frame,
+                             uint16_t encrypted_frame_len)
 {
   return s0_application_command_handler(c,
                                         rx_options,
-                                        frame_data1,
-                                        frame_length_2_byte);
+                                        encrypted_frame,
+                                        encrypted_frame_len);
 }
 
 void free_all_tx_sessions()
@@ -1299,7 +1318,7 @@ void reset_block_next_elem()
 void reset_s0_timers()
 {
   ctimer_stop(&nonce_timer);
-  ctimer_set(&nonce_timer, 1000, nonce_timer_timeout, 0);
+  ctimer_set(&nonce_timer, CLOCK_SECOND, nonce_timer_timeout, 0);
 }
 
 sl_status_t zwave_s0_on_abort_send_data(zwave_tx_session_id_t session_id)

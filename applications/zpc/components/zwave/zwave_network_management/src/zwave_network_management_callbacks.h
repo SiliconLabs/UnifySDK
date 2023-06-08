@@ -52,6 +52,12 @@ void on_set_default_complete();
  */
 void on_request_node_neighbor_update_completed(uint8_t status);
 
+/**
+ * @brief Callback function that gets notified whenever a Z-Wave API started
+ * call is received
+ */
+void on_zwave_api_started();
+
 #ifdef __cplusplus
 }
 #endif
