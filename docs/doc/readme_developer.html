@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -78,7 +78,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
@@ -359,16 +358,6 @@ This design was chosen to avoid concurrency issues between threads.</p>
 <p><img alt="Unify Main Events" src="../_images/sequence_uic_ipc.png" /></p>
 <p>Additional information on this is available in the
 <a href="../doxygen_uic/index.html">Unify Library API</a></p>
-</section>
-<section id="nix-experimental">
-<h2>Nix (Experimental)<a class="headerlink" href="#nix-experimental" title="Permalink to this heading"></a></h2>
-<p>We are adding support for <a class="reference external" href="https://nixos.wiki/wiki/Flakes"><code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">flakes</span></code></a> to make use of the <a class="reference external" href="https://nixos.org/manual/nix/stable/">nix package manager</a>.
-This aims to let developers leverage the benefits of using a <a class="reference external" href="https://nixos.org/manual/nix/stable/">purely functional package manager</a>.</p>
-<p>If you have <code class="docutils literal notranslate"><span class="pre">nix</span></code> installed and <code class="docutils literal notranslate"><span class="pre">flakes</span></code> enabled, you can run an application with one command without checking out the repo or installing any dependencies.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">nix</span> <span class="n">run</span> <span class="n">github</span><span class="p">:</span><span class="n">SiliconLabs</span><span class="o">/</span><span class="n">UnifySDK</span><span class="c1">#zpc</span>
-</pre></div>
-</div>
-<p>We elaborate on this in the <a class="reference internal" href="readme_nix.html"><span class="doc std std-doc">nix readme</span></a>.</p>
 </section>
 </section>
 

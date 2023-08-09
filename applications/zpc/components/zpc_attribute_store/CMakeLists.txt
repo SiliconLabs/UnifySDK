@@ -15,7 +15,7 @@ target_include_directories(
 
 target_link_libraries(
   zpc_attribute_store
-  PUBLIC ucl_definitions unify zpc_utils zwave_controller
+  PUBLIC unify zpc_utils zwave_controller
   PRIVATE zwave_handlers dotdot_mapper_binding_cluster_helper)
 install(TARGETS zpc_attribute_store LIBRARY DESTINATION lib)
 
@@ -34,7 +34,7 @@ if(BUILD_TESTING)
            "$<TARGET_PROPERTY:zpc_utils,INTERFACE_INCLUDE_DIRECTORIES>"
            "$<TARGET_PROPERTY:zwave_controller,INTERFACE_INCLUDE_DIRECTORIES>"
            ${CMAKE_CURRENT_LIST_DIR}/include/command_class_types)
-  target_link_libraries(zpc_attribute_store_mock PUBLIC ucl_definitions)
+  target_link_libraries(zpc_attribute_store_mock )
 
   add_subdirectory(test)
   add_subdirectory(test_helper)

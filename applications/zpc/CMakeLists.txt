@@ -42,7 +42,7 @@ else()
 endif()
 if(NOT EXISTS ${UNIFY-TESTFRAMEWORK_PATH})
   message(FATAL_ERROR "Path to unify testframework does not exist")
-else()  
+else()
   message(STATUS "Found unify testframwork: ${UNIFY-TESTFRAMEWORK_PATH}")
 endif()
 
@@ -54,7 +54,7 @@ if(EXISTS ${LIBUNIFY_LOCATION})
   message(STATUS "Found libunify: ${LIBUNIFY_LOCATION}")
   list(APPEND CMAKE_PREFIX_PATH ${LIBUNIFY_LOCATION}/lib/cmake)
   find_package(unify REQUIRED)
-else()  
+else()
 # find_package(unify REQUIRED)
 endif()
 
@@ -67,7 +67,7 @@ target_link_libraries(
   PUBLIC dotdot_mapper
          dotdot_mapper_binding_cluster_helper
          network_monitor
-         ucl_definitions
+
          ucl_mqtt
          zcl_cluster_servers
          zpc_application_monitoring

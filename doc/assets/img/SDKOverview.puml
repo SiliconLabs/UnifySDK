@@ -5,12 +5,14 @@ skinparam roundCorner 15
 top to bottom direction
 
 cloud "IoT Services" as IOTService {
-    rectangle "Developer GUI" as DEVGUI
+    rectangle "Developer GUI" as DEVGUI 
     rectangle "UPTICap" as UPTICAP
     rectangle "UPTIWriter" as UPTIWRITER
+    rectangle "Matter Bridge" as UMB
 
     DEVGUI -[hidden]r->UPTICAP
     UPTICAP -[hidden]r->UPTIWRITER 
+    UPTIWRITER -[hidden]r->UMB
 }
 
 rectangle "IoT Gateway" {

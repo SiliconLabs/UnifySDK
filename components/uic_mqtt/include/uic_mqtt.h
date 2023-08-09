@@ -16,7 +16,7 @@
  * @ingroup unify_components
  * @brief MQTT client interface
  *
- * This component implement an mqtt client interface. The the mqtt client
+ * This component implement an mqtt client interface. The mqtt client
  * features connection state management, with re-connect on disconnects and
  * cashing of publish messages in case the a publish message cannot be delivered
  * to the broker.
@@ -156,10 +156,11 @@ void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callback);
 /**
  * @brief Subscribe to a topic.
  *
- * @param topic Describes the subscription topic pattern.
- * @param callback A callback function,
- *                 that will be called when a message is received from the broker.
- *
+ * @param topic     Describes the subscription topic pattern.
+ * @param callback  A callback function,
+ *                  that will be called when a message is received from the broker.
+ * @param user      A pointer value that will be passed to the callabck
+ *                  function when invoked
  */
 void uic_mqtt_subscribe_ex(const char *topic,
                            mqtt_message_callback_ex_t callback,

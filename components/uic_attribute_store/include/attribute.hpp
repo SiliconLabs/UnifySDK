@@ -34,7 +34,7 @@
 #include <string>
 #include <iterator>
 #include <functional>
-
+#include <cstring>
 namespace attribute_store
 {
 /**
@@ -133,8 +133,9 @@ class attribute
     uint8_t buffer[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH];
     uint8_t size = 0;
     if (get(value_type, (uint8_t *)buffer, &size)) {
-      // For iterable containers we copy the data
-      if constexpr (is_iterable<T>::value) {
+      if constexpr(std::is_same<T,std::string>::value) {
+        return std::string(reinterpret_cast<char*>(buffer));
+      }else if constexpr (is_iterable<T>::value) { // For iterable containers we copy the data
         typedef typename T::value_type v_t;
         //Make sure that value type of the conrainter int,float,bool ... etc
         static_assert(std::is_trivially_copyable<v_t>::value);
@@ -197,9 +198,15 @@ class attribute
    */
 
   template<typename T>
-  inline attribute &set(attribute_store_node_value_state_t value_type, T value)
+  inline attribute &set(attribute_store_node_value_state_t value_type, const T& value)
   {
-    if constexpr (is_iterable<T>::value) {
+    if constexpr(std::is_same<T,char const*>::value) {
+      // We are storing strings as C Strings with the null termination caracter in the attribute store.
+      return set(value_type, reinterpret_cast<const uint8_t *>(value), std::strlen(value)+1);
+    } else if constexpr(std::is_same<T,std::string>::value) {
+      // We are storing strings as C Strings with the null termination caracter in the attribute store.
+      return set(value_type, value.c_str());
+    } else if constexpr (is_iterable<T>::value) {
       typedef typename T::value_type v_t;
       //Make sure that value type of the conrainter int,float,bool ... etc
       static_assert(std::is_trivially_copyable<v_t>::value);
@@ -208,13 +215,15 @@ class attribute
       std::vector<v_t> v;
       std::copy(value.begin(), value.end(), std::back_insert_iterator(v));
       return set(value_type,
-                 reinterpret_cast<uint8_t *>(v.data()),
+                 reinterpret_cast<const uint8_t *>(v.data()),
                  v.size() * sizeof(v_t));
-    } else {
+    }
+    else {
       static_assert(std::is_trivially_copyable<T>::value);
-      return set(value_type, reinterpret_cast<uint8_t *>(&value), sizeof(T));
+      return set(value_type, reinterpret_cast<const uint8_t *>(&value), sizeof(T));
     }
   }
+
 
   inline void clear(attribute_store_node_value_state_t value_type)
   {

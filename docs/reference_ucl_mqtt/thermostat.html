@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ Thermostat/LocalTemperature Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LocalTemperature attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/LocalTemperature/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/LocalTemperature/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/LocalTemperature/Desired { &quot;value&quot;: &lt;DESIRED_LOCAL_TEMPERATURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/LocalTemperature/Reported { &quot;value&quot;: &lt;REPORTED_LOCAL_TEMPERATURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/LocalTemperature/Desired { &quot;value&quot;: &lt;DESIRED_LOCAL_TEMPERATURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/LocalTemperature/Reported { &quot;value&quot;: &lt;REPORTED_LOCAL_TEMPERATURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ Thermostat/OutdoorTemperature Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OutdoorTemperature attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OutdoorTemperature/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/OutdoorTemperature/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OutdoorTemperature/Desired { &quot;value&quot;: &lt;DESIRED_OUTDOOR_TEMPERATURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OutdoorTemperature/Reported { &quot;value&quot;: &lt;REPORTED_OUTDOOR_TEMPERATURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OutdoorTemperature/Desired { &quot;value&quot;: &lt;DESIRED_OUTDOOR_TEMPERATURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OutdoorTemperature/Reported { &quot;value&quot;: &lt;REPORTED_OUTDOOR_TEMPERATURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ Thermostat/Occupancy Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Occupancy attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/Occupancy/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/Occupancy/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/Occupancy/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPANCY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/Occupancy/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPANCY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/Occupancy/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPANCY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/Occupancy/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPANCY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ Thermostat/AbsMinHeatSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AbsMinHeatSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMinHeatSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/AbsMinHeatSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMinHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MIN_HEAT_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMinHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MIN_HEAT_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMinHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MIN_HEAT_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMinHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MIN_HEAT_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ Thermostat/AbsMaxHeatSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AbsMaxHeatSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMaxHeatSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/AbsMaxHeatSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MAX_HEAT_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MAX_HEAT_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MAX_HEAT_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MAX_HEAT_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ Thermostat/AbsMinCoolSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AbsMinCoolSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMinCoolSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/AbsMinCoolSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMinCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MIN_COOL_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMinCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MIN_COOL_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMinCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MIN_COOL_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMinCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MIN_COOL_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ Thermostat/AbsMaxCoolSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AbsMaxCoolSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMaxCoolSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/AbsMaxCoolSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MAX_COOL_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MAX_COOL_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_ABS_MAX_COOL_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_ABS_MAX_COOL_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ Thermostat/PICoolingDemand Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PICoolingDemand attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/PICoolingDemand/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/PICoolingDemand/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/PICoolingDemand/Desired { &quot;value&quot;: &lt;DESIRED_PI_COOLING_DEMAND&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/PICoolingDemand/Reported { &quot;value&quot;: &lt;REPORTED_PI_COOLING_DEMAND&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/PICoolingDemand/Desired { &quot;value&quot;: &lt;DESIRED_PI_COOLING_DEMAND&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/PICoolingDemand/Reported { &quot;value&quot;: &lt;REPORTED_PI_COOLING_DEMAND&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ Thermostat/PIHeatingDemand Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PIHeatingDemand attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/PIHeatingDemand/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/PIHeatingDemand/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/PIHeatingDemand/Desired { &quot;value&quot;: &lt;DESIRED_PI_HEATING_DEMAND&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/PIHeatingDemand/Reported { &quot;value&quot;: &lt;REPORTED_PI_HEATING_DEMAND&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/PIHeatingDemand/Desired { &quot;value&quot;: &lt;DESIRED_PI_HEATING_DEMAND&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/PIHeatingDemand/Reported { &quot;value&quot;: &lt;REPORTED_PI_HEATING_DEMAND&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ Thermostat/HVACSystemTypeConfiguration Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for HVACSystemTypeConfiguration attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/HVACSystemTypeConfiguration/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/HVACSystemTypeConfiguration/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/HVACSystemTypeConfiguration/Desired { &quot;value&quot;: &lt;DESIRED_HVAC_SYSTEM_TYPE_CONFIGURATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/HVACSystemTypeConfiguration/Reported { &quot;value&quot;: &lt;REPORTED_HVAC_SYSTEM_TYPE_CONFIGURATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/HVACSystemTypeConfiguration/Desired { &quot;value&quot;: &lt;DESIRED_HVAC_SYSTEM_TYPE_CONFIGURATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/HVACSystemTypeConfiguration/Reported { &quot;value&quot;: &lt;REPORTED_HVAC_SYSTEM_TYPE_CONFIGURATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ Thermostat/LocalTemperatureCalibration Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LocalTemperatureCalibration attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/LocalTemperatureCalibration/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/LocalTemperatureCalibration/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/LocalTemperatureCalibration/Desired { &quot;value&quot;: &lt;DESIRED_LOCAL_TEMPERATURE_CALIBRATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/LocalTemperatureCalibration/Reported { &quot;value&quot;: &lt;REPORTED_LOCAL_TEMPERATURE_CALIBRATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/LocalTemperatureCalibration/Desired { &quot;value&quot;: &lt;DESIRED_LOCAL_TEMPERATURE_CALIBRATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/LocalTemperatureCalibration/Reported { &quot;value&quot;: &lt;REPORTED_LOCAL_TEMPERATURE_CALIBRATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ Thermostat/OccupiedCoolingSetpoint Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OccupiedCoolingSetpoint attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedCoolingSetpoint/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/OccupiedCoolingSetpoint/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_COOLING_SETPOINT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_COOLING_SETPOINT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_COOLING_SETPOINT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_COOLING_SETPOINT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ Thermostat/OccupiedHeatingSetpoint Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OccupiedHeatingSetpoint attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedHeatingSetpoint/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/OccupiedHeatingSetpoint/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_HEATING_SETPOINT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_HEATING_SETPOINT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_HEATING_SETPOINT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_HEATING_SETPOINT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ Thermostat/UnoccupiedCoolingSetpoint Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for UnoccupiedCoolingSetpoint attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedCoolingSetpoint/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedCoolingSetpoint/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_COOLING_SETPOINT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_COOLING_SETPOINT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_COOLING_SETPOINT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_COOLING_SETPOINT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ Thermostat/UnoccupiedHeatingSetpoint Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for UnoccupiedHeatingSetpoint attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedHeatingSetpoint/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedHeatingSetpoint/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_HEATING_SETPOINT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_HEATING_SETPOINT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_HEATING_SETPOINT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_HEATING_SETPOINT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ Thermostat/MinHeatSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinHeatSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinHeatSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/MinHeatSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MIN_HEAT_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MIN_HEAT_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MinHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MIN_HEAT_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MinHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MIN_HEAT_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ Thermostat/MaxHeatSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxHeatSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MaxHeatSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/MaxHeatSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MaxHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MAX_HEAT_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MaxHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MAX_HEAT_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MaxHeatSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MAX_HEAT_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MaxHeatSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MAX_HEAT_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ Thermostat/MinCoolSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinCoolSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinCoolSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/MinCoolSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MIN_COOL_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MIN_COOL_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MinCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MIN_COOL_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MinCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MIN_COOL_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ Thermostat/MaxCoolSetpointLimit Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxCoolSetpointLimit attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MaxCoolSetpointLimit/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/MaxCoolSetpointLimit/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MaxCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MAX_COOL_SETPOINT_LIMIT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MaxCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MAX_COOL_SETPOINT_LIMIT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MaxCoolSetpointLimit/Desired { &quot;value&quot;: &lt;DESIRED_MAX_COOL_SETPOINT_LIMIT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MaxCoolSetpointLimit/Reported { &quot;value&quot;: &lt;REPORTED_MAX_COOL_SETPOINT_LIMIT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ Thermostat/MinSetpointDeadBand Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinSetpointDeadBand attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinSetpointDeadBand/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/MinSetpointDeadBand/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinSetpointDeadBand/Desired { &quot;value&quot;: &lt;DESIRED_MIN_SETPOINT_DEAD_BAND&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/MinSetpointDeadBand/Reported { &quot;value&quot;: &lt;REPORTED_MIN_SETPOINT_DEAD_BAND&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MinSetpointDeadBand/Desired { &quot;value&quot;: &lt;DESIRED_MIN_SETPOINT_DEAD_BAND&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/MinSetpointDeadBand/Reported { &quot;value&quot;: &lt;REPORTED_MIN_SETPOINT_DEAD_BAND&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ Thermostat/RemoteSensing Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RemoteSensing attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/RemoteSensing/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/RemoteSensing/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/RemoteSensing/Desired { &quot;value&quot;: &lt;DESIRED_REMOTE_SENSING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/RemoteSensing/Reported { &quot;value&quot;: &lt;REPORTED_REMOTE_SENSING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/RemoteSensing/Desired { &quot;value&quot;: &lt;DESIRED_REMOTE_SENSING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/RemoteSensing/Reported { &quot;value&quot;: &lt;REPORTED_REMOTE_SENSING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -705,10 +747,12 @@ Thermostat/ControlSequenceOfOperation Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ControlSequenceOfOperation attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ControlSequenceOfOperation/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ControlSequenceOfOperation/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ControlSequenceOfOperation/Desired { &quot;value&quot;: &lt;DESIRED_CONTROL_SEQUENCE_OF_OPERATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ControlSequenceOfOperation/Reported { &quot;value&quot;: &lt;REPORTED_CONTROL_SEQUENCE_OF_OPERATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Desired { &quot;value&quot;: &lt;DESIRED_CONTROL_SEQUENCE_OF_OPERATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Reported { &quot;value&quot;: &lt;REPORTED_CONTROL_SEQUENCE_OF_OPERATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -733,10 +777,12 @@ Thermostat/SystemMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SystemMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SystemMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/SystemMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SystemMode/Desired { &quot;value&quot;: &lt;DESIRED_SYSTEM_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SystemMode/Reported { &quot;value&quot;: &lt;REPORTED_SYSTEM_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SystemMode/Desired { &quot;value&quot;: &lt;DESIRED_SYSTEM_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SystemMode/Reported { &quot;value&quot;: &lt;REPORTED_SYSTEM_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -761,10 +807,12 @@ Thermostat/AlarmMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AlarmMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AlarmMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/AlarmMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_ALARM_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_ALARM_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_ALARM_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_ALARM_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -789,10 +837,12 @@ Thermostat/ThermostatRunningMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ThermostatRunningMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatRunningMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ThermostatRunningMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatRunningMode/Desired { &quot;value&quot;: &lt;DESIRED_THERMOSTAT_RUNNING_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatRunningMode/Reported { &quot;value&quot;: &lt;REPORTED_THERMOSTAT_RUNNING_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ThermostatRunningMode/Desired { &quot;value&quot;: &lt;DESIRED_THERMOSTAT_RUNNING_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ThermostatRunningMode/Reported { &quot;value&quot;: &lt;REPORTED_THERMOSTAT_RUNNING_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -817,10 +867,12 @@ Thermostat/StartOfWeek Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for StartOfWeek attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/StartOfWeek/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/StartOfWeek/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/StartOfWeek/Desired { &quot;value&quot;: &lt;DESIRED_START_OF_WEEK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/StartOfWeek/Reported { &quot;value&quot;: &lt;REPORTED_START_OF_WEEK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/StartOfWeek/Desired { &quot;value&quot;: &lt;DESIRED_START_OF_WEEK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/StartOfWeek/Reported { &quot;value&quot;: &lt;REPORTED_START_OF_WEEK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -845,10 +897,12 @@ Thermostat/NumberOfWeeklyTransitions Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NumberOfWeeklyTransitions attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/NumberOfWeeklyTransitions/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/NumberOfWeeklyTransitions/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/NumberOfWeeklyTransitions/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_WEEKLY_TRANSITIONS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/NumberOfWeeklyTransitions/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_WEEKLY_TRANSITIONS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/NumberOfWeeklyTransitions/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_WEEKLY_TRANSITIONS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/NumberOfWeeklyTransitions/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_WEEKLY_TRANSITIONS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -873,10 +927,12 @@ Thermostat/NumberOfDailyTransitions Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NumberOfDailyTransitions attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/NumberOfDailyTransitions/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/NumberOfDailyTransitions/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/NumberOfDailyTransitions/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_DAILY_TRANSITIONS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/NumberOfDailyTransitions/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_DAILY_TRANSITIONS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/NumberOfDailyTransitions/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_DAILY_TRANSITIONS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/NumberOfDailyTransitions/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_DAILY_TRANSITIONS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -901,10 +957,12 @@ Thermostat/TemperatureSetpointHold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for TemperatureSetpointHold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/TemperatureSetpointHold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/TemperatureSetpointHold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/TemperatureSetpointHold/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_SETPOINT_HOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/TemperatureSetpointHold/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_SETPOINT_HOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/TemperatureSetpointHold/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_SETPOINT_HOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/TemperatureSetpointHold/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_SETPOINT_HOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -929,10 +987,12 @@ Thermostat/TemperatureSetpointHoldDuration Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for TemperatureSetpointHoldDuration attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/TemperatureSetpointHoldDuration/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/TemperatureSetpointHoldDuration/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/TemperatureSetpointHoldDuration/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_SETPOINT_HOLD_DURATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/TemperatureSetpointHoldDuration/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_SETPOINT_HOLD_DURATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/TemperatureSetpointHoldDuration/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_SETPOINT_HOLD_DURATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/TemperatureSetpointHoldDuration/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_SETPOINT_HOLD_DURATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -957,10 +1017,12 @@ Thermostat/ThermostatProgrammingOperationMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ThermostatProgrammingOperationMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatProgrammingOperationMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ThermostatProgrammingOperationMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired { &quot;value&quot;: &lt;DESIRED_THERMOSTAT_PROGRAMMING_OPERATION_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported { &quot;value&quot;: &lt;REPORTED_THERMOSTAT_PROGRAMMING_OPERATION_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired { &quot;value&quot;: &lt;DESIRED_THERMOSTAT_PROGRAMMING_OPERATION_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported { &quot;value&quot;: &lt;REPORTED_THERMOSTAT_PROGRAMMING_OPERATION_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -985,10 +1047,12 @@ Thermostat/ThermostatRunningState Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ThermostatRunningState attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatRunningState/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ThermostatRunningState/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatRunningState/Desired { &quot;value&quot;: &lt;DESIRED_THERMOSTAT_RUNNING_STATE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ThermostatRunningState/Reported { &quot;value&quot;: &lt;REPORTED_THERMOSTAT_RUNNING_STATE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ThermostatRunningState/Desired { &quot;value&quot;: &lt;DESIRED_THERMOSTAT_RUNNING_STATE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ThermostatRunningState/Reported { &quot;value&quot;: &lt;REPORTED_THERMOSTAT_RUNNING_STATE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1013,10 +1077,12 @@ Thermostat/SetpointChangeSource Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SetpointChangeSource attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeSource/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/SetpointChangeSource/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeSource/Desired { &quot;value&quot;: &lt;DESIRED_SETPOINT_CHANGE_SOURCE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeSource/Reported { &quot;value&quot;: &lt;REPORTED_SETPOINT_CHANGE_SOURCE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SetpointChangeSource/Desired { &quot;value&quot;: &lt;DESIRED_SETPOINT_CHANGE_SOURCE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SetpointChangeSource/Reported { &quot;value&quot;: &lt;REPORTED_SETPOINT_CHANGE_SOURCE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1041,10 +1107,12 @@ Thermostat/SetpointChangeAmount Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SetpointChangeAmount attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeAmount/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/SetpointChangeAmount/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeAmount/Desired { &quot;value&quot;: &lt;DESIRED_SETPOINT_CHANGE_AMOUNT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeAmount/Reported { &quot;value&quot;: &lt;REPORTED_SETPOINT_CHANGE_AMOUNT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SetpointChangeAmount/Desired { &quot;value&quot;: &lt;DESIRED_SETPOINT_CHANGE_AMOUNT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SetpointChangeAmount/Reported { &quot;value&quot;: &lt;REPORTED_SETPOINT_CHANGE_AMOUNT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1069,10 +1137,12 @@ Thermostat/SetpointChangeSourceTimestamp Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SetpointChangeSourceTimestamp attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeSourceTimestamp/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/SetpointChangeSourceTimestamp/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeSourceTimestamp/Desired { &quot;value&quot;: &lt;DESIRED_SETPOINT_CHANGE_SOURCE_TIMESTAMP&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/SetpointChangeSourceTimestamp/Reported { &quot;value&quot;: &lt;REPORTED_SETPOINT_CHANGE_SOURCE_TIMESTAMP&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SetpointChangeSourceTimestamp/Desired { &quot;value&quot;: &lt;DESIRED_SETPOINT_CHANGE_SOURCE_TIMESTAMP&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/SetpointChangeSourceTimestamp/Reported { &quot;value&quot;: &lt;REPORTED_SETPOINT_CHANGE_SOURCE_TIMESTAMP&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1097,10 +1167,12 @@ Thermostat/OccupiedSetback Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OccupiedSetback attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetback/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/OccupiedSetback/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetback/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_SETBACK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetback/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_SETBACK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedSetback/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_SETBACK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedSetback/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_SETBACK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1125,10 +1197,12 @@ Thermostat/OccupiedSetbackMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OccupiedSetbackMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetbackMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/OccupiedSetbackMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetbackMin/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_SETBACK_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetbackMin/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_SETBACK_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedSetbackMin/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_SETBACK_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedSetbackMin/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_SETBACK_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1153,10 +1227,12 @@ Thermostat/OccupiedSetbackMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OccupiedSetbackMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetbackMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/OccupiedSetbackMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetbackMax/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_SETBACK_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/OccupiedSetbackMax/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_SETBACK_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedSetbackMax/Desired { &quot;value&quot;: &lt;DESIRED_OCCUPIED_SETBACK_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/OccupiedSetbackMax/Reported { &quot;value&quot;: &lt;REPORTED_OCCUPIED_SETBACK_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1181,10 +1257,12 @@ Thermostat/UnoccupiedSetback Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for UnoccupiedSetback attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetback/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedSetback/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetback/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_SETBACK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetback/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_SETBACK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedSetback/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_SETBACK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedSetback/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_SETBACK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1209,10 +1287,12 @@ Thermostat/UnoccupiedSetbackMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for UnoccupiedSetbackMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetbackMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedSetbackMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetbackMin/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_SETBACK_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetbackMin/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_SETBACK_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedSetbackMin/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_SETBACK_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedSetbackMin/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_SETBACK_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1237,10 +1317,12 @@ Thermostat/UnoccupiedSetbackMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for UnoccupiedSetbackMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetbackMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedSetbackMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetbackMax/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_SETBACK_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/UnoccupiedSetbackMax/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_SETBACK_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedSetbackMax/Desired { &quot;value&quot;: &lt;DESIRED_UNOCCUPIED_SETBACK_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/UnoccupiedSetbackMax/Reported { &quot;value&quot;: &lt;REPORTED_UNOCCUPIED_SETBACK_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1265,10 +1347,12 @@ Thermostat/EmergencyHeatDelta Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EmergencyHeatDelta attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/EmergencyHeatDelta/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/EmergencyHeatDelta/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/EmergencyHeatDelta/Desired { &quot;value&quot;: &lt;DESIRED_EMERGENCY_HEAT_DELTA&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/EmergencyHeatDelta/Reported { &quot;value&quot;: &lt;REPORTED_EMERGENCY_HEAT_DELTA&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/EmergencyHeatDelta/Desired { &quot;value&quot;: &lt;DESIRED_EMERGENCY_HEAT_DELTA&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/EmergencyHeatDelta/Reported { &quot;value&quot;: &lt;REPORTED_EMERGENCY_HEAT_DELTA&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1293,10 +1377,12 @@ Thermostat/ACType Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACType attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACType/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACType/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACType/Desired { &quot;value&quot;: &lt;DESIRED_AC_TYPE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACType/Reported { &quot;value&quot;: &lt;REPORTED_AC_TYPE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACType/Desired { &quot;value&quot;: &lt;DESIRED_AC_TYPE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACType/Reported { &quot;value&quot;: &lt;REPORTED_AC_TYPE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1321,10 +1407,12 @@ Thermostat/ACCapacity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACCapacity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCapacity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACCapacity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCapacity/Desired { &quot;value&quot;: &lt;DESIRED_AC_CAPACITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCapacity/Reported { &quot;value&quot;: &lt;REPORTED_AC_CAPACITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCapacity/Desired { &quot;value&quot;: &lt;DESIRED_AC_CAPACITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCapacity/Reported { &quot;value&quot;: &lt;REPORTED_AC_CAPACITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1349,10 +1437,12 @@ Thermostat/ACRefrigerantType Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACRefrigerantType attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACRefrigerantType/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACRefrigerantType/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACRefrigerantType/Desired { &quot;value&quot;: &lt;DESIRED_AC_REFRIGERANT_TYPE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACRefrigerantType/Reported { &quot;value&quot;: &lt;REPORTED_AC_REFRIGERANT_TYPE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACRefrigerantType/Desired { &quot;value&quot;: &lt;DESIRED_AC_REFRIGERANT_TYPE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACRefrigerantType/Reported { &quot;value&quot;: &lt;REPORTED_AC_REFRIGERANT_TYPE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1377,10 +1467,12 @@ Thermostat/ACCompressorType Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACCompressorType attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCompressorType/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACCompressorType/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCompressorType/Desired { &quot;value&quot;: &lt;DESIRED_AC_COMPRESSOR_TYPE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCompressorType/Reported { &quot;value&quot;: &lt;REPORTED_AC_COMPRESSOR_TYPE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCompressorType/Desired { &quot;value&quot;: &lt;DESIRED_AC_COMPRESSOR_TYPE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCompressorType/Reported { &quot;value&quot;: &lt;REPORTED_AC_COMPRESSOR_TYPE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1405,10 +1497,12 @@ Thermostat/ACErrorCode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACErrorCode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACErrorCode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACErrorCode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACErrorCode/Desired { &quot;value&quot;: &lt;DESIRED_AC_ERROR_CODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACErrorCode/Reported { &quot;value&quot;: &lt;REPORTED_AC_ERROR_CODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACErrorCode/Desired { &quot;value&quot;: &lt;DESIRED_AC_ERROR_CODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACErrorCode/Reported { &quot;value&quot;: &lt;REPORTED_AC_ERROR_CODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1433,10 +1527,12 @@ Thermostat/ACLouverPosition Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACLouverPosition attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACLouverPosition/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACLouverPosition/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACLouverPosition/Desired { &quot;value&quot;: &lt;DESIRED_AC_LOUVER_POSITION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACLouverPosition/Reported { &quot;value&quot;: &lt;REPORTED_AC_LOUVER_POSITION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACLouverPosition/Desired { &quot;value&quot;: &lt;DESIRED_AC_LOUVER_POSITION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACLouverPosition/Reported { &quot;value&quot;: &lt;REPORTED_AC_LOUVER_POSITION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1461,10 +1557,12 @@ Thermostat/ACCoilTemperature Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACCoilTemperature attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCoilTemperature/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACCoilTemperature/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCoilTemperature/Desired { &quot;value&quot;: &lt;DESIRED_AC_COIL_TEMPERATURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCoilTemperature/Reported { &quot;value&quot;: &lt;REPORTED_AC_COIL_TEMPERATURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCoilTemperature/Desired { &quot;value&quot;: &lt;DESIRED_AC_COIL_TEMPERATURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCoilTemperature/Reported { &quot;value&quot;: &lt;REPORTED_AC_COIL_TEMPERATURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1489,10 +1587,12 @@ Thermostat/ACCapacityFormat Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACCapacityFormat attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCapacityFormat/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Thermostat/Attributes/ACCapacityFormat/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCapacityFormat/Desired { &quot;value&quot;: &lt;DESIRED_AC_CAPACITY_FORMAT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Attributes/ACCapacityFormat/Reported { &quot;value&quot;: &lt;REPORTED_AC_CAPACITY_FORMAT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCapacityFormat/Desired { &quot;value&quot;: &lt;DESIRED_AC_CAPACITY_FORMAT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Thermostat/Attributes/ACCapacityFormat/Reported { &quot;value&quot;: &lt;REPORTED_AC_CAPACITY_FORMAT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1914,7 +2014,7 @@ Thermostat/WriteAttributes Command</h2>
 <p>To update all Thermostat attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Thermostat/Commands/WriteAttributes&#39; -m  &#39;{ &quot;HVACSystemTypeConfiguration&quot;: &lt;HVAC_SYSTEM_TYPE_CONFIGURATION_VALUE&gt; ,&quot;LocalTemperatureCalibration&quot;: &lt;LOCAL_TEMPERATURE_CALIBRATION_VALUE&gt; ,&quot;OccupiedCoolingSetpoint&quot;: &lt;OCCUPIED_COOLING_SETPOINT_VALUE&gt; ,&quot;OccupiedHeatingSetpoint&quot;: &lt;OCCUPIED_HEATING_SETPOINT_VALUE&gt; ,&quot;UnoccupiedCoolingSetpoint&quot;: &lt;UNOCCUPIED_COOLING_SETPOINT_VALUE&gt; ,&quot;UnoccupiedHeatingSetpoint&quot;: &lt;UNOCCUPIED_HEATING_SETPOINT_VALUE&gt; ,&quot;MinHeatSetpointLimit&quot;: &lt;MIN_HEAT_SETPOINT_LIMIT_VALUE&gt; ,&quot;MaxHeatSetpointLimit&quot;: &lt;MAX_HEAT_SETPOINT_LIMIT_VALUE&gt; ,&quot;MinCoolSetpointLimit&quot;: &lt;MIN_COOL_SETPOINT_LIMIT_VALUE&gt; ,&quot;MaxCoolSetpointLimit&quot;: &lt;MAX_COOL_SETPOINT_LIMIT_VALUE&gt; ,&quot;MinSetpointDeadBand&quot;: &lt;MIN_SETPOINT_DEAD_BAND_VALUE&gt; ,&quot;RemoteSensing&quot;: &lt;REMOTE_SENSING_VALUE&gt; ,&quot;ControlSequenceOfOperation&quot;: &lt;CONTROL_SEQUENCE_OF_OPERATION_VALUE&gt; ,&quot;SystemMode&quot;: &lt;SYSTEM_MODE_VALUE&gt; ,&quot;TemperatureSetpointHold&quot;: &lt;TEMPERATURE_SETPOINT_HOLD_VALUE&gt; ,&quot;TemperatureSetpointHoldDuration&quot;: &lt;TEMPERATURE_SETPOINT_HOLD_DURATION_VALUE&gt; ,&quot;ThermostatProgrammingOperationMode&quot;: &lt;THERMOSTAT_PROGRAMMING_OPERATION_MODE_VALUE&gt; ,&quot;OccupiedSetback&quot;: &lt;OCCUPIED_SETBACK_VALUE&gt; ,&quot;UnoccupiedSetback&quot;: &lt;UNOCCUPIED_SETBACK_VALUE&gt; ,&quot;EmergencyHeatDelta&quot;: &lt;EMERGENCY_HEAT_DELTA_VALUE&gt; ,&quot;ACType&quot;: &lt;AC_TYPE_VALUE&gt; ,&quot;ACCapacity&quot;: &lt;AC_CAPACITY_VALUE&gt; ,&quot;ACRefrigerantType&quot;: &lt;AC_REFRIGERANT_TYPE_VALUE&gt; ,&quot;ACCompressorType&quot;: &lt;AC_COMPRESSOR_TYPE_VALUE&gt; ,&quot;ACErrorCode&quot;: &lt;AC_ERROR_CODE_VALUE&gt; ,&quot;ACLouverPosition&quot;: &lt;AC_LOUVER_POSITION_VALUE&gt; ,&quot;ACCapacityFormat&quot;: &lt;AC_CAPACITY_FORMAT_VALUE&gt;  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -2007,7 +2107,7 @@ Thermostat/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

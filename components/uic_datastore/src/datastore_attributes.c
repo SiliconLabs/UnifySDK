@@ -80,7 +80,7 @@ sl_status_t datastore_attribute_table_init()
   }
 
   // Filesystem operations are reduced and there is some performance gain if
-  // running in exclusive lock mocde (though nobody else can open the database)
+  // running in exclusive lock mode (though nobody else can open the database)
   rc = datastore_exec_sql("PRAGMA locking_mode = EXCLUSIVE;");
   if (rc != SQLITE_OK) {
     sqlite3_close(db);

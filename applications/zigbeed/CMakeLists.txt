@@ -11,8 +11,8 @@ else()
   set(ZIGBEED_ARCHITECTURE arch_x86_64)
 endif()
 
-    find_package(GeckoSDK 4.2.2 EXACT REQUIRED)
-    find_package(CPCD 4.2.2 EXACT REQUIRED)
+    find_package(GeckoSDK 4.3.0 EXACT REQUIRED)
+    find_package(CPCD 4.3.0 EXACT REQUIRED)
     find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
     set(OUTPUT_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)

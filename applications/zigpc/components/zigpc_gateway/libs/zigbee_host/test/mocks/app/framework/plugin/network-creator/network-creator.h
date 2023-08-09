@@ -33,5 +33,10 @@
  *  @return Status of the commencement of the network creator process.
  */
 EmberStatus emberAfPluginNetworkCreatorStart(bool centralizedNetwork);
+EmberStatus emberAfPluginNetworkCreatorNetworkForm(bool centralizedNetwork,
+                                                   EmberPanId panId,
+                                                   int8_t radioTxPower,
+                                                   uint8_t channel);
+
 
 #endif  // SILABS_AF_NETWORK_CREATOR_H

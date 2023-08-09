@@ -56,7 +56,7 @@ void test_gateway_node_add_should_call_process_send(void)
   zigbee_eui64_t test_eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
   zigbee_install_code_t test_install_code = {0xA};
   uint8_t test_install_code_length        = 12;
-  zigpc_gateway_add_node_install_code_ExpectAndReturn(test_eui64, test_install_code, test_install_code_length, SL_STATUS_OK);
+  zigpc_gateway_add_node_ExpectAndReturn(test_eui64, test_install_code, test_install_code_length,false, SL_STATUS_OK);
   
   zigpc_observable_notify_ExpectAndReturn(&zigpc_net_mgmt_observable,
                                           ZIGPC_NET_MGMT_NOTIFY_STATE_UPDATE,
@@ -66,7 +66,8 @@ void test_gateway_node_add_should_call_process_send(void)
   // ACT
   sl_status_t test_status = zigpc_net_mgmt_add_node(test_eui64,
                                                     test_install_code,
-                                                    test_install_code_length);
+                                                    test_install_code_length,
+                                                    false);
 
   // ASSERT
   TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);

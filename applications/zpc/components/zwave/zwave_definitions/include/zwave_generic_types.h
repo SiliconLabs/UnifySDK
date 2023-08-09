@@ -31,7 +31,7 @@ typedef uint8_t zwave_command_t;
 
 /**
  * @brief Z-Wave Operating Modes (AL, FL or NL).
- * Refer to @ref zwave_nwk_spec for details.
+ * Refer to the Z-Wave Network Layer Specification for details.
  */
 typedef enum zwave_operating_mode {
   /// Node is Always Listening (AL)

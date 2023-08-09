@@ -173,6 +173,10 @@ void test_attribute_store_read_value_helper()
   /////////////////////////////////////////////
   TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(new_node_5, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_desired_size(new_node_5));
+  TEST_ASSERT_EQUAL(1,
+                    attribute_store_get_desired_else_reported_size(new_node_5));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_value_size(new_node_5, 0xFF));
 
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(new_node_5, REPORTED_ATTRIBUTE));
@@ -1624,4 +1628,109 @@ void test_attribute_store_set_child_desired_only_if_exists()
                                                      value,
                                                      sizeof(value)));
   TEST_ASSERT_TRUE(attribute_store_is_desired_defined(test_node));
+}
+
+void test_set_all_children_reported()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  const int value = 43;
+
+  // First check that nothing happens if we try to set all children when none exist.
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_all_children_reported(root_node,
+                                                              10,
+                                                              &value,
+                                                              sizeof(int)));
+
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(root_node));
+
+  // Create a child with the wrong type, same, nothing will happen.
+  attribute_store_node_t node_5 = attribute_store_add_node(11, root_node);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_all_children_reported(root_node,
+                                                              10,
+                                                              &value,
+                                                              sizeof(int)));
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_5));
+
+  // Now create the children with the right type:
+  attribute_store_node_t node_1 = attribute_store_add_node(10, root_node);
+  attribute_store_node_t node_2 = attribute_store_add_node(10, root_node);
+  attribute_store_node_t node_3 = attribute_store_add_node(10, root_node);
+  attribute_store_node_t node_4 = attribute_store_add_node(10, root_node);
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_1));
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_2));
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_3));
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_4));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_all_children_reported(root_node,
+                                                              10,
+                                                              &value,
+                                                              sizeof(int)));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(node_1));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(node_2));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(node_3));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(node_4));
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_5));
+
+  TEST_ASSERT_EQUAL(value, attribute_store_get_reported_number(node_1));
+  TEST_ASSERT_EQUAL(value, attribute_store_get_reported_number(node_2));
+  TEST_ASSERT_EQUAL(value, attribute_store_get_reported_number(node_3));
+  TEST_ASSERT_EQUAL(value, attribute_store_get_reported_number(node_4));
+}
+
+void test_set_child_reported_only_if_undefined()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  int value = 43;
+
+  // First check that nothing happens if we try to set all children when none exist.
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_child_reported_only_if_undefined(root_node,
+                                                         10,
+                                                         &value,
+                                                         sizeof(int)));
+
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(root_node));
+
+  // Create a child with the wrong type, same, nothing will happen.
+  attribute_store_node_t node_5 = attribute_store_add_node(11, root_node);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_child_reported_only_if_undefined(root_node,
+                                                         10,
+                                                         &value,
+                                                         sizeof(int)));
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_5));
+
+  // Now create the children with the right type:
+  attribute_store_node_t node_1 = attribute_store_add_node(10, root_node);
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(node_1));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_reported_size(node_1));
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_child_reported_only_if_undefined(root_node,
+                                                         10,
+                                                         &value,
+                                                         sizeof(int)));
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(node_1));
+  TEST_ASSERT_EQUAL(value, attribute_store_get_reported_number(node_1));
+
+  // Try with a new value
+  value = 50;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_child_reported_only_if_undefined(root_node,
+                                                         10,
+                                                         &value,
+                                                         sizeof(int)));
+  TEST_ASSERT_NOT_EQUAL(value, attribute_store_get_reported_number(node_1));
+  TEST_ASSERT_EQUAL(43, attribute_store_get_reported_number(node_1));
 }

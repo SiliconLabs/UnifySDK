@@ -17,6 +17,7 @@ var group__command__classes =
     [ "Central Scene Command Class", "group__zwave__command__class__central__scene.html", "group__zwave__command__class__central__scene" ],
     [ "Configuration Command Class", "group__zwave__command__class__configuration.html", "group__zwave__command__class__configuration" ],
     [ "Device Reset Locally Command Class", "group__device__reset__locally__command__class.html", "group__device__reset__locally__command__class" ],
+    [ "DoorLock Command Class", "group__door__lock__command__class.html", "group__door__lock__command__class" ],
     [ "Z-Wave Granted Keys Resolver", "group__zwave__granted__keys.html", "group__zwave__granted__keys" ],
     [ "Inclusion Controller Command Class", "group__zwave__command__class__inclusion__controller.html", "group__zwave__command__class__inclusion__controller" ],
     [ "Indicator Command Class Support", "group__zwave__command__class__indicator__support.html", "group__zwave__command__class__indicator__support" ],
@@ -38,5 +39,6 @@ var group__command__classes =
     [ "Thermostat Mode Command Class", "group__thermostat__mode__command__class.html", "group__thermostat__mode__command__class" ],
     [ "Thermostat Setpoint Command Class", "group__thermostat__setpoint__command__class.html", "group__thermostat__setpoint__command__class" ],
     [ "Transport Service Command Class", "group__zwave__command__class__transport__service.html", "group__zwave__command__class__transport__service" ],
+    [ "User Code Command Class", "group__zwave__command__class__user__code.html", "group__zwave__command__class__user__code" ],
     [ "Wake Up Command Class", "group__zwave__command__class__wake__up.html", "group__zwave__command__class__wake__up" ]
 ];

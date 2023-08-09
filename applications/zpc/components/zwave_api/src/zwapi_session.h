@@ -98,7 +98,7 @@ sl_status_t zwapi_session_send_frame(uint8_t command,
  * @returns SL_STATUS_OK if the frame sent and Ack'ed by the module and the
  * corresponding Response frame was received. SL_STATUS_FAIL otherwise
  *
- * @zgw_name SendFrameWithResponse
+ * aka SendFrameWithResponse
  */
 sl_status_t
   zwapi_session_send_frame_with_response(uint8_t command,
@@ -126,7 +126,7 @@ sl_status_t zwapi_session_send_frame_no_ack(uint8_t command,
  * @brief Loads the received frames from the serial device into the
  * zwapi_session receive queue
  *
- * @zgw_name DrainRX
+ * aka DrainRX
  */
 void zwapi_session_enqueue_rx_frames(void);
 
@@ -139,14 +139,14 @@ void zwapi_session_enqueue_rx_frames(void);
  * @returns true the receive queue still contains more frames
  * @returns false the receive queue is now empty.
  *
- * @zgw_name DequeueFrame
+ * aka DequeueFrame
  */
 bool zwapi_session_dequeue_frame(uint8_t **frame_ptr, uint8_t *frame_len);
 
 /**
  * @brief Flush the zwapi_session receive queue
  *
- * @zgw_name SerialFlushQueue
+ * aka SerialFlushQueue
  */
 void zwapi_session_flush_queue(void);
 

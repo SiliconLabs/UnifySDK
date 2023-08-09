@@ -71,6 +71,7 @@ The Unify Framework has support for:
   [![Bluetooth AoX](assets/img/Bluetooth_logo.png)](../applications/aox/applications/aoxpc/readme_user.md)
   [![Zigbee](assets/img/Zigbee_logo.png)](../applications/zigpc/readme_user.md)
   [![Z-Wave](assets/img/Z-Wave_logo.png)](../applications/zpc/readme_user.md)
+  [![Matter](assets/img/matter_logo.png)](https://siliconlabs.github.io/matter/latest/unify/readme_user.html)
 
 Further details can be found on the [Unify Framework introduction page](UnifySDK.md).
 

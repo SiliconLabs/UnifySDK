@@ -19,7 +19,7 @@
 #include "zigbee_host_callback_dispatcher.h"
 
 
-void emAfNcpInit(bool memoryAllocation)
+void sli_zb_af_ncp_init(bool memoryAllocation)
 {
   emberAfPluginAddressTableNcpInitCallback(memoryAllocation);
   emberAfPluginNcpConfigurationNcpInitCallback(memoryAllocation);

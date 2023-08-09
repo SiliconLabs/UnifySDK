@@ -17,6 +17,7 @@ scope 20 chain_reaction(0) clear_desired(0) {
   // Linking attributes zwave -> zigbee
   r'zbON_OFF =
     if (zwave_no_binary_switch) undefined
+    if (fn_are_all_undefined(r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE)) undefined
     if (r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE > 0) 1 0
   d'zbON_OFF =
     if (zwave_no_binary_switch) undefined

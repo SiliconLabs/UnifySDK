@@ -19,7 +19,7 @@
 
 // Interfaces
 #include "zwave_command_class_version_types.h"
-#include "ucl_definitions.h"
+
 
 // ZPC includes
 #include "binding_cluster_mapper_helper.h"
@@ -620,8 +620,8 @@ static void on_network_status_update(attribute_store_node_t network_status_node,
   }
 
   // Read the network status, do not publish if it is not online functional:
-  if (get_network_status(network_status_node)
-      != NODE_STATE_TOPIC_STATE_INCLUDED) {
+  if (unify_attribute_store_node_state_get_status(network_status_node)
+      != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
     return;
   }
 
@@ -682,7 +682,7 @@ static void on_group_command_list_udpate(attribute_store_node_t updated_node,
   }
 
   // Read the network status, do not publish if it is not online functional:
-  if (get_network_status(updated_node) != NODE_STATE_TOPIC_STATE_INCLUDED) {
+  if (unify_attribute_store_node_state_get_status(updated_node) != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
     return;
   }
 
@@ -716,7 +716,7 @@ static void on_group_content_udpate(attribute_store_node_t updated_node,
   }
 
   // Read the network status, do not publish if it is not online functional:
-  if (get_network_status(updated_node) != NODE_STATE_TOPIC_STATE_INCLUDED) {
+  if (unify_attribute_store_node_state_get_status(updated_node) != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
     return;
   }
 
@@ -741,7 +741,7 @@ sl_status_t binding_cluster_server_init()
 
   // Register attribute updates
   attribute_store_register_callback_by_type_and_state(&on_network_status_update,
-                                                      ATTRIBUTE_NETWORK_STATUS,
+                                                      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                                       REPORTED_ATTRIBUTE);
 
   attribute_store_register_callback_by_type_and_state(

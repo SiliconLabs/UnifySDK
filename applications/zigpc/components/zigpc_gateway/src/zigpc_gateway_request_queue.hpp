@@ -28,8 +28,8 @@
  * function `invoke()` that must be overridden by derived classes. Each
  * ZigbeeHost API call should be wrapped in a separate derived class.
  *
- * For example, the derived class `PermitJoinRequest` uses the `invoke` function
- * to call the zigbeeHostTrustCenterJoinOpen/Close APIs using the information
+ * For example, the derived class `DiscoverDeviceRequest` uses the `invoke` function
+ * to call the zigbeeHostZdoActiveEndpointsRequest APIs using the information
  * persisted in the object in its constructor.
  *
  *
@@ -228,42 +228,6 @@ class NetworkInitRequest : public RequestQueue::Entry
   public:
   explicit NetworkInitRequest(void);
   ~NetworkInitRequest() override = default;
-
-  EmberStatus invoke(void) override;
-};
-
-/**
- * @brief Call to allow/deny devices from joining the network.
- *
- */
-class PermitJoinRequest : public RequestQueue::Entry
-{
-  private:
-  bool enable_joins; /**< Enable/Disable Joins */
-
-  public:
-  explicit PermitJoinRequest(bool enable_joins);
-  ~PermitJoinRequest() override = default;
-
-  EmberStatus invoke(void) override;
-};
-
-/**
- * @brief Call to add install code to the gateway.
- *
- */
-class AddInstallCodeRequest : public RequestQueue::Entry
-{
-  private:
-  zigbee_eui64_t eui64;               /**< Device ID */
-  zigbee_install_code_t install_code; /**< Install code buffer */
-  uint8_t install_code_length;        /**< Install code length */
-
-  public:
-  explicit AddInstallCodeRequest(const zigbee_eui64_t eui64,
-                                 const zigbee_install_code_t install_code,
-                                 uint8_t install_code_length);
-  ~AddInstallCodeRequest() override = default;
 
   EmberStatus invoke(void) override;
 };

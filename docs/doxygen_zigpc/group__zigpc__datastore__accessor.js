@@ -57,11 +57,6 @@ var group__zigpc__datastore__accessor =
       [ "get_label_type", "classClusterAttributeListAccessor.html#aa0cc348f448bec7231136dc8b4f6c864", null ],
       [ "to_str", "classClusterAttributeListAccessor.html#a12116233c77d0666c4473bc9682ce284", null ]
     ] ],
-    [ "BindingListAccessor", "classBindingListAccessor.html", [
-      [ "BindingListAccessor", "classBindingListAccessor.html#aed8fc7d0e5fd774119109cb2fcd6ab15", null ],
-      [ "get_label_type", "classBindingListAccessor.html#aca893aaa0fdf08c82355fcb967cea1f5", null ],
-      [ "to_str", "classBindingListAccessor.html#a7cb6cac74fdfc052adfa1e2559580991", null ]
-    ] ],
     [ "ClusterCommandListAccessor", "classClusterCommandListAccessor.html", [
       [ "ClusterCommandListAccessor", "classClusterCommandListAccessor.html#ad73a4c9da8e01a1e00750d07618773f3", null ],
       [ "get_entity_type", "classClusterCommandListAccessor.html#aaa1082baa3284e5ba85d6ebf1ed3dba2", null ],

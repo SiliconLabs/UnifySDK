@@ -26,6 +26,8 @@
 #include "zigpc_gateway.h"
 #include "zigpc_gateway_int.h"
 
+
+
 PROCESS_NAME(zigpc_gateway_process);
 
 static const clock_time_t TICK_DURATION_MS = (CLOCK_SECOND / 80);
@@ -149,7 +151,7 @@ void test_zigpc_gateway_network_deny_joins_call(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 }
 
-void test_zigpc_gateway_add_node_install_code_call(void)
+void test_zigpc_gateway_add_node_call(void)
 {
   zigbee_install_code_t install_code = {};
   uint8_t install_code_length        = 10U;
@@ -159,20 +161,26 @@ void test_zigpc_gateway_add_node_install_code_call(void)
                                                             install_code,
                                                             install_code_length,
                                                             EMBER_SUCCESS);
+  
+  zigbeeHostTrustCenterJoinOpen_ExpectAndReturn(true,SL_STATUS_OK);
+
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_eui64
-    = zigpc_gateway_add_node_install_code(NULL,
+    = zigpc_gateway_add_node(NULL,
                                           install_code,
-                                          install_code_length);
+                                          install_code_length,
+                                          false);
   sl_status_t status_null_ic
-    = zigpc_gateway_add_node_install_code(TEST_EUI64,
+    = zigpc_gateway_add_node(TEST_EUI64,
                                           NULL,
-                                          install_code_length);
-  sl_status_t status = zigpc_gateway_add_node_install_code(TEST_EUI64,
+                                          install_code_length,
+                                          false);
+  sl_status_t status = zigpc_gateway_add_node(TEST_EUI64,
                                                            install_code,
-                                                           install_code_length);
+                                                           install_code_length,
+                                                           false);
 
   contiki_test_helper_run(TICK_DURATION_MS * 2);
 
@@ -413,22 +421,14 @@ void test_zigpc_gateway_add_ota_image_call(void)
 void test_zigpc_gateway_too_many_messages_defer_call(void)
 {
   // ARRANGE
-  zigbeeHostTrustCenterJoinOpen_ExpectAndReturn(
-    true,
-    EMBER_MAX_MESSAGE_LIMIT_REACHED);
-
-  // ignoring call to print NWK key
-  zigbeeHostGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
+  zigbeeHostNetworkDeviceLeaveRequest_ExpectAndReturn(TEST_EUI64_LE, EMBER_MAX_MESSAGE_LIMIT_REACHED);
 
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_MESSAGE_LIMIT_REACHED + 3);
 
-  zigbeeHostTrustCenterJoinOpen_ExpectAndReturn(true, EMBER_SUCCESS);
-
-  // ignoring call to print NWK key
-  zigbeeHostGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
+  zigbeeHostNetworkDeviceLeaveRequest_ExpectAndReturn(TEST_EUI64_LE, EMBER_SUCCESS);
 
   // ACT
-  sl_status_t status = zigpc_gateway_network_permit_joins(true);
+  sl_status_t status = zigpc_gateway_remove_node(TEST_EUI64);
 
   for (size_t i = 0; i < (DEFER_CYCLES_MESSAGE_LIMIT_REACHED + 3); i++) {
     contiki_test_helper_run(TICK_DURATION_MS);
@@ -519,8 +519,8 @@ void test_zigpc_gateway_pause_dispatching_on_ncp_reset(void)
   // ACT (pre-reset)
   // Simulate NCP start resetting
   zigpc_gateway_on_ncp_pre_reset(EZSP_ASH_NCP_FATAL_ERROR);
-  // Send Network close request
-  sl_status_t status = zigpc_gateway_network_permit_joins(false);
+  // Send remove node request
+  sl_status_t status = zigpc_gateway_remove_node(TEST_EUI64);
   contiki_test_helper_run(TICK_DURATION_MS * DEFER_CYCLES_DEFAULT);
 
   // ASSERT (pre-reset)
@@ -528,7 +528,7 @@ void test_zigpc_gateway_pause_dispatching_on_ncp_reset(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 
   // ARRANGE (post-reset)
-  zigbeeHostTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
+  zigbeeHostNetworkDeviceLeaveRequest_ExpectAndReturn(TEST_EUI64_LE, EMBER_SUCCESS);
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_START_BACKOFF
                                        + DEFER_CYCLES_DEFAULT);
   zigbeeHostSetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
@@ -554,12 +554,12 @@ void test_zigpc_gateway_keep_retrying_on_ncp_not_ready(void)
 {
   // ARRANGE (pre-reset)
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
-
   // ACT (pre-reset)
   // Simulate NCP start resetting
   zigpc_gateway_on_ncp_pre_reset(EZSP_NOT_CONNECTED);
-  // Send Network close request
-  sl_status_t status = zigpc_gateway_network_permit_joins(false);
+  
+  // Send remove node request
+  sl_status_t status = zigpc_gateway_remove_node(TEST_EUI64);
   contiki_test_helper_run(TICK_DURATION_MS * DEFER_CYCLES_DEFAULT);
 
   // ASSERT (pre-reset)
@@ -568,7 +568,7 @@ void test_zigpc_gateway_keep_retrying_on_ncp_not_ready(void)
 
   // ARRANGE (post-reset-ncp-not-ready)
   zigbeeHostSetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
-  zigbeeHostTrustCenterJoinClose_ExpectAndReturn(EZSP_NOT_CONNECTED);
+  zigbeeHostNetworkDeviceLeaveRequest_ExpectAndReturn(TEST_EUI64_LE, EZSP_NOT_CONNECTED);
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_LOST_CONNECTION
                                        + DEFER_CYCLES_DEFAULT);
 
@@ -581,7 +581,7 @@ void test_zigpc_gateway_keep_retrying_on_ncp_not_ready(void)
   // ASSERT (post-reset-ncp-not-ready): Handled by CMock
 
   // ARRANGE (post-reset-ncp-ready)
-  zigbeeHostTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
+  zigbeeHostNetworkDeviceLeaveRequest_ExpectAndReturn(TEST_EUI64_LE, EMBER_SUCCESS);
   helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_START_BACKOFF
                                        + DEFER_CYCLES_DEFAULT);
 

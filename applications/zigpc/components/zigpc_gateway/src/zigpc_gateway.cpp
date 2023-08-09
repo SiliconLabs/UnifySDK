@@ -23,25 +23,56 @@
 #include "gateway_sleepy_queue.h"
 #include "zigpc_gateway_request_queue.hpp"
 
+
 namespace gw = zigpc::gateway;
 
+
 sl_status_t
-  zigpc_gateway_add_node_install_code(const zigbee_eui64_t node_eui64,
+  zigpc_gateway_add_node(const zigbee_eui64_t node_eui64,
                                       const zigbee_install_code_t install_code,
-                                      const uint8_t install_code_length)
+                                      const uint8_t install_code_length,
+                                      bool is_well_known_key_add)
 {
+
+  // Handle Bad input
   sl_status_t status = SL_STATUS_OK;
 
   if ((node_eui64 == nullptr) || (install_code == nullptr)) {
     status = SL_STATUS_NULL_POINTER;
-  } else {
-    auto call
-      = std::make_shared<gw::AddInstallCodeRequest>(node_eui64,
-                                                    install_code,
-                                                    install_code_length);
-
-    gw::RequestQueue::getInstance().enqueue(call);
+    return status;
   }
+
+  // Handle Well known Case
+
+  if (is_well_known_key_add) {
+    status = zigpc_gateway_network_permit_joins(true);
+    sl_log_debug(LOG_TAG, "Gateway permits joins with status: 0x%X", status);
+  } else {
+    // Handle install code
+    zigbee_eui64_t eui64_le;
+    zigbee_install_code_t install_code_copy;
+
+    std::copy(install_code,
+              install_code + sizeof(zigbee_install_code_t),
+              install_code_copy);
+
+    zigbee_eui64_copy_switch_endian(eui64_le, node_eui64);
+
+    status  = zigbeeHostTrustCenterAddDeviceInstallCode(
+                  eui64_le,
+                  install_code_copy,
+                  install_code_length);
+    
+    sl_log_debug(LOG_TAG, "Add device install code with status: 0x%X", status);
+  }
+
+  status =  zigbeeHostTrustCenterJoinOpen(true);
+
+  sl_log(LOG_TAG,
+          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
+          "Add Node Gateway : %sable permit-join EmberAfStatus: 0x%X",
+          true ? "En" : "Dis",
+          status);
 
   return status;
 }
@@ -61,9 +92,36 @@ sl_status_t zigpc_gateway_network_permit_joins(bool enable)
 {
   sl_status_t status = SL_STATUS_OK;
 
-  auto call = std::make_shared<gw::PermitJoinRequest>(enable);
+  if (enable) {
+    if(zigpc_get_config()->tc_use_well_known_key == true ){
+          EmberEUI64 wildcardEui64
+            = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+          const EmberKeyData centralizedKey
+            = zigbeeHostGetTrustCenterWellKownKey();
 
-  gw::RequestQueue::getInstance().enqueue(call);
+          status
+            = zigbeeHostTrustCenterAddLinkKey(wildcardEui64, &centralizedKey, true);
+
+          sl_log(LOG_TAG,
+             (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
+            "Gateway Well-known link key add EmberAfStatus: 0x%X",
+             status);
+      }
+
+      status = zigbeeHostTrustCenterJoinOpen(true);
+      sl_log_debug(LOG_TAG, "Trust Center permits joins with status: 0x%X", status);
+    
+      zigpc_gateway_command_print_nwk_key();
+
+  } else {
+    status = zigbeeHostTrustCenterJoinClose();
+  }
+
+  sl_log(LOG_TAG,
+         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
+          "Permit Joins Gateway : %sable permit-join EmberAfStatus: 0x%X",
+         enable ? "En" : "Dis",
+         status);
 
   return status;
 }

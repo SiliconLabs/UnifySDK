@@ -24,7 +24,7 @@ target_link_libraries(
   dotdot_mapper
   PUBLIC dotdot_mapper_binding_cluster_helper unify zpc_dotdot_mqtt
          zpc_attribute_store
-  PRIVATE zwave_handlers ucl_definitions)
+  PRIVATE zwave_handlers )
 
 if(BUILD_TESTING)
   add_subdirectory(test)

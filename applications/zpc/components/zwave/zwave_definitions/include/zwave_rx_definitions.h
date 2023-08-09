@@ -17,7 +17,7 @@
 
 /**
  * @defgroup zwave_rx_definitions Z-Wave Controller Connection Info type
- * @ingroup zwave_rx_definitions
+ * @ingroup zwave_definitions
  * @brief Z-Wave Controller Connection Info type definition
  **
  * @{

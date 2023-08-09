@@ -5,22 +5,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
                    "-Wl,--allow-multiple-definition")
 endif()
 
-# ZCL Group cluster server test
-target_add_unittest(
-  zcl_cluster_servers
-  NAME
-  zcl_group_cluster_server_test
-  SOURCES
-  zcl_group_cluster_server_test.c
-  DEPENDS
-  zpc_attribute_store
-  ucl_mqtt
-  uic_mqtt_mock
-  zpc_dotdot_mqtt_mock
-  zwave_network_management_mock
-  uic_contiki_stub
-  unify)
-
 # ZCL OTA cluster server test
 target_add_unittest(
   zcl_cluster_servers
@@ -92,4 +76,30 @@ target_add_unittest(
   uic_contiki_stub
   unify)
 
+# User Code Cluster Server test
+target_add_unittest(
+  zcl_cluster_servers
+  NAME
+  user_code_cluster_server_test
+  SOURCES
+  user_code_cluster_server_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  uic_dotdot_mqtt_mock
+  uic_mqtt_stub
+  uic_contiki_stub
+  unify)
+
 target_include_directories(zcl_scenes_cluster_server_test PRIVATE ../src)
+
+
+# Fixture test, runs the init and teardown functions
+target_add_unittest(
+  zcl_cluster_servers
+  NAME
+  zcl_cluster_servers_fixture_test
+  SOURCES
+  zcl_cluster_servers_fixture_test.c
+  DEPENDS
+  unify
+  zpc_config_mock)

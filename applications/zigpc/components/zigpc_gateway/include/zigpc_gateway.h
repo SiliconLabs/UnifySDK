@@ -148,13 +148,15 @@ bool zigpc_gateway_install_code_is_valid(const uint8_t *install_code,
  * @param node_eui64            End device EUI64 in big-endian format
  * @param install_code          End device install code
  * @param install_code_length   install code length
+ * @param is_well_known_key_add 
  * @return sl_status_t          SL_STATUS_OK on request accepted by ZigPC
  * Gateway, or error in reading and preparing data to be sent to ZigPC Gateway.
  */
 sl_status_t
-  zigpc_gateway_add_node_install_code(const zigbee_eui64_t node_eui64,
+  zigpc_gateway_add_node(const zigbee_eui64_t node_eui64,
                                       const zigbee_install_code_t install_code,
-                                      const uint8_t install_code_length);
+                                      const uint8_t install_code_length,
+                                      bool is_well_known_key_add);
 
 /**
  * @brief Request to remove node on the Zigbee Network. If the node is not on

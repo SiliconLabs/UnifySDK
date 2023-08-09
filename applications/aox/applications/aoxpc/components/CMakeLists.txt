@@ -20,6 +20,12 @@ add_library(cte
   ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/aoa_cte/cte_conn.c
   ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/aoa_cte/cte_silabs.c
 )
+
+# TODO: this workaround should be removed once the GSDK issue is fixed.
+set_source_files_properties(
+  ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/aoa_cte/cte_conn_less.c PROPERTIES COMPILE_FLAGS -Wno-error=deprecated-declarations
+)
+
 target_include_directories(cte
   PUBLIC ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/aoa_cte
   PRIVATE ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/aoa_cte/config

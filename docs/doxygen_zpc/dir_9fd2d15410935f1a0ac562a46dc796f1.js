@@ -2,6 +2,7 @@ var dir_9fd2d15410935f1a0ac562a46dc796f1 =
 [
     [ "ZW_typedefs.h", "ZW__typedefs_8h.html", "ZW__typedefs_8h" ],
     [ "zwave_command_class_indices.h", "zwave__command__class__indices_8h.html", "zwave__command__class__indices_8h" ],
+    [ "zwave_command_class_user_code_types.h", "zwave__command__class__user__code__types_8h.html", "zwave__command__class__user__code__types_8h" ],
     [ "zwave_command_class_version_types.h", "zwave__command__class__version__types_8h.html", "zwave__command__class__version__types_8h" ],
     [ "zwave_controller_connection_info.h", "zwave__controller__connection__info_8h.html", "zwave__controller__connection__info_8h" ],
     [ "zwave_controller_types.h", "zwave__controller__types_8h.html", "zwave__controller__types_8h" ],

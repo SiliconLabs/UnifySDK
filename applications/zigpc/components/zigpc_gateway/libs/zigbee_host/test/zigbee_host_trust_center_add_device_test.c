@@ -81,12 +81,12 @@ void test_trust_center_add_device_install_code_should_parse_link_key_and_call_jo
     = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
   EmberKeyData test_link_key = {{0x55, 0x66, 0x77, 0x88, 0x99}};
 
-  emAfInstallCodeToKey_ExpectAndReturn(test_install_code,
+  sli_zigbee_af_install_code_to_key_ExpectAndReturn(test_install_code,
                                        10,
                                        NULL,
                                        EMBER_SUCCESS);
-  emAfInstallCodeToKey_ReturnThruPtr_key(&test_link_key);
-  emAfInstallCodeToKey_IgnoreArg_key();
+  sli_zigbee_af_install_code_to_key_ReturnThruPtr_key(&test_link_key);
+  sli_zigbee_af_install_code_to_key_IgnoreArg_key();
 
   ezspAddTransientLinkKey_ExpectAndReturn(test_eui64,
                                           &test_link_key,
@@ -107,12 +107,12 @@ void test_trust_center_add_device_install_code_should_return_on_join_network_err
   EmberKeyData test_link_key                   = {{0xFF, 0xEE, 0xDD}};
   EmberStatus test_status                      = 0xCC;
 
-  emAfInstallCodeToKey_ExpectAndReturn(test_install_code,
+  sli_zigbee_af_install_code_to_key_ExpectAndReturn(test_install_code,
                                        10,
                                        NULL,
                                        EMBER_SUCCESS);
-  emAfInstallCodeToKey_ReturnThruPtr_key(&test_link_key);
-  emAfInstallCodeToKey_IgnoreArg_key();
+  sli_zigbee_af_install_code_to_key_ReturnThruPtr_key(&test_link_key);
+  sli_zigbee_af_install_code_to_key_IgnoreArg_key();
 
   ezspAddTransientLinkKey_ExpectAndReturn(test_eui64,
                                           &test_link_key,
@@ -131,11 +131,11 @@ void test_trust_center_add_device_install_code_should_return_on_key_parse_error(
   uint8_t test_install_code[INSTALL_CODE_SIZE] = {0xAA, 0xBB};
   EmberStatus test_status                      = 0xFA;
 
-  emAfInstallCodeToKey_ExpectAndReturn(test_install_code,
+  sli_zigbee_af_install_code_to_key_ExpectAndReturn(test_install_code,
                                        10,
                                        NULL,
                                        test_status);
-  emAfInstallCodeToKey_IgnoreArg_key();
+  sli_zigbee_af_install_code_to_key_IgnoreArg_key();
 
   status = zigbeeHostTrustCenterAddDeviceInstallCode(test_eui64,
                                                      test_install_code,

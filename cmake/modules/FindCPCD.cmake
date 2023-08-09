@@ -20,7 +20,7 @@ elseif(DEFINED ENV{CPCD_LOCATION})
 else()
   if(NOT FETCH_CPCD_VERSION)
     # The version to fetch should ideally be the same as the version used for fetching GeckoSDK
-    set(FETCH_CPCD_VERSION "v4.2.2")
+    set(FETCH_CPCD_VERSION "v4.3.0")
   endif()
   message(STATUS "Fetching CPCd ${FETCH_CPCD_VERSION} from public repository")
 endif()

@@ -39,6 +39,12 @@
         },
         {
           "include": "#numeric_constants"
+        },
+        {
+          "include": "#instance_modifier"
+        },
+        {
+          "include": "#clearance_modifier"
         }
       ]
     },
@@ -53,6 +59,14 @@
     "existence_of_attribute": {
       "match": "e'[\\.\\[\\]\\w]+",
       "name": "variable.language"
+    },
+    "instance_modifier": {
+      "match": "i:",
+      "name": "storage.modifier"
+    },
+    "clearance_modifier": {
+      "match": "c:",
+      "name": "storage.modifier"
     },
     "comment": {
       "match": "\\/\\/.*",

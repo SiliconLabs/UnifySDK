@@ -35,6 +35,7 @@
 // Maximum amount of NodeIDs for which we cache the number of repeaters.
 #define ZWAVE_TX_ROUTE_CACHE_BUFFER_SIZE 50
 #endif
+
 /**
  * @defgroup zwave_tx Z-Wave TX
  * @ingroup zwave_controller
@@ -158,46 +159,12 @@ tx -> u: <b>zwave_tx_send_data</b> callback\n(frame 1 transmission results)
 
 @enduml
  *
- */
-
-/// Maximum QoS priority for \ref zwave_tx_options_t qos_priority.
-/// Nothing is more important than these frames.
-#define ZWAVE_TX_QOS_MAX_PRIORITY 0xFFFFFF00
-/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
-/// when sending timing critical frames.
-#define ZWAVE_TX_QOS_RECOMMENDED_TIMING_CRITICAL_PRIORITY 0x0FFFFFFF
-/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
-/// for replying to incoming Get type commands.
-#define ZWAVE_TX_QOS_RECOMMENDED_GET_ANSWER_PRIORITY 0x00FFFFFF
-/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
-/// for issuing probing commands (node interview).
-#define ZWAVE_TX_QOS_RECOMMENDED_NODE_INTERVIEW_PRIORITY 0x0000FFFF
-/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
-/// for state polling of a node (e.g. verifying its On/off state
-/// if it does not report to the Lifeline).
-#define ZWAVE_TX_QOS_RECOMMENDED_POLLING_PRIORITY 0x00000FFF
-/// Minimum QoS priority for \ref zwave_tx_options_t qos_priority.
-#define ZWAVE_TX_QOS_MIN_PRIORITY 0x00000000
-
-/// Recommended QoS gap between frames to accomodate for parent/child frames
-#define ZWAVE_TX_RECOMMENDED_QOS_GAP 10
-/** @} end zwave_tx_options_qos_priority */
-
-/**
- * @defgroup zwave_tx_options_qos_priority Z-Wave TX Options QoS priority
- * @ingroup zwave_tx_interface
- * @brief QoS Priority for Z-Wave TX Options
- *
- * The QoS Priority is used to determine the order of frames being sent.
- * It is a 32 bits value, with the normal ranging from 0 to 0xFFFFFFFF. (32 bits)
- *
- * Inclusion and other timing critical frames should high priority.
- * Frames that can wait should have a low priority.
- * ZWAVE_TX_QOS_MAX_PRIORITY should not be used, unless really in an emergency
- * situation.
  * @{
  */
 
+/**
+ * @brief Function signature for callbacks invoked when send data has completed
+ */
 typedef void (*on_zwave_tx_send_data_complete_t)(
   uint8_t status, const zwapi_tx_report_t *tx_info, void *user);
 

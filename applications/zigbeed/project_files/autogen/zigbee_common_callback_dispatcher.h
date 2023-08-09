@@ -22,13 +22,13 @@
 #include "stack/include/ember.h"
 
 // Event Init
-void emAfEventInit(void);
+void sli_zigbee_af_event_init(void);
 // Local data Init
-void emAfLocalDataInit(void);
+void sli_zigbee_af_local_data_init(void);
 // Init done
-void emAfInitDone(void);
+void sli_zigbee_af_initDone(void);
 
 // Tick
-void emAfTick(void);
+void sli_zigbee_af_tick(void);
 
 #endif // SL_ZIGBEE_COMMON_CALLBACK_DISPATCHER_H

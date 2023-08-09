@@ -29,6 +29,7 @@ add_library(
   ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_supported_generated_commands.cpp
   ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_helpers.cpp
   src/dotdot_mqtt_parsing_helpers.cpp
+  src/dotdot_mqtt_additional_value_names.cpp
   src/dotdot_bitmap.cpp
   src/json_helpers.cpp)
 

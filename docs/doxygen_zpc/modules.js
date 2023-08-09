@@ -2,8 +2,8 @@ var modules =
 [
     [ "Dotdot Mapper", "group__dotdot__mapper.html", "group__dotdot__mapper" ],
     [ "Network Monitor", "group__network__monitor.html", "group__network__monitor" ],
-    [ "UCL definitions", "group__ucl__definitions.html", "group__ucl__definitions" ],
     [ "UCL MQTT", "group__ucl__mqtt.html", "group__ucl__mqtt" ],
+    [ "ZPC Node State", "group__zpc__node__state.html", "group__zpc__node__state" ],
     [ "ZCL Cluster Servers", "group__zcl__cluster__servers.html", "group__zcl__cluster__servers" ],
     [ "ZCL Binding Cluster server", "group__zcl__binding__cluster__server.html", "group__zcl__binding__cluster__server" ],
     [ "ZPC Application Monitoring", "group__zpc__application__monitoring.html", "group__zpc__application__monitoring" ],
@@ -19,13 +19,14 @@ var modules =
     [ "Z-Wave Polling Manager", "group__zwave__poll__manager.html", "group__zwave__poll__manager" ],
     [ "ZPC Utilities", "group__zpc__utils.html", "group__zpc__utils" ],
     [ "Z-Wave Controller", "group__zwave__controller.html", "group__zwave__controller" ],
-    [ "Z-Wave Controller Connection Info type", "group__zwave__rx__definitions.html", "group__zwave__rx__definitions" ],
     [ "Z-Wave Command Classes", "group__command__classes.html", "group__command__classes" ],
     [ "Z-Wave Application Command Class Handler", "group__zwave__command__handler.html", "group__zwave__command__handler" ],
-    [ "Zwave_command_type", "group__zwave__command__type.html", "group__zwave__command__type" ],
+    [ "Z-Wave Command Types", "group__zwave__command__type.html", "group__zwave__command__type" ],
     [ "Z-Wave SmartStart Management", "group__zwave__smartstart__management.html", "group__zwave__smartstart__management" ],
     [ "Mapper path match evaluation", "group__Attribute.html", null ],
     [ "Scope settings helpers", "group__attribute__mapper__scope__settings.html", "group__attribute__mapper__scope__settings" ],
+    [ "Unify Attribute Definitions", "group__uic__attribute__definitions.html", null ],
     [ "Unify Components", "group__unify__components.html", "group__unify__components" ],
-    [ "Internal C++ ZAP definitions", "group__dotdot__mqtt__hpp.html", "group__dotdot__mqtt__hpp" ]
+    [ "Internal C++ ZAP definitions", "group__dotdot__mqtt__hpp.html", "group__dotdot__mqtt__hpp" ],
+    [ "Unify Dotdot Attribute Store Group Cluster", "group__unify__dotdot__attribute__store__group__cluster.html", "group__unify__dotdot__attribute__store__group__cluster" ]
 ];

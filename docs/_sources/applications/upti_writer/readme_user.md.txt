@@ -79,7 +79,8 @@ These fields are decoded as follows:
 
 E.g our log file name is `capture_15-46-02.log`
 
-Start Simplicity Studio and switch to Network Analyzer perspective:
+Start [Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
+and switch to Network Analyzer perspective:
 
 ![SS_Network_Analyzer_Tab](doc/assets/img/studio_network_analyzer.png)
 

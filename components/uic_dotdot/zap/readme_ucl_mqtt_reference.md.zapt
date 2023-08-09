@@ -69,15 +69,26 @@ The following attribute topics are used to retrieve the {{label}} cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for {{label}} attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+{{#unless (clusterWithoutEndpoints parent.label)}}/+{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/+'
+
 # Example output
-ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Desired { "value": <DESIRED_{{asSnakeCaseUpper label}}> }
-ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Reported { "value": <REPORTED_{{asSnakeCaseUpper label}}> }
+{{#if (isMonotonousArray label)}}
+
+ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/ep0{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Desired { "value": [<DESIRED_{{asSnakeCaseUpper label}}>,<DESIRED_{{asSnakeCaseUpper label}}>]}
+ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/ep0{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Reported { "value": [<REPORTED_{{asSnakeCaseUpper label}}>,<REPORTED_{{asSnakeCaseUpper label}}>]}
+
+{{else}}
+
+ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/ep0{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Desired { "value": <DESIRED_{{asSnakeCaseUpper label}}>}
+ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/ep0{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Reported { "value": <REPORTED_{{asSnakeCaseUpper label}}>}
+
+{{/if}}
 ```
 
 <br><br>
@@ -115,7 +126,7 @@ ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unle
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName label}}/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName label}}/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -175,7 +186,7 @@ ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unle
 
 To see supported commands for {{label}} cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints label)}}/<EP>{{/unless}}/{{asPublicationName label}}/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints label)}}/<EP>{{/unless}}/{{asPublicationName label}}/SupportedCommands { "value": [{{#zcl_commands}}{{#if (isEqual source "server")}}"{{label}}",{{#last}}"WriteAttributes", "ForceReadAttributes"{{/last}}{{/if}}{{/zcl_commands}}] }
@@ -183,8 +194,7 @@ ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints label)}}/<EP>{{/unless}}/{{
 
 To see supported generated commands for {{label}} cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints label)}}/<EP>{{/unless}}/{{asPublicationName label}}/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints label)}}/<EP>{{/unless}}/{{asPublicationName label}}/SupportedGeneratedCommands { "value": [{{#zcl_commands}}{{#if (isEqual source "client")}}"{{label}}"{{listComma this}}{{/if}}{{/zcl_commands}}] }
@@ -245,13 +255,13 @@ ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints label)}}/<EP>{{/unless}}/{{
 
 To send a {{asPublicationName parent.label}}/{{label}} command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName parent.label}}/Commands/{{label}}' -m  '{ {{#zcl_command_arguments}}"{{label}}": <{{asSnakeCaseUpper label}}_VALUE>{{listComma this}}{{/zcl_command_arguments}} }'
 ```
 
 To receive a {{asPublicationName parent.label}}/{{label}} generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName parent.label}}/GeneratedCommands/{{label}}'
 ```
 
@@ -299,11 +309,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.la
 
 To update all {{asPublicationName label}} attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName label}}/Commands/WriteAttributes' -m  '{ {{#zcl_attributes}}{{#if isWritable }}"{{label}}": <{{asSnakeCaseUpper label}}_VALUE> {{listComma this}}{{/if}}{{/zcl_attributes}} }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -345,13 +356,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.la
 
 To force read all {{asPublicationName label}} attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName label}}/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the {{asPublicationName label}} attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.label)}}/<EP>{{/unless}}/{{asPublicationName label}}/Commands/ForceReadAttributes' -m  '{ "value": [{{#zcl_attributes}}{{#first}}"{{label}}"{{/first}}{{/zcl_attributes}}] }'
 ```
 
@@ -487,3 +498,55 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>{{#unless (clusterWithoutEndpoints parent.la
 <br><br>
 
 {{/zcl_bitmaps}}
+
+<!-- -->
+<!-- -->
+<!-- Page about arrays-->
+<!-- -->
+<!-- -->
+\page ucl_monotonous_arrays UCL Array Attributes
+
+ZAP and DotDot do not always support very well attributes that are arrays
+consisting of several elements, as for example the Group or Scene Tables.
+In such cases, the UCL specifications have defined how to publish and interpret
+the values of such attributes.
+
+The Unify library provides limited support for Attributes that are array.
+Protocol Controller and/or IoT Services may have to add manual code
+to handle these cases.
+
+The following attributes are supported as arrays in the Unify Library.
+
+| Cluster  |  Attribute    |  Example topic |
+|----------|---------------|----------------|
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_attributes}}
+{{#if (isMonotonousArray label)}}
+{{#unless (isStruct type)}}
+| {{parent.label}} | {{label}} | ucl/by-unid/zw-12345678-0001{{#unless (clusterWithoutEndpoints parent.label)}}/ep0{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Reported |
+{{/unless}}
+{{/if}}
+{{/zcl_attributes}}
+{{/if}}
+{{/zcl_clusters}}
+
+
+The following attributes are partially or not supported as arrays in the
+Unify Library. It is because these arrays contains objects themselves.
+For attributes not present in either lists (e.g. Group Table),
+refer to the Unify Specification.
+
+| Cluster  |  Attribute    |  Example topic |
+|----------|---------------|----------------|
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_attributes}}
+{{#if (isMonotonousArray label)}}
+{{#if (isStruct type)}}
+| {{parent.label}} | {{label}} | ucl/by-unid/zw-12345678-0001{{#unless (clusterWithoutEndpoints parent.label)}}/ep0{{/unless}}/{{asPublicationName parent.label}}/Attributes/{{label}}/Reported |
+{{/if}}
+{{/if}}
+{{/zcl_attributes}}
+{{/if}}
+{{/zcl_clusters}}

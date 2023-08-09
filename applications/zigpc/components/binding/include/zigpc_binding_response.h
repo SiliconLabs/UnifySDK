@@ -19,8 +19,30 @@
 extern "C" {
 #endif
 
+/**
+ * @brief zigpc_binding_bind_unbind_callback
+ * A callback used on the reception of a binding or unbinding command. Contains
+ * the raw information from the gateway
+ *
+ * @param data - a pointer to the event data containing the binding information
+ * Note, this function should free any memory assigned to data
+ */ 
 void zigpc_binding_bind_unbind_callback(void *data);
 
+/**
+ * @brief zigpc_binding_handle_bind_unbind_reponse
+ * Handle a response from a binding/binding command. Handles the parsed response
+ * after being processed
+ *
+ * @param binding           - the binding information
+ * @param is_bind_response  - a boolean representing if a binding (true) or
+ *                            unbinding (false) response
+ * @param zdo_status        - the ZDO status contained in the response
+ *
+ * @return SL_STATUS_OK if able to properly handle the response, SL_STATUS_FAIL
+ * if something went wrong in parsing the binding or if the binding request
+ * itself failed in some way
+ */ 
 sl_status_t zigpc_binding_handle_bind_unbind_reponse(
                 const zigbee_binding_t binding,
                 bool is_bind_response,

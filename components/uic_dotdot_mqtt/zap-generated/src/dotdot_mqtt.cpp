@@ -36,6 +36,7 @@
 #include "dotdot_mqtt_parsing_helpers.hpp"
 #include "dotdot_mqtt_attributes.h"
 #include "dotdot_mqtt_translators.h"
+#include "dotdot_mqtt_additional_value_names.hpp"
 
 #include <nlohmann/json.hpp>
 
@@ -401,7 +402,11 @@ sl_status_t uic_mqtt_dotdot_basic_zcl_version_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(0,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(0,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -467,7 +472,11 @@ sl_status_t uic_mqtt_dotdot_basic_application_version_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(0,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(0,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -533,7 +542,11 @@ sl_status_t uic_mqtt_dotdot_basic_stack_version_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(0,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(0,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -599,7 +612,11 @@ sl_status_t uic_mqtt_dotdot_basic_hw_version_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(0,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(0,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -865,7 +882,10 @@ sl_status_t uic_mqtt_dotdot_basic_power_source_publish(
 
   #ifdef BASIC_POWER_SOURCE_ENUM_NAME_AVAILABLE
   jsn["value"] = basic_power_source_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for BASIC_POWER_SOURCE. Using number instead.");
   jsn["value"] = static_cast<BasicPowerSource>(value);
   #endif
 
@@ -935,7 +955,10 @@ sl_status_t uic_mqtt_dotdot_basic_generic_device_class_publish(
 
   #ifdef BASIC_GENERIC_DEVICE_CLASS_ENUM_NAME_AVAILABLE
   jsn["value"] = basic_generic_device_class_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for BASIC_GENERIC_DEVICE_CLASS. Using number instead.");
   jsn["value"] = static_cast<BasicGenericDeviceClass>(value);
   #endif
 
@@ -1005,7 +1028,10 @@ sl_status_t uic_mqtt_dotdot_basic_generic_device_type_publish(
 
   #ifdef BASIC_GENERIC_DEVICE_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = basic_generic_device_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for BASIC_GENERIC_DEVICE_TYPE. Using number instead.");
   jsn["value"] = static_cast<BasicGenericDeviceType>(value);
   #endif
 
@@ -1471,7 +1497,10 @@ sl_status_t uic_mqtt_dotdot_basic_physical_environment_publish(
 
   #ifdef BASIC_PHYSICAL_ENVIRONMENT_ENUM_NAME_AVAILABLE
   jsn["value"] = basic_physical_environment_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for BASIC_PHYSICAL_ENVIRONMENT. Using number instead.");
   jsn["value"] = static_cast<BasicPhysicalEnvironment>(value);
   #endif
 
@@ -1539,7 +1568,11 @@ sl_status_t uic_mqtt_dotdot_basic_device_enabled_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(0,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(0,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2119,7 +2152,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2185,7 +2222,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_frequency_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2320,7 +2361,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2386,7 +2431,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2452,7 +2501,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2518,7 +2571,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,32,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,32,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2584,7 +2641,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_remaining_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,33,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,33,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2718,7 +2779,10 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_size_publish(
 
   #ifdef POWER_CONFIGURATION_BATTERY_SIZE_ENUM_NAME_AVAILABLE
   jsn["value"] = power_configuration_battery_size_get_enum_value_name((uint32_t)value);
+  #elif defined(BATTERY_SIZE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = battery_size_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for POWER_CONFIGURATION_BATTERY_SIZE. Using number instead.");
   jsn["value"] = static_cast<BatterySize>(value);
   #endif
 
@@ -2786,7 +2850,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_batterya_hr_rating_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,50,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,50,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2852,7 +2920,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_quantity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,51,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,51,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -2918,7 +2990,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_rated_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,52,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,52,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3053,7 +3129,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,54,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,54,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3119,7 +3199,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,55,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,55,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3185,7 +3269,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,56,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,56,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3251,7 +3339,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,57,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,57,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3317,7 +3409,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,58,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,58,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3383,7 +3479,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,59,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,59,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3449,7 +3549,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,60,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,60,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3515,7 +3619,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold3_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,61,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,61,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3650,7 +3758,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,64,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,64,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3716,7 +3828,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_remaining_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,65,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,65,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3850,7 +3966,10 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_size_publish(
 
   #ifdef POWER_CONFIGURATION_BATTERY2_SIZE_ENUM_NAME_AVAILABLE
   jsn["value"] = power_configuration_battery2_size_get_enum_value_name((uint32_t)value);
+  #elif defined(BATTERY_SIZE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = battery_size_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for POWER_CONFIGURATION_BATTERY2_SIZE. Using number instead.");
   jsn["value"] = static_cast<BatterySize>(value);
   #endif
 
@@ -3918,7 +4037,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,82,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,82,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -3984,7 +4107,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_quantity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,83,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,83,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4050,7 +4177,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_rated_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,84,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,84,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4185,7 +4316,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,86,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,86,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4251,7 +4386,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,87,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,87,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4317,7 +4456,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,88,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,88,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4383,7 +4526,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,89,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,89,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4449,7 +4596,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshol
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,90,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,90,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4515,7 +4666,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,91,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,91,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4581,7 +4736,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,92,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,92,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4647,7 +4806,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold3_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,93,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,93,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4782,7 +4945,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,96,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,96,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4848,7 +5015,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_remaining_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,97,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,97,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -4982,7 +5153,10 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_size_publish(
 
   #ifdef POWER_CONFIGURATION_BATTERY3_SIZE_ENUM_NAME_AVAILABLE
   jsn["value"] = power_configuration_battery3_size_get_enum_value_name((uint32_t)value);
+  #elif defined(BATTERY_SIZE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = battery_size_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for POWER_CONFIGURATION_BATTERY3_SIZE. Using number instead.");
   jsn["value"] = static_cast<BatterySize>(value);
   #endif
 
@@ -5050,7 +5224,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,114,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,114,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5116,7 +5294,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_quantity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,115,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,115,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5182,7 +5364,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_rated_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,116,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,116,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5317,7 +5503,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,118,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,118,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5383,7 +5573,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,119,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,119,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5449,7 +5643,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,120,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,120,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5515,7 +5713,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,121,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,121,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5581,7 +5783,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshol
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,122,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,122,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5647,7 +5853,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,123,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,123,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5713,7 +5923,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,124,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,124,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -5779,7 +5993,11 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold3_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1,125,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1,125,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6120,7 +6338,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_current_temperature
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6186,7 +6408,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_min_temp_experience
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6252,7 +6478,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_max_temp_experience
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6318,7 +6548,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_over_temp_total_dwe
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6453,7 +6687,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_low_temp_threshold_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6519,7 +6757,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_high_temp_threshold
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6585,7 +6827,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_low_temp_dwell_trip
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -6651,7 +6897,11 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_high_temp_dwell_tri
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -7517,7 +7767,11 @@ sl_status_t uic_mqtt_dotdot_identify_identify_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(3,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(3,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -13120,7 +13374,11 @@ sl_status_t uic_mqtt_dotdot_scenes_scene_count_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(5,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(5,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -13186,7 +13444,11 @@ sl_status_t uic_mqtt_dotdot_scenes_current_scene_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(5,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(5,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -13252,7 +13514,11 @@ sl_status_t uic_mqtt_dotdot_scenes_current_group_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(5,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(5,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -13318,7 +13584,11 @@ sl_status_t uic_mqtt_dotdot_scenes_scene_valid_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(5,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(5,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -13453,7 +13723,11 @@ sl_status_t uic_mqtt_dotdot_scenes_last_configured_by_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(5,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(5,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -13523,7 +13797,15 @@ sl_status_t uic_mqtt_dotdot_scenes_scene_table_publish(
   jsn["value"] = nlohmann::json::array();
 
   for (size_t i = 0; i<value_count;i++){
-    jsn["value"].push_back(value[i]);
+    // Struct type
+    nlohmann::json json_object = nlohmann::json::object();
+    json_object["SceneID"] = value[i].SceneID;
+    json_object["GroupID"] = value[i].GroupID;
+    json_object["SceneName"] = value[i].SceneName;
+    json_object["TransitionTime"] = value[i].TransitionTime;
+    json_object["TransitionTime100ms"] = value[i].TransitionTime100ms;
+    json_object["SceneTableExtensions"] = value[i].SceneTableExtensions;
+    jsn["value"].push_back(json_object);
   }
 
 
@@ -14831,7 +15113,11 @@ sl_status_t uic_mqtt_dotdot_on_off_on_off_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(6,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(6,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -14897,7 +15183,11 @@ sl_status_t uic_mqtt_dotdot_on_off_global_scene_control_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(6,16384,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(6,16384,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -14963,7 +15253,11 @@ sl_status_t uic_mqtt_dotdot_on_off_on_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(6,16385,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(6,16385,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -15029,7 +15323,11 @@ sl_status_t uic_mqtt_dotdot_on_off_off_wait_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(6,16386,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(6,16386,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -15097,7 +15395,10 @@ sl_status_t uic_mqtt_dotdot_on_off_start_up_on_off_publish(
 
   #ifdef ON_OFF_START_UP_ON_OFF_ENUM_NAME_AVAILABLE
   jsn["value"] = on_off_start_up_on_off_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for ON_OFF_START_UP_ON_OFF. Using number instead.");
   jsn["value"] = static_cast<OnOffStartUpOnOff>(value);
   #endif
 
@@ -17035,7 +17336,11 @@ sl_status_t uic_mqtt_dotdot_level_current_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17101,7 +17406,11 @@ sl_status_t uic_mqtt_dotdot_level_remaining_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17167,7 +17476,11 @@ sl_status_t uic_mqtt_dotdot_level_min_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17233,7 +17546,11 @@ sl_status_t uic_mqtt_dotdot_level_max_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17299,7 +17616,11 @@ sl_status_t uic_mqtt_dotdot_level_current_frequency_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17365,7 +17686,11 @@ sl_status_t uic_mqtt_dotdot_level_min_frequency_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17431,7 +17756,11 @@ sl_status_t uic_mqtt_dotdot_level_max_frequency_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17566,7 +17895,11 @@ sl_status_t uic_mqtt_dotdot_level_on_off_transition_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17632,7 +17965,11 @@ sl_status_t uic_mqtt_dotdot_level_on_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17698,7 +18035,11 @@ sl_status_t uic_mqtt_dotdot_level_on_transition_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17764,7 +18105,11 @@ sl_status_t uic_mqtt_dotdot_level_off_transition_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17830,7 +18175,11 @@ sl_status_t uic_mqtt_dotdot_level_default_move_rate_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -17896,7 +18245,11 @@ sl_status_t uic_mqtt_dotdot_level_start_up_current_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(8,16384,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(8,16384,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19150,7 +19503,11 @@ sl_status_t uic_mqtt_dotdot_alarms_alarm_count_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(9,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(9,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19472,7 +19829,11 @@ sl_status_t uic_mqtt_dotdot_time_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19607,7 +19968,11 @@ sl_status_t uic_mqtt_dotdot_time_time_zone_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19673,7 +20038,11 @@ sl_status_t uic_mqtt_dotdot_time_dst_start_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19739,7 +20108,11 @@ sl_status_t uic_mqtt_dotdot_time_dst_end_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19805,7 +20178,11 @@ sl_status_t uic_mqtt_dotdot_time_dst_shift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19871,7 +20248,11 @@ sl_status_t uic_mqtt_dotdot_time_standard_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -19937,7 +20318,11 @@ sl_status_t uic_mqtt_dotdot_time_local_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,7,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,7,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -20003,7 +20388,11 @@ sl_status_t uic_mqtt_dotdot_time_last_set_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,8,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,8,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -20069,7 +20458,11 @@ sl_status_t uic_mqtt_dotdot_time_valid_until_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(10,9,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(10,9,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -20145,3210 +20538,6 @@ sl_status_t uic_mqtt_dotdot_time_init()
   uic_mqtt_dotdot_time_attributes_init();
 
   uic_mqtt_dotdot_by_group_time_init();
-
-  return SL_STATUS_OK;
-}
-
-// Callbacks pointers
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t> uic_mqtt_dotdot_ota_upgrade_image_notify_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t> uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t> uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t> uic_mqtt_dotdot_ota_upgrade_image_block_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t> uic_mqtt_dotdot_ota_upgrade_image_page_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t> uic_mqtt_dotdot_ota_upgrade_image_block_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t> uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t> uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t> uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t> uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t> uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t> uic_mqtt_dotdot_ota_upgrade_write_attributes_callback;
-static std::set<uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t> uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback;
-
-// Callbacks setters
-void uic_mqtt_dotdot_ota_upgrade_image_notify_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_image_notify_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_image_notify_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_image_notify_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_image_notify_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_image_notify_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_image_notify_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_image_notify_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_image_block_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_image_block_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_image_block_request_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_image_block_request_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_image_page_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_image_page_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_image_page_request_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_image_page_request_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_image_block_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_image_block_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_image_block_response_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_image_block_response_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback.clear();
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback;
-}
-
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback.erase(callback);
-}
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback_clear()
-{
-  uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback.clear();
-}
-
-void uic_mqtt_dotdot_set_ota_upgrade_write_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_write_attributes_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_unset_ota_upgrade_write_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_write_attributes_callback.erase(callback);
-}
-void uic_mqtt_dotdot_clear_ota_upgrade_write_attributes_callbacks()
-{
-  uic_mqtt_dotdot_ota_upgrade_write_attributes_callback.clear();
-}
-std::set<uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t>& get_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback()
-{
-  return uic_mqtt_dotdot_ota_upgrade_write_attributes_callback;
-}
-
-void uic_mqtt_dotdot_set_ota_upgrade_force_read_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_unset_ota_upgrade_force_read_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback.erase(callback);
-}
-void uic_mqtt_dotdot_clear_ota_upgrade_force_read_attributes_callbacks()
-{
-  uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback.clear();
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/ImageNotify
-void uic_mqtt_dotdot_on_ota_upgrade_image_notify(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_image_notify_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  ImageNotifyPayloadType payload_type = {};
-  uint8_t query_jitter = {};
-  uint16_t manufacturer_code = {};
-  uint16_t image_type = {};
-  uint32_t new_file_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_notify(
-      jsn,
-      payload_type,
-
-      query_jitter,
-
-      manufacturer_code,
-
-      image_type,
-
-      new_file_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImageNotify");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageNotify", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageNotify", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_notify_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      payload_type,
-  
-      query_jitter,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      new_file_version
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/ImageNotify
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_image_notify(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  ImageNotifyPayloadType payload_type = {};
-  uint8_t query_jitter = {};
-  uint16_t manufacturer_code = {};
-  uint16_t image_type = {};
-  uint32_t new_file_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_notify(
-      jsn,
-      payload_type,
-
-      query_jitter,
-
-      manufacturer_code,
-
-      image_type,
-
-      new_file_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImageNotify");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageNotify", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageNotify", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      payload_type,
-  
-      query_jitter,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      new_file_version
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/QueryNextImageRequest
-void uic_mqtt_dotdot_on_ota_upgrade_query_next_image_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint8_t field_control = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t current_file_version = {};
-  uint16_t hardware_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_request(
-      jsn,
-      field_control,
-
-      manufacturer_code,
-
-      image_type,
-
-      current_file_version,
-
-      hardware_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryNextImageRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageRequest", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      field_control,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      current_file_version,
-  
-      hardware_version
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/QueryNextImageRequest
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_query_next_image_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint8_t field_control = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t current_file_version = {};
-  uint16_t hardware_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_request(
-      jsn,
-      field_control,
-
-      manufacturer_code,
-
-      image_type,
-
-      current_file_version,
-
-      hardware_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryNextImageRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageRequest", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      field_control,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      current_file_version,
-  
-      hardware_version
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/QueryNextImageResponse
-void uic_mqtt_dotdot_on_ota_upgrade_query_next_image_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t image_size = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_response(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      image_size
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryNextImageResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageResponse", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      image_size
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/QueryNextImageResponse
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_query_next_image_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t image_size = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_response(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      image_size
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryNextImageResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryNextImageResponse", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      image_size
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/ImageBlockRequest
-void uic_mqtt_dotdot_on_ota_upgrade_image_block_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_image_block_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint8_t field_control = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t file_offset = {};
-  uint8_t maximum_data_size = {};
-  EUI64 request_node_address = {};
-  uint16_t minimum_block_period = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_block_request(
-      jsn,
-      field_control,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      file_offset,
-
-      maximum_data_size,
-
-      request_node_address,
-
-      minimum_block_period
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImageBlockRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockRequest", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_block_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      field_control,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      file_offset,
-  
-      maximum_data_size,
-  
-      request_node_address,
-  
-      minimum_block_period
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/ImageBlockRequest
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_image_block_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint8_t field_control = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t file_offset = {};
-  uint8_t maximum_data_size = {};
-  EUI64 request_node_address = {};
-  uint16_t minimum_block_period = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_block_request(
-      jsn,
-      field_control,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      file_offset,
-
-      maximum_data_size,
-
-      request_node_address,
-
-      minimum_block_period
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImageBlockRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockRequest", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      field_control,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      file_offset,
-  
-      maximum_data_size,
-  
-      request_node_address,
-  
-      minimum_block_period
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/ImagePageRequest
-void uic_mqtt_dotdot_on_ota_upgrade_image_page_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_image_page_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint8_t field_control = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t file_offset = {};
-  uint8_t maximum_data_size = {};
-  uint16_t page_size = {};
-  uint16_t response_spacing = {};
-  EUI64 request_node_address = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_page_request(
-      jsn,
-      field_control,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      file_offset,
-
-      maximum_data_size,
-
-      page_size,
-
-      response_spacing,
-
-      request_node_address
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImagePageRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImagePageRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImagePageRequest", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_page_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      field_control,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      file_offset,
-  
-      maximum_data_size,
-  
-      page_size,
-  
-      response_spacing,
-  
-      request_node_address
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/ImagePageRequest
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_image_page_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint8_t field_control = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t file_offset = {};
-  uint8_t maximum_data_size = {};
-  uint16_t page_size = {};
-  uint16_t response_spacing = {};
-  EUI64 request_node_address = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_page_request(
-      jsn,
-      field_control,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      file_offset,
-
-      maximum_data_size,
-
-      page_size,
-
-      response_spacing,
-
-      request_node_address
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImagePageRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImagePageRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImagePageRequest", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      field_control,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      file_offset,
-  
-      maximum_data_size,
-  
-      page_size,
-  
-      response_spacing,
-  
-      request_node_address
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/ImageBlockResponse
-void uic_mqtt_dotdot_on_ota_upgrade_image_block_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_image_block_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t file_offset = {};
-  std::string image_data;
-  uint32_t current_time = {};
-  uint32_t request_time = {};
-  uint16_t minimum_block_period = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_block_response(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      file_offset,
-
-      image_data,
-
-      current_time,
-
-      request_time,
-
-      minimum_block_period
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImageBlockResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockResponse", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_block_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      file_offset,
-  
-      image_data.c_str(),
-  
-      current_time,
-  
-      request_time,
-  
-      minimum_block_period
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/ImageBlockResponse
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_image_block_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t file_offset = {};
-  std::string image_data;
-  uint32_t current_time = {};
-  uint32_t request_time = {};
-  uint16_t minimum_block_period = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_image_block_response(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      file_offset,
-
-      image_data,
-
-      current_time,
-
-      request_time,
-
-      minimum_block_period
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "ImageBlockResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "ImageBlockResponse", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      file_offset,
-  
-      image_data.c_str(),
-  
-      current_time,
-  
-      request_time,
-  
-      minimum_block_period
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/UpgradeEndRequest
-void uic_mqtt_dotdot_on_ota_upgrade_upgrade_end_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_request(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "UpgradeEndRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndRequest", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/UpgradeEndRequest
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_upgrade_end_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_request(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "UpgradeEndRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndRequest", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/UpgradeEndResponse
-void uic_mqtt_dotdot_on_ota_upgrade_upgrade_end_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  UTC current_time = {};
-  UTC upgrade_time = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_response(
-      jsn,
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      current_time,
-
-      upgrade_time
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "UpgradeEndResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndResponse", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      current_time,
-  
-      upgrade_time
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/UpgradeEndResponse
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_upgrade_end_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uint16_t manufacturer_code = {};
-  OTAImageType image_type = {};
-  uint32_t file_version = {};
-  UTC current_time = {};
-  UTC upgrade_time = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_response(
-      jsn,
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      current_time,
-
-      upgrade_time
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "UpgradeEndResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "UpgradeEndResponse", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      current_time,
-  
-      upgrade_time
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/QueryDeviceSpecificFileRequest
-void uic_mqtt_dotdot_on_ota_upgrade_query_device_specific_file_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  EUI64 request_node_address = {};
-  uint16_t manufacturer_code = {};
-  OTADeviceSpecificImageType image_type = {};
-  uint32_t file_version = {};
-  uint16_t current_zigbee_stack_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_request(
-      jsn,
-      request_node_address,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      current_zigbee_stack_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryDeviceSpecificFileRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileRequest", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      request_node_address,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      current_zigbee_stack_version
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileRequest
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_query_device_specific_file_request(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  EUI64 request_node_address = {};
-  uint16_t manufacturer_code = {};
-  OTADeviceSpecificImageType image_type = {};
-  uint32_t file_version = {};
-  uint16_t current_zigbee_stack_version = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_request(
-      jsn,
-      request_node_address,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      current_zigbee_stack_version
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryDeviceSpecificFileRequest");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileRequest", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileRequest", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      request_node_address,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      current_zigbee_stack_version
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/QueryDeviceSpecificFileResponse
-void uic_mqtt_dotdot_on_ota_upgrade_query_device_specific_file_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTADeviceSpecificImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t image_size = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_response(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      image_size
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryDeviceSpecificFileResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileResponse", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      image_size
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileResponse
-static void uic_mqtt_dotdot_on_generated_ota_upgrade_query_device_specific_file_response(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  zclStatus status = {};
-  uint16_t manufacturer_code = {};
-  OTADeviceSpecificImageType image_type = {};
-  uint32_t file_version = {};
-  uint32_t image_size = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_response(
-      jsn,
-      status,
-
-      manufacturer_code,
-
-      image_type,
-
-      file_version,
-
-      image_size
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "QueryDeviceSpecificFileResponse");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileResponse", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "QueryDeviceSpecificFileResponse", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      status,
-  
-      manufacturer_code,
-  
-      image_type,
-  
-      file_version,
-  
-      image_size
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/OTAUpgrade/Commands/WriteAttributes
-void uic_mqtt_dotdot_on_ota_upgrade_WriteAttributes(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (uic_mqtt_dotdot_ota_upgrade_write_attributes_callback.empty()) {
-    return;
-  }
-
-  if (message_length == 0) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_state_t new_state = {};
-  uic_mqtt_dotdot_ota_upgrade_updated_state_t new_updated_state = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-    uic_mqtt_dotdot_parse_ota_upgrade_write_attributes(
-      jsn,
-      new_state,
-      new_updated_state
-    );
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "OTAUpgrade", "WriteAttributes");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "WriteAttributes", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade", "WriteAttributes", "");
-    return;
-  }
-
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_write_attributes_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      new_state,
-      new_updated_state
-    );
-  }
-
-}
-
-static void uic_mqtt_dotdot_on_ota_upgrade_force_read_attributes(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  uint8_t endpoint = 0;
-  std::string unid;
-
-  if ((message_length == 0) || (uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback.empty())) {
-    return;
-  }
-
-  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  try {
-    uic_mqtt_dotdot_ota_upgrade_updated_state_t force_update = {0};
-    bool trigger_handler = false;
-
-    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
-    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
-
-    // Assume all attributes to be read on empty array received
-    if (attributes.size() == 0) {
-      force_update.upgrade_serverid = true;
-      force_update.file_offset = true;
-      force_update.current_file_version = true;
-      force_update.current_zig_bee_stack_version = true;
-      force_update.downloaded_file_version = true;
-      force_update.downloaded_zig_bee_stack_version = true;
-      force_update.image_upgrade_status = true;
-      force_update.manufacturerid = true;
-      force_update.image_typeid = true;
-      force_update.minimum_block_period = true;
-      force_update.image_stamp = true;
-      force_update.upgrade_activation_policy = true;
-      force_update.upgrade_timeout_policy = true;
-      trigger_handler = true;
-    } else {
-      std::unordered_map<std::string, bool *> supported_attrs = {
-        {"UpgradeServerID", &force_update.upgrade_serverid },
-        {"FileOffset", &force_update.file_offset },
-        {"CurrentFileVersion", &force_update.current_file_version },
-        {"CurrentZigBeeStackVersion", &force_update.current_zig_bee_stack_version },
-        {"DownloadedFileVersion", &force_update.downloaded_file_version },
-        {"DownloadedZigBeeStackVersion", &force_update.downloaded_zig_bee_stack_version },
-        {"ImageUpgradeStatus", &force_update.image_upgrade_status },
-        {"ManufacturerID", &force_update.manufacturerid },
-        {"ImageTypeID", &force_update.image_typeid },
-        {"MinimumBlockPeriod", &force_update.minimum_block_period },
-        {"ImageStamp", &force_update.image_stamp },
-        {"UpgradeActivationPolicy", &force_update.upgrade_activation_policy },
-        {"UpgradeTimeoutPolicy", &force_update.upgrade_timeout_policy },
-      };
-
-      for (auto& attribute : attributes) {
-        auto found_attr = supported_attrs.find(attribute);
-        if (found_attr != supported_attrs.end()) {
-          *(found_attr->second) = true;
-          trigger_handler = true;
-        }
-      }
-    }
-
-    if (trigger_handler == true) {
-      for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback) {
-        callback(
-          static_cast<dotdot_unid_t>(unid.c_str()),
-          endpoint,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-          force_update
-        );
-      }
-    }
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "OTAUpgrade/Commands/ForceReadAttributes: Unable to parse JSON payload");
-    return;
-  }
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_serverid_publish(
-  const char *base_topic,
-  EUI64 value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/UpgradeServerID", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/UpgradeServerID";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_serverid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/UpgradeServerID";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_file_offset_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/FileOffset", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/FileOffset";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_file_offset_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/FileOffset";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_file_version_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/CurrentFileVersion", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/CurrentFileVersion";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_file_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/CurrentFileVersion";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_zig_bee_stack_version_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/CurrentZigBeeStackVersion", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/CurrentZigBeeStackVersion";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_zig_bee_stack_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/CurrentZigBeeStackVersion";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_file_version_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/DownloadedFileVersion", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/DownloadedFileVersion";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_file_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/DownloadedFileVersion";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_zig_bee_stack_version_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/DownloadedZigBeeStackVersion", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/DownloadedZigBeeStackVersion";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_zig_bee_stack_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/DownloadedZigBeeStackVersion";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_upgrade_status_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  #ifdef OTA_UPGRADE_IMAGE_UPGRADE_STATUS_ENUM_NAME_AVAILABLE
-  jsn["value"] = ota_upgrade_image_upgrade_status_get_enum_value_name((uint32_t)value);
-  #else
-  jsn["value"] = static_cast<OTAUpgradeImageUpgradeStatus>(value);
-  #endif
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/ImageUpgradeStatus", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/ImageUpgradeStatus";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_upgrade_status_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/ImageUpgradeStatus";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_manufacturerid_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/ManufacturerID", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/ManufacturerID";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_manufacturerid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/ManufacturerID";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_typeid_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/ImageTypeID", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/ImageTypeID";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_typeid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/ImageTypeID";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_minimum_block_period_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/MinimumBlockPeriod", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/MinimumBlockPeriod";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_minimum_block_period_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/MinimumBlockPeriod";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_stamp_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  jsn["value"] = value;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/ImageStamp", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/ImageStamp";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_stamp_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/ImageStamp";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_activation_policy_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  #ifdef OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY_ENUM_NAME_AVAILABLE
-  jsn["value"] = ota_upgrade_upgrade_activation_policy_get_enum_value_name((uint32_t)value);
-  #else
-  jsn["value"] = static_cast<OTAUpgradeUpgradeActivationPolicy>(value);
-  #endif
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/UpgradeActivationPolicy", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/UpgradeActivationPolicy";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_activation_policy_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/UpgradeActivationPolicy";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_timeout_policy_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  #ifdef OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_ENUM_NAME_AVAILABLE
-  jsn["value"] = ota_upgrade_upgrade_timeout_policy_get_enum_value_name((uint32_t)value);
-  #else
-  jsn["value"] = static_cast<OTAUpgradeUpgradeTimeoutPolicy>(value);
-  #endif
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "OTAUpgrade/Attributes/UpgradeTimeoutPolicy", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/OTAUpgrade/Attributes/UpgradeTimeoutPolicy";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_timeout_policy_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/UpgradeTimeoutPolicy";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-
-sl_status_t uic_mqtt_dotdot_ota_upgrade_init()
-{
-  std::string base_topic = "ucl/by-unid/+/+/";
-
-  std::string subscription_topic;
-  if(!uic_mqtt_dotdot_ota_upgrade_write_attributes_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/WriteAttributes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_WriteAttributes);
-  }
-
-  if(!uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/ForceReadAttributes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_force_read_attributes);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_image_notify_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/ImageNotify";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_image_notify);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/ImageNotify";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_image_notify);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/QueryNextImageRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_query_next_image_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/QueryNextImageRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_query_next_image_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/QueryNextImageResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_query_next_image_response);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/QueryNextImageResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_query_next_image_response);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_image_block_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/ImageBlockRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_image_block_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/ImageBlockRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_image_block_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_image_page_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/ImagePageRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_image_page_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/ImagePageRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_image_page_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_image_block_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/ImageBlockResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_image_block_response);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/ImageBlockResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_image_block_response);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/UpgradeEndRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_upgrade_end_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/UpgradeEndRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_upgrade_end_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/UpgradeEndResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_upgrade_end_response);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/UpgradeEndResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_upgrade_end_response);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/QueryDeviceSpecificFileRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_query_device_specific_file_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileRequest";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_query_device_specific_file_request);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/Commands/QueryDeviceSpecificFileResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_ota_upgrade_query_device_specific_file_response);
-  }
-  if (!uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback.empty()) {
-    subscription_topic = base_topic + "OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_ota_upgrade_query_device_specific_file_response);
-  }
-
-  // Init the attributes for that cluster
-  uic_mqtt_dotdot_ota_upgrade_attributes_init();
-
-  uic_mqtt_dotdot_by_group_ota_upgrade_init();
 
   return SL_STATUS_OK;
 }
@@ -24289,7 +21478,11 @@ sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(32,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(32,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -24355,7 +21548,11 @@ sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(32,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(32,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -24421,7 +21618,11 @@ sl_status_t uic_mqtt_dotdot_poll_control_short_poll_interval_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(32,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(32,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -24487,7 +21688,11 @@ sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(32,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(32,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -24553,7 +21758,11 @@ sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(32,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(32,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -24619,7 +21828,11 @@ sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(32,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(32,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -24685,7 +21898,11 @@ sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(32,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(32,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -24989,7 +22206,11 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_physical_closed_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(256,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(256,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -25055,7 +22276,11 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_motor_step_size_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(256,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(256,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -25190,7 +22415,11 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_closed_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(256,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(256,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -25258,7 +22487,10 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_mode_publish(
 
   #ifdef SHADE_CONFIGURATION_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = shade_configuration_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for SHADE_CONFIGURATION_MODE. Using number instead.");
   jsn["value"] = static_cast<ShadeConfigurationMode>(value);
   #endif
 
@@ -34546,7 +31778,10 @@ sl_status_t uic_mqtt_dotdot_door_lock_lock_state_publish(
 
   #ifdef DOOR_LOCK_LOCK_STATE_ENUM_NAME_AVAILABLE
   jsn["value"] = door_lock_lock_state_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DOOR_LOCK_LOCK_STATE. Using number instead.");
   jsn["value"] = static_cast<DoorLockLockState>(value);
   #endif
 
@@ -34616,7 +31851,10 @@ sl_status_t uic_mqtt_dotdot_door_lock_lock_type_publish(
 
   #ifdef DOOR_LOCK_LOCK_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = door_lock_lock_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DOOR_LOCK_LOCK_TYPE. Using number instead.");
   jsn["value"] = static_cast<DoorLockLockType>(value);
   #endif
 
@@ -34684,7 +31922,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_actuator_enabled_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -34752,7 +31994,10 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_state_publish(
 
   #ifdef DOOR_LOCK_DOOR_STATE_ENUM_NAME_AVAILABLE
   jsn["value"] = door_lock_door_state_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DOOR_LOCK_DOOR_STATE. Using number instead.");
   jsn["value"] = static_cast<DoorLockDoorState>(value);
   #endif
 
@@ -34820,7 +32065,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_open_events_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -34886,7 +32135,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_closed_events_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -34952,7 +32205,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_open_period_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35018,7 +32275,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_log_records_supported_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35084,7 +32345,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_total_users_supported_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35150,7 +32415,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35216,7 +32485,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35282,7 +32555,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_week_day_schedules_supported_per
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35348,7 +32625,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_year_day_schedules_supported_per
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,21,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,21,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35414,7 +32695,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,22,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,22,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35480,7 +32765,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_maxpin_code_length_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,23,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,23,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35546,7 +32835,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_minpin_code_length_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,24,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,24,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35612,7 +32905,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_maxrfid_code_length_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,25,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,25,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35678,7 +32975,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_minrfid_code_length_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,26,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,26,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35744,7 +33045,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_enable_logging_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,32,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,32,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35876,7 +33181,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_led_settings_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,34,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,34,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -35942,7 +33251,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_auto_relock_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,35,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,35,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36008,7 +33321,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_sound_volume_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,36,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,36,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36076,7 +33393,10 @@ sl_status_t uic_mqtt_dotdot_door_lock_operating_mode_publish(
 
   #ifdef DOOR_LOCK_OPERATING_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = door_lock_operating_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(DRLK_OPER_MODE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = drlk_oper_mode_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DOOR_LOCK_OPERATING_MODE. Using number instead.");
   jsn["value"] = static_cast<DrlkOperMode>(value);
   #endif
 
@@ -36282,7 +33602,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_enable_local_programming_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,40,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,40,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36348,7 +33672,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_enable_one_touch_locking_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,41,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,41,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36414,7 +33742,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_enable_inside_statusled_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,42,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,42,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36480,7 +33812,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_enable_privacy_mode_button_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,43,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,43,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36546,7 +33882,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,48,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,48,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36612,7 +33952,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,49,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,49,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36678,7 +34022,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_sendpin_over_the_air_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,50,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,50,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36744,7 +34092,11 @@ sl_status_t uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(257,51,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(257,51,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -36812,7 +34164,10 @@ sl_status_t uic_mqtt_dotdot_door_lock_security_level_publish(
 
   #ifdef DOOR_LOCK_SECURITY_LEVEL_ENUM_NAME_AVAILABLE
   jsn["value"] = door_lock_security_level_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DOOR_LOCK_SECURITY_LEVEL. Using number instead.");
   jsn["value"] = static_cast<DoorLockSecurityLevel>(value);
   #endif
 
@@ -39124,7 +36479,10 @@ sl_status_t uic_mqtt_dotdot_window_covering_window_covering_type_publish(
 
   #ifdef WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = window_covering_window_covering_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for WINDOW_COVERING_WINDOW_COVERING_TYPE. Using number instead.");
   jsn["value"] = static_cast<WindowCoveringWindowCoveringType>(value);
   #endif
 
@@ -39192,7 +36550,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39258,7 +36620,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39324,7 +36690,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39390,7 +36760,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39456,7 +36830,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39522,7 +36900,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_tilt_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39657,7 +37039,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_percentage_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,8,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,8,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39723,7 +37109,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,9,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,9,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39789,7 +37179,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,256,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,256,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39855,7 +37249,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,257,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,257,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39921,7 +37319,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,258,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,258,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -39987,7 +37389,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,259,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,259,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -40053,7 +37459,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_velocity_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,260,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,260,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -40119,7 +37529,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_acceleration_time_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,261,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,261,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -40185,7 +37599,11 @@ sl_status_t uic_mqtt_dotdot_window_covering_deceleration_time_lift_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(258,262,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(258,262,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41010,7 +38428,10 @@ sl_status_t uic_mqtt_dotdot_barrier_control_moving_state_publish(
 
   #ifdef BARRIER_CONTROL_MOVING_STATE_ENUM_NAME_AVAILABLE
   jsn["value"] = barrier_control_moving_state_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for BARRIER_CONTROL_MOVING_STATE. Using number instead.");
   jsn["value"] = static_cast<BarrierControlMovingState>(value);
   #endif
 
@@ -41216,7 +38637,11 @@ sl_status_t uic_mqtt_dotdot_barrier_control_open_events_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(259,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(259,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41282,7 +38707,11 @@ sl_status_t uic_mqtt_dotdot_barrier_control_close_events_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(259,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(259,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41348,7 +38777,11 @@ sl_status_t uic_mqtt_dotdot_barrier_control_command_open_events_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(259,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(259,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41414,7 +38847,11 @@ sl_status_t uic_mqtt_dotdot_barrier_control_command_close_events_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(259,7,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(259,7,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41480,7 +38917,11 @@ sl_status_t uic_mqtt_dotdot_barrier_control_open_period_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(259,8,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(259,8,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41546,7 +38987,11 @@ sl_status_t uic_mqtt_dotdot_barrier_control_close_period_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(259,9,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(259,9,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41612,7 +39057,11 @@ sl_status_t uic_mqtt_dotdot_barrier_control_barrier_position_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(259,10,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(259,10,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41930,7 +39379,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_pressure_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -41996,7 +39449,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_speed_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42062,7 +39519,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_flow_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42128,7 +39589,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_pressure_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42194,7 +39659,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_pressure_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42260,7 +39729,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_comp_pressure_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42326,7 +39799,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_comp_pressure_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42392,7 +39869,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_speed_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,7,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,7,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42458,7 +39939,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_speed_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,8,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,8,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42524,7 +40009,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_flow_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,9,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,9,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42590,7 +40079,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_flow_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,10,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,10,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42656,7 +40149,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_temp_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,11,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,11,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42722,7 +40219,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_temp_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,12,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,12,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -42859,7 +40360,10 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_effective_operation_m
 
   #ifdef PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_OPERATION_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = pump_configuration_and_control_effective_operation_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(PUMP_OPERATION_MODE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = pump_operation_mode_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_OPERATION_MODE. Using number instead.");
   jsn["value"] = static_cast<PumpOperationMode>(value);
   #endif
 
@@ -42929,7 +40433,10 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_effective_control_mod
 
   #ifdef PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_CONTROL_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = pump_configuration_and_control_effective_control_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(PUMP_CONTROL_MODE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = pump_control_mode_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_CONTROL_MODE. Using number instead.");
   jsn["value"] = static_cast<PumpControlMode>(value);
   #endif
 
@@ -42997,7 +40504,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_capacity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -43063,7 +40574,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_speed_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -43129,7 +40644,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_running_hour
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,21,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,21,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -43195,7 +40714,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,22,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,22,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -43261,7 +40784,11 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_energy_consu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(512,23,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(512,23,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -43329,7 +40856,10 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_operation_mode_publis
 
   #ifdef PUMP_CONFIGURATION_AND_CONTROL_OPERATION_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = pump_configuration_and_control_operation_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(PUMP_OPERATION_MODE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = pump_operation_mode_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for PUMP_CONFIGURATION_AND_CONTROL_OPERATION_MODE. Using number instead.");
   jsn["value"] = static_cast<PumpOperationMode>(value);
   #endif
 
@@ -43399,7 +40929,10 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_control_mode_publish(
 
   #ifdef PUMP_CONFIGURATION_AND_CONTROL_CONTROL_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = pump_configuration_and_control_control_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(PUMP_CONTROL_MODE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = pump_control_mode_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for PUMP_CONFIGURATION_AND_CONTROL_CONTROL_MODE. Using number instead.");
   jsn["value"] = static_cast<PumpControlMode>(value);
   #endif
 
@@ -45004,7 +42537,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_local_temperature_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45070,7 +42607,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_outdoor_temperature_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45205,7 +42746,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_abs_min_heat_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45271,7 +42816,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_abs_max_heat_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45337,7 +42886,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_abs_min_cool_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,5,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45403,7 +42956,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_abs_max_cool_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45469,7 +43026,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_pi_cooling_demand_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,7,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,7,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45535,7 +43096,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_pi_heating_demand_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,8,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,8,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45670,7 +43235,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_local_temperature_calibration_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45736,7 +43305,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_cooling_setpoint_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45802,7 +43375,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_heating_setpoint_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45868,7 +43445,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_cooling_setpoint_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -45934,7 +43515,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_heating_setpoint_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46000,7 +43585,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_min_heat_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,21,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,21,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46066,7 +43655,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_max_heat_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,22,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,22,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46132,7 +43725,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_min_cool_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,23,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,23,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46198,7 +43795,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_max_cool_setpoint_limit_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,24,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,24,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46264,7 +43865,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_min_setpoint_dead_band_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,25,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,25,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46401,7 +44006,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_control_sequence_of_operation_publish(
 
   #ifdef THERMOSTAT_CONTROL_SEQUENCE_OF_OPERATION_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_control_sequence_of_operation_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_CONTROL_SEQUENCE_OF_OPERATION. Using number instead.");
   jsn["value"] = static_cast<ThermostatControlSequenceOfOperation>(value);
   #endif
 
@@ -46471,7 +44079,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_system_mode_publish(
 
   #ifdef THERMOSTAT_SYSTEM_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_system_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_SYSTEM_MODE. Using number instead.");
   jsn["value"] = static_cast<ThermostatSystemMode>(value);
   #endif
 
@@ -46610,7 +44221,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_thermostat_running_mode_publish(
 
   #ifdef THERMOSTAT_THERMOSTAT_RUNNING_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_thermostat_running_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_THERMOSTAT_RUNNING_MODE. Using number instead.");
   jsn["value"] = static_cast<ThermostatThermostatRunningMode>(value);
   #endif
 
@@ -46680,7 +44294,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_start_of_week_publish(
 
   #ifdef THERMOSTAT_START_OF_WEEK_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_start_of_week_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_START_OF_WEEK. Using number instead.");
   jsn["value"] = static_cast<ThermostatStartOfWeek>(value);
   #endif
 
@@ -46748,7 +44365,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_number_of_weekly_transitions_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,33,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,33,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46814,7 +44435,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_number_of_daily_transitions_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,34,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,34,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -46882,7 +44507,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_publish(
 
   #ifdef THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_temperature_setpoint_hold_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_TEMPERATURE_SETPOINT_HOLD. Using number instead.");
   jsn["value"] = static_cast<ThermostatTemperatureSetpointHold>(value);
   #endif
 
@@ -46950,7 +44578,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_duration_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,36,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,36,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47156,7 +44788,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_publish(
 
   #ifdef THERMOSTAT_SETPOINT_CHANGE_SOURCE_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_setpoint_change_source_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_SETPOINT_CHANGE_SOURCE. Using number instead.");
   jsn["value"] = static_cast<ThermostatSetpointChangeSource>(value);
   #endif
 
@@ -47224,7 +44859,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_amount_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,49,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,49,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47290,7 +44929,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,50,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,50,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47356,7 +44999,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,52,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,52,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47422,7 +45069,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,53,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,53,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47488,7 +45139,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,54,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,54,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47554,7 +45209,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,55,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,55,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47620,7 +45279,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,56,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,56,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47686,7 +45349,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,57,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,57,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47752,7 +45419,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_emergency_heat_delta_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,58,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,58,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47820,7 +45491,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_type_publish(
 
   #ifdef THERMOSTAT_AC_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_ac_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_AC_TYPE. Using number instead.");
   jsn["value"] = static_cast<ThermostatACType>(value);
   #endif
 
@@ -47888,7 +45562,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_capacity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,65,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,65,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -47956,7 +45634,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_refrigerant_type_publish(
 
   #ifdef THERMOSTAT_AC_REFRIGERANT_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_ac_refrigerant_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_AC_REFRIGERANT_TYPE. Using number instead.");
   jsn["value"] = static_cast<ThermostatACRefrigerantType>(value);
   #endif
 
@@ -48026,7 +45707,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_compressor_type_publish(
 
   #ifdef THERMOSTAT_AC_COMPRESSOR_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_ac_compressor_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_AC_COMPRESSOR_TYPE. Using number instead.");
   jsn["value"] = static_cast<ThermostatACCompressorType>(value);
   #endif
 
@@ -48165,7 +45849,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_louver_position_publish(
 
   #ifdef THERMOSTAT_AC_LOUVER_POSITION_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_ac_louver_position_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_AC_LOUVER_POSITION. Using number instead.");
   jsn["value"] = static_cast<ThermostatACLouverPosition>(value);
   #endif
 
@@ -48233,7 +45920,11 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_coil_temperature_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(513,70,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(513,70,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -48301,7 +45992,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_capacity_format_publish(
 
   #ifdef THERMOSTAT_AC_CAPACITY_FORMAT_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_ac_capacity_format_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_AC_CAPACITY_FORMAT. Using number instead.");
   jsn["value"] = static_cast<ThermostatACCapacityFormat>(value);
   #endif
 
@@ -48619,7 +46313,10 @@ sl_status_t uic_mqtt_dotdot_fan_control_fan_mode_publish(
 
   #ifdef FAN_CONTROL_FAN_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = fan_control_fan_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for FAN_CONTROL_FAN_MODE. Using number instead.");
   jsn["value"] = static_cast<FanControlFanMode>(value);
   #endif
 
@@ -48689,7 +46386,10 @@ sl_status_t uic_mqtt_dotdot_fan_control_fan_mode_sequence_publish(
 
   #ifdef FAN_CONTROL_FAN_MODE_SEQUENCE_ENUM_NAME_AVAILABLE
   jsn["value"] = fan_control_fan_mode_sequence_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for FAN_CONTROL_FAN_MODE_SEQUENCE. Using number instead.");
   jsn["value"] = static_cast<FanControlFanModeSequence>(value);
   #endif
 
@@ -48961,7 +46661,11 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_relative_humidity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(515,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(515,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -49027,7 +46731,11 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_cooling_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(515,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(515,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -49093,7 +46801,11 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_rh_dehumidification_setpoin
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(515,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(515,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -49161,7 +46873,10 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_relative_humidity_mode_publ
 
   #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = dehumidification_control_relative_humidity_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_MODE. Using number instead.");
   jsn["value"] = static_cast<DehumidificationControlRelativeHumidityMode>(value);
   #endif
 
@@ -49231,7 +46946,10 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_lockout_pu
 
   #ifdef DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_LOCKOUT_ENUM_NAME_AVAILABLE
   jsn["value"] = dehumidification_control_dehumidification_lockout_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_LOCKOUT. Using number instead.");
   jsn["value"] = static_cast<DehumidificationControlDehumidificationLockout>(value);
   #endif
 
@@ -49299,7 +47017,11 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_hysteresis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(515,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(515,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -49365,7 +47087,11 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_max_cool_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(515,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(515,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -49433,7 +47159,10 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_relative_humidity_display_p
 
   #ifdef DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_DISPLAY_ENUM_NAME_AVAILABLE
   jsn["value"] = dehumidification_control_relative_humidity_display_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_DISPLAY. Using number instead.");
   jsn["value"] = static_cast<DehumidificationControlRelativeHumidityDisplay>(value);
   #endif
 
@@ -49697,7 +47426,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_user_interface_configuration_temperature_
 
   #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_TEMPERATURE_DISPLAY_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_user_interface_configuration_temperature_display_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_USER_INTERFACE_CONFIGURATION_TEMPERATURE_DISPLAY_MODE. Using number instead.");
   jsn["value"] = static_cast<ThermostatUserInterfaceConfigurationTemperatureDisplayMode>(value);
   #endif
 
@@ -49767,7 +47499,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_user_interface_configuration_keypad_locko
 
   #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_KEYPAD_LOCKOUT_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_user_interface_configuration_keypad_lockout_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_USER_INTERFACE_CONFIGURATION_KEYPAD_LOCKOUT. Using number instead.");
   jsn["value"] = static_cast<ThermostatUserInterfaceConfigurationKeypadLockout>(value);
   #endif
 
@@ -49837,7 +47572,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_user_interface_configuration_schedule_pro
 
   #ifdef THERMOSTAT_USER_INTERFACE_CONFIGURATION_SCHEDULE_PROGRAMMING_VISIBILITY_ENUM_NAME_AVAILABLE
   jsn["value"] = thermostat_user_interface_configuration_schedule_programming_visibility_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for THERMOSTAT_USER_INTERFACE_CONFIGURATION_SCHEDULE_PROGRAMMING_VISIBILITY. Using number instead.");
   jsn["value"] = static_cast<ThermostatUserInterfaceConfigurationScheduleProgrammingVisibility>(value);
   #endif
 
@@ -53843,7 +51581,11 @@ sl_status_t uic_mqtt_dotdot_color_control_current_hue_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -53909,7 +51651,11 @@ sl_status_t uic_mqtt_dotdot_color_control_current_saturation_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -53975,7 +51721,11 @@ sl_status_t uic_mqtt_dotdot_color_control_remaining_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54041,7 +51791,11 @@ sl_status_t uic_mqtt_dotdot_color_control_currentx_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54107,7 +51861,11 @@ sl_status_t uic_mqtt_dotdot_color_control_currenty_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,4,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54175,7 +51933,10 @@ sl_status_t uic_mqtt_dotdot_color_control_drift_compensation_publish(
 
   #ifdef COLOR_CONTROL_DRIFT_COMPENSATION_ENUM_NAME_AVAILABLE
   jsn["value"] = color_control_drift_compensation_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for COLOR_CONTROL_DRIFT_COMPENSATION. Using number instead.");
   jsn["value"] = static_cast<ColorControlDriftCompensation>(value);
   #endif
 
@@ -54309,7 +52070,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_temperature_mireds_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,7,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,7,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54377,7 +52142,10 @@ sl_status_t uic_mqtt_dotdot_color_control_color_mode_publish(
 
   #ifdef COLOR_CONTROL_COLOR_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = color_control_color_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for COLOR_CONTROL_COLOR_MODE. Using number instead.");
   jsn["value"] = static_cast<ColorControlColorMode>(value);
   #endif
 
@@ -54514,7 +52282,11 @@ sl_status_t uic_mqtt_dotdot_color_control_number_of_primaries_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54580,7 +52352,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1x_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54646,7 +52422,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1y_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54712,7 +52492,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54778,7 +52562,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2x_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,21,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,21,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54844,7 +52632,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2y_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,22,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,22,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54910,7 +52702,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,23,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,23,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -54976,7 +52772,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3x_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,25,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,25,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55042,7 +52842,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3y_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,26,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,26,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55108,7 +52912,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,27,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,27,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55174,7 +52982,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4x_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,32,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,32,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55240,7 +53052,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4y_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,33,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,33,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55306,7 +53122,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,34,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,34,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55372,7 +53192,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5x_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,36,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,36,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55438,7 +53262,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5y_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,37,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,37,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55504,7 +53332,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,38,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,38,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55570,7 +53402,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6x_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,40,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,40,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55636,7 +53472,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6y_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,41,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,41,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55702,7 +53542,11 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,42,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,42,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55768,7 +53612,11 @@ sl_status_t uic_mqtt_dotdot_color_control_white_pointx_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,48,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,48,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55834,7 +53682,11 @@ sl_status_t uic_mqtt_dotdot_color_control_white_pointy_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,49,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,49,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55900,7 +53752,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointrx_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,50,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,50,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -55966,7 +53822,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointry_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,51,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,51,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56032,7 +53892,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointr_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,52,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,52,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56098,7 +53962,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointgx_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,54,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,54,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56164,7 +54032,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointgy_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,55,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,55,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56230,7 +54102,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointg_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,56,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,56,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56296,7 +54172,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointbx_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,58,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,58,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56362,7 +54242,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointby_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,59,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,59,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56428,7 +54312,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointb_intensity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,60,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,60,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56494,7 +54382,11 @@ sl_status_t uic_mqtt_dotdot_color_control_enhanced_current_hue_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16384,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16384,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56562,7 +54454,10 @@ sl_status_t uic_mqtt_dotdot_color_control_enhanced_color_mode_publish(
 
   #ifdef COLOR_CONTROL_ENHANCED_COLOR_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = color_control_enhanced_color_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for COLOR_CONTROL_ENHANCED_COLOR_MODE. Using number instead.");
   jsn["value"] = static_cast<ColorControlEnhancedColorMode>(value);
   #endif
 
@@ -56630,7 +54525,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16386,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16386,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56698,7 +54597,10 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
 
   #ifdef COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE
   jsn["value"] = color_control_color_loop_direction_get_enum_value_name((uint32_t)value);
+  #elif defined(CC_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE)
+  jsn["value"] = cc_color_loop_direction_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for COLOR_CONTROL_COLOR_LOOP_DIRECTION. Using number instead.");
   jsn["value"] = static_cast<CCColorLoopDirection>(value);
   #endif
 
@@ -56766,7 +54668,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16388,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16388,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56832,7 +54738,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_start_enhanced_hue_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16389,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16389,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -56898,7 +54808,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_stored_enhanced_hue_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16390,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16390,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57033,7 +54947,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_min_mireds_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16395,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16395,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57099,7 +55017,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_max_mireds_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16396,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16396,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57165,7 +55087,11 @@ sl_status_t uic_mqtt_dotdot_color_control_couple_color_temp_to_level_min_mireds_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16397,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16397,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57231,7 +55157,11 @@ sl_status_t uic_mqtt_dotdot_color_control_start_up_color_temperature_mireds_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16400,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16400,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57669,7 +55599,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_min_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57735,7 +55669,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_max_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57870,7 +55808,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_min_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -57936,7 +55878,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_max_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58002,7 +55948,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58068,7 +56018,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_fade_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58134,7 +56088,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_intrinsic_ballast_factor_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58200,7 +56158,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_ballast_factor_adjustment_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,21,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,21,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58266,7 +56228,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_quantity_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,32,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,32,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58464,7 +56430,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_rated_hours_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,50,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,50,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58530,7 +56500,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,51,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,51,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58665,7 +56639,11 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_trip_point_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(769,53,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(769,53,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58929,7 +56907,11 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1024,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1024,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -58995,7 +56977,11 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1024,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1024,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -59061,7 +57047,11 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1024,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1024,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -59127,7 +57117,11 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1024,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1024,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -59195,7 +57189,10 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_light_sensor_type_publish(
 
   #ifdef ILLUMINANCE_MEASUREMENT_LIGHT_SENSOR_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = illuminance_measurement_light_sensor_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for ILLUMINANCE_MEASUREMENT_LIGHT_SENSOR_TYPE. Using number instead.");
   jsn["value"] = static_cast<IlluminanceMeasurementLightSensorType>(value);
   #endif
 
@@ -59459,7 +57456,10 @@ sl_status_t uic_mqtt_dotdot_illuminance_level_sensing_level_status_publish(
 
   #ifdef ILLUMINANCE_LEVEL_SENSING_LEVEL_STATUS_ENUM_NAME_AVAILABLE
   jsn["value"] = illuminance_level_sensing_level_status_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for ILLUMINANCE_LEVEL_SENSING_LEVEL_STATUS. Using number instead.");
   jsn["value"] = static_cast<IlluminanceLevelSensingLevelStatus>(value);
   #endif
 
@@ -59529,7 +57529,10 @@ sl_status_t uic_mqtt_dotdot_illuminance_level_sensing_light_sensor_type_publish(
 
   #ifdef ILLUMINANCE_LEVEL_SENSING_LIGHT_SENSOR_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = illuminance_level_sensing_light_sensor_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for ILLUMINANCE_LEVEL_SENSING_LIGHT_SENSOR_TYPE. Using number instead.");
   jsn["value"] = static_cast<IlluminanceLevelSensingLightSensorType>(value);
   #endif
 
@@ -59597,7 +57600,11 @@ sl_status_t uic_mqtt_dotdot_illuminance_level_sensing_illuminance_target_level_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1025,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1025,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -59859,7 +57866,11 @@ sl_status_t uic_mqtt_dotdot_temperature_measurement_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1026,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1026,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -59925,7 +57936,11 @@ sl_status_t uic_mqtt_dotdot_temperature_measurement_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1026,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1026,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -59991,7 +58006,11 @@ sl_status_t uic_mqtt_dotdot_temperature_measurement_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1026,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1026,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60057,7 +58076,11 @@ sl_status_t uic_mqtt_dotdot_temperature_measurement_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1026,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1026,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60329,7 +58352,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60395,7 +58422,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60461,7 +58492,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60527,7 +58562,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60593,7 +58632,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_scaled_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60659,7 +58702,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_min_scaled_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60725,7 +58772,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_max_scaled_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60791,7 +58842,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_scaled_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -60857,7 +58912,11 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_scale_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1027,20,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1027,20,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61119,7 +59178,11 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1028,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1028,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61185,7 +59248,11 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1028,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1028,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61251,7 +59318,11 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1028,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1028,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61317,7 +59388,11 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1028,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1028,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61579,7 +59654,11 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1029,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1029,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61645,7 +59724,11 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1029,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1029,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61711,7 +59794,11 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1029,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1029,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -61777,7 +59864,11 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1029,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1029,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62126,7 +60217,10 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_occupancy_sensor_type_publish(
 
   #ifdef OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = occupancy_sensing_occupancy_sensor_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE. Using number instead.");
   jsn["value"] = static_cast<OccupancySensingOccupancySensorType>(value);
   #endif
 
@@ -62263,7 +60357,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62329,7 +60427,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62395,7 +60497,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_thresho
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62461,7 +60567,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,32,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,32,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62527,7 +60637,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,33,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,33,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62593,7 +60707,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,34,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,34,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62659,7 +60777,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_occupied_to_unocc
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,48,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,48,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62725,7 +60847,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,49,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,49,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -62791,7 +60917,11 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1030,50,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1030,50,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63053,7 +61183,11 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1032,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1032,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63119,7 +61253,11 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1032,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1032,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63185,7 +61323,11 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1032,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1032,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63251,7 +61393,11 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1032,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1032,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63513,7 +61659,11 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1033,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1033,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63579,7 +61729,11 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1033,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1033,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63645,7 +61799,11 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1033,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1033,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63711,7 +61869,11 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1033,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1033,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -63973,7 +62135,11 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_measured_value_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1034,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1034,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64039,7 +62205,11 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_min_measured_val
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1034,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1034,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64105,7 +62275,11 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_max_measured_val
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1034,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1034,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64171,7 +62345,11 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_tolerance_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1034,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1034,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64433,7 +62611,11 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1035,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1035,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64499,7 +62681,11 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1035,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1035,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64565,7 +62751,11 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1035,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1035,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64631,7 +62821,11 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1035,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1035,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64893,7 +63087,11 @@ sl_status_t uic_mqtt_dotdot_carbon_monoxide_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1036,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1036,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -64959,7 +63157,11 @@ sl_status_t uic_mqtt_dotdot_carbon_monoxide_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1036,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1036,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65025,7 +63227,11 @@ sl_status_t uic_mqtt_dotdot_carbon_monoxide_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1036,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1036,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65091,7 +63297,11 @@ sl_status_t uic_mqtt_dotdot_carbon_monoxide_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1036,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1036,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65353,7 +63563,11 @@ sl_status_t uic_mqtt_dotdot_carbon_dioxide_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1037,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1037,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65419,7 +63633,11 @@ sl_status_t uic_mqtt_dotdot_carbon_dioxide_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1037,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1037,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65485,7 +63703,11 @@ sl_status_t uic_mqtt_dotdot_carbon_dioxide_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1037,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1037,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65551,7 +63773,11 @@ sl_status_t uic_mqtt_dotdot_carbon_dioxide_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1037,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1037,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65813,7 +64039,11 @@ sl_status_t uic_mqtt_dotdot_pm25_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1066,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1066,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65879,7 +64109,11 @@ sl_status_t uic_mqtt_dotdot_pm25_min_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1066,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1066,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -65945,7 +64179,11 @@ sl_status_t uic_mqtt_dotdot_pm25_max_measured_value_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1066,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1066,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -66011,7 +64249,11 @@ sl_status_t uic_mqtt_dotdot_pm25_tolerance_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1066,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1066,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -67095,7 +65337,10 @@ sl_status_t uic_mqtt_dotdot_ias_zone_zone_state_publish(
 
   #ifdef IAS_ZONE_ZONE_STATE_ENUM_NAME_AVAILABLE
   jsn["value"] = ias_zone_zone_state_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for IAS_ZONE_ZONE_STATE. Using number instead.");
   jsn["value"] = static_cast<IASZoneZoneState>(value);
   #endif
 
@@ -67165,7 +65410,10 @@ sl_status_t uic_mqtt_dotdot_ias_zone_zone_type_publish(
 
   #ifdef IAS_ZONE_ZONE_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = ias_zone_zone_type_get_enum_value_name((uint32_t)value);
+  #elif defined(IAS_ZONE_TYPE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = ias_zone_type_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for IAS_ZONE_ZONE_TYPE. Using number instead.");
   jsn["value"] = static_cast<IasZoneType>(value);
   #endif
 
@@ -67302,7 +65550,11 @@ sl_status_t uic_mqtt_dotdot_ias_zone_iascie_address_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1280,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1280,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -67368,7 +65620,11 @@ sl_status_t uic_mqtt_dotdot_ias_zone_zoneid_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1280,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1280,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -67434,7 +65690,11 @@ sl_status_t uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1280,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1280,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -67500,7 +65760,11 @@ sl_status_t uic_mqtt_dotdot_ias_zone_current_zone_sensitivity_level_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1280,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1280,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68134,7 +66398,11 @@ sl_status_t uic_mqtt_dotdot_iaswd_max_duration_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1282,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1282,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68456,7 +66724,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_summation_delivered_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68522,7 +66794,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_summation_received_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68588,7 +66864,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68654,7 +66934,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,3,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68720,7 +67004,11 @@ sl_status_t uic_mqtt_dotdot_metering_power_factor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,6,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68786,7 +67074,11 @@ sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,7,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,7,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68852,7 +67144,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,8,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,8,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68918,7 +67214,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,9,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,9,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -68984,7 +67284,11 @@ sl_status_t uic_mqtt_dotdot_metering_default_update_period_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,10,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,10,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -69052,7 +67356,10 @@ sl_status_t uic_mqtt_dotdot_metering_supply_status_publish(
 
   #ifdef METERING_SUPPLY_STATUS_ENUM_NAME_AVAILABLE
   jsn["value"] = metering_supply_status_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for METERING_SUPPLY_STATUS. Using number instead.");
   jsn["value"] = static_cast<MeteringSupplyStatus>(value);
   #endif
 
@@ -69120,7 +67427,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,21,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,21,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -69186,7 +67497,11 @@ sl_status_t uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,22,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,22,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -69252,7 +67567,11 @@ sl_status_t uic_mqtt_dotdot_metering_inlet_temperature_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,23,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,23,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -69318,7 +67637,11 @@ sl_status_t uic_mqtt_dotdot_metering_outlet_temperature_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,24,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,24,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -69386,7 +67709,10 @@ sl_status_t uic_mqtt_dotdot_metering_unitof_measure_publish(
 
   #ifdef METERING_UNITOF_MEASURE_ENUM_NAME_AVAILABLE
   jsn["value"] = metering_unitof_measure_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for METERING_UNITOF_MEASURE. Using number instead.");
   jsn["value"] = static_cast<MeteringUnitofMeasure>(value);
   #endif
 
@@ -69454,7 +67780,11 @@ sl_status_t uic_mqtt_dotdot_metering_multiplier_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,769,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,769,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -69520,7 +67850,11 @@ sl_status_t uic_mqtt_dotdot_metering_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(1794,770,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(1794,770,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -69795,7 +68129,10 @@ sl_status_t uic_mqtt_dotdot_metering_metering_device_type_publish(
 
   #ifdef METERING_METERING_DEVICE_TYPE_ENUM_NAME_AVAILABLE
   jsn["value"] = metering_metering_device_type_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for METERING_METERING_DEVICE_TYPE. Using number instead.");
   jsn["value"] = static_cast<MeteringMeteringDeviceType>(value);
   #endif
 
@@ -69865,7 +68202,10 @@ sl_status_t uic_mqtt_dotdot_metering_energy_carrier_unit_of_measure_publish(
 
   #ifdef METERING_ENERGY_CARRIER_UNIT_OF_MEASURE_ENUM_NAME_AVAILABLE
   jsn["value"] = metering_energy_carrier_unit_of_measure_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for METERING_ENERGY_CARRIER_UNIT_OF_MEASURE. Using number instead.");
   jsn["value"] = static_cast<MeteringEnergyCarrierUnitOfMeasure>(value);
   #endif
 
@@ -70073,7 +68413,10 @@ sl_status_t uic_mqtt_dotdot_metering_temperature_unit_of_measure_publish(
 
   #ifdef METERING_TEMPERATURE_UNIT_OF_MEASURE_ENUM_NAME_AVAILABLE
   jsn["value"] = metering_temperature_unit_of_measure_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for METERING_TEMPERATURE_UNIT_OF_MEASURE. Using number instead.");
   jsn["value"] = static_cast<MeteringTemperatureUnitOfMeasure>(value);
   #endif
 
@@ -71425,7 +69768,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,256,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,256,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71491,7 +69838,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,257,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,257,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71557,7 +69908,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,258,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,258,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71623,7 +69978,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,259,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,259,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71689,7 +70048,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,260,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,260,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71755,7 +70118,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,261,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,261,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71821,7 +70188,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,262,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,262,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71887,7 +70258,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,263,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,263,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -71953,7 +70328,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,264,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,264,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72019,7 +70398,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,512,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,512,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72085,7 +70468,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,513,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,513,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72151,7 +70538,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,514,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,514,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72217,7 +70608,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,515,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,515,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72283,7 +70678,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,516,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,516,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72349,7 +70748,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,517,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,517,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72415,7 +70818,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,768,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,768,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72481,7 +70888,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,769,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,769,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72547,7 +70958,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,770,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,770,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72613,7 +71028,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_neutral_current_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,771,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,771,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72679,7 +71098,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_total_active_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,772,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,772,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72745,7 +71168,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_total_reactive_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,773,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,773,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72811,7 +71238,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_total_apparent_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,774,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,774,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72877,7 +71308,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured1st_harmonic_current_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,775,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,775,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -72943,7 +71378,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured3rd_harmonic_current_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,776,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,776,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73009,7 +71448,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured5th_harmonic_current_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,777,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,777,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73075,7 +71518,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured7th_harmonic_current_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,778,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,778,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73141,7 +71588,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured9th_harmonic_current_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,779,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,779,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73207,7 +71658,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured11th_harmonic_current
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,780,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,780,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73273,7 +71728,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase1st_harmonic_cu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,781,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,781,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73339,7 +71798,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase3rd_harmonic_cu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,782,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,782,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73405,7 +71868,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase5th_harmonic_cu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,783,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,783,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73471,7 +71938,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase7th_harmonic_cu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,784,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,784,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73537,7 +72008,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase9th_harmonic_cu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,785,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,785,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73603,7 +72078,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase11th_harmonic_c
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,786,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,786,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73669,7 +72148,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1024,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1024,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73735,7 +72218,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1025,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1025,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73801,7 +72288,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_multiplier_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1026,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1026,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73867,7 +72358,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1027,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1027,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73933,7 +72428,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_harmonic_current_multiplier_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1028,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1028,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -73999,7 +72498,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_phase_harmonic_current_multip
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1029,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1029,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74065,7 +72568,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1281,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1281,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74131,7 +72638,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_current_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1282,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1282,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74197,7 +72708,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1283,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1283,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74263,7 +72778,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1285,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1285,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74329,7 +72848,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1286,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1286,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74395,7 +72918,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1287,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1287,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74461,7 +72988,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1288,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1288,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74527,7 +73058,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1289,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1289,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74593,7 +73128,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1290,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1290,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74659,7 +73198,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1291,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1291,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74725,7 +73268,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_min_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1292,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1292,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74791,7 +73338,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_max_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1293,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1293,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74857,7 +73408,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1294,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1294,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74923,7 +73478,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1295,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1295,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -74989,7 +73548,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1296,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1296,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75055,7 +73618,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1297,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1297,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75121,7 +73688,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1298,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1298,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75187,7 +73758,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_coun
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1299,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1299,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75253,7 +73828,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1300,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1300,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75319,7 +73898,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1301,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1301,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75385,7 +73968,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1302,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1302,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75451,7 +74038,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1303,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1303,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75517,7 +74108,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1536,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1536,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75583,7 +74178,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1537,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1537,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75649,7 +74248,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1538,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1538,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75715,7 +74318,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1539,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1539,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75781,7 +74388,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1540,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1540,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75847,7 +74458,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_divisor_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1541,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1541,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -75982,7 +74597,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_overload_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1793,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1793,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76048,7 +74667,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_overload_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,1794,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,1794,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76183,7 +74806,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_overload_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2049,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2049,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76249,7 +74876,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_overload_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2050,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2050,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76315,7 +74946,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_active_power_overload_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2051,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2051,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76381,7 +75016,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_reactive_power_overload_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2052,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2052,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76447,7 +75086,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2053,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2053,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76513,7 +75156,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2054,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2054,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76579,7 +75226,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_publ
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2055,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2055,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76645,7 +75296,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2056,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2056,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76711,7 +75366,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2057,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2057,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76777,7 +75436,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2058,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2058,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76843,7 +75506,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2305,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2305,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76909,7 +75576,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_current_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2306,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2306,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -76975,7 +75646,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2307,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2307,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77041,7 +75716,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2309,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2309,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77107,7 +75786,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2310,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2310,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77173,7 +75856,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2311,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2311,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77239,7 +75926,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2312,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2312,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77305,7 +75996,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2313,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2313,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77371,7 +76066,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2314,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2314,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77437,7 +76136,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2315,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2315,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77503,7 +76206,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_min_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2316,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2316,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77569,7 +76276,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_max_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2317,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2317,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77635,7 +76346,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2318,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2318,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77701,7 +76416,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2319,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2319,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77767,7 +76486,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2320,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2320,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77833,7 +76556,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2321,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2321,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77899,7 +76626,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2322,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2322,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -77965,7 +76696,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_coun
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2323,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2323,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78031,7 +76766,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2324,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2324,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78097,7 +76836,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2325,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2325,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78163,7 +76906,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2326,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2326,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78229,7 +76976,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2327,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2327,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78295,7 +77046,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2561,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2561,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78361,7 +77116,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_current_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2562,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2562,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78427,7 +77186,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2563,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2563,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78493,7 +77256,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2565,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2565,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78559,7 +77326,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2566,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2566,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78625,7 +77396,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2567,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2567,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78691,7 +77466,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2568,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2568,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78757,7 +77536,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2569,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2569,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78823,7 +77606,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2570,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2570,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78889,7 +77676,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2571,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2571,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -78955,7 +77746,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_min_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2572,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2572,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79021,7 +77816,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_active_power_max_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2573,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2573,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79087,7 +77886,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2574,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2574,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79153,7 +77956,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2575,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2575,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79219,7 +78026,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phc_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2576,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2576,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79285,7 +78096,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2577,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2577,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79351,7 +78166,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2578,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2578,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79417,7 +78236,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_coun
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2579,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2579,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79483,7 +78306,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2580,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2580,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79549,7 +78376,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2581,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2581,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79615,7 +78446,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_pu
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2582,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2582,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -79681,7 +78516,11 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phc_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2820,2583,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2820,2583,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80031,7 +78870,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_number_of_resets_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80097,7 +78940,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_persistent_memory_writes_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80163,7 +79010,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_bcast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,256,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,256,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80229,7 +79080,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_bcast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,257,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,257,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80295,7 +79150,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_ucast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,258,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,258,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80361,7 +79220,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,259,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,259,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80427,7 +79290,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_retry_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,260,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,260,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80493,7 +79360,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_fail_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,261,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,261,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80559,7 +79430,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_bcast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,262,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,262,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80625,7 +79500,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_bcast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,263,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,263,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80691,7 +79570,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_ucast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,264,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,264,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80757,7 +79640,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_success_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,265,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,265,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80823,7 +79710,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_retry_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,266,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,266,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80889,7 +79780,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_fail_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,267,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,267,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -80955,7 +79850,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_route_disc_initiated_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,268,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,268,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81021,7 +79920,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_added_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,269,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,269,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81087,7 +79990,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_removed_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,270,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,270,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81153,7 +80060,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_stale_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,271,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,271,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81219,7 +80130,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_join_indication_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,272,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,272,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81285,7 +80200,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_child_moved_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,273,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,273,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81351,7 +80270,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_nwkfc_failure_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,274,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,274,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81417,7 +80340,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_apsfc_failure_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,275,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,275,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81483,7 +80410,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_unauthorized_key_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,276,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,276,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81549,7 +80480,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_nwk_decrypt_failures_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,277,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,277,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81615,7 +80550,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_decrypt_failures_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,278,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,278,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81681,7 +80620,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_packet_buffer_allocate_failures_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,279,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,279,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81747,7 +80690,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_relayed_ucast_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,280,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,280,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81813,7 +80760,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_phy_tomac_queue_limit_reached_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,281,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,281,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81879,7 +80830,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,282,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,282,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -81945,7 +80900,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_averagemac_retry_peraps_message_sent_pub
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,283,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,283,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -82011,7 +80970,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_last_messagelqi_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,284,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,284,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -82077,7 +81040,11 @@ sl_status_t uic_mqtt_dotdot_diagnostics_last_messagerssi_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(2821,285,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(2821,285,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -82685,7 +81652,11 @@ sl_status_t uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report_enabled_p
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64769,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64769,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -82751,7 +81722,11 @@ sl_status_t uic_mqtt_dotdot_protocol_controller_rf_telemetry_pti_enabled_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64769,1,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64769,1,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -82847,6 +81822,8 @@ static std::set<uic_mqtt_dotdot_state_discover_neighbors_callback_t> uic_mqtt_do
 static std::set<uic_mqtt_dotdot_state_discover_neighbors_callback_t> uic_mqtt_dotdot_state_generated_discover_neighbors_callback;
 static std::set<uic_mqtt_dotdot_state_interview_callback_t> uic_mqtt_dotdot_state_interview_callback;
 static std::set<uic_mqtt_dotdot_state_interview_callback_t> uic_mqtt_dotdot_state_generated_interview_callback;
+static std::set<uic_mqtt_dotdot_state_discover_security_callback_t> uic_mqtt_dotdot_state_discover_security_callback;
+static std::set<uic_mqtt_dotdot_state_discover_security_callback_t> uic_mqtt_dotdot_state_generated_discover_security_callback;
 static std::set<uic_mqtt_dotdot_state_write_attributes_callback_t> uic_mqtt_dotdot_state_write_attributes_callback;
 static std::set<uic_mqtt_dotdot_state_force_read_attributes_callback_t> uic_mqtt_dotdot_state_force_read_attributes_callback;
 
@@ -82982,6 +81959,39 @@ void uic_mqtt_dotdot_state_generated_interview_callback_unset(const uic_mqtt_dot
 void uic_mqtt_dotdot_state_generated_interview_callback_clear()
 {
   uic_mqtt_dotdot_state_generated_interview_callback.clear();
+}
+void uic_mqtt_dotdot_state_discover_security_callback_set(const uic_mqtt_dotdot_state_discover_security_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_state_discover_security_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_state_discover_security_callback_unset(const uic_mqtt_dotdot_state_discover_security_callback_t callback)
+{
+  uic_mqtt_dotdot_state_discover_security_callback.erase(callback);
+}
+void uic_mqtt_dotdot_state_discover_security_callback_clear()
+{
+  uic_mqtt_dotdot_state_discover_security_callback.clear();
+}
+std::set<uic_mqtt_dotdot_state_discover_security_callback_t>& get_uic_mqtt_dotdot_state_discover_security_callback()
+{
+  return uic_mqtt_dotdot_state_discover_security_callback;
+}
+
+void uic_mqtt_dotdot_state_generated_discover_security_callback_set(const uic_mqtt_dotdot_state_discover_security_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_state_generated_discover_security_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_state_generated_discover_security_callback_unset(const uic_mqtt_dotdot_state_discover_security_callback_t callback)
+{
+  uic_mqtt_dotdot_state_generated_discover_security_callback.erase(callback);
+}
+void uic_mqtt_dotdot_state_generated_discover_security_callback_clear()
+{
+  uic_mqtt_dotdot_state_generated_discover_security_callback.clear();
 }
 
 void uic_mqtt_dotdot_set_state_write_attributes_callback(
@@ -83435,6 +82445,109 @@ static void uic_mqtt_dotdot_on_generated_state_interview(
 }
 
 
+// Callback function for incoming publications on ucl/by-unid/+/+/State/Commands/DiscoverSecurity
+void uic_mqtt_dotdot_on_state_discover_security(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_state_discover_security_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "State", "DiscoverSecurity");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "DiscoverSecurity", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "DiscoverSecurity", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_state_discover_security_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/State/GeneratedCommands/DiscoverSecurity
+static void uic_mqtt_dotdot_on_generated_state_discover_security(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_state_generated_discover_security_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "State", "DiscoverSecurity");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "DiscoverSecurity", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "DiscoverSecurity", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_state_generated_discover_security_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
 // Callback function for incoming publications on ucl/by-unid/+/+/State/Commands/WriteAttributes
 void uic_mqtt_dotdot_on_state_WriteAttributes(
   const char *topic,
@@ -83525,10 +82638,18 @@ static void uic_mqtt_dotdot_on_state_force_read_attributes(
     // Assume all attributes to be read on empty array received
     if (attributes.size() == 0) {
       force_update.endpoint_id_list = true;
+      force_update.network_status = true;
+      force_update.security = true;
+      force_update.maximum_command_delay = true;
+      force_update.network_list = true;
       trigger_handler = true;
     } else {
       std::unordered_map<std::string, bool *> supported_attrs = {
         {"EndpointIdList", &force_update.endpoint_id_list },
+        {"NetworkStatus", &force_update.network_status },
+        {"Security", &force_update.security },
+        {"MaximumCommandDelay", &force_update.maximum_command_delay },
+        {"NetworkList", &force_update.network_list },
       };
 
       for (auto& attribute : attributes) {
@@ -83628,6 +82749,295 @@ sl_status_t uic_mqtt_dotdot_state_endpoint_id_list_unretain(
 }
 // clang-format off
 
+sl_status_t uic_mqtt_dotdot_state_network_status_publish(
+  const char *base_topic,
+  NodeStateNetworkStatus value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef STATE_NETWORK_STATUS_ENUM_NAME_AVAILABLE
+  jsn["value"] = state_network_status_get_enum_value_name((uint32_t)value);
+  #elif defined(NODE_STATE_NETWORK_STATUS_ENUM_NAME_AVAILABLE)
+  jsn["value"] = node_state_network_status_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for STATE_NETWORK_STATUS. Using number instead.");
+  jsn["value"] = static_cast<NodeStateNetworkStatus>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State/Attributes/NetworkStatus", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/State/Attributes/NetworkStatus";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_state_network_status_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/State/Attributes/NetworkStatus";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_state_security_publish(
+  const char *base_topic,
+  NodeStateSecurity value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef STATE_SECURITY_ENUM_NAME_AVAILABLE
+  jsn["value"] = state_security_get_enum_value_name((uint32_t)value);
+  #elif defined(NODE_STATE_SECURITY_ENUM_NAME_AVAILABLE)
+  jsn["value"] = node_state_security_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for STATE_SECURITY. Using number instead.");
+  jsn["value"] = static_cast<NodeStateSecurity>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State/Attributes/Security", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/State/Attributes/Security";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_state_security_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/State/Attributes/Security";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_state_maximum_command_delay_publish(
+  const char *base_topic,
+  uint32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64770,3,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64770,3,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State/Attributes/MaximumCommandDelay", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/State/Attributes/MaximumCommandDelay";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_state_maximum_command_delay_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/State/Attributes/MaximumCommandDelay";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_state_network_list_publish(
+  const char *base_topic,
+  size_t value_count,
+  const char** value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a variable size array of the same known type.
+  // Create an array under the value {"value":[]}
+  jsn["value"] = nlohmann::json::array();
+
+  for (size_t i = 0; i<value_count;i++){
+    // String type
+    jsn["value"].push_back(std::string(value[i]));
+  }
+
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State/Attributes/NetworkList", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/State/Attributes/NetworkList";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_state_network_list_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/State/Attributes/NetworkList";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
 
 sl_status_t uic_mqtt_dotdot_state_init()
 {
@@ -83674,6 +83084,14 @@ sl_status_t uic_mqtt_dotdot_state_init()
   if (!uic_mqtt_dotdot_state_generated_interview_callback.empty()) {
     subscription_topic = base_topic + "State/GeneratedCommands/Interview";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_state_interview);
+  }
+  if (!uic_mqtt_dotdot_state_discover_security_callback.empty()) {
+    subscription_topic = base_topic + "State/Commands/DiscoverSecurity";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_state_discover_security);
+  }
+  if (!uic_mqtt_dotdot_state_generated_discover_security_callback.empty()) {
+    subscription_topic = base_topic + "State/GeneratedCommands/DiscoverSecurity";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_state_discover_security);
   }
 
   // Init the attributes for that cluster
@@ -84519,7 +83937,11 @@ sl_status_t uic_mqtt_dotdot_binding_binding_table_full_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64771,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64771,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85009,7 +84431,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_reporting_interval_seconds_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,0,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85435,7 +84861,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_ram_totalmb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,32,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,32,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85501,7 +84931,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_ram_freemb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,33,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,33,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85567,7 +85001,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_ram_availablemb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,34,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,34,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85633,7 +85071,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_swap_memory_totalmb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,35,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,35,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85699,7 +85141,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_swap_memory_usedmb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,36,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,36,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85765,7 +85211,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_virtual_memory_totalmb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,37,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,37,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -85831,7 +85281,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_virtual_memory_usedmb_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,38,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,38,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86344,7 +85798,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_uptime_minutes_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,64,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,64,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86410,7 +85868,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_current_temperature_celcius_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,80,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,80,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86476,7 +85938,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_average_temperature_celcius_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,81,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,81,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86542,7 +86008,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_min_temperature_celcius_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,82,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,82,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86608,7 +86078,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_max_temperature_celcius_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,83,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,83,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86674,7 +86148,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_power_plugged_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,96,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,96,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86740,7 +86218,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_battery_percentage_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,97,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,97,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -86806,7 +86288,11 @@ sl_status_t uic_mqtt_dotdot_system_metrics_system_interrupts_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64772,112,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64772,112,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -87421,7 +86907,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_application_connected_publish
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -87560,7 +87050,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_uptime_minutes_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,16,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -87626,7 +87120,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_process_id_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -87824,7 +87322,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_logging_enabled_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,33,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,33,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -87892,7 +87394,10 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_logging_level_publish(
 
   #ifdef APPLICATION_MONITORING_MQTT_LOGGING_LEVEL_ENUM_NAME_AVAILABLE
   jsn["value"] = application_monitoring_mqtt_logging_level_get_enum_value_name((uint32_t)value);
+  #elif defined(LOGGING_LEVEL_ENUM_ENUM_NAME_AVAILABLE)
+  jsn["value"] = logging_level_enum_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for APPLICATION_MONITORING_MQTT_LOGGING_LEVEL. Using number instead.");
   jsn["value"] = static_cast<LoggingLevelEnum>(value);
   #endif
 
@@ -87960,7 +87465,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_statistics_reporting_int
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,48,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,48,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88026,7 +87535,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_sent_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,49,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,49,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88092,7 +87605,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_received_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,50,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,50,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88158,7 +87675,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_subscription_count_publi
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,51,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,51,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88224,7 +87745,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_average_delivery_time_se
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,52,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,52,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88290,7 +87815,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_min_delivery_time_second
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,53,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,53,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88356,7 +87885,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_max_delivery_time_second
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,54,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,54,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88422,7 +87955,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_application_statistics_report
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,64,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,64,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88488,7 +88025,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,65,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,65,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88554,7 +88095,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,66,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,66,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88620,7 +88165,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_perc
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,67,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,67,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88686,7 +88235,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_perc
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,68,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,68,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -88752,7 +88305,11 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationram_usagemb_publis
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64773,69,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64773,69,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -90878,7 +90435,10 @@ sl_status_t uic_mqtt_dotdot_aox_locator_reporting_mode_publish(
 
   #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = aox_locator_reporting_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_REPORTING_MODE. Using number instead.");
   jsn["value"] = static_cast<AoXLocatorReportingMode>(value);
   #endif
 
@@ -90946,7 +90506,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,2,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,2,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91312,7 +90876,10 @@ sl_status_t uic_mqtt_dotdot_aox_locator_aox_mode_publish(
 
   #ifdef AOX_LOCATOR_AOX_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = aox_locator_aox_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_AOX_MODE. Using number instead.");
   jsn["value"] = static_cast<AoXLocatorAoXMode>(value);
   #endif
 
@@ -91382,7 +90949,10 @@ sl_status_t uic_mqtt_dotdot_aox_locator_antenna_mode_publish(
 
   #ifdef AOX_LOCATOR_ANTENNA_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = aox_locator_antenna_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_ANTENNA_MODE. Using number instead.");
   jsn["value"] = static_cast<AoXLocatorAntennaMode>(value);
   #endif
 
@@ -91522,7 +91092,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_period_samples_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,11,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,11,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91588,7 +91162,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,12,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,12,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91654,7 +91232,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_weight_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,13,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,13,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91720,7 +91302,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_timeout_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,14,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,14,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91786,7 +91372,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_delay_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,15,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,15,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91854,7 +91444,10 @@ sl_status_t uic_mqtt_dotdot_aox_locator_cte_mode_publish(
 
   #ifdef AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
   jsn["value"] = aox_locator_cte_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_CTE_MODE. Using number instead.");
   jsn["value"] = static_cast<AoXLocatorCTEMode>(value);
   #endif
 
@@ -91922,7 +91515,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_cte_sampling_interval_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,17,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91988,7 +91585,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_cte_length_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,18,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,18,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -92054,7 +91655,11 @@ sl_status_t uic_mqtt_dotdot_aox_locator_slot_duration_publish(
 
   // This is a single value
 
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name(64784,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,19,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -92875,10 +92480,6 @@ sl_status_t uic_mqtt_dotdot_init() {
   }
 
   if (status_flag == SL_STATUS_OK) {
-    status_flag = uic_mqtt_dotdot_ota_upgrade_init();
-  }
-
-  if (status_flag == SL_STATUS_OK) {
     status_flag = uic_mqtt_dotdot_poll_control_init();
   }
 
@@ -93061,7 +92662,6 @@ void uic_mqtt_dotdot_publish_supported_commands(
   uic_mqtt_dotdot_level_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_alarms_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_time_publish_supported_commands(unid, endpoint_id);
-  uic_mqtt_dotdot_ota_upgrade_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_poll_control_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_shade_configuration_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_door_lock_publish_supported_commands(unid, endpoint_id);
@@ -93119,7 +92719,6 @@ void uic_mqtt_dotdot_publish_empty_supported_commands(
   uic_mqtt_dotdot_level_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_alarms_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_time_publish_empty_supported_commands(unid, endpoint_id);
-  uic_mqtt_dotdot_ota_upgrade_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_poll_control_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_shade_configuration_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_door_lock_publish_empty_supported_commands(unid, endpoint_id);
@@ -96279,604 +95878,6 @@ void uic_mqtt_dotdot_time_publish_empty_supported_commands(
   std::string topic = "ucl/by-unid/" + std::string(unid);
   topic +=  "/ep"+ std::to_string(endpoint_id);
   topic +=  "/Time/SupportedCommands";
-
-  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
-    uic_mqtt_publish(topic.c_str(),
-                     EMPTY_VALUE_ARRAY,
-                     strlen(EMPTY_VALUE_ARRAY),
-                     true);
-  }
-}
-
-// Publishing Cluster Revision for OTAUpgrade Cluster
-void uic_mqtt_dotdot_ota_upgrade_publish_cluster_revision(const char* base_topic, uint16_t value)
-{
-  std::string cluster_topic = std::string(base_topic) + "/OTAUpgrade/Attributes/ClusterRevision";
-  // Publish Desired
-  std::string pub_topic_des = cluster_topic + "/Desired";
-  std::string payload = std::string(R"({"value": )")
-    + std::to_string(value) + std::string("}");
-  uic_mqtt_publish(pub_topic_des.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    true);
-  // Publish Reported
-  std::string pub_topic_rep = cluster_topic + "/Reported";
-  uic_mqtt_publish(pub_topic_rep.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    true);
-}
-
-// Unretain Cluster Revision for OTAUpgrade Cluster
-void uic_mqtt_dotdot_ota_upgrade_unretain_cluster_revision(const char* base_topic)
-{
-  // clang-format on
-  std::string cluster_topic
-    = std::string(base_topic)
-      + "/OTAUpgrade/Attributes/ClusterRevision";
-  // Publish Desired
-  std::string desired_topic = cluster_topic + "/Desired";
-  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
-  // Publish Reported
-  std::string reported_topic = cluster_topic + "/Reported";
-  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
-  // clang-format off
-}
-
-static inline bool uic_mqtt_dotdot_ota_upgrade_image_notify_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    ImageNotifyPayloadType payload_type_value;
-    memset(&payload_type_value, 0x00, sizeof(payload_type_value));
-    uint8_t query_jitter_value;
-    memset(&query_jitter_value, 0x00, sizeof(query_jitter_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    uint16_t image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t new_file_version_value;
-    memset(&new_file_version_value, 0x00, sizeof(new_file_version_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_notify_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        payload_type_value,
-    
-        query_jitter_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        new_file_version_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_query_next_image_request_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    uint8_t field_control_value;
-    memset(&field_control_value, 0x00, sizeof(field_control_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTAImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t current_file_version_value;
-    memset(&current_file_version_value, 0x00, sizeof(current_file_version_value));
-    uint16_t hardware_version_value;
-    memset(&hardware_version_value, 0x00, sizeof(hardware_version_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        field_control_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        current_file_version_value,
-    
-        hardware_version_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_query_next_image_response_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    zclStatus status_value;
-    memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTAImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    uint32_t image_size_value;
-    memset(&image_size_value, 0x00, sizeof(image_size_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        status_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value,
-    
-        image_size_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_image_block_request_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    uint8_t field_control_value;
-    memset(&field_control_value, 0x00, sizeof(field_control_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTAImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    uint32_t file_offset_value;
-    memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-    uint8_t maximum_data_size_value;
-    memset(&maximum_data_size_value, 0x00, sizeof(maximum_data_size_value));
-    EUI64 request_node_address_value;
-    memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-    uint16_t minimum_block_period_value;
-    memset(&minimum_block_period_value, 0x00, sizeof(minimum_block_period_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_block_request_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        field_control_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value,
-    
-        file_offset_value,
-    
-        maximum_data_size_value,
-    
-        request_node_address_value,
-    
-        minimum_block_period_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_image_page_request_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    uint8_t field_control_value;
-    memset(&field_control_value, 0x00, sizeof(field_control_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTAImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    uint32_t file_offset_value;
-    memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-    uint8_t maximum_data_size_value;
-    memset(&maximum_data_size_value, 0x00, sizeof(maximum_data_size_value));
-    uint16_t page_size_value;
-    memset(&page_size_value, 0x00, sizeof(page_size_value));
-    uint16_t response_spacing_value;
-    memset(&response_spacing_value, 0x00, sizeof(response_spacing_value));
-    EUI64 request_node_address_value;
-    memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_page_request_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        field_control_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value,
-    
-        file_offset_value,
-    
-        maximum_data_size_value,
-    
-        page_size_value,
-    
-        response_spacing_value,
-    
-        request_node_address_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_image_block_response_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    zclStatus status_value;
-    memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTAImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    uint32_t file_offset_value;
-    memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-    const char* image_data_value;
-    memset(&image_data_value, 0x00, sizeof(image_data_value));
-    uint32_t current_time_value;
-    memset(&current_time_value, 0x00, sizeof(current_time_value));
-    uint32_t request_time_value;
-    memset(&request_time_value, 0x00, sizeof(request_time_value));
-    uint16_t minimum_block_period_value;
-    memset(&minimum_block_period_value, 0x00, sizeof(minimum_block_period_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_image_block_response_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        status_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value,
-    
-        file_offset_value,
-    
-        image_data_value,
-    
-        current_time_value,
-    
-        request_time_value,
-    
-        minimum_block_period_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    zclStatus status_value;
-    memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTAImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        status_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTAImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    UTC current_time_value;
-    memset(&current_time_value, 0x00, sizeof(current_time_value));
-    UTC upgrade_time_value;
-    memset(&upgrade_time_value, 0x00, sizeof(upgrade_time_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value,
-    
-        current_time_value,
-    
-        upgrade_time_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    EUI64 request_node_address_value;
-    memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTADeviceSpecificImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    uint16_t current_zigbee_stack_version_value;
-    memset(&current_zigbee_stack_version_value, 0x00, sizeof(current_zigbee_stack_version_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        request_node_address_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value,
-    
-        current_zigbee_stack_version_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    zclStatus status_value;
-    memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t manufacturer_code_value;
-    memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-    OTADeviceSpecificImageType image_type_value;
-    memset(&image_type_value, 0x00, sizeof(image_type_value));
-    uint32_t file_version_value;
-    memset(&file_version_value, 0x00, sizeof(file_version_value));
-    uint32_t image_size_value;
-    memset(&image_size_value, 0x00, sizeof(image_size_value));
-    for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        status_value,
-    
-        manufacturer_code_value,
-    
-        image_type_value,
-    
-        file_version_value,
-    
-        image_size_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-static inline bool uic_mqtt_dotdot_ota_upgrade_write_attributes_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_write_attributes_callback) {
-    uic_mqtt_dotdot_ota_upgrade_state_t ota_upgrade_new_state = {};
-    uic_mqtt_dotdot_ota_upgrade_updated_state_t ota_upgrade_new_updated_state = {};
-
-    if (callback(
-          unid,
-          endpoint_id,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
-          ota_upgrade_new_state,
-          ota_upgrade_new_updated_state
-      ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-  return false;
-}
-
-static inline bool uic_mqtt_dotdot_ota_upgrade_force_read_attributes_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  for (const auto& callback: uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback) {
-    uic_mqtt_dotdot_ota_upgrade_updated_state_t ota_upgrade_force_update = {0};
-    if (callback(
-          unid,
-          endpoint_id,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
-          ota_upgrade_force_update
-      ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-  return false;
-}
-
-// Publishing Supported Commands for OTAUpgrade Cluster
-void uic_mqtt_dotdot_ota_upgrade_publish_supported_commands(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  std::stringstream ss;
-  bool first_command = true;
-  ss.str("");
-
-  // check if there is callback for each command
-  if (uic_mqtt_dotdot_ota_upgrade_image_notify_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("ImageNotify")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_query_next_image_request_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("QueryNextImageRequest")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_query_next_image_response_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("QueryNextImageResponse")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_image_block_request_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("ImageBlockRequest")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_image_page_request_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("ImagePageRequest")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_image_block_response_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("ImageBlockResponse")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("UpgradeEndRequest")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("UpgradeEndResponse")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("QueryDeviceSpecificFileRequest")";
-  }
-  if (uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("QueryDeviceSpecificFileResponse")";
-  }
-
-  // Check for a WriteAttributes Callback
-  if(uic_mqtt_dotdot_ota_upgrade_write_attributes_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("WriteAttributes")";
-  }
-
-  // Check for a ForceReadAttributes Callback
-  if (uic_mqtt_dotdot_ota_upgrade_force_read_attributes_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("ForceReadAttributes")";
-  }
-
-  // Publish supported commands
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint_id);
-  topic +=  "/OTAUpgrade/SupportedCommands";
-  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
-  if (first_command == false) {
-    uic_mqtt_publish(topic.c_str(),
-                      payload_str.c_str(),
-                      payload_str.length(),
-                      true);
-  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
-    // There are no supported commands, but make sure we publish some
-    // SupportedCommands = [] if any attribute has been published for a cluster.
-    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
-    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
-    attributes_topic += "/OTAUpgrade/Attributes";
-
-    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
-      uic_mqtt_publish(topic.c_str(),
-                      EMPTY_VALUE_ARRAY,
-                      strlen(EMPTY_VALUE_ARRAY),
-                      true);
-    }
-  }
-}
-
-// Publishing empty/no Supported Commands for OTAUpgrade Cluster
-void uic_mqtt_dotdot_ota_upgrade_publish_empty_supported_commands(
-  const dotdot_unid_t unid
-  , dotdot_endpoint_id_t endpoint_id)
-{
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint_id);
-  topic +=  "/OTAUpgrade/SupportedCommands";
 
   if (uic_mqtt_count_topics(topic.c_str()) > 0) {
     uic_mqtt_publish(topic.c_str(),
@@ -105059,6 +104060,20 @@ static inline bool uic_mqtt_dotdot_state_interview_is_supported(
 
   return false;
 }
+static inline bool uic_mqtt_dotdot_state_discover_security_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_state_discover_security_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 static inline bool uic_mqtt_dotdot_state_write_attributes_is_supported(
   const dotdot_unid_t unid,
@@ -105136,6 +104151,13 @@ void uic_mqtt_dotdot_state_publish_supported_commands(
     }
     first_command = false;
     ss << R"("Interview")";
+  }
+  if (uic_mqtt_dotdot_state_discover_security_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DiscoverSecurity")";
   }
 
   // Check for a WriteAttributes Callback
@@ -108707,366 +107729,6 @@ void uic_mqtt_dotdot_alarms_publish_generated_reset_alarm_log_command(
   std::string payload =
     get_json_payload_for_alarms_reset_alarm_log_command(
     );
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated ImageNotify command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImageNotify
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_notify_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_notify_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/ImageNotify";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_image_notify_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated QueryNextImageRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryNextImageRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_next_image_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_next_image_request_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/QueryNextImageRequest";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_query_next_image_request_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated QueryNextImageResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryNextImageResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_next_image_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_next_image_response_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/QueryNextImageResponse";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_query_next_image_response_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated ImageBlockRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImageBlockRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_block_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_block_request_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/ImageBlockRequest";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_image_block_request_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated ImagePageRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImagePageRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_page_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_page_request_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/ImagePageRequest";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_image_page_request_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated ImageBlockResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImageBlockResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_block_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_block_response_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/ImageBlockResponse";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_image_block_response_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated UpgradeEndRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/UpgradeEndRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_upgrade_end_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_upgrade_end_request_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/UpgradeEndRequest";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_upgrade_end_request_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated UpgradeEndResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/UpgradeEndResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_upgrade_end_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_upgrade_end_response_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/UpgradeEndResponse";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_upgrade_end_response_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated QueryDeviceSpecificFileRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_device_specific_file_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_device_specific_file_request_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileRequest";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_query_device_specific_file_request_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated QueryDeviceSpecificFileResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_device_specific_file_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_device_specific_file_response_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileResponse";
-
-  std::string payload =
-    get_json_payload_for_ota_upgrade_query_device_specific_file_response_command(
-    fields);
 
   // Publish our command
   uic_mqtt_publish(topic.c_str(),
@@ -112942,6 +111604,34 @@ void uic_mqtt_dotdot_state_publish_generated_interview_command(
 
   std::string payload =
     get_json_payload_for_state_interview_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DiscoverSecurity command for
+ * the State cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/State/GeneratedCommands/DiscoverSecurity
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_generated_discover_security_command(
+  const dotdot_unid_t unid
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/" + std::string(unid) + "/";
+  topic += "State/GeneratedCommands/DiscoverSecurity";
+
+  std::string payload =
+    get_json_payload_for_state_discover_security_command(
     );
 
   // Publish our command

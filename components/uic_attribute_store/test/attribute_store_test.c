@@ -1544,3 +1544,47 @@ void test_attribute_store_avoid_infinite_create_recursion_on_parent_deletion()
     0,
     attribute_store_get_node_total_child_count(attribute_store_get_root()));
 }
+
+void test_attribute_store_get_node_value_size()
+{
+  TEST_ASSERT_EQUAL(
+    0,
+    attribute_store_get_node_value_size(3333, REPORTED_ATTRIBUTE));
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+
+  // clang-format off
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_value_size(node_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_value_size(node_1, DESIRED_ATTRIBUTE));
+  // clang-format on
+
+  uint8_t value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+
+  attribute_store_set_node_attribute_value(node_1,
+                                           REPORTED_ATTRIBUTE,
+                                           value,
+                                           2);
+  // clang-format off
+  TEST_ASSERT_EQUAL(2, attribute_store_get_node_value_size(node_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_value_size(node_1, DESIRED_ATTRIBUTE));
+  // clang-format on
+
+  attribute_store_set_node_attribute_value(node_1,
+                                           REPORTED_ATTRIBUTE,
+                                           value,
+                                           0);
+  attribute_store_set_node_attribute_value(node_1,
+                                           DESIRED_ATTRIBUTE,
+                                           value,
+                                           200);
+  // clang-format off
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_value_size(node_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(200, attribute_store_get_node_value_size(node_1, DESIRED_ATTRIBUTE));
+  // clang-format on
+
+  attribute_store_teardown();
+  // clang-format off
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_value_size(node_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_value_size(node_1, DESIRED_ATTRIBUTE));
+  // clang-format on
+}

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AoX Applications
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -97,6 +97,8 @@ $(document).ready(function(){initNavTree('unify__dotdot__attribute__store__comma
 <code>#include &quot;<a class="el" href="unify__dotdot__defined__attribute__types_8h_source.html">unify_dotdot_defined_attribute_types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="attribute__timeouts_8h_source.html">attribute_timeouts.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="attribute__transitions_8h_source.html">attribute_transitions.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dotdot__mqtt_8h_source.html">dotdot_mqtt.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zap-types_8h_source.html">zap-types.h</a>&quot;</code><br />
 </div><table class="memberdecls">
@@ -107,10 +109,18 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a8661de8ab1c33c2454e19cb49e9ec5fb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__door__lock_8c.html#a8661de8ab1c33c2454e19cb49e9ec5fb">set_lock_to_secured</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
+<tr class="separator:a8661de8ab1c33c2454e19cb49e9ec5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7208b6ca2a942ca06b3b612fce6161b3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__door__lock_8c.html#a7208b6ca2a942ca06b3b612fce6161b3">on_lock_state_reported_update</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
+<tr class="separator:a7208b6ca2a942ca06b3b612fce6161b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac18842d63bb080cc112d6359cd176e80"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__door__lock_8c.html#ac18842d63bb080cc112d6359cd176e80">doorlock_lock_command</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, const <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> callback_type, const char *pin_code)</td></tr>
 <tr class="separator:ac18842d63bb080cc112d6359cd176e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a240af5860774979f47536b73eea8736e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__door__lock_8c.html#a240af5860774979f47536b73eea8736e">doorlock_unLock_command</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> callback_type, const char *pin_code)</td></tr>
 <tr class="separator:a240af5860774979f47536b73eea8736e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e797f1076494ea8bc736c5cd73edf52"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__door__lock_8c.html#a9e797f1076494ea8bc736c5cd73edf52">toggle_command</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> callback_type, const char *pin_code)</td></tr>
+<tr class="separator:a9e797f1076494ea8bc736c5cd73edf52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2157686ce52daedaf780fc2ea5a1a097"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__door__lock_8c.html#a2157686ce52daedaf780fc2ea5a1a097">unlock_with_timeout_command</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> callback_type, uint16_t timeout_in_seconds, const char *pin_orrfid_code)</td></tr>
+<tr class="separator:a2157686ce52daedaf780fc2ea5a1a097"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga929168483eed2a52d728ae96c7c2f5c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__door__lock__cluster__mapper.html#ga929168483eed2a52d728ae96c7c2f5c0">door_lock_cluster_mapper_init</a> ()</td></tr>
 <tr class="memdesc:ga929168483eed2a52d728ae96c7c2f5c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intitialise the DoorLock cluster mapper.  <a href="group__door__lock__cluster__mapper.html#ga929168483eed2a52d728ae96c7c2f5c0">More...</a><br /></td></tr>
 <tr class="separator:ga929168483eed2a52d728ae96c7c2f5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -227,13 +237,177 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7208b6ca2a942ca06b3b612fce6161b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7208b6ca2a942ca06b3b612fce6161b3">&#9670;&nbsp;</a></span>on_lock_state_reported_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void on_lock_state_reported_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>updated_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a>&#160;</td>
+          <td class="paramname"><em>change</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8661de8ab1c33c2454e19cb49e9ec5fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8661de8ab1c33c2454e19cb49e9ec5fb">&#9670;&nbsp;</a></span>set_lock_to_secured()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void set_lock_to_secured </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e797f1076494ea8bc736c5cd73edf52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e797f1076494ea8bc736c5cd73edf52">&#9670;&nbsp;</a></span>toggle_command()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> toggle_command </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>callback_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pin_code</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2157686ce52daedaf780fc2ea5a1a097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2157686ce52daedaf780fc2ea5a1a097">&#9670;&nbsp;</a></span>unlock_with_timeout_command()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> unlock_with_timeout_command </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>callback_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>timeout_in_seconds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pin_orrfid_code</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_112d20045a7ca684343196244a8f6d73.html">unify_dotdot_attribute_store</a></li><li class="navelem"><a class="el" href="dir_4d908a52017a2c1804f64ff3615d4d5e.html">src</a></li><li class="navelem"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__door__lock_8c.html">unify_dotdot_attribute_store_command_callbacks_door_lock.c</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:47 for AoX Applications by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:52 for AoX Applications by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

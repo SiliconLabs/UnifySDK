@@ -728,35 +728,29 @@ void test_zwave_command_class_notification_get()
     ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
     test_updated_node_parent);
 
-  attribute_store_read_value_ExpectAndReturn(
+  attribute_store_get_reported_ExpectAndReturn(
     test_updated_node_parent,
-    REPORTED_ATTRIBUTE,
     NULL,
     sizeof(notification_type_home_security),
     SL_STATUS_OK);
-  attribute_store_read_value_IgnoreArg_read_value();
-  attribute_store_read_value_ReturnMemThruPtr_read_value(
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnMemThruPtr_value(
     &notification_type_home_security,
     sizeof(notification_type_home_security));
 
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(
-    test_updated_node,
-    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_STATE,
-    test_updated_node_parent_state);
-  attribute_store_read_value_ExpectAndReturn(test_updated_node_parent_state,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(test_notification_state),
-                                             SL_STATUS_OK);
-  attribute_store_read_value_IgnoreArg_read_value();
-  attribute_store_read_value_ReturnMemThruPtr_read_value(
+  attribute_store_get_reported_ExpectAndReturn(test_updated_node_parent_state,
+                                               NULL,
+                                               sizeof(test_notification_state),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnMemThruPtr_value(
     &test_notification_state,
     sizeof(test_notification_state));
 
   attribute_store_get_first_parent_with_type_ExpectAndReturn(
     test_updated_node,
-    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
-    test_updated_node_parent);
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_STATE,
+    test_updated_node_parent_state);
   attribute_store_get_node_child_by_type_ExpectAndReturn(
     test_updated_node_parent,
     ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS,
@@ -775,12 +769,13 @@ void test_zwave_command_class_notification_get()
     sizeof(test_number_of_supported_states));
 
   // Set the node reported value to 0 to prevent Notification Get loops
-  attribute_store_set_node_attribute_value_ExpectAndReturn(test_updated_node,
-                                                           REPORTED_ATTRIBUTE,
-                                                           NULL,
-                                                           sizeof(int32_t),
-                                                           SL_STATUS_OK);
-  attribute_store_set_node_attribute_value_IgnoreArg_value();
+  attribute_store_set_all_children_reported_ExpectAndReturn(
+    test_updated_node_parent,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT,
+    NULL,
+    sizeof(int32_t),
+    SL_STATUS_OK);
+  attribute_store_set_all_children_reported_IgnoreArg_value();
 
   // Call the function to test
   TEST_ASSERT_EQUAL(

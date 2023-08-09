@@ -352,7 +352,7 @@ void test_zwave_command_class_inclusion_controller_proxy_inclusion_replace()
   TEST_ASSERT_TRUE(
     found_node_id.child_by_type(ATTRIBUTE_ENDPOINT_ID).is_valid());
   TEST_ASSERT_TRUE(
-    found_node_id.child_by_type(ATTRIBUTE_NETWORK_STATUS).is_valid());
+    found_node_id.child_by_type(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS).is_valid());
   TEST_ASSERT_TRUE(found_node_id.child_by_type(ATTRIBUTE_ENDPOINT_ID)
                      .child_by_type(ATTRIBUTE_ZWAVE_NIF)
                      .is_valid());

@@ -41,7 +41,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -82,7 +82,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
@@ -663,7 +662,8 @@ without any infinite loop.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Chain reaction is always active for attribute creations.</p>
+<p>Chain reaction is always active for attribute creations done automatically
+by regular assignments.</p>
 </div>
 <p>For example, considering the following map:</p>
 <div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> <span class="no">chain_reaction</span>(<span class="no">0</span>) {
@@ -741,6 +741,94 @@ the default parent type.</p>
 }
 </pre></div>
 </div>
+</section>
+</section>
+<section id="instance-assignments">
+<h3>Instance assignments<a class="headerlink" href="#instance-assignments" title="Permalink to this heading"></a></h3>
+<p>Until now, the examples have been using regular assignments. UAM file allows
+to add a <a href="#id1"><span class="problematic" id="id2">``</span></a>i:<a href="#id3"><span class="problematic" id="id4">``</span></a>modifier before the left-hand side of an assignment, which
+will make it an instance assignemnt. Here is an example:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="no">i</span>:<span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;3</span>
+}
+</pre></div>
+</div>
+<p>Instance assignments are intended for making sure that an attribute with a certain
+value exists or not. Consider the following map:</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="c c-Singleline">// Create an attribute 2 with reported value 1 if r&#39;3 is greater than 0.</span>
+  <span class="no">i</span>:<span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nb">if</span> (<span class="nv">r&#39;3</span> <span class="ow">&gt;</span> <span class="no">0</span>) <span class="no">1</span> <span class="no">undefined</span>
+  <span class="c c-Singleline">// Also create an attribute reported 2 with value 2 if r&#39;3 is greater than 0.</span>
+  <span class="no">i</span>:<span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nb">if</span> (<span class="nv">r&#39;3</span> <span class="ow">&gt;</span> <span class="no">0</span>) <span class="no">2</span> <span class="no">undefined</span>
+}
+</pre></div>
+</div>
+<p>Here the difference, is that regular assignments would end up creating a single
+Attribute 2, and will either set the reported value to 1 or 2.</p>
+<p>Instance assignments will create 2 Attributes 2, one with value 1 and one with value 2.
+The evaluated values of expression will differ slightly when using instance
+assignments. It is recommended to use an index at the end of the left-hand
+side to indicate the instance values.</p>
+<p>The value type <code class="docutils literal notranslate"><span class="pre">e'</span></code> cannot be used with a instance assignment. It must be
+either the reported or the desired value.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="c c-Singleline">// Here the expression will be interpreted as the value that must exist in the reported value of an attribute 2</span>
+  <span class="no">i</span>:<span class="nv">r&#39;2</span> <span class="o">=</span> <span class="ow">&lt;</span><span class="no">expression</span><span class="ow">&gt;</span>
+  <span class="c c-Singleline">// Here the expression will be interpreted as a boolean expression that indicate if the Attribute 2 with Value 1 should exist or not.</span>
+  <span class="no">i</span>:<span class="nv">r&#39;2[1]</span> <span class="o">=</span> <span class="ow">&lt;</span><span class="no">expression</span><span class="ow">&gt;</span>
+}
+</pre></div>
+</div>
+<section id="scope-settings-with-instance-assignments">
+<h4>Scope settings with Instance assignments<a class="headerlink" href="#scope-settings-with-instance-assignments" title="Permalink to this heading"></a></h4>
+<p>Scope priorities are respected within a type of assignment.
+There is no guarantee that Instance assignments will run before or after
+another type of assignment (regular, clearance), but scope priorities within
+the same type of assignement will be respected.</p>
+<p>Scope settings will behave as follow with instance assignments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">clear_desired</span></code>: will have no effect. The desired_value will not be cleared.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chain_reaction</span></code>: works normally</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common_parent_type</span></code>: works normally</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_attributes</span></code>: will have no effect. The instance assignement expressions will dictate if attributes are to be created or deleted.</p></li>
+</ul>
+</section>
+</section>
+<section id="clearance-assignments">
+<h3>Clearance assignments<a class="headerlink" href="#clearance-assignments" title="Permalink to this heading"></a></h3>
+<p>Clearance assignments are run by the mapper before the regular assignments,
+if the destination already exists.</p>
+<p>Scope priorities are respected within a type of assignment.
+There is no guarantee that Clearance assignments will run before or after
+another type of assignment (regular, clearance), but scope priorities within
+the same type of assignement will be respected.</p>
+<p>Until now, the examples have been using regular assignments. UAM file allows
+to add a <a href="#id5"><span class="problematic" id="id6">``</span></a>c:<a href="#id7"><span class="problematic" id="id8">``</span></a>modifier before the left-hand side of an assignment, which
+will make it an instance assignemnt. Here is an example:</p>
+<p>The value type <code class="docutils literal notranslate"><span class="pre">e'</span></code> cannot be used with a clearance assignment. It must be
+either the reported or the desired value.</p>
+<div class="highlight-uam notranslate"><div class="highlight"><pre><span></span><span class="nb">scope</span> <span class="no">0</span> {
+  <span class="c c-Singleline">// Clear the reported value of attribute 2 if r&#39;3 != 0.</span>
+  <span class="no">c</span>:<span class="nv">r&#39;2</span> <span class="o">=</span> <span class="nv">r&#39;3</span>
+}
+</pre></div>
+</div>
+<p>Right-hand sides in clearance assignments are evaluated like a boolean expression.
+If the Right-hand side evaluates to:</p>
+<ul class="simple">
+<li><p><a href="#id9"><span class="problematic" id="id10">``</span></a>0 <a href="#id11"><span class="problematic" id="id12">``</span></a>: The value will not be cleared. Stop looking at lower priority clearance maps for the same destination.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!=</span> <span class="pre">0</span></code> : The value will be cleared. Stop looking at lower priority clearance maps for the same destination.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">undefined</span></code>: Ignore this map and check the lower priority clearance maps for the same destination.</p></li>
+</ul>
+<section id="scope-settings-with-clearance-assignments">
+<h4>Scope settings with Clearance assignments<a class="headerlink" href="#scope-settings-with-clearance-assignments" title="Permalink to this heading"></a></h4>
+<p>Scope settings will behave as follow with clearance assignments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">clear_desired</span></code>: will have no effect.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chain_reaction</span></code>: works normally</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common_parent_type</span></code>: works normally</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_attributes</span></code>: will have no effect. Clearance assignements will never create or delete attributes.</p></li>
+</ul>
 </section>
 </section>
 <section id="debugging-evaluations">

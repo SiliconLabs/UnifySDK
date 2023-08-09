@@ -68,7 +68,7 @@ typedef struct {
  *
  */
 sl_status_t zwave_controller_storage_callback_register(
-  const zwave_controller_storage_callback_t *callback);
+  const zwave_controller_storage_callback_t *callbacks);
 
 /**
  * @brief Set the Z-Wave node as s2 capable when it supports S2.

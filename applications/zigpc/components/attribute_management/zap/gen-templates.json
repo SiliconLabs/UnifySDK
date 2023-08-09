@@ -1,13 +1,14 @@
 {
-  "name": "Unify ZigPC Attribute Management",
-  "version": "uic-zigpc-attrmgmt-v1",
-  "override": "../../../../../components/uic_dotdot/zap/addon-override.js",
-  "helpers": ["../../zcl_util/zap/addon-helper.js"],
-  "templates": [
-    {
-      "path": "zigpc_attrmgmt_publish.cpp.zapt",
-      "name": "Attribute Management Publisher",
-      "output": "src/zigpc_attrmgmt_publish.cpp"
-    }
-  ]
+    "name": "Unify ZigPC Attribute Management",
+    "version": "uic-zigpc-attrmgmt-v1",
+    "override": "../../../../../components/uic_dotdot/zap/addon-override.js",
+    "helpers": [
+        "../../zcl_util/zap/addon-helper.js",
+        "../../../../../components/uic_dotdot/zap/addon-base-helper.js"
+    ],
+    "templates": [{
+        "path": "zigpc_attrmgmt_publish.cpp.zapt",
+        "name": "Attribute Management Publisher",
+        "output": "src/zigpc_attrmgmt_publish.cpp"
+    }]
 }

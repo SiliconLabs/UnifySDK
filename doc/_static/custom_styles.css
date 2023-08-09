@@ -2,6 +2,15 @@ body {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif
 }
 
+a {
+    color: #0f62fe;
+}
+
+a:hover {
+    color: #0f62fe;
+    text-decoration: underline;
+}
+
 .wy-nav-content {
     max-width: none;
 }
@@ -11,9 +20,10 @@ body {
 }
 
 .wy-side-nav-search {
-    background: #0086D9;
+    background: #0F62FE;
     padding: 0;
     height: 174px;
+    width: 320px;
 }
 
 .wy-side-nav-search input[type=text] {
@@ -44,6 +54,7 @@ body {
 
 .wy-nav-side {
     background: #363636;
+    width: 320px;
 }
 
 #rtd-search-form input {
@@ -51,10 +62,15 @@ body {
     padding: 7px 12px;
 }
 
+.wy-menu-vertical {
+    width: 320px;
+}
+
 .wy-menu-vertical a {
     color: #c8c8c8;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
+    font-size: 100%;
 }
 
 .wy-menu-vertical li a {
@@ -126,13 +142,16 @@ body {
 
 .wy-side-scroll {
     height: calc(100% - 20px);
+    width: 340px;
 }
+
 
 /* override table no-wrap */
-.wy-table-responsive table td, .wy-table-responsive table th {
+
+.wy-table-responsive table td,
+.wy-table-responsive table th {
     white-space: normal;
 }
-
 
 footer {
     text-align: center;

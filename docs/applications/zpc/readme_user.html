@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -171,7 +171,7 @@ Z-Wave controller.</p>
 The ZPC can dump the running configuration using the command line option <code class="docutils literal notranslate"><span class="pre">--dump-config</span></code>.
 The dumped file can be used as a starting point a config file.</p>
 <p>Configuration file example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>zpc<span class="w"> </span>--dump-config
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~$<span class="w"> </span>zpc<span class="w"> </span>--dump-config
 <span class="c1"># Unify sample conf file</span>
 
 log:
@@ -242,8 +242,8 @@ commands, type <code class="docutils literal notranslate"><span class="pre">help
 /var/lib/uic/zpc.db is only writable for the <em>uic</em> system user (which is
 created upon installation). If you run the zpc as another user,
 select a different database location.</p>
-<p>For example,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>--zpc.rf_region<span class="w"> </span>EU<span class="w"> </span>--zpc.datastore_file<span class="w"> </span>mydatabase.db<span class="w"> </span>--mapdir<span class="w"> </span>rules
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~$ </span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>--zpc.rf_region<span class="w"> </span>EU<span class="w"> </span>--zpc.datastore_file<span class="w"> </span>mydatabase.db<span class="w"> </span>--mapdir<span class="w"> </span>rules
 </pre></div>
 </div>
 </section>
@@ -257,23 +257,23 @@ command line when booting the ZPC.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_version</span></code> will print the chip and software version of the
 SerialAPI and exit immediately. This can be used to determine if the firmware
 should be applied or not.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/tty.usbserial-14310<span class="w"> </span>--zpc.ncp_version
-<span class="c1"># Unify build: ver_1.0.2_cert-196-g7d2caffd</span>
-<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728069<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>Unify<span class="w"> </span>Signal<span class="w"> </span>Handler
-<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728548<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>Unify<span class="w"> </span>MQTT<span class="w"> </span>Client
-<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728627<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>Unify<span class="w"> </span>STDIN
-<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.728714<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>uic_component_fixtures<span class="o">]</span><span class="w"> </span>Completed:<span class="w"> </span>ZPC<span class="w"> </span>Config
-<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.765728<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>zpc_ncp_update<span class="o">]</span><span class="w"> </span>chip_hardware_type<span class="w">     </span>:<span class="w">     </span><span class="m">7</span>
-<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.765847<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>zpc_ncp_update<span class="o">]</span><span class="w"> </span>chip_hardware_revision<span class="w"> </span>:<span class="w">     </span><span class="m">0</span>
-<span class="m">2022</span>-Jan-05<span class="w"> </span><span class="m">14</span>:48:25.765908<span class="w"> </span>&lt;i&gt;<span class="w"> </span><span class="o">[</span>zpc_ncp_update<span class="o">]</span><span class="w"> </span>chip_serial_api_version:<span class="w">  </span><span class="m">7</span>.15
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~$ </span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/tty.usbserial-14310<span class="w"> </span>--zpc.ncp_version
+<span class="gp"># </span>Unify<span class="w"> </span>build:<span class="w"> </span>ver_1.0.2_cert-196-g7d2caffd
+<span class="go">2022-Jan-05 14:48:25.728069 &lt;i&gt; [uic_component_fixtures] Completed: Unify Signal Handler</span>
+<span class="go">2022-Jan-05 14:48:25.728548 &lt;i&gt; [uic_component_fixtures] Completed: Unify MQTT Client</span>
+<span class="go">2022-Jan-05 14:48:25.728627 &lt;i&gt; [uic_component_fixtures] Completed: Unify STDIN</span>
+<span class="go">2022-Jan-05 14:48:25.728714 &lt;i&gt; [uic_component_fixtures] Completed: ZPC Config</span>
+<span class="go">2022-Jan-05 14:48:25.765728 &lt;i&gt; [zpc_ncp_update] chip_hardware_type     :     7</span>
+<span class="go">2022-Jan-05 14:48:25.765847 &lt;i&gt; [zpc_ncp_update] chip_hardware_revision :     0</span>
+<span class="go">2022-Jan-05 14:48:25.765908 &lt;i&gt; [zpc_ncp_update] chip_serial_api_version:  7.15</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_update</span></code> performs a firmware update and exits the application when the
 update is completed.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>--zpc.ncp_update<span class="w"> </span>new_firmware.gbl
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~$ </span>zpc<span class="w"> </span>--zpc.serial<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>--zpc.ncp_update<span class="w"> </span>new_firmware.gbl
 </pre></div>
 </div>
-<p>If the firmware update succeeds the the exit code of the zpc will be <em>2</em> and if
+<p>If the firmware update succeeds, the exit code of the zpc will be <em>2</em> and if
 the update fails the exit code will be <em>1</em>.</p>
 <hr class="docutils" />
 <p><strong>NOTE</strong> for the NCP update to work, a Gecko Bootloader and possibly signing
@@ -283,11 +283,11 @@ certificates need to be installed.</p>
 left in bootloader. The ZPC will not be able to re-flash because it requires a
 functional serial API. In this case the device can be flashed manually using the
 XModem tool <em>sx</em> from the Debian package lrzsx:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>lrzsz
-<span class="w">  </span>stty<span class="w"> </span>-F<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span><span class="m">115200</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
-<span class="w">  </span>sx<span class="w"> </span>ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl<span class="w"> </span>&lt;<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>lrzsz
+stty<span class="w"> </span>-F<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span><span class="m">115200</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
+sx<span class="w"> </span>ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl<span class="w"> </span>&lt;<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
+<span class="nb">echo</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/ttyUSB0
 </pre></div>
 </div>
 </section>
@@ -711,10 +711,16 @@ to add new maps. Follow the instructions in this <a class="reference internal" h
 </section>
 <section id="migrating-to-zpc-from-z-ip-gateway">
 <h2>Migrating to ZPC from Z/IP Gateway<a class="headerlink" href="#migrating-to-zpc-from-z-ip-gateway" title="Permalink to this heading"></a></h2>
-<p>This section describes how to migrate to a ZPC from a Z/IP gateway. If migration
-from a third-party gateway is desired, the first step in the migration process
-is to migrate to a Z/IP Gateway.</p>
-<p>To successfully migrate, the following Z/IP Gateway SDK tools are needed.</p>
+<p>It is possible to migrate from a Z/IP Gateway or other vendor gateway setup
+that uses a Z-Wave module to a ZPC.</p>
+<p>This section describes how to migrate to a ZPC from a Z/IP gateway.
+Migrating from a Z/IP Gateway or other vendor gateway should work in a similar
+fashion.</p>
+<section id="z-wave-module-hardware-migration">
+<h3>Z-Wave Module/hardware migration<a class="headerlink" href="#z-wave-module-hardware-migration" title="Permalink to this heading"></a></h3>
+<p>If you intend to reuse the same Z-Wave module, you can skip this section altogether.
+If you need to migrate to a new Z-Wave module, the following Z/IP Gateway
+SDK tools are needed:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">zw_programmer</span></code> Is required for programming new firmware on the Z-Wave modules
 and for reading and writing the Z-Wave controller module NVM.</p></li>
@@ -722,24 +728,60 @@ and for reading and writing the Z-Wave controller module NVM.</p></li>
 protocol versions. The tool can be used to migrate from a 500 series Z-Wave
 chip to a 700 series chip.</p></li>
 </ul>
-<p>You can get Z/IP Gateway through Simplicity Studio. Read the Z/IP Gateway SDK
-user guide on how to compile and install the Z/IP gateway on your platform.</p>
+<p>You can get Z/IP Gateway through <a class="reference external" href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a>.
+Read the Z/IP Gateway SDK user guide on how to compile and install the
+Z/IP gateway on your platform.</p>
 <p>For Z-Wave Long Range support, the ZPC requires a Z-Wave API controller version
 7.16 or higher. For details about migrating between protocol versions, see the
 Z/IP Gateway manual, <em>Migration Support Tools</em></p>
 <p>To ensure that the ZPC is working correctly, it must have access to the network
-encryption keys as well as information about which security keys have been
-granted to each node in the network. The Z/IP Gateway stores the encryption keys
-in the right place in the module NVM for the ZPC to read.</p>
-<p>In general, the ZPC will query all network information from the nodes in the
-network on the first boot, but it needs to know which network keys have been
-granted to the nodes in the network. The Unify Framework contains the tool
-<code class="docutils literal notranslate"><span class="pre">zpc_database_tool</span></code>; which can be used for manipulating the ZPC database.
-zpc_database_tool can import/export the ZPC database from/to a JSON file.
+encryption keys, which are located in the NVM of the Z-Wave Module.</p>
+</section>
+<section id="starting-the-zpc-on-a-previous-z-wave-network">
+<h3>Starting the ZPC on a previous Z-Wave network<a class="headerlink" href="#starting-the-zpc-on-a-previous-z-wave-network" title="Permalink to this heading"></a></h3>
+<section id="without-database-migration">
+<h4>Without database migration<a class="headerlink" href="#without-database-migration" title="Permalink to this heading"></a></h4>
+<p>The ZPC will attempt to query all network information from the
+nodes in the network when it first boots. This procedure may not work reliably,
+especially the network key discovery for each node, as it is a time out based
+discovery.</p>
+<p>Without additional preparation, the ZPC will attempt to communicate with each node
+in the network, perform the 2 operations one after another:</p>
+<ul class="simple">
+<li><p>Discover the Granted S0/S2 Security keys</p></li>
+<li><p>Interview the node and discovery its Command Classes, capabilities and state.</p></li>
+</ul>
+<p>Sleeping nodes will be marked as offline until they issue a Wake Up Notification
+to the ZPC. When receiving the Wake Up Notification, the ZPC will perform the
+security key discovery and interview.</p>
+<p>Sleeping nodes not configured to send Wake Up Notifications to the NodeID
+of the Z-Wave module in which the ZPC was booted will never recover.
+In this case, nodes should be excluded and re-included into the network,
+if the ZPC must be able to control them.</p>
+<p>Discovering the Granted S0/S2 Security keys is time out based and may fail
+in case of network traffic / congestion. In this case, it is possible to
+instruct the ZPC to try again, using the DiscoverSecurity command under
+the state topic. For example, for UNID <code class="docutils literal notranslate"><span class="pre">zw-D2422D68-0009</span></code>, it would be</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-D2422D68-0009/State/Commands/DiscoverSecurity</span> - {}
+</pre></div>
+</div>
+<p>Likewise, if the interview fails in some way, it is possible to initiate
+it again using the following topic:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-D2422D68-0009/State/Commands/Interview</span> - {}
+</pre></div>
+</div>
+</section>
+<section id="with-database-migration">
+<h4>With database migration<a class="headerlink" href="#with-database-migration" title="Permalink to this heading"></a></h4>
+<p>The ZPC can use some help, receiving some known information about the
+nodes in its network before booting and discovering it for the first time.
+It will make the first boot quicker and more reliable.</p>
+<p>The Unify SDK contains a tool named <code class="docutils literal notranslate"><span class="pre">zpc_database_tool</span></code>; which can be used for
+manipulating the ZPC database. <code class="docutils literal notranslate"><span class="pre">zpc_database_tool</span></code> can import/export the ZPC
+database from/to a JSON file.
 The easiest way to set the granted key information is to do the following:</p>
 <ol class="arabic">
-<li><p>Migrate the Z-Wave controller using the Z/IP Gateway SDK tools as described
-above.</p></li>
+<li><p>Migrate the hardware/Z-Wave module if needed</p></li>
 <li><p>Start the ZPC with the migrated Z-Wave controller module but with an empty
 database file. <code class="docutils literal notranslate"><span class="pre">zpc</span> <span class="pre">--zpc.datastore_file</span> <span class="pre">datastore.db</span></code></p></li>
 <li><p>Shut down the ZPC by typing <code class="docutils literal notranslate"><span class="pre">exit</span></code> on the console. The ZPC will now have
@@ -749,7 +791,7 @@ created an initial database that matches the Z-Wave network.</p></li>
 <li><p>Open and edit the JSON file and locate the following attributes under each
 ATTRIBUTE_NODE_ID object:</p>
 <ul>
-<li><p>ATTRIBUTE_NETWORK_STATUS must be set to “reported”: “00”</p></li>
+<li><p>DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS must be set to “reported”: “00”</p></li>
 <li><p>ATTRIBUTE_KEX_FAIL_TYPE should be set to “reported”: “00”</p></li>
 <li><p>ATTRIBUTE_S2_DSK this is optional but should be set to the DSK of the node.</p></li>
 <li><p>ATTRIBUTE_NODE_IS_S2_CAPABLE should only be defined if the node supports
@@ -796,6 +838,8 @@ have been granted the following keys are currently defined:</p>
 <li><p>You can now start the ZPC as usual. The ZPC will start probing all nodes, sleeping devices will be probed
 when they wake up.</p></li>
 </ol>
+</section>
+</section>
 <section id="zpc-database-json-example">
 <h3>ZPC Database JSON Example<a class="headerlink" href="#zpc-database-json-example" title="Permalink to this heading"></a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="p">{</span>
@@ -819,7 +863,7 @@ when they wake up.</p></li>
 <span class="w">              </span><span class="p">]</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS&quot;</span><span class="p">,</span>
 <span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span>
@@ -842,7 +886,7 @@ when they wake up.</p></li>
 <span class="w">              </span><span class="p">]</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS&quot;</span><span class="p">,</span>
 <span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span>
@@ -890,12 +934,14 @@ when they wake up.</p></li>
 <li><p>Does not support Learn Mode which enables it to be included in other networks.</p></li>
 <li><p>Does not allow to establish arbitrary Associations and only establishes Lifeline Association.</p></li>
 <li><p>Does not control all Command Classes fully, but only provides partial control
-Z-Wave Command Classes where the ZPC provides partial control include:</p></li>
-<li><p>Switch Multilevel, version 4,</p></li>
+Z-Wave Command Classes where the ZPC provides partial control include:</p>
+<ul>
 <li><p>Multilevel Sensor, version 11,</p></li>
 <li><p>Thermostat Mode, version 3,</p></li>
 <li><p>Thermostat Setpoint, version 3 and</p></li>
 <li><p>Notification, version 11.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="performing-backup-and-restore">
@@ -923,10 +969,10 @@ Copy a backup of the SQLite database to an active SQLite database.</p></li>
 will be made in a new version, the ZPC datastore version will be incremented.</p>
 <p>The ZPC will automatically refuse to start if it detects a version mismatch
 between its ZPC datastore version and the version written in the datastore file.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;E&gt; [datastore_fixt] Datastore version: 1 in datastore file is non compatible
-with the ZPC datastore version: 2. Please convert your ZPC datastore using the
-ZPC datastore tools
-&lt;C&gt; [uic_component_fixtures] Failed  [1]: Datastore.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;E&gt; [datastore_fixt] Datastore version: 1 in datastore file is non compatible</span>
+<span class="go">with the ZPC datastore version: 2. Please convert your ZPC datastore using the</span>
+<span class="go">ZPC datastore tools</span>
+<span class="go">&lt;C&gt; [uic_component_fixtures] Failed  [1]: Datastore.</span>
 </pre></div>
 </div>
 <section id="recovering-a-database">
@@ -1025,6 +1071,8 @@ You could verify that the gateway still responds by modifying the state of
 another Z-Wave device in the gateway and see if the gateway responds to these
 changes. A way to modify the state is to open MQTT explorer and publish a
 command to a cluster for a particular node.</p></li>
+<li><p>Check if the Protocol Controller and the different components are up and
+running using the ApplicationMonitoring page.</p></li>
 <li><p>As last resort, try to restart the Unify gateway.</p></li>
 </ol>
 </li>

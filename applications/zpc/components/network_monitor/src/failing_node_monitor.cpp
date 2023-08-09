@@ -16,7 +16,7 @@
 
 // Interfaces
 #include "attribute_store_defined_attribute_types.h"
-#include "ucl_definitions.h"
+
 
 // ZPC components
 #include "zwave_controller_utils.h"
@@ -25,6 +25,7 @@
 #include "sl_log.h"
 #include "attribute_timeouts.h"
 #include "attribute_store_helper.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 
 // Type aliasing
 constexpr attribute_store_type_t PING_INTERVAL_ATTRIBUTE
@@ -153,14 +154,14 @@ static void
 static bool is_node_failing(attribute_store_node_t network_status_node)
 {
   // Assume the node is just included if we cannot read the network status
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_get_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
 
   switch (network_status) {
-    case NODE_STATE_TOPIC_STATE_OFFLINE:
-    case NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL:
+    case ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE:
+    case ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL:
       return true;
 
     // All the rest is considered as not failing.
@@ -258,6 +259,6 @@ void failing_node_monitor_init()
 
   // Register Attribute Store callbacks
   attribute_store_register_callback_by_type_and_state(&on_network_status_update,
-                                                      ATTRIBUTE_NETWORK_STATUS,
+                                                      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                                       REPORTED_ATTRIBUTE);
 }

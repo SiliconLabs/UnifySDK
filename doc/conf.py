@@ -28,6 +28,8 @@ class uam_lexer(RegexLexer):
             (r"=", Operator),
             (r"\+", Operator.Word),
             (r"\|", Operator.Word),
+            (r"i:", Generic.Emph),
+            (r"c:", Generic.Emph),
             (r"undefined", Name.Variable.Magic),
             (r"chain_reaction", Generic.Heading),
             (r"clear_desired", Generic.Heading),

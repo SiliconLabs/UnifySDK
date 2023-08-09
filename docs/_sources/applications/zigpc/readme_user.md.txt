@@ -296,6 +296,24 @@ UCL topics used:
 - Publishing Network Management state changes:
 `ucl/by-unid/<DEVICE_UNID>/ProtocolController/NetworkManagement`
 
+### Zigbee Network Parameters
+
+The parameters for the Zigbee network can be set in 2 ways:
+  - Using the default network parameters
+  - Specifying the PANID, channel and radio power in the configuration
+
+Using the default network parameters as in the standard Z3GatewayHost
+application requires no additional input.
+
+Optionally, the user may configure the radio parameters at the command line or
+in the zigpc configuration file. The "zigpc.use\_network\_args" flag must be set
+to "true" (or 1). The user must then supply the "zigpc.network\_panid",
+"zigpc.network\_channel" and "zigpc.network\_radio\_power". Please note, that
+ALL arguments must be supplied when the "use\_network\_args" option is set.
+
+Running zigpc with the --help option will also describe how to use these
+settings.
+
 ### Device State Updates
 
 ZigPC publishes the network status of devices through inclusion, interview,
@@ -1141,7 +1159,7 @@ The Gecko SDK provides ready-made NCP images available under the demo-applicatio
 #### Building NCP FW Images Using Studio
 
 Follow section 2 from the following application note to build a NCP application
-using the Simplicity Studio IDE:
+using the [Simplicity Studio](https://www.silabs.com/developers/simplicity-studio) IDE:
 [AN1010: Building a Customized NCP Application](https://www.silabs.com/documents/public/application-notes/an1010-customized-ncp.pdf)
 
 ### Setting Up the Sample Zigbee Z3Light FW Image

@@ -13,7 +13,7 @@
 
 /**
  * @file ota_mqtt.hpp
- * @brief OTA status updates module 
+ * @brief OTA status updates module
  *
  * This module implements the logic for publishing OTA subscriptions.
  *
@@ -34,8 +34,8 @@
 #include "sl_status.h"
 
 /**
- * @brief Publish OTA status update for string value. 
- * 
+ * @brief Publish OTA status update for string value.
+ *
  * @param unid unique identifier id.
  * @param endpoint endpoint id.
  * @param uiid unique image identifier id.
@@ -51,8 +51,8 @@ void publish_status_string(const dotdot_unid_t &unid,
                            uint32_t cluster_revision);
 
 /**
- * @brief Publish OTA status update for unsigned long value. 
- * 
+ * @brief Publish OTA status update for unsigned long value.
+ *
  * @param unid unique identifier id.
  * @param endpoint endpoint id.
  * @param uiid unique image identifier id.
@@ -68,19 +68,19 @@ void publish_status_unsigned_long(const dotdot_unid_t &unid,
                                   uint32_t cluster_revision);
 
 /**
- * @brief Convert last error to label. 
- * 
- * @param value last error enum value.
- * 
+ * @brief Convert last error to label.
+ *
+ * @param last_error last error enum value.
+ *
  * @returns label of enum value.
  */
 std::string convert_last_error_to_label(uic_ota::last_error_t last_error);
 
 /**
- * @brief Conver status to label. 
- * 
- * @param value last error enum value.
- * 
+ * @brief Conver status to label.
+ *
+ * @param status last error enum value.
+ *
  * @returns label of enum value.
  */
 std::string convert_status_to_label(uic_ota::status_t status);

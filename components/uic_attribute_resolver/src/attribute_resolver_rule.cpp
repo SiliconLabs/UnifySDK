@@ -29,7 +29,6 @@
 
 constexpr char LOG_TAG[]                   = "attribute_resolver_rule";
 constexpr int DEFAULT_GROUPING_DEPTH       = 1;
-constexpr size_t MAX_FRAME_LEN             = 255;
 constexpr clock_time_t MAX_RESOLUTION_TIME = 60 * CLOCK_CONF_SECOND;
 
 struct attribute_rule {

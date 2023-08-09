@@ -189,7 +189,7 @@ class zwave_tx_queue
   */
   bool contains(const zwave_tx_session_id_t session_id) const;
   /**
-   * @brief Find the child in the queue with the the highest priority.
+   * @brief Find the child in the queue with the highest priority.
    *
    * @param element     Variable where to copy the data from the child element
    *                    identified by the session_id

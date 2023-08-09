@@ -15,22 +15,22 @@ when running multiple Unify applications that use the same shared library
 
 | Component          |    Flash |                RAM (RSS) |
 | ------------------ | -------: | -----------------------: |
-| libunify           | 12944 kB |                      N/A |
-| uic-aoxpc          |  1460 kB |                 10500 kB |
-| uic-zigpc          |  1828 kB |                 15000 kB |
-| uic-zpc            |  4883 kB |                    23 kB |
-| uic-gms            |  1542 kB |                 15932 kB |
-| uic-nal            |  1590 kB |                 17356 kB |
-| uic-positioning    |  4256 kB |                 16300 kB |
-| uic-upti-cap       |  1590 kB |                 16036 kB |
-| uic-upti-writer    |  1570 kB |                  8700 kB |
-| uic-image-provider |  1542 kB |                 15944 kB |
-| uic-upvl           |  1602 kB |                 17296 kB |
-| uic-dev-gui        | 43680 kB |                 49404 kB |
-| zigbeed            |   496 kB |                  1100 kB |
-| Z3Gateway          |   608 kB |                   600 kB |
-| uic-cpcd           |   275 kB |                  2200 kB |
-| uic-cpc-hci-bridge |    10 kB |                   TBD kB |
+| libunify           | 15427 kB |                      N/A |
+| uic-aoxpc          |  1507 kB |                 17872 kB |
+| uic-zigpc          |  1485 kB |                 17332 kB |
+| uic-zpc            |  5061 kB |                 24888 kB |
+| uic-gms            |  1579 kB |                 16160 kB |
+| uic-nal            |  1620 kB |                 17324 kB |
+| uic-positioning    |  1420 kB |                 16816 kB |
+| uic-upti-cap       |  1624 kB |                 16276 kB |
+| uic-upti-writer    |  1608 kB |                 16168 kB |
+| uic-image-provider |  1579 kB |                 16440 kB |
+| uic-upvl           |  1628 kB |                 17392 kB |
+| uic-dev-gui        | 48089 kB |                 47440 kB |
+| zigbeed            |  4019 kB |                  3108 kB |
+| Z3Gateway          |   621 kB |                      TBD |
+| uic-cpcd           |   290 kB |                   772 kB |
+| uic-cpc-hci-bridge |    10 kB |                      TBD |
 
 The SDK depends on the following Debian packages:
 

@@ -73,7 +73,7 @@ RUN curl https://sh.rustup.rs -sSf --output /tmp/sh.rustup.rs \
   && if [[ $ARCH == *"arm64"* ]]; then export RUST_TRIPLES="$RUST_TRIPLES aarch64-unknown-linux-gnu"; fi \
   && ./sh.rustup.rs -y --profile minimal --target ${RUST_TRIPLES} --default-toolchain ${RUST_VERSION}\
   && rm /tmp/sh.rustup.rs \
-  && /opt/cargo-home/bin/cargo install cargo2junit \
+  && /opt/cargo-home/bin/cargo install cargo2junit --locked \
   && /opt/cargo-home/bin/cargo install --version 1.41.3 cargo-deb \ 
   && chmod -R a+rw ${RUSTUP_HOME} ${CARGO_HOME} \
   && find ${RUSTUP_HOME} ${CARGO_HOME} -type d -exec chmod a+x {} \;
@@ -95,9 +95,11 @@ RUN curl -L https://github.com/plantuml/plantuml/releases/download/v1.2022.0/pla
 ENV PLANTUML_JAR_PATH=/opt/plantuml.jar
 
 # Install ZAP and dependencies
-COPY uic-resources/linux/zap_2022.1.10_amd64.deb /tmp/zap_2022.1.10_amd64.deb
-RUN apt update \
-  && apt install -y --no-install-recommends /tmp/zap_2022.1.10_amd64.deb \
+RUN wget -O /tmp/zap.deb https://github.com/project-chip/zap/releases/download/v2023.05.04/zap-linux.deb \
+  && echo a9ef0608035a106d4df4dd126490546cf8ba5d7cd13039a18d19cd3edd418a47 /tmp/zap.deb > /tmp/zap.deb.sha256 \
+  && sha256sum -c /tmp/zap.deb.sha256\
+  && apt update \
+  && apt install -y --no-install-recommends /tmp/zap.deb \
   && rm -rf /var/lib/apt/lists/*
 
 # Unpack SLC CLI

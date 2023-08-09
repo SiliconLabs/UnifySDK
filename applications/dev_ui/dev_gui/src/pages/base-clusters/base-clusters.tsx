@@ -243,7 +243,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
   }
 
   actionsList = (item: any) => {
-    let commands = item.SupportedCommands && item.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes" && cmd !== "AddScene")
+    let commands = item.SupportedCommands && item.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes" && cmd !== "AddScene" && cmd != "ForceReadAttributes")
     return commands && commands.length
       ? <DropdownButton menuAlign={'right'} variant="outline-primary" title="Commands" size="sm" className={`float-left`} disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"}>
         {commands.map((cmd: string, cmdIndex: number) => {

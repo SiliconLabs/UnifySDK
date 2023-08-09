@@ -18,8 +18,9 @@
  *
  * This module takes care of the S2 Command Class support and control.
  *
- * It uses a subscription to @ref ATTRIBUTE_COMMAND_CLASS_SECURITY_2_VERSION
- * in the @ref attribute_store to find out about the nodes that support Security 2.
+ * It uses a subscription to the ATTRIBUTE_COMMAND_CLASS_SECURITY_2_VERSION
+ * attribute type in the @ref attribute_store to find out about the nodes
+ * that support Security 2.
  *
  * @{
  */

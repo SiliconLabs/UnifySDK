@@ -24,6 +24,48 @@ For the application specific release notes, please follow these links:
 * [Zigbeed](applications/zigbeed/release_notes.md)
 * [Portable Runtime](portable_runtime/release_notes.md)
 
+## [1.4.0] - Aug 2023
+
+### Added (1.4.0)
+
+* Attribute Mapper can now create instances and clear values.
+
+* Unify DotDot Attribute Store component can now handle the node state topic.
+  Configuration struct was updated with a few more settings to accomodate for it.
+* Added State topic and Group Cluster handling in the Unify DotDot Attribute Store compopnent
+* Node state Cluster
+  * Now supports Discover Security Command to read Security state of the Node
+  * Network Status Attribute now supports new state "Commissioning started"
+  * Secutiry Status Attribute now supports new "Matter" mode.
+  * Network List Attribute is now added to the cluster
+
+* GSDK version updated to 4.3.0
+
+* Docker Changes
+  * Remove unnecessary libyaml-cpp0.6. libyaml-cpp-dev is already pulling the related one.
+      This change will help to support current debian-12 (which currently ships libyaml-cpp0.7)
+  * Now docker pulls all git lfs assets before starting the build.
+
+### Fixed (1.4.0)
+
+* Attribute Mapper fixed to evaluate all type assignments for a given destination.
+  The mapper used to "forget" some assignments if both the desired and reported
+  values would be assigned by the same attribute update.
+  Note that new mappings may become "active" all of a sudden with existing maps.
+* Attribute resolver on giving up on reading reported attribute, will now remove the
+  desired attribute value to have uniformity.
+
+### Known Issues (1.4.0)
+
+* **UIC-2261**: Attribute Mapper parent operator navigation does not always work (only on left hand sides)
+  _Note_: Avoid using the parent operator in UAM files, use the common_parent_type scope setting instead
+* **UIC-2228**: Attribute Mapper reducer is disabled due to errors. The mapper will not successfully reduce constant expressions.
+  _Note_: Avoid unnecessary calculations in the UAM files. e.g. write 100 instead of 10*10
+* **UIC-1725**: Resize a terminal with a running Unify application and a few error messages regarding file descriptors will be displayed.
+  _Note_: The errors can be ignored, there is no consequence
+* **UIC-1593**: The Dotdot MQTT library does not always use enum names, even though the Unify Specification indicates that it should.
+  _Note_: Be tolerant to numbers instead of strings for enums.
+
 ## [1.3.2] - Jun 2023
 
 ## [1.3.1] - March 2023
@@ -47,17 +89,6 @@ For the application specific release notes, please follow these links:
     r'2 = if(e'3 == 0) undefined
           if(r'3 > 0) 1 0
     ```
-
-### Known Issues (1.3.1)
-
-* **UIC-2261**: Attribute Mapper parent operator navigation does not always work (only on left hand sides)
-  _Note_: Avoid using the parent operator in UAM files, use the common_parent_type scope setting instead
-* **UIC-2228**: Attribute Mapper reducer is disabled due to errors. The mapper will not successfully reduce constant expressions.
-  _Note_: Avoid unnecessary calculations in the UAM files. e.g. write 100 instead of 10*10
-* **UIC-1725**: Resize a terminal with a running Unify application and a few error messages regarding file descriptors will be displayed.
-  _Note_: The errors can be ignored, there is no consequence
-* **UIC-1593**: The Dotdot MQTT library does not always use enum names, even though the Unify Specification indicates that it should.
-  _Note_: Be tolerant to numbers instead of strings for enums.
 
 ## [1.3.0] - February 2023
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['query_28895',['Query',['../classsmartstart_1_1Query.html#a9312a25bf70fe2409d2dbeecb187ec4e',1,'smartstart::Query']]]
+  ['query_31518',['Query',['../classsmartstart_1_1Query.html#a9312a25bf70fe2409d2dbeecb187ec4e',1,'smartstart::Query']]]
 ];

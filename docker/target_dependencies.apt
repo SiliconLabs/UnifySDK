@@ -24,6 +24,5 @@ libssl-dev
 libsystemd-dev
 libwrap0-dev
 libyaml-cpp-dev
-libyaml-cpp0.6
 procps
 uthash-dev

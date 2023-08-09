@@ -102,6 +102,7 @@ void test_get_endpoint_id_list_invalid_args(void)
   // ASSERT
   TEST_ASSERT_EQUAL(0, ep_list.size());
 }
+
 void test_get_endpoint_id_list_sanity(void)
 {
   size_t ep_count    = 2;

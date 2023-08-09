@@ -900,7 +900,7 @@ node before commands are delivered to the end node.
 
 
 Refer to the :ref:`unify_specifications_chapter_service_discovery`
-for details about the the node state topic.
+for details about the node state topic.
 
 .. _unify_specifications_section_reportable_unsolicited_messages_from_the_pan:
 

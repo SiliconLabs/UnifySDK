@@ -49,6 +49,8 @@ static sl_status_t handle_attribute_store_log(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_log_search(const handle_args_t &arg);
 static sl_status_t
   handle_attribute_store_set_reported(const handle_args_t &arg);
+static sl_status_t
+  handle_attribute_store_set_reported_string(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg);
 static sl_status_t
   handle_attribute_store_set_all_desired_types(const handle_args_t &arg);
@@ -105,6 +107,10 @@ const command_map_t attribute_store_commands = {
    {COLOR_START "<Attribute ID>,<Value>" COLOR_END
                 " :Sets the Attribute ID to the given REPORTED value.",
     &handle_attribute_store_set_reported}},
+  {"attribute_store_set_reported_string",
+   {COLOR_START "<Attribute ID>,<Value>" COLOR_END
+                " :Sets the Attribute ID to the given REPORTED string.",
+    &handle_attribute_store_set_reported_string}},
   {"attribute_store_log_node",
    {COLOR_START "<Attribute ID>,<(Optional) {0, 1}>" COLOR_END
                 " :prints the content of an attribute store node. If the "
@@ -639,6 +645,36 @@ static sl_status_t handle_attribute_store_set_reported(const handle_args_t &arg)
   }
 }
 
+static sl_status_t
+  handle_attribute_store_set_reported_string(const handle_args_t &arg)
+{
+  if (arg.size() != 3) {
+    dprintf(uic_stdin_get_output_fd(),
+            "Invalid number of arguments, expected args:"
+            "attribute_store_set_reported_string <ID>,<Value> \n");
+    return SL_STATUS_FAIL;
+  }
+  auto node = ATTRIBUTE_STORE_INVALID_NODE;
+  try {
+    node = std::stoi(arg[1].c_str(), nullptr, 10);
+  } catch (const std::invalid_argument &e) {
+    dprintf(uic_stdin_get_output_fd(),
+            "%s: Invalid argument: %s\n",
+            arg[1].c_str(),
+            e.what());
+    return SL_STATUS_FAIL;
+  }
+  try {
+    return attribute_store_set_reported_string(node, arg[2].c_str());
+  } catch (const std::invalid_argument &e) {
+    dprintf(uic_stdin_get_output_fd(),
+            "%s: Invalid argument: %s\n",
+            arg[2].c_str(),
+            e.what());
+    return SL_STATUS_FAIL;
+  }
+}
+
 static sl_status_t handle_attribute_store_log_node(const handle_args_t &arg)
 {
   bool log_children = false;
@@ -722,7 +758,7 @@ static sl_status_t handle_attribute_store_add(const handle_args_t &arg)
   try {
     // Find out the Attribute Store Attribute ID.
     attribute_store_node_t parent_node = std::stoi(arg[1].c_str(), nullptr, 10);
-    attribute_store_type_t type        = std::stoi(arg[2].c_str(), nullptr, 10);
+    attribute_store_type_t type        = std::stoull(arg[2].c_str(), nullptr, 10);
 
     return attribute_store_add_node(type, parent_node);
   } catch (const std::invalid_argument &e) {

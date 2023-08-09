@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /**
- * @defgroup zwave_command_type
+ * @defgroup zwave_command_type Z-Wave Command Types
  * @brief Helper Class to determine if a command is a GET SET or REPORT
  *
  * @{
@@ -31,10 +31,10 @@ class ZwaveCommandClassType
 
   /**
    * @brief Get the type of a Z-Wave frame
-   * 
+   *
    * @param command_class Command class byte
    * @param command       Command byte
-   * @return type_t 
+   * @return type_t
    */
   static inline type_t get_type(zwave_command_class_t command_class,
                                 zwave_command_t command)
@@ -54,11 +54,11 @@ class ZwaveCommandClassType
 
   /**
    * @brief Return is a frame is a supporting frame
-   * 
+   *
    * @param command_class Command class byte
    * @param command       Command byte
-   * @return true 
-   * @return false 
+   * @return true
+   * @return false
    */
   static inline bool is_supporting(zwave_command_class_t command_class,
                                    zwave_command_t command)

@@ -13,6 +13,8 @@
 // Includes from this component
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
+#include "unify_dotdot_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 #include "zpc_attribute_store.h"
 
 // Generic includes
@@ -416,18 +418,18 @@ attribute_store_node_t
     0);
 }
 
-node_state_topic_state_t
+NodeStateNetworkStatus
   attribute_store_network_helper_get_network_status(attribute_store_node_t node)
 {
   // Default to UNAVAILABLE if the value is undefined in the attribute store
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE;
 
   attribute_store_node_t node_id_node
     = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_NODE_ID);
 
   attribute_store_node_t network_status_node
     = attribute_store_get_first_child_by_type(node_id_node,
-                                              ATTRIBUTE_NETWORK_STATUS);
+                                              DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
   attribute_store_get_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));

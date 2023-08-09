@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -149,30 +149,30 @@ $(document).ready(function(){initNavTree('uic__mqtt_8h_source.html',''); initRes
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#gac31887652c6a7939224ad46803d5774d">uic_mqtt_subscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic, <a class="code" href="group__uic__mqtt.html#gacf7c8ad274a1b1ced5ae34fef47468c3">mqtt_message_callback_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#ga36ba7c285e7dfc74f57dae7b4c70163d">uic_mqtt_subscribe_ex</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                           <a class="code" href="group__uic__mqtt.html#gac4617cef7714b640e5a8306ab7f40409">mqtt_message_callback_ex_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                           <span class="keywordtype">void</span> *user);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#ga10c664a1b41e089425079c74333eb86f">uic_mqtt_unsubscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic, <a class="code" href="group__uic__mqtt.html#gacf7c8ad274a1b1ced5ae34fef47468c3">mqtt_message_callback_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#ga1f24243430a1651395c6927c7788c180">uic_mqtt_unsubscribe_ex</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic,</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                             <a class="code" href="group__uic__mqtt.html#gac4617cef7714b640e5a8306ab7f40409">mqtt_message_callback_ex_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>,</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                             <span class="keywordtype">void</span> *user);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#gae2e2e942f76c2d0143ed907b2d413bb2">uic_mqtt_set_before_disconnect_callback</a>(</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <a class="code" href="group__uic__mqtt.html#gad709fa4a1409b3b03912d7cae1c491b0">mqtt_connection_callbacks_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#gacc9eff67ac8ed62e455a130e4e6c4def">uic_mqtt_set_after_connect_callback</a>(<a class="code" href="group__uic__mqtt.html#gad709fa4a1409b3b03912d7cae1c491b0">mqtt_connection_callbacks_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="group__uic__mqtt.html#ga885170f068f59170b27f64308f875739">uic_mqtt_get_client_id</a>();</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__uic__mqtt.html#gaed0f45505344d3dafa4f826aa4e5438e">uic_mqtt_is_connected_to_broker</a>();</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// UIC_MQTT</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#ga36ba7c285e7dfc74f57dae7b4c70163d">uic_mqtt_subscribe_ex</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                           <a class="code" href="group__uic__mqtt.html#gac4617cef7714b640e5a8306ab7f40409">mqtt_message_callback_ex_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                           <span class="keywordtype">void</span> *user);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#ga10c664a1b41e089425079c74333eb86f">uic_mqtt_unsubscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic, <a class="code" href="group__uic__mqtt.html#gacf7c8ad274a1b1ced5ae34fef47468c3">mqtt_message_callback_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#ga1f24243430a1651395c6927c7788c180">uic_mqtt_unsubscribe_ex</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                             <a class="code" href="group__uic__mqtt.html#gac4617cef7714b640e5a8306ab7f40409">mqtt_message_callback_ex_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>,</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                             <span class="keywordtype">void</span> *user);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#gae2e2e942f76c2d0143ed907b2d413bb2">uic_mqtt_set_before_disconnect_callback</a>(</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <a class="code" href="group__uic__mqtt.html#gad709fa4a1409b3b03912d7cae1c491b0">mqtt_connection_callbacks_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__mqtt.html#gacc9eff67ac8ed62e455a130e4e6c4def">uic_mqtt_set_after_connect_callback</a>(<a class="code" href="group__uic__mqtt.html#gad709fa4a1409b3b03912d7cae1c491b0">mqtt_connection_callbacks_t</a> <a class="code" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="group__uic__mqtt.html#ga885170f068f59170b27f64308f875739">uic_mqtt_get_client_id</a>();</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__uic__mqtt.html#gaed0f45505344d3dafa4f826aa4e5438e">uic_mqtt_is_connected_to_broker</a>();</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// UIC_MQTT</span></div>
 <div class="ttc" id="agroup__uic__mqtt_html_ga10c664a1b41e089425079c74333eb86f"><div class="ttname"><a href="group__uic__mqtt.html#ga10c664a1b41e089425079c74333eb86f">uic_mqtt_unsubscribe</a></div><div class="ttdeci">void uic_mqtt_unsubscribe(const char *topic, mqtt_message_callback_t callback)</div><div class="ttdoc">Unsubscribe from a topic.</div><div class="ttdef"><b>Definition:</b> uic_mqtt.c:190</div></div>
 <div class="ttc" id="agroup__uic__mqtt_html_ga1f24243430a1651395c6927c7788c180"><div class="ttname"><a href="group__uic__mqtt.html#ga1f24243430a1651395c6927c7788c180">uic_mqtt_unsubscribe_ex</a></div><div class="ttdeci">void uic_mqtt_unsubscribe_ex(const char *topic, mqtt_message_callback_ex_t callback, void *user)</div><div class="ttdoc">Unsubscribe from a topic.</div><div class="ttdef"><b>Definition:</b> uic_mqtt.c:195</div></div>
 <div class="ttc" id="agroup__uic__mqtt_html_ga36ba7c285e7dfc74f57dae7b4c70163d"><div class="ttname"><a href="group__uic__mqtt.html#ga36ba7c285e7dfc74f57dae7b4c70163d">uic_mqtt_subscribe_ex</a></div><div class="ttdeci">void uic_mqtt_subscribe_ex(const char *topic, mqtt_message_callback_ex_t callback, void *user)</div><div class="ttdoc">Subscribe to a topic.</div><div class="ttdef"><b>Definition:</b> uic_mqtt.c:153</div></div>
@@ -192,14 +192,14 @@ $(document).ready(function(){initNavTree('uic__mqtt_8h_source.html',''); initRes
 <div class="ttc" id="agroup__uic__mqtt_html_gafa197d6f8b9ede2cb582ebb82e3e3f1d"><div class="ttname"><a href="group__uic__mqtt.html#gafa197d6f8b9ede2cb582ebb82e3e3f1d">uic_mqtt_count_topics</a></div><div class="ttdeci">int uic_mqtt_count_topics(const char *prefix_pattern)</div><div class="ttdoc">Count the number of topics published.</div><div class="ttdef"><b>Definition:</b> uic_mqtt.c:168</div></div>
 <div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:139</div></div>
 <div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
-<div class="ttc" id="azwave__s0__transport_8c_html_a800e1cc61a01bde0fe6d9a3eddb91b5e"><div class="ttname"><a href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a></div><div class="ttdeci">static void callback(uint8_t status, const zwapi_tx_report_t *tx_info, void *user)</div><div class="ttdoc">Z-Wave Tx Send data callback function.</div><div class="ttdef"><b>Definition:</b> zwave_s0_transport.c:605</div></div>
+<div class="ttc" id="azwave__s0__transport_8c_html_a800e1cc61a01bde0fe6d9a3eddb91b5e"><div class="ttname"><a href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a></div><div class="ttdeci">static void callback(uint8_t status, const zwapi_tx_report_t *tx_info, void *user)</div><div class="ttdoc">Z-Wave Tx Send data callback function.</div><div class="ttdef"><b>Definition:</b> zwave_s0_transport.c:601</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_4bf479fad80bec7ec7959953963ae340.html">uic_mqtt</a></li><li class="navelem"><a class="el" href="dir_8e6fba72874c404124ea9b0b3cb2476b.html">include</a></li><li class="navelem"><a class="el" href="uic__mqtt_8h.html">uic_mqtt.h</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:53 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:58 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -956,16 +956,24 @@ static void on_zwave_cc_version_version_attribute_update(
          == attribute_store_get_node_type(updated_node));
   zwave_cc_version_t supported_version = 0;
   if (SL_STATUS_OK
-      != attribute_store_read_value(updated_node,
-                                    REPORTED_ATTRIBUTE,
-                                    &supported_version,
-                                    sizeof(supported_version))) {
+      != attribute_store_get_reported(updated_node,
+                                      &supported_version,
+                                      sizeof(supported_version))) {
     return;
   };
 
   attribute_store_node_t endpoint_node
     = attribute_store_get_first_parent_with_type(updated_node,
                                                  ATTRIBUTE_ENDPOINT_ID);
+  zwave_endpoint_id_t endpoint_id = 1;
+  attribute_store_get_reported(endpoint_node,
+                               &endpoint_id,
+                               sizeof(endpoint_id));
+
+  // Probe the version attributes only for endpoint 0:
+  if (endpoint_id != 0) {
+    return;
+  }
 
   attribute_store_add_if_missing(endpoint_node,
                                  version_report_attribute,

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ Basic/ZCLVersion Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ZCLVersion attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ZCLVersion/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ZCLVersion/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ZCLVersion/Desired { &quot;value&quot;: &lt;DESIRED_ZCL_VERSION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ZCLVersion/Reported { &quot;value&quot;: &lt;REPORTED_ZCL_VERSION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ZCLVersion/Desired { &quot;value&quot;: &lt;DESIRED_ZCL_VERSION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ZCLVersion/Reported { &quot;value&quot;: &lt;REPORTED_ZCL_VERSION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ Basic/ApplicationVersion Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ApplicationVersion attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ApplicationVersion/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ApplicationVersion/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ApplicationVersion/Desired { &quot;value&quot;: &lt;DESIRED_APPLICATION_VERSION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ApplicationVersion/Reported { &quot;value&quot;: &lt;REPORTED_APPLICATION_VERSION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ApplicationVersion/Desired { &quot;value&quot;: &lt;DESIRED_APPLICATION_VERSION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ApplicationVersion/Reported { &quot;value&quot;: &lt;REPORTED_APPLICATION_VERSION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ Basic/StackVersion Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for StackVersion attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/StackVersion/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/StackVersion/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/StackVersion/Desired { &quot;value&quot;: &lt;DESIRED_STACK_VERSION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/StackVersion/Reported { &quot;value&quot;: &lt;REPORTED_STACK_VERSION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/StackVersion/Desired { &quot;value&quot;: &lt;DESIRED_STACK_VERSION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/StackVersion/Reported { &quot;value&quot;: &lt;REPORTED_STACK_VERSION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ Basic/HWVersion Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for HWVersion attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/HWVersion/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/HWVersion/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/HWVersion/Desired { &quot;value&quot;: &lt;DESIRED_HW_VERSION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/HWVersion/Reported { &quot;value&quot;: &lt;REPORTED_HW_VERSION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/HWVersion/Desired { &quot;value&quot;: &lt;DESIRED_HW_VERSION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/HWVersion/Reported { &quot;value&quot;: &lt;REPORTED_HW_VERSION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ Basic/ManufacturerName Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ManufacturerName attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ManufacturerName/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ManufacturerName/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ManufacturerName/Desired { &quot;value&quot;: &lt;DESIRED_MANUFACTURER_NAME&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ManufacturerName/Reported { &quot;value&quot;: &lt;REPORTED_MANUFACTURER_NAME&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ManufacturerName/Desired { &quot;value&quot;: &lt;DESIRED_MANUFACTURER_NAME&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ManufacturerName/Reported { &quot;value&quot;: &lt;REPORTED_MANUFACTURER_NAME&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ Basic/ModelIdentifier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ModelIdentifier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ModelIdentifier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ModelIdentifier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ModelIdentifier/Desired { &quot;value&quot;: &lt;DESIRED_MODEL_IDENTIFIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ModelIdentifier/Reported { &quot;value&quot;: &lt;REPORTED_MODEL_IDENTIFIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ModelIdentifier/Desired { &quot;value&quot;: &lt;DESIRED_MODEL_IDENTIFIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ModelIdentifier/Reported { &quot;value&quot;: &lt;REPORTED_MODEL_IDENTIFIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ Basic/DateCode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DateCode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DateCode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/DateCode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DateCode/Desired { &quot;value&quot;: &lt;DESIRED_DATE_CODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DateCode/Reported { &quot;value&quot;: &lt;REPORTED_DATE_CODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/DateCode/Desired { &quot;value&quot;: &lt;DESIRED_DATE_CODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/DateCode/Reported { &quot;value&quot;: &lt;REPORTED_DATE_CODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ Basic/PowerSource Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PowerSource attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/PowerSource/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/PowerSource/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/PowerSource/Desired { &quot;value&quot;: &lt;DESIRED_POWER_SOURCE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/PowerSource/Reported { &quot;value&quot;: &lt;REPORTED_POWER_SOURCE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/PowerSource/Desired { &quot;value&quot;: &lt;DESIRED_POWER_SOURCE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/PowerSource/Reported { &quot;value&quot;: &lt;REPORTED_POWER_SOURCE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ Basic/GenericDevice-Class Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for GenericDevice-Class attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/GenericDevice-Class/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/GenericDevice-Class/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/GenericDevice-Class/Desired { &quot;value&quot;: &lt;DESIRED_GENERIC_DEVICE_CLASS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/GenericDevice-Class/Reported { &quot;value&quot;: &lt;REPORTED_GENERIC_DEVICE_CLASS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/GenericDevice-Class/Desired { &quot;value&quot;: &lt;DESIRED_GENERIC_DEVICE_CLASS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/GenericDevice-Class/Reported { &quot;value&quot;: &lt;REPORTED_GENERIC_DEVICE_CLASS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ Basic/GenericDevice-Type Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for GenericDevice-Type attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/GenericDevice-Type/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/GenericDevice-Type/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/GenericDevice-Type/Desired { &quot;value&quot;: &lt;DESIRED_GENERIC_DEVICE_TYPE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/GenericDevice-Type/Reported { &quot;value&quot;: &lt;REPORTED_GENERIC_DEVICE_TYPE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/GenericDevice-Type/Desired { &quot;value&quot;: &lt;DESIRED_GENERIC_DEVICE_TYPE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/GenericDevice-Type/Reported { &quot;value&quot;: &lt;REPORTED_GENERIC_DEVICE_TYPE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ Basic/ProductCode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ProductCode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductCode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ProductCode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductCode/Desired { &quot;value&quot;: &lt;DESIRED_PRODUCT_CODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductCode/Reported { &quot;value&quot;: &lt;REPORTED_PRODUCT_CODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ProductCode/Desired { &quot;value&quot;: &lt;DESIRED_PRODUCT_CODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ProductCode/Reported { &quot;value&quot;: &lt;REPORTED_PRODUCT_CODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ Basic/ProductURL Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ProductURL attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductURL/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ProductURL/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductURL/Desired { &quot;value&quot;: &lt;DESIRED_PRODUCTURL&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductURL/Reported { &quot;value&quot;: &lt;REPORTED_PRODUCTURL&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ProductURL/Desired { &quot;value&quot;: &lt;DESIRED_PRODUCTURL&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ProductURL/Reported { &quot;value&quot;: &lt;REPORTED_PRODUCTURL&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ Basic/ManufacturerVersionDetails Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ManufacturerVersionDetails attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ManufacturerVersionDetails/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ManufacturerVersionDetails/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ManufacturerVersionDetails/Desired { &quot;value&quot;: &lt;DESIRED_MANUFACTURER_VERSION_DETAILS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ManufacturerVersionDetails/Reported { &quot;value&quot;: &lt;REPORTED_MANUFACTURER_VERSION_DETAILS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ManufacturerVersionDetails/Desired { &quot;value&quot;: &lt;DESIRED_MANUFACTURER_VERSION_DETAILS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ManufacturerVersionDetails/Reported { &quot;value&quot;: &lt;REPORTED_MANUFACTURER_VERSION_DETAILS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ Basic/SerialNumber Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SerialNumber attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/SerialNumber/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/SerialNumber/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/SerialNumber/Desired { &quot;value&quot;: &lt;DESIRED_SERIAL_NUMBER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/SerialNumber/Reported { &quot;value&quot;: &lt;REPORTED_SERIAL_NUMBER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/SerialNumber/Desired { &quot;value&quot;: &lt;DESIRED_SERIAL_NUMBER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/SerialNumber/Reported { &quot;value&quot;: &lt;REPORTED_SERIAL_NUMBER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ Basic/ProductLabel Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ProductLabel attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductLabel/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/ProductLabel/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductLabel/Desired { &quot;value&quot;: &lt;DESIRED_PRODUCT_LABEL&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/ProductLabel/Reported { &quot;value&quot;: &lt;REPORTED_PRODUCT_LABEL&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ProductLabel/Desired { &quot;value&quot;: &lt;DESIRED_PRODUCT_LABEL&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/ProductLabel/Reported { &quot;value&quot;: &lt;REPORTED_PRODUCT_LABEL&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ Basic/LocationDescription Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LocationDescription attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/LocationDescription/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/LocationDescription/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/LocationDescription/Desired { &quot;value&quot;: &lt;DESIRED_LOCATION_DESCRIPTION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/LocationDescription/Reported { &quot;value&quot;: &lt;REPORTED_LOCATION_DESCRIPTION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/LocationDescription/Desired { &quot;value&quot;: &lt;DESIRED_LOCATION_DESCRIPTION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/LocationDescription/Reported { &quot;value&quot;: &lt;REPORTED_LOCATION_DESCRIPTION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ Basic/PhysicalEnvironment Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PhysicalEnvironment attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/PhysicalEnvironment/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/PhysicalEnvironment/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/PhysicalEnvironment/Desired { &quot;value&quot;: &lt;DESIRED_PHYSICAL_ENVIRONMENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/PhysicalEnvironment/Reported { &quot;value&quot;: &lt;REPORTED_PHYSICAL_ENVIRONMENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/PhysicalEnvironment/Desired { &quot;value&quot;: &lt;DESIRED_PHYSICAL_ENVIRONMENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/PhysicalEnvironment/Reported { &quot;value&quot;: &lt;REPORTED_PHYSICAL_ENVIRONMENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ Basic/DeviceEnabled Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DeviceEnabled attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DeviceEnabled/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/DeviceEnabled/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DeviceEnabled/Desired { &quot;value&quot;: &lt;DESIRED_DEVICE_ENABLED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DeviceEnabled/Reported { &quot;value&quot;: &lt;REPORTED_DEVICE_ENABLED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/DeviceEnabled/Desired { &quot;value&quot;: &lt;DESIRED_DEVICE_ENABLED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/DeviceEnabled/Reported { &quot;value&quot;: &lt;REPORTED_DEVICE_ENABLED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ Basic/AlarmMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AlarmMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/AlarmMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/AlarmMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_ALARM_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_ALARM_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_ALARM_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_ALARM_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ Basic/DisableLocalConfig Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DisableLocalConfig attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DisableLocalConfig/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/DisableLocalConfig/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DisableLocalConfig/Desired { &quot;value&quot;: &lt;DESIRED_DISABLE_LOCAL_CONFIG&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/DisableLocalConfig/Reported { &quot;value&quot;: &lt;REPORTED_DISABLE_LOCAL_CONFIG&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/DisableLocalConfig/Desired { &quot;value&quot;: &lt;DESIRED_DISABLE_LOCAL_CONFIG&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/DisableLocalConfig/Reported { &quot;value&quot;: &lt;REPORTED_DISABLE_LOCAL_CONFIG&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ Basic/SWBuildID Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SWBuildID attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/SWBuildID/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Basic/Attributes/SWBuildID/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/SWBuildID/Desired { &quot;value&quot;: &lt;DESIRED_SW_BUILDID&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Attributes/SWBuildID/Reported { &quot;value&quot;: &lt;REPORTED_SW_BUILDID&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/SWBuildID/Desired { &quot;value&quot;: &lt;DESIRED_SW_BUILDID&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Basic/Attributes/SWBuildID/Reported { &quot;value&quot;: &lt;REPORTED_SW_BUILDID&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -814,7 +856,7 @@ Basic/WriteAttributes Command</h2>
 <p>To update all Basic attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Basic/Commands/WriteAttributes&#39; -m  &#39;{ &quot;LocationDescription&quot;: &lt;LOCATION_DESCRIPTION_VALUE&gt; ,&quot;PhysicalEnvironment&quot;: &lt;PHYSICAL_ENVIRONMENT_VALUE&gt; ,&quot;DeviceEnabled&quot;: &lt;DEVICE_ENABLED_VALUE&gt; ,&quot;AlarmMask&quot;: &lt;ALARM_MASK_VALUE&gt; ,&quot;DisableLocalConfig&quot;: &lt;DISABLE_LOCAL_CONFIG_VALUE&gt; , }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -878,7 +920,7 @@ Basic/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

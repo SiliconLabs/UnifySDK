@@ -72,6 +72,15 @@ int zigbeeHostInit(struct zigbeeHostOpts *opts)
 
   // NOTE: Gateway backchannel is not used/enabled
 
+  EmberStatus status =
+    zigbeeHostRegisterClusters(
+        opts->supportedClusterList,
+        opts->supportedClusterListSize);
+
+  if(EMBER_SUCCESS != status)
+  {
+    return EMBER_ERR_FATAL;
+  }
   // Initialize Silicon Labs device, system, service(s) and protocol stack(s).
   // Note that if the kernel is present, processing task(s) will be created by
   // this call.
@@ -109,6 +118,39 @@ EzspStatus zigbeeHostSetEzspPolicy(EzspPolicyId policyId,
                                    const char *decisionName)
 {
   return emberAfSetEzspPolicy(policyId, decisionId, policyName, decisionName);
+}
+
+EmberStatus zigbeeHostRegisterClusters(
+              const uint16_t *cluster_list,
+              unsigned int cluster_list_size )
+{
+
+  EmberStatus status = EMBER_SUCCESS;
+
+  if(cluster_list != NULL)
+  {
+    for(unsigned int i =0; i < cluster_list_size; i++)
+    {
+      uint16_t cluster_id = cluster_list[i];
+      (void)sl_zigbee_subscribe_to_zcl_commands(
+              cluster_id,
+              0xFFFF,
+              ZCL_DIRECTION_CLIENT_TO_SERVER,
+              &emberAfClusterServiceCallback);
+
+      (void)sl_zigbee_subscribe_to_zcl_commands(
+              cluster_id,
+              0xFFFF,
+              ZCL_DIRECTION_SERVER_TO_CLIENT,
+              &emberAfClusterServiceCallback);
+    }
+  }
+  else
+  {
+    status = EMBER_BAD_ARGUMENT;
+  }
+
+  return status;
 }
 
 /*****************************************************************************/

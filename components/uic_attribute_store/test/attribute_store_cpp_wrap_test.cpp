@@ -87,8 +87,8 @@ void test_attribute_store_cpp_wrap_get_set_test()
   //Can we store a string?
   n.set_desired<std::string>("hello world");
   std::string str = n.desired<std::string>();
-  TEST_ASSERT_TRUE(str == "hello world");
-
+  TEST_ASSERT_EQUAL_STRING("hello world",str.c_str());
+  TEST_ASSERT_TRUE("hello world" == str);
   // Can we use a list container with a 32bit type?
   std::list<int32_t> l1 = {1, 2, 3, -4, 5, -6, 7, 8, 9, 0};
   n.set_desired(l1);
@@ -157,5 +157,39 @@ void test_attribute_store_cpp_wrap_navigation_test()
     TEST_ASSERT_EQUAL(i, d.child_by_type(0x42, i).reported<uint8_t>());
   }
   TEST_ASSERT_TRUE(n3 == d.child_by_type_and_value<uint8_t>(0x42, 2));
+}
+
+void test_attribute_store_cpp_wrap_strings()
+{
+  attribute a = attribute::root().add_node(2);
+
+  // Save a C-String, read it back as a std::string
+  char test_c_string[] = "a string value";
+  attribute_store_set_reported_string(a, test_c_string);
+
+  try {
+    auto read_value = a.reported<std::string>();
+    TEST_ASSERT_EQUAL_STRING(read_value.c_str(), test_c_string);
+  } catch (const std::exception &e) {
+    TEST_FAIL_MESSAGE("Could not read the reported value back");
+  }
+
+  // Save a std::string, read it as a std::string:
+  std::string new_value = std::string("my new string value");
+  a.set_desired<std::string>(new_value);
+  a.set_desired("my new string value");
+
+  try {
+    auto read_value = a.desired<std::string>();
+    TEST_ASSERT_EQUAL_STRING("my new string value", read_value.c_str());
+  } catch (const std::exception &e) {
+    TEST_FAIL_MESSAGE("Could not read the desired value back");
+  }
+
+  char read_string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH];
+  attribute_store_get_desired_string(a,
+                                      read_string,
+                                      ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  TEST_ASSERT_EQUAL_STRING("my new string value", read_string);
 }
 }

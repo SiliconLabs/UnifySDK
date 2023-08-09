@@ -12,6 +12,7 @@
  *****************************************************************************/
 // clang-format off
 {{zap_header}}  // clang-format on
+#include "unify_dotdot_attribute_store.h"
 #include "unify_dotdot_attribute_store_attribute_publisher.h"
 #include "unify_dotdot_attribute_store_helpers.h"
 #include "unify_dotdot_attribute_store_configuration.h"
@@ -28,8 +29,6 @@
 #include "sl_log.h"
 #define LOG_TAG "unify_dotdot_attribute_store_attribute_publisher"
 
-#define MAXIMUM_UNID_SIZE 100
-
 // clang-format off
 {{#zcl_clusters}}
 {{#if (supportedCluster label)}}
@@ -44,7 +43,7 @@ static void {{asSnakeCaseLower label}}_cluster_publish_desired_value_callback(
    attribute_store_node_t updated_node, attribute_store_change_t change)
 {
   // clang-format on
-  if (false == is_publish_attribute_values_to_mqtt_enabled()) {
+  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
     return;
   }
   if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
@@ -60,6 +59,15 @@ static void {{asSnakeCaseLower label}}_cluster_publish_desired_value_callback(
 
   // Get the UNID and EndPoint, and prepare the basic topic
   char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  {{#if (clusterWithoutEndpoints label)}}
+  // clang-format on
+  if (SL_STATUS_OK != unify_dotdot_attributes_get_unid()(updated_node, unid)) {
+    return;
+  }
+  // clang-format off
+  {{else}}
+  // clang-format on
   dotdot_endpoint_id_t endpoint_id = 0;
   if (SL_STATUS_OK
       != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
@@ -67,6 +75,9 @@ static void {{asSnakeCaseLower label}}_cluster_publish_desired_value_callback(
                                                      &endpoint_id)) {
     return;
   }
+  // clang-format off
+  {{/if}}
+  // clang-format on
 
   std::string base_topic = "ucl/by-unid/" + std::string(unid);
   // clang-format off
@@ -84,11 +95,20 @@ static void {{asSnakeCaseLower label}}_cluster_publish_desired_value_callback(
     return;
   }
 
+  // If the value got updated but both Reported and Desired undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)
+      && false == attribute_store_is_desired_defined(updated_node)) {
+    sl_log_debug(LOG_TAG,
+                 "Reported/Desired values are undefined. "
+                 "Skipping publication");
+    return;
+  }
+
   // clang-format off
   try {
     attribute_store::attribute attr(updated_node);
   {{#zcl_attributes}}
-    {{#if (isMonotonousArray label)}}
+    {{#if (isMonotonousArray label)}} 
     // Skip attribute {{label}} because it is an array,
     // we typically don't save them as array in the attribute store.
     sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute {{parent.label}} {{label}}. Arrays are not supported");
@@ -129,7 +149,7 @@ static void {{asSnakeCaseLower label}}_cluster_publish_reported_value_callback(
    attribute_store_node_t updated_node, attribute_store_change_t change)
 {
   // clang-format on
-  if (false == is_publish_attribute_values_to_mqtt_enabled()) {
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
     return;
   }
   if (change == ATTRIBUTE_CREATED) {
@@ -145,6 +165,15 @@ static void {{asSnakeCaseLower label}}_cluster_publish_reported_value_callback(
 
   // Get the UNID and EndPoint, and prepare the basic topic
   char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  {{#if (clusterWithoutEndpoints label)}}
+  // clang-format on
+  if (SL_STATUS_OK != unify_dotdot_attributes_get_unid()(updated_node, unid)) {
+    return;
+  }
+  // clang-format off
+  {{else}}
+  // clang-format on
   dotdot_endpoint_id_t endpoint_id = 0;
   if (SL_STATUS_OK
       != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
@@ -152,6 +181,9 @@ static void {{asSnakeCaseLower label}}_cluster_publish_reported_value_callback(
                                                      &endpoint_id)) {
     return;
   }
+  // clang-format off
+  {{/if}}
+  // clang-format on
 
   std::string base_topic = "ucl/by-unid/" + std::string(unid);
   // clang-format off
@@ -187,6 +219,12 @@ static void {{asSnakeCaseLower label}}_cluster_publish_reported_value_callback(
     break;
     }
     // clang-format on
+    return;
+  }
+
+  // If the value got updated but undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)) {
+    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
     return;
   }
 
@@ -229,19 +267,32 @@ static void {{asSnakeCaseLower label}}_cluster_publish_reported_value_callback(
 static void {{asSnakeCaseLower label}}_cluster_cluster_revision_callback(
    attribute_store_node_t updated_node, attribute_store_change_t change)
 {
-  if (false == is_publish_attribute_values_to_mqtt_enabled()) {
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
     return;
   }
 
   // Get the UNID and EndPoint, and prepare the basic topic
-  char unid[MAXIMUM_UNID_SIZE]    = {};
+  char unid[MAXIMUM_UNID_SIZE]     = {};
   dotdot_endpoint_id_t endpoint_id = 0;
-  if (SL_STATUS_OK
-        != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
-                                                       unid,
-                                                       &endpoint_id)) {
+  // clang-format off
+  {{#if (clusterWithoutEndpoints label)}}
+  // clang-format on
+  if (SL_STATUS_OK != unify_dotdot_attributes_get_unid()(updated_node, unid)) {
     return;
   }
+  // clang-format off
+  {{else}}
+  // clang-format on
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  {{/if}}
+  // clang-format on
 
   std::string base_topic = "ucl/by-unid/" + std::string(unid);
   // clang-format off

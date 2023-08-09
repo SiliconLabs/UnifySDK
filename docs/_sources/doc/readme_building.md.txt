@@ -5,9 +5,7 @@ cross-compile the Unify components. This guide explains how to build Debian
 packages for the Raspberry Pi.
 
 For a list of build dependencies please refer to the
-[Dockerfile](../docker/Dockerfile). We are introducing an experiemental way to
-build which is Nix. You can find the instructions in
-[readme_nix.md](readme_nix.md).
+[Dockerfile](../docker/Dockerfile).
 
 ```{toctree}
 ---
@@ -15,7 +13,6 @@ maxdepth: 2
 titlesonly:
 hidden:
 ---
-readme_nix.md
 ```
 
 ## Build Instructions

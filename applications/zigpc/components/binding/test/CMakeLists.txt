@@ -8,6 +8,7 @@ target_add_unittest(
     zigpc_common_zigbee.c
     DEPENDS
     zigpc_common_mock
+    zigpc_datastore_mock
     zigpc_gateway_mock)
 
 target_add_unittest(

@@ -24,7 +24,8 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "zwave_node_id_definitions.h"
 #include "zwave_command_class_wake_up_types.h"
-#include "ucl_definitions.h"
+
+#include "unify_dotdot_attribute_store_node_state.h"
 
 // Test helpers
 #include "unity.h"
@@ -87,13 +88,13 @@ static attribute_store_node_t create_al_node(zwave_node_id_t node_id)
 
   attribute_store_node_t network_status_node
     = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_NETWORK_STATUS,
+                                             DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                              0);
   if (network_status_node == ATTRIBUTE_STORE_INVALID_NODE) {
     network_status_node
-      = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
+      = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, node_id_node);
   }
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
@@ -161,37 +162,37 @@ void test_monitoring_failed_al_node_happy_case()
 
   // Set the node to just included
   attribute_store_node_t network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED;
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, node_id_node);
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_COMMISIONING_STARTED;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
 
   // Make it to unavailable, nothing should happen
-  network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
 
   // Make it to an invalid value, nothing should happen
-  network_status = NODE_STATE_TOPIC_LAST;
+  network_status = 10000;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
 
   // Make it to a interviewing, nothing should happen
-  network_status = NODE_STATE_TOPIC_INTERVIEWING;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
 
   // Now start monitoring the node:
-  network_status = NODE_STATE_TOPIC_STATE_OFFLINE;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
@@ -228,7 +229,7 @@ void test_monitoring_failed_al_node_happy_case()
   on_send_nop_completed(0, NULL, (void *)((intptr_t)node_id_node));
 
   // finally it is no longer failing:
-  network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
@@ -255,15 +256,15 @@ void test_monitoring_failed_fl_node_happy_case()
 
   // Set the node to interviewing
   attribute_store_node_t network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_INTERVIEWING;
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, node_id_node);
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
 
   // Make it to Interview fail, it will start monitoring
-  network_status = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
@@ -301,7 +302,7 @@ void test_monitoring_failed_fl_node_happy_case()
   on_send_nop_completed(0, NULL, (void *)((intptr_t)node_id_node));
 
   // finally it is no longer failing:
-  network_status = NODE_STATE_TOPIC_INTERVIEWING;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
@@ -318,8 +319,8 @@ void test_monitoring_failed_2_al_nodes_with_back_off()
 
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
   // set both nodes as failing:
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_node_2,
                                &network_status,
                                sizeof(network_status));
@@ -357,8 +358,8 @@ void test_monitoring_failed_al_node_max_interval()
 
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
   // set both nodes as failing:
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_node_2,
                                &network_status,
                                sizeof(network_status));
@@ -420,7 +421,7 @@ void test_monitoring_failed_al_ping_interval_gets_deleted_while_transmitting_nop
 
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
   // Mark the node as failing:
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_OFFLINE;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE;
   attribute_store_set_reported(network_status_node_2,
                                &network_status,
                                sizeof(network_status));
@@ -463,8 +464,8 @@ void test_monitoring_failed_al_network_status_gets_deleted_while_transmitting_no
 
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
   // Mark the node as failing:
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_node_2,
                                &network_status,
                                sizeof(network_status));
@@ -497,8 +498,8 @@ void test_monitoring_failed_al_network_status_gets_deleted_after_transmitting_no
 
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
   // Mark the node as failing:
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_node_2,
                                &network_status,
                                sizeof(network_status));
@@ -527,16 +528,16 @@ void test_monitoring_failed_unknown_operating_mode_not_monitored()
 {
   // Add a network status
   attribute_store_node_t network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED;
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, node_id_node);
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_COMMISIONING_STARTED;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
 
   // Mark the node as failing:
-  network_status = NODE_STATE_TOPIC_STATE_OFFLINE;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE;
   attribute_store_set_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
@@ -555,8 +556,8 @@ void test_monitoring_failed_tx_queue_rejects_nop()
 
   contiki_test_helper_run(MAX_PING_TIME_INTERVAL);
   // set both nodes as failing:
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_node_20,
                                &network_status,
                                sizeof(network_status));
@@ -605,8 +606,8 @@ void test_monitoring_failed_al_node_already_has_a_ping_interval()
                                      sizeof(ping_interval));
 
   // set the node as failing:
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_99_node,
                                &network_status,
                                sizeof(network_status));
@@ -633,8 +634,8 @@ void test_monitoring_failed_al_node_undefined_node_id()
   attribute_store_undefine_reported(node_id_989_node);
 
   // set the node as failing:
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_reported(network_status_989_node,
                                &network_status,
                                sizeof(network_status));
@@ -653,7 +654,7 @@ void test_monitoring_failed_al_node_undefined_node_id_after_scheduling_send_nop(
                                                  ATTRIBUTE_NODE_ID);
 
   // set the node as failing:
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_OFFLINE;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE;
   attribute_store_set_reported(network_status_7_node,
                                &network_status,
                                sizeof(network_status));

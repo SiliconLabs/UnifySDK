@@ -41,7 +41,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -188,6 +188,12 @@ published about the node. The topic is <code class="docutils literal notranslate
 <span class="w">        </span><span class="s2">&quot;string&quot;</span>
 <span class="w">      </span><span class="p">],</span>
 <span class="w">      </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^(unknown)|(infinite)$&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;NetworkList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -203,13 +209,15 @@ published about the node. The topic is <code class="docutils literal notranslate
 <table class="colwidths-given docutils align-default" id="table-unify-specifications-mqtt-topic-state-topic-attributes-overview" style="width: 80%">
 <caption><span class="caption-number">Table 6.1 </span><span class="caption-text">MQTT Topic State topic attributes overview</span><a class="headerlink" href="#table-unify-specifications-mqtt-topic-state-topic-attributes-overview" title="Permalink to this table"></a></caption>
 <colgroup>
-<col style="width: 22%" />
-<col style="width: 56%" />
-<col style="width: 22%" />
+<col style="width: 21%" />
+<col style="width: 53%" />
+<col style="width: 5%" />
+<col style="width: 21%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property name</p></th>
 <th class="head"><p>Description</p></th>
+<th class="head"><p>Mandatory?</p></th>
 <th class="head"><p>Example value</p></th>
 </tr>
 </thead>
@@ -220,6 +228,7 @@ published about the node. The topic is <code class="docutils literal notranslate
 <p>during inclusion. More details about each value is provided in the</p>
 <p><a class="reference internal" href="#unify-specifications-chapter-service-discovery-network-status-section"><span class="std std-ref">NetworkStatus</span></a> section.</p>
 </td>
+<td><p>Yes</p></td>
 <td><p>“Online functional”</p>
 <p>“Online interviewing”</p>
 <p>“Online non-functional”</p>
@@ -227,16 +236,29 @@ published about the node. The topic is <code class="docutils literal notranslate
 <p>“Offline”</p>
 </td>
 </tr>
-<tr class="row-odd"><td><p>MaximumCommandDelay</p></td>
+<tr class="row-odd"><td><p>Security</p></td>
+<td><p>Indicates the security protocol used by the node to join a network and exchange messages with other nodes.</p></td>
+<td><p>Yes</p></td>
+<td><p>“Z-Wave S0”</p>
+<p>“None”</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>MaximumCommandDelay</p></td>
 <td><p>Indicates the maximum delay that it can take to deliver a command to the</p>
 <p>node, in seconds. It can either be deterministic (with a precise value),</p>
 <p>“unknown”, or “infinite”. It can therefore either be a JSON number or</p>
 <p>JSON String.</p>
 </td>
+<td><p>Yes</p></td>
 <td><p>4200</p>
 <p>“unknown”</p>
 <p>“infinite”</p>
 </td>
+</tr>
+<tr class="row-odd"><td><p>NetworkList</p></td>
+<td><p>Indicates the PAN(s) that the node has joined. This should contain an array of one or more unique network identifiers (Network IDs).</p></td>
+<td><p>No</p></td>
+<td><p>[ “1”, “2”, “3” ]</p></td>
 </tr>
 </tbody>
 </table>
@@ -400,7 +422,7 @@ the following two topic filters:</p>
 </ul>
 <p>When an IoT Service receives publish messages, such as
 <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/98146584/ep10/OnOff/SupportedCommands</span></code>, it will then know that a
-Protocol Controller can service commands for the the OnOff Cluster for
+Protocol Controller can service commands for the OnOff Cluster for
 unid 98146584, endpoint 10.
 The MQTT Client can issue the cluster commands (e.g On) to the corresponding
 subtopic: <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/98146584/ep10/OnOff/Commands/On</span></code>.</p>

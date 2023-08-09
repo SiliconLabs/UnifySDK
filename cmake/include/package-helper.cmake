@@ -22,13 +22,15 @@ set(CPACK_SOURCE_IGNORE_FILES
     "${PROJECT_SOURCE_DIR}/build.*/"
     "${PROJECT_SOURCE_DIR}/GeckoSDK.*/"
     "Jenkinsfile" "Earthfile"
+    "*.nix" "justfile" ".envrc" "flake.lock"
     "\\\\.git*"
     "\\\\.pre-commit-config.yaml"
     "${PROJECT_SOURCE_DIR}/externals"
     "sonar-project\\\\.properties"
     "${PROJECT_SOURCE_DIR}/scripts/ci"
     "${PROJECT_SOURCE_DIR}/scripts/internal"
-    ".*\\\\.internal\\\\.md")
+    ".*\\\\.internal\\\\.md"
+    "${PROJECT_SOURCE_DIR}/applications/examples/applications/example_mqtt_device")
 
 # Generate Debian package
 set(CPACK_GENERATOR "DEB")

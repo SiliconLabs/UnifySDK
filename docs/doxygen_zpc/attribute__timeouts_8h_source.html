@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -121,22 +121,26 @@ $(document).ready(function(){initNavTree('attribute__timeouts_8h_source.html',''
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23">clock_time_t</a> duration,</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">   94</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">attribute_timeout_cancel_callback</a>(</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="code" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">  102</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">attribute_timeouts_init</a>();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">  108</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">attribute_timeouts_teardown</a>();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">//ATTRIBUTE_TIMEOUTS_H</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#ga1366e86e4511431e7afd133f37fe01eb">   93</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__unify__attribute__timeouts.html#ga1366e86e4511431e7afd133f37fe01eb">attribute_timeout_is_callback_active</a>(</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="code" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">  105</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">attribute_timeout_cancel_callback</a>(</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="code" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">  113</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">attribute_timeouts_init</a>();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">  119</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">attribute_timeouts_teardown</a>();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">//ATTRIBUTE_TIMEOUTS_H</span></div>
 <div class="ttc" id="aattribute__store_8h_html"><div class="ttname"><a href="attribute__store_8h.html">attribute_store.h</a></div></div>
 <div class="ttc" id="aclock_8h_html"><div class="ttname"><a href="clock_8h.html">clock.h</a></div></div>
 <div class="ttc" id="agecko_2contiki-conf_8h_html_a6e6c13e871b82d881a01d1bc8df69d23"><div class="ttname"><a href="gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23">clock_time_t</a></div><div class="ttdeci">uint32_t clock_time_t</div><div class="ttdef"><b>Definition:</b> contiki-conf.h:31</div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_ga66c4c40720e5271c527c718924261fc6"><div class="ttname"><a href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a></div><div class="ttdeci">datastore_attribute_id_t attribute_store_node_t</div><div class="ttdoc">Handle to identify attribute store nodes.</div><div class="ttdef"><b>Definition:</b> attribute_store.h:101</div></div>
+<div class="ttc" id="agroup__unify__attribute__timeouts_html_ga1366e86e4511431e7afd133f37fe01eb"><div class="ttname"><a href="group__unify__attribute__timeouts.html#ga1366e86e4511431e7afd133f37fe01eb">attribute_timeout_is_callback_active</a></div><div class="ttdeci">bool attribute_timeout_is_callback_active(attribute_store_node_t node, attribute_timeout_callback_t callback_function)</div><div class="ttdoc">Checks if a node/callback pair is active.</div></div>
 <div class="ttc" id="agroup__unify__attribute__timeouts_html_ga63a383c7d992d7896de75455e73624a0"><div class="ttname"><a href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">attribute_timeouts_teardown</a></div><div class="ttdeci">int attribute_timeouts_teardown()</div><div class="ttdoc">Teardown the Unify attribute timeouts component.</div></div>
 <div class="ttc" id="agroup__unify__attribute__timeouts_html_gaabf87d99516792615d624442789a9f64"><div class="ttname"><a href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">attribute_timeout_cancel_callback</a></div><div class="ttdeci">sl_status_t attribute_timeout_cancel_callback(attribute_store_node_t node, attribute_timeout_callback_t callback_function)</div><div class="ttdoc">Cancels a callback to be called after a duration for an attribute.</div></div>
 <div class="ttc" id="agroup__unify__attribute__timeouts_html_gaac3e9c367a090a9f713b47d70a1d7ce2"><div class="ttname"><a href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">attribute_timeouts_init</a></div><div class="ttdeci">sl_status_t attribute_timeouts_init()</div><div class="ttdoc">Initializes the Unify attribute timeouts component.</div></div>
@@ -150,7 +154,7 @@ $(document).ready(function(){initNavTree('attribute__timeouts_8h_source.html',''
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_7ae99e22e7f2630b0926b8e8347da62e.html">uic_attribute_utils</a></li><li class="navelem"><a class="el" href="dir_33d00ec0ddc6a53e379204f6ad540127.html">include</a></li><li class="navelem"><a class="el" href="attribute__timeouts_8h.html">attribute_timeouts.h</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:51 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:56 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

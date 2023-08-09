@@ -2,7 +2,6 @@ var dir_7619deabe98ce62d677c018eac259f19 =
 [
     [ "dotdot_mapper", "dir_fc5e30e6d560322ea12b12d1fc01c4d3.html", "dir_fc5e30e6d560322ea12b12d1fc01c4d3" ],
     [ "network_monitor", "dir_0ff5599c2bc4bb9ac92bae07d4f59ba3.html", "dir_0ff5599c2bc4bb9ac92bae07d4f59ba3" ],
-    [ "ucl_definitions", "dir_07fb7ab87a00e8ad8333f6d3dbfb59d0.html", "dir_07fb7ab87a00e8ad8333f6d3dbfb59d0" ],
     [ "ucl_mqtt", "dir_6b85f8de57a896b19916185a245d7220.html", "dir_6b85f8de57a896b19916185a245d7220" ],
     [ "zcl_cluster_servers", "dir_d91d23ed1d6406dcb702936bf15f1c1b.html", "dir_d91d23ed1d6406dcb702936bf15f1c1b" ],
     [ "zpc_application_monitoring", "dir_e87b3c44944f54ddfb6f5201e34a4fef.html", "dir_e87b3c44944f54ddfb6f5201e34a4fef" ],

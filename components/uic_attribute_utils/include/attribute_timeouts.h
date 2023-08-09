@@ -83,6 +83,17 @@ sl_status_t attribute_timeout_set_callback(
   attribute_timeout_callback_t callback_function);
 
 /**
+ * @brief Checks if a node/callback pair is active
+ *
+ * @param node               The attribute store node to inspect after the duration.
+ * @param callback_function  The function to invoke for the attribute node inspection.
+ *
+ * @returns True if the node has a timeor/ Callback running, false otherwise
+ */
+bool attribute_timeout_is_callback_active(
+  attribute_store_node_t node, attribute_timeout_callback_t callback_function);
+
+/**
  * @brief Cancels a callback to be called after a duration for an attribute.
  *
  * @param node               The attribute store node to inspect after the duration.

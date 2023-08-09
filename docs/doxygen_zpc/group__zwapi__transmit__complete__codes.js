@@ -1,80 +1,9 @@
 var group__zwapi__transmit__complete__codes =
 [
-    [ "rssi_val", "structrssi__val.html", [
-      [ "incoming", "group__ZWAPI__TRANSPORT.html#gab9a181364dad599a51b3404326b05965", null ]
-    ] ],
-    [ "_S_ROUTE_LINK_", "struct__S__ROUTE__LINK__.html", [
-      [ "from", "group__ZWAPI__TRANSPORT.html#ga262512c102d961fd5b112ebc09f9953f", null ],
-      [ "to", "group__ZWAPI__TRANSPORT.html#ga48835eafd966292b1f53c28b71dc21aa", null ]
-    ] ],
-    [ "zwapi_tx_report", "structzwapi__tx__report.html", [
-      [ "ack_channel_number", "group__ZWAPI__TRANSPORT.html#ga196d0cb6bf88d71d61367186716a42ff", null ],
-      [ "ack_rssi", "group__ZWAPI__TRANSPORT.html#ga68331652178bd9d9130377c075dc3e63", null ],
-      [ "beam_1000ms", "group__ZWAPI__TRANSPORT.html#gae0f69743368ac5d44df24ffafc122920", null ],
-      [ "beam_250ms", "group__ZWAPI__TRANSPORT.html#gacd117a3b6bd8ca1e661896417e9154f1", null ],
-      [ "destination_ack_mpdu_measured_noise_floor", "group__ZWAPI__TRANSPORT.html#ga5d99d33dc4822ded9479ac4afef39187", null ],
-      [ "destination_ack_mpdu_measured_rssi", "group__ZWAPI__TRANSPORT.html#gafb57e18c9f40281b259ac8a7edc4a370", null ],
-      [ "destination_ack_mpdu_tx_power", "group__ZWAPI__TRANSPORT.html#ga19d0c319ca575d4d98e7c43a7bbfe113", null ],
-      [ "last_failed_link", "group__ZWAPI__TRANSPORT.html#gabbc8cf5ee9c5a623e48645a494b209d7", null ],
-      [ "last_route_repeaters", "group__ZWAPI__TRANSPORT.html#gaf0d72c401fee5e9c9a23de8a25baa129", null ],
-      [ "last_route_speed", "group__ZWAPI__TRANSPORT.html#gaf9096a9a858a8c34490c50ad346f7134", null ],
-      [ "measured_noise_floor", "group__ZWAPI__TRANSPORT.html#ga03d5139813ab21154be450ef2dac507e", null ],
-      [ "number_of_repeaters", "group__ZWAPI__TRANSPORT.html#gaf59c968cd9db4c20afc88fb76b329c84", null ],
-      [ "route_scheme_state", "group__ZWAPI__TRANSPORT.html#ga3d8eb5667d33743e44c019f83823e681", null ],
-      [ "routing_attempts", "group__ZWAPI__TRANSPORT.html#gaf0b793fabb8d969b38edc1f33deb5785", null ],
-      [ "rssi_values", "group__ZWAPI__TRANSPORT.html#ga4fc2b9c75b6373405dcdf44e944ecda9", null ],
-      [ "transmit_ticks", "group__ZWAPI__TRANSPORT.html#ga5de901837c9db0fd8a1122961e19d7bc", null ],
-      [ "tx_channel_number", "group__ZWAPI__TRANSPORT.html#ga07cdae256d6955ba453f23645bbebc6f", null ],
-      [ "tx_power", "group__ZWAPI__TRANSPORT.html#gadb4574b51f44c8eaa432918385197e30", null ]
-    ] ],
-    [ "LAST_USED_ROUTE_CONF_SIZE", "group__zwapi__transmit__complete__codes.html#gacf4e8c982f34bf1d1b8cbf09b013abb9", null ],
-    [ "LAST_USED_ROUTE_REPEATER_0_INDEX", "group__zwapi__transmit__complete__codes.html#gaddc54c356bed753bfe530900d9570755", null ],
-    [ "LAST_USED_ROUTE_REPEATER_1_INDEX", "group__zwapi__transmit__complete__codes.html#ga41fc1906c08e8806052fb4fe29349067", null ],
-    [ "LAST_USED_ROUTE_REPEATER_2_INDEX", "group__zwapi__transmit__complete__codes.html#gadfc36ad3a95d22582710713a123b6d47", null ],
-    [ "LAST_USED_ROUTE_REPEATER_3_INDEX", "group__zwapi__transmit__complete__codes.html#gae3381744bfc0f507162e6e69e42ca745", null ],
-    [ "LAST_USED_ROUTE_SIZE", "group__zwapi__transmit__complete__codes.html#gad706ef0fddfce5045cf3b882594e284c", null ],
-    [ "MAX_REPEATERS", "group__zwapi__transmit__complete__codes.html#ga3f884461c9298bba45c9adf6ecc1435a", null ],
-    [ "RSSI_BELOW_SENSITIVITY", "group__zwapi__transmit__complete__codes.html#ga0ef5e26625774c8955d8b55cc64b306c", null ],
-    [ "RSSI_MAX_POWER_SATURATED", "group__zwapi__transmit__complete__codes.html#ga90e5ebdcfd1d3ca49ad7dcc25f241f62", null ],
-    [ "RSSI_NOT_AVAILABLE", "group__zwapi__transmit__complete__codes.html#ga2a65aec1ad77607ef2c0ef501b64fcd8", null ],
-    [ "RSSI_RESERVED_START", "group__zwapi__transmit__complete__codes.html#gabee81c398659111e9b02f1b6850bee1b", null ],
     [ "TRANSMIT_COMPLETE_FAIL", "group__zwapi__transmit__complete__codes.html#ga1eaef772149be86a61fca27ea794357d", null ],
     [ "TRANSMIT_COMPLETE_NO_ACK", "group__zwapi__transmit__complete__codes.html#gab94094905b74f2a887335f96d05c94a0", null ],
     [ "TRANSMIT_COMPLETE_NOROUTE", "group__zwapi__transmit__complete__codes.html#ga261766b8bd8d2721ac9edae12a6c3a3a", null ],
     [ "TRANSMIT_COMPLETE_OK", "group__zwapi__transmit__complete__codes.html#ga9faf63c1cb8447f48ef34e319333b73a", null ],
     [ "TRANSMIT_COMPLETE_VERIFIED", "group__zwapi__transmit__complete__codes.html#gab1955e8e56f5a92cc5da053e6487331b", null ],
-    [ "TRANSMIT_ROUTING_NOT_IDLE", "group__zwapi__transmit__complete__codes.html#ga9621e1f0d136d9d14743fa58504e5bb3", null ],
-    [ "ZW_MAX_CACHED_RETURN_ROUTE_DESTINATIONS", "group__zwapi__transmit__complete__codes.html#ga6d2f4a4149a45cadf852d30c47cfbe8d", null ],
-    [ "ZW_RF_TEST_SIGNAL_CARRIER", "group__zwapi__transmit__complete__codes.html#ga5467e3b1d54fd9339362679f4d66bfb7", null ],
-    [ "ZW_RF_TEST_SIGNAL_CARRIER_MODULATED", "group__zwapi__transmit__complete__codes.html#ga31bb8e256d2d590cd9dcfa52257938fa", null ],
-    [ "ZW_ROUTE_LOST_ACCEPT", "group__zwapi__transmit__complete__codes.html#gac545b11fd6602c1e55ee3f5a65c7bea6", null ],
-    [ "ZW_ROUTE_LOST_FAILED", "group__zwapi__transmit__complete__codes.html#ga224b08d32664fcbfc8a637c6a6d2ad87", null ],
-    [ "e_routing_scheme_t", "group__zwapi__transmit__complete__codes.html#ga54bca03cc4f1046186ffea9a171977a3", null ],
-    [ "last_route_speed_t", "group__zwapi__transmit__complete__codes.html#ga9dcd8ba3175c6a535ab72ca1f654c741", null ],
-    [ "S_ROUTE_LINK", "group__zwapi__transmit__complete__codes.html#gae3301f35fd3b25ac67d4730e29a481c0", null ],
-    [ "zwapi_tx_report_t", "group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef", null ],
-    [ "_E_ROUTING_SCHEME_", "group__zwapi__transmit__complete__codes.html#ga4e5f107bf559b3761ce591b4fc991902", [
-      [ "ROUTINGSCHEME_IDLE", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902ae18901142cf64e343f5c33b24cb353bb", null ],
-      [ "ROUTINGSCHEME_DIRECT", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902ad4703483ba832f856f24d4b648be2a5f", null ],
-      [ "ROUTINGSCHEME_CACHED_ROUTE_SR", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902aa1a01a6e4e148a88301becbd02c83b65", null ],
-      [ "ROUTINGSCHEME_CACHED_ROUTE", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902af083fd1273631813ec59ef5a8d53cba2", null ],
-      [ "ROUTINGSCHEME_CACHED_ROUTE_NLWR", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902a631fc2e0ddb09c44dbd1e235a762424a", null ],
-      [ "ROUTINGSCHEME_ROUTE", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902a5bd2f5e842a0c1fcaa25173fd8de7c61", null ],
-      [ "ROUTINGSCHEME_RESORT_DIRECT", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902aa483362f6b4d3b140ab8f70ed8cdd8be", null ],
-      [ "ROUTINGSCHEME_RESORT_EXPLORE", "group__zwapi__transmit__complete__codes.html#gga4e5f107bf559b3761ce591b4fc991902a70973f1fe530cd678d626b36ec4d769b", null ]
-    ] ],
-    [ "last_route_speed", "group__zwapi__transmit__complete__codes.html#ga5dc1ccd95f0cdf3b8c5123252b653bd9", [
-      [ "UNKNOWN_SPEED", "group__zwapi__transmit__complete__codes.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9aa53f9634cf21bd6983e8c3baea28489d", null ],
-      [ "ZWAVE_9_6_KBITS_S", "group__zwapi__transmit__complete__codes.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9ad845423f894b04b4b42cb82908b26f1f", null ],
-      [ "ZWAVE_40_KBITS_S", "group__zwapi__transmit__complete__codes.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9a4569edf20de10db7880227471fa632d1", null ],
-      [ "ZWAVE_100_KBITS_S", "group__zwapi__transmit__complete__codes.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9a0aa0acb935d03e586cdc19d4bc182b6e", null ],
-      [ "ZWAVE_LONG_RANGE_100_KBITS_S", "group__zwapi__transmit__complete__codes.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9af447d982faff74dba9b9f6f087e72d23", null ]
-    ] ],
-    [ "zwapi_abort_send_data", "group__zwapi__transmit__complete__codes.html#gaba4d318f684708cdee3b6cae1a1ce1ba", null ],
-    [ "zwapi_lock_route", "group__zwapi__transmit__complete__codes.html#ga95d031567ad7f9296403d11ce2b9a148", null ],
-    [ "zwapi_send_data", "group__zwapi__transmit__complete__codes.html#ga550a9c5891598a986c28487f36d6e24c", null ],
-    [ "zwapi_send_data_bridge", "group__zwapi__transmit__complete__codes.html#ga49e55cd554c976315f80fa0d605debf9", null ],
-    [ "zwapi_send_data_multi", "group__zwapi__transmit__complete__codes.html#ga117c122b8c680198f198acdf737adf15", null ],
-    [ "zwapi_send_data_multi_bridge", "group__zwapi__transmit__complete__codes.html#ga98a99d5a85b10bc6bd51e68233142b52", null ],
-    [ "zwapi_send_nop", "group__zwapi__transmit__complete__codes.html#ga2475e2eb87efe6379c0e58840465cda4", null ]
+    [ "TRANSMIT_ROUTING_NOT_IDLE", "group__zwapi__transmit__complete__codes.html#ga9621e1f0d136d9d14743fa58504e5bb3", null ]
 ];

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('zwave__s0__network_8h_source.html','')
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="group__zwave__s0__network.html#ga76fa676b152471a413e32cc25d8f56c9">   41</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="group__zwave__s0__network.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a>)(</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="code" href="group__zwave__controller__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="code" href="group__zwave__network__management__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__s0__network.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network_init</a>();</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__s0__network.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a>(<span class="keyword">const</span> <a class="code" href="group__zwave__s0__network.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> <a class="code" href="structcb.html">cb</a>);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
@@ -129,8 +129,8 @@ $(document).ready(function(){initNavTree('zwave__s0__network_8h_source.html','')
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">//ZWAVE_S0_NETWORK_H</span></div>
 <div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:139</div></div>
-<div class="ttc" id="agroup__zwave__controller__types_html_ga9b8e934334335348e5cf74df4ece6847"><div class="ttname"><a href="group__zwave__controller__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a></div><div class="ttdeci">zwave_kex_fail_type_t</div><div class="ttdoc">Error codes used in S2 inclusion.</div><div class="ttdef"><b>Definition:</b> zwave_network_management_types.h:59</div></div>
 <div class="ttc" id="agroup__zwave__keyset__definitions_html_gaa3cfbf3467d02ec3ba1b4313b3e2834a"><div class="ttname"><a href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a></div><div class="ttdeci">uint8_t zwave_keyset_t</div><div class="ttdef"><b>Definition:</b> zwave_keyset_definitions.h:32</div></div>
+<div class="ttc" id="agroup__zwave__network__management__types_html_ga9b8e934334335348e5cf74df4ece6847"><div class="ttname"><a href="group__zwave__network__management__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a></div><div class="ttdeci">zwave_kex_fail_type_t</div><div class="ttdoc">Error codes used in S2 inclusion.</div><div class="ttdef"><b>Definition:</b> zwave_network_management_types.h:59</div></div>
 <div class="ttc" id="agroup__zwave__node__id__definitions_html_gad2b01997b1abb48bc7a1877551536935"><div class="ttname"><a href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a></div><div class="ttdeci">uint16_t zwave_node_id_t</div><div class="ttdoc">Z-Wave NodeID type.</div><div class="ttdef"><b>Definition:</b> zwave_node_id_definitions.h:84</div></div>
 <div class="ttc" id="agroup__zwave__s0__network_html_ga27e4137188b19b88cf40318f7fea87dc"><div class="ttname"><a href="group__zwave__s0__network.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_start_bootstrapping</a></div><div class="ttdeci">void zwave_s0_start_bootstrapping(zwave_node_id_t node_id, uint8_t is_controller)</div><div class="ttdoc">Start the S0 add node process.</div><div class="ttdef"><b>Definition:</b> zwave_s0_network.c:22</div></div>
 <div class="ttc" id="agroup__zwave__s0__network_html_ga5383f6449674d8d642c1dd4b33911613"><div class="ttname"><a href="group__zwave__s0__network.html#ga5383f6449674d8d642c1dd4b33911613">zwave_s0_start_learn_mode</a></div><div class="ttdeci">void zwave_s0_start_learn_mode(zwave_node_id_t our_nodeid)</div><div class="ttdoc">Start S0 learn mode.</div><div class="ttdef"><b>Definition:</b> zwave_s0_network.c:63</div></div>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('zwave__s0__network_8h_source.html','')
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_f4b467f0a960798c9a570e0236e928b5.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_6fba1e772b51ab46cce9ac80a46e75aa.html">s0</a></li><li class="navelem"><a class="el" href="dir_45f309fa25cd9f50508918a6f8137b17.html">include</a></li><li class="navelem"><a class="el" href="zwave__s0__network_8h.html">zwave_s0_network.h</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:50 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:56 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

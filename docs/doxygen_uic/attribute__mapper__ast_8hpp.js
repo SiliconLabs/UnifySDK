@@ -17,6 +17,11 @@ var attribute__mapper__ast_8hpp =
     [ "operand", "attribute__mapper__ast_8hpp.html#a853a6aa17efe898ec921b127af0ada6c", null ],
     [ "result_type_t", "group__attribute__mapper__ast.html#gae9a62cfdebf78872a00d83a2d12eeb64", null ],
     [ "scope_settings_t", "attribute__mapper__ast_8hpp.html#aef0d3c13d88a76613ad4519f04810f4b", null ],
+    [ "AssignmentType", "attribute__mapper__ast_8hpp.html#a5ace4d117a90fb4a9aa004b203963c01", [
+      [ "REGULAR", "attribute__mapper__ast_8hpp.html#a5ace4d117a90fb4a9aa004b203963c01a5f945141c4e13754a6fc23500d025eb4", null ],
+      [ "INSTANCE", "attribute__mapper__ast_8hpp.html#a5ace4d117a90fb4a9aa004b203963c01a7a8b06d47b1d4fd5933348ca8613f1df", null ],
+      [ "CLEARANCE", "attribute__mapper__ast_8hpp.html#a5ace4d117a90fb4a9aa004b203963c01aa39a3e888f0031d1da8f8dacc47ab263", null ]
+    ] ],
     [ "operator_ids", "attribute__mapper__ast_8hpp.html#a103453ee4c6f922adfc20d135c7f4689", [
       [ "operator_plus", "attribute__mapper__ast_8hpp.html#a103453ee4c6f922adfc20d135c7f4689ab1c75fd3802ae603c4a17a6e60e7c497", null ],
       [ "operator_minus", "attribute__mapper__ast_8hpp.html#a103453ee4c6f922adfc20d135c7f4689a50b2c841949046e1deb68f0f18ec8c5d", null ],

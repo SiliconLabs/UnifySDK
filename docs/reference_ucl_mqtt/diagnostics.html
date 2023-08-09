@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ Diagnostics/NumberOfResets Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NumberOfResets attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NumberOfResets/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/NumberOfResets/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NumberOfResets/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_RESETS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NumberOfResets/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_RESETS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NumberOfResets/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_RESETS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NumberOfResets/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_RESETS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ Diagnostics/PersistentMemoryWrites Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PersistentMemoryWrites attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PersistentMemoryWrites/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/PersistentMemoryWrites/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PersistentMemoryWrites/Desired { &quot;value&quot;: &lt;DESIRED_PERSISTENT_MEMORY_WRITES&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PersistentMemoryWrites/Reported { &quot;value&quot;: &lt;REPORTED_PERSISTENT_MEMORY_WRITES&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PersistentMemoryWrites/Desired { &quot;value&quot;: &lt;DESIRED_PERSISTENT_MEMORY_WRITES&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PersistentMemoryWrites/Reported { &quot;value&quot;: &lt;REPORTED_PERSISTENT_MEMORY_WRITES&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ Diagnostics/MacRxBcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MacRxBcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacRxBcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/MacRxBcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacRxBcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_RX_BCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacRxBcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_RX_BCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacRxBcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_RX_BCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacRxBcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_RX_BCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ Diagnostics/MacTxBcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MacTxBcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxBcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/MacTxBcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxBcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_BCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxBcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_BCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxBcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_BCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxBcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_BCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ Diagnostics/MacRxUcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MacRxUcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacRxUcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/MacRxUcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacRxUcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_RX_UCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacRxUcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_RX_UCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacRxUcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_RX_UCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacRxUcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_RX_UCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ Diagnostics/MacTxUcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MacTxUcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/MacTxUcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_UCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_UCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxUcast/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_UCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxUcast/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_UCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ Diagnostics/MacTxUcastRetry Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MacTxUcastRetry attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcastRetry/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/MacTxUcastRetry/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcastRetry/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_UCAST_RETRY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcastRetry/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_UCAST_RETRY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxUcastRetry/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_UCAST_RETRY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxUcastRetry/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_UCAST_RETRY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ Diagnostics/MacTxUcastFail Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MacTxUcastFail attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcastFail/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/MacTxUcastFail/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcastFail/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_UCAST_FAIL&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/MacTxUcastFail/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_UCAST_FAIL&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxUcastFail/Desired { &quot;value&quot;: &lt;DESIRED_MAC_TX_UCAST_FAIL&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/MacTxUcastFail/Reported { &quot;value&quot;: &lt;REPORTED_MAC_TX_UCAST_FAIL&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ Diagnostics/APSRxBcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSRxBcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSRxBcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSRxBcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSRxBcast/Desired { &quot;value&quot;: &lt;DESIRED_APS_RX_BCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSRxBcast/Reported { &quot;value&quot;: &lt;REPORTED_APS_RX_BCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSRxBcast/Desired { &quot;value&quot;: &lt;DESIRED_APS_RX_BCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSRxBcast/Reported { &quot;value&quot;: &lt;REPORTED_APS_RX_BCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ Diagnostics/APSTxBcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSTxBcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxBcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSTxBcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxBcast/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_BCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxBcast/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_BCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxBcast/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_BCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxBcast/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_BCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ Diagnostics/APSRxUcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSRxUcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSRxUcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSRxUcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSRxUcast/Desired { &quot;value&quot;: &lt;DESIRED_APS_RX_UCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSRxUcast/Reported { &quot;value&quot;: &lt;REPORTED_APS_RX_UCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSRxUcast/Desired { &quot;value&quot;: &lt;DESIRED_APS_RX_UCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSRxUcast/Reported { &quot;value&quot;: &lt;REPORTED_APS_RX_UCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ Diagnostics/APSTxUcastSuccess Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSTxUcastSuccess attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastSuccess/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSTxUcastSuccess/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastSuccess/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_UCAST_SUCCESS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastSuccess/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_UCAST_SUCCESS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxUcastSuccess/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_UCAST_SUCCESS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxUcastSuccess/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_UCAST_SUCCESS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ Diagnostics/APSTxUcastRetry Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSTxUcastRetry attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastRetry/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSTxUcastRetry/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastRetry/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_UCAST_RETRY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastRetry/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_UCAST_RETRY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxUcastRetry/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_UCAST_RETRY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxUcastRetry/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_UCAST_RETRY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ Diagnostics/APSTxUcastFail Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSTxUcastFail attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastFail/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSTxUcastFail/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastFail/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_UCAST_FAIL&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSTxUcastFail/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_UCAST_FAIL&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxUcastFail/Desired { &quot;value&quot;: &lt;DESIRED_APS_TX_UCAST_FAIL&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSTxUcastFail/Reported { &quot;value&quot;: &lt;REPORTED_APS_TX_UCAST_FAIL&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ Diagnostics/RouteDiscInitiated Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RouteDiscInitiated attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/RouteDiscInitiated/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/RouteDiscInitiated/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/RouteDiscInitiated/Desired { &quot;value&quot;: &lt;DESIRED_ROUTE_DISC_INITIATED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/RouteDiscInitiated/Reported { &quot;value&quot;: &lt;REPORTED_ROUTE_DISC_INITIATED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/RouteDiscInitiated/Desired { &quot;value&quot;: &lt;DESIRED_ROUTE_DISC_INITIATED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/RouteDiscInitiated/Reported { &quot;value&quot;: &lt;REPORTED_ROUTE_DISC_INITIATED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ Diagnostics/NeighborAdded Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NeighborAdded attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborAdded/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/NeighborAdded/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborAdded/Desired { &quot;value&quot;: &lt;DESIRED_NEIGHBOR_ADDED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborAdded/Reported { &quot;value&quot;: &lt;REPORTED_NEIGHBOR_ADDED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NeighborAdded/Desired { &quot;value&quot;: &lt;DESIRED_NEIGHBOR_ADDED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NeighborAdded/Reported { &quot;value&quot;: &lt;REPORTED_NEIGHBOR_ADDED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ Diagnostics/NeighborRemoved Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NeighborRemoved attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborRemoved/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/NeighborRemoved/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborRemoved/Desired { &quot;value&quot;: &lt;DESIRED_NEIGHBOR_REMOVED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborRemoved/Reported { &quot;value&quot;: &lt;REPORTED_NEIGHBOR_REMOVED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NeighborRemoved/Desired { &quot;value&quot;: &lt;DESIRED_NEIGHBOR_REMOVED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NeighborRemoved/Reported { &quot;value&quot;: &lt;REPORTED_NEIGHBOR_REMOVED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ Diagnostics/NeighborStale Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NeighborStale attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborStale/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/NeighborStale/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborStale/Desired { &quot;value&quot;: &lt;DESIRED_NEIGHBOR_STALE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NeighborStale/Reported { &quot;value&quot;: &lt;REPORTED_NEIGHBOR_STALE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NeighborStale/Desired { &quot;value&quot;: &lt;DESIRED_NEIGHBOR_STALE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NeighborStale/Reported { &quot;value&quot;: &lt;REPORTED_NEIGHBOR_STALE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ Diagnostics/JoinIndication Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for JoinIndication attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/JoinIndication/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/JoinIndication/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/JoinIndication/Desired { &quot;value&quot;: &lt;DESIRED_JOIN_INDICATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/JoinIndication/Reported { &quot;value&quot;: &lt;REPORTED_JOIN_INDICATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/JoinIndication/Desired { &quot;value&quot;: &lt;DESIRED_JOIN_INDICATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/JoinIndication/Reported { &quot;value&quot;: &lt;REPORTED_JOIN_INDICATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ Diagnostics/ChildMoved Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ChildMoved attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/ChildMoved/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/ChildMoved/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/ChildMoved/Desired { &quot;value&quot;: &lt;DESIRED_CHILD_MOVED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/ChildMoved/Reported { &quot;value&quot;: &lt;REPORTED_CHILD_MOVED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/ChildMoved/Desired { &quot;value&quot;: &lt;DESIRED_CHILD_MOVED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/ChildMoved/Reported { &quot;value&quot;: &lt;REPORTED_CHILD_MOVED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ Diagnostics/NWKFCFailure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NWKFCFailure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NWKFCFailure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/NWKFCFailure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NWKFCFailure/Desired { &quot;value&quot;: &lt;DESIRED_NWKFC_FAILURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NWKFCFailure/Reported { &quot;value&quot;: &lt;REPORTED_NWKFC_FAILURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NWKFCFailure/Desired { &quot;value&quot;: &lt;DESIRED_NWKFC_FAILURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NWKFCFailure/Reported { &quot;value&quot;: &lt;REPORTED_NWKFC_FAILURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -705,10 +747,12 @@ Diagnostics/APSFCFailure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSFCFailure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSFCFailure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSFCFailure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSFCFailure/Desired { &quot;value&quot;: &lt;DESIRED_APSFC_FAILURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSFCFailure/Reported { &quot;value&quot;: &lt;REPORTED_APSFC_FAILURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSFCFailure/Desired { &quot;value&quot;: &lt;DESIRED_APSFC_FAILURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSFCFailure/Reported { &quot;value&quot;: &lt;REPORTED_APSFC_FAILURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -733,10 +777,12 @@ Diagnostics/APSUnauthorizedKey Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSUnauthorizedKey attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSUnauthorizedKey/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSUnauthorizedKey/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSUnauthorizedKey/Desired { &quot;value&quot;: &lt;DESIRED_APS_UNAUTHORIZED_KEY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSUnauthorizedKey/Reported { &quot;value&quot;: &lt;REPORTED_APS_UNAUTHORIZED_KEY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSUnauthorizedKey/Desired { &quot;value&quot;: &lt;DESIRED_APS_UNAUTHORIZED_KEY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSUnauthorizedKey/Reported { &quot;value&quot;: &lt;REPORTED_APS_UNAUTHORIZED_KEY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -761,10 +807,12 @@ Diagnostics/NWKDecryptFailures Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NWKDecryptFailures attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NWKDecryptFailures/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/NWKDecryptFailures/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NWKDecryptFailures/Desired { &quot;value&quot;: &lt;DESIRED_NWK_DECRYPT_FAILURES&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/NWKDecryptFailures/Reported { &quot;value&quot;: &lt;REPORTED_NWK_DECRYPT_FAILURES&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NWKDecryptFailures/Desired { &quot;value&quot;: &lt;DESIRED_NWK_DECRYPT_FAILURES&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/NWKDecryptFailures/Reported { &quot;value&quot;: &lt;REPORTED_NWK_DECRYPT_FAILURES&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -789,10 +837,12 @@ Diagnostics/APSDecryptFailures Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for APSDecryptFailures attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSDecryptFailures/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/APSDecryptFailures/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSDecryptFailures/Desired { &quot;value&quot;: &lt;DESIRED_APS_DECRYPT_FAILURES&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/APSDecryptFailures/Reported { &quot;value&quot;: &lt;REPORTED_APS_DECRYPT_FAILURES&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSDecryptFailures/Desired { &quot;value&quot;: &lt;DESIRED_APS_DECRYPT_FAILURES&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/APSDecryptFailures/Reported { &quot;value&quot;: &lt;REPORTED_APS_DECRYPT_FAILURES&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -817,10 +867,12 @@ Diagnostics/PacketBufferAllocateFailures Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PacketBufferAllocateFailures attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PacketBufferAllocateFailures/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/PacketBufferAllocateFailures/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PacketBufferAllocateFailures/Desired { &quot;value&quot;: &lt;DESIRED_PACKET_BUFFER_ALLOCATE_FAILURES&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PacketBufferAllocateFailures/Reported { &quot;value&quot;: &lt;REPORTED_PACKET_BUFFER_ALLOCATE_FAILURES&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PacketBufferAllocateFailures/Desired { &quot;value&quot;: &lt;DESIRED_PACKET_BUFFER_ALLOCATE_FAILURES&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PacketBufferAllocateFailures/Reported { &quot;value&quot;: &lt;REPORTED_PACKET_BUFFER_ALLOCATE_FAILURES&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -845,10 +897,12 @@ Diagnostics/RelayedUcast Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RelayedUcast attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/RelayedUcast/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/RelayedUcast/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/RelayedUcast/Desired { &quot;value&quot;: &lt;DESIRED_RELAYED_UCAST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/RelayedUcast/Reported { &quot;value&quot;: &lt;REPORTED_RELAYED_UCAST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/RelayedUcast/Desired { &quot;value&quot;: &lt;DESIRED_RELAYED_UCAST&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/RelayedUcast/Reported { &quot;value&quot;: &lt;REPORTED_RELAYED_UCAST&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -873,10 +927,12 @@ Diagnostics/PHYToMACQueueLimitReached Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PHYToMACQueueLimitReached attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PHYToMACQueueLimitReached/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/PHYToMACQueueLimitReached/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PHYToMACQueueLimitReached/Desired { &quot;value&quot;: &lt;DESIRED_PHY_TOMAC_QUEUE_LIMIT_REACHED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PHYToMACQueueLimitReached/Reported { &quot;value&quot;: &lt;REPORTED_PHY_TOMAC_QUEUE_LIMIT_REACHED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PHYToMACQueueLimitReached/Desired { &quot;value&quot;: &lt;DESIRED_PHY_TOMAC_QUEUE_LIMIT_REACHED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PHYToMACQueueLimitReached/Reported { &quot;value&quot;: &lt;REPORTED_PHY_TOMAC_QUEUE_LIMIT_REACHED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -901,10 +957,12 @@ Diagnostics/PacketValidateDropCount Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PacketValidateDropCount attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PacketValidateDropCount/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/PacketValidateDropCount/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PacketValidateDropCount/Desired { &quot;value&quot;: &lt;DESIRED_PACKET_VALIDATE_DROP_COUNT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/PacketValidateDropCount/Reported { &quot;value&quot;: &lt;REPORTED_PACKET_VALIDATE_DROP_COUNT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PacketValidateDropCount/Desired { &quot;value&quot;: &lt;DESIRED_PACKET_VALIDATE_DROP_COUNT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/PacketValidateDropCount/Reported { &quot;value&quot;: &lt;REPORTED_PACKET_VALIDATE_DROP_COUNT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -929,10 +987,12 @@ Diagnostics/AverageMACRetryPerAPSMessageSent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageMACRetryPerAPSMessageSent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -957,10 +1017,12 @@ Diagnostics/LastMessageLQI Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LastMessageLQI attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/LastMessageLQI/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/LastMessageLQI/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/LastMessageLQI/Desired { &quot;value&quot;: &lt;DESIRED_LAST_MESSAGELQI&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/LastMessageLQI/Reported { &quot;value&quot;: &lt;REPORTED_LAST_MESSAGELQI&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/LastMessageLQI/Desired { &quot;value&quot;: &lt;DESIRED_LAST_MESSAGELQI&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/LastMessageLQI/Reported { &quot;value&quot;: &lt;REPORTED_LAST_MESSAGELQI&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -985,10 +1047,12 @@ Diagnostics/LastMessageRSSI Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LastMessageRSSI attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/LastMessageRSSI/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Diagnostics/Attributes/LastMessageRSSI/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/LastMessageRSSI/Desired { &quot;value&quot;: &lt;DESIRED_LAST_MESSAGERSSI&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Attributes/LastMessageRSSI/Reported { &quot;value&quot;: &lt;REPORTED_LAST_MESSAGERSSI&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/LastMessageRSSI/Desired { &quot;value&quot;: &lt;DESIRED_LAST_MESSAGERSSI&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Diagnostics/Attributes/LastMessageRSSI/Reported { &quot;value&quot;: &lt;REPORTED_LAST_MESSAGERSSI&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1081,7 +1145,7 @@ Diagnostics/WriteAttributes Command</h2>
 <p>To update all Diagnostics attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Diagnostics/Commands/WriteAttributes&#39; -m  &#39;{  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -1156,7 +1220,7 @@ Diagnostics/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

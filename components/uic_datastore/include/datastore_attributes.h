@@ -95,7 +95,7 @@ sl_status_t datastore_store_attribute(datastore_attribute_id_t id,
  * @brief Fetch an attribute from the persistent datastore.
  *
  * @param id                  Unique ID for the Attribute Store node to be
- *                            inserted/updated.
+ *                            fetched.
  * @param type                Pointer to copy the node type from the
  *                            Attribute Store.
  * @param parent_id           Pointer where the Unique ID of the parent will

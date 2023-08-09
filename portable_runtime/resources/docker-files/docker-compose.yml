@@ -3,7 +3,7 @@ services:
   # Base configurations
   mqtt-broker:
     image: eclipse-mosquitto:1.5.9
-
+    container_name: unify-mqtt-broker
     volumes:
       - ./mosquitto-config:/mosquitto/config/
     ports:
@@ -24,6 +24,7 @@ services:
   # Developer applications
   unify-dev-gui-server:
     image: unify-runtime
+    container_name: unify-dev-gui-server
     restart: on-failure
     depends_on:
       - unify-base
@@ -37,6 +38,7 @@ services:
 
   unify-dev-gui-api:
     image: unify-runtime
+    container_name: unify-dev-gui-api
     restart: on-failure
     depends_on:
       - unify-base
@@ -50,6 +52,7 @@ services:
   # Application services
   unify-gms:
     image: unify-runtime
+    container_name: unify-gms
     restart: on-failure
     depends_on:
       - unify-base
@@ -62,6 +65,7 @@ services:
 
   unify-upvl:
     image: unify-runtime
+    container_name: unify-upvl
     restart: on-failure
     depends_on:
       - unify-base
@@ -74,6 +78,7 @@ services:
 
   unify-nal:
     image: unify-runtime
+    container_name: unify-nal
     restart: on-failure
     depends_on:
       - unify-base
@@ -86,6 +91,7 @@ services:
 
   unify-image-provider:
     image: unify-runtime
+    container_name: unify-image-provider
     restart: on-failure
     depends_on:
       - unify-base
@@ -98,6 +104,7 @@ services:
 
   unify-upti-cap:
     image: unify-runtime
+    container_name: unify-upti-cap
     restart: on-failure
     depends_on:
       - unify-base
@@ -111,6 +118,7 @@ services:
   # Protocol controllers
   unify-zpc:
     image: unify-runtime
+    container_name: unify-zpc
     restart: on-failure
     depends_on:
       - unify-base
@@ -118,8 +126,11 @@ services:
     networks:
       - mqtt-network
     environment:
-      - ZPC_DEVICE
+      - ZPC_DEVICE_TTY
+      - ZPC_DEVICE_IP
       - ZPC_CONFIG_ARGS
+    devices:
+      - "${ZPC_DEVICE_TTY:-/dev/null}:${ZPC_DEVICE_TTY:-/dev/null}"
     entrypoint: "/unify/run_zpc.sh --mqtt.host mqtt-broker ${ZPC_CONFIG_ARGS} --mqtt.client_id zpc-portable_runtime"
     volumes:
       - unify_zpc:/var/lib

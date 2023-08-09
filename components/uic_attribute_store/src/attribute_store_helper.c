@@ -418,6 +418,27 @@ sl_status_t attribute_store_set_child_reported(attribute_store_node_t parent,
   return attribute_store_set_reported(child_node, value, value_size);
 }
 
+sl_status_t
+  attribute_store_set_all_children_reported(attribute_store_node_t parent,
+                                            attribute_store_type_t type,
+                                            const void *value,
+                                            uint8_t value_size)
+{
+  size_t child_index = 0;
+  sl_status_t status = SL_STATUS_OK;
+  attribute_store_node_t child_node
+    = attribute_store_get_first_child_by_type(parent, type);
+
+  while (child_node != ATTRIBUTE_STORE_INVALID_NODE) {
+    status |= attribute_store_set_reported(child_node, value, value_size);
+    child_index += 1;
+    child_node
+      = attribute_store_get_node_child_by_type(parent, type, child_index);
+  }
+
+  return status;
+}
+
 sl_status_t attribute_store_set_child_desired(attribute_store_node_t parent,
                                               attribute_store_type_t type,
                                               const void *value,
@@ -466,6 +487,21 @@ sl_status_t attribute_store_set_child_reported_only_if_exists(
   attribute_store_node_t child_node
     = attribute_store_get_first_child_by_type(parent, type);
   return attribute_store_set_reported(child_node, value, value_size);
+}
+
+sl_status_t attribute_store_set_child_reported_only_if_undefined(
+  attribute_store_node_t parent,
+  attribute_store_type_t type,
+  const void *value,
+  uint8_t value_size)
+{
+  attribute_store_node_t child_node
+    = attribute_store_get_first_child_by_type(parent, type);
+  if ((attribute_store_node_exists(child_node))
+      && attribute_store_is_reported_defined(child_node) == false) {
+    return attribute_store_set_reported(child_node, value, value_size);
+  }
+  return SL_STATUS_OK;
 }
 
 sl_status_t attribute_store_set_child_desired_only_if_exists(
@@ -823,4 +859,24 @@ attribute_store_node_t
     child_node = attribute_store_add_node(type, node);
   }
   return child_node;
+}
+
+uint8_t attribute_store_get_reported_size(attribute_store_node_t node)
+{
+  return attribute_store_get_node_value_size(node, REPORTED_ATTRIBUTE);
+}
+
+uint8_t attribute_store_get_desired_size(attribute_store_node_t node)
+{
+  return attribute_store_get_node_value_size(node, DESIRED_ATTRIBUTE);
+}
+
+uint8_t
+  attribute_store_get_desired_else_reported_size(attribute_store_node_t node)
+{
+  uint8_t size = attribute_store_get_desired_size(node);
+  if (size == 0) {
+    return attribute_store_get_reported_size(node);
+  }
+  return size;
 }

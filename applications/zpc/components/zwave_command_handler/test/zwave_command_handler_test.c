@@ -18,6 +18,7 @@
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_keyset_mock.h"
 #include "zwave_controller_mock.h"
+#include "zwave_controller_storage_mock.h"
 #include "zwave_controller_utils_mock.h"
 #include "zwave_security_validation_mock.h"
 #include "zwave_network_management_mock.h"
@@ -38,6 +39,7 @@ uint8_t cc_time2_handle_counter           = 0;
 uint8_t cc_version_init_counter           = 0;
 uint8_t cc_version_control_handle_counter = 0;
 uint8_t cc_version_support_handle_counter = 0;
+static zwave_keyset_t our_granted_keys    = 0x87;
 
 static sl_status_t
   zwave_controller_callback_save(const zwave_controller_callbacks_t *cb, int n)
@@ -96,6 +98,15 @@ void zwave_command_handler_init_test_helper()
   cc_time_init();
   cc_zwave_plus_init();
 
+  zwave_node_id_t our_node_id = 0x30;
+  zwave_network_management_get_node_id_ExpectAndReturn(our_node_id);
+  zwave_controller_storage_get_node_granted_keys_ExpectAndReturn(our_node_id,
+                                                                 NULL,
+                                                                 SL_STATUS_OK);
+  zwave_controller_storage_get_node_granted_keys_IgnoreArg_keys();
+  zwave_controller_storage_get_node_granted_keys_ReturnThruPtr_keys(
+    &our_granted_keys);
+
   // Initialize the Command Class handler component.
   zwave_controller_register_callbacks_AddCallback(
     zwave_controller_callback_save);
@@ -103,9 +114,10 @@ void zwave_command_handler_init_test_helper()
   zwave_controller_register_callbacks_IgnoreArg_callbacks();
 
   zwave_network_management_get_home_id_ExpectAndReturn(0x20);
-  zwave_network_management_get_node_id_ExpectAndReturn(0x30);
+  zwave_network_management_get_node_id_ExpectAndReturn(our_node_id);
+
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
-    0x87,  ///FIXME: For now we pretend to have all keys
+    our_granted_keys,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS);
   zwave_controller_get_highest_encapsulation_IgnoreArg_keyset();
 
@@ -201,12 +213,11 @@ void test_entering_a_new_network()
 
   zwave_home_id_t home_id             = 0x12345678;
   zwave_node_id_t node_id             = 0x12;
-  zwave_keyset_t granted_keys         = 0x87;
   zwave_kex_fail_type_t kex_fail_type = 0x00;
 
   // When entering a new network, we expect the NIF to get set.
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
-    granted_keys,  ///FIXME: For now we pretend to have all keys
+    our_granted_keys,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS);
   zwave_controller_get_highest_encapsulation_IgnoreArg_keyset();
 
@@ -223,7 +234,7 @@ void test_entering_a_new_network()
 
   zwave_controller_callbacks->on_new_network_entered(home_id,
                                                      node_id,
-                                                     granted_keys,
+                                                     our_granted_keys,
                                                      kex_fail_type);
 
   // No frame should have been received here.

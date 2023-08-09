@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('group__zigpc__gateway__call.html','');
 <h2><a class="anchor" id="autotoc_md10"></a>
 RequestQueue Storage</h2>
 <p>The RequestQueue uses the virtual base class to store API call (zigpc::gateway::Entry). This class provides one virtual function <code>invoke()</code> that must be overridden by derived classes. Each ZigbeeHost API call should be wrapped in a separate derived class.</p>
-<p>For example, the derived class <code>PermitJoinRequest</code> uses the <code>invoke</code> function to call the zigbeeHostTrustCenterJoinOpen/Close APIs using the information persisted in the object in its constructor.</p>
+<p>For example, the derived class <code>DiscoverDeviceRequest</code> uses the <code>invoke</code> function to call the zigbeeHostZdoActiveEndpointsRequest APIs using the information persisted in the object in its constructor.</p>
 <h2><a class="anchor" id="autotoc_md11"></a>
 RequestQueue Behaviour</h2>
 <p>The RequestQueue is initialized as a singleton and is accessible using the static getInstance() function.</p>
@@ -111,7 +111,7 @@ RequestQueue Behaviour</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:49 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:55 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

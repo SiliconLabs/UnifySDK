@@ -62,7 +62,7 @@ bool operator==(const attribute_path_subscript &a,
 
 bool operator==(const assignment &a, const assignment &b)
 {
-  return a.lhs == b.lhs && a.rhs == b.rhs;
+  return a.type == b.type && a.lhs == b.lhs && a.rhs == b.rhs;
 }
 
 bool operator==(const function_invokation &a, const function_invokation &b)

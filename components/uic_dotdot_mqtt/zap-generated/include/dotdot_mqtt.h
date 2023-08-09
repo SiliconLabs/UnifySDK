@@ -8546,1281 +8546,6 @@ void uic_mqtt_dotdot_time_publish_supported_commands(
 void uic_mqtt_dotdot_time_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
-// Callback types used by the ota_upgrade cluster
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    ImageNotifyPayloadType payload_type,
-
-    uint8_t query_jitter,
-
-    uint16_t manufacturer_code,
-
-    uint16_t image_type,
-
-    uint32_t new_file_version
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t field_control,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t current_file_version,
-
-    uint16_t hardware_version
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t image_size
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t field_control,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t file_offset,
-
-    uint8_t maximum_data_size,
-
-    EUI64 request_node_address,
-
-    uint16_t minimum_block_period
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t field_control,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t file_offset,
-
-    uint8_t maximum_data_size,
-
-    uint16_t page_size,
-
-    uint16_t response_spacing,
-
-    EUI64 request_node_address
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t file_offset,
-
-    const char* image_data,
-
-    uint32_t current_time,
-
-    uint32_t request_time,
-
-    uint16_t minimum_block_period
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    UTC current_time,
-
-    UTC upgrade_time
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    EUI64 request_node_address,
-
-    uint16_t manufacturer_code,
-
-    OTADeviceSpecificImageType image_type,
-
-    uint32_t file_version,
-
-    uint16_t current_zigbee_stack_version
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTADeviceSpecificImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t image_size
-
-);
-
-typedef struct {
-  EUI64 upgrade_serverid;
-  uint32_t file_offset;
-  uint32_t current_file_version;
-  uint16_t current_zig_bee_stack_version;
-  uint32_t downloaded_file_version;
-  uint16_t downloaded_zig_bee_stack_version;
-  uint8_t image_upgrade_status;
-  uint16_t manufacturerid;
-  uint16_t image_typeid;
-  uint16_t minimum_block_period;
-  uint32_t image_stamp;
-  uint8_t upgrade_activation_policy;
-  uint8_t upgrade_timeout_policy;
-} uic_mqtt_dotdot_ota_upgrade_state_t;
-
-typedef struct {
-  bool upgrade_serverid;
-  bool file_offset;
-  bool current_file_version;
-  bool current_zig_bee_stack_version;
-  bool downloaded_file_version;
-  bool downloaded_zig_bee_stack_version;
-  bool image_upgrade_status;
-  bool manufacturerid;
-  bool image_typeid;
-  bool minimum_block_period;
-  bool image_stamp;
-  bool upgrade_activation_policy;
-  bool upgrade_timeout_policy;
-} uic_mqtt_dotdot_ota_upgrade_updated_state_t;
-
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t)(
-    const dotdot_unid_t unid,
-    const dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uic_mqtt_dotdot_ota_upgrade_state_t,
-    uic_mqtt_dotdot_ota_upgrade_updated_state_t
-);
-
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t)(
-    const dotdot_unid_t unid,
-    const dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uic_mqtt_dotdot_ota_upgrade_updated_state_t
-);
-
-
-/**
- * @brief Command fields for OTAUpgrade/ImageNotify
- */
-typedef struct {
-  ImageNotifyPayloadType payload_type;
-
-  uint8_t query_jitter;
-
-  uint16_t manufacturer_code;
-
-  uint16_t image_type;
-
-  uint32_t new_file_version;
-} uic_mqtt_dotdot_ota_upgrade_command_image_notify_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/QueryNextImageRequest
- */
-typedef struct {
-  uint8_t field_control;
-
-  uint16_t manufacturer_code;
-
-  OTAImageType image_type;
-
-  uint32_t current_file_version;
-
-  uint16_t hardware_version;
-} uic_mqtt_dotdot_ota_upgrade_command_query_next_image_request_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/QueryNextImageResponse
- */
-typedef struct {
-  zclStatus status;
-
-  uint16_t manufacturer_code;
-
-  OTAImageType image_type;
-
-  uint32_t file_version;
-
-  uint32_t image_size;
-} uic_mqtt_dotdot_ota_upgrade_command_query_next_image_response_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/ImageBlockRequest
- */
-typedef struct {
-  uint8_t field_control;
-
-  uint16_t manufacturer_code;
-
-  OTAImageType image_type;
-
-  uint32_t file_version;
-
-  uint32_t file_offset;
-
-  uint8_t maximum_data_size;
-
-  EUI64 request_node_address;
-
-  uint16_t minimum_block_period;
-} uic_mqtt_dotdot_ota_upgrade_command_image_block_request_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/ImagePageRequest
- */
-typedef struct {
-  uint8_t field_control;
-
-  uint16_t manufacturer_code;
-
-  OTAImageType image_type;
-
-  uint32_t file_version;
-
-  uint32_t file_offset;
-
-  uint8_t maximum_data_size;
-
-  uint16_t page_size;
-
-  uint16_t response_spacing;
-
-  EUI64 request_node_address;
-} uic_mqtt_dotdot_ota_upgrade_command_image_page_request_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/ImageBlockResponse
- */
-typedef struct {
-  zclStatus status;
-
-  uint16_t manufacturer_code;
-
-  OTAImageType image_type;
-
-  uint32_t file_version;
-
-  uint32_t file_offset;
-
-  const char* image_data;
-
-  uint32_t current_time;
-
-  uint32_t request_time;
-
-  uint16_t minimum_block_period;
-} uic_mqtt_dotdot_ota_upgrade_command_image_block_response_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/UpgradeEndRequest
- */
-typedef struct {
-  zclStatus status;
-
-  uint16_t manufacturer_code;
-
-  OTAImageType image_type;
-
-  uint32_t file_version;
-} uic_mqtt_dotdot_ota_upgrade_command_upgrade_end_request_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/UpgradeEndResponse
- */
-typedef struct {
-  uint16_t manufacturer_code;
-
-  OTAImageType image_type;
-
-  uint32_t file_version;
-
-  UTC current_time;
-
-  UTC upgrade_time;
-} uic_mqtt_dotdot_ota_upgrade_command_upgrade_end_response_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/QueryDeviceSpecificFileRequest
- */
-typedef struct {
-  EUI64 request_node_address;
-
-  uint16_t manufacturer_code;
-
-  OTADeviceSpecificImageType image_type;
-
-  uint32_t file_version;
-
-  uint16_t current_zigbee_stack_version;
-} uic_mqtt_dotdot_ota_upgrade_command_query_device_specific_file_request_fields_t;
-
-/**
- * @brief Command fields for OTAUpgrade/QueryDeviceSpecificFileResponse
- */
-typedef struct {
-  zclStatus status;
-
-  uint16_t manufacturer_code;
-
-  OTADeviceSpecificImageType image_type;
-
-  uint32_t file_version;
-
-  uint32_t image_size;
-} uic_mqtt_dotdot_ota_upgrade_command_query_device_specific_file_response_fields_t;
-
-
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/image_notify is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_notify_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/image_notify is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_notify_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/image_notify is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_image_notify_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_notify is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_notify is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/image_notify is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_notify_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/query_next_image_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/query_next_image_request is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/query_next_image_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_next_image_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_next_image_request is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/query_next_image_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_request_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/query_next_image_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/query_next_image_response is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/query_next_image_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_next_image_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_next_image_response is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/query_next_image_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_next_image_response_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/image_block_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/image_block_request is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/image_block_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_block_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_block_request is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/image_block_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_request_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/image_page_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/image_page_request is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/image_page_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_page_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_page_request is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/image_page_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_page_request_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/image_block_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/image_block_response is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/image_block_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_block_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/image_block_response is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/image_block_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_image_block_response_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/upgrade_end_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/upgrade_end_request is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/upgrade_end_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/upgrade_end_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/upgrade_end_request is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/upgrade_end_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_request_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/upgrade_end_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/upgrade_end_response is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/upgrade_end_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/upgrade_end_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/upgrade_end_response is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/upgrade_end_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_upgrade_end_response_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/query_device_specific_file_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/query_device_specific_file_request is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/query_device_specific_file_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_device_specific_file_request is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_device_specific_file_request is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/query_device_specific_file_request is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_request_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * OTAUpgrade/Commands/query_device_specific_file_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * OTAUpgrade/Commands/query_device_specific_file_response is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * OTAUpgrade/Commands/query_device_specific_file_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_device_specific_file_response is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback_set(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/OTAUpgrade/GeneratedCommands/query_device_specific_file_response is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback_unset(const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/OTAUpgrade/GeneratedCommands/query_device_specific_file_response is received.
- */
-void uic_mqtt_dotdot_ota_upgrade_generated_query_device_specific_file_response_callback_clear();
-
-/**
- * @brief Setup a callback for WriteAttribute to be called when a
- * +/ota_upgrade/Commands/WriteAttributes is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_set_ota_upgrade_write_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t callback
-);
-/**
- * @brief Unsets a callback for WriteAttribute to be called when a
- * +/ota_upgrade/Commands/WriteAttributes is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_unset_ota_upgrade_write_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t callback
-);
-/**
- * @brief Clears all callbacks registered for when
- * +/ota_upgrade/Commands/WriteAttributes is received.
- */
-void uic_mqtt_dotdot_clear_ota_upgrade_write_attributes_callbacks();
-
-/**
- * @brief Setup a callback for ForceReadAttributes to be called when a
- * +/ota_upgrade/Commands/ForceReadAttributes is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_set_ota_upgrade_force_read_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t callback
-);
-/**
- * @brief Unsets a callback for ForceReadAttributes to be called when a
- * +/ota_upgrade/Commands/ForceReadAttributes is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_unset_ota_upgrade_force_read_attributes_callback(
-  const uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t callback
-);
-/**
- * @brief Clears all callbacks registered for when
- * +/ota_upgrade/Commands/ForceReadAttributes is received.
- */
-void uic_mqtt_dotdot_clear_ota_upgrade_force_read_attributes_callbacks();
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/UpgradeServerID
- *
- * @param base_topic    topic prefix to publish, /upgrade_serverid
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_serverid_publish(
-  const char *base_topic,
-  EUI64 value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/UpgradeServerID
- *
- * @param base_topic    topic prefix to publish, /upgrade_serverid
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_serverid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/FileOffset
- *
- * @param base_topic    topic prefix to publish, /file_offset
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_file_offset_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/FileOffset
- *
- * @param base_topic    topic prefix to publish, /file_offset
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_file_offset_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/CurrentFileVersion
- *
- * @param base_topic    topic prefix to publish, /current_file_version
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_file_version_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/CurrentFileVersion
- *
- * @param base_topic    topic prefix to publish, /current_file_version
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_file_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/CurrentZigBeeStackVersion
- *
- * @param base_topic    topic prefix to publish, /current_zig_bee_stack_version
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_zig_bee_stack_version_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/CurrentZigBeeStackVersion
- *
- * @param base_topic    topic prefix to publish, /current_zig_bee_stack_version
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_current_zig_bee_stack_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/DownloadedFileVersion
- *
- * @param base_topic    topic prefix to publish, /downloaded_file_version
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_file_version_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/DownloadedFileVersion
- *
- * @param base_topic    topic prefix to publish, /downloaded_file_version
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_file_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/DownloadedZigBeeStackVersion
- *
- * @param base_topic    topic prefix to publish, /downloaded_zig_bee_stack_version
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_zig_bee_stack_version_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/DownloadedZigBeeStackVersion
- *
- * @param base_topic    topic prefix to publish, /downloaded_zig_bee_stack_version
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_downloaded_zig_bee_stack_version_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/ImageUpgradeStatus
- *
- * @param base_topic    topic prefix to publish, /image_upgrade_status
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_upgrade_status_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/ImageUpgradeStatus
- *
- * @param base_topic    topic prefix to publish, /image_upgrade_status
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_upgrade_status_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/ManufacturerID
- *
- * @param base_topic    topic prefix to publish, /manufacturerid
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_manufacturerid_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/ManufacturerID
- *
- * @param base_topic    topic prefix to publish, /manufacturerid
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_manufacturerid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/ImageTypeID
- *
- * @param base_topic    topic prefix to publish, /image_typeid
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_typeid_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/ImageTypeID
- *
- * @param base_topic    topic prefix to publish, /image_typeid
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_typeid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/MinimumBlockPeriod
- *
- * @param base_topic    topic prefix to publish, /minimum_block_period
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_minimum_block_period_publish(
-  const char *base_topic,
-  uint16_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/MinimumBlockPeriod
- *
- * @param base_topic    topic prefix to publish, /minimum_block_period
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_minimum_block_period_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/ImageStamp
- *
- * @param base_topic    topic prefix to publish, /image_stamp
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_stamp_publish(
-  const char *base_topic,
-  uint32_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/ImageStamp
- *
- * @param base_topic    topic prefix to publish, /image_stamp
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_image_stamp_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/UpgradeActivationPolicy
- *
- * @param base_topic    topic prefix to publish, /upgrade_activation_policy
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_activation_policy_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/UpgradeActivationPolicy
- *
- * @param base_topic    topic prefix to publish, /upgrade_activation_policy
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_activation_policy_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; OTAUpgrade/Attributes/UpgradeTimeoutPolicy
- *
- * @param base_topic    topic prefix to publish, /upgrade_timeout_policy
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_timeout_policy_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; OTAUpgrade/Attributes/UpgradeTimeoutPolicy
- *
- * @param base_topic    topic prefix to publish, /upgrade_timeout_policy
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_timeout_policy_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-
-/**
- * @brief Publish the OTAUpgrade/ClusterRevision attribute
- *
- * @param base_topic    topic prefix to publish, /OTAUpgrade/Attributes/ClusterRevision
- *                      will be appended.
- * @param value         Value to publish.
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_cluster_revision(const char* base_topic, uint16_t value);
-
-/**
- * @brief Unretain a publication to OTAUpgrade/ClusterRevision attribute
- *
- * @param base_topic    topic prefix to publish, /OTAUpgrade/Attributes/ClusterRevision
- *                      will be appended.
- */
-void uic_mqtt_dotdot_ota_upgrade_unretain_cluster_revision(const char* base_topic);
-
-/**
- * @brief Publish the SupportedCommands for UNID/EndPoint for the OTAUpgrade Cluster
- *
- * This function will iterate over all Commands in the OTAUpgrade Cluster and
- * call all registered callback functions with UNID/endpoint, and
- * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
- * All Cluster Command callback functions that return SL_STATUS_OK
- * will be added to the list of supported commands and published.
- *
- * @param unid
- * @param endpoint
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_supported_commands(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint);
-
-/**
- * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
- * the OTAUpgrade Cluster
- *
- * @param unid
- * @param endpoint )
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_empty_supported_commands(
-  const dotdot_unid_t unid
-  ,dotdot_endpoint_id_t endpoint);
 // Callback types used by the poll_control cluster
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_check_in_callback_t)(
     dotdot_unid_t unid,
@@ -36162,14 +34887,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_state_interview_callback_t)(
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type
 );
+typedef sl_status_t (*uic_mqtt_dotdot_state_discover_security_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
 
 typedef struct {
   size_t endpoint_id_list_count;
   const uint8_t* endpoint_id_list;
+  uint8_t network_status;
+  uint8_t security;
+  uint32_t maximum_command_delay;
+  size_t network_list_count;
+  const char** network_list;
 } uic_mqtt_dotdot_state_state_t;
 
 typedef struct {
   bool endpoint_id_list;
+  bool network_status;
+  bool security;
+  bool maximum_command_delay;
+  bool network_list;
 } uic_mqtt_dotdot_state_updated_state_t;
 
 typedef sl_status_t (*uic_mqtt_dotdot_state_write_attributes_callback_t)(
@@ -36349,6 +35088,46 @@ void uic_mqtt_dotdot_state_generated_interview_callback_unset(const uic_mqtt_dot
  * +/State/GeneratedCommands/interview is received.
  */
 void uic_mqtt_dotdot_state_generated_interview_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * State/Commands/discover_security is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_state_discover_security_callback_set(const uic_mqtt_dotdot_state_discover_security_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * State/Commands/discover_security is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_state_discover_security_callback_unset(const uic_mqtt_dotdot_state_discover_security_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * State/Commands/discover_security is received.
+ */
+void uic_mqtt_dotdot_state_discover_security_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/State/GeneratedCommands/discover_security is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_state_generated_discover_security_callback_set(const uic_mqtt_dotdot_state_discover_security_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/State/GeneratedCommands/discover_security is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_state_generated_discover_security_callback_unset(const uic_mqtt_dotdot_state_discover_security_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/State/GeneratedCommands/discover_security is received.
+ */
+void uic_mqtt_dotdot_state_generated_discover_security_callback_clear();
 
 /**
  * @brief Setup a callback for WriteAttribute to be called when a
@@ -36427,6 +35206,128 @@ sl_status_t uic_mqtt_dotdot_state_endpoint_id_list_publish(
  * @returns SL_STATUS_OK on success
  */
 sl_status_t uic_mqtt_dotdot_state_endpoint_id_list_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; State/Attributes/NetworkStatus
+ *
+ * @param base_topic    topic prefix to publish, /network_status
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_network_status_publish(
+  const char *base_topic,
+  NodeStateNetworkStatus value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; State/Attributes/NetworkStatus
+ *
+ * @param base_topic    topic prefix to publish, /network_status
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_network_status_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; State/Attributes/Security
+ *
+ * @param base_topic    topic prefix to publish, /security
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_security_publish(
+  const char *base_topic,
+  NodeStateSecurity value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; State/Attributes/Security
+ *
+ * @param base_topic    topic prefix to publish, /security
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_security_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; State/Attributes/MaximumCommandDelay
+ *
+ * @param base_topic    topic prefix to publish, /maximum_command_delay
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_maximum_command_delay_publish(
+  const char *base_topic,
+  uint32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; State/Attributes/MaximumCommandDelay
+ *
+ * @param base_topic    topic prefix to publish, /maximum_command_delay
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_maximum_command_delay_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; State/Attributes/NetworkList
+ *
+ * @param base_topic    topic prefix to publish, /network_list
+ *                      will be appended
+ * @param value_count   Size of the array contained at value
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_network_list_publish(
+  const char *base_topic,
+  size_t value_count,
+  const char** value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; State/Attributes/NetworkList
+ *
+ * @param base_topic    topic prefix to publish, /network_list
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_state_network_list_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -40735,6 +39636,13 @@ typedef void (*group_dispatch_t)(uint16_t group_id,
  * @param callback
  */
 void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback);
+
+/**
+ * @brief Gets the Group dispatch callback
+ *
+ * @returns Pointer to the registered group dispatch function. Note: may be NULL
+ */
+group_dispatch_t uic_mqtt_dotdot_get_group_dispatch_callback();
 
 
 #ifdef __cplusplus

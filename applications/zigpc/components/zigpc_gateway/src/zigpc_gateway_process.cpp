@@ -22,6 +22,9 @@
 #include "sl_log.h"
 
 // Component includes
+
+#include "zcl_util.h"
+
 #include "zigpc_gateway_process.h"
 #include "zigpc_gateway_process_send.h"
 #include "zigpc_gateway_int.h"
@@ -53,6 +56,9 @@ sl_status_t zigpc_gateway_process_setup(void)
 
     std::string ota_path(zigpc_config->ota_path);
     z3gw_opts.otaPath = ota_path.data();
+
+    z3gw_opts.supportedClusterListSize = zigpc_zcl_get_number_supported_clusters();
+    z3gw_opts.supportedClusterList = zigpc_zcl_get_supported_cluster_list();
 
     result = (zigbeeHostInit(&z3gw_opts) == EMBER_SUCCESS) ? SL_STATUS_OK
                                                            : SL_STATUS_FAIL;

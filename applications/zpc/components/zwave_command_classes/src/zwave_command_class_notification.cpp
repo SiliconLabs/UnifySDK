@@ -59,7 +59,10 @@ static sl_status_t zwave_command_class_notification_update_state_event(
   const ZW_NOTIFICATION_REPORT_1BYTE_V3_FRAME *frame,
   uint16_t frame_length)
 {
-  const int32_t notification_event = frame->mevent;
+  int32_t notification_event = frame->mevent;
+  if (notification_event == 0xFE) {
+    notification_event = 0;
+  }
 
   attribute notification_event_node
     = attribute_store_get_node_child_by_value(notification_type_node,
@@ -176,43 +179,45 @@ static sl_status_t zwave_command_class_notification_report_cmd_handler(
     // If event is 0 it we find the event to use for state lookup in the event
     // parameters, as due to spec the "IDLE" shall have the event to set to idle
     // as paramter.
-    if (event == 0) {
-      if (
-        0
-        == (frame->properties1
-            & NOTIFICATION_REPORT_PROPERTIES1_EVENT_PARAMETERS_LENGTH_MASK_V8)) {
-        sl_log_debug(
-          LOG_TAG,
-          "Notification Idle Event received without any event parameters. "
-          "Setting all states to idle.");
-        std::set<unsigned int> updated_states;
-        for (auto const &elem:
-             notification_event_state_map.at(frame->notificationType)) {
-          try {
-            if (updated_states.find(elem.second) != updated_states.end()) {
-              // State is already set to idle
-              continue;
-            }
-            updated_states.insert(elem.second);
-            zwave_command_class_notification_update_state_event(
-              notification_type_node,
-              elem.second,
-              frame,
-              frame_length);
-          } catch (const std::exception &ex) {
-            // continue with next state in case of erorrs
-            sl_log_warning(
-              LOG_TAG,
-              "Failed to write Notification Event to attribute store: %s",
-              ex.what());
+    if (((event == 0)
+         && (frame->properties1
+             & NOTIFICATION_REPORT_PROPERTIES1_EVENT_PARAMETERS_LENGTH_MASK_V8)
+              == 0)
+        || (event == 0xFE)) {
+      sl_log_debug(LOG_TAG,
+                   "Notification Idle Event without any event parameters or "
+                   "Event 0xFE received. Setting all states to idle.");
+      std::set<unsigned int> updated_states;
+      for (auto const &elem:
+           notification_event_state_map.at(frame->notificationType)) {
+        try {
+          if (updated_states.find(elem.second) != updated_states.end()) {
+            // State is already set to idle
+            continue;
           }
+          updated_states.insert(elem.second);
+          zwave_command_class_notification_update_state_event(
+            notification_type_node,
+            elem.second,
+            frame,
+            frame_length);
+        } catch (const std::exception &ex) {
+          // continue with next state in case of erorrs
+          sl_log_warning(
+            LOG_TAG,
+            "Failed to write Notification Event to attribute store: %s",
+            ex.what());
         }
-
-        // We always return OK here, even for errors
-        return SL_STATUS_OK;
       }
+
+      // We always return OK here, even for errors
+      return SL_STATUS_OK;
+    }
+
+    if (event == 0) {
       event = frame->eventParameter1;
     }
+
     uint8_t state;
     try {
       // Lookup if the event is a state change
@@ -666,26 +671,25 @@ static sl_status_t zwave_command_class_notification_get(
   notification_get_frame->cmd         = NOTIFICATION_GET_V8;
   notification_get_frame->v1AlarmType = 0x00;
   // read the Notification type
+  attribute_store_node_t type_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE(TYPE));
   uint8_t notification_type;
-  attribute_store_read_value(
-    attribute_store_get_first_parent_with_type(node, ATTRIBUTE(TYPE)),
-    REPORTED_ATTRIBUTE,
-    &notification_type,
-    sizeof(notification_type));
+  attribute_store_get_reported(type_node,
+                               &notification_type,
+                               sizeof(notification_type));
   notification_get_frame->notificationType = notification_type;
 
   // Get Notification Event / State from attribute store
   uint8_t notification_state;
-  attribute_store_read_value(
+  attribute_store_get_reported(
     attribute_store_get_first_parent_with_type(node, ATTRIBUTE(STATE)),
-    REPORTED_ATTRIBUTE,
     &notification_state,
     sizeof(notification_state));
   uint8_t supported_notification_states[MAX_SUPPORTED_NOTIFICATION_STATES];
   uint8_t number_of_supported_states;
   attribute_store_node_t supported_states_node
     = attribute_store_get_first_child_by_type(
-      attribute_store_get_first_parent_with_type(node, ATTRIBUTE(TYPE)),
+      type_node,
       ATTRIBUTE(SUPPORTED_STATES_OR_EVENTS));
   attribute_store_get_node_attribute_value(supported_states_node,
                                            REPORTED_ATTRIBUTE,
@@ -700,13 +704,13 @@ static sl_status_t zwave_command_class_notification_get(
   *frame_len = sizeof(ZW_NOTIFICATION_GET_V4_FRAME);
 
   // Just in case the supporting node does not answer Notification
-  // Get commands, we set the reported value to 0 to prevent
-  // more resolutions.
-  int32_t notification_event = 0;
-  attribute_store_set_node_attribute_value(node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&notification_event,
-                                           sizeof(notification_event));
+  // Get commands, we set the reported value of all events for the type to 0
+  // to prevent more resolutions.
+  const int32_t notification_event = 0;
+  attribute_store_set_all_children_reported(type_node,
+                                            ATTRIBUTE(EVENT),
+                                            &notification_event,
+                                            sizeof(notification_event));
 
   return SL_STATUS_OK;
 }

@@ -31,9 +31,6 @@
 
 #include "aoxpc_attribute_store_dotdot_attributes.h"
 
-///< Set the proper name for the Root,
-DEFINE_ATTRIBUTE(ATTRIBUTE_STORE_ROOT, 0x0001)
-
 // Generic Node attributes, should be attached under NodeID nodes and not endpoints.
 // Suggested range 0x01..0xFF
 

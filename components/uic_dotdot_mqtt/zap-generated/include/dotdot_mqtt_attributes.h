@@ -935,98 +935,6 @@ typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_valid_until_time_callback_t
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   UTC valid_until_time
 );
-// Callback types used by the ota_upgrade cluster
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  EUI64 upgrade_serverid
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint32_t file_offset
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint32_t current_file_version
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t current_zig_bee_stack_version
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint32_t downloaded_file_version
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t downloaded_zig_bee_stack_version
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t image_upgrade_status
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t manufacturerid
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t image_typeid
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t minimum_block_period
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint32_t image_stamp
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t upgrade_activation_policy
-);
-typedef sl_status_t (*uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t upgrade_timeout_policy
-);
 // Callback types used by the poll_control cluster
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_check_in_interval_callback_t)(
   dotdot_unid_t unid,
@@ -4596,6 +4504,35 @@ typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback_
   size_t endpoint_id_list_count,
   const uint8_t* endpoint_id_list
 );
+typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_network_status_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t network_status
+);
+typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_security_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t security
+);
+typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint32_t maximum_command_delay
+);
+typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_network_list_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  size_t network_list_count,
+  const char** network_list
+);
 // Callback types used by the binding cluster
 typedef sl_status_t (*uic_mqtt_dotdot_binding_attribute_binding_table_full_callback_t)(
   dotdot_unid_t unid,
@@ -5993,92 +5930,6 @@ void uic_mqtt_dotdot_time_attribute_last_set_time_callback_set(const uic_mqtt_do
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_time_attribute_valid_until_time_callback_set(const uic_mqtt_dotdot_time_attribute_valid_until_time_callback_t callback);
-
-
-/**
- *  Initializes the attributes features for the OTAUpgrade cluster,
- *  allowing to receive attribute updates from other UNIDs.
- */
-sl_status_t uic_mqtt_dotdot_ota_upgrade_attributes_init();
-
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/upgrade_serverid/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/file_offset/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/current_file_version/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/current_zig_bee_stack_version/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/downloaded_file_version/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/downloaded_zig_bee_stack_version/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/image_upgrade_status/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/manufacturerid/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/image_typeid/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/minimum_block_period/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/image_stamp/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/upgrade_activation_policy/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback_t callback);
-/**
- * Setup callback to be called when a
- * OTAUpgrade/Attributes/upgrade_timeout_policy/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback_t callback);
 
 
 /**
@@ -9373,6 +9224,30 @@ sl_status_t uic_mqtt_dotdot_state_attributes_init();
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback_set(const uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * State/Attributes/network_status/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_state_attribute_network_status_callback_set(const uic_mqtt_dotdot_state_attribute_network_status_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * State/Attributes/security/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_state_attribute_security_callback_set(const uic_mqtt_dotdot_state_attribute_security_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * State/Attributes/maximum_command_delay/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback_set(const uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * State/Attributes/network_list/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_state_attribute_network_list_callback_set(const uic_mqtt_dotdot_state_attribute_network_list_callback_t callback);
 
 
 /**

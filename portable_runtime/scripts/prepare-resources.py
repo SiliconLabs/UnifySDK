@@ -98,8 +98,8 @@ platform_tools = {
 common_resources = [
     {
         'download_name'   : 'Application Firmware',
-        'download_url'    : 'https://github.com/SiliconLabs/gecko_sdk/releases/download/v4.2.2/demo-applications.zip',
-        'download_sha256' : '229b49a73c43cff7749a26a77487b31d4cef59060d75322b229a6a50f07ba188',
+        'download_url'    : 'https://github.com/SiliconLabs/gecko_sdk/releases/download/v4.3.0/demo-applications.zip',
+        'download_sha256' : '2f481a464022c5281844a2bf45a4ce545db46375026dff0539528d4ffc487215',
         'extract_details' : [
             {
                 'extract_src' : 'protocol/z-wave/demos/zwave_soc_switch_on_off/zwave_soc_switch_on_off-brd2603a-eu.hex',
@@ -117,8 +117,8 @@ common_resources = [
     },
     {
         'download_name'   : 'Unify Debian packages',
-        'download_url'    : 'https://github.com/SiliconLabs/UnifySDK/releases/download/ver_1.3.1/unify_1.3.1_x86_64.zip',
-        'download_sha256' : '21798654079347c79e30735a904dc293e64b0ab691a8fccd9fc660f69364af5e',
+        'download_url'    : 'https://github.com/SiliconLabs/UnifySDK/releases/download/ver_1.3.2/unify_1.3.2_x86_64.zip',
+        'download_sha256' : '5a022a368f40887ffd99e7dd92038190c0504d19762ab265eedb308c6f771870',
         'extract_details' : [
             {
                 'extract_dst' : 'docker-files/',

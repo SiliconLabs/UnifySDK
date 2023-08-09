@@ -267,7 +267,8 @@ void test_thermostat_setpoint_raise_or_lower_command_clear_reported()
 void test_thermostat_publish_reported_value()
 {
   test_configuration.get_unid_endpoint_function       = &test_get_unid_endpoint;
-  test_configuration.publish_attribute_values_to_mqtt = true;
+  test_configuration.publish_reported_attribute_values_to_mqtt = true;
+  test_configuration.publish_desired_attribute_values_to_mqtt = true;
   unify_dotdot_attribute_store_set_configuration(&test_configuration);
 
   // Add an attribute
@@ -298,7 +299,8 @@ void test_thermostat_publish_reported_value()
 void test_thermostat_publish_desired_value()
 {
   test_configuration.get_unid_endpoint_function       = &test_get_unid_endpoint;
-  test_configuration.publish_attribute_values_to_mqtt = true;
+  test_configuration.publish_desired_attribute_values_to_mqtt = true;
+  test_configuration.publish_reported_attribute_values_to_mqtt = true;
   unify_dotdot_attribute_store_set_configuration(&test_configuration);
 
   // Add an attribute with reported value
@@ -339,7 +341,8 @@ void test_thermostat_unretain_published_values()
 {
   test_configuration.get_unid_endpoint_function       = &test_get_unid_endpoint;
   test_configuration.get_endpoint_node_function       = &test_get_endpoint_node;
-  test_configuration.publish_attribute_values_to_mqtt = false;
+  test_configuration.publish_desired_attribute_values_to_mqtt = false;
+  test_configuration.publish_reported_attribute_values_to_mqtt = false;
   unify_dotdot_attribute_store_set_configuration(&test_configuration);
 
   // Add an attribute with reported value
@@ -351,7 +354,8 @@ void test_thermostat_unretain_published_values()
   attribute_store_set_desired(node, &value, sizeof(value));
 
   // Enable publishing
-  test_configuration.publish_attribute_values_to_mqtt = true;
+  test_configuration.publish_desired_attribute_values_to_mqtt = true;
+  test_configuration.publish_reported_attribute_values_to_mqtt = true;
   unify_dotdot_attribute_store_set_configuration(&test_configuration);
 
   // Delete an attribute:

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -148,7 +148,7 @@ Functions</h2></td></tr>
 <tr class="separator:abf1b965ec1c5a35734c8cb5c5824aaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d552fc6b0125173d0ed560c46e79ffb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a9d552fc6b0125173d0ed560c46e79ffb">add_node_status_update</a> (<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *inf)</td></tr>
 <tr class="separator:a9d552fc6b0125173d0ed560c46e79ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91e54e7af314fb21e1c38313ccb3d876"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a91e54e7af314fb21e1c38313ccb3d876">on_secure_inclusion_complete</a> (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__controller__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td></tr>
+<tr class="memitem:a91e54e7af314fb21e1c38313ccb3d876"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a91e54e7af314fb21e1c38313ccb3d876">on_secure_inclusion_complete</a> (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td></tr>
 <tr class="separator:a91e54e7af314fb21e1c38313ccb3d876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af14bab0aea74138e4c2a1b3690145828"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#af14bab0aea74138e4c2a1b3690145828">on_keys_request</a> (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> requested_keys, bool csa)</td></tr>
 <tr class="separator:af14bab0aea74138e4c2a1b3690145828"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,13 +163,13 @@ Functions</h2></td></tr>
 <tr class="memitem:af9725af53f46d47041ed76276f01b39c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#af9725af53f46d47041ed76276f01b39c">dispatch_node_added</a> ()</td></tr>
 <tr class="memdesc:af9725af53f46d47041ed76276f01b39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tell the Z-Wave Controller that a Network Inclusion operation has completed and returns the NM state machine to IDLE.  <a href="nm__state__machine_8c.html#af9725af53f46d47041ed76276f01b39c">More...</a><br /></td></tr>
 <tr class="separator:af9725af53f46d47041ed76276f01b39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcdc17538148dcf4141793a866836aae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#abcdc17538148dcf4141793a866836aae">on_new_network</a> (<a class="el" href="group__zwave__controller__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail)</td></tr>
+<tr class="memitem:abcdc17538148dcf4141793a866836aae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#abcdc17538148dcf4141793a866836aae">on_new_network</a> (<a class="el" href="group__zwave__network__management__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail)</td></tr>
 <tr class="memdesc:abcdc17538148dcf4141793a866836aae"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called at the end of a set default or after learnmode.  <a href="nm__state__machine_8c.html#abcdc17538148dcf4141793a866836aae">More...</a><br /></td></tr>
 <tr class="separator:abcdc17538148dcf4141793a866836aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4221caf69dfb4cb2cd9e2e0eb4b9f0a6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a4221caf69dfb4cb2cd9e2e0eb4b9f0a6">nop_send_done</a> (uint8_t status, const <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
+<tr class="memitem:a4221caf69dfb4cb2cd9e2e0eb4b9f0a6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a4221caf69dfb4cb2cd9e2e0eb4b9f0a6">nop_send_done</a> (uint8_t status, const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
 <tr class="separator:a4221caf69dfb4cb2cd9e2e0eb4b9f0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cb14e1fc617e0d15c24e08f2474ec5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a9cb14e1fc617e0d15c24e08f2474ec5b">nm_state_machine_teardown</a> ()</td></tr>
-<tr class="memdesc:a9cb14e1fc617e0d15c24e08f2474ec5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teardown the Z-Wave network management state machine Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__controller__types.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Stops all ongoing Network management operations.  <a href="nm__state__machine_8c.html#a9cb14e1fc617e0d15c24e08f2474ec5b">More...</a><br /></td></tr>
+<tr class="memdesc:a9cb14e1fc617e0d15c24e08f2474ec5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teardown the Z-Wave network management state machine Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__network__management__types.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Stops all ongoing Network management operations.  <a href="nm__state__machine_8c.html#a9cb14e1fc617e0d15c24e08f2474ec5b">More...</a><br /></td></tr>
 <tr class="separator:a9cb14e1fc617e0d15c24e08f2474ec5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bedb93fa551c5f612efe78db1642309"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a4bedb93fa551c5f612efe78db1642309">nm_state_machine_init</a> ()</td></tr>
 <tr class="memdesc:a4bedb93fa551c5f612efe78db1642309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Z-Wave network management state machine.  <a href="nm__state__machine_8c.html#a4bedb93fa551c5f612efe78db1642309">More...</a><br /></td></tr>
@@ -418,7 +418,7 @@ License</h1>
 </div><div class="memdoc">
 
 <p>Initialize the Z-Wave network management state machine. </p>
-<p>Sets <a class="el" href="group__zwave__s2__network.html#ga4c03d9d281a119324b565f10c276f0a3">zwave_s2_network_callbacks_t</a> Calls <a class="el" href="group__zwave__s2__network.html#ga7af4fbf520536f7ecdd7732f4c384091">zwave_s2_set_network_callbacks</a> and <a class="el" href="group__zwave__s0__network.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__controller__types.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Print the HomeID, NodeID and DSK to console and Print node list Stops all ongoing Network management operations </p>
+<p>Sets <a class="el" href="group__zwave__s2__network.html#ga4c03d9d281a119324b565f10c276f0a3">zwave_s2_network_callbacks_t</a> Calls <a class="el" href="group__zwave__s2__network.html#ga7af4fbf520536f7ecdd7732f4c384091">zwave_s2_set_network_callbacks</a> and <a class="el" href="group__zwave__s0__network.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__network__management__types.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Print the HomeID, NodeID and DSK to console and Print node list Stops all ongoing Network management operations </p>
 
 </div>
 </div>
@@ -437,7 +437,7 @@ License</h1>
       </table>
 </div><div class="memdoc">
 
-<p>Teardown the Z-Wave network management state machine Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__controller__types.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Stops all ongoing Network management operations. </p>
+<p>Teardown the Z-Wave network management state machine Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__network__management__types.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Stops all ongoing Network management operations. </p>
 
 </div>
 </div>
@@ -459,7 +459,7 @@ License</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
           <td class="paramname"><em>tx_info</em>, </td>
         </tr>
         <tr>
@@ -573,7 +573,7 @@ License</h1>
         <tr>
           <td class="memname">static void on_new_network </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__network__management__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a>&#160;</td>
           <td class="paramname"><em>kex_fail</em></td><td>)</td>
           <td></td>
         </tr>
@@ -697,7 +697,7 @@ License</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__network__management__types.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a>&#160;</td>
           <td class="paramname"><em>kex_fail_code</em>&#160;</td>
         </tr>
         <tr>
@@ -798,7 +798,7 @@ License</h1>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_4c7246e6a1b2917f2d670822ca0c83f7.html">zwave_network_management</a></li><li class="navelem"><a class="el" href="dir_140a5582e5dd5795b7b4430df83ea200.html">src</a></li><li class="navelem"><a class="el" href="nm__state__machine_8c.html">nm_state_machine.c</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:54 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:59 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -18,13 +18,15 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "zwave_COMMAND_CLASS_MANUFACTURER_SPECIFIC_attribute_id.h"
 #include "zpc_attribute_store_network_helper.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 
 // Unify component includes
 #include "attribute.hpp"
 #include "attribute_store_helper.h"
 #include "sl_log.h"
-#include "ucl_definitions.h"
+
 #include "unify_dotdot_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 #include <sstream>
 #include <iomanip>
 // Interfaces
@@ -116,11 +118,11 @@ static void network_status_attribute_update(attribute_store_node_t updated_node,
   if (change != ATTRIBUTE_UPDATED) {
     return;
   }
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE;
   attribute_store_get_reported(updated_node,
                                &network_status,
                                sizeof(network_status));
-  if (network_status != NODE_STATE_TOPIC_STATE_INCLUDED) {
+  if (network_status != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
     return;
   }
   attribute network_status_node(updated_node);
@@ -156,7 +158,7 @@ bool basic_cluster_mapper_init()
   // Listen to updates: Network Status attribute
   attribute_store_register_callback_by_type_and_state(
     &network_status_attribute_update,
-    ATTRIBUTE_NETWORK_STATUS,
+    DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
     REPORTED_ATTRIBUTE);
 
   return true;

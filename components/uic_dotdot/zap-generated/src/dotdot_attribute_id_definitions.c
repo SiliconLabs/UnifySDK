@@ -1767,6 +1767,14 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
         // clang-format off
         case DOTDOT_STATE_ENDPOINT_ID_LIST_ATTRIBUTE_ID:
           return "EndpointIdList";
+        case DOTDOT_STATE_NETWORK_STATUS_ATTRIBUTE_ID:
+          return "NetworkStatus";
+        case DOTDOT_STATE_SECURITY_ATTRIBUTE_ID:
+          return "Security";
+        case DOTDOT_STATE_MAXIMUM_COMMAND_DELAY_ATTRIBUTE_ID:
+          return "MaximumCommandDelay";
+        case DOTDOT_STATE_NETWORK_LIST_ATTRIBUTE_ID:
+          return "NetworkList";
           // clang-format on
         default:
           return "Unknown";
@@ -4103,6 +4111,18 @@ dotdot_attribute_id_t
       if (strcmp ("EndpointIdList", attribute_name) == 0) {
         return DOTDOT_STATE_ENDPOINT_ID_LIST_ATTRIBUTE_ID;
       }
+      if (strcmp ("NetworkStatus", attribute_name) == 0) {
+        return DOTDOT_STATE_NETWORK_STATUS_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Security", attribute_name) == 0) {
+        return DOTDOT_STATE_SECURITY_ATTRIBUTE_ID;
+      }
+      if (strcmp ("MaximumCommandDelay", attribute_name) == 0) {
+        return DOTDOT_STATE_MAXIMUM_COMMAND_DELAY_ATTRIBUTE_ID;
+      }
+      if (strcmp ("NetworkList", attribute_name) == 0) {
+        return DOTDOT_STATE_NETWORK_LIST_ATTRIBUTE_ID;
+      }
     break;
     case DOTDOT_BINDING_CLUSTER_ID:
       if (strcmp ("BindingTableFull", attribute_name) == 0) {
@@ -4602,8 +4622,8 @@ dotdot_attribute_json_type_t
                 case DOTDOT_SCENES_LAST_CONFIGURED_BY_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_SCENES_SCENE_TABLE_ATTRIBUTE_ID:
-          return JSON_TYPE_NUMBER;
-                  // clang-format on
+          return JSON_TYPE_OBJECT;
+          // clang-format on
         default:
           return JSON_TYPE_UNKNOWN;
       }
@@ -6107,7 +6127,15 @@ dotdot_attribute_json_type_t
         // clang-format off
         case DOTDOT_STATE_ENDPOINT_ID_LIST_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                  // clang-format on
+                case DOTDOT_STATE_NETWORK_STATUS_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_STATE_SECURITY_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_STATE_MAXIMUM_COMMAND_DELAY_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_STATE_NETWORK_LIST_ATTRIBUTE_ID:
+          return JSON_TYPE_STRING;
+          // clang-format on
         default:
           return JSON_TYPE_UNKNOWN;
       }
@@ -6399,18 +6427,6 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   if (10 == cluster_id) {
   }
 
-  if (25 == cluster_id) {
-    if (6 == attribute_id) {
-      return true;
-    }
-    if (11 == attribute_id) {
-      return true;
-    }
-    if (12 == attribute_id) {
-      return true;
-    }
-  }
-
   if (32 == cluster_id) {
   }
 
@@ -6646,6 +6662,12 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   }
 
   if (64770 == cluster_id) {
+    if (1 == attribute_id) {
+      return true;
+    }
+    if (2 == attribute_id) {
+      return true;
+    }
   }
 
   if (64771 == cluster_id) {

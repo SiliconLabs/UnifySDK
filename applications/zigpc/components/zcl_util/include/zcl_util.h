@@ -151,6 +151,20 @@ sl_status_t zigpc_zcl_build_command_frame(
  **/
 size_t zigpc_zcl_get_type_size(zigpc_zcl_data_type_t type);
 
+/**
+ * @brief zigpc_zcl_get_number_supported_clusters
+ *
+ * @return the number of unique supported ZCL clusters
+ */
+size_t zigpc_zcl_get_number_supported_clusters();
+
+/**
+ * @brief zigpc_zcl_get_supported_cluster_list
+ *
+ * @return a const pointer to the static list of the ID's of supported clusters
+ */
+const uint16_t* zigpc_zcl_get_supported_cluster_list();
+
 #ifdef __cplusplus
 }
 #endif

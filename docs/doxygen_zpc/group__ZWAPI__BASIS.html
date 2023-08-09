@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -631,7 +631,7 @@ Functions</h2></td></tr>
 
 <p>Disable the Watchdog. </p>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL</dd></dl>
-<p>@zgw_name ZW_WatchDogDisable </p>
+<p>aka ZW_WatchDogDisable </p>
 
 </div>
 </div>
@@ -653,7 +653,7 @@ Functions</h2></td></tr>
 
 <p>Enable Auto Programming mode. </p>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<p>@zgw_name ZW_AutoProgrammingEnable </p>
+<p>aka ZW_AutoProgrammingEnable </p>
 
 </div>
 </div>
@@ -674,7 +674,7 @@ Functions</h2></td></tr>
 
 <p>Enable the Watchdog. </p>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL</dd></dl>
-<p>@zgw_name ZW_WatchDogEnable </p>
+<p>aka ZW_WatchDogEnable </p>
 
 </div>
 </div>
@@ -699,9 +699,9 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the Exclusion request queued for transmission </dd>
 <dd>
 SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
-<p>@serial_tx{REQ | 0x5E}</p>
-<p>@serial_rx{RES | 0x5E | retVal}</p>
-<p>@zgw_name ZW_ExploreRequestExclusion </p>
+<p>Tx: {REQ | 0x5E}</p>
+<p>Rx: {RES | 0x5E | retVal}</p>
+<p>aka ZW_ExploreRequestExclusion </p>
 
 </div>
 </div>
@@ -726,9 +726,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 <p>This function sends out an explorer frame requesting inclusion into a network. If the inclusion request is accepted by a controller in network wide inclusion mode, the application on this node will get notified through the callback from the <a class="el" href="group__ZWAPI__CONTROLLER.html#ga6e50a93518af078f107923bca22a6880" title="Enable/disable Z-Wave Learn Mode.">zwapi_set_learn_mode()</a> function. Once a callback is received from <a class="el" href="group__ZWAPI__CONTROLLER.html#ga6e50a93518af078f107923bca22a6880" title="Enable/disable Z-Wave Learn Mode.">zwapi_set_learn_mode()</a> saying that the inclusion process has started, the application should not make further calls to this function.</p>
 <dl class="section note"><dt>Note</dt><dd>Recommend not to call this function more than once every 4 seconds.</dd></dl>
-<p>@serial_tx{REQ | 0x5E}</p>
-<p>@serial_rx{RES | 0x5E | retVal}</p>
-<p>@zgw_name ZW_ExploreRequestInclusion </p>
+<p>Tx: {REQ | 0x5E}</p>
+<p>Rx: {RES | 0x5E | retVal}</p>
+<p>aka ZW_ExploreRequestInclusion </p>
 
 </div>
 </div>
@@ -766,9 +766,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
   </table>
   </dd>
 </dl>
-<p>@serial_tx{(no arguments)}</p>
-<p>@serial_rx{RES | RSSI Ch0 | RSSI Ch1 | RSSI Ch2 (3CH systems only)}</p>
-<p>@zgw_name ZW_GetBackgroundRSSI </p>
+<p>Tx: {(no arguments)}</p>
+<p>Rx: {RES | RSSI Ch0 | RSSI Ch1 | RSSI Ch2 (3CH systems only)}</p>
+<p>aka ZW_GetBackgroundRSSI </p>
 
 </div>
 </div>
@@ -823,7 +823,7 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.</dd></dl>
-<p>@zgw_name GetLongRangeChannel </p>
+<p>aka GetLongRangeChannel </p>
 
 </div>
 </div>
@@ -863,7 +863,7 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.</dd></dl>
-<p>@zgw_name SerialAPI_GetLRNodeList </p>
+<p>aka SerialAPI_GetLRNodeList </p>
 
 </div>
 </div>
@@ -913,9 +913,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 <p>Get the current MAX Long Range TX power level in effect. </p>
 <dl class="section return"><dt>Returns</dt><dd>MAX Long Range TX power level settings The power level is in deci dBm. E.g. 1dBm output power will be 10 in and -2dBm will be -20</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This API is available as of serial API version 7</dd></dl>
-<p>@serial_tx{REQ | 0x0B | 0x05}</p>
-<p>@serial_rx{RES | 0x0B | 0x05 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}</p>
-<p>@zgw_name ZW_MAXLRTXPowerLevelGet </p>
+<p>Tx: {REQ | 0x0B | 0x05}</p>
+<p>Rx: {RES | 0x0B | 0x05 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}</p>
+<p>aka ZW_MAXLRTXPowerLevelGet </p>
 
 </div>
 </div>
@@ -990,8 +990,8 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.</dd></dl>
-<p>@serial_tx{HOST-&gt;ZW: REQ | 0x1D} @serial_tx{ZW-&gt;HOST: RES | 0x1D | rndNo}</p>
-<p>@zgw_name ZW_Random(ZW_GetRandomArray) </p>
+<p>Tx: {HOST-&gt;ZW: REQ | 0x1D} Tx: {ZW-&gt;HOST: RES | 0x1D | rndNo}</p>
+<p>aka ZW_Random(ZW_GetRandomArray) </p>
 
 </div>
 </div>
@@ -1030,9 +1030,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.</dd></dl>
-<p>@serial_tx{REQ | 0x1C | noRandomBytes}</p>
-<p>@serial_rx{RES | 0x1C | randomGenerationSuccess | noRandomBytesGenerated | randombytes[]}</p>
-<p>@zgw_name ZW_GetRandomWord (ZW_GetRandomArray) </p>
+<p>Tx: {REQ | 0x1C | noRandomBytes}</p>
+<p>Rx: {RES | 0x1C | randomGenerationSuccess | noRandomBytesGenerated | randombytes[]}</p>
+<p>aka ZW_GetRandomWord (ZW_GetRandomArray) </p>
 
 </div>
 </div>
@@ -1055,9 +1055,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 <p>Get the current power level used in RF transmitting. </p>
 <dl class="section return"><dt>Returns</dt><dd>rf_power_level_t the power level currently in effect during RF transmissions.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This function should only be used in an install/test link situation.</dd></dl>
-<p>@serial_tx{REQ | 0xBA}</p>
-<p>@serial_rx{RES | 0xBA | powerlevel}</p>
-<p>@zgw_name ZW_RFPowerLevelGet </p>
+<p>Tx: {REQ | 0xBA}</p>
+<p>Rx: {RES | 0xBA | powerlevel}</p>
+<p>aka ZW_RFPowerLevelGet </p>
 
 </div>
 </div>
@@ -1079,9 +1079,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 
 <p>Get the current RF region. </p>
 <dl class="section return"><dt>Returns</dt><dd>zwapi_rf_region_t the RF region currently in effect. REGION_UNDEFINED if unable to get RF region.</dd></dl>
-<p>@serial_tx{REQ | 0x0B | 0x20}</p>
-<p>@serial_rx{RES | 0x0B | 0x20 | RFRegion}</p>
-<p>@zgw_name ZW_RFRegionGet </p>
+<p>Tx: {REQ | 0x0B | 0x20}</p>
+<p>Rx: {RES | 0x0B | 0x20 | RFRegion}</p>
+<p>aka ZW_RFRegionGet </p>
 
 </div>
 </div>
@@ -1108,9 +1108,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 </ul>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This API is available as of serial API version 7</dd></dl>
-<p>@serial_tx{REQ | 0x0B | 0x08}</p>
-<p>@serial_rx{RES | 0x0B | 0x08 | NormalTxPower | Measured0dBmPower}</p>
-<p>@zgw_name ZW_TXPowerLevelGet </p>
+<p>Tx: {REQ | 0x0B | 0x08}</p>
+<p>Rx: {RES | 0x0B | 0x08 | NormalTxPower | Measured0dBmPower}</p>
+<p>aka ZW_TXPowerLevelGet </p>
 
 </div>
 </div>
@@ -1136,7 +1136,7 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 <li><a class="el" href="group__ZWAPI__INIT.html#gac7251b59e0baa6557772f8821def7108">zwapi_library_type_t</a></li>
 </ul>
 </dd></dl>
-<p>@zgw_name ZW_Type_Library </p>
+<p>aka ZW_Type_Library </p>
 
 </div>
 </div>
@@ -1164,7 +1164,7 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the Library type ZW_LIB_xxx</dd></dl>
-<p>@zgw_name ZW_Version </p>
+<p>aka ZW_Version </p>
 
 </div>
 </div>
@@ -1191,9 +1191,9 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 <dd>
 <a class="el" href="group__ZWAPI__BASIS.html#ga130142ba2c8e2103b0aabfb2051e47a6">ZW_PROTOCOL_STATUS_SUC</a> if SUC sends pending updates.</dd></dl>
 <p>The function returns a mask telling which protocol function is currently running</p>
-<p>@serial_tx{REQ | 0xBF}</p>
-<p>@serial_rx{RES | 0xBF | retVal}</p>
-<p>@zgw_name ZW_GetProtocolStatus </p>
+<p>Tx: {REQ | 0xBF}</p>
+<p>Rx: {RES | 0xBF | retVal}</p>
+<p>aka ZW_GetProtocolStatus </p>
 
 </div>
 </div>
@@ -1273,8 +1273,8 @@ SL_STATUS_FAIL if the node is not in learn mode</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">destNode</td><td>is the destination Node ID (ZWAVE_BROADCAST_NODE_ID == all nodes) </td></tr>
-    <tr><td class="paramname">txOptions</td><td>is transmit option flags. (see <a class="el" href="group__zwapi__transmit__complete__codes.html#ga550a9c5891598a986c28487f36d6e24c" title="Send data to a Z-Wave node or to the broadcast destination.">zwapi_send_data()</a>) </td></tr>
-    <tr><td class="paramname">completedFunc</td><td>is the transmit completed callback function. For information about the txStatus parameter see <a class="el" href="group__zwapi__transmit__complete__codes.html#ga550a9c5891598a986c28487f36d6e24c" title="Send data to a Z-Wave node or to the broadcast destination.">zwapi_send_data()</a>. </td></tr>
+    <tr><td class="paramname">txOptions</td><td>is transmit option flags. (see <a class="el" href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c" title="Send data to a Z-Wave node or to the broadcast destination.">zwapi_send_data()</a>) </td></tr>
+    <tr><td class="paramname">completedFunc</td><td>is the transmit completed callback function. For information about the txStatus parameter see <a class="el" href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c" title="Send data to a Z-Wave node or to the broadcast destination.">zwapi_send_data()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1286,10 +1286,10 @@ false if frame was not put in transmit queue (possibly due to transmit queue ove
 <p>When <a class="el" href="group__ZWAPI__BASIS.html#gaa214b575f39daf6c9bbe6cb7005db3a2" title="Create and transmit a &quot;Node Information&quot; frame.">zwapi_send_node_information()</a> is used in learn mode for adding or removing the node from the network the transmit option TRANSMIT_OPTION_LOW_POWER should NOT be used.</p>
 <dl class="section note"><dt>Note</dt><dd>zwapi_send_node_information uses the transmit queue in the API, so using other transmit functions before the complete callback has been called by the API is not recommended.</dd></dl>
 <p>Timeout: 65 s Exception recovery: Resume normal operation, no recovery needed</p>
-<p>@serial_tx{REQ | 0x12 | destNode | txOptions | funcID}</p>
-<p>@serial_rx{RES | 0x12 | retVal}</p>
-<p>@serial_rx{REQ | 0x12 | funcID | txStatus}</p>
-<p>@zgw_name ZW_SendNodeInformation </p>
+<p>Tx: {REQ | 0x12 | destNode | txOptions | funcID}</p>
+<p>Rx: {RES | 0x12 | retVal}</p>
+<p>Rx: {REQ | 0x12 | funcID | txStatus}</p>
+<p>aka ZW_SendNodeInformation </p>
 
 </div>
 </div>
@@ -1330,7 +1330,7 @@ false if frame was not put in transmit queue (possibly due to transmit queue ove
   <table class="params">
     <tr><td class="paramname">node_id</td><td>the NodeID destination the test frame will be transmitted to. </td></tr>
     <tr><td class="paramname">power_level</td><td>the power level to use for the RF transmission. </td></tr>
-    <tr><td class="paramname">callback_function</td><td>is the callback function that will be called when the operation of this function is done. For information about the tx_status parameter, refer to <a class="el" href="group__zwapi__transmit__complete__codes.html#ga550a9c5891598a986c28487f36d6e24c">zwapi_send_data</a></td></tr>
+    <tr><td class="paramname">callback_function</td><td>is the callback function that will be called when the operation of this function is done. For information about the tx_status parameter, refer to <a class="el" href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c">zwapi_send_data</a></td></tr>
   </table>
   </dd>
 </dl>
@@ -1340,7 +1340,7 @@ SL_STATUS_FAIL if the frame was <em>not</em> sent.</dd></dl>
 <p>Send a test frame directly to nodeID without any routing, RF transmission power is previously set to power level by calling <a class="el" href="group__ZWAPI__BASIS.html#ga25bf07d26df5a79bba14e77bf0185185" title="Set the power level to used in RF transmissions.">zwapi_set_rf_power_level()</a>. The test frame is acknowledged at the RF transmission power level indicated by the parameter power level by nodeID (if the test frame got through).This test will be done using 9600 kbit/s transmission rate.</p>
 <dl class="section note"><dt>Note</dt><dd>This function should only be used in an install/test link situation.</dd></dl>
 <p>Timeout: 200 ms Exception recovery: Resume normal operation, no recovery needed</p>
-<p>@zgw_name ZW_SendTestFrame </p>
+<p>aka ZW_SendTestFrame </p>
 
 </div>
 </div>
@@ -1392,7 +1392,7 @@ SL_STATUS_FAIL if the frame was <em>not</em> sent.</dd></dl>
   </table>
   </dd>
 </dl>
-<p>@zgw_name SerialAPI_ApplicationNodeInformation </p>
+<p>aka SerialAPI_ApplicationNodeInformation </p>
 
 </div>
 </div>
@@ -1420,7 +1420,7 @@ SL_STATUS_FAIL if the frame was <em>not</em> sent.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.</dd></dl>
-<p>@zgw_name SetLongRangeChannel </p>
+<p>aka SetLongRangeChannel </p>
 
 </div>
 </div>
@@ -1453,9 +1453,9 @@ SL_STATUS_NOT_SUPPORTED if the Z-Wave module does not support this function. </d
 <dd>
 SL_STATUS_FAIL if the power level could not be set.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This API is available as of serial API version 7</dd></dl>
-<p>@serial_tx{REQ | 0x0B | 0x03 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}</p>
-<p>@serial_rx{RES | 0x0B | 0x03 | CmdRes}</p>
-<p>@zgw_name ZW_MAXLRTXPowerLevelSet </p>
+<p>Tx: {REQ | 0x0B | 0x03 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}</p>
+<p>Rx: {RES | 0x0B | 0x03 | CmdRes}</p>
+<p>aka ZW_MAXLRTXPowerLevelSet </p>
 
 </div>
 </div>
@@ -1483,7 +1483,7 @@ SL_STATUS_FAIL if the power level could not be set.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.</dd></dl>
-<p>@zgw_name SerialAPI_GetLRNodeList </p>
+<p>aka SerialAPI_GetLRNodeList </p>
 
 </div>
 </div>
@@ -1542,9 +1542,9 @@ SL_STATUS_FAIL if the power level could not be set.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>rf_power_level_t the power level set in the Z-Wave Radio Module.</dd></dl>
 <p>The RF power is dependent on the settings for transmit power level in App_RFSetup.a51. If this value is changed from using the default library value, the resulting power levels might differ from the intended values. The returned value is however always the one used.</p>
 <dl class="section note"><dt>Note</dt><dd>This function should only be used in an install/test link situation and the power level should always be set back to NORMAL_POWER when the testing is done.</dd></dl>
-<p>@serial_tx{REQ | 0x17 | powerLevel}</p>
-<p>@serial_rx{RES | 0x17 | retVal}</p>
-<p>@zgw_name ZW_RFPowerLevelSet </p>
+<p>Tx: {REQ | 0x17 | powerLevel}</p>
+<p>Rx: {RES | 0x17 | retVal}</p>
+<p>aka ZW_RFPowerLevelSet </p>
 
 </div>
 </div>
@@ -1574,7 +1574,7 @@ SL_STATUS_FAIL if the power level could not be set.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns SL_STATUS_OK if operation was executed successfully, SL_STATUS_FAIL otherwise.</dd></dl>
-<p>@zgw_name ZW_SetRFReceiveMode </p>
+<p>aka ZW_SetRFReceiveMode </p>
 
 </div>
 </div>
@@ -1604,9 +1604,9 @@ SL_STATUS_FAIL if the power level could not be set.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK the RF region was set successfully. </dd>
 <dd>
 SL_STATUS_FAIL the RF region was <em>not</em> set.</dd></dl>
-<p>@serial_tx{REQ | 0x0B | 0x40 | RFRegion}</p>
-<p>@serial_rx{RES | 0x0B | 0x40 | CmdRes}</p>
-<p>@zgw_name ZW_RFRegionSet </p>
+<p>Tx: {REQ | 0x0B | 0x40 | RFRegion}</p>
+<p>Rx: {RES | 0x0B | 0x40 | CmdRes}</p>
+<p>aka ZW_RFRegionSet </p>
 
 </div>
 </div>
@@ -1643,9 +1643,9 @@ SL_STATUS_NOT_SUPPORTED if the Z-Wave module does not support this function. </d
 <dd>
 SL_STATUS_FAIL if the TX power level could not be set.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This API is available as of serial API version 7</dd></dl>
-<p>@serial_tx{REQ | 0x0B | 0x04 | NormalTxPower | Measured0dBmPower}</p>
-<p>@serial_rx{RES | 0x0B | 0x04 | CmdRes}</p>
-<p>@zgw_name ZW_TXPowerLevelSet </p>
+<p>Tx: {REQ | 0x0B | 0x04 | NormalTxPower | Measured0dBmPower}</p>
+<p>Rx: {RES | 0x0B | 0x04 | CmdRes}</p>
+<p>aka ZW_TXPowerLevelSet </p>
 
 </div>
 </div>
@@ -1700,8 +1700,8 @@ SL_STATUS_FAIL if the setting could not be changed. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>USB modules will do a disconnect - connect when this command is issued. This means that the module may get a new address on the USB bus. This will make the old file handle to the USB serial interface invalid.</dd>
 <dd>
 Recent Z-Wave versions (at least 6.80 and 7.00) will return FUNC_ID_SERIAL_API_STARTED once restarted.</dd></dl>
-<p>@serial_tx{REQ | 0x08}</p>
-<p>@zgw_name ZW_SoftReset </p>
+<p>Tx: {REQ | 0x08}</p>
+<p>aka ZW_SoftReset </p>
 
 </div>
 </div>
@@ -1722,8 +1722,8 @@ Recent Z-Wave versions (at least 6.80 and 7.00) will return FUNC_ID_SERIAL_API_S
 
 <p>Enable Watchdog and start kicking it in the Z-Wave chip. </p>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL</dd></dl>
-<p>@serial_tx{REQ | 0xD2}</p>
-<p>@zgw_name SerialAPI_WatchdogStart </p>
+<p>Tx: {REQ | 0xD2}</p>
+<p>aka SerialAPI_WatchdogStart </p>
 
 </div>
 </div>
@@ -1744,7 +1744,7 @@ Recent Z-Wave versions (at least 6.80 and 7.00) will return FUNC_ID_SERIAL_API_S
 
 <p>Return whether the Z-Wave module supports Long Range. </p>
 <dl class="section return"><dt>Returns</dt><dd>True or False</dd></dl>
-<p>@zgw_name SerialAPI_SupportsLR </p>
+<p>aka SerialAPI_SupportsLR </p>
 
 </div>
 </div>
@@ -1753,7 +1753,7 @@ Recent Z-Wave versions (at least 6.80 and 7.00) will return FUNC_ID_SERIAL_API_S
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -486,7 +486,7 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader">zwapi_get_priority_route() and zwapi_set_priority_route() route structure definitions</h2></td></tr>
 <tr class="memitem:ga0a4bb8200520aeede5766d1c6a47b8d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga0a4bb8200520aeede5766d1c6a47b8d4">ROUTECACHE_LINE_CONF_SIZE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ga0a4bb8200520aeede5766d1c6a47b8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac7a813bb0b415f1cfa255755cafcaf4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac7a813bb0b415f1cfa255755cafcaf4b">ROUTECACHE_LINE_SIZE</a>&#160;&#160;&#160;(<a class="el" href="group__zwapi__transmit__complete__codes.html#ga3f884461c9298bba45c9adf6ecc1435a">MAX_REPEATERS</a> + <a class="el" href="group__ZWAPI__CONTROLLER.html#ga0a4bb8200520aeede5766d1c6a47b8d4">ROUTECACHE_LINE_CONF_SIZE</a>)</td></tr>
+<tr class="memitem:gac7a813bb0b415f1cfa255755cafcaf4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac7a813bb0b415f1cfa255755cafcaf4b">ROUTECACHE_LINE_SIZE</a>&#160;&#160;&#160;(<a class="el" href="group__ZWAPI__TRANSPORT.html#ga3f884461c9298bba45c9adf6ecc1435a">MAX_REPEATERS</a> + <a class="el" href="group__ZWAPI__CONTROLLER.html#ga0a4bb8200520aeede5766d1c6a47b8d4">ROUTECACHE_LINE_CONF_SIZE</a>)</td></tr>
 <tr class="separator:gac7a813bb0b415f1cfa255755cafcaf4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">PriorityRoute index definitions</h2></td></tr>
@@ -1593,7 +1593,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ROUTECACHE_LINE_SIZE&#160;&#160;&#160;(<a class="el" href="group__zwapi__transmit__complete__codes.html#ga3f884461c9298bba45c9adf6ecc1435a">MAX_REPEATERS</a> + <a class="el" href="group__ZWAPI__CONTROLLER.html#ga0a4bb8200520aeede5766d1c6a47b8d4">ROUTECACHE_LINE_CONF_SIZE</a>)</td>
+          <td class="memname">#define ROUTECACHE_LINE_SIZE&#160;&#160;&#160;(<a class="el" href="group__ZWAPI__TRANSPORT.html#ga3f884461c9298bba45c9adf6ecc1435a">MAX_REPEATERS</a> + <a class="el" href="group__ZWAPI__CONTROLLER.html#ga0a4bb8200520aeede5766d1c6a47b8d4">ROUTECACHE_LINE_CONF_SIZE</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2446,7 +2446,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<p>@zgw_name ZW_AddNodeToNetwork </p>
+<p>aka ZW_AddNodeToNetwork </p>
 
 </div>
 </div>
@@ -2497,7 +2497,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This should be called after receiving a application_controller_update_function with a whitelisted DSK.</dd></dl>
-<p>@zgw_name ZW_AddNodeToNetworkSmartStart </p>
+<p>aka ZW_AddNodeToNetworkSmartStart </p>
 
 </div>
 </div>
@@ -2544,7 +2544,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns true if assign return route was initiated, or false if a return route assign/delete is already active</dd></dl>
 <p>Calculate the shortest transport routes from the Routing End Node to the route destination node and transmit the return routes to the Routing End Node.</p>
-<p>@zgw_name ZW_AssignReturnRoute </p>
+<p>aka ZW_AssignReturnRoute </p>
 
 </div>
 </div>
@@ -2586,7 +2586,7 @@ Functions</h2></td></tr>
 <dd>
 SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <p>Calculate the shortest transport routes to a Routing End Node from the Static Update Controller (SUC) Node and transmit the return routes to the Routing End Node.</p>
-<p>@zgw_name ZW_AssignSUCReturnRoute </p>
+<p>aka ZW_AssignSUCReturnRoute </p>
 
 </div>
 </div>
@@ -2631,7 +2631,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<p>@zgw_name ZW_CreateNewPrimaryCtrl </p>
+<p>aka ZW_CreateNewPrimaryCtrl </p>
 
 </div>
 </div>
@@ -2671,7 +2671,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns true if delete return routes was initiated, or false if not</dd></dl>
 <p>Transmits "NULL" routes to the Routing End Node.</p>
-<p>@zgw_name ZW_DeleteReturnRoute </p>
+<p>aka ZW_DeleteReturnRoute </p>
 
 </div>
 </div>
@@ -2713,7 +2713,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <dd>
 SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <p>Transmit "NULL" routes to the Routing End Node.</p>
-<p>@zgw_name ZW_DeleteSUCReturnRoute </p>
+<p>aka ZW_DeleteSUCReturnRoute </p>
 
 </div>
 </div>
@@ -2758,7 +2758,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the SUC functionality was enabled/disabled. </dd>
 <dd>
 SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd></dl>
-<p>@zgw_name ZW_EnableSUC </p>
+<p>aka ZW_EnableSUC </p>
 
 </div>
 </div>
@@ -2784,7 +2784,7 @@ SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd
  = CONTROLLER_IS_SUC : If this bit is set then this controller is a SUC <br  />
  = CONTROLLER_NODEID_SERVER_PRESENT : If this bit is set then there is a SUC ID server (SIS) in the network and this controller can therefore include/exclude nodes in the network (inclusion controller). <br  />
  = CONTROLLER_IS_REAL_PRIMARY : = CONTROLLER_IS_SUC : = NO_NODES_INCLUDED :</dd></dl>
-<p>@zgw_name ZW_GetControllerCapabilities </p>
+<p>aka ZW_GetControllerCapabilities </p>
 
 </div>
 </div>
@@ -2846,7 +2846,7 @@ SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd
 <li>ZW_GET_ROUTING_INFO_40K - Return nodes supporting 40k</li>
 <li>ZW_GET_ROUTING_INFO_100K - Return nodes supporting 100k</li>
 </ul>
-<p>@zgw_name ZW_GetRoutingInfo_old </p>
+<p>aka ZW_GetRoutingInfo_old </p>
 
 </div>
 </div>
@@ -2905,9 +2905,9 @@ false if No LWR found for bNodeID.</dd></dl>
 <li><code>0, 0, 0, 0, ZW_PRIORITY_ROUTE_SPEED_100K</code> &rarr; Direct 100K</li>
 <li><code>2, 3, 0, 0, ZW_PRIORITY_ROUTE_SPEED_40K</code> &rarr; 40K route through repeaters 2 and 3</li>
 </ul>
-<p>@serial_tx{REQ | 0x92 | bNodeID}</p>
-<p>@serial_rx{RES | 0x92 | bNodeID | retVal | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}</p>
-<p>@zgw_name ZW_GetPriorityRoute @zgw_name ZW_GetLastWorkingRoute </p>
+<p>Tx: {REQ | 0x92 | bNodeID}</p>
+<p>Rx: {RES | 0x92 | bNodeID | retVal | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}</p>
+<p>aka ZW_GetPriorityRoute aka ZW_GetLastWorkingRoute </p>
 
 </div>
 </div>
@@ -2945,7 +2945,7 @@ false if No LWR found for bNodeID.</dd></dl>
   </table>
   </dd>
 </dl>
-<p>@zgw_name ZW_GetNodeProtocolInfo </p>
+<p>aka ZW_GetNodeProtocolInfo </p>
 
 </div>
 </div>
@@ -2967,7 +2967,7 @@ false if No LWR found for bNodeID.</dd></dl>
 
 <p>Get the currently registered SUC node ID. </p>
 <dl class="section return"><dt>Returns</dt><dd>returns the SUC node ID, and ZERO if no SUC available</dd></dl>
-<p>@zgw_name ZW_GetSUCNodeID </p>
+<p>aka ZW_GetSUCNodeID </p>
 
 </div>
 </div>
@@ -2995,7 +2995,7 @@ false if No LWR found for bNodeID.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL</dd></dl>
-<p>@zgw_name ZW_GetVirtualNodes </p>
+<p>aka ZW_GetVirtualNodes </p>
 
 </div>
 </div>
@@ -3023,7 +3023,7 @@ false if No LWR found for bNodeID.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns true if node in failed node table, else false</dd></dl>
-<p>@zgw_name ZW_isFailedNode </p>
+<p>aka ZW_isFailedNode </p>
 
 </div>
 </div>
@@ -3047,7 +3047,7 @@ false if No LWR found for bNodeID.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true when the controller is a primary controller in the network </dd>
 <dd>
 false when the controller is a secondary controller in the network.</dd></dl>
-<p>@zgw_name ZW_IsPrimaryCtrl </p>
+<p>aka ZW_IsPrimaryCtrl </p>
 
 </div>
 </div>
@@ -3100,7 +3100,7 @@ One or more of the following bit flags If the removing process can not be starte
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga627b5070463752f3a3723b2b8daeed53">ZW_FAILED_NODE_REMOVED</a> The failed node was removed from the failed nodes list</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gada8273213487e5c790c8dc593cb3d9f2">ZW_FAILED_NODE_NOT_REMOVED</a> The failed node was not removed</li>
 </ul>
-<p>@zgw_name ZW_RemoveFailedNode </p>
+<p>aka ZW_RemoveFailedNode </p>
 
 </div>
 </div>
@@ -3146,7 +3146,7 @@ One or more of the following bit flags If the removing process can not be starte
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<p>@zgw_name ZW_RemoveNodeFromNetwork </p>
+<p>aka ZW_RemoveNodeFromNetwork </p>
 
 </div>
 </div>
@@ -3208,7 +3208,7 @@ One or more of the following flags if the replace process can not be started:<ul
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gad0b95dfd183534fa8ec4434444d45d60">ZW_FAILED_NODE_REPLACE_DONE</a> The failed node has been replaced.</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gaae3f7a3ff0bdd80ba5282700d9b6c927">ZW_FAILED_NODE_REPLACE_FAILED</a> The failed node has not been replaced.</li>
 </ul>
-<p>@zgw_name ZW_ReplaceFailedNode </p>
+<p>aka ZW_ReplaceFailedNode </p>
 
 </div>
 </div>
@@ -3230,7 +3230,7 @@ One or more of the following flags if the replace process can not be started:<ul
 
 <p>Send command completed to primary controller. </p>
 <dl class="section note"><dt>Note</dt><dd>Called in replication mode when a command from the sender has been processed.</dd></dl>
-<p>@zgw_name ZW_ReplicationReceiveComplete </p>
+<p>aka ZW_ReplicationReceiveComplete </p>
 
 </div>
 </div>
@@ -3269,7 +3269,7 @@ One or more of the following flags if the replace process can not be started:<ul
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK (neighbor discovery started) or SL_STATUS_FAIL</dd></dl>
-<p>@zgw_name ZW_RequestNodeNeighborUpdate </p>
+<p>aka ZW_RequestNodeNeighborUpdate </p>
 
 </div>
 </div>
@@ -3312,10 +3312,10 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <dl class="section note"><dt>Note</dt><dd>The SUC can only handle one network update at a time, so care should be taken not to have all the controllers in the network ask for updates at the same time.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This API call will generate a lot of network activity that will use bandwidth and stress the SUC in the network. Therefore, network updates should be requested as seldom as possible and never more often that once every hour from a controller.</dd></dl>
 <p>Timeout: 65 s. Exception recovery: Resume normal operation, no recovery needed.</p>
-<p>@serial_tx{REQ | 0x53 | funcID}</p>
-<p>@serial_rx{RES | 0x53 | retVal}</p>
-<p>@serial_rx{REQ | 0x53 | funcID | txStatus}</p>
-<p>@zgw_name ZW_RequestNetWorkUpdate </p>
+<p>Tx: {REQ | 0x53 | funcID}</p>
+<p>Rx: {RES | 0x53 | retVal}</p>
+<p>Rx: {REQ | 0x53 | funcID | txStatus}</p>
+<p>aka ZW_RequestNetWorkUpdate </p>
 
 </div>
 </div>
@@ -3343,7 +3343,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<p>@zgw_name ZW_RequestNodeInfo </p>
+<p>aka ZW_RequestNodeInfo </p>
 
 </div>
 </div>
@@ -3404,7 +3404,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Used when the controller is replication mode</dd></dl>
-<p>@zgw_name ZW_ReplicationSend </p>
+<p>aka ZW_ReplicationSend </p>
 
 </div>
 </div>
@@ -3431,7 +3431,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
   </table>
   </dd>
 </dl>
-<p>@zgw_name ZW_SetDefault </p>
+<p>aka ZW_SetDefault </p>
 
 </div>
 </div>
@@ -3478,7 +3478,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the requested operation was accepted and has started </dd>
 <dd>
 SL_STATUS_FAIL if the requested operation has not been started</dd></dl>
-<p>@zgw_name ZW_SetLearnMode </p>
+<p>aka ZW_SetLearnMode </p>
 
 </div>
 </div>
@@ -3507,7 +3507,7 @@ SL_STATUS_FAIL if the requested operation has not been started</dd></dl>
 </dl>
 <p>A ZDK 4.5 controller uses the routing algorithm from 5.02 to address nodes from ZDK's not supporting explorer frame.</p>
 <p>The routing algorithm from 5.02 ignores the transmit option TRANSMIT_OPTION_EXPLORE flag and maximum number of source routing attempts value (maxRouteTries)</p>
-<p>@zgw_name ZW_SetRoutingMAX </p>
+<p>aka ZW_SetRoutingMAX </p>
 
 </div>
 </div>
@@ -3556,9 +3556,9 @@ false if the specified bNodeID was not valid and no LWR was set.</dd></dl>
 <li><code>2, 3, 0, 0, ZW_PRIORITY_ROUTE_SPEED_40K</code> &rarr; 40K Priority route through repeaters 2 and 3</li>
 <li><code>2, 3, 4, 0, ZW_PRIORITY_ROUTE_SPEED_9600</code> &rarr; 9600 Priority route through repeaters 2, 3 and 4</li>
 </ul>
-<p>@serial_tx{REQ | 0x93 | bNodeID | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}</p>
-<p>@serial_rx{RES | 0x93 | bNodeID | retVal}</p>
-<p>@zgw_name ZW_SetPriorityRoute @zgw_name ZW_SetLastWorkingRoute </p>
+<p>Tx: {REQ | 0x93 | bNodeID | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}</p>
+<p>Rx: {RES | 0x93 | bNodeID | retVal}</p>
+<p>aka ZW_SetPriorityRoute aka ZW_SetLastWorkingRoute </p>
 
 </div>
 </div>
@@ -3620,7 +3620,7 @@ false if the specified bNodeID was not valid and no LWR was set.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if success. </dd>
 <dd>
 SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></dl>
-<p>@zgw_name ZW_SetSUCNodeID </p>
+<p>aka ZW_SetSUCNodeID </p>
 
 </div>
 </div>
@@ -3680,7 +3680,7 @@ SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></d
   </dd>
 </dl>
 <p>This takes effect for all virtual nodes, regardless of dstNode value.</p>
-<p>@zgw_name SerialAPI_ApplicationSlaveNodeInformation </p>
+<p>aka SerialAPI_ApplicationSlaveNodeInformation </p>
 
 </div>
 </div>
@@ -3721,10 +3721,10 @@ SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></d
   <table class="params">
     <tr><td class="paramname">node</td><td>NodeID of the virtual node to set to Learn Mode. Use 0 (zero) if new node is to be learned </td></tr>
     <tr><td class="paramname">mode</td><td>learn mode. One of:<ul>
-<li>VIRTUAL_NODE_LEARN_MODE_DISABLE Disable</li>
-<li>VIRTUAL_NODE_LEARN_MODE_ENABLE Enable</li>
-<li>VIRTUAL_NODE_LEARN_MODE_ADD Create New Virtual End Node</li>
-<li>VIRTUAL_NODE_LEARN_MODE_REMOVE Remove Virtual End Node </li>
+<li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga8e06af06a6d0a4282eeb8081d068ed59">VIRTUAL_END_NODE_LEARN_MODE_DISABLE</a> Disable</li>
+<li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga8a6cca9cb3eebd1da12dd65cb0ac6e34">VIRTUAL_END_NODE_LEARN_MODE_ENABLE</a> Enable</li>
+<li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga639ff160a8d59bd1237ac3e926102a69">VIRTUAL_END_NODE_LEARN_MODE_ADD</a> Create New Virtual End Node</li>
+<li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga908c55a5ec0b2aa73a0d65fb1ce78dc4">VIRTUAL_END_NODE_LEARN_MODE_REMOVE</a> Remove Virtual End Node </li>
 </ul>
 </td></tr>
     <tr><td class="paramname">learnFunc</td><td>callback function for the Node learn mode process </td></tr>
@@ -3739,7 +3739,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
 <li>If the received ID's are zero the stored ID's will be set to zero.</li>
 </ul>
 <p>The learnFunc is called when the received assign command has been handled. The newID parameter is the learned Node ID.</p>
-<p>@zgw_name ZW_SetSlaveLearnMode </p>
+<p>aka ZW_SetSlaveLearnMode </p>
 
 </div>
 </div>
@@ -3784,7 +3784,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<p>@zgw_name ZW_ControllerChange </p>
+<p>aka ZW_ControllerChange </p>
 
 </div>
 </div>
@@ -3793,7 +3793,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

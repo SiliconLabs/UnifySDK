@@ -19,6 +19,7 @@
 #include "zwave_controller_callbacks.h"
 #include "zwave_network_management.h"
 #include "zwave_unid.h"
+#include "zpc_node_state.h"
 
 // Contiki
 #include "process.h"
@@ -933,6 +934,7 @@ PROCESS_THREAD(ucl_network_management_process, ev, data)
     switch (ev) {
       case PROCESS_EVENT_INIT:
         ucl_network_management_init();
+        zpc_node_state_init();
         break;
 
       case PROCESS_EVENT_EXIT:

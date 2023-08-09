@@ -248,16 +248,21 @@ sl_status_t
         }
     }
 
-    std::stringstream payload("{\"value\":[");
+    std::stringstream payload;
+    payload << "{\"value\":[";
 
+    bool first = true;
     for(auto cluster_id : cluster_list)
-    {
+    {   
+        if(!first) payload << ",";
         std::string cluster_name = 
             uic_dotdot_get_cluster_name(cluster_id);
-        payload << "\"" << cluster_name << "\"" << ",";
-
+        payload << "\"" << cluster_name << "\"" ;
+        first = false;
     }
-
+  
+    
+    
     payload << "]}";
     
     uic_mqtt_publish(

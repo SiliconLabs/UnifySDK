@@ -2237,7 +2237,7 @@ zigpc_zcl_status_t zigpc_zclcmdparse_ias_zone_zone_enroll_request_command(
   data = &result->data.ias_zone_zone_enroll_request;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
-    arg_type = ZIGPC_ZCL_DATA_TYPE_ENUM16;
+    arg_type = ZIGPC_ZCL_DATA_TYPE_UINT16;
     arg_size = zigpc_zcl_get_data_type_size(arg_type);
     if (arg_size == 0) {
       // Unable to get size of parameter

@@ -48,7 +48,7 @@ class Measurements extends React.Component<MeasurementsProps, MeasurementsState>
                                                 <Card.Body>
                                                     <div className='col-sm-12'>
                                                         {attrs?.length && attrs.map((attr: string, indexAttr) => {
-                                                            return <div className="col-sm-6 inline" key={indexAttr}><b><i>{attr}: </i></b>{node.ep[ep].Measurements[cluster].Attributes[attr].Reported}</div>
+                                                            return <div className="col-sm-6 inline" key={indexAttr}><b><i>{attr}: </i></b>{JSON.stringify(node.ep[ep].Measurements[cluster].Attributes[attr].Reported)}</div>
                                                         })}
                                                     </div>
                                                 </Card.Body>
@@ -81,7 +81,7 @@ class Measurements extends React.Component<MeasurementsProps, MeasurementsState>
                                             <td className={`vertical-middle ${className}`}>{cluster}</td>
                                             <td className={`vertical-middle ${className}`}>
                                                 {node.ep[ep].Measurements[cluster].Attributes && Object.keys(node.ep[ep].Measurements[cluster].Attributes).map((attr: any, indexAttr: number) => {
-                                                    return <div key={`${index}-${indexEp}-${indexCl}-${indexAttr}`}><b><i>{attr}: </i></b>{node.ep[ep].Measurements[cluster].Attributes[attr].Reported}</div>
+                                                    return <div key={`${index}-${indexEp}-${indexCl}-${indexAttr}`}><b><i>{attr}: </i></b>{JSON.stringify(node.ep[ep].Measurements[cluster].Attributes[attr].Reported)}</div>
                                                 })}
                                             </td>
                                         </tr>
@@ -120,7 +120,7 @@ class Measurements extends React.Component<MeasurementsProps, MeasurementsState>
                             <Card.Body className={className}>
                                 <div className='col-sm-12'>
                                     {item.Attributes && Object.keys(item.Attributes).map((attr: any, indexCl: number) => {
-                                        return <div className="col-sm-6 inline" key={indexCl}><b><i>{attr}: </i></b>{item.Attributes[attr].Reported}</div>
+                                        return <div className="col-sm-6 inline" key={indexCl}><b><i>{attr}: </i></b>{JSON.stringify(item.Attributes[attr].Reported)}</div>
                                     })}
                                 </div>
                             </Card.Body>
@@ -143,7 +143,7 @@ class Measurements extends React.Component<MeasurementsProps, MeasurementsState>
                                     <td className={`vertical-middle ${className}`}><EditableAttribute Node={item.Node} EpName={item.Ep} Cluster={item.Node.ep[item.Ep].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={item.Node.NetworkStatus === "Offline" || item.Node.NetworkStatus === "Unavailable"} /></td>
                                     <td className={`vertical-middle ${className}`}>
                                         {item.Attributes && Object.keys(item.Attributes).map((attr: any, indexAttr: number) => {
-                                            return <div key={indexAttr}><b><i>{attr}: </i></b>{item.Attributes[attr].Reported}</div>
+                                            return <div key={indexAttr}><b><i>{attr}: </i></b>{JSON.stringify(item.Attributes[attr].Reported)}</div>
                                         })}
                                     </td>
                                 </tr>

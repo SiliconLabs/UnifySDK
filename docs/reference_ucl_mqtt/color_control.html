@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ ColorControl/CurrentHue Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentHue attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentHue/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/CurrentHue/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentHue/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_HUE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentHue/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_HUE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentHue/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_HUE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentHue/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_HUE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ ColorControl/CurrentSaturation Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentSaturation attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentSaturation/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/CurrentSaturation/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentSaturation/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_SATURATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentSaturation/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_SATURATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentSaturation/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_SATURATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentSaturation/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_SATURATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ ColorControl/RemainingTime Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RemainingTime attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/RemainingTime/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/RemainingTime/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/RemainingTime/Desired { &quot;value&quot;: &lt;DESIRED_REMAINING_TIME&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/RemainingTime/Reported { &quot;value&quot;: &lt;REPORTED_REMAINING_TIME&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/RemainingTime/Desired { &quot;value&quot;: &lt;DESIRED_REMAINING_TIME&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/RemainingTime/Reported { &quot;value&quot;: &lt;REPORTED_REMAINING_TIME&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ ColorControl/CurrentX Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentX attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentX/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/CurrentX/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentX/Desired { &quot;value&quot;: &lt;DESIRED_CURRENTX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentX/Reported { &quot;value&quot;: &lt;REPORTED_CURRENTX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentX/Desired { &quot;value&quot;: &lt;DESIRED_CURRENTX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentX/Reported { &quot;value&quot;: &lt;REPORTED_CURRENTX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ ColorControl/CurrentY Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentY attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentY/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/CurrentY/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentY/Desired { &quot;value&quot;: &lt;DESIRED_CURRENTY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CurrentY/Reported { &quot;value&quot;: &lt;REPORTED_CURRENTY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentY/Desired { &quot;value&quot;: &lt;DESIRED_CURRENTY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CurrentY/Reported { &quot;value&quot;: &lt;REPORTED_CURRENTY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ ColorControl/DriftCompensation Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DriftCompensation attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/DriftCompensation/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/DriftCompensation/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/DriftCompensation/Desired { &quot;value&quot;: &lt;DESIRED_DRIFT_COMPENSATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/DriftCompensation/Reported { &quot;value&quot;: &lt;REPORTED_DRIFT_COMPENSATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/DriftCompensation/Desired { &quot;value&quot;: &lt;DESIRED_DRIFT_COMPENSATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/DriftCompensation/Reported { &quot;value&quot;: &lt;REPORTED_DRIFT_COMPENSATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ ColorControl/CompensationText Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CompensationText attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CompensationText/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/CompensationText/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CompensationText/Desired { &quot;value&quot;: &lt;DESIRED_COMPENSATION_TEXT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CompensationText/Reported { &quot;value&quot;: &lt;REPORTED_COMPENSATION_TEXT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CompensationText/Desired { &quot;value&quot;: &lt;DESIRED_COMPENSATION_TEXT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CompensationText/Reported { &quot;value&quot;: &lt;REPORTED_COMPENSATION_TEXT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ ColorControl/ColorTemperatureMireds Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorTemperatureMireds attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTemperatureMireds/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorTemperatureMireds/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTemperatureMireds/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_TEMPERATURE_MIREDS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTemperatureMireds/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_TEMPERATURE_MIREDS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorTemperatureMireds/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_TEMPERATURE_MIREDS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorTemperatureMireds/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_TEMPERATURE_MIREDS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ ColorControl/ColorMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorMode/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorMode/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorMode/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorMode/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ ColorControl/Options Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Options attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Options/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Options/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Options/Desired { &quot;value&quot;: &lt;DESIRED_OPTIONS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Options/Reported { &quot;value&quot;: &lt;REPORTED_OPTIONS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Options/Desired { &quot;value&quot;: &lt;DESIRED_OPTIONS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Options/Reported { &quot;value&quot;: &lt;REPORTED_OPTIONS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ ColorControl/NumberOfPrimaries Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NumberOfPrimaries attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/NumberOfPrimaries/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/NumberOfPrimaries/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/NumberOfPrimaries/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_PRIMARIES&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/NumberOfPrimaries/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_PRIMARIES&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/NumberOfPrimaries/Desired { &quot;value&quot;: &lt;DESIRED_NUMBER_OF_PRIMARIES&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/NumberOfPrimaries/Reported { &quot;value&quot;: &lt;REPORTED_NUMBER_OF_PRIMARIES&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ ColorControl/Primary1X Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary1X attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1X/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary1X/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY1X&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY1X&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary1X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY1X&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary1X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY1X&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ ColorControl/Primary1Y Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary1Y attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1Y/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary1Y/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY1Y&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY1Y&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary1Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY1Y&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary1Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY1Y&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ ColorControl/Primary1Intensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary1Intensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1Intensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary1Intensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY1_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary1Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY1_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary1Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY1_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary1Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY1_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ ColorControl/Primary2X Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary2X attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2X/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary2X/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY2X&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY2X&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary2X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY2X&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary2X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY2X&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ ColorControl/Primary2Y Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary2Y attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2Y/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary2Y/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY2Y&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY2Y&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary2Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY2Y&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary2Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY2Y&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ ColorControl/Primary2Intensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary2Intensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2Intensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary2Intensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY2_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary2Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY2_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary2Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY2_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary2Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY2_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ ColorControl/Primary3X Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary3X attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3X/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary3X/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY3X&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY3X&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary3X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY3X&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary3X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY3X&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ ColorControl/Primary3Y Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary3Y attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3Y/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary3Y/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY3Y&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY3Y&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary3Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY3Y&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary3Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY3Y&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ ColorControl/Primary3Intensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary3Intensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3Intensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary3Intensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY3_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary3Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY3_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary3Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY3_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary3Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY3_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ ColorControl/Primary4X Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary4X attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4X/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary4X/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY4X&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY4X&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary4X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY4X&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary4X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY4X&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -705,10 +747,12 @@ ColorControl/Primary4Y Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary4Y attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4Y/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary4Y/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY4Y&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY4Y&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary4Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY4Y&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary4Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY4Y&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -733,10 +777,12 @@ ColorControl/Primary4Intensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary4Intensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4Intensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary4Intensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY4_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary4Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY4_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary4Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY4_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary4Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY4_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -761,10 +807,12 @@ ColorControl/Primary5X Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary5X attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5X/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary5X/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY5X&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY5X&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary5X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY5X&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary5X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY5X&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -789,10 +837,12 @@ ColorControl/Primary5Y Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary5Y attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5Y/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary5Y/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY5Y&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY5Y&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary5Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY5Y&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary5Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY5Y&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -817,10 +867,12 @@ ColorControl/Primary5Intensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary5Intensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5Intensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary5Intensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY5_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary5Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY5_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary5Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY5_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary5Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY5_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -845,10 +897,12 @@ ColorControl/Primary6X Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary6X attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6X/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary6X/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY6X&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY6X&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary6X/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY6X&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary6X/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY6X&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -873,10 +927,12 @@ ColorControl/Primary6Y Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary6Y attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6Y/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary6Y/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY6Y&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY6Y&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary6Y/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY6Y&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary6Y/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY6Y&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -901,10 +957,12 @@ ColorControl/Primary6Intensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Primary6Intensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6Intensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/Primary6Intensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY6_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/Primary6Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY6_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary6Intensity/Desired { &quot;value&quot;: &lt;DESIRED_PRIMARY6_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/Primary6Intensity/Reported { &quot;value&quot;: &lt;REPORTED_PRIMARY6_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -929,10 +987,12 @@ ColorControl/WhitePointX Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for WhitePointX attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/WhitePointX/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/WhitePointX/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/WhitePointX/Desired { &quot;value&quot;: &lt;DESIRED_WHITE_POINTX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/WhitePointX/Reported { &quot;value&quot;: &lt;REPORTED_WHITE_POINTX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/WhitePointX/Desired { &quot;value&quot;: &lt;DESIRED_WHITE_POINTX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/WhitePointX/Reported { &quot;value&quot;: &lt;REPORTED_WHITE_POINTX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -957,10 +1017,12 @@ ColorControl/WhitePointY Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for WhitePointY attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/WhitePointY/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/WhitePointY/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/WhitePointY/Desired { &quot;value&quot;: &lt;DESIRED_WHITE_POINTY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/WhitePointY/Reported { &quot;value&quot;: &lt;REPORTED_WHITE_POINTY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/WhitePointY/Desired { &quot;value&quot;: &lt;DESIRED_WHITE_POINTY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/WhitePointY/Reported { &quot;value&quot;: &lt;REPORTED_WHITE_POINTY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -985,10 +1047,12 @@ ColorControl/ColorPointRX Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointRX attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRX/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointRX/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRX/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTRX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRX/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTRX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointRX/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTRX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointRX/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTRX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1013,10 +1077,12 @@ ColorControl/ColorPointRY Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointRY attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRY/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointRY/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRY/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTRY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRY/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTRY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointRY/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTRY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointRY/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTRY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1041,10 +1107,12 @@ ColorControl/ColorPointRIntensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointRIntensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRIntensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointRIntensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRIntensity/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTR_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointRIntensity/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTR_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointRIntensity/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTR_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointRIntensity/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTR_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1069,10 +1137,12 @@ ColorControl/ColorPointGX Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointGX attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGX/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointGX/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGX/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTGX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGX/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTGX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointGX/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTGX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointGX/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTGX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1097,10 +1167,12 @@ ColorControl/ColorPointGY Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointGY attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGY/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointGY/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGY/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTGY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGY/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTGY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointGY/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTGY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointGY/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTGY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1125,10 +1197,12 @@ ColorControl/ColorPointGIntensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointGIntensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGIntensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointGIntensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGIntensity/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTG_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointGIntensity/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTG_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointGIntensity/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTG_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointGIntensity/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTG_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1153,10 +1227,12 @@ ColorControl/ColorPointBX Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointBX attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBX/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointBX/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBX/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTBX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBX/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTBX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointBX/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTBX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointBX/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTBX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1181,10 +1257,12 @@ ColorControl/ColorPointBY Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointBY attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBY/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointBY/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBY/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTBY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBY/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTBY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointBY/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTBY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointBY/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTBY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1209,10 +1287,12 @@ ColorControl/ColorPointBIntensity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorPointBIntensity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBIntensity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorPointBIntensity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBIntensity/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTB_INTENSITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorPointBIntensity/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTB_INTENSITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointBIntensity/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_POINTB_INTENSITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorPointBIntensity/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_POINTB_INTENSITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1237,10 +1317,12 @@ ColorControl/EnhancedCurrentHue Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EnhancedCurrentHue attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/EnhancedCurrentHue/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/EnhancedCurrentHue/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/EnhancedCurrentHue/Desired { &quot;value&quot;: &lt;DESIRED_ENHANCED_CURRENT_HUE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/EnhancedCurrentHue/Reported { &quot;value&quot;: &lt;REPORTED_ENHANCED_CURRENT_HUE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/EnhancedCurrentHue/Desired { &quot;value&quot;: &lt;DESIRED_ENHANCED_CURRENT_HUE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/EnhancedCurrentHue/Reported { &quot;value&quot;: &lt;REPORTED_ENHANCED_CURRENT_HUE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1265,10 +1347,12 @@ ColorControl/EnhancedColorMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EnhancedColorMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/EnhancedColorMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/EnhancedColorMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/EnhancedColorMode/Desired { &quot;value&quot;: &lt;DESIRED_ENHANCED_COLOR_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/EnhancedColorMode/Reported { &quot;value&quot;: &lt;REPORTED_ENHANCED_COLOR_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/EnhancedColorMode/Desired { &quot;value&quot;: &lt;DESIRED_ENHANCED_COLOR_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/EnhancedColorMode/Reported { &quot;value&quot;: &lt;REPORTED_ENHANCED_COLOR_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1293,10 +1377,12 @@ ColorControl/ColorLoopActive Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorLoopActive attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopActive/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopActive/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopActive/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_ACTIVE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopActive/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_ACTIVE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopActive/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_ACTIVE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopActive/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_ACTIVE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1321,10 +1407,12 @@ ColorControl/ColorLoopDirection Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorLoopDirection attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopDirection/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopDirection/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopDirection/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_DIRECTION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopDirection/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_DIRECTION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopDirection/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_DIRECTION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopDirection/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_DIRECTION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1349,10 +1437,12 @@ ColorControl/ColorLoopTime Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorLoopTime attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopTime/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopTime/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopTime/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_TIME&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopTime/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_TIME&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopTime/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_TIME&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopTime/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_TIME&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1377,10 +1467,12 @@ ColorControl/ColorLoopStartEnhancedHue Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorLoopStartEnhancedHue attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopStartEnhancedHue/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopStartEnhancedHue/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopStartEnhancedHue/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_START_ENHANCED_HUE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopStartEnhancedHue/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_START_ENHANCED_HUE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopStartEnhancedHue/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_START_ENHANCED_HUE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopStartEnhancedHue/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_START_ENHANCED_HUE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1405,10 +1497,12 @@ ColorControl/ColorLoopStoredEnhancedHue Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorLoopStoredEnhancedHue attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopStoredEnhancedHue/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopStoredEnhancedHue/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_STORED_ENHANCED_HUE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_STORED_ENHANCED_HUE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_LOOP_STORED_ENHANCED_HUE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_LOOP_STORED_ENHANCED_HUE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1433,10 +1527,12 @@ ColorControl/ColorCapabilities Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorCapabilities attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorCapabilities/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorCapabilities/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorCapabilities/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_CAPABILITIES&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorCapabilities/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_CAPABILITIES&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorCapabilities/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_CAPABILITIES&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorCapabilities/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_CAPABILITIES&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1461,10 +1557,12 @@ ColorControl/ColorTempPhysicalMinMireds Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorTempPhysicalMinMireds attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTempPhysicalMinMireds/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorTempPhysicalMinMireds/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTempPhysicalMinMireds/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_TEMP_PHYSICAL_MIN_MIREDS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTempPhysicalMinMireds/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_TEMP_PHYSICAL_MIN_MIREDS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorTempPhysicalMinMireds/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_TEMP_PHYSICAL_MIN_MIREDS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorTempPhysicalMinMireds/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_TEMP_PHYSICAL_MIN_MIREDS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1489,10 +1587,12 @@ ColorControl/ColorTempPhysicalMaxMireds Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ColorTempPhysicalMaxMireds attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTempPhysicalMaxMireds/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/ColorTempPhysicalMaxMireds/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_TEMP_PHYSICAL_MAX_MIREDS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_TEMP_PHYSICAL_MAX_MIREDS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Desired { &quot;value&quot;: &lt;DESIRED_COLOR_TEMP_PHYSICAL_MAX_MIREDS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Reported { &quot;value&quot;: &lt;REPORTED_COLOR_TEMP_PHYSICAL_MAX_MIREDS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1517,10 +1617,12 @@ ColorControl/CoupleColorTempToLevelMinMireds Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CoupleColorTempToLevelMinMireds attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Desired { &quot;value&quot;: &lt;DESIRED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Reported { &quot;value&quot;: &lt;REPORTED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Desired { &quot;value&quot;: &lt;DESIRED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Reported { &quot;value&quot;: &lt;REPORTED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1545,10 +1647,12 @@ ColorControl/StartUpColorTemperatureMireds Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for StartUpColorTemperatureMireds attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/StartUpColorTemperatureMireds/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ColorControl/Attributes/StartUpColorTemperatureMireds/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/StartUpColorTemperatureMireds/Desired { &quot;value&quot;: &lt;DESIRED_START_UP_COLOR_TEMPERATURE_MIREDS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Attributes/StartUpColorTemperatureMireds/Reported { &quot;value&quot;: &lt;REPORTED_START_UP_COLOR_TEMPERATURE_MIREDS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/StartUpColorTemperatureMireds/Desired { &quot;value&quot;: &lt;DESIRED_START_UP_COLOR_TEMPERATURE_MIREDS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ColorControl/Attributes/StartUpColorTemperatureMireds/Reported { &quot;value&quot;: &lt;REPORTED_START_UP_COLOR_TEMPERATURE_MIREDS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2502,7 +2606,7 @@ ColorControl/WriteAttributes Command</h2>
 <p>To update all ColorControl attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ColorControl/Commands/WriteAttributes&#39; -m  &#39;{ &quot;Options&quot;: &lt;OPTIONS_VALUE&gt; ,&quot;WhitePointX&quot;: &lt;WHITE_POINTX_VALUE&gt; ,&quot;WhitePointY&quot;: &lt;WHITE_POINTY_VALUE&gt; ,&quot;ColorPointRX&quot;: &lt;COLOR_POINTRX_VALUE&gt; ,&quot;ColorPointRY&quot;: &lt;COLOR_POINTRY_VALUE&gt; ,&quot;ColorPointRIntensity&quot;: &lt;COLOR_POINTR_INTENSITY_VALUE&gt; ,&quot;ColorPointGX&quot;: &lt;COLOR_POINTGX_VALUE&gt; ,&quot;ColorPointGY&quot;: &lt;COLOR_POINTGY_VALUE&gt; ,&quot;ColorPointGIntensity&quot;: &lt;COLOR_POINTG_INTENSITY_VALUE&gt; ,&quot;ColorPointBX&quot;: &lt;COLOR_POINTBX_VALUE&gt; ,&quot;ColorPointBY&quot;: &lt;COLOR_POINTBY_VALUE&gt; ,&quot;ColorPointBIntensity&quot;: &lt;COLOR_POINTB_INTENSITY_VALUE&gt; ,&quot;StartUpColorTemperatureMireds&quot;: &lt;START_UP_COLOR_TEMPERATURE_MIREDS_VALUE&gt;  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -2597,7 +2701,7 @@ ColorControl/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

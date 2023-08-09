@@ -1,8 +1,8 @@
 //This file is generated automatically. Don't try to change something here.
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
     Basic: {
@@ -376,8 +376,8 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "GeneralHardwareFault", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "GeneralSoftwareFault", mask: 0x02, type: "boolean", offset: 1 }
+                { name: "GeneralHardwareFault", mask: 1, type: "boolean", offset: 0 },
+								{ name: "GeneralSoftwareFault", mask: 2, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -391,8 +391,8 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "DisableResetToFactoryDefaults", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "DisableDeviceConfiguration", mask: 0x02, type: "boolean", offset: 1 }
+                { name: "DisableResetToFactoryDefaults", mask: 1, type: "boolean", offset: 0 },
+								{ name: "DisableDeviceConfiguration", mask: 2, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -454,9 +454,9 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: NaN,
               bitmap: [
-                { name: "MainsVoltageTooLow", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "MainsVoltageTooHigh", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "MainsPowerSupplyLost", mask: 0x04, type: "boolean", offset: 2 }
+                { name: "MainsVoltageTooLow", mask: 1, type: "boolean", offset: 0 },
+								{ name: "MainsVoltageTooHigh", mask: 2, type: "boolean", offset: 1 },
+								{ name: "MainsPowerSupplyLost", mask: 4, type: "boolean", offset: 2 }
               ]
             },
             {                
@@ -596,10 +596,10 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "BatteryVoltageTooLow", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "BatteryAlarm1", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "BatteryAlarm2", mask: 0x04, type: "boolean", offset: 2 },
-								{ name: "BatteryAlarm3", mask: 0x08, type: "boolean", offset: 3 }
+                { name: "BatteryVoltageTooLow", mask: 1, type: "boolean", offset: 0 },
+								{ name: "BatteryAlarm1", mask: 2, type: "boolean", offset: 1 },
+								{ name: "BatteryAlarm2", mask: 4, type: "boolean", offset: 2 },
+								{ name: "BatteryAlarm3", mask: 8, type: "boolean", offset: 3 }
               ]
             },
             {                
@@ -709,19 +709,19 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "Battery1MinThreshold", mask: 0x00000001, type: "boolean", offset: 0 },
-								{ name: "Battery1Threshold1", mask: 0x00000002, type: "boolean", offset: 1 },
-								{ name: "Battery1Threshold2", mask: 0x00000004, type: "boolean", offset: 2 },
-								{ name: "Battery1Threshold3", mask: 0x00000008, type: "boolean", offset: 3 },
-								{ name: "Battery2MinThreshold", mask: 0x00000400, type: "boolean", offset: 10 },
-								{ name: "Battery2Threshold1", mask: 0x00000800, type: "boolean", offset: 11 },
-								{ name: "Battery2Threshold2", mask: 0x00001000, type: "boolean", offset: 12 },
-								{ name: "Battery2Threshold3", mask: 0x00002000, type: "boolean", offset: 13 },
-								{ name: "Battery3MinThreshold", mask: 0x00100000, type: "boolean", offset: 20 },
-								{ name: "Battery3Threshold1", mask: 0x00200000, type: "boolean", offset: 21 },
-								{ name: "Battery3Threshold2", mask: 0x00400000, type: "boolean", offset: 22 },
-								{ name: "Battery3Threshold3", mask: 0x00800000, type: "boolean", offset: 23 },
-								{ name: "MainsPowerSupplyLost", mask: 0x40000000, type: "boolean", offset: 30 }
+                { name: "Battery1MinThreshold", mask: 1, type: "boolean", offset: 0 },
+								{ name: "Battery1Threshold1", mask: 2, type: "boolean", offset: 1 },
+								{ name: "Battery1Threshold2", mask: 4, type: "boolean", offset: 2 },
+								{ name: "Battery1Threshold3", mask: 8, type: "boolean", offset: 3 },
+								{ name: "Battery2MinThreshold", mask: 1024, type: "boolean", offset: 10 },
+								{ name: "Battery2Threshold1", mask: 2048, type: "boolean", offset: 11 },
+								{ name: "Battery2Threshold2", mask: 4096, type: "boolean", offset: 12 },
+								{ name: "Battery2Threshold3", mask: 8192, type: "boolean", offset: 13 },
+								{ name: "Battery3MinThreshold", mask: 1048576, type: "boolean", offset: 20 },
+								{ name: "Battery3Threshold1", mask: 2097152, type: "boolean", offset: 21 },
+								{ name: "Battery3Threshold2", mask: 4194304, type: "boolean", offset: 22 },
+								{ name: "Battery3Threshold3", mask: 8388608, type: "boolean", offset: 23 },
+								{ name: "MainsPowerSupplyLost", mask: 1073741824, type: "boolean", offset: 30 }
               ]
             },
             {                
@@ -1314,7 +1314,7 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SceneNamesSupported", mask: 0x80, type: "boolean", offset: 7 }
+                { name: "SceneNamesSupported", mask: 128, type: "boolean", offset: 7 }
               ]
             },
             {                
@@ -2958,7 +2958,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "CopyAllScenes",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -3289,7 +3289,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "AcceptOnlyWhenOn",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -3404,8 +3404,8 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "ExecuteIfOff", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "CoupleColorTempToLevel", mask: 0x02, type: "boolean", offset: 1 }
+                { name: "ExecuteIfOff", mask: 1, type: "boolean", offset: 0 },
+								{ name: "CoupleColorTempToLevel", mask: 2, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -3501,13 +3501,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3520,13 +3520,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3566,13 +3566,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3585,13 +3585,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3636,13 +3636,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3655,13 +3655,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3681,13 +3681,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3700,13 +3700,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3736,13 +3736,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3755,13 +3755,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3801,13 +3801,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3820,13 +3820,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3871,13 +3871,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3890,13 +3890,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3916,13 +3916,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -3935,13 +3935,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "CoupleColorTempToLevel",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -4269,11 +4269,11 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 1,
               bitmap: [
-                { name: "NormalModeSupported", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "VacationModeSupported", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "PrivacyModeSupported", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "NoRFLockOrUnlockModeSupported", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "PassageModeSupported", mask: 0x0010, type: "boolean", offset: 4 }
+                { name: "NormalModeSupported", mask: 1, type: "boolean", offset: 0 },
+								{ name: "VacationModeSupported", mask: 2, type: "boolean", offset: 1 },
+								{ name: "PrivacyModeSupported", mask: 4, type: "boolean", offset: 2 },
+								{ name: "NoRFLockOrUnlockModeSupported", mask: 8, type: "boolean", offset: 3 },
+								{ name: "PassageModeSupported", mask: 16, type: "boolean", offset: 4 }
               ]
             },
             {                
@@ -4287,12 +4287,12 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "DefaultEnableLocalProgrammingAttributeIsEnabled", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "DefaultKeypadInterfaceIsEnabled", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "DefaultRFInterfaceIsEnabled", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "DefaultSoundVolumeIsEnabled", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "DefaultAutoRelockTimeIsEnabled", mask: 0x0040, type: "boolean", offset: 6 },
-								{ name: "DefaultLEDSettingsIsEnabled", mask: 0x0080, type: "boolean", offset: 7 }
+                { name: "DefaultEnableLocalProgrammingAttributeIsEnabled", mask: 1, type: "boolean", offset: 0 },
+								{ name: "DefaultKeypadInterfaceIsEnabled", mask: 2, type: "boolean", offset: 1 },
+								{ name: "DefaultRFInterfaceIsEnabled", mask: 4, type: "boolean", offset: 2 },
+								{ name: "DefaultSoundVolumeIsEnabled", mask: 32, type: "boolean", offset: 5 },
+								{ name: "DefaultAutoRelockTimeIsEnabled", mask: 64, type: "boolean", offset: 6 },
+								{ name: "DefaultLEDSettingsIsEnabled", mask: 128, type: "boolean", offset: 7 }
               ]
             },
             {                
@@ -4409,12 +4409,12 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "DeadboltJammed", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "LockResetToFactoryDefaults", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "RFPowerModuleCycled", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "TamperAlarmWrongCodeEntryLimit", mask: 0x0010, type: "boolean", offset: 4 },
-								{ name: "TamperAlarmFrontEscutcheonRemovedFromMain", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "ForcedDoorOpenUnderDoorLockedCondition", mask: 0x0040, type: "boolean", offset: 6 }
+                { name: "DeadboltJammed", mask: 1, type: "boolean", offset: 0 },
+								{ name: "LockResetToFactoryDefaults", mask: 2, type: "boolean", offset: 1 },
+								{ name: "RFPowerModuleCycled", mask: 8, type: "boolean", offset: 3 },
+								{ name: "TamperAlarmWrongCodeEntryLimit", mask: 16, type: "boolean", offset: 4 },
+								{ name: "TamperAlarmFrontEscutcheonRemovedFromMain", mask: 32, type: "boolean", offset: 5 },
+								{ name: "ForcedDoorOpenUnderDoorLockedCondition", mask: 64, type: "boolean", offset: 6 }
               ]
             },
             {                
@@ -4428,14 +4428,14 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "KeypadOpUnknownOrMS", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "KeypadOpLock", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "KeypadOpUnlock", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "KeypadOpLockErrorInvalidPIN", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "KeypadOpLockErrorInvalidSchedule", mask: 0x0010, type: "boolean", offset: 4 },
-								{ name: "KeypadOpUnlockInvalidPIN", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "KeypadOpUnlockInvalidSchedule", mask: 0x0040, type: "boolean", offset: 6 },
-								{ name: "KeypadOpNonAccessUser", mask: 0x0080, type: "boolean", offset: 7 }
+                { name: "KeypadOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
+								{ name: "KeypadOpLock", mask: 2, type: "boolean", offset: 1 },
+								{ name: "KeypadOpUnlock", mask: 4, type: "boolean", offset: 2 },
+								{ name: "KeypadOpLockErrorInvalidPIN", mask: 8, type: "boolean", offset: 3 },
+								{ name: "KeypadOpLockErrorInvalidSchedule", mask: 16, type: "boolean", offset: 4 },
+								{ name: "KeypadOpUnlockInvalidPIN", mask: 32, type: "boolean", offset: 5 },
+								{ name: "KeypadOpUnlockInvalidSchedule", mask: 64, type: "boolean", offset: 6 },
+								{ name: "KeypadOpNonAccessUser", mask: 128, type: "boolean", offset: 7 }
               ]
             },
             {                
@@ -4449,13 +4449,13 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "RFOpUnknownOrMS", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "RFOpLock", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "RFOpUnlock", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "RFOpLockErrorInvalidCode", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "RFOpLockErrorInvalidSchedule", mask: 0x0010, type: "boolean", offset: 4 },
-								{ name: "RFOpUnlockInvalidCode", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "RFOpUnlockInvalidSchedule", mask: 0x0040, type: "boolean", offset: 6 }
+                { name: "RFOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
+								{ name: "RFOpLock", mask: 2, type: "boolean", offset: 1 },
+								{ name: "RFOpUnlock", mask: 4, type: "boolean", offset: 2 },
+								{ name: "RFOpLockErrorInvalidCode", mask: 8, type: "boolean", offset: 3 },
+								{ name: "RFOpLockErrorInvalidSchedule", mask: 16, type: "boolean", offset: 4 },
+								{ name: "RFOpUnlockInvalidCode", mask: 32, type: "boolean", offset: 5 },
+								{ name: "RFOpUnlockInvalidSchedule", mask: 64, type: "boolean", offset: 6 }
               ]
             },
             {                
@@ -4469,17 +4469,17 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "ManualOpUnknownOrMS", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "ManualOpThumbturnLock", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "ManualOpThumbturnUnlock", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "ManualOpOneTouchLock", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "ManualOpKeyLock", mask: 0x0010, type: "boolean", offset: 4 },
-								{ name: "ManualOpKeyUnlock", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "ManualOpAutoLock", mask: 0x0040, type: "boolean", offset: 6 },
-								{ name: "ManualOpScheduleLock", mask: 0x0080, type: "boolean", offset: 7 },
-								{ name: "ManualOpScheduleUnlock", mask: 0x0100, type: "boolean", offset: 8 },
-								{ name: "ManualOpLock", mask: 0x0200, type: "boolean", offset: 9 },
-								{ name: "ManualOpUnlock", mask: 0x0400, type: "boolean", offset: 10 }
+                { name: "ManualOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
+								{ name: "ManualOpThumbturnLock", mask: 2, type: "boolean", offset: 1 },
+								{ name: "ManualOpThumbturnUnlock", mask: 4, type: "boolean", offset: 2 },
+								{ name: "ManualOpOneTouchLock", mask: 8, type: "boolean", offset: 3 },
+								{ name: "ManualOpKeyLock", mask: 16, type: "boolean", offset: 4 },
+								{ name: "ManualOpKeyUnlock", mask: 32, type: "boolean", offset: 5 },
+								{ name: "ManualOpAutoLock", mask: 64, type: "boolean", offset: 6 },
+								{ name: "ManualOpScheduleLock", mask: 128, type: "boolean", offset: 7 },
+								{ name: "ManualOpScheduleUnlock", mask: 256, type: "boolean", offset: 8 },
+								{ name: "ManualOpLock", mask: 512, type: "boolean", offset: 9 },
+								{ name: "ManualOpUnlock", mask: 1024, type: "boolean", offset: 10 }
               ]
             },
             {                
@@ -4493,13 +4493,13 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "RFIDOpUnknownOrMS", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "RFIDOpLock", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "RFIDOpUnlock", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "RFIDOpLockErrorInvalidRFID", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "RFIDOpLockErrorInvalidSchedule", mask: 0x0010, type: "boolean", offset: 4 },
-								{ name: "RFIDOpUnlockErrorInvalidRFID", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "RFIDOpUnlockErrorInvalidSchedule", mask: 0x0040, type: "boolean", offset: 6 }
+                { name: "RFIDOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
+								{ name: "RFIDOpLock", mask: 2, type: "boolean", offset: 1 },
+								{ name: "RFIDOpUnlock", mask: 4, type: "boolean", offset: 2 },
+								{ name: "RFIDOpLockErrorInvalidRFID", mask: 8, type: "boolean", offset: 3 },
+								{ name: "RFIDOpLockErrorInvalidSchedule", mask: 16, type: "boolean", offset: 4 },
+								{ name: "RFIDOpUnlockErrorInvalidRFID", mask: 32, type: "boolean", offset: 5 },
+								{ name: "RFIDOpUnlockErrorInvalidSchedule", mask: 64, type: "boolean", offset: 6 }
               ]
             },
             {                
@@ -4513,11 +4513,11 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "KeypadProgUnknownOrMS", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "KeypadProgMasterCodeChanged", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "KeypadProgPINAdded", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "KeypadProgPINDeleted", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "KeypadProgPINChanged", mask: 0x0010, type: "boolean", offset: 4 }
+                { name: "KeypadProgUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
+								{ name: "KeypadProgMasterCodeChanged", mask: 2, type: "boolean", offset: 1 },
+								{ name: "KeypadProgPINAdded", mask: 4, type: "boolean", offset: 2 },
+								{ name: "KeypadProgPINDeleted", mask: 8, type: "boolean", offset: 3 },
+								{ name: "KeypadProgPINChanged", mask: 16, type: "boolean", offset: 4 }
               ]
             },
             {                
@@ -4531,12 +4531,12 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "RFProgUnknownOrMS", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "RFProgPINAdded", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "RFProgPINDeleted", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "RFProgPINChanged", mask: 0x0010, type: "boolean", offset: 4 },
-								{ name: "RFProgRFIDAdded", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "RFProgRFIDDeleted", mask: 0x0040, type: "boolean", offset: 6 }
+                { name: "RFProgUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
+								{ name: "RFProgPINAdded", mask: 4, type: "boolean", offset: 2 },
+								{ name: "RFProgPINDeleted", mask: 8, type: "boolean", offset: 3 },
+								{ name: "RFProgPINChanged", mask: 16, type: "boolean", offset: 4 },
+								{ name: "RFProgRFIDAdded", mask: 32, type: "boolean", offset: 5 },
+								{ name: "RFProgRFIDDeleted", mask: 64, type: "boolean", offset: 6 }
               ]
             },
             {                
@@ -4550,9 +4550,9 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "RFIDProgUnknownOrMS", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "RFIDProgRFIDAdded", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "RFIDProgRFIDDeleted", mask: 0x0040, type: "boolean", offset: 6 }
+                { name: "RFIDProgUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
+								{ name: "RFIDProgRFIDAdded", mask: 32, type: "boolean", offset: 5 },
+								{ name: "RFIDProgRFIDDeleted", mask: 64, type: "boolean", offset: 6 }
               ]
             }
         ],
@@ -5323,10 +5323,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserStatus",
@@ -5418,10 +5416,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -5503,10 +5499,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -5568,10 +5562,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserStatus",
@@ -5619,10 +5611,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -5668,17 +5658,13 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "ScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "DaysMask",
@@ -5687,49 +5673,49 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Sun",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Mon",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             },
                             {
                               name: "Tue",
-                              mask: 0x04,
+                              mask: 4,
                               type: "boolean",
                               offset: 2,
                             },
                             {
                               name: "Wed",
-                              mask: 0x08,
+                              mask: 8,
                               type: "boolean",
                               offset: 3,
                             },
                             {
                               name: "Thu",
-                              mask: 0x10,
+                              mask: 16,
                               type: "boolean",
                               offset: 4,
                             },
                             {
                               name: "Fri",
-                              mask: 0x20,
+                              mask: 32,
                               type: "boolean",
                               offset: 5,
                             },
                             {
                               name: "Sat",
-                              mask: 0x40,
+                              mask: 64,
                               type: "boolean",
                               offset: 6,
                             },
                             {
                               name: "Enable",
-                              mask: 0x80,
+                              mask: 128,
                               type: "boolean",
                               offset: 7,
                             }
@@ -5786,17 +5772,13 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "ScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -5969,49 +5951,49 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Sun",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Mon",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             },
                             {
                               name: "Tue",
-                              mask: 0x04,
+                              mask: 4,
                               type: "boolean",
                               offset: 2,
                             },
                             {
                               name: "Wed",
-                              mask: 0x08,
+                              mask: 8,
                               type: "boolean",
                               offset: 3,
                             },
                             {
                               name: "Thu",
-                              mask: 0x10,
+                              mask: 16,
                               type: "boolean",
                               offset: 4,
                             },
                             {
                               name: "Fri",
-                              mask: 0x20,
+                              mask: 32,
                               type: "boolean",
                               offset: 5,
                             },
                             {
                               name: "Sat",
-                              mask: 0x40,
+                              mask: 64,
                               type: "boolean",
                               offset: 6,
                             },
                             {
                               name: "Enable",
-                              mask: 0x80,
+                              mask: 128,
                               type: "boolean",
                               offset: 7,
                             }
@@ -6046,17 +6028,13 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "ScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -6089,17 +6067,13 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "ScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "LocalStartTime",
@@ -6142,17 +6116,13 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "ScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -6337,17 +6307,13 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "ScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -6380,10 +6346,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "HolidayScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "LocalStartTime",
@@ -6453,10 +6417,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "HolidayScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -6663,10 +6625,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "HolidayScheduleID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -6699,10 +6659,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserType",
@@ -6766,10 +6724,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -6823,10 +6779,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "UserStatus",
@@ -6918,10 +6872,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -7003,10 +6955,8 @@ export let ClusterTypeAttrs: any = {
               fields: [
                   {
                     name: "UserID",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   }
               ]              
             },
@@ -7431,13 +7381,13 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 3,
               bitmap: [
-                { name: "Operational", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "Online", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "OpenAndUpCommandsReversed", mask: 0x04, type: "boolean", offset: 2 },
-								{ name: "LiftClosedLoop", mask: 0x08, type: "boolean", offset: 3 },
-								{ name: "TiltClosedLoop", mask: 0x10, type: "boolean", offset: 4 },
-								{ name: "LiftEncoderControlled", mask: 0x20, type: "boolean", offset: 5 },
-								{ name: "TiltEncoderControlled", mask: 0x40, type: "boolean", offset: 6 }
+                { name: "Operational", mask: 1, type: "boolean", offset: 0 },
+								{ name: "Online", mask: 2, type: "boolean", offset: 1 },
+								{ name: "OpenAndUpCommandsReversed", mask: 4, type: "boolean", offset: 2 },
+								{ name: "LiftClosedLoop", mask: 8, type: "boolean", offset: 3 },
+								{ name: "TiltClosedLoop", mask: 16, type: "boolean", offset: 4 },
+								{ name: "LiftEncoderControlled", mask: 32, type: "boolean", offset: 5 },
+								{ name: "TiltEncoderControlled", mask: 64, type: "boolean", offset: 6 }
               ]
             },
             {                
@@ -7552,10 +7502,10 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 4,
               bitmap: [
-                { name: "MotorDirectionReversed", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "CalibrationMode", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "MaintenanceMode", mask: 0x04, type: "boolean", offset: 2 },
-								{ name: "LEDFeedback", mask: 0x08, type: "boolean", offset: 3 }
+                { name: "MotorDirectionReversed", mask: 1, type: "boolean", offset: 0 },
+								{ name: "CalibrationMode", mask: 2, type: "boolean", offset: 1 },
+								{ name: "MaintenanceMode", mask: 4, type: "boolean", offset: 2 },
+								{ name: "LEDFeedback", mask: 8, type: "boolean", offset: 3 }
               ]
             },
             {                
@@ -7682,10 +7632,10 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "RemoteLockout", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "TamperDetected", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "FailedCommunication", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "PositionFailure", mask: 0x0008, type: "boolean", offset: 3 }
+                { name: "RemoteLockout", mask: 1, type: "boolean", offset: 0 },
+								{ name: "TamperDetected", mask: 2, type: "boolean", offset: 1 },
+								{ name: "FailedCommunication", mask: 4, type: "boolean", offset: 2 },
+								{ name: "PositionFailure", mask: 8, type: "boolean", offset: 3 }
               ]
             },
             {                
@@ -7698,7 +7648,7 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "PartialBarrier", mask: 0x01, type: "boolean", offset: 0 }
+                { name: "PartialBarrier", mask: 1, type: "boolean", offset: 0 }
               ]
             },
             {                
@@ -7838,7 +7788,7 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "Occupied", mask: 0x01, type: "boolean", offset: 0 }
+                { name: "Occupied", mask: 1, type: "boolean", offset: 0 }
               ]
             },
             {                
@@ -7926,18 +7876,18 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "CoolingSystemStage", mask: 0x03, type: "enum", offset: 0, enum: 
+                { name: "CoolingSystemStage", mask: 3, type: "enum", offset: 0, enum: 
 									[ { name: "CoolStage1", value: 0},
 								{ name: "CoolStage2", value: 1},
 								{ name: "CoolStage3", value: 2} ] },
-								{ name: "HeatingSystemStage", mask: 0x0C, type: "enum", offset: 2, enum: 
+								{ name: "HeatingSystemStage", mask: 12, type: "enum", offset: 2, enum: 
 									[ { name: "HeatStage1", value: 0},
 								{ name: "HeatStage2", value: 1},
 								{ name: "HeatStage3", value: 2} ] },
-								{ name: "HeatingSystemType", mask: 0x10, type: "enum", offset: 4, enum: 
+								{ name: "HeatingSystemType", mask: 16, type: "enum", offset: 4, enum: 
 									[ { name: "Conventional", value: 0},
 								{ name: "HeatPump", value: 1} ] },
-								{ name: "HeatingFuelSource", mask: 0x20, type: "enum", offset: 5, enum: 
+								{ name: "HeatingFuelSource", mask: 32, type: "enum", offset: 5, enum: 
 									[ { name: "ElectricOrB", value: 0},
 								{ name: "GasOrO", value: 1} ] }
               ]
@@ -8075,9 +8025,9 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "LocalTemperatureRemote", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "OutdoorTemperatureRemote", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "OccupancyRemote", mask: 0x04, type: "boolean", offset: 2 }
+                { name: "LocalTemperatureRemote", mask: 1, type: "boolean", offset: 0 },
+								{ name: "OutdoorTemperatureRemote", mask: 2, type: "boolean", offset: 1 },
+								{ name: "OccupancyRemote", mask: 4, type: "boolean", offset: 2 }
               ]
             },
             {                
@@ -8132,9 +8082,9 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "InitializationFailure", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "HardwareFailure", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "SelfCalibrationFailure", mask: 0x04, type: "boolean", offset: 2 }
+                { name: "InitializationFailure", mask: 1, type: "boolean", offset: 0 },
+								{ name: "HardwareFailure", mask: 2, type: "boolean", offset: 1 },
+								{ name: "SelfCalibrationFailure", mask: 4, type: "boolean", offset: 2 }
               ]
             },
             {                
@@ -8233,11 +8183,11 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "ProgrammingMode", mask: 0x01, type: "enum", offset: 0, enum: 
+                { name: "ProgrammingMode", mask: 1, type: "enum", offset: 0, enum: 
 									[ { name: "SimpleOrSetpoint", value: 0},
 								{ name: "Schedule", value: 1} ] },
-								{ name: "AutoOrRecovery", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "EconomyOrEnergyStar", mask: 0x04, type: "boolean", offset: 2 }
+								{ name: "AutoOrRecovery", mask: 2, type: "boolean", offset: 1 },
+								{ name: "EconomyOrEnergyStar", mask: 4, type: "boolean", offset: 2 }
               ]
             },
             {                
@@ -8250,13 +8200,13 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "HeatOn", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "CoolOn", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "FanOn", mask: 0x04, type: "boolean", offset: 2 },
-								{ name: "HeatSecondStageOn", mask: 0x08, type: "boolean", offset: 3 },
-								{ name: "CoolSecondStageOn", mask: 0x10, type: "boolean", offset: 4 },
-								{ name: "FanSecondStageOn", mask: 0x20, type: "boolean", offset: 5 },
-								{ name: "FanThirdStageOn", mask: 0x40, type: "boolean", offset: 6 }
+                { name: "HeatOn", mask: 1, type: "boolean", offset: 0 },
+								{ name: "CoolOn", mask: 2, type: "boolean", offset: 1 },
+								{ name: "FanOn", mask: 4, type: "boolean", offset: 2 },
+								{ name: "HeatSecondStageOn", mask: 8, type: "boolean", offset: 3 },
+								{ name: "CoolSecondStageOn", mask: 16, type: "boolean", offset: 4 },
+								{ name: "FanSecondStageOn", mask: 32, type: "boolean", offset: 5 },
+								{ name: "FanThirdStageOn", mask: 64, type: "boolean", offset: 6 }
               ]
             },
             {                
@@ -8448,11 +8398,11 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "CompressorFailureOrRefrigerantLeakage", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "RoomTemperatureSensorFailure", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "OutdoorTemperatureSensorFailure", mask: 0x04, type: "boolean", offset: 2 },
-								{ name: "IndoorCoilTemperatureSensorFailure", mask: 0x08, type: "boolean", offset: 3 },
-								{ name: "FanFailure", mask: 0x10, type: "boolean", offset: 4 }
+                { name: "CompressorFailureOrRefrigerantLeakage", mask: 1, type: "boolean", offset: 0 },
+								{ name: "RoomTemperatureSensorFailure", mask: 2, type: "boolean", offset: 1 },
+								{ name: "OutdoorTemperatureSensorFailure", mask: 4, type: "boolean", offset: 2 },
+								{ name: "IndoorCoilTemperatureSensorFailure", mask: 8, type: "boolean", offset: 3 },
+								{ name: "FanFailure", mask: 16, type: "boolean", offset: 4 }
               ]
             },
             {                
@@ -8551,49 +8501,49 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Sunday",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Monday",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             },
                             {
                               name: "Tuesday",
-                              mask: 0x04,
+                              mask: 4,
                               type: "boolean",
                               offset: 2,
                             },
                             {
                               name: "Wednesday",
-                              mask: 0x08,
+                              mask: 8,
                               type: "boolean",
                               offset: 3,
                             },
                             {
                               name: "Thursday",
-                              mask: 0x10,
+                              mask: 16,
                               type: "boolean",
                               offset: 4,
                             },
                             {
                               name: "Friday",
-                              mask: 0x20,
+                              mask: 32,
                               type: "boolean",
                               offset: 5,
                             },
                             {
                               name: "Saturday",
-                              mask: 0x40,
+                              mask: 64,
                               type: "boolean",
                               offset: 6,
                             },
                             {
                               name: "AwayOrVacation",
-                              mask: 0x80,
+                              mask: 128,
                               type: "boolean",
                               offset: 7,
                             }
@@ -8606,13 +8556,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Heat",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Cool",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -8661,49 +8611,49 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Sunday",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Monday",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             },
                             {
                               name: "Tuesday",
-                              mask: 0x04,
+                              mask: 4,
                               type: "boolean",
                               offset: 2,
                             },
                             {
                               name: "Wednesday",
-                              mask: 0x08,
+                              mask: 8,
                               type: "boolean",
                               offset: 3,
                             },
                             {
                               name: "Thursday",
-                              mask: 0x10,
+                              mask: 16,
                               type: "boolean",
                               offset: 4,
                             },
                             {
                               name: "Friday",
-                              mask: 0x20,
+                              mask: 32,
                               type: "boolean",
                               offset: 5,
                             },
                             {
                               name: "Saturday",
-                              mask: 0x40,
+                              mask: 64,
                               type: "boolean",
                               offset: 6,
                             },
                             {
                               name: "AwayOrVacation",
-                              mask: 0x80,
+                              mask: 128,
                               type: "boolean",
                               offset: 7,
                             }
@@ -8716,13 +8666,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Heat",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Cool",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -8803,49 +8753,49 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Sunday",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Monday",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             },
                             {
                               name: "Tuesday",
-                              mask: 0x04,
+                              mask: 4,
                               type: "boolean",
                               offset: 2,
                             },
                             {
                               name: "Wednesday",
-                              mask: 0x08,
+                              mask: 8,
                               type: "boolean",
                               offset: 3,
                             },
                             {
                               name: "Thursday",
-                              mask: 0x10,
+                              mask: 16,
                               type: "boolean",
                               offset: 4,
                             },
                             {
                               name: "Friday",
-                              mask: 0x20,
+                              mask: 32,
                               type: "boolean",
                               offset: 5,
                             },
                             {
                               name: "Saturday",
-                              mask: 0x40,
+                              mask: 64,
                               type: "boolean",
                               offset: 6,
                             },
                             {
                               name: "AwayOrVacation",
-                              mask: 0x80,
+                              mask: 128,
                               type: "boolean",
                               offset: 7,
                             }
@@ -8858,13 +8808,13 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Heat",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Cool",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             }
@@ -9454,11 +9404,11 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "HueSaturationSupported", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "EnhancedHueSupported", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "ColorLoopSupported", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "XYSupported", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "ColorTemperatureSupported", mask: 0x0010, type: "boolean", offset: 4 }
+                { name: "HueSaturationSupported", mask: 1, type: "boolean", offset: 0 },
+								{ name: "EnhancedHueSupported", mask: 2, type: "boolean", offset: 1 },
+								{ name: "ColorLoopSupported", mask: 4, type: "boolean", offset: 2 },
+								{ name: "XYSupported", mask: 8, type: "boolean", offset: 3 },
+								{ name: "ColorTemperatureSupported", mask: 16, type: "boolean", offset: 4 }
               ]
             },
             {                
@@ -9553,7 +9503,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9566,7 +9516,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9610,7 +9560,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9623,7 +9573,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9668,7 +9618,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9681,7 +9631,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9711,7 +9661,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9724,7 +9674,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9768,7 +9718,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9781,7 +9731,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9826,7 +9776,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9839,7 +9789,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9874,7 +9824,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9887,7 +9837,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9922,7 +9872,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9935,7 +9885,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9965,7 +9915,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -9978,7 +9928,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10013,7 +9963,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10026,7 +9976,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10056,7 +10006,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10069,7 +10019,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10122,7 +10072,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10135,7 +10085,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10179,7 +10129,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10192,7 +10142,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10237,7 +10187,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10250,7 +10200,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10285,7 +10235,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10298,7 +10248,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10318,25 +10268,25 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "UpdateAction",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "UpdateDirection",
-                              mask: 0x02,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             },
                             {
                               name: "UpdateTime",
-                              mask: 0x04,
+                              mask: 4,
                               type: "boolean",
                               offset: 2,
                             },
                             {
                               name: "UpdateStartHue",
-                              mask: 0x08,
+                              mask: 8,
                               type: "boolean",
                               offset: 3,
                             }
@@ -10393,7 +10343,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10406,7 +10356,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10426,7 +10376,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10439,7 +10389,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10478,17 +10428,13 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "ColorTemperatureMinimumMireds",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "ColorTemperatureMaximumMireds",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "OptionsMask",
@@ -10497,7 +10443,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10510,7 +10456,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10550,17 +10496,13 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "ColorTemperatureMinimumMireds",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "ColorTemperatureMaximumMireds",
-                    type: "struct",
+                    type: "number",
                     isArray: false,
-                    struct:[
-                    ],
                   },
                   {
                     name: "OptionsMask",
@@ -10569,7 +10511,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10582,7 +10524,7 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "ExecuteIfOff",
-                              mask: 0x01,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             }
@@ -10891,6 +10833,61 @@ export let ClusterTypeAttrs: any = {
         ] 
       }
     },
+    RelativityHumidity: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              max: 9999,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 10000,
+              min: 1,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 2048,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
     OccupancySensing: {
       server:{
         attributes: [
@@ -10904,7 +10901,7 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SensedOccupancy", mask: 0x01, type: "boolean", offset: 0 }
+                { name: "SensedOccupancy", mask: 1, type: "boolean", offset: 0 }
               ]
             },
             {                
@@ -10934,9 +10931,9 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "PIR", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "Ultrasonic", mask: 0x02, type: "boolean", offset: 1 },
-								{ name: "PhysicalContact", mask: 0x04, type: "boolean", offset: 2 }
+                { name: "PIR", mask: 1, type: "boolean", offset: 0 },
+								{ name: "Ultrasonic", mask: 2, type: "boolean", offset: 1 },
+								{ name: "PhysicalContact", mask: 4, type: "boolean", offset: 2 }
               ]
             },
             {                
@@ -11049,6 +11046,61 @@ export let ClusterTypeAttrs: any = {
               writable: true,
               isArray: false,
               default: 1,
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    SoilMoisture: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "number",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "number",            
+              max: 9999,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "number",            
+              max: 10000,
+              min: 1,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 65535,
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "number",            
+              max: 2048,
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
             }
         ],
         commands: [
@@ -11216,6 +11268,180 @@ export let ClusterTypeAttrs: any = {
         ] 
       }
     },
+    CarbonMonoxide: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "struct",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "struct",            
+              min: 0,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "struct",            
+              max: 1,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "struct",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    CarbonDioxide: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "struct",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "struct",            
+              min: 0,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "struct",            
+              max: 1,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "struct",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
+    PM25: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "MeasuredValue",
+              type: "struct",            
+              required: true,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 1,
+              name: "MinMeasuredValue",
+              type: "struct",            
+              min: 0,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 2,
+              name: "MaxMeasuredValue",
+              type: "struct",            
+              max: 1,
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            },
+            {                
+              id: 3,
+              name: "Tolerance",
+              type: "struct",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+              ],
+            }
+        ],
+        commands: [
+        ] 
+      }
+    },
     IASZone: {
       server:{
         attributes: [
@@ -11375,61 +11601,61 @@ export let ClusterTypeAttrs: any = {
                     bitmap:[
                             {
                               name: "Alarm1",
-                              mask: 0x0001,
+                              mask: 1,
                               type: "boolean",
                               offset: 0,
                             },
                             {
                               name: "Alarm2",
-                              mask: 0x0002,
+                              mask: 2,
                               type: "boolean",
                               offset: 1,
                             },
                             {
                               name: "Tamper",
-                              mask: 0x0004,
+                              mask: 4,
                               type: "boolean",
                               offset: 2,
                             },
                             {
                               name: "BatteryLow",
-                              mask: 0x0008,
+                              mask: 8,
                               type: "boolean",
                               offset: 3,
                             },
                             {
                               name: "SupervisionNotify",
-                              mask: 0x0010,
+                              mask: 16,
                               type: "boolean",
                               offset: 4,
                             },
                             {
                               name: "RestoreNotify",
-                              mask: 0x0020,
+                              mask: 32,
                               type: "boolean",
                               offset: 5,
                             },
                             {
                               name: "Trouble",
-                              mask: 0x0040,
+                              mask: 64,
                               type: "boolean",
                               offset: 6,
                             },
                             {
                               name: "ACMainsFault",
-                              mask: 0x0080,
+                              mask: 128,
                               type: "boolean",
                               offset: 7,
                             },
                             {
                               name: "Test",
-                              mask: 0x0100,
+                              mask: 256,
                               type: "boolean",
                               offset: 8,
                             },
                             {
                               name: "BatteryDefect",
-                              mask: 0x0200,
+                              mask: 512,
                               type: "boolean",
                               offset: 9,
                             }
@@ -11786,9 +12012,9 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SuppressLeadingZeros", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 0xE0, type: "boolean", offset: 5 },
-								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 0x1E, type: "boolean", offset: 1 }
+                { name: "SuppressLeadingZeros", mask: 1, type: "boolean", offset: 0 },
+								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 224, type: "boolean", offset: 5 },
+								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 30, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -11801,9 +12027,9 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SuppressLeadingZeros", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 0xE0, type: "boolean", offset: 5 },
-								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 0x1E, type: "boolean", offset: 1 }
+                { name: "SuppressLeadingZeros", mask: 1, type: "boolean", offset: 0 },
+								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 224, type: "boolean", offset: 5 },
+								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 30, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -11816,9 +12042,9 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SuppressLeadingZeros", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 0xE0, type: "boolean", offset: 5 },
-								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 0x1E, type: "boolean", offset: 1 }
+                { name: "SuppressLeadingZeros", mask: 1, type: "boolean", offset: 0 },
+								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 224, type: "boolean", offset: 5 },
+								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 30, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -11881,9 +12107,9 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SuppressLeadingZeros", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 0xE0, type: "boolean", offset: 5 },
-								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 0x1E, type: "boolean", offset: 1 }
+                { name: "SuppressLeadingZeros", mask: 1, type: "boolean", offset: 0 },
+								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 224, type: "boolean", offset: 5 },
+								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 30, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -11896,9 +12122,9 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SuppressLeadingZeros", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 0xE0, type: "boolean", offset: 5 },
-								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 0x1E, type: "boolean", offset: 1 }
+                { name: "SuppressLeadingZeros", mask: 1, type: "boolean", offset: 0 },
+								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 224, type: "boolean", offset: 5 },
+								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 30, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -11926,9 +12152,9 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               bitmap: [
-                { name: "SuppressLeadingZeros", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 0xE0, type: "boolean", offset: 5 },
-								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 0x1E, type: "boolean", offset: 1 }
+                { name: "SuppressLeadingZeros", mask: 1, type: "boolean", offset: 0 },
+								{ name: "NumberOfDigitsToTheRightOfDecimalPoint", mask: 224, type: "boolean", offset: 5 },
+								{ name: "NumberOfDigitsToTheLeftOfTheDecimalPoint", mask: 30, type: "boolean", offset: 1 }
               ]
             }
         ],
@@ -11950,15 +12176,15 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "ActiveMeasurementAC", mask: 0x00000001, type: "boolean", offset: 0 },
-								{ name: "ReactiveMeasurementAC", mask: 0x00000002, type: "boolean", offset: 1 },
-								{ name: "ApparentMeasurementAC", mask: 0x00000004, type: "boolean", offset: 2 },
-								{ name: "PhaseAMeasurement", mask: 0x00000008, type: "boolean", offset: 3 },
-								{ name: "PhaseBMeasurement", mask: 0x00000010, type: "boolean", offset: 4 },
-								{ name: "PhaseCMeasurement", mask: 0x00000020, type: "boolean", offset: 5 },
-								{ name: "DCMeasurement", mask: 0x00000040, type: "boolean", offset: 6 },
-								{ name: "HarmonicsMeasurement", mask: 0x00000080, type: "boolean", offset: 7 },
-								{ name: "PowerQualityMeasurement", mask: 0x00000100, type: "boolean", offset: 8 }
+                { name: "ActiveMeasurementAC", mask: 1, type: "boolean", offset: 0 },
+								{ name: "ReactiveMeasurementAC", mask: 2, type: "boolean", offset: 1 },
+								{ name: "ApparentMeasurementAC", mask: 4, type: "boolean", offset: 2 },
+								{ name: "PhaseAMeasurement", mask: 8, type: "boolean", offset: 3 },
+								{ name: "PhaseBMeasurement", mask: 16, type: "boolean", offset: 4 },
+								{ name: "PhaseCMeasurement", mask: 32, type: "boolean", offset: 5 },
+								{ name: "DCMeasurement", mask: 64, type: "boolean", offset: 6 },
+								{ name: "HarmonicsMeasurement", mask: 128, type: "boolean", offset: 7 },
+								{ name: "PowerQualityMeasurement", mask: 256, type: "boolean", offset: 8 }
               ]
             },
             {                
@@ -12751,8 +12977,8 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "VoltageOverload", mask: 0x01, type: "boolean", offset: 0 },
-								{ name: "CurrentOverload", mask: 0x02, type: "boolean", offset: 1 }
+                { name: "VoltageOverload", mask: 1, type: "boolean", offset: 0 },
+								{ name: "CurrentOverload", mask: 2, type: "boolean", offset: 1 }
               ]
             },
             {                
@@ -12788,16 +13014,16 @@ export let ClusterTypeAttrs: any = {
               isArray: false,
               default: 0,
               bitmap: [
-                { name: "VoltageOverload", mask: 0x0001, type: "boolean", offset: 0 },
-								{ name: "CurrentOverload", mask: 0x0002, type: "boolean", offset: 1 },
-								{ name: "ActivePowerOverload", mask: 0x0004, type: "boolean", offset: 2 },
-								{ name: "ReactivePowerOverload", mask: 0x0008, type: "boolean", offset: 3 },
-								{ name: "AverageRMSOverVoltage", mask: 0x0010, type: "boolean", offset: 4 },
-								{ name: "AverageRMSUnderVoltage", mask: 0x0020, type: "boolean", offset: 5 },
-								{ name: "RMSExtremeOverVoltage", mask: 0x0040, type: "boolean", offset: 6 },
-								{ name: "RMSExtremeUnderVoltage", mask: 0x0080, type: "boolean", offset: 7 },
-								{ name: "RMSVoltageSag", mask: 0x0100, type: "boolean", offset: 8 },
-								{ name: "RMSVoltageSwell", mask: 0x0200, type: "boolean", offset: 9 }
+                { name: "VoltageOverload", mask: 1, type: "boolean", offset: 0 },
+								{ name: "CurrentOverload", mask: 2, type: "boolean", offset: 1 },
+								{ name: "ActivePowerOverload", mask: 4, type: "boolean", offset: 2 },
+								{ name: "ReactivePowerOverload", mask: 8, type: "boolean", offset: 3 },
+								{ name: "AverageRMSOverVoltage", mask: 16, type: "boolean", offset: 4 },
+								{ name: "AverageRMSUnderVoltage", mask: 32, type: "boolean", offset: 5 },
+								{ name: "RMSExtremeOverVoltage", mask: 64, type: "boolean", offset: 6 },
+								{ name: "RMSExtremeUnderVoltage", mask: 128, type: "boolean", offset: 7 },
+								{ name: "RMSVoltageSag", mask: 256, type: "boolean", offset: 8 },
+								{ name: "RMSVoltageSwell", mask: 512, type: "boolean", offset: 9 }
               ]
             },
             {                

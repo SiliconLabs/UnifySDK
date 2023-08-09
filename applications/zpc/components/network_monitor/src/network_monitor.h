@@ -76,13 +76,13 @@
     ...
     AttributeStore        -> NetworkMonitor       : network_monitor_on_nif_updated()
     activate NetworkMonitor
-    NetworkMonitor        -> AttributeStore       : Update the ATTRIBUTE_NETWORK_STATUS to \nNODE_STATE_TOPIC_INTERVIEWING
+    NetworkMonitor        -> AttributeStore       : Update the DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS to \nZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING
     NetworkMonitor        -> AttributeResolver    : Register listener for the NodeID\nnetwork_monitor_node_id_resolution_listener()
     deactivate NetworkMonitor
     ...
     note over AttributeResolver: Node is resolved
     AttributeResolver     -> NetworkMonitor       : network_monitor_node_id_resolution_listener()
-    NetworkMonitor        -> AttributeStore       : Update the ATTRIBUTE_NETWORK_STATUS to \nNODE_STATE_TOPIC_STATE_INCLUDED
+    NetworkMonitor        -> AttributeStore       : Update the DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS to \nZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL
   @enduml
  *
  * @{

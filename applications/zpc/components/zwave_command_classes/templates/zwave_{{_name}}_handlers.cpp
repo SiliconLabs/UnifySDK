@@ -76,7 +76,7 @@ sl_status_t __attribute__((weak)) zwave_{{_name}}_override(
  */
 
 {{#cmd_type "_GET"}}
-static sl_status_t zwave_{{_name}}(
+sl_status_t zwave_{{_name}}(
   attribute_store_node_t _node, uint8_t *frame, uint16_t *frame_len)
 {
    sl_status_t rc = zwave_{{_name}}_override(_node, frame, frame_len);
@@ -133,7 +133,7 @@ static sl_status_t zwave_{{_name}}(
  */
 
 {{#cmd_type "_SET"}}
-static sl_status_t zwave_{{_name}}(
+sl_status_t zwave_{{_name}}(
   attribute_store_node_t _node, uint8_t *frame, uint16_t *frame_len)
 {
    sl_status_t rc = zwave_{{_name}}_override(_node, frame, frame_len);
@@ -196,7 +196,7 @@ static sl_status_t zwave_{{_name}}(
  */
 
 {{#cmd_type "_REPORT"}}
-static sl_status_t zwave_{{_name}}_handle_report_command(
+sl_status_t zwave_{{_name}}_handle_report_command(
   const zwave_controller_connection_info_t *connection_info,
   const uint8_t *frame,
   uint16_t frame_length)

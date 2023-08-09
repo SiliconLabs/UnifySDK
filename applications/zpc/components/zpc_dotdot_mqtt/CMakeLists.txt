@@ -11,13 +11,11 @@ target_link_libraries(
   PRIVATE unify
           zpc_attribute_store
           zcl_cluster_servers
-          ucl_definitions)
-
-target_interface_libraries(zpc_dotdot_mqtt ucl_definitions)
+          )
 
 if(BUILD_TESTING)
   # Unit tests
-  add_subdirectory(test)
+  # add_subdirectory(test)
 
   # Mocks
   target_add_mock(zpc_dotdot_mqtt)

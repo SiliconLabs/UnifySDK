@@ -307,39 +307,6 @@ var NAVTREE =
         [ "Time/ForceReadAttributes Command", "time.html#time_force_read_attr_cmd", null ]
       ] ]
     ] ],
-    [ "OTAUpgrade Cluster", "ota_upgrade.html", [
-      [ "OTAUpgrade Attributes", "ota_upgrade.html#ota_upgrade_attrs", [
-        [ "OTAUpgrade/UpgradeServerID Attribute", "ota_upgrade.html#ota_upgrade_attr_upgrade_serverid", null ],
-        [ "OTAUpgrade/FileOffset Attribute", "ota_upgrade.html#ota_upgrade_attr_file_offset", null ],
-        [ "OTAUpgrade/CurrentFileVersion Attribute", "ota_upgrade.html#ota_upgrade_attr_current_file_version", null ],
-        [ "OTAUpgrade/CurrentZigBeeStackVersion Attribute", "ota_upgrade.html#ota_upgrade_attr_current_zig_bee_stack_version", null ],
-        [ "OTAUpgrade/DownloadedFileVersion Attribute", "ota_upgrade.html#ota_upgrade_attr_downloaded_file_version", null ],
-        [ "OTAUpgrade/DownloadedZigBeeStackVersion Attribute", "ota_upgrade.html#ota_upgrade_attr_downloaded_zig_bee_stack_version", null ],
-        [ "OTAUpgrade/ImageUpgradeStatus Attribute", "ota_upgrade.html#ota_upgrade_attr_image_upgrade_status", null ],
-        [ "OTAUpgrade/ManufacturerID Attribute", "ota_upgrade.html#ota_upgrade_attr_manufacturerid", null ],
-        [ "OTAUpgrade/ImageTypeID Attribute", "ota_upgrade.html#ota_upgrade_attr_image_typeid", null ],
-        [ "OTAUpgrade/MinimumBlockPeriod Attribute", "ota_upgrade.html#ota_upgrade_attr_minimum_block_period", null ],
-        [ "OTAUpgrade/ImageStamp Attribute", "ota_upgrade.html#ota_upgrade_attr_image_stamp", null ],
-        [ "OTAUpgrade/UpgradeActivationPolicy Attribute", "ota_upgrade.html#ota_upgrade_attr_upgrade_activation_policy", null ],
-        [ "OTAUpgrade/UpgradeTimeoutPolicy Attribute", "ota_upgrade.html#ota_upgrade_attr_upgrade_timeout_policy", null ],
-        [ "OTAUpgrade/ClusterRevision Attribute", "ota_upgrade.html#ota_upgrade_attr_cluster_revision", null ]
-      ] ],
-      [ "OTAUpgrade Command Support", "ota_upgrade.html#ota_upgrade_recv_cmd_support", null ],
-      [ "OTAUpgrade Commands", "ota_upgrade.html#ota_upgrade_cmds", [
-        [ "OTAUpgrade/ImageNotify Command", "ota_upgrade.html#ota_upgrade_image_notify_cmd", null ],
-        [ "OTAUpgrade/QueryNextImageRequest Command", "ota_upgrade.html#ota_upgrade_query_next_image_request_cmd", null ],
-        [ "OTAUpgrade/QueryNextImageResponse Command", "ota_upgrade.html#ota_upgrade_query_next_image_response_cmd", null ],
-        [ "OTAUpgrade/ImageBlockRequest Command", "ota_upgrade.html#ota_upgrade_image_block_request_cmd", null ],
-        [ "OTAUpgrade/ImagePageRequest Command", "ota_upgrade.html#ota_upgrade_image_page_request_cmd", null ],
-        [ "OTAUpgrade/ImageBlockResponse Command", "ota_upgrade.html#ota_upgrade_image_block_response_cmd", null ],
-        [ "OTAUpgrade/UpgradeEndRequest Command", "ota_upgrade.html#ota_upgrade_upgrade_end_request_cmd", null ],
-        [ "OTAUpgrade/UpgradeEndResponse Command", "ota_upgrade.html#ota_upgrade_upgrade_end_response_cmd", null ],
-        [ "OTAUpgrade/QueryDeviceSpecificFileRequest Command", "ota_upgrade.html#ota_upgrade_query_device_specific_file_request_cmd", null ],
-        [ "OTAUpgrade/QueryDeviceSpecificFileResponse Command", "ota_upgrade.html#ota_upgrade_query_device_specific_file_response_cmd", null ],
-        [ "OTAUpgrade/WriteAttributes Command", "ota_upgrade.html#ota_upgrade_write_attr_cmd", null ],
-        [ "OTAUpgrade/ForceReadAttributes Command", "ota_upgrade.html#ota_upgrade_force_read_attr_cmd", null ]
-      ] ]
-    ] ],
     [ "PollControl Cluster", "poll_control.html", [
       [ "PollControl Attributes", "poll_control.html#poll_control_attrs", [
         [ "PollControl/CheckInInterval Attribute", "poll_control.html#poll_control_attr_check_in_interval", null ],
@@ -1273,6 +1240,10 @@ var NAVTREE =
     [ "State Cluster", "state.html", [
       [ "State Attributes", "state.html#state_attrs", [
         [ "State/EndpointIdList Attribute", "state.html#state_attr_endpoint_id_list", null ],
+        [ "State/NetworkStatus Attribute", "state.html#state_attr_network_status", null ],
+        [ "State/Security Attribute", "state.html#state_attr_security", null ],
+        [ "State/MaximumCommandDelay Attribute", "state.html#state_attr_maximum_command_delay", null ],
+        [ "State/NetworkList Attribute", "state.html#state_attr_network_list", null ],
         [ "State/ClusterRevision Attribute", "state.html#state_attr_cluster_revision", null ]
       ] ],
       [ "State Command Support", "state.html#state_recv_cmd_support", null ],
@@ -1281,6 +1252,7 @@ var NAVTREE =
         [ "State/RemoveOffline Command", "state.html#state_remove_offline_cmd", null ],
         [ "State/DiscoverNeighbors Command", "state.html#state_discover_neighbors_cmd", null ],
         [ "State/Interview Command", "state.html#state_interview_cmd", null ],
+        [ "State/DiscoverSecurity Command", "state.html#state_discover_security_cmd", null ],
         [ "State/WriteAttributes Command", "state.html#state_write_attr_cmd", null ],
         [ "State/ForceReadAttributes Command", "state.html#state_force_read_attr_cmd", null ]
       ] ]
@@ -1465,6 +1437,7 @@ var NAVTREE =
       [ "MinMaxPair Struct", "ucl_structs.html#struct_min_max_pair", null ],
       [ "NetworkInterfaceData Struct", "ucl_structs.html#struct_network_interface_data", null ],
       [ "SExtensionFieldSetList Struct", "ucl_structs.html#struct_s_extension_field_set_list", null ],
+      [ "SSceneTable Struct", "ucl_structs.html#struct_s_scene_table", null ],
       [ "SphericalCoordinates Struct", "ucl_structs.html#struct_spherical_coordinates", null ],
       [ "TransitionType Struct", "ucl_structs.html#struct_transition_type", null ],
       [ "WirelessNetworkInterfaceData Struct", "ucl_structs.html#struct_wireless_network_interface_data", null ]
@@ -1647,8 +1620,17 @@ var NAVTREE =
       [ "TstatScheduleDOW Bitmap", "ucl_bitmaps.html#enum_tstat_scheduledow", null ],
       [ "TstatScheduleMode Bitmap", "ucl_bitmaps.html#enum_tstat_schedule_mode", null ],
       [ "WindowCoveringConfigOrStatus Bitmap", "ucl_bitmaps.html#enum_window_covering_config_or_status", null ],
-      [ "WindowCoveringMode Bitmap", "ucl_bitmaps.html#enum_window_covering_mode", null ]
-    ] ]
+      [ "WindowCoveringMode Bitmap", "ucl_bitmaps.html#enum_window_covering_mode", null ],
+      [ "map16 Bitmap", "ucl_bitmaps.html#enum_map16", null ],
+      [ "map24 Bitmap", "ucl_bitmaps.html#enum_map24", null ],
+      [ "map32 Bitmap", "ucl_bitmaps.html#enum_map32", null ],
+      [ "map40 Bitmap", "ucl_bitmaps.html#enum_map40", null ],
+      [ "map48 Bitmap", "ucl_bitmaps.html#enum_map48", null ],
+      [ "map56 Bitmap", "ucl_bitmaps.html#enum_map56", null ],
+      [ "map64 Bitmap", "ucl_bitmaps.html#enum_map64", null ],
+      [ "map8 Bitmap", "ucl_bitmaps.html#enum_map8", null ]
+    ] ],
+    [ "UCL Array Attributes", "ucl_monotonous_arrays.html", null ]
   ] ]
 ];
 
@@ -1658,8 +1640,8 @@ var NAVTREEINDEX =
 "color_control.html#color_control_move_color_cmd",
 "electrical_measurement.html#electrical_measurement_attr_averagerms_under_voltage_counter",
 "metering.html#metering_attr_historical_consumption_formatting",
-"pump_configuration_and_control.html#pump_configuration_and_control_attr_max_speed",
-"ucl_bitmaps.html#enum_door_lockrf_operation_event_mask"
+"scenes.html#scenes_attr_current_group",
+"ucl_bitmaps.html#enum_metering_summation_formatting"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

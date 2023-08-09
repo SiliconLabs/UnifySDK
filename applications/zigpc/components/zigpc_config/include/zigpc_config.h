@@ -49,9 +49,15 @@ typedef struct {
 
   bool poll_attr_only;
   bool ncp_update_firmware_flag;
-
   const char *ncp_update_firmware_path;
+
   const char *ota_path;
+
+  bool use_network_args;
+  uint16_t network_pan_id;
+  int8_t network_radio_power;
+  uint8_t network_channel;
+
 } zigpc_config_t;
 
 /**

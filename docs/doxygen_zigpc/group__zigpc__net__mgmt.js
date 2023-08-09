@@ -20,7 +20,7 @@ var group__zigpc__net__mgmt =
       [ "ZIGPC_NET_MGMT_FSM_STATE_NODE_INTERVIEW", "group__zigpc__net__mgmt.html#gga41074cd4be64194f1a68da0b7449ba8ea7145d6d7dd394f545977d7e1c1ab3008", null ],
       [ "ZIGPC_NET_MGMT_FSM_STATE_MAX_VAL", "group__zigpc__net__mgmt.html#gga41074cd4be64194f1a68da0b7449ba8ea3d071438f0955b39279c19f5484311b7", null ]
     ] ],
-    [ "zigpc_net_mgmt_add_node", "group__zigpc__net__mgmt.html#ga9ce4ef77782dbe443ccf8287b939acc2", null ],
+    [ "zigpc_net_mgmt_add_node", "group__zigpc__net__mgmt.html#ga837547f53a0cf275be8f037c3bacf2cf", null ],
     [ "zigpc_net_mgmt_remove_node", "group__zigpc__net__mgmt.html#ga68a052a418455f87b473f09ac5e29137", null ],
     [ "zigpc_net_mgmt_state_change_request", "group__zigpc__net__mgmt.html#ga6a3162c4a400126e6d0a32e0877cda34", null ],
     [ "zigpc_netmgmt_network_permit_joins", "group__zigpc__net__mgmt.html#ga678175109b10fb1376eae2e610097433", null ]

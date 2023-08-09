@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -65,7 +65,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#additional-subcommands">Additional subcommands</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#flash-application">Flash application</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#read-dsk-key">Read DSK key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-device-specific-key-dsk">Read Device Specific Key (DSK)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#list-connected-devices">List connected devices</a></li>
 </ul>
 </li>
@@ -104,7 +104,7 @@
 <h1>Portable runtime environment<a class="headerlink" href="#portable-runtime-environment" title="Permalink to this heading"></a></h1>
 <section id="unify-portable-runtime-environment">
 <h2>Unify Portable Runtime Environment<a class="headerlink" href="#unify-portable-runtime-environment" title="Permalink to this heading"></a></h2>
-<p><strong>Disclaimer</strong>: Currently the Unify Portable Runtime environment only supports the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code>.</p>
+<p><strong>Disclaimer</strong>: Currently the Unify Portable Runtime environment only supports the Z-Wave Protocol Controller (<code class="docutils literal notranslate"><span class="pre">ZPC</span></code>).</p>
 <p><strong>Prerequisites</strong>:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
@@ -115,27 +115,38 @@
 <p>The Unify Portable Runtime Environment strives to get Unify running as fast as
 possible on your desktop. The portable runtime comes as a binary executable CLI,
 together with Unify Debian packages, a docker-compose file and a tool which can
-map a Silicon Labs devices into a Linux docker environment on Windows, MacOS and
+map a Silicon Labs device into a Linux docker environment on Windows, MacOS and
 Linux.</p>
 </section>
 <section id="quick-start">
 <h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p><strong>Note</strong>: If you are running Linux, you need the right permissions to run the <code class="docutils literal notranslate"><span class="pre">Commander</span></code> and <code class="docutils literal notranslate"><span class="pre">Silink</span></code> tools.</p>
+<p>For handling thes permissions, you either need to:</p>
+<ol class="arabic">
+<li><p>copy the Udev rules from <code class="docutils literal notranslate"><span class="pre">./resources/commander/99-jlink.rules</span></code> to the system folder <code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/</span></code> and run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">control</span> <span class="pre">--reload</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">trigger</span></code>.</p>
+<p>or</p>
+</li>
+<li><p>run all the commands as root with eg. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./unify_portable_cli....</span></code>.</p></li>
+</ol>
 <p><strong>WARNING</strong>: If you start up the portable docker environment on a host already
-running Unify Framework applications this will cause unexpected behavior.</p>
+running Unify Framework applications, this will cause unexpected behavior.</p>
 <p>Setting up the portable runtime environment should be as easy as downloading
-portable_runtime_&lt;OS&gt;.zip file from the
+<code class="docutils literal notranslate"><span class="pre">portable_runtime_&lt;OS&gt;.&lt;zip/tar.bz2&gt;</span></code> file from the
 <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>
-and unzipping it.</p>
-<p>After unzipping make sure you only have a single <a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a>
+and extracting it.</p>
+<p>After extraction, make sure you only have a single <a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a>
 connected to your desktop and run the binary <code class="docutils literal notranslate"><span class="pre">portable_runtime_cli</span></code>.
-This should setup the whole Unify Framework ecosystem.
-An example of such can be seen below on a Windows machine.</p>
+This should set up the whole Unify Framework ecosystem.
+An example of this can be seen below on a Windows machine.</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">someuser</span><span class="p">\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">portable_runtime_windows</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">unify_portable_cli</span><span class="p">.</span><span class="n">exe</span>
-<span class="n">Attempting</span> <span class="n">to</span> <span class="n">automap</span> <span class="n">the</span> <span class="n">connected</span> <span class="n">device</span><span class="p">...</span>
-<span class="n">Mapping</span> <span class="n">device</span> <span class="n">with</span> <span class="n">Silink</span><span class="p">...</span>
 <span class="n">Verifying</span> <span class="n">Docker</span> <span class="n">installation</span>
+<span class="n">devices</span><span class="p">:</span> <span class="n">1</span> <span class="n">device</span> <span class="n">found</span><span class="p">.</span>
+
+<span class="n">Identified</span> <span class="n">as</span> <span class="n">440285211</span> <span class="n">Serial</span> <span class="n">API</span> <span class="n">Controller</span>
+<span class="n">Mapping</span> <span class="n">device</span> <span class="n">with</span> <span class="n">Silink</span><span class="p">...</span>
 <span class="n">Building</span> <span class="n">Unify</span> <span class="n">Portable</span> <span class="n">Runtime</span><span class="p">...</span>
-<span class="n">Building</span> <span class="n">docker</span> <span class="n">image</span> <span class="n">with</span> <span class="n">unify_1</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">0_x86_64</span><span class="p">.</span><span class="n">zip</span>
+<span class="n">Building</span> <span class="n">docker</span> <span class="n">image</span> <span class="n">with</span> <span class="n">unify_1</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">1_x86_64</span><span class="p">.</span><span class="n">zip</span>
+<span class="n">Starting</span> <span class="n">Unify</span> <span class="n">Portable</span> <span class="n">Runtime</span><span class="p">...</span>
 <span class="n">Unify</span> <span class="n">is</span> <span class="n">running</span><span class="p">!</span>
 <span class="n">Please</span> <span class="n">visit</span> <span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">3080</span> <span class="k">in</span> <span class="n">your</span> <span class="n">browser</span><span class="p">.</span>
 <span class="n">Change</span> <span class="n">the</span> <span class="s1">&#39;Host&#39;</span> <span class="n">field</span> <span class="n">to</span> <span class="s1">&#39;mqtt-broker&#39;</span> <span class="n">and</span> <span class="n">press</span> <span class="s1">&#39;Connect&#39;</span><span class="p">.</span>
@@ -170,30 +181,28 @@ Here is an example on how to start it up in the US region.</p>
 <h3>Multiple devices connected<a class="headerlink" href="#multiple-devices-connected" title="Permalink to this heading"></a></h3>
 <p>Having multiple Thunderboard or WSTK boards connected via USB, you will have to specify which of the devices to use.
 This can be done by providing the path to a serial device, a serial number or an IP address of the Z-Wave device which can run the <em>ZPC</em> Z-Wave controller.</p>
-<p>Failing to specify a serial number, a list of all the connected devices will be printed.</p>
+<p>If you do not specify a serial number, the portable runtime will attempt to
+identify the controller device based on its application name. If that fails,
+you will be asked to select the controller from a the list of the connected
+devices.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe</span>
-<span class="go">Multiple devices detected and no device string was given.</span>
-<span class="go">Please provide the device serial number of the controller device eg. &#39;-s 440262195&#39;.</span>
-<span class="go">Here is a list of connected devices:</span>
-<span class="go">deviceCount=2</span>
-<span class="go">device(440262195) {</span>
-<span class="go">  serialNumber=440262195</span>
-<span class="go">  adapterType=JLink</span>
-<span class="go">  adapterLabel=J-Link Silicon Labs</span>
-<span class="go">  adapterId=2603A</span>
-<span class="go">  adapterName=BRD2603A Rev. A00</span>
-<span class="go">  adapterDescription=Unknown board</span>
-<span class="go">  ....</span>
-<span class="go">}</span>
-<span class="go">device(440247860) {</span>
-<span class="go">  serialNumber=440247860</span>
-<span class="go">  adapterType=JLink</span>
-<span class="go">  adapterLabel=J-Link Silicon Labs</span>
-<span class="go">  adapterId=4002A</span>
-<span class="go">  adapterName=BRD4002A Rev. A04</span>
-<span class="go">  adapterDescription=Wireless Starter Kit Mainboard</span>
-<span class="go">  ...</span>
-<span class="go">}</span>
+<span class="go">Verifying Docker installation</span>
+<span class="go">devices: 2 devices found.</span>
+<span class="go">0: 440285211, J-Link EnergyMicro</span>
+<span class="go">0: 440265328, J-Link EnergyMicro</span>
+
+<span class="go">Attempting to identify the Serial API Controller...</span>
+<span class="go">Identification failed.</span>
+<span class="go">Serial number is not specified.</span>
+
+<span class="go">Device No. | Serial No. | Board No. | Freq. | Application name</span>
+<span class="go">-----------+------------+-----------+-------+------------------------------</span>
+<span class="go">         0 | 440285211  | 224300280 | EU    | unknown</span>
+<span class="go">         1 | 440265328  | 220500227 | EU    | unknown</span>
+
+<span class="go">Please select a device.</span>
+<span class="go">Note that the device&#39;s number may change when multiple boards are connected!</span>
+<span class="go">Type 0, 1, ... or x to cancel:</span>
 </pre></div>
 </div>
 <section id="serial-no">
@@ -210,7 +219,7 @@ For Debian based distro, it can be installed like so:</p>
 </section>
 <section id="ip-address">
 <h4>IP address<a class="headerlink" href="#ip-address" title="Permalink to this heading"></a></h4>
-<p>If you have eg. a WSTK board connected to the same network, you can specify it’s IP like so:</p>
+<p>If you have eg. a WSTK board connected to the same network, you can specify its IP address like so:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe --ip-address 10.0.0.12</span>
 </pre></div>
 </div>
@@ -227,19 +236,25 @@ By specifying the device path, you can map that device into the portable runtime
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
-<p>In case you run into any issues, two log files are produced.
-The two files, <code class="docutils literal notranslate"><span class="pre">docker.log</span></code> and <code class="docutils literal notranslate"><span class="pre">silink.log</span></code>, can be used during support.</p>
+<p>In case you run into any issues, a log file is produced in the base directory, called <code class="docutils literal notranslate"><span class="pre">portable_runtime.log</span></code>.</p>
 </section>
 <section id="additional-subcommands">
 <h2>Additional subcommands<a class="headerlink" href="#additional-subcommands" title="Permalink to this heading"></a></h2>
-<p>The portable runtime CLI includes additonal convenience functions that allow to reflash the application firmwares and query the DSK values of the connected devices.</p>
+<p>The portable runtime CLI includes additional convenience functions that allow
+you to flash the application firmwares, query the DSK values, and list other
+details of connected devices.</p>
 <section id="flash-application">
 <h3>Flash application<a class="headerlink" href="#flash-application" title="Permalink to this heading"></a></h3>
-<p>It is possible to flash the devices with the <code class="docutils literal notranslate"><span class="pre">flash-app</span></code> subcommand. You can reach the help for the subcommand as follows:</p>
+<p>It is possible to flash the devices with the <code class="docutils literal notranslate"><span class="pre">flash-app</span></code> subcommand. To get help
+on how to use this subcommand, use the <code class="docutils literal notranslate"><span class="pre">-h</span></code> switch:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe flash-app -h</span>
 </pre></div>
 </div>
-<p>The package contains three pre-built application firmwares. It is possible to flashing the pre-built applications using <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag and one of the following names: <code class="docutils literal notranslate"><span class="pre">switch-on-off</span></code>, <code class="docutils literal notranslate"><span class="pre">multilevel-sensor</span></code>, <code class="docutils literal notranslate"><span class="pre">serial-api</span></code>.</p>
+<p>The package contains several pre-built application firmwares. It is possible to
+flash the pre-built applications using the <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag and one of the following
+names:<br />
+<code class="docutils literal notranslate"><span class="pre">multilevel-sensor</span></code>, <code class="docutils literal notranslate"><span class="pre">power-strip</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor-pir</span></code>, <code class="docutils literal notranslate"><span class="pre">serial-api</span></code>, <code class="docutils literal notranslate"><span class="pre">switch-on-off</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">wall-controller</span></code>.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe -s 440262211 flash-app -n switch-on-off</span>
 </pre></div>
 </div>
@@ -247,23 +262,29 @@ The two files, <code class="docutils literal notranslate"><span class="pre">dock
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli.exe -s 440262176 flash-app -u zwave_soc_switch_on_off-brd2603a-us.hex</span>
 </pre></div>
 </div>
+<p>Specifying the serial number is not required - in that case you will be asked to
+select the device that you want to flash.</p>
 <p>If the RF region is not defined by the <code class="docutils literal notranslate"><span class="pre">--zwave-rf</span></code> argument, then default value will be flashed (EU). It is possible to define the rf-region to be flashed to device from the region list: EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli.exe --zwave-rf US_LR -s 440262138 flash-app -n switch-on-off</span>
 </pre></div>
 </div>
-<p>After the application firmware is flashed to the device, the DSK key of the End Device will be printed.
-Note: In case of flashing serial-api, the DSK key is empty.</p>
+<p>After the application firmware is flashed to the device, the DSK of the End Device will be printed.
+Note: In case of flashing serial-api, there is no DSK.</p>
 </section>
-<section id="read-dsk-key">
-<h3>Read DSK key<a class="headerlink" href="#read-dsk-key" title="Permalink to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">read-dsk</span></code> subcommand print out the DSK key of a device, specified by the serial number <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag before the subcommand. This DSK value can be used for secure inclusion.</p>
+<section id="read-device-specific-key-dsk">
+<h3>Read Device Specific Key (DSK)<a class="headerlink" href="#read-device-specific-key-dsk" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">read-dsk</span></code> subcommand prints the DSK of a device. This DSK value can be used for secure inclusion.
+The device to be queried can be selected from the list of devices interactively,
+or by specifying the serial number <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag before the subcommand.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe -s 440262138 read-dsk</span>
 </pre></div>
 </div>
 </section>
 <section id="list-connected-devices">
 <h3>List connected devices<a class="headerlink" href="#list-connected-devices" title="Permalink to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">list-devices</span></code> subcommand allows to query the serial number and the board number of the connected devices as follows:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">list-devices</span></code> subcommand allows to query the serial number, board number,
+configured radio region, and application name of the connected devices, and can
+be invoked as follows:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe list-devices</span>
 </pre></div>
 </div>

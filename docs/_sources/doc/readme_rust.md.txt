@@ -33,16 +33,16 @@ in local development scenarios.
 
 ### Setting up environment
 
-The following variables need to be set when running cargo standalone: 
+The following variables need to be set when running cargo standalone:
 | variable        | description                                               |
 |-----------------|-----------------------------------------------------------|
 |UNIFY_BINARY_DIR | needs to point to cmake's build directory
-|VERSION_STR      | needs to point to an version. for dev purposes an 
+|VERSION_STR      | needs to point to an version. for dev purposes an
 arbitrary version can be chosen   |
 
 Example:
 
-```bash 
+```bash
 cd build ninja export UNIFY_BINARY_DIR=$PWD export VERSION_STR="foo123"
 ```
 
@@ -72,7 +72,7 @@ the overall concept
 [here](https://docs.rust-embedded.org/book/interoperability/c-with-rust.html).
 In short, we want to create a small wrapper project that imports the c symbols
 so that they can referenced correctly in Rust. Next to that, we need to tell the
-rust compiler how to link towards these symbols. We have tooling in place that
+Rust compiler how to link towards these symbols. We have tooling in place that
 generates this symbol definitions for you.
 
 ### 1. Declare a cargo build
@@ -80,17 +80,17 @@ generates this symbol definitions for you.
 Add the cargo project as part of the cmake build. We created a cmake function
 which does this for you. Refer to `cargo_build` for more info on usage.
 
-### 2. Define link libraries 
+### 2. Define link libraries
 
 This can be via link-lib arguments inside your build.rs file. Click here for
 [more info](https://doc.rust-lang.org/cargo/reference/build-scripts.html).
 - Inside the main function of this build.rs file you print the library to link
   towards as followed:
 
-```rust 
+```rust
 fn main() { // these exports are only used when an exe is compiled. e.g.
 integration // tests or final binaries!
-println!("cargo:rustc-link-lib=dylib=uic_log"); } 
+println!("cargo:rustc-link-lib=dylib=uic_log"); }
 ```
 
 Alternatively, we have a ninja importer. Which can read an build.ninja file and
@@ -100,7 +100,7 @@ unify_build_utils::compiler_arguments.
 For usage browse through the components/uic_rust folder, there are enough
 examples to be found.
 
-### 3. Configure bindings 
+### 3. Configure bindings
 
 Configuration of bindings is done in the corresponding build.rs files. See
 unify_build_utils::configure_bindings.
@@ -121,23 +121,23 @@ interface with C.
 
 ## Rust to C/C++
 
-Linking of rust libraries inside C is also possible. An example is the
+Linking of Rust libraries inside C is also possible. An example is the
 `rust_command_classes` project. The following steps need to be executed to
 successfully link Rust libraries to C:
 
-- Make sure the rust project is know to cmake. You do this by calling function
-  `cargo_build` for your rust project. See the in code documentation for more
+- Make sure the Rust project is know to cmake. You do this by calling function
+  `cargo_build` for your Rust project. See the in code documentation for more
   information about the usage of this command.
-- Declare your rust project as a static native library. Add the following to
+- Declare your Rust project as a static native library. Add the following to
   your `Cargo.toml` file:
 
 ```toml
 [lib] crate-type = ["staticlib"]
 ```
 
-- In cmake, add a dependency to your rust project. You want to add it to the
+- In cmake, add a dependency to your Rust project. You want to add it to the
   target_link_libraries list in cmake. use the name `<rust_project>` to
-  reference to the rust project. For example:
+  reference to the Rust project. For example:
 
 ```cmake target_link_libraries( zpc ... rust_command_handlers) ```
 

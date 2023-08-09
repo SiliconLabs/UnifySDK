@@ -44,8 +44,8 @@ using association_bytes = std::vector<uint8_t>;
 /**
  * @brief Converts a bytestream from the attribute store to a set of associations.
  *
- * @param [in] source
- * @param [out] target
+ * @param [in] source   Source Association Bytes
+ * @param [out] target  Destination Association Sets
  *
  */
 void get_association_list(association_bytes source, association_set &target);
@@ -54,8 +54,8 @@ void get_association_list(association_bytes source, association_set &target);
  * @brief Converts a bytestream from the attribute store to a set of
  * NodeID associations. Everything after the MARKER will be ignored.
  *
- * @param [in] source
- * @param [out] target
+ * @param [in] source   Source Association Bytes
+ * @param [out] target  Destination Association Set
  *
  */
 void get_node_id_association_list(association_bytes source,
@@ -66,8 +66,8 @@ void get_node_id_association_list(association_bytes source,
  *
  * An empty set will result in an ASSOCIATION_MARKER bytestream.
  *
- * @param [in] source
- * @param [out] target
+ * @param [in] source   Source Association Set
+ * @param [out] target  Destination Association Bytes
  *
  */
 void get_association_bytestream(association_set source,
@@ -79,8 +79,8 @@ void get_association_bytestream(association_set source,
  *
  * An empty set will result in an empty bytestream.
  *
- * @param [in] source
- * @param [out] target
+ * @param [in] source   Source Association Set
+ * @param [out] target  Destination Association Bytes
  *
  */
 void get_node_id_association_bytestream(association_set source,
@@ -89,9 +89,9 @@ void get_node_id_association_bytestream(association_set source,
 /**
  * @brief Substract set_1 from set_2.
  *
- * @param [in] set_1
- * @param [in] set_2
- * @param [out] result, set that have set_2 elements that are not in set_1
+ * @param [in] set_1    The first Association Set
+ * @param [in] set_2    The second Association Set
+ * @param [out] result Set that contains set_2 elements that are not in set_1
  */
 void substract_association_lists(const association_set &set_1,
                                  const association_set &set_2,
@@ -100,9 +100,9 @@ void substract_association_lists(const association_set &set_1,
 /**
  * @brief Merge set_1 and set_2.
  *
- * @param [in] set_1
- * @param [in] set_2
- * @param [out] result, set that have set_1 and set_2 elements
+ * @param [in] set_1    The first Association Set
+ * @param [in] set_2    The second Association Set
+ * @param [out] result Set that contains both set_1 and set_2 elements
  */
 void merge_association_lists(const association_set &set_1,
                              const association_set &set_2,

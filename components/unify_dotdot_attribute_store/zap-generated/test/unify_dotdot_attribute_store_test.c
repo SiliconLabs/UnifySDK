@@ -356,56 +356,6 @@ uic_mqtt_dotdot_time_write_attributes_callback_t get_uic_mqtt_dotdot_time_write_
   return test_uic_mqtt_dotdot_time_write_attributes_callback;
 }
 
-static uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t test_uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback = NULL;
-static uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t test_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback = NULL;
-
-uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t get_uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback;
-}
-uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t get_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback;
-}
-
-static uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t get_uic_mqtt_dotdot_ota_upgrade_image_notify_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t get_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t get_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t get_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t get_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t get_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback;
-}
-static uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback = NULL;
-uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback(){
-  return test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback;
-}
 static uic_mqtt_dotdot_poll_control_force_read_attributes_callback_t test_uic_mqtt_dotdot_poll_control_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_poll_control_write_attributes_callback_t test_uic_mqtt_dotdot_poll_control_write_attributes_callback = NULL;
 
@@ -1176,6 +1126,10 @@ static uic_mqtt_dotdot_state_interview_callback_t test_uic_mqtt_dotdot_state_int
 uic_mqtt_dotdot_state_interview_callback_t get_uic_mqtt_dotdot_state_interview_callback(){
   return test_uic_mqtt_dotdot_state_interview_callback;
 }
+static uic_mqtt_dotdot_state_discover_security_callback_t test_uic_mqtt_dotdot_state_discover_security_callback = NULL;
+uic_mqtt_dotdot_state_discover_security_callback_t get_uic_mqtt_dotdot_state_discover_security_callback(){
+  return test_uic_mqtt_dotdot_state_discover_security_callback;
+}
 static uic_mqtt_dotdot_binding_force_read_attributes_callback_t test_uic_mqtt_dotdot_binding_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_binding_write_attributes_callback_t test_uic_mqtt_dotdot_binding_write_attributes_callback = NULL;
 
@@ -1315,6 +1269,7 @@ dotdot_unid_t expected_unid               = TEST_UNID;
 dotdot_endpoint_id_t expected_endpoint_id = 23;
 attribute_store_node_t expected_node_id   = ATTRIBUTE_STORE_INVALID_NODE;
 unify_dotdot_attribute_store_configuration_t test_configuration = {};
+static mqtt_message_callback_t group_command_dispatch           = NULL;
 
 // These declarations are for unity to include tests from other source file into
 // test runner. target_add_unittest() function does not run tests from other
@@ -1359,7 +1314,10 @@ void test_level_step_with_on_off_command();
 void test_level_stop_with_on_off_command();
 void test_level_current_level_validation();
 void test_level_remaining_time_countdown();
+void test_level_set_frequency();
 void test_door_lock_lock_unlock_command();
+void test_door_lock_toggle_command();
+void test_door_lock_unlock_with_timeout_command();
 void test_identify_no_get_endpoint_function_registered();
 void test_identify_identify_query_command_support();
 void test_identify_identify_query_command_clear_reported();
@@ -1371,6 +1329,7 @@ void test_identify_publish_no_get_unid_function_registered();
 void test_identify_publish_reported_value();
 void test_identify_publish_desired_value();
 void test_identify_unretain_published_values();
+void test_poll_control_set_long_poll_interval_command();
 void test_thermostat_no_get_endpoint_function_registered();
 void test_thermostat_setpoint_raise_or_lower_command_support();
 void test_thermostat_setpoint_raise_or_lower_command_update_desired();
@@ -1378,6 +1337,13 @@ void test_thermostat_setpoint_raise_or_lower_command_clear_reported();
 void test_thermostat_publish_reported_value();
 void test_thermostat_publish_desired_value();
 void test_thermostat_unretain_published_values();
+void test_window_covering_up_or_open_command();
+void test_window_covering_down_or_close_command();
+void test_window_covering_stop_command();
+void test_window_covering_go_to_lift_value_command();
+void test_window_covering_go_to_lift_percentage_command();
+void test_window_covering_go_to_tilt_value_command();
+void test_window_covering_go_to_tilt_percentage_command();
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
@@ -1771,66 +1737,6 @@ void set_uic_mqtt_dotdot_time_write_attributes_callback_stub(
   const uic_mqtt_dotdot_time_write_attributes_callback_t callback, int cmock_num_calls)
 {
   test_uic_mqtt_dotdot_time_write_attributes_callback = callback;
-}
-void set_uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_stub(
-  const uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback = callback;
-}
-void set_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_stub(
-  const uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_image_notify_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_image_notify_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_set_stub(
-  const uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback = callback;
 }
 void set_uic_mqtt_dotdot_poll_control_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_poll_control_force_read_attributes_callback_t callback, int cmock_num_calls)
@@ -2712,6 +2618,11 @@ void uic_mqtt_dotdot_state_interview_callback_set_stub(
 {
   test_uic_mqtt_dotdot_state_interview_callback = callback;
 }
+void uic_mqtt_dotdot_state_discover_security_callback_set_stub(
+  const uic_mqtt_dotdot_state_discover_security_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_state_discover_security_callback = callback;
+}
 void set_uic_mqtt_dotdot_binding_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_binding_force_read_attributes_callback_t callback, int cmock_num_calls)
 {
@@ -2879,6 +2790,19 @@ sl_status_t test_get_unid_endpoint(attribute_store_node_t node,
   snprintf(unid, sizeof(TEST_UNID), "%s", expected_unid);
   *endpoint_id = expected_endpoint_id;
   return SL_STATUS_OK;
+}
+
+// Stub functions
+static void uic_mqtt_subscribe_stub(const char *topic,
+                                    mqtt_message_callback_t callback,
+                                    int cmock_num_calls)
+{
+  if (strcmp("ucl/by-group/+/Groups/Commands/+", topic) == 0) {
+    group_command_dispatch = callback;
+  } else {
+    sl_log_debug("uic_mqtt_subscribe_stub", "Subscription to topic: %s", topic);
+    TEST_FAIL_MESSAGE("Subscription to an unexpected topic.");
+  }
 }
 
 /// Called before each and every test
@@ -3110,42 +3034,6 @@ void setUp()
   test_uic_mqtt_dotdot_time_write_attributes_callback = NULL;
   uic_mqtt_dotdot_set_time_write_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_time_write_attributes_callback_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback = NULL;
-  uic_mqtt_dotdot_set_ota_upgrade_force_read_attributes_callback_Stub(
-    &set_uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback = NULL;
-  uic_mqtt_dotdot_set_ota_upgrade_write_attributes_callback_Stub(
-    &set_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_image_notify_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_image_notify_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_set_stub);
-  test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback = NULL;
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_set_Stub(
-    &uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_set_stub);
   test_uic_mqtt_dotdot_poll_control_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_poll_control_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_poll_control_force_read_attributes_callback_stub);
@@ -3674,6 +3562,9 @@ void setUp()
   test_uic_mqtt_dotdot_state_interview_callback = NULL;
   uic_mqtt_dotdot_state_interview_callback_set_Stub(
     &uic_mqtt_dotdot_state_interview_callback_set_stub);
+  test_uic_mqtt_dotdot_state_discover_security_callback = NULL;
+  uic_mqtt_dotdot_state_discover_security_callback_set_Stub(
+    &uic_mqtt_dotdot_state_discover_security_callback_set_stub);
   test_uic_mqtt_dotdot_binding_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_binding_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_binding_force_read_attributes_callback_stub);
@@ -3762,6 +3653,9 @@ void setUp()
   uic_mqtt_dotdot_protocol_controller_network_management_write_callback_set_Stub(
     &uic_mqtt_dotdot_protocol_controller_network_management_write_callback_set_stub);
   // clang-format on
+
+  group_command_dispatch = NULL;
+  uic_mqtt_subscribe_Stub(&uic_mqtt_subscribe_stub);
 
   // Call init
   TEST_ASSERT_EQUAL(SL_STATUS_OK, unify_dotdot_attribute_store_init());
@@ -3929,19 +3823,6 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_time_local_time(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_time_last_set_time(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_time_valid_until_time(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_upgrade_serverid(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_file_offset(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_current_file_version(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_current_zig_bee_stack_version(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_downloaded_file_version(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_downloaded_zig_bee_stack_version(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_image_upgrade_status(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_manufacturerid(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_image_typeid(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_minimum_block_period(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_image_stamp(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_upgrade_activation_policy(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_ota_upgrade_upgrade_timeout_policy(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_poll_control_check_in_interval(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_poll_control_long_poll_interval(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_poll_control_short_poll_interval(expected_unid,expected_endpoint_id) );
@@ -4447,6 +4328,10 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_protocol_controller_rf_telemetry_tx_report_enabled(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_protocol_controller_rf_telemetry_pti_enabled(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_state_endpoint_id_list(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_state_network_status(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_state_security(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_state_maximum_command_delay(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_state_network_list(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_binding_binding_table_full(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_binding_bindable_cluster_list(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_binding_binding_table(expected_unid,expected_endpoint_id) );
@@ -5407,316 +5292,6 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_alarms_reset_alarm_log_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback) {
-    // Dummy command parameters
-      ImageNotifyPayloadType payload_type_value;
-      memset(&payload_type_value, 0x00, sizeof(payload_type_value));
-      uint8_t query_jitter_value;
-      memset(&query_jitter_value, 0x00, sizeof(query_jitter_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      uint16_t image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t new_file_version_value;
-      memset(&new_file_version_value, 0x00, sizeof(new_file_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        payload_type_value,
-      
-        query_jitter_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        new_file_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback) {
-    // Dummy command parameters
-      uint8_t field_control_value;
-      memset(&field_control_value, 0x00, sizeof(field_control_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t current_file_version_value;
-      memset(&current_file_version_value, 0x00, sizeof(current_file_version_value));
-      uint16_t hardware_version_value;
-      memset(&hardware_version_value, 0x00, sizeof(hardware_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        field_control_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        current_file_version_value,
-      
-        hardware_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t image_size_value;
-      memset(&image_size_value, 0x00, sizeof(image_size_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        image_size_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback) {
-    // Dummy command parameters
-      uint8_t field_control_value;
-      memset(&field_control_value, 0x00, sizeof(field_control_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t file_offset_value;
-      memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-      uint8_t maximum_data_size_value;
-      memset(&maximum_data_size_value, 0x00, sizeof(maximum_data_size_value));
-      EUI64 request_node_address_value;
-      memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-      uint16_t minimum_block_period_value;
-      memset(&minimum_block_period_value, 0x00, sizeof(minimum_block_period_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        field_control_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        file_offset_value,
-      
-        maximum_data_size_value,
-      
-        request_node_address_value,
-      
-        minimum_block_period_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback) {
-    // Dummy command parameters
-      uint8_t field_control_value;
-      memset(&field_control_value, 0x00, sizeof(field_control_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t file_offset_value;
-      memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-      uint8_t maximum_data_size_value;
-      memset(&maximum_data_size_value, 0x00, sizeof(maximum_data_size_value));
-      uint16_t page_size_value;
-      memset(&page_size_value, 0x00, sizeof(page_size_value));
-      uint16_t response_spacing_value;
-      memset(&response_spacing_value, 0x00, sizeof(response_spacing_value));
-      EUI64 request_node_address_value;
-      memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        field_control_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        file_offset_value,
-      
-        maximum_data_size_value,
-      
-        page_size_value,
-      
-        response_spacing_value,
-      
-        request_node_address_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t file_offset_value;
-      memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-      const char* image_data_value;
-      memset(&image_data_value, 0x00, sizeof(image_data_value));
-      uint32_t current_time_value;
-      memset(&current_time_value, 0x00, sizeof(current_time_value));
-      uint32_t request_time_value;
-      memset(&request_time_value, 0x00, sizeof(request_time_value));
-      uint16_t minimum_block_period_value;
-      memset(&minimum_block_period_value, 0x00, sizeof(minimum_block_period_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        file_offset_value,
-      
-        image_data_value,
-      
-        current_time_value,
-      
-        request_time_value,
-      
-        minimum_block_period_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback) {
-    // Dummy command parameters
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      UTC current_time_value;
-      memset(&current_time_value, 0x00, sizeof(current_time_value));
-      UTC upgrade_time_value;
-      memset(&upgrade_time_value, 0x00, sizeof(upgrade_time_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        current_time_value,
-      
-        upgrade_time_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback) {
-    // Dummy command parameters
-      EUI64 request_node_address_value;
-      memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTADeviceSpecificImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint16_t current_zigbee_stack_version_value;
-      memset(&current_zigbee_stack_version_value, 0x00, sizeof(current_zigbee_stack_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        request_node_address_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        current_zigbee_stack_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTADeviceSpecificImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t image_size_value;
-      memset(&image_size_value, 0x00, sizeof(image_size_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        image_size_value
       
       ));
   }
@@ -7610,6 +7185,13 @@ void test_automatic_deduction_of_supported_commands()
       
       ));
   }
+  if (NULL != test_uic_mqtt_dotdot_state_discover_security_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_state_discover_security_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
   if (NULL != test_uic_mqtt_dotdot_binding_bind_callback) {
     // Dummy command parameters
       const char* cluster_name_value;
@@ -8695,316 +8277,6 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_alarms_reset_alarm_log_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback) {
-    // Dummy command parameters
-      ImageNotifyPayloadType payload_type_value;
-      memset(&payload_type_value, 0x00, sizeof(payload_type_value));
-      uint8_t query_jitter_value;
-      memset(&query_jitter_value, 0x00, sizeof(query_jitter_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      uint16_t image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t new_file_version_value;
-      memset(&new_file_version_value, 0x00, sizeof(new_file_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_image_notify_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        payload_type_value,
-      
-        query_jitter_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        new_file_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback) {
-    // Dummy command parameters
-      uint8_t field_control_value;
-      memset(&field_control_value, 0x00, sizeof(field_control_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t current_file_version_value;
-      memset(&current_file_version_value, 0x00, sizeof(current_file_version_value));
-      uint16_t hardware_version_value;
-      memset(&hardware_version_value, 0x00, sizeof(hardware_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        field_control_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        current_file_version_value,
-      
-        hardware_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t image_size_value;
-      memset(&image_size_value, 0x00, sizeof(image_size_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        image_size_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback) {
-    // Dummy command parameters
-      uint8_t field_control_value;
-      memset(&field_control_value, 0x00, sizeof(field_control_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t file_offset_value;
-      memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-      uint8_t maximum_data_size_value;
-      memset(&maximum_data_size_value, 0x00, sizeof(maximum_data_size_value));
-      EUI64 request_node_address_value;
-      memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-      uint16_t minimum_block_period_value;
-      memset(&minimum_block_period_value, 0x00, sizeof(minimum_block_period_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        field_control_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        file_offset_value,
-      
-        maximum_data_size_value,
-      
-        request_node_address_value,
-      
-        minimum_block_period_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback) {
-    // Dummy command parameters
-      uint8_t field_control_value;
-      memset(&field_control_value, 0x00, sizeof(field_control_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t file_offset_value;
-      memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-      uint8_t maximum_data_size_value;
-      memset(&maximum_data_size_value, 0x00, sizeof(maximum_data_size_value));
-      uint16_t page_size_value;
-      memset(&page_size_value, 0x00, sizeof(page_size_value));
-      uint16_t response_spacing_value;
-      memset(&response_spacing_value, 0x00, sizeof(response_spacing_value));
-      EUI64 request_node_address_value;
-      memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        field_control_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        file_offset_value,
-      
-        maximum_data_size_value,
-      
-        page_size_value,
-      
-        response_spacing_value,
-      
-        request_node_address_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t file_offset_value;
-      memset(&file_offset_value, 0x00, sizeof(file_offset_value));
-      const char* image_data_value;
-      memset(&image_data_value, 0x00, sizeof(image_data_value));
-      uint32_t current_time_value;
-      memset(&current_time_value, 0x00, sizeof(current_time_value));
-      uint32_t request_time_value;
-      memset(&request_time_value, 0x00, sizeof(request_time_value));
-      uint16_t minimum_block_period_value;
-      memset(&minimum_block_period_value, 0x00, sizeof(minimum_block_period_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        file_offset_value,
-      
-        image_data_value,
-      
-        current_time_value,
-      
-        request_time_value,
-      
-        minimum_block_period_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback) {
-    // Dummy command parameters
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTAImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      UTC current_time_value;
-      memset(&current_time_value, 0x00, sizeof(current_time_value));
-      UTC upgrade_time_value;
-      memset(&upgrade_time_value, 0x00, sizeof(upgrade_time_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        current_time_value,
-      
-        upgrade_time_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback) {
-    // Dummy command parameters
-      EUI64 request_node_address_value;
-      memset(&request_node_address_value, 0x00, sizeof(request_node_address_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTADeviceSpecificImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint16_t current_zigbee_stack_version_value;
-      memset(&current_zigbee_stack_version_value, 0x00, sizeof(current_zigbee_stack_version_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        request_node_address_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        current_zigbee_stack_version_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback) {
-    // Dummy command parameters
-      zclStatus status_value;
-      memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t manufacturer_code_value;
-      memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
-      OTADeviceSpecificImageType image_type_value;
-      memset(&image_type_value, 0x00, sizeof(image_type_value));
-      uint32_t file_version_value;
-      memset(&file_version_value, 0x00, sizeof(file_version_value));
-      uint32_t image_size_value;
-      memset(&image_size_value, 0x00, sizeof(image_size_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        status_value,
-      
-        manufacturer_code_value,
-      
-        image_type_value,
-      
-        file_version_value,
-      
-        image_size_value
       
       ));
   }
@@ -10895,6 +10167,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_state_interview_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_state_discover_security_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_state_discover_security_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
       
       ));
   }

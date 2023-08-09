@@ -102,6 +102,12 @@ The state topic is a JSON object that MUST follow the following JSON Schema.
           "string"
         ],
         "pattern": "^(unknown)|(infinite)$"
+      },
+      "NetworkList": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
       }
     },
     "required": [
@@ -116,12 +122,13 @@ The properties in the JSON object of the state topic is shown in
 
 .. list-table:: MQTT Topic State topic attributes overview
   :name: table_unify_specifications_mqtt_topic_state_topic_attributes_overview
-  :widths: 20 50 20
+  :widths: 20 50 5 20
   :width: 80%
   :header-rows: 1
 
   * - Property name
     - Description
+    - Mandatory?
     - Example value
   * - NetworkStatus
     - Indicates if the node is part of the network or available in general.
@@ -131,6 +138,7 @@ The properties in the JSON object of the state topic is shown in
       during inclusion. More details about each value is provided in the
 
       :ref:`unify_specifications_chapter_service_discovery_network_status_section` section.
+    - Yes
     - "Online functional"
 
       "Online interviewing"
@@ -140,6 +148,12 @@ The properties in the JSON object of the state topic is shown in
       "Unavailable"
 
       "Offline"
+  * - Security
+    - Indicates the security protocol used by the node to join a network and exchange messages with other nodes.
+    - Yes
+    - "Z-Wave S0"
+
+      "None"
   * - MaximumCommandDelay
     - Indicates the maximum delay that it can take to deliver a command to the
 
@@ -148,11 +162,16 @@ The properties in the JSON object of the state topic is shown in
       "unknown", or "infinite". It can therefore either be a JSON number or
 
       JSON String.
+    - Yes
     - 4200
 
       "unknown"
 
       "infinite"
+  * - NetworkList
+    - Indicates the PAN(s) that the node has joined. This should contain an array of one or more unique network identifiers (Network IDs).
+    - No
+    - [ "1", "2", "3" ]
 
 So for example, when a new node joined the network and interview/setup is
 completed, the Protocol Controller MUST publish:
@@ -335,7 +354,7 @@ the following two topic filters:
 
 When an IoT Service receives publish messages, such as
 ``ucl/by-unid/98146584/ep10/OnOff/SupportedCommands``, it will then know that a
-Protocol Controller can service commands for the the OnOff Cluster for
+Protocol Controller can service commands for the OnOff Cluster for
 unid 98146584, endpoint 10.
 The MQTT Client can issue the cluster commands (e.g On) to the corresponding
 subtopic: ``ucl/by-unid/98146584/ep10/OnOff/Commands/On``.

@@ -213,6 +213,27 @@ eval_result_type<T> is_any_undefined(std::vector<eval_result_type<T>> &results)
   }
   return false;
 }
+
+/**
+ * @brief Computes the log10 of the first defined argument
+ *
+ * @tparam T          Type of the result.
+ * @param results     Vector of expressions results.
+ * @returns undefined value if if all expressions are undefined (do not have a value)
+ * @returns log10 value otherwise
+ */
+template<typename T>
+eval_result_type<T> log10(std::vector<eval_result_type<T>> &results)
+{
+  for (eval_result_type<T> &result: results) {
+    if (result) {
+      return std::log10(result.value());
+    }
+  }
+
+  // No luck finding a defined argument
+  return eval_result_type<T>();
+}
 /** @} end attribute_mapper_built_in_functions_definitions */
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -227,6 +248,7 @@ template<typename T> const mapper_function_map<T> built_in_functions = {
   {std::string("is_any_defined"), &is_any_defined<T>},
   {std::string("are_all_undefined"), &are_all_undefined<T>},
   {std::string("is_any_undefined"), &is_any_undefined<T>},
+  {std::string("log10"), &log10<T>},
 };
 
 template<typename T> const mapper_function_map<T> &get_built_in_functions()

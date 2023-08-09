@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /**
- * @defgroup unify_application_monitoring
+ * @defgroup unify_application_monitoring Unify Application Monitoring
  * @ingroup unify_components
  * @brief Helper components that assists with ApplicationMonitoring over MQTT.
  *

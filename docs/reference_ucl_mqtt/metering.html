@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ Metering/CurrentSummationDelivered Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentSummationDelivered attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentSummationDelivered/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentSummationDelivered/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentSummationDelivered/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_SUMMATION_DELIVERED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentSummationDelivered/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_SUMMATION_DELIVERED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentSummationDelivered/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_SUMMATION_DELIVERED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentSummationDelivered/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_SUMMATION_DELIVERED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ Metering/CurrentSummationReceived Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentSummationReceived attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentSummationReceived/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentSummationReceived/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentSummationReceived/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_SUMMATION_RECEIVED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentSummationReceived/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_SUMMATION_RECEIVED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentSummationReceived/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_SUMMATION_RECEIVED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentSummationReceived/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_SUMMATION_RECEIVED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ Metering/CurrentMaxDemandDelivered Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentMaxDemandDelivered attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandDelivered/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandDelivered/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandDelivered/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_DELIVERED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandDelivered/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_DELIVERED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandDelivered/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_DELIVERED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandDelivered/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_DELIVERED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ Metering/CurrentMaxDemandReceived Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentMaxDemandReceived attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandReceived/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandReceived/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandReceived/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_RECEIVED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandReceived/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_RECEIVED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandReceived/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_RECEIVED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandReceived/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_RECEIVED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ Metering/PowerFactor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PowerFactor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/PowerFactor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/PowerFactor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/PowerFactor/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/PowerFactor/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/PowerFactor/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/PowerFactor/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ Metering/ReadingSnapShotTime Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReadingSnapShotTime attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/ReadingSnapShotTime/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/ReadingSnapShotTime/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/ReadingSnapShotTime/Desired { &quot;value&quot;: &lt;DESIRED_READING_SNAP_SHOT_TIME&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/ReadingSnapShotTime/Reported { &quot;value&quot;: &lt;REPORTED_READING_SNAP_SHOT_TIME&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/ReadingSnapShotTime/Desired { &quot;value&quot;: &lt;DESIRED_READING_SNAP_SHOT_TIME&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/ReadingSnapShotTime/Reported { &quot;value&quot;: &lt;REPORTED_READING_SNAP_SHOT_TIME&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ Metering/CurrentMaxDemandDeliveredTime Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentMaxDemandDeliveredTime attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandDeliveredTime/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandDeliveredTime/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandDeliveredTime/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_DELIVERED_TIME&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandDeliveredTime/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_DELIVERED_TIME&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandDeliveredTime/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_DELIVERED_TIME&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandDeliveredTime/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_DELIVERED_TIME&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ Metering/CurrentMaxDemandReceivedTime Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentMaxDemandReceivedTime attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandReceivedTime/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandReceivedTime/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandReceivedTime/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_RECEIVED_TIME&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentMaxDemandReceivedTime/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_RECEIVED_TIME&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandReceivedTime/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_MAX_DEMAND_RECEIVED_TIME&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentMaxDemandReceivedTime/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_MAX_DEMAND_RECEIVED_TIME&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ Metering/DefaultUpdatePeriod Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DefaultUpdatePeriod attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/DefaultUpdatePeriod/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/DefaultUpdatePeriod/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/DefaultUpdatePeriod/Desired { &quot;value&quot;: &lt;DESIRED_DEFAULT_UPDATE_PERIOD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/DefaultUpdatePeriod/Reported { &quot;value&quot;: &lt;REPORTED_DEFAULT_UPDATE_PERIOD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/DefaultUpdatePeriod/Desired { &quot;value&quot;: &lt;DESIRED_DEFAULT_UPDATE_PERIOD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/DefaultUpdatePeriod/Reported { &quot;value&quot;: &lt;REPORTED_DEFAULT_UPDATE_PERIOD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ Metering/SupplyStatus Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SupplyStatus attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/SupplyStatus/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/SupplyStatus/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/SupplyStatus/Desired { &quot;value&quot;: &lt;DESIRED_SUPPLY_STATUS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/SupplyStatus/Reported { &quot;value&quot;: &lt;REPORTED_SUPPLY_STATUS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/SupplyStatus/Desired { &quot;value&quot;: &lt;DESIRED_SUPPLY_STATUS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/SupplyStatus/Reported { &quot;value&quot;: &lt;REPORTED_SUPPLY_STATUS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ Metering/CurrentInletEnergyCarrierSummation Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentInletEnergyCarrierSummation attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentInletEnergyCarrierSummation/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentInletEnergyCarrierSummation/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentInletEnergyCarrierSummation/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentInletEnergyCarrierSummation/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentInletEnergyCarrierSummation/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentInletEnergyCarrierSummation/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ Metering/CurrentOutletEnergyCarrierSummation Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CurrentOutletEnergyCarrierSummation attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentOutletEnergyCarrierSummation/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/CurrentOutletEnergyCarrierSummation/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Desired { &quot;value&quot;: &lt;DESIRED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Reported { &quot;value&quot;: &lt;REPORTED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ Metering/InletTemperature Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for InletTemperature attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/InletTemperature/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/InletTemperature/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/InletTemperature/Desired { &quot;value&quot;: &lt;DESIRED_INLET_TEMPERATURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/InletTemperature/Reported { &quot;value&quot;: &lt;REPORTED_INLET_TEMPERATURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/InletTemperature/Desired { &quot;value&quot;: &lt;DESIRED_INLET_TEMPERATURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/InletTemperature/Reported { &quot;value&quot;: &lt;REPORTED_INLET_TEMPERATURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ Metering/OutletTemperature Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OutletTemperature attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/OutletTemperature/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/OutletTemperature/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/OutletTemperature/Desired { &quot;value&quot;: &lt;DESIRED_OUTLET_TEMPERATURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/OutletTemperature/Reported { &quot;value&quot;: &lt;REPORTED_OUTLET_TEMPERATURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/OutletTemperature/Desired { &quot;value&quot;: &lt;DESIRED_OUTLET_TEMPERATURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/OutletTemperature/Reported { &quot;value&quot;: &lt;REPORTED_OUTLET_TEMPERATURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ Metering/UnitofMeasure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for UnitofMeasure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/UnitofMeasure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/UnitofMeasure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/UnitofMeasure/Desired { &quot;value&quot;: &lt;DESIRED_UNITOF_MEASURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/UnitofMeasure/Reported { &quot;value&quot;: &lt;REPORTED_UNITOF_MEASURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/UnitofMeasure/Desired { &quot;value&quot;: &lt;DESIRED_UNITOF_MEASURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/UnitofMeasure/Reported { &quot;value&quot;: &lt;REPORTED_UNITOF_MEASURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ Metering/Multiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Multiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/Multiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/Multiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/Multiplier/Desired { &quot;value&quot;: &lt;DESIRED_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/Multiplier/Reported { &quot;value&quot;: &lt;REPORTED_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/Multiplier/Desired { &quot;value&quot;: &lt;DESIRED_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/Multiplier/Reported { &quot;value&quot;: &lt;REPORTED_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ Metering/Divisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Divisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/Divisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/Divisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/Divisor/Desired { &quot;value&quot;: &lt;DESIRED_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/Divisor/Reported { &quot;value&quot;: &lt;REPORTED_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/Divisor/Desired { &quot;value&quot;: &lt;DESIRED_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/Divisor/Reported { &quot;value&quot;: &lt;REPORTED_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ Metering/SummationFormatting Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SummationFormatting attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/SummationFormatting/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/SummationFormatting/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/SummationFormatting/Desired { &quot;value&quot;: &lt;DESIRED_SUMMATION_FORMATTING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/SummationFormatting/Reported { &quot;value&quot;: &lt;REPORTED_SUMMATION_FORMATTING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/SummationFormatting/Desired { &quot;value&quot;: &lt;DESIRED_SUMMATION_FORMATTING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/SummationFormatting/Reported { &quot;value&quot;: &lt;REPORTED_SUMMATION_FORMATTING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ Metering/DemandFormatting Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DemandFormatting attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/DemandFormatting/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/DemandFormatting/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/DemandFormatting/Desired { &quot;value&quot;: &lt;DESIRED_DEMAND_FORMATTING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/DemandFormatting/Reported { &quot;value&quot;: &lt;REPORTED_DEMAND_FORMATTING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/DemandFormatting/Desired { &quot;value&quot;: &lt;DESIRED_DEMAND_FORMATTING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/DemandFormatting/Reported { &quot;value&quot;: &lt;REPORTED_DEMAND_FORMATTING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ Metering/HistoricalConsumptionFormatting Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for HistoricalConsumptionFormatting attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/HistoricalConsumptionFormatting/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/HistoricalConsumptionFormatting/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/HistoricalConsumptionFormatting/Desired { &quot;value&quot;: &lt;DESIRED_HISTORICAL_CONSUMPTION_FORMATTING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/HistoricalConsumptionFormatting/Reported { &quot;value&quot;: &lt;REPORTED_HISTORICAL_CONSUMPTION_FORMATTING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/HistoricalConsumptionFormatting/Desired { &quot;value&quot;: &lt;DESIRED_HISTORICAL_CONSUMPTION_FORMATTING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/HistoricalConsumptionFormatting/Reported { &quot;value&quot;: &lt;REPORTED_HISTORICAL_CONSUMPTION_FORMATTING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ Metering/MeteringDeviceType Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeteringDeviceType attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/MeteringDeviceType/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/MeteringDeviceType/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/MeteringDeviceType/Desired { &quot;value&quot;: &lt;DESIRED_METERING_DEVICE_TYPE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/MeteringDeviceType/Reported { &quot;value&quot;: &lt;REPORTED_METERING_DEVICE_TYPE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/MeteringDeviceType/Desired { &quot;value&quot;: &lt;DESIRED_METERING_DEVICE_TYPE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/MeteringDeviceType/Reported { &quot;value&quot;: &lt;REPORTED_METERING_DEVICE_TYPE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -705,10 +747,12 @@ Metering/EnergyCarrierUnitOfMeasure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EnergyCarrierUnitOfMeasure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierUnitOfMeasure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/EnergyCarrierUnitOfMeasure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierUnitOfMeasure/Desired { &quot;value&quot;: &lt;DESIRED_ENERGY_CARRIER_UNIT_OF_MEASURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierUnitOfMeasure/Reported { &quot;value&quot;: &lt;REPORTED_ENERGY_CARRIER_UNIT_OF_MEASURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/EnergyCarrierUnitOfMeasure/Desired { &quot;value&quot;: &lt;DESIRED_ENERGY_CARRIER_UNIT_OF_MEASURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/EnergyCarrierUnitOfMeasure/Reported { &quot;value&quot;: &lt;REPORTED_ENERGY_CARRIER_UNIT_OF_MEASURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -733,10 +777,12 @@ Metering/EnergyCarrierSummationFormatting Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EnergyCarrierSummationFormatting attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierSummationFormatting/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/EnergyCarrierSummationFormatting/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierSummationFormatting/Desired { &quot;value&quot;: &lt;DESIRED_ENERGY_CARRIER_SUMMATION_FORMATTING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierSummationFormatting/Reported { &quot;value&quot;: &lt;REPORTED_ENERGY_CARRIER_SUMMATION_FORMATTING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/EnergyCarrierSummationFormatting/Desired { &quot;value&quot;: &lt;DESIRED_ENERGY_CARRIER_SUMMATION_FORMATTING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/EnergyCarrierSummationFormatting/Reported { &quot;value&quot;: &lt;REPORTED_ENERGY_CARRIER_SUMMATION_FORMATTING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -761,10 +807,12 @@ Metering/EnergyCarrierDemandFormatting Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EnergyCarrierDemandFormatting attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierDemandFormatting/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/EnergyCarrierDemandFormatting/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierDemandFormatting/Desired { &quot;value&quot;: &lt;DESIRED_ENERGY_CARRIER_DEMAND_FORMATTING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/EnergyCarrierDemandFormatting/Reported { &quot;value&quot;: &lt;REPORTED_ENERGY_CARRIER_DEMAND_FORMATTING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/EnergyCarrierDemandFormatting/Desired { &quot;value&quot;: &lt;DESIRED_ENERGY_CARRIER_DEMAND_FORMATTING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/EnergyCarrierDemandFormatting/Reported { &quot;value&quot;: &lt;REPORTED_ENERGY_CARRIER_DEMAND_FORMATTING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -789,10 +837,12 @@ Metering/TemperatureUnitOfMeasure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for TemperatureUnitOfMeasure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/TemperatureUnitOfMeasure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/TemperatureUnitOfMeasure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/TemperatureUnitOfMeasure/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_UNIT_OF_MEASURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/TemperatureUnitOfMeasure/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_UNIT_OF_MEASURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/TemperatureUnitOfMeasure/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_UNIT_OF_MEASURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/TemperatureUnitOfMeasure/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_UNIT_OF_MEASURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -817,10 +867,12 @@ Metering/TemperatureFormatting Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for TemperatureFormatting attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/TemperatureFormatting/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/Metering/Attributes/TemperatureFormatting/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/TemperatureFormatting/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_FORMATTING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Attributes/TemperatureFormatting/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_FORMATTING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/TemperatureFormatting/Desired { &quot;value&quot;: &lt;DESIRED_TEMPERATURE_FORMATTING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/Metering/Attributes/TemperatureFormatting/Reported { &quot;value&quot;: &lt;REPORTED_TEMPERATURE_FORMATTING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -913,7 +965,7 @@ Metering/WriteAttributes Command</h2>
 <p>To update all Metering attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/Metering/Commands/WriteAttributes&#39; -m  &#39;{  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -982,7 +1034,7 @@ Metering/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

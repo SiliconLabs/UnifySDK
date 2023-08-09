@@ -185,39 +185,70 @@ void setUp()
   zwave_command_class_version_init_verification();
 }
 
-void test_on_zwave_cc_version_version_attribute_update()
+void test_on_zwave_cc_version_version_attribute_update_endpoint_0()
+{
+  // Create Command Class Version attribute under the endpoint 0:
+  attribute_store_node_t endpoint_0_node
+    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
+  const zwave_endpoint_id_t endpoint_0 = 0;
+  attribute_store_set_reported(endpoint_0_node,
+                               &endpoint_0,
+                               sizeof(endpoint_0));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(endpoint_0_node));
+
+  // Nothing should happen on creation, missing value.
+  attribute_store_node_t test_version_node
+    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_VERSION_VERSION,
+                               endpoint_0_node);
+
+  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_0_node));
+
+  // Nothing happens either if no value is defined.
+  u8_value = 1;
+  attribute_store_set_reported(test_version_node, &u8_value, sizeof(u8_value));
+  TEST_ASSERT_EQUAL(2, attribute_store_get_node_child_count(endpoint_0_node));
+
+  u8_value = 3;
+  attribute_store_set_reported(test_version_node, &u8_value, sizeof(u8_value));
+  TEST_ASSERT_EQUAL(3, attribute_store_get_node_child_count(endpoint_0_node));
+
+  // Delete all these attributes
+  attribute_store_delete_node(
+    attribute_store_get_node_child_by_type(endpoint_0_node,
+                                           ATTRIBUTE(VERSION_REPORT_DATA),
+                                           0));
+  attribute_store_delete_node(attribute_store_get_node_child_by_type(
+    endpoint_0_node,
+    ATTRIBUTE(ZWAVE_SOFTWARE_GET_SUPPORT),
+    0));
+
+  // Delete the test_node, nothing should be created again.
+  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_0_node));
+  attribute_store_delete_node(test_version_node);
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(endpoint_0_node));
+}
+
+void test_on_zwave_cc_version_version_attribute_update_endpoint_3()
 {
   // Create Command Class Version attribute under the endpoint:
   TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(endpoint_id_node));
 
-  // Nothing should happen on creation, missing value.
+  // Nothing will happen with endpoints > 0
   attribute_store_node_t test_version_node
     = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_VERSION_VERSION,
                                endpoint_id_node);
 
   TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
 
-  // Nothing happens either if no value is defined.
   u8_value = 1;
   attribute_store_set_reported(test_version_node, &u8_value, sizeof(u8_value));
-  TEST_ASSERT_EQUAL(2, attribute_store_get_node_child_count(endpoint_id_node));
+  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
 
   u8_value = 3;
   attribute_store_set_reported(test_version_node, &u8_value, sizeof(u8_value));
-  TEST_ASSERT_EQUAL(3, attribute_store_get_node_child_count(endpoint_id_node));
-
-  // Delete all these attributes
-  attribute_store_delete_node(
-    attribute_store_get_node_child_by_type(endpoint_id_node,
-                                           ATTRIBUTE(VERSION_REPORT_DATA),
-                                           0));
-  attribute_store_delete_node(attribute_store_get_node_child_by_type(
-    endpoint_id_node,
-    ATTRIBUTE(ZWAVE_SOFTWARE_GET_SUPPORT),
-    0));
+  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
 
   // Delete the test_node, nothing should be created again.
-  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
   attribute_store_delete_node(test_version_node);
   TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(endpoint_id_node));
 }

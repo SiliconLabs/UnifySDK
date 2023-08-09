@@ -2,6 +2,7 @@
 , cpcd
 , common
 , libunify
+  , zw-libs2
 , ths-unity
 }:
 with pkgs;
@@ -41,6 +42,7 @@ with pkgs;
     "-DCMAKE_INSTALL_PREFIX=install"
     "-DTHS-UNITY_LOCATION=${ths-unity}"
     "-DCOMMON_LOCATION=${common}"
+    "-DZW-LIBS2_LOCATION=${zw-libs2.packages.${system}.zw-libs2}"
     "-DUNIFY-TESTFRAMEWORK_LOCATION=${libunify.testframework}"
     "-DLIBUNIFY_LOCATION=${libunify}"
     "-DBUILD_TESTING=OFF"

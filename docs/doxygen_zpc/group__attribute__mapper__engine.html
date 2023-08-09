@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -107,9 +107,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:gaeaad976733ee1551c5313cb5a712e8a0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a> = std::multimap&lt; int, std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;, <a class="el" href="structscope__priority__compare.html">scope_priority_compare</a> &gt;</td></tr>
 <tr class="memdesc:gaeaad976733ee1551c5313cb5a712e8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of unique assignments, sorted by their scope priority.  <a href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">More...</a><br /></td></tr>
 <tr class="separator:gaeaad976733ee1551c5313cb5a712e8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa05df914b34c1ce2fd2f17be82265494"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__engine.html#gaa05df914b34c1ce2fd2f17be82265494">assignments_to_run_t</a> = std::map&lt; attribute_store::attribute, <a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a> &gt;</td></tr>
-<tr class="memdesc:gaa05df914b34c1ce2fd2f17be82265494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of equivalent assignments associated with a destination attributes.  <a href="group__attribute__mapper__engine.html#gaa05df914b34c1ce2fd2f17be82265494">More...</a><br /></td></tr>
-<tr class="separator:gaa05df914b34c1ce2fd2f17be82265494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga48d8ceb6fb6814122865d274026d7469"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__engine.html#ga48d8ceb6fb6814122865d274026d7469">assignments_to_run_t</a> = std::map&lt; std::tuple&lt; attribute_store::attribute, char, int &gt;, <a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a> &gt;</td></tr>
+<tr class="memdesc:ga48d8ceb6fb6814122865d274026d7469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of equivalent assignments associated with a destination attributes. Associates an attribute and its value type to a list of assigments The tuple represents: destination, value_type, assignment type.  <a href="group__attribute__mapper__engine.html#ga48d8ceb6fb6814122865d274026d7469">More...</a><br /></td></tr>
+<tr class="separator:ga48d8ceb6fb6814122865d274026d7469"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8464bd651a8a81b4945ae593ff47661c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__engine.html#ga8464bd651a8a81b4945ae593ff47661c">assignment_properties_t</a> = std::tuple&lt; int, char, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> &gt;</td></tr>
 <tr class="memdesc:ga8464bd651a8a81b4945ae593ff47661c"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment_properties_t keeps track of various  <a href="group__attribute__mapper__engine.html#ga8464bd651a8a81b4945ae593ff47661c">More...</a><br /></td></tr>
 <tr class="separator:ga8464bd651a8a81b4945ae593ff47661c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,19 +138,19 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a id="gaa05df914b34c1ce2fd2f17be82265494"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa05df914b34c1ce2fd2f17be82265494">&#9670;&nbsp;</a></span>assignments_to_run_t</h2>
+<a id="ga48d8ceb6fb6814122865d274026d7469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga48d8ceb6fb6814122865d274026d7469">&#9670;&nbsp;</a></span>assignments_to_run_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__attribute__mapper__engine.html#gaa05df914b34c1ce2fd2f17be82265494">assignments_to_run_t</a> =  std::map&lt;attribute_store::attribute, <a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a>&gt;</td>
+          <td class="memname">using <a class="el" href="group__attribute__mapper__engine.html#ga48d8ceb6fb6814122865d274026d7469">assignments_to_run_t</a> =  std::map&lt;std::tuple&lt;attribute_store::attribute, char, int&gt;, <a class="el" href="group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0">equivalent_assignments_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Map of equivalent assignments associated with a destination attributes. </p>
+<p>Map of equivalent assignments associated with a destination attributes. Associates an attribute and its value type to a list of assigments The tuple represents: destination, value_type, assignment type. </p>
 
 </div>
 </div>
@@ -175,7 +175,7 @@ Typedefs</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:03 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

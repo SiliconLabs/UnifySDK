@@ -71,6 +71,12 @@ typedef struct {
 } attribute_resolver_config_t;
 
 /**
+ * Maximum size of the buffer that allows to copy rule frames
+ *
+ */
+#define MAX_FRAME_LEN 255
+
+/**
  * @brief Generator function for building PAN frames
  *
  * This function prototype is used by the rules engine to

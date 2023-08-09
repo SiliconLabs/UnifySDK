@@ -12,7 +12,8 @@
  *****************************************************************************/
 #include <list>
 
-
+#include <vector>
+#include <algorithm>
 // Unify shared components
 #include <sl_status.h>
 #include <sl_log.h>
@@ -27,6 +28,8 @@
 #include "zigpc_datastore_id.h"
 #include "zigpc_datastore_accessor.hpp"
 #include "zigpc_datastore_util.hpp"
+
+
 
 /**********************************
  **********************************
@@ -107,6 +110,12 @@ sl_status_t zigpc_datastore_read_device(const zigbee_eui64_t eui64,
   DeviceAccessor device;
 
   return device.read(parent, eui64_i, data);
+}
+
+bool zigpc_datastore_is_device_contained(zigbee_eui64_uint_t device_eui64){
+  std::vector<zigbee_eui64_uint_t> v_device = zigpc_datastore::device::get_id_list();
+  bool is_contained = (std::find(v_device.begin(),v_device.end(), device_eui64 ) != v_device.end());
+  return is_contained;
 }
 
 sl_status_t zigpc_datastore_write_device(const zigbee_eui64_t eui64,

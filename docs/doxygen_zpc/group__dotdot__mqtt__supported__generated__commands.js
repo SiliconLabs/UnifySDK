@@ -85,19 +85,6 @@ var group__dotdot__mqtt__supported__generated__commands =
     [ "_uic_mqtt_dotdot_time_supported_commands_", "struct__uic__mqtt__dotdot__time__supported__commands__.html", [
       [ "write_attributes", "struct__uic__mqtt__dotdot__time__supported__commands__.html#a8946292992429c03d1143d3c746ef129", null ]
     ] ],
-    [ "_uic_mqtt_dotdot_ota_upgrade_supported_commands_", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html", [
-      [ "image_block_request", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a5982e9d52af2f502214fbf919585af2c", null ],
-      [ "image_block_response", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a3b03a459ea0618589265a0730c4a583a", null ],
-      [ "image_notify", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a72075f634c58b0dbac4a9b59ab174b92", null ],
-      [ "image_page_request", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a619536a6f6f13f5e33fc2b751bcd27c4", null ],
-      [ "query_device_specific_file_request", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a7cde373be2ac517a77e701fc0f33a470", null ],
-      [ "query_device_specific_file_response", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#aaa82f308d8185b70b8c0792da8f51d36", null ],
-      [ "query_next_image_request", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#ac5310782c5192b37c2172be7571d2342", null ],
-      [ "query_next_image_response", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a50fad09d81eb98970e8e5a536f800377", null ],
-      [ "upgrade_end_request", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a460a6a12a209c0b6b4ced3af3be765a9", null ],
-      [ "upgrade_end_response", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#aef0cfcd7841f7fecff37628038908602", null ],
-      [ "write_attributes", "struct__uic__mqtt__dotdot__ota__upgrade__supported__commands__.html#a36a0d22f35647f7a5f4918372a75a2b6", null ]
-    ] ],
     [ "_uic_mqtt_dotdot_poll_control_supported_commands_", "struct__uic__mqtt__dotdot__poll__control__supported__commands__.html", [
       [ "check_in", "struct__uic__mqtt__dotdot__poll__control__supported__commands__.html#ad52db15b40972be080afcea912f08c83", null ],
       [ "check_in_response", "struct__uic__mqtt__dotdot__poll__control__supported__commands__.html#a35bc7a5da94b43f83aa7fdfc96733b14", null ],
@@ -302,6 +289,7 @@ var group__dotdot__mqtt__supported__generated__commands =
     ] ],
     [ "_uic_mqtt_dotdot_state_supported_commands_", "struct__uic__mqtt__dotdot__state__supported__commands__.html", [
       [ "discover_neighbors", "struct__uic__mqtt__dotdot__state__supported__commands__.html#ac57e9c0890c59c20aa23d2caad3b6065", null ],
+      [ "discover_security", "struct__uic__mqtt__dotdot__state__supported__commands__.html#aed781af5756db29c20f29327b076129c", null ],
       [ "interview", "struct__uic__mqtt__dotdot__state__supported__commands__.html#a7bbde7864067026fbc59b8e2212e89aa", null ],
       [ "remove", "struct__uic__mqtt__dotdot__state__supported__commands__.html#a90f0690821676ec7b5a4e98df347cbb4", null ],
       [ "remove_offline", "struct__uic__mqtt__dotdot__state__supported__commands__.html#a00ecfa31bd6b41011eaf4e0f1b4d455c", null ],
@@ -375,7 +363,6 @@ var group__dotdot__mqtt__supported__generated__commands =
     [ "uic_mqtt_dotdot_name_and_location_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#gaef3ba147e1b2c2c1f2da944e8a7f3d9c", null ],
     [ "uic_mqtt_dotdot_occupancy_sensing_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga40969545b4ed20a555229ab55b4bc0e5", null ],
     [ "uic_mqtt_dotdot_on_off_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga791038c17767bbc8363f88701fbf15e3", null ],
-    [ "uic_mqtt_dotdot_ota_upgrade_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga9f55ef8e16e87cf29713d68885599165", null ],
     [ "uic_mqtt_dotdot_ph_measurement_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga251e22975985cfb335999a33257c4a27", null ],
     [ "uic_mqtt_dotdot_pm25_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga93ad3ced7b01ade8f03bd437936d6f1f", null ],
     [ "uic_mqtt_dotdot_poll_control_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga4d137742100004f7deb600228a30c96d", null ],
@@ -427,7 +414,6 @@ var group__dotdot__mqtt__supported__generated__commands =
     [ "uic_mqtt_dotdot_name_and_location_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga27f4ea61541b19d64babb98e06a0b524", null ],
     [ "uic_mqtt_dotdot_occupancy_sensing_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gad32cca60c34eb0b7cbe2a5fe33a6e3fb", null ],
     [ "uic_mqtt_dotdot_on_off_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga43cc597ed7f7b8f643fbb28574e7ac77", null ],
-    [ "uic_mqtt_dotdot_ota_upgrade_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gac6f606108ac141a7b89ecd169a9a7fc3", null ],
     [ "uic_mqtt_dotdot_ph_measurement_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga5863e083c0e359360c9d6db459f95e09", null ],
     [ "uic_mqtt_dotdot_pm25_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga5bf440d3ce870538d29d4fcc0e622a09", null ],
     [ "uic_mqtt_dotdot_poll_control_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gaad452868a574cff1c860256fd4fefde6", null ],

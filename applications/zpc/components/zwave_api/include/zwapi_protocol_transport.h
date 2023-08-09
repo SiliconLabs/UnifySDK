@@ -117,6 +117,7 @@ extern "C" {
 /// Assign route transmit complete but no routes was found
 #define TRANSMIT_COMPLETE_NOROUTE  0x04
 #define TRANSMIT_COMPLETE_VERIFIED 0x05  ///< Verified delivery
+///@}
 
 /// @name ZW_REDISCOVERY_NEEDED callback values
 /// Note that they are different from zwapi_request_network_update() callbacks
@@ -248,7 +249,7 @@ typedef struct zwapi_tx_report {
  * @param lock bool true for lock entry, if false unlock entry
  * @returns sl_status_t
  *
- * @zgw_name ZW_LockRoute
+ * aka ZW_LockRoute
  */
 sl_status_t zwapi_lock_route(bool lock);
 
@@ -274,7 +275,7 @@ sl_status_t zwapi_lock_route(bool lock);
  * (zwapi_tx_report_t) is the transmit status report.
  * @returns sl_status_t
  *
- * @zgw_name ZW_SendData_Bridge
+ * aka ZW_SendData_Bridge
  */
 sl_status_t zwapi_send_data_bridge(
   zwave_node_id_t source_node_id,
@@ -308,7 +309,7 @@ sl_status_t zwapi_send_data_bridge(
  * @note: A bridge controller library MUST NOT send to a virtual node that
  * belongs to the bridge itself.
  *
- * @zgw_name ZW_SendData
+ * aka ZW_SendData
  */
 sl_status_t zwapi_send_data(zwave_node_id_t destination_node_id,
                             const uint8_t *data,
@@ -325,7 +326,7 @@ sl_status_t zwapi_send_data(zwave_node_id_t destination_node_id,
  * @note If an ongoing transmission is aborted, the callback function from the send
  * call will return with the status TRANSMIT_COMPLETE_NO_ACK.
  *
- * @zgw_name ZW_SendDataAbort
+ * aka ZW_SendDataAbort
  */
 sl_status_t zwapi_abort_send_data(void);
 
@@ -344,7 +345,7 @@ sl_status_t zwapi_abort_send_data(void);
  * Z-Wave API libraries can call it. In case of a bridge library, the function
  * will send from its actual NodeID.
  *
- * @zgw_name SerialAPI_ZW_SendDataMulti
+ * aka SerialAPI_ZW_SendDataMulti
  */
 sl_status_t zwapi_send_data_multi(zwave_nodemask_t destination_node_mask,
                                   const uint8_t *data,
@@ -369,7 +370,7 @@ sl_status_t zwapi_send_data_multi(zwave_nodemask_t destination_node_mask,
  * because the function zwapi_send_data_multi() is not available on a chip with
  * bridge controller library (which is what the ZPC uses).
  *
- * @zgw_name SerialAPI_ZW_SendDataMulti_Bridge
+ * aka SerialAPI_ZW_SendDataMulti_Bridge
  */
 sl_status_t
   zwapi_send_data_multi_bridge(zwave_node_id_t source_node_id,

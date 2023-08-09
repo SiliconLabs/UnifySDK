@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -94,6 +94,7 @@ $(document).ready(function(){initNavTree('zigpc__config_8c.html',''); initResiza
 <code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
 <code>#include &quot;uic_version.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__config_8h_source.html">zigpc_config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zigpc__config__validate_8h_source.html">zigpc_config_validate.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__config__fixt_8h_source.html">zigpc_config_fixt.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -128,12 +129,20 @@ Variables</h2></td></tr>
 <tr class="separator:ad6e1498ef0d3b291ae8434fae40ab242"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a351c937de4be1403b48bad7abeb5778c"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a351c937de4be1403b48bad7abeb5778c">CONFIG_KEY_ZIGPC_OTA_PATH</a> = &quot;zigpc.ota_path&quot;</td></tr>
 <tr class="separator:a351c937de4be1403b48bad7abeb5778c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7791ce7e12f8b8d4dd7d973db8253c34"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a7791ce7e12f8b8d4dd7d973db8253c34">ZIGPC_DEFAULT_OTA_PATH</a> = &quot;./ota-files/&quot;</td></tr>
+<tr class="memitem:a7791ce7e12f8b8d4dd7d973db8253c34"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a7791ce7e12f8b8d4dd7d973db8253c34">ZIGPC_DEFAULT_OTA_PATH</a> = UIC_VAR_DIR &quot;/ota-files/&quot;</td></tr>
 <tr class="separator:a7791ce7e12f8b8d4dd7d973db8253c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5242548808dc8bd7e4d5eb50fc8f0bdc"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a5242548808dc8bd7e4d5eb50fc8f0bdc">CONFIG_FLAG_ZIGPC_POLL_ATTR_ONLY</a> = &quot;zigpc.poll_attr_only&quot;</td></tr>
 <tr class="separator:a5242548808dc8bd7e4d5eb50fc8f0bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fdca44881420da5d2da08787d0f4113"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a8fdca44881420da5d2da08787d0f4113">DEFAULT_POLL_ATTR_ONLY</a> = true</td></tr>
 <tr class="separator:a8fdca44881420da5d2da08787d0f4113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200c6a726dbb504f6aaae5fdf49cf988"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a200c6a726dbb504f6aaae5fdf49cf988">CONFIG_USE_NETWORK_ARGS</a> = &quot;zigpc.use_network_args&quot;</td></tr>
+<tr class="separator:a200c6a726dbb504f6aaae5fdf49cf988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51b61026e533e0658f83437a5612b483"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a51b61026e533e0658f83437a5612b483">CONFIG_NETWORK_PANID</a> = &quot;zigpc.network_panid&quot;</td></tr>
+<tr class="separator:a51b61026e533e0658f83437a5612b483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2694d1ba96f738bc5f57d218bfe07108"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a2694d1ba96f738bc5f57d218bfe07108">CONFIG_NETWORK_RADIO_POW</a> = &quot;zigpc.network_radio_power&quot;</td></tr>
+<tr class="separator:a2694d1ba96f738bc5f57d218bfe07108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370efbe9a964c392f90164be70d12bbe"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a370efbe9a964c392f90164be70d12bbe">CONFIG_NETWORK_CHANNEL</a> = &quot;zigpc.network_channel&quot;</td></tr>
+<tr class="separator:a370efbe9a964c392f90164be70d12bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99382a15fdb218336b4a9f6c8585159d"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a99382a15fdb218336b4a9f6c8585159d">CONFIG_KEY_ZIGPC_POLLING_RATE</a> = &quot;zigpc.attr_polling_rate_ms&quot;</td></tr>
 <tr class="separator:a99382a15fdb218336b4a9f6c8585159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b69430639f93a76a62f373ff5f34d6b"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a9b69430639f93a76a62f373ff5f34d6b">ZIGPC_DEFAULT_POLLING_RATE_MS</a> = 10000</td></tr>
@@ -340,6 +349,94 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a370efbe9a964c392f90164be70d12bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a370efbe9a964c392f90164be70d12bbe">&#9670;&nbsp;</a></span>CONFIG_NETWORK_CHANNEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* CONFIG_NETWORK_CHANNEL = &quot;zigpc.network_channel&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51b61026e533e0658f83437a5612b483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51b61026e533e0658f83437a5612b483">&#9670;&nbsp;</a></span>CONFIG_NETWORK_PANID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* CONFIG_NETWORK_PANID = &quot;zigpc.network_panid&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2694d1ba96f738bc5f57d218bfe07108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2694d1ba96f738bc5f57d218bfe07108">&#9670;&nbsp;</a></span>CONFIG_NETWORK_RADIO_POW</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* CONFIG_NETWORK_RADIO_POW = &quot;zigpc.network_radio_power&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a200c6a726dbb504f6aaae5fdf49cf988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a200c6a726dbb504f6aaae5fdf49cf988">&#9670;&nbsp;</a></span>CONFIG_USE_NETWORK_ARGS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* CONFIG_USE_NETWORK_ARGS = &quot;zigpc.use_network_args&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8fdca44881420da5d2da08787d0f4113"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8fdca44881420da5d2da08787d0f4113">&#9670;&nbsp;</a></span>DEFAULT_POLL_ATTR_ONLY</h2>
 
@@ -438,7 +535,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* ZIGPC_DEFAULT_OTA_PATH = &quot;./ota-files/&quot;</td>
+          <td class="memname">const char* ZIGPC_DEFAULT_OTA_PATH = UIC_VAR_DIR &quot;/ota-files/&quot;</td>
         </tr>
       </table>
   </td>
@@ -478,7 +575,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_dfd589449ec80b8bfaf793b62bd7da62.html">zigpc_config</a></li><li class="navelem"><a class="el" href="dir_6ad7f00040ebed4321e5af4b28de275f.html">src</a></li><li class="navelem"><a class="el" href="zigpc__config_8c.html">zigpc_config.c</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:47 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:53 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

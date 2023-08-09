@@ -19,7 +19,7 @@ target_include_directories(
   PRIVATE src)
 target_link_libraries(
   network_monitor
-  INTERFACE zwave_definitions ucl_definitions
+  INTERFACE zwave_definitions
   PUBLIC zpc_attribute_store unify ucl_mqtt zcl_cluster_servers
   PRIVATE zwave_command_classes zwave_s2)
 

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ ElectricalMeasurement/MeasurementType Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeasurementType attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasurementType/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasurementType/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasurementType/Desired { &quot;value&quot;: &lt;DESIRED_MEASUREMENT_TYPE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasurementType/Reported { &quot;value&quot;: &lt;REPORTED_MEASUREMENT_TYPE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasurementType/Desired { &quot;value&quot;: &lt;DESIRED_MEASUREMENT_TYPE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasurementType/Reported { &quot;value&quot;: &lt;REPORTED_MEASUREMENT_TYPE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ ElectricalMeasurement/DCVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltage/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltage/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltage/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltage/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ ElectricalMeasurement/DCVoltageMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCVoltageMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMin/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMin/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageMin/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageMin/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ ElectricalMeasurement/DCVoltageMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCVoltageMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMax/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMax/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageMax/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageMax/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ ElectricalMeasurement/DCCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrent/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrent/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrent/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrent/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ ElectricalMeasurement/DCCurrentMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCCurrentMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMin/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMin/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentMin/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentMin/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ ElectricalMeasurement/DCCurrentMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCCurrentMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMax/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMax/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentMax/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentMax/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ ElectricalMeasurement/DCPower Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCPower attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPower/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPower/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPower/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPower/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPower/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPower/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ ElectricalMeasurement/DCPowerMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCPowerMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMin/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMin/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerMin/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerMin/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ ElectricalMeasurement/DCPowerMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCPowerMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMax/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMax/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerMax/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerMax/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ ElectricalMeasurement/DCVoltageMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCVoltageMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ ElectricalMeasurement/DCVoltageDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCVoltageDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageDivisor/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageDivisor/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageDivisor/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageDivisor/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ ElectricalMeasurement/DCCurrentMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCCurrentMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ ElectricalMeasurement/DCCurrentDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCCurrentDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentDivisor/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentDivisor/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentDivisor/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentDivisor/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ ElectricalMeasurement/DCPowerMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCPowerMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ ElectricalMeasurement/DCPowerDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCPowerDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerDivisor/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCPowerDivisor/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerDivisor/Desired { &quot;value&quot;: &lt;DESIRED_DC_POWER_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCPowerDivisor/Reported { &quot;value&quot;: &lt;REPORTED_DC_POWER_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ ElectricalMeasurement/ACFrequency Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACFrequency attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequency/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequency/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequency/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequency/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequency/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequency/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ ElectricalMeasurement/ACFrequencyMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACFrequencyMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMin/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMin/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyMin/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyMin/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ ElectricalMeasurement/ACFrequencyMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACFrequencyMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMax/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMax/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyMax/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyMax/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ ElectricalMeasurement/NeutralCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NeutralCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/NeutralCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/NeutralCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/NeutralCurrent/Desired { &quot;value&quot;: &lt;DESIRED_NEUTRAL_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/NeutralCurrent/Reported { &quot;value&quot;: &lt;REPORTED_NEUTRAL_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/NeutralCurrent/Desired { &quot;value&quot;: &lt;DESIRED_NEUTRAL_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/NeutralCurrent/Reported { &quot;value&quot;: &lt;REPORTED_NEUTRAL_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ ElectricalMeasurement/TotalActivePower Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for TotalActivePower attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalActivePower/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/TotalActivePower/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalActivePower/Desired { &quot;value&quot;: &lt;DESIRED_TOTAL_ACTIVE_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalActivePower/Reported { &quot;value&quot;: &lt;REPORTED_TOTAL_ACTIVE_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/TotalActivePower/Desired { &quot;value&quot;: &lt;DESIRED_TOTAL_ACTIVE_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/TotalActivePower/Reported { &quot;value&quot;: &lt;REPORTED_TOTAL_ACTIVE_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -705,10 +747,12 @@ ElectricalMeasurement/TotalReactivePower Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for TotalReactivePower attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalReactivePower/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/TotalReactivePower/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalReactivePower/Desired { &quot;value&quot;: &lt;DESIRED_TOTAL_REACTIVE_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalReactivePower/Reported { &quot;value&quot;: &lt;REPORTED_TOTAL_REACTIVE_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/TotalReactivePower/Desired { &quot;value&quot;: &lt;DESIRED_TOTAL_REACTIVE_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/TotalReactivePower/Reported { &quot;value&quot;: &lt;REPORTED_TOTAL_REACTIVE_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -733,10 +777,12 @@ ElectricalMeasurement/TotalApparentPower Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for TotalApparentPower attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalApparentPower/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/TotalApparentPower/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalApparentPower/Desired { &quot;value&quot;: &lt;DESIRED_TOTAL_APPARENT_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/TotalApparentPower/Reported { &quot;value&quot;: &lt;REPORTED_TOTAL_APPARENT_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/TotalApparentPower/Desired { &quot;value&quot;: &lt;DESIRED_TOTAL_APPARENT_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/TotalApparentPower/Reported { &quot;value&quot;: &lt;REPORTED_TOTAL_APPARENT_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -761,10 +807,12 @@ ElectricalMeasurement/Measured1stHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Measured1stHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED1ST_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED1ST_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED1ST_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED1ST_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -789,10 +837,12 @@ ElectricalMeasurement/Measured3rdHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Measured3rdHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED3RD_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED3RD_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED3RD_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED3RD_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -817,10 +867,12 @@ ElectricalMeasurement/Measured5thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Measured5thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED5TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED5TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED5TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED5TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -845,10 +897,12 @@ ElectricalMeasurement/Measured7thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Measured7thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED7TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED7TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED7TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED7TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -873,10 +927,12 @@ ElectricalMeasurement/Measured9thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Measured9thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED9TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED9TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED9TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED9TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -901,10 +957,12 @@ ElectricalMeasurement/Measured11thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Measured11thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED11TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED11TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED11TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED11TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -929,10 +987,12 @@ ElectricalMeasurement/MeasuredPhase1stHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeasuredPhase1stHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE1ST_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE1ST_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE1ST_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE1ST_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -957,10 +1017,12 @@ ElectricalMeasurement/MeasuredPhase3rdHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeasuredPhase3rdHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE3RD_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE3RD_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE3RD_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE3RD_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -985,10 +1047,12 @@ ElectricalMeasurement/MeasuredPhase5thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeasuredPhase5thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE5TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE5TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE5TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE5TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1013,10 +1077,12 @@ ElectricalMeasurement/MeasuredPhase7thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeasuredPhase7thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE7TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE7TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE7TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE7TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1041,10 +1107,12 @@ ElectricalMeasurement/MeasuredPhase9thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeasuredPhase9thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE9TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE9TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE9TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE9TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1069,10 +1137,12 @@ ElectricalMeasurement/MeasuredPhase11thHarmonicCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MeasuredPhase11thHarmonicCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE11TH_HARMONIC_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE11TH_HARMONIC_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Desired { &quot;value&quot;: &lt;DESIRED_MEASURED_PHASE11TH_HARMONIC_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Reported { &quot;value&quot;: &lt;REPORTED_MEASURED_PHASE11TH_HARMONIC_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1097,10 +1167,12 @@ ElectricalMeasurement/ACFrequencyMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACFrequencyMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1125,10 +1197,12 @@ ElectricalMeasurement/ACFrequencyDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACFrequencyDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_FREQUENCY_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_FREQUENCY_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1153,10 +1227,12 @@ ElectricalMeasurement/PowerMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PowerMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_POWER_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_POWER_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_POWER_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_POWER_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1181,10 +1257,12 @@ ElectricalMeasurement/PowerDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PowerDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerDivisor/Desired { &quot;value&quot;: &lt;DESIRED_POWER_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerDivisor/Reported { &quot;value&quot;: &lt;REPORTED_POWER_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerDivisor/Desired { &quot;value&quot;: &lt;DESIRED_POWER_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerDivisor/Reported { &quot;value&quot;: &lt;REPORTED_POWER_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1209,10 +1287,12 @@ ElectricalMeasurement/HarmonicCurrentMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for HarmonicCurrentMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_HARMONIC_CURRENT_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_HARMONIC_CURRENT_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_HARMONIC_CURRENT_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_HARMONIC_CURRENT_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1237,10 +1317,12 @@ ElectricalMeasurement/PhaseHarmonicCurrentMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PhaseHarmonicCurrentMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_PHASE_HARMONIC_CURRENT_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_PHASE_HARMONIC_CURRENT_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_PHASE_HARMONIC_CURRENT_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_PHASE_HARMONIC_CURRENT_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1265,10 +1347,12 @@ ElectricalMeasurement/LineCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LineCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/LineCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrent/Desired { &quot;value&quot;: &lt;DESIRED_LINE_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrent/Reported { &quot;value&quot;: &lt;REPORTED_LINE_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/LineCurrent/Desired { &quot;value&quot;: &lt;DESIRED_LINE_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/LineCurrent/Reported { &quot;value&quot;: &lt;REPORTED_LINE_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1293,10 +1377,12 @@ ElectricalMeasurement/ActiveCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActiveCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActiveCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrent/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrent/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActiveCurrent/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActiveCurrent/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1321,10 +1407,12 @@ ElectricalMeasurement/ReactiveCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReactiveCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactiveCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrent/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrent/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactiveCurrent/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactiveCurrent/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1349,10 +1437,12 @@ ElectricalMeasurement/RMSVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltage/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltage/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltage/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltage/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1377,10 +1467,12 @@ ElectricalMeasurement/RMSVoltageMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMin/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMin/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMin/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMin/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1405,10 +1497,12 @@ ElectricalMeasurement/RMSVoltageMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMax/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMax/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMax/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMax/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1433,10 +1527,12 @@ ElectricalMeasurement/RMSCurrent Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrent attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrent/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrent/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrent/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrent/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrent/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrent/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1461,10 +1557,12 @@ ElectricalMeasurement/RMSCurrentMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMin/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMin/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMin/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMin/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1489,10 +1587,12 @@ ElectricalMeasurement/RMSCurrentMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMax/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMax/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMax/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMax/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1517,10 +1617,12 @@ ElectricalMeasurement/ActivePower Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePower attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePower/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePower/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePower/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePower/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePower/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePower/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1545,10 +1647,12 @@ ElectricalMeasurement/ActivePowerMin Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerMin attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMin/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMin/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMin/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MIN&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMin/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MIN&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMin/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MIN&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMin/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MIN&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1573,10 +1677,12 @@ ElectricalMeasurement/ActivePowerMax Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerMax attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMax/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMax/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMax/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MAX&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMax/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MAX&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMax/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MAX&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMax/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MAX&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1601,10 +1707,12 @@ ElectricalMeasurement/ReactivePower Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReactivePower attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePower/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactivePower/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePower/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePower/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactivePower/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactivePower/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1629,10 +1737,12 @@ ElectricalMeasurement/ApparentPower Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ApparentPower attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPower/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ApparentPower/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPower/Desired { &quot;value&quot;: &lt;DESIRED_APPARENT_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPower/Reported { &quot;value&quot;: &lt;REPORTED_APPARENT_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ApparentPower/Desired { &quot;value&quot;: &lt;DESIRED_APPARENT_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ApparentPower/Reported { &quot;value&quot;: &lt;REPORTED_APPARENT_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1657,10 +1767,12 @@ ElectricalMeasurement/PowerFactor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PowerFactor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerFactor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactor/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactor/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerFactor/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerFactor/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1685,10 +1797,12 @@ ElectricalMeasurement/AverageRMSVoltageMeasurementPeriod Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSVoltageMeasurementPeriod attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1713,10 +1827,12 @@ ElectricalMeasurement/AverageRMSOverVoltageCounter Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSOverVoltageCounter attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1741,10 +1857,12 @@ ElectricalMeasurement/AverageRMSUnderVoltageCounter Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSUnderVoltageCounter attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1769,10 +1887,12 @@ ElectricalMeasurement/RMSExtremeOverVoltagePeriod Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeOverVoltagePeriod attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1797,10 +1917,12 @@ ElectricalMeasurement/RMSExtremeUnderVoltagePeriod Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeUnderVoltagePeriod attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1825,10 +1947,12 @@ ElectricalMeasurement/RMSVoltageSagPeriod Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSagPeriod attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG_PERIOD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG_PERIOD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG_PERIOD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG_PERIOD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1853,10 +1977,12 @@ ElectricalMeasurement/RMSVoltageSwellPeriod Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSwellPeriod attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL_PERIOD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL_PERIOD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL_PERIOD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL_PERIOD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1881,10 +2007,12 @@ ElectricalMeasurement/ACVoltageMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACVoltageMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACVoltageMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_VOLTAGE_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_VOLTAGE_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_VOLTAGE_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_VOLTAGE_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1909,10 +2037,12 @@ ElectricalMeasurement/ACVoltageDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACVoltageDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACVoltageDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_VOLTAGE_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_VOLTAGE_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACVoltageDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_VOLTAGE_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACVoltageDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_VOLTAGE_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1937,10 +2067,12 @@ ElectricalMeasurement/ACCurrentMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACCurrentMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACCurrentMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_CURRENT_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_CURRENT_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_CURRENT_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_CURRENT_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1965,10 +2097,12 @@ ElectricalMeasurement/ACCurrentDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACCurrentDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACCurrentDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_CURRENT_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_CURRENT_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACCurrentDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_CURRENT_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACCurrentDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_CURRENT_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1993,10 +2127,12 @@ ElectricalMeasurement/ACPowerMultiplier Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACPowerMultiplier attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACPowerMultiplier/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACPowerMultiplier/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACPowerMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_POWER_MULTIPLIER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACPowerMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_POWER_MULTIPLIER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACPowerMultiplier/Desired { &quot;value&quot;: &lt;DESIRED_AC_POWER_MULTIPLIER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACPowerMultiplier/Reported { &quot;value&quot;: &lt;REPORTED_AC_POWER_MULTIPLIER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2021,10 +2157,12 @@ ElectricalMeasurement/ACPowerDivisor Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACPowerDivisor attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACPowerDivisor/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACPowerDivisor/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACPowerDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_POWER_DIVISOR&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACPowerDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_POWER_DIVISOR&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACPowerDivisor/Desired { &quot;value&quot;: &lt;DESIRED_AC_POWER_DIVISOR&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACPowerDivisor/Reported { &quot;value&quot;: &lt;REPORTED_AC_POWER_DIVISOR&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2049,10 +2187,12 @@ ElectricalMeasurement/DCOverloadAlarmsMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCOverloadAlarmsMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Desired { &quot;value&quot;: &lt;DESIRED_DC_OVERLOAD_ALARMS_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Reported { &quot;value&quot;: &lt;REPORTED_DC_OVERLOAD_ALARMS_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Desired { &quot;value&quot;: &lt;DESIRED_DC_OVERLOAD_ALARMS_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Reported { &quot;value&quot;: &lt;REPORTED_DC_OVERLOAD_ALARMS_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2077,10 +2217,12 @@ ElectricalMeasurement/DCVoltageOverload Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCVoltageOverload attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageOverload/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageOverload/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageOverload/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_OVERLOAD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCVoltageOverload/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_OVERLOAD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageOverload/Desired { &quot;value&quot;: &lt;DESIRED_DC_VOLTAGE_OVERLOAD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCVoltageOverload/Reported { &quot;value&quot;: &lt;REPORTED_DC_VOLTAGE_OVERLOAD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2105,10 +2247,12 @@ ElectricalMeasurement/DCCurrentOverload Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for DCCurrentOverload attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentOverload/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentOverload/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentOverload/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_OVERLOAD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/DCCurrentOverload/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_OVERLOAD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentOverload/Desired { &quot;value&quot;: &lt;DESIRED_DC_CURRENT_OVERLOAD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/DCCurrentOverload/Reported { &quot;value&quot;: &lt;REPORTED_DC_CURRENT_OVERLOAD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2133,10 +2277,12 @@ ElectricalMeasurement/ACAlarmsMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACAlarmsMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACAlarmsMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACAlarmsMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACAlarmsMask/Desired { &quot;value&quot;: &lt;DESIRED_AC_ALARMS_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACAlarmsMask/Reported { &quot;value&quot;: &lt;REPORTED_AC_ALARMS_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACAlarmsMask/Desired { &quot;value&quot;: &lt;DESIRED_AC_ALARMS_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACAlarmsMask/Reported { &quot;value&quot;: &lt;REPORTED_AC_ALARMS_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2161,10 +2307,12 @@ ElectricalMeasurement/ACVoltageOverload Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACVoltageOverload attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageOverload/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACVoltageOverload/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_VOLTAGE_OVERLOAD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACVoltageOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_VOLTAGE_OVERLOAD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACVoltageOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_VOLTAGE_OVERLOAD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACVoltageOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_VOLTAGE_OVERLOAD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2189,10 +2337,12 @@ ElectricalMeasurement/ACCurrentOverload Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACCurrentOverload attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentOverload/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACCurrentOverload/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_CURRENT_OVERLOAD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACCurrentOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_CURRENT_OVERLOAD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACCurrentOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_CURRENT_OVERLOAD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACCurrentOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_CURRENT_OVERLOAD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2217,10 +2367,12 @@ ElectricalMeasurement/ACActivePowerOverload Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACActivePowerOverload attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACActivePowerOverload/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACActivePowerOverload/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACActivePowerOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_ACTIVE_POWER_OVERLOAD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACActivePowerOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_ACTIVE_POWER_OVERLOAD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACActivePowerOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_ACTIVE_POWER_OVERLOAD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACActivePowerOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_ACTIVE_POWER_OVERLOAD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2245,10 +2397,12 @@ ElectricalMeasurement/ACReactivePowerOverload Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ACReactivePowerOverload attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACReactivePowerOverload/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACReactivePowerOverload/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_REACTIVE_POWER_OVERLOAD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_REACTIVE_POWER_OVERLOAD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Desired { &quot;value&quot;: &lt;DESIRED_AC_REACTIVE_POWER_OVERLOAD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Reported { &quot;value&quot;: &lt;REPORTED_AC_REACTIVE_POWER_OVERLOAD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2273,10 +2427,12 @@ ElectricalMeasurement/AverageRMSOverVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSOverVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2301,10 +2457,12 @@ ElectricalMeasurement/AverageRMSUnderVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSUnderVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2329,10 +2487,12 @@ ElectricalMeasurement/RMSExtremeOverVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeOverVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2357,10 +2517,12 @@ ElectricalMeasurement/RMSExtremeUnderVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeUnderVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2385,10 +2547,12 @@ ElectricalMeasurement/RMSVoltageSag Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSag attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSag/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSag/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSag/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSag/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSag/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSag/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2413,10 +2577,12 @@ ElectricalMeasurement/RMSVoltageSwell Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSwell attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwell/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwell/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwell/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwell/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwell/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwell/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2441,10 +2607,12 @@ ElectricalMeasurement/LineCurrentPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LineCurrentPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrentPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/LineCurrentPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_LINE_CURRENT_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_LINE_CURRENT_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/LineCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_LINE_CURRENT_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/LineCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_LINE_CURRENT_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2469,10 +2637,12 @@ ElectricalMeasurement/ActiveCurrentPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActiveCurrentPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrentPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActiveCurrentPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_CURRENT_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_CURRENT_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_CURRENT_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_CURRENT_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2497,10 +2667,12 @@ ElectricalMeasurement/ReactiveCurrentPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReactiveCurrentPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_CURRENT_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_CURRENT_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_CURRENT_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_CURRENT_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2525,10 +2697,12 @@ ElectricalMeasurement/RMSVoltagePhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltagePhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltagePhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltagePhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltagePhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltagePhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2553,10 +2727,12 @@ ElectricalMeasurement/RMSVoltageMinPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageMinPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MIN_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MIN_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MIN_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MIN_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2581,10 +2757,12 @@ ElectricalMeasurement/RMSVoltageMaxPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageMaxPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MAX_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MAX_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MAX_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MAX_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2609,10 +2787,12 @@ ElectricalMeasurement/RMSCurrentPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2637,10 +2817,12 @@ ElectricalMeasurement/RMSCurrentMinPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentMinPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MIN_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MIN_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MIN_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MIN_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2665,10 +2847,12 @@ ElectricalMeasurement/RMSCurrentMaxPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentMaxPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MAX_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MAX_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MAX_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MAX_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2693,10 +2877,12 @@ ElectricalMeasurement/ActivePowerPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2721,10 +2907,12 @@ ElectricalMeasurement/ActivePowerMinPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerMinPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMinPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMinPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MIN_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MIN_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MIN_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MIN_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2749,10 +2937,12 @@ ElectricalMeasurement/ActivePowerMaxPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerMaxPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MAX_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MAX_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MAX_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MAX_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2777,10 +2967,12 @@ ElectricalMeasurement/ReactivePowerPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReactivePowerPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePowerPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactivePowerPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePowerPhB/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_POWER_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePowerPhB/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_POWER_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhB/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_POWER_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhB/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_POWER_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2805,10 +2997,12 @@ ElectricalMeasurement/ApparentPowerPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ApparentPowerPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPowerPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ApparentPowerPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPowerPhB/Desired { &quot;value&quot;: &lt;DESIRED_APPARENT_POWER_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPowerPhB/Reported { &quot;value&quot;: &lt;REPORTED_APPARENT_POWER_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhB/Desired { &quot;value&quot;: &lt;DESIRED_APPARENT_POWER_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhB/Reported { &quot;value&quot;: &lt;REPORTED_APPARENT_POWER_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2833,10 +3027,12 @@ ElectricalMeasurement/PowerFactorPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PowerFactorPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactorPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerFactorPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactorPhB/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactorPhB/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerFactorPhB/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerFactorPhB/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2861,10 +3057,12 @@ ElectricalMeasurement/AverageRMSVoltageMeasurementPeriodPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSVoltageMeasurementPeriodPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2889,10 +3087,12 @@ ElectricalMeasurement/AverageRMSOverVoltageCounterPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSOverVoltageCounterPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2917,10 +3117,12 @@ ElectricalMeasurement/AverageRMSUnderVoltageCounterPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSUnderVoltageCounterPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2945,10 +3147,12 @@ ElectricalMeasurement/RMSExtremeOverVoltagePeriodPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeOverVoltagePeriodPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -2973,10 +3177,12 @@ ElectricalMeasurement/RMSExtremeUnderVoltagePeriodPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeUnderVoltagePeriodPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3001,10 +3207,12 @@ ElectricalMeasurement/RMSVoltageSagPeriodPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSagPeriodPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3029,10 +3237,12 @@ ElectricalMeasurement/RMSVoltageSwellPeriodPhB Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSwellPeriodPhB attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHB&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHB&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHB&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHB&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3057,10 +3267,12 @@ ElectricalMeasurement/LineCurrentPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LineCurrentPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrentPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/LineCurrentPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_LINE_CURRENT_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/LineCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_LINE_CURRENT_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/LineCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_LINE_CURRENT_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/LineCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_LINE_CURRENT_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3085,10 +3297,12 @@ ElectricalMeasurement/ActiveCurrentPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActiveCurrentPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrentPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActiveCurrentPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_CURRENT_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_CURRENT_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_CURRENT_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_CURRENT_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3113,10 +3327,12 @@ ElectricalMeasurement/ReactiveCurrentPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReactiveCurrentPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_CURRENT_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_CURRENT_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_CURRENT_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_CURRENT_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3141,10 +3357,12 @@ ElectricalMeasurement/RMSVoltagePhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltagePhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltagePhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltagePhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltagePhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltagePhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3169,10 +3387,12 @@ ElectricalMeasurement/RMSVoltageMinPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageMinPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MIN_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MIN_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MIN_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MIN_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3197,10 +3417,12 @@ ElectricalMeasurement/RMSVoltageMaxPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageMaxPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MAX_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MAX_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_MAX_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_MAX_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3225,10 +3447,12 @@ ElectricalMeasurement/RMSCurrentPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3253,10 +3477,12 @@ ElectricalMeasurement/RMSCurrentMinPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentMinPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MIN_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MIN_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MIN_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MIN_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3281,10 +3507,12 @@ ElectricalMeasurement/RMSCurrentMaxPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSCurrentMaxPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MAX_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MAX_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_CURRENT_MAX_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_CURRENT_MAX_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3309,10 +3537,12 @@ ElectricalMeasurement/ActivePowerPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3337,10 +3567,12 @@ ElectricalMeasurement/ActivePowerMinPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerMinPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMinPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMinPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MIN_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MIN_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MIN_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MIN_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3365,10 +3597,12 @@ ElectricalMeasurement/ActivePowerMaxPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ActivePowerMaxPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MAX_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MAX_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Desired { &quot;value&quot;: &lt;DESIRED_ACTIVE_POWER_MAX_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Reported { &quot;value&quot;: &lt;REPORTED_ACTIVE_POWER_MAX_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3393,10 +3627,12 @@ ElectricalMeasurement/ReactivePowerPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReactivePowerPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePowerPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactivePowerPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePowerPhC/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_POWER_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ReactivePowerPhC/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_POWER_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhC/Desired { &quot;value&quot;: &lt;DESIRED_REACTIVE_POWER_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhC/Reported { &quot;value&quot;: &lt;REPORTED_REACTIVE_POWER_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3421,10 +3657,12 @@ ElectricalMeasurement/ApparentPowerPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ApparentPowerPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPowerPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ApparentPowerPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPowerPhC/Desired { &quot;value&quot;: &lt;DESIRED_APPARENT_POWER_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/ApparentPowerPhC/Reported { &quot;value&quot;: &lt;REPORTED_APPARENT_POWER_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhC/Desired { &quot;value&quot;: &lt;DESIRED_APPARENT_POWER_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhC/Reported { &quot;value&quot;: &lt;REPORTED_APPARENT_POWER_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3449,10 +3687,12 @@ ElectricalMeasurement/PowerFactorPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PowerFactorPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactorPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerFactorPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactorPhC/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/PowerFactorPhC/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerFactorPhC/Desired { &quot;value&quot;: &lt;DESIRED_POWER_FACTOR_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/PowerFactorPhC/Reported { &quot;value&quot;: &lt;REPORTED_POWER_FACTOR_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3477,10 +3717,12 @@ ElectricalMeasurement/AverageRMSVoltageMeasurementPeriodPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSVoltageMeasurementPeriodPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3505,10 +3747,12 @@ ElectricalMeasurement/AverageRMSOverVoltageCounterPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSOverVoltageCounterPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3533,10 +3777,12 @@ ElectricalMeasurement/AverageRMSUnderVoltageCounterPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AverageRMSUnderVoltageCounterPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Desired { &quot;value&quot;: &lt;DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Reported { &quot;value&quot;: &lt;REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3561,10 +3807,12 @@ ElectricalMeasurement/RMSExtremeOverVoltagePeriodPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeOverVoltagePeriodPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3589,10 +3837,12 @@ ElectricalMeasurement/RMSExtremeUnderVoltagePeriodPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSExtremeUnderVoltagePeriodPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3617,10 +3867,12 @@ ElectricalMeasurement/RMSVoltageSagPeriodPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSagPeriodPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3645,10 +3897,12 @@ ElectricalMeasurement/RMSVoltageSwellPeriodPhC Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for RMSVoltageSwellPeriodPhC attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHC&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHC&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Desired { &quot;value&quot;: &lt;DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHC&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Reported { &quot;value&quot;: &lt;REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHC&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -3978,7 +4232,7 @@ ElectricalMeasurement/WriteAttributes Command</h2>
 <p>To update all ElectricalMeasurement attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ElectricalMeasurement/Commands/WriteAttributes&#39; -m  &#39;{ &quot;AverageRMSVoltageMeasurementPeriod&quot;: &lt;AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_VALUE&gt; ,&quot;AverageRMSOverVoltageCounter&quot;: &lt;AVERAGERMS_OVER_VOLTAGE_COUNTER_VALUE&gt; ,&quot;AverageRMSUnderVoltageCounter&quot;: &lt;AVERAGERMS_UNDER_VOLTAGE_COUNTER_VALUE&gt; ,&quot;RMSExtremeOverVoltagePeriod&quot;: &lt;RMS_EXTREME_OVER_VOLTAGE_PERIOD_VALUE&gt; ,&quot;RMSExtremeUnderVoltagePeriod&quot;: &lt;RMS_EXTREME_UNDER_VOLTAGE_PERIOD_VALUE&gt; ,&quot;RMSVoltageSagPeriod&quot;: &lt;RMS_VOLTAGE_SAG_PERIOD_VALUE&gt; ,&quot;RMSVoltageSwellPeriod&quot;: &lt;RMS_VOLTAGE_SWELL_PERIOD_VALUE&gt; ,&quot;DCOverloadAlarmsMask&quot;: &lt;DC_OVERLOAD_ALARMS_MASK_VALUE&gt; ,&quot;ACAlarmsMask&quot;: &lt;AC_ALARMS_MASK_VALUE&gt; ,&quot;RMSExtremeOverVoltage&quot;: &lt;RMS_EXTREME_OVER_VOLTAGE_VALUE&gt; ,&quot;RMSExtremeUnderVoltage&quot;: &lt;RMS_EXTREME_UNDER_VOLTAGE_VALUE&gt; ,&quot;RMSVoltageSag&quot;: &lt;RMS_VOLTAGE_SAG_VALUE&gt; ,&quot;RMSVoltageSwell&quot;: &lt;RMS_VOLTAGE_SWELL_VALUE&gt; ,&quot;AverageRMSVoltageMeasurementPeriodPhB&quot;: &lt;AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_VALUE&gt; ,&quot;AverageRMSOverVoltageCounterPhB&quot;: &lt;AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_VALUE&gt; ,&quot;AverageRMSUnderVoltageCounterPhB&quot;: &lt;AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_VALUE&gt; ,&quot;RMSExtremeOverVoltagePeriodPhB&quot;: &lt;RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_VALUE&gt; ,&quot;RMSExtremeUnderVoltagePeriodPhB&quot;: &lt;RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB_VALUE&gt; ,&quot;RMSVoltageSagPeriodPhB&quot;: &lt;RMS_VOLTAGE_SAG_PERIOD_PHB_VALUE&gt; ,&quot;RMSVoltageSwellPeriodPhB&quot;: &lt;RMS_VOLTAGE_SWELL_PERIOD_PHB_VALUE&gt; ,&quot;AverageRMSVoltageMeasurementPeriodPhC&quot;: &lt;AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_VALUE&gt; ,&quot;AverageRMSOverVoltageCounterPhC&quot;: &lt;AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_VALUE&gt; ,&quot;AverageRMSUnderVoltageCounterPhC&quot;: &lt;AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_VALUE&gt; ,&quot;RMSExtremeOverVoltagePeriodPhC&quot;: &lt;RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_VALUE&gt; ,&quot;RMSExtremeUnderVoltagePeriodPhC&quot;: &lt;RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC_VALUE&gt; ,&quot;RMSVoltageSagPeriodPhC&quot;: &lt;RMS_VOLTAGE_SAG_PERIOD_PHC_VALUE&gt; ,&quot;RMSVoltageSwellPeriodPhC&quot;: &lt;RMS_VOLTAGE_SWELL_PERIOD_PHC_VALUE&gt;  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -4148,7 +4402,7 @@ ElectricalMeasurement/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -212,20 +212,20 @@ void test_dotdot_mqtt_publish_attributes_int()
 void test_dotdot_mqtt_publish_attributes_enum()
 {
   const char *topic_desired
-    = "test/hest/OTAUpgrade/Attributes/UpgradeTimeoutPolicy/Desired";
+    = "test/hest/DoorLock/Attributes/SecurityLevel/Desired";
   const char *topic_reported
-    = "test/hest/OTAUpgrade/Attributes/UpgradeTimeoutPolicy/Reported";
-  uic_mqtt_dotdot_ota_upgrade_upgrade_timeout_policy_publish(
+    = "test/hest/DoorLock/Attributes/SecurityLevel/Reported";
+  uic_mqtt_dotdot_door_lock_security_level_publish(
     "test/hest",
-    ZCL_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_APPLY_UPGRADE_AFTER_TIMEOUT,
+    ZCL_DOOR_LOCK_SECURITY_LEVEL_NETWORK,
     UCL_MQTT_PUBLISH_TYPE_ALL);
   TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_reported));
   TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
   char result[100];
   mqtt_test_helper_pop_publish(topic_reported, result);
-  TEST_ASSERT_EQUAL_JSON(R"({"value":"ApplyUpgradeAfterTimeout"})", result);
+  TEST_ASSERT_EQUAL_JSON(R"({"value":"Network"})", result);
   mqtt_test_helper_pop_publish(topic_desired, result);
-  TEST_ASSERT_EQUAL_JSON(R"({"value":"ApplyUpgradeAfterTimeout"})", result);
+  TEST_ASSERT_EQUAL_JSON(R"({"value":"Network"})", result);
 }
 
 static uint16_t user_id_value     = 0;

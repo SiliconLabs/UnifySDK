@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('structzwapi__tx__report.html',''); ini
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structzwapi__tx__report-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">zwapi_tx_report Struct Reference<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__api.html">Z-Wave API</a> &raquo; <a class="el" href="group__ZWAPI__TRANSPORT.html">Transport API</a> &raquo; <a class="el" href="group__zwapi__transmit__complete__codes.html">Z-Wave API send_data return codes</a></div></div>  </div>
+<div class="title">zwapi_tx_report Struct Reference<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__api.html">Z-Wave API</a> &raquo; <a class="el" href="group__ZWAPI__TRANSPORT.html">Transport API</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,47 +98,303 @@ $(document).ready(function(){initNavTree('structzwapi__tx__report.html',''); ini
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ga5de901837c9db0fd8a1122961e19d7bc"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga5de901837c9db0fd8a1122961e19d7bc">transmit_ticks</a></td></tr>
-<tr class="memdesc:ga5de901837c9db0fd8a1122961e19d7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Passed 10 ms ticks  <a href="group__ZWAPI__TRANSPORT.html#ga5de901837c9db0fd8a1122961e19d7bc">More...</a><br /></td></tr>
-<tr class="separator:ga5de901837c9db0fd8a1122961e19d7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf59c968cd9db4c20afc88fb76b329c84"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gaf59c968cd9db4c20afc88fb76b329c84">number_of_repeaters</a></td></tr>
-<tr class="separator:gaf59c968cd9db4c20afc88fb76b329c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga68331652178bd9d9130377c075dc3e63"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga68331652178bd9d9130377c075dc3e63">ack_rssi</a></td></tr>
-<tr class="separator:ga68331652178bd9d9130377c075dc3e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4fc2b9c75b6373405dcdf44e944ecda9"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrssi__val.html">rssi_val</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga4fc2b9c75b6373405dcdf44e944ecda9">rssi_values</a></td></tr>
-<tr class="separator:ga4fc2b9c75b6373405dcdf44e944ecda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga196d0cb6bf88d71d61367186716a42ff"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga196d0cb6bf88d71d61367186716a42ff">ack_channel_number</a></td></tr>
-<tr class="separator:ga196d0cb6bf88d71d61367186716a42ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga07cdae256d6955ba453f23645bbebc6f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga07cdae256d6955ba453f23645bbebc6f">tx_channel_number</a></td></tr>
-<tr class="separator:ga07cdae256d6955ba453f23645bbebc6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3d8eb5667d33743e44c019f83823e681"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwapi__transmit__complete__codes.html#ga54bca03cc4f1046186ffea9a171977a3">e_routing_scheme_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga3d8eb5667d33743e44c019f83823e681">route_scheme_state</a></td></tr>
-<tr class="separator:ga3d8eb5667d33743e44c019f83823e681"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf0d72c401fee5e9c9a23de8a25baa129"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gaf0d72c401fee5e9c9a23de8a25baa129">last_route_repeaters</a> [<a class="el" href="group__zwapi__transmit__complete__codes.html#gad706ef0fddfce5045cf3b882594e284c">LAST_USED_ROUTE_SIZE</a>]</td></tr>
-<tr class="separator:gaf0d72c401fee5e9c9a23de8a25baa129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacd117a3b6bd8ca1e661896417e9154f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gacd117a3b6bd8ca1e661896417e9154f1">beam_250ms</a></td></tr>
-<tr class="separator:gacd117a3b6bd8ca1e661896417e9154f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae0f69743368ac5d44df24ffafc122920"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gae0f69743368ac5d44df24ffafc122920">beam_1000ms</a></td></tr>
-<tr class="separator:gae0f69743368ac5d44df24ffafc122920"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf9096a9a858a8c34490c50ad346f7134"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwapi__transmit__complete__codes.html#ga9dcd8ba3175c6a535ab72ca1f654c741">last_route_speed_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gaf9096a9a858a8c34490c50ad346f7134">last_route_speed</a></td></tr>
-<tr class="separator:gaf9096a9a858a8c34490c50ad346f7134"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf0b793fabb8d969b38edc1f33deb5785"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gaf0b793fabb8d969b38edc1f33deb5785">routing_attempts</a></td></tr>
-<tr class="separator:gaf0b793fabb8d969b38edc1f33deb5785"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabbc8cf5ee9c5a623e48645a494b209d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwapi__transmit__complete__codes.html#gae3301f35fd3b25ac67d4730e29a481c0">S_ROUTE_LINK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gabbc8cf5ee9c5a623e48645a494b209d7">last_failed_link</a></td></tr>
-<tr class="separator:gabbc8cf5ee9c5a623e48645a494b209d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadb4574b51f44c8eaa432918385197e30"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gadb4574b51f44c8eaa432918385197e30">tx_power</a></td></tr>
-<tr class="separator:gadb4574b51f44c8eaa432918385197e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga03d5139813ab21154be450ef2dac507e"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga03d5139813ab21154be450ef2dac507e">measured_noise_floor</a></td></tr>
-<tr class="separator:ga03d5139813ab21154be450ef2dac507e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga19d0c319ca575d4d98e7c43a7bbfe113"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga19d0c319ca575d4d98e7c43a7bbfe113">destination_ack_mpdu_tx_power</a></td></tr>
-<tr class="separator:ga19d0c319ca575d4d98e7c43a7bbfe113"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafb57e18c9f40281b259ac8a7edc4a370"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gafb57e18c9f40281b259ac8a7edc4a370">destination_ack_mpdu_measured_rssi</a></td></tr>
-<tr class="separator:gafb57e18c9f40281b259ac8a7edc4a370"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d99d33dc4822ded9479ac4afef39187"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga5d99d33dc4822ded9479ac4afef39187">destination_ack_mpdu_measured_noise_floor</a></td></tr>
-<tr class="separator:ga5d99d33dc4822ded9479ac4afef39187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5de901837c9db0fd8a1122961e19d7bc"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a5de901837c9db0fd8a1122961e19d7bc">transmit_ticks</a></td></tr>
+<tr class="memdesc:a5de901837c9db0fd8a1122961e19d7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Passed 10 ms ticks  <a href="structzwapi__tx__report.html#a5de901837c9db0fd8a1122961e19d7bc">More...</a><br /></td></tr>
+<tr class="separator:a5de901837c9db0fd8a1122961e19d7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af59c968cd9db4c20afc88fb76b329c84"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#af59c968cd9db4c20afc88fb76b329c84">number_of_repeaters</a></td></tr>
+<tr class="separator:af59c968cd9db4c20afc88fb76b329c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68331652178bd9d9130377c075dc3e63"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a68331652178bd9d9130377c075dc3e63">ack_rssi</a></td></tr>
+<tr class="separator:a68331652178bd9d9130377c075dc3e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fc2b9c75b6373405dcdf44e944ecda9"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrssi__val.html">rssi_val</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a4fc2b9c75b6373405dcdf44e944ecda9">rssi_values</a></td></tr>
+<tr class="separator:a4fc2b9c75b6373405dcdf44e944ecda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a196d0cb6bf88d71d61367186716a42ff"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a196d0cb6bf88d71d61367186716a42ff">ack_channel_number</a></td></tr>
+<tr class="separator:a196d0cb6bf88d71d61367186716a42ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07cdae256d6955ba453f23645bbebc6f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a07cdae256d6955ba453f23645bbebc6f">tx_channel_number</a></td></tr>
+<tr class="separator:a07cdae256d6955ba453f23645bbebc6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d8eb5667d33743e44c019f83823e681"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga54bca03cc4f1046186ffea9a171977a3">e_routing_scheme_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a3d8eb5667d33743e44c019f83823e681">route_scheme_state</a></td></tr>
+<tr class="separator:a3d8eb5667d33743e44c019f83823e681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0d72c401fee5e9c9a23de8a25baa129"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#af0d72c401fee5e9c9a23de8a25baa129">last_route_repeaters</a> [<a class="el" href="group__ZWAPI__TRANSPORT.html#gad706ef0fddfce5045cf3b882594e284c">LAST_USED_ROUTE_SIZE</a>]</td></tr>
+<tr class="separator:af0d72c401fee5e9c9a23de8a25baa129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd117a3b6bd8ca1e661896417e9154f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#acd117a3b6bd8ca1e661896417e9154f1">beam_250ms</a></td></tr>
+<tr class="separator:acd117a3b6bd8ca1e661896417e9154f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f69743368ac5d44df24ffafc122920"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#ae0f69743368ac5d44df24ffafc122920">beam_1000ms</a></td></tr>
+<tr class="separator:ae0f69743368ac5d44df24ffafc122920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9096a9a858a8c34490c50ad346f7134"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga9dcd8ba3175c6a535ab72ca1f654c741">last_route_speed_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#af9096a9a858a8c34490c50ad346f7134">last_route_speed</a></td></tr>
+<tr class="separator:af9096a9a858a8c34490c50ad346f7134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0b793fabb8d969b38edc1f33deb5785"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#af0b793fabb8d969b38edc1f33deb5785">routing_attempts</a></td></tr>
+<tr class="separator:af0b793fabb8d969b38edc1f33deb5785"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc8cf5ee9c5a623e48645a494b209d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__ZWAPI__TRANSPORT.html#gae3301f35fd3b25ac67d4730e29a481c0">S_ROUTE_LINK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#abbc8cf5ee9c5a623e48645a494b209d7">last_failed_link</a></td></tr>
+<tr class="separator:abbc8cf5ee9c5a623e48645a494b209d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb4574b51f44c8eaa432918385197e30"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#adb4574b51f44c8eaa432918385197e30">tx_power</a></td></tr>
+<tr class="separator:adb4574b51f44c8eaa432918385197e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d5139813ab21154be450ef2dac507e"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a03d5139813ab21154be450ef2dac507e">measured_noise_floor</a></td></tr>
+<tr class="separator:a03d5139813ab21154be450ef2dac507e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d0c319ca575d4d98e7c43a7bbfe113"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a19d0c319ca575d4d98e7c43a7bbfe113">destination_ack_mpdu_tx_power</a></td></tr>
+<tr class="separator:a19d0c319ca575d4d98e7c43a7bbfe113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb57e18c9f40281b259ac8a7edc4a370"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#afb57e18c9f40281b259ac8a7edc4a370">destination_ack_mpdu_measured_rssi</a></td></tr>
+<tr class="separator:afb57e18c9f40281b259ac8a7edc4a370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d99d33dc4822ded9479ac4afef39187"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwapi__tx__report.html#a5d99d33dc4822ded9479ac4afef39187">destination_ack_mpdu_measured_noise_floor</a></td></tr>
+<tr class="separator:a5d99d33dc4822ded9479ac4afef39187"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Detailed report and data about Z-Wave transmissions. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a196d0cb6bf88d71d61367186716a42ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a196d0cb6bf88d71d61367186716a42ff">&#9670;&nbsp;</a></span>ack_channel_number</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t zwapi_tx_report::ack_channel_number</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68331652178bd9d9130377c075dc3e63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68331652178bd9d9130377c075dc3e63">&#9670;&nbsp;</a></span>ack_rssi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t zwapi_tx_report::ack_rssi</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae0f69743368ac5d44df24ffafc122920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f69743368ac5d44df24ffafc122920">&#9670;&nbsp;</a></span>beam_1000ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zwapi_tx_report::beam_1000ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd117a3b6bd8ca1e661896417e9154f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd117a3b6bd8ca1e661896417e9154f1">&#9670;&nbsp;</a></span>beam_250ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zwapi_tx_report::beam_250ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d99d33dc4822ded9479ac4afef39187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d99d33dc4822ded9479ac4afef39187">&#9670;&nbsp;</a></span>destination_ack_mpdu_measured_noise_floor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t zwapi_tx_report::destination_ack_mpdu_measured_noise_floor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb57e18c9f40281b259ac8a7edc4a370"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb57e18c9f40281b259ac8a7edc4a370">&#9670;&nbsp;</a></span>destination_ack_mpdu_measured_rssi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t zwapi_tx_report::destination_ack_mpdu_measured_rssi</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19d0c319ca575d4d98e7c43a7bbfe113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19d0c319ca575d4d98e7c43a7bbfe113">&#9670;&nbsp;</a></span>destination_ack_mpdu_tx_power</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t zwapi_tx_report::destination_ack_mpdu_tx_power</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abbc8cf5ee9c5a623e48645a494b209d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc8cf5ee9c5a623e48645a494b209d7">&#9670;&nbsp;</a></span>last_failed_link</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__ZWAPI__TRANSPORT.html#gae3301f35fd3b25ac67d4730e29a481c0">S_ROUTE_LINK</a> zwapi_tx_report::last_failed_link</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0d72c401fee5e9c9a23de8a25baa129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0d72c401fee5e9c9a23de8a25baa129">&#9670;&nbsp;</a></span>last_route_repeaters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t zwapi_tx_report::last_route_repeaters[<a class="el" href="group__ZWAPI__TRANSPORT.html#gad706ef0fddfce5045cf3b882594e284c">LAST_USED_ROUTE_SIZE</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9096a9a858a8c34490c50ad346f7134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9096a9a858a8c34490c50ad346f7134">&#9670;&nbsp;</a></span>last_route_speed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga9dcd8ba3175c6a535ab72ca1f654c741">last_route_speed_t</a> zwapi_tx_report::last_route_speed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a03d5139813ab21154be450ef2dac507e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d5139813ab21154be450ef2dac507e">&#9670;&nbsp;</a></span>measured_noise_floor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t zwapi_tx_report::measured_noise_floor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af59c968cd9db4c20afc88fb76b329c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af59c968cd9db4c20afc88fb76b329c84">&#9670;&nbsp;</a></span>number_of_repeaters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t zwapi_tx_report::number_of_repeaters</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Repeaters in route, zero for direct range rssi_values per hop for direct and routed frames. Contains repeaters + 1 values. </p>
+
+</div>
+</div>
+<a id="a3d8eb5667d33743e44c019f83823e681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d8eb5667d33743e44c019f83823e681">&#9670;&nbsp;</a></span>route_scheme_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga54bca03cc4f1046186ffea9a171977a3">e_routing_scheme_t</a> zwapi_tx_report::route_scheme_state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0b793fabb8d969b38edc1f33deb5785"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0b793fabb8d969b38edc1f33deb5785">&#9670;&nbsp;</a></span>routing_attempts</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t zwapi_tx_report::routing_attempts</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4fc2b9c75b6373405dcdf44e944ecda9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fc2b9c75b6373405dcdf44e944ecda9">&#9670;&nbsp;</a></span>rssi_values</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structrssi__val.html">rssi_val</a> zwapi_tx_report::rssi_values</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5de901837c9db0fd8a1122961e19d7bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de901837c9db0fd8a1122961e19d7bc">&#9670;&nbsp;</a></span>transmit_ticks</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t zwapi_tx_report::transmit_ticks</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>&lt; Passed 10 ms ticks </p>
+
+</div>
+</div>
+<a id="a07cdae256d6955ba453f23645bbebc6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07cdae256d6955ba453f23645bbebc6f">&#9670;&nbsp;</a></span>tx_channel_number</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t zwapi_tx_report::tx_channel_number</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb4574b51f44c8eaa432918385197e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb4574b51f44c8eaa432918385197e30">&#9670;&nbsp;</a></span>tx_power</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t zwapi_tx_report::tx_power</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>applications/zpc/components/zwave_api/include/<a class="el" href="zwapi__protocol__transport_8h_source.html">zwapi_protocol_transport.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -147,7 +403,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzwapi__tx__report.html">zwapi_tx_report</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:07 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:13 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

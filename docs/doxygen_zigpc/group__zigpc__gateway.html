@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -137,9 +137,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gab170cdf1b427f9c324ed2c050f36f521"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gab170cdf1b427f9c324ed2c050f36f521">zigpc_gateway_install_code_is_valid</a> (const uint8_t *install_code, uint8_t install_code_length)</td></tr>
 <tr class="memdesc:gab170cdf1b427f9c324ed2c050f36f521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate if install code can be accepted by EmberAf layer.  <a href="group__zigpc__gateway.html#gab170cdf1b427f9c324ed2c050f36f521">More...</a><br /></td></tr>
 <tr class="separator:gab170cdf1b427f9c324ed2c050f36f521"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaddae89c536ca2647bfdf8b9c024896a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gaddae89c536ca2647bfdf8b9c024896a6">zigpc_gateway_add_node_install_code</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length)</td></tr>
-<tr class="memdesc:gaddae89c536ca2647bfdf8b9c024896a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to add a node to the Zigbee Network using the Z3 Install Code Method.  <a href="group__zigpc__gateway.html#gaddae89c536ca2647bfdf8b9c024896a6">More...</a><br /></td></tr>
-<tr class="separator:gaddae89c536ca2647bfdf8b9c024896a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4d2d017337309e43ce7eaeff7f95b40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gaa4d2d017337309e43ce7eaeff7f95b40">zigpc_gateway_add_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length, bool is_well_known_key_add)</td></tr>
+<tr class="memdesc:gaa4d2d017337309e43ce7eaeff7f95b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to add a node to the Zigbee Network using the Z3 Install Code Method.  <a href="group__zigpc__gateway.html#gaa4d2d017337309e43ce7eaeff7f95b40">More...</a><br /></td></tr>
+<tr class="separator:gaa4d2d017337309e43ce7eaeff7f95b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeea7caf0b81c569c2b10deeeebe1acf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gaeea7caf0b81c569c2b10deeeebe1acf5">zigpc_gateway_remove_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
 <tr class="memdesc:gaeea7caf0b81c569c2b10deeeebe1acf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to remove node on the Zigbee Network. If the node is not on the Zigbee network, no device remove success events will be sent to listening components.  <a href="group__zigpc__gateway.html#gaeea7caf0b81c569c2b10deeeebe1acf5">More...</a><br /></td></tr>
 <tr class="separator:gaeea7caf0b81c569c2b10deeeebe1acf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,14 +193,14 @@ Functions</h2></td></tr>
 <p>Set up and tear down the ZigPC gateway process.</p>
 <p>TODO: Write component description for zigpc_gateway_process </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gaddae89c536ca2647bfdf8b9c024896a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaddae89c536ca2647bfdf8b9c024896a6">&#9670;&nbsp;</a></span>zigpc_gateway_add_node_install_code()</h2>
+<a id="gaa4d2d017337309e43ce7eaeff7f95b40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa4d2d017337309e43ce7eaeff7f95b40">&#9670;&nbsp;</a></span>zigpc_gateway_add_node()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_add_node_install_code </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_add_node </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
           <td class="paramname"><em>node_eui64</em>, </td>
@@ -215,7 +215,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>install_code_length</em>&#160;</td>
+          <td class="paramname"><em>install_code_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_well_known_key_add</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -231,6 +237,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">node_eui64</td><td>End device EUI64 in big-endian format </td></tr>
     <tr><td class="paramname">install_code</td><td>End device install code </td></tr>
     <tr><td class="paramname">install_code_length</td><td>install code length </td></tr>
+    <tr><td class="paramname">is_well_known_key_add</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -1041,7 +1048,7 @@ false Is not valid. </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:49 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:55 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

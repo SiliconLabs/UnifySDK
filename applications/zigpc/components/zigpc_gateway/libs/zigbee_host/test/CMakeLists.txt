@@ -19,6 +19,7 @@ set(GECKO_SDK_MOCK_HEADERS
     mocks/app/framework/include/af.h
     mocks/app/framework/util/af-main.h
     mocks/app/framework/security/af-security.h
+    mocks/app/framework/service-function/sl_service_function.h
     mocks/app/util/ezsp/ezsp.h
     mocks/app/util/zigbee-framework/zigbee-device-common.h
     mocks/app/framework/plugin/network-creator/network-creator.h
@@ -31,6 +32,7 @@ add_mock(geckosdk_mock ${GECKO_SDK_MOCK_HEADERS})
 target_include_directories(
   geckosdk_mock
   PUBLIC ${ZIGBEE_HOST_STACK_INCLUDES}
+         .
          ../include
          ../src
          ../gen/autogen

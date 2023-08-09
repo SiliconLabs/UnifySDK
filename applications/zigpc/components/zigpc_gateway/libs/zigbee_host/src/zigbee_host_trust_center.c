@@ -93,7 +93,7 @@ bool zigbeeHostTrustCenterInstallCodeValid(const uint8_t *installCode,
   memcpy(installCodeCp, installCode, installCodeLength);
 
   EmberStatus status
-    = emAfInstallCodeToKey(installCodeCp, installCodeLength, &linkKey);
+    = sli_zigbee_af_install_code_to_key(installCodeCp, installCodeLength, &linkKey);
   return (status == EMBER_SUCCESS);
 }
 
@@ -107,7 +107,7 @@ EmberStatus zigbeeHostTrustCenterAddDeviceInstallCode(const EmberEUI64 eui64,
   if ((NULL == installCode) || (NULL == eui64) || (installCodeLength == 0)) {
     status = EMBER_BAD_ARGUMENT;
   } else {
-    status = emAfInstallCodeToKey(installCode, installCodeLength, &linkKey);
+    status = sli_zigbee_af_install_code_to_key(installCode, installCodeLength, &linkKey);
     if (status != EMBER_SUCCESS) {
       appDebugPrint("Error: Failed to convert Install Code to Link Key: 0x%X\n",
                     status);
@@ -135,7 +135,7 @@ EmberStatus zigbeeHostTrustCenterJoinOpen(bool openForever)
     // 0xFF: forever, 0xFE: 254 seconds
     uint8_t permitDuration = (openForever == true) ? 0xFF : 0xFE;
     zaTrustCenterSetJoinPolicy(EMBER_USE_PRECONFIGURED_KEY);
-    status = emAfPermitJoin(permitDuration, true);
+    status = emberAfPermitJoin(permitDuration, true);
   }
 
   return status;
@@ -149,9 +149,8 @@ EmberStatus zigbeeHostTrustCenterJoinClose(void)
     status = EMBER_NETWORK_DOWN;
     appDebugPrint("Error: Network not up: 0x%X\n", status);
   } else {
-    emberClearTransientLinkKeys();
     zaTrustCenterSetJoinPolicy(EMBER_ALLOW_REJOINS_ONLY);
-    status = emAfPermitJoin(0, true);
+    status = emberAfPermitJoin(0, true);
   }
 
   return status;
@@ -195,6 +194,31 @@ EmberStatus zigbeeHostTrustCenterInit(void)
   EmberNetworkStatus networkState = emberAfNetworkState();
   if (networkState == EMBER_NO_NETWORK) {
     status = emberAfPluginNetworkCreatorStart(true);
+    if (status != EMBER_SUCCESS) {
+      appDebugPrint("Error: Failed to create trust center network: 0x%X\n",
+                    status);
+    }
+  }
+
+  return status;
+}
+
+EmberStatus zigbeeHostTrustCenterInitWithArgs(
+        uint16_t pan_id,
+        int8_t radio_tx_power,
+        uint8_t channel)
+{
+  EmberStatus status = EMBER_SUCCESS;
+
+  EmberNetworkStatus networkState = emberAfNetworkState();
+  if (networkState == EMBER_NO_NETWORK) {
+
+    status = emberAfPluginNetworkCreatorNetworkForm(
+                true,
+                pan_id,
+                radio_tx_power,
+                channel);
+
     if (status != EMBER_SUCCESS) {
       appDebugPrint("Error: Failed to create trust center network: 0x%X\n",
                     status);

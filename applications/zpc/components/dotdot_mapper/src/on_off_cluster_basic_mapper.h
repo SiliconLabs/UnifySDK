@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /**
- * @defgroup on_off_cluster_mapper OnOff cluster mapper
+ * @defgroup zpc_on_off_cluster_mapper ZPC OnOff cluster mapper
  * @ingroup dotdot_mapper
  * @brief Maps OnOff Cluster incoming Commands to attribute modifications.
  *

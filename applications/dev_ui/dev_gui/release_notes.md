@@ -1,5 +1,18 @@
 # Dev GUI Release Notes
 
+## [1.4.0] - Aug 2023
+
+* ForcereadAttributes is removed from commands List in clusters, as the same is available as Action Button
+* Endpoints are now automatically sorted by name on the Nodes page.
+* Added support for new clusters
+      * ConcentrationMeasurement.CarbonMonoxide
+      * ConcentrationMeasurement.CarbonDioxide
+      * ConcentrationMeasurement.PM25
+      * WaterContentMeasurement.SoilMoisture
+      * WaterContentMeasurement.RelativityHumidity
+* Added a popup whenever any of the app's crashes, disconnects or reconnects
+* Updating name and location from DEV GUI now supports [ a-z A-Z 0-9 - _ : . ] characters
+
 ## [1.3.2] - Jun 2023
 
 ## [1.3.1] - Mar 2023

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AoX Applications
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -152,6 +152,15 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:ab034cf278bae51c4f73b43c49657bb02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#ab034cf278bae51c4f73b43c49657bb02">run_assignment</a> (std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment, attribute_store::attribute assigment_destination, attribute_store::attribute original_node)</td></tr>
 <tr class="memdesc:ab034cf278bae51c4f73b43c49657bb02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a single assigment and verifies if a value was applied.  <a href="classMapperEngine.html#ab034cf278bae51c4f73b43c49657bb02">More...</a><br /></td></tr>
 <tr class="separator:ab034cf278bae51c4f73b43c49657bb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7efda3bc18a9660637f7559a1024585"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#ab7efda3bc18a9660637f7559a1024585">apply_regular_assignment</a> (attribute_store::attribute common_parent, attribute_store::attribute destination, attribute_store::attribute original_node, const <a class="el" href="namespaceast.html#aef0d3c13d88a76613ad4519f04810f4b">ast::scope_settings_t</a> &amp;settings, <a class="el" href="group__attribute__mapper__ast.html#gae9a62cfdebf78872a00d83a2d12eeb64">result_type_t</a> evaluated_value, std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment) const</td></tr>
+<tr class="memdesc:ab7efda3bc18a9660637f7559a1024585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a regular assigment.  <a href="classMapperEngine.html#ab7efda3bc18a9660637f7559a1024585">More...</a><br /></td></tr>
+<tr class="separator:ab7efda3bc18a9660637f7559a1024585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06eb313d3e223c5183a052a3e8fbe28c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#a06eb313d3e223c5183a052a3e8fbe28c">apply_instance_assignment</a> (attribute_store::attribute common_parent, float evaluated_value, std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment, bool chain_reaction)</td></tr>
+<tr class="memdesc:a06eb313d3e223c5183a052a3e8fbe28c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies an instance assigment, which will verify if an attribute path with a certain value exists.  <a href="classMapperEngine.html#a06eb313d3e223c5183a052a3e8fbe28c">More...</a><br /></td></tr>
+<tr class="separator:a06eb313d3e223c5183a052a3e8fbe28c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a64e5bbbe739f6d2cb7674daee4566f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMapperEngine.html#a7a64e5bbbe739f6d2cb7674daee4566f">apply_clearance_assignment</a> (attribute_store::attribute common_parent, float evaluated_value, std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; assignment)</td></tr>
+<tr class="memdesc:a7a64e5bbbe739f6d2cb7674daee4566f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a clearance assigment, which may undefine values.  <a href="classMapperEngine.html#a7a64e5bbbe739f6d2cb7674daee4566f">More...</a><br /></td></tr>
+<tr class="separator:a7a64e5bbbe739f6d2cb7674daee4566f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -183,7 +192,7 @@ Private Attributes</h2></td></tr>
 <li>The <a class="el" href="structast_1_1eval.html" title="AST evaluator.">ast::eval</a> class is used to evaluate expressions when a change in a attribute value occurs</li>
 </ul>
 <div class="plantumlgraph">
-<object type="image/svg+xml" data="inline_umlgraph_5.svg"></object>
+<object type="image/svg+xml" data="inline_umlgraph_7.svg"></object>
 </div>
  </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9d90a71af2f7809eef7d3a636edc78f2"></a>
@@ -212,6 +221,199 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true If load succeed </dd>
 <dd>
 false Some error occurred in parsing of AST validation </dd></dl>
+
+</div>
+</div>
+<a id="a7a64e5bbbe739f6d2cb7674daee4566f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a64e5bbbe739f6d2cb7674daee4566f">&#9670;&nbsp;</a></span>apply_clearance_assignment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MapperEngine::apply_clearance_assignment </td>
+          <td>(</td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>common_parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>evaluated_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;&#160;</td>
+          <td class="paramname"><em>assignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Applies a clearance assigment, which may undefine values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">common_parent</td><td>Common parent Attribute for the assignment </td></tr>
+    <tr><td class="paramname">evaluated_value</td><td>Evaluated value from the right-hand side of the assignment </td></tr>
+    <tr><td class="paramname">assignment</td><td>Pointer to the assignment </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a value was applied to the left-hand side </dd>
+<dd>
+false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a06eb313d3e223c5183a052a3e8fbe28c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06eb313d3e223c5183a052a3e8fbe28c">&#9670;&nbsp;</a></span>apply_instance_assignment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MapperEngine::apply_instance_assignment </td>
+          <td>(</td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>common_parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>evaluated_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;&#160;</td>
+          <td class="paramname"><em>assignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>chain_reaction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Applies an instance assigment, which will verify if an attribute path with a certain value exists. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">common_parent</td><td>Common parent Attribute for the assignment </td></tr>
+    <tr><td class="paramname">evaluated_value</td><td>Evaluated value from the right-hand side of the assignment </td></tr>
+    <tr><td class="paramname">assignment</td><td>Pointer to the assignment </td></tr>
+    <tr><td class="paramname">chain_reaction</td><td>Chain reaction setting from the scope </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a value was applied to the left-hand side </dd>
+<dd>
+false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="ab7efda3bc18a9660637f7559a1024585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7efda3bc18a9660637f7559a1024585">&#9670;&nbsp;</a></span>apply_regular_assignment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MapperEngine::apply_regular_assignment </td>
+          <td>(</td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>common_parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>destination</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">attribute_store::attribute&#160;</td>
+          <td class="paramname"><em>original_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespaceast.html#aef0d3c13d88a76613ad4519f04810f4b">ast::scope_settings_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>settings</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__attribute__mapper__ast.html#gae9a62cfdebf78872a00d83a2d12eeb64">result_type_t</a>&#160;</td>
+          <td class="paramname"><em>evaluated_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt;&#160;</td>
+          <td class="paramname"><em>assignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Applies a regular assigment. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">common_parent</td><td>Common parent Attribute for the assignment </td></tr>
+    <tr><td class="paramname">destination</td><td>Destination Attribute for the assignment </td></tr>
+    <tr><td class="paramname">original_node</td><td>Original node that triggered the assignment evaluation </td></tr>
+    <tr><td class="paramname">settings</td><td>Score settings associated with the assignment </td></tr>
+    <tr><td class="paramname">evaluated_value</td><td>Evaluated value from the right-hand side of the assignment </td></tr>
+    <tr><td class="paramname">assignment</td><td>Pointer to the assignment </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a value was applied to the left-hand side </dd>
+<dd>
+false otherwise </dd></dl>
 
 </div>
 </div>
@@ -302,6 +504,7 @@ false if it does not match </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">assignment</td><td>The assignment to look for a destination </td></tr>
+    <tr><td class="paramname">original_node</td><td>Original attribute that was updated </td></tr>
   </table>
   </dd>
 </dl>
@@ -619,16 +822,15 @@ false Some error occurred in parsing of AST validation </dd></dl>
 <p>Runs a single assigment and verifies if a value was applied. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">assignment</td><td><br  />
- </td></tr>
-    <tr><td class="paramname">assigment_destination</td><td></td></tr>
-    <tr><td class="paramname">original_node</td><td></td></tr>
+    <tr><td class="paramname">assignment</td><td>Pointer to the assignment </td></tr>
+    <tr><td class="paramname">assigment_destination</td><td>Destination attribute for the assignment </td></tr>
+    <tr><td class="paramname">original_node</td><td>Original node that triggered the assignment evaluation </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dl class="section return"><dt>Returns</dt><dd>true if a value was applied to the left-hand side </dd>
 <dd>
-false </dd></dl>
+false otherwise </dd></dl>
 
 </div>
 </div>
@@ -681,6 +883,7 @@ false </dd></dl>
   <table class="params">
     <tr><td class="paramname">assignments_to_check</td><td>List of assigment to execute </td></tr>
     <tr><td class="paramname">assigment_destination</td><td>Destination attribute </td></tr>
+    <tr><td class="paramname">original_node</td><td>Original attribute that triggered these assignments </td></tr>
   </table>
   </dd>
 </dl>
@@ -835,7 +1038,7 @@ false Some error occurred in parsing of AST validation </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMapperEngine.html">MapperEngine</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:55 for AoX Applications by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:57:01 for AoX Applications by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -240,6 +240,7 @@ void test_simple_assignment()
   expr.first = first;
 
   ast::assignment ass;
+  ass.type = 0;
   ass.lhs = attr;
   ass.rhs = expr;
 
@@ -250,6 +251,11 @@ void test_simple_assignment()
 void test_simple_undefined()
 {
   TEST_ASSERT_FALSE(eval_simple("undefined"));
+}
+
+void test_printing()
+{
+  TEST_ASSERT_FALSE(eval_simple("r'1 <= r'2 + r'3 - r'4 & r'5 | r'6 / r'7 ^ r'8 < r'9 > r'10 or r'11 * r'12 % r'13 != r'14 == r'15 ** r'16 >= r'17"));
 }
 
 void test_exists()

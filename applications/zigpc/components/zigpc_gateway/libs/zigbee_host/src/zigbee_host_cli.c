@@ -105,7 +105,7 @@ void zigbeeHostCommandPrintInfo(void)
   emberAfAppFlush();
 #endif  // EZSP_HOST
 
-  emAfCliVersionCommand();
+  sli_zigbee_af_cli_version_command();
   emberAfAppFlush();
 
   appDebugPrint("nodeType [");
@@ -128,8 +128,8 @@ void zigbeeHostCommandPrintInfo(void)
   // NOTE: Replaced in ZigPC by content of function
   // printPacketBuffers();
   appDebugPrint("Buffs: %d / %d\n",
-                emAfGetPacketBufferFreeCount(),
-                emAfGetPacketBufferTotalCount());
+                sli_zigbee_af_get_packet_buffer_free_count(),
+                sli_zigbee_af_get_packet_buffer_total_count());
 
   emberAfAppFlush();
 
@@ -141,7 +141,7 @@ void zigbeeHostCommandPrintInfo(void)
     appDebugPrint("Ep cnt: %d\n", emberAfEndpointCount());
     // Loop for each endpoint.
     for (i = 0; i < emberAfEndpointCount(); i++) {
-      EmberAfEndpointType *et = emAfEndpoints[i].endpointType;
+      EmberAfEndpointType *et = sli_zigbee_af_endpoints[i].endpointType;
       appDebugPrint("ep %d [endpoint %p, device %p] ",
                     emberAfEndpointFromIndex(i),
                     (emberAfEndpointIndexIsEnabled(i) ? "enabled" : "disabled"),
@@ -162,7 +162,7 @@ void zigbeeHostCommandPrintInfo(void)
           zc->clusterId);
         emberAfAppDebugExec(emberAfDecodeAndPrintClusterWithMfgCode(
           zc->clusterId,
-          emAfGetManufacturerCodeForCluster(zc)));
+          sli_zigbee_af_get_manufacturer_code_for_cluster(zc)));
         appDebugPrint("\n");
         emberAfAppFlush();
       }
@@ -175,17 +175,17 @@ void zigbeeHostCommandPrintInfo(void)
   }
 
   {
-    const char *names[] = {EM_AF_GENERATED_NETWORK_STRINGS};
+    const char *names[] = {EMBER_AF_GENERATED_NETWORK_STRINGS};
     uint8_t i;
     appDebugPrint("Nwk cnt: %d\n", EMBER_SUPPORTED_NETWORKS);
     for (i = 0; i < EMBER_SUPPORTED_NETWORKS; i++) {
       (void)emberAfPushNetworkIndex(i);
       appDebugPrint("nwk %d [%p]\n", i, names[i]);
-      if (emAfProIsCurrentNetwork()) {
+      if (sli_zigbee_af_pro_is_current_network()) {
         appDebugPrint("  nodeType [0x%x]\n",
-                      emAfCurrentZigbeeProNetwork->nodeType);
+                      sli_zigbee_af_current_zigbee_pro_network->nodeType);
         appDebugPrint("  securityProfile [0x%x]\n",
-                      emAfCurrentZigbeeProNetwork->securityProfile);
+                      sli_zigbee_af_current_zigbee_pro_network->securityProfile);
       }
       (void)emberAfPopNetworkIndex();
     }

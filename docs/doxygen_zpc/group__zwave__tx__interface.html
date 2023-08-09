@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -84,10 +84,8 @@ $(document).ready(function(){initNavTree('group__zwave__tx__interface.html','');
 
 <div class="header">
   <div class="summary">
-<a href="#groups">Modules</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">Z-Wave TX Interface<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__tx.html">Z-Wave TX</a></div></div>  </div>
 </div><!--header-->
@@ -96,12 +94,6 @@ $(document).ready(function(){initNavTree('group__zwave__tx__interface.html','');
 <p>This is the public interface for the Z-Wave TX component.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
-Modules</h2></td></tr>
-<tr class="memitem:group__zwave__tx__options__qos__priority"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__options__qos__priority.html">Z-Wave TX Options QoS priority</a></td></tr>
-<tr class="memdesc:group__zwave__tx__options__qos__priority"><td class="mdescLeft">&#160;</td><td class="mdescRight">QoS Priority for Z-Wave TX Options. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__tx__transport__options.html">zwave_tx_transport_options</a></td></tr>
@@ -120,41 +112,11 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga0036a7cb6519b5780b83fe426c86e9f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga12c249f53157f1b461a0c534a274a72f"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structzwave__tx__options.html">zwave_tx_options</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f">zwave_tx_options_t</a></td></tr>
 <tr class="separator:ga12c249f53157f1b461a0c534a274a72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga352fa211e6acdc27d604c8bfb50d1d40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga352fa211e6acdc27d604c8bfb50d1d40">zwave_tx_transport_options::parent_session_id</a></td></tr>
-<tr class="memdesc:ga352fa211e6acdc27d604c8bfb50d1d40"><td class="mdescLeft">&#160;</td><td class="mdescRight">zwave_tx_session_id_t of the parent frame. A parent frame is a frame  <a href="group__zwave__tx__interface.html#ga352fa211e6acdc27d604c8bfb50d1d40">More...</a><br /></td></tr>
-<tr class="separator:ga352fa211e6acdc27d604c8bfb50d1d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad64babac04318fb7bdc198f7153c3707"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gad64babac04318fb7bdc198f7153c3707">zwave_tx_transport_options::valid_parent_session_id</a></td></tr>
-<tr class="separator:gad64babac04318fb7bdc198f7153c3707"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5471644447dd2057d16fffdddc48c09d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga5471644447dd2057d16fffdddc48c09d">zwave_tx_transport_options::group_id</a></td></tr>
-<tr class="separator:ga5471644447dd2057d16fffdddc48c09d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab1fe8c0c709e0ce0de23f5e543c6ea0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gab1fe8c0c709e0ce0de23f5e543c6ea0f">zwave_tx_transport_options::is_first_follow_up</a></td></tr>
-<tr class="separator:gab1fe8c0c709e0ce0de23f5e543c6ea0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9c51a314a41be4d09ce06e49cc34dfa5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga9c51a314a41be4d09ce06e49cc34dfa5">zwave_tx_transport_options::is_test_frame</a></td></tr>
-<tr class="separator:ga9c51a314a41be4d09ce06e49cc34dfa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga85bfd0fc0be19c0b482b0c7f7e382f6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga85bfd0fc0be19c0b482b0c7f7e382f6a">zwave_tx_transport_options::ignore_incoming_frames_back_off</a></td></tr>
-<tr class="separator:ga85bfd0fc0be19c0b482b0c7f7e382f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1e9d705e2a918a9464b7f3f431ffd20d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__ZWAPI__BASIS.html#gae40fbd54aa01a8f1dcb7d5d1672a5ca4">rf_power_level_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga1e9d705e2a918a9464b7f3f431ffd20d">zwave_tx_transport_options::rf_power</a></td></tr>
-<tr class="separator:ga1e9d705e2a918a9464b7f3f431ffd20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6393bb75e40099db43f54d436fd35ee3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga6393bb75e40099db43f54d436fd35ee3">zwave_tx_options::number_of_responses</a></td></tr>
-<tr class="separator:ga6393bb75e40099db43f54d436fd35ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab1fa5993c1e8efd7ae27014b5a0977a4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gab1fa5993c1e8efd7ae27014b5a0977a4">zwave_tx_options::discard_timeout_ms</a></td></tr>
-<tr class="separator:gab1fa5993c1e8efd7ae27014b5a0977a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaed5db3a6a7b5e41111530a7a4c5bbb4b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gaed5db3a6a7b5e41111530a7a4c5bbb4b">zwave_tx_options::qos_priority</a></td></tr>
-<tr class="separator:gaed5db3a6a7b5e41111530a7a4c5bbb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaabf707ec26bc96c30b1930ed8f21d419"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gaabf707ec26bc96c30b1930ed8f21d419">zwave_tx_options::fasttrack</a></td></tr>
-<tr class="separator:gaabf707ec26bc96c30b1930ed8f21d419"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga51b9ba28fbd1b5de28313f7441c66f34"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga51b9ba28fbd1b5de28313f7441c66f34">zwave_tx_options::send_follow_ups</a></td></tr>
-<tr class="separator:ga51b9ba28fbd1b5de28313f7441c66f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga99b5dba527ab07064da062e62b4034e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__tx__interface.html#ga0036a7cb6519b5780b83fe426c86e9f6">zwave_tx_transport_options_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga99b5dba527ab07064da062e62b4034e4">zwave_tx_options::transport</a></td></tr>
-<tr class="separator:ga99b5dba527ab07064da062e62b4034e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>This is the public interface for the Z-Wave TX component. </p>
-<p><a class="el" href="group__zwave__tx__options__qos__priority.html#gad1538f36d226fe8147c5e538625568df">zwave_tx_send_data()</a> and <a class="el" href="group__zwave__tx__options__qos__priority.html#ga6f1b21f8eaea9acf202a08d92b80547a">zwave_tx_abort_transmission()</a> are the two main functions to be used from other components.</p>
-<p><a class="el" href="group__zwave__tx__options__qos__priority.html#gaecd18ffa418c0db342d7af2132b6c92f">zwave_tx_init()</a> should not be called by other components. </p>
+<p><a class="el" href="group__zwave__tx.html#gad1538f36d226fe8147c5e538625568df">zwave_tx_send_data()</a> and <a class="el" href="group__zwave__tx.html#ga6f1b21f8eaea9acf202a08d92b80547a">zwave_tx_abort_transmission()</a> are the two main functions to be used from other components.</p>
+<p><a class="el" href="group__zwave__tx.html#gaecd18ffa418c0db342d7af2132b6c92f">zwave_tx_init()</a> should not be called by other components. </p>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga12c249f53157f1b461a0c534a274a72f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga12c249f53157f1b461a0c534a274a72f">&#9670;&nbsp;</a></span>zwave_tx_options_t</h2>
@@ -202,209 +164,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="gab1fa5993c1e8efd7ae27014b5a0977a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab1fa5993c1e8efd7ae27014b5a0977a4">&#9670;&nbsp;</a></span>discard_timeout_ms</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t zwave_tx_options::discard_timeout_ms</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Maximum time in ms this transmission is allowed to spend in queue waiting to be processed before it is dropped. Discard timeout of 0 means to never drop the frame. </p>
-
-</div>
-</div>
-<a id="gaabf707ec26bc96c30b1930ed8f21d419"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaabf707ec26bc96c30b1930ed8f21d419">&#9670;&nbsp;</a></span>fasttrack</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool zwave_tx_options::fasttrack</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This flag indicates if the message should be attempted to be sent without beaming or route resolution. This option should only be used for FL nodes. If the transmission fails, the message will be re-queued and attempted again later. </p>
-
-</div>
-</div>
-<a id="ga5471644447dd2057d16fffdddc48c09d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5471644447dd2057d16fffdddc48c09d">&#9670;&nbsp;</a></span>group_id</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> zwave_tx_transport_options::group_id</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This flag can be used for tracking multicast/singlecast follow-ups transmissions. For Singlecast messages (remote.is_multicast = false), this must be set to ZWAVE_TX_INVALID_GROUP if the frame is not a follow-up frame, else to the group_id for which it is a follow-up. For Multicast messages (remote.is_multicast = true), if this field is set with a group_id different than 0, the Tx Queue will use the TRANSMIT_OPTION_MULTICAST_AS_BROADCAST and the multicast will be sent as a "singlecast to the broadcast destination" </p>
-
-</div>
-</div>
-<a id="ga85bfd0fc0be19c0b482b0c7f7e382f6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga85bfd0fc0be19c0b482b0c7f7e382f6a">&#9670;&nbsp;</a></span>ignore_incoming_frames_back_off</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool zwave_tx_transport_options::ignore_incoming_frames_back_off</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This flag indicates if the frame is to be sent even if we have incoming frames. Should be used only if the transport need a frame send/delivered at the risk of a collision. </p>
-
-</div>
-</div>
-<a id="gab1fe8c0c709e0ce0de23f5e543c6ea0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab1fe8c0c709e0ce0de23f5e543c6ea0f">&#9670;&nbsp;</a></span>is_first_follow_up</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool zwave_tx_transport_options::is_first_follow_up</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Is this the first Singlecast follow-up frame ? Only set this to true if queuing the first follow-up frame. </p>
-
-</div>
-</div>
-<a id="ga9c51a314a41be4d09ce06e49cc34dfa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9c51a314a41be4d09ce06e49cc34dfa5">&#9670;&nbsp;</a></span>is_test_frame</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool zwave_tx_transport_options::is_test_frame</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This flag indicates if the frame is to be sent as a test frame Test frame was intended to be used to test link reliability, the Z-Wave API will send a test frame without any routing and with 9600 kbit/s transmission speed. The payload will also be ignored. </p>
-
-</div>
-</div>
-<a id="ga6393bb75e40099db43f54d436fd35ee3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6393bb75e40099db43f54d436fd35ee3">&#9670;&nbsp;</a></span>number_of_responses</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t zwave_tx_options::number_of_responses</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The <a class="el" href="group__zwave__tx__process.html">Z-Wave TX Process</a> will wait for the expected responses to a frame before transmitting the next frame. It will time out and resume TX operations after a recommended backoff time for the expected number of responses It is possible to specify that multiple responses are expected. In case of Supervision with status update flag, the number_of_responses should be set to 1, as only one frame will be returned immediately for sure, the other(s) one will come later after an arbitrary time. </p>
-
-</div>
-</div>
-<a id="ga352fa211e6acdc27d604c8bfb50d1d40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga352fa211e6acdc27d604c8bfb50d1d40">&#9670;&nbsp;</a></span>parent_session_id</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> zwave_tx_transport_options::parent_session_id</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>zwave_tx_session_id_t of the parent frame. A parent frame is a frame </p>
-
-</div>
-</div>
-<a id="gaed5db3a6a7b5e41111530a7a4c5bbb4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaed5db3a6a7b5e41111530a7a4c5bbb4b">&#9670;&nbsp;</a></span>qos_priority</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t zwave_tx_options::qos_priority</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Priority of transmission element. Frames with higher numbers are sent first. </p>
-
-</div>
-</div>
-<a id="ga1e9d705e2a918a9464b7f3f431ffd20d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1e9d705e2a918a9464b7f3f431ffd20d">&#9670;&nbsp;</a></span>rf_power</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__ZWAPI__BASIS.html#gae40fbd54aa01a8f1dcb7d5d1672a5ca4">rf_power_level_t</a> zwave_tx_transport_options::rf_power</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This value indicates if the a test frame must be sent with a particular Tx Power. This value will be ignored if the is_test_frame flag is set to false. </p>
-
-</div>
-</div>
-<a id="ga51b9ba28fbd1b5de28313f7441c66f34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga51b9ba28fbd1b5de28313f7441c66f34">&#9670;&nbsp;</a></span>send_follow_ups</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool zwave_tx_options::send_follow_ups</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The transports can automatically queue Follow-up messages following a multicast. If you wish to activate this functionality, set this field to true. </p>
-
-</div>
-</div>
-<a id="ga99b5dba527ab07064da062e62b4034e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga99b5dba527ab07064da062e62b4034e4">&#9670;&nbsp;</a></span>transport</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__zwave__tx__interface.html#ga0036a7cb6519b5780b83fe426c86e9f6">zwave_tx_transport_options_t</a> zwave_tx_options::transport</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Data for Z-Wave Transport. This should be zero'ed out by user components and used only by Z-Wave Transports. </p>
-
-</div>
-</div>
-<a id="gad64babac04318fb7bdc198f7153c3707"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad64babac04318fb7bdc198f7153c3707">&#9670;&nbsp;</a></span>valid_parent_session_id</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool zwave_tx_transport_options::valid_parent_session_id</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This flag indicates if the parent_session_id field is supposed to contain a valid value. If this field is set to true, qos_priority will be overwritten so that the frame is sent before the parent. </p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

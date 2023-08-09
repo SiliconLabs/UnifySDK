@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example MQTT Device &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/examples/applications/example_mqtt_device/README.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/js/charenc.js"></script>
+        <script src="../../../../_static/js/crypt.js"></script>
+        <script src="../../../../_static/js/sha1.js"></script>
+        <script src="../../../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.4.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="example-mqtt-device">
+<h1>Example MQTT Device<a class="headerlink" href="#example-mqtt-device" title="Permalink to this heading"></a></h1>
+<p>This applicate simulates an MQTT device having all possible UCL capabilities
+using the Unify Library.</p>
+<section id="build-the-application">
+<h2>Build the application<a class="headerlink" href="#build-the-application" title="Permalink to this heading"></a></h2>
+<p>Use the following define with CMake to build this application: <code class="docutils literal notranslate"><span class="pre">-DBUILD_EMD=ON</span></code>.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/build $ </span>cmake<span class="w"> </span>-GNinja<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebugInfo<span class="w"> </span>-DBUILD_EMD<span class="o">=</span>ON
+<span class="go">[...]</span>
+<span class="go">-- Example MQTT Device (EMD) will build</span>
+<span class="gp">pi@unify:/build $ </span>ninja
+</pre></div>
+</div>
+</section>
+<section id="start-the-application">
+<h2>Start the application<a class="headerlink" href="#start-the-application" title="Permalink to this heading"></a></h2>
+<p>It is important to configure the path of the UAM files for the basic cluster
+functionalities to work.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/build $ </span>./applications/examples/applications/example_mqtt_device/emd<span class="w"> </span>--mqtt.host<span class="w"> </span>localhost<span class="w"> </span>--log.level<span class="w"> </span>debug<span class="w"> </span>--emd.datastore_file<span class="w"> </span>emd.db<span class="w"> </span>--mapdir<span class="w"> </span>../applications/examples/applications/example_mqtt_device/components/emd_attribute_mapper/rules/
+</pre></div>
+</div>
+<p>Use the console to create new devices/endpoints.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EMD&gt;help</span>
+<span class="go">==================================================</span>
+<span class="go">Unify Command line interface Help:</span>
+<span class="go">==================================================</span>
+<span class="go">add_endpoint Add an endpoint under a UNID in the Attribute Store</span>
+<span class="go">add_unid Add a UNID in the Attribute Store</span>
+<span class="gp"># </span>---<span class="w"> </span>SNIP<span class="w"> </span>---
+<span class="go">remove_endpoint Removes an endpoint under a UNID from the Attribute Store</span>
+<span class="go">remove_unid Removes a UNID from the Attribute Store</span>
+</pre></div>
+</div>
+<p>For example, add a device with UNID 1 and endpoint 0. Endpoint 0 will also be
+created if you specify any other endpoint number.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EMD&gt;add_endpoint 1,0</span>
+<span class="gp"># </span>Attributes<span class="w"> </span>are<span class="w"> </span>created<span class="w"> </span>and<span class="w"> </span>published<span class="w"> </span>here.
+</pre></div>
+</div>
+<p>Observe on the MQTT publications. Devices will appear Online with all
+possible attributes and commands supported by the Unify DotDot Attribute
+Store library.</p>
+<p>Commands will affect the desired values. The application will wait the value
+configured on the MaximumCommandDelay before it aligns the reported values.</p>
+<p>The Unify Attribute Store commands are available via the console, if you want
+to update values that are not updatable via MQTT.</p>
+<p>It is possible to Remove UNIDs using the MQTT state topic, it will simulate
+a node removal.</p>
+<p>It is also possible to simulate a node interview. The interview will take the
+value configured in the INTERVIEW_TIME define.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

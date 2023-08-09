@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -385,8 +385,8 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>@serial_rx{REQ | 0x04 | rxStatus | sourceNode | cmdLength | pCmd[ ] | rxRSSIVal }</p>
-<p>When a foreign frame is received in promiscuous mode: @serial_rx{REQ | 0xD1 | rxStatus | sourceNode | cmdLength | pCmd[ ] | destNode} The destNode parameter is only valid for singlecast frames.</p>
+<p>Rx: {REQ | 0x04 | rxStatus | sourceNode | cmdLength | pCmd[ ] | rxRSSIVal }</p>
+<p>When a foreign frame is received in promiscuous mode: Rx: {REQ | 0xD1 | rxStatus | sourceNode | cmdLength | pCmd[ ] | destNode} The destNode parameter is only valid for singlecast frames.</p>
 <p>The Z-Wave API will call the <a class="el" href="group__ZWAPI__INIT.html#ga8760e50d33250308039ff09a9e8a1674">application_command_handler_function</a> function registered with <a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init()</a> when an application command or request has been received from another node. The receive buffer is released when returning from this function. The type of frame used by the request can be determined (single cast, multicast, or broadcast frame). This is used to avoid flooding the network by responding on a multicast or broadcast. In order not to disrupt the radio communication and the protocol, no application function must execute code for more than 5 ms without returning. </p>
 
 </div>
@@ -428,7 +428,7 @@ Functions</h2></td></tr>
 <p>A controller application may send a <a class="el" href="group__ZWAPI__CONTROLLER.html#gad659a161bf6bf468119f4b85d3752f9f" title="Request network topology updates from the SUC/SIS node.">zwapi_request_network_update()</a> command to a SIS or SIS node. In response, the SIS MUST return update information for each node change since the last update handled by the requesting controller node. The application of the requesting controller node may receive multiple calls to <a class="el" href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">application_controller_update_function</a> in response to <a class="el" href="group__ZWAPI__CONTROLLER.html#gad659a161bf6bf468119f4b85d3752f9f" title="Request network topology updates from the SUC/SIS node.">zwapi_request_network_update()</a>.</p>
 <p>The Z Wave protocol most not call <a class="el" href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">application_controller_update_function</a> in a controller node acting as primary controller or inclusion controller when a node is added or deleted.</p>
 <p>Any controller application MUST implement this function.</p>
-<p>\serial_rx{REQ | 0x49 | bStatus | bNodeID | bLen | basic | generic | specific | commandclasses[ ]}</p>
+<p>Rx: {REQ | 0x49 | bStatus | bNodeID | bLen | basic | generic | specific | commandclasses[ ]}</p>
 <p>application_controller_update_function via the Z-Wave API also have the possibility for receiving the status UPDATE_STATE_NODE_INFO_REQ_FAILED, which means that a node did not acknowledge a <a class="el" href="group__ZWAPI__CONTROLLER.html#ga7f0684275070545db6dfb2b534e93b01" title="Request node information from a node.">zwapi_request_node_info()</a> call. </p>
 
 </div>
@@ -447,7 +447,7 @@ Functions</h2></td></tr>
 
 <p>Structure holding the application callback functions. </p>
 <p>The application callback functions must be registered to the Z-Wave API with <a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init()</a>. The functions will be invoked by the Z-Wave API at specific times.</p>
-<p>@zgw_name SerialAPI_Callbacks </p>
+<p>aka SerialAPI_Callbacks </p>
 
 </div>
 </div>
@@ -478,25 +478,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a5789076342f93457595696fd21307d16"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_STATIC&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_CONTROLLER_STATIC </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a5789076342f93457595696fd21307d16"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_STATIC&#160;</td><td class="fielddoc"><p>aka ZW_LIB_CONTROLLER_STATIC </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108afd31e7dc2115b39b3f8ff4aaab09f99a"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_CONTROLLER </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108afd31e7dc2115b39b3f8ff4aaab09f99a"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER&#160;</td><td class="fielddoc"><p>aka ZW_LIB_CONTROLLER </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ad0f24e48735f2003f792ffca0559a760"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ENHANCED&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_SLAVE_ENHANCED </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ad0f24e48735f2003f792ffca0559a760"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ENHANCED&#160;</td><td class="fielddoc"><p>aka ZW_LIB_SLAVE_ENHANCED </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a7506b467575ae5889a88c244189cae54"></a>ZWAVE_LIBRARY_TYPE_END_NODE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_SLAVE </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a7506b467575ae5889a88c244189cae54"></a>ZWAVE_LIBRARY_TYPE_END_NODE&#160;</td><td class="fielddoc"><p>aka ZW_LIB_SLAVE </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ab4f5c48dd86cdb8cb28b03634ea2e1f0"></a>ZWAVE_LIBRARY_TYPE_INSTALLER&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_INSTALLER </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ab4f5c48dd86cdb8cb28b03634ea2e1f0"></a>ZWAVE_LIBRARY_TYPE_INSTALLER&#160;</td><td class="fielddoc"><p>aka ZW_LIB_INSTALLER </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a285654fd01306b8b25cb03b4e31f1b4e"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ROUTING&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_SLAVE_ROUTING </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a285654fd01306b8b25cb03b4e31f1b4e"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ROUTING&#160;</td><td class="fielddoc"><p>aka ZW_LIB_SLAVE_ROUTING </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a0689c0c111b28eb947b0af7ca064132e"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_BRIDGE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_CONTROLLER_BRIDGE </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a0689c0c111b28eb947b0af7ca064132e"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_BRIDGE&#160;</td><td class="fielddoc"><p>aka ZW_LIB_CONTROLLER_BRIDGE </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a97e7aad5c75d33d8b4e235fe28436dd6"></a>ZWAVE_LIBRARY_TYPE_DUT&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_DUT </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a97e7aad5c75d33d8b4e235fe28436dd6"></a>ZWAVE_LIBRARY_TYPE_DUT&#160;</td><td class="fielddoc"><p>aka ZW_LIB_DUT </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108aa31ba07d7270eb74f6be76d1f9a02ad8"></a>ZWAVE_LIBRARY_TYPE_AVREMOTE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_AVREMOTE </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108aa31ba07d7270eb74f6be76d1f9a02ad8"></a>ZWAVE_LIBRARY_TYPE_AVREMOTE&#160;</td><td class="fielddoc"><p>aka ZW_LIB_AVREMOTE </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ac11fa08cc23e69984ad45af1300c02fa"></a>ZWAVE_LIBRARY_TYPE_AVDEVICE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_AVDEVICE </p>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ac11fa08cc23e69984ad45af1300c02fa"></a>ZWAVE_LIBRARY_TYPE_AVDEVICE&#160;</td><td class="fielddoc"><p>aka ZW_LIB_AVDEVICE </p>
 </td></tr>
 </table>
 
@@ -542,7 +542,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shut down the Z-Wave API and close the communication ports. </p>
-<p>@zgw_name SerialAPI_Destroy </p>
+<p>aka SerialAPI_Destroy </p>
 
 </div>
 </div>
@@ -581,7 +581,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>nvm_id (e.g., bridge6.81)</dd></dl>
-<p>@zgw_name GenerateNvmIdFromSdkVersion </p>
+<p>aka GenerateNvmIdFromSdkVersion </p>
 
 </div>
 </div>
@@ -609,7 +609,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns SDK version (e.g., "6.81.00")</dd></dl>
-<p>@zgw_name GenerateSdkVersionFromProtocolVersion </p>
+<p>aka GenerateSdkVersionFromProtocolVersion </p>
 
 </div>
 </div>
@@ -647,7 +647,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>@zgw_name Get_SerialAPI_AppVersion </p>
+<p>aka Get_SerialAPI_AppVersion </p>
 
 </div>
 </div>
@@ -713,7 +713,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>@zgw_name SerialAPI_GetChipTypeAndVersion </p>
+<p>aka SerialAPI_GetChipTypeAndVersion </p>
 
 </div>
 </div>
@@ -786,7 +786,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the initialization data was retrieved and parsed correctly. SL_STATUS_FAIL otherwise</dd></dl>
-<p>@zgw_name SerialAPI_GetInitData </p>
+<p>aka SerialAPI_GetInitData </p>
 
 </div>
 </div>
@@ -861,7 +861,7 @@ Functions</h2></td></tr>
 
 <p>Retrieves versioning data from the Z-Wave API Module. </p>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<p>@zgw_name ZW_GetProtocolVersion </p>
+<p>aka ZW_GetProtocolVersion </p>
 
 </div>
 </div>
@@ -926,7 +926,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> if all initialization was successfully completed. It includes initializing the Z-Wave module serial port, reading the module's capabilities and its version. <a class="el" href="group__unify__sl__status__codes.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> otherwise</dd></dl>
-<p>@zgw_name SerialAPI_Init </p>
+<p>aka SerialAPI_Init </p>
 
 </div>
 </div>
@@ -1023,7 +1023,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>returns true if there are still more frames to process in the receive queue.</dd></dl>
 <p>This function must be called from some application main loop. This is what drives the serial data receive handling. <a class="el" href="group__ZWAPI__INIT.html#gad44a77c9f06a6a5b81d5b3fd1f38e6b1" title="Main poll loop for the Z-Wave API.">zwapi_poll()</a> checks the serial port for new data and handles timers and all other async callbacks. I.e., all Z-Wave API callbacks are called from within this function.</p>
 <p>TODO: It would be nice to have zwapi_poll return the minimum number of system ticks to parse before a timer times out. In this way we don't need to call zwapi_poll unless we got a receive interrupt from the uart or if a timer has timed out. This means that the system would be able to go into low power mode between zwapi_poll calls.</p>
-<p>@zgw_name SerialAPI_Poll </p>
+<p>aka SerialAPI_Poll </p>
 
 </div>
 </div>
@@ -1070,13 +1070,10 @@ SL_STATUS_FAIL otherwise </dd></dl>
 <p>Sets the value of "awaiting a Z-Wave API started callback". </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td></td></tr>
+    <tr><td class="paramname">value</td><td>Value to set. True if we are expecting/waiting for a Z-Wave API started message, false if not. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
 
 </div>
 </div>
@@ -1135,7 +1132,7 @@ false </dd></dl>
 <dd>
 false if the command is NOT supported</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>A Z-Wave API session must have been opened with <a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init()</a> before calling this function.</dd></dl>
-<p>@zgw_name SerialAPI_SupportsCommand_func </p>
+<p>aka SerialAPI_SupportsCommand_func </p>
 
 </div>
 </div>
@@ -1164,7 +1161,7 @@ false if the command is NOT supported</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the command is supported, false otherwise.</dd></dl>
-<p>@zgw_name SupportsSerialAPISetup_func </p>
+<p>aka SupportsSerialAPISetup_func </p>
 
 </div>
 </div>
@@ -1193,7 +1190,7 @@ false if the command is NOT supported</dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

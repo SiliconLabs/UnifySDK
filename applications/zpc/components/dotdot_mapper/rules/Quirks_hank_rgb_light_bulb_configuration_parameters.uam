@@ -1,0 +1,49 @@
+// Configuration Parameter info for the Hank RGB Light Bulb
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE              0x00007203
+def zwPRODUCT_ID                0x00007204
+
+// Device fingerprint
+def hank_rgb_light_bulb ((r'zwMANUFACTURER_ID == 520) & (r'zwPRODUCT_TYPE == 256) & (r'zwPRODUCT_ID == 4))
+
+// Configuration Command Class
+def zw_CONF_PARAM_ID 0x7004
+def zw_CONF_PARAM_ID_LIST 0x7011
+def zw_NEXT_SUPPORTED_PARAMETER_ID 0x7002
+def MIN_VALUE 0x700A
+def MAX_VALUE 0x700B
+def DEFAULT_VALUE 0x700C
+def SIZE 0x7005
+
+scope 520 chain_reaction(0) {
+  // The product supports Configuration < v3. We know that it has Configuration parameters
+  // We create them here
+  i:r'zw_CONF_PARAM_ID[21] =
+    if (hank_rgb_light_bulb) 1
+    undefined
+
+  i:r'zw_CONF_PARAM_ID[24] =
+    if (hank_rgb_light_bulb) 1
+    undefined
+
+  // This one seems to work, I did not see it described in the user manual.
+  i:r'zw_CONF_PARAM_ID[254] =
+    if (hank_rgb_light_bulb) 1
+    undefined
+
+
+  // Fill up the info we know about these configuration parameters
+  r'zw_CONF_PARAM_ID[21].MIN_VALUE =  if (hank_rgb_light_bulb) 0 undefined
+  r'zw_CONF_PARAM_ID[21].MAX_VALUE =  if (hank_rgb_light_bulb) 2 undefined
+  r'zw_CONF_PARAM_ID[21].DEFAULT_VALUE =  if (hank_rgb_light_bulb) 0 undefined
+
+  r'zw_CONF_PARAM_ID[24].MIN_VALUE =  if (hank_rgb_light_bulb) 0 undefined
+  r'zw_CONF_PARAM_ID[24].MAX_VALUE =  if (hank_rgb_light_bulb) 2 undefined
+  r'zw_CONF_PARAM_ID[24].DEFAULT_VALUE =  if (hank_rgb_light_bulb) 1 undefined
+
+  r'zw_CONF_PARAM_ID[254].MIN_VALUE =  if (hank_rgb_light_bulb) 0 undefined
+  r'zw_CONF_PARAM_ID[254].DEFAULT_VALUE =  if (hank_rgb_light_bulb) 1 undefined
+  r'zw_CONF_PARAM_ID[254].SIZE =  if (hank_rgb_light_bulb) 4 undefined
+  // Mapper does not handle too well this large value, converting to float will interpret it as 1431655808 =(
+  r'zw_CONF_PARAM_ID[254].MAX_VALUE =  if (hank_rgb_light_bulb) 1431655765 undefined
+}

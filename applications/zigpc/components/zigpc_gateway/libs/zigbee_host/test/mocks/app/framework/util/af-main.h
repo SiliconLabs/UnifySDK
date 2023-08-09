@@ -22,6 +22,6 @@
     for more details.
 */
 
-EmberStatus emAfPermitJoin(uint8_t duration, bool broadcastMgmtPermitJoin);
+EmberStatus emberAfPermitJoin(uint8_t duration, bool broadcastMgmtPermitJoin);
 
 #endif  // SILABS_AF_MAIN_H

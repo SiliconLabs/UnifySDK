@@ -132,6 +132,7 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
   {
     using qi::alnum;
     using qi::alpha;
+    using qi::attr;
     using qi::char_;
     using qi::eol;
     using qi::hex;
@@ -169,6 +170,10 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     // the whole attribute path, example d'1245.6666[3].9999
     attribute_rule = char_("dre") >> '\'' >> attribute_path_element_rule % '.';
 
+    // Instance assigments i: / Clearance assignment c:
+    assignment_type_rule
+      = (lit("c:") >> attr(2)) | (lit("i:") >> attr(1)) | attr(0);
+
     // if condition, example if (r'1244 == 0) 2 4
     condition_rule = "if" > operand_rule > operand_rule > operand_rule;
 
@@ -192,7 +197,8 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
                              >> ")";
 
     // an assignment, example r'1234 = r'6666
-    assignment_rule = attribute_rule >> "=" >> expression_rule;
+    assignment_rule
+      = assignment_type_rule >> attribute_rule >> "=" >> expression_rule;
 
     // Scope configuration is used assign configurations for a scope
     scope_setting_name = string("chain_reaction") | string("clear_desired")
@@ -214,6 +220,7 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     operand_rule.name("operand");
     condition_rule.name("condition");
     attribute_rule.name("attribute");
+    assignment_type_rule.name("assignment_type");
     assignment_rule.name("assignment");
     built_in_function_rule.name("function");
     scope_setting_name.name("scope_setting_name");
@@ -249,6 +256,7 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
   qi::rule<IteratorType, ast::expression(), Skipper> term_rule;
   qi::rule<IteratorType, ast::operand(), Skipper> operand_rule;
   qi::rule<IteratorType, ast::condition(), Skipper> condition_rule;
+  qi::rule<IteratorType, int, Skipper> assignment_type_rule;
   qi::rule<IteratorType, ast::attribute(), Skipper> attribute_rule;
   qi::rule<IteratorType, ast::attribute_path_element(), Skipper>
     attribute_path_element_rule;

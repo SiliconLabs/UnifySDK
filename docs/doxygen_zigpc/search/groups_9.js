@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['posix_2dspecific_20implementation_20of_20the_20event_20demultiplexer_27s_20internal_20interface_37170',['Posix-Specific Implementation of the Event Demultiplexer&apos;s Internal Interface',['../group__uic__main__ext__posix.html',1,'']]],
-  ['process_20definitions_20for_20the_20unify_20attribute_20mapper_37171',['Process definitions for the Unify Attribute Mapper',['../group__attribute__mapper__process.html',1,'']]],
-  ['protothread_20semaphores_37172',['Protothread semaphores',['../group__ptsem.html',1,'']]],
-  ['protothreads_37173',['Protothreads',['../group__pt.html',1,'']]]
+  ['pollcontrol_20cluster_20mapper_39588',['PollControl Cluster Mapper',['../group__unify__dotdot__attribute__store__command__callbacks__poll__control.html',1,'']]],
+  ['posix_2dspecific_20implementation_20of_20the_20event_20demultiplexer_27s_20internal_20interface_39589',['Posix-Specific Implementation of the Event Demultiplexer&apos;s Internal Interface',['../group__uic__main__ext__posix.html',1,'']]],
+  ['process_20definitions_20for_20the_20unify_20attribute_20mapper_39590',['Process definitions for the Unify Attribute Mapper',['../group__attribute__mapper__process.html',1,'']]],
+  ['protothread_20semaphores_39591',['Protothread semaphores',['../group__ptsem.html',1,'']]],
+  ['protothreads_39592',['Protothreads',['../group__pt.html',1,'']]]
 ];

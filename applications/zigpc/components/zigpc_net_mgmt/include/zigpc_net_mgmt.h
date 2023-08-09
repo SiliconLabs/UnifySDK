@@ -75,16 +75,18 @@ typedef struct {
 sl_status_t zigpc_netmgmt_network_permit_joins(bool enable);
 
 /**
- * @brief Request to add a new end device to the Zigbee PAN using Z3 Install Code Method.
+ * @brief Request to add a new end device to the Zigbee PAN
  *
  * @param node_eui64            To be added End Device
  * @param install_code          Install code buffer
  * @param install_code_length   Install code length
+ * @param is_well_known_key_add if True : use well known joining method, if false : use install code method
  * @return sl_status_t          Returns if Network Management can service the request
  */
 sl_status_t zigpc_net_mgmt_add_node(const zigbee_eui64_t node_eui64,
                                     const zigbee_install_code_t install_code,
-                                    const uint8_t install_code_length);
+                                    const uint8_t install_code_length,
+                                    bool is_well_known_key_add);
 
 /**
  * @brief Request to remove a node already on the network. This request

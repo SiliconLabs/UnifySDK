@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -215,6 +215,11 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a103453ee4c6f922adfc20d135c7f4689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definitions of operators When the parser encounters the string representation of operators, they are parsed into one of the following enums.  <a href="namespaceast.html#a103453ee4c6f922adfc20d135c7f4689">More...</a><br /></td></tr>
 <tr class="separator:a103453ee4c6f922adfc20d135c7f4689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ace4d117a90fb4a9aa004b203963c01"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01">AssignmentType</a> { <a class="el" href="namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01a5f945141c4e13754a6fc23500d025eb4">REGULAR</a>
+, <a class="el" href="namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01a7a8b06d47b1d4fd5933348ca8613f1df">INSTANCE</a>
+, <a class="el" href="namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01aa39a3e888f0031d1da8f8dacc47ab263">CLEARANCE</a>
+ }</td></tr>
+<tr class="separator:a5ace4d117a90fb4a9aa004b203963c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -280,6 +285,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ga4a95d7c23d4b96003a4a1ce8958f8b84"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__built__in__functions__definitions.html#ga4a95d7c23d4b96003a4a1ce8958f8b84">is_any_undefined</a> (std::vector&lt; <a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&gt; &amp;results)</td></tr>
 <tr class="memdesc:ga4a95d7c23d4b96003a4a1ce8958f8b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any of the expressions are defined (i.e. have a result)  <a href="group__attribute__mapper__built__in__functions__definitions.html#ga4a95d7c23d4b96003a4a1ce8958f8b84">More...</a><br /></td></tr>
 <tr class="separator:ga4a95d7c23d4b96003a4a1ce8958f8b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__built__in__functions__definitions.html#gabcfcdb83e6dc25df0b00121a463d5a39">log10</a> (std::vector&lt; <a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&gt; &amp;results)</td></tr>
+<tr class="memdesc:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the log10 of the first defined argument.  <a href="group__attribute__mapper__built__in__functions__definitions.html#gabcfcdb83e6dc25df0b00121a463d5a39">More...</a><br /></td></tr>
+<tr class="separator:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ef82a09426afdaee7a9f96377d8e8f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a05ef82a09426afdaee7a9f96377d8e8f"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="namespaceast.html#afcc1703485c9b6f49d785a9539e89993">mapper_function_map</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceast.html#a05ef82a09426afdaee7a9f96377d8e8f">get_built_in_functions</a> ()</td></tr>
 <tr class="memdesc:a05ef82a09426afdaee7a9f96377d8e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the map of built-in functions, containing names and pointers.  <a href="namespaceast.html#a05ef82a09426afdaee7a9f96377d8e8f">More...</a><br /></td></tr>
@@ -454,6 +463,25 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a5ace4d117a90fb4a9aa004b203963c01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ace4d117a90fb4a9aa004b203963c01">&#9670;&nbsp;</a></span>AssignmentType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01">ast::AssignmentType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5ace4d117a90fb4a9aa004b203963c01a5f945141c4e13754a6fc23500d025eb4"></a>REGULAR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a5ace4d117a90fb4a9aa004b203963c01a7a8b06d47b1d4fd5933348ca8613f1df"></a>INSTANCE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a5ace4d117a90fb4a9aa004b203963c01aa39a3e888f0031d1da8f8dacc47ab263"></a>CLEARANCE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a103453ee4c6f922adfc20d135c7f4689"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a103453ee4c6f922adfc20d135c7f4689">&#9670;&nbsp;</a></span>operator_ids</h2>
 
@@ -1067,6 +1095,7 @@ template&lt;typename T &gt; </div>
 <div class="line">  {std::string(<span class="stringliteral">&quot;is_any_defined&quot;</span>), &amp;is_any_defined&lt;T&gt;},</div>
 <div class="line">  {std::string(<span class="stringliteral">&quot;are_all_undefined&quot;</span>), &amp;are_all_undefined&lt;T&gt;},</div>
 <div class="line">  {std::string(<span class="stringliteral">&quot;is_any_undefined&quot;</span>), &amp;is_any_undefined&lt;T&gt;},</div>
+<div class="line">  {std::string(<span class="stringliteral">&quot;log10&quot;</span>), &amp;log10&lt;T&gt;},</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -1077,7 +1106,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceast.html">ast</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:07 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:13 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

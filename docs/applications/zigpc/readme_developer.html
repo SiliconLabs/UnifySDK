@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -277,8 +277,9 @@ a particular log_tag):</p>
 </section>
 <section id="using-zigbee-network-analyzer-to-monitor-pan">
 <h2>Using Zigbee Network Analyzer to Monitor PAN<a class="headerlink" href="#using-zigbee-network-analyzer-to-monitor-pan" title="Permalink to this heading"></a></h2>
-<p>The “Network Analyzer” perspective in Silicon Labs Simplicity Studio IDE v5 can
-be used to analyze the traffic on the Zigbee PAN.</p>
+<p>The “Network Analyzer” perspective in Silicon Labs
+<a class="reference external" href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a> IDE v5
+can be used to analyze the traffic on the Zigbee PAN.</p>
 <p>Network activity can be observed based on the UCL commands relayed by ZigPC.</p>
 <section id="installing-simplicity-studio-v5">
 <h3>Installing Simplicity Studio v5<a class="headerlink" href="#installing-simplicity-studio-v5" title="Permalink to this heading"></a></h3>
@@ -288,13 +289,15 @@ a host computer.</p>
 </section>
 <section id="detecting-devices-in-simplicity-studio">
 <h3>Detecting Devices in Simplicity Studio<a class="headerlink" href="#detecting-devices-in-simplicity-studio" title="Permalink to this heading"></a></h3>
-<p>Devices in Simplicity Studio can be detected using any of the following methods:</p>
+<p>Devices in <a class="reference external" href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a>
+can be detected using any of the following methods:</p>
 <section id="connection-via-ethernet-interface">
 <h4>Connection via Ethernet Interface<a class="headerlink" href="#connection-via-ethernet-interface" title="Permalink to this heading"></a></h4>
 <p>If the host computer and one of the Zigbee devices are connected via Ethernet (using
 a Wireless Starter Kit for example:
 <a class="reference external" href="https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit">https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit</a>),
-Simplicity Studio can capture network traffic using this interface. Either an
+<a class="reference external" href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a>
+can capture network traffic using this interface. Either an
 end device or the gateway radio can be connected via Ethernet to perform network
 capture (since the serial USB connection, which ZigPC uses, can run
 independently of the Ethernet connection services).</p>
@@ -348,7 +351,7 @@ printed out at startup.</p>
 <p>Extract the NWK key value ( <code class="docutils literal notranslate"><span class="pre">ZZ</span> <span class="pre">ZZ</span> <span class="pre">ZZ</span> <span class="pre">...</span></code> sequence in the log above) and add
 it as a Network Analyzer Security Key using the following instructions:</p>
 <ol class="arabic simple">
-<li><p>Open Simplicity Studio v5.</p></li>
+<li><p>Open <a class="reference external" href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a> v5.</p></li>
 <li><p>Click from the top menu: Window -&gt; Preferences.</p></li>
 <li><p>From the left sidebar, select: Network Analyzer -&gt; Decoding -&gt; Security Keys.</p></li>
 <li><p>Add a New Entry and insert the NWK key as the Key value.</p></li>
@@ -369,6 +372,8 @@ Code based DSK:</p>
 clusters or to override the functionality of default clusters. This step must
 be run at compilation time in order to properly include the necessary MQTT
 topics and other related ZCL information.</p>
+<p>Please note, there has been limited testing on custom clusters and more changes
+may be needed to support custom applications.</p>
 <ul class="simple">
 <li><p>Step 1: Adding the custom cluster to the Unify framework</p></li>
 </ul>
@@ -385,14 +390,7 @@ templates will generate for the new cluster by adding the name to:
 ‘uic/applications/zigpc/components/zcl_util/zap/addon-helper.js
 Specifically, the ‘SUPPORTED_CLUSTERS’ and ‘SUPPORTED_CLUSTER_ATTRIBUTES’
 lists must reference the new cluster.</p>
-<ul class="simple">
-<li><p>Step 3: Adding the custom clusters in the zigbeeHost gateway level</p></li>
-</ul>
-<p>ZigPC uses a custom zigbeeHost layer to manage the zigbee stack. Ensure that
-this layer can also access the new ZCL cluster by modifying the slcp file
-in ‘uic/applications/zigpc/components/zigpc_gateway/libs/zigbee_host/src/libzigbee_host.slcp’
-Add the new cluster in the same format as all the existing clusters at this layer.</p>
-<p>*Step 4: Re-generate all ZAP templates</p>
+<p>*Step 3: Re-generate all ZAP templates</p>
 <p>Unify uses ZAP to generate ZCL cluster information (as discussed in step #2).
 Make sure that zap can find the library by modifying its configuration file.</p>
 <p>Alternatively, compile with the cmake option ‘ZAP_GENERATE’ set to ‘ON’ to
@@ -404,19 +402,9 @@ command_mapper, zcl_util, zcl_command_parser, zcl_profiles, attribute_management
 <p>Please take a look at [<a class="reference external" href="https://github.com/SiliconLabs/zap">https://github.com/SiliconLabs/zap</a>] for more detailed
 information.</p>
 <ul class="simple">
-<li><p>Step 5: Re-generate the zigbee_host</p></li>
+<li><p>Step 4:</p></li>
 </ul>
-<p>Re-generate the zigbee_host slcp, in the autogen folder. Set the
-STUDIO_ADAPTER_PATH to point to zap, which should already be configured
-to point to the custom xml. Otherwise, it will be necessary to edit the
-zap-config of the zigbee_host folder.</p>
-<p>Please read [<a class="reference external" href="https://siliconlabs.github.io/slc-specification/1.0/">https://siliconlabs.github.io/slc-specification/1.0/</a>] and
-[<a class="reference external" href="https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf">https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf</a>]
-for more information on using the slc_cli.</p>
-<ul class="simple">
-<li><p>Step 6:</p></li>
-</ul>
-<p>Compile ZigPC as normal. ZigPC should now support your custom cluster</p>
+<p>Compile ZigPC as normal. ZigPC should now support your custom cluster.</p>
 </section>
 </section>
 </section>

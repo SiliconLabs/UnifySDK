@@ -90,7 +90,7 @@ if(DOXYGEN_FOUND)
   # Doxygen src for libuic
   set(LIBUIC_DOXYGEN_SRC
       ${CMAKE_SOURCE_DIR}/components ${CMAKE_CURRENT_BINARY_DIR}/components
-      ${CMAKE_BINARY_DIR}/components/uic_dotdot_mqtt/src
+      ${CMAKE_SOURCE_DIR}/components/uic_dotdot_mqtt/zap-generated/src
       ${CMAKE_SOURCE_DIR}/include)
 
   # ############################################################################

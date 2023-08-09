@@ -609,7 +609,8 @@ without any infinite loop.
 
 .. note::
 
-  Chain reaction is always active for attribute creations.
+  Chain reaction is always active for attribute creations done automatically
+  by regular assignments.
 
 For example, considering the following map:
 
@@ -691,6 +692,109 @@ the default parent type.
     // Equivalent to : r'^.ep[1].1 = r'^.ep[0].1
     r'ep[1].1 = r'ep[0].1
   }
+
+Instance assignments
+''''''''''''''''''''
+
+Until now, the examples have been using regular assignments. UAM file allows
+to add a ``i:``modifier before the left-hand side of an assignment, which
+will make it an instance assignemnt. Here is an example:
+
+.. code-block:: uam
+
+  scope 0 {
+    i:r'2 = r'3
+  }
+
+Instance assignments are intended for making sure that an attribute with a certain
+value exists or not. Consider the following map:
+
+.. code-block:: uam
+
+  scope 0 {
+    // Create an attribute 2 with reported value 1 if r'3 is greater than 0.
+    i:r'2 = if (r'3 > 0) 1 undefined
+    // Also create an attribute reported 2 with value 2 if r'3 is greater than 0.
+    i:r'2 = if (r'3 > 0) 2 undefined
+  }
+
+Here the difference, is that regular assignments would end up creating a single
+Attribute 2, and will either set the reported value to 1 or 2.
+
+Instance assignments will create 2 Attributes 2, one with value 1 and one with value 2.
+The evaluated values of expression will differ slightly when using instance
+assignments. It is recommended to use an index at the end of the left-hand
+side to indicate the instance values.
+
+The value type ``e'`` cannot be used with a instance assignment. It must be
+either the reported or the desired value.
+
+.. code-block:: uam
+
+  scope 0 {
+    // Here the expression will be interpreted as the value that must exist in the reported value of an attribute 2
+    i:r'2 = <expression>
+    // Here the expression will be interpreted as a boolean expression that indicate if the Attribute 2 with Value 1 should exist or not.
+    i:r'2[1] = <expression>
+  }
+
+Scope settings with Instance assignments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Scope priorities are respected within a type of assignment.
+There is no guarantee that Instance assignments will run before or after
+another type of assignment (regular, clearance), but scope priorities within
+the same type of assignement will be respected.
+
+Scope settings will behave as follow with instance assignments:
+
+* ``clear_desired``: will have no effect. The desired_value will not be cleared.
+* ``chain_reaction``: works normally
+* ``common_parent_type``: works normally
+* ``create_attributes``: will have no effect. The instance assignement expressions will dictate if attributes are to be created or deleted.
+
+
+Clearance assignments
+'''''''''''''''''''''
+
+Clearance assignments are run by the mapper before the regular assignments,
+if the destination already exists.
+
+Scope priorities are respected within a type of assignment.
+There is no guarantee that Clearance assignments will run before or after
+another type of assignment (regular, clearance), but scope priorities within
+the same type of assignement will be respected.
+
+Until now, the examples have been using regular assignments. UAM file allows
+to add a ``c:``modifier before the left-hand side of an assignment, which
+will make it an instance assignemnt. Here is an example:
+
+The value type ``e'`` cannot be used with a clearance assignment. It must be
+either the reported or the desired value.
+
+.. code-block:: uam
+
+  scope 0 {
+    // Clear the reported value of attribute 2 if r'3 != 0.
+    c:r'2 = r'3
+  }
+
+Right-hand sides in clearance assignments are evaluated like a boolean expression.
+If the Right-hand side evaluates to:
+
+* ``0 ``: The value will not be cleared. Stop looking at lower priority clearance maps for the same destination.
+* ``!= 0`` : The value will be cleared. Stop looking at lower priority clearance maps for the same destination.
+* ``undefined``: Ignore this map and check the lower priority clearance maps for the same destination.
+
+Scope settings with Clearance assignments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Scope settings will behave as follow with clearance assignments:
+
+* ``clear_desired``: will have no effect.
+* ``chain_reaction``: works normally
+* ``common_parent_type``: works normally
+* ``create_attributes``: will have no effect. Clearance assignements will never create or delete attributes.
 
 
 Debugging evaluations

@@ -23,6 +23,7 @@ After entering the URL, you should see this front page:
 
 ![Front Page](doc/assets/img/very_start.PNG)
 
+
 ## Connecting the Developer GUI
 
 Click connect in the top bar to start operating the _Unify_. Because of the
@@ -35,6 +36,7 @@ this, the page will still be blank. Then, click on the navigation bar on the
 left saying **Nodes**. At that point, the page should look like this:
 
 ![Display Nodes](doc/assets/img/connect.PNG)
+
 
 ## Node Inclusion
 
@@ -53,6 +55,7 @@ inclusion, click **Reject**. Following is an example of a nodelist, where
 different security schemes are displayed:
 
 ![Secure Node](doc/assets/img/secure_node_list_inclusion.PNG)
+
 
 ## SmartStart List
 
@@ -155,6 +158,7 @@ before they will seek inclusion in a new network.
 
 There is currently no support for BLE DSKs in the SmartStart List.
 
+
 ## Clusters
 
 The following are the currently (2022-02-09) supported clusters of the _Dev GUI_:
@@ -165,7 +169,8 @@ The following are the currently (2022-02-09) supported clusters of the _Dev GUI_
 - Basic
 - Binding
 - ColorControl
-- ConcentrationMeasurement
+- CarbonDioxide
+- CarbonMonoxide
 - ConfigurationParameters
 - DoorLock
 - ElectricalConductivityMeasurement
@@ -181,37 +186,48 @@ The following are the currently (2022-02-09) supported clusters of the _Dev GUI_
 - OccupancySensing
 - OnOff
 - PhMeasurement
+- PM25
 - PowerConfiguration
 - PressureMeasurement
+- RelativityHumidity
 - RFTelemetry
 - Scenes
+- SoilMoisture
 - SystemMetrics
 - TemperatureMeasurement
 - Thermostat
-- WaterContentMeasurement
 - WindSpeedMeasurement
 - WindowCovering
 
 After inclusion of the node and navigating to the corresponding cluster page,
 you have the ability to view/edit cluster attributes and send commands that supported by the cluster.
 
-Cluster page examples:
+#### Cluster page examples
+
 ![On/Off Switch](doc/assets/img/on_off.PNG)
+
 ![Occupancy Sensor](doc/assets/img/occupancy_sensor.PNG)
+
 ![Door Lock](doc/assets/img/door_lock.PNG)
 
 If the attribute is writable it can be edited by the Dev GUI. Writable attributes are highlighted in yellow:
+
 ![Thermostat Set attributes](doc/assets/img/thermostat_modes.PNG)
 
 In case the running command requires a list of params they can be entered in a pop-up window
+
 ![Door Lock Pin](doc/assets/img/door_lock_pin.PNG)
+
 
 ## Measurements
 
 All *Measurement clusters collected on one "Measurements" page. The first tab on this page is a list of all measurement clusters per node,
 the rest provide a list of nodes that support the corresponding cluster:
+
 ![All Measurements](doc/assets/img/all_measurements.png)
+
 ![Nodes per Measurement](doc/assets/img/nodes_per_measurement.png)
+
 
 ## Groups
 
@@ -243,6 +259,7 @@ This enables selecting the command you want to send to the group. Clicking _Send
 will issue the command. In the above example, it will turn all the binary
 switches in the group off.
 
+
 ## Name and Location
 
 The Dev GUI allows the user to set name and location for each device and help recognize
@@ -255,27 +272,36 @@ After clicking _Update_, the page will look like this.
 
 ![Name and Location Overview](doc/assets/img/name_location_nodes.PNG)
 
+
 ## Application Monitoring
 
 All Unify services have the ability to notify client about their start/stop.
 So the Application Monitoring page represents the status and version of each application running on the _Unify_ gateway.
+
 ![Application Monitoring](doc/assets/img/application_monitoring.png)
+
 
 ## OTA
 
 The OTA page provides information about the device's current firmware:
+
 ![OTA](doc/assets/img/ota.png)
 
 If a new version of the firmware is ability, devices can be flashed:
+
 ![OTA Flash](doc/assets/img/ota_flash.png)
+
 
 ## Commissionable Devices
 
 Represents a list of commissinable devices provided by Matter Bridge:
+
 ![Commissionable Devices](doc/assets/img/commissionable_devices.png)
 
 If DSK is available, the device can be added to the SmartStart list:
+
 ![Add Commissionable Devices](doc/assets/img/commissionable_devices_add.png)
+
 
 ## UPTI
 
@@ -284,17 +310,22 @@ to start/stop trace packages capturing and visualize trace packages.
 
 * Enable/Disable PTI on the Protocol Controller
     To `Enable` or `Disable` the PTI functionality for controllers with NCP that support this, you need to toggle `On\Off PTI` switch to the desired position on the `RFTelemetry` page
+
     ![ToggleSerialApiPTI](../../upti_cap/assets/enable_serial_api_pti.png).
+
     Note: An enabled pti produces a large number of messages sent via mqtt, so to prevent mqtt overload it is recommended to keep PTI disabled at all times while not in use.
     Note: This functionality is available when running the [ZPC](../../zpc/readme_user.md).
 
 * Discovery PTI
     To discover the network and identify all PTIs, press `Discovery` button on the `UPTI` page. After some time, all PTIs will be available in a table with information about `Serial Number`, `IP Address` and connection status
+
     ![Discovery](../../upti_cap/assets/discover.png).
 
 * Enable/Disable data capture
     To `Toggle` capturing data, press `Enable` or `Disable` button. If you `Enable` capturing, you can choose in the pop-up window whether you want to parse additional data or only capture raw data.
+
     ![TogglePTI](../../upti_cap/assets/toggle_pti.png)
+
     ![EnabledPTI](../../upti_cap/assets/enabled_pti.png)
 
 * View Trace Package
@@ -304,4 +335,5 @@ to start/stop trace packages capturing and visualize trace packages.
     ![WithAdditionalData](../../upti_cap/assets/with_additional_data.png)
 
     or without additional data:
+    
     ![WithoutAdditionalData](../../upti_cap/assets/without_additional_data.png)

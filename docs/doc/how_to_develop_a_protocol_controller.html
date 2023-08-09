@@ -41,7 +41,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -82,7 +82,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
@@ -374,7 +373,7 @@ attribute has 2 values, a reported (current value reported by the node itself)
 and a desired (future/wished value).</p>
 <p>An example of a Z-Wave Attribute Store is shown below:</p>
 <figure class="align-center" id="id3">
-<a class="reference internal image-reference" href="../_images/attribute_store_representation.png"><img alt="Z-Wave Attribute Store representation" src="../_images/attribute_store_representation.png" style="width: 95%;" /></a>
+<a class="reference internal image-reference" href="doc/assets/img/attribute_store_representation.png"><img alt="Z-Wave Attribute Store representation" src="doc/assets/img/attribute_store_representation.png" style="width: 95%;" /></a>
 <figcaption>
 <p><span class="caption-number">Figure 3 </span><span class="caption-text">Z-Wave Attribute Store representation</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
@@ -998,7 +997,8 @@ automatically.</p>
 <span class="c1">// EPC Configuration for the Unify DotDot Attribute Store</span>
 <span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">unify_dotdot_attribute_store_configuration_t</span><span class="w"> </span><span class="n">epc_configuration</span>
 <span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">{.</span><span class="n">get_endpoint_node_function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attribute_store_network_helper_get_endpoint_node</span><span class="p">,</span>
-<span class="w">     </span><span class="p">.</span><span class="n">get_unid_endpoint_function</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attribute_store_network_helper_get_unid_endpoint_from_node</span><span class="p">,</span>
+<span class="w">     </span><span class="p">.</span><span class="n">get_unid_endpoint_function</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attribute_store_network_helper_get_unid_endpoint_from_node</span><span class="p">,</span>
+<span class="w">     </span><span class="p">.</span><span class="n">get_unid_function</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attribute_store_network_helper_get_unid_from_node</span><span class="p">,</span>
 <span class="w">     </span><span class="p">.</span><span class="n">update_attribute_desired_values_on_commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
 <span class="w">     </span><span class="p">.</span><span class="n">clear_reported_on_desired_updates</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
 <span class="w">     </span><span class="p">.</span><span class="n">automatic_deduction_of_supported_commands</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>

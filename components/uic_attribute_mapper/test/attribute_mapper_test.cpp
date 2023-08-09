@@ -347,15 +347,13 @@ void test_mapper_engine_existence_link()
 
 void test_mapper_engine_instance_existence()
 {
-  TEST_IGNORE_MESSAGE("UIC-2183");
-
   MapperEngine &e = MapperEngine::get_instance();
   e.set_common_parent_type(attribute::root().type());
   e.reset();
   e.add_expression(R"(
     scope 0 {
       // I want to create attribute 2 if there is an attribute 3 with value 10.
-      e'2 = e'3[10]
+      e'2 = fn_are_all_defined(r'3[10])
     }
   )");
 
@@ -394,8 +392,6 @@ void test_mapper_engine_instance_existence()
 
 void test_mapper_engine_instance_existence_dependency()
 {
-  TEST_IGNORE_MESSAGE("UIC-2183");
-
   MapperEngine &e = MapperEngine::get_instance();
   e.set_common_parent_type(attribute::root().type());
   e.reset();
@@ -403,7 +399,7 @@ void test_mapper_engine_instance_existence_dependency()
     scope 0 {
       // I want to (create and )set attribute 2 if there is an attribute 3 with value 10.
       // Value 2 should probably be set if there is an attribute 3 but none with value 10.
-      r'2 = if (e'3[10]) 1 2
+      r'2 =  if (fn_are_all_defined(r'3[10])) 1 2
     }
   )");
 
@@ -440,7 +436,208 @@ void test_mapper_engine_instance_existence_dependency()
 
   // Now delete attribute attribute_3_10. attribute 2 should go back to 2
   attribute_3_10.delete_node();
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_2));
+}
+
+void test_mapper_engine_instance_creation_with_index()
+{
+  // Remove the default tree.
+  attribute::root().delete_node();
+
+  // Get the engine started:
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  e.add_expression(R"(
+    scope 0 {
+      // I want to have an instance of an attribute 2 with reported value 10 if
+      // there is an attribute 3 with value 10.
+      i:r'2[10] =  if (fn_are_all_defined(r'3[10])) 1 0
+    }
+  )");
+
+  auto attribute_2 = attribute::root().child_by_type(2);
+  TEST_ASSERT_FALSE(attribute_2.is_valid());
+
+  auto attribute_3 = attribute::root().add_node(3);
+  attribute_store_set_reported_number(attribute_3, 1);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute::root().child_by_type(2).is_valid());
+
+  auto other_attribute_2 = attribute::root().add_node(2);
+  attribute_store_set_reported_number(other_attribute_2, 2);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(other_attribute_2));
+
+  attribute_store_set_reported_number(attribute_3, 2);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(other_attribute_2, attribute::root().child_by_type(2));
+  TEST_ASSERT_FALSE(attribute::root().child_by_type(2, 1).is_valid());
+
+  attribute_store_set_reported_number(attribute_3, 10);
+  contiki_test_helper_run(0);
+  attribute_2 = attribute::root().child_by_type(2, 1);
+  TEST_ASSERT_TRUE(attribute_2.is_valid());
+  TEST_ASSERT_EQUAL(10, attribute_store_get_reported_number(attribute_2));
+
+  // Now check that the instance gets deleted if I change the value of attribute 3:
+  attribute_store_set_reported_number(attribute_3, 1);
+  contiki_test_helper_run(0);
+  attribute_2 = attribute::root().child_by_type(2, 1);
+  TEST_ASSERT_FALSE(attribute_2.is_valid());
+}
+
+void test_mapper_engine_instance_creation()
+{
+  // Remove the default tree.
+  attribute::root().delete_node();
+
+  // Get the engine started:
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  e.add_expression(R"(
+    scope 0 {
+      // Here I want an instance of 2 with the value 1 if attribute 3 has reported value 10.
+      // No deletion once the instance of 2 with value 1 has been created.
+      i:r'2 =  if (fn_are_all_defined(r'3[10])) 1 undefined
+    }
+  )");
+
+  auto attribute_2 = attribute::root().child_by_type(2);
+  TEST_ASSERT_FALSE(attribute_2.is_valid());
+
+  // Create and set attribute 3 to 1:
+  auto attribute_3 = attribute::root().add_node(3);
+  attribute_store_set_reported_number(attribute_3, 1);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute::root().child_by_type(2).is_valid());
+
+  // Set Create an attribute 2 with value 2. it won't affect anything
+  auto other_attribute_2 = attribute::root().add_node(2);
+  attribute_store_set_reported_number(other_attribute_2, 2);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(other_attribute_2));
+
+  // Set attribute 3 to 2:
+  attribute_store_set_reported_number(attribute_3, 2);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(other_attribute_2, attribute::root().child_by_type(2));
+  TEST_ASSERT_FALSE(attribute::root().child_by_type(2, 1).is_valid());
+
+  // Set attribute 3 to 10:
+  attribute_store_set_reported_number(attribute_3, 10);
+  contiki_test_helper_run(0);
+  attribute_2 = attribute::root().child_by_type(2, 1);
+  TEST_ASSERT_TRUE(attribute_2.is_valid());
   TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(attribute_2));
+
+  // Now delete attribute 3, attribute 2 instance will survive
+  attribute_3.delete_node();
+  contiki_test_helper_run(0);
+  TEST_ASSERT_TRUE(attribute_2.is_valid());
+}
+
+void test_mapper_engine_instance_creation_scope_priority()
+{
+  // Remove the default tree.
+  attribute::root().delete_node();
+
+  // Get the engine started:
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  e.add_expression(R"(
+    // Let's just check that all expressions get evaluated, because they are instances
+    scope 0 {
+      i:r'2[10] =  if (r'3 == 10) 1 0
+    }
+    scope 2 {
+      i:r'2[11] =  if (r'3 == 10) 1 0
+    }
+    scope 3 {
+      i:r'2[12] =  if (r'3 == 10) 1 0
+    }
+    scope 4 {
+      i:r'2[13] =  if (r'3 == 10) 1 undefined
+    }
+  )");
+
+  TEST_ASSERT_FALSE(attribute::root().child_by_type(2));
+
+  // Create and set attribute 3 to 1:
+  auto attribute_3 = attribute::root().add_node(3);
+  attribute_store_set_reported_number(attribute_3, 1);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute::root().child_by_type(2));
+
+  // Set attribute 3 to 10:
+  attribute_store_set_reported_number(attribute_3, 10);
+  contiki_test_helper_run(0);
+  auto attribute_2_10 = attribute::root().child_by_type(2, 0);
+  auto attribute_2_11 = attribute::root().child_by_type(2, 1);
+  auto attribute_2_12 = attribute::root().child_by_type(2, 2);
+  auto attribute_2_13 = attribute::root().child_by_type(2, 3);
+  TEST_ASSERT_TRUE(attribute_2_10.is_valid());
+  TEST_ASSERT_TRUE(attribute_2_11.is_valid());
+  TEST_ASSERT_TRUE(attribute_2_12.is_valid());
+  TEST_ASSERT_TRUE(attribute_2_13.is_valid());
+  TEST_ASSERT_EQUAL(10, attribute_store_get_reported_number(attribute_2_10));
+  TEST_ASSERT_EQUAL(11, attribute_store_get_reported_number(attribute_2_11));
+  TEST_ASSERT_EQUAL(12, attribute_store_get_reported_number(attribute_2_12));
+  TEST_ASSERT_EQUAL(13, attribute_store_get_reported_number(attribute_2_13));
+
+  // Only instance 13 will survive a deletion of attribute 3:
+  attribute_3.delete_node();
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute_2_10.is_valid());
+  TEST_ASSERT_FALSE(attribute_2_11.is_valid());
+  TEST_ASSERT_FALSE(attribute_2_12.is_valid());
+  TEST_ASSERT_TRUE(attribute_2_13.is_valid());
+}
+
+void test_mapper_engine_instance_creation_conflicting_priority()
+{
+  // Remove the default tree.
+  attribute::root().delete_node();
+
+  // Get the engine started:
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  e.add_expression(R"(
+    // Let's play with the limit a bit, get conflicting instances based on priority
+    // This is bad performance due to the fact that we have to evaluate everything everytime.
+    scope 0 {
+      i:d'2.4.5[10] =  if (r'3 < 5) 1 0
+    }
+    scope 2 {
+      i:d'2.4.5[10] =  if (r'3 <= 10) 0 1
+    }
+  )");
+
+  // Create and set attribute 3 to 5: (scope 2 active)
+  auto attribute_3 = attribute::root().add_node(3);
+  attribute_store_set_reported_number(attribute_3, 5);
+  contiki_test_helper_run(0);
+
+  // Instances will get to create only the last attribute of the branch.
+  TEST_ASSERT_FALSE(attribute::root().child_by_type(5));
+  auto attribute_4 = attribute::root().add_node(2).add_node(4);
+  attribute_store_set_reported_number(attribute_3, 11);
+  contiki_test_helper_run(0);
+  auto attribute_5_10 = attribute_4.child_by_type(5);
+  TEST_ASSERT_TRUE(attribute_5_10.is_valid());
+  TEST_ASSERT_EQUAL(10, attribute_store_get_desired_number(attribute_5_10));
+
+  // Now set attribute 3 to 2: Scope 0 will want to erase attribute 2, scope 2 will want to create it.
+  attribute_store_set_reported_number(attribute_3, 12);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_FALSE(attribute_5_10.is_valid());
+  attribute_5_10 = attribute_4.child_by_type(5);
+  TEST_ASSERT_TRUE(attribute_5_10.is_valid());
+  TEST_ASSERT_EQUAL(10, attribute_store_get_desired_number(attribute_5_10));
 }
 
 void test_attribute_mapper_config_init()
@@ -562,6 +759,37 @@ void test_mapper_engine_are_all_defined_built_in_function()
   // Now everybody is upset again.
   TEST_ASSERT_EQUAL(0, attribute_store_get_reported_number(attribute_1));
   TEST_ASSERT_EQUAL(0, attribute_store_get_reported_number(attribute_2));
+}
+
+void test_mapper_engine_log10_built_in_function()
+{
+  attribute::root().delete_node();
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+  e.add_expression(R"(
+    scope 0 {
+      r'2 = fn_log10(r'9, r'10)
+    }
+  )");
+
+  // None of r'9 / r'10 are defined yet.
+  contiki_test_helper_run(0);
+  auto attribute_9  = attribute::root().add_node(9);
+  auto attribute_10 = attribute::root().add_node(10);
+  contiki_test_helper_run(0);
+  auto attribute_2 = attribute::root().child_by_type(2);
+  TEST_ASSERT_FALSE(attribute_2.is_valid());
+  attribute_store_set_reported_number(attribute_10, 100);
+  contiki_test_helper_run(0);
+  attribute_2 = attribute::root().child_by_type(2);
+  TEST_ASSERT_TRUE(attribute_2.is_valid());
+  TEST_ASSERT_EQUAL(2, attribute_store_get_reported_number(attribute_2));
+
+  // r'9 has priority over r'10
+  attribute_store_set_reported_number(attribute_9, 10000);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(4, attribute_store_get_reported_number(attribute_2));
 }
 
 void test_mapper_engine_scream_with_unknown_functions()
@@ -1504,5 +1732,134 @@ void test_scope_priority_create_delete_schizophrenia()
   contiki_test_helper_run(0);
   attribute_3 = attribute::root().child_by_type(3);
   TEST_ASSERT_TRUE(attribute_3.is_valid());
+}
+
+void test_scope_priority_multiple_value_type_dependencies()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+
+  // Both assignments have to run, even if they have the same original node and
+  // destination, because they assign a different value type.
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 200 chain_reaction(0) clear_desired(0) {
+      r'3 =
+        if (fn_are_all_defined(r'4) == 0) undefined
+        if (r'4 > 0) 1 0
+
+      d'3 =
+        if (fn_is_any_defined(d'4, r'4) == 0) undefined
+        if ((d'4 or r'4) > 0) 1 0
+    }
+  )"));
+
+  // Here we have a "destination" that would be created or deleted based on the
+  // priority.
+  auto attribute_4 = attribute::root().add_node(4);
+  attribute_store_set_reported_number(attribute_4, 4);
+  contiki_test_helper_run(0);  // that will create the attribute 3
+
+  auto attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_TRUE(attribute_3.is_valid());
+  TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(attribute_3));
+  TEST_ASSERT_EQUAL(1, attribute_store_get_desired_number(attribute_3));
+
+  attribute_store_set_reported_number(attribute_4, 0);
+  attribute_store_undefine_desired(attribute_4);
+  contiki_test_helper_run(0);
+
+  TEST_ASSERT_EQUAL(0, attribute_store_get_reported_number(attribute_3));
+  TEST_ASSERT_EQUAL(0, attribute_store_get_desired_number(attribute_3));
+}
+
+void test_clearance_assignments()
+{
+  attribute::root().delete_node();
+
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+
+  // Both assignments have to run, even if they have the same original node and
+  // destination, because they assign a different value type.
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 200 chain_reaction(0) clear_desired(0) {
+      r'3 =
+        if (fn_are_all_defined(r'4) == 0) undefined
+        if (r'4 > 0) 1 0
+
+      d'3 =
+        if (fn_is_any_defined(d'4, r'4) == 0) undefined
+        if ((d'4 or r'4) > 0) 1 0
+
+      // Now have 3 get undefined when 4 is undefined
+      c:r'3 = if(fn_are_all_defined(r'4) == 0) 1 undefined
+      c:d'3 = if(fn_are_all_defined(r'4) == 0) 1 undefined
+    }
+  )"));
+
+  // Create the dependency. Attribyute 4, with both Reported set.
+  auto attribute_4 = attribute::root().add_node(4);
+  attribute_store_set_reported_number(attribute_4, 4);
+  contiki_test_helper_run(0);  // that will create the attribute 3
+
+  auto attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_TRUE(attribute_3.is_valid());
+  TEST_ASSERT_EQUAL(1, attribute_store_get_reported_number(attribute_3));
+  TEST_ASSERT_EQUAL(1, attribute_store_get_desired_number(attribute_3));
+
+  // Now undefine the reported of attribute 4, the clearance rules will apply
+  attribute_store_undefine_reported(attribute_4);
+  contiki_test_helper_run(0);
+
+  TEST_ASSERT_FALSE(attribute_store_is_reported_defined(attribute_3));
+  TEST_ASSERT_FALSE(attribute_store_is_desired_defined(attribute_3));
+}
+
+void test_clearance_and_instance_assignments_with_existence_type()
+{
+  attribute::root().delete_node();
+
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_common_parent_type(attribute::root().type());
+  e.reset();
+
+  // This is illegal, so both expression should just create logging errors and nothing will be mapped.
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 99 chain_reaction(0) clear_desired(0) {
+      c:e'2 =
+        if (fn_are_all_defined(r'4) == 0) undefined
+        if (r'4 > 0) 1 0
+
+      i:e'3 =
+        if (fn_are_all_defined(r'4) == 0) undefined
+        if (r'4 > 0) 1 0
+    }
+  )"));
+
+  // Create the dependency. Attribyute 4, with both Reported set.
+  auto attribute_4 = attribute::root().add_node(4);
+  attribute_store_set_reported_number(attribute_4, 4);
+  contiki_test_helper_run(0);
+
+  // Attribute 3 should not exist
+  auto attribute_3 = attribute::root().child_by_type(3);
+  TEST_ASSERT_FALSE(attribute_3.is_valid());
+
+  // Add attribute 2, check that it does not get cleared in any way:
+  auto attribute_2 = attribute::root().add_node(2);
+  TEST_ASSERT_TRUE(attribute_2.is_valid());
+  attribute_store_set_reported_number(attribute_2, 4);
+  attribute_store_set_desired_number(attribute_2, 4);
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(attribute_2));
+  TEST_ASSERT_TRUE(attribute_store_is_desired_defined(attribute_2));
+
+  // Attribute 4 to 0:
+  attribute_store_set_reported_number(attribute_4, 0);
+  contiki_test_helper_run(0);
+
+  TEST_ASSERT_TRUE(attribute_store_is_reported_defined(attribute_2));
+  TEST_ASSERT_TRUE(attribute_store_is_desired_defined(attribute_2));
 }
 }

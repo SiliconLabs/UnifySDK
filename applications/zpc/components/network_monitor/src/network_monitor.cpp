@@ -24,7 +24,7 @@
 #include "network_monitor_utils.h"
 
 // Interfaces
-#include "ucl_definitions.h"
+
 #include "zwave_command_class_wake_up_types.h"
 #include "attribute_store_defined_attribute_types.h"
 
@@ -32,6 +32,8 @@
 #include "uic_mqtt.h"
 #include "sl_log.h"
 #include "attribute_store_helper.h"
+#include "unify_dotdot_attribute_store_node_state.h"
+#include "unify_dotdot_defined_attribute_types.h"
 #include "attribute.hpp"
 #include "attribute_timeouts.h"
 #include "attribute_resolver.h"
@@ -55,7 +57,6 @@
 #include "ucl_mqtt_node_interview.h"
 #include "zwave_controller_storage.h"
 #include "zcl_cluster_servers.h"
-#include "ucl_node_state.h"
 #include "zwave_association_toolbox.h"
 
 #include "zpc_attribute_store_network_helper.h"
@@ -161,7 +162,7 @@ static void network_monitor_on_nif_updated(attribute_store_node_t updated_node,
                                            attribute_store_change_t change);
 
 static attribute network_monitor_add_attribute_store_node(
-  zwave_node_id_t node_id, node_state_topic_state_t network_status);
+  zwave_node_id_t node_id, NodeStateNetworkStatus network_status);
 static void
   network_monitor_remove_attribute_store_node(zwave_node_id_t node_id);
 
@@ -357,12 +358,12 @@ static void network_monitor_create_attribute_store_network_nodes(
     }
 
     const bool zpc_node = (node_id == zwave_network_management_get_node_id());
-    // Create the node, set NODE_STATE_TOPIC_STATE_INCLUDED for ZPC node,
-    // NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED for all end devices
+    // Create the node, set ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL for ZPC node,
+    // ZCL_NODE_STATE_NETWORK_STATUS_COMMISIONING_STARTED for all end devices
     attribute attr_node_id_node = network_monitor_add_attribute_store_node(
       node_id,
-      zpc_node ? NODE_STATE_TOPIC_STATE_INCLUDED
-               : NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED);
+      zpc_node ? ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL
+               : ZCL_NODE_STATE_NETWORK_STATUS_COMMISIONING_STARTED);
     // If it's our own NodeID, make sure to have our granted keys saved
     if (zpc_node) {
       // Configure our Granted keys and KEX Fail type.
@@ -528,7 +529,7 @@ static void network_monitor_remove_attribute_store_node(zwave_node_id_t node_id)
  *                to add in the attribute store.
  */
 static attribute network_monitor_add_attribute_store_node(
-  zwave_node_id_t node_id, node_state_topic_state_t network_status)
+  zwave_node_id_t node_id, NodeStateNetworkStatus network_status)
 {
   sl_log_debug(LOG_TAG,
                "Making sure that NodeID %d (with endpoint 0) "
@@ -547,10 +548,10 @@ static attribute network_monitor_add_attribute_store_node(
 
   attribute_store_node_t network_status_node
     = attribute_store_get_first_child_by_type(node_id_node,
-                                              ATTRIBUTE_NETWORK_STATUS);
+                                              DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
   if (network_status_node == ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_set_child_reported(node_id_node,
-                                       ATTRIBUTE_NETWORK_STATUS,
+                                       DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                        &network_status,
                                        sizeof(network_status));
   }
@@ -575,16 +576,16 @@ static void
                "NodeID %d is now considered as failing/offline",
                node_id);
 
-  node_state_topic_state_t network_status
-    = get_node_network_status(node_id_node);
-  node_state_topic_state_t new_status = NODE_STATE_TOPIC_STATE_OFFLINE;
-  if (network_status == NODE_STATE_TOPIC_INTERVIEWING) {
+  NodeStateNetworkStatus network_status
+    = unify_attribute_store_node_state_get_status(node_id_node);
+  NodeStateNetworkStatus new_status = ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE;
+  if (network_status == ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING) {
     // If the network status was interviewing and the frame transmission failed
     // Set it to Failed interview, so we try again a ful interview when it responds again
-    new_status = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+    new_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   }
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &new_status,
                                      sizeof(new_status));
 }
@@ -603,24 +604,24 @@ static void
   network_monitor_mark_node_as_online(attribute_store_node_t node_id_node,
                                       const unid_t unid)
 {
-  node_state_topic_state_t network_status
-    = get_node_network_status(node_id_node);
+  NodeStateNetworkStatus network_status
+    = unify_attribute_store_node_state_get_status(node_id_node);
 
   // Don't modify anything if the node is not offline.
-  if (network_status != NODE_STATE_TOPIC_STATE_OFFLINE
-      && network_status != NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL) {
+  if (network_status != ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE
+      && network_status != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL) {
     return;
   }
 
-  node_state_topic_state_t new_status = NODE_STATE_TOPIC_STATE_INCLUDED;
-  if (network_status == NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL) {
+  NodeStateNetworkStatus new_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
+  if (network_status == ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL) {
     // If the network status was interviewing and the frame transmission failed
     // Set it to Failed interview, so we try again a ful interview when it responds again
-    new_status = NODE_STATE_TOPIC_INTERVIEWING;
+    new_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
     ucl_mqtt_initiate_node_interview(unid);
   }
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &new_status,
                                      sizeof(new_status));
 }
@@ -737,7 +738,7 @@ static void network_monitor_handle_event_node_id_assigned(
 {
   network_monitor_add_attribute_store_node(
     event_data->node_id,
-    NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED);
+    ZCL_NODE_STATE_NETWORK_STATUS_COMMISIONING_STARTED);
   zwave_store_inclusion_protocol(event_data->node_id,
                                  event_data->inclusion_protocol);
 
@@ -765,21 +766,21 @@ static void network_monitor_handle_event_node_interview_initiated(
 {
   attribute_store_node_t network_status_node
     = attribute_store_get_first_child_by_type(node_id_node,
-                                              ATTRIBUTE_NETWORK_STATUS);
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+                                              DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_get_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
 
-  if (network_status == NODE_STATE_TOPIC_STATE_OFFLINE) {
-    network_status = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  if (network_status == ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE) {
+    network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   } else {
-    network_status = NODE_STATE_TOPIC_INTERVIEWING;
+    network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
   }
 
   // Network status will also be created, if it was not here.
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 
@@ -796,9 +797,9 @@ static void network_monitor_handle_event_node_interview_done(
     node_id_node,
     network_monitor_node_id_resolution_listener);
 
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 }

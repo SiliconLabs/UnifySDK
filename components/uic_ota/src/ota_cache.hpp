@@ -174,16 +174,16 @@ bool is_image_received_and_cached(const std::string &key);
  * @brief Clear out cache of images.
  */
 void clear_images_cache();
-};  // namespace image_file_handler
+}  // namespace image_file_handler
 
 /**
  * @namespace UnidStateHandler.
  * @brief Handling UNID state for OTA.
  *
  * Class will encapsulate following:
- * - If an image is provided specifically for the UNID or should accept UIID/all.
- * - The last provided image_ready_cb for UNID in poll.
- * - If the UNID is in poll waiting for an image.
+ *  - If an image is provided specifically for the UNID or should accept UIID/all.
+ *  - The last provided image_ready_cb for UNID in poll.
+ *  - If the UNID is in poll waiting for an image.
  *
  */
 namespace unid_state_handler
@@ -337,7 +337,7 @@ std::map<std::string, std::vector<endpoint_cache_t>, std::less<>>
  */
 std::vector<endpoint_cache_t>
   get_endpoints_status_published_and_pop(const dotdot_unid_t &unid);
-};  // namespace unid_state_handler
+}  // namespace unid_state_handler
 
 #endif  //OTA_CACHE_HPP
 /** @} end ota_cache */

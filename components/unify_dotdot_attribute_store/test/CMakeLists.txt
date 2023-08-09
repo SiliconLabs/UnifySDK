@@ -20,7 +20,10 @@ target_add_unittest(
   unify_dotdot_attribute_store_command_mapper_on_off_test.c
   unify_dotdot_attribute_store_command_mapper_door_lock_test.c
   unify_dotdot_attribute_store_command_mapper_identify_test.c
+  unify_dotdot_attribute_store_command_mapper_poll_control_test.c
   unify_dotdot_attribute_store_command_mapper_thermostat_test.c
+  unify_dotdot_attribute_store_command_mapper_window_covering_test.c
+
   DEPENDS
   uic_dotdot_mqtt_mock
   uic_mqtt_mock
@@ -33,3 +36,37 @@ target_include_directories(
   unify_dotdot_attribute_store_test
   PUBLIC ../src ../zap-generated/src ../zap-generated/test
          ../zap-generated/include)
+
+
+target_add_unittest(
+  unify_dotdot_attribute_store_shared
+  NAME
+  unify_dotdot_attribute_store_configuration_test
+  SOURCES
+  unify_dotdot_attribute_store_configuration_test.c
+)
+
+target_add_unittest(
+  unify_dotdot_attribute_store_shared
+  NAME
+  unify_dotdot_attribute_store_node_state_test
+  SOURCES
+  unify_dotdot_attribute_store_node_state_test.c
+  DEPENDS
+  uic_mqtt_mock
+  uic_dotdot_mqtt_mock
+  uic_contiki_stub
+)
+
+
+target_add_unittest(
+  unify_dotdot_attribute_store_shared
+  NAME
+  unify_dotdot_attribute_store_group_cluster_test
+  SOURCES
+  unify_dotdot_attribute_store_group_cluster_test.c
+  DEPENDS
+  uic_mqtt_mock
+  uic_dotdot_mqtt_mock
+  uic_contiki_stub
+)

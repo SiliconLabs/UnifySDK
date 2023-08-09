@@ -24,7 +24,7 @@
     for more details.
 */
 
-EmberStatus emAfInstallCodeToKey(uint8_t *installCode,  // includes CRC
+EmberStatus sli_zigbee_af_install_code_to_key(uint8_t *installCode,  // includes CRC
                                  uint8_t length,        // includes CRC length
                                  EmberKeyData *key);
 

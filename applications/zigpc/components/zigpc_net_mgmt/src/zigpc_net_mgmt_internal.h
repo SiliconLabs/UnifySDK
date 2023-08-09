@@ -53,6 +53,7 @@ sl_status_t zigpc_net_mgmt_init_complete(
  * @param eui64 - EUI64 of the node to add
  * @param install_code - install code used to encrypt messages to specified device
  * @param install_code_length - length of install code (bytes)
+ * @param is_well_known_key_add if True : use well known joining method, if false : use install code method
  *
  * @return SL_STATUS_OK if the node was added to added to TrustZone succesffuly
  *
@@ -60,7 +61,8 @@ sl_status_t zigpc_net_mgmt_init_complete(
 sl_status_t zigpc_net_mgmt_hdl_idle_add_request( 
   const zigbee_eui64_t eui64,
   const zigbee_install_code_t install_code,
-  uint8_t install_code_length);
+  uint8_t install_code_length,
+  bool is_well_known_key_add);
 
 /**
  * @brief zigpc_net_mgmt_hdl_idle_remove_request

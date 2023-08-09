@@ -72,7 +72,7 @@ typedef enum {
  *    operation was disturbed by another write
  *  - @ref ZWAVE_API_NVM_RETURN_CODE_END_OF_FILE End of File
  *
- * @zgw_name SerialAPI_nvm_close
+ * aka SerialAPI_nvm_close
  */
 uint8_t zwapi_nvm_close(void);
 
@@ -81,7 +81,7 @@ uint8_t zwapi_nvm_close(void);
  *
  * @returns uint32_t the expected size in bytes of the NVM area.
  *
- * @zgw_name SerialAPI_nvm_open
+ * aka SerialAPI_nvm_open
  */
 uint32_t zwapi_nvm_open(void);
 
@@ -97,7 +97,7 @@ uint32_t zwapi_nvm_open(void);
  * - @ref ZWAPI_PROTOCOL_NVM_STATUS_ERROR Unspecified Error
  * - @ref ZWAPI_PROTOCOL_NVM_STATUS_EOF Status End-of-file
  *
- * @zgw_name SerialAPI_nvm_backup
+ * aka SerialAPI_nvm_backup
  */
 zwapi_protocol_nvm_status_t zwapi_nvm_read(uint32_t offset,
                                            uint8_t *buf,
@@ -116,7 +116,7 @@ zwapi_protocol_nvm_status_t zwapi_nvm_read(uint32_t offset,
  * - @ref ZWAPI_PROTOCOL_NVM_STATUS_ERROR Unspecified Error
  * - @ref ZWAPI_PROTOCOL_NVM_STATUS_EOF Status End-of-file
  *
- * @zgw_name SerialAPI_nvm_restore
+ * aka SerialAPI_nvm_restore
  */
 zwapi_protocol_nvm_status_t zwapi_nvm_write(uint32_t offset,
                                             const uint8_t *buf,

@@ -516,7 +516,7 @@ static sl_status_t zwave_command_class_inclusion_controller_support_handler(
         = attribute_store_network_helper_create_endpoint_node(unid, 0);
       attribute_store_node_t node_id_node
         = attribute_store_get_node_parent(endpoint_node);
-      attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
+      attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, node_id_node);
       // During replace fail, on_node_assigned zwave_controller callback (i.e, trigger via protocol command)
       // will not be received. Therefore, we trigger the nif interview when we only receive INITIATE command
       it->second.get()->on_node_add_received = true;
@@ -584,7 +584,8 @@ sl_status_t zwave_command_class_inclusion_controller_init()
   handler.command_class      = COMMAND_CLASS_INCLUSION_CONTROLLER;
   handler.command_class_name = "Inclusion Controller";
   handler.version            = INCLUSION_CONTROLLER_VERSION;
-  /// TODO: UIC-1102 Wait for the 2021D spec release to be in force for cert and set that to false again.
+  // Keep manual security handling as it is both supported and controlled
+  // and the automatic checks for the control handlers are weaker
   handler.manual_security_validation = true;
 
   zwave_command_handler_register_handler(handler);

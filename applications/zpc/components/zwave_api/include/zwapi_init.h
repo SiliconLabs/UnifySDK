@@ -45,19 +45,17 @@ extern "C" {
 ///@{
 typedef enum {
   ZWAVE_LIBRARY_TYPE_CONTROLLER_STATIC
-  = 0x01,                                ///< @zgw_name ZW_LIB_CONTROLLER_STATIC
-  ZWAVE_LIBRARY_TYPE_CONTROLLER = 0x02,  ///< @zgw_name ZW_LIB_CONTROLLER
-  ZWAVE_LIBRARY_TYPE_END_NODE_ENHANCED
-  = 0x03,                               ///< @zgw_name ZW_LIB_SLAVE_ENHANCED
-  ZWAVE_LIBRARY_TYPE_END_NODE  = 0x04,  ///< @zgw_name ZW_LIB_SLAVE
-  ZWAVE_LIBRARY_TYPE_INSTALLER = 0x05,  ///< @zgw_name ZW_LIB_INSTALLER
-  ZWAVE_LIBRARY_TYPE_END_NODE_ROUTING
-  = 0x06,  ///< @zgw_name ZW_LIB_SLAVE_ROUTING
+  = 0x01,  ///< aka ZW_LIB_CONTROLLER_STATIC
+  ZWAVE_LIBRARY_TYPE_CONTROLLER        = 0x02,  ///< aka ZW_LIB_CONTROLLER
+  ZWAVE_LIBRARY_TYPE_END_NODE_ENHANCED = 0x03,  ///< aka ZW_LIB_SLAVE_ENHANCED
+  ZWAVE_LIBRARY_TYPE_END_NODE          = 0x04,  ///< aka ZW_LIB_SLAVE
+  ZWAVE_LIBRARY_TYPE_INSTALLER         = 0x05,  ///< aka ZW_LIB_INSTALLER
+  ZWAVE_LIBRARY_TYPE_END_NODE_ROUTING  = 0x06,  ///< aka ZW_LIB_SLAVE_ROUTING
   ZWAVE_LIBRARY_TYPE_CONTROLLER_BRIDGE
-  = 0x07,                              ///< @zgw_name ZW_LIB_CONTROLLER_BRIDGE
-  ZWAVE_LIBRARY_TYPE_DUT      = 0x08,  ///< @zgw_name ZW_LIB_DUT
-  ZWAVE_LIBRARY_TYPE_AVREMOTE = 0x0A,  ///< @zgw_name ZW_LIB_AVREMOTE
-  ZWAVE_LIBRARY_TYPE_AVDEVICE = 0x0B   ///< @zgw_name ZW_LIB_AVDEVICE
+  = 0x07,                              ///< aka ZW_LIB_CONTROLLER_BRIDGE
+  ZWAVE_LIBRARY_TYPE_DUT      = 0x08,  ///< aka ZW_LIB_DUT
+  ZWAVE_LIBRARY_TYPE_AVREMOTE = 0x0A,  ///< aka ZW_LIB_AVREMOTE
+  ZWAVE_LIBRARY_TYPE_AVDEVICE = 0x0B   ///< aka ZW_LIB_AVDEVICE
 } zwapi_library_type_t;
 ///@}
 
@@ -156,10 +154,10 @@ typedef struct _zwapi_protocol_version_information_t_ {
  * @param received_frame_length is the length of the received command class frame.
  * @param rssi_value is the RSSI measurement for the frame that was received.
  *
- * @serial_rx{REQ | 0x04 | rxStatus | sourceNode | cmdLength | pCmd[ ] | rxRSSIVal }
+ * Rx: {REQ | 0x04 | rxStatus | sourceNode | cmdLength | pCmd[ ] | rxRSSIVal }
  *
  * When a foreign frame is received in promiscuous mode:
- * @serial_rx{REQ | 0xD1 | rxStatus | sourceNode | cmdLength | pCmd[ ] | destNode}
+ * Rx: {REQ | 0xD1 | rxStatus | sourceNode | cmdLength | pCmd[ ] | destNode}
  * The destNode parameter is only valid for singlecast frames.
  *
  * The Z-Wave API will call the @ref application_command_handler_function function
@@ -235,7 +233,7 @@ typedef void (*application_command_handler_function)(
  *
  * Any controller application MUST implement this function.
  *
- * \serial_rx{REQ | 0x49 | bStatus | bNodeID | bLen | basic | generic | specific | commandclasses[ ]}
+ * Rx: {REQ | 0x49 | bStatus | bNodeID | bLen | basic | generic | specific | commandclasses[ ]}
  *
  * application_controller_update_function via the Z-Wave API also have the possibility
  * for receiving the status UPDATE_STATE_NODE_INFO_REQ_FAILED, which means that
@@ -255,7 +253,7 @@ typedef void (*application_controller_update_function)(
  * zwapi_init(). The functions will be invoked by the Z-Wave API at specific
  * times.
  *
- * @zgw_name SerialAPI_Callbacks
+ * aka SerialAPI_Callbacks
  */
 typedef struct zwapi_callbacks {
   application_command_handler_function application_command_handler;
@@ -276,7 +274,7 @@ typedef struct zwapi_callbacks {
  * includes initializing the Z-Wave module serial port, reading the module's
  * capabilities and its version. \ref SL_STATUS_FAIL otherwise
  *
- * @zgw_name SerialAPI_Init
+ * aka SerialAPI_Init
  */
 sl_status_t zwapi_init(const char *serial_port,
                        int *serial_fd,
@@ -285,7 +283,7 @@ sl_status_t zwapi_init(const char *serial_port,
 /**
  * @brief Shut down the Z-Wave API and close the communication ports.
  *
- * @zgw_name SerialAPI_Destroy
+ * aka SerialAPI_Destroy
  */
 void zwapi_destroy(void);
 
@@ -329,7 +327,7 @@ sl_status_t zwapi_log_to_file_disable();
  * timed out. This means that the system would be able to go into low power mode
  * between zwapi_poll calls.
  *
- * @zgw_name SerialAPI_Poll
+ * aka SerialAPI_Poll
  */
 bool zwapi_poll(void);
 
@@ -343,7 +341,7 @@ bool zwapi_poll(void);
  * @note A Z-Wave API session must have been opened with zwapi_init() before
  * calling this function.
  *
- * @zgw_name SerialAPI_SupportsCommand_func
+ * aka SerialAPI_SupportsCommand_func
  */
 bool zwapi_support_command_func(uint8_t func_id);
 
@@ -359,7 +357,7 @@ bool zwapi_support_command_func(uint8_t func_id);
  * @param setup_cmd The command from @ref serial_api_setup_cmd_t to check.
  * @returns true if the command is supported, false otherwise.
  *
- * @zgw_name SupportsSerialAPISetup_func
+ * aka SupportsSerialAPISetup_func
  */
 bool zwapi_support_setup_func(serial_api_setup_cmd_t setup_cmd);
 
@@ -397,7 +395,7 @@ sl_status_t zwapi_refresh_capabilities(void);
  * @returns SL_STATUS_OK if the initialization data was retrieved and parsed
  * correctly. SL_STATUS_FAIL otherwise
  *
- * @zgw_name SerialAPI_GetInitData
+ * aka SerialAPI_GetInitData
  */
 sl_status_t zwapi_get_init_data(uint8_t *ver,
                                 uint8_t *capabilities,
@@ -427,7 +425,7 @@ sl_status_t zwapi_get_node_list(zwave_nodemask_t node_list);
  * @param type returns argument for the chip type.
  * @param version returns argument for the chip version.
  *
- * @zgw_name SerialAPI_GetChipTypeAndVersion
+ * aka SerialAPI_GetChipTypeAndVersion
  */
 void zwapi_get_chip_type_version(uint8_t *type, uint8_t *version);
 
@@ -437,7 +435,7 @@ void zwapi_get_chip_type_version(uint8_t *type, uint8_t *version);
  * @param major pointer to variable that should contain the major version.
  * @param minor pointer to variable that should contain the minor version.
  *
- * @zgw_name Get_SerialAPI_AppVersion
+ * aka Get_SerialAPI_AppVersion
  */
 void zwapi_get_app_version(uint8_t *major, uint8_t *minor);
 
@@ -465,7 +463,7 @@ zwapi_library_type_t zwapi_get_library_type();
  *
  * @returns SL_STATUS_OK or SL_STATUS_FAIL.
  *
- * @zgw_name ZW_GetProtocolVersion
+ * aka ZW_GetProtocolVersion
  */
 sl_status_t zwapi_get_protocol_version(
   zwapi_protocol_version_information_t *protocol_version);
@@ -501,9 +499,8 @@ bool zwapi_is_awaiting_zwave_api_started();
 /**
  * @brief Sets the value of "awaiting a Z-Wave API started callback"
  *
- * @param value
- * @return true
- * @return false
+ * @param value Value to set. True if we are expecting/waiting for a Z-Wave
+ * API started message, false if not.
  */
 void zwapi_set_awaiting_zwave_api_started(bool value);
 
@@ -523,7 +520,7 @@ zwapi_callbacks_t *zwave_api_get_callbacks();
  *
  * @returns returns SDK version (e.g., "6.81.00")
  *
- * @zgw_name GenerateSdkVersionFromProtocolVersion
+ * aka GenerateSdkVersionFromProtocolVersion
  */
 const char *
   zwapi_generate_sdk_version_from_protocol_version(const char *version_string);
@@ -536,7 +533,7 @@ const char *
  *
  * @returns nvm_id (e.g., bridge6.81)
  *
- * @zgw_name GenerateNvmIdFromSdkVersion
+ * aka GenerateNvmIdFromSdkVersion
  */
 const char *
   zwapi_generate_nvm_id_from_sdk_version(const char *sdk_ver,

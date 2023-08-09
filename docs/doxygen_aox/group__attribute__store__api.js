@@ -40,6 +40,7 @@ var group__attribute__store__api =
     [ "attribute_store_get_node_parent", "group__attribute__store__api.html#ga2d26761e26d14154029710bea435ae85", null ],
     [ "attribute_store_get_node_total_child_count", "group__attribute__store__api.html#ga9c76be28e95124621df1f9c0c2a2cd43", null ],
     [ "attribute_store_get_node_type", "group__attribute__store__api.html#gaa56b6047b70100c29aa666e9b5fe893e", null ],
+    [ "attribute_store_get_node_value_size", "group__attribute__store__api.html#ga7d55a7adcf431832e1f32d5d69d80ae8", null ],
     [ "attribute_store_get_root", "group__attribute__store__api.html#ga372a92c330a1c685bfafab33e965149a", null ],
     [ "attribute_store_is_node_a_child", "group__attribute__store__api.html#ga4e5d4fcdc5148b345d79c58767bd2134", null ],
     [ "attribute_store_log", "group__attribute__store__api.html#ga2b7e18d0efb27747221103e461fa8de3", null ],

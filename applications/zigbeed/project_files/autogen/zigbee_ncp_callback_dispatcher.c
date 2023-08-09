@@ -22,6 +22,7 @@
 
 void emberAfEzspGetValueCommandCallback(EmberAfPluginEzspValueCommandContext* context)
 {
+  emberAfPluginEzspMfglibGetValueCommandCallback(context);
   emberAfPluginEzspGetValueCommandCallback(context);
   emberAfPluginEzspZigbeeProGetValueCommandCallback(context);
   emberAfPluginEzspSecurityGetValueCommandCallback(context);
@@ -36,6 +37,7 @@ void emberAfEzspGetExtendedValueCommandCallback(EmberAfPluginEzspValueCommandCon
 
 void emberAfEzspSetValueCommandCallback(EmberAfPluginEzspValueCommandContext* context)
 {
+  emberAfPluginEzspMfglibSetValueCommandCallback(context);
   emberAfPluginEzspSetValueCommandCallback(context);
   emberAfPluginEzspZigbeeProSetValueCommandCallback(context);
   emberAfPluginEzspSecuritySetValueCommandCallback(context);
@@ -86,7 +88,7 @@ void emberAfEzspSetConfigurationValueCommandCallback(EmberAfPluginEzspConfigurat
 
 void emberAfPluginEzspModifyMemoryAllocationCallback(void)
 {
-  emInitializeBindingTable();
+  sli_zigbee_initialize_binding_table();
   emberAfPluginEzspZigbeeProModifyMemoryAllocationCallback();
 }
 

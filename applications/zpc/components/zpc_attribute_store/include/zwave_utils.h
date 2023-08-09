@@ -48,7 +48,7 @@ extern "C" {
 /**
  * @brief Returns the operating mode of a node
  *
- * Refer to @ref zwave_nwk_spec for Operating Modes.
+ * Refer to the Z-Wave Network Layer Specification for Operating Modes.
  * It can be Always listening (AL), Frequently listening (FL) or
  * Non-Listening (NL).
  *

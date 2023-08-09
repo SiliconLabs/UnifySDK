@@ -16,8 +16,10 @@
  * @ingroup command_classes
  * @brief Device Reset Locally Command Class handlers and init functions
  *
+ * 
  * @{
 */
+
 
 #ifndef ZWAVE_COMMAND_CLASS_DEVICE_RESET_LOCALLY_H
 #define ZWAVE_COMMAND_CLASS_DEVICE_RESET_LOCALLY_H

@@ -40,7 +40,7 @@ but Unify applications should avoid duplicating the functionality of these Unify
 components.
 
 The figure below illustrates the inter dependencies between various components
-in the the Unify Framework Library. Each component (blue block in the figure) has a public
+in the Unify Framework Library. Each component (blue block in the figure) has a public
 interface which is exported by the library.
 
 ```{uml}
@@ -223,10 +223,14 @@ of any data type in a tree structure, representing the state of the network.
 
 ### Attribute Mapper
 
+Attribute Mapper is a component that offers a text file based system
+that allows to define Attribute relations, allowing automatic rules and
+attribute manipulations using assignments based on text script files.
 The attribute mapper is able to map attributes in the Attribute System to each
-other. The mapper is using a scripting langrage to perform the mapping. Complex
+other. The mapper is using UAM grammar to perform the mapping. Complex
 mappings are supported, where one attribute might depend on multiple other
-attributes.
+attributes. Detailed information about Mapper component is documented in
+[Attribute Mapper Documentation](attribute_mapper_overview.md)
 
 ### Attribute Resolver
 
@@ -275,7 +279,7 @@ images availability and OTA status.
 
 ## Test Framework
 
-The Test Framework consists of the the *Throw the Switch Unity* and
+The Test Framework consists of the *Throw the Switch Unity* and
 *Throw the Switch CMOCK* frameworks for making unit tests and mocks.
 The two libraries has been integrated into the cmake build system and provides
 automatic mock generation for C header files.

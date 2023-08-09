@@ -22,35 +22,35 @@
 #include "stack/include/ember.h"
 
 // Event Init
-void emAfEventInit(void);
-void emAfZclFrameworkCoreInitEventsCallback(uint8_t init_level);
-void emAfServiceDiscoveryInitEventsCallback(uint8_t init_level);
-void emAfPluginNetworkSteeringInitCallback(uint8_t init_level);
+void sli_zigbee_af_event_init(void);
+void sli_zigbee_af_zcl_framework_core_init_events_callback(uint8_t init_level);
+void sli_zigbee_af_service_discovery_init_events_callback(uint8_t init_level);
+void sli_zigbee_af_network_steering_init_callback(uint8_t init_level);
 void emberAfPluginReportingInitCallback(uint8_t init_level);
-void emAfPluginScanDispatchInitCallback(uint8_t init_level);
+void sli_zigbee_af_scan_dispatch_init_callback(uint8_t init_level);
 void emberAfPluginTrustCenterNwkKeyUpdatePeriodicInitCallback(uint8_t init_level);
-void emAfPluginTrustCenterNwkKeyUpdateUnicastInitCallback(uint8_t init_level);
-void emAfPluginUpdateTcLinkKeyBeginTcLinkKeyUpdateInit(uint8_t init_level);
+void sli_zigbee_af_trust_center_nwk_key_update_unicast_init_callback(uint8_t init_level);
+void sli_zigbee_af_update_tc_link_key_begin_tc_link_key_update_init(uint8_t init_level);
 // Local data Init
-void emAfLocalDataInit(void);
+void sli_zigbee_af_local_data_init(void);
 void emberAfPluginConcentratorInitCallback(uint8_t init_level);
 // Init done
-void emAfInitDone(void);
-void emAfInitCallback(uint8_t init_level);
+void sli_zigbee_af_initDone(void);
+void sli_zigbee_af_initCallback(uint8_t init_level);
 void sli_zigbee_zcl_cli_init(uint8_t init_level);
 void emberAfInit(uint8_t init_level);
 void emberAfPluginCountersInitCallback(uint8_t init_level);
 void emberAfPluginGatewayInitCallback(uint8_t init_level);
 void emberAfPluginNetworkCreatorSecurityInitCallback(uint8_t init_level);
-void emAfPluginOtaStoragePosixFilesystemInitCallback(uint8_t init_level);
+void sli_zigbee_af_ota_storage_posix_filesystsli_zigbee_init_callback(uint8_t init_level);
 void emberAfPluginReportingInitCallback(uint8_t init_level);
 void emberAfPluginTrustCenterNwkKeyUpdatePeriodicInitCallback(uint8_t init_level);
-void emAfNetworkInit(uint8_t init_level);
+void sli_zigbee_af_network_init(uint8_t init_level);
 
 // Tick
-void emAfTick(void);
+void sli_zigbee_af_tick(void);
 void emberAfPluginGatewayTickCallback(void);
-void emAfHostFrameworkTick(void);
+void sli_zigbee_af_host_framework_tick(void);
 void emberAfOtaServerTick(void);
 
 #endif // SL_ZIGBEE_COMMON_CALLBACK_DISPATCHER_H

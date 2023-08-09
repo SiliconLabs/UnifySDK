@@ -8,10 +8,10 @@ find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 add_library(
   zcl_cluster_servers
   src/configuration_parameter_cluster_server.cpp
+  src/user_code_cluster_server.cpp
   src/zcl_binding_cluster_server.cpp
   src/zcl_cluster_servers.cpp
   src/zcl_cluster_servers_helpers.cpp
-  src/zcl_group_cluster_server.cpp
   src/zcl_OTA_cluster_server.cpp
   src/zcl_rf_telemetry_cluster_server.c
   src/zcl_scenes_cluster_server.cpp)
@@ -27,7 +27,6 @@ target_link_libraries(
   PRIVATE unify
           zpc_attribute_store
           zpc_utils
-          zpc_dotdot_mqtt
           ucl_mqtt
           zwave_command_classes
           zwave_api_transport

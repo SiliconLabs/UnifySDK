@@ -1,6 +1,6 @@
 var zigpc__gateway_8h =
 [
-    [ "zigpc_gateway_add_node_install_code", "group__zigpc__gateway.html#gaddae89c536ca2647bfdf8b9c024896a6", null ],
+    [ "zigpc_gateway_add_node", "group__zigpc__gateway.html#gaa4d2d017337309e43ce7eaeff7f95b40", null ],
     [ "zigpc_gateway_add_ota_image", "group__zigpc__gateway.html#gaf5d34b9888658ca11ba56651f575fee8", null ],
     [ "zigpc_gateway_bootload_restart", "group__zigpc__gateway.html#ga952b523b3af1a79d22b23ac63b999c96", null ],
     [ "zigpc_gateway_clear_counters", "group__zigpc__gateway.html#ga9e8d3a2574985bfa3a9ad1e91ab1f9e0", null ],

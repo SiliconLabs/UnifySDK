@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -118,6 +118,14 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a444a1fc57506e842aa492fae49f26c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ce4eaa2f92daeecd87bca04342a8d4c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a0ce4eaa2f92daeecd87bca04342a8d4c">ota_path</a></td></tr>
 <tr class="separator:a0ce4eaa2f92daeecd87bca04342a8d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a313239febeafa7c89fc54c1b37a2979a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a313239febeafa7c89fc54c1b37a2979a">use_network_args</a></td></tr>
+<tr class="separator:a313239febeafa7c89fc54c1b37a2979a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae899e01b118538a571fcbdd09eb57b02"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#ae899e01b118538a571fcbdd09eb57b02">network_pan_id</a></td></tr>
+<tr class="separator:ae899e01b118538a571fcbdd09eb57b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9951aa27113fc2ae1fa2e30d6ef0c6f4"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a9951aa27113fc2ae1fa2e30d6ef0c6f4">network_radio_power</a></td></tr>
+<tr class="separator:a9951aa27113fc2ae1fa2e30d6ef0c6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66576655dd4cf7ef0189bf171d8bc6e5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a66576655dd4cf7ef0189bf171d8bc6e5">network_channel</a></td></tr>
+<tr class="separator:a66576655dd4cf7ef0189bf171d8bc6e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Reference to options used by ZigPC. </p>
@@ -209,6 +217,48 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a66576655dd4cf7ef0189bf171d8bc6e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66576655dd4cf7ef0189bf171d8bc6e5">&#9670;&nbsp;</a></span>network_channel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t zigpc_config_t::network_channel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae899e01b118538a571fcbdd09eb57b02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae899e01b118538a571fcbdd09eb57b02">&#9670;&nbsp;</a></span>network_pan_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t zigpc_config_t::network_pan_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9951aa27113fc2ae1fa2e30d6ef0c6f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9951aa27113fc2ae1fa2e30d6ef0c6f4">&#9670;&nbsp;</a></span>network_radio_power</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t zigpc_config_t::network_radio_power</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0ce4eaa2f92daeecd87bca04342a8d4c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ce4eaa2f92daeecd87bca04342a8d4c">&#9670;&nbsp;</a></span>ota_path</h2>
 
@@ -267,6 +317,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a313239febeafa7c89fc54c1b37a2979a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a313239febeafa7c89fc54c1b37a2979a">&#9670;&nbsp;</a></span>use_network_args</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zigpc_config_t::use_network_args</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>applications/zigpc/components/zigpc_config/include/<a class="el" href="zigpc__config_8h_source.html">zigpc_config.h</a></li>
 </ul>
@@ -276,7 +340,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzigpc__config__t.html">zigpc_config_t</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:01 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:07 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

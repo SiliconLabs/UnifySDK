@@ -43,6 +43,7 @@
 #include "zwave_command_class_version.h"
 #include "zwave_command_class_wake_up.h"
 #include "zwave_command_class_time.h"
+#include "zwave_command_class_user_code.h"
 #include "zwave_command_class_basic.h"
 #include "zwave_command_class_zwave_plus_info.h"
 #include "zwave_command_class_device_reset_locally.h"
@@ -61,7 +62,7 @@
 #include "sl_status.h"
 #include "sl_log.h"
 
-#include "zwave_COMMAND_CLASS_DOOR_LOCK_handlers.h"
+#include "zwave_command_class_door_lock_control.h"
 #include "zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_handlers.h"
 #include "zwave_command_class_battery.h"
 #include "zwave_COMMAND_CLASS_SENSOR_BINARY_handlers.h"
@@ -108,6 +109,7 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_thermostat_setpoint_init();
   status |= zwave_command_class_time_init();
   status |= zwave_command_class_transport_service_init();
+  status |= zwave_command_class_user_code_init();
   status |= zwave_command_class_version_init();
   status |= zwave_command_class_wake_up_init();
   status |= zwave_command_class_zwave_plus_info_init();
@@ -118,7 +120,7 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_manufacturer_specific_control_init();
 
   // Auto-generated handlers
-  status |= zwave_COMMAND_CLASS_DOOR_LOCK_init();
+  status |= zwave_command_class_door_lock_init();
   status |= zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_init();
   status |= zwave_COMMAND_CLASS_SENSOR_BINARY_init();
 

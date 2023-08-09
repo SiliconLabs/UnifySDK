@@ -43,7 +43,7 @@ extern "C" {
 {{#zcl_attributes}}
 // {{parent.label}} {{label}}
 /**
- * @brief Verifies if the DotDot {{parent.label}}::{{label}} is supported
+ * @brief Verifies if the DotDot {{parent.label}} - {{label}} is supported
  * under a UNID/EndpoinID
  *
  * @param unid          Node's UNID
@@ -56,7 +56,7 @@ bool {{asAttributeIsSupportedFunction parent.label label}} (
               const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
 
 /**
- * @brief Gets the DotDot {{parent.label}}::{{label}} attribute value under a UNID/EndpoinID
+ * @brief Gets the DotDot {{parent.label}} - {{label}} attribute value under a UNID/EndpoinID
  *
  * @param unid          Node's UNID
  * @param endpoint_id   Endpoint ID
@@ -75,7 +75,7 @@ bool {{asAttributeIsSupportedFunction parent.label label}} (
   attribute_store_node_value_state_t value_state);
 
 /**
- * @brief Set the DotDot {{parent.label}}::{{label}} attribute under a UNID/EndpoinID
+ * @brief Set the DotDot {{parent.label}} - {{label}} attribute under a UNID/EndpoinID
  *
  * @param unid          Node's UNID
  * @param endpoint_id   Endpoint ID
@@ -100,7 +100,7 @@ sl_status_t {{asAttributeSetFunction parent.label label}}(
   );
 
 /**
- * @brief Undefines the Reported value of the the DotDot {{parent.label}}::{{label}}
+ * @brief Undefines the Reported value of the the DotDot {{parent.label}} - {{label}}
  * attribute under a UNID/EndpoinID
  *
  * @param unid          Node's UNID
@@ -112,8 +112,8 @@ sl_status_t {{asAttributeUndefineReportedFunction parent.label label}}(
   const dotdot_endpoint_id_t endpoint_id);
 
 /**
- * @brief Undefines the Desired value of the the DotDot
- * {{parent.label}}::{{label}} attribute under a UNID/EndpoinID
+ * @brief Undefines the Desired value of the DotDot
+ * {{parent.label}} - {{label}} attribute under a UNID/EndpointID
  *
  * @param unid          Node's UNID
  * @param endpoint_id   Endpoint ID
@@ -124,7 +124,31 @@ sl_status_t {{asAttributeUndefineDesiredFunction parent.label label}}(
   const dotdot_endpoint_id_t endpoint_id);
 
 /**
- * @brief Creates a DotDot {{parent.label}}::{{label}} attribute under a UNID/EndpoinID
+ * @brief Checks if the reported value is defined for the DotDot
+ * {{parent.label}} - {{label}} attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool {{asAttributeIsReportedDefinedFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * {{parent.label}} - {{label}} attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool {{asAttributeIsDesiredDefinedFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot {{parent.label}} - {{label}} attribute under a UNID/EndpoinID
  *
  * @param unid          Node's UNID
  * @param endpoint_id   Endpoint ID

@@ -7,15 +7,22 @@
     flake-utils.url = "github:numtide/flake-utils";
     nix-filter.url = github:numtide/nix-filter;
     zw-testframework = {
-      url = "./components/testframework/libs/testframework";
+      url = "git+ssh://git@stash.silabs.com/z-wave/zw-testframework?rev=cbbf779dfddcabd1470e5f8d7208f903fe716129";
       flake = false;
     };
     ths-cmock = {
-      url = "./components/testframework/libs/cmock";
+      url = "git+ssh://git@stash.silabs.com/z-wave/ths_cmock?rev=0d7a1a1c1ca1a51c96b8f606153daf31cebea6d9";
       flake = false;
     };
     ths-unity = {
-      url = "./components/testframework/libs/cmock/vendor/unity";
+      url = "git+ssh://git@stash.silabs.com/z-wave/ths_unity?rev=b0032caca4402da692548f2ee296d3b1b1251ca0";
+      flake = false;
+    };
+    zw-libs2 = {
+      url = "git+ssh://git@stash.silabs.com/uic/zw-libs2-flake?rev=4c25c776f99b0e2422cd5588cb11c6f28b267b9a";
+    };
+    uic-resources = {
+      url = "git+ssh://git@stash.silabs.com/uic/uic-resources?ref=develop";
       flake = false;
     };
     gecko-sdk = {
@@ -23,7 +30,7 @@
       flake = false;
     };
     cpcd = {
-      url = "github:SiliconLabs/unify-sdk-flakes?rev=7de893c04150bfcb0f25823fc105bcae514cb2bc";
+      url = "git+ssh://git@stash.silabs.com/uic/cpc-daemon-flake.git?rev=e40cf898b8bb80aad70e1349539a8aaf889ea99d";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -37,6 +44,8 @@
     , zw-testframework
     , ths-cmock
     , ths-unity
+    , zw-libs2
+    , uic-resources
     , gecko-sdk
     , cpcd
     }:
@@ -58,7 +67,7 @@
         packages = rec {
           common = import ./common.nix { inherit pkgs filter; };
           libunify = import ./libunify.nix { inherit pkgs filter cpcd common zw-testframework ths-cmock ths-unity; };
-          zpc = import ./zpc.nix { inherit pkgs cpcd common libunify ths-unity; };
+          zpc = import ./zpc.nix { inherit pkgs cpcd common libunify zw-libs2 ths-unity; };
           default = libunify;
         };
         devShells.default = import ./shell.nix { inherit pkgs cpcd zw-testframework ths-cmock ths-unity gecko-sdk packages; };

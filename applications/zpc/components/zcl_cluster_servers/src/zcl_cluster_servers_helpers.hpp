@@ -24,8 +24,9 @@
 
 #include "sl_status.h"
 #include "attribute_store.h"
-#include "ucl_definitions.h"
+
 #include "zwave_controller_types.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 
 #include <string>
 
@@ -49,14 +50,6 @@ sl_status_t
                                         zwave_endpoint_id_t &endpoint_id,
                                         std::string &unid);
 
-/**
- * @brief Reads the UCL network status of a node, starting from any attribute
- * under the NodeID in the attribute store.
- *
- * @param node     Attribute store node under the NodeID for which we want
- * to read the network status.
- */
-node_state_topic_state_t get_network_status(attribute_store_node_t node);
 
 #ifdef __cplusplus
 }

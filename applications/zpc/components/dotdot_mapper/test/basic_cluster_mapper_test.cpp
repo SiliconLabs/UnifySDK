@@ -20,11 +20,12 @@
 #include "attribute.hpp"
 #include "zpc_attribute_store_test_helper.h"
 #include "unify_dotdot_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 
 // Interfaces
 #include "zwave_generic_types.h"
 #include "zwave_command_class_version_types.h"
-#include "ucl_definitions.h"
+
 
 #include "workaround_basic_cluster_mapper_test.hpp"
 using namespace attribute_store;
@@ -70,8 +71,8 @@ void test_manufacturer_id_to_name_mapper()
   manufacturer_id_node.set_reported<uint32_t>(0x0000);
 
   attribute attr_node_id_node(node_id_node);
-  attr_node_id_node.add_node(ATTRIBUTE_NETWORK_STATUS)
-    .set_reported<node_state_topic_state_t>(NODE_STATE_TOPIC_STATE_INCLUDED);
+  attr_node_id_node.add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS)
+    .set_reported<NodeStateNetworkStatus>(ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL);
 
   attribute basic_cluster_man_name_node
     = attr_ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_MANUFACTURER_NAME);
@@ -101,8 +102,8 @@ void test_serial_number_mapper()
     std::vector<uint8_t>({0x11, 0x22, 0x33, 0x44, 0x55, 0x66}));
 
   attribute attr_node_id_node(node_id_node);
-  attr_node_id_node.add_node(ATTRIBUTE_NETWORK_STATUS)
-    .set_reported<node_state_topic_state_t>(NODE_STATE_TOPIC_STATE_INCLUDED);
+  attr_node_id_node.add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS)
+    .set_reported<NodeStateNetworkStatus>(ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL);
 
   attribute dotdot_serial_node
     = attribute(endpoint_id_node)

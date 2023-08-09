@@ -1,6 +1,6 @@
 add_subdirectory(components)
 
-# Example Protocol Contoller executable
+# Example Protocol Controller executable
 add_executable(epc main.c)
 target_link_libraries(epc PUBLIC unify epc_application_monitoring epc_config
                                  epc_datastore)

@@ -143,6 +143,31 @@ sl_status_t {{asAttributeUndefineDesiredFunction parent.label label}}(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool {{asAttributeIsReportedDefinedFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      {{asAttributeIdDefine parent.label label}});
+  return attribute_store_is_reported_defined(node);
+}
+
+bool {{asAttributeIsDesiredDefinedFunction parent.label label}}(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      {{asAttributeIdDefine parent.label label}});
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t {{asAttributeCreateFunction parent.label label}}(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {

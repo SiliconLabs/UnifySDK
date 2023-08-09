@@ -81,7 +81,7 @@ typedef struct _NVR_FLASH_STRUCT_ {
  * If the CRC16 field in the protocol area of the NVR is not correct all fields
  * will return the value 0xFF when read with this function.
  *
- * @zgw_name ZW_NVRGetValue
+ * aka ZW_NVRGetValue
  */
 sl_status_t
   zwapi_nvr_get_value(uint8_t bOffset, uint8_t bLength, uint8_t *bRetBuffer);
@@ -93,7 +93,7 @@ sl_status_t
  * @param node_id Node ID pointer
  * @returns SL_STATUS_OK on success and SL_STATUS_FAIL if something went wrong
  *
- * @zgw_name MemoryGetID
+ * aka MemoryGetID
  */
 sl_status_t zwapi_memory_get_ids(zwave_home_id_t *home_id,
                                  zwave_node_id_t *node_id);
@@ -105,7 +105,7 @@ sl_status_t zwapi_memory_get_ids(zwave_home_id_t *home_id,
  * @param byte_value pointer for the function to store the read byte
  * @returns SL_STATUS_OK on success and SL_STATUS_FAIL if something went wrong
  *
- * @zgw_name MemoryGetByte
+ * aka MemoryGetByte
  */
 sl_status_t zwapi_memory_get_byte(uint16_t offset, uint8_t *byte_value);
 
@@ -116,7 +116,7 @@ sl_status_t zwapi_memory_get_byte(uint16_t offset, uint8_t *byte_value);
  * @param bData Data to store
  * @returns 0 on error, 1 on OK but no change, 2 Ok with changes
  *
- * @zgw_name MemoryPutByte
+ * aka MemoryPutByte
  */
 uint8_t zwapi_memory_put_byte(uint16_t offset, uint8_t bData);
 
@@ -128,7 +128,7 @@ uint8_t zwapi_memory_put_byte(uint16_t offset, uint8_t bData);
  * @param length   Number of bytes to read
  * @returns SL_STATUS_OK on success and SL_STATUS_FAIL if something went wrong
  *
- * @zgw_name MemoryGetBuffer
+ * aka MemoryGetBuffer
  */
 sl_status_t
   zwapi_memory_get_buffer(uint16_t offset, uint8_t *buffer, uint8_t length);
@@ -143,7 +143,7 @@ sl_status_t
  * @returns 0 on error, 1 on OK but no change, >=2 represents the number
  * of bytes written +1
  *
- * @zgw_name MemoryPutBuffer
+ * aka MemoryPutBuffer
  */
 uint8_t zwapi_memory_put_buffer(uint16_t offset,
                                 const uint8_t *buffer,

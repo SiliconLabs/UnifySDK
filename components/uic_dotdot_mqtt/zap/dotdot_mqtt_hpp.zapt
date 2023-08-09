@@ -10,6 +10,10 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+
+{{#zcl_enums}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_enums}}
+{{#zcl_bitmaps}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_bitmaps}}
+
 // clang-format off
 {{zap_header}}
 // clang-format on
@@ -92,7 +96,7 @@ void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes(
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> {{label}}_bitmap_data {
   {{#zcl_bitmap_items}}
-{ {"{{label}}", "{{checkSpecialTypeBitmapsEnum type}}", "{{mask}}", "{{asOffset mask}}"}, {
+{ {"{{label}}", "{{checkSpecialTypeBitmapsEnum type}}", "{{asHex mask}}", "{{asOffset mask}}"}, {
   {{#if_is_enum type}}
     {{#zcl_enums}}
       {{#if (isSubstringInString parent.label label)}}
@@ -105,7 +109,7 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }{{listComma this}}
   {{/zcl_bitmap_items}}
 };
-const dotdot_bitmap {{label}}("{{label}}", "{{type}}", {{label}}_bitmap_data);
+const dotdot_bitmap {{label}}("{{label}}", "{{zcl_type_map_get_item label}}", {{label}}_bitmap_data);
 {{/zcl_bitmaps}}
 
 #endif  //DOTDOT_MQTT_HPP

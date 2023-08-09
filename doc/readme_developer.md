@@ -146,7 +146,7 @@ python -m pip install pre-commit
 
 Second, install the git hook:
 
-``` bash
+``` bash
 python -m pre-commit install
 ```
 
@@ -256,17 +256,3 @@ The following sequence diagram shows how the Unify Main loop triggers events bas
 
 Additional information on this is available in the
 <a href="../doxygen_uic/index.html">Unify Library API</a>
-
-## Nix (Experimental)
-
-We are adding support for [`nix flakes`](https://nixos.wiki/wiki/Flakes) to make use of the [nix package manager](https://nixos.org/manual/nix/stable/).
-This aims to let developers leverage the benefits of using a [purely functional package manager](https://nixos.org/manual/nix/stable/).
-
-If you have `nix` installed and `flakes` enabled, you can run an application with one command without checking out the repo or installing any dependencies.
-
-```
-> nix run github:SiliconLabs/UnifySDK#zpc
-```
-
-We elaborate on this in the [nix readme](readme_nix.md).
-

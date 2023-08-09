@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -96,7 +96,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
@@ -159,7 +158,7 @@ applications. Applications are totally free to use a subset of these components.
 but Unify applications should avoid duplicating the functionality of these Unify
 components.</p>
 <p>The figure below illustrates the inter dependencies between various components
-in the the Unify Framework Library. Each component (blue block in the figure) has a public
+in the Unify Framework Library. Each component (blue block in the figure) has a public
 interface which is exported by the library.</p>
 <p class="plantuml">
 <img src="../_images/plantuml-6d805b93502765dff640e05c3ff64b283dfcd27c.png" alt="title Unify Platform Components
@@ -322,10 +321,14 @@ of any data type in a tree structure, representing the state of the network.</p>
 </section>
 <section id="attribute-mapper">
 <h3>Attribute Mapper<a class="headerlink" href="#attribute-mapper" title="Permalink to this heading"></a></h3>
-<p>The attribute mapper is able to map attributes in the Attribute System to each
-other. The mapper is using a scripting langrage to perform the mapping. Complex
+<p>Attribute Mapper is a component that offers a text file based system
+that allows to define Attribute relations, allowing automatic rules and
+attribute manipulations using assignments based on text script files.
+The attribute mapper is able to map attributes in the Attribute System to each
+other. The mapper is using UAM grammar to perform the mapping. Complex
 mappings are supported, where one attribute might depend on multiple other
-attributes.</p>
+attributes. Detailed information about Mapper component is documented in
+<a class="reference internal" href="attribute_mapper_overview.html"><span class="doc std std-doc">Attribute Mapper Documentation</span></a></p>
 </section>
 <section id="attribute-resolver">
 <h3>Attribute Resolver<a class="headerlink" href="#attribute-resolver" title="Permalink to this heading"></a></h3>
@@ -373,7 +376,7 @@ images availability and OTA status.</p>
 </section>
 <section id="test-framework">
 <h2>Test Framework<a class="headerlink" href="#test-framework" title="Permalink to this heading"></a></h2>
-<p>The Test Framework consists of the the <em>Throw the Switch Unity</em> and
+<p>The Test Framework consists of the <em>Throw the Switch Unity</em> and
 <em>Throw the Switch CMOCK</em> frameworks for making unit tests and mocks.
 The two libraries has been integrated into the cmake build system and provides
 automatic mock generation for C header files.</p>

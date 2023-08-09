@@ -3,6 +3,7 @@ Description=Unified IoT AoX Protcol Controller
 After=network.target mosquitto.service
 
 [Service]
+WorkingDirectory=/var/lib/uic
 ExecStart=/usr/bin/aoxpc
 Restart=on-failure
 KillMode=process

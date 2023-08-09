@@ -250,6 +250,28 @@ void test_attribute_store_set_reported()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
+void test_attribute_store_set_reported_string()
+{
+  attribute_store_set_node_attribute_value_StopIgnore();
+
+  sl_status_t state
+    = uic_stdin_handle_command("attribute_store_set_reported_string");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  state = uic_stdin_handle_command("attribute_store_set_reported_string 34");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  state
+    = uic_stdin_handle_command("attribute_store_set_reported_string 3fdsa083");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  attribute_store_set_reported_string_ExpectAndReturn(43, NULL, SL_STATUS_OK);
+  attribute_store_set_reported_string_IgnoreArg_string();
+  state
+    = uic_stdin_handle_command("attribute_store_set_reported_string 43,hello");
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
+}
+
 void test_attribute_store_log_node()
 {
   sl_status_t state = uic_stdin_handle_command("attribute_store_log_node");

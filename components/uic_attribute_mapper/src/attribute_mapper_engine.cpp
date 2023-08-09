@@ -37,6 +37,8 @@ constexpr const char LOG_TAG[] = "attribute_mapper";
 using namespace attribute_store;
 
 using assignment_set_t = std::set<std::shared_ptr<ast::assignment>>;
+using attribute_store_get_number_function_t
+  = result_type_t (*)(attribute_store_node_t);
 
 ////////////////////////////////////////////////////////////////////////////////
 // MapperEngine Class functions
@@ -72,6 +74,11 @@ attribute MapperEngine::get_assigment_potential_destination(
   attribute common_parent
     = original_node.first_parent(scope_common_parent_type);
   if (!common_parent.is_valid()) {
+    sl_log_debug(LOG_TAG,
+                 "Cannot locate common parent node "
+                 "with type %d for Attribute ID %d",
+                 scope_common_parent_type,
+                 original_node);
     return destination_node;
   }
 
@@ -94,7 +101,8 @@ equivalent_assignments_t MapperEngine::get_equivalent_assignments(
 
   // Find all assignments that have identical value_type / attribute type.
   for (const auto &[assignment, properties]: assignment_properties) {
-    if ((std::get<1>(properties) == std::get<1>(initial_props))
+    if ((assignment->type == initial_assigment->type)
+        && (std::get<1>(properties) == std::get<1>(initial_props))
         && (std::get<2>(properties) == std::get<2>(initial_props))) {
       equivalent_assignments.insert(
         {std::get<0>(assignment_properties[assignment]), assignment});
@@ -102,7 +110,8 @@ equivalent_assignments_t MapperEngine::get_equivalent_assignments(
   }
 
   //sl_log_debug(LOG_TAG,
-  //             "Number of equivalent assignments for %c'%s: %d",
+  //             "Number of equivalent type %d assignments for %c'%s: %d",
+  //             initial_assigment->type,
   //             std::get<1>(initial_props),
   //             attribute_store_get_type_name(std::get<2>(initial_props)),
   //             equivalent_assignments.size());
@@ -384,14 +393,23 @@ void MapperEngine::on_attribute_updated(
     // Check if the potential destination already exists.
     attribute initial_destination
       = get_assigment_potential_destination(r->second, original_node);
+    assignment_properties_t initial_properties
+      = this->assignment_properties[r->second];
+    ast::value_type_t initial_destination_value_type
+      = std::get<1>(initial_properties);
 
     // Find concurent assignments that may have priority.
     equivalent_assignments_t assignments_to_check
       = get_equivalent_assignments(r->second);
 
-    // Add it to the list. if destination is the same, it will be filtered out.
-    if (initial_destination.is_valid()) {
-      assignments_to_run[initial_destination] = assignments_to_check;
+    // Add it to the list. if destination is the same for regular/clearance assignments,
+    // it will be filtered out.
+    if (initial_destination.is_valid()
+        && (r->second->type != ast::AssignmentType::INSTANCE)) {
+      assignments_to_run[{initial_destination,
+                          initial_destination_value_type,
+                          r->second->type}]
+        = assignments_to_check;
     } else {
       this->run_assignments(assignments_to_check,
                             initial_destination,
@@ -399,9 +417,22 @@ void MapperEngine::on_attribute_updated(
     }
   }
 
-  // Now run everything, the map should have filtered duplicates.:
-  for (auto &[destination, assignments_to_check]: assignments_to_run) {
-    this->run_assignments(assignments_to_check, destination, original_node);
+  // Now run everything, the map should have filtered duplicates.
+  // 1st pass: the CLEARANCE assignments:
+  for (auto &[tuple, assignments_to_check]: assignments_to_run) {
+    if (std::get<2>(tuple) == ast::AssignmentType::CLEARANCE) {
+      this->run_assignments(assignments_to_check,
+                            std::get<0>(tuple),
+                            original_node);
+    }
+  }
+  // 2nd pass: the REGULAR assignments:
+  for (auto &[tuple, assignments_to_check]: assignments_to_run) {
+    if (std::get<2>(tuple) == ast::AssignmentType::REGULAR) {
+      this->run_assignments(assignments_to_check,
+                            std::get<0>(tuple),
+                            original_node);
+    }
   }
 }
 
@@ -410,15 +441,24 @@ void MapperEngine::run_assignments(
   attribute assigment_destination,
   attribute original_node)
 {
-  const bool run_all_assignments = !assigment_destination.is_valid();
+  if (assignments_to_check.size() == 0) {
+    return;
+  }
 
-  // If the destination is unknown, we run all assignment in ascending priority,
-  // the last one having an effect will prevail (highest priority)
+  const bool run_all_assignments
+    = (!assigment_destination.is_valid())
+      || (assignments_to_check.begin()->second->type
+          == ast::AssignmentType::INSTANCE);
+
+  // If the destination is unknown or for instance assigments, we run all
+  // assignments in ascending priority, the last one having an effect will
+  // prevail (highest priority)
   if (run_all_assignments) {
     sl_log_debug(LOG_TAG,
-                 "Running all %d equivalent assignments in ascending priority "
-                 "after Attribute ID %d update due to missing destination",
+                 "Running all %d equivalent type %d assignments in ascending "
+                 "priority after Attribute ID %d update",
                  assignments_to_check.size(),
+                 assignments_to_check.begin()->second->type,
                  original_node);
     for (auto it = assignments_to_check.rbegin();
          it != assignments_to_check.rend();
@@ -428,8 +468,9 @@ void MapperEngine::run_assignments(
   } else {
     // Anouncement
     sl_log_debug(LOG_TAG,
-                 "Checking assignments for Destination ID "
+                 "Checking type %d assignments for Destination ID "
                  "%d (%s), Original Node %d (%s). (%d candidate(s))",
+                 assignments_to_check.begin()->second->type,
                  assigment_destination,
                  attribute_store_get_type_name(assigment_destination.type()),
                  original_node,
@@ -501,11 +542,55 @@ bool MapperEngine::run_assignment(std::shared_ptr<ast::assignment> assignment,
     return false;
   }
 
+  bool attribute_reactions_paused_by_engine = false;
+  if ((false == is_chain_reaction_enabled(settings))
+      && (false
+          == attribute_mapper_is_attribute_reactions_paused(destination))) {
+    attribute_reactions_paused_by_engine = true;
+    attribute_mapper_pause_reactions_to_attribute_updates(destination);
+  }
+
+  bool assignment_result = false;
+  if (assignment->type == ast::AssignmentType::INSTANCE) {
+    assignment_result
+      = this->apply_instance_assignment(common_parent,
+                                        value.value(),
+                                        assignment,
+                                        is_chain_reaction_enabled(settings));
+  } else if (assignment->type == ast::AssignmentType::CLEARANCE) {
+    assignment_result = this->apply_clearance_assignment(common_parent,
+                                                         value.value(),
+                                                         assignment);
+  } else {
+    assignment_result = this->apply_regular_assignment(common_parent,
+                                                       destination,
+                                                       original_node,
+                                                       settings,
+                                                       value.value(),
+                                                       assignment);
+  }
+
+  if (true == attribute_reactions_paused_by_engine) {
+    attribute_mapper_resume_reactions_to_attribute_updates(destination);
+  }
+
+  // Return the execution status.
+  return assignment_result;
+}
+
+bool MapperEngine::apply_regular_assignment(
+  attribute common_parent,
+  attribute destination,
+  attribute original_node,
+  const ast::scope_settings_t &settings,
+  result_type_t evaluated_value,
+  std::shared_ptr<ast::assignment> assignment) const
+{
   // Verify if we want to create an attribute.
   const bool create_if_missing
     = should_create_attributes(assignment->lhs.value_type,
                                settings,
-                               value.value());
+                               evaluated_value);
 
   // Find a new destination, in case we need to create the attribute if missing
   destination = get_destination_for_attribute(common_parent,
@@ -530,7 +615,7 @@ bool MapperEngine::run_assignment(std::shared_ptr<ast::assignment> assignment,
      << std::dec << original_node << " ("
      << attribute_store_get_type_name(original_node.type()) << ")"
      << " affecting Attribute ID " << std::dec << destination
-     << " - Result value: " << value.value();
+     << " - Result value: " << evaluated_value;
   sl_log_debug(LOG_TAG, ss.str().c_str());
 #endif
 
@@ -539,16 +624,14 @@ bool MapperEngine::run_assignment(std::shared_ptr<ast::assignment> assignment,
       if (is_clear_desired_value_enabled(settings)) {
         destination.clear_desired();
       }
-      attribute_store_set_reported_number(destination, value.value());
+      attribute_store_set_reported_number(destination, evaluated_value);
 
     } else if (assignment->lhs.value_type == 'd') {
-      attribute_store_set_desired_number(destination, value.value());
-    } else if (assignment->lhs.value_type == 'e') {
-      // Existences don't set values, they create attributes
-      if (value.value() == 0) {
-        sl_log_debug(LOG_TAG, "Deleting Attribute ID %d", destination);
-        destination.delete_node();
-      }
+      attribute_store_set_desired_number(destination, evaluated_value);
+    } else if ((assignment->lhs.value_type == 'e') && (evaluated_value == 0)) {
+      // Existences don't set values, they create/delete attributes
+      sl_log_debug(LOG_TAG, "Deleting Attribute ID %d", destination);
+      destination.delete_node();
       // Creations for the exitence type assignment are handled by
       // should_create_attributes / create_if_missing above.
     }
@@ -562,6 +645,185 @@ bool MapperEngine::run_assignment(std::shared_ptr<ast::assignment> assignment,
     attribute_mapper_resume_reactions_to_attribute_updates(destination);
   }
 
-  // We executed it, return true;
+  return true;
+}
+
+bool MapperEngine::apply_instance_assignment(
+  attribute common_parent,
+  result_type_t evaluated_value,
+  std::shared_ptr<ast::assignment> assignment,
+  bool chain_reaction)
+{
+#ifndef NDEBUG
+  // Debug build will print the matched expressions
+  std::stringstream ss;
+  ss << "Applying instance check for: " << assignment->lhs
+     << " under parent Attribute ID " << std::dec << common_parent << " ("
+     << attribute_store_get_type_name(common_parent.type()) << ")"
+     << " - Evaluated value: " << evaluated_value;
+  sl_log_debug(LOG_TAG, ss.str().c_str());
+#endif
+
+  // Find out if all the tree but the last part is correct:
+  // i.e. r'1.2[3].4 -> Would navigate to attribute 2 with value 3 under 1, under the common parent.
+  if (assignment->lhs.attribute_path.size() > 1) {
+    ast::attribute lhs_prefix = assignment->lhs;
+    // Remove the last element
+    lhs_prefix.attribute_path.pop_back();
+    ast::attribute_path_eval path_evaluator(common_parent);
+    common_parent = path_evaluator(lhs_prefix.attribute_path);
+  }
+
+  // If we have a subscript at the end, i.e. i:r'1[2] = ..., we will treat the evaluated value as a boolean for existence
+  // If we have no subscript at the end, i.e. i:r'1 = ..., we will treat the evaluated value as the value for the instance
+  result_type_t target_instance_value = evaluated_value;
+  bool attribute_should_exist         = true;
+  attribute_store_type_t target_type  = ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE;
+
+  if (assignment->lhs.attribute_path.back().which() == 3) {
+    // Evaluate the last element:
+    ast::eval<uint32_t> evaluator(common_parent);
+    auto last_element = boost::get<ast::attribute_path_subscript>(
+      assignment->lhs.attribute_path.back());
+    auto instance_value = boost::apply_visitor(evaluator, last_element.index);
+    auto instance_type
+      = boost::apply_visitor(evaluator, last_element.identifier);
+
+    if (!instance_value || !instance_type) {
+      sl_log_warning(LOG_TAG,
+                     "Cannot derive value/type of last element. "
+                     "Check your UAM files.");
+      return false;
+    }
+    target_type            = instance_type.value();
+    target_instance_value  = instance_value.value();
+    attribute_should_exist = (evaluated_value != 0);
+  } else {
+    // Get the assigned type from the properies
+    auto properties = assignment_properties[assignment];
+    target_type     = std::get<2>(properties);
+  }
+
+  // Now from the parent, check if if have a child with the desired value
+  attribute_store_get_number_function_t get_number_function = nullptr;
+  if (assignment->lhs.value_type == 'r') {
+    get_number_function = &attribute_store_get_reported_number;
+  } else if (assignment->lhs.value_type == 'd') {
+    get_number_function = &attribute_store_get_desired_number;
+  } else {
+    sl_log_error(LOG_TAG,
+                 "Invalid map detected. "
+                 "i: should be used with r' or d' only.");
+    return false;
+  }
+  attribute destination = ATTRIBUTE_STORE_INVALID_NODE;
+  for (auto child_node: common_parent.children(target_type)) {
+    if (get_number_function(child_node) == target_instance_value) {
+      destination = child_node;
+      break;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "Immediate parent ID %d - Destination %d - Child Attribute "
+               "type: %d - Instance "
+               "value: %f - Should exist : %d",
+               common_parent,
+               destination,
+               target_type,
+               target_instance_value,
+               attribute_should_exist);
+
+  if (attribute_should_exist == false) {
+    sl_log_debug(LOG_TAG,
+                 "Destination should not exist. Deleting Attribute ID %d",
+                 destination);
+    attribute_store_delete_node(destination);
+    return true;
+  }
+
+  if (destination.is_valid()) {
+    sl_log_debug(LOG_TAG,
+                 "Destination found (ID %d). Nothing more will be done",
+                 destination);
+    return true;
+  }
+
+  // Now we have to create the mising instance
+  if (chain_reaction == false) {
+    attribute_mapper_pause_mapping();
+  }
+  attribute_store_node_t new_node
+    = attribute_store_add_node(target_type, common_parent);
+  if (assignment->lhs.value_type == 'r') {
+    attribute_store_set_reported_number(new_node, target_instance_value);
+  } else if (assignment->lhs.value_type == 'd') {
+    attribute_store_set_desired_number(new_node, target_instance_value);
+  } else {
+    sl_log_error(LOG_TAG,
+                 "Invalid map detected. "
+                 "i: should be used with r' or d' only.");
+    attribute_store_delete_node(new_node);
+    if (chain_reaction == false) {
+      attribute_mapper_resume_mapping();
+    }
+    return false;
+  }
+
+  if (chain_reaction == false) {
+    attribute_mapper_resume_mapping();
+  }
+  return true;
+}
+
+bool MapperEngine::apply_clearance_assignment(
+  attribute common_parent,
+  result_type_t evaluated_value,
+  std::shared_ptr<ast::assignment> assignment)
+{
+#ifndef NDEBUG
+  // Debug build will print the matched expressions
+  std::stringstream ss;
+  ss << "Applying clearance check for: " << assignment->lhs
+     << " under parent Attribute ID " << std::dec << common_parent << " ("
+     << attribute_store_get_type_name(common_parent.type()) << ")"
+     << " - Evaluated value: " << evaluated_value;
+  sl_log_debug(LOG_TAG, ss.str().c_str());
+#endif
+
+  // Find a new destination, in case we need to create the attribute if missing
+  attribute destination
+    = get_destination_for_attribute(common_parent, assignment->lhs, false);
+  if (!destination.is_valid()) {
+    sl_log_debug(LOG_TAG, "Destination not found. Map will not be applied");
+    return false;
+  }
+  bool attribute_should_be_cleared = (evaluated_value != 0);
+  if (false == attribute_should_be_cleared) {
+    // Evaluated value is 0, we do not clear the value.
+    sl_log_debug(LOG_TAG,
+                 "Value will not be cleared for Attribute ID %d",
+                 destination);
+    return true;
+  }
+
+  // Now check which value to clear
+  if (assignment->lhs.value_type == 'r') {
+    attribute_store_undefine_reported(destination);
+    sl_log_debug(LOG_TAG,
+                 "Reported value cleared for Attribute ID %d",
+                 destination);
+  } else if (assignment->lhs.value_type == 'd') {
+    attribute_store_undefine_desired(destination);
+    sl_log_debug(LOG_TAG,
+                 "Desired value cleared for Attribute ID %d",
+                 destination);
+  } else {
+    sl_log_error(LOG_TAG,
+                 "Invalid map detected. "
+                 "c: should be used with r' or d' only.");
+    return false;
+  }
+
   return true;
 }

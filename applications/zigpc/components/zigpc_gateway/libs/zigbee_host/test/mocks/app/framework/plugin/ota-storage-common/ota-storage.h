@@ -23,6 +23,6 @@
  * for more details.
  */
 
-EmberAfOtaStorageStatus emAfOtaStorageAddImageFile(const char *filename);
+EmberAfOtaStorageStatus sli_zigbee_af_ota_storage_add_image_file(const char *filename);
 
 #endif  // SILABS_AF_OTA_STORAGE_H

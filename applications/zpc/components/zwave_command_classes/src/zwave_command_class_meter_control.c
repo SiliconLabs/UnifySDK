@@ -98,7 +98,7 @@ static void undefine_meter_values(attribute_store_node_t node)
 /**
  * @brief Prepares a Meter Reset Command.
  *
- * @param node          Attribute Store node to resolve
+ * @param value_node    Attribute Store node to resolve
  * @param frame         Pointer at which frame data can be written.
  * @param frame_length  Pointer at which the frame data length can be written.
  *

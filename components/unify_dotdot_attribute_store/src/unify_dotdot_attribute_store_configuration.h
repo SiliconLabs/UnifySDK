@@ -23,6 +23,7 @@
 #ifndef UNIFY_DOTDOT_ATTRIBUTE_STORE_CONFIGURATION_H
 #define UNIFY_DOTDOT_ATTRIBUTE_STORE_CONFIGURATION_H
 
+#include "attribute_store_type_registration.h"
 #include "unify_dotdot_attribute_store.h"
 
 #ifdef __cplusplus
@@ -44,6 +45,28 @@ endpoint_node_fetching_function_t unify_dotdot_attributes_get_endpoint_node();
  * @returns unid_fetching_function_t
  */
 unid_fetching_function_t unify_dotdot_attributes_get_unid_endpoint();
+
+/**
+ * @brief Returns the registered function that allows to derive a UNID from a
+ * node in the Attribute Store
+ *
+ * @returns unid_only_fetching_function_t
+ */
+unid_only_fetching_function_t unify_dotdot_attributes_get_unid();
+
+/**
+ * @brief Return the attribute type of an endpoint
+ *
+ * @return attribute_store_type_t
+ */
+attribute_store_type_t unify_dotdot_attributes_endpoint_attribute();
+
+/**
+ * @brief Return the attribute type of a node
+ *
+ * @return attribute_store_type_t
+ */
+attribute_store_type_t unify_dotdot_attributes_node_attribute();
 
 /**
  * @brief Checks if the component is configured to update the desired
@@ -87,11 +110,20 @@ bool is_force_read_attributes_enabled();
 
 /**
  * @brief Checks if the component is configured to publish ZCL attribute
- * values to MQTT
+ * desired values to MQTT
  *
  * @returns true if enabled, false if disabled
  */
-bool is_publish_attribute_values_to_mqtt_enabled();
+bool is_publish_desired_attribute_values_to_mqtt_enabled();
+
+/**
+ * @brief Checks if the component is configured to publish ZCL attribute
+ * reported values to MQTT
+ *
+ * @returns true if enabled, false if disabled
+ */
+bool is_publish_reported_attribute_values_to_mqtt_enabled();
+
 
 #ifdef __cplusplus
 }

@@ -162,14 +162,14 @@ void zwave_command_class_agi_request_to_establish_association(
   zwave_command_class_t command_class, zwave_command_t command);
 
 /**
- * @brief Verifies if a Group ID sends some Command Class/Command information
- * that we want to listen to (and therefore should establish an association)
+ * @brief Verifies if a Group ID under a NodeID/Endpoint sends some commands
+ * that we want to receive
  *
- * @param node_id   Command Class Identifier
- * @param command         Command Identifier
+ * @param node_id         NodeID of the Z-Wave Node
+ * @param endpoint_id     Endpoint ID under which the group is located
+ * @param group_id        Group ID to check
  *
- * @returns true if association must be established
- *          false if we do not particularly have to make an association
+ * @returns true if association should be established because we want to receive commands from that group, false otherwise
  */
 bool zwave_command_class_agi_group_contains_listeners(
   zwave_node_id_t node_id,

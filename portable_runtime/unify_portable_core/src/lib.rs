@@ -14,13 +14,15 @@ use std::{
     env,
     error::Error,
     fmt,
-    fs::File,
-    io::Write,
+    fs::{File, remove_file},
+    io::{Write, stdout},
+    net::IpAddr,
     path::{Path, PathBuf},
-    process::{Child, Command, ExitStatus, Output},
-    collections::HashSet,
+    process::{Child, Command, ExitStatus},
+    str::FromStr,
 };
 use regex::Regex;
+use bimap::BiMap;
 
 const LOG_NAME: &str = "./portable_runtime.log";
 
@@ -99,14 +101,19 @@ pub fn init_log() {
 
 pub fn is_docker_available() -> bool {
     match run_cmd_in_dir!(["docker", "info"], "").status() {
-      Ok(_) => true,
+      Ok(status) => status.success(),
       Err(_) => false
     }
 }
 
+pub fn does_file_exists(input_path: String) -> bool {
+  let path_obj = Path::new(&input_path);
+  path_obj.exists()
+}
+
 pub fn is_docker_compose_installed() -> bool {
     match run_cmd_in_dir!(["docker-compose", "version"], "").status() {
-      Ok(_) => true,
+      Ok(status) => status.success(),
       Err(_) => false
     }
 }
@@ -213,13 +220,21 @@ pub fn silink_automap(serial_number: &str) -> Result<Child, std::io::Error> {
     }
 }
 
-pub fn silink_inspect() -> Result<Output, std::io::Error> {
+pub fn silink_inspect() -> Result<String, &'static str> {
     _ = silink_prepare().expect("Failed to set execution permissions for Silink.");
-    run_cmd!([SILINK_PATH.to_str().unwrap(), "-inspect"]).output()
+    match run_cmd!([SILINK_PATH.to_str().unwrap(), "-inspect"]).output() {
+        Ok(result) => {
+            Ok(String::from_utf8_lossy(&result.stdout).to_string())
+        }
+        Err(_) => Err("Failed to start Silink!")
+    }
 }
 
 pub fn set_zpc_device(device_str: &str) {
-    env::set_var("ZPC_DEVICE", device_str);
+    match IpAddr::from_str(device_str) {
+        Ok(_)  => env::set_var("ZPC_DEVICE_IP", device_str),
+        Err(_) => env::set_var("ZPC_DEVICE_TTY", device_str)
+    }
 }
 
 pub fn set_zpc_config_args(arg_str: &str) {
@@ -256,6 +271,32 @@ pub fn kill_process(pid: &str) {
 #[derive(Debug)]
 struct CommanderError(String);
 
+pub struct DeviceInfo {
+    pub serial_number: String,
+    pub board_number: String,
+    pub application_name: Option<String>,
+    pub frequency: Option<String>
+}
+
+lazy_static! {
+    pub static ref REGIONS: BiMap<i16, &'static str> = {
+        BiMap::from_iter(vec![
+            (0, "EU"),
+            (1, "US"),
+            (2, "ANZ"),
+            (3, "HK"),
+            (4, "MA"),
+            (5, "IN"),
+            (6, "IS"),
+            (7, "RU"),
+            (8, "CN"),
+            (9, "US_LR"),
+            (32, "JP"),
+            (33, "KR"),
+        ])
+    };
+}
+
 impl fmt::Display for CommanderError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "There is an error: {}", self.0)
@@ -276,80 +317,116 @@ pub fn commander_prepare() -> Result<&'static str, Box<dyn std::error::Error>> {
     Ok(COMMANDER_PATH.to_str().unwrap())
 }
 
-pub fn flash_device(name_path: &str, serialnum: &str, proccesor_type: &str, region: i8) -> Result<(), std::io::Error> {
+pub fn flash_device(name_path: &str, serialnum: &str, proccesor_type: &str, region: i16) -> Result<(), &'static str> {
 
-    println!("Flashing FW for {} to device with serial no. {}", name_path, serialnum);
+    println!("Flashing FW {} to device with serial no. {}", name_path, serialnum);
 
     let commander_path = commander_prepare().unwrap();
 
-    // Erase flash
-    //  TODO: Check the succes erase: Flash was erased successfully
-    let erase_out = run_cmd!([commander_path, "device", "masserase", "-s", serialnum, "-d", proccesor_type]).output()?;
-    let erase_out_string = String::from_utf8_lossy(&erase_out.stdout);
-    println!("{}", erase_out.status);
-    println!("{}", erase_out_string);
+    println!("\t- Erasing flash");
+    match run_cmd_in_dir!([commander_path, "device", "masserase", "-s", serialnum, "-d", proccesor_type], "").status() {
+        Err(_) => return Err("Failed to mass erase!"),
+        Ok(stat) => if ! stat.success() { return Err("Failed to mass erase!"); } else { () },
+    }
 
-    // Flash MFG token
-    let mfgtoken_out = run_cmd!([commander_path, "flash", "--tokengroup", "znet", "--token",
-        &("MFG_ZWAVE_COUNTRY_FREQ:0x".to_owned() + &(format!("{:x}", region))), "-s", serialnum, "-d", proccesor_type]).output()?;
-    let mfgtoken_out_string = String::from_utf8_lossy(&mfgtoken_out.stdout);
-    println!("{}", mfgtoken_out_string);
+    println!("\t- Flashing MFG token");
+    match run_cmd_in_dir!([commander_path, "flash", "--tokengroup", "znet", "--token", &("MFG_ZWAVE_COUNTRY_FREQ:0x".to_owned() + &(format!("{:x}", region))), "-s", serialnum, "-d", proccesor_type], "").status() {
+        Err(_) => return Err("Failed to flash manufacturer token!"),
+        Ok(stat) => if ! stat.success() { return Err("Failed to flash manufacturer token!"); } else { () },
+    }
 
-    // Flash the downloaded hex file
-    let flash_out = run_cmd!([commander_path, "flash", name_path, "-s", serialnum, "-d", proccesor_type]).output()?;
-    let flash_out_string = String::from_utf8_lossy(&flash_out.stdout);
-    println!("{}", flash_out_string);
-    Ok(())
+    println!("\t- Flashing application firmware file");
+    match run_cmd_in_dir!([commander_path, "flash", name_path, "-s", serialnum, "-d", proccesor_type], "").status() {
+        Err(_) => return Err("Failed to flash the application!"),
+        Ok(stat) =>
+          if ! stat.success() {
+              return Err("Failed to flash the application!");
+          } else {
+              println!("Flashing succeeded!");
+              Ok(())
+          },
+    }
 }
 
-pub fn read_dsk(serialnum: &str, proccesor_type: &str) -> Result<String, Box<dyn std::error::Error>> {
+fn read_mfg_token(serial_number: &str, proccesor_type: Option<&str>, token: &str, regex: Regex) -> Result<String, Box<dyn std::error::Error>> {
     let commander_path = commander_prepare().unwrap();
-    // Read DSK value
-    let qr_raw_cmd = run_cmd!([commander_path, "tokendump", "--tokengroup", "znet", "--token", "MFG_ZW_QR_CODE", "-s", serialnum, "-d", proccesor_type]).output()?;
+    let mut command_parts = vec![commander_path, "tokendump", "--tokengroup", "znet", "--token", token, "-s", serial_number];
+    if proccesor_type.is_some() {
+        command_parts.push("-d");
+        command_parts.push(proccesor_type.unwrap());
+    }
+    let qr_raw_cmd = run_cmd!(command_parts).output()?;
     let qr_raw_string = String::from_utf8_lossy(&qr_raw_cmd.stdout);
-
-    let re = Regex::new(r#"MFG_ZW_QR_CODE: "([0-9]*)""#).unwrap();
-    let dsk_match_string = re.captures(&qr_raw_string);
+    let dsk_match_string = regex.captures(&qr_raw_string);
 
     match dsk_match_string {
         None => Ok(String::new()),
         Some(caps) => Ok(caps.get(1).unwrap().as_str().to_string()),
-}
+    }
 }
 
-pub fn get_serialnum(silink_result_tmp: &str) -> Vec<String> {
+pub fn read_dsk(serial_number: &str, proccesor_type: Option<&str>) -> Result<String, Box<dyn std::error::Error>> {
+    read_mfg_token(serial_number, proccesor_type, "MFG_ZW_QR_CODE",
+        Regex::new(r#"MFG_ZW_QR_CODE: "([0-9]*)""#).unwrap()
+    )
+}
 
-    let mut vec_return = Vec::new();
+fn read_freq(serial_number: &str, proccesor_type: Option<&str>) -> Option<String> {
+    let freq_string = read_mfg_token(serial_number, proccesor_type, "MFG_ZWAVE_COUNTRY_FREQ",
+        Regex::new(r#"MFG_ZWAVE_COUNTRY_FREQ: 0x([[:xdigit:]]{2})"#).unwrap()
+    ).unwrap();
+    let freq_value = i16::from_str_radix(&freq_string, 16).unwrap_or(254);
+    match REGIONS.get_by_left(&freq_value) {
+        Some(region) => Some(region.to_string()),
+        None => None
+    }
+}
+
+pub fn list_devices(silink_result_tmp: &str, print_output: bool) -> Vec<DeviceInfo> {
+    let new_string = silink_result_tmp.to_string();
 
     let re_device = Regex::new(r#"(\{(.|\n)*?\})"#).unwrap();
-    let re_serial = Regex::new(r#"(serialNumber=)([0-9]{9})"#).unwrap();
-    let re_board  = Regex::new(r#"(boardSerial\[0\]=)([0-9]{9})"#).unwrap();
-    let new_string:String = silink_result_tmp.to_string().clone();
-    let vec_device:HashSet<&str> = re_device.find_iter(&new_string).map(|mat| mat.as_str()).collect();
+    let re_serial = Regex::new(r#"serialNumber=([0-9]{9})"#).unwrap();
+    let re_board  = Regex::new(r#"boardSerial\[0\]=([0-9]{9})"#).unwrap();
 
-    let mut act_device_num = 0;
-
-    for act_device in vec_device {
-
-        let device_string_tmp:String = act_device.to_string().clone();
-
-        println!("Device: {}", act_device_num);
-        let vec_serial:HashSet<&str> = re_serial.find_iter(&device_string_tmp).map(|mat| mat.as_str()).collect();
-        for act_serial in vec_serial {
-            let serial_formated:String = act_serial[act_serial.len() - 9..].to_string();
-            println!("\t Serialnumber: {}", serial_formated);
-            vec_return.push(serial_formated);
-        }
-
-        let vec_board:HashSet<&str>  = re_board.find_iter(&device_string_tmp).map(|mat| mat.as_str()).collect();
-        for act_board in vec_board {
-            println!("\t Boardnumber: {}", act_board[act_board.len() - 9..].to_string());
-        }
-
-        act_device_num = act_device_num + 1;
+    if print_output {
+        println!("{: >10} | {: <10} | {: <9} | {: <5} | {: <29}",
+            "Device No.", "Serial No.", "Board No.", "Freq.", "Application name");
+        println!("{: >10}-+-{: <10}-+-{: <9}-+-{: <5}-+-{: <29}",
+            "-".repeat(10), "-".repeat(10), "-".repeat(9), "-".repeat(5), "-".repeat(29));
     }
 
-   return vec_return;
+    re_device.find_iter(&new_string)
+        .enumerate()
+        .map(move |(number, device)| {
+            let device_string = device.as_str().to_owned();
+            let serial_number = re_serial.captures(&device_string)
+                .unwrap()[1].to_owned();
+            let board_number = re_board.captures(&device_string)
+                .unwrap()[1].to_owned();
+            let frequency = read_freq(&serial_number, None);
+            if print_output {
+                print!("{: >10} | {: <10} | {: <9} | {: <5} | ",
+                    number, serial_number, board_number,
+                    frequency.clone().unwrap_or("?".to_string())
+                );
+                stdout().flush().expect("Couldn't flush stdout");
+            }
+            // FIXME - Setting  default_controller as appliaction name when get_name fails
+            // FIXME - Ideally it should be read from device
+            let mut application_name = get_name(&serial_number);
+            if application_name.is_none()  {
+                application_name = Some(String::from("unknown"));
+            }
+
+            if print_output {
+                println!( "{: <29}",
+                    application_name.clone().unwrap_or((&"unknown").to_string()).to_string()
+                );
+            }
+            DeviceInfo{serial_number, board_number, application_name, frequency}
+        })
+        .collect()
 }
 
 pub fn print_dsk(dsk: &str){
@@ -365,5 +442,36 @@ pub fn print_dsk(dsk: &str){
                  &dsk[37..42],
                  &dsk[42..47],
                  &dsk[47..52]);
+    }
+}
+
+pub fn get_name(serial_number: &str) -> Option<String> {
+    let commander_path = commander_prepare().unwrap();
+
+    // Read NVM3 contents to a temporary file, parse, then delete it
+    let nvm_file = format!("nvm_{}.s37", serial_number);
+    run_cmd!([commander_path, "nvm3", "read", "-s", serial_number, "-o", &nvm_file]).output().ok();
+    let command_result = run_cmd!([
+        commander_path, "nvm3", "parse", &nvm_file, "--key", "0x4100c" ])
+        .output().unwrap();
+    remove_file(&nvm_file).ok();
+
+    let commander_output = String::from_utf8_lossy(&command_result.stdout);
+    if !commander_output.contains("Matching NVM3 objects:") {
+        None
+    } else {
+        // Parse commander output, convert bytes to ASCII string
+        let matcher = Regex::new(r"(?m)[[:xdigit:]]{8}: ((?: ?[[:xdigit:]]{2})+)").unwrap();
+        let ascii_chars = matcher.captures_iter(&commander_output)
+            .take(2)
+            .map(|cap| cap[1].to_owned())
+            .collect::<Vec<String>>()
+            .join(" ") // Join lines to get space-delimited list of bytes, i.e. "01 23 45 ..."
+            .split(" ")
+            .map(|character| u8::from_str_radix(character, 16).unwrap())
+            .filter(|character| character != &0) // Remove trailing '\0' characters
+            .collect::<Vec<u8>>();
+        let name = std::str::from_utf8(&ascii_chars).unwrap();
+        Some(name.to_owned())
     }
 }

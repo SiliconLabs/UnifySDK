@@ -104,6 +104,31 @@ sl_status_t dotdot_basic_zcl_version_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_zcl_version_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_ZCL_VERSION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_zcl_version_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_ZCL_VERSION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_zcl_version(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -188,6 +213,31 @@ sl_status_t dotdot_basic_application_version_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_APPLICATION_VERSION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_application_version_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_APPLICATION_VERSION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_application_version_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_APPLICATION_VERSION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_application_version(
@@ -276,6 +326,31 @@ sl_status_t dotdot_basic_stack_version_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_stack_version_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_STACK_VERSION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_stack_version_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_STACK_VERSION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_stack_version(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -360,6 +435,31 @@ sl_status_t dotdot_basic_hw_version_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_hw_version_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_hw_version_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_hw_version(
@@ -449,6 +549,31 @@ sl_status_t dotdot_basic_manufacturer_name_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_manufacturer_name_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_MANUFACTURER_NAME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_manufacturer_name_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_MANUFACTURER_NAME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_manufacturer_name(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -534,6 +659,31 @@ sl_status_t dotdot_basic_model_identifier_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_MODEL_IDENTIFIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_model_identifier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_MODEL_IDENTIFIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_model_identifier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_MODEL_IDENTIFIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_model_identifier(
@@ -623,6 +773,31 @@ sl_status_t dotdot_basic_date_code_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_date_code_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_DATE_CODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_date_code_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_DATE_CODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_date_code(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -707,6 +882,31 @@ sl_status_t dotdot_basic_power_source_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_power_source_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_power_source_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_power_source(
@@ -795,6 +995,31 @@ sl_status_t dotdot_basic_generic_device_class_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_generic_device_class_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_GENERIC_DEVICE_CLASS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_generic_device_class_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_GENERIC_DEVICE_CLASS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_generic_device_class(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -879,6 +1104,31 @@ sl_status_t dotdot_basic_generic_device_type_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_GENERIC_DEVICE_TYPE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_generic_device_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_GENERIC_DEVICE_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_generic_device_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_GENERIC_DEVICE_TYPE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_generic_device_type(
@@ -968,6 +1218,31 @@ sl_status_t dotdot_basic_product_code_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_product_code_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PRODUCT_CODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_product_code_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PRODUCT_CODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_product_code(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -1053,6 +1328,31 @@ sl_status_t dotdot_basic_producturl_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_PRODUCTURL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_producturl_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PRODUCTURL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_producturl_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PRODUCTURL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_producturl(
@@ -1142,6 +1442,31 @@ sl_status_t dotdot_basic_manufacturer_version_details_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_manufacturer_version_details_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_MANUFACTURER_VERSION_DETAILS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_manufacturer_version_details_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_MANUFACTURER_VERSION_DETAILS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_manufacturer_version_details(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -1227,6 +1552,31 @@ sl_status_t dotdot_basic_serial_number_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_serial_number_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_serial_number_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_serial_number(
@@ -1316,6 +1666,31 @@ sl_status_t dotdot_basic_product_label_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_product_label_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PRODUCT_LABEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_product_label_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PRODUCT_LABEL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_product_label(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -1401,6 +1776,31 @@ sl_status_t dotdot_basic_location_description_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_LOCATION_DESCRIPTION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_location_description_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_LOCATION_DESCRIPTION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_location_description_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_LOCATION_DESCRIPTION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_location_description(
@@ -1489,6 +1889,31 @@ sl_status_t dotdot_basic_physical_environment_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_physical_environment_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PHYSICAL_ENVIRONMENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_physical_environment_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_PHYSICAL_ENVIRONMENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_physical_environment(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -1573,6 +1998,31 @@ sl_status_t dotdot_basic_device_enabled_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_DEVICE_ENABLED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_device_enabled_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_DEVICE_ENABLED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_device_enabled_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_DEVICE_ENABLED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_device_enabled(
@@ -1661,6 +2111,31 @@ sl_status_t dotdot_basic_alarm_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_basic_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_basic_alarm_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -1745,6 +2220,31 @@ sl_status_t dotdot_basic_disable_local_config_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_DISABLE_LOCAL_CONFIG);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_disable_local_config_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_DISABLE_LOCAL_CONFIG);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_disable_local_config_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_DISABLE_LOCAL_CONFIG);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_disable_local_config(
@@ -1832,6 +2332,31 @@ sl_status_t dotdot_basic_sw_buildid_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BASIC_SW_BUILDID);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_basic_sw_buildid_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_SW_BUILDID);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_basic_sw_buildid_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BASIC_SW_BUILDID);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_basic_sw_buildid(
@@ -2017,6 +2542,31 @@ sl_status_t dotdot_power_configuration_mains_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_mains_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_mains_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_mains_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -2101,6 +2651,31 @@ sl_status_t dotdot_power_configuration_mains_frequency_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_FREQUENCY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_mains_frequency_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_FREQUENCY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_mains_frequency_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_FREQUENCY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_mains_frequency(
@@ -2189,6 +2764,31 @@ sl_status_t dotdot_power_configuration_mains_alarm_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_mains_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_mains_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_mains_alarm_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -2273,6 +2873,31 @@ sl_status_t dotdot_power_configuration_mains_voltage_min_threshold_undefine_desi
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_mains_voltage_min_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_mains_voltage_min_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_mains_voltage_min_threshold(
@@ -2361,6 +2986,31 @@ sl_status_t dotdot_power_configuration_mains_voltage_max_threshold_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_mains_voltage_max_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MAX_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_mains_voltage_max_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MAX_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_mains_voltage_max_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -2445,6 +3095,31 @@ sl_status_t dotdot_power_configuration_mains_voltage_dwell_trip_point_undefine_d
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_mains_voltage_dwell_trip_point_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_mains_voltage_dwell_trip_point_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_mains_voltage_dwell_trip_point(
@@ -2533,6 +3208,31 @@ sl_status_t dotdot_power_configuration_battery_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -2617,6 +3317,31 @@ sl_status_t dotdot_power_configuration_battery_percentage_remaining_undefine_des
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_percentage_remaining_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_percentage_remaining_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_percentage_remaining(
@@ -2706,6 +3431,31 @@ sl_status_t dotdot_power_configuration_battery_manufacturer_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_manufacturer_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_MANUFACTURER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_manufacturer_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_MANUFACTURER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_manufacturer(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -2790,6 +3540,31 @@ sl_status_t dotdot_power_configuration_battery_size_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_SIZE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_size_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_SIZE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_size_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_SIZE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_size(
@@ -2878,6 +3653,31 @@ sl_status_t dotdot_power_configuration_batterya_hr_rating_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_batterya_hr_rating_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERYA_HR_RATING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_batterya_hr_rating_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERYA_HR_RATING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_batterya_hr_rating(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -2962,6 +3762,31 @@ sl_status_t dotdot_power_configuration_battery_quantity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_QUANTITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_quantity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_QUANTITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_quantity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_QUANTITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_quantity(
@@ -3050,6 +3875,31 @@ sl_status_t dotdot_power_configuration_battery_rated_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_rated_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_RATED_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_rated_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_RATED_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_rated_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -3134,6 +3984,31 @@ sl_status_t dotdot_power_configuration_battery_alarm_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_ALARM_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_alarm_mask(
@@ -3222,6 +4097,31 @@ sl_status_t dotdot_power_configuration_battery_voltage_min_threshold_undefine_de
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_voltage_min_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_voltage_min_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_voltage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -3306,6 +4206,31 @@ sl_status_t dotdot_power_configuration_battery_voltage_threshold1_undefine_desir
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_voltage_threshold1_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_voltage_threshold1_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_voltage_threshold1(
@@ -3394,6 +4319,31 @@ sl_status_t dotdot_power_configuration_battery_voltage_threshold2_undefine_desir
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_voltage_threshold2_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD2);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_voltage_threshold2_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD2);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_voltage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -3478,6 +4428,31 @@ sl_status_t dotdot_power_configuration_battery_voltage_threshold3_undefine_desir
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_voltage_threshold3_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_voltage_threshold3_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_voltage_threshold3(
@@ -3566,6 +4541,31 @@ sl_status_t dotdot_power_configuration_battery_percentage_min_threshold_undefine
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_percentage_min_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_MIN_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_percentage_min_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_MIN_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_percentage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -3650,6 +4650,31 @@ sl_status_t dotdot_power_configuration_battery_percentage_threshold1_undefine_de
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_percentage_threshold1_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_percentage_threshold1_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_percentage_threshold1(
@@ -3738,6 +4763,31 @@ sl_status_t dotdot_power_configuration_battery_percentage_threshold2_undefine_de
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_percentage_threshold2_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD2);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_percentage_threshold2_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD2);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_percentage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -3822,6 +4872,31 @@ sl_status_t dotdot_power_configuration_battery_percentage_threshold3_undefine_de
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery_percentage_threshold3_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_percentage_threshold3_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery_percentage_threshold3(
@@ -3910,6 +4985,31 @@ sl_status_t dotdot_power_configuration_battery_alarm_state_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery_alarm_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_ALARM_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery_alarm_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_ALARM_STATE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery_alarm_state(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -3996,6 +5096,31 @@ sl_status_t dotdot_power_configuration_battery2_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -4080,6 +5205,31 @@ sl_status_t dotdot_power_configuration_battery2_percentage_remaining_undefine_de
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_percentage_remaining_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_percentage_remaining_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_percentage_remaining(
@@ -4169,6 +5319,31 @@ sl_status_t dotdot_power_configuration_battery2_manufacturer_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_manufacturer_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_MANUFACTURER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_manufacturer_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_MANUFACTURER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_manufacturer(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -4253,6 +5428,31 @@ sl_status_t dotdot_power_configuration_battery2_size_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_SIZE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_size_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_SIZE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_size_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_SIZE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_size(
@@ -4341,6 +5541,31 @@ sl_status_t dotdot_power_configuration_battery2a_hr_rating_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2a_hr_rating_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2A_HR_RATING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2a_hr_rating_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2A_HR_RATING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2a_hr_rating(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -4425,6 +5650,31 @@ sl_status_t dotdot_power_configuration_battery2_quantity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_QUANTITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_quantity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_QUANTITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_quantity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_QUANTITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_quantity(
@@ -4513,6 +5763,31 @@ sl_status_t dotdot_power_configuration_battery2_rated_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_rated_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_RATED_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_rated_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_RATED_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_rated_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -4597,6 +5872,31 @@ sl_status_t dotdot_power_configuration_battery2_alarm_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_ALARM_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_alarm_mask(
@@ -4685,6 +5985,31 @@ sl_status_t dotdot_power_configuration_battery2_voltage_min_threshold_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_voltage_min_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_voltage_min_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_voltage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -4769,6 +6094,31 @@ sl_status_t dotdot_power_configuration_battery2_voltage_threshold1_undefine_desi
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_voltage_threshold1_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_voltage_threshold1_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_voltage_threshold1(
@@ -4857,6 +6207,31 @@ sl_status_t dotdot_power_configuration_battery2_voltage_threshold2_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_voltage_threshold2_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD2);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_voltage_threshold2_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD2);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_voltage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -4941,6 +6316,31 @@ sl_status_t dotdot_power_configuration_battery2_voltage_threshold3_undefine_desi
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_voltage_threshold3_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_voltage_threshold3_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_voltage_threshold3(
@@ -5029,6 +6429,31 @@ sl_status_t dotdot_power_configuration_battery2_percentage_min_threshold_undefin
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_percentage_min_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_MIN_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_percentage_min_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_MIN_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_percentage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -5113,6 +6538,31 @@ sl_status_t dotdot_power_configuration_battery2_percentage_threshold1_undefine_d
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_percentage_threshold1_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_percentage_threshold1_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_percentage_threshold1(
@@ -5201,6 +6651,31 @@ sl_status_t dotdot_power_configuration_battery2_percentage_threshold2_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_percentage_threshold2_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD2);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_percentage_threshold2_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD2);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_percentage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -5285,6 +6760,31 @@ sl_status_t dotdot_power_configuration_battery2_percentage_threshold3_undefine_d
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery2_percentage_threshold3_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_percentage_threshold3_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery2_percentage_threshold3(
@@ -5373,6 +6873,31 @@ sl_status_t dotdot_power_configuration_battery2_alarm_state_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery2_alarm_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_ALARM_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery2_alarm_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_ALARM_STATE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery2_alarm_state(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -5459,6 +6984,31 @@ sl_status_t dotdot_power_configuration_battery3_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -5543,6 +7093,31 @@ sl_status_t dotdot_power_configuration_battery3_percentage_remaining_undefine_de
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_percentage_remaining_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_percentage_remaining_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_percentage_remaining(
@@ -5632,6 +7207,31 @@ sl_status_t dotdot_power_configuration_battery3_manufacturer_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_manufacturer_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_MANUFACTURER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_manufacturer_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_MANUFACTURER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_manufacturer(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -5716,6 +7316,31 @@ sl_status_t dotdot_power_configuration_battery3_size_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_SIZE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_size_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_SIZE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_size_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_SIZE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_size(
@@ -5804,6 +7429,31 @@ sl_status_t dotdot_power_configuration_battery3a_hr_rating_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3a_hr_rating_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3A_HR_RATING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3a_hr_rating_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3A_HR_RATING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3a_hr_rating(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -5888,6 +7538,31 @@ sl_status_t dotdot_power_configuration_battery3_quantity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_QUANTITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_quantity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_QUANTITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_quantity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_QUANTITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_quantity(
@@ -5976,6 +7651,31 @@ sl_status_t dotdot_power_configuration_battery3_rated_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_rated_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_RATED_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_rated_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_RATED_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_rated_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -6060,6 +7760,31 @@ sl_status_t dotdot_power_configuration_battery3_alarm_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_ALARM_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_alarm_mask(
@@ -6148,6 +7873,31 @@ sl_status_t dotdot_power_configuration_battery3_voltage_min_threshold_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_voltage_min_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_voltage_min_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_MIN_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_voltage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -6232,6 +7982,31 @@ sl_status_t dotdot_power_configuration_battery3_voltage_threshold1_undefine_desi
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_voltage_threshold1_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_voltage_threshold1_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_voltage_threshold1(
@@ -6320,6 +8095,31 @@ sl_status_t dotdot_power_configuration_battery3_voltage_threshold2_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_voltage_threshold2_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD2);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_voltage_threshold2_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD2);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_voltage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -6404,6 +8204,31 @@ sl_status_t dotdot_power_configuration_battery3_voltage_threshold3_undefine_desi
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_voltage_threshold3_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_voltage_threshold3_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_voltage_threshold3(
@@ -6492,6 +8317,31 @@ sl_status_t dotdot_power_configuration_battery3_percentage_min_threshold_undefin
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_percentage_min_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_MIN_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_percentage_min_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_MIN_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_percentage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -6576,6 +8426,31 @@ sl_status_t dotdot_power_configuration_battery3_percentage_threshold1_undefine_d
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_percentage_threshold1_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_percentage_threshold1_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_percentage_threshold1(
@@ -6664,6 +8539,31 @@ sl_status_t dotdot_power_configuration_battery3_percentage_threshold2_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_percentage_threshold2_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD2);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_percentage_threshold2_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD2);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_percentage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -6750,6 +8650,31 @@ sl_status_t dotdot_power_configuration_battery3_percentage_threshold3_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_power_configuration_battery3_percentage_threshold3_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD3);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_percentage_threshold3_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD3);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_power_configuration_battery3_percentage_threshold3(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -6834,6 +8759,31 @@ sl_status_t dotdot_power_configuration_battery3_alarm_state_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_ALARM_STATE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_power_configuration_battery3_alarm_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_ALARM_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_power_configuration_battery3_alarm_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_ALARM_STATE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_power_configuration_battery3_alarm_state(
@@ -7250,6 +9200,31 @@ sl_status_t dotdot_device_temperature_configuration_current_temperature_undefine
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_device_temperature_configuration_current_temperature_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_CURRENT_TEMPERATURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_current_temperature_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_CURRENT_TEMPERATURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_device_temperature_configuration_current_temperature(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -7334,6 +9309,31 @@ sl_status_t dotdot_device_temperature_configuration_min_temp_experienced_undefin
       DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_MIN_TEMP_EXPERIENCED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_device_temperature_configuration_min_temp_experienced_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_MIN_TEMP_EXPERIENCED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_min_temp_experienced_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_MIN_TEMP_EXPERIENCED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_device_temperature_configuration_min_temp_experienced(
@@ -7422,6 +9422,31 @@ sl_status_t dotdot_device_temperature_configuration_max_temp_experienced_undefin
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_device_temperature_configuration_max_temp_experienced_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_MAX_TEMP_EXPERIENCED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_max_temp_experienced_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_MAX_TEMP_EXPERIENCED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_device_temperature_configuration_max_temp_experienced(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -7506,6 +9531,31 @@ sl_status_t dotdot_device_temperature_configuration_over_temp_total_dwell_undefi
       DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_device_temperature_configuration_over_temp_total_dwell_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_over_temp_total_dwell_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_device_temperature_configuration_over_temp_total_dwell(
@@ -7594,6 +9644,31 @@ sl_status_t dotdot_device_temperature_configuration_device_temp_alarm_mask_undef
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_device_temperature_configuration_device_temp_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_DEVICE_TEMP_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_device_temp_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_DEVICE_TEMP_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_device_temperature_configuration_device_temp_alarm_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -7678,6 +9753,31 @@ sl_status_t dotdot_device_temperature_configuration_low_temp_threshold_undefine_
       DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_THRESHOLD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_device_temperature_configuration_low_temp_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_low_temp_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_device_temperature_configuration_low_temp_threshold(
@@ -7766,6 +9866,31 @@ sl_status_t dotdot_device_temperature_configuration_high_temp_threshold_undefine
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_device_temperature_configuration_high_temp_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_high_temp_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_device_temperature_configuration_high_temp_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -7852,6 +9977,31 @@ sl_status_t dotdot_device_temperature_configuration_low_temp_dwell_trip_point_un
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_device_temperature_configuration_low_temp_dwell_trip_point_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_low_temp_dwell_trip_point_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_device_temperature_configuration_low_temp_dwell_trip_point(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -7936,6 +10086,31 @@ sl_status_t dotdot_device_temperature_configuration_high_temp_dwell_trip_point_u
       DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_device_temperature_configuration_high_temp_dwell_trip_point_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_device_temperature_configuration_high_temp_dwell_trip_point_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_device_temperature_configuration_high_temp_dwell_trip_point(
@@ -8085,6 +10260,31 @@ sl_status_t dotdot_identify_identify_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_identify_identify_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_identify_identify_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_identify_identify_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -8196,6 +10396,31 @@ sl_status_t dotdot_groups_name_support_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_groups_name_support_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_GROUPS_NAME_SUPPORT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_groups_name_support_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_GROUPS_NAME_SUPPORT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_groups_name_support(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -8304,6 +10529,31 @@ sl_status_t dotdot_scenes_scene_count_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_scenes_scene_count_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_COUNT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_scenes_scene_count_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_COUNT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_scenes_scene_count(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -8388,6 +10638,31 @@ sl_status_t dotdot_scenes_current_scene_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_SCENE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_scenes_current_scene_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_SCENE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_scenes_current_scene_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_SCENE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_scenes_current_scene(
@@ -8476,6 +10751,31 @@ sl_status_t dotdot_scenes_current_group_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_scenes_current_group_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_GROUP);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_scenes_current_group_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_GROUP);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_scenes_current_group(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -8560,6 +10860,31 @@ sl_status_t dotdot_scenes_scene_valid_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_VALID);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_scenes_scene_valid_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_VALID);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_scenes_scene_valid_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_VALID);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_scenes_scene_valid(
@@ -8648,6 +10973,31 @@ sl_status_t dotdot_scenes_name_support_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_scenes_name_support_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_NAME_SUPPORT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_scenes_name_support_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_NAME_SUPPORT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_scenes_name_support(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -8732,6 +11082,31 @@ sl_status_t dotdot_scenes_last_configured_by_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SCENES_LAST_CONFIGURED_BY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_scenes_last_configured_by_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_LAST_CONFIGURED_BY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_scenes_last_configured_by_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_LAST_CONFIGURED_BY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_scenes_last_configured_by(
@@ -8821,6 +11196,31 @@ sl_status_t dotdot_scenes_scene_table_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_scenes_scene_table_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_scenes_scene_table_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_scenes_scene_table(
@@ -8949,6 +11349,31 @@ sl_status_t dotdot_on_off_on_off_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_on_off_on_off_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_on_off_on_off_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_on_off_on_off(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -9033,6 +11458,31 @@ sl_status_t dotdot_on_off_global_scene_control_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ON_OFF_GLOBAL_SCENE_CONTROL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_on_off_global_scene_control_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_GLOBAL_SCENE_CONTROL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_on_off_global_scene_control_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_GLOBAL_SCENE_CONTROL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_on_off_global_scene_control(
@@ -9121,6 +11571,31 @@ sl_status_t dotdot_on_off_on_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_on_off_on_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_on_off_on_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_on_off_on_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -9207,6 +11682,31 @@ sl_status_t dotdot_on_off_off_wait_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_on_off_off_wait_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_OFF_WAIT_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_on_off_off_wait_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_OFF_WAIT_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_on_off_off_wait_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -9291,6 +11791,31 @@ sl_status_t dotdot_on_off_start_up_on_off_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ON_OFF_START_UP_ON_OFF);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_on_off_start_up_on_off_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_START_UP_ON_OFF);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_on_off_start_up_on_off_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ON_OFF_START_UP_ON_OFF);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_on_off_start_up_on_off(
@@ -9422,6 +11947,31 @@ sl_status_t dotdot_level_current_level_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_level_current_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_current_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_level_current_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -9506,6 +12056,31 @@ sl_status_t dotdot_level_remaining_time_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_LEVEL_REMAINING_TIME);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_level_remaining_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_REMAINING_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_remaining_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_REMAINING_TIME);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_level_remaining_time(
@@ -9594,6 +12169,31 @@ sl_status_t dotdot_level_min_level_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_level_min_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_min_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_LEVEL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_level_min_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -9678,6 +12278,31 @@ sl_status_t dotdot_level_max_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_level_max_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_max_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_level_max_level(
@@ -9766,6 +12391,31 @@ sl_status_t dotdot_level_current_frequency_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_level_current_frequency_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_FREQUENCY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_current_frequency_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_FREQUENCY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_level_current_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -9850,6 +12500,31 @@ sl_status_t dotdot_level_min_frequency_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_FREQUENCY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_level_min_frequency_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_FREQUENCY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_min_frequency_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_FREQUENCY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_level_min_frequency(
@@ -9938,6 +12613,31 @@ sl_status_t dotdot_level_max_frequency_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_level_max_frequency_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_FREQUENCY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_max_frequency_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_FREQUENCY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_level_max_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -10022,6 +12722,31 @@ sl_status_t dotdot_level_options_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_LEVEL_OPTIONS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_level_options_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_OPTIONS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_options_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_OPTIONS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_level_options(
@@ -10110,6 +12835,31 @@ sl_status_t dotdot_level_on_off_transition_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_level_on_off_transition_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_on_off_transition_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_level_on_off_transition_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -10194,6 +12944,31 @@ sl_status_t dotdot_level_on_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_LEVEL_ON_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_level_on_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_ON_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_on_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_ON_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_level_on_level(
@@ -10282,6 +13057,31 @@ sl_status_t dotdot_level_on_transition_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_level_on_transition_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_ON_TRANSITION_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_on_transition_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_ON_TRANSITION_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_level_on_transition_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -10366,6 +13166,31 @@ sl_status_t dotdot_level_off_transition_time_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_LEVEL_OFF_TRANSITION_TIME);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_level_off_transition_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_OFF_TRANSITION_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_off_transition_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_OFF_TRANSITION_TIME);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_level_off_transition_time(
@@ -10454,6 +13279,31 @@ sl_status_t dotdot_level_default_move_rate_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_level_default_move_rate_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_DEFAULT_MOVE_RATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_default_move_rate_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_DEFAULT_MOVE_RATE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_level_default_move_rate(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -10538,6 +13388,31 @@ sl_status_t dotdot_level_start_up_current_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_LEVEL_START_UP_CURRENT_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_level_start_up_current_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_START_UP_CURRENT_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_level_start_up_current_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_LEVEL_START_UP_CURRENT_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_level_start_up_current_level(
@@ -10708,6 +13583,31 @@ sl_status_t dotdot_alarms_alarm_count_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_alarms_alarm_count_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ALARMS_ALARM_COUNT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_alarms_alarm_count_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ALARMS_ALARM_COUNT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_alarms_alarm_count(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -10816,6 +13716,31 @@ sl_status_t dotdot_time_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_time_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_time_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -10900,6 +13825,31 @@ sl_status_t dotdot_time_time_status_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_TIME_TIME_STATUS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_time_time_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_TIME_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_time_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_TIME_STATUS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_time_time_status(
@@ -10988,6 +13938,31 @@ sl_status_t dotdot_time_time_zone_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_time_time_zone_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_TIME_ZONE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_time_zone_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_TIME_ZONE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_time_time_zone(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -11072,6 +14047,31 @@ sl_status_t dotdot_time_dst_start_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_TIME_DST_START);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_time_dst_start_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_DST_START);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_dst_start_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_DST_START);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_time_dst_start(
@@ -11160,6 +14160,31 @@ sl_status_t dotdot_time_dst_end_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_time_dst_end_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_DST_END);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_dst_end_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_DST_END);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_time_dst_end(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -11244,6 +14269,31 @@ sl_status_t dotdot_time_dst_shift_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_TIME_DST_SHIFT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_time_dst_shift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_DST_SHIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_dst_shift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_DST_SHIFT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_time_dst_shift(
@@ -11332,6 +14382,31 @@ sl_status_t dotdot_time_standard_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_time_standard_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_STANDARD_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_standard_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_STANDARD_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_time_standard_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -11416,6 +14491,31 @@ sl_status_t dotdot_time_local_time_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_time_local_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_local_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_time_local_time(
@@ -11504,6 +14604,31 @@ sl_status_t dotdot_time_last_set_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_time_last_set_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_LAST_SET_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_last_set_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_LAST_SET_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_time_last_set_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -11590,6 +14715,31 @@ sl_status_t dotdot_time_valid_until_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_time_valid_until_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_time_valid_until_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_time_valid_until_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -11669,1182 +14819,6 @@ bool dotdot_is_any_time_writable_attribute_supported(
   return false;
 }
 ////////////////////////////////////////////////////////////////////////////////
-// Start of cluster OTAUpgrade
-////////////////////////////////////////////////////////////////////////////////
-bool dotdot_is_supported_ota_upgrade_upgrade_serverid(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_SERVERID);
-  return attribute_store_node_exists(node);
-}
-
-EUI64 dotdot_get_ota_upgrade_upgrade_serverid(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_SERVERID);
-
-  EUI64 result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_upgrade_serverid(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  EUI64 new_upgrade_serverid
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_SERVERID);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_upgrade_serverid,
-                                                  sizeof(EUI64));
-  }
-
-sl_status_t dotdot_ota_upgrade_upgrade_serverid_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_SERVERID);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_upgrade_serverid_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_SERVERID);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_upgrade_serverid(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_SERVERID);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_file_offset(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_FILE_OFFSET);
-  return attribute_store_node_exists(node);
-}
-
-uint32_t dotdot_get_ota_upgrade_file_offset(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_FILE_OFFSET);
-
-  uint32_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_file_offset(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint32_t new_file_offset
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_FILE_OFFSET);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_file_offset,
-                                                  sizeof(uint32_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_file_offset_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_FILE_OFFSET);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_file_offset_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_FILE_OFFSET);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_file_offset(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_FILE_OFFSET);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_current_file_version(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_FILE_VERSION);
-  return attribute_store_node_exists(node);
-}
-
-uint32_t dotdot_get_ota_upgrade_current_file_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_FILE_VERSION);
-
-  uint32_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_current_file_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint32_t new_current_file_version
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_FILE_VERSION);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_current_file_version,
-                                                  sizeof(uint32_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_current_file_version_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_FILE_VERSION);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_current_file_version_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_FILE_VERSION);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_current_file_version(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_FILE_VERSION);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_current_zig_bee_stack_version(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION);
-  return attribute_store_node_exists(node);
-}
-
-uint16_t dotdot_get_ota_upgrade_current_zig_bee_stack_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION);
-
-  uint16_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_current_zig_bee_stack_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint16_t new_current_zig_bee_stack_version
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_current_zig_bee_stack_version,
-                                                  sizeof(uint16_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_current_zig_bee_stack_version_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_current_zig_bee_stack_version_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_current_zig_bee_stack_version(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_downloaded_file_version(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_FILE_VERSION);
-  return attribute_store_node_exists(node);
-}
-
-uint32_t dotdot_get_ota_upgrade_downloaded_file_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_FILE_VERSION);
-
-  uint32_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_downloaded_file_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint32_t new_downloaded_file_version
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_FILE_VERSION);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_downloaded_file_version,
-                                                  sizeof(uint32_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_downloaded_file_version_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_FILE_VERSION);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_downloaded_file_version_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_FILE_VERSION);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_downloaded_file_version(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_FILE_VERSION);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_downloaded_zig_bee_stack_version(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION);
-  return attribute_store_node_exists(node);
-}
-
-uint16_t dotdot_get_ota_upgrade_downloaded_zig_bee_stack_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION);
-
-  uint16_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_downloaded_zig_bee_stack_version(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint16_t new_downloaded_zig_bee_stack_version
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_downloaded_zig_bee_stack_version,
-                                                  sizeof(uint16_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_downloaded_zig_bee_stack_version_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_downloaded_zig_bee_stack_version_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_downloaded_zig_bee_stack_version(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_image_upgrade_status(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_UPGRADE_STATUS);
-  return attribute_store_node_exists(node);
-}
-
-uint8_t dotdot_get_ota_upgrade_image_upgrade_status(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_UPGRADE_STATUS);
-
-  uint8_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_image_upgrade_status(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint8_t new_image_upgrade_status
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_UPGRADE_STATUS);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_image_upgrade_status,
-                                                  sizeof(uint8_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_image_upgrade_status_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_UPGRADE_STATUS);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_image_upgrade_status_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_UPGRADE_STATUS);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_image_upgrade_status(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_UPGRADE_STATUS);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_manufacturerid(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MANUFACTURERID);
-  return attribute_store_node_exists(node);
-}
-
-uint16_t dotdot_get_ota_upgrade_manufacturerid(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MANUFACTURERID);
-
-  uint16_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_manufacturerid(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint16_t new_manufacturerid
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MANUFACTURERID);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_manufacturerid,
-                                                  sizeof(uint16_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_manufacturerid_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MANUFACTURERID);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_manufacturerid_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MANUFACTURERID);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_manufacturerid(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MANUFACTURERID);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_image_typeid(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_TYPEID);
-  return attribute_store_node_exists(node);
-}
-
-uint16_t dotdot_get_ota_upgrade_image_typeid(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_TYPEID);
-
-  uint16_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_image_typeid(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint16_t new_image_typeid
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_TYPEID);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_image_typeid,
-                                                  sizeof(uint16_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_image_typeid_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_TYPEID);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_image_typeid_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_TYPEID);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_image_typeid(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_TYPEID);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_minimum_block_period(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MINIMUM_BLOCK_PERIOD);
-  return attribute_store_node_exists(node);
-}
-
-uint16_t dotdot_get_ota_upgrade_minimum_block_period(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MINIMUM_BLOCK_PERIOD);
-
-  uint16_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_minimum_block_period(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint16_t new_minimum_block_period
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MINIMUM_BLOCK_PERIOD);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_minimum_block_period,
-                                                  sizeof(uint16_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_minimum_block_period_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MINIMUM_BLOCK_PERIOD);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_minimum_block_period_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MINIMUM_BLOCK_PERIOD);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_minimum_block_period(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MINIMUM_BLOCK_PERIOD);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_image_stamp(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_STAMP);
-  return attribute_store_node_exists(node);
-}
-
-uint32_t dotdot_get_ota_upgrade_image_stamp(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_STAMP);
-
-  uint32_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_image_stamp(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint32_t new_image_stamp
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_STAMP);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_image_stamp,
-                                                  sizeof(uint32_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_image_stamp_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_STAMP);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_image_stamp_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_STAMP);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_image_stamp(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_STAMP);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_upgrade_activation_policy(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY);
-  return attribute_store_node_exists(node);
-}
-
-uint8_t dotdot_get_ota_upgrade_upgrade_activation_policy(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY);
-
-  uint8_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_upgrade_activation_policy(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint8_t new_upgrade_activation_policy
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_upgrade_activation_policy,
-                                                  sizeof(uint8_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_upgrade_activation_policy_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_upgrade_activation_policy_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_upgrade_activation_policy(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-bool dotdot_is_supported_ota_upgrade_upgrade_timeout_policy(
-  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY);
-  return attribute_store_node_exists(node);
-}
-
-uint8_t dotdot_get_ota_upgrade_upgrade_timeout_policy(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state)
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY);
-
-  uint8_t result = {};
-  attribute_store_read_value(node,
-                             value_state,
-                             (uint8_t *)&result,
-                             sizeof(result));
-  return result;
-}
-
-sl_status_t dotdot_set_ota_upgrade_upgrade_timeout_policy(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  attribute_store_node_value_state_t value_state,
-  uint8_t new_upgrade_timeout_policy
-  )
-{
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY);
-
-  return attribute_store_set_node_attribute_value(node,
-                                                  value_state,
-                                                  (uint8_t *)&new_upgrade_timeout_policy,
-                                                  sizeof(uint8_t));
-  }
-
-sl_status_t dotdot_ota_upgrade_upgrade_timeout_policy_undefine_reported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY);
-  attribute_store_undefine_reported(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_ota_upgrade_upgrade_timeout_policy_undefine_desired(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node
-    = attribute_store_get_first_child_by_type(
-      endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY);
-  attribute_store_undefine_desired(node);
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-sl_status_t dotdot_create_ota_upgrade_upgrade_timeout_policy(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
-  attribute_store_node_t node =
-    attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY);
-
-  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
-}
-
-bool dotdot_is_any_ota_upgrade_attribute_supported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-  if (true == dotdot_is_supported_ota_upgrade_upgrade_serverid(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_file_offset(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_current_file_version(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_current_zig_bee_stack_version(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_downloaded_file_version(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_downloaded_zig_bee_stack_version(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_image_upgrade_status(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_manufacturerid(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_image_typeid(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_minimum_block_period(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_image_stamp(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_upgrade_activation_policy(unid, endpoint_id)) {
-    return true;
-  }
-  if (true == dotdot_is_supported_ota_upgrade_upgrade_timeout_policy(unid, endpoint_id)) {
-    return true;
-  }
-
-  return false;
-}
-
-bool dotdot_is_any_ota_upgrade_writable_attribute_supported(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint_id) {
-
-
-  return false;
-}
-////////////////////////////////////////////////////////////////////////////////
 // Start of cluster PollControl
 ////////////////////////////////////////////////////////////////////////////////
 bool dotdot_is_supported_poll_control_check_in_interval(
@@ -12920,6 +14894,31 @@ sl_status_t dotdot_poll_control_check_in_interval_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_poll_control_check_in_interval_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_poll_control_check_in_interval_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_poll_control_check_in_interval(
@@ -13008,6 +15007,31 @@ sl_status_t dotdot_poll_control_long_poll_interval_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_poll_control_long_poll_interval_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_poll_control_long_poll_interval_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_poll_control_long_poll_interval(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -13092,6 +15116,31 @@ sl_status_t dotdot_poll_control_short_poll_interval_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_SHORT_POLL_INTERVAL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_poll_control_short_poll_interval_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_SHORT_POLL_INTERVAL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_poll_control_short_poll_interval_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_SHORT_POLL_INTERVAL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_poll_control_short_poll_interval(
@@ -13180,6 +15229,31 @@ sl_status_t dotdot_poll_control_fast_poll_timeout_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_poll_control_fast_poll_timeout_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_poll_control_fast_poll_timeout_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_poll_control_fast_poll_timeout(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -13264,6 +15338,31 @@ sl_status_t dotdot_poll_control_check_in_interval_min_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL_MIN);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_poll_control_check_in_interval_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_poll_control_check_in_interval_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL_MIN);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_poll_control_check_in_interval_min(
@@ -13352,6 +15451,31 @@ sl_status_t dotdot_poll_control_long_poll_interval_min_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_poll_control_long_poll_interval_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_poll_control_long_poll_interval_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_poll_control_long_poll_interval_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -13436,6 +15560,31 @@ sl_status_t dotdot_poll_control_fast_poll_timeout_max_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT_MAX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_poll_control_fast_poll_timeout_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_poll_control_fast_poll_timeout_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT_MAX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_poll_control_fast_poll_timeout_max(
@@ -13570,6 +15719,31 @@ sl_status_t dotdot_shade_configuration_physical_closed_limit_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_shade_configuration_physical_closed_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_PHYSICAL_CLOSED_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_shade_configuration_physical_closed_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_PHYSICAL_CLOSED_LIMIT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_shade_configuration_physical_closed_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -13654,6 +15828,31 @@ sl_status_t dotdot_shade_configuration_motor_step_size_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MOTOR_STEP_SIZE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_shade_configuration_motor_step_size_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MOTOR_STEP_SIZE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_shade_configuration_motor_step_size_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MOTOR_STEP_SIZE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_shade_configuration_motor_step_size(
@@ -13742,6 +15941,31 @@ sl_status_t dotdot_shade_configuration_status_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_shade_configuration_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_shade_configuration_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_STATUS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_shade_configuration_status(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -13828,6 +16052,31 @@ sl_status_t dotdot_shade_configuration_closed_limit_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_shade_configuration_closed_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_CLOSED_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_shade_configuration_closed_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_CLOSED_LIMIT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_shade_configuration_closed_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -13912,6 +16161,31 @@ sl_status_t dotdot_shade_configuration_mode_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MODE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_shade_configuration_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_shade_configuration_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MODE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_shade_configuration_mode(
@@ -14043,6 +16317,31 @@ sl_status_t dotdot_door_lock_lock_state_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_lock_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCK_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_lock_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCK_STATE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_lock_state(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -14127,6 +16426,31 @@ sl_status_t dotdot_door_lock_lock_type_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCK_TYPE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_lock_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCK_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_lock_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCK_TYPE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_lock_type(
@@ -14215,6 +16539,31 @@ sl_status_t dotdot_door_lock_actuator_enabled_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_actuator_enabled_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ACTUATOR_ENABLED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_actuator_enabled_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ACTUATOR_ENABLED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_actuator_enabled(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -14299,6 +16648,31 @@ sl_status_t dotdot_door_lock_door_state_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_STATE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_door_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_door_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_STATE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_door_state(
@@ -14387,6 +16761,31 @@ sl_status_t dotdot_door_lock_door_open_events_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_door_open_events_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_OPEN_EVENTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_door_open_events_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_OPEN_EVENTS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_door_open_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -14471,6 +16870,31 @@ sl_status_t dotdot_door_lock_door_closed_events_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_CLOSED_EVENTS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_door_closed_events_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_CLOSED_EVENTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_door_closed_events_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_CLOSED_EVENTS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_door_closed_events(
@@ -14559,6 +16983,31 @@ sl_status_t dotdot_door_lock_open_period_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_open_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_OPEN_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_open_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_OPEN_PERIOD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_open_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -14643,6 +17092,31 @@ sl_status_t dotdot_door_lock_number_of_log_records_supported_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_number_of_log_records_supported_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_of_log_records_supported_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_number_of_log_records_supported(
@@ -14731,6 +17205,31 @@ sl_status_t dotdot_door_lock_number_of_total_users_supported_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_number_of_total_users_supported_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_of_total_users_supported_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_number_of_total_users_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -14815,6 +17314,31 @@ sl_status_t dotdot_door_lock_number_ofpin_users_supported_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_number_ofpin_users_supported_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_ofpin_users_supported_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_number_ofpin_users_supported(
@@ -14903,6 +17427,31 @@ sl_status_t dotdot_door_lock_number_ofrfid_users_supported_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_number_ofrfid_users_supported_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_ofrfid_users_supported_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_number_ofrfid_users_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -14987,6 +17536,31 @@ sl_status_t dotdot_door_lock_number_of_week_day_schedules_supported_per_user_und
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_number_of_week_day_schedules_supported_per_user_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_of_week_day_schedules_supported_per_user_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_number_of_week_day_schedules_supported_per_user(
@@ -15075,6 +17649,31 @@ sl_status_t dotdot_door_lock_number_of_year_day_schedules_supported_per_user_und
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_number_of_year_day_schedules_supported_per_user_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_of_year_day_schedules_supported_per_user_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_number_of_year_day_schedules_supported_per_user(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -15159,6 +17758,31 @@ sl_status_t dotdot_door_lock_number_of_holiday_schedules_supported_undefine_desi
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_number_of_holiday_schedules_supported_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_of_holiday_schedules_supported_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_number_of_holiday_schedules_supported(
@@ -15247,6 +17871,31 @@ sl_status_t dotdot_door_lock_maxpin_code_length_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_maxpin_code_length_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_maxpin_code_length_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_maxpin_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -15331,6 +17980,31 @@ sl_status_t dotdot_door_lock_minpin_code_length_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_minpin_code_length_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_minpin_code_length_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_minpin_code_length(
@@ -15419,6 +18093,31 @@ sl_status_t dotdot_door_lock_maxrfid_code_length_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_maxrfid_code_length_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_maxrfid_code_length_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_maxrfid_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -15505,6 +18204,31 @@ sl_status_t dotdot_door_lock_minrfid_code_length_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_minrfid_code_length_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_minrfid_code_length_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_minrfid_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -15589,6 +18313,31 @@ sl_status_t dotdot_door_lock_enable_logging_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_LOGGING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_enable_logging_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_LOGGING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_enable_logging_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_LOGGING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_enable_logging(
@@ -15678,6 +18427,31 @@ sl_status_t dotdot_door_lock_language_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_language_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LANGUAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_language_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LANGUAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_language(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -15762,6 +18536,31 @@ sl_status_t dotdot_door_lock_led_settings_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LED_SETTINGS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_led_settings_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LED_SETTINGS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_led_settings_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LED_SETTINGS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_led_settings(
@@ -15850,6 +18649,31 @@ sl_status_t dotdot_door_lock_auto_relock_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_auto_relock_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_AUTO_RELOCK_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_auto_relock_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_AUTO_RELOCK_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_auto_relock_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -15934,6 +18758,31 @@ sl_status_t dotdot_door_lock_sound_volume_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SOUND_VOLUME);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_sound_volume_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SOUND_VOLUME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_sound_volume_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SOUND_VOLUME);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_sound_volume(
@@ -16022,6 +18871,31 @@ sl_status_t dotdot_door_lock_operating_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_operating_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_OPERATING_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_operating_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_OPERATING_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_operating_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -16106,6 +18980,31 @@ sl_status_t dotdot_door_lock_supported_operating_modes_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SUPPORTED_OPERATING_MODES);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_supported_operating_modes_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SUPPORTED_OPERATING_MODES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_supported_operating_modes_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SUPPORTED_OPERATING_MODES);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_supported_operating_modes(
@@ -16194,6 +19093,31 @@ sl_status_t dotdot_door_lock_default_configuration_register_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_default_configuration_register_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DEFAULT_CONFIGURATION_REGISTER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_default_configuration_register_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DEFAULT_CONFIGURATION_REGISTER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_default_configuration_register(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -16278,6 +19202,31 @@ sl_status_t dotdot_door_lock_enable_local_programming_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_LOCAL_PROGRAMMING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_enable_local_programming_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_LOCAL_PROGRAMMING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_enable_local_programming_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_LOCAL_PROGRAMMING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_enable_local_programming(
@@ -16366,6 +19315,31 @@ sl_status_t dotdot_door_lock_enable_one_touch_locking_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_enable_one_touch_locking_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_ONE_TOUCH_LOCKING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_enable_one_touch_locking_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_ONE_TOUCH_LOCKING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_enable_one_touch_locking(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -16450,6 +19424,31 @@ sl_status_t dotdot_door_lock_enable_inside_statusled_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_INSIDE_STATUSLED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_enable_inside_statusled_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_INSIDE_STATUSLED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_enable_inside_statusled_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_INSIDE_STATUSLED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_enable_inside_statusled(
@@ -16538,6 +19537,31 @@ sl_status_t dotdot_door_lock_enable_privacy_mode_button_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_enable_privacy_mode_button_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_PRIVACY_MODE_BUTTON);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_enable_privacy_mode_button_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_PRIVACY_MODE_BUTTON);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_enable_privacy_mode_button(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -16622,6 +19646,31 @@ sl_status_t dotdot_door_lock_wrong_code_entry_limit_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_wrong_code_entry_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_wrong_code_entry_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_wrong_code_entry_limit(
@@ -16710,6 +19759,31 @@ sl_status_t dotdot_door_lock_user_code_temporary_disable_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_user_code_temporary_disable_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_user_code_temporary_disable_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_user_code_temporary_disable_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -16794,6 +19868,31 @@ sl_status_t dotdot_door_lock_sendpin_over_the_air_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_sendpin_over_the_air_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_sendpin_over_the_air_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_sendpin_over_the_air(
@@ -16882,6 +19981,31 @@ sl_status_t dotdot_door_lock_requirepi_nforrf_operation_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_requirepi_nforrf_operation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_requirepi_nforrf_operation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_requirepi_nforrf_operation(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -16966,6 +20090,31 @@ sl_status_t dotdot_door_lock_security_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SECURITY_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_security_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SECURITY_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_security_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SECURITY_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_security_level(
@@ -17054,6 +20203,31 @@ sl_status_t dotdot_door_lock_alarm_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_alarm_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -17138,6 +20312,31 @@ sl_status_t dotdot_door_lock_keypad_operation_event_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_KEYPAD_OPERATION_EVENT_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_keypad_operation_event_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_KEYPAD_OPERATION_EVENT_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_keypad_operation_event_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_KEYPAD_OPERATION_EVENT_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_keypad_operation_event_mask(
@@ -17226,6 +20425,31 @@ sl_status_t dotdot_door_lock_rf_operation_event_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_rf_operation_event_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RF_OPERATION_EVENT_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_rf_operation_event_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RF_OPERATION_EVENT_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_rf_operation_event_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -17310,6 +20534,31 @@ sl_status_t dotdot_door_lock_manual_operation_event_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MANUAL_OPERATION_EVENT_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_manual_operation_event_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MANUAL_OPERATION_EVENT_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_manual_operation_event_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MANUAL_OPERATION_EVENT_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_manual_operation_event_mask(
@@ -17398,6 +20647,31 @@ sl_status_t dotdot_door_lock_rfid_operation_event_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_rfid_operation_event_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_OPERATION_EVENT_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_rfid_operation_event_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_OPERATION_EVENT_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_rfid_operation_event_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -17482,6 +20756,31 @@ sl_status_t dotdot_door_lock_keypad_programming_event_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_KEYPAD_PROGRAMMING_EVENT_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_keypad_programming_event_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_KEYPAD_PROGRAMMING_EVENT_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_keypad_programming_event_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_KEYPAD_PROGRAMMING_EVENT_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_keypad_programming_event_mask(
@@ -17570,6 +20869,31 @@ sl_status_t dotdot_door_lock_rf_programming_event_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_door_lock_rf_programming_event_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RF_PROGRAMMING_EVENT_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_rf_programming_event_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RF_PROGRAMMING_EVENT_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_door_lock_rf_programming_event_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -17654,6 +20978,31 @@ sl_status_t dotdot_door_lock_rfid_programming_event_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_rfid_programming_event_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_rfid_programming_event_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_door_lock_rfid_programming_event_mask(
@@ -17965,6 +21314,31 @@ sl_status_t dotdot_window_covering_window_covering_type_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_window_covering_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_WINDOW_COVERING_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_window_covering_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_WINDOW_COVERING_TYPE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_window_covering_type(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -18049,6 +21423,31 @@ sl_status_t dotdot_window_covering_physical_closed_limit_lift_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_physical_closed_limit_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_physical_closed_limit_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_physical_closed_limit_lift(
@@ -18137,6 +21536,31 @@ sl_status_t dotdot_window_covering_physical_closed_limit_tilt_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_physical_closed_limit_tilt_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_TILT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_physical_closed_limit_tilt_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_TILT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_physical_closed_limit_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -18221,6 +21645,31 @@ sl_status_t dotdot_window_covering_current_position_lift_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_current_position_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_current_position_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_current_position_lift(
@@ -18309,6 +21758,31 @@ sl_status_t dotdot_window_covering_current_position_tilt_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_current_position_tilt_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_current_position_tilt_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_current_position_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -18393,6 +21867,31 @@ sl_status_t dotdot_window_covering_number_of_actuations_lift_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_number_of_actuations_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_number_of_actuations_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_number_of_actuations_lift(
@@ -18481,6 +21980,31 @@ sl_status_t dotdot_window_covering_number_of_actuations_tilt_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_number_of_actuations_tilt_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_TILT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_number_of_actuations_tilt_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_TILT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_number_of_actuations_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -18565,6 +22089,31 @@ sl_status_t dotdot_window_covering_config_or_status_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CONFIG_OR_STATUS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_config_or_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CONFIG_OR_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_config_or_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CONFIG_OR_STATUS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_config_or_status(
@@ -18653,6 +22202,31 @@ sl_status_t dotdot_window_covering_current_position_lift_percentage_undefine_des
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_current_position_lift_percentage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_current_position_lift_percentage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_current_position_lift_percentage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -18737,6 +22311,31 @@ sl_status_t dotdot_window_covering_current_position_tilt_percentage_undefine_des
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_current_position_tilt_percentage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_current_position_tilt_percentage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_current_position_tilt_percentage(
@@ -18825,6 +22424,31 @@ sl_status_t dotdot_window_covering_installed_open_limit_lift_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_installed_open_limit_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_installed_open_limit_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_LIFT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_installed_open_limit_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -18909,6 +22533,31 @@ sl_status_t dotdot_window_covering_installed_closed_limit_lift_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_installed_closed_limit_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_installed_closed_limit_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_installed_closed_limit_lift(
@@ -18997,6 +22646,31 @@ sl_status_t dotdot_window_covering_installed_open_limit_tilt_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_installed_open_limit_tilt_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_TILT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_installed_open_limit_tilt_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_TILT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_installed_open_limit_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -19081,6 +22755,31 @@ sl_status_t dotdot_window_covering_installed_closed_limit_tilt_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_installed_closed_limit_tilt_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_installed_closed_limit_tilt_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_installed_closed_limit_tilt(
@@ -19169,6 +22868,31 @@ sl_status_t dotdot_window_covering_velocity_lift_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_velocity_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_VELOCITY_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_velocity_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_VELOCITY_LIFT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_velocity_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -19253,6 +22977,31 @@ sl_status_t dotdot_window_covering_acceleration_time_lift_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_ACCELERATION_TIME_LIFT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_acceleration_time_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_ACCELERATION_TIME_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_acceleration_time_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_ACCELERATION_TIME_LIFT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_acceleration_time_lift(
@@ -19341,6 +23090,31 @@ sl_status_t dotdot_window_covering_deceleration_time_lift_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_deceleration_time_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_DECELERATION_TIME_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_deceleration_time_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_DECELERATION_TIME_LIFT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_deceleration_time_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -19425,6 +23199,31 @@ sl_status_t dotdot_window_covering_mode_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_MODE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_MODE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_mode(
@@ -19514,6 +23313,31 @@ sl_status_t dotdot_window_covering_intermediate_setpoints_lift_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_window_covering_intermediate_setpoints_lift_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INTERMEDIATE_SETPOINTS_LIFT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_intermediate_setpoints_lift_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INTERMEDIATE_SETPOINTS_LIFT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_window_covering_intermediate_setpoints_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -19599,6 +23423,31 @@ sl_status_t dotdot_window_covering_intermediate_setpoints_tilt_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INTERMEDIATE_SETPOINTS_TILT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_window_covering_intermediate_setpoints_tilt_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INTERMEDIATE_SETPOINTS_TILT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_window_covering_intermediate_setpoints_tilt_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INTERMEDIATE_SETPOINTS_TILT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_window_covering_intermediate_setpoints_tilt(
@@ -19775,6 +23624,31 @@ sl_status_t dotdot_barrier_control_moving_state_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_barrier_control_moving_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_MOVING_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_moving_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_MOVING_STATE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_barrier_control_moving_state(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -19859,6 +23733,31 @@ sl_status_t dotdot_barrier_control_safety_status_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_SAFETY_STATUS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_barrier_control_safety_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_SAFETY_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_safety_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_SAFETY_STATUS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_barrier_control_safety_status(
@@ -19947,6 +23846,31 @@ sl_status_t dotdot_barrier_control_capabilities_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_barrier_control_capabilities_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CAPABILITIES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_capabilities_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CAPABILITIES);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_barrier_control_capabilities(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -20031,6 +23955,31 @@ sl_status_t dotdot_barrier_control_open_events_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_EVENTS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_barrier_control_open_events_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_EVENTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_open_events_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_EVENTS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_barrier_control_open_events(
@@ -20119,6 +24068,31 @@ sl_status_t dotdot_barrier_control_close_events_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_barrier_control_close_events_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_EVENTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_close_events_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_EVENTS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_barrier_control_close_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -20203,6 +24177,31 @@ sl_status_t dotdot_barrier_control_command_open_events_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_OPEN_EVENTS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_barrier_control_command_open_events_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_OPEN_EVENTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_command_open_events_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_OPEN_EVENTS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_barrier_control_command_open_events(
@@ -20291,6 +24290,31 @@ sl_status_t dotdot_barrier_control_command_close_events_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_barrier_control_command_close_events_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_CLOSE_EVENTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_command_close_events_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_CLOSE_EVENTS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_barrier_control_command_close_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -20375,6 +24399,31 @@ sl_status_t dotdot_barrier_control_open_period_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_PERIOD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_barrier_control_open_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_open_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_PERIOD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_barrier_control_open_period(
@@ -20463,6 +24512,31 @@ sl_status_t dotdot_barrier_control_close_period_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_barrier_control_close_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_close_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_PERIOD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_barrier_control_close_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -20547,6 +24621,31 @@ sl_status_t dotdot_barrier_control_barrier_position_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_BARRIER_POSITION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_barrier_control_barrier_position_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_BARRIER_POSITION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_barrier_control_barrier_position_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_BARRIER_POSITION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_barrier_control_barrier_position(
@@ -20702,6 +24801,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_pressure_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_max_pressure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_PRESSURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_pressure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_PRESSURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_max_pressure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -20786,6 +24910,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_speed_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_max_speed_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_speed_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_max_speed(
@@ -20874,6 +25023,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_flow_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_max_flow_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_FLOW);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_flow_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_FLOW);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_max_flow(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -20958,6 +25132,31 @@ sl_status_t dotdot_pump_configuration_and_control_min_const_pressure_undefine_de
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_PRESSURE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_min_const_pressure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_PRESSURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_min_const_pressure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_PRESSURE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_min_const_pressure(
@@ -21046,6 +25245,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_const_pressure_undefine_de
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_max_const_pressure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_PRESSURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_const_pressure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_PRESSURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_max_const_pressure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -21130,6 +25354,31 @@ sl_status_t dotdot_pump_configuration_and_control_min_comp_pressure_undefine_des
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_COMP_PRESSURE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_min_comp_pressure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_COMP_PRESSURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_min_comp_pressure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_COMP_PRESSURE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_min_comp_pressure(
@@ -21218,6 +25467,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_comp_pressure_undefine_des
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_max_comp_pressure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_COMP_PRESSURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_comp_pressure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_COMP_PRESSURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_max_comp_pressure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -21302,6 +25576,31 @@ sl_status_t dotdot_pump_configuration_and_control_min_const_speed_undefine_desir
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_min_const_speed_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_min_const_speed_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_min_const_speed(
@@ -21390,6 +25689,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_const_speed_undefine_desir
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_max_const_speed_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_SPEED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_const_speed_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_SPEED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_max_const_speed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -21474,6 +25798,31 @@ sl_status_t dotdot_pump_configuration_and_control_min_const_flow_undefine_desire
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_min_const_flow_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_min_const_flow_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_min_const_flow(
@@ -21562,6 +25911,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_const_flow_undefine_desire
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_max_const_flow_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_FLOW);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_const_flow_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_FLOW);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_max_const_flow(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -21646,6 +26020,31 @@ sl_status_t dotdot_pump_configuration_and_control_min_const_temp_undefine_desire
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_TEMP);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_min_const_temp_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_TEMP);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_min_const_temp_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_TEMP);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_min_const_temp(
@@ -21734,6 +26133,31 @@ sl_status_t dotdot_pump_configuration_and_control_max_const_temp_undefine_desire
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_max_const_temp_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_TEMP);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_max_const_temp_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_TEMP);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_max_const_temp(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -21818,6 +26242,31 @@ sl_status_t dotdot_pump_configuration_and_control_pump_status_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_PUMP_STATUS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_pump_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_PUMP_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_pump_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_PUMP_STATUS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_pump_status(
@@ -21906,6 +26355,31 @@ sl_status_t dotdot_pump_configuration_and_control_effective_operation_mode_undef
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_effective_operation_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_OPERATION_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_effective_operation_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_OPERATION_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_effective_operation_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -21990,6 +26464,31 @@ sl_status_t dotdot_pump_configuration_and_control_effective_control_mode_undefin
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_CONTROL_MODE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_effective_control_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_CONTROL_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_effective_control_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_EFFECTIVE_CONTROL_MODE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_effective_control_mode(
@@ -22078,6 +26577,31 @@ sl_status_t dotdot_pump_configuration_and_control_capacity_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_capacity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_CAPACITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_capacity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_CAPACITY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_capacity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -22162,6 +26686,31 @@ sl_status_t dotdot_pump_configuration_and_control_speed_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_SPEED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_speed_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_SPEED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_speed_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_SPEED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_speed(
@@ -22250,6 +26799,31 @@ sl_status_t dotdot_pump_configuration_and_control_lifetime_running_hours_undefin
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_lifetime_running_hours_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_RUNNING_HOURS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_lifetime_running_hours_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_RUNNING_HOURS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_lifetime_running_hours(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -22334,6 +26908,31 @@ sl_status_t dotdot_pump_configuration_and_control_power_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_POWER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_POWER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_power(
@@ -22422,6 +27021,31 @@ sl_status_t dotdot_pump_configuration_and_control_lifetime_energy_consumed_undef
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_lifetime_energy_consumed_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_ENERGY_CONSUMED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_lifetime_energy_consumed_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_ENERGY_CONSUMED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_lifetime_energy_consumed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -22506,6 +27130,31 @@ sl_status_t dotdot_pump_configuration_and_control_operation_mode_undefine_desire
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_OPERATION_MODE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_operation_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_OPERATION_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_operation_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_OPERATION_MODE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_operation_mode(
@@ -22594,6 +27243,31 @@ sl_status_t dotdot_pump_configuration_and_control_control_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pump_configuration_and_control_control_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_CONTROL_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_control_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_CONTROL_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pump_configuration_and_control_control_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -22678,6 +27352,31 @@ sl_status_t dotdot_pump_configuration_and_control_alarm_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_ALARM_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pump_configuration_and_control_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pump_configuration_and_control_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pump_configuration_and_control_alarm_mask(
@@ -22869,6 +27568,31 @@ sl_status_t dotdot_thermostat_local_temperature_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_local_temperature_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_LOCAL_TEMPERATURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_local_temperature_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_LOCAL_TEMPERATURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_local_temperature(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -22953,6 +27677,31 @@ sl_status_t dotdot_thermostat_outdoor_temperature_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OUTDOOR_TEMPERATURE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_outdoor_temperature_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OUTDOOR_TEMPERATURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_outdoor_temperature_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OUTDOOR_TEMPERATURE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_outdoor_temperature(
@@ -23041,6 +27790,31 @@ sl_status_t dotdot_thermostat_occupancy_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_occupancy_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPANCY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_occupancy_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPANCY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_occupancy(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -23125,6 +27899,31 @@ sl_status_t dotdot_thermostat_abs_min_heat_setpoint_limit_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MIN_HEAT_SETPOINT_LIMIT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_abs_min_heat_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MIN_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_abs_min_heat_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MIN_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_abs_min_heat_setpoint_limit(
@@ -23213,6 +28012,31 @@ sl_status_t dotdot_thermostat_abs_max_heat_setpoint_limit_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_abs_max_heat_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MAX_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_abs_max_heat_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MAX_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_abs_max_heat_setpoint_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -23297,6 +28121,31 @@ sl_status_t dotdot_thermostat_abs_min_cool_setpoint_limit_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MIN_COOL_SETPOINT_LIMIT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_abs_min_cool_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MIN_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_abs_min_cool_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MIN_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_abs_min_cool_setpoint_limit(
@@ -23385,6 +28234,31 @@ sl_status_t dotdot_thermostat_abs_max_cool_setpoint_limit_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_abs_max_cool_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MAX_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_abs_max_cool_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ABS_MAX_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_abs_max_cool_setpoint_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -23469,6 +28343,31 @@ sl_status_t dotdot_thermostat_pi_cooling_demand_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_COOLING_DEMAND);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_pi_cooling_demand_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_COOLING_DEMAND);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_pi_cooling_demand_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_COOLING_DEMAND);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_pi_cooling_demand(
@@ -23557,6 +28456,31 @@ sl_status_t dotdot_thermostat_pi_heating_demand_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_pi_heating_demand_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_HEATING_DEMAND);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_pi_heating_demand_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_HEATING_DEMAND);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_pi_heating_demand(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -23641,6 +28565,31 @@ sl_status_t dotdot_thermostat_hvac_system_type_configuration_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_HVAC_SYSTEM_TYPE_CONFIGURATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_hvac_system_type_configuration_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_HVAC_SYSTEM_TYPE_CONFIGURATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_hvac_system_type_configuration_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_HVAC_SYSTEM_TYPE_CONFIGURATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_hvac_system_type_configuration(
@@ -23729,6 +28678,31 @@ sl_status_t dotdot_thermostat_local_temperature_calibration_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_local_temperature_calibration_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_LOCAL_TEMPERATURE_CALIBRATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_local_temperature_calibration_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_LOCAL_TEMPERATURE_CALIBRATION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_local_temperature_calibration(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -23813,6 +28787,31 @@ sl_status_t dotdot_thermostat_occupied_cooling_setpoint_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_COOLING_SETPOINT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_occupied_cooling_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_COOLING_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_occupied_cooling_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_COOLING_SETPOINT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_occupied_cooling_setpoint(
@@ -23901,6 +28900,31 @@ sl_status_t dotdot_thermostat_occupied_heating_setpoint_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_occupied_heating_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_HEATING_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_occupied_heating_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_HEATING_SETPOINT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_occupied_heating_setpoint(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -23985,6 +29009,31 @@ sl_status_t dotdot_thermostat_unoccupied_cooling_setpoint_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_COOLING_SETPOINT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_unoccupied_cooling_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_COOLING_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_unoccupied_cooling_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_COOLING_SETPOINT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_unoccupied_cooling_setpoint(
@@ -24073,6 +29122,31 @@ sl_status_t dotdot_thermostat_unoccupied_heating_setpoint_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_unoccupied_heating_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_HEATING_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_unoccupied_heating_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_HEATING_SETPOINT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_unoccupied_heating_setpoint(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -24157,6 +29231,31 @@ sl_status_t dotdot_thermostat_min_heat_setpoint_limit_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_HEAT_SETPOINT_LIMIT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_min_heat_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_min_heat_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_min_heat_setpoint_limit(
@@ -24245,6 +29344,31 @@ sl_status_t dotdot_thermostat_max_heat_setpoint_limit_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_max_heat_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MAX_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_max_heat_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MAX_HEAT_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_max_heat_setpoint_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -24329,6 +29453,31 @@ sl_status_t dotdot_thermostat_min_cool_setpoint_limit_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_COOL_SETPOINT_LIMIT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_min_cool_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_min_cool_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_min_cool_setpoint_limit(
@@ -24417,6 +29566,31 @@ sl_status_t dotdot_thermostat_max_cool_setpoint_limit_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_max_cool_setpoint_limit_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MAX_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_max_cool_setpoint_limit_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MAX_COOL_SETPOINT_LIMIT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_max_cool_setpoint_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -24501,6 +29675,31 @@ sl_status_t dotdot_thermostat_min_setpoint_dead_band_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_SETPOINT_DEAD_BAND);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_min_setpoint_dead_band_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_SETPOINT_DEAD_BAND);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_min_setpoint_dead_band_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_MIN_SETPOINT_DEAD_BAND);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_min_setpoint_dead_band(
@@ -24589,6 +29788,31 @@ sl_status_t dotdot_thermostat_remote_sensing_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_remote_sensing_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_REMOTE_SENSING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_remote_sensing_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_REMOTE_SENSING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_remote_sensing(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -24673,6 +29897,31 @@ sl_status_t dotdot_thermostat_control_sequence_of_operation_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_CONTROL_SEQUENCE_OF_OPERATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_control_sequence_of_operation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_CONTROL_SEQUENCE_OF_OPERATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_control_sequence_of_operation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_CONTROL_SEQUENCE_OF_OPERATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_control_sequence_of_operation(
@@ -24761,6 +30010,31 @@ sl_status_t dotdot_thermostat_system_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_system_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SYSTEM_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_system_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SYSTEM_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_system_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -24845,6 +30119,31 @@ sl_status_t dotdot_thermostat_alarm_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ALARM_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_alarm_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ALARM_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_alarm_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_ALARM_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_alarm_mask(
@@ -24933,6 +30232,31 @@ sl_status_t dotdot_thermostat_thermostat_running_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_thermostat_running_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_THERMOSTAT_RUNNING_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_thermostat_running_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_THERMOSTAT_RUNNING_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_thermostat_running_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -25017,6 +30341,31 @@ sl_status_t dotdot_thermostat_start_of_week_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_START_OF_WEEK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_start_of_week_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_START_OF_WEEK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_start_of_week_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_START_OF_WEEK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_start_of_week(
@@ -25105,6 +30454,31 @@ sl_status_t dotdot_thermostat_number_of_weekly_transitions_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_number_of_weekly_transitions_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_WEEKLY_TRANSITIONS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_number_of_weekly_transitions_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_WEEKLY_TRANSITIONS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_number_of_weekly_transitions(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -25189,6 +30563,31 @@ sl_status_t dotdot_thermostat_number_of_daily_transitions_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_number_of_daily_transitions_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_number_of_daily_transitions_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_number_of_daily_transitions(
@@ -25277,6 +30676,31 @@ sl_status_t dotdot_thermostat_temperature_setpoint_hold_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_temperature_setpoint_hold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_temperature_setpoint_hold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_temperature_setpoint_hold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -25361,6 +30785,31 @@ sl_status_t dotdot_thermostat_temperature_setpoint_hold_duration_undefine_desire
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_temperature_setpoint_hold_duration_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_temperature_setpoint_hold_duration_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_temperature_setpoint_hold_duration(
@@ -25449,6 +30898,31 @@ sl_status_t dotdot_thermostat_thermostat_programming_operation_mode_undefine_des
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_thermostat_programming_operation_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_thermostat_programming_operation_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_thermostat_programming_operation_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -25533,6 +31007,31 @@ sl_status_t dotdot_thermostat_thermostat_running_state_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_THERMOSTAT_RUNNING_STATE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_thermostat_running_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_THERMOSTAT_RUNNING_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_thermostat_running_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_THERMOSTAT_RUNNING_STATE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_thermostat_running_state(
@@ -25621,6 +31120,31 @@ sl_status_t dotdot_thermostat_setpoint_change_source_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_setpoint_change_source_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_setpoint_change_source_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_setpoint_change_source(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -25705,6 +31229,31 @@ sl_status_t dotdot_thermostat_setpoint_change_amount_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_AMOUNT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_setpoint_change_amount_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_AMOUNT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_setpoint_change_amount_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_AMOUNT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_setpoint_change_amount(
@@ -25793,6 +31342,31 @@ sl_status_t dotdot_thermostat_setpoint_change_source_timestamp_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_setpoint_change_source_timestamp_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_setpoint_change_source_timestamp_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_setpoint_change_source_timestamp(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -25877,6 +31451,31 @@ sl_status_t dotdot_thermostat_occupied_setback_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_occupied_setback_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_occupied_setback_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_occupied_setback(
@@ -25965,6 +31564,31 @@ sl_status_t dotdot_thermostat_occupied_setback_min_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_occupied_setback_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_occupied_setback_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_occupied_setback_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -26049,6 +31673,31 @@ sl_status_t dotdot_thermostat_occupied_setback_max_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MAX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_occupied_setback_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_occupied_setback_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MAX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_occupied_setback_max(
@@ -26137,6 +31786,31 @@ sl_status_t dotdot_thermostat_unoccupied_setback_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_unoccupied_setback_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_unoccupied_setback_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_unoccupied_setback(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -26221,6 +31895,31 @@ sl_status_t dotdot_thermostat_unoccupied_setback_min_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MIN);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_unoccupied_setback_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_unoccupied_setback_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MIN);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_unoccupied_setback_min(
@@ -26309,6 +32008,31 @@ sl_status_t dotdot_thermostat_unoccupied_setback_max_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_unoccupied_setback_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_unoccupied_setback_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_unoccupied_setback_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -26393,6 +32117,31 @@ sl_status_t dotdot_thermostat_emergency_heat_delta_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_EMERGENCY_HEAT_DELTA);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_emergency_heat_delta_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_EMERGENCY_HEAT_DELTA);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_emergency_heat_delta_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_EMERGENCY_HEAT_DELTA);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_emergency_heat_delta(
@@ -26481,6 +32230,31 @@ sl_status_t dotdot_thermostat_ac_type_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_ac_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_TYPE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_ac_type(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -26565,6 +32339,31 @@ sl_status_t dotdot_thermostat_ac_capacity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_ac_capacity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_capacity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_ac_capacity(
@@ -26653,6 +32452,31 @@ sl_status_t dotdot_thermostat_ac_refrigerant_type_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_ac_refrigerant_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_REFRIGERANT_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_refrigerant_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_REFRIGERANT_TYPE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_ac_refrigerant_type(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -26737,6 +32561,31 @@ sl_status_t dotdot_thermostat_ac_compressor_type_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_COMPRESSOR_TYPE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_ac_compressor_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_COMPRESSOR_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_compressor_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_COMPRESSOR_TYPE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_ac_compressor_type(
@@ -26825,6 +32674,31 @@ sl_status_t dotdot_thermostat_ac_error_code_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_ac_error_code_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_ERROR_CODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_error_code_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_ERROR_CODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_ac_error_code(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -26909,6 +32783,31 @@ sl_status_t dotdot_thermostat_ac_louver_position_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_LOUVER_POSITION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_ac_louver_position_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_LOUVER_POSITION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_louver_position_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_LOUVER_POSITION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_ac_louver_position(
@@ -26997,6 +32896,31 @@ sl_status_t dotdot_thermostat_ac_coil_temperature_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_ac_coil_temperature_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_COIL_TEMPERATURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_coil_temperature_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_COIL_TEMPERATURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_ac_coil_temperature(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -27081,6 +33005,31 @@ sl_status_t dotdot_thermostat_ac_capacity_format_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY_FORMAT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_ac_capacity_format_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY_FORMAT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_ac_capacity_format_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY_FORMAT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_ac_capacity_format(
@@ -27419,6 +33368,31 @@ sl_status_t dotdot_fan_control_fan_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_fan_control_fan_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_FAN_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_fan_control_fan_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_FAN_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_fan_control_fan_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -27503,6 +33477,31 @@ sl_status_t dotdot_fan_control_fan_mode_sequence_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_FAN_MODE_SEQUENCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_fan_control_fan_mode_sequence_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_FAN_MODE_SEQUENCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_fan_control_fan_mode_sequence_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_FAN_MODE_SEQUENCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_fan_control_fan_mode_sequence(
@@ -27622,6 +33621,31 @@ sl_status_t dotdot_dehumidification_control_relative_humidity_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_dehumidification_control_relative_humidity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_relative_humidity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_dehumidification_control_relative_humidity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -27706,6 +33730,31 @@ sl_status_t dotdot_dehumidification_control_dehumidification_cooling_undefine_de
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_dehumidification_control_dehumidification_cooling_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_dehumidification_cooling_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_dehumidification_control_dehumidification_cooling(
@@ -27794,6 +33843,31 @@ sl_status_t dotdot_dehumidification_control_rh_dehumidification_setpoint_undefin
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_dehumidification_control_rh_dehumidification_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RH_DEHUMIDIFICATION_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_rh_dehumidification_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RH_DEHUMIDIFICATION_SETPOINT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_dehumidification_control_rh_dehumidification_setpoint(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -27878,6 +33952,31 @@ sl_status_t dotdot_dehumidification_control_relative_humidity_mode_undefine_desi
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_MODE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_dehumidification_control_relative_humidity_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_relative_humidity_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_MODE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_dehumidification_control_relative_humidity_mode(
@@ -27966,6 +34065,31 @@ sl_status_t dotdot_dehumidification_control_dehumidification_lockout_undefine_de
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_dehumidification_control_dehumidification_lockout_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_LOCKOUT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_dehumidification_lockout_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_LOCKOUT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_dehumidification_control_dehumidification_lockout(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -28050,6 +34174,31 @@ sl_status_t dotdot_dehumidification_control_dehumidification_hysteresis_undefine
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_dehumidification_control_dehumidification_hysteresis_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_dehumidification_hysteresis_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_dehumidification_control_dehumidification_hysteresis(
@@ -28138,6 +34287,31 @@ sl_status_t dotdot_dehumidification_control_dehumidification_max_cool_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_dehumidification_control_dehumidification_max_cool_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_MAX_COOL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_dehumidification_max_cool_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_MAX_COOL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_dehumidification_control_dehumidification_max_cool(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -28222,6 +34396,31 @@ sl_status_t dotdot_dehumidification_control_relative_humidity_display_undefine_d
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_DISPLAY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_dehumidification_control_relative_humidity_display_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_DISPLAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_dehumidification_control_relative_humidity_display_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_DISPLAY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_dehumidification_control_relative_humidity_display(
@@ -28371,6 +34570,31 @@ sl_status_t dotdot_thermostat_user_interface_configuration_temperature_display_m
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_user_interface_configuration_temperature_display_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_USER_INTERFACE_CONFIGURATION_TEMPERATURE_DISPLAY_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_user_interface_configuration_temperature_display_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_USER_INTERFACE_CONFIGURATION_TEMPERATURE_DISPLAY_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_user_interface_configuration_temperature_display_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -28457,6 +34681,31 @@ sl_status_t dotdot_thermostat_user_interface_configuration_keypad_lockout_undefi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_thermostat_user_interface_configuration_keypad_lockout_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_USER_INTERFACE_CONFIGURATION_KEYPAD_LOCKOUT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_user_interface_configuration_keypad_lockout_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_USER_INTERFACE_CONFIGURATION_KEYPAD_LOCKOUT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_thermostat_user_interface_configuration_keypad_lockout(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -28541,6 +34790,31 @@ sl_status_t dotdot_thermostat_user_interface_configuration_schedule_programming_
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_USER_INTERFACE_CONFIGURATION_SCHEDULE_PROGRAMMING_VISIBILITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_thermostat_user_interface_configuration_schedule_programming_visibility_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_USER_INTERFACE_CONFIGURATION_SCHEDULE_PROGRAMMING_VISIBILITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_thermostat_user_interface_configuration_schedule_programming_visibility_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_USER_INTERFACE_CONFIGURATION_SCHEDULE_PROGRAMMING_VISIBILITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_thermostat_user_interface_configuration_schedule_programming_visibility(
@@ -28666,6 +34940,31 @@ sl_status_t dotdot_color_control_current_hue_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_current_hue_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_HUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_current_hue_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_HUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_current_hue(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -28750,6 +35049,31 @@ sl_status_t dotdot_color_control_current_saturation_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_SATURATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_current_saturation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_SATURATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_current_saturation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_SATURATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_current_saturation(
@@ -28838,6 +35162,31 @@ sl_status_t dotdot_color_control_remaining_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_remaining_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_REMAINING_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_remaining_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_REMAINING_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_remaining_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -28922,6 +35271,31 @@ sl_status_t dotdot_color_control_currentx_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_currentx_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_currentx_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_currentx(
@@ -29010,6 +35384,31 @@ sl_status_t dotdot_color_control_currenty_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_currenty_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_currenty_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_currenty(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -29094,6 +35493,31 @@ sl_status_t dotdot_color_control_drift_compensation_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_DRIFT_COMPENSATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_drift_compensation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_DRIFT_COMPENSATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_drift_compensation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_DRIFT_COMPENSATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_drift_compensation(
@@ -29183,6 +35607,31 @@ sl_status_t dotdot_color_control_compensation_text_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_compensation_text_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COMPENSATION_TEXT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_compensation_text_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COMPENSATION_TEXT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_compensation_text(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -29267,6 +35716,31 @@ sl_status_t dotdot_color_control_color_temperature_mireds_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_temperature_mireds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_temperature_mireds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_temperature_mireds(
@@ -29355,6 +35829,31 @@ sl_status_t dotdot_color_control_color_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -29439,6 +35938,31 @@ sl_status_t dotdot_color_control_options_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_OPTIONS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_options_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_OPTIONS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_options_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_OPTIONS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_options(
@@ -29527,6 +36051,31 @@ sl_status_t dotdot_color_control_number_of_primaries_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_number_of_primaries_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_NUMBER_OF_PRIMARIES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_number_of_primaries_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_NUMBER_OF_PRIMARIES);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_number_of_primaries(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -29611,6 +36160,31 @@ sl_status_t dotdot_color_control_primary1x_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1X);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary1x_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1X);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary1x_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1X);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary1x(
@@ -29699,6 +36273,31 @@ sl_status_t dotdot_color_control_primary1y_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary1y_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1Y);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary1y_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1Y);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary1y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -29783,6 +36382,31 @@ sl_status_t dotdot_color_control_primary1_intensity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1_INTENSITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary1_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary1_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1_INTENSITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary1_intensity(
@@ -29871,6 +36495,31 @@ sl_status_t dotdot_color_control_primary2x_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary2x_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2X);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary2x_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2X);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary2x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -29955,6 +36604,31 @@ sl_status_t dotdot_color_control_primary2y_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2Y);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary2y_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2Y);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary2y_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2Y);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary2y(
@@ -30043,6 +36717,31 @@ sl_status_t dotdot_color_control_primary2_intensity_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary2_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary2_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2_INTENSITY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary2_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -30127,6 +36826,31 @@ sl_status_t dotdot_color_control_primary3x_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3X);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary3x_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3X);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary3x_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3X);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary3x(
@@ -30215,6 +36939,31 @@ sl_status_t dotdot_color_control_primary3y_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary3y_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3Y);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary3y_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3Y);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary3y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -30299,6 +37048,31 @@ sl_status_t dotdot_color_control_primary3_intensity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3_INTENSITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary3_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary3_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3_INTENSITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary3_intensity(
@@ -30387,6 +37161,31 @@ sl_status_t dotdot_color_control_primary4x_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary4x_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4X);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary4x_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4X);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary4x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -30471,6 +37270,31 @@ sl_status_t dotdot_color_control_primary4y_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4Y);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary4y_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4Y);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary4y_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4Y);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary4y(
@@ -30559,6 +37383,31 @@ sl_status_t dotdot_color_control_primary4_intensity_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary4_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary4_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4_INTENSITY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary4_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -30643,6 +37492,31 @@ sl_status_t dotdot_color_control_primary5x_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5X);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary5x_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5X);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary5x_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5X);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary5x(
@@ -30731,6 +37605,31 @@ sl_status_t dotdot_color_control_primary5y_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary5y_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5Y);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary5y_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5Y);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary5y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -30815,6 +37714,31 @@ sl_status_t dotdot_color_control_primary5_intensity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5_INTENSITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary5_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary5_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5_INTENSITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary5_intensity(
@@ -30903,6 +37827,31 @@ sl_status_t dotdot_color_control_primary6x_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary6x_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6X);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary6x_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6X);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary6x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -30987,6 +37936,31 @@ sl_status_t dotdot_color_control_primary6y_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6Y);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_primary6y_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6Y);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary6y_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6Y);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_primary6y(
@@ -31075,6 +38049,31 @@ sl_status_t dotdot_color_control_primary6_intensity_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_primary6_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_primary6_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6_INTENSITY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_primary6_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -31159,6 +38158,31 @@ sl_status_t dotdot_color_control_white_pointx_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_white_pointx_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_white_pointx_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_white_pointx(
@@ -31247,6 +38271,31 @@ sl_status_t dotdot_color_control_white_pointy_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_white_pointy_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_white_pointy_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_white_pointy(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -31331,6 +38380,31 @@ sl_status_t dotdot_color_control_color_pointrx_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_pointrx_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointrx_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_pointrx(
@@ -31419,6 +38493,31 @@ sl_status_t dotdot_color_control_color_pointry_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_pointry_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointry_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_pointry(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -31503,6 +38602,31 @@ sl_status_t dotdot_color_control_color_pointr_intensity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTR_INTENSITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_pointr_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTR_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointr_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTR_INTENSITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_pointr_intensity(
@@ -31591,6 +38715,31 @@ sl_status_t dotdot_color_control_color_pointgx_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_pointgx_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointgx_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGX);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_pointgx(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -31675,6 +38824,31 @@ sl_status_t dotdot_color_control_color_pointgy_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_pointgy_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointgy_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_pointgy(
@@ -31763,6 +38937,31 @@ sl_status_t dotdot_color_control_color_pointg_intensity_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_pointg_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTG_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointg_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTG_INTENSITY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_pointg_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -31847,6 +39046,31 @@ sl_status_t dotdot_color_control_color_pointbx_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_pointbx_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointbx_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_pointbx(
@@ -31935,6 +39159,31 @@ sl_status_t dotdot_color_control_color_pointby_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_pointby_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointby_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_pointby(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -32019,6 +39268,31 @@ sl_status_t dotdot_color_control_color_pointb_intensity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTB_INTENSITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_pointb_intensity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTB_INTENSITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_pointb_intensity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTB_INTENSITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_pointb_intensity(
@@ -32107,6 +39381,31 @@ sl_status_t dotdot_color_control_enhanced_current_hue_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_enhanced_current_hue_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_CURRENT_HUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_enhanced_current_hue_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_CURRENT_HUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_enhanced_current_hue(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -32191,6 +39490,31 @@ sl_status_t dotdot_color_control_enhanced_color_mode_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_COLOR_MODE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_enhanced_color_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_COLOR_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_enhanced_color_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_COLOR_MODE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_enhanced_color_mode(
@@ -32279,6 +39603,31 @@ sl_status_t dotdot_color_control_color_loop_active_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_loop_active_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_ACTIVE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_loop_active_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_ACTIVE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_loop_active(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -32363,6 +39712,31 @@ sl_status_t dotdot_color_control_color_loop_direction_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_loop_direction_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_loop_direction_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_loop_direction(
@@ -32451,6 +39825,31 @@ sl_status_t dotdot_color_control_color_loop_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_loop_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_loop_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_loop_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -32535,6 +39934,31 @@ sl_status_t dotdot_color_control_color_loop_start_enhanced_hue_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_loop_start_enhanced_hue_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_loop_start_enhanced_hue_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_loop_start_enhanced_hue(
@@ -32623,6 +40047,31 @@ sl_status_t dotdot_color_control_color_loop_stored_enhanced_hue_undefine_desired
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_loop_stored_enhanced_hue_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_STORED_ENHANCED_HUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_loop_stored_enhanced_hue_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_STORED_ENHANCED_HUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_loop_stored_enhanced_hue(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -32707,6 +40156,31 @@ sl_status_t dotdot_color_control_color_capabilities_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_CAPABILITIES);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_capabilities_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_CAPABILITIES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_capabilities_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_CAPABILITIES);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_capabilities(
@@ -32795,6 +40269,31 @@ sl_status_t dotdot_color_control_color_temp_physical_min_mireds_undefine_desired
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_color_temp_physical_min_mireds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MIN_MIREDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_temp_physical_min_mireds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MIN_MIREDS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_color_temp_physical_min_mireds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -32879,6 +40378,31 @@ sl_status_t dotdot_color_control_color_temp_physical_max_mireds_undefine_desired
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_color_temp_physical_max_mireds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_color_temp_physical_max_mireds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_color_temp_physical_max_mireds(
@@ -32967,6 +40491,31 @@ sl_status_t dotdot_color_control_couple_color_temp_to_level_min_mireds_undefine_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_color_control_couple_color_temp_to_level_min_mireds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_couple_color_temp_to_level_min_mireds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_color_control_couple_color_temp_to_level_min_mireds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -33051,6 +40600,31 @@ sl_status_t dotdot_color_control_start_up_color_temperature_mireds_undefine_desi
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_color_control_start_up_color_temperature_mireds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_color_control_start_up_color_temperature_mireds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_color_control_start_up_color_temperature_mireds(
@@ -33353,6 +40927,31 @@ sl_status_t dotdot_ballast_configuration_physical_min_level_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_physical_min_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MIN_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_physical_min_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MIN_LEVEL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_physical_min_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -33437,6 +41036,31 @@ sl_status_t dotdot_ballast_configuration_physical_max_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_physical_max_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_physical_max_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_physical_max_level(
@@ -33525,6 +41149,31 @@ sl_status_t dotdot_ballast_configuration_ballast_status_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_ballast_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_BALLAST_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_ballast_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_BALLAST_STATUS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_ballast_status(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -33609,6 +41258,31 @@ sl_status_t dotdot_ballast_configuration_min_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MIN_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_min_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MIN_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_min_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MIN_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_min_level(
@@ -33697,6 +41371,31 @@ sl_status_t dotdot_ballast_configuration_max_level_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_max_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MAX_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_max_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MAX_LEVEL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_max_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -33781,6 +41480,31 @@ sl_status_t dotdot_ballast_configuration_power_on_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_power_on_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_power_on_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_power_on_level(
@@ -33869,6 +41593,31 @@ sl_status_t dotdot_ballast_configuration_power_on_fade_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_power_on_fade_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_FADE_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_power_on_fade_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_FADE_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_power_on_fade_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -33953,6 +41702,31 @@ sl_status_t dotdot_ballast_configuration_intrinsic_ballast_factor_undefine_desir
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_intrinsic_ballast_factor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_intrinsic_ballast_factor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_intrinsic_ballast_factor(
@@ -34041,6 +41815,31 @@ sl_status_t dotdot_ballast_configuration_ballast_factor_adjustment_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_ballast_factor_adjustment_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_BALLAST_FACTOR_ADJUSTMENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_ballast_factor_adjustment_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_BALLAST_FACTOR_ADJUSTMENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_ballast_factor_adjustment(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -34125,6 +41924,31 @@ sl_status_t dotdot_ballast_configuration_lamp_quantity_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_QUANTITY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_lamp_quantity_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_QUANTITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_lamp_quantity_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_QUANTITY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_lamp_quantity(
@@ -34214,6 +42038,31 @@ sl_status_t dotdot_ballast_configuration_lamp_type_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_lamp_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_lamp_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_TYPE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_lamp_type(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -34299,6 +42148,31 @@ sl_status_t dotdot_ballast_configuration_lamp_manufacturer_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_MANUFACTURER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_lamp_manufacturer_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_MANUFACTURER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_lamp_manufacturer_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_MANUFACTURER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_lamp_manufacturer(
@@ -34387,6 +42261,31 @@ sl_status_t dotdot_ballast_configuration_lamp_rated_hours_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_lamp_rated_hours_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_RATED_HOURS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_lamp_rated_hours_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_RATED_HOURS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_lamp_rated_hours(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -34471,6 +42370,31 @@ sl_status_t dotdot_ballast_configuration_lamp_burn_hours_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_lamp_burn_hours_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_lamp_burn_hours_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_lamp_burn_hours(
@@ -34559,6 +42483,31 @@ sl_status_t dotdot_ballast_configuration_lamp_alarm_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ballast_configuration_lamp_alarm_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_ALARM_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_lamp_alarm_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_ALARM_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ballast_configuration_lamp_alarm_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -34643,6 +42592,31 @@ sl_status_t dotdot_ballast_configuration_lamp_burn_hours_trip_point_undefine_des
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ballast_configuration_lamp_burn_hours_trip_point_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ballast_configuration_lamp_burn_hours_trip_point_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ballast_configuration_lamp_burn_hours_trip_point(
@@ -34834,6 +42808,31 @@ sl_status_t dotdot_illuminance_measurement_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_illuminance_measurement_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_measurement_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_illuminance_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -34918,6 +42917,31 @@ sl_status_t dotdot_illuminance_measurement_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_illuminance_measurement_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_measurement_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_illuminance_measurement_min_measured_value(
@@ -35006,6 +43030,31 @@ sl_status_t dotdot_illuminance_measurement_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_illuminance_measurement_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_measurement_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_illuminance_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -35092,6 +43141,31 @@ sl_status_t dotdot_illuminance_measurement_tolerance_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_illuminance_measurement_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_measurement_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_illuminance_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -35176,6 +43250,31 @@ sl_status_t dotdot_illuminance_measurement_light_sensor_type_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_LIGHT_SENSOR_TYPE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_illuminance_measurement_light_sensor_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_LIGHT_SENSOR_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_measurement_light_sensor_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_LIGHT_SENSOR_TYPE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_illuminance_measurement_light_sensor_type(
@@ -35298,6 +43397,31 @@ sl_status_t dotdot_illuminance_level_sensing_level_status_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_illuminance_level_sensing_level_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_LEVEL_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_level_sensing_level_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_LEVEL_STATUS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_illuminance_level_sensing_level_status(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -35384,6 +43508,31 @@ sl_status_t dotdot_illuminance_level_sensing_light_sensor_type_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_illuminance_level_sensing_light_sensor_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_LIGHT_SENSOR_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_level_sensing_light_sensor_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_LIGHT_SENSOR_TYPE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_illuminance_level_sensing_light_sensor_type(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -35468,6 +43617,31 @@ sl_status_t dotdot_illuminance_level_sensing_illuminance_target_level_undefine_d
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_illuminance_level_sensing_illuminance_target_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_illuminance_level_sensing_illuminance_target_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_illuminance_level_sensing_illuminance_target_level(
@@ -35587,6 +43761,31 @@ sl_status_t dotdot_temperature_measurement_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_temperature_measurement_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_temperature_measurement_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_temperature_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -35671,6 +43870,31 @@ sl_status_t dotdot_temperature_measurement_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_temperature_measurement_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_temperature_measurement_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_temperature_measurement_min_measured_value(
@@ -35759,6 +43983,31 @@ sl_status_t dotdot_temperature_measurement_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_temperature_measurement_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_temperature_measurement_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_temperature_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -35843,6 +44092,31 @@ sl_status_t dotdot_temperature_measurement_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_temperature_measurement_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_temperature_measurement_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_temperature_measurement_tolerance(
@@ -35962,6 +44236,31 @@ sl_status_t dotdot_pressure_measurement_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pressure_measurement_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pressure_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -36046,6 +44345,31 @@ sl_status_t dotdot_pressure_measurement_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pressure_measurement_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pressure_measurement_min_measured_value(
@@ -36134,6 +44458,31 @@ sl_status_t dotdot_pressure_measurement_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pressure_measurement_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pressure_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -36218,6 +44567,31 @@ sl_status_t dotdot_pressure_measurement_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pressure_measurement_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pressure_measurement_tolerance(
@@ -36306,6 +44680,31 @@ sl_status_t dotdot_pressure_measurement_scaled_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pressure_measurement_scaled_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_scaled_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pressure_measurement_scaled_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -36390,6 +44789,31 @@ sl_status_t dotdot_pressure_measurement_min_scaled_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MIN_SCALED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pressure_measurement_min_scaled_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MIN_SCALED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_min_scaled_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MIN_SCALED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pressure_measurement_min_scaled_value(
@@ -36478,6 +44902,31 @@ sl_status_t dotdot_pressure_measurement_max_scaled_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pressure_measurement_max_scaled_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MAX_SCALED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_max_scaled_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_MAX_SCALED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pressure_measurement_max_scaled_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -36564,6 +45013,31 @@ sl_status_t dotdot_pressure_measurement_scaled_tolerance_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pressure_measurement_scaled_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALED_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_scaled_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALED_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pressure_measurement_scaled_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -36648,6 +45122,31 @@ sl_status_t dotdot_pressure_measurement_scale_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pressure_measurement_scale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pressure_measurement_scale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pressure_measurement_scale(
@@ -36782,6 +45281,31 @@ sl_status_t dotdot_flow_measurement_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_flow_measurement_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_flow_measurement_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_flow_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -36866,6 +45390,31 @@ sl_status_t dotdot_flow_measurement_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_flow_measurement_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_flow_measurement_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_flow_measurement_min_measured_value(
@@ -36954,6 +45503,31 @@ sl_status_t dotdot_flow_measurement_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_flow_measurement_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_flow_measurement_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_flow_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -37038,6 +45612,31 @@ sl_status_t dotdot_flow_measurement_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_flow_measurement_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_flow_measurement_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_flow_measurement_tolerance(
@@ -37157,6 +45756,31 @@ sl_status_t dotdot_relativity_humidity_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_relativity_humidity_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_relativity_humidity_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_relativity_humidity_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -37241,6 +45865,31 @@ sl_status_t dotdot_relativity_humidity_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_relativity_humidity_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_relativity_humidity_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_relativity_humidity_min_measured_value(
@@ -37329,6 +45978,31 @@ sl_status_t dotdot_relativity_humidity_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_relativity_humidity_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_relativity_humidity_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_relativity_humidity_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -37413,6 +46087,31 @@ sl_status_t dotdot_relativity_humidity_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_relativity_humidity_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_relativity_humidity_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_relativity_humidity_tolerance(
@@ -37532,6 +46231,31 @@ sl_status_t dotdot_occupancy_sensing_occupancy_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_occupancy_sensing_occupancy_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_OCCUPANCY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_occupancy_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_OCCUPANCY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_occupancy_sensing_occupancy(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -37616,6 +46340,31 @@ sl_status_t dotdot_occupancy_sensing_occupancy_sensor_type_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_occupancy_sensing_occupancy_sensor_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_occupancy_sensor_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_occupancy_sensing_occupancy_sensor_type(
@@ -37704,6 +46453,31 @@ sl_status_t dotdot_occupancy_sensing_occupancy_sensor_type_bitmap_undefine_desir
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_occupancy_sensing_occupancy_sensor_type_bitmap_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_BITMAP);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_occupancy_sensor_type_bitmap_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_BITMAP);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_occupancy_sensing_occupancy_sensor_type_bitmap(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -37788,6 +46562,31 @@ sl_status_t dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_undefine_d
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_occupancy_sensing_pir_occupied_to_unoccupied_delay(
@@ -37876,6 +46675,31 @@ sl_status_t dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_occupancy_sensing_pir_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -37960,6 +46784,31 @@ sl_status_t dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_undefi
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
@@ -38048,6 +46897,31 @@ sl_status_t dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_und
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -38132,6 +47006,31 @@ sl_status_t dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_und
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay(
@@ -38220,6 +47119,31 @@ sl_status_t dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -38304,6 +47228,31 @@ sl_status_t dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_del
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay(
@@ -38392,6 +47341,31 @@ sl_status_t dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_del
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -38476,6 +47450,31 @@ sl_status_t dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_thr
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold(
@@ -38646,6 +47645,31 @@ sl_status_t dotdot_soil_moisture_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_soil_moisture_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_soil_moisture_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_soil_moisture_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -38730,6 +47754,31 @@ sl_status_t dotdot_soil_moisture_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_soil_moisture_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_soil_moisture_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_soil_moisture_min_measured_value(
@@ -38818,6 +47867,31 @@ sl_status_t dotdot_soil_moisture_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_soil_moisture_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_soil_moisture_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_soil_moisture_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -38902,6 +47976,31 @@ sl_status_t dotdot_soil_moisture_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_soil_moisture_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_soil_moisture_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_soil_moisture_tolerance(
@@ -39021,6 +48120,31 @@ sl_status_t dotdot_ph_measurement_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ph_measurement_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ph_measurement_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ph_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -39105,6 +48229,31 @@ sl_status_t dotdot_ph_measurement_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ph_measurement_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ph_measurement_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ph_measurement_min_measured_value(
@@ -39193,6 +48342,31 @@ sl_status_t dotdot_ph_measurement_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ph_measurement_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ph_measurement_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ph_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -39277,6 +48451,31 @@ sl_status_t dotdot_ph_measurement_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ph_measurement_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ph_measurement_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ph_measurement_tolerance(
@@ -39396,6 +48595,31 @@ sl_status_t dotdot_electrical_conductivity_measurement_measured_value_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_conductivity_measurement_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_conductivity_measurement_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_conductivity_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -39480,6 +48704,31 @@ sl_status_t dotdot_electrical_conductivity_measurement_min_measured_value_undefi
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_conductivity_measurement_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_conductivity_measurement_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_conductivity_measurement_min_measured_value(
@@ -39568,6 +48817,31 @@ sl_status_t dotdot_electrical_conductivity_measurement_max_measured_value_undefi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_conductivity_measurement_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_conductivity_measurement_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_conductivity_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -39652,6 +48926,31 @@ sl_status_t dotdot_electrical_conductivity_measurement_tolerance_undefine_desire
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_conductivity_measurement_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_conductivity_measurement_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_conductivity_measurement_tolerance(
@@ -39771,6 +49070,31 @@ sl_status_t dotdot_wind_speed_measurement_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_wind_speed_measurement_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_wind_speed_measurement_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_wind_speed_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -39855,6 +49179,31 @@ sl_status_t dotdot_wind_speed_measurement_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_wind_speed_measurement_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_wind_speed_measurement_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_wind_speed_measurement_min_measured_value(
@@ -39943,6 +49292,31 @@ sl_status_t dotdot_wind_speed_measurement_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_wind_speed_measurement_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_wind_speed_measurement_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_wind_speed_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -40027,6 +49401,31 @@ sl_status_t dotdot_wind_speed_measurement_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_wind_speed_measurement_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_wind_speed_measurement_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_wind_speed_measurement_tolerance(
@@ -40146,6 +49545,31 @@ sl_status_t dotdot_carbon_monoxide_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_carbon_monoxide_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_monoxide_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_carbon_monoxide_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -40230,6 +49654,31 @@ sl_status_t dotdot_carbon_monoxide_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_carbon_monoxide_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_monoxide_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_carbon_monoxide_min_measured_value(
@@ -40318,6 +49767,31 @@ sl_status_t dotdot_carbon_monoxide_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_carbon_monoxide_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_monoxide_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_carbon_monoxide_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -40402,6 +49876,31 @@ sl_status_t dotdot_carbon_monoxide_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_carbon_monoxide_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_monoxide_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_MONOXIDE_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_carbon_monoxide_tolerance(
@@ -40521,6 +50020,31 @@ sl_status_t dotdot_carbon_dioxide_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_carbon_dioxide_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_dioxide_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_carbon_dioxide_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -40605,6 +50129,31 @@ sl_status_t dotdot_carbon_dioxide_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_carbon_dioxide_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_dioxide_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_carbon_dioxide_min_measured_value(
@@ -40693,6 +50242,31 @@ sl_status_t dotdot_carbon_dioxide_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_carbon_dioxide_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_dioxide_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_carbon_dioxide_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -40777,6 +50351,31 @@ sl_status_t dotdot_carbon_dioxide_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_carbon_dioxide_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_carbon_dioxide_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CARBON_DIOXIDE_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_carbon_dioxide_tolerance(
@@ -40896,6 +50495,31 @@ sl_status_t dotdot_pm25_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pm25_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pm25_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pm25_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -40980,6 +50604,31 @@ sl_status_t dotdot_pm25_min_measured_value_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PM25_MIN_MEASURED_VALUE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pm25_min_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_MIN_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pm25_min_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_MIN_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pm25_min_measured_value(
@@ -41068,6 +50717,31 @@ sl_status_t dotdot_pm25_max_measured_value_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_pm25_max_measured_value_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_MAX_MEASURED_VALUE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pm25_max_measured_value_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_MAX_MEASURED_VALUE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_pm25_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -41152,6 +50826,31 @@ sl_status_t dotdot_pm25_tolerance_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_PM25_TOLERANCE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_pm25_tolerance_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_TOLERANCE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_pm25_tolerance_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PM25_TOLERANCE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_pm25_tolerance(
@@ -41271,6 +50970,31 @@ sl_status_t dotdot_ias_zone_zone_state_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ias_zone_zone_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ias_zone_zone_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ias_zone_zone_state(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -41355,6 +51079,31 @@ sl_status_t dotdot_ias_zone_zone_type_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_TYPE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ias_zone_zone_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ias_zone_zone_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_TYPE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ias_zone_zone_type(
@@ -41443,6 +51192,31 @@ sl_status_t dotdot_ias_zone_zone_status_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ias_zone_zone_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ias_zone_zone_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATUS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ias_zone_zone_status(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -41527,6 +51301,31 @@ sl_status_t dotdot_ias_zone_iascie_address_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_IAS_ZONE_IASCIE_ADDRESS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ias_zone_iascie_address_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_IASCIE_ADDRESS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ias_zone_iascie_address_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_IASCIE_ADDRESS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ias_zone_iascie_address(
@@ -41615,6 +51414,31 @@ sl_status_t dotdot_ias_zone_zoneid_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ias_zone_zoneid_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONEID);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ias_zone_zoneid_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONEID);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ias_zone_zoneid(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -41701,6 +51525,31 @@ sl_status_t dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_undefine
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_ias_zone_number_of_zone_sensitivity_levels_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -41785,6 +51634,31 @@ sl_status_t dotdot_ias_zone_current_zone_sensitivity_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_ias_zone_current_zone_sensitivity_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_ias_zone_current_zone_sensitivity_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_ias_zone_current_zone_sensitivity_level(
@@ -41919,6 +51793,31 @@ sl_status_t dotdot_iaswd_max_duration_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_iaswd_max_duration_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IASWD_MAX_DURATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_iaswd_max_duration_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_IASWD_MAX_DURATION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_iaswd_max_duration(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -42030,6 +51929,31 @@ sl_status_t dotdot_metering_current_summation_delivered_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_current_summation_delivered_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_DELIVERED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_summation_delivered_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_DELIVERED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_current_summation_delivered(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -42114,6 +52038,31 @@ sl_status_t dotdot_metering_current_summation_received_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_RECEIVED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_current_summation_received_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_RECEIVED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_summation_received_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_RECEIVED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_current_summation_received(
@@ -42202,6 +52151,31 @@ sl_status_t dotdot_metering_current_max_demand_delivered_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_current_max_demand_delivered_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_max_demand_delivered_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_current_max_demand_delivered(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -42286,6 +52260,31 @@ sl_status_t dotdot_metering_current_max_demand_received_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_current_max_demand_received_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_max_demand_received_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_current_max_demand_received(
@@ -42374,6 +52373,31 @@ sl_status_t dotdot_metering_power_factor_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_power_factor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_POWER_FACTOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_power_factor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_POWER_FACTOR);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_power_factor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -42458,6 +52482,31 @@ sl_status_t dotdot_metering_reading_snap_shot_time_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_reading_snap_shot_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_reading_snap_shot_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_reading_snap_shot_time(
@@ -42546,6 +52595,31 @@ sl_status_t dotdot_metering_current_max_demand_delivered_time_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_current_max_demand_delivered_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_max_demand_delivered_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_current_max_demand_delivered_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -42630,6 +52704,31 @@ sl_status_t dotdot_metering_current_max_demand_received_time_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_current_max_demand_received_time_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_max_demand_received_time_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_current_max_demand_received_time(
@@ -42718,6 +52817,31 @@ sl_status_t dotdot_metering_default_update_period_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_default_update_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_DEFAULT_UPDATE_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_default_update_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_DEFAULT_UPDATE_PERIOD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_default_update_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -42802,6 +52926,31 @@ sl_status_t dotdot_metering_supply_status_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_SUPPLY_STATUS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_supply_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_SUPPLY_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_supply_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_SUPPLY_STATUS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_supply_status(
@@ -42890,6 +53039,31 @@ sl_status_t dotdot_metering_current_inlet_energy_carrier_summation_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_current_inlet_energy_carrier_summation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_INLET_ENERGY_CARRIER_SUMMATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_inlet_energy_carrier_summation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_INLET_ENERGY_CARRIER_SUMMATION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_current_inlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -42974,6 +53148,31 @@ sl_status_t dotdot_metering_current_outlet_energy_carrier_summation_undefine_des
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_current_outlet_energy_carrier_summation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_current_outlet_energy_carrier_summation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_current_outlet_energy_carrier_summation(
@@ -43062,6 +53261,31 @@ sl_status_t dotdot_metering_inlet_temperature_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_inlet_temperature_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_INLET_TEMPERATURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_inlet_temperature_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_INLET_TEMPERATURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_inlet_temperature(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -43146,6 +53370,31 @@ sl_status_t dotdot_metering_outlet_temperature_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_OUTLET_TEMPERATURE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_outlet_temperature_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_OUTLET_TEMPERATURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_outlet_temperature_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_OUTLET_TEMPERATURE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_outlet_temperature(
@@ -43234,6 +53483,31 @@ sl_status_t dotdot_metering_unitof_measure_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_unitof_measure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_UNITOF_MEASURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_unitof_measure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_UNITOF_MEASURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_unitof_measure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -43318,6 +53592,31 @@ sl_status_t dotdot_metering_multiplier_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_MULTIPLIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_multiplier(
@@ -43406,6 +53705,31 @@ sl_status_t dotdot_metering_divisor_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_DIVISOR);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -43490,6 +53814,31 @@ sl_status_t dotdot_metering_summation_formatting_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_SUMMATION_FORMATTING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_summation_formatting_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_SUMMATION_FORMATTING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_summation_formatting_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_SUMMATION_FORMATTING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_summation_formatting(
@@ -43578,6 +53927,31 @@ sl_status_t dotdot_metering_demand_formatting_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_demand_formatting_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_DEMAND_FORMATTING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_demand_formatting_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_DEMAND_FORMATTING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_demand_formatting(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -43662,6 +54036,31 @@ sl_status_t dotdot_metering_historical_consumption_formatting_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_HISTORICAL_CONSUMPTION_FORMATTING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_historical_consumption_formatting_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_HISTORICAL_CONSUMPTION_FORMATTING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_historical_consumption_formatting_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_HISTORICAL_CONSUMPTION_FORMATTING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_historical_consumption_formatting(
@@ -43750,6 +54149,31 @@ sl_status_t dotdot_metering_metering_device_type_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_metering_device_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_METERING_DEVICE_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_metering_device_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_METERING_DEVICE_TYPE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_metering_device_type(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -43834,6 +54258,31 @@ sl_status_t dotdot_metering_energy_carrier_unit_of_measure_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_UNIT_OF_MEASURE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_energy_carrier_unit_of_measure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_UNIT_OF_MEASURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_energy_carrier_unit_of_measure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_UNIT_OF_MEASURE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_energy_carrier_unit_of_measure(
@@ -43922,6 +54371,31 @@ sl_status_t dotdot_metering_energy_carrier_summation_formatting_undefine_desired
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_energy_carrier_summation_formatting_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_SUMMATION_FORMATTING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_energy_carrier_summation_formatting_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_SUMMATION_FORMATTING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_energy_carrier_summation_formatting(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -44006,6 +54480,31 @@ sl_status_t dotdot_metering_energy_carrier_demand_formatting_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_DEMAND_FORMATTING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_energy_carrier_demand_formatting_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_DEMAND_FORMATTING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_energy_carrier_demand_formatting_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_ENERGY_CARRIER_DEMAND_FORMATTING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_energy_carrier_demand_formatting(
@@ -44094,6 +54593,31 @@ sl_status_t dotdot_metering_temperature_unit_of_measure_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_metering_temperature_unit_of_measure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_TEMPERATURE_UNIT_OF_MEASURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_temperature_unit_of_measure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_TEMPERATURE_UNIT_OF_MEASURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_metering_temperature_unit_of_measure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -44178,6 +54702,31 @@ sl_status_t dotdot_metering_temperature_formatting_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_METERING_TEMPERATURE_FORMATTING);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_metering_temperature_formatting_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_TEMPERATURE_FORMATTING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_metering_temperature_formatting_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_METERING_TEMPERATURE_FORMATTING);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_metering_temperature_formatting(
@@ -44363,6 +54912,31 @@ sl_status_t dotdot_electrical_measurement_measurement_type_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_measurement_type_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASUREMENT_TYPE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measurement_type_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASUREMENT_TYPE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_measurement_type(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -44447,6 +55021,31 @@ sl_status_t dotdot_electrical_measurement_dc_voltage_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_voltage(
@@ -44535,6 +55134,31 @@ sl_status_t dotdot_electrical_measurement_dc_voltage_min_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_voltage_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_voltage_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_voltage_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -44619,6 +55243,31 @@ sl_status_t dotdot_electrical_measurement_dc_voltage_max_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MAX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_voltage_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_voltage_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MAX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_voltage_max(
@@ -44707,6 +55356,31 @@ sl_status_t dotdot_electrical_measurement_dc_current_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -44791,6 +55465,31 @@ sl_status_t dotdot_electrical_measurement_dc_current_min_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MIN);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_current_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_current_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MIN);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_current_min(
@@ -44879,6 +55578,31 @@ sl_status_t dotdot_electrical_measurement_dc_current_max_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_current_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_current_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_current_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -44963,6 +55687,31 @@ sl_status_t dotdot_electrical_measurement_dc_power_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_power(
@@ -45051,6 +55800,31 @@ sl_status_t dotdot_electrical_measurement_dc_power_min_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_power_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_power_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_power_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -45135,6 +55909,31 @@ sl_status_t dotdot_electrical_measurement_dc_power_max_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MAX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_power_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_power_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MAX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_power_max(
@@ -45223,6 +56022,31 @@ sl_status_t dotdot_electrical_measurement_dc_voltage_multiplier_undefine_desired
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_voltage_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_voltage_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_voltage_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -45307,6 +56131,31 @@ sl_status_t dotdot_electrical_measurement_dc_voltage_divisor_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_voltage_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_voltage_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_voltage_divisor(
@@ -45395,6 +56244,31 @@ sl_status_t dotdot_electrical_measurement_dc_current_multiplier_undefine_desired
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_current_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_current_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_current_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -45479,6 +56353,31 @@ sl_status_t dotdot_electrical_measurement_dc_current_divisor_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_current_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_current_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_current_divisor(
@@ -45567,6 +56466,31 @@ sl_status_t dotdot_electrical_measurement_dc_power_multiplier_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_power_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_power_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_power_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -45651,6 +56575,31 @@ sl_status_t dotdot_electrical_measurement_dc_power_divisor_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_power_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_power_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_power_divisor(
@@ -45739,6 +56688,31 @@ sl_status_t dotdot_electrical_measurement_ac_frequency_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_frequency_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_frequency_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -45823,6 +56797,31 @@ sl_status_t dotdot_electrical_measurement_ac_frequency_min_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_ac_frequency_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_frequency_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_ac_frequency_min(
@@ -45911,6 +56910,31 @@ sl_status_t dotdot_electrical_measurement_ac_frequency_max_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_frequency_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_frequency_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_frequency_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -45995,6 +57019,31 @@ sl_status_t dotdot_electrical_measurement_neutral_current_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_neutral_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_neutral_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_neutral_current(
@@ -46083,6 +57132,31 @@ sl_status_t dotdot_electrical_measurement_total_active_power_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_total_active_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_ACTIVE_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_total_active_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_ACTIVE_POWER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_total_active_power(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -46167,6 +57241,31 @@ sl_status_t dotdot_electrical_measurement_total_reactive_power_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_REACTIVE_POWER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_total_reactive_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_REACTIVE_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_total_reactive_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_REACTIVE_POWER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_total_reactive_power(
@@ -46255,6 +57354,31 @@ sl_status_t dotdot_electrical_measurement_total_apparent_power_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_total_apparent_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_APPARENT_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_total_apparent_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_APPARENT_POWER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_total_apparent_power(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -46339,6 +57463,31 @@ sl_status_t dotdot_electrical_measurement_measured1st_harmonic_current_undefine_
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED1ST_HARMONIC_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_measured1st_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED1ST_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured1st_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED1ST_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_measured1st_harmonic_current(
@@ -46427,6 +57576,31 @@ sl_status_t dotdot_electrical_measurement_measured3rd_harmonic_current_undefine_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_measured3rd_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED3RD_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured3rd_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED3RD_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_measured3rd_harmonic_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -46511,6 +57685,31 @@ sl_status_t dotdot_electrical_measurement_measured5th_harmonic_current_undefine_
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED5TH_HARMONIC_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_measured5th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED5TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured5th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED5TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_measured5th_harmonic_current(
@@ -46599,6 +57798,31 @@ sl_status_t dotdot_electrical_measurement_measured7th_harmonic_current_undefine_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_measured7th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED7TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured7th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED7TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_measured7th_harmonic_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -46683,6 +57907,31 @@ sl_status_t dotdot_electrical_measurement_measured9th_harmonic_current_undefine_
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED9TH_HARMONIC_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_measured9th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED9TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured9th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED9TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_measured9th_harmonic_current(
@@ -46771,6 +58020,31 @@ sl_status_t dotdot_electrical_measurement_measured11th_harmonic_current_undefine
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_measured11th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED11TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured11th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED11TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_measured11th_harmonic_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -46855,6 +58129,31 @@ sl_status_t dotdot_electrical_measurement_measured_phase1st_harmonic_current_und
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE1ST_HARMONIC_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_measured_phase1st_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE1ST_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured_phase1st_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE1ST_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_measured_phase1st_harmonic_current(
@@ -46943,6 +58242,31 @@ sl_status_t dotdot_electrical_measurement_measured_phase3rd_harmonic_current_und
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_measured_phase3rd_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE3RD_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured_phase3rd_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE3RD_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_measured_phase3rd_harmonic_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -47027,6 +58351,31 @@ sl_status_t dotdot_electrical_measurement_measured_phase5th_harmonic_current_und
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE5TH_HARMONIC_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_measured_phase5th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE5TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured_phase5th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE5TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_measured_phase5th_harmonic_current(
@@ -47115,6 +58464,31 @@ sl_status_t dotdot_electrical_measurement_measured_phase7th_harmonic_current_und
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_measured_phase7th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE7TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured_phase7th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE7TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_measured_phase7th_harmonic_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -47199,6 +58573,31 @@ sl_status_t dotdot_electrical_measurement_measured_phase9th_harmonic_current_und
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE9TH_HARMONIC_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_measured_phase9th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE9TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured_phase9th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE9TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_measured_phase9th_harmonic_current(
@@ -47287,6 +58686,31 @@ sl_status_t dotdot_electrical_measurement_measured_phase11th_harmonic_current_un
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_measured_phase11th_harmonic_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE11TH_HARMONIC_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_measured_phase11th_harmonic_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_MEASURED_PHASE11TH_HARMONIC_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_measured_phase11th_harmonic_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -47371,6 +58795,31 @@ sl_status_t dotdot_electrical_measurement_ac_frequency_multiplier_undefine_desir
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_ac_frequency_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_frequency_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_ac_frequency_multiplier(
@@ -47459,6 +58908,31 @@ sl_status_t dotdot_electrical_measurement_ac_frequency_divisor_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_frequency_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_frequency_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_DIVISOR);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_frequency_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -47543,6 +59017,31 @@ sl_status_t dotdot_electrical_measurement_power_multiplier_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_power_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_power_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_power_multiplier(
@@ -47631,6 +59130,31 @@ sl_status_t dotdot_electrical_measurement_power_divisor_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_power_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_power_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_DIVISOR);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_power_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -47715,6 +59239,31 @@ sl_status_t dotdot_electrical_measurement_harmonic_current_multiplier_undefine_d
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_HARMONIC_CURRENT_MULTIPLIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_harmonic_current_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_HARMONIC_CURRENT_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_harmonic_current_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_HARMONIC_CURRENT_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_harmonic_current_multiplier(
@@ -47803,6 +59352,31 @@ sl_status_t dotdot_electrical_measurement_phase_harmonic_current_multiplier_unde
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_phase_harmonic_current_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_PHASE_HARMONIC_CURRENT_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_phase_harmonic_current_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_PHASE_HARMONIC_CURRENT_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_phase_harmonic_current_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -47887,6 +59461,31 @@ sl_status_t dotdot_electrical_measurement_line_current_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_line_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_line_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_line_current(
@@ -47975,6 +59574,31 @@ sl_status_t dotdot_electrical_measurement_active_current_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -48059,6 +59683,31 @@ sl_status_t dotdot_electrical_measurement_reactive_current_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_reactive_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_reactive_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_reactive_current(
@@ -48147,6 +59796,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -48231,6 +59905,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_min_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_voltage_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_min(
@@ -48319,6 +60018,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_max_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -48403,6 +60127,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_current_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_current(
@@ -48491,6 +60240,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_min_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_current_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_current_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -48575,6 +60349,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_max_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_current_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_current_max(
@@ -48663,6 +60462,31 @@ sl_status_t dotdot_electrical_measurement_active_power_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_power(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -48747,6 +60571,31 @@ sl_status_t dotdot_electrical_measurement_active_power_min_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_active_power_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_active_power_min(
@@ -48835,6 +60684,31 @@ sl_status_t dotdot_electrical_measurement_active_power_max_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_power_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_power_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -48919,6 +60793,31 @@ sl_status_t dotdot_electrical_measurement_reactive_power_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_reactive_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_reactive_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_reactive_power(
@@ -49007,6 +60906,31 @@ sl_status_t dotdot_electrical_measurement_apparent_power_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_apparent_power_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_apparent_power_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_apparent_power(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -49091,6 +61015,31 @@ sl_status_t dotdot_electrical_measurement_power_factor_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_power_factor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_power_factor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_power_factor(
@@ -49179,6 +61128,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_averagerms_voltage_measurement_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -49263,6 +61237,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_undefi
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_counter_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_counter_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage_counter(
@@ -49351,6 +61350,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_undef
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_counter_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_counter_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage_counter(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -49435,6 +61459,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_over_voltage_period_undefi
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_over_voltage_period(
@@ -49523,6 +61572,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_under_voltage_period_undef
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_under_voltage_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -49607,6 +61681,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_sag_period_undefine_desire
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_voltage_sag_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_sag_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_sag_period(
@@ -49695,6 +61794,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_swell_period_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_swell_period_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_swell_period_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_swell_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -49779,6 +61903,31 @@ sl_status_t dotdot_electrical_measurement_ac_voltage_multiplier_undefine_desired
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_ac_voltage_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_voltage_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_ac_voltage_multiplier(
@@ -49867,6 +62016,31 @@ sl_status_t dotdot_electrical_measurement_ac_voltage_divisor_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_voltage_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_voltage_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_DIVISOR);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_voltage_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -49951,6 +62125,31 @@ sl_status_t dotdot_electrical_measurement_ac_current_multiplier_undefine_desired
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_ac_current_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_current_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_ac_current_multiplier(
@@ -50039,6 +62238,31 @@ sl_status_t dotdot_electrical_measurement_ac_current_divisor_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_current_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_current_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_DIVISOR);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_current_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -50123,6 +62347,31 @@ sl_status_t dotdot_electrical_measurement_ac_power_multiplier_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_ac_power_multiplier_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_power_multiplier_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_ac_power_multiplier(
@@ -50211,6 +62460,31 @@ sl_status_t dotdot_electrical_measurement_ac_power_divisor_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_power_divisor_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_DIVISOR);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_power_divisor_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_DIVISOR);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_power_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -50295,6 +62569,31 @@ sl_status_t dotdot_electrical_measurement_dc_overload_alarms_mask_undefine_desir
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_OVERLOAD_ALARMS_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_overload_alarms_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_OVERLOAD_ALARMS_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_overload_alarms_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_OVERLOAD_ALARMS_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_overload_alarms_mask(
@@ -50383,6 +62682,31 @@ sl_status_t dotdot_electrical_measurement_dc_voltage_overload_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_dc_voltage_overload_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_OVERLOAD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_voltage_overload_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_OVERLOAD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_dc_voltage_overload(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -50467,6 +62791,31 @@ sl_status_t dotdot_electrical_measurement_dc_current_overload_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_OVERLOAD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_dc_current_overload_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_OVERLOAD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_dc_current_overload_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_OVERLOAD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_dc_current_overload(
@@ -50555,6 +62904,31 @@ sl_status_t dotdot_electrical_measurement_ac_alarms_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_alarms_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_ALARMS_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_alarms_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_ALARMS_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_alarms_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -50639,6 +63013,31 @@ sl_status_t dotdot_electrical_measurement_ac_voltage_overload_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_OVERLOAD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_ac_voltage_overload_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_OVERLOAD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_voltage_overload_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_OVERLOAD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_ac_voltage_overload(
@@ -50727,6 +63126,31 @@ sl_status_t dotdot_electrical_measurement_ac_current_overload_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_current_overload_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_OVERLOAD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_current_overload_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_OVERLOAD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_current_overload(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -50811,6 +63235,31 @@ sl_status_t dotdot_electrical_measurement_ac_active_power_overload_undefine_desi
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_ACTIVE_POWER_OVERLOAD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_ac_active_power_overload_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_ACTIVE_POWER_OVERLOAD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_active_power_overload_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_ACTIVE_POWER_OVERLOAD);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_ac_active_power_overload(
@@ -50899,6 +63348,31 @@ sl_status_t dotdot_electrical_measurement_ac_reactive_power_overload_undefine_de
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_ac_reactive_power_overload_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_REACTIVE_POWER_OVERLOAD);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_ac_reactive_power_overload_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_REACTIVE_POWER_OVERLOAD);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_ac_reactive_power_overload(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -50983,6 +63457,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_undefine_desir
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage(
@@ -51071,6 +63570,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -51155,6 +63679,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_over_voltage_undefine_desi
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_over_voltage(
@@ -51243,6 +63792,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_under_voltage_undefine_des
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_under_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -51327,6 +63901,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_sag_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_voltage_sag_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_sag_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_sag(
@@ -51415,6 +64014,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_swell_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_swell_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_swell_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_swell(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -51499,6 +64123,31 @@ sl_status_t dotdot_electrical_measurement_line_current_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_line_current_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_line_current_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_line_current_phb(
@@ -51587,6 +64236,31 @@ sl_status_t dotdot_electrical_measurement_active_current_phb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_current_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_current_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_current_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -51671,6 +64345,31 @@ sl_status_t dotdot_electrical_measurement_reactive_current_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_reactive_current_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_reactive_current_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_reactive_current_phb(
@@ -51759,6 +64458,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_phb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -51843,6 +64567,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_min_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_voltage_min_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_min_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_min_phb(
@@ -51931,6 +64680,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_max_phb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_max_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_max_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_max_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -52015,6 +64789,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_current_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_current_phb(
@@ -52103,6 +64902,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_min_phb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_current_min_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_min_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_current_min_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -52187,6 +65011,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_max_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_current_max_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_max_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_current_max_phb(
@@ -52275,6 +65124,31 @@ sl_status_t dotdot_electrical_measurement_active_power_phb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_power_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_power_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -52359,6 +65233,31 @@ sl_status_t dotdot_electrical_measurement_active_power_min_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_active_power_min_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_min_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_active_power_min_phb(
@@ -52447,6 +65346,31 @@ sl_status_t dotdot_electrical_measurement_active_power_max_phb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_power_max_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_max_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_power_max_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -52531,6 +65455,31 @@ sl_status_t dotdot_electrical_measurement_reactive_power_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_reactive_power_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_reactive_power_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_reactive_power_phb(
@@ -52619,6 +65568,31 @@ sl_status_t dotdot_electrical_measurement_apparent_power_phb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_apparent_power_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_apparent_power_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_apparent_power_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -52703,6 +65677,31 @@ sl_status_t dotdot_electrical_measurement_power_factor_phb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_power_factor_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_power_factor_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_power_factor_phb(
@@ -52791,6 +65790,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_averagerms_voltage_measurement_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -52875,6 +65899,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_un
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage_counter_phb(
@@ -52963,6 +66012,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_u
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage_counter_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -53047,6 +66121,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_un
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_over_voltage_period_phb(
@@ -53135,6 +66234,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_u
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_under_voltage_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -53219,6 +66343,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_sag_period_phb_undefine_de
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_voltage_sag_period_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_sag_period_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_sag_period_phb(
@@ -53307,6 +66456,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_swell_period_phb_undefine_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_swell_period_phb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_swell_period_phb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_swell_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -53391,6 +66565,31 @@ sl_status_t dotdot_electrical_measurement_line_current_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_line_current_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_line_current_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_line_current_phc(
@@ -53479,6 +66678,31 @@ sl_status_t dotdot_electrical_measurement_active_current_phc_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_current_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_current_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_CURRENT_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_current_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -53563,6 +66787,31 @@ sl_status_t dotdot_electrical_measurement_reactive_current_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_reactive_current_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_reactive_current_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_CURRENT_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_reactive_current_phc(
@@ -53651,6 +66900,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_phc_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -53735,6 +67009,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_min_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_voltage_min_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_min_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_min_phc(
@@ -53823,6 +67122,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_max_phc_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_max_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_max_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_max_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -53907,6 +67231,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_current_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_current_phc(
@@ -53995,6 +67344,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_min_phc_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_current_min_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_min_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_current_min_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -54079,6 +67453,31 @@ sl_status_t dotdot_electrical_measurement_rms_current_max_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_current_max_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_current_max_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_current_max_phc(
@@ -54167,6 +67566,31 @@ sl_status_t dotdot_electrical_measurement_active_power_phc_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_power_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_power_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -54251,6 +67675,31 @@ sl_status_t dotdot_electrical_measurement_active_power_min_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_active_power_min_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_min_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MIN_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_active_power_min_phc(
@@ -54339,6 +67788,31 @@ sl_status_t dotdot_electrical_measurement_active_power_max_phc_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_active_power_max_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_active_power_max_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_ACTIVE_POWER_MAX_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_active_power_max_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -54423,6 +67897,31 @@ sl_status_t dotdot_electrical_measurement_reactive_power_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_reactive_power_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_reactive_power_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_REACTIVE_POWER_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_reactive_power_phc(
@@ -54511,6 +68010,31 @@ sl_status_t dotdot_electrical_measurement_apparent_power_phc_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_apparent_power_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_apparent_power_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_apparent_power_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -54595,6 +68119,31 @@ sl_status_t dotdot_electrical_measurement_power_factor_phc_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_power_factor_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_power_factor_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_power_factor_phc(
@@ -54683,6 +68232,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_averagerms_voltage_measurement_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -54767,6 +68341,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_un
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage_counter_phc(
@@ -54855,6 +68454,31 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_u
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage_counter_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -54939,6 +68563,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_un
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_over_voltage_period_phc(
@@ -55027,6 +68676,31 @@ sl_status_t dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_u
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_extreme_under_voltage_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -55113,6 +68787,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_sag_period_phc_undefine_de
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_electrical_measurement_rms_voltage_sag_period_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_sag_period_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHC);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_sag_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -55197,6 +68896,31 @@ sl_status_t dotdot_electrical_measurement_rms_voltage_swell_period_phc_undefine_
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_electrical_measurement_rms_voltage_swell_period_phc_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_electrical_measurement_rms_voltage_swell_period_phc_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_electrical_measurement_rms_voltage_swell_period_phc(
@@ -55766,6 +69490,31 @@ sl_status_t dotdot_diagnostics_number_of_resets_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_number_of_resets_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NUMBER_OF_RESETS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_number_of_resets_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NUMBER_OF_RESETS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_number_of_resets(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -55850,6 +69599,31 @@ sl_status_t dotdot_diagnostics_persistent_memory_writes_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PERSISTENT_MEMORY_WRITES);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_persistent_memory_writes_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PERSISTENT_MEMORY_WRITES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_persistent_memory_writes_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PERSISTENT_MEMORY_WRITES);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_persistent_memory_writes(
@@ -55938,6 +69712,31 @@ sl_status_t dotdot_diagnostics_mac_rx_bcast_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_mac_rx_bcast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_BCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_mac_rx_bcast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_BCAST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_mac_rx_bcast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -56022,6 +69821,31 @@ sl_status_t dotdot_diagnostics_mac_tx_bcast_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_BCAST);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_mac_tx_bcast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_BCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_mac_tx_bcast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_BCAST);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_mac_tx_bcast(
@@ -56110,6 +69934,31 @@ sl_status_t dotdot_diagnostics_mac_rx_ucast_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_mac_rx_ucast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_UCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_mac_rx_ucast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_UCAST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_mac_rx_ucast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -56194,6 +70043,31 @@ sl_status_t dotdot_diagnostics_mac_tx_ucast_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_mac_tx_ucast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_mac_tx_ucast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_mac_tx_ucast(
@@ -56282,6 +70156,31 @@ sl_status_t dotdot_diagnostics_mac_tx_ucast_retry_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_mac_tx_ucast_retry_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_RETRY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_mac_tx_ucast_retry_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_RETRY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_mac_tx_ucast_retry(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -56366,6 +70265,31 @@ sl_status_t dotdot_diagnostics_mac_tx_ucast_fail_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_FAIL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_mac_tx_ucast_fail_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_FAIL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_mac_tx_ucast_fail_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_FAIL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_mac_tx_ucast_fail(
@@ -56454,6 +70378,31 @@ sl_status_t dotdot_diagnostics_aps_rx_bcast_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_aps_rx_bcast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_BCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_rx_bcast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_BCAST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_aps_rx_bcast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -56538,6 +70487,31 @@ sl_status_t dotdot_diagnostics_aps_tx_bcast_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_BCAST);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_aps_tx_bcast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_BCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_tx_bcast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_BCAST);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_aps_tx_bcast(
@@ -56626,6 +70600,31 @@ sl_status_t dotdot_diagnostics_aps_rx_ucast_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_aps_rx_ucast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_UCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_rx_ucast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_UCAST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_aps_rx_ucast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -56710,6 +70709,31 @@ sl_status_t dotdot_diagnostics_aps_tx_ucast_success_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_SUCCESS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_aps_tx_ucast_success_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_SUCCESS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_tx_ucast_success_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_SUCCESS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_aps_tx_ucast_success(
@@ -56798,6 +70822,31 @@ sl_status_t dotdot_diagnostics_aps_tx_ucast_retry_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_aps_tx_ucast_retry_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_RETRY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_tx_ucast_retry_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_RETRY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_aps_tx_ucast_retry(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -56882,6 +70931,31 @@ sl_status_t dotdot_diagnostics_aps_tx_ucast_fail_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_FAIL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_aps_tx_ucast_fail_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_FAIL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_tx_ucast_fail_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_FAIL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_aps_tx_ucast_fail(
@@ -56970,6 +71044,31 @@ sl_status_t dotdot_diagnostics_route_disc_initiated_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_route_disc_initiated_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_ROUTE_DISC_INITIATED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_route_disc_initiated_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_ROUTE_DISC_INITIATED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_route_disc_initiated(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -57054,6 +71153,31 @@ sl_status_t dotdot_diagnostics_neighbor_added_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_ADDED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_neighbor_added_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_ADDED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_neighbor_added_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_ADDED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_neighbor_added(
@@ -57142,6 +71266,31 @@ sl_status_t dotdot_diagnostics_neighbor_removed_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_neighbor_removed_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_REMOVED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_neighbor_removed_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_REMOVED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_neighbor_removed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -57226,6 +71375,31 @@ sl_status_t dotdot_diagnostics_neighbor_stale_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_STALE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_neighbor_stale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_STALE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_neighbor_stale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_STALE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_neighbor_stale(
@@ -57314,6 +71488,31 @@ sl_status_t dotdot_diagnostics_join_indication_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_join_indication_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_JOIN_INDICATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_join_indication_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_JOIN_INDICATION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_join_indication(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -57398,6 +71597,31 @@ sl_status_t dotdot_diagnostics_child_moved_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_CHILD_MOVED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_child_moved_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_CHILD_MOVED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_child_moved_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_CHILD_MOVED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_child_moved(
@@ -57486,6 +71710,31 @@ sl_status_t dotdot_diagnostics_nwkfc_failure_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_nwkfc_failure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWKFC_FAILURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_nwkfc_failure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWKFC_FAILURE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_nwkfc_failure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -57570,6 +71819,31 @@ sl_status_t dotdot_diagnostics_apsfc_failure_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APSFC_FAILURE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_apsfc_failure_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APSFC_FAILURE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_apsfc_failure_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APSFC_FAILURE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_apsfc_failure(
@@ -57658,6 +71932,31 @@ sl_status_t dotdot_diagnostics_aps_unauthorized_key_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_aps_unauthorized_key_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_UNAUTHORIZED_KEY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_unauthorized_key_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_UNAUTHORIZED_KEY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_aps_unauthorized_key(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -57742,6 +72041,31 @@ sl_status_t dotdot_diagnostics_nwk_decrypt_failures_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWK_DECRYPT_FAILURES);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_nwk_decrypt_failures_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWK_DECRYPT_FAILURES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_nwk_decrypt_failures_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWK_DECRYPT_FAILURES);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_nwk_decrypt_failures(
@@ -57830,6 +72154,31 @@ sl_status_t dotdot_diagnostics_aps_decrypt_failures_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_aps_decrypt_failures_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_DECRYPT_FAILURES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_aps_decrypt_failures_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_DECRYPT_FAILURES);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_aps_decrypt_failures(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -57914,6 +72263,31 @@ sl_status_t dotdot_diagnostics_packet_buffer_allocate_failures_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_packet_buffer_allocate_failures_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_packet_buffer_allocate_failures_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_packet_buffer_allocate_failures(
@@ -58002,6 +72376,31 @@ sl_status_t dotdot_diagnostics_relayed_ucast_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_relayed_ucast_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_RELAYED_UCAST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_relayed_ucast_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_RELAYED_UCAST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_relayed_ucast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -58086,6 +72485,31 @@ sl_status_t dotdot_diagnostics_phy_tomac_queue_limit_reached_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_phy_tomac_queue_limit_reached_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_phy_tomac_queue_limit_reached_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_phy_tomac_queue_limit_reached(
@@ -58174,6 +72598,31 @@ sl_status_t dotdot_diagnostics_packet_validate_drop_count_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_packet_validate_drop_count_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_packet_validate_drop_count_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_packet_validate_drop_count(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -58258,6 +72707,31 @@ sl_status_t dotdot_diagnostics_averagemac_retry_peraps_message_sent_undefine_des
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_averagemac_retry_peraps_message_sent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_averagemac_retry_peraps_message_sent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_averagemac_retry_peraps_message_sent(
@@ -58346,6 +72820,31 @@ sl_status_t dotdot_diagnostics_last_messagelqi_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_diagnostics_last_messagelqi_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGELQI);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_last_messagelqi_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGELQI);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_diagnostics_last_messagelqi(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -58430,6 +72929,31 @@ sl_status_t dotdot_diagnostics_last_messagerssi_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGERSSI);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_diagnostics_last_messagerssi_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGERSSI);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_diagnostics_last_messagerssi_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGERSSI);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_diagnostics_last_messagerssi(
@@ -58633,6 +73157,31 @@ sl_status_t dotdot_protocol_controller_rf_telemetry_tx_report_enabled_undefine_d
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_protocol_controller_rf_telemetry_tx_report_enabled_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_ENABLED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_protocol_controller_rf_telemetry_tx_report_enabled_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_ENABLED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_protocol_controller_rf_telemetry_tx_report_enabled(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -58717,6 +73266,31 @@ sl_status_t dotdot_protocol_controller_rf_telemetry_pti_enabled_undefine_desired
       DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_protocol_controller_rf_telemetry_pti_enabled_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_protocol_controller_rf_telemetry_pti_enabled_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_protocol_controller_rf_telemetry_pti_enabled(
@@ -58839,6 +73413,31 @@ sl_status_t dotdot_state_endpoint_id_list_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_state_endpoint_id_list_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_ENDPOINT_ID_LIST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_state_endpoint_id_list_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_ENDPOINT_ID_LIST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_state_endpoint_id_list(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -58850,12 +73449,471 @@ sl_status_t dotdot_create_state_endpoint_id_list(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
+bool dotdot_is_supported_state_network_status(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  return attribute_store_node_exists(node);
+}
+
+NodeStateNetworkStatus dotdot_get_state_network_status(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+
+  NodeStateNetworkStatus result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_state_network_status(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  NodeStateNetworkStatus new_network_status
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_network_status,
+                                                  sizeof(NodeStateNetworkStatus));
+  }
+
+sl_status_t dotdot_state_network_status_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_state_network_status_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_state_network_status_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_state_network_status_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_state_network_status(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_state_security(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+  return attribute_store_node_exists(node);
+}
+
+NodeStateSecurity dotdot_get_state_security(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+
+  NodeStateSecurity result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_state_security(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  NodeStateSecurity new_security
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_security,
+                                                  sizeof(NodeStateSecurity));
+  }
+
+sl_status_t dotdot_state_security_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_state_security_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_state_security_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_state_security_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_state_security(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_STATE_SECURITY);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_state_maximum_command_delay(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+  return attribute_store_node_exists(node);
+}
+
+uint32_t dotdot_get_state_maximum_command_delay(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+
+  uint32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_state_maximum_command_delay(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint32_t new_maximum_command_delay
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_maximum_command_delay,
+                                                  sizeof(uint32_t));
+  }
+
+sl_status_t dotdot_state_maximum_command_delay_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_state_maximum_command_delay_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_state_maximum_command_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_state_maximum_command_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_state_maximum_command_delay(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_state_network_list(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+  return attribute_store_node_exists(node);
+}
+
+const char* dotdot_get_state_network_list(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+
+  if (REPORTED_ATTRIBUTE == value_state) {
+    attribute_store_get_reported_string(node, received_string, ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  } else {
+    attribute_store_get_desired_string(node, received_string, ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  }
+  return received_string;
+}
+
+sl_status_t dotdot_set_state_network_list(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  size_t new_network_list_count,
+  const char** new_network_list
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+
+  // Skip attribute NetworkList because it is an array,
+  // we typically don't save them as array in the attribute store.
+  sl_log_error(LOG_TAG, "Error, skipping to change the desired value of NetworkList, Attribute %d, "
+                        "because it is a complicated type (array: string). "
+                        "Please change the code to do this manually.",node);
+  return SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_state_network_list_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_state_network_list_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_state_network_list_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_state_network_list_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_state_network_list(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
 
 bool dotdot_is_any_state_attribute_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   if (true == dotdot_is_supported_state_endpoint_id_list(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_state_network_status(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_state_security(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_state_maximum_command_delay(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_state_network_list(unid, endpoint_id)) {
     return true;
   }
 
@@ -58947,6 +74005,31 @@ sl_status_t dotdot_binding_binding_table_full_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_binding_binding_table_full_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BINDING_BINDING_TABLE_FULL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_binding_binding_table_full_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BINDING_BINDING_TABLE_FULL);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_binding_binding_table_full(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -59036,6 +74119,31 @@ sl_status_t dotdot_binding_bindable_cluster_list_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_binding_bindable_cluster_list_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BINDING_BINDABLE_CLUSTER_LIST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_binding_bindable_cluster_list_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BINDING_BINDABLE_CLUSTER_LIST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_binding_bindable_cluster_list(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -59123,6 +74231,31 @@ sl_status_t dotdot_binding_binding_table_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_BINDING_BINDING_TABLE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_binding_binding_table_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BINDING_BINDING_TABLE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_binding_binding_table_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_BINDING_BINDING_TABLE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_binding_binding_table(
@@ -59239,6 +74372,31 @@ sl_status_t dotdot_system_metrics_reporting_interval_seconds_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_reporting_interval_seconds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_REPORTING_INTERVAL_SECONDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_reporting_interval_seconds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_REPORTING_INTERVAL_SECONDS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -59326,6 +74484,31 @@ sl_status_t dotdot_system_metrics_cpu_usage_percent_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_USAGE_PERCENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_cpu_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_cpu_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_cpu_usage_percent(
@@ -59417,6 +74600,31 @@ sl_status_t dotdot_system_metrics_cpu_frequencym_hz_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_cpu_frequencym_hz_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_FREQUENCYM_HZ);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_cpu_frequencym_hz_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_FREQUENCYM_HZ);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_cpu_frequencym_hz(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -59504,6 +74712,31 @@ sl_status_t dotdot_system_metrics_cpu_average_usage_percent_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_AVERAGE_USAGE_PERCENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_cpu_average_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_AVERAGE_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_cpu_average_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_AVERAGE_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_cpu_average_usage_percent(
@@ -59595,6 +74828,31 @@ sl_status_t dotdot_system_metrics_cpu_min_usage_percent_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_cpu_min_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_MIN_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_cpu_min_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_MIN_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_cpu_min_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -59684,6 +74942,31 @@ sl_status_t dotdot_system_metrics_cpu_max_usage_percent_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_cpu_max_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_MAX_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_cpu_max_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CPU_MAX_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_cpu_max_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -59768,6 +75051,31 @@ sl_status_t dotdot_system_metrics_ram_totalmb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_TOTALMB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_ram_totalmb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_TOTALMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_ram_totalmb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_TOTALMB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_ram_totalmb(
@@ -59856,6 +75164,31 @@ sl_status_t dotdot_system_metrics_ram_freemb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_ram_freemb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_FREEMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_ram_freemb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_FREEMB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_ram_freemb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -59940,6 +75273,31 @@ sl_status_t dotdot_system_metrics_ram_availablemb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_AVAILABLEMB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_ram_availablemb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_AVAILABLEMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_ram_availablemb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_RAM_AVAILABLEMB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_ram_availablemb(
@@ -60028,6 +75386,31 @@ sl_status_t dotdot_system_metrics_swap_memory_totalmb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_swap_memory_totalmb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SWAP_MEMORY_TOTALMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_swap_memory_totalmb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SWAP_MEMORY_TOTALMB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_swap_memory_totalmb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -60112,6 +75495,31 @@ sl_status_t dotdot_system_metrics_swap_memory_usedmb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SWAP_MEMORY_USEDMB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_swap_memory_usedmb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SWAP_MEMORY_USEDMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_swap_memory_usedmb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SWAP_MEMORY_USEDMB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_swap_memory_usedmb(
@@ -60200,6 +75608,31 @@ sl_status_t dotdot_system_metrics_virtual_memory_totalmb_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_virtual_memory_totalmb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_VIRTUAL_MEMORY_TOTALMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_virtual_memory_totalmb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_VIRTUAL_MEMORY_TOTALMB);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_virtual_memory_totalmb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -60284,6 +75717,31 @@ sl_status_t dotdot_system_metrics_virtual_memory_usedmb_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_VIRTUAL_MEMORY_USEDMB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_virtual_memory_usedmb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_VIRTUAL_MEMORY_USEDMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_virtual_memory_usedmb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_VIRTUAL_MEMORY_USEDMB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_virtual_memory_usedmb(
@@ -60375,6 +75833,31 @@ sl_status_t dotdot_system_metrics_disks_usage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_disks_usage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_DISKS_USAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_disks_usage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_DISKS_USAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_disks_usage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -60462,6 +75945,31 @@ sl_status_t dotdot_system_metrics_disks_counters_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_DISKS_COUNTERS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_disks_counters_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_DISKS_COUNTERS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_disks_counters_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_DISKS_COUNTERS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_disks_counters(
@@ -60553,6 +76061,31 @@ sl_status_t dotdot_system_metrics_network_interfaces_data_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_network_interfaces_data_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_NETWORK_INTERFACES_DATA);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_network_interfaces_data_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_NETWORK_INTERFACES_DATA);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_network_interfaces_data(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -60642,6 +76175,31 @@ sl_status_t dotdot_system_metrics_wireless_network_interfaces_data_undefine_desi
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_wireless_network_interfaces_data_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_WIRELESS_NETWORK_INTERFACES_DATA);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_wireless_network_interfaces_data_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_WIRELESS_NETWORK_INTERFACES_DATA);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_wireless_network_interfaces_data(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -60727,6 +76285,31 @@ sl_status_t dotdot_system_metrics_hostname_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_HOSTNAME);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_hostname_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_HOSTNAME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_hostname_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_HOSTNAME);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_hostname(
@@ -60816,6 +76399,31 @@ sl_status_t dotdot_system_metrics_fqdn_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_fqdn_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_FQDN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_fqdn_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_FQDN);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_fqdn(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -60900,6 +76508,31 @@ sl_status_t dotdot_system_metrics_uptime_minutes_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_UPTIME_MINUTES);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_uptime_minutes_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_UPTIME_MINUTES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_uptime_minutes_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_UPTIME_MINUTES);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_uptime_minutes(
@@ -60988,6 +76621,31 @@ sl_status_t dotdot_system_metrics_current_temperature_celcius_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_current_temperature_celcius_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CURRENT_TEMPERATURE_CELCIUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_current_temperature_celcius_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_CURRENT_TEMPERATURE_CELCIUS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_current_temperature_celcius(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -61072,6 +76730,31 @@ sl_status_t dotdot_system_metrics_average_temperature_celcius_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_AVERAGE_TEMPERATURE_CELCIUS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_average_temperature_celcius_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_AVERAGE_TEMPERATURE_CELCIUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_average_temperature_celcius_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_AVERAGE_TEMPERATURE_CELCIUS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_average_temperature_celcius(
@@ -61160,6 +76843,31 @@ sl_status_t dotdot_system_metrics_min_temperature_celcius_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_min_temperature_celcius_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_MIN_TEMPERATURE_CELCIUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_min_temperature_celcius_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_MIN_TEMPERATURE_CELCIUS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_min_temperature_celcius(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -61244,6 +76952,31 @@ sl_status_t dotdot_system_metrics_max_temperature_celcius_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_MAX_TEMPERATURE_CELCIUS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_max_temperature_celcius_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_MAX_TEMPERATURE_CELCIUS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_max_temperature_celcius_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_MAX_TEMPERATURE_CELCIUS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_max_temperature_celcius(
@@ -61332,6 +77065,31 @@ sl_status_t dotdot_system_metrics_power_plugged_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_power_plugged_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_POWER_PLUGGED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_power_plugged_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_POWER_PLUGGED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_power_plugged(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -61418,6 +77176,31 @@ sl_status_t dotdot_system_metrics_battery_percentage_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_system_metrics_battery_percentage_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_BATTERY_PERCENTAGE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_battery_percentage_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_BATTERY_PERCENTAGE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_system_metrics_battery_percentage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -61502,6 +77285,31 @@ sl_status_t dotdot_system_metrics_system_interrupts_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SYSTEM_INTERRUPTS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_system_metrics_system_interrupts_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SYSTEM_INTERRUPTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_system_metrics_system_interrupts_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SYSTEM_INTERRUPTS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_system_metrics_system_interrupts(
@@ -61694,6 +77502,31 @@ sl_status_t dotdot_application_monitoring_application_name_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_application_name_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_NAME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_application_name_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_NAME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_application_name(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -61781,6 +77614,31 @@ sl_status_t dotdot_application_monitoring_application_version_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_application_version_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_VERSION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_application_version_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_VERSION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_application_version(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -61865,6 +77723,31 @@ sl_status_t dotdot_application_monitoring_application_connected_undefine_desired
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CONNECTED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_application_connected_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CONNECTED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_application_connected_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CONNECTED);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_application_connected(
@@ -61956,6 +77839,31 @@ sl_status_t dotdot_application_monitoring_applicationmqtt_topics_undefine_desire
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_applicationmqtt_topics_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_applicationmqtt_topics_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_applicationmqtt_topics(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -62042,6 +77950,31 @@ sl_status_t dotdot_application_monitoring_uptime_minutes_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_uptime_minutes_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_UPTIME_MINUTES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_uptime_minutes_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_UPTIME_MINUTES);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_uptime_minutes(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -62126,6 +78059,31 @@ sl_status_t dotdot_application_monitoring_process_id_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_PROCESS_ID);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_process_id_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_PROCESS_ID);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_process_id_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_PROCESS_ID);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_process_id(
@@ -62215,6 +78173,31 @@ sl_status_t dotdot_application_monitoring_hostname_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_hostname_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_HOSTNAME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_hostname_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_HOSTNAME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_hostname(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -62300,6 +78283,31 @@ sl_status_t dotdot_application_monitoring_fqdn_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_FQDN);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_fqdn_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_FQDN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_fqdn_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_FQDN);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_fqdn(
@@ -62388,6 +78396,31 @@ sl_status_t dotdot_application_monitoring_mqtt_logging_enabled_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_mqtt_logging_enabled_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_LOGGING_ENABLED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_logging_enabled_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_LOGGING_ENABLED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_mqtt_logging_enabled(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -62472,6 +78505,31 @@ sl_status_t dotdot_application_monitoring_mqtt_logging_level_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_LOGGING_LEVEL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_mqtt_logging_level_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_LOGGING_LEVEL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_logging_level_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_LOGGING_LEVEL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_mqtt_logging_level(
@@ -62560,6 +78618,31 @@ sl_status_t dotdot_application_monitoring_mqtt_statistics_reporting_interval_sec
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_mqtt_statistics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -62644,6 +78727,31 @@ sl_status_t dotdot_application_monitoring_mqtt_messages_sent_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_SENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_mqtt_messages_sent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_SENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_messages_sent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_SENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_mqtt_messages_sent(
@@ -62732,6 +78840,31 @@ sl_status_t dotdot_application_monitoring_mqtt_messages_received_undefine_desire
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_mqtt_messages_received_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_RECEIVED);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_messages_received_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_RECEIVED);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_mqtt_messages_received(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -62816,6 +78949,31 @@ sl_status_t dotdot_application_monitoring_mqtt_subscription_count_undefine_desir
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_mqtt_subscription_count_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_subscription_count_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_mqtt_subscription_count(
@@ -62904,6 +79062,31 @@ sl_status_t dotdot_application_monitoring_mqtt_average_delivery_time_seconds_und
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_mqtt_average_delivery_time_seconds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_AVERAGE_DELIVERY_TIME_SECONDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_average_delivery_time_seconds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_AVERAGE_DELIVERY_TIME_SECONDS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_mqtt_average_delivery_time_seconds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -62988,6 +79171,31 @@ sl_status_t dotdot_application_monitoring_mqtt_min_delivery_time_seconds_undefin
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MIN_DELIVERY_TIME_SECONDS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_mqtt_min_delivery_time_seconds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MIN_DELIVERY_TIME_SECONDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_min_delivery_time_seconds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MIN_DELIVERY_TIME_SECONDS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_mqtt_min_delivery_time_seconds(
@@ -63076,6 +79284,31 @@ sl_status_t dotdot_application_monitoring_mqtt_max_delivery_time_seconds_undefin
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_mqtt_max_delivery_time_seconds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MAX_DELIVERY_TIME_SECONDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_mqtt_max_delivery_time_seconds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MAX_DELIVERY_TIME_SECONDS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_mqtt_max_delivery_time_seconds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -63160,6 +79393,31 @@ sl_status_t dotdot_application_monitoring_application_statistics_reporting_inter
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_application_statistics_reporting_interval_seconds_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_application_statistics_reporting_interval_seconds_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_application_statistics_reporting_interval_seconds(
@@ -63248,6 +79506,31 @@ sl_status_t dotdot_application_monitoring_applicationcpu_usage_percent_undefine_
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_applicationcpu_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_applicationcpu_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_applicationcpu_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -63332,6 +79615,31 @@ sl_status_t dotdot_application_monitoring_applicationcpu_average_usage_percent_u
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_applicationcpu_average_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_applicationcpu_average_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_applicationcpu_average_usage_percent(
@@ -63420,6 +79728,31 @@ sl_status_t dotdot_application_monitoring_applicationcpu_min_usage_percent_undef
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_applicationcpu_min_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_applicationcpu_min_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_applicationcpu_min_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -63506,6 +79839,31 @@ sl_status_t dotdot_application_monitoring_applicationcpu_max_usage_percent_undef
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_application_monitoring_applicationcpu_max_usage_percent_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_applicationcpu_max_usage_percent_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_application_monitoring_applicationcpu_max_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -63590,6 +79948,31 @@ sl_status_t dotdot_application_monitoring_applicationram_usagemb_undefine_desire
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_application_monitoring_applicationram_usagemb_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_application_monitoring_applicationram_usagemb_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_application_monitoring_applicationram_usagemb(
@@ -63779,6 +80162,31 @@ sl_status_t dotdot_name_and_location_name_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_name_and_location_name_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_NAME_AND_LOCATION_NAME);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_name_and_location_name_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_NAME_AND_LOCATION_NAME);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_name_and_location_name(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -63864,6 +80272,31 @@ sl_status_t dotdot_name_and_location_location_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_NAME_AND_LOCATION_LOCATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_name_and_location_location_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_NAME_AND_LOCATION_LOCATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_name_and_location_location_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_NAME_AND_LOCATION_LOCATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_name_and_location_location(
@@ -63986,6 +80419,31 @@ sl_status_t dotdot_configuration_parameters_configuration_parameters_undefine_de
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_configuration_parameters_configuration_parameters_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_configuration_parameters_configuration_parameters_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_configuration_parameters_configuration_parameters(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -64094,6 +80552,31 @@ sl_status_t dotdot_aox_locator_reporting_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_reporting_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_reporting_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_reporting_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -64178,6 +80661,31 @@ sl_status_t dotdot_aox_locator_position_and_orientation_valid_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_position_and_orientation_valid_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_position_and_orientation_valid_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_position_and_orientation_valid(
@@ -64266,6 +80774,31 @@ sl_status_t dotdot_aox_locator_position_and_orientation_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_position_and_orientation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_position_and_orientation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_position_and_orientation(
@@ -64357,6 +80890,31 @@ sl_status_t dotdot_aox_locator_azimuth_mask_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_azimuth_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AZIMUTH_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_azimuth_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AZIMUTH_MASK);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_azimuth_mask(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -64444,6 +81002,31 @@ sl_status_t dotdot_aox_locator_elevation_mask_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_elevation_mask_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_elevation_mask_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_elevation_mask(
@@ -64535,6 +81118,31 @@ sl_status_t dotdot_aox_locator_allow_list_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_allow_list_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ALLOW_LIST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_allow_list_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ALLOW_LIST);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_allow_list(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -64621,6 +81229,31 @@ sl_status_t dotdot_aox_locator_aox_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_aox_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_aox_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_aox_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -64705,6 +81338,31 @@ sl_status_t dotdot_aox_locator_antenna_mode_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_antenna_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_antenna_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_antenna_mode(
@@ -64796,6 +81454,31 @@ sl_status_t dotdot_aox_locator_antenna_array_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_antenna_array_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_ARRAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_antenna_array_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_ARRAY);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_antenna_array(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -64880,6 +81563,31 @@ sl_status_t dotdot_aox_locator_period_samples_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_period_samples_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_period_samples_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_period_samples(
@@ -64968,6 +81676,31 @@ sl_status_t dotdot_aox_locator_angle_filtering_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_angle_filtering_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_angle_filtering_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_angle_filtering(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -65052,6 +81785,31 @@ sl_status_t dotdot_aox_locator_angle_filtering_weight_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_angle_filtering_weight_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_angle_filtering_weight_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_angle_filtering_weight(
@@ -65140,6 +81898,31 @@ sl_status_t dotdot_aox_locator_angle_correction_timeout_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_angle_correction_timeout_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_angle_correction_timeout_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_angle_correction_timeout(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -65224,6 +82007,31 @@ sl_status_t dotdot_aox_locator_angle_correction_delay_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_angle_correction_delay_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_angle_correction_delay_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_angle_correction_delay(
@@ -65312,6 +82120,31 @@ sl_status_t dotdot_aox_locator_cte_mode_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_cte_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_cte_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_cte_mode(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -65396,6 +82229,31 @@ sl_status_t dotdot_aox_locator_cte_sampling_interval_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_cte_sampling_interval_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_cte_sampling_interval_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_cte_sampling_interval(
@@ -65484,6 +82342,31 @@ sl_status_t dotdot_aox_locator_cte_length_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_locator_cte_length_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_cte_length_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_locator_cte_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -65568,6 +82451,31 @@ sl_status_t dotdot_aox_locator_slot_duration_undefine_desired(
       DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_aox_locator_slot_duration_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_locator_slot_duration_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_aox_locator_slot_duration(
@@ -65785,6 +82693,31 @@ sl_status_t dotdot_aox_position_estimation_position_undefine_desired(
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
+
+bool dotdot_aox_position_estimation_position_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_POSITION_ESTIMATION_POSITION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_aox_position_estimation_position_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_AOX_POSITION_ESTIMATION_POSITION);
+  return attribute_store_is_desired_defined(node);
+}
+
 sl_status_t dotdot_create_aox_position_estimation_position(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
@@ -65893,6 +82826,31 @@ sl_status_t dotdot_protocol_controller_network_management_network_management_sta
       DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_protocol_controller_network_management_network_management_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_protocol_controller_network_management_network_management_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE);
+  return attribute_store_is_desired_defined(node);
 }
 
 sl_status_t dotdot_create_protocol_controller_network_management_network_management_state(

@@ -37,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -77,11 +77,29 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="portable-environment">
 <h1>Portable environment<a class="headerlink" href="#portable-environment" title="Permalink to this heading"></a></h1>
-<p>This folder contains simple packaging scripts for downloading Silink and setting up portable runtime environment folders. The script should be executed within ´uic/portable_runtime´.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>portable_runtime$<span class="w"> </span>python3<span class="w"> </span>../scripts/ci/portable_environment/package_portable_environments.py<span class="w"> </span>
+<p>At the moment the Portable Runtime is comprised of a command line application (CLI), <em><code class="docutils literal notranslate"><span class="pre">unify_portable_cli</span></code></em>, with support for Linux, MacOS and Windows on the x86_64 architecture.
+There is also an experimental GUI, <em>unify_portable_gui</em>, that for the time being, has only been tested on Windows.</p>
+<p>The applications are written in Rust and rely on some platform specific tools, that are to be packaged and placed relative to the executable in a subfolder called <em><code class="docutils literal notranslate"><span class="pre">./resources</span></code></em>.</p>
+<section id="prepare-runtime-dependencies">
+<h2>Prepare runtime dependencies<a class="headerlink" href="#prepare-runtime-dependencies" title="Permalink to this heading"></a></h2>
+<p>The runtime dependencies for the applications, can be downloaded by running the Python script located in <em><code class="docutils literal notranslate"><span class="pre">./scripts/prepare-resources.py</span></code></em>.
+This script contains links for the various dependencies and as such downloads and extracts them to the correct location in the local filesystem.</p>
+<p>It makes sense to run this before starting to compile the application, as one can then just run <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--target</span> <span class="pre">x86_64-unknown-linux-gnu</span> <span class="pre">--release</span> <span class="pre">--package</span> <span class="pre">unify_portable_cli</span></code> from the top level <code class="docutils literal notranslate"><span class="pre">portable_runtime</span></code> folder.</p>
+<p>The script has some arguments that needs to be specified so it knows where to place the dependencies in the filesystem.
+You should specify which target OS you are building for with the <code class="docutils literal notranslate"><span class="pre">--target</span></code> argument.
+With the <code class="docutils literal notranslate"><span class="pre">--build_type</span></code> argument you specify whether it is a <code class="docutils literal notranslate"><span class="pre">debug</span></code> or a <code class="docutils literal notranslate"><span class="pre">release</span></code> build.
+The last argument is for the case where you decice to build the Rust project in a different build folder.
+For this case, you can specify the location of the top level build folder, usually named <code class="docutils literal notranslate"><span class="pre">target</span></code>in Rust, with the argument <code class="docutils literal notranslate"><span class="pre">--build_folder</span></code>.</p>
+</section>
+<section id="package-the-portable-runtime">
+<h2>Package the Portable Runtime<a class="headerlink" href="#package-the-portable-runtime" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">scripts</span></code> folder contains a simple packaging script for generating a deployment package for the Portable Runtime.
+The script should be executed within ´uic/portable_runtime´ like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>portable_runtime$<span class="w"> </span>python3<span class="w"> </span>./scripts/package_portable_environments.py<span class="w"> </span>--target<span class="w"> </span>windows<span class="w"> </span>--build_type<span class="w"> </span>release
 </pre></div>
 </div>
-<p>This creates portable environment folders and downloads Silink for supported platforms/architectures and creates zip archives ready for deployment.</p>
+<p>This will produce a compressed archive, a *.zip file for Windows and *.tar.bz2 file for Linux &amp; MacOS, of the CLI tool and the related runtime dependencies.</p>
+</section>
 </section>
 
 

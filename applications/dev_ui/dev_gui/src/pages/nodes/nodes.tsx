@@ -294,6 +294,8 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   getEndPointsM = (item: any, index: number) => {
     let endPoints = Object.keys(item.ep);
+    if (endPoints?.length)
+      endPoints = endPoints.sort();
     let clustersCount = item.IsExpanded ? endPoints.reduce((i, j: any) => (i + (item.ep[j].Clusters !== undefined ? Object.keys(item.ep[j].Clusters).filter(f => (ClusterViewOverrides as any)[f]?.IsExpandable).length : 0)), 0) : 0;
     return (<>
       {endPoints.map((endPoint: any, indexEp: number) => {
@@ -419,6 +421,8 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   getEndPoints = (item: any, index: number) => {
     let endPoints = Object.keys(item.ep);
+    if (endPoints?.length)
+      endPoints = endPoints.sort();
     let clustersCount = item.IsExpanded ? endPoints.reduce((i, j: any) => (i + (item.ep[j].Clusters !== undefined ? Object.keys(item.ep[j].Clusters).filter(f => (ClusterViewOverrides as any)[f]?.IsExpandable).length : 0)), 0) : 0;
     return (<>
       {endPoints.map((endPoint: any, indexEp: number) => {

@@ -17,12 +17,12 @@
 #include "attribute_store_helper.h"
 #include "dotdot_mqtt.h"
 #include "sl_log.h"
+#include "unify_dotdot_attribute_store_group_cluster.h"
 
 // ZPC Includes
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
-#include "zcl_group_cluster_server.h"
 
 // Generic includes
 #include <string>

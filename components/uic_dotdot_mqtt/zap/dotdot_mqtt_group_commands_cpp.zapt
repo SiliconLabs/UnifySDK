@@ -284,3 +284,7 @@ void {{dotdot_prefix}}_set_group_dispatch_callback(group_dispatch_t callback)
   group_dispatch_callback = callback;
 
 }
+
+group_dispatch_t {{dotdot_prefix}}_get_group_dispatch_callback(){
+  return group_dispatch_callback;
+}

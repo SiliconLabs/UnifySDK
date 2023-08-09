@@ -7,7 +7,6 @@ var group__zpc__attribute__store__network__helpers =
     [ "attribute_store_network_helper_get_endpoint_id_from_node", "group__zpc__attribute__store__network__helpers.html#ga00d73eba16badbaff8ea5e8e9f7038d1", null ],
     [ "attribute_store_network_helper_get_endpoint_node", "group__zpc__attribute__store__network__helpers.html#gae4d15b8e0c61c88d94c8f342bd2014fc", null ],
     [ "attribute_store_network_helper_get_home_id_node", "group__zpc__attribute__store__network__helpers.html#ga05cb572c96f7dc8e6657f86e135fafed", null ],
-    [ "attribute_store_network_helper_get_network_status", "group__zpc__attribute__store__network__helpers.html#gaf123a5996d170bafbd684ee71ae9de6c", null ],
     [ "attribute_store_network_helper_get_node_id_from_node", "group__zpc__attribute__store__network__helpers.html#ga715be25ab9c545f84ff524bc5a7eb7db", null ],
     [ "attribute_store_network_helper_get_node_id_node", "group__zpc__attribute__store__network__helpers.html#gafb993ff484b3c826743c4695d6659cf0", null ],
     [ "attribute_store_network_helper_get_unid_endpoint_from_node", "group__zpc__attribute__store__network__helpers.html#gafae8b9288ffd88bbbe138edf03680b14", null ],

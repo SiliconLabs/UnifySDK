@@ -130,6 +130,8 @@ static bool
  *        in the attribute store
  *
  * @param endpoint_node    Attribute store node for the Endpoint ID
+ * @param parameter_id     Configuration Parameter ID to create in the Attribute
+ *                         Store
  * @returns The created (or exisiting) attribute store node for the configuration
  * parameter ID
  */
@@ -142,10 +144,6 @@ static attribute_store_node_t
                               ATTRIBUTE(PARAMETER_ID),
                               &parameter_id,
                               sizeof(parameter_id));
-
-  attribute_store_add_if_missing(parameter_id_node,
-                                 configuration_parameter_attributes,
-                                 COUNT_OF(configuration_parameter_attributes));
 
   return parameter_id_node;
 }
@@ -208,9 +206,10 @@ static configuration_parameter_format_t
  * @brief Set the parameter value value in the frame buffer based on the parameter
  * size, MSB first.
  *
- * @param frame
- * @param value
- * @param size
+ * @param frame     "Slice" of the received frame starting where the value is to be written
+ * @param value     Configuration parameter value to write in the frame
+ * @param size      Configuration parameter size
+ * @param format    Configuration parameter format
  */
 static void
   set_parameter_value_in_buffer(uint8_t *frame,
@@ -271,30 +270,34 @@ static sl_status_t
                "Setting default properties for parameter ID node %d",
                parameter_id_node);
   // default is not read-only:
-  configuration_parameter_flag_t flag_value = false;
-  attribute_store_set_child_reported(parameter_id_node,
-                                     ATTRIBUTE(PARAMETER_READ_ONLY),
-                                     &flag_value,
-                                     sizeof(flag_value));
+  const configuration_parameter_flag_t flag_value = false;
+  attribute_store_set_child_reported_only_if_undefined(
+    parameter_id_node,
+    ATTRIBUTE(PARAMETER_READ_ONLY),
+    &flag_value,
+    sizeof(flag_value));
 
   // Not advanced
-  attribute_store_set_child_reported(parameter_id_node,
-                                     ATTRIBUTE(PARAMETER_ADVANCED),
-                                     &flag_value,
-                                     sizeof(flag_value));
+  attribute_store_set_child_reported_only_if_undefined(
+    parameter_id_node,
+    ATTRIBUTE(PARAMETER_ADVANCED),
+    &flag_value,
+    sizeof(flag_value));
 
   // Altering capabilties
-  attribute_store_set_child_reported(parameter_id_node,
-                                     ATTRIBUTE(PARAMETER_ALTERING_CAPABILITIES),
-                                     &flag_value,
-                                     sizeof(flag_value));
+  attribute_store_set_child_reported_only_if_undefined(
+    parameter_id_node,
+    ATTRIBUTE(PARAMETER_ALTERING_CAPABILITIES),
+    &flag_value,
+    sizeof(flag_value));
   // Default format: Signed integer
-  configuration_parameter_format_t default_format
+  const configuration_parameter_format_t default_format
     = PARAMETER_FORMAT_SIGNED_INTEGER;
-  attribute_store_set_child_reported(parameter_id_node,
-                                     ATTRIBUTE(PARAMETER_FORMAT),
-                                     &default_format,
-                                     sizeof(default_format));
+  attribute_store_set_child_reported_only_if_undefined(
+    parameter_id_node,
+    ATTRIBUTE(PARAMETER_FORMAT),
+    &default_format,
+    sizeof(default_format));
 
   // Next stop: min/default/max. we need to know the size for this.
   configuration_parameter_size_t size
@@ -307,10 +310,11 @@ static sl_status_t
   // Set the default to the current setting:
   configuration_parameter_value_t value
     = get_configuration_parameter_value(parameter_id_node);
-  attribute_store_set_child_reported(parameter_id_node,
-                                     ATTRIBUTE(PARAMETER_DEFAULT_VALUE),
-                                     &value,
-                                     sizeof(value));
+  attribute_store_set_child_reported_only_if_undefined(
+    parameter_id_node,
+    ATTRIBUTE(PARAMETER_DEFAULT_VALUE),
+    &value,
+    sizeof(value));
 
   // set the Minimum depending on the size.
   if (size == 1) {
@@ -320,10 +324,11 @@ static sl_status_t
   } else {
     value = INT32_MIN;
   }
-  attribute_store_set_child_reported(parameter_id_node,
-                                     ATTRIBUTE(PARAMETER_MIN_VALUE),
-                                     &value,
-                                     sizeof(value));
+  attribute_store_set_child_reported_only_if_undefined(
+    parameter_id_node,
+    ATTRIBUTE(PARAMETER_MIN_VALUE),
+    &value,
+    sizeof(value));
 
   // set the Maximum depending on the size.
   if (size == 1) {
@@ -333,10 +338,11 @@ static sl_status_t
   } else {
     value = INT32_MAX;
   }
-  attribute_store_set_child_reported(parameter_id_node,
-                                     ATTRIBUTE(PARAMETER_MAX_VALUE),
-                                     &value,
-                                     sizeof(value));
+  attribute_store_set_child_reported_only_if_undefined(
+    parameter_id_node,
+    ATTRIBUTE(PARAMETER_MAX_VALUE),
+    &value,
+    sizeof(value));
 
   return SL_STATUS_ALREADY_EXISTS;
 }
@@ -1427,6 +1433,35 @@ static void
 // Attribute update callbacks
 ///////////////////////////////////////////////////////////////////////////////
 /**
+ * @brief Attribute callback function listening for Configuration Paramter ID
+ *        creations and creating all the sub-attributes
+ *
+ * @param parameter_id_node    Attribute Store node that was modified.
+ * @param change               Type of change applied to the node.
+ */
+static void
+  zwave_command_class_configuration_on_configuration_parameter_created(
+    attribute_store_node_t parameter_id_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_CREATED) {
+    return;
+  }
+
+  attribute_store_add_if_missing(parameter_id_node,
+                                 configuration_parameter_attributes,
+                                 COUNT_OF(configuration_parameter_attributes));
+
+  zwave_cc_version_t supporting_node_version
+    = zwave_command_class_get_version_from_node(parameter_id_node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
+
+  if (supporting_node_version < 3) {
+    // Proactively fill default values if the node cannot be asked.
+    set_default_parameter_properties(parameter_id_node);
+  }
+}
+
+/**
  * @brief Attribute callback function listening for Configuration version
  *        attribute updates.
  *
@@ -1561,6 +1596,10 @@ sl_status_t zwave_command_class_configuration_init()
   attribute_store_register_callback_by_type(
     zwave_command_class_configuration_on_version_attribute_update,
     ATTRIBUTE(VERSION));
+
+  attribute_store_register_callback_by_type(
+    &zwave_command_class_configuration_on_configuration_parameter_created,
+    ATTRIBUTE(PARAMETER_ID));
 
   // Register our handler to the Z-Wave CC framework:
   zwave_command_handler_t handler = {};

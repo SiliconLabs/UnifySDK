@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ PowerConfiguration/MainsVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MainsVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltage/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltage/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltage/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltage/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ PowerConfiguration/MainsFrequency Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MainsFrequency attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsFrequency/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsFrequency/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsFrequency/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_FREQUENCY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsFrequency/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_FREQUENCY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsFrequency/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_FREQUENCY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsFrequency/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_FREQUENCY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ PowerConfiguration/MainsAlarmMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MainsAlarmMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsAlarmMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsAlarmMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsAlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_ALARM_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsAlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_ALARM_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsAlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_ALARM_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsAlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_ALARM_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ PowerConfiguration/MainsVoltageMinThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MainsVoltageMinThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageMinThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltageMinThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE_MIN_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE_MIN_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE_MIN_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE_MIN_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ PowerConfiguration/MainsVoltageMaxThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MainsVoltageMaxThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE_MAX_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE_MAX_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE_MAX_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE_MAX_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ PowerConfiguration/MainsVoltageDwellTripPoint Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MainsVoltageDwellTripPoint attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE_DWELL_TRIP_POINT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE_DWELL_TRIP_POINT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Desired { &quot;value&quot;: &lt;DESIRED_MAINS_VOLTAGE_DWELL_TRIP_POINT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Reported { &quot;value&quot;: &lt;REPORTED_MAINS_VOLTAGE_DWELL_TRIP_POINT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ PowerConfiguration/BatteryVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ PowerConfiguration/BatteryPercentageRemaining Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryPercentageRemaining attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageRemaining/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageRemaining/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageRemaining/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_REMAINING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageRemaining/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_REMAINING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageRemaining/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_REMAINING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageRemaining/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_REMAINING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ PowerConfiguration/BatteryManufacturer Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryManufacturer attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryManufacturer/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryManufacturer/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryManufacturer/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_MANUFACTURER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryManufacturer/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_MANUFACTURER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryManufacturer/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_MANUFACTURER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryManufacturer/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_MANUFACTURER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ PowerConfiguration/BatterySize Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatterySize attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatterySize/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatterySize/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatterySize/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_SIZE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatterySize/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_SIZE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatterySize/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_SIZE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatterySize/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_SIZE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ PowerConfiguration/BatteryAHrRating Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryAHrRating attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAHrRating/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryAHrRating/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAHrRating/Desired { &quot;value&quot;: &lt;DESIRED_BATTERYA_HR_RATING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAHrRating/Reported { &quot;value&quot;: &lt;REPORTED_BATTERYA_HR_RATING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryAHrRating/Desired { &quot;value&quot;: &lt;DESIRED_BATTERYA_HR_RATING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryAHrRating/Reported { &quot;value&quot;: &lt;REPORTED_BATTERYA_HR_RATING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ PowerConfiguration/BatteryQuantity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryQuantity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryQuantity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryQuantity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryQuantity/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_QUANTITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryQuantity/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_QUANTITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryQuantity/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_QUANTITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryQuantity/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_QUANTITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ PowerConfiguration/BatteryRatedVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryRatedVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryRatedVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryRatedVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryRatedVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_RATED_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryRatedVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_RATED_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryRatedVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_RATED_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryRatedVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_RATED_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ PowerConfiguration/BatteryAlarmMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryAlarmMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAlarmMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryAlarmMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_ALARM_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_ALARM_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryAlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_ALARM_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryAlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_ALARM_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ PowerConfiguration/BatteryVoltageMinThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryVoltageMinThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_MIN_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_MIN_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_MIN_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_MIN_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ PowerConfiguration/BatteryVoltageThreshold1 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryVoltageThreshold1 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold1/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageThreshold1/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_THRESHOLD1&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_THRESHOLD1&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_THRESHOLD1&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_THRESHOLD1&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ PowerConfiguration/BatteryVoltageThreshold2 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryVoltageThreshold2 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold2/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageThreshold2/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_THRESHOLD2&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_THRESHOLD2&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_THRESHOLD2&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_THRESHOLD2&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ PowerConfiguration/BatteryVoltageThreshold3 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryVoltageThreshold3 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold3/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageThreshold3/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_THRESHOLD3&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_THRESHOLD3&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_VOLTAGE_THRESHOLD3&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_VOLTAGE_THRESHOLD3&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ PowerConfiguration/BatteryPercentageMinThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryPercentageMinThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_MIN_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_MIN_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_MIN_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_MIN_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ PowerConfiguration/BatteryPercentageThreshold1 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryPercentageThreshold1 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold1/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageThreshold1/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_THRESHOLD1&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_THRESHOLD1&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_THRESHOLD1&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_THRESHOLD1&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ PowerConfiguration/BatteryPercentageThreshold2 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryPercentageThreshold2 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold2/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageThreshold2/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_THRESHOLD2&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_THRESHOLD2&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_THRESHOLD2&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_THRESHOLD2&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -705,10 +747,12 @@ PowerConfiguration/BatteryPercentageThreshold3 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryPercentageThreshold3 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold3/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageThreshold3/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_THRESHOLD3&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_THRESHOLD3&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_PERCENTAGE_THRESHOLD3&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_PERCENTAGE_THRESHOLD3&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -733,10 +777,12 @@ PowerConfiguration/BatteryAlarmState Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for BatteryAlarmState attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAlarmState/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryAlarmState/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAlarmState/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_ALARM_STATE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/BatteryAlarmState/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_ALARM_STATE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryAlarmState/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY_ALARM_STATE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/BatteryAlarmState/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY_ALARM_STATE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -761,10 +807,12 @@ PowerConfiguration/Battery2Voltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2Voltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Voltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Voltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Voltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Voltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Voltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Voltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -789,10 +837,12 @@ PowerConfiguration/Battery2PercentageRemaining Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2PercentageRemaining attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageRemaining/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageRemaining/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageRemaining/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_REMAINING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageRemaining/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_REMAINING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageRemaining/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_REMAINING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageRemaining/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_REMAINING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -817,10 +867,12 @@ PowerConfiguration/Battery2Manufacturer Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2Manufacturer attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Manufacturer/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Manufacturer/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Manufacturer/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_MANUFACTURER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Manufacturer/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_MANUFACTURER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Manufacturer/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_MANUFACTURER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Manufacturer/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_MANUFACTURER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -845,10 +897,12 @@ PowerConfiguration/Battery2Size Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2Size attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Size/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Size/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Size/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_SIZE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Size/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_SIZE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Size/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_SIZE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Size/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_SIZE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -873,10 +927,12 @@ PowerConfiguration/Battery2AHrRating Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2AHrRating attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AHrRating/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2AHrRating/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AHrRating/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2A_HR_RATING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AHrRating/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2A_HR_RATING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2AHrRating/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2A_HR_RATING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2AHrRating/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2A_HR_RATING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -901,10 +957,12 @@ PowerConfiguration/Battery2Quantity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2Quantity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Quantity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Quantity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Quantity/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_QUANTITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2Quantity/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_QUANTITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Quantity/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_QUANTITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2Quantity/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_QUANTITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -929,10 +987,12 @@ PowerConfiguration/Battery2RatedVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2RatedVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2RatedVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2RatedVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2RatedVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_RATED_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2RatedVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_RATED_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2RatedVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_RATED_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2RatedVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_RATED_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -957,10 +1017,12 @@ PowerConfiguration/Battery2AlarmMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2AlarmMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AlarmMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2AlarmMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_ALARM_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_ALARM_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_ALARM_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_ALARM_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -985,10 +1047,12 @@ PowerConfiguration/Battery2VoltageMinThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2VoltageMinThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_MIN_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_MIN_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_MIN_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_MIN_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1013,10 +1077,12 @@ PowerConfiguration/Battery2VoltageThreshold1 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2VoltageThreshold1 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold1/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageThreshold1/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_THRESHOLD1&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_THRESHOLD1&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_THRESHOLD1&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_THRESHOLD1&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1041,10 +1107,12 @@ PowerConfiguration/Battery2VoltageThreshold2 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2VoltageThreshold2 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold2/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageThreshold2/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_THRESHOLD2&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_THRESHOLD2&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_THRESHOLD2&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_THRESHOLD2&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1069,10 +1137,12 @@ PowerConfiguration/Battery2VoltageThreshold3 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2VoltageThreshold3 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold3/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageThreshold3/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_THRESHOLD3&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_THRESHOLD3&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_VOLTAGE_THRESHOLD3&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_VOLTAGE_THRESHOLD3&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1097,10 +1167,12 @@ PowerConfiguration/Battery2PercentageMinThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2PercentageMinThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_MIN_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_MIN_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_MIN_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_MIN_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1125,10 +1197,12 @@ PowerConfiguration/Battery2PercentageThreshold1 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2PercentageThreshold1 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold1/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageThreshold1/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_THRESHOLD1&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_THRESHOLD1&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_THRESHOLD1&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_THRESHOLD1&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1153,10 +1227,12 @@ PowerConfiguration/Battery2PercentageThreshold2 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2PercentageThreshold2 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold2/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageThreshold2/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_THRESHOLD2&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_THRESHOLD2&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_THRESHOLD2&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_THRESHOLD2&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1181,10 +1257,12 @@ PowerConfiguration/Battery2PercentageThreshold3 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2PercentageThreshold3 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold3/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageThreshold3/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_THRESHOLD3&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_THRESHOLD3&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_PERCENTAGE_THRESHOLD3&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_PERCENTAGE_THRESHOLD3&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1209,10 +1287,12 @@ PowerConfiguration/Battery2AlarmState Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery2AlarmState attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AlarmState/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2AlarmState/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AlarmState/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_ALARM_STATE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery2AlarmState/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_ALARM_STATE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2AlarmState/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY2_ALARM_STATE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery2AlarmState/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY2_ALARM_STATE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1237,10 +1317,12 @@ PowerConfiguration/Battery3Voltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3Voltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Voltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Voltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Voltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Voltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Voltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Voltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1265,10 +1347,12 @@ PowerConfiguration/Battery3PercentageRemaining Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3PercentageRemaining attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageRemaining/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageRemaining/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageRemaining/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_REMAINING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageRemaining/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_REMAINING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageRemaining/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_REMAINING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageRemaining/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_REMAINING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1293,10 +1377,12 @@ PowerConfiguration/Battery3Manufacturer Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3Manufacturer attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Manufacturer/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Manufacturer/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Manufacturer/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_MANUFACTURER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Manufacturer/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_MANUFACTURER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Manufacturer/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_MANUFACTURER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Manufacturer/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_MANUFACTURER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1321,10 +1407,12 @@ PowerConfiguration/Battery3Size Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3Size attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Size/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Size/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Size/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_SIZE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Size/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_SIZE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Size/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_SIZE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Size/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_SIZE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1349,10 +1437,12 @@ PowerConfiguration/Battery3AHrRating Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3AHrRating attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AHrRating/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3AHrRating/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AHrRating/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3A_HR_RATING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AHrRating/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3A_HR_RATING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3AHrRating/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3A_HR_RATING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3AHrRating/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3A_HR_RATING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1377,10 +1467,12 @@ PowerConfiguration/Battery3Quantity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3Quantity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Quantity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Quantity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Quantity/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_QUANTITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3Quantity/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_QUANTITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Quantity/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_QUANTITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3Quantity/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_QUANTITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1405,10 +1497,12 @@ PowerConfiguration/Battery3RatedVoltage Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3RatedVoltage attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3RatedVoltage/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3RatedVoltage/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3RatedVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_RATED_VOLTAGE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3RatedVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_RATED_VOLTAGE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3RatedVoltage/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_RATED_VOLTAGE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3RatedVoltage/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_RATED_VOLTAGE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1433,10 +1527,12 @@ PowerConfiguration/Battery3AlarmMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3AlarmMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AlarmMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3AlarmMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_ALARM_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_ALARM_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_ALARM_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_ALARM_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1461,10 +1557,12 @@ PowerConfiguration/Battery3VoltageMinThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3VoltageMinThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_MIN_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_MIN_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_MIN_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_MIN_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1489,10 +1587,12 @@ PowerConfiguration/Battery3VoltageThreshold1 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3VoltageThreshold1 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold1/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageThreshold1/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_THRESHOLD1&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_THRESHOLD1&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_THRESHOLD1&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_THRESHOLD1&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1517,10 +1617,12 @@ PowerConfiguration/Battery3VoltageThreshold2 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3VoltageThreshold2 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold2/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageThreshold2/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_THRESHOLD2&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_THRESHOLD2&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_THRESHOLD2&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_THRESHOLD2&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1545,10 +1647,12 @@ PowerConfiguration/Battery3VoltageThreshold3 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3VoltageThreshold3 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold3/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageThreshold3/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_THRESHOLD3&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_THRESHOLD3&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_VOLTAGE_THRESHOLD3&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_VOLTAGE_THRESHOLD3&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1573,10 +1677,12 @@ PowerConfiguration/Battery3PercentageMinThreshold Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3PercentageMinThreshold attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_MIN_THRESHOLD&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_MIN_THRESHOLD&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_MIN_THRESHOLD&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_MIN_THRESHOLD&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1601,10 +1707,12 @@ PowerConfiguration/Battery3PercentageThreshold1 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3PercentageThreshold1 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold1/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageThreshold1/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_THRESHOLD1&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_THRESHOLD1&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_THRESHOLD1&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_THRESHOLD1&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1629,10 +1737,12 @@ PowerConfiguration/Battery3PercentageThreshold2 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3PercentageThreshold2 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold2/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageThreshold2/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_THRESHOLD2&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_THRESHOLD2&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_THRESHOLD2&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_THRESHOLD2&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1657,10 +1767,12 @@ PowerConfiguration/Battery3PercentageThreshold3 Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3PercentageThreshold3 attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold3/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageThreshold3/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_THRESHOLD3&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_THRESHOLD3&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_PERCENTAGE_THRESHOLD3&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_PERCENTAGE_THRESHOLD3&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1685,10 +1797,12 @@ PowerConfiguration/Battery3AlarmState Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Battery3AlarmState attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AlarmState/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3AlarmState/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AlarmState/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_ALARM_STATE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Attributes/Battery3AlarmState/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_ALARM_STATE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3AlarmState/Desired { &quot;value&quot;: &lt;DESIRED_BATTERY3_ALARM_STATE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PowerConfiguration/Attributes/Battery3AlarmState/Reported { &quot;value&quot;: &lt;REPORTED_BATTERY3_ALARM_STATE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -1919,7 +2033,7 @@ PowerConfiguration/WriteAttributes Command</h2>
 <p>To update all PowerConfiguration attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PowerConfiguration/Commands/WriteAttributes&#39; -m  &#39;{ &quot;MainsAlarmMask&quot;: &lt;MAINS_ALARM_MASK_VALUE&gt; ,&quot;MainsVoltageMinThreshold&quot;: &lt;MAINS_VOLTAGE_MIN_THRESHOLD_VALUE&gt; ,&quot;MainsVoltageMaxThreshold&quot;: &lt;MAINS_VOLTAGE_MAX_THRESHOLD_VALUE&gt; ,&quot;MainsVoltageDwellTripPoint&quot;: &lt;MAINS_VOLTAGE_DWELL_TRIP_POINT_VALUE&gt; ,&quot;BatteryManufacturer&quot;: &lt;BATTERY_MANUFACTURER_VALUE&gt; ,&quot;BatterySize&quot;: &lt;BATTERY_SIZE_VALUE&gt; ,&quot;BatteryAHrRating&quot;: &lt;BATTERYA_HR_RATING_VALUE&gt; ,&quot;BatteryQuantity&quot;: &lt;BATTERY_QUANTITY_VALUE&gt; ,&quot;BatteryRatedVoltage&quot;: &lt;BATTERY_RATED_VOLTAGE_VALUE&gt; ,&quot;BatteryAlarmMask&quot;: &lt;BATTERY_ALARM_MASK_VALUE&gt; ,&quot;BatteryVoltageMinThreshold&quot;: &lt;BATTERY_VOLTAGE_MIN_THRESHOLD_VALUE&gt; ,&quot;BatteryVoltageThreshold1&quot;: &lt;BATTERY_VOLTAGE_THRESHOLD1_VALUE&gt; ,&quot;BatteryVoltageThreshold2&quot;: &lt;BATTERY_VOLTAGE_THRESHOLD2_VALUE&gt; ,&quot;BatteryVoltageThreshold3&quot;: &lt;BATTERY_VOLTAGE_THRESHOLD3_VALUE&gt; ,&quot;BatteryPercentageMinThreshold&quot;: &lt;BATTERY_PERCENTAGE_MIN_THRESHOLD_VALUE&gt; ,&quot;BatteryPercentageThreshold1&quot;: &lt;BATTERY_PERCENTAGE_THRESHOLD1_VALUE&gt; ,&quot;BatteryPercentageThreshold2&quot;: &lt;BATTERY_PERCENTAGE_THRESHOLD2_VALUE&gt; ,&quot;BatteryPercentageThreshold3&quot;: &lt;BATTERY_PERCENTAGE_THRESHOLD3_VALUE&gt; ,&quot;Battery2Manufacturer&quot;: &lt;BATTERY2_MANUFACTURER_VALUE&gt; ,&quot;Battery2Size&quot;: &lt;BATTERY2_SIZE_VALUE&gt; ,&quot;Battery2AHrRating&quot;: &lt;BATTERY2A_HR_RATING_VALUE&gt; ,&quot;Battery2Quantity&quot;: &lt;BATTERY2_QUANTITY_VALUE&gt; ,&quot;Battery2RatedVoltage&quot;: &lt;BATTERY2_RATED_VOLTAGE_VALUE&gt; ,&quot;Battery2AlarmMask&quot;: &lt;BATTERY2_ALARM_MASK_VALUE&gt; ,&quot;Battery2VoltageMinThreshold&quot;: &lt;BATTERY2_VOLTAGE_MIN_THRESHOLD_VALUE&gt; ,&quot;Battery2VoltageThreshold1&quot;: &lt;BATTERY2_VOLTAGE_THRESHOLD1_VALUE&gt; ,&quot;Battery2VoltageThreshold2&quot;: &lt;BATTERY2_VOLTAGE_THRESHOLD2_VALUE&gt; ,&quot;Battery2VoltageThreshold3&quot;: &lt;BATTERY2_VOLTAGE_THRESHOLD3_VALUE&gt; ,&quot;Battery2PercentageMinThreshold&quot;: &lt;BATTERY2_PERCENTAGE_MIN_THRESHOLD_VALUE&gt; ,&quot;Battery2PercentageThreshold1&quot;: &lt;BATTERY2_PERCENTAGE_THRESHOLD1_VALUE&gt; ,&quot;Battery2PercentageThreshold2&quot;: &lt;BATTERY2_PERCENTAGE_THRESHOLD2_VALUE&gt; ,&quot;Battery2PercentageThreshold3&quot;: &lt;BATTERY2_PERCENTAGE_THRESHOLD3_VALUE&gt; ,&quot;Battery3Manufacturer&quot;: &lt;BATTERY3_MANUFACTURER_VALUE&gt; ,&quot;Battery3Size&quot;: &lt;BATTERY3_SIZE_VALUE&gt; ,&quot;Battery3AHrRating&quot;: &lt;BATTERY3A_HR_RATING_VALUE&gt; ,&quot;Battery3Quantity&quot;: &lt;BATTERY3_QUANTITY_VALUE&gt; ,&quot;Battery3RatedVoltage&quot;: &lt;BATTERY3_RATED_VOLTAGE_VALUE&gt; ,&quot;Battery3AlarmMask&quot;: &lt;BATTERY3_ALARM_MASK_VALUE&gt; ,&quot;Battery3VoltageMinThreshold&quot;: &lt;BATTERY3_VOLTAGE_MIN_THRESHOLD_VALUE&gt; ,&quot;Battery3VoltageThreshold1&quot;: &lt;BATTERY3_VOLTAGE_THRESHOLD1_VALUE&gt; ,&quot;Battery3VoltageThreshold2&quot;: &lt;BATTERY3_VOLTAGE_THRESHOLD2_VALUE&gt; ,&quot;Battery3VoltageThreshold3&quot;: &lt;BATTERY3_VOLTAGE_THRESHOLD3_VALUE&gt; ,&quot;Battery3PercentageMinThreshold&quot;: &lt;BATTERY3_PERCENTAGE_MIN_THRESHOLD_VALUE&gt; ,&quot;Battery3PercentageThreshold1&quot;: &lt;BATTERY3_PERCENTAGE_THRESHOLD1_VALUE&gt; ,&quot;Battery3PercentageThreshold2&quot;: &lt;BATTERY3_PERCENTAGE_THRESHOLD2_VALUE&gt; ,&quot;Battery3PercentageThreshold3&quot;: &lt;BATTERY3_PERCENTAGE_THRESHOLD3_VALUE&gt; , }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -2019,7 +2133,7 @@ PowerConfiguration/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -63,10 +63,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Unify Coding Standard</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#introduction">1 Introduction</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#purpose-of-this-document">1.1 Purpose of this document</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#latest-version-of-this-document">1.2 Latest version of this document</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#changing-this-document">1.3 Changing this document</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#structure-and-wording-of-this-document">1.4 Structure and wording of this document</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#application-of-this-standard">1.5 Application of this standard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure-and-wording-of-this-document">1.2 Structure and wording of this document</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-of-this-standard">1.3 Application of this standard</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#general-guidelines">2 General Guidelines</a><ul>
@@ -131,7 +129,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
@@ -173,49 +170,8 @@ rules in this document that you will disagree with. However, please adhere to
 the rules described here, as having a coding standard that you (somewhat)
 disagree with is better than having no coding standard.</p>
 </section>
-<section id="latest-version-of-this-document">
-<h3>1.2 Latest version of this document<a class="headerlink" href="#latest-version-of-this-document" title="Permalink to this heading"></a></h3>
-<p>This document is version <strong>0.1</strong>.</p>
-<p>The latest version of this document can always be found in Stash:</p>
-<p><a class="reference external" href="https://siliconlabs.github.io/UnifySDK/doc/standards/coding-standard.html">coding_standard</a></p>
-<p><strong>Note:</strong> The reason why this document is in git is so that we can use pull-
-requests for changes and make it easier for people to track changes to the
-standard.</p>
-</section>
-<section id="changing-this-document">
-<h3>1.3 Changing this document<a class="headerlink" href="#changing-this-document" title="Permalink to this heading"></a></h3>
-<p>Any change made to this document must comply with following procedure.</p>
-<p><strong>Note:</strong> This includes adding yourself to this list!</p>
-<p>Additionally, please make sure that your commit has a good commit message.</p>
-<section id="versioning">
-<h4>1.3.1 Versioning<a class="headerlink" href="#versioning" title="Permalink to this heading"></a></h4>
-<p>Whenever a new coding standard is released, a PR will be merged back in the
-<code class="docutils literal notranslate"><span class="pre">develop</span></code> branch and the version number of the standard will be incremented.</p>
-<p>Therefore, each commit on the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch will be a new, stable version of
-this coding standard. For small additions to the standard, only the minor number
-version should be incremented. For versions not compatible with previous ones,
-the major version number should be incremented.</p>
-<p>Whenever a new version is released, a notification should be sent to all developers,
-indicating what has changed and if existing code needs to be updated in some
-way or can remain the same, with only new code following the new standard.
-If a legacy layer needs to be created, the notification should also mention it.</p>
-</section>
-<section id="review-committee">
-<h4>1.3.2 Review committee<a class="headerlink" href="#review-committee" title="Permalink to this heading"></a></h4>
-<p>The pull request to merge in to <code class="docutils literal notranslate"><span class="pre">develop</span></code> needs to be approved by
-one of the following people:</p>
-<ul class="simple">
-<li><p>Jonas Roum-Møller</p></li>
-<li><p>Anders Esbensen</p></li>
-</ul>
-<p>Additionally, the following people should be on the review list:</p>
-<ul class="simple">
-<li><p>All members of the Unify development team</p></li>
-</ul>
-</section>
-</section>
 <section id="structure-and-wording-of-this-document">
-<h3>1.4 Structure and wording of this document<a class="headerlink" href="#structure-and-wording-of-this-document" title="Permalink to this heading"></a></h3>
+<h3>1.2 Structure and wording of this document<a class="headerlink" href="#structure-and-wording-of-this-document" title="Permalink to this heading"></a></h3>
 <p>This document contains three separate parts: Coding guidelines, coding style and
 documentation. The coding guidelines deal with the structure of your code. This
 part is split into a general and a C specific part. The coding style guide
@@ -223,24 +179,24 @@ details how your code should look, e.g. brace style, comment style etc.
 Documentation deals with how you should document your code to make it easy for
 other people to use and modify the code.</p>
 <section id="source-code">
-<h4>1.4.1 Source Code<a class="headerlink" href="#source-code" title="Permalink to this heading"></a></h4>
+<h4>1.2.1 Source Code<a class="headerlink" href="#source-code" title="Permalink to this heading"></a></h4>
 <p>In this document, <strong>Source code</strong> is used as a common name for any C, C++ or
 header file from Silicon Labs that is being provided to customers. It applies to
 both manually created as well as autogenerated code.</p>
 </section>
 <section id="required">
-<h4>1.4.2 Required<a class="headerlink" href="#required" title="Permalink to this heading"></a></h4>
+<h4>1.2.2 Required<a class="headerlink" href="#required" title="Permalink to this heading"></a></h4>
 <p>Some of the coding standards are required and some are recommendations. All
 required coding standards are tagged with <strong>Required</strong>.</p>
 </section>
 <section id="recommended">
-<h4>1.4.3 Recommended<a class="headerlink" href="#recommended" title="Permalink to this heading"></a></h4>
+<h4>1.2.3 Recommended<a class="headerlink" href="#recommended" title="Permalink to this heading"></a></h4>
 <p>Recommended rules should generally be followed. However, recommended rules can
 be broken in special circumstances. All recommended coding standards are tagged
 <strong>Recommended</strong>.</p>
 </section>
 <section id="should">
-<h4>1.4.4 Should<a class="headerlink" href="#should" title="Permalink to this heading"></a></h4>
+<h4>1.2.4 Should<a class="headerlink" href="#should" title="Permalink to this heading"></a></h4>
 <p>The word “should” is used throughout this document. In this context, “should” is
 used to indicate best practice. You should strive to meet these guidelines.
 However, it is possible to break these rules, if that results in a better end
@@ -248,15 +204,15 @@ result.</p>
 </section>
 </section>
 <section id="application-of-this-standard">
-<h3>1.5 Application of this standard<a class="headerlink" href="#application-of-this-standard" title="Permalink to this heading"></a></h3>
+<h3>1.3 Application of this standard<a class="headerlink" href="#application-of-this-standard" title="Permalink to this heading"></a></h3>
 <section id="new-modules">
-<h4>1.5.1 New modules<a class="headerlink" href="#new-modules" title="Permalink to this heading"></a></h4>
+<h4>1.3.1 New modules<a class="headerlink" href="#new-modules" title="Permalink to this heading"></a></h4>
 <p>This standard applies unconditionally to new modules.</p>
 <p>Please note that a new software module does not need to be a new full stack.
 This could be only a new part in an existing stack.</p>
 </section>
 <section id="existing-modules">
-<h4>1.5.2 Existing modules<a class="headerlink" href="#existing-modules" title="Permalink to this heading"></a></h4>
+<h4>1.3.2 Existing modules<a class="headerlink" href="#existing-modules" title="Permalink to this heading"></a></h4>
 <p>Existing components will continue to use the coding standard they are already
 using (there is still some differences between the various stacks).</p>
 </section>
@@ -602,7 +558,7 @@ void sl_assert(const char *file, int line)
 with a user defined assert.</p>
 <ol class="arabic simple">
 <li><p>define a <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">user_assert(const</span> <span class="pre">char</span> <span class="pre">*,</span> <span class="pre">int)</span></code> function</p></li>
-<li><p>Uncomment the two lines below (marked “declaration” and “definition”).</p></li>
+<li><p>Uncomment the two lines in the above example (marked “declaration” and “definition”).</p></li>
 </ol>
 <p><code class="docutils literal notranslate"><span class="pre">assert()</span></code> is a void function and never return any value. If you like
 a function to return a value depending on the evaluation of an expression,

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('group__zpc__attribute__types.html','')
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ga3166964cf57ad2a2698767b68277881c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__types.html#ga3166964cf57ad2a2698767b68277881c">ZWAVE_CC_VERSION_ATTRIBUTE</a>(cc)&#160;&#160;&#160;(<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>)((cc &lt;&lt; 8) | 0x1)</td></tr>
-<tr class="memdesc:ga3166964cf57ad2a2698767b68277881c"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Set the proper name for the Root,  <a href="group__zpc__attribute__types.html#ga3166964cf57ad2a2698767b68277881c">More...</a><br /></td></tr>
+<tr class="memdesc:ga3166964cf57ad2a2698767b68277881c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of a node in the attribute store.  <a href="group__zpc__attribute__types.html#ga3166964cf57ad2a2698767b68277881c">More...</a><br /></td></tr>
 <tr class="separator:ga3166964cf57ad2a2698767b68277881c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae537fef967d9fbfad304aec7b2b85948"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__types.html#gae537fef967d9fbfad304aec7b2b85948">COUNT_OF</a>(x)&#160;&#160;&#160;  ((sizeof(x) / sizeof(0 [x])) / ((size_t)(!(sizeof(x) % sizeof(0 [x])))))</td></tr>
 <tr class="separator:gae537fef967d9fbfad304aec7b2b85948"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,7 +155,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>&lt; Set the proper name for the Root, </p>
 <p>Type of a node in the attribute store. </p>
 
 </div>
@@ -188,7 +187,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>&lt; This represents a Home ID. zwave_home_id_t type </p>
-<p>&lt; This represents a Node ID. zwave_node_id_t type. &lt; This represents an endpoint. zwave_endpoint_id_t type. &lt; This represents a list of granted security keys to a node. zwave_keyset_t type &lt; This represents the outcome of the S2 Bootstrapping process. zwave_kex_fail_type_t &lt; This represents the S2 DSK to a node. zwave_dsk_t &lt; This represent the listening protocol byte from the NIF. uint8_t &lt; This represent the optional protocol byte from the NIF. uint8_t &lt; This represents the Z-Wave Role Type of a node. zwave_role_type_t &lt; This represents the name assigned to a node. This is a string. &lt; This represents the location assigned to a node. This is a string &lt; This represents the Network Status of a node. node_state_topic_state_t &lt; This represents a timestamp (in seconds!) of the last time when we received and/or successfully transmitted a frame towards a node. storage type of the timestamp is clock_time_t &lt; This is the protocol used for including a node. zwave_protocol_t &lt; This is a token shown if a node is S2 capable. No value, it's a token &lt; This is the S2 SPAN data for a node. span_entry_t type &lt; This is the S2 MPAN table for the ZPC. No type. &lt; This is one entry of the S2 MPAN table for the ZPC. mpan_entry_t type &lt; This is an attribute that keeps a list of assigned groups. no type &lt; This is an assigned Multicast group. zwave_multicast_group_id_t &lt; This is the interval for sending NOPs to failing node clock_time_t &lt; Used by poll engine to request of for polling of the attributer This represents the list of supported command classes (NIF) for a node This represents the list of supported command classes only at the highest security level (secure NIF) for a node. This represents the Z-Wave Basic device class of a node/endpoint This represents the Z-Wave Generic Device Type of a node/endpoint. This represents the Z-Wave Specific Device Type of a node/endpoint. &lt; This represent a zwave_key_protocol_combination_t This indicates if more reports are expected to "complete" the value of an attribute </p>
+<p>&lt; This represents a Node ID. zwave_node_id_t type. &lt; This represents an endpoint. zwave_endpoint_id_t type. &lt; This represents a list of granted security keys to a node. zwave_keyset_t type &lt; This represents the outcome of the S2 Bootstrapping process. zwave_kex_fail_type_t &lt; This represents the S2 DSK to a node. zwave_dsk_t &lt; This represent the listening protocol byte from the NIF. uint8_t &lt; This represent the optional protocol byte from the NIF. uint8_t &lt; This represents the Z-Wave Role Type of a node. zwave_role_type_t &lt; This represents the name assigned to a node. This is a string. &lt; This represents the location assigned to a node. This is a string &lt; This represents a timestamp (in seconds!) of the last time when we received and/or successfully transmitted a frame towards a node. storage type of the timestamp is clock_time_t &lt; This is the protocol used for including a node. zwave_protocol_t &lt; This is a token shown if a node is S2 capable. No value, it's a token &lt; This is the S2 SPAN data for a node. span_entry_t type &lt; This is the S2 MPAN table for the ZPC. No type. &lt; This is one entry of the S2 MPAN table for the ZPC. mpan_entry_t type &lt; This is an attribute that keeps a list of assigned groups. no type &lt; This is an assigned Multicast group. zwave_multicast_group_id_t &lt; This is the interval for sending NOPs to failing node clock_time_t &lt; Used by poll engine to request of for polling of the attributer This represents the list of supported command classes (NIF) for a node This represents the list of supported command classes only at the highest security level (secure NIF) for a node. This represents the Z-Wave Basic device class of a node/endpoint This represents the Z-Wave Generic Device Type of a node/endpoint. This represents the Z-Wave Specific Device Type of a node/endpoint. &lt; This represent a zwave_key_protocol_combination_t This indicates if more reports are expected to "complete" the value of an attribute </p>
 
 </div>
 </div>
@@ -197,7 +196,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

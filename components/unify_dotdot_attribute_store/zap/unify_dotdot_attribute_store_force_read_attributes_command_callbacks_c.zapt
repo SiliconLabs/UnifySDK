@@ -31,6 +31,7 @@
 // clang-format off
 {{#zcl_clusters}}
 {{#if (supportedCluster label)}}
+{{#unless (clusterWithoutEndpoints label)}}
 ////////////////////////////////////////////////////////////////////////////////
 // Start of cluster {{label}}
 ////////////////////////////////////////////////////////////////////////////////
@@ -63,6 +64,7 @@ static sl_status_t {{asForceReadAttributesCallback this}} (
   {{/zcl_attributes}}
   return SL_STATUS_OK;
 }
+{{/unless}}
 {{/if}}
 {{/zcl_clusters}}
 // clang-format on
@@ -76,8 +78,9 @@ sl_status_t
   // Register ForceReadAttribute callbacks on all supported clusters
   // clang-format off
   {{#zcl_clusters}}{{#if (supportedCluster label)}}
+  {{#unless (clusterWithoutEndpoints label)}}
   {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_force_read_attributes_callback(&{{asForceReadAttributesCallback this}});
-  {{/if}}{{/zcl_clusters}}
+  {{/unless}}{{/if}}{{/zcl_clusters}}
   // clang-format on
 
   return SL_STATUS_OK;

@@ -196,6 +196,19 @@ sl_status_t
   return SL_STATUS_OK;
 }
 
+bool attribute_timeout_is_callback_active(
+  attribute_store_node_t node, attribute_timeout_callback_t callback_function)
+{
+  auto range = attribute_timeouts.equal_range(node);
+  for (auto it = range.first; it != range.second; it++) {
+    if (it->second.callback_function == callback_function) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 sl_status_t attribute_timeout_cancel_callback(
   attribute_store_node_t node, attribute_timeout_callback_t callback_function)
 {

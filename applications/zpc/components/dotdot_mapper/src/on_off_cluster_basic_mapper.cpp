@@ -18,9 +18,9 @@
 #include "sl_status.h"
 #include "attribute_store_helper.h"
 #include "zpc_attribute_store_network_helper.h"
-#include "ucl_definitions.h"
-#include "unify_dotdot_defined_attribute_types.h"
 
+#include "unify_dotdot_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 // Includes from auto-generated files
 #include "dotdot_mqtt.h"
 
@@ -43,9 +43,9 @@ static void
   if (change != ATTRIBUTE_CREATED) {
     return;
   }
-  node_state_topic_state_t network_status
-    = attribute_store_network_helper_get_network_status(node);
-  if (network_status != NODE_STATE_TOPIC_STATE_INCLUDED) {
+  NodeStateNetworkStatus network_status
+    = unify_attribute_store_node_state_get_status(node);
+  if (network_status != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
     return;
   }
   unid_t unid;

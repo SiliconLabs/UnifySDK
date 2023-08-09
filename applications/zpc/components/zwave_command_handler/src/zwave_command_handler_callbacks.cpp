@@ -231,33 +231,46 @@ void zwave_command_handler_on_frame_received(
     = zwave_command_handler_dispatch(connection_info, frame_data, frame_length);
   switch (status) {
     case SL_STATUS_OK:
-      sl_log_debug(LOG_TAG, "Command was handled successfully.");
+      sl_log_debug(LOG_TAG,
+                   "Command from NodeID %d:%d was handled successfully.",
+                   connection_info->remote.node_id,
+                   connection_info->remote.endpoint_id);
       break;
 
     case SL_STATUS_FAIL:
       sl_log_debug(LOG_TAG,
-                   "Command had an error during handling. "
-                   "Not all parameters were accepted");
+                   "Command from NodeID %d:%d had an error during handling. "
+                   "Not all parameters were accepted",
+                   connection_info->remote.node_id,
+                   connection_info->remote.endpoint_id);
       break;
 
     case SL_STATUS_BUSY:
       // This should not happen, or if it happens, we should be able to return
       // an application busy message or similar.
-      sl_log_warning(
-        LOG_TAG,
-        "Frame handler is busy and could not handle frame correctly.");
+      sl_log_warning(LOG_TAG,
+                     "Frame handler is busy and could not handle frame from "
+                     "NodeID %d:%d correctly.",
+                     connection_info->remote.node_id,
+                     connection_info->remote.endpoint_id);
       break;
 
     case SL_STATUS_NOT_SUPPORTED:
-      sl_log_debug(LOG_TAG,
-                   "Command got rejected because it is not supported. "
-                   "It was possibly also rejected due to security filtering\n");
+      sl_log_debug(
+        LOG_TAG,
+        "Command from NodeID %d:%d got rejected because it is not supported. "
+        "It was possibly also rejected due to security filtering",
+        connection_info->remote.node_id,
+        connection_info->remote.endpoint_id);
       break;
 
     default:
-      sl_log_warning(LOG_TAG,
-                     "Command had an unexpected return status: 0x%04X\n",
-                     status);
+      sl_log_warning(
+        LOG_TAG,
+        "Command from NodeID %d:%d had an unexpected return status: 0x%04X\n",
+        connection_info->remote.node_id,
+        connection_info->remote.endpoint_id,
+        status);
       break;
   }
 }

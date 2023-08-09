@@ -14,6 +14,7 @@
 // Includes from this component
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
+
 #include "zpc_attribute_store.h"
 
 // Includes from other components
@@ -577,7 +578,7 @@ static void create_test_network()
 
   // set the network status of
   attribute_store_node_t network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_expected);
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, node_id_expected);
   uint8_t test_online_network_status = 0x01;
   attribute_store_set_node_attribute_value(network_status_node,
                                            REPORTED_ATTRIBUTE,
@@ -639,11 +640,4 @@ void test_attribute_store_network_helper_get_endpoint_0_node()
                                sizeof(endpoint_0));
   TEST_ASSERT_EQUAL(endpoint_id_node,
                     attribute_store_get_endpoint_0_node(node_id_node));
-}
-
-void test_attribute_store_network_helper_get_network_status()
-{
-  TEST_ASSERT_EQUAL(
-    0x01,
-    attribute_store_network_helper_get_network_status(association_group_node));
 }

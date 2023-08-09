@@ -21,10 +21,11 @@
 #include "attribute_timeouts.h"
 #include "dotdot_attribute_id_definitions.h"
 #include "unify_dotdot_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 #include "sl_log.h"
 
 // Interfaces/definitions
-#include "ucl_definitions.h"
+
 
 // ZPC Components
 #include "zwave_unid.h"
@@ -68,6 +69,7 @@ static uic_mqtt_dotdot_scenes_recall_scene_callback_t recall_scene_command
 static uic_mqtt_dotdot_scenes_get_scene_membership_callback_t
   get_scene_membership_command
   = NULL;
+static int group_dispatch_count = 0;
 
 // Stub functions
 void uic_mqtt_dotdot_scenes_add_scene_callback_set_stub(
@@ -118,6 +120,17 @@ void uic_mqtt_dotdot_scenes_get_scene_membership_callback_set_stub(
 {
   get_scene_membership_command = callback;
 }
+
+static void group_dispatch_stub(uint16_t group_id,
+                                const char *cluster_name,
+                                const char *command,
+                                const char *message,
+                                size_t message_length,
+                                mqtt_message_callback_t callback)
+{
+  group_dispatch_count += 1;
+}
+
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
@@ -154,6 +167,7 @@ void setUp()
   store_scene_command          = NULL;
   recall_scene_command         = NULL;
   get_scene_membership_command = NULL;
+  group_dispatch_count         = 0;
 
   // Set up the stubs
   uic_mqtt_dotdot_scenes_add_scene_callback_set_Stub(
@@ -190,10 +204,10 @@ void setUp()
     DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL);
 
   // Configure the supporting node to be online functional:
-  const node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INCLUDED;
+  const NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 }
@@ -699,12 +713,10 @@ void test_on_group_add_scene_command()
   mqtt_test_helper_publish(wrong_group_topic, payload, strlen(payload));
 
   // This should go through to the dispatch component
-  zpc_dotdot_mqtt_group_dispatch_Expect(4,
-                                        "Scenes",
-                                        "AddScene",
-                                        payload,
-                                        strlen(payload),
-                                        NULL);
-  zpc_dotdot_mqtt_group_dispatch_IgnoreArg_callback();
+  TEST_ASSERT_EQUAL(0, group_dispatch_count);
+  uic_mqtt_dotdot_get_group_dispatch_callback_ExpectAndReturn(
+    &group_dispatch_stub);
+
   mqtt_test_helper_publish(ADD_SCENE_GROUP_TOPIC, payload, strlen(payload));
+  TEST_ASSERT_EQUAL(1, group_dispatch_count);
 }

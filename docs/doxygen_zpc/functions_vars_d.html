@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -309,13 +309,13 @@ $(document).ready(function(){initNavTree('functions_vars_d.html',''); initResiza
 : <a class="el" href="structuic__mqtt__dotdot__protocol__controller__rf__telemetry__command__tx__report__fields__t.html#a457f6b82e43c9469e4ddabc91727edd6">uic_mqtt_dotdot_protocol_controller_rf_telemetry_command_tx_report_fields_t</a>
 </li>
 <li>destination_ack_mpdu_measured_noise_floor
-: <a class="el" href="group__ZWAPI__TRANSPORT.html#ga5d99d33dc4822ded9479ac4afef39187">zwapi_tx_report</a>
+: <a class="el" href="structzwapi__tx__report.html#a5d99d33dc4822ded9479ac4afef39187">zwapi_tx_report</a>
 </li>
 <li>destination_ack_mpdu_measured_rssi
-: <a class="el" href="group__ZWAPI__TRANSPORT.html#gafb57e18c9f40281b259ac8a7edc4a370">zwapi_tx_report</a>
+: <a class="el" href="structzwapi__tx__report.html#afb57e18c9f40281b259ac8a7edc4a370">zwapi_tx_report</a>
 </li>
 <li>destination_ack_mpdu_tx_power
-: <a class="el" href="group__ZWAPI__TRANSPORT.html#ga19d0c319ca575d4d98e7c43a7bbfe113">zwapi_tx_report</a>
+: <a class="el" href="structzwapi__tx__report.html#a19d0c319ca575d4d98e7c43a7bbfe113">zwapi_tx_report</a>
 </li>
 <li>destination_ack_tx_powerd_bm
 : <a class="el" href="structuic__mqtt__dotdot__protocol__controller__rf__telemetry__command__tx__report__fields__t.html#a372803361c747298b8ac58787c572879">uic_mqtt_dotdot_protocol_controller_rf_telemetry_command_tx_report_fields_t</a>
@@ -391,7 +391,7 @@ $(document).ready(function(){initNavTree('functions_vars_d.html',''); initResiza
 : <a class="el" href="structmulticast__follow__up__session__state.html#a02fe43e06f6aa2dc141b87cb7146f3e6">multicast_follow_up_session_state</a>
 </li>
 <li>discard_timeout_ms
-: <a class="el" href="group__zwave__tx__interface.html#gab1fa5993c1e8efd7ae27014b5a0977a4">zwave_tx_options</a>
+: <a class="el" href="structzwave__tx__options.html#ab1fa5993c1e8efd7ae27014b5a0977a4">zwave_tx_options</a>
 </li>
 <li>discover_neighbors
 : <a class="el" href="struct__uic__mqtt__dotdot__state__supported__commands__.html#ac57e9c0890c59c20aa23d2caad3b6065">_uic_mqtt_dotdot_state_supported_commands_</a>
@@ -401,6 +401,9 @@ $(document).ready(function(){initNavTree('functions_vars_d.html',''); initResiza
 </li>
 <li>discover_parameter_range
 : <a class="el" href="struct__uic__mqtt__dotdot__configuration__parameters__supported__commands__.html#a6ee62cd338b2fced24acefa8035a16fe">_uic_mqtt_dotdot_configuration_parameters_supported_commands_</a>
+</li>
+<li>discover_security
+: <a class="el" href="struct__uic__mqtt__dotdot__state__supported__commands__.html#aed781af5756db29c20f29327b076129c">_uic_mqtt_dotdot_state_supported_commands_</a>
 </li>
 <li>disks_counters
 : <a class="el" href="structuic__mqtt__dotdot__system__metrics__state__t.html#a8dd6b007bb91a160164300bfd923dccb">uic_mqtt_dotdot_system_metrics_state_t</a>
@@ -447,14 +450,6 @@ $(document).ready(function(){initNavTree('functions_vars_d.html',''); initResiza
 <li>down_or_close
 : <a class="el" href="struct__uic__mqtt__dotdot__window__covering__supported__commands__.html#abb744e7f7e38d16802c3fbe6a8e7c111">_uic_mqtt_dotdot_window_covering_supported_commands_</a>
 </li>
-<li>downloaded_file_version
-: <a class="el" href="structuic__mqtt__dotdot__ota__upgrade__state__t.html#a9b9dc156520b1b24e2682b0a9294cc14">uic_mqtt_dotdot_ota_upgrade_state_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__ota__upgrade__updated__state__t.html#a754cb43bda7f082d12ee6d04749e8f20">uic_mqtt_dotdot_ota_upgrade_updated_state_t</a>
-</li>
-<li>downloaded_zig_bee_stack_version
-: <a class="el" href="structuic__mqtt__dotdot__ota__upgrade__state__t.html#ad24aadf050bb2d074481007804965e66">uic_mqtt_dotdot_ota_upgrade_state_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__ota__upgrade__updated__state__t.html#a4feb80943d157a57c364266c0fde92bf">uic_mqtt_dotdot_ota_upgrade_updated_state_t</a>
-</li>
 <li>drift_compensation
 : <a class="el" href="structuic__mqtt__dotdot__color__control__state__t.html#a3150993c32305d0f4730e9eb4a489248">uic_mqtt_dotdot_color_control_state_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__color__control__updated__state__t.html#a92f64106b0b19b7a145f0c3973fc6ee6">uic_mqtt_dotdot_color_control_updated_state_t</a>
@@ -491,7 +486,7 @@ $(document).ready(function(){initNavTree('functions_vars_d.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:08 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:14 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

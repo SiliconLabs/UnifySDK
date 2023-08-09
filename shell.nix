@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } 
+{ pkgs ? import <nixpkgs> { }
 , cpcd
 , zw-testframework
 , ths-cmock
@@ -19,7 +19,7 @@ gcc10Stdenv.mkDerivation rec {
   boost = boost_pinned.override { stdenv = pkgs.gcc10Stdenv; };
   cmakeFlags = [
     "-GNinja"
-    # The find boost script that comes with cmake prioritizes installations in the system. 
+    # The find boost script that comes with cmake prioritizes installations in the system.
     # Disable this so the version in the nix store can be found.
     "-DBoost_NO_BOOST_CMAKE=TRUE"
     "-DCMAKE_INSTALL_PREFIX=install"
@@ -49,13 +49,14 @@ gcc10Stdenv.mkDerivation rec {
     "-DBUILD_OTBR=OFF"
     "-DBUILD_MATTER_BRIDGE=OFF"
     "-DBUILD_EPC=OFF"
+    "-DBUILD_EMD=OFF"
   ];
   enableParallelBuilding = true;
 
   nativeBuildInputs = [
     cmake
     ninja
-    just 
+    just
     clang
     python-pinned.packages
   ];

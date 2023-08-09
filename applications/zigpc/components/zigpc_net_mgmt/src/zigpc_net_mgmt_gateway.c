@@ -55,17 +55,14 @@ void zigpc_net_mgmt_callback_on_network_initialized(void *event_data)
 
 void zigpc_net_mgmt_callback_on_node_add_start(void *event_data)
 {
-        
-  sl_log_info(LOG_TAG, "Device announce");
-
-}
-
-void zigpc_net_mgmt_callback_on_node_add_complete(void *event_data)
-{
+  
+    sl_log_info(LOG_TAG, "Device announce");
+    
     const struct zigpc_gateway_on_node_add *node_add
         = (struct zigpc_gateway_on_node_add *)event_data;
 
     sl_status_t status = zigpc_net_mgmt_node_add_complete(node_add->eui64);
+    
     if (status != SL_STATUS_OK) 
     {
         sl_log_warning(
@@ -74,6 +71,12 @@ void zigpc_net_mgmt_callback_on_node_add_complete(void *event_data)
                  status);
     }
 
+}
+
+void zigpc_net_mgmt_callback_on_node_add_complete(void *event_data)
+{
+    (void) event_data;
+    sl_log_info(LOG_TAG, "Trust center complete");
 }
 
 void zigpc_net_mgmt_on_discovery_status(

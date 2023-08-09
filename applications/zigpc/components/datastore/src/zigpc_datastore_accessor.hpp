@@ -733,20 +733,6 @@ class ClusterAttributeListAccessor :
   std::string to_str(attribute_store_node_t parent, size_t list_count) override;
 };
 
-class BindingListAccessor :
-     public StoreListAccessor<std::string>
-{
-    public:
-    explicit BindingListAccessor();
-  
-    static inline std::string get_label_type(void)
-    {
-        return "Binding";
-    }
-  
-    std::string to_str(attribute_store_node_t parent, size_t list_count) override;
-};
-
 class ClusterCommandListAccessor : public StoreListAccessor<zcl_command_id_t>
 {
   private:

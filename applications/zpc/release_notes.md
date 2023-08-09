@@ -1,8 +1,62 @@
 # ZPC Release Notes
-## [1.3.2] - Jun 2023
-### Fixed (1.3.2)
+
+## [1.4.0] - Aug 2023
+
+### Added (1.4.0)
+
+* Enabled ForceReadAttributes commands.
+* Added control of the User Code Command Class, version 2.
+* Added a state command allowing to re-discover S0/S2 Security keys.
+* Added an IlluminanceMeasurement mapping from Multilevel Sensor CC
+* Implement Control of the Door Lock Command Class, v4
+
+### Changed (1.4.0)
+
+* Enabled strict security filtering for support of Command Classes always in the NIF.
+  Command Classes always present in the NIF used to be accepted no matter what.
+  Command Classes always present in the NIF are now only accepted at the highest shared security level with the sending node.
+* Split unify dotdot attribute store attribute publishing config into desired and reported attribute publishing config
+* Add the mapper the capability to clear attributes
+* Force UIC services to run in /var/lib/uic
+
+### Fixed (1.4.0)
+
 * Z-Wave API Transport recovers from aborted transactions when an unexpected
   Z-Wave API started is received.
+* Fix some potential s0 buffer overflows
+
+### Known Issues (1.4.0)
+
+* **UIC-2274**
+  * During installation, The presented dialog to specify the serial-port for the
+    given application does not update the actual configuration file
+    (/etc/uic/uic.cfg). The default value is written instead.
+  * Packages may overwrite configuration parameters during installation of none
+    related packages. Updated documentation to mitigate this issue.
+
+* **UIC-2219**:
+  Bindings command processing do not validate the full UNID.
+  This may trigger to establish spurious associations if having several
+  Z-Wave networks.
+  _Note_: Do not try to bind nodes accross networks. (inter-pc bindings)
+
+* **UIC-2283**:
+  Color Switch Command Class durations are completely ignored.
+  _Note_: Set the colors instantaneously to avoid issues.
+
+* **UIC-1779**:
+  Multi Channel Endpoint Find Reports reports to follow set
+  to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
+  _Note_: No workaround, wait for the nodes to recover.
+
+* **UIC-1652**:
+  The ZPC silently ignores incorrect YAML and uses default values
+  if it cannot parse the YAML content for its configuration.
+  _Note_: Verify the validity of the YAML in the configuration file.
+
+* **UIC-1088**:
+  Potentially wrong controller NIF after controller migration.
+  _Note_: Usually not a problem in practice
 
 ## [1.3.1] - Mar 2023
 
@@ -255,49 +309,6 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 * Various bug fixes
 * UAM Language updates
 * Documentation updates
-
-## Known Bugs
-
-* **UIC-2274**
-  * During installation, The presented dialog to specify the serial-port for the
-    given application does not update the actual configuration file
-    (/etc/uic/uic.cfg). The default value is written instead.
-  * Packages may overwrite configuration parameters during installation of none
-    related packages. Updated documentation to mitigate this issue.
-
-* **UIC-2219**:
-  Bindings command processing do not validate the full UNID.
-  This may trigger to establish spurious associations if having several
-  Z-Wave networks.
-  _Note_: Do not try to bind nodes accross networks. (inter-pc bindings)
-
-* **UIC-2218**:
-  Start and stop the ZPC quickly may lead to a few leftover MQTT topics not removed.
-  _Note_: Wait a few seconds before stopping the ZPC.
-
-* **UIC-1927**:
-  Color Switch Command Class durations are completely ignored.
-  _Note_: Set the colors instantaneously to avoid issues.
-
-* **UIC-1779**:
-  Multi Channel Endpoint Find Reports reports to follow set
-  to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
-  _Note_: No workaround, wait for the nodes to recover.
-
-* **UIC-1652**:
-  The ZPC silently ignores incorrect YAML and uses default values
-  if it cannot parse the YAML content for its configuration.
-  _Note_: Verify the validity of the YAML in the configuration file.
-
-* **UIC-1162**:
-  When a device have multiple Z-Wave functionalities mapped to
-  the same Zigbee attribute, the state of the device will be ambiguous.
-  The ZCL state will represent the functionality that was last updated.
-  _Note_: Update tha UAM file with a device fingerprint to circumvent issues.
-
-* **UIC-1088**:
-  Potentially wrong controller NIF after controller migration.
-  _Note_: Usually not a problem in practice
 
 ## Z-Wave Certification information
 

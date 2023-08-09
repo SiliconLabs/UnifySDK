@@ -59,15 +59,19 @@ The following attribute topics are used to retrieve the Basic cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ZCLVersion attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ZCLVersion/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ZCLVersion/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ZCLVersion/Desired { "value": <DESIRED_ZCL_VERSION> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ZCLVersion/Reported { "value": <REPORTED_ZCL_VERSION> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ZCLVersion/Desired { "value": <DESIRED_ZCL_VERSION>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ZCLVersion/Reported { "value": <REPORTED_ZCL_VERSION>}
+
 ```
 
 <br><br>
@@ -99,15 +103,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ZCLVersion/Reported { "value": <REPORTE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationVersion attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ApplicationVersion/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ApplicationVersion/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ApplicationVersion/Desired { "value": <DESIRED_APPLICATION_VERSION> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ApplicationVersion/Reported { "value": <REPORTED_APPLICATION_VERSION> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ApplicationVersion/Desired { "value": <DESIRED_APPLICATION_VERSION>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ApplicationVersion/Reported { "value": <REPORTED_APPLICATION_VERSION>}
+
 ```
 
 <br><br>
@@ -139,15 +147,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ApplicationVersion/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for StackVersion attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/StackVersion/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/StackVersion/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/StackVersion/Desired { "value": <DESIRED_STACK_VERSION> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/StackVersion/Reported { "value": <REPORTED_STACK_VERSION> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/StackVersion/Desired { "value": <DESIRED_STACK_VERSION>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/StackVersion/Reported { "value": <REPORTED_STACK_VERSION>}
+
 ```
 
 <br><br>
@@ -179,15 +191,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/StackVersion/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for HWVersion attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/HWVersion/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/HWVersion/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/HWVersion/Desired { "value": <DESIRED_HW_VERSION> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/HWVersion/Reported { "value": <REPORTED_HW_VERSION> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/HWVersion/Desired { "value": <DESIRED_HW_VERSION>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/HWVersion/Reported { "value": <REPORTED_HW_VERSION>}
+
 ```
 
 <br><br>
@@ -219,15 +235,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/HWVersion/Reported { "value": <REPORTED
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ManufacturerName attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerName/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ManufacturerName/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerName/Desired { "value": <DESIRED_MANUFACTURER_NAME> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerName/Reported { "value": <REPORTED_MANUFACTURER_NAME> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ManufacturerName/Desired { "value": <DESIRED_MANUFACTURER_NAME>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ManufacturerName/Reported { "value": <REPORTED_MANUFACTURER_NAME>}
+
 ```
 
 <br><br>
@@ -259,15 +279,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerName/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ModelIdentifier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ModelIdentifier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ModelIdentifier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ModelIdentifier/Desired { "value": <DESIRED_MODEL_IDENTIFIER> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ModelIdentifier/Reported { "value": <REPORTED_MODEL_IDENTIFIER> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ModelIdentifier/Desired { "value": <DESIRED_MODEL_IDENTIFIER>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ModelIdentifier/Reported { "value": <REPORTED_MODEL_IDENTIFIER>}
+
 ```
 
 <br><br>
@@ -299,15 +323,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ModelIdentifier/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DateCode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DateCode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/DateCode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DateCode/Desired { "value": <DESIRED_DATE_CODE> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DateCode/Reported { "value": <REPORTED_DATE_CODE> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/DateCode/Desired { "value": <DESIRED_DATE_CODE>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/DateCode/Reported { "value": <REPORTED_DATE_CODE>}
+
 ```
 
 <br><br>
@@ -339,15 +367,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DateCode/Reported { "value": <REPORTED_
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerSource attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PowerSource/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/PowerSource/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PowerSource/Desired { "value": <DESIRED_POWER_SOURCE> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PowerSource/Reported { "value": <REPORTED_POWER_SOURCE> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/PowerSource/Desired { "value": <DESIRED_POWER_SOURCE>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/PowerSource/Reported { "value": <REPORTED_POWER_SOURCE>}
+
 ```
 
 <br><br>
@@ -379,15 +411,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PowerSource/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for GenericDevice-Class attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Class/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/GenericDevice-Class/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Class/Desired { "value": <DESIRED_GENERIC_DEVICE_CLASS> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Class/Reported { "value": <REPORTED_GENERIC_DEVICE_CLASS> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/GenericDevice-Class/Desired { "value": <DESIRED_GENERIC_DEVICE_CLASS>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/GenericDevice-Class/Reported { "value": <REPORTED_GENERIC_DEVICE_CLASS>}
+
 ```
 
 <br><br>
@@ -419,15 +455,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Class/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for GenericDevice-Type attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Type/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/GenericDevice-Type/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Type/Desired { "value": <DESIRED_GENERIC_DEVICE_TYPE> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Type/Reported { "value": <REPORTED_GENERIC_DEVICE_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/GenericDevice-Type/Desired { "value": <DESIRED_GENERIC_DEVICE_TYPE>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/GenericDevice-Type/Reported { "value": <REPORTED_GENERIC_DEVICE_TYPE>}
+
 ```
 
 <br><br>
@@ -459,15 +499,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/GenericDevice-Type/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ProductCode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductCode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ProductCode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductCode/Desired { "value": <DESIRED_PRODUCT_CODE> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductCode/Reported { "value": <REPORTED_PRODUCT_CODE> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ProductCode/Desired { "value": <DESIRED_PRODUCT_CODE>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ProductCode/Reported { "value": <REPORTED_PRODUCT_CODE>}
+
 ```
 
 <br><br>
@@ -499,15 +543,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductCode/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ProductURL attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductURL/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ProductURL/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductURL/Desired { "value": <DESIRED_PRODUCTURL> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductURL/Reported { "value": <REPORTED_PRODUCTURL> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ProductURL/Desired { "value": <DESIRED_PRODUCTURL>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ProductURL/Reported { "value": <REPORTED_PRODUCTURL>}
+
 ```
 
 <br><br>
@@ -539,15 +587,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductURL/Reported { "value": <REPORTE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ManufacturerVersionDetails attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerVersionDetails/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ManufacturerVersionDetails/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerVersionDetails/Desired { "value": <DESIRED_MANUFACTURER_VERSION_DETAILS> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerVersionDetails/Reported { "value": <REPORTED_MANUFACTURER_VERSION_DETAILS> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ManufacturerVersionDetails/Desired { "value": <DESIRED_MANUFACTURER_VERSION_DETAILS>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ManufacturerVersionDetails/Reported { "value": <REPORTED_MANUFACTURER_VERSION_DETAILS>}
+
 ```
 
 <br><br>
@@ -579,15 +631,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ManufacturerVersionDetails/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SerialNumber attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SerialNumber/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/SerialNumber/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SerialNumber/Desired { "value": <DESIRED_SERIAL_NUMBER> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SerialNumber/Reported { "value": <REPORTED_SERIAL_NUMBER> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/SerialNumber/Desired { "value": <DESIRED_SERIAL_NUMBER>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/SerialNumber/Reported { "value": <REPORTED_SERIAL_NUMBER>}
+
 ```
 
 <br><br>
@@ -619,15 +675,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SerialNumber/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ProductLabel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductLabel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ProductLabel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductLabel/Desired { "value": <DESIRED_PRODUCT_LABEL> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductLabel/Reported { "value": <REPORTED_PRODUCT_LABEL> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ProductLabel/Desired { "value": <DESIRED_PRODUCT_LABEL>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ProductLabel/Reported { "value": <REPORTED_PRODUCT_LABEL>}
+
 ```
 
 <br><br>
@@ -659,15 +719,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ProductLabel/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LocationDescription attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/LocationDescription/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/LocationDescription/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/LocationDescription/Desired { "value": <DESIRED_LOCATION_DESCRIPTION> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/LocationDescription/Reported { "value": <REPORTED_LOCATION_DESCRIPTION> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/LocationDescription/Desired { "value": <DESIRED_LOCATION_DESCRIPTION>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/LocationDescription/Reported { "value": <REPORTED_LOCATION_DESCRIPTION>}
+
 ```
 
 <br><br>
@@ -699,15 +763,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/LocationDescription/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalEnvironment attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PhysicalEnvironment/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/PhysicalEnvironment/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PhysicalEnvironment/Desired { "value": <DESIRED_PHYSICAL_ENVIRONMENT> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PhysicalEnvironment/Reported { "value": <REPORTED_PHYSICAL_ENVIRONMENT> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/PhysicalEnvironment/Desired { "value": <DESIRED_PHYSICAL_ENVIRONMENT>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/PhysicalEnvironment/Reported { "value": <REPORTED_PHYSICAL_ENVIRONMENT>}
+
 ```
 
 <br><br>
@@ -739,15 +807,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/PhysicalEnvironment/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DeviceEnabled attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DeviceEnabled/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/DeviceEnabled/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DeviceEnabled/Desired { "value": <DESIRED_DEVICE_ENABLED> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DeviceEnabled/Reported { "value": <REPORTED_DEVICE_ENABLED> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/DeviceEnabled/Desired { "value": <DESIRED_DEVICE_ENABLED>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/DeviceEnabled/Reported { "value": <REPORTED_DEVICE_ENABLED>}
+
 ```
 
 <br><br>
@@ -779,15 +851,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DeviceEnabled/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/AlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/AlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -819,15 +895,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/AlarmMask/Reported { "value": <REPORTED
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DisableLocalConfig attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DisableLocalConfig/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/DisableLocalConfig/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DisableLocalConfig/Desired { "value": <DESIRED_DISABLE_LOCAL_CONFIG> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DisableLocalConfig/Reported { "value": <REPORTED_DISABLE_LOCAL_CONFIG> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/DisableLocalConfig/Desired { "value": <DESIRED_DISABLE_LOCAL_CONFIG>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/DisableLocalConfig/Reported { "value": <REPORTED_DISABLE_LOCAL_CONFIG>}
+
 ```
 
 <br><br>
@@ -859,15 +939,19 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/DisableLocalConfig/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SWBuildID attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SWBuildID/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/SWBuildID/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SWBuildID/Desired { "value": <DESIRED_SW_BUILDID> }
-ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SWBuildID/Reported { "value": <REPORTED_SW_BUILDID> }
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/SWBuildID/Desired { "value": <DESIRED_SW_BUILDID>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/SWBuildID/Reported { "value": <REPORTED_SW_BUILDID>}
+
 ```
 
 <br><br>
@@ -904,7 +988,7 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/SWBuildID/Reported { "value": <REPORTED
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -960,7 +1044,7 @@ ucl/by-unid/<UNID>/<EP>/Basic/Attributes/ClusterRevision/Reported { "value": <RE
 
 To see supported commands for Basic cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Basic/SupportedCommands { "value": ["ResetToFactoryDefaults","WriteAttributes", "ForceReadAttributes"] }
@@ -968,8 +1052,7 @@ ucl/by-unid/<UNID>/<EP>/Basic/SupportedCommands { "value": ["ResetToFactoryDefau
 
 To see supported generated commands for Basic cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Basic/SupportedGeneratedCommands { "value": [] }
@@ -1015,13 +1098,13 @@ ucl/by-unid/<UNID>/<EP>/Basic/SupportedGeneratedCommands { "value": [] }
 
 To send a Basic/ResetToFactoryDefaults command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Commands/ResetToFactoryDefaults' -m  '{  }'
 ```
 
 To receive a Basic/ResetToFactoryDefaults generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/GeneratedCommands/ResetToFactoryDefaults'
 ```
 
@@ -1069,11 +1152,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Basic/GeneratedCommands/ResetToFactory
 
 To update all Basic attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Commands/WriteAttributes' -m  '{ "LocationDescription": <LOCATION_DESCRIPTION_VALUE> ,"PhysicalEnvironment": <PHYSICAL_ENVIRONMENT_VALUE> ,"DeviceEnabled": <DEVICE_ENABLED_VALUE> ,"AlarmMask": <ALARM_MASK_VALUE> ,"DisableLocalConfig": <DISABLE_LOCAL_CONFIG_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -1133,13 +1217,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Commands/WriteAttributes' -m  '{
 
 To force read all Basic attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Basic attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Commands/ForceReadAttributes' -m  '{ "value": ["ZCLVersion"] }'
 ```
 
@@ -1196,15 +1280,19 @@ The following attribute topics are used to retrieve the PowerConfiguration clust
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MainsVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltage/Desired { "value": <DESIRED_MAINS_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltage/Reported { "value": <REPORTED_MAINS_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltage/Desired { "value": <DESIRED_MAINS_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltage/Reported { "value": <REPORTED_MAINS_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -1236,15 +1324,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltage/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MainsFrequency attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsFrequency/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsFrequency/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsFrequency/Desired { "value": <DESIRED_MAINS_FREQUENCY> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsFrequency/Reported { "value": <REPORTED_MAINS_FREQUENCY> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsFrequency/Desired { "value": <DESIRED_MAINS_FREQUENCY>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsFrequency/Reported { "value": <REPORTED_MAINS_FREQUENCY>}
+
 ```
 
 <br><br>
@@ -1276,15 +1368,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsFrequency/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MainsAlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsAlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsAlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsAlarmMask/Desired { "value": <DESIRED_MAINS_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsAlarmMask/Reported { "value": <REPORTED_MAINS_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsAlarmMask/Desired { "value": <DESIRED_MAINS_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsAlarmMask/Reported { "value": <REPORTED_MAINS_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -1316,15 +1412,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsAlarmMask/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MainsVoltageMinThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMinThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltageMinThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Desired { "value": <DESIRED_MAINS_VOLTAGE_MIN_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Reported { "value": <REPORTED_MAINS_VOLTAGE_MIN_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Desired { "value": <DESIRED_MAINS_VOLTAGE_MIN_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltageMinThreshold/Reported { "value": <REPORTED_MAINS_VOLTAGE_MIN_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -1356,15 +1456,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMinThreshold/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MainsVoltageMaxThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Desired { "value": <DESIRED_MAINS_VOLTAGE_MAX_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Reported { "value": <REPORTED_MAINS_VOLTAGE_MAX_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Desired { "value": <DESIRED_MAINS_VOLTAGE_MAX_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/Reported { "value": <REPORTED_MAINS_VOLTAGE_MAX_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -1396,15 +1500,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageMaxThreshold/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MainsVoltageDwellTripPoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Desired { "value": <DESIRED_MAINS_VOLTAGE_DWELL_TRIP_POINT> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Reported { "value": <REPORTED_MAINS_VOLTAGE_DWELL_TRIP_POINT> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Desired { "value": <DESIRED_MAINS_VOLTAGE_DWELL_TRIP_POINT>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint/Reported { "value": <REPORTED_MAINS_VOLTAGE_DWELL_TRIP_POINT>}
+
 ```
 
 <br><br>
@@ -1436,15 +1544,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/MainsVoltageDwellTripPoint
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltage/Desired { "value": <DESIRED_BATTERY_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltage/Reported { "value": <REPORTED_BATTERY_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltage/Desired { "value": <DESIRED_BATTERY_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltage/Reported { "value": <REPORTED_BATTERY_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -1476,15 +1588,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltage/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryPercentageRemaining attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageRemaining/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageRemaining/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageRemaining/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_REMAINING> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageRemaining/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_REMAINING> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageRemaining/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_REMAINING>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageRemaining/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_REMAINING>}
+
 ```
 
 <br><br>
@@ -1516,15 +1632,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageRemaining
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryManufacturer attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryManufacturer/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryManufacturer/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryManufacturer/Desired { "value": <DESIRED_BATTERY_MANUFACTURER> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryManufacturer/Reported { "value": <REPORTED_BATTERY_MANUFACTURER> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryManufacturer/Desired { "value": <DESIRED_BATTERY_MANUFACTURER>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryManufacturer/Reported { "value": <REPORTED_BATTERY_MANUFACTURER>}
+
 ```
 
 <br><br>
@@ -1556,15 +1676,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryManufacturer/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatterySize attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatterySize/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatterySize/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatterySize/Desired { "value": <DESIRED_BATTERY_SIZE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatterySize/Reported { "value": <REPORTED_BATTERY_SIZE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatterySize/Desired { "value": <DESIRED_BATTERY_SIZE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatterySize/Reported { "value": <REPORTED_BATTERY_SIZE>}
+
 ```
 
 <br><br>
@@ -1596,15 +1720,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatterySize/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryAHrRating attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAHrRating/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryAHrRating/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAHrRating/Desired { "value": <DESIRED_BATTERYA_HR_RATING> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAHrRating/Reported { "value": <REPORTED_BATTERYA_HR_RATING> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryAHrRating/Desired { "value": <DESIRED_BATTERYA_HR_RATING>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryAHrRating/Reported { "value": <REPORTED_BATTERYA_HR_RATING>}
+
 ```
 
 <br><br>
@@ -1636,15 +1764,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAHrRating/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryQuantity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryQuantity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryQuantity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryQuantity/Desired { "value": <DESIRED_BATTERY_QUANTITY> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryQuantity/Reported { "value": <REPORTED_BATTERY_QUANTITY> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryQuantity/Desired { "value": <DESIRED_BATTERY_QUANTITY>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryQuantity/Reported { "value": <REPORTED_BATTERY_QUANTITY>}
+
 ```
 
 <br><br>
@@ -1676,15 +1808,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryQuantity/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryRatedVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryRatedVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryRatedVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryRatedVoltage/Desired { "value": <DESIRED_BATTERY_RATED_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryRatedVoltage/Reported { "value": <REPORTED_BATTERY_RATED_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryRatedVoltage/Desired { "value": <DESIRED_BATTERY_RATED_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryRatedVoltage/Reported { "value": <REPORTED_BATTERY_RATED_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -1716,15 +1852,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryRatedVoltage/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryAlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryAlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmMask/Desired { "value": <DESIRED_BATTERY_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmMask/Reported { "value": <REPORTED_BATTERY_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryAlarmMask/Desired { "value": <DESIRED_BATTERY_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryAlarmMask/Reported { "value": <REPORTED_BATTERY_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -1756,15 +1896,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmMask/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryVoltageMinThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Desired { "value": <DESIRED_BATTERY_VOLTAGE_MIN_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Reported { "value": <REPORTED_BATTERY_VOLTAGE_MIN_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Desired { "value": <DESIRED_BATTERY_VOLTAGE_MIN_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageMinThreshold/Reported { "value": <REPORTED_BATTERY_VOLTAGE_MIN_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -1796,15 +1940,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageMinThreshold
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryVoltageThreshold1 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold1/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageThreshold1/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Desired { "value": <DESIRED_BATTERY_VOLTAGE_THRESHOLD1> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Reported { "value": <REPORTED_BATTERY_VOLTAGE_THRESHOLD1> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Desired { "value": <DESIRED_BATTERY_VOLTAGE_THRESHOLD1>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold1/Reported { "value": <REPORTED_BATTERY_VOLTAGE_THRESHOLD1>}
+
 ```
 
 <br><br>
@@ -1836,15 +1984,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold1/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryVoltageThreshold2 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold2/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageThreshold2/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Desired { "value": <DESIRED_BATTERY_VOLTAGE_THRESHOLD2> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Reported { "value": <REPORTED_BATTERY_VOLTAGE_THRESHOLD2> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Desired { "value": <DESIRED_BATTERY_VOLTAGE_THRESHOLD2>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold2/Reported { "value": <REPORTED_BATTERY_VOLTAGE_THRESHOLD2>}
+
 ```
 
 <br><br>
@@ -1876,15 +2028,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold2/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryVoltageThreshold3 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold3/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryVoltageThreshold3/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Desired { "value": <DESIRED_BATTERY_VOLTAGE_THRESHOLD3> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Reported { "value": <REPORTED_BATTERY_VOLTAGE_THRESHOLD3> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Desired { "value": <DESIRED_BATTERY_VOLTAGE_THRESHOLD3>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryVoltageThreshold3/Reported { "value": <REPORTED_BATTERY_VOLTAGE_THRESHOLD3>}
+
 ```
 
 <br><br>
@@ -1916,15 +2072,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryVoltageThreshold3/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryPercentageMinThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_MIN_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_MIN_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_MIN_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageMinThreshold/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_MIN_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -1956,15 +2116,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageMinThresh
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryPercentageThreshold1 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold1/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageThreshold1/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_THRESHOLD1> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_THRESHOLD1> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_THRESHOLD1>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold1/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_THRESHOLD1>}
+
 ```
 
 <br><br>
@@ -1996,15 +2160,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryPercentageThreshold2 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold2/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageThreshold2/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_THRESHOLD2> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_THRESHOLD2> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_THRESHOLD2>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold2/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_THRESHOLD2>}
+
 ```
 
 <br><br>
@@ -2036,15 +2204,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryPercentageThreshold3 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold3/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryPercentageThreshold3/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_THRESHOLD3> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_THRESHOLD3> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Desired { "value": <DESIRED_BATTERY_PERCENTAGE_THRESHOLD3>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryPercentageThreshold3/Reported { "value": <REPORTED_BATTERY_PERCENTAGE_THRESHOLD3>}
+
 ```
 
 <br><br>
@@ -2076,15 +2248,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryPercentageThreshold
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryAlarmState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/BatteryAlarmState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmState/Desired { "value": <DESIRED_BATTERY_ALARM_STATE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmState/Reported { "value": <REPORTED_BATTERY_ALARM_STATE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryAlarmState/Desired { "value": <DESIRED_BATTERY_ALARM_STATE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/BatteryAlarmState/Reported { "value": <REPORTED_BATTERY_ALARM_STATE>}
+
 ```
 
 <br><br>
@@ -2116,15 +2292,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/BatteryAlarmState/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2Voltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Voltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Voltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Voltage/Desired { "value": <DESIRED_BATTERY2_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Voltage/Reported { "value": <REPORTED_BATTERY2_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Voltage/Desired { "value": <DESIRED_BATTERY2_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Voltage/Reported { "value": <REPORTED_BATTERY2_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -2156,15 +2336,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Voltage/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2PercentageRemaining attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageRemaining/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageRemaining/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageRemaining/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_REMAINING> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageRemaining/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_REMAINING> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageRemaining/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_REMAINING>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageRemaining/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_REMAINING>}
+
 ```
 
 <br><br>
@@ -2196,15 +2380,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageRemainin
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2Manufacturer attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Manufacturer/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Manufacturer/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Manufacturer/Desired { "value": <DESIRED_BATTERY2_MANUFACTURER> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Manufacturer/Reported { "value": <REPORTED_BATTERY2_MANUFACTURER> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Manufacturer/Desired { "value": <DESIRED_BATTERY2_MANUFACTURER>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Manufacturer/Reported { "value": <REPORTED_BATTERY2_MANUFACTURER>}
+
 ```
 
 <br><br>
@@ -2236,15 +2424,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Manufacturer/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2Size attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Size/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Size/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Size/Desired { "value": <DESIRED_BATTERY2_SIZE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Size/Reported { "value": <REPORTED_BATTERY2_SIZE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Size/Desired { "value": <DESIRED_BATTERY2_SIZE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Size/Reported { "value": <REPORTED_BATTERY2_SIZE>}
+
 ```
 
 <br><br>
@@ -2276,15 +2468,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Size/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2AHrRating attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AHrRating/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2AHrRating/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AHrRating/Desired { "value": <DESIRED_BATTERY2A_HR_RATING> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AHrRating/Reported { "value": <REPORTED_BATTERY2A_HR_RATING> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2AHrRating/Desired { "value": <DESIRED_BATTERY2A_HR_RATING>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2AHrRating/Reported { "value": <REPORTED_BATTERY2A_HR_RATING>}
+
 ```
 
 <br><br>
@@ -2316,15 +2512,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AHrRating/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2Quantity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Quantity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2Quantity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Quantity/Desired { "value": <DESIRED_BATTERY2_QUANTITY> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Quantity/Reported { "value": <REPORTED_BATTERY2_QUANTITY> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Quantity/Desired { "value": <DESIRED_BATTERY2_QUANTITY>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2Quantity/Reported { "value": <REPORTED_BATTERY2_QUANTITY>}
+
 ```
 
 <br><br>
@@ -2356,15 +2556,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2Quantity/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2RatedVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2RatedVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2RatedVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2RatedVoltage/Desired { "value": <DESIRED_BATTERY2_RATED_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2RatedVoltage/Reported { "value": <REPORTED_BATTERY2_RATED_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2RatedVoltage/Desired { "value": <DESIRED_BATTERY2_RATED_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2RatedVoltage/Reported { "value": <REPORTED_BATTERY2_RATED_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -2396,15 +2600,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2RatedVoltage/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2AlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2AlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmMask/Desired { "value": <DESIRED_BATTERY2_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmMask/Reported { "value": <REPORTED_BATTERY2_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2AlarmMask/Desired { "value": <DESIRED_BATTERY2_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2AlarmMask/Reported { "value": <REPORTED_BATTERY2_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -2436,15 +2644,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmMask/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2VoltageMinThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_MIN_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_MIN_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_MIN_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageMinThreshold/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_MIN_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -2476,15 +2688,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageMinThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2VoltageThreshold1 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold1/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageThreshold1/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_THRESHOLD1> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_THRESHOLD1> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_THRESHOLD1>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold1/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_THRESHOLD1>}
+
 ```
 
 <br><br>
@@ -2516,15 +2732,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold1/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2VoltageThreshold2 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold2/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageThreshold2/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_THRESHOLD2> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_THRESHOLD2> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_THRESHOLD2>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold2/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_THRESHOLD2>}
+
 ```
 
 <br><br>
@@ -2556,15 +2776,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold2/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2VoltageThreshold3 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold3/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2VoltageThreshold3/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_THRESHOLD3> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_THRESHOLD3> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Desired { "value": <DESIRED_BATTERY2_VOLTAGE_THRESHOLD3>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2VoltageThreshold3/Reported { "value": <REPORTED_BATTERY2_VOLTAGE_THRESHOLD3>}
+
 ```
 
 <br><br>
@@ -2596,15 +2820,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2VoltageThreshold3/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2PercentageMinThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_MIN_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_MIN_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_MIN_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageMinThreshold/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_MIN_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -2636,15 +2864,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageMinThres
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2PercentageThreshold1 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold1/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageThreshold1/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_THRESHOLD1> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_THRESHOLD1> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_THRESHOLD1>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold1/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_THRESHOLD1>}
+
 ```
 
 <br><br>
@@ -2676,15 +2908,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2PercentageThreshold2 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold2/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageThreshold2/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_THRESHOLD2> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_THRESHOLD2> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_THRESHOLD2>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold2/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_THRESHOLD2>}
+
 ```
 
 <br><br>
@@ -2716,15 +2952,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2PercentageThreshold3 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold3/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2PercentageThreshold3/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_THRESHOLD3> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_THRESHOLD3> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Desired { "value": <DESIRED_BATTERY2_PERCENTAGE_THRESHOLD3>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2PercentageThreshold3/Reported { "value": <REPORTED_BATTERY2_PERCENTAGE_THRESHOLD3>}
+
 ```
 
 <br><br>
@@ -2756,15 +2996,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2PercentageThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery2AlarmState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery2AlarmState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmState/Desired { "value": <DESIRED_BATTERY2_ALARM_STATE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmState/Reported { "value": <REPORTED_BATTERY2_ALARM_STATE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2AlarmState/Desired { "value": <DESIRED_BATTERY2_ALARM_STATE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery2AlarmState/Reported { "value": <REPORTED_BATTERY2_ALARM_STATE>}
+
 ```
 
 <br><br>
@@ -2796,15 +3040,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery2AlarmState/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3Voltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Voltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Voltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Voltage/Desired { "value": <DESIRED_BATTERY3_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Voltage/Reported { "value": <REPORTED_BATTERY3_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Voltage/Desired { "value": <DESIRED_BATTERY3_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Voltage/Reported { "value": <REPORTED_BATTERY3_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -2836,15 +3084,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Voltage/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3PercentageRemaining attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageRemaining/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageRemaining/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageRemaining/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_REMAINING> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageRemaining/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_REMAINING> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageRemaining/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_REMAINING>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageRemaining/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_REMAINING>}
+
 ```
 
 <br><br>
@@ -2876,15 +3128,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageRemainin
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3Manufacturer attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Manufacturer/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Manufacturer/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Manufacturer/Desired { "value": <DESIRED_BATTERY3_MANUFACTURER> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Manufacturer/Reported { "value": <REPORTED_BATTERY3_MANUFACTURER> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Manufacturer/Desired { "value": <DESIRED_BATTERY3_MANUFACTURER>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Manufacturer/Reported { "value": <REPORTED_BATTERY3_MANUFACTURER>}
+
 ```
 
 <br><br>
@@ -2916,15 +3172,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Manufacturer/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3Size attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Size/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Size/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Size/Desired { "value": <DESIRED_BATTERY3_SIZE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Size/Reported { "value": <REPORTED_BATTERY3_SIZE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Size/Desired { "value": <DESIRED_BATTERY3_SIZE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Size/Reported { "value": <REPORTED_BATTERY3_SIZE>}
+
 ```
 
 <br><br>
@@ -2956,15 +3216,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Size/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3AHrRating attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AHrRating/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3AHrRating/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AHrRating/Desired { "value": <DESIRED_BATTERY3A_HR_RATING> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AHrRating/Reported { "value": <REPORTED_BATTERY3A_HR_RATING> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3AHrRating/Desired { "value": <DESIRED_BATTERY3A_HR_RATING>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3AHrRating/Reported { "value": <REPORTED_BATTERY3A_HR_RATING>}
+
 ```
 
 <br><br>
@@ -2996,15 +3260,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AHrRating/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3Quantity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Quantity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3Quantity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Quantity/Desired { "value": <DESIRED_BATTERY3_QUANTITY> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Quantity/Reported { "value": <REPORTED_BATTERY3_QUANTITY> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Quantity/Desired { "value": <DESIRED_BATTERY3_QUANTITY>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3Quantity/Reported { "value": <REPORTED_BATTERY3_QUANTITY>}
+
 ```
 
 <br><br>
@@ -3036,15 +3304,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3Quantity/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3RatedVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3RatedVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3RatedVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3RatedVoltage/Desired { "value": <DESIRED_BATTERY3_RATED_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3RatedVoltage/Reported { "value": <REPORTED_BATTERY3_RATED_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3RatedVoltage/Desired { "value": <DESIRED_BATTERY3_RATED_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3RatedVoltage/Reported { "value": <REPORTED_BATTERY3_RATED_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -3076,15 +3348,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3RatedVoltage/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3AlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3AlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmMask/Desired { "value": <DESIRED_BATTERY3_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmMask/Reported { "value": <REPORTED_BATTERY3_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3AlarmMask/Desired { "value": <DESIRED_BATTERY3_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3AlarmMask/Reported { "value": <REPORTED_BATTERY3_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -3116,15 +3392,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmMask/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3VoltageMinThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_MIN_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_MIN_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_MIN_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageMinThreshold/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_MIN_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -3156,15 +3436,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageMinThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3VoltageThreshold1 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold1/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageThreshold1/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_THRESHOLD1> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_THRESHOLD1> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_THRESHOLD1>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold1/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_THRESHOLD1>}
+
 ```
 
 <br><br>
@@ -3196,15 +3480,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold1/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3VoltageThreshold2 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold2/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageThreshold2/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_THRESHOLD2> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_THRESHOLD2> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_THRESHOLD2>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold2/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_THRESHOLD2>}
+
 ```
 
 <br><br>
@@ -3236,15 +3524,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold2/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3VoltageThreshold3 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold3/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3VoltageThreshold3/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_THRESHOLD3> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_THRESHOLD3> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Desired { "value": <DESIRED_BATTERY3_VOLTAGE_THRESHOLD3>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3VoltageThreshold3/Reported { "value": <REPORTED_BATTERY3_VOLTAGE_THRESHOLD3>}
+
 ```
 
 <br><br>
@@ -3276,15 +3568,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3VoltageThreshold3/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3PercentageMinThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_MIN_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_MIN_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_MIN_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageMinThreshold/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_MIN_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -3316,15 +3612,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageMinThres
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3PercentageThreshold1 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold1/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageThreshold1/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_THRESHOLD1> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_THRESHOLD1> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_THRESHOLD1>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold1/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_THRESHOLD1>}
+
 ```
 
 <br><br>
@@ -3356,15 +3656,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3PercentageThreshold2 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold2/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageThreshold2/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_THRESHOLD2> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_THRESHOLD2> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_THRESHOLD2>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold2/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_THRESHOLD2>}
+
 ```
 
 <br><br>
@@ -3396,15 +3700,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3PercentageThreshold3 attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold3/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3PercentageThreshold3/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_THRESHOLD3> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_THRESHOLD3> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Desired { "value": <DESIRED_BATTERY3_PERCENTAGE_THRESHOLD3>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3PercentageThreshold3/Reported { "value": <REPORTED_BATTERY3_PERCENTAGE_THRESHOLD3>}
+
 ```
 
 <br><br>
@@ -3436,15 +3744,19 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3PercentageThreshol
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Battery3AlarmState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PowerConfiguration/Attributes/Battery3AlarmState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmState/Desired { "value": <DESIRED_BATTERY3_ALARM_STATE> }
-ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmState/Reported { "value": <REPORTED_BATTERY3_ALARM_STATE> }
+
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3AlarmState/Desired { "value": <DESIRED_BATTERY3_ALARM_STATE>}
+ucl/by-unid/<UNID>/ep0/PowerConfiguration/Attributes/Battery3AlarmState/Reported { "value": <REPORTED_BATTERY3_ALARM_STATE>}
+
 ```
 
 <br><br>
@@ -3481,7 +3793,7 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/Battery3AlarmState/Reporte
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -3534,7 +3846,7 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Attributes/ClusterRevision/Reported {
 
 To see supported commands for PowerConfiguration cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PowerConfiguration/SupportedCommands { "value": [] }
@@ -3542,8 +3854,7 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/SupportedCommands { "value": [] }
 
 To see supported generated commands for PowerConfiguration cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PowerConfiguration/SupportedGeneratedCommands { "value": [] }
@@ -3727,11 +4038,12 @@ ucl/by-unid/<UNID>/<EP>/PowerConfiguration/SupportedGeneratedCommands { "value":
 
 To update all PowerConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Commands/WriteAttributes' -m  '{ "MainsAlarmMask": <MAINS_ALARM_MASK_VALUE> ,"MainsVoltageMinThreshold": <MAINS_VOLTAGE_MIN_THRESHOLD_VALUE> ,"MainsVoltageMaxThreshold": <MAINS_VOLTAGE_MAX_THRESHOLD_VALUE> ,"MainsVoltageDwellTripPoint": <MAINS_VOLTAGE_DWELL_TRIP_POINT_VALUE> ,"BatteryManufacturer": <BATTERY_MANUFACTURER_VALUE> ,"BatterySize": <BATTERY_SIZE_VALUE> ,"BatteryAHrRating": <BATTERYA_HR_RATING_VALUE> ,"BatteryQuantity": <BATTERY_QUANTITY_VALUE> ,"BatteryRatedVoltage": <BATTERY_RATED_VOLTAGE_VALUE> ,"BatteryAlarmMask": <BATTERY_ALARM_MASK_VALUE> ,"BatteryVoltageMinThreshold": <BATTERY_VOLTAGE_MIN_THRESHOLD_VALUE> ,"BatteryVoltageThreshold1": <BATTERY_VOLTAGE_THRESHOLD1_VALUE> ,"BatteryVoltageThreshold2": <BATTERY_VOLTAGE_THRESHOLD2_VALUE> ,"BatteryVoltageThreshold3": <BATTERY_VOLTAGE_THRESHOLD3_VALUE> ,"BatteryPercentageMinThreshold": <BATTERY_PERCENTAGE_MIN_THRESHOLD_VALUE> ,"BatteryPercentageThreshold1": <BATTERY_PERCENTAGE_THRESHOLD1_VALUE> ,"BatteryPercentageThreshold2": <BATTERY_PERCENTAGE_THRESHOLD2_VALUE> ,"BatteryPercentageThreshold3": <BATTERY_PERCENTAGE_THRESHOLD3_VALUE> ,"Battery2Manufacturer": <BATTERY2_MANUFACTURER_VALUE> ,"Battery2Size": <BATTERY2_SIZE_VALUE> ,"Battery2AHrRating": <BATTERY2A_HR_RATING_VALUE> ,"Battery2Quantity": <BATTERY2_QUANTITY_VALUE> ,"Battery2RatedVoltage": <BATTERY2_RATED_VOLTAGE_VALUE> ,"Battery2AlarmMask": <BATTERY2_ALARM_MASK_VALUE> ,"Battery2VoltageMinThreshold": <BATTERY2_VOLTAGE_MIN_THRESHOLD_VALUE> ,"Battery2VoltageThreshold1": <BATTERY2_VOLTAGE_THRESHOLD1_VALUE> ,"Battery2VoltageThreshold2": <BATTERY2_VOLTAGE_THRESHOLD2_VALUE> ,"Battery2VoltageThreshold3": <BATTERY2_VOLTAGE_THRESHOLD3_VALUE> ,"Battery2PercentageMinThreshold": <BATTERY2_PERCENTAGE_MIN_THRESHOLD_VALUE> ,"Battery2PercentageThreshold1": <BATTERY2_PERCENTAGE_THRESHOLD1_VALUE> ,"Battery2PercentageThreshold2": <BATTERY2_PERCENTAGE_THRESHOLD2_VALUE> ,"Battery2PercentageThreshold3": <BATTERY2_PERCENTAGE_THRESHOLD3_VALUE> ,"Battery3Manufacturer": <BATTERY3_MANUFACTURER_VALUE> ,"Battery3Size": <BATTERY3_SIZE_VALUE> ,"Battery3AHrRating": <BATTERY3A_HR_RATING_VALUE> ,"Battery3Quantity": <BATTERY3_QUANTITY_VALUE> ,"Battery3RatedVoltage": <BATTERY3_RATED_VOLTAGE_VALUE> ,"Battery3AlarmMask": <BATTERY3_ALARM_MASK_VALUE> ,"Battery3VoltageMinThreshold": <BATTERY3_VOLTAGE_MIN_THRESHOLD_VALUE> ,"Battery3VoltageThreshold1": <BATTERY3_VOLTAGE_THRESHOLD1_VALUE> ,"Battery3VoltageThreshold2": <BATTERY3_VOLTAGE_THRESHOLD2_VALUE> ,"Battery3VoltageThreshold3": <BATTERY3_VOLTAGE_THRESHOLD3_VALUE> ,"Battery3PercentageMinThreshold": <BATTERY3_PERCENTAGE_MIN_THRESHOLD_VALUE> ,"Battery3PercentageThreshold1": <BATTERY3_PERCENTAGE_THRESHOLD1_VALUE> ,"Battery3PercentageThreshold2": <BATTERY3_PERCENTAGE_THRESHOLD2_VALUE> ,"Battery3PercentageThreshold3": <BATTERY3_PERCENTAGE_THRESHOLD3_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -3827,13 +4139,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Commands/WriteAttri
 
 To force read all PowerConfiguration attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the PowerConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PowerConfiguration/Commands/ForceReadAttributes' -m  '{ "value": ["MainsVoltage"] }'
 ```
 
@@ -3890,15 +4202,19 @@ The following attribute topics are used to retrieve the DeviceTemperatureConfigu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentTemperature attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/CurrentTemperature/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/CurrentTemperature/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/CurrentTemperature/Desired { "value": <DESIRED_CURRENT_TEMPERATURE> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/CurrentTemperature/Reported { "value": <REPORTED_CURRENT_TEMPERATURE> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/CurrentTemperature/Desired { "value": <DESIRED_CURRENT_TEMPERATURE>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/CurrentTemperature/Reported { "value": <REPORTED_CURRENT_TEMPERATURE>}
+
 ```
 
 <br><br>
@@ -3930,15 +4246,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/CurrentTempera
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinTempExperienced attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MinTempExperienced/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/MinTempExperienced/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MinTempExperienced/Desired { "value": <DESIRED_MIN_TEMP_EXPERIENCED> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MinTempExperienced/Reported { "value": <REPORTED_MIN_TEMP_EXPERIENCED> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/MinTempExperienced/Desired { "value": <DESIRED_MIN_TEMP_EXPERIENCED>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/MinTempExperienced/Reported { "value": <REPORTED_MIN_TEMP_EXPERIENCED>}
+
 ```
 
 <br><br>
@@ -3970,15 +4290,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MinTempExperie
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxTempExperienced attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MaxTempExperienced/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/MaxTempExperienced/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MaxTempExperienced/Desired { "value": <DESIRED_MAX_TEMP_EXPERIENCED> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MaxTempExperienced/Reported { "value": <REPORTED_MAX_TEMP_EXPERIENCED> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/MaxTempExperienced/Desired { "value": <DESIRED_MAX_TEMP_EXPERIENCED>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/MaxTempExperienced/Reported { "value": <REPORTED_MAX_TEMP_EXPERIENCED>}
+
 ```
 
 <br><br>
@@ -4010,15 +4334,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/MaxTempExperie
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OverTempTotalDwell attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/OverTempTotalDwell/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/OverTempTotalDwell/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/OverTempTotalDwell/Desired { "value": <DESIRED_OVER_TEMP_TOTAL_DWELL> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/OverTempTotalDwell/Reported { "value": <REPORTED_OVER_TEMP_TOTAL_DWELL> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/OverTempTotalDwell/Desired { "value": <DESIRED_OVER_TEMP_TOTAL_DWELL>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/OverTempTotalDwell/Reported { "value": <REPORTED_OVER_TEMP_TOTAL_DWELL>}
+
 ```
 
 <br><br>
@@ -4050,15 +4378,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/OverTempTotalD
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DeviceTempAlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/DeviceTempAlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/DeviceTempAlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/DeviceTempAlarmMask/Desired { "value": <DESIRED_DEVICE_TEMP_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/DeviceTempAlarmMask/Reported { "value": <REPORTED_DEVICE_TEMP_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/DeviceTempAlarmMask/Desired { "value": <DESIRED_DEVICE_TEMP_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/DeviceTempAlarmMask/Reported { "value": <REPORTED_DEVICE_TEMP_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -4090,15 +4422,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/DeviceTempAlar
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LowTempThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/LowTempThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempThreshold/Desired { "value": <DESIRED_LOW_TEMP_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempThreshold/Reported { "value": <REPORTED_LOW_TEMP_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/LowTempThreshold/Desired { "value": <DESIRED_LOW_TEMP_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/LowTempThreshold/Reported { "value": <REPORTED_LOW_TEMP_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -4130,15 +4466,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempThresho
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for HighTempThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/HighTempThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempThreshold/Desired { "value": <DESIRED_HIGH_TEMP_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempThreshold/Reported { "value": <REPORTED_HIGH_TEMP_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/HighTempThreshold/Desired { "value": <DESIRED_HIGH_TEMP_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/HighTempThreshold/Reported { "value": <REPORTED_HIGH_TEMP_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -4170,15 +4510,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempThresh
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LowTempDwellTripPoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempDwellTripPoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/LowTempDwellTripPoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempDwellTripPoint/Desired { "value": <DESIRED_LOW_TEMP_DWELL_TRIP_POINT> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempDwellTripPoint/Reported { "value": <REPORTED_LOW_TEMP_DWELL_TRIP_POINT> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/LowTempDwellTripPoint/Desired { "value": <DESIRED_LOW_TEMP_DWELL_TRIP_POINT>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/LowTempDwellTripPoint/Reported { "value": <REPORTED_LOW_TEMP_DWELL_TRIP_POINT>}
+
 ```
 
 <br><br>
@@ -4210,15 +4554,19 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/LowTempDwellTr
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for HighTempDwellTripPoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempDwellTripPoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DeviceTemperatureConfiguration/Attributes/HighTempDwellTripPoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempDwellTripPoint/Desired { "value": <DESIRED_HIGH_TEMP_DWELL_TRIP_POINT> }
-ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempDwellTripPoint/Reported { "value": <REPORTED_HIGH_TEMP_DWELL_TRIP_POINT> }
+
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/HighTempDwellTripPoint/Desired { "value": <DESIRED_HIGH_TEMP_DWELL_TRIP_POINT>}
+ucl/by-unid/<UNID>/ep0/DeviceTemperatureConfiguration/Attributes/HighTempDwellTripPoint/Reported { "value": <REPORTED_HIGH_TEMP_DWELL_TRIP_POINT>}
+
 ```
 
 <br><br>
@@ -4255,7 +4603,7 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/HighTempDwellT
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -4308,7 +4656,7 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Attributes/ClusterRevisio
 
 To see supported commands for DeviceTemperatureConfiguration cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/SupportedCommands { "value": [] }
@@ -4316,8 +4664,7 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/SupportedCommands { "valu
 
 To see supported generated commands for DeviceTemperatureConfiguration cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/SupportedGeneratedCommands { "value": [] }
@@ -4378,11 +4725,12 @@ ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/SupportedGeneratedCommand
 
 To update all DeviceTemperatureConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Commands/WriteAttributes' -m  '{ "DeviceTempAlarmMask": <DEVICE_TEMP_ALARM_MASK_VALUE> ,"LowTempThreshold": <LOW_TEMP_THRESHOLD_VALUE> ,"HighTempThreshold": <HIGH_TEMP_THRESHOLD_VALUE> ,"LowTempDwellTripPoint": <LOW_TEMP_DWELL_TRIP_POINT_VALUE> ,"HighTempDwellTripPoint": <HIGH_TEMP_DWELL_TRIP_POINT_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -4430,13 +4778,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Command
 
 To force read all DeviceTemperatureConfiguration attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the DeviceTemperatureConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DeviceTemperatureConfiguration/Commands/ForceReadAttributes' -m  '{ "value": ["CurrentTemperature"] }'
 ```
 
@@ -4493,15 +4841,19 @@ The following attribute topics are used to retrieve the Identify cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for IdentifyTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Attributes/IdentifyTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Identify/Attributes/IdentifyTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Identify/Attributes/IdentifyTime/Desired { "value": <DESIRED_IDENTIFY_TIME> }
-ucl/by-unid/<UNID>/<EP>/Identify/Attributes/IdentifyTime/Reported { "value": <REPORTED_IDENTIFY_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Identify/Attributes/IdentifyTime/Desired { "value": <DESIRED_IDENTIFY_TIME>}
+ucl/by-unid/<UNID>/ep0/Identify/Attributes/IdentifyTime/Reported { "value": <REPORTED_IDENTIFY_TIME>}
+
 ```
 
 <br><br>
@@ -4538,7 +4890,7 @@ ucl/by-unid/<UNID>/<EP>/Identify/Attributes/IdentifyTime/Reported { "value": <RE
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Identify/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -4597,7 +4949,7 @@ ucl/by-unid/<UNID>/<EP>/Identify/Attributes/ClusterRevision/Reported { "value": 
 
 To see supported commands for Identify cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Identify/SupportedCommands { "value": ["Identify","IdentifyQuery","TriggerEffect","WriteAttributes", "ForceReadAttributes"] }
@@ -4605,8 +4957,7 @@ ucl/by-unid/<UNID>/<EP>/Identify/SupportedCommands { "value": ["Identify","Ident
 
 To see supported generated commands for Identify cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Identify/SupportedGeneratedCommands { "value": ["IdentifyQueryResponse",] }
@@ -4656,13 +5007,13 @@ ucl/by-unid/<UNID>/<EP>/Identify/SupportedGeneratedCommands { "value": ["Identif
 
 To send a Identify/Identify command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/Identify' -m  '{ "IdentifyTime": <IDENTIFY_TIME_VALUE> }'
 ```
 
 To receive a Identify/Identify generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/Identify'
 ```
 
@@ -4699,13 +5050,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/Identify'
 
 To send a Identify/IdentifyQueryResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/IdentifyQueryResponse' -m  '{ "Timeout": <TIMEOUT_VALUE> }'
 ```
 
 To receive a Identify/IdentifyQueryResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/IdentifyQueryResponse'
 ```
 
@@ -4738,13 +5089,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/IdentifyQue
 
 To send a Identify/IdentifyQuery command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/IdentifyQuery' -m  '{  }'
 ```
 
 To receive a Identify/IdentifyQuery generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/IdentifyQuery'
 ```
 
@@ -4785,13 +5136,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/IdentifyQue
 
 To send a Identify/TriggerEffect command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/TriggerEffect' -m  '{ "EffectIdentifier": <EFFECT_IDENTIFIER_VALUE>,"EffectVariant": <EFFECT_VARIANT_VALUE> }'
 ```
 
 To receive a Identify/TriggerEffect generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/TriggerEffect'
 ```
 
@@ -4827,11 +5178,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Identify/GeneratedCommands/TriggerEffe
 
 To update all Identify attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/WriteAttributes' -m  '{ "IdentifyTime": <IDENTIFY_TIME_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -4871,13 +5223,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/WriteAttributes' -m 
 
 To force read all Identify attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Identify attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Identify/Commands/ForceReadAttributes' -m  '{ "value": ["IdentifyTime"] }'
 ```
 
@@ -4934,15 +5286,19 @@ The following attribute topics are used to retrieve the Groups cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NameSupport attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Attributes/NameSupport/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Groups/Attributes/NameSupport/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Groups/Attributes/NameSupport/Desired { "value": <DESIRED_NAME_SUPPORT> }
-ucl/by-unid/<UNID>/<EP>/Groups/Attributes/NameSupport/Reported { "value": <REPORTED_NAME_SUPPORT> }
+
+ucl/by-unid/<UNID>/ep0/Groups/Attributes/NameSupport/Desired { "value": <DESIRED_NAME_SUPPORT>}
+ucl/by-unid/<UNID>/ep0/Groups/Attributes/NameSupport/Reported { "value": <REPORTED_NAME_SUPPORT>}
+
 ```
 
 <br><br>
@@ -4979,7 +5335,7 @@ ucl/by-unid/<UNID>/<EP>/Groups/Attributes/NameSupport/Reported { "value": <REPOR
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Groups/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -5044,7 +5400,7 @@ ucl/by-unid/<UNID>/<EP>/Groups/Attributes/ClusterRevision/Reported { "value": <R
 
 To see supported commands for Groups cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Groups/SupportedCommands { "value": ["AddGroup","ViewGroup","GetGroupMembership","RemoveGroup","RemoveAllGroups","AddGroupIfIdentifying","WriteAttributes", "ForceReadAttributes"] }
@@ -5052,8 +5408,7 @@ ucl/by-unid/<UNID>/<EP>/Groups/SupportedCommands { "value": ["AddGroup","ViewGro
 
 To see supported generated commands for Groups cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Groups/SupportedGeneratedCommands { "value": ["AddGroupResponse","ViewGroupResponse","GetGroupMembershipResponse","RemoveGroupResponse",] }
@@ -5107,13 +5462,13 @@ ucl/by-unid/<UNID>/<EP>/Groups/SupportedGeneratedCommands { "value": ["AddGroupR
 
 To send a Groups/AddGroup command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/AddGroup' -m  '{ "GroupId": <GROUP_ID_VALUE>,"GroupName": <GROUP_NAME_VALUE> }'
 ```
 
 To receive a Groups/AddGroup generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/AddGroup'
 ```
 
@@ -5154,13 +5509,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/AddGroup'
 
 To send a Groups/AddGroupResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/AddGroupResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupId": <GROUP_ID_VALUE> }'
 ```
 
 To receive a Groups/AddGroupResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/AddGroupResponse'
 ```
 
@@ -5197,13 +5552,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/AddGroupRespo
 
 To send a Groups/ViewGroup command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/ViewGroup' -m  '{ "GroupId": <GROUP_ID_VALUE> }'
 ```
 
 To receive a Groups/ViewGroup generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/ViewGroup'
 ```
 
@@ -5248,13 +5603,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/ViewGroup'
 
 To send a Groups/ViewGroupResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/ViewGroupResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupId": <GROUP_ID_VALUE>,"GroupName": <GROUP_NAME_VALUE> }'
 ```
 
 To receive a Groups/ViewGroupResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/ViewGroupResponse'
 ```
 
@@ -5294,13 +5649,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/ViewGroupResp
 
 To send a Groups/GetGroupMembership command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/GetGroupMembership' -m  '{ "GroupList": <GROUP_LIST_VALUE> }'
 ```
 
 To receive a Groups/GetGroupMembership generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/GetGroupMembership'
 ```
 
@@ -5344,13 +5699,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/GetGroupMembe
 
 To send a Groups/GetGroupMembershipResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/GetGroupMembershipResponse' -m  '{ "Capacity": <CAPACITY_VALUE>,"GroupList": <GROUP_LIST_VALUE> }'
 ```
 
 To receive a Groups/GetGroupMembershipResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/GetGroupMembershipResponse'
 ```
 
@@ -5387,13 +5742,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/GetGroupMembe
 
 To send a Groups/RemoveGroup command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/RemoveGroup' -m  '{ "GroupId": <GROUP_ID_VALUE> }'
 ```
 
 To receive a Groups/RemoveGroup generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/RemoveGroup'
 ```
 
@@ -5434,13 +5789,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/RemoveGroup'
 
 To send a Groups/RemoveGroupResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/RemoveGroupResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupId": <GROUP_ID_VALUE> }'
 ```
 
 To receive a Groups/RemoveGroupResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/RemoveGroupResponse'
 ```
 
@@ -5473,13 +5828,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/RemoveGroupRe
 
 To send a Groups/RemoveAllGroups command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/RemoveAllGroups' -m  '{  }'
 ```
 
 To receive a Groups/RemoveAllGroups generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/RemoveAllGroups'
 ```
 
@@ -5520,13 +5875,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/RemoveAllGrou
 
 To send a Groups/AddGroupIfIdentifying command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/AddGroupIfIdentifying' -m  '{ "GroupId": <GROUP_ID_VALUE>,"GroupName": <GROUP_NAME_VALUE> }'
 ```
 
 To receive a Groups/AddGroupIfIdentifying generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/AddGroupIfIdentifying'
 ```
 
@@ -5559,11 +5914,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Groups/GeneratedCommands/AddGroupIfIde
 
 To update all Groups attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -5603,13 +5959,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/WriteAttributes' -m  '
 
 To force read all Groups attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Groups attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Groups/Commands/ForceReadAttributes' -m  '{ "value": ["NameSupport"] }'
 ```
 
@@ -5666,15 +6022,19 @@ The following attribute topics are used to retrieve the Scenes cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SceneCount attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneCount/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Scenes/Attributes/SceneCount/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneCount/Desired { "value": <DESIRED_SCENE_COUNT> }
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneCount/Reported { "value": <REPORTED_SCENE_COUNT> }
+
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/SceneCount/Desired { "value": <DESIRED_SCENE_COUNT>}
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/SceneCount/Reported { "value": <REPORTED_SCENE_COUNT>}
+
 ```
 
 <br><br>
@@ -5706,15 +6066,19 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneCount/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentScene attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentScene/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Scenes/Attributes/CurrentScene/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentScene/Desired { "value": <DESIRED_CURRENT_SCENE> }
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentScene/Reported { "value": <REPORTED_CURRENT_SCENE> }
+
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/CurrentScene/Desired { "value": <DESIRED_CURRENT_SCENE>}
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/CurrentScene/Reported { "value": <REPORTED_CURRENT_SCENE>}
+
 ```
 
 <br><br>
@@ -5746,15 +6110,19 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentScene/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentGroup attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentGroup/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Scenes/Attributes/CurrentGroup/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentGroup/Desired { "value": <DESIRED_CURRENT_GROUP> }
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentGroup/Reported { "value": <REPORTED_CURRENT_GROUP> }
+
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/CurrentGroup/Desired { "value": <DESIRED_CURRENT_GROUP>}
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/CurrentGroup/Reported { "value": <REPORTED_CURRENT_GROUP>}
+
 ```
 
 <br><br>
@@ -5786,15 +6154,19 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/CurrentGroup/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SceneValid attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneValid/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Scenes/Attributes/SceneValid/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneValid/Desired { "value": <DESIRED_SCENE_VALID> }
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneValid/Reported { "value": <REPORTED_SCENE_VALID> }
+
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/SceneValid/Desired { "value": <DESIRED_SCENE_VALID>}
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/SceneValid/Reported { "value": <REPORTED_SCENE_VALID>}
+
 ```
 
 <br><br>
@@ -5826,15 +6198,19 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneValid/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NameSupport attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/NameSupport/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Scenes/Attributes/NameSupport/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/NameSupport/Desired { "value": <DESIRED_NAME_SUPPORT> }
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/NameSupport/Reported { "value": <REPORTED_NAME_SUPPORT> }
+
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/NameSupport/Desired { "value": <DESIRED_NAME_SUPPORT>}
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/NameSupport/Reported { "value": <REPORTED_NAME_SUPPORT>}
+
 ```
 
 <br><br>
@@ -5866,15 +6242,19 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/NameSupport/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LastConfiguredBy attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/LastConfiguredBy/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Scenes/Attributes/LastConfiguredBy/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/LastConfiguredBy/Desired { "value": <DESIRED_LAST_CONFIGURED_BY> }
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/LastConfiguredBy/Reported { "value": <REPORTED_LAST_CONFIGURED_BY> }
+
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/LastConfiguredBy/Desired { "value": <DESIRED_LAST_CONFIGURED_BY>}
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/LastConfiguredBy/Reported { "value": <REPORTED_LAST_CONFIGURED_BY>}
+
 ```
 
 <br><br>
@@ -5909,15 +6289,19 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/LastConfiguredBy/Reported { "value": <
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SceneTable attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneTable/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Scenes/Attributes/SceneTable/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneTable/Desired { "value": <DESIRED_SCENE_TABLE> }
-ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneTable/Reported { "value": <REPORTED_SCENE_TABLE> }
+
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/SceneTable/Desired { "value": [<DESIRED_SCENE_TABLE>,<DESIRED_SCENE_TABLE>]}
+ucl/by-unid/<UNID>/ep0/Scenes/Attributes/SceneTable/Reported { "value": [<REPORTED_SCENE_TABLE>,<REPORTED_SCENE_TABLE>]}
+
 ```
 
 <br><br>
@@ -5954,7 +6338,7 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/SceneTable/Reported { "value": <REPORT
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -6028,7 +6412,7 @@ ucl/by-unid/<UNID>/<EP>/Scenes/Attributes/ClusterRevision/Reported { "value": <R
 
 To see supported commands for Scenes cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Scenes/SupportedCommands { "value": ["AddScene","ViewScene","RemoveScene","RemoveAllScenes","StoreScene","RecallScene","GetSceneMembership","EnhancedAddScene","EnhancedViewScene","CopyScene",] }
@@ -6036,8 +6420,7 @@ ucl/by-unid/<UNID>/<EP>/Scenes/SupportedCommands { "value": ["AddScene","ViewSce
 
 To see supported generated commands for Scenes cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Scenes/SupportedGeneratedCommands { "value": ["AddSceneResponse","ViewSceneResponse","RemoveSceneResponse","RemoveAllScenesResponse","StoreSceneResponse","GetSceneMembershipResponse","EnhancedAddSceneResponse","EnhancedViewSceneResponse","CopySceneResponse"] }
@@ -6110,13 +6493,13 @@ ucl/by-unid/<UNID>/<EP>/Scenes/SupportedGeneratedCommands { "value": ["AddSceneR
 
 To send a Scenes/AddScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/AddScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"SceneName": <SCENE_NAME_VALUE>,"ExtensionFieldSets": <EXTENSION_FIELD_SETS_VALUE>,"TransitionTime100ms": <TRANSITION_TIME100MS_VALUE> }'
 ```
 
 To receive a Scenes/AddScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/AddScene'
 ```
 
@@ -6161,13 +6544,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/AddScene'
 
 To send a Scenes/AddSceneResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/AddSceneResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/AddSceneResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/AddSceneResponse'
 ```
 
@@ -6208,13 +6591,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/AddSceneRespo
 
 To send a Scenes/ViewScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/ViewScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/ViewScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/ViewScene'
 ```
 
@@ -6274,13 +6657,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/ViewScene'
 
 To send a Scenes/ViewSceneResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/ViewSceneResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"SceneName": <SCENE_NAME_VALUE>,"ExtensionFieldSets": <EXTENSION_FIELD_SETS_VALUE> }'
 ```
 
 To receive a Scenes/ViewSceneResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/ViewSceneResponse'
 ```
 
@@ -6321,13 +6704,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/ViewSceneResp
 
 To send a Scenes/RemoveScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/RemoveScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/RemoveScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveScene'
 ```
 
@@ -6372,13 +6755,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveScene'
 
 To send a Scenes/RemoveSceneResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/RemoveSceneResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/RemoveSceneResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveSceneResponse'
 ```
 
@@ -6415,13 +6798,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveSceneRe
 
 To send a Scenes/RemoveAllScenes command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/RemoveAllScenes' -m  '{ "GroupID": <GROUPID_VALUE> }'
 ```
 
 To receive a Scenes/RemoveAllScenes generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveAllScenes'
 ```
 
@@ -6462,13 +6845,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveAllScen
 
 To send a Scenes/RemoveAllScenesResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/RemoveAllScenesResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupID": <GROUPID_VALUE> }'
 ```
 
 To receive a Scenes/RemoveAllScenesResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveAllScenesResponse'
 ```
 
@@ -6509,13 +6892,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RemoveAllScen
 
 To send a Scenes/StoreScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/StoreScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/StoreScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/StoreScene'
 ```
 
@@ -6560,13 +6943,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/StoreScene'
 
 To send a Scenes/StoreSceneResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/StoreSceneResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/StoreSceneResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/StoreSceneResponse'
 ```
 
@@ -6611,13 +6994,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/StoreSceneRes
 
 To send a Scenes/RecallScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/RecallScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE> }'
 ```
 
 To receive a Scenes/RecallScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RecallScene'
 ```
 
@@ -6654,13 +7037,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/RecallScene'
 
 To send a Scenes/GetSceneMembership command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/GetSceneMembership' -m  '{ "GroupID": <GROUPID_VALUE> }'
 ```
 
 To receive a Scenes/GetSceneMembership generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/GetSceneMembership'
 ```
 
@@ -6712,13 +7095,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/GetSceneMembe
 
 To send a Scenes/GetSceneMembershipResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/GetSceneMembershipResponse' -m  '{ "Status": <STATUS_VALUE>,"Capacity": <CAPACITY_VALUE>,"GroupID": <GROUPID_VALUE>,"SceneList": <SCENE_LIST_VALUE> }'
 ```
 
 To receive a Scenes/GetSceneMembershipResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/GetSceneMembershipResponse'
 ```
 
@@ -6774,13 +7157,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/GetSceneMembe
 
 To send a Scenes/EnhancedAddScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/EnhancedAddScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"SceneName": <SCENE_NAME_VALUE>,"ExtensionFieldSets": <EXTENSION_FIELD_SETS_VALUE> }'
 ```
 
 To receive a Scenes/EnhancedAddScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedAddScene'
 ```
 
@@ -6825,13 +7208,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedAddSc
 
 To send a Scenes/EnhancedAddSceneResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/EnhancedAddSceneResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/EnhancedAddSceneResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedAddSceneResponse'
 ```
 
@@ -6872,13 +7255,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedAddSc
 
 To send a Scenes/EnhancedViewScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/EnhancedViewScene' -m  '{ "GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE> }'
 ```
 
 To receive a Scenes/EnhancedViewScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedViewScene'
 ```
 
@@ -6938,13 +7321,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedViewS
 
 To send a Scenes/EnhancedViewSceneResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/EnhancedViewSceneResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupID": <GROUPID_VALUE>,"SceneID": <SCENEID_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"SceneName": <SCENE_NAME_VALUE>,"ExtensionFieldSets": <EXTENSION_FIELD_SETS_VALUE> }'
 ```
 
 To receive a Scenes/EnhancedViewSceneResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedViewSceneResponse'
 ```
 
@@ -6997,13 +7380,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/EnhancedViewS
 
 To send a Scenes/CopyScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/CopyScene' -m  '{ "Mode": <MODE_VALUE>,"GroupIdentifierFrom": <GROUP_IDENTIFIER_FROM_VALUE>,"SceneIdentifierFrom": <SCENE_IDENTIFIER_FROM_VALUE>,"GroupIdentifierTo": <GROUP_IDENTIFIER_TO_VALUE>,"SceneIdentifierTo": <SCENE_IDENTIFIER_TO_VALUE> }'
 ```
 
 To receive a Scenes/CopyScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/CopyScene'
 ```
 
@@ -7048,13 +7431,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/CopyScene'
 
 To send a Scenes/CopySceneResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/CopySceneResponse' -m  '{ "Status": <STATUS_VALUE>,"GroupIdentifierFrom": <GROUP_IDENTIFIER_FROM_VALUE>,"SceneIdentifierFrom": <SCENE_IDENTIFIER_FROM_VALUE> }'
 ```
 
 To receive a Scenes/CopySceneResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/CopySceneResponse'
 ```
 
@@ -7087,11 +7470,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/GeneratedCommands/CopySceneResp
 
 To update all Scenes attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -7137,13 +7521,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/WriteAttributes' -m  '
 
 To force read all Scenes attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Scenes attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Scenes/Commands/ForceReadAttributes' -m  '{ "value": ["SceneCount"] }'
 ```
 
@@ -7200,15 +7584,19 @@ The following attribute topics are used to retrieve the OnOff cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OnOff attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnOff/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OnOff/Attributes/OnOff/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnOff/Desired { "value": <DESIRED_ON_OFF> }
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnOff/Reported { "value": <REPORTED_ON_OFF> }
+
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/OnOff/Desired { "value": <DESIRED_ON_OFF>}
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/OnOff/Reported { "value": <REPORTED_ON_OFF>}
+
 ```
 
 <br><br>
@@ -7240,15 +7628,19 @@ ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnOff/Reported { "value": <REPORTED_ON_
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for GlobalSceneControl attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/GlobalSceneControl/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OnOff/Attributes/GlobalSceneControl/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/GlobalSceneControl/Desired { "value": <DESIRED_GLOBAL_SCENE_CONTROL> }
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/GlobalSceneControl/Reported { "value": <REPORTED_GLOBAL_SCENE_CONTROL> }
+
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/GlobalSceneControl/Desired { "value": <DESIRED_GLOBAL_SCENE_CONTROL>}
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/GlobalSceneControl/Reported { "value": <REPORTED_GLOBAL_SCENE_CONTROL>}
+
 ```
 
 <br><br>
@@ -7280,15 +7672,19 @@ ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/GlobalSceneControl/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OnTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OnOff/Attributes/OnTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnTime/Desired { "value": <DESIRED_ON_TIME> }
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnTime/Reported { "value": <REPORTED_ON_TIME> }
+
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/OnTime/Desired { "value": <DESIRED_ON_TIME>}
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/OnTime/Reported { "value": <REPORTED_ON_TIME>}
+
 ```
 
 <br><br>
@@ -7320,15 +7716,19 @@ ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OnTime/Reported { "value": <REPORTED_ON
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OffWaitTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OffWaitTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OnOff/Attributes/OffWaitTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OffWaitTime/Desired { "value": <DESIRED_OFF_WAIT_TIME> }
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OffWaitTime/Reported { "value": <REPORTED_OFF_WAIT_TIME> }
+
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/OffWaitTime/Desired { "value": <DESIRED_OFF_WAIT_TIME>}
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/OffWaitTime/Reported { "value": <REPORTED_OFF_WAIT_TIME>}
+
 ```
 
 <br><br>
@@ -7360,15 +7760,19 @@ ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/OffWaitTime/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for StartUpOnOff attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/StartUpOnOff/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OnOff/Attributes/StartUpOnOff/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/StartUpOnOff/Desired { "value": <DESIRED_START_UP_ON_OFF> }
-ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/StartUpOnOff/Reported { "value": <REPORTED_START_UP_ON_OFF> }
+
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/StartUpOnOff/Desired { "value": <DESIRED_START_UP_ON_OFF>}
+ucl/by-unid/<UNID>/ep0/OnOff/Attributes/StartUpOnOff/Reported { "value": <REPORTED_START_UP_ON_OFF>}
+
 ```
 
 <br><br>
@@ -7405,7 +7809,7 @@ ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/StartUpOnOff/Reported { "value": <REPOR
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -7466,7 +7870,7 @@ ucl/by-unid/<UNID>/<EP>/OnOff/Attributes/ClusterRevision/Reported { "value": <RE
 
 To see supported commands for OnOff cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/OnOff/SupportedCommands { "value": ["Off","On","Toggle","OffWithEffect","OnWithRecallGlobalScene","OnWithTimedOff","WriteAttributes", "ForceReadAttributes"] }
@@ -7474,8 +7878,7 @@ ucl/by-unid/<UNID>/<EP>/OnOff/SupportedCommands { "value": ["Off","On","Toggle",
 
 To see supported generated commands for OnOff cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/OnOff/SupportedGeneratedCommands { "value": [] }
@@ -7521,13 +7924,13 @@ ucl/by-unid/<UNID>/<EP>/OnOff/SupportedGeneratedCommands { "value": [] }
 
 To send a OnOff/Off command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/Off' -m  '{  }'
 ```
 
 To receive a OnOff/Off generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/Off'
 ```
 
@@ -7560,13 +7963,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/Off'
 
 To send a OnOff/On command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/On' -m  '{  }'
 ```
 
 To receive a OnOff/On generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/On'
 ```
 
@@ -7599,13 +8002,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/On'
 
 To send a OnOff/Toggle command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/Toggle' -m  '{  }'
 ```
 
 To receive a OnOff/Toggle generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/Toggle'
 ```
 
@@ -7646,13 +8049,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/Toggle'
 
 To send a OnOff/OffWithEffect command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/OffWithEffect' -m  '{ "EffectIdentifier": <EFFECT_IDENTIFIER_VALUE>,"EffectVariant": <EFFECT_VARIANT_VALUE> }'
 ```
 
 To receive a OnOff/OffWithEffect generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/OffWithEffect'
 ```
 
@@ -7685,13 +8088,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/OffWithEffect'
 
 To send a OnOff/OnWithRecallGlobalScene command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/OnWithRecallGlobalScene' -m  '{  }'
 ```
 
 To receive a OnOff/OnWithRecallGlobalScene generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/OnWithRecallGlobalScene'
 ```
 
@@ -7736,13 +8139,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/OnWithRecallGl
 
 To send a OnOff/OnWithTimedOff command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/OnWithTimedOff' -m  '{ "OnOffControl": <ON_OFF_CONTROL_VALUE>,"OnTime": <ON_TIME_VALUE>,"OffWaitTime": <OFF_WAIT_TIME_VALUE> }'
 ```
 
 To receive a OnOff/OnWithTimedOff generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/OnWithTimedOff'
 ```
 
@@ -7784,11 +8187,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/GeneratedCommands/OnWithTimedOff
 
 To update all OnOff attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/WriteAttributes' -m  '{ "OnTime": <ON_TIME_VALUE> ,"OffWaitTime": <OFF_WAIT_TIME_VALUE> ,"StartUpOnOff": <START_UP_ON_OFF_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -7832,13 +8236,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/WriteAttributes' -m  '{
 
 To force read all OnOff attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the OnOff attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OnOff/Commands/ForceReadAttributes' -m  '{ "value": ["OnOff"] }'
 ```
 
@@ -7895,15 +8299,19 @@ The following attribute topics are used to retrieve the Level cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/CurrentLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentLevel/Desired { "value": <DESIRED_CURRENT_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentLevel/Reported { "value": <REPORTED_CURRENT_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/CurrentLevel/Desired { "value": <DESIRED_CURRENT_LEVEL>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/CurrentLevel/Reported { "value": <REPORTED_CURRENT_LEVEL>}
+
 ```
 
 <br><br>
@@ -7935,15 +8343,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentLevel/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RemainingTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/RemainingTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/RemainingTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/RemainingTime/Desired { "value": <DESIRED_REMAINING_TIME> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/RemainingTime/Reported { "value": <REPORTED_REMAINING_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/RemainingTime/Desired { "value": <DESIRED_REMAINING_TIME>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/RemainingTime/Reported { "value": <REPORTED_REMAINING_TIME>}
+
 ```
 
 <br><br>
@@ -7975,15 +8387,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/RemainingTime/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/MinLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinLevel/Desired { "value": <DESIRED_MIN_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinLevel/Reported { "value": <REPORTED_MIN_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MinLevel/Desired { "value": <DESIRED_MIN_LEVEL>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MinLevel/Reported { "value": <REPORTED_MIN_LEVEL>}
+
 ```
 
 <br><br>
@@ -8015,15 +8431,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinLevel/Reported { "value": <REPORTED_
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/MaxLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxLevel/Desired { "value": <DESIRED_MAX_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxLevel/Reported { "value": <REPORTED_MAX_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MaxLevel/Desired { "value": <DESIRED_MAX_LEVEL>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MaxLevel/Reported { "value": <REPORTED_MAX_LEVEL>}
+
 ```
 
 <br><br>
@@ -8055,15 +8475,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxLevel/Reported { "value": <REPORTED_
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentFrequency attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentFrequency/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/CurrentFrequency/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentFrequency/Desired { "value": <DESIRED_CURRENT_FREQUENCY> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentFrequency/Reported { "value": <REPORTED_CURRENT_FREQUENCY> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/CurrentFrequency/Desired { "value": <DESIRED_CURRENT_FREQUENCY>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/CurrentFrequency/Reported { "value": <REPORTED_CURRENT_FREQUENCY>}
+
 ```
 
 <br><br>
@@ -8095,15 +8519,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/CurrentFrequency/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinFrequency attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinFrequency/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/MinFrequency/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinFrequency/Desired { "value": <DESIRED_MIN_FREQUENCY> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinFrequency/Reported { "value": <REPORTED_MIN_FREQUENCY> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MinFrequency/Desired { "value": <DESIRED_MIN_FREQUENCY>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MinFrequency/Reported { "value": <REPORTED_MIN_FREQUENCY>}
+
 ```
 
 <br><br>
@@ -8135,15 +8563,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/MinFrequency/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxFrequency attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxFrequency/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/MaxFrequency/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxFrequency/Desired { "value": <DESIRED_MAX_FREQUENCY> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxFrequency/Reported { "value": <REPORTED_MAX_FREQUENCY> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MaxFrequency/Desired { "value": <DESIRED_MAX_FREQUENCY>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/MaxFrequency/Reported { "value": <REPORTED_MAX_FREQUENCY>}
+
 ```
 
 <br><br>
@@ -8175,15 +8607,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/MaxFrequency/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Options attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/Options/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/Options/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/Options/Desired { "value": <DESIRED_OPTIONS> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/Options/Reported { "value": <REPORTED_OPTIONS> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/Options/Desired { "value": <DESIRED_OPTIONS>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/Options/Reported { "value": <REPORTED_OPTIONS>}
+
 ```
 
 <br><br>
@@ -8215,15 +8651,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/Options/Reported { "value": <REPORTED_O
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OnOffTransitionTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnOffTransitionTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/OnOffTransitionTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnOffTransitionTime/Desired { "value": <DESIRED_ON_OFF_TRANSITION_TIME> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnOffTransitionTime/Reported { "value": <REPORTED_ON_OFF_TRANSITION_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OnOffTransitionTime/Desired { "value": <DESIRED_ON_OFF_TRANSITION_TIME>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OnOffTransitionTime/Reported { "value": <REPORTED_ON_OFF_TRANSITION_TIME>}
+
 ```
 
 <br><br>
@@ -8255,15 +8695,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnOffTransitionTime/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OnLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/OnLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnLevel/Desired { "value": <DESIRED_ON_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnLevel/Reported { "value": <REPORTED_ON_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OnLevel/Desired { "value": <DESIRED_ON_LEVEL>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OnLevel/Reported { "value": <REPORTED_ON_LEVEL>}
+
 ```
 
 <br><br>
@@ -8295,15 +8739,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnLevel/Reported { "value": <REPORTED_O
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OnTransitionTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnTransitionTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/OnTransitionTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnTransitionTime/Desired { "value": <DESIRED_ON_TRANSITION_TIME> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnTransitionTime/Reported { "value": <REPORTED_ON_TRANSITION_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OnTransitionTime/Desired { "value": <DESIRED_ON_TRANSITION_TIME>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OnTransitionTime/Reported { "value": <REPORTED_ON_TRANSITION_TIME>}
+
 ```
 
 <br><br>
@@ -8335,15 +8783,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/OnTransitionTime/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OffTransitionTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/OffTransitionTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/OffTransitionTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OffTransitionTime/Desired { "value": <DESIRED_OFF_TRANSITION_TIME> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/OffTransitionTime/Reported { "value": <REPORTED_OFF_TRANSITION_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OffTransitionTime/Desired { "value": <DESIRED_OFF_TRANSITION_TIME>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/OffTransitionTime/Reported { "value": <REPORTED_OFF_TRANSITION_TIME>}
+
 ```
 
 <br><br>
@@ -8375,15 +8827,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/OffTransitionTime/Reported { "value": <
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DefaultMoveRate attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/DefaultMoveRate/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/DefaultMoveRate/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/DefaultMoveRate/Desired { "value": <DESIRED_DEFAULT_MOVE_RATE> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/DefaultMoveRate/Reported { "value": <REPORTED_DEFAULT_MOVE_RATE> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/DefaultMoveRate/Desired { "value": <DESIRED_DEFAULT_MOVE_RATE>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/DefaultMoveRate/Reported { "value": <REPORTED_DEFAULT_MOVE_RATE>}
+
 ```
 
 <br><br>
@@ -8415,15 +8871,19 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/DefaultMoveRate/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for StartUpCurrentLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/StartUpCurrentLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Level/Attributes/StartUpCurrentLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/StartUpCurrentLevel/Desired { "value": <DESIRED_START_UP_CURRENT_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/Level/Attributes/StartUpCurrentLevel/Reported { "value": <REPORTED_START_UP_CURRENT_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/Level/Attributes/StartUpCurrentLevel/Desired { "value": <DESIRED_START_UP_CURRENT_LEVEL>}
+ucl/by-unid/<UNID>/ep0/Level/Attributes/StartUpCurrentLevel/Reported { "value": <REPORTED_START_UP_CURRENT_LEVEL>}
+
 ```
 
 <br><br>
@@ -8460,7 +8920,7 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/StartUpCurrentLevel/Reported { "value":
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Level/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -8524,7 +8984,7 @@ ucl/by-unid/<UNID>/<EP>/Level/Attributes/ClusterRevision/Reported { "value": <RE
 
 To see supported commands for Level cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Level/SupportedCommands { "value": ["MoveToLevel","Move","Step","Stop","MoveToLevelWithOnOff","MoveWithOnOff","StepWithOnOff","StopWithOnOff","MoveToClosestFrequency","WriteAttributes", "ForceReadAttributes"] }
@@ -8532,8 +8992,7 @@ ucl/by-unid/<UNID>/<EP>/Level/SupportedCommands { "value": ["MoveToLevel","Move"
 
 To see supported generated commands for Level cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Level/SupportedGeneratedCommands { "value": [] }
@@ -8595,13 +9054,13 @@ ucl/by-unid/<UNID>/<EP>/Level/SupportedGeneratedCommands { "value": [] }
 
 To send a Level/MoveToLevel command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/MoveToLevel' -m  '{ "Level": <LEVEL_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/MoveToLevel generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveToLevel'
 ```
 
@@ -8650,13 +9109,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveToLevel'
 
 To send a Level/Move command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/Move' -m  '{ "MoveMode": <MOVE_MODE_VALUE>,"Rate": <RATE_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/Move generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/Move'
 ```
 
@@ -8709,13 +9168,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/Move'
 
 To send a Level/Step command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/Step' -m  '{ "StepMode": <STEP_MODE_VALUE>,"StepSize": <STEP_SIZE_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/Step generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/Step'
 ```
 
@@ -8756,13 +9215,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/Step'
 
 To send a Level/Stop command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/Stop' -m  '{ "OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/Stop generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/Stop'
 ```
 
@@ -8811,13 +9270,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/Stop'
 
 To send a Level/MoveToLevelWithOnOff command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/MoveToLevelWithOnOff' -m  '{ "Level": <LEVEL_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/MoveToLevelWithOnOff generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveToLevelWithOnOff'
 ```
 
@@ -8866,13 +9325,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveToLevelWit
 
 To send a Level/MoveWithOnOff command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/MoveWithOnOff' -m  '{ "MoveMode": <MOVE_MODE_VALUE>,"Rate": <RATE_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/MoveWithOnOff generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveWithOnOff'
 ```
 
@@ -8925,13 +9384,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveWithOnOff'
 
 To send a Level/StepWithOnOff command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/StepWithOnOff' -m  '{ "StepMode": <STEP_MODE_VALUE>,"StepSize": <STEP_SIZE_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/StepWithOnOff generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/StepWithOnOff'
 ```
 
@@ -8972,13 +9431,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/StepWithOnOff'
 
 To send a Level/StopWithOnOff command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/StopWithOnOff' -m  '{ "OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a Level/StopWithOnOff generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/StopWithOnOff'
 ```
 
@@ -9015,13 +9474,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/StopWithOnOff'
 
 To send a Level/MoveToClosestFrequency command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/MoveToClosestFrequency' -m  '{ "Frequency": <FREQUENCY_VALUE> }'
 ```
 
 To receive a Level/MoveToClosestFrequency generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveToClosestFrequency'
 ```
 
@@ -9075,11 +9534,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Level/GeneratedCommands/MoveToClosestF
 
 To update all Level attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/WriteAttributes' -m  '{ "Options": <OPTIONS_VALUE> ,"OnOffTransitionTime": <ON_OFF_TRANSITION_TIME_VALUE> ,"OnLevel": <ON_LEVEL_VALUE> ,"OnTransitionTime": <ON_TRANSITION_TIME_VALUE> ,"OffTransitionTime": <OFF_TRANSITION_TIME_VALUE> ,"DefaultMoveRate": <DEFAULT_MOVE_RATE_VALUE> ,"StartUpCurrentLevel": <START_UP_CURRENT_LEVEL_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -9132,13 +9592,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/WriteAttributes' -m  '{
 
 To force read all Level attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Level attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Level/Commands/ForceReadAttributes' -m  '{ "value": ["CurrentLevel"] }'
 ```
 
@@ -9195,15 +9655,19 @@ The following attribute topics are used to retrieve the Alarms cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AlarmCount attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Attributes/AlarmCount/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Alarms/Attributes/AlarmCount/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Alarms/Attributes/AlarmCount/Desired { "value": <DESIRED_ALARM_COUNT> }
-ucl/by-unid/<UNID>/<EP>/Alarms/Attributes/AlarmCount/Reported { "value": <REPORTED_ALARM_COUNT> }
+
+ucl/by-unid/<UNID>/ep0/Alarms/Attributes/AlarmCount/Desired { "value": <DESIRED_ALARM_COUNT>}
+ucl/by-unid/<UNID>/ep0/Alarms/Attributes/AlarmCount/Reported { "value": <REPORTED_ALARM_COUNT>}
+
 ```
 
 <br><br>
@@ -9240,7 +9704,7 @@ ucl/by-unid/<UNID>/<EP>/Alarms/Attributes/AlarmCount/Reported { "value": <REPORT
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Alarms/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -9301,7 +9765,7 @@ ucl/by-unid/<UNID>/<EP>/Alarms/Attributes/ClusterRevision/Reported { "value": <R
 
 To see supported commands for Alarms cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Alarms/SupportedCommands { "value": ["ResetAlarm","ResetAllAlarms","GetAlarm","ResetAlarmLog","WriteAttributes", "ForceReadAttributes"] }
@@ -9309,8 +9773,7 @@ ucl/by-unid/<UNID>/<EP>/Alarms/SupportedCommands { "value": ["ResetAlarm","Reset
 
 To see supported generated commands for Alarms cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Alarms/SupportedGeneratedCommands { "value": ["Alarm","GetAlarmResponse",] }
@@ -9364,13 +9827,13 @@ ucl/by-unid/<UNID>/<EP>/Alarms/SupportedGeneratedCommands { "value": ["Alarm","G
 
 To send a Alarms/ResetAlarm command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/ResetAlarm' -m  '{ "AlarmCode": <ALARM_CODE_VALUE>,"ClusterIdentifier": <CLUSTER_IDENTIFIER_VALUE> }'
 ```
 
 To receive a Alarms/ResetAlarm generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/ResetAlarm'
 ```
 
@@ -9411,13 +9874,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/ResetAlarm'
 
 To send a Alarms/Alarm command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/Alarm' -m  '{ "AlarmCode": <ALARM_CODE_VALUE>,"ClusterIdentifier": <CLUSTER_IDENTIFIER_VALUE> }'
 ```
 
 To receive a Alarms/Alarm generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/Alarm'
 ```
 
@@ -9450,13 +9913,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/Alarm'
 
 To send a Alarms/ResetAllAlarms command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/ResetAllAlarms' -m  '{  }'
 ```
 
 To receive a Alarms/ResetAllAlarms generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/ResetAllAlarms'
 ```
 
@@ -9505,13 +9968,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/ResetAllAlarm
 
 To send a Alarms/GetAlarmResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/GetAlarmResponse' -m  '{ "Status": <STATUS_VALUE>,"AlarmCode": <ALARM_CODE_VALUE>,"ClusterIdentifier": <CLUSTER_IDENTIFIER_VALUE>,"TimeStamp": <TIME_STAMP_VALUE> }'
 ```
 
 To receive a Alarms/GetAlarmResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/GetAlarmResponse'
 ```
 
@@ -9544,13 +10007,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/GetAlarmRespo
 
 To send a Alarms/GetAlarm command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/GetAlarm' -m  '{  }'
 ```
 
 To receive a Alarms/GetAlarm generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/GetAlarm'
 ```
 
@@ -9583,13 +10046,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/GetAlarm'
 
 To send a Alarms/ResetAlarmLog command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/ResetAlarmLog' -m  '{  }'
 ```
 
 To receive a Alarms/ResetAlarmLog generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/ResetAlarmLog'
 ```
 
@@ -9622,11 +10085,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/GeneratedCommands/ResetAlarmLog
 
 To update all Alarms attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -9666,13 +10130,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/WriteAttributes' -m  '
 
 To force read all Alarms attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Alarms attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Alarms/Commands/ForceReadAttributes' -m  '{ "value": ["AlarmCount"] }'
 ```
 
@@ -9729,15 +10193,19 @@ The following attribute topics are used to retrieve the Time cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Time attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/Time/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/Time/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/Time/Desired { "value": <DESIRED_TIME> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/Time/Reported { "value": <REPORTED_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/Time/Desired { "value": <DESIRED_TIME>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/Time/Reported { "value": <REPORTED_TIME>}
+
 ```
 
 <br><br>
@@ -9769,15 +10237,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/Time/Reported { "value": <REPORTED_TIME>
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TimeStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/TimeStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeStatus/Desired { "value": <DESIRED_TIME_STATUS> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeStatus/Reported { "value": <REPORTED_TIME_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/TimeStatus/Desired { "value": <DESIRED_TIME_STATUS>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/TimeStatus/Reported { "value": <REPORTED_TIME_STATUS>}
+
 ```
 
 <br><br>
@@ -9809,15 +10281,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeStatus/Reported { "value": <REPORTED
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TimeZone attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeZone/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/TimeZone/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeZone/Desired { "value": <DESIRED_TIME_ZONE> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeZone/Reported { "value": <REPORTED_TIME_ZONE> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/TimeZone/Desired { "value": <DESIRED_TIME_ZONE>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/TimeZone/Reported { "value": <REPORTED_TIME_ZONE>}
+
 ```
 
 <br><br>
@@ -9849,15 +10325,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/TimeZone/Reported { "value": <REPORTED_T
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DstStart attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstStart/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/DstStart/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstStart/Desired { "value": <DESIRED_DST_START> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstStart/Reported { "value": <REPORTED_DST_START> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/DstStart/Desired { "value": <DESIRED_DST_START>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/DstStart/Reported { "value": <REPORTED_DST_START>}
+
 ```
 
 <br><br>
@@ -9889,15 +10369,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstStart/Reported { "value": <REPORTED_D
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DstEnd attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstEnd/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/DstEnd/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstEnd/Desired { "value": <DESIRED_DST_END> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstEnd/Reported { "value": <REPORTED_DST_END> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/DstEnd/Desired { "value": <DESIRED_DST_END>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/DstEnd/Reported { "value": <REPORTED_DST_END>}
+
 ```
 
 <br><br>
@@ -9929,15 +10413,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstEnd/Reported { "value": <REPORTED_DST
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DstShift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstShift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/DstShift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstShift/Desired { "value": <DESIRED_DST_SHIFT> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstShift/Reported { "value": <REPORTED_DST_SHIFT> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/DstShift/Desired { "value": <DESIRED_DST_SHIFT>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/DstShift/Reported { "value": <REPORTED_DST_SHIFT>}
+
 ```
 
 <br><br>
@@ -9969,15 +10457,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/DstShift/Reported { "value": <REPORTED_D
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for StandardTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/StandardTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/StandardTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/StandardTime/Desired { "value": <DESIRED_STANDARD_TIME> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/StandardTime/Reported { "value": <REPORTED_STANDARD_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/StandardTime/Desired { "value": <DESIRED_STANDARD_TIME>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/StandardTime/Reported { "value": <REPORTED_STANDARD_TIME>}
+
 ```
 
 <br><br>
@@ -10009,15 +10501,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/StandardTime/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LocalTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/LocalTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/LocalTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/LocalTime/Desired { "value": <DESIRED_LOCAL_TIME> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/LocalTime/Reported { "value": <REPORTED_LOCAL_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/LocalTime/Desired { "value": <DESIRED_LOCAL_TIME>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/LocalTime/Reported { "value": <REPORTED_LOCAL_TIME>}
+
 ```
 
 <br><br>
@@ -10049,15 +10545,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/LocalTime/Reported { "value": <REPORTED_
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LastSetTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/LastSetTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/LastSetTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/LastSetTime/Desired { "value": <DESIRED_LAST_SET_TIME> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/LastSetTime/Reported { "value": <REPORTED_LAST_SET_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/LastSetTime/Desired { "value": <DESIRED_LAST_SET_TIME>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/LastSetTime/Reported { "value": <REPORTED_LAST_SET_TIME>}
+
 ```
 
 <br><br>
@@ -10089,15 +10589,19 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/LastSetTime/Reported { "value": <REPORTE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ValidUntilTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/ValidUntilTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Time/Attributes/ValidUntilTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/ValidUntilTime/Desired { "value": <DESIRED_VALID_UNTIL_TIME> }
-ucl/by-unid/<UNID>/<EP>/Time/Attributes/ValidUntilTime/Reported { "value": <REPORTED_VALID_UNTIL_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Time/Attributes/ValidUntilTime/Desired { "value": <DESIRED_VALID_UNTIL_TIME>}
+ucl/by-unid/<UNID>/ep0/Time/Attributes/ValidUntilTime/Reported { "value": <REPORTED_VALID_UNTIL_TIME>}
+
 ```
 
 <br><br>
@@ -10134,7 +10638,7 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/ValidUntilTime/Reported { "value": <REPO
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Time/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -10187,7 +10691,7 @@ ucl/by-unid/<UNID>/<EP>/Time/Attributes/ClusterRevision/Reported { "value": <REP
 
 To see supported commands for Time cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Time/SupportedCommands { "value": [] }
@@ -10195,8 +10699,7 @@ ucl/by-unid/<UNID>/<EP>/Time/SupportedCommands { "value": [] }
 
 To see supported generated commands for Time cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Time/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Time/SupportedGeneratedCommands { "value": [] }
@@ -10263,11 +10766,12 @@ ucl/by-unid/<UNID>/<EP>/Time/SupportedGeneratedCommands { "value": [] }
 
 To update all Time attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Time/Commands/WriteAttributes' -m  '{ "Time": <TIME_VALUE> ,"TimeStatus": <TIME_STATUS_VALUE> ,"TimeZone": <TIME_ZONE_VALUE> ,"DstStart": <DST_START_VALUE> ,"DstEnd": <DST_END_VALUE> ,"DstShift": <DST_SHIFT_VALUE> ,"ValidUntilTime": <VALID_UNTIL_TIME_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -10316,1412 +10820,18 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Time/Commands/WriteAttributes' -m  '{ 
 
 To force read all Time attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Time/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Time attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Time/Commands/ForceReadAttributes' -m  '{ "value": ["Time"] }'
 ```
 
 <!-- -->
 <!-- END OF Time Commands Section -->
-<!-- -->
-
-<br><br><br>
-
-
-<!-- -->
-<!-- -->
-<!-- NEW Page Cluster Support -->
-<!-- -->
-<!-- -->
-\page ota_upgrade OTAUpgrade Cluster
-The following commands and attributes are accepted as JSON payloads for the
-OTAUpgrade cluster.
-
-<br><br>
-
-<!-- -->
-<!--  START OF OTAUpgrade Attributes Section -->
-<!-- -->
-\section ota_upgrade_attrs OTAUpgrade Attributes
-The following attribute topics are used to retrieve the OTAUpgrade cluster state.
-
-<br>
-
-\subsection ota_upgrade_attr_upgrade_serverid OTAUpgrade/UpgradeServerID Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/UpgradeServerID/Reported
-[PREFIX]/OTAUpgrade/Attributes/UpgradeServerID/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster UpgradeServerID Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "EUI64"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for UpgradeServerID attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeServerID/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeServerID/Desired { "value": <DESIRED_UPGRADE_SERVERID> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeServerID/Reported { "value": <REPORTED_UPGRADE_SERVERID> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_file_offset OTAUpgrade/FileOffset Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/FileOffset/Reported
-[PREFIX]/OTAUpgrade/Attributes/FileOffset/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster FileOffset Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for FileOffset attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/FileOffset/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/FileOffset/Desired { "value": <DESIRED_FILE_OFFSET> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/FileOffset/Reported { "value": <REPORTED_FILE_OFFSET> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_current_file_version OTAUpgrade/CurrentFileVersion Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/CurrentFileVersion/Reported
-[PREFIX]/OTAUpgrade/Attributes/CurrentFileVersion/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster CurrentFileVersion Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for CurrentFileVersion attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/CurrentFileVersion/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/CurrentFileVersion/Desired { "value": <DESIRED_CURRENT_FILE_VERSION> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/CurrentFileVersion/Reported { "value": <REPORTED_CURRENT_FILE_VERSION> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_current_zig_bee_stack_version OTAUpgrade/CurrentZigBeeStackVersion Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/CurrentZigBeeStackVersion/Reported
-[PREFIX]/OTAUpgrade/Attributes/CurrentZigBeeStackVersion/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster CurrentZigBeeStackVersion Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for CurrentZigBeeStackVersion attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/CurrentZigBeeStackVersion/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/CurrentZigBeeStackVersion/Desired { "value": <DESIRED_CURRENT_ZIG_BEE_STACK_VERSION> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/CurrentZigBeeStackVersion/Reported { "value": <REPORTED_CURRENT_ZIG_BEE_STACK_VERSION> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_downloaded_file_version OTAUpgrade/DownloadedFileVersion Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/DownloadedFileVersion/Reported
-[PREFIX]/OTAUpgrade/Attributes/DownloadedFileVersion/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster DownloadedFileVersion Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for DownloadedFileVersion attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/DownloadedFileVersion/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/DownloadedFileVersion/Desired { "value": <DESIRED_DOWNLOADED_FILE_VERSION> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/DownloadedFileVersion/Reported { "value": <REPORTED_DOWNLOADED_FILE_VERSION> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_downloaded_zig_bee_stack_version OTAUpgrade/DownloadedZigBeeStackVersion Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/DownloadedZigBeeStackVersion/Reported
-[PREFIX]/OTAUpgrade/Attributes/DownloadedZigBeeStackVersion/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster DownloadedZigBeeStackVersion Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for DownloadedZigBeeStackVersion attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/DownloadedZigBeeStackVersion/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/DownloadedZigBeeStackVersion/Desired { "value": <DESIRED_DOWNLOADED_ZIG_BEE_STACK_VERSION> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/DownloadedZigBeeStackVersion/Reported { "value": <REPORTED_DOWNLOADED_ZIG_BEE_STACK_VERSION> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_image_upgrade_status OTAUpgrade/ImageUpgradeStatus Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/ImageUpgradeStatus/Reported
-[PREFIX]/OTAUpgrade/Attributes/ImageUpgradeStatus/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ImageUpgradeStatus Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "OTAUpgradeImageUpgradeStatus"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for ImageUpgradeStatus attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageUpgradeStatus/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageUpgradeStatus/Desired { "value": <DESIRED_IMAGE_UPGRADE_STATUS> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageUpgradeStatus/Reported { "value": <REPORTED_IMAGE_UPGRADE_STATUS> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_manufacturerid OTAUpgrade/ManufacturerID Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/ManufacturerID/Reported
-[PREFIX]/OTAUpgrade/Attributes/ManufacturerID/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ManufacturerID Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for ManufacturerID attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ManufacturerID/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ManufacturerID/Desired { "value": <DESIRED_MANUFACTURERID> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ManufacturerID/Reported { "value": <REPORTED_MANUFACTURERID> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_image_typeid OTAUpgrade/ImageTypeID Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/ImageTypeID/Reported
-[PREFIX]/OTAUpgrade/Attributes/ImageTypeID/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ImageTypeID Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for ImageTypeID attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageTypeID/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageTypeID/Desired { "value": <DESIRED_IMAGE_TYPEID> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageTypeID/Reported { "value": <REPORTED_IMAGE_TYPEID> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_minimum_block_period OTAUpgrade/MinimumBlockPeriod Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/MinimumBlockPeriod/Reported
-[PREFIX]/OTAUpgrade/Attributes/MinimumBlockPeriod/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster MinimumBlockPeriod Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for MinimumBlockPeriod attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/MinimumBlockPeriod/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/MinimumBlockPeriod/Desired { "value": <DESIRED_MINIMUM_BLOCK_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/MinimumBlockPeriod/Reported { "value": <REPORTED_MINIMUM_BLOCK_PERIOD> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_image_stamp OTAUpgrade/ImageStamp Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/ImageStamp/Reported
-[PREFIX]/OTAUpgrade/Attributes/ImageStamp/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ImageStamp Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for ImageStamp attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageStamp/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageStamp/Desired { "value": <DESIRED_IMAGE_STAMP> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ImageStamp/Reported { "value": <REPORTED_IMAGE_STAMP> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_upgrade_activation_policy OTAUpgrade/UpgradeActivationPolicy Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/UpgradeActivationPolicy/Reported
-[PREFIX]/OTAUpgrade/Attributes/UpgradeActivationPolicy/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster UpgradeActivationPolicy Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "OTAUpgradeUpgradeActivationPolicy"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for UpgradeActivationPolicy attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeActivationPolicy/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeActivationPolicy/Desired { "value": <DESIRED_UPGRADE_ACTIVATION_POLICY> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeActivationPolicy/Reported { "value": <REPORTED_UPGRADE_ACTIVATION_POLICY> }
-```
-
-<br><br>
-
-\subsection ota_upgrade_attr_upgrade_timeout_policy OTAUpgrade/UpgradeTimeoutPolicy Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/UpgradeTimeoutPolicy/Reported
-[PREFIX]/OTAUpgrade/Attributes/UpgradeTimeoutPolicy/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster UpgradeTimeoutPolicy Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "OTAUpgradeUpgradeTimeoutPolicy"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for UpgradeTimeoutPolicy attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeTimeoutPolicy/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeTimeoutPolicy/Desired { "value": <DESIRED_UPGRADE_TIMEOUT_POLICY> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/UpgradeTimeoutPolicy/Reported { "value": <REPORTED_UPGRADE_TIMEOUT_POLICY> }
-```
-
-<br><br>
-
-
-\subsection ota_upgrade_attr_cluster_revision OTAUpgrade/ClusterRevision Attribute
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Attributes/ClusterRevision/Reported
-[PREFIX]/OTAUpgrade/Attributes/ClusterRevision/Desired
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ClusterRevision Attribute Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ClusterRevision/+'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
-```
-
-<!-- -->
-<!--  END OF OTAUpgrade Attributes Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
-<!-- START OF OTAUpgrade Supported Commands Section -->
-<!-- -->
-\section ota_upgrade_recv_cmd_support OTAUpgrade Command Support
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/SupportedCommands
-[PREFIX]/OTAUpgrade/SupportedGeneratedCommands
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Command Support Properties",
-  "type": "object",
-  "properties": {
-      "value": {
-          "type": "array",
-          "items" : {
-            "type": "string",
-            "enum": [
-              "ImageNotify",
-              "QueryNextImageRequest",
-              "QueryNextImageResponse",
-              "ImageBlockRequest",
-              "ImagePageRequest",
-              "ImageBlockResponse",
-              "UpgradeEndRequest",
-              "UpgradeEndResponse",
-              "QueryDeviceSpecificFileRequest",
-              "QueryDeviceSpecificFileResponse",
-              "WriteAttributes",
-              "ForceReadAttributes"
-            ]
-          }
-        }
-      }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To see supported commands for OTAUpgrade cluster under the by-unid topic space:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/SupportedCommands'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/SupportedCommands { "value": ["QueryNextImageRequest","ImageBlockRequest","ImagePageRequest","UpgradeEndRequest","QueryDeviceSpecificFileRequest",] }
-```
-
-To see supported generated commands for OTAUpgrade cluster under the by-unid topic space:
-
-```
-
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/SupportedGeneratedCommands'
-# Example output
-ucl/by-unid/<UNID>/<EP>/OTAUpgrade/SupportedGeneratedCommands { "value": ["ImageNotify","QueryNextImageResponse","ImageBlockResponse","UpgradeEndResponse","QueryDeviceSpecificFileResponse"] }
-```
-
-<!-- -->
-<!-- END OF OTAUpgrade Supported Commands Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
-<!-- START OF OTAUpgrade Commands Section -->
-<!-- -->
-\section ota_upgrade_cmds OTAUpgrade Commands
-
-<br><br>
-
-\subsection ota_upgrade_image_notify_cmd OTAUpgrade/ImageNotify Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/ImageNotify
-[PREFIX]/OTAUpgrade/GeneratedCommands/ImageNotify
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ImageNotify Command Properties",
-  "type": "object",
-  "properties": {
-    "PayloadType": {
-      "type": "ImageNotifyPayloadType"
-    },
-    "QueryJitter": {
-      "type": "integer"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "integer"
-    },
-    "NewFileVersion": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "PayloadType",
-    "QueryJitter",
-    "ManufacturerCode",
-    "ImageType",
-    "NewFileVersion"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/ImageNotify command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/ImageNotify' -m  '{ "PayloadType": <PAYLOAD_TYPE_VALUE>,"QueryJitter": <QUERY_JITTER_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"NewFileVersion": <NEW_FILE_VERSION_VALUE> }'
-```
-
-To receive a OTAUpgrade/ImageNotify generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/ImageNotify'
-```
-
-<br><br>
-
-\subsection ota_upgrade_query_next_image_request_cmd OTAUpgrade/QueryNextImageRequest Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/QueryNextImageRequest
-[PREFIX]/OTAUpgrade/GeneratedCommands/QueryNextImageRequest
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster QueryNextImageRequest Command Properties",
-  "type": "object",
-  "properties": {
-    "FieldControl": {
-      "type": "QueryNextImageRequestFieldControl"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTAImageType"
-    },
-    "CurrentFileVersion": {
-      "type": "integer"
-    },
-    "HardwareVersion": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "FieldControl",
-    "ManufacturerCode",
-    "ImageType",
-    "CurrentFileVersion",
-    "HardwareVersion"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/QueryNextImageRequest command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/QueryNextImageRequest' -m  '{ "FieldControl": <FIELD_CONTROL_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"CurrentFileVersion": <CURRENT_FILE_VERSION_VALUE>,"HardwareVersion": <HARDWARE_VERSION_VALUE> }'
-```
-
-To receive a OTAUpgrade/QueryNextImageRequest generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/QueryNextImageRequest'
-```
-
-<br><br>
-
-\subsection ota_upgrade_query_next_image_response_cmd OTAUpgrade/QueryNextImageResponse Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/QueryNextImageResponse
-[PREFIX]/OTAUpgrade/GeneratedCommands/QueryNextImageResponse
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster QueryNextImageResponse Command Properties",
-  "type": "object",
-  "properties": {
-    "Status": {
-      "type": "zclStatus"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTAImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    },
-    "ImageSize": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "Status",
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion",
-    "ImageSize"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/QueryNextImageResponse command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/QueryNextImageResponse' -m  '{ "Status": <STATUS_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE>,"ImageSize": <IMAGE_SIZE_VALUE> }'
-```
-
-To receive a OTAUpgrade/QueryNextImageResponse generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/QueryNextImageResponse'
-```
-
-<br><br>
-
-\subsection ota_upgrade_image_block_request_cmd OTAUpgrade/ImageBlockRequest Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/ImageBlockRequest
-[PREFIX]/OTAUpgrade/GeneratedCommands/ImageBlockRequest
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ImageBlockRequest Command Properties",
-  "type": "object",
-  "properties": {
-    "FieldControl": {
-      "type": "ImageBlockRequestFieldControl"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTAImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    },
-    "FileOffset": {
-      "type": "integer"
-    },
-    "MaximumDataSize": {
-      "type": "integer"
-    },
-    "RequestNodeAddress": {
-      "type": "EUI64"
-    },
-    "MinimumBlockPeriod": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "FieldControl",
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion",
-    "FileOffset",
-    "MaximumDataSize",
-    "RequestNodeAddress",
-    "MinimumBlockPeriod"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/ImageBlockRequest command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/ImageBlockRequest' -m  '{ "FieldControl": <FIELD_CONTROL_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE>,"FileOffset": <FILE_OFFSET_VALUE>,"MaximumDataSize": <MAXIMUM_DATA_SIZE_VALUE>,"RequestNodeAddress": <REQUEST_NODE_ADDRESS_VALUE>,"MinimumBlockPeriod": <MINIMUM_BLOCK_PERIOD_VALUE> }'
-```
-
-To receive a OTAUpgrade/ImageBlockRequest generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/ImageBlockRequest'
-```
-
-<br><br>
-
-\subsection ota_upgrade_image_page_request_cmd OTAUpgrade/ImagePageRequest Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/ImagePageRequest
-[PREFIX]/OTAUpgrade/GeneratedCommands/ImagePageRequest
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ImagePageRequest Command Properties",
-  "type": "object",
-  "properties": {
-    "FieldControl": {
-      "type": "ImagePageRequestFieldControl"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTAImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    },
-    "FileOffset": {
-      "type": "integer"
-    },
-    "MaximumDataSize": {
-      "type": "integer"
-    },
-    "PageSize": {
-      "type": "integer"
-    },
-    "ResponseSpacing": {
-      "type": "integer"
-    },
-    "RequestNodeAddress": {
-      "type": "EUI64"
-    }
-  },
-  "required": [
-    "FieldControl",
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion",
-    "FileOffset",
-    "MaximumDataSize",
-    "PageSize",
-    "ResponseSpacing",
-    "RequestNodeAddress"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/ImagePageRequest command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/ImagePageRequest' -m  '{ "FieldControl": <FIELD_CONTROL_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE>,"FileOffset": <FILE_OFFSET_VALUE>,"MaximumDataSize": <MAXIMUM_DATA_SIZE_VALUE>,"PageSize": <PAGE_SIZE_VALUE>,"ResponseSpacing": <RESPONSE_SPACING_VALUE>,"RequestNodeAddress": <REQUEST_NODE_ADDRESS_VALUE> }'
-```
-
-To receive a OTAUpgrade/ImagePageRequest generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/ImagePageRequest'
-```
-
-<br><br>
-
-\subsection ota_upgrade_image_block_response_cmd OTAUpgrade/ImageBlockResponse Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/ImageBlockResponse
-[PREFIX]/OTAUpgrade/GeneratedCommands/ImageBlockResponse
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ImageBlockResponse Command Properties",
-  "type": "object",
-  "properties": {
-    "Status": {
-      "type": "zclStatus"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTAImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    },
-    "FileOffset": {
-      "type": "integer"
-    },
-    "ImageData": {
-      "type": "string"
-    },
-    "CurrentTime": {
-      "type": "integer"
-    },
-    "RequestTime": {
-      "type": "integer"
-    },
-    "MinimumBlockPeriod": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "Status",
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion",
-    "FileOffset",
-    "ImageData",
-    "CurrentTime",
-    "RequestTime",
-    "MinimumBlockPeriod"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/ImageBlockResponse command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/ImageBlockResponse' -m  '{ "Status": <STATUS_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE>,"FileOffset": <FILE_OFFSET_VALUE>,"ImageData": <IMAGE_DATA_VALUE>,"CurrentTime": <CURRENT_TIME_VALUE>,"RequestTime": <REQUEST_TIME_VALUE>,"MinimumBlockPeriod": <MINIMUM_BLOCK_PERIOD_VALUE> }'
-```
-
-To receive a OTAUpgrade/ImageBlockResponse generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/ImageBlockResponse'
-```
-
-<br><br>
-
-\subsection ota_upgrade_upgrade_end_request_cmd OTAUpgrade/UpgradeEndRequest Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/UpgradeEndRequest
-[PREFIX]/OTAUpgrade/GeneratedCommands/UpgradeEndRequest
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster UpgradeEndRequest Command Properties",
-  "type": "object",
-  "properties": {
-    "Status": {
-      "type": "zclStatus"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTAImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "Status",
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/UpgradeEndRequest command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/UpgradeEndRequest' -m  '{ "Status": <STATUS_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE> }'
-```
-
-To receive a OTAUpgrade/UpgradeEndRequest generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/UpgradeEndRequest'
-```
-
-<br><br>
-
-\subsection ota_upgrade_upgrade_end_response_cmd OTAUpgrade/UpgradeEndResponse Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/UpgradeEndResponse
-[PREFIX]/OTAUpgrade/GeneratedCommands/UpgradeEndResponse
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster UpgradeEndResponse Command Properties",
-  "type": "object",
-  "properties": {
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTAImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    },
-    "CurrentTime": {
-      "type": "UTC"
-    },
-    "UpgradeTime": {
-      "type": "UTC"
-    }
-  },
-  "required": [
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion",
-    "CurrentTime",
-    "UpgradeTime"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/UpgradeEndResponse command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/UpgradeEndResponse' -m  '{ "ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE>,"CurrentTime": <CURRENT_TIME_VALUE>,"UpgradeTime": <UPGRADE_TIME_VALUE> }'
-```
-
-To receive a OTAUpgrade/UpgradeEndResponse generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/UpgradeEndResponse'
-```
-
-<br><br>
-
-\subsection ota_upgrade_query_device_specific_file_request_cmd OTAUpgrade/QueryDeviceSpecificFileRequest Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/QueryDeviceSpecificFileRequest
-[PREFIX]/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileRequest
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster QueryDeviceSpecificFileRequest Command Properties",
-  "type": "object",
-  "properties": {
-    "RequestNodeAddress": {
-      "type": "EUI64"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTADeviceSpecificImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    },
-    "CurrentZigbeeStackVersion": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "RequestNodeAddress",
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion",
-    "CurrentZigbeeStackVersion"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/QueryDeviceSpecificFileRequest command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/QueryDeviceSpecificFileRequest' -m  '{ "RequestNodeAddress": <REQUEST_NODE_ADDRESS_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE>,"CurrentZigbeeStackVersion": <CURRENT_ZIGBEE_STACK_VERSION_VALUE> }'
-```
-
-To receive a OTAUpgrade/QueryDeviceSpecificFileRequest generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileRequest'
-```
-
-<br><br>
-
-\subsection ota_upgrade_query_device_specific_file_response_cmd OTAUpgrade/QueryDeviceSpecificFileResponse Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/QueryDeviceSpecificFileResponse
-[PREFIX]/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileResponse
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster QueryDeviceSpecificFileResponse Command Properties",
-  "type": "object",
-  "properties": {
-    "Status": {
-      "type": "zclStatus"
-    },
-    "ManufacturerCode": {
-      "type": "integer"
-    },
-    "ImageType": {
-      "type": "OTADeviceSpecificImageType"
-    },
-    "FileVersion": {
-      "type": "integer"
-    },
-    "ImageSize": {
-      "type": "integer"
-    }
-  },
-  "required": [
-    "Status",
-    "ManufacturerCode",
-    "ImageType",
-    "FileVersion",
-    "ImageSize"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To send a OTAUpgrade/QueryDeviceSpecificFileResponse command under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/QueryDeviceSpecificFileResponse' -m  '{ "Status": <STATUS_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE>,"ImageType": <IMAGE_TYPE_VALUE>,"FileVersion": <FILE_VERSION_VALUE>,"ImageSize": <IMAGE_SIZE_VALUE> }'
-```
-
-To receive a OTAUpgrade/QueryDeviceSpecificFileResponse generated command from a UNID/endpoint:
-
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileResponse'
-```
-
-<br><br>
-
-\subsection ota_upgrade_write_attr_cmd OTAUpgrade/WriteAttributes Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/WriteAttributes
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster WriteAttributes Command Properties",
-  "type": "object",
-  "properties": {
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To update all OTAUpgrade attributes under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/WriteAttributes' -m  '{  }'
-```
-
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
-
-<br><br>
-
-\subsection ota_upgrade_force_read_attr_cmd OTAUpgrade/ForceReadAttributes Command
-
-**MQTT Topic Pattern:**
-
-```
-[PREFIX]/OTAUpgrade/Commands/ForceReadAttributes
-```
-
-**MQTT Payload JSON Schema:**
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OTAUpgrade Cluster ForceReadAttributes Command Properties",
-  "type": "object",
-  "properties": {
-    "value": {
-      "type": "array"
-      "items": {
-        "type": "string",
-        "enum": [
-          "UpgradeServerID",
-          "FileOffset",
-          "CurrentFileVersion",
-          "CurrentZigBeeStackVersion",
-          "DownloadedFileVersion",
-          "DownloadedZigBeeStackVersion",
-          "ImageUpgradeStatus",
-          "ManufacturerID",
-          "ImageTypeID",
-          "MinimumBlockPeriod",
-          "ImageStamp",
-          "UpgradeActivationPolicy",
-          "UpgradeTimeoutPolicy"
-        ]
-      }
-    }
-  },
-  "required": [
-    "value"
-  ]
-}
-```
-
-**Example Mosquitto CLI Tool Usage**
-
-To force read all OTAUpgrade attributes under the by-unid topic space (by sending an empty array):
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/ForceReadAttributes' -m  '{ "value": [] }'
-```
-
-To force read one of the OTAUpgrade attributes under the by-unid topic space:
-
-```
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OTAUpgrade/Commands/ForceReadAttributes' -m  '{ "value": ["UpgradeServerID"] }'
-```
-
-<!-- -->
-<!-- END OF OTAUpgrade Commands Section -->
 <!-- -->
 
 <br><br><br>
@@ -11773,15 +10883,19 @@ The following attribute topics are used to retrieve the PollControl cluster stat
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CheckInInterval attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInInterval/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PollControl/Attributes/CheckInInterval/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInInterval/Desired { "value": <DESIRED_CHECK_IN_INTERVAL> }
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInInterval/Reported { "value": <REPORTED_CHECK_IN_INTERVAL> }
+
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/CheckInInterval/Desired { "value": <DESIRED_CHECK_IN_INTERVAL>}
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/CheckInInterval/Reported { "value": <REPORTED_CHECK_IN_INTERVAL>}
+
 ```
 
 <br><br>
@@ -11813,15 +10927,19 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInInterval/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LongPollInterval attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollInterval/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PollControl/Attributes/LongPollInterval/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollInterval/Desired { "value": <DESIRED_LONG_POLL_INTERVAL> }
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollInterval/Reported { "value": <REPORTED_LONG_POLL_INTERVAL> }
+
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/LongPollInterval/Desired { "value": <DESIRED_LONG_POLL_INTERVAL>}
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/LongPollInterval/Reported { "value": <REPORTED_LONG_POLL_INTERVAL>}
+
 ```
 
 <br><br>
@@ -11853,15 +10971,19 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollInterval/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ShortPollInterval attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/ShortPollInterval/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PollControl/Attributes/ShortPollInterval/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/ShortPollInterval/Desired { "value": <DESIRED_SHORT_POLL_INTERVAL> }
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/ShortPollInterval/Reported { "value": <REPORTED_SHORT_POLL_INTERVAL> }
+
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/ShortPollInterval/Desired { "value": <DESIRED_SHORT_POLL_INTERVAL>}
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/ShortPollInterval/Reported { "value": <REPORTED_SHORT_POLL_INTERVAL>}
+
 ```
 
 <br><br>
@@ -11893,15 +11015,19 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/ShortPollInterval/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for FastPollTimeout attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeout/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PollControl/Attributes/FastPollTimeout/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeout/Desired { "value": <DESIRED_FAST_POLL_TIMEOUT> }
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeout/Reported { "value": <REPORTED_FAST_POLL_TIMEOUT> }
+
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/FastPollTimeout/Desired { "value": <DESIRED_FAST_POLL_TIMEOUT>}
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/FastPollTimeout/Reported { "value": <REPORTED_FAST_POLL_TIMEOUT>}
+
 ```
 
 <br><br>
@@ -11933,15 +11059,19 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeout/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CheckInIntervalMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInIntervalMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PollControl/Attributes/CheckInIntervalMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInIntervalMin/Desired { "value": <DESIRED_CHECK_IN_INTERVAL_MIN> }
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInIntervalMin/Reported { "value": <REPORTED_CHECK_IN_INTERVAL_MIN> }
+
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/CheckInIntervalMin/Desired { "value": <DESIRED_CHECK_IN_INTERVAL_MIN>}
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/CheckInIntervalMin/Reported { "value": <REPORTED_CHECK_IN_INTERVAL_MIN>}
+
 ```
 
 <br><br>
@@ -11973,15 +11103,19 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/CheckInIntervalMin/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LongPollIntervalMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollIntervalMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PollControl/Attributes/LongPollIntervalMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollIntervalMin/Desired { "value": <DESIRED_LONG_POLL_INTERVAL_MIN> }
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollIntervalMin/Reported { "value": <REPORTED_LONG_POLL_INTERVAL_MIN> }
+
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/LongPollIntervalMin/Desired { "value": <DESIRED_LONG_POLL_INTERVAL_MIN>}
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/LongPollIntervalMin/Reported { "value": <REPORTED_LONG_POLL_INTERVAL_MIN>}
+
 ```
 
 <br><br>
@@ -12013,15 +11147,19 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/LongPollIntervalMin/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for FastPollTimeoutMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeoutMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PollControl/Attributes/FastPollTimeoutMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeoutMax/Desired { "value": <DESIRED_FAST_POLL_TIMEOUT_MAX> }
-ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeoutMax/Reported { "value": <REPORTED_FAST_POLL_TIMEOUT_MAX> }
+
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/FastPollTimeoutMax/Desired { "value": <DESIRED_FAST_POLL_TIMEOUT_MAX>}
+ucl/by-unid/<UNID>/ep0/PollControl/Attributes/FastPollTimeoutMax/Reported { "value": <REPORTED_FAST_POLL_TIMEOUT_MAX>}
+
 ```
 
 <br><br>
@@ -12058,7 +11196,7 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/FastPollTimeoutMax/Reported { "va
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -12118,7 +11256,7 @@ ucl/by-unid/<UNID>/<EP>/PollControl/Attributes/ClusterRevision/Reported { "value
 
 To see supported commands for PollControl cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PollControl/SupportedCommands { "value": ["CheckIn",] }
@@ -12126,8 +11264,7 @@ ucl/by-unid/<UNID>/<EP>/PollControl/SupportedCommands { "value": ["CheckIn",] }
 
 To see supported generated commands for PollControl cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PollControl/SupportedGeneratedCommands { "value": ["CheckInResponse","FastPollStop","SetLongPollInterval","SetShortPollInterval"] }
@@ -12173,13 +11310,13 @@ ucl/by-unid/<UNID>/<EP>/PollControl/SupportedGeneratedCommands { "value": ["Chec
 
 To send a PollControl/CheckIn command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/CheckIn' -m  '{  }'
 ```
 
 To receive a PollControl/CheckIn generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/CheckIn'
 ```
 
@@ -12220,13 +11357,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/CheckIn'
 
 To send a PollControl/CheckInResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/CheckInResponse' -m  '{ "StartFastPolling": <START_FAST_POLLING_VALUE>,"FastPollTimeout": <FAST_POLL_TIMEOUT_VALUE> }'
 ```
 
 To receive a PollControl/CheckInResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/CheckInResponse'
 ```
 
@@ -12259,13 +11396,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/CheckInR
 
 To send a PollControl/FastPollStop command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/FastPollStop' -m  '{  }'
 ```
 
 To receive a PollControl/FastPollStop generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/FastPollStop'
 ```
 
@@ -12302,13 +11439,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/FastPoll
 
 To send a PollControl/SetLongPollInterval command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/SetLongPollInterval' -m  '{ "NewLongPollInterval": <NEW_LONG_POLL_INTERVAL_VALUE> }'
 ```
 
 To receive a PollControl/SetLongPollInterval generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/SetLongPollInterval'
 ```
 
@@ -12345,13 +11482,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/SetLongP
 
 To send a PollControl/SetShortPollInterval command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/SetShortPollInterval' -m  '{ "NewShortPollInterval": <NEW_SHORT_POLL_INTERVAL_VALUE> }'
 ```
 
 To receive a PollControl/SetShortPollInterval generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/SetShortPollInterval'
 ```
 
@@ -12390,11 +11527,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/GeneratedCommands/SetShort
 
 To update all PollControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/WriteAttributes' -m  '{ "CheckInInterval": <CHECK_IN_INTERVAL_VALUE> ,"FastPollTimeout": <FAST_POLL_TIMEOUT_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -12440,13 +11578,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/WriteAttributes' 
 
 To force read all PollControl attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the PollControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PollControl/Commands/ForceReadAttributes' -m  '{ "value": ["CheckInInterval"] }'
 ```
 
@@ -12503,15 +11641,19 @@ The following attribute topics are used to retrieve the ShadeConfiguration clust
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalClosedLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/PhysicalClosedLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ShadeConfiguration/Attributes/PhysicalClosedLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/PhysicalClosedLimit/Desired { "value": <DESIRED_PHYSICAL_CLOSED_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/PhysicalClosedLimit/Reported { "value": <REPORTED_PHYSICAL_CLOSED_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/PhysicalClosedLimit/Desired { "value": <DESIRED_PHYSICAL_CLOSED_LIMIT>}
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/PhysicalClosedLimit/Reported { "value": <REPORTED_PHYSICAL_CLOSED_LIMIT>}
+
 ```
 
 <br><br>
@@ -12543,15 +11685,19 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/PhysicalClosedLimit/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MotorStepSize attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/MotorStepSize/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ShadeConfiguration/Attributes/MotorStepSize/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/MotorStepSize/Desired { "value": <DESIRED_MOTOR_STEP_SIZE> }
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/MotorStepSize/Reported { "value": <REPORTED_MOTOR_STEP_SIZE> }
+
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/MotorStepSize/Desired { "value": <DESIRED_MOTOR_STEP_SIZE>}
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/MotorStepSize/Reported { "value": <REPORTED_MOTOR_STEP_SIZE>}
+
 ```
 
 <br><br>
@@ -12583,15 +11729,19 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/MotorStepSize/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Status attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Status/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ShadeConfiguration/Attributes/Status/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Status/Desired { "value": <DESIRED_STATUS> }
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Status/Reported { "value": <REPORTED_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/Status/Desired { "value": <DESIRED_STATUS>}
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/Status/Reported { "value": <REPORTED_STATUS>}
+
 ```
 
 <br><br>
@@ -12623,15 +11773,19 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Status/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ClosedLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/ClosedLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ShadeConfiguration/Attributes/ClosedLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/ClosedLimit/Desired { "value": <DESIRED_CLOSED_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/ClosedLimit/Reported { "value": <REPORTED_CLOSED_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/ClosedLimit/Desired { "value": <DESIRED_CLOSED_LIMIT>}
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/ClosedLimit/Reported { "value": <REPORTED_CLOSED_LIMIT>}
+
 ```
 
 <br><br>
@@ -12663,15 +11817,19 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/ClosedLimit/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Mode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Mode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ShadeConfiguration/Attributes/Mode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Mode/Desired { "value": <DESIRED_MODE> }
-ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Mode/Reported { "value": <REPORTED_MODE> }
+
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/Mode/Desired { "value": <DESIRED_MODE>}
+ucl/by-unid/<UNID>/ep0/ShadeConfiguration/Attributes/Mode/Reported { "value": <REPORTED_MODE>}
+
 ```
 
 <br><br>
@@ -12708,7 +11866,7 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/Mode/Reported { "value": <
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -12761,7 +11919,7 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Attributes/ClusterRevision/Reported {
 
 To see supported commands for ShadeConfiguration cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/SupportedCommands { "value": [] }
@@ -12769,8 +11927,7 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/SupportedCommands { "value": [] }
 
 To see supported generated commands for ShadeConfiguration cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/SupportedGeneratedCommands { "value": [] }
@@ -12825,11 +11982,12 @@ ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/SupportedGeneratedCommands { "value":
 
 To update all ShadeConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Commands/WriteAttributes' -m  '{ "Status": <STATUS_VALUE> ,"ClosedLimit": <CLOSED_LIMIT_VALUE> ,"Mode": <MODE_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -12873,13 +12031,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Commands/WriteAttri
 
 To force read all ShadeConfiguration attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ShadeConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ShadeConfiguration/Commands/ForceReadAttributes' -m  '{ "value": ["PhysicalClosedLimit"] }'
 ```
 
@@ -12936,15 +12094,19 @@ The following attribute topics are used to retrieve the DoorLock cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LockState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/LockState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockState/Desired { "value": <DESIRED_LOCK_STATE> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockState/Reported { "value": <REPORTED_LOCK_STATE> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/LockState/Desired { "value": <DESIRED_LOCK_STATE>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/LockState/Reported { "value": <REPORTED_LOCK_STATE>}
+
 ```
 
 <br><br>
@@ -12976,15 +12138,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockState/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LockType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/LockType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockType/Desired { "value": <DESIRED_LOCK_TYPE> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockType/Reported { "value": <REPORTED_LOCK_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/LockType/Desired { "value": <DESIRED_LOCK_TYPE>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/LockType/Reported { "value": <REPORTED_LOCK_TYPE>}
+
 ```
 
 <br><br>
@@ -13016,15 +12182,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LockType/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActuatorEnabled attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ActuatorEnabled/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/ActuatorEnabled/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ActuatorEnabled/Desired { "value": <DESIRED_ACTUATOR_ENABLED> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ActuatorEnabled/Reported { "value": <REPORTED_ACTUATOR_ENABLED> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/ActuatorEnabled/Desired { "value": <DESIRED_ACTUATOR_ENABLED>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/ActuatorEnabled/Reported { "value": <REPORTED_ACTUATOR_ENABLED>}
+
 ```
 
 <br><br>
@@ -13056,15 +12226,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ActuatorEnabled/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DoorState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/DoorState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorState/Desired { "value": <DESIRED_DOOR_STATE> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorState/Reported { "value": <REPORTED_DOOR_STATE> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DoorState/Desired { "value": <DESIRED_DOOR_STATE>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DoorState/Reported { "value": <REPORTED_DOOR_STATE>}
+
 ```
 
 <br><br>
@@ -13096,15 +12270,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorState/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DoorOpenEvents attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorOpenEvents/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/DoorOpenEvents/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorOpenEvents/Desired { "value": <DESIRED_DOOR_OPEN_EVENTS> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorOpenEvents/Reported { "value": <REPORTED_DOOR_OPEN_EVENTS> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DoorOpenEvents/Desired { "value": <DESIRED_DOOR_OPEN_EVENTS>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DoorOpenEvents/Reported { "value": <REPORTED_DOOR_OPEN_EVENTS>}
+
 ```
 
 <br><br>
@@ -13136,15 +12314,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorOpenEvents/Reported { "value": <
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DoorClosedEvents attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorClosedEvents/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/DoorClosedEvents/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorClosedEvents/Desired { "value": <DESIRED_DOOR_CLOSED_EVENTS> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorClosedEvents/Reported { "value": <REPORTED_DOOR_CLOSED_EVENTS> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DoorClosedEvents/Desired { "value": <DESIRED_DOOR_CLOSED_EVENTS>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DoorClosedEvents/Reported { "value": <REPORTED_DOOR_CLOSED_EVENTS>}
+
 ```
 
 <br><br>
@@ -13176,15 +12358,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DoorClosedEvents/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OpenPeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OpenPeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/OpenPeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OpenPeriod/Desired { "value": <DESIRED_OPEN_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OpenPeriod/Reported { "value": <REPORTED_OPEN_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/OpenPeriod/Desired { "value": <DESIRED_OPEN_PERIOD>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/OpenPeriod/Reported { "value": <REPORTED_OPEN_PERIOD>}
+
 ```
 
 <br><br>
@@ -13216,15 +12402,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OpenPeriod/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfLogRecordsSupported attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfLogRecordsSupported/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/NumberOfLogRecordsSupported/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfLogRecordsSupported/Desired { "value": <DESIRED_NUMBER_OF_LOG_RECORDS_SUPPORTED> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfLogRecordsSupported/Reported { "value": <REPORTED_NUMBER_OF_LOG_RECORDS_SUPPORTED> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfLogRecordsSupported/Desired { "value": <DESIRED_NUMBER_OF_LOG_RECORDS_SUPPORTED>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfLogRecordsSupported/Reported { "value": <REPORTED_NUMBER_OF_LOG_RECORDS_SUPPORTED>}
+
 ```
 
 <br><br>
@@ -13256,15 +12446,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfLogRecordsSupported/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfTotalUsersSupported attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfTotalUsersSupported/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/NumberOfTotalUsersSupported/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfTotalUsersSupported/Desired { "value": <DESIRED_NUMBER_OF_TOTAL_USERS_SUPPORTED> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfTotalUsersSupported/Reported { "value": <REPORTED_NUMBER_OF_TOTAL_USERS_SUPPORTED> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfTotalUsersSupported/Desired { "value": <DESIRED_NUMBER_OF_TOTAL_USERS_SUPPORTED>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfTotalUsersSupported/Reported { "value": <REPORTED_NUMBER_OF_TOTAL_USERS_SUPPORTED>}
+
 ```
 
 <br><br>
@@ -13296,15 +12490,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfTotalUsersSupported/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfPINUsersSupported attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfPINUsersSupported/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/NumberOfPINUsersSupported/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfPINUsersSupported/Desired { "value": <DESIRED_NUMBER_OFPIN_USERS_SUPPORTED> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfPINUsersSupported/Reported { "value": <REPORTED_NUMBER_OFPIN_USERS_SUPPORTED> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfPINUsersSupported/Desired { "value": <DESIRED_NUMBER_OFPIN_USERS_SUPPORTED>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfPINUsersSupported/Reported { "value": <REPORTED_NUMBER_OFPIN_USERS_SUPPORTED>}
+
 ```
 
 <br><br>
@@ -13336,15 +12534,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfPINUsersSupported/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfRFIDUsersSupported attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfRFIDUsersSupported/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/NumberOfRFIDUsersSupported/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfRFIDUsersSupported/Desired { "value": <DESIRED_NUMBER_OFRFID_USERS_SUPPORTED> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfRFIDUsersSupported/Reported { "value": <REPORTED_NUMBER_OFRFID_USERS_SUPPORTED> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfRFIDUsersSupported/Desired { "value": <DESIRED_NUMBER_OFRFID_USERS_SUPPORTED>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfRFIDUsersSupported/Reported { "value": <REPORTED_NUMBER_OFRFID_USERS_SUPPORTED>}
+
 ```
 
 <br><br>
@@ -13376,15 +12578,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfRFIDUsersSupported/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfWeekDaySchedulesSupportedPerUser attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPerUser/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPerUser/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPerUser/Desired { "value": <DESIRED_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPerUser/Reported { "value": <REPORTED_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPerUser/Desired { "value": <DESIRED_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPerUser/Reported { "value": <REPORTED_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER>}
+
 ```
 
 <br><br>
@@ -13416,15 +12622,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPer
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfYearDaySchedulesSupportedPerUser attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfYearDaySchedulesSupportedPerUser/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/NumberOfYearDaySchedulesSupportedPerUser/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfYearDaySchedulesSupportedPerUser/Desired { "value": <DESIRED_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfYearDaySchedulesSupportedPerUser/Reported { "value": <REPORTED_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfYearDaySchedulesSupportedPerUser/Desired { "value": <DESIRED_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfYearDaySchedulesSupportedPerUser/Reported { "value": <REPORTED_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER>}
+
 ```
 
 <br><br>
@@ -13456,15 +12666,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfYearDaySchedulesSupportedPer
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfHolidaySchedulesSupported attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfHolidaySchedulesSupported/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/NumberOfHolidaySchedulesSupported/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfHolidaySchedulesSupported/Desired { "value": <DESIRED_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfHolidaySchedulesSupported/Reported { "value": <REPORTED_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfHolidaySchedulesSupported/Desired { "value": <DESIRED_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/NumberOfHolidaySchedulesSupported/Reported { "value": <REPORTED_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED>}
+
 ```
 
 <br><br>
@@ -13496,15 +12710,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/NumberOfHolidaySchedulesSupported/Re
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxPINCodeLength attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxPINCodeLength/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/MaxPINCodeLength/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxPINCodeLength/Desired { "value": <DESIRED_MAXPIN_CODE_LENGTH> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxPINCodeLength/Reported { "value": <REPORTED_MAXPIN_CODE_LENGTH> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MaxPINCodeLength/Desired { "value": <DESIRED_MAXPIN_CODE_LENGTH>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MaxPINCodeLength/Reported { "value": <REPORTED_MAXPIN_CODE_LENGTH>}
+
 ```
 
 <br><br>
@@ -13536,15 +12754,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxPINCodeLength/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinPINCodeLength attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinPINCodeLength/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/MinPINCodeLength/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinPINCodeLength/Desired { "value": <DESIRED_MINPIN_CODE_LENGTH> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinPINCodeLength/Reported { "value": <REPORTED_MINPIN_CODE_LENGTH> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MinPINCodeLength/Desired { "value": <DESIRED_MINPIN_CODE_LENGTH>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MinPINCodeLength/Reported { "value": <REPORTED_MINPIN_CODE_LENGTH>}
+
 ```
 
 <br><br>
@@ -13576,15 +12798,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinPINCodeLength/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxRFIDCodeLength attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxRFIDCodeLength/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/MaxRFIDCodeLength/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxRFIDCodeLength/Desired { "value": <DESIRED_MAXRFID_CODE_LENGTH> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxRFIDCodeLength/Reported { "value": <REPORTED_MAXRFID_CODE_LENGTH> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MaxRFIDCodeLength/Desired { "value": <DESIRED_MAXRFID_CODE_LENGTH>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MaxRFIDCodeLength/Reported { "value": <REPORTED_MAXRFID_CODE_LENGTH>}
+
 ```
 
 <br><br>
@@ -13616,15 +12842,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MaxRFIDCodeLength/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinRFIDCodeLength attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinRFIDCodeLength/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/MinRFIDCodeLength/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinRFIDCodeLength/Desired { "value": <DESIRED_MINRFID_CODE_LENGTH> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinRFIDCodeLength/Reported { "value": <REPORTED_MINRFID_CODE_LENGTH> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MinRFIDCodeLength/Desired { "value": <DESIRED_MINRFID_CODE_LENGTH>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/MinRFIDCodeLength/Reported { "value": <REPORTED_MINRFID_CODE_LENGTH>}
+
 ```
 
 <br><br>
@@ -13656,15 +12886,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/MinRFIDCodeLength/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnableLogging attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLogging/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/EnableLogging/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLogging/Desired { "value": <DESIRED_ENABLE_LOGGING> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLogging/Reported { "value": <REPORTED_ENABLE_LOGGING> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableLogging/Desired { "value": <DESIRED_ENABLE_LOGGING>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableLogging/Reported { "value": <REPORTED_ENABLE_LOGGING>}
+
 ```
 
 <br><br>
@@ -13696,15 +12930,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLogging/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Language attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/Language/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/Language/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/Language/Desired { "value": <DESIRED_LANGUAGE> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/Language/Reported { "value": <REPORTED_LANGUAGE> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/Language/Desired { "value": <DESIRED_LANGUAGE>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/Language/Reported { "value": <REPORTED_LANGUAGE>}
+
 ```
 
 <br><br>
@@ -13736,15 +12974,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/Language/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LEDSettings attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LEDSettings/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/LEDSettings/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LEDSettings/Desired { "value": <DESIRED_LED_SETTINGS> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LEDSettings/Reported { "value": <REPORTED_LED_SETTINGS> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/LEDSettings/Desired { "value": <DESIRED_LED_SETTINGS>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/LEDSettings/Reported { "value": <REPORTED_LED_SETTINGS>}
+
 ```
 
 <br><br>
@@ -13776,15 +13018,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/LEDSettings/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AutoRelockTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AutoRelockTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/AutoRelockTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AutoRelockTime/Desired { "value": <DESIRED_AUTO_RELOCK_TIME> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AutoRelockTime/Reported { "value": <REPORTED_AUTO_RELOCK_TIME> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/AutoRelockTime/Desired { "value": <DESIRED_AUTO_RELOCK_TIME>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/AutoRelockTime/Reported { "value": <REPORTED_AUTO_RELOCK_TIME>}
+
 ```
 
 <br><br>
@@ -13816,15 +13062,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AutoRelockTime/Reported { "value": <
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SoundVolume attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SoundVolume/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/SoundVolume/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SoundVolume/Desired { "value": <DESIRED_SOUND_VOLUME> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SoundVolume/Reported { "value": <REPORTED_SOUND_VOLUME> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SoundVolume/Desired { "value": <DESIRED_SOUND_VOLUME>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SoundVolume/Reported { "value": <REPORTED_SOUND_VOLUME>}
+
 ```
 
 <br><br>
@@ -13856,15 +13106,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SoundVolume/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OperatingMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OperatingMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/OperatingMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OperatingMode/Desired { "value": <DESIRED_OPERATING_MODE> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OperatingMode/Reported { "value": <REPORTED_OPERATING_MODE> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/OperatingMode/Desired { "value": <DESIRED_OPERATING_MODE>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/OperatingMode/Reported { "value": <REPORTED_OPERATING_MODE>}
+
 ```
 
 <br><br>
@@ -13896,15 +13150,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/OperatingMode/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SupportedOperatingModes attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SupportedOperatingModes/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/SupportedOperatingModes/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SupportedOperatingModes/Desired { "value": <DESIRED_SUPPORTED_OPERATING_MODES> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SupportedOperatingModes/Reported { "value": <REPORTED_SUPPORTED_OPERATING_MODES> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SupportedOperatingModes/Desired { "value": <DESIRED_SUPPORTED_OPERATING_MODES>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SupportedOperatingModes/Reported { "value": <REPORTED_SUPPORTED_OPERATING_MODES>}
+
 ```
 
 <br><br>
@@ -13936,15 +13194,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SupportedOperatingModes/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DefaultConfigurationRegister attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DefaultConfigurationRegister/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/DefaultConfigurationRegister/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DefaultConfigurationRegister/Desired { "value": <DESIRED_DEFAULT_CONFIGURATION_REGISTER> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DefaultConfigurationRegister/Reported { "value": <REPORTED_DEFAULT_CONFIGURATION_REGISTER> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DefaultConfigurationRegister/Desired { "value": <DESIRED_DEFAULT_CONFIGURATION_REGISTER>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/DefaultConfigurationRegister/Reported { "value": <REPORTED_DEFAULT_CONFIGURATION_REGISTER>}
+
 ```
 
 <br><br>
@@ -13976,15 +13238,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/DefaultConfigurationRegister/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnableLocalProgramming attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLocalProgramming/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/EnableLocalProgramming/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLocalProgramming/Desired { "value": <DESIRED_ENABLE_LOCAL_PROGRAMMING> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLocalProgramming/Reported { "value": <REPORTED_ENABLE_LOCAL_PROGRAMMING> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableLocalProgramming/Desired { "value": <DESIRED_ENABLE_LOCAL_PROGRAMMING>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableLocalProgramming/Reported { "value": <REPORTED_ENABLE_LOCAL_PROGRAMMING>}
+
 ```
 
 <br><br>
@@ -14016,15 +13282,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableLocalProgramming/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnableOneTouchLocking attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableOneTouchLocking/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/EnableOneTouchLocking/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableOneTouchLocking/Desired { "value": <DESIRED_ENABLE_ONE_TOUCH_LOCKING> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableOneTouchLocking/Reported { "value": <REPORTED_ENABLE_ONE_TOUCH_LOCKING> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableOneTouchLocking/Desired { "value": <DESIRED_ENABLE_ONE_TOUCH_LOCKING>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableOneTouchLocking/Reported { "value": <REPORTED_ENABLE_ONE_TOUCH_LOCKING>}
+
 ```
 
 <br><br>
@@ -14056,15 +13326,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableOneTouchLocking/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnableInsideStatusLED attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableInsideStatusLED/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/EnableInsideStatusLED/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableInsideStatusLED/Desired { "value": <DESIRED_ENABLE_INSIDE_STATUSLED> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableInsideStatusLED/Reported { "value": <REPORTED_ENABLE_INSIDE_STATUSLED> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableInsideStatusLED/Desired { "value": <DESIRED_ENABLE_INSIDE_STATUSLED>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnableInsideStatusLED/Reported { "value": <REPORTED_ENABLE_INSIDE_STATUSLED>}
+
 ```
 
 <br><br>
@@ -14096,15 +13370,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnableInsideStatusLED/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnablePrivacyModeButton attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnablePrivacyModeButton/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/EnablePrivacyModeButton/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnablePrivacyModeButton/Desired { "value": <DESIRED_ENABLE_PRIVACY_MODE_BUTTON> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnablePrivacyModeButton/Reported { "value": <REPORTED_ENABLE_PRIVACY_MODE_BUTTON> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnablePrivacyModeButton/Desired { "value": <DESIRED_ENABLE_PRIVACY_MODE_BUTTON>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/EnablePrivacyModeButton/Reported { "value": <REPORTED_ENABLE_PRIVACY_MODE_BUTTON>}
+
 ```
 
 <br><br>
@@ -14136,15 +13414,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/EnablePrivacyModeButton/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for WrongCodeEntryLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/WrongCodeEntryLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/WrongCodeEntryLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/WrongCodeEntryLimit/Desired { "value": <DESIRED_WRONG_CODE_ENTRY_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/WrongCodeEntryLimit/Reported { "value": <REPORTED_WRONG_CODE_ENTRY_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/WrongCodeEntryLimit/Desired { "value": <DESIRED_WRONG_CODE_ENTRY_LIMIT>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/WrongCodeEntryLimit/Reported { "value": <REPORTED_WRONG_CODE_ENTRY_LIMIT>}
+
 ```
 
 <br><br>
@@ -14176,15 +13458,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/WrongCodeEntryLimit/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UserCodeTemporaryDisableTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/UserCodeTemporaryDisableTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/UserCodeTemporaryDisableTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/UserCodeTemporaryDisableTime/Desired { "value": <DESIRED_USER_CODE_TEMPORARY_DISABLE_TIME> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/UserCodeTemporaryDisableTime/Reported { "value": <REPORTED_USER_CODE_TEMPORARY_DISABLE_TIME> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/UserCodeTemporaryDisableTime/Desired { "value": <DESIRED_USER_CODE_TEMPORARY_DISABLE_TIME>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/UserCodeTemporaryDisableTime/Reported { "value": <REPORTED_USER_CODE_TEMPORARY_DISABLE_TIME>}
+
 ```
 
 <br><br>
@@ -14216,15 +13502,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/UserCodeTemporaryDisableTime/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SendPINOverTheAir attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SendPINOverTheAir/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/SendPINOverTheAir/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SendPINOverTheAir/Desired { "value": <DESIRED_SENDPIN_OVER_THE_AIR> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SendPINOverTheAir/Reported { "value": <REPORTED_SENDPIN_OVER_THE_AIR> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SendPINOverTheAir/Desired { "value": <DESIRED_SENDPIN_OVER_THE_AIR>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SendPINOverTheAir/Reported { "value": <REPORTED_SENDPIN_OVER_THE_AIR>}
+
 ```
 
 <br><br>
@@ -14256,15 +13546,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SendPINOverTheAir/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RequirePINforRFOperation attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RequirePINforRFOperation/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/RequirePINforRFOperation/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RequirePINforRFOperation/Desired { "value": <DESIRED_REQUIREPI_NFORRF_OPERATION> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RequirePINforRFOperation/Reported { "value": <REPORTED_REQUIREPI_NFORRF_OPERATION> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RequirePINforRFOperation/Desired { "value": <DESIRED_REQUIREPI_NFORRF_OPERATION>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RequirePINforRFOperation/Reported { "value": <REPORTED_REQUIREPI_NFORRF_OPERATION>}
+
 ```
 
 <br><br>
@@ -14296,15 +13590,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RequirePINforRFOperation/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SecurityLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SecurityLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/SecurityLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SecurityLevel/Desired { "value": <DESIRED_SECURITY_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SecurityLevel/Reported { "value": <REPORTED_SECURITY_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SecurityLevel/Desired { "value": <DESIRED_SECURITY_LEVEL>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/SecurityLevel/Reported { "value": <REPORTED_SECURITY_LEVEL>}
+
 ```
 
 <br><br>
@@ -14336,15 +13634,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/SecurityLevel/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/AlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -14376,15 +13678,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/AlarmMask/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for KeypadOperationEventMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadOperationEventMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/KeypadOperationEventMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadOperationEventMask/Desired { "value": <DESIRED_KEYPAD_OPERATION_EVENT_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadOperationEventMask/Reported { "value": <REPORTED_KEYPAD_OPERATION_EVENT_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/KeypadOperationEventMask/Desired { "value": <DESIRED_KEYPAD_OPERATION_EVENT_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/KeypadOperationEventMask/Reported { "value": <REPORTED_KEYPAD_OPERATION_EVENT_MASK>}
+
 ```
 
 <br><br>
@@ -14416,15 +13722,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadOperationEventMask/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RFOperationEventMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFOperationEventMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/RFOperationEventMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFOperationEventMask/Desired { "value": <DESIRED_RF_OPERATION_EVENT_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFOperationEventMask/Reported { "value": <REPORTED_RF_OPERATION_EVENT_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFOperationEventMask/Desired { "value": <DESIRED_RF_OPERATION_EVENT_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFOperationEventMask/Reported { "value": <REPORTED_RF_OPERATION_EVENT_MASK>}
+
 ```
 
 <br><br>
@@ -14456,15 +13766,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFOperationEventMask/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ManualOperationEventMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ManualOperationEventMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/ManualOperationEventMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ManualOperationEventMask/Desired { "value": <DESIRED_MANUAL_OPERATION_EVENT_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ManualOperationEventMask/Reported { "value": <REPORTED_MANUAL_OPERATION_EVENT_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/ManualOperationEventMask/Desired { "value": <DESIRED_MANUAL_OPERATION_EVENT_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/ManualOperationEventMask/Reported { "value": <REPORTED_MANUAL_OPERATION_EVENT_MASK>}
+
 ```
 
 <br><br>
@@ -14496,15 +13810,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ManualOperationEventMask/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RFIDOperationEventMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDOperationEventMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/RFIDOperationEventMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDOperationEventMask/Desired { "value": <DESIRED_RFID_OPERATION_EVENT_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDOperationEventMask/Reported { "value": <REPORTED_RFID_OPERATION_EVENT_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFIDOperationEventMask/Desired { "value": <DESIRED_RFID_OPERATION_EVENT_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFIDOperationEventMask/Reported { "value": <REPORTED_RFID_OPERATION_EVENT_MASK>}
+
 ```
 
 <br><br>
@@ -14536,15 +13854,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDOperationEventMask/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for KeypadProgrammingEventMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadProgrammingEventMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/KeypadProgrammingEventMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadProgrammingEventMask/Desired { "value": <DESIRED_KEYPAD_PROGRAMMING_EVENT_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadProgrammingEventMask/Reported { "value": <REPORTED_KEYPAD_PROGRAMMING_EVENT_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/KeypadProgrammingEventMask/Desired { "value": <DESIRED_KEYPAD_PROGRAMMING_EVENT_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/KeypadProgrammingEventMask/Reported { "value": <REPORTED_KEYPAD_PROGRAMMING_EVENT_MASK>}
+
 ```
 
 <br><br>
@@ -14576,15 +13898,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/KeypadProgrammingEventMask/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RFProgrammingEventMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFProgrammingEventMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/RFProgrammingEventMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFProgrammingEventMask/Desired { "value": <DESIRED_RF_PROGRAMMING_EVENT_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFProgrammingEventMask/Reported { "value": <REPORTED_RF_PROGRAMMING_EVENT_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFProgrammingEventMask/Desired { "value": <DESIRED_RF_PROGRAMMING_EVENT_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFProgrammingEventMask/Reported { "value": <REPORTED_RF_PROGRAMMING_EVENT_MASK>}
+
 ```
 
 <br><br>
@@ -14616,15 +13942,19 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFProgrammingEventMask/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RFIDProgrammingEventMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDProgrammingEventMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DoorLock/Attributes/RFIDProgrammingEventMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDProgrammingEventMask/Desired { "value": <DESIRED_RFID_PROGRAMMING_EVENT_MASK> }
-ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDProgrammingEventMask/Reported { "value": <REPORTED_RFID_PROGRAMMING_EVENT_MASK> }
+
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFIDProgrammingEventMask/Desired { "value": <DESIRED_RFID_PROGRAMMING_EVENT_MASK>}
+ucl/by-unid/<UNID>/ep0/DoorLock/Attributes/RFIDProgrammingEventMask/Reported { "value": <REPORTED_RFID_PROGRAMMING_EVENT_MASK>}
+
 ```
 
 <br><br>
@@ -14661,7 +13991,7 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/RFIDProgrammingEventMask/Reported { 
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -14770,7 +14100,7 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ClusterRevision/Reported { "value": 
 
 To see supported commands for DoorLock cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedCommands { "value": ["LockDoor","UnlockDoor","Toggle","UnlockWithTimeout","GetLogRecord","SetPINCode","GetPINCode","ClearPINCode","ClearAllPINCodes","SetUserStatus","GetUserStatus","SetWeekdaySchedule","GetWeekdaySchedule","ClearWeekdaySchedule","SetYearDaySchedule","GetYearDaySchedule","ClearYearDaySchedule","SetHolidaySchedule","GetHolidaySchedule","ClearHolidaySchedule","SetUserType","GetUserType","SetRFIDCode","GetRFIDCode","ClearRFIDCode","ClearAllRFIDCodes",] }
@@ -14778,8 +14108,7 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedCommands { "value": ["LockDoor","Unloc
 
 To see supported generated commands for DoorLock cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedGeneratedCommands { "value": ["LockDoorResponse","UnlockDoorResponse","ToggleResponse","UnlockWithTimeoutResponse","GetLogRecordResponse","SetPINCodeResponse","GetPINCodeResponse","ClearPINCodeResponse","ClearAllPINCodesResponse","SetUserStatusResponse","GetUserStatusResponse","SetWeekdayScheduleResponse","GetWeekdayScheduleResponse","ClearWeekdayScheduleResponse","SetYearDayScheduleResponse","GetYearDayScheduleResponse","ClearYearDayScheduleResponse","SetHolidayScheduleResponse","GetHolidayScheduleResponse","ClearHolidayScheduleResponse","SetUserTypeResponse","GetUserTypeResponse","SetRFIDCodeResponse","GetRFIDCodeResponse","ClearRFIDCodeResponse","ClearAllRFIDCodesResponse","OperatingEventNotification","ProgrammingEventNotification"] }
@@ -14829,13 +14158,13 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedGeneratedCommands { "value": ["LockDoo
 
 To send a DoorLock/LockDoor command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/LockDoor' -m  '{ "PINOrRFIDCode": <PIN_ORRFID_CODE_VALUE> }'
 ```
 
 To receive a DoorLock/LockDoor generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/LockDoor'
 ```
 
@@ -14872,13 +14201,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/LockDoor'
 
 To send a DoorLock/LockDoorResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/LockDoorResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/LockDoorResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/LockDoorResponse'
 ```
 
@@ -14915,13 +14244,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/LockDoorRes
 
 To send a DoorLock/UnlockDoor command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/UnlockDoor' -m  '{ "PINOrRFIDCode": <PIN_ORRFID_CODE_VALUE> }'
 ```
 
 To receive a DoorLock/UnlockDoor generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockDoor'
 ```
 
@@ -14958,13 +14287,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockDoor'
 
 To send a DoorLock/UnlockDoorResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/UnlockDoorResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/UnlockDoorResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockDoorResponse'
 ```
 
@@ -15001,13 +14330,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockDoorR
 
 To send a DoorLock/Toggle command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/Toggle' -m  '{ "PINOrRFIDCode": <PIN_ORRFID_CODE_VALUE> }'
 ```
 
 To receive a DoorLock/Toggle generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/Toggle'
 ```
 
@@ -15044,13 +14373,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/Toggle'
 
 To send a DoorLock/ToggleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ToggleResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ToggleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ToggleResponse'
 ```
 
@@ -15091,13 +14420,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ToggleRespo
 
 To send a DoorLock/UnlockWithTimeout command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/UnlockWithTimeout' -m  '{ "TimeoutInSeconds": <TIMEOUT_IN_SECONDS_VALUE>,"PINOrRFIDCode": <PIN_ORRFID_CODE_VALUE> }'
 ```
 
 To receive a DoorLock/UnlockWithTimeout generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockWithTimeout'
 ```
 
@@ -15134,13 +14463,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockWithT
 
 To send a DoorLock/UnlockWithTimeoutResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/UnlockWithTimeoutResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/UnlockWithTimeoutResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockWithTimeoutResponse'
 ```
 
@@ -15177,13 +14506,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/UnlockWithT
 
 To send a DoorLock/GetLogRecord command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetLogRecord' -m  '{ "LogIndex": <LOG_INDEX_VALUE> }'
 ```
 
 To receive a DoorLock/GetLogRecord generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetLogRecord'
 ```
 
@@ -15244,13 +14573,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetLogRecor
 
 To send a DoorLock/GetLogRecordResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetLogRecordResponse' -m  '{ "LogEntryID": <LOG_ENTRYID_VALUE>,"Timestamp": <TIMESTAMP_VALUE>,"EventType": <EVENT_TYPE_VALUE>,"SourceOperationEvent": <SOURCE_OPERATION_EVENT_VALUE>,"EventIDOrAlarmCode": <EVENTID_OR_ALARM_CODE_VALUE>,"UserID": <USERID_VALUE>,"PIN": <PIN_VALUE> }'
 ```
 
 To receive a DoorLock/GetLogRecordResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetLogRecordResponse'
 ```
 
@@ -15299,13 +14628,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetLogRecor
 
 To send a DoorLock/SetPINCode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetPINCode' -m  '{ "UserID": <USERID_VALUE>,"UserStatus": <USER_STATUS_VALUE>,"UserType": <USER_TYPE_VALUE>,"PIN": <PIN_VALUE> }'
 ```
 
 To receive a DoorLock/SetPINCode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetPINCode'
 ```
 
@@ -15342,13 +14671,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetPINCode'
 
 To send a DoorLock/SetPINCodeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetPINCodeResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetPINCodeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetPINCodeResponse'
 ```
 
@@ -15385,13 +14714,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetPINCodeR
 
 To send a DoorLock/GetPINCode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetPINCode' -m  '{ "UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/GetPINCode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetPINCode'
 ```
 
@@ -15440,13 +14769,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetPINCode'
 
 To send a DoorLock/GetPINCodeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetPINCodeResponse' -m  '{ "UserID": <USERID_VALUE>,"UserStatus": <USER_STATUS_VALUE>,"UserType": <USER_TYPE_VALUE>,"Code": <CODE_VALUE> }'
 ```
 
 To receive a DoorLock/GetPINCodeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetPINCodeResponse'
 ```
 
@@ -15483,13 +14812,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetPINCodeR
 
 To send a DoorLock/ClearPINCode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearPINCode' -m  '{ "UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/ClearPINCode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearPINCode'
 ```
 
@@ -15526,13 +14855,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearPINCod
 
 To send a DoorLock/ClearPINCodeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearPINCodeResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ClearPINCodeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearPINCodeResponse'
 ```
 
@@ -15565,13 +14894,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearPINCod
 
 To send a DoorLock/ClearAllPINCodes command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearAllPINCodes' -m  '{  }'
 ```
 
 To receive a DoorLock/ClearAllPINCodes generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllPINCodes'
 ```
 
@@ -15608,13 +14937,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllPIN
 
 To send a DoorLock/ClearAllPINCodesResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearAllPINCodesResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ClearAllPINCodesResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllPINCodesResponse'
 ```
 
@@ -15655,13 +14984,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllPIN
 
 To send a DoorLock/SetUserStatus command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetUserStatus' -m  '{ "UserID": <USERID_VALUE>,"UserStatus": <USER_STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetUserStatus generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserStatus'
 ```
 
@@ -15698,13 +15027,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserStat
 
 To send a DoorLock/SetUserStatusResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetUserStatusResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetUserStatusResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserStatusResponse'
 ```
 
@@ -15741,13 +15070,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserStat
 
 To send a DoorLock/GetUserStatus command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetUserStatus' -m  '{ "UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/GetUserStatus generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserStatus'
 ```
 
@@ -15788,13 +15117,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserStat
 
 To send a DoorLock/GetUserStatusResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetUserStatusResponse' -m  '{ "UserID": <USERID_VALUE>,"UserStatus": <USER_STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/GetUserStatusResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserStatusResponse'
 ```
 
@@ -15855,13 +15184,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserStat
 
 To send a DoorLock/SetWeekdaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetWeekdaySchedule' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE>,"DaysMask": <DAYS_MASK_VALUE>,"StartHour": <START_HOUR_VALUE>,"StartMinute": <START_MINUTE_VALUE>,"EndHour": <END_HOUR_VALUE>,"EndMinute": <END_MINUTE_VALUE> }'
 ```
 
 To receive a DoorLock/SetWeekdaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetWeekdaySchedule'
 ```
 
@@ -15898,13 +15227,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetWeekdayS
 
 To send a DoorLock/SetWeekdayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetWeekdayScheduleResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetWeekdayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetWeekdayScheduleResponse'
 ```
 
@@ -15945,13 +15274,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetWeekdayS
 
 To send a DoorLock/GetWeekdaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetWeekdaySchedule' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/GetWeekdaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetWeekdaySchedule'
 ```
 
@@ -16016,13 +15345,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetWeekdayS
 
 To send a DoorLock/GetWeekdayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetWeekdayScheduleResponse' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE>,"Status": <STATUS_VALUE>,"DaysMask": <DAYS_MASK_VALUE>,"StartHour": <START_HOUR_VALUE>,"StartMinute": <START_MINUTE_VALUE>,"EndHour": <END_HOUR_VALUE>,"EndMinute": <END_MINUTE_VALUE> }'
 ```
 
 To receive a DoorLock/GetWeekdayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetWeekdayScheduleResponse'
 ```
 
@@ -16063,13 +15392,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetWeekdayS
 
 To send a DoorLock/ClearWeekdaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearWeekdaySchedule' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/ClearWeekdaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearWeekdaySchedule'
 ```
 
@@ -16106,13 +15435,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearWeekda
 
 To send a DoorLock/ClearWeekdayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearWeekdayScheduleResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ClearWeekdayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearWeekdayScheduleResponse'
 ```
 
@@ -16161,13 +15490,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearWeekda
 
 To send a DoorLock/SetYearDaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetYearDaySchedule' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE>,"LocalStartTime": <LOCAL_START_TIME_VALUE>,"LocalEndTime": <LOCAL_END_TIME_VALUE> }'
 ```
 
 To receive a DoorLock/SetYearDaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetYearDaySchedule'
 ```
 
@@ -16204,13 +15533,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetYearDayS
 
 To send a DoorLock/SetYearDayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetYearDayScheduleResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetYearDayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetYearDayScheduleResponse'
 ```
 
@@ -16251,13 +15580,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetYearDayS
 
 To send a DoorLock/GetYearDaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetYearDaySchedule' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/GetYearDaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetYearDaySchedule'
 ```
 
@@ -16310,13 +15639,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetYearDayS
 
 To send a DoorLock/GetYearDayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetYearDayScheduleResponse' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE>,"Status": <STATUS_VALUE>,"LocalStartTime": <LOCAL_START_TIME_VALUE>,"LocalEndTime": <LOCAL_END_TIME_VALUE> }'
 ```
 
 To receive a DoorLock/GetYearDayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetYearDayScheduleResponse'
 ```
 
@@ -16357,13 +15686,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetYearDayS
 
 To send a DoorLock/ClearYearDaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearYearDaySchedule' -m  '{ "ScheduleID": <SCHEDULEID_VALUE>,"UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/ClearYearDaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearYearDaySchedule'
 ```
 
@@ -16400,13 +15729,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearYearDa
 
 To send a DoorLock/ClearYearDayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearYearDayScheduleResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ClearYearDayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearYearDayScheduleResponse'
 ```
 
@@ -16455,13 +15784,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearYearDa
 
 To send a DoorLock/SetHolidaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetHolidaySchedule' -m  '{ "HolidayScheduleID": <HOLIDAY_SCHEDULEID_VALUE>,"LocalStartTime": <LOCAL_START_TIME_VALUE>,"LocalEndTime": <LOCAL_END_TIME_VALUE>,"OperatingModeDuringHoliday": <OPERATING_MODE_DURING_HOLIDAY_VALUE> }'
 ```
 
 To receive a DoorLock/SetHolidaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetHolidaySchedule'
 ```
 
@@ -16498,13 +15827,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetHolidayS
 
 To send a DoorLock/SetHolidayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetHolidayScheduleResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetHolidayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetHolidayScheduleResponse'
 ```
 
@@ -16541,13 +15870,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetHolidayS
 
 To send a DoorLock/GetHolidaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetHolidaySchedule' -m  '{ "HolidayScheduleID": <HOLIDAY_SCHEDULEID_VALUE> }'
 ```
 
 To receive a DoorLock/GetHolidaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetHolidaySchedule'
 ```
 
@@ -16600,13 +15929,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetHolidayS
 
 To send a DoorLock/GetHolidayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetHolidayScheduleResponse' -m  '{ "HolidayScheduleID": <HOLIDAY_SCHEDULEID_VALUE>,"Status": <STATUS_VALUE>,"LocalStartTime": <LOCAL_START_TIME_VALUE>,"LocalEndTime": <LOCAL_END_TIME_VALUE>,"OperatingModeDuringHoliday": <OPERATING_MODE_DURING_HOLIDAY_VALUE> }'
 ```
 
 To receive a DoorLock/GetHolidayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetHolidayScheduleResponse'
 ```
 
@@ -16643,13 +15972,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetHolidayS
 
 To send a DoorLock/ClearHolidaySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearHolidaySchedule' -m  '{ "HolidayScheduleID": <HOLIDAY_SCHEDULEID_VALUE> }'
 ```
 
 To receive a DoorLock/ClearHolidaySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearHolidaySchedule'
 ```
 
@@ -16686,13 +16015,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearHolida
 
 To send a DoorLock/ClearHolidayScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearHolidayScheduleResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ClearHolidayScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearHolidayScheduleResponse'
 ```
 
@@ -16733,13 +16062,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearHolida
 
 To send a DoorLock/SetUserType command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetUserType' -m  '{ "UserID": <USERID_VALUE>,"UserType": <USER_TYPE_VALUE> }'
 ```
 
 To receive a DoorLock/SetUserType generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserType'
 ```
 
@@ -16776,13 +16105,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserType
 
 To send a DoorLock/SetUserTypeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetUserTypeResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetUserTypeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserTypeResponse'
 ```
 
@@ -16819,13 +16148,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetUserType
 
 To send a DoorLock/GetUserType command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetUserType' -m  '{ "UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/GetUserType generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserType'
 ```
 
@@ -16866,13 +16195,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserType
 
 To send a DoorLock/GetUserTypeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetUserTypeResponse' -m  '{ "UserID": <USERID_VALUE>,"UserType": <USER_TYPE_VALUE> }'
 ```
 
 To receive a DoorLock/GetUserTypeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserTypeResponse'
 ```
 
@@ -16921,13 +16250,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetUserType
 
 To send a DoorLock/SetRFIDCode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetRFIDCode' -m  '{ "UserID": <USERID_VALUE>,"UserStatus": <USER_STATUS_VALUE>,"UserType": <USER_TYPE_VALUE>,"RFIDCode": <RFID_CODE_VALUE> }'
 ```
 
 To receive a DoorLock/SetRFIDCode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetRFIDCode'
 ```
 
@@ -16964,13 +16293,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetRFIDCode
 
 To send a DoorLock/SetRFIDCodeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/SetRFIDCodeResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/SetRFIDCodeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetRFIDCodeResponse'
 ```
 
@@ -17007,13 +16336,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/SetRFIDCode
 
 To send a DoorLock/GetRFIDCode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetRFIDCode' -m  '{ "UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/GetRFIDCode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetRFIDCode'
 ```
 
@@ -17062,13 +16391,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetRFIDCode
 
 To send a DoorLock/GetRFIDCodeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetRFIDCodeResponse' -m  '{ "UserID": <USERID_VALUE>,"UserStatus": <USER_STATUS_VALUE>,"UserType": <USER_TYPE_VALUE>,"RFIDCode": <RFID_CODE_VALUE> }'
 ```
 
 To receive a DoorLock/GetRFIDCodeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetRFIDCodeResponse'
 ```
 
@@ -17105,13 +16434,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetRFIDCode
 
 To send a DoorLock/ClearRFIDCode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearRFIDCode' -m  '{ "UserID": <USERID_VALUE> }'
 ```
 
 To receive a DoorLock/ClearRFIDCode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearRFIDCode'
 ```
 
@@ -17148,13 +16477,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearRFIDCo
 
 To send a DoorLock/ClearRFIDCodeResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearRFIDCodeResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ClearRFIDCodeResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearRFIDCodeResponse'
 ```
 
@@ -17187,13 +16516,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearRFIDCo
 
 To send a DoorLock/ClearAllRFIDCodes command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearAllRFIDCodes' -m  '{  }'
 ```
 
 To receive a DoorLock/ClearAllRFIDCodes generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllRFIDCodes'
 ```
 
@@ -17230,13 +16559,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllRFI
 
 To send a DoorLock/ClearAllRFIDCodesResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ClearAllRFIDCodesResponse' -m  '{ "Status": <STATUS_VALUE> }'
 ```
 
 To receive a DoorLock/ClearAllRFIDCodesResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllRFIDCodesResponse'
 ```
 
@@ -17293,13 +16622,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllRFI
 
 To send a DoorLock/OperatingEventNotification command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/OperatingEventNotification' -m  '{ "OperationEventSource": <OPERATION_EVENT_SOURCE_VALUE>,"OperationEventCode": <OPERATION_EVENT_CODE_VALUE>,"UserID": <USERID_VALUE>,"PIN": <PIN_VALUE>,"LocalTime": <LOCAL_TIME_VALUE>,"Data": <DATA_VALUE> }'
 ```
 
 To receive a DoorLock/OperatingEventNotification generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/OperatingEventNotification'
 ```
 
@@ -17364,13 +16693,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/OperatingEv
 
 To send a DoorLock/ProgrammingEventNotification command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ProgrammingEventNotification' -m  '{ "ProgramEventSource": <PROGRAM_EVENT_SOURCE_VALUE>,"ProgramEventCode": <PROGRAM_EVENT_CODE_VALUE>,"UserID": <USERID_VALUE>,"PIN": <PIN_VALUE>,"UserType": <USER_TYPE_VALUE>,"UserStatus": <USER_STATUS_VALUE>,"LocalTime": <LOCAL_TIME_VALUE>,"Data": <DATA_VALUE> }'
 ```
 
 To receive a DoorLock/ProgrammingEventNotification generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ProgrammingEventNotification'
 ```
 
@@ -17478,11 +16807,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/Programming
 
 To update all DoorLock attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/WriteAttributes' -m  '{ "DoorOpenEvents": <DOOR_OPEN_EVENTS_VALUE> ,"DoorClosedEvents": <DOOR_CLOSED_EVENTS_VALUE> ,"OpenPeriod": <OPEN_PERIOD_VALUE> ,"EnableLogging": <ENABLE_LOGGING_VALUE> ,"Language": <LANGUAGE_VALUE> ,"LEDSettings": <LED_SETTINGS_VALUE> ,"AutoRelockTime": <AUTO_RELOCK_TIME_VALUE> ,"SoundVolume": <SOUND_VOLUME_VALUE> ,"OperatingMode": <OPERATING_MODE_VALUE> ,"EnableLocalProgramming": <ENABLE_LOCAL_PROGRAMMING_VALUE> ,"EnableOneTouchLocking": <ENABLE_ONE_TOUCH_LOCKING_VALUE> ,"EnableInsideStatusLED": <ENABLE_INSIDE_STATUSLED_VALUE> ,"EnablePrivacyModeButton": <ENABLE_PRIVACY_MODE_BUTTON_VALUE> ,"WrongCodeEntryLimit": <WRONG_CODE_ENTRY_LIMIT_VALUE> ,"UserCodeTemporaryDisableTime": <USER_CODE_TEMPORARY_DISABLE_TIME_VALUE> ,"SendPINOverTheAir": <SENDPIN_OVER_THE_AIR_VALUE> ,"RequirePINforRFOperation": <REQUIREPI_NFORRF_OPERATION_VALUE> ,"AlarmMask": <ALARM_MASK_VALUE> ,"KeypadOperationEventMask": <KEYPAD_OPERATION_EVENT_MASK_VALUE> ,"RFOperationEventMask": <RF_OPERATION_EVENT_MASK_VALUE> ,"ManualOperationEventMask": <MANUAL_OPERATION_EVENT_MASK_VALUE> ,"RFIDOperationEventMask": <RFID_OPERATION_EVENT_MASK_VALUE> ,"KeypadProgrammingEventMask": <KEYPAD_PROGRAMMING_EVENT_MASK_VALUE> ,"RFProgrammingEventMask": <RF_PROGRAMMING_EVENT_MASK_VALUE> ,"RFIDProgrammingEventMask": <RFID_PROGRAMMING_EVENT_MASK_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -17564,13 +16894,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/WriteAttributes' -m 
 
 To force read all DoorLock attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the DoorLock attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/ForceReadAttributes' -m  '{ "value": ["LockState"] }'
 ```
 
@@ -17627,15 +16957,19 @@ The following attribute topics are used to retrieve the WindowCovering cluster s
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for WindowCoveringType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/WindowCoveringType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/WindowCoveringType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/WindowCoveringType/Desired { "value": <DESIRED_WINDOW_COVERING_TYPE> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/WindowCoveringType/Reported { "value": <REPORTED_WINDOW_COVERING_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/WindowCoveringType/Desired { "value": <DESIRED_WINDOW_COVERING_TYPE>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/WindowCoveringType/Reported { "value": <REPORTED_WINDOW_COVERING_TYPE>}
+
 ```
 
 <br><br>
@@ -17667,15 +17001,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/WindowCoveringType/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalClosedLimitLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/PhysicalClosedLimitLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitLift/Desired { "value": <DESIRED_PHYSICAL_CLOSED_LIMIT_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitLift/Reported { "value": <REPORTED_PHYSICAL_CLOSED_LIMIT_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/PhysicalClosedLimitLift/Desired { "value": <DESIRED_PHYSICAL_CLOSED_LIMIT_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/PhysicalClosedLimitLift/Reported { "value": <REPORTED_PHYSICAL_CLOSED_LIMIT_LIFT>}
+
 ```
 
 <br><br>
@@ -17707,15 +17045,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitLift/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalClosedLimitTilt attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitTilt/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/PhysicalClosedLimitTilt/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitTilt/Desired { "value": <DESIRED_PHYSICAL_CLOSED_LIMIT_TILT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitTilt/Reported { "value": <REPORTED_PHYSICAL_CLOSED_LIMIT_TILT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/PhysicalClosedLimitTilt/Desired { "value": <DESIRED_PHYSICAL_CLOSED_LIMIT_TILT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/PhysicalClosedLimitTilt/Reported { "value": <REPORTED_PHYSICAL_CLOSED_LIMIT_TILT>}
+
 ```
 
 <br><br>
@@ -17747,15 +17089,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/PhysicalClosedLimitTilt/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentPositionLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/CurrentPositionLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLift/Desired { "value": <DESIRED_CURRENT_POSITION_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLift/Reported { "value": <REPORTED_CURRENT_POSITION_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionLift/Desired { "value": <DESIRED_CURRENT_POSITION_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionLift/Reported { "value": <REPORTED_CURRENT_POSITION_LIFT>}
+
 ```
 
 <br><br>
@@ -17787,15 +17133,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLift/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentPositionTilt attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTilt/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/CurrentPositionTilt/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTilt/Desired { "value": <DESIRED_CURRENT_POSITION_TILT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTilt/Reported { "value": <REPORTED_CURRENT_POSITION_TILT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionTilt/Desired { "value": <DESIRED_CURRENT_POSITION_TILT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionTilt/Reported { "value": <REPORTED_CURRENT_POSITION_TILT>}
+
 ```
 
 <br><br>
@@ -17827,15 +17177,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTilt/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfActuationsLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/NumberOfActuationsLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsLift/Desired { "value": <DESIRED_NUMBER_OF_ACTUATIONS_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsLift/Reported { "value": <REPORTED_NUMBER_OF_ACTUATIONS_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/NumberOfActuationsLift/Desired { "value": <DESIRED_NUMBER_OF_ACTUATIONS_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/NumberOfActuationsLift/Reported { "value": <REPORTED_NUMBER_OF_ACTUATIONS_LIFT>}
+
 ```
 
 <br><br>
@@ -17867,15 +17221,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsLift/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfActuationsTilt attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsTilt/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/NumberOfActuationsTilt/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsTilt/Desired { "value": <DESIRED_NUMBER_OF_ACTUATIONS_TILT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsTilt/Reported { "value": <REPORTED_NUMBER_OF_ACTUATIONS_TILT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/NumberOfActuationsTilt/Desired { "value": <DESIRED_NUMBER_OF_ACTUATIONS_TILT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/NumberOfActuationsTilt/Reported { "value": <REPORTED_NUMBER_OF_ACTUATIONS_TILT>}
+
 ```
 
 <br><br>
@@ -17907,15 +17265,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/NumberOfActuationsTilt/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ConfigOrStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/ConfigOrStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/ConfigOrStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/ConfigOrStatus/Desired { "value": <DESIRED_CONFIG_OR_STATUS> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/ConfigOrStatus/Reported { "value": <REPORTED_CONFIG_OR_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/ConfigOrStatus/Desired { "value": <DESIRED_CONFIG_OR_STATUS>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/ConfigOrStatus/Reported { "value": <REPORTED_CONFIG_OR_STATUS>}
+
 ```
 
 <br><br>
@@ -17947,15 +17309,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/ConfigOrStatus/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentPositionLiftPercentage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLiftPercentage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/CurrentPositionLiftPercentage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLiftPercentage/Desired { "value": <DESIRED_CURRENT_POSITION_LIFT_PERCENTAGE> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLiftPercentage/Reported { "value": <REPORTED_CURRENT_POSITION_LIFT_PERCENTAGE> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionLiftPercentage/Desired { "value": <DESIRED_CURRENT_POSITION_LIFT_PERCENTAGE>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionLiftPercentage/Reported { "value": <REPORTED_CURRENT_POSITION_LIFT_PERCENTAGE>}
+
 ```
 
 <br><br>
@@ -17987,15 +17353,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionLiftPercentage/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentPositionTiltPercentage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTiltPercentage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/CurrentPositionTiltPercentage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTiltPercentage/Desired { "value": <DESIRED_CURRENT_POSITION_TILT_PERCENTAGE> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTiltPercentage/Reported { "value": <REPORTED_CURRENT_POSITION_TILT_PERCENTAGE> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionTiltPercentage/Desired { "value": <DESIRED_CURRENT_POSITION_TILT_PERCENTAGE>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/CurrentPositionTiltPercentage/Reported { "value": <REPORTED_CURRENT_POSITION_TILT_PERCENTAGE>}
+
 ```
 
 <br><br>
@@ -18027,15 +17397,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/CurrentPositionTiltPercentage/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for InstalledOpenLimitLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/InstalledOpenLimitLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitLift/Desired { "value": <DESIRED_INSTALLED_OPEN_LIMIT_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitLift/Reported { "value": <REPORTED_INSTALLED_OPEN_LIMIT_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledOpenLimitLift/Desired { "value": <DESIRED_INSTALLED_OPEN_LIMIT_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledOpenLimitLift/Reported { "value": <REPORTED_INSTALLED_OPEN_LIMIT_LIFT>}
+
 ```
 
 <br><br>
@@ -18067,15 +17441,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitLift/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for InstalledClosedLimitLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/InstalledClosedLimitLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitLift/Desired { "value": <DESIRED_INSTALLED_CLOSED_LIMIT_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitLift/Reported { "value": <REPORTED_INSTALLED_CLOSED_LIMIT_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledClosedLimitLift/Desired { "value": <DESIRED_INSTALLED_CLOSED_LIMIT_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledClosedLimitLift/Reported { "value": <REPORTED_INSTALLED_CLOSED_LIMIT_LIFT>}
+
 ```
 
 <br><br>
@@ -18107,15 +17485,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitLift/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for InstalledOpenLimitTilt attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitTilt/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/InstalledOpenLimitTilt/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitTilt/Desired { "value": <DESIRED_INSTALLED_OPEN_LIMIT_TILT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitTilt/Reported { "value": <REPORTED_INSTALLED_OPEN_LIMIT_TILT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledOpenLimitTilt/Desired { "value": <DESIRED_INSTALLED_OPEN_LIMIT_TILT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledOpenLimitTilt/Reported { "value": <REPORTED_INSTALLED_OPEN_LIMIT_TILT>}
+
 ```
 
 <br><br>
@@ -18147,15 +17529,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledOpenLimitTilt/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for InstalledClosedLimitTilt attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitTilt/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/InstalledClosedLimitTilt/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitTilt/Desired { "value": <DESIRED_INSTALLED_CLOSED_LIMIT_TILT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitTilt/Reported { "value": <REPORTED_INSTALLED_CLOSED_LIMIT_TILT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledClosedLimitTilt/Desired { "value": <DESIRED_INSTALLED_CLOSED_LIMIT_TILT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/InstalledClosedLimitTilt/Reported { "value": <REPORTED_INSTALLED_CLOSED_LIMIT_TILT>}
+
 ```
 
 <br><br>
@@ -18187,15 +17573,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/InstalledClosedLimitTilt/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for VelocityLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/VelocityLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/VelocityLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/VelocityLift/Desired { "value": <DESIRED_VELOCITY_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/VelocityLift/Reported { "value": <REPORTED_VELOCITY_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/VelocityLift/Desired { "value": <DESIRED_VELOCITY_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/VelocityLift/Reported { "value": <REPORTED_VELOCITY_LIFT>}
+
 ```
 
 <br><br>
@@ -18227,15 +17617,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/VelocityLift/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AccelerationTimeLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/AccelerationTimeLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/AccelerationTimeLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/AccelerationTimeLift/Desired { "value": <DESIRED_ACCELERATION_TIME_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/AccelerationTimeLift/Reported { "value": <REPORTED_ACCELERATION_TIME_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/AccelerationTimeLift/Desired { "value": <DESIRED_ACCELERATION_TIME_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/AccelerationTimeLift/Reported { "value": <REPORTED_ACCELERATION_TIME_LIFT>}
+
 ```
 
 <br><br>
@@ -18267,15 +17661,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/AccelerationTimeLift/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DecelerationTimeLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/DecelerationTimeLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/DecelerationTimeLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/DecelerationTimeLift/Desired { "value": <DESIRED_DECELERATION_TIME_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/DecelerationTimeLift/Reported { "value": <REPORTED_DECELERATION_TIME_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/DecelerationTimeLift/Desired { "value": <DESIRED_DECELERATION_TIME_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/DecelerationTimeLift/Reported { "value": <REPORTED_DECELERATION_TIME_LIFT>}
+
 ```
 
 <br><br>
@@ -18307,15 +17705,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/DecelerationTimeLift/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Mode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/Mode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/Mode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/Mode/Desired { "value": <DESIRED_MODE> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/Mode/Reported { "value": <REPORTED_MODE> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/Mode/Desired { "value": <DESIRED_MODE>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/Mode/Reported { "value": <REPORTED_MODE>}
+
 ```
 
 <br><br>
@@ -18347,15 +17749,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/Mode/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for IntermediateSetpointsLift attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsLift/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/IntermediateSetpointsLift/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsLift/Desired { "value": <DESIRED_INTERMEDIATE_SETPOINTS_LIFT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsLift/Reported { "value": <REPORTED_INTERMEDIATE_SETPOINTS_LIFT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/IntermediateSetpointsLift/Desired { "value": <DESIRED_INTERMEDIATE_SETPOINTS_LIFT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/IntermediateSetpointsLift/Reported { "value": <REPORTED_INTERMEDIATE_SETPOINTS_LIFT>}
+
 ```
 
 <br><br>
@@ -18387,15 +17793,19 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsLift/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for IntermediateSetpointsTilt attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsTilt/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindowCovering/Attributes/IntermediateSetpointsTilt/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsTilt/Desired { "value": <DESIRED_INTERMEDIATE_SETPOINTS_TILT> }
-ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsTilt/Reported { "value": <REPORTED_INTERMEDIATE_SETPOINTS_TILT> }
+
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/IntermediateSetpointsTilt/Desired { "value": <DESIRED_INTERMEDIATE_SETPOINTS_TILT>}
+ucl/by-unid/<UNID>/ep0/WindowCovering/Attributes/IntermediateSetpointsTilt/Reported { "value": <REPORTED_INTERMEDIATE_SETPOINTS_TILT>}
+
 ```
 
 <br><br>
@@ -18432,7 +17842,7 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/IntermediateSetpointsTilt/Repo
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -18494,7 +17904,7 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/Attributes/ClusterRevision/Reported { "va
 
 To see supported commands for WindowCovering cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/WindowCovering/SupportedCommands { "value": ["UpOrOpen","DownOrClose","Stop","GoToLiftValue","GoToLiftPercentage","GoToTiltValue","GoToTiltPercentage","WriteAttributes", "ForceReadAttributes"] }
@@ -18502,8 +17912,7 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/SupportedCommands { "value": ["UpOrOpen",
 
 To see supported generated commands for WindowCovering cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/WindowCovering/SupportedGeneratedCommands { "value": [] }
@@ -18549,13 +17958,13 @@ ucl/by-unid/<UNID>/<EP>/WindowCovering/SupportedGeneratedCommands { "value": [] 
 
 To send a WindowCovering/UpOrOpen command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/UpOrOpen' -m  '{  }'
 ```
 
 To receive a WindowCovering/UpOrOpen generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/UpOrOpen'
 ```
 
@@ -18588,13 +17997,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/UpOrO
 
 To send a WindowCovering/DownOrClose command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/DownOrClose' -m  '{  }'
 ```
 
 To receive a WindowCovering/DownOrClose generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/DownOrClose'
 ```
 
@@ -18627,13 +18036,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/DownO
 
 To send a WindowCovering/Stop command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/Stop' -m  '{  }'
 ```
 
 To receive a WindowCovering/Stop generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/Stop'
 ```
 
@@ -18670,13 +18079,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/Stop'
 
 To send a WindowCovering/GoToLiftValue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/GoToLiftValue' -m  '{ "LiftValue": <LIFT_VALUE_VALUE> }'
 ```
 
 To receive a WindowCovering/GoToLiftValue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToLiftValue'
 ```
 
@@ -18713,13 +18122,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToL
 
 To send a WindowCovering/GoToLiftPercentage command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/GoToLiftPercentage' -m  '{ "PercentageLiftValue": <PERCENTAGE_LIFT_VALUE_VALUE> }'
 ```
 
 To receive a WindowCovering/GoToLiftPercentage generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToLiftPercentage'
 ```
 
@@ -18756,13 +18165,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToL
 
 To send a WindowCovering/GoToTiltValue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/GoToTiltValue' -m  '{ "TiltValue": <TILT_VALUE_VALUE> }'
 ```
 
 To receive a WindowCovering/GoToTiltValue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToTiltValue'
 ```
 
@@ -18799,13 +18208,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToT
 
 To send a WindowCovering/GoToTiltPercentage command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/GoToTiltPercentage' -m  '{ "PercentageTiltValue": <PERCENTAGE_TILT_VALUE_VALUE> }'
 ```
 
 To receive a WindowCovering/GoToTiltPercentage generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToTiltPercentage'
 ```
 
@@ -18847,11 +18256,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/GeneratedCommands/GoToT
 
 To update all WindowCovering attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/WriteAttributes' -m  '{ "VelocityLift": <VELOCITY_LIFT_VALUE> ,"AccelerationTimeLift": <ACCELERATION_TIME_LIFT_VALUE> ,"DecelerationTimeLift": <DECELERATION_TIME_LIFT_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -18910,13 +18320,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/WriteAttribute
 
 To force read all WindowCovering attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the WindowCovering attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindowCovering/Commands/ForceReadAttributes' -m  '{ "value": ["WindowCoveringType"] }'
 ```
 
@@ -18973,15 +18383,19 @@ The following attribute topics are used to retrieve the BarrierControl cluster s
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MovingState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/MovingState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/MovingState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/MovingState/Desired { "value": <DESIRED_MOVING_STATE> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/MovingState/Reported { "value": <REPORTED_MOVING_STATE> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/MovingState/Desired { "value": <DESIRED_MOVING_STATE>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/MovingState/Reported { "value": <REPORTED_MOVING_STATE>}
+
 ```
 
 <br><br>
@@ -19013,15 +18427,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/MovingState/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SafetyStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/SafetyStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/SafetyStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/SafetyStatus/Desired { "value": <DESIRED_SAFETY_STATUS> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/SafetyStatus/Reported { "value": <REPORTED_SAFETY_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/SafetyStatus/Desired { "value": <DESIRED_SAFETY_STATUS>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/SafetyStatus/Reported { "value": <REPORTED_SAFETY_STATUS>}
+
 ```
 
 <br><br>
@@ -19053,15 +18471,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/SafetyStatus/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Capabilities attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/Capabilities/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/Capabilities/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/Capabilities/Desired { "value": <DESIRED_CAPABILITIES> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/Capabilities/Reported { "value": <REPORTED_CAPABILITIES> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/Capabilities/Desired { "value": <DESIRED_CAPABILITIES>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/Capabilities/Reported { "value": <REPORTED_CAPABILITIES>}
+
 ```
 
 <br><br>
@@ -19093,15 +18515,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/Capabilities/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OpenEvents attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenEvents/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/OpenEvents/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenEvents/Desired { "value": <DESIRED_OPEN_EVENTS> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenEvents/Reported { "value": <REPORTED_OPEN_EVENTS> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/OpenEvents/Desired { "value": <DESIRED_OPEN_EVENTS>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/OpenEvents/Reported { "value": <REPORTED_OPEN_EVENTS>}
+
 ```
 
 <br><br>
@@ -19133,15 +18559,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenEvents/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CloseEvents attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CloseEvents/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/CloseEvents/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CloseEvents/Desired { "value": <DESIRED_CLOSE_EVENTS> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CloseEvents/Reported { "value": <REPORTED_CLOSE_EVENTS> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/CloseEvents/Desired { "value": <DESIRED_CLOSE_EVENTS>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/CloseEvents/Reported { "value": <REPORTED_CLOSE_EVENTS>}
+
 ```
 
 <br><br>
@@ -19173,15 +18603,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CloseEvents/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CommandOpenEvents attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandOpenEvents/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/CommandOpenEvents/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandOpenEvents/Desired { "value": <DESIRED_COMMAND_OPEN_EVENTS> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandOpenEvents/Reported { "value": <REPORTED_COMMAND_OPEN_EVENTS> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/CommandOpenEvents/Desired { "value": <DESIRED_COMMAND_OPEN_EVENTS>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/CommandOpenEvents/Reported { "value": <REPORTED_COMMAND_OPEN_EVENTS>}
+
 ```
 
 <br><br>
@@ -19213,15 +18647,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandOpenEvents/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CommandCloseEvents attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandCloseEvents/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/CommandCloseEvents/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandCloseEvents/Desired { "value": <DESIRED_COMMAND_CLOSE_EVENTS> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandCloseEvents/Reported { "value": <REPORTED_COMMAND_CLOSE_EVENTS> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/CommandCloseEvents/Desired { "value": <DESIRED_COMMAND_CLOSE_EVENTS>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/CommandCloseEvents/Reported { "value": <REPORTED_COMMAND_CLOSE_EVENTS>}
+
 ```
 
 <br><br>
@@ -19253,15 +18691,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/CommandCloseEvents/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OpenPeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenPeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/OpenPeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenPeriod/Desired { "value": <DESIRED_OPEN_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenPeriod/Reported { "value": <REPORTED_OPEN_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/OpenPeriod/Desired { "value": <DESIRED_OPEN_PERIOD>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/OpenPeriod/Reported { "value": <REPORTED_OPEN_PERIOD>}
+
 ```
 
 <br><br>
@@ -19293,15 +18735,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/OpenPeriod/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ClosePeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/ClosePeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/ClosePeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/ClosePeriod/Desired { "value": <DESIRED_CLOSE_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/ClosePeriod/Reported { "value": <REPORTED_CLOSE_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/ClosePeriod/Desired { "value": <DESIRED_CLOSE_PERIOD>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/ClosePeriod/Reported { "value": <REPORTED_CLOSE_PERIOD>}
+
 ```
 
 <br><br>
@@ -19333,15 +18779,19 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/ClosePeriod/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BarrierPosition attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/BarrierPosition/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BarrierControl/Attributes/BarrierPosition/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/BarrierPosition/Desired { "value": <DESIRED_BARRIER_POSITION> }
-ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/BarrierPosition/Reported { "value": <REPORTED_BARRIER_POSITION> }
+
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/BarrierPosition/Desired { "value": <DESIRED_BARRIER_POSITION>}
+ucl/by-unid/<UNID>/ep0/BarrierControl/Attributes/BarrierPosition/Reported { "value": <REPORTED_BARRIER_POSITION>}
+
 ```
 
 <br><br>
@@ -19378,7 +18828,7 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/BarrierPosition/Reported { "va
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -19435,7 +18885,7 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/Attributes/ClusterRevision/Reported { "va
 
 To see supported commands for BarrierControl cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/BarrierControl/SupportedCommands { "value": ["GoToPercent","Stop","WriteAttributes", "ForceReadAttributes"] }
@@ -19443,8 +18893,7 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/SupportedCommands { "value": ["GoToPercen
 
 To see supported generated commands for BarrierControl cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/BarrierControl/SupportedGeneratedCommands { "value": [] }
@@ -19494,13 +18943,13 @@ ucl/by-unid/<UNID>/<EP>/BarrierControl/SupportedGeneratedCommands { "value": [] 
 
 To send a BarrierControl/GoToPercent command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Commands/GoToPercent' -m  '{ "PercentOpen": <PERCENT_OPEN_VALUE> }'
 ```
 
 To receive a BarrierControl/GoToPercent generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/GeneratedCommands/GoToPercent'
 ```
 
@@ -19533,13 +18982,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/GeneratedCommands/GoToP
 
 To send a BarrierControl/Stop command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Commands/Stop' -m  '{  }'
 ```
 
 To receive a BarrierControl/Stop generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/GeneratedCommands/Stop'
 ```
 
@@ -19590,11 +19039,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/GeneratedCommands/Stop'
 
 To update all BarrierControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Commands/WriteAttributes' -m  '{ "OpenEvents": <OPEN_EVENTS_VALUE> ,"CloseEvents": <CLOSE_EVENTS_VALUE> ,"CommandOpenEvents": <COMMAND_OPEN_EVENTS_VALUE> ,"CommandCloseEvents": <COMMAND_CLOSE_EVENTS_VALUE> ,"OpenPeriod": <OPEN_PERIOD_VALUE> ,"ClosePeriod": <CLOSE_PERIOD_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -19643,13 +19093,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Commands/WriteAttribute
 
 To force read all BarrierControl attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the BarrierControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BarrierControl/Commands/ForceReadAttributes' -m  '{ "value": ["MovingState"] }'
 ```
 
@@ -19706,15 +19156,19 @@ The following attribute topics are used to retrieve the PumpConfigurationAndCont
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxPressure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxPressure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxPressure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxPressure/Desired { "value": <DESIRED_MAX_PRESSURE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxPressure/Reported { "value": <REPORTED_MAX_PRESSURE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxPressure/Desired { "value": <DESIRED_MAX_PRESSURE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxPressure/Reported { "value": <REPORTED_MAX_PRESSURE>}
+
 ```
 
 <br><br>
@@ -19746,15 +19200,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxPressure/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxSpeed attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxSpeed/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxSpeed/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxSpeed/Desired { "value": <DESIRED_MAX_SPEED> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxSpeed/Reported { "value": <REPORTED_MAX_SPEED> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxSpeed/Desired { "value": <DESIRED_MAX_SPEED>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxSpeed/Reported { "value": <REPORTED_MAX_SPEED>}
+
 ```
 
 <br><br>
@@ -19786,15 +19244,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxSpeed/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxFlow attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxFlow/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxFlow/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxFlow/Desired { "value": <DESIRED_MAX_FLOW> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxFlow/Reported { "value": <REPORTED_MAX_FLOW> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxFlow/Desired { "value": <DESIRED_MAX_FLOW>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxFlow/Reported { "value": <REPORTED_MAX_FLOW>}
+
 ```
 
 <br><br>
@@ -19826,15 +19288,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxFlow/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinConstPressure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstPressure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstPressure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstPressure/Desired { "value": <DESIRED_MIN_CONST_PRESSURE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstPressure/Reported { "value": <REPORTED_MIN_CONST_PRESSURE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstPressure/Desired { "value": <DESIRED_MIN_CONST_PRESSURE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstPressure/Reported { "value": <REPORTED_MIN_CONST_PRESSURE>}
+
 ```
 
 <br><br>
@@ -19866,15 +19332,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstPressure/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxConstPressure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstPressure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstPressure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstPressure/Desired { "value": <DESIRED_MAX_CONST_PRESSURE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstPressure/Reported { "value": <REPORTED_MAX_CONST_PRESSURE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstPressure/Desired { "value": <DESIRED_MAX_CONST_PRESSURE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstPressure/Reported { "value": <REPORTED_MAX_CONST_PRESSURE>}
+
 ```
 
 <br><br>
@@ -19906,15 +19376,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstPressure/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinCompPressure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinCompPressure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinCompPressure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinCompPressure/Desired { "value": <DESIRED_MIN_COMP_PRESSURE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinCompPressure/Reported { "value": <REPORTED_MIN_COMP_PRESSURE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinCompPressure/Desired { "value": <DESIRED_MIN_COMP_PRESSURE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinCompPressure/Reported { "value": <REPORTED_MIN_COMP_PRESSURE>}
+
 ```
 
 <br><br>
@@ -19946,15 +19420,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinCompPressure/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxCompPressure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxCompPressure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxCompPressure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxCompPressure/Desired { "value": <DESIRED_MAX_COMP_PRESSURE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxCompPressure/Reported { "value": <REPORTED_MAX_COMP_PRESSURE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxCompPressure/Desired { "value": <DESIRED_MAX_COMP_PRESSURE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxCompPressure/Reported { "value": <REPORTED_MAX_COMP_PRESSURE>}
+
 ```
 
 <br><br>
@@ -19986,15 +19464,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxCompPressure/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinConstSpeed attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstSpeed/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstSpeed/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstSpeed/Desired { "value": <DESIRED_MIN_CONST_SPEED> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstSpeed/Reported { "value": <REPORTED_MIN_CONST_SPEED> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstSpeed/Desired { "value": <DESIRED_MIN_CONST_SPEED>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstSpeed/Reported { "value": <REPORTED_MIN_CONST_SPEED>}
+
 ```
 
 <br><br>
@@ -20026,15 +19508,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstSpeed/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxConstSpeed attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstSpeed/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstSpeed/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Desired { "value": <DESIRED_MAX_CONST_SPEED> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Reported { "value": <REPORTED_MAX_CONST_SPEED> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Desired { "value": <DESIRED_MAX_CONST_SPEED>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Reported { "value": <REPORTED_MAX_CONST_SPEED>}
+
 ```
 
 <br><br>
@@ -20066,15 +19552,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinConstFlow attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstFlow/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstFlow/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstFlow/Desired { "value": <DESIRED_MIN_CONST_FLOW> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstFlow/Reported { "value": <REPORTED_MIN_CONST_FLOW> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstFlow/Desired { "value": <DESIRED_MIN_CONST_FLOW>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstFlow/Reported { "value": <REPORTED_MIN_CONST_FLOW>}
+
 ```
 
 <br><br>
@@ -20106,15 +19596,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstFlow/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxConstFlow attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstFlow/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstFlow/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstFlow/Desired { "value": <DESIRED_MAX_CONST_FLOW> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstFlow/Reported { "value": <REPORTED_MAX_CONST_FLOW> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstFlow/Desired { "value": <DESIRED_MAX_CONST_FLOW>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstFlow/Reported { "value": <REPORTED_MAX_CONST_FLOW>}
+
 ```
 
 <br><br>
@@ -20146,15 +19640,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstFlow/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinConstTemp attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstTemp/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstTemp/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstTemp/Desired { "value": <DESIRED_MIN_CONST_TEMP> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstTemp/Reported { "value": <REPORTED_MIN_CONST_TEMP> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstTemp/Desired { "value": <DESIRED_MIN_CONST_TEMP>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MinConstTemp/Reported { "value": <REPORTED_MIN_CONST_TEMP>}
+
 ```
 
 <br><br>
@@ -20186,15 +19684,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MinConstTemp/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxConstTemp attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstTemp/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstTemp/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstTemp/Desired { "value": <DESIRED_MAX_CONST_TEMP> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstTemp/Reported { "value": <REPORTED_MAX_CONST_TEMP> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstTemp/Desired { "value": <DESIRED_MAX_CONST_TEMP>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/MaxConstTemp/Reported { "value": <REPORTED_MAX_CONST_TEMP>}
+
 ```
 
 <br><br>
@@ -20226,15 +19728,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/MaxConstTemp/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PumpStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/PumpStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/PumpStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/PumpStatus/Desired { "value": <DESIRED_PUMP_STATUS> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/PumpStatus/Reported { "value": <REPORTED_PUMP_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/PumpStatus/Desired { "value": <DESIRED_PUMP_STATUS>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/PumpStatus/Reported { "value": <REPORTED_PUMP_STATUS>}
+
 ```
 
 <br><br>
@@ -20266,15 +19772,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/PumpStatus/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EffectiveOperationMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Desired { "value": <DESIRED_EFFECTIVE_OPERATION_MODE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Reported { "value": <REPORTED_EFFECTIVE_OPERATION_MODE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Desired { "value": <DESIRED_EFFECTIVE_OPERATION_MODE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Reported { "value": <REPORTED_EFFECTIVE_OPERATION_MODE>}
+
 ```
 
 <br><br>
@@ -20306,15 +19816,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveOperatio
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EffectiveControlMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveControlMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/EffectiveControlMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Desired { "value": <DESIRED_EFFECTIVE_CONTROL_MODE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Reported { "value": <REPORTED_EFFECTIVE_CONTROL_MODE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Desired { "value": <DESIRED_EFFECTIVE_CONTROL_MODE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Reported { "value": <REPORTED_EFFECTIVE_CONTROL_MODE>}
+
 ```
 
 <br><br>
@@ -20346,15 +19860,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/EffectiveControlM
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Capacity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Capacity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/Capacity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Capacity/Desired { "value": <DESIRED_CAPACITY> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Capacity/Reported { "value": <REPORTED_CAPACITY> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/Capacity/Desired { "value": <DESIRED_CAPACITY>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/Capacity/Reported { "value": <REPORTED_CAPACITY>}
+
 ```
 
 <br><br>
@@ -20386,15 +19904,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Capacity/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Speed attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Speed/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/Speed/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Speed/Desired { "value": <DESIRED_SPEED> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Speed/Reported { "value": <REPORTED_SPEED> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/Speed/Desired { "value": <DESIRED_SPEED>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/Speed/Reported { "value": <REPORTED_SPEED>}
+
 ```
 
 <br><br>
@@ -20426,15 +19948,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Speed/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LifetimeRunningHours attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Desired { "value": <DESIRED_LIFETIME_RUNNING_HOURS> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Reported { "value": <REPORTED_LIFETIME_RUNNING_HOURS> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Desired { "value": <DESIRED_LIFETIME_RUNNING_HOURS>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Reported { "value": <REPORTED_LIFETIME_RUNNING_HOURS>}
+
 ```
 
 <br><br>
@@ -20466,15 +19992,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeRunningHo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Power attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Power/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/Power/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Power/Desired { "value": <DESIRED_POWER> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Power/Reported { "value": <REPORTED_POWER> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/Power/Desired { "value": <DESIRED_POWER>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/Power/Reported { "value": <REPORTED_POWER>}
+
 ```
 
 <br><br>
@@ -20506,15 +20036,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/Power/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LifetimeEnergyConsumed attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Desired { "value": <DESIRED_LIFETIME_ENERGY_CONSUMED> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Reported { "value": <REPORTED_LIFETIME_ENERGY_CONSUMED> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Desired { "value": <DESIRED_LIFETIME_ENERGY_CONSUMED>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Reported { "value": <REPORTED_LIFETIME_ENERGY_CONSUMED>}
+
 ```
 
 <br><br>
@@ -20546,15 +20080,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/LifetimeEnergyCon
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OperationMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/OperationMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/OperationMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/OperationMode/Desired { "value": <DESIRED_OPERATION_MODE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/OperationMode/Reported { "value": <REPORTED_OPERATION_MODE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/OperationMode/Desired { "value": <DESIRED_OPERATION_MODE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/OperationMode/Reported { "value": <REPORTED_OPERATION_MODE>}
+
 ```
 
 <br><br>
@@ -20586,15 +20124,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/OperationMode/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ControlMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/ControlMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/ControlMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/ControlMode/Desired { "value": <DESIRED_CONTROL_MODE> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/ControlMode/Reported { "value": <REPORTED_CONTROL_MODE> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/ControlMode/Desired { "value": <DESIRED_CONTROL_MODE>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/ControlMode/Reported { "value": <REPORTED_CONTROL_MODE>}
+
 ```
 
 <br><br>
@@ -20626,15 +20168,19 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/ControlMode/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/AlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/AlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/PumpConfigurationAndControl/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -20671,7 +20217,7 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/AlarmMask/Reporte
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -20724,7 +20270,7 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Attributes/ClusterRevision/R
 
 To see supported commands for PumpConfigurationAndControl cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/SupportedCommands { "value": [] }
@@ -20732,8 +20278,7 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/SupportedCommands { "value":
 
 To see supported generated commands for PumpConfigurationAndControl cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/SupportedGeneratedCommands { "value": [] }
@@ -20791,11 +20336,12 @@ ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/SupportedGeneratedCommands {
 
 To update all PumpConfigurationAndControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Commands/WriteAttributes' -m  '{ "LifetimeRunningHours": <LIFETIME_RUNNING_HOURS_VALUE> ,"Power": <POWER_VALUE> ,"OperationMode": <OPERATION_MODE_VALUE> ,"ControlMode": <CONTROL_MODE_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -20858,13 +20404,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Commands/W
 
 To force read all PumpConfigurationAndControl attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the PumpConfigurationAndControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PumpConfigurationAndControl/Commands/ForceReadAttributes' -m  '{ "value": ["MaxPressure"] }'
 ```
 
@@ -20921,15 +20467,19 @@ The following attribute topics are used to retrieve the Thermostat cluster state
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LocalTemperature attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperature/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/LocalTemperature/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperature/Desired { "value": <DESIRED_LOCAL_TEMPERATURE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperature/Reported { "value": <REPORTED_LOCAL_TEMPERATURE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/LocalTemperature/Desired { "value": <DESIRED_LOCAL_TEMPERATURE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/LocalTemperature/Reported { "value": <REPORTED_LOCAL_TEMPERATURE>}
+
 ```
 
 <br><br>
@@ -20961,15 +20511,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperature/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OutdoorTemperature attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OutdoorTemperature/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/OutdoorTemperature/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OutdoorTemperature/Desired { "value": <DESIRED_OUTDOOR_TEMPERATURE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OutdoorTemperature/Reported { "value": <REPORTED_OUTDOOR_TEMPERATURE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OutdoorTemperature/Desired { "value": <DESIRED_OUTDOOR_TEMPERATURE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OutdoorTemperature/Reported { "value": <REPORTED_OUTDOOR_TEMPERATURE>}
+
 ```
 
 <br><br>
@@ -21001,15 +20555,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OutdoorTemperature/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Occupancy attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/Occupancy/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/Occupancy/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/Occupancy/Desired { "value": <DESIRED_OCCUPANCY> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/Occupancy/Reported { "value": <REPORTED_OCCUPANCY> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/Occupancy/Desired { "value": <DESIRED_OCCUPANCY>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/Occupancy/Reported { "value": <REPORTED_OCCUPANCY>}
+
 ```
 
 <br><br>
@@ -21041,15 +20599,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/Occupancy/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AbsMinHeatSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinHeatSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/AbsMinHeatSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinHeatSetpointLimit/Desired { "value": <DESIRED_ABS_MIN_HEAT_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinHeatSetpointLimit/Reported { "value": <REPORTED_ABS_MIN_HEAT_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMinHeatSetpointLimit/Desired { "value": <DESIRED_ABS_MIN_HEAT_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMinHeatSetpointLimit/Reported { "value": <REPORTED_ABS_MIN_HEAT_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21081,15 +20643,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinHeatSetpointLimit/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AbsMaxHeatSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxHeatSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/AbsMaxHeatSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Desired { "value": <DESIRED_ABS_MAX_HEAT_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Reported { "value": <REPORTED_ABS_MAX_HEAT_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Desired { "value": <DESIRED_ABS_MAX_HEAT_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Reported { "value": <REPORTED_ABS_MAX_HEAT_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21121,15 +20687,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxHeatSetpointLimit/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AbsMinCoolSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinCoolSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/AbsMinCoolSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinCoolSetpointLimit/Desired { "value": <DESIRED_ABS_MIN_COOL_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinCoolSetpointLimit/Reported { "value": <REPORTED_ABS_MIN_COOL_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMinCoolSetpointLimit/Desired { "value": <DESIRED_ABS_MIN_COOL_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMinCoolSetpointLimit/Reported { "value": <REPORTED_ABS_MIN_COOL_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21161,15 +20731,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMinCoolSetpointLimit/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AbsMaxCoolSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxCoolSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/AbsMaxCoolSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Desired { "value": <DESIRED_ABS_MAX_COOL_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Reported { "value": <REPORTED_ABS_MAX_COOL_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Desired { "value": <DESIRED_ABS_MAX_COOL_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Reported { "value": <REPORTED_ABS_MAX_COOL_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21201,15 +20775,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AbsMaxCoolSetpointLimit/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PICoolingDemand attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PICoolingDemand/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/PICoolingDemand/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PICoolingDemand/Desired { "value": <DESIRED_PI_COOLING_DEMAND> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PICoolingDemand/Reported { "value": <REPORTED_PI_COOLING_DEMAND> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/PICoolingDemand/Desired { "value": <DESIRED_PI_COOLING_DEMAND>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/PICoolingDemand/Reported { "value": <REPORTED_PI_COOLING_DEMAND>}
+
 ```
 
 <br><br>
@@ -21241,15 +20819,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PICoolingDemand/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PIHeatingDemand attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PIHeatingDemand/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/PIHeatingDemand/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PIHeatingDemand/Desired { "value": <DESIRED_PI_HEATING_DEMAND> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PIHeatingDemand/Reported { "value": <REPORTED_PI_HEATING_DEMAND> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/PIHeatingDemand/Desired { "value": <DESIRED_PI_HEATING_DEMAND>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/PIHeatingDemand/Reported { "value": <REPORTED_PI_HEATING_DEMAND>}
+
 ```
 
 <br><br>
@@ -21281,15 +20863,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/PIHeatingDemand/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for HVACSystemTypeConfiguration attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/HVACSystemTypeConfiguration/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/HVACSystemTypeConfiguration/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/HVACSystemTypeConfiguration/Desired { "value": <DESIRED_HVAC_SYSTEM_TYPE_CONFIGURATION> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/HVACSystemTypeConfiguration/Reported { "value": <REPORTED_HVAC_SYSTEM_TYPE_CONFIGURATION> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/HVACSystemTypeConfiguration/Desired { "value": <DESIRED_HVAC_SYSTEM_TYPE_CONFIGURATION>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/HVACSystemTypeConfiguration/Reported { "value": <REPORTED_HVAC_SYSTEM_TYPE_CONFIGURATION>}
+
 ```
 
 <br><br>
@@ -21321,15 +20907,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/HVACSystemTypeConfiguration/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LocalTemperatureCalibration attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperatureCalibration/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/LocalTemperatureCalibration/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperatureCalibration/Desired { "value": <DESIRED_LOCAL_TEMPERATURE_CALIBRATION> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperatureCalibration/Reported { "value": <REPORTED_LOCAL_TEMPERATURE_CALIBRATION> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/LocalTemperatureCalibration/Desired { "value": <DESIRED_LOCAL_TEMPERATURE_CALIBRATION>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/LocalTemperatureCalibration/Reported { "value": <REPORTED_LOCAL_TEMPERATURE_CALIBRATION>}
+
 ```
 
 <br><br>
@@ -21361,15 +20951,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/LocalTemperatureCalibration/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OccupiedCoolingSetpoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedCoolingSetpoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/OccupiedCoolingSetpoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired { "value": <DESIRED_OCCUPIED_COOLING_SETPOINT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported { "value": <REPORTED_OCCUPIED_COOLING_SETPOINT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired { "value": <DESIRED_OCCUPIED_COOLING_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported { "value": <REPORTED_OCCUPIED_COOLING_SETPOINT>}
+
 ```
 
 <br><br>
@@ -21401,15 +20995,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OccupiedHeatingSetpoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedHeatingSetpoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/OccupiedHeatingSetpoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired { "value": <DESIRED_OCCUPIED_HEATING_SETPOINT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported { "value": <REPORTED_OCCUPIED_HEATING_SETPOINT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired { "value": <DESIRED_OCCUPIED_HEATING_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported { "value": <REPORTED_OCCUPIED_HEATING_SETPOINT>}
+
 ```
 
 <br><br>
@@ -21441,15 +21039,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UnoccupiedCoolingSetpoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedCoolingSetpoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedCoolingSetpoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Desired { "value": <DESIRED_UNOCCUPIED_COOLING_SETPOINT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Reported { "value": <REPORTED_UNOCCUPIED_COOLING_SETPOINT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Desired { "value": <DESIRED_UNOCCUPIED_COOLING_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Reported { "value": <REPORTED_UNOCCUPIED_COOLING_SETPOINT>}
+
 ```
 
 <br><br>
@@ -21481,15 +21083,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedCoolingSetpoint/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UnoccupiedHeatingSetpoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedHeatingSetpoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedHeatingSetpoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Desired { "value": <DESIRED_UNOCCUPIED_HEATING_SETPOINT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Reported { "value": <REPORTED_UNOCCUPIED_HEATING_SETPOINT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Desired { "value": <DESIRED_UNOCCUPIED_HEATING_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Reported { "value": <REPORTED_UNOCCUPIED_HEATING_SETPOINT>}
+
 ```
 
 <br><br>
@@ -21521,15 +21127,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedHeatingSetpoint/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinHeatSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinHeatSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/MinHeatSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinHeatSetpointLimit/Desired { "value": <DESIRED_MIN_HEAT_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinHeatSetpointLimit/Reported { "value": <REPORTED_MIN_HEAT_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MinHeatSetpointLimit/Desired { "value": <DESIRED_MIN_HEAT_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MinHeatSetpointLimit/Reported { "value": <REPORTED_MIN_HEAT_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21561,15 +21171,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinHeatSetpointLimit/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxHeatSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxHeatSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/MaxHeatSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxHeatSetpointLimit/Desired { "value": <DESIRED_MAX_HEAT_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxHeatSetpointLimit/Reported { "value": <REPORTED_MAX_HEAT_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MaxHeatSetpointLimit/Desired { "value": <DESIRED_MAX_HEAT_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MaxHeatSetpointLimit/Reported { "value": <REPORTED_MAX_HEAT_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21601,15 +21215,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxHeatSetpointLimit/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinCoolSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinCoolSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/MinCoolSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinCoolSetpointLimit/Desired { "value": <DESIRED_MIN_COOL_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinCoolSetpointLimit/Reported { "value": <REPORTED_MIN_COOL_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MinCoolSetpointLimit/Desired { "value": <DESIRED_MIN_COOL_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MinCoolSetpointLimit/Reported { "value": <REPORTED_MIN_COOL_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21641,15 +21259,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinCoolSetpointLimit/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxCoolSetpointLimit attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxCoolSetpointLimit/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/MaxCoolSetpointLimit/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxCoolSetpointLimit/Desired { "value": <DESIRED_MAX_COOL_SETPOINT_LIMIT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxCoolSetpointLimit/Reported { "value": <REPORTED_MAX_COOL_SETPOINT_LIMIT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MaxCoolSetpointLimit/Desired { "value": <DESIRED_MAX_COOL_SETPOINT_LIMIT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MaxCoolSetpointLimit/Reported { "value": <REPORTED_MAX_COOL_SETPOINT_LIMIT>}
+
 ```
 
 <br><br>
@@ -21681,15 +21303,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MaxCoolSetpointLimit/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinSetpointDeadBand attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinSetpointDeadBand/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/MinSetpointDeadBand/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinSetpointDeadBand/Desired { "value": <DESIRED_MIN_SETPOINT_DEAD_BAND> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinSetpointDeadBand/Reported { "value": <REPORTED_MIN_SETPOINT_DEAD_BAND> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MinSetpointDeadBand/Desired { "value": <DESIRED_MIN_SETPOINT_DEAD_BAND>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/MinSetpointDeadBand/Reported { "value": <REPORTED_MIN_SETPOINT_DEAD_BAND>}
+
 ```
 
 <br><br>
@@ -21721,15 +21347,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/MinSetpointDeadBand/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RemoteSensing attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/RemoteSensing/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/RemoteSensing/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/RemoteSensing/Desired { "value": <DESIRED_REMOTE_SENSING> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/RemoteSensing/Reported { "value": <REPORTED_REMOTE_SENSING> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/RemoteSensing/Desired { "value": <DESIRED_REMOTE_SENSING>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/RemoteSensing/Reported { "value": <REPORTED_REMOTE_SENSING>}
+
 ```
 
 <br><br>
@@ -21761,15 +21391,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/RemoteSensing/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ControlSequenceOfOperation attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ControlSequenceOfOperation/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ControlSequenceOfOperation/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ControlSequenceOfOperation/Desired { "value": <DESIRED_CONTROL_SEQUENCE_OF_OPERATION> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ControlSequenceOfOperation/Reported { "value": <REPORTED_CONTROL_SEQUENCE_OF_OPERATION> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Desired { "value": <DESIRED_CONTROL_SEQUENCE_OF_OPERATION>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Reported { "value": <REPORTED_CONTROL_SEQUENCE_OF_OPERATION>}
+
 ```
 
 <br><br>
@@ -21801,15 +21435,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ControlSequenceOfOperation/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SystemMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SystemMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/SystemMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SystemMode/Desired { "value": <DESIRED_SYSTEM_MODE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SystemMode/Reported { "value": <REPORTED_SYSTEM_MODE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SystemMode/Desired { "value": <DESIRED_SYSTEM_MODE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SystemMode/Reported { "value": <REPORTED_SYSTEM_MODE>}
+
 ```
 
 <br><br>
@@ -21841,15 +21479,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SystemMode/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AlarmMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AlarmMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/AlarmMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AlarmMask/Desired { "value": <DESIRED_ALARM_MASK>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/AlarmMask/Reported { "value": <REPORTED_ALARM_MASK>}
+
 ```
 
 <br><br>
@@ -21881,15 +21523,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/AlarmMask/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ThermostatRunningMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ThermostatRunningMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningMode/Desired { "value": <DESIRED_THERMOSTAT_RUNNING_MODE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningMode/Reported { "value": <REPORTED_THERMOSTAT_RUNNING_MODE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ThermostatRunningMode/Desired { "value": <DESIRED_THERMOSTAT_RUNNING_MODE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ThermostatRunningMode/Reported { "value": <REPORTED_THERMOSTAT_RUNNING_MODE>}
+
 ```
 
 <br><br>
@@ -21921,15 +21567,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningMode/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for StartOfWeek attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/StartOfWeek/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/StartOfWeek/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/StartOfWeek/Desired { "value": <DESIRED_START_OF_WEEK> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/StartOfWeek/Reported { "value": <REPORTED_START_OF_WEEK> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/StartOfWeek/Desired { "value": <DESIRED_START_OF_WEEK>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/StartOfWeek/Reported { "value": <REPORTED_START_OF_WEEK>}
+
 ```
 
 <br><br>
@@ -21961,15 +21611,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/StartOfWeek/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfWeeklyTransitions attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfWeeklyTransitions/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/NumberOfWeeklyTransitions/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfWeeklyTransitions/Desired { "value": <DESIRED_NUMBER_OF_WEEKLY_TRANSITIONS> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfWeeklyTransitions/Reported { "value": <REPORTED_NUMBER_OF_WEEKLY_TRANSITIONS> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/NumberOfWeeklyTransitions/Desired { "value": <DESIRED_NUMBER_OF_WEEKLY_TRANSITIONS>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/NumberOfWeeklyTransitions/Reported { "value": <REPORTED_NUMBER_OF_WEEKLY_TRANSITIONS>}
+
 ```
 
 <br><br>
@@ -22001,15 +21655,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfWeeklyTransitions/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfDailyTransitions attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfDailyTransitions/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/NumberOfDailyTransitions/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfDailyTransitions/Desired { "value": <DESIRED_NUMBER_OF_DAILY_TRANSITIONS> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfDailyTransitions/Reported { "value": <REPORTED_NUMBER_OF_DAILY_TRANSITIONS> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/NumberOfDailyTransitions/Desired { "value": <DESIRED_NUMBER_OF_DAILY_TRANSITIONS>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/NumberOfDailyTransitions/Reported { "value": <REPORTED_NUMBER_OF_DAILY_TRANSITIONS>}
+
 ```
 
 <br><br>
@@ -22041,15 +21699,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/NumberOfDailyTransitions/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TemperatureSetpointHold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/TemperatureSetpointHold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHold/Desired { "value": <DESIRED_TEMPERATURE_SETPOINT_HOLD> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHold/Reported { "value": <REPORTED_TEMPERATURE_SETPOINT_HOLD> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/TemperatureSetpointHold/Desired { "value": <DESIRED_TEMPERATURE_SETPOINT_HOLD>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/TemperatureSetpointHold/Reported { "value": <REPORTED_TEMPERATURE_SETPOINT_HOLD>}
+
 ```
 
 <br><br>
@@ -22081,15 +21743,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHold/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TemperatureSetpointHoldDuration attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHoldDuration/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/TemperatureSetpointHoldDuration/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHoldDuration/Desired { "value": <DESIRED_TEMPERATURE_SETPOINT_HOLD_DURATION> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHoldDuration/Reported { "value": <REPORTED_TEMPERATURE_SETPOINT_HOLD_DURATION> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/TemperatureSetpointHoldDuration/Desired { "value": <DESIRED_TEMPERATURE_SETPOINT_HOLD_DURATION>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/TemperatureSetpointHoldDuration/Reported { "value": <REPORTED_TEMPERATURE_SETPOINT_HOLD_DURATION>}
+
 ```
 
 <br><br>
@@ -22121,15 +21787,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/TemperatureSetpointHoldDuration/Re
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ThermostatProgrammingOperationMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatProgrammingOperationMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ThermostatProgrammingOperationMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired { "value": <DESIRED_THERMOSTAT_PROGRAMMING_OPERATION_MODE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported { "value": <REPORTED_THERMOSTAT_PROGRAMMING_OPERATION_MODE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired { "value": <DESIRED_THERMOSTAT_PROGRAMMING_OPERATION_MODE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported { "value": <REPORTED_THERMOSTAT_PROGRAMMING_OPERATION_MODE>}
+
 ```
 
 <br><br>
@@ -22161,15 +21831,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatProgrammingOperationMode
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ThermostatRunningState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ThermostatRunningState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningState/Desired { "value": <DESIRED_THERMOSTAT_RUNNING_STATE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningState/Reported { "value": <REPORTED_THERMOSTAT_RUNNING_STATE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ThermostatRunningState/Desired { "value": <DESIRED_THERMOSTAT_RUNNING_STATE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ThermostatRunningState/Reported { "value": <REPORTED_THERMOSTAT_RUNNING_STATE>}
+
 ```
 
 <br><br>
@@ -22201,15 +21875,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ThermostatRunningState/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SetpointChangeSource attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSource/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/SetpointChangeSource/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSource/Desired { "value": <DESIRED_SETPOINT_CHANGE_SOURCE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSource/Reported { "value": <REPORTED_SETPOINT_CHANGE_SOURCE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SetpointChangeSource/Desired { "value": <DESIRED_SETPOINT_CHANGE_SOURCE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SetpointChangeSource/Reported { "value": <REPORTED_SETPOINT_CHANGE_SOURCE>}
+
 ```
 
 <br><br>
@@ -22241,15 +21919,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSource/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SetpointChangeAmount attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeAmount/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/SetpointChangeAmount/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeAmount/Desired { "value": <DESIRED_SETPOINT_CHANGE_AMOUNT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeAmount/Reported { "value": <REPORTED_SETPOINT_CHANGE_AMOUNT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SetpointChangeAmount/Desired { "value": <DESIRED_SETPOINT_CHANGE_AMOUNT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SetpointChangeAmount/Reported { "value": <REPORTED_SETPOINT_CHANGE_AMOUNT>}
+
 ```
 
 <br><br>
@@ -22281,15 +21963,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeAmount/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SetpointChangeSourceTimestamp attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSourceTimestamp/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/SetpointChangeSourceTimestamp/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSourceTimestamp/Desired { "value": <DESIRED_SETPOINT_CHANGE_SOURCE_TIMESTAMP> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSourceTimestamp/Reported { "value": <REPORTED_SETPOINT_CHANGE_SOURCE_TIMESTAMP> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SetpointChangeSourceTimestamp/Desired { "value": <DESIRED_SETPOINT_CHANGE_SOURCE_TIMESTAMP>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SetpointChangeSourceTimestamp/Reported { "value": <REPORTED_SETPOINT_CHANGE_SOURCE_TIMESTAMP>}
+
 ```
 
 <br><br>
@@ -22321,15 +22007,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/SetpointChangeSourceTimestamp/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OccupiedSetback attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetback/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/OccupiedSetback/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetback/Desired { "value": <DESIRED_OCCUPIED_SETBACK> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetback/Reported { "value": <REPORTED_OCCUPIED_SETBACK> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedSetback/Desired { "value": <DESIRED_OCCUPIED_SETBACK>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedSetback/Reported { "value": <REPORTED_OCCUPIED_SETBACK>}
+
 ```
 
 <br><br>
@@ -22361,15 +22051,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetback/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OccupiedSetbackMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/OccupiedSetbackMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMin/Desired { "value": <DESIRED_OCCUPIED_SETBACK_MIN> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMin/Reported { "value": <REPORTED_OCCUPIED_SETBACK_MIN> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedSetbackMin/Desired { "value": <DESIRED_OCCUPIED_SETBACK_MIN>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedSetbackMin/Reported { "value": <REPORTED_OCCUPIED_SETBACK_MIN>}
+
 ```
 
 <br><br>
@@ -22401,15 +22095,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMin/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OccupiedSetbackMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/OccupiedSetbackMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMax/Desired { "value": <DESIRED_OCCUPIED_SETBACK_MAX> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMax/Reported { "value": <REPORTED_OCCUPIED_SETBACK_MAX> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedSetbackMax/Desired { "value": <DESIRED_OCCUPIED_SETBACK_MAX>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/OccupiedSetbackMax/Reported { "value": <REPORTED_OCCUPIED_SETBACK_MAX>}
+
 ```
 
 <br><br>
@@ -22441,15 +22139,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/OccupiedSetbackMax/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UnoccupiedSetback attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetback/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedSetback/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetback/Desired { "value": <DESIRED_UNOCCUPIED_SETBACK> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetback/Reported { "value": <REPORTED_UNOCCUPIED_SETBACK> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedSetback/Desired { "value": <DESIRED_UNOCCUPIED_SETBACK>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedSetback/Reported { "value": <REPORTED_UNOCCUPIED_SETBACK>}
+
 ```
 
 <br><br>
@@ -22481,15 +22183,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetback/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UnoccupiedSetbackMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedSetbackMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMin/Desired { "value": <DESIRED_UNOCCUPIED_SETBACK_MIN> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMin/Reported { "value": <REPORTED_UNOCCUPIED_SETBACK_MIN> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedSetbackMin/Desired { "value": <DESIRED_UNOCCUPIED_SETBACK_MIN>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedSetbackMin/Reported { "value": <REPORTED_UNOCCUPIED_SETBACK_MIN>}
+
 ```
 
 <br><br>
@@ -22521,15 +22227,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMin/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UnoccupiedSetbackMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/UnoccupiedSetbackMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMax/Desired { "value": <DESIRED_UNOCCUPIED_SETBACK_MAX> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMax/Reported { "value": <REPORTED_UNOCCUPIED_SETBACK_MAX> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedSetbackMax/Desired { "value": <DESIRED_UNOCCUPIED_SETBACK_MAX>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/UnoccupiedSetbackMax/Reported { "value": <REPORTED_UNOCCUPIED_SETBACK_MAX>}
+
 ```
 
 <br><br>
@@ -22561,15 +22271,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/UnoccupiedSetbackMax/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EmergencyHeatDelta attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/EmergencyHeatDelta/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/EmergencyHeatDelta/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/EmergencyHeatDelta/Desired { "value": <DESIRED_EMERGENCY_HEAT_DELTA> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/EmergencyHeatDelta/Reported { "value": <REPORTED_EMERGENCY_HEAT_DELTA> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/EmergencyHeatDelta/Desired { "value": <DESIRED_EMERGENCY_HEAT_DELTA>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/EmergencyHeatDelta/Reported { "value": <REPORTED_EMERGENCY_HEAT_DELTA>}
+
 ```
 
 <br><br>
@@ -22601,15 +22315,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/EmergencyHeatDelta/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACType/Desired { "value": <DESIRED_AC_TYPE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACType/Reported { "value": <REPORTED_AC_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACType/Desired { "value": <DESIRED_AC_TYPE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACType/Reported { "value": <REPORTED_AC_TYPE>}
+
 ```
 
 <br><br>
@@ -22641,15 +22359,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACType/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACCapacity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACCapacity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacity/Desired { "value": <DESIRED_AC_CAPACITY> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacity/Reported { "value": <REPORTED_AC_CAPACITY> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCapacity/Desired { "value": <DESIRED_AC_CAPACITY>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCapacity/Reported { "value": <REPORTED_AC_CAPACITY>}
+
 ```
 
 <br><br>
@@ -22681,15 +22403,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacity/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACRefrigerantType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACRefrigerantType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACRefrigerantType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACRefrigerantType/Desired { "value": <DESIRED_AC_REFRIGERANT_TYPE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACRefrigerantType/Reported { "value": <REPORTED_AC_REFRIGERANT_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACRefrigerantType/Desired { "value": <DESIRED_AC_REFRIGERANT_TYPE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACRefrigerantType/Reported { "value": <REPORTED_AC_REFRIGERANT_TYPE>}
+
 ```
 
 <br><br>
@@ -22721,15 +22447,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACRefrigerantType/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACCompressorType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCompressorType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACCompressorType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCompressorType/Desired { "value": <DESIRED_AC_COMPRESSOR_TYPE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCompressorType/Reported { "value": <REPORTED_AC_COMPRESSOR_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCompressorType/Desired { "value": <DESIRED_AC_COMPRESSOR_TYPE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCompressorType/Reported { "value": <REPORTED_AC_COMPRESSOR_TYPE>}
+
 ```
 
 <br><br>
@@ -22761,15 +22491,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCompressorType/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACErrorCode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACErrorCode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACErrorCode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACErrorCode/Desired { "value": <DESIRED_AC_ERROR_CODE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACErrorCode/Reported { "value": <REPORTED_AC_ERROR_CODE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACErrorCode/Desired { "value": <DESIRED_AC_ERROR_CODE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACErrorCode/Reported { "value": <REPORTED_AC_ERROR_CODE>}
+
 ```
 
 <br><br>
@@ -22801,15 +22535,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACErrorCode/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACLouverPosition attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACLouverPosition/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACLouverPosition/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACLouverPosition/Desired { "value": <DESIRED_AC_LOUVER_POSITION> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACLouverPosition/Reported { "value": <REPORTED_AC_LOUVER_POSITION> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACLouverPosition/Desired { "value": <DESIRED_AC_LOUVER_POSITION>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACLouverPosition/Reported { "value": <REPORTED_AC_LOUVER_POSITION>}
+
 ```
 
 <br><br>
@@ -22841,15 +22579,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACLouverPosition/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACCoilTemperature attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCoilTemperature/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACCoilTemperature/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCoilTemperature/Desired { "value": <DESIRED_AC_COIL_TEMPERATURE> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCoilTemperature/Reported { "value": <REPORTED_AC_COIL_TEMPERATURE> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCoilTemperature/Desired { "value": <DESIRED_AC_COIL_TEMPERATURE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCoilTemperature/Reported { "value": <REPORTED_AC_COIL_TEMPERATURE>}
+
 ```
 
 <br><br>
@@ -22881,15 +22623,19 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCoilTemperature/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACCapacityFormat attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacityFormat/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/ACCapacityFormat/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacityFormat/Desired { "value": <DESIRED_AC_CAPACITY_FORMAT> }
-ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacityFormat/Reported { "value": <REPORTED_AC_CAPACITY_FORMAT> }
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCapacityFormat/Desired { "value": <DESIRED_AC_CAPACITY_FORMAT>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCapacityFormat/Reported { "value": <REPORTED_AC_CAPACITY_FORMAT>}
+
 ```
 
 <br><br>
@@ -22926,7 +22672,7 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ACCapacityFormat/Reported { "value
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -22988,7 +22734,7 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/Attributes/ClusterRevision/Reported { "value"
 
 To see supported commands for Thermostat cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Thermostat/SupportedCommands { "value": ["SetpointRaiseOrLower","SetWeeklySchedule","GetWeeklySchedule","ClearWeeklySchedule","GetRelayStatusLog","WriteAttributes", "ForceReadAttributes"] }
@@ -22996,8 +22742,7 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/SupportedCommands { "value": ["SetpointRaiseO
 
 To see supported generated commands for Thermostat cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Thermostat/SupportedGeneratedCommands { "value": ["GetWeeklyScheduleResponse","GetRelayStatusLogResponse",] }
@@ -23051,13 +22796,13 @@ ucl/by-unid/<UNID>/<EP>/Thermostat/SupportedGeneratedCommands { "value": ["GetWe
 
 To send a Thermostat/SetpointRaiseOrLower command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/SetpointRaiseOrLower' -m  '{ "Mode": <MODE_VALUE>,"Amount": <AMOUNT_VALUE> }'
 ```
 
 To receive a Thermostat/SetpointRaiseOrLower generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/SetpointRaiseOrLower'
 ```
 
@@ -23109,13 +22854,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/SetpointR
 
 To send a Thermostat/GetWeeklyScheduleResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/GetWeeklyScheduleResponse' -m  '{ "NumberOfTransitions": <NUMBER_OF_TRANSITIONS_VALUE>,"DayOfWeek": <DAY_OF_WEEK_VALUE>,"Mode": <MODE_VALUE>,"Transitions": <TRANSITIONS_VALUE> }'
 ```
 
 To receive a Thermostat/GetWeeklyScheduleResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetWeeklyScheduleResponse'
 ```
 
@@ -23167,13 +22912,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetWeekly
 
 To send a Thermostat/SetWeeklySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/SetWeeklySchedule' -m  '{ "NumberOfTransitions": <NUMBER_OF_TRANSITIONS_VALUE>,"DayOfWeek": <DAY_OF_WEEK_VALUE>,"Mode": <MODE_VALUE>,"Transitions": <TRANSITIONS_VALUE> }'
 ```
 
 To receive a Thermostat/SetWeeklySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/SetWeeklySchedule'
 ```
 
@@ -23230,13 +22975,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/SetWeekly
 
 To send a Thermostat/GetRelayStatusLogResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/GetRelayStatusLogResponse' -m  '{ "TimeOfDay": <TIME_OF_DAY_VALUE>,"RelayStatus": <RELAY_STATUS_VALUE>,"LocalTemperature": <LOCAL_TEMPERATURE_VALUE>,"HumidityPercentage": <HUMIDITY_PERCENTAGE_VALUE>,"SetPoint": <SET_POINT_VALUE>,"UnreadEntries": <UNREAD_ENTRIES_VALUE> }'
 ```
 
 To receive a Thermostat/GetRelayStatusLogResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetRelayStatusLogResponse'
 ```
 
@@ -23277,13 +23022,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetRelayS
 
 To send a Thermostat/GetWeeklySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/GetWeeklySchedule' -m  '{ "DaysToReturn": <DAYS_TO_RETURN_VALUE>,"ModeToReturn": <MODE_TO_RETURN_VALUE> }'
 ```
 
 To receive a Thermostat/GetWeeklySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetWeeklySchedule'
 ```
 
@@ -23316,13 +23061,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetWeekly
 
 To send a Thermostat/ClearWeeklySchedule command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/ClearWeeklySchedule' -m  '{  }'
 ```
 
 To receive a Thermostat/ClearWeeklySchedule generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/ClearWeeklySchedule'
 ```
 
@@ -23355,13 +23100,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/ClearWeek
 
 To send a Thermostat/GetRelayStatusLog command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/GetRelayStatusLog' -m  '{  }'
 ```
 
 To receive a Thermostat/GetRelayStatusLog generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetRelayStatusLog'
 ```
 
@@ -23475,11 +23220,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetRelayS
 
 To update all Thermostat attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/WriteAttributes' -m  '{ "HVACSystemTypeConfiguration": <HVAC_SYSTEM_TYPE_CONFIGURATION_VALUE> ,"LocalTemperatureCalibration": <LOCAL_TEMPERATURE_CALIBRATION_VALUE> ,"OccupiedCoolingSetpoint": <OCCUPIED_COOLING_SETPOINT_VALUE> ,"OccupiedHeatingSetpoint": <OCCUPIED_HEATING_SETPOINT_VALUE> ,"UnoccupiedCoolingSetpoint": <UNOCCUPIED_COOLING_SETPOINT_VALUE> ,"UnoccupiedHeatingSetpoint": <UNOCCUPIED_HEATING_SETPOINT_VALUE> ,"MinHeatSetpointLimit": <MIN_HEAT_SETPOINT_LIMIT_VALUE> ,"MaxHeatSetpointLimit": <MAX_HEAT_SETPOINT_LIMIT_VALUE> ,"MinCoolSetpointLimit": <MIN_COOL_SETPOINT_LIMIT_VALUE> ,"MaxCoolSetpointLimit": <MAX_COOL_SETPOINT_LIMIT_VALUE> ,"MinSetpointDeadBand": <MIN_SETPOINT_DEAD_BAND_VALUE> ,"RemoteSensing": <REMOTE_SENSING_VALUE> ,"ControlSequenceOfOperation": <CONTROL_SEQUENCE_OF_OPERATION_VALUE> ,"SystemMode": <SYSTEM_MODE_VALUE> ,"TemperatureSetpointHold": <TEMPERATURE_SETPOINT_HOLD_VALUE> ,"TemperatureSetpointHoldDuration": <TEMPERATURE_SETPOINT_HOLD_DURATION_VALUE> ,"ThermostatProgrammingOperationMode": <THERMOSTAT_PROGRAMMING_OPERATION_MODE_VALUE> ,"OccupiedSetback": <OCCUPIED_SETBACK_VALUE> ,"UnoccupiedSetback": <UNOCCUPIED_SETBACK_VALUE> ,"EmergencyHeatDelta": <EMERGENCY_HEAT_DELTA_VALUE> ,"ACType": <AC_TYPE_VALUE> ,"ACCapacity": <AC_CAPACITY_VALUE> ,"ACRefrigerantType": <AC_REFRIGERANT_TYPE_VALUE> ,"ACCompressorType": <AC_COMPRESSOR_TYPE_VALUE> ,"ACErrorCode": <AC_ERROR_CODE_VALUE> ,"ACLouverPosition": <AC_LOUVER_POSITION_VALUE> ,"ACCapacityFormat": <AC_CAPACITY_FORMAT_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -23568,13 +23314,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/WriteAttributes' -
 
 To force read all Thermostat attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Thermostat attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/ForceReadAttributes' -m  '{ "value": ["LocalTemperature"] }'
 ```
 
@@ -23631,15 +23377,19 @@ The following attribute topics are used to retrieve the FanControl cluster state
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for FanMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FanControl/Attributes/FanMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanMode/Desired { "value": <DESIRED_FAN_MODE> }
-ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanMode/Reported { "value": <REPORTED_FAN_MODE> }
+
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/FanMode/Desired { "value": <DESIRED_FAN_MODE>}
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/FanMode/Reported { "value": <REPORTED_FAN_MODE>}
+
 ```
 
 <br><br>
@@ -23671,15 +23421,19 @@ ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanMode/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for FanModeSequence attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanModeSequence/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FanControl/Attributes/FanModeSequence/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanModeSequence/Desired { "value": <DESIRED_FAN_MODE_SEQUENCE> }
-ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanModeSequence/Reported { "value": <REPORTED_FAN_MODE_SEQUENCE> }
+
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/FanModeSequence/Desired { "value": <DESIRED_FAN_MODE_SEQUENCE>}
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/FanModeSequence/Reported { "value": <REPORTED_FAN_MODE_SEQUENCE>}
+
 ```
 
 <br><br>
@@ -23716,7 +23470,7 @@ ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/FanModeSequence/Reported { "value"
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -23769,7 +23523,7 @@ ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/ClusterRevision/Reported { "value"
 
 To see supported commands for FanControl cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/FanControl/SupportedCommands { "value": [] }
@@ -23777,8 +23531,7 @@ ucl/by-unid/<UNID>/<EP>/FanControl/SupportedCommands { "value": [] }
 
 To see supported generated commands for FanControl cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/FanControl/SupportedGeneratedCommands { "value": [] }
@@ -23830,11 +23583,12 @@ ucl/by-unid/<UNID>/<EP>/FanControl/SupportedGeneratedCommands { "value": [] }
 
 To update all FanControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/WriteAttributes' -m  '{ "FanMode": <FAN_MODE_VALUE> ,"FanModeSequence": <FAN_MODE_SEQUENCE_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -23875,13 +23629,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/WriteAttributes' -
 
 To force read all FanControl attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the FanControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/ForceReadAttributes' -m  '{ "value": ["FanMode"] }'
 ```
 
@@ -23938,15 +23692,19 @@ The following attribute topics are used to retrieve the DehumidificationControl 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RelativeHumidity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/RelativeHumidity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidity/Desired { "value": <DESIRED_RELATIVE_HUMIDITY> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidity/Reported { "value": <REPORTED_RELATIVE_HUMIDITY> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RelativeHumidity/Desired { "value": <DESIRED_RELATIVE_HUMIDITY>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RelativeHumidity/Reported { "value": <REPORTED_RELATIVE_HUMIDITY>}
+
 ```
 
 <br><br>
@@ -23978,15 +23736,19 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidity/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DehumidificationCooling attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationCooling/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/DehumidificationCooling/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationCooling/Desired { "value": <DESIRED_DEHUMIDIFICATION_COOLING> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationCooling/Reported { "value": <REPORTED_DEHUMIDIFICATION_COOLING> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationCooling/Desired { "value": <DESIRED_DEHUMIDIFICATION_COOLING>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationCooling/Reported { "value": <REPORTED_DEHUMIDIFICATION_COOLING>}
+
 ```
 
 <br><br>
@@ -24018,15 +23780,19 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationCooli
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RHDehumidificationSetpoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RHDehumidificationSetpoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/RHDehumidificationSetpoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RHDehumidificationSetpoint/Desired { "value": <DESIRED_RH_DEHUMIDIFICATION_SETPOINT> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RHDehumidificationSetpoint/Reported { "value": <REPORTED_RH_DEHUMIDIFICATION_SETPOINT> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RHDehumidificationSetpoint/Desired { "value": <DESIRED_RH_DEHUMIDIFICATION_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RHDehumidificationSetpoint/Reported { "value": <REPORTED_RH_DEHUMIDIFICATION_SETPOINT>}
+
 ```
 
 <br><br>
@@ -24058,15 +23824,19 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RHDehumidificationSet
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RelativeHumidityMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/RelativeHumidityMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityMode/Desired { "value": <DESIRED_RELATIVE_HUMIDITY_MODE> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityMode/Reported { "value": <REPORTED_RELATIVE_HUMIDITY_MODE> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RelativeHumidityMode/Desired { "value": <DESIRED_RELATIVE_HUMIDITY_MODE>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RelativeHumidityMode/Reported { "value": <REPORTED_RELATIVE_HUMIDITY_MODE>}
+
 ```
 
 <br><br>
@@ -24098,15 +23868,19 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityMode/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DehumidificationLockout attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationLockout/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/DehumidificationLockout/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationLockout/Desired { "value": <DESIRED_DEHUMIDIFICATION_LOCKOUT> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationLockout/Reported { "value": <REPORTED_DEHUMIDIFICATION_LOCKOUT> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationLockout/Desired { "value": <DESIRED_DEHUMIDIFICATION_LOCKOUT>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationLockout/Reported { "value": <REPORTED_DEHUMIDIFICATION_LOCKOUT>}
+
 ```
 
 <br><br>
@@ -24138,15 +23912,19 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationLocko
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DehumidificationHysteresis attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationHysteresis/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/DehumidificationHysteresis/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationHysteresis/Desired { "value": <DESIRED_DEHUMIDIFICATION_HYSTERESIS> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationHysteresis/Reported { "value": <REPORTED_DEHUMIDIFICATION_HYSTERESIS> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationHysteresis/Desired { "value": <DESIRED_DEHUMIDIFICATION_HYSTERESIS>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationHysteresis/Reported { "value": <REPORTED_DEHUMIDIFICATION_HYSTERESIS>}
+
 ```
 
 <br><br>
@@ -24178,15 +23956,19 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationHyste
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DehumidificationMaxCool attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationMaxCool/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/DehumidificationMaxCool/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationMaxCool/Desired { "value": <DESIRED_DEHUMIDIFICATION_MAX_COOL> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationMaxCool/Reported { "value": <REPORTED_DEHUMIDIFICATION_MAX_COOL> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationMaxCool/Desired { "value": <DESIRED_DEHUMIDIFICATION_MAX_COOL>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/DehumidificationMaxCool/Reported { "value": <REPORTED_DEHUMIDIFICATION_MAX_COOL>}
+
 ```
 
 <br><br>
@@ -24218,15 +24000,19 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/DehumidificationMaxCo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RelativeHumidityDisplay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityDisplay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/DehumidificationControl/Attributes/RelativeHumidityDisplay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityDisplay/Desired { "value": <DESIRED_RELATIVE_HUMIDITY_DISPLAY> }
-ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityDisplay/Reported { "value": <REPORTED_RELATIVE_HUMIDITY_DISPLAY> }
+
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RelativeHumidityDisplay/Desired { "value": <DESIRED_RELATIVE_HUMIDITY_DISPLAY>}
+ucl/by-unid/<UNID>/ep0/DehumidificationControl/Attributes/RelativeHumidityDisplay/Reported { "value": <REPORTED_RELATIVE_HUMIDITY_DISPLAY>}
+
 ```
 
 <br><br>
@@ -24263,7 +24049,7 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/RelativeHumidityDispl
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -24316,7 +24102,7 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Attributes/ClusterRevision/Repor
 
 To see supported commands for DehumidificationControl cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DehumidificationControl/SupportedCommands { "value": [] }
@@ -24324,8 +24110,7 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/SupportedCommands { "value": [] 
 
 To see supported generated commands for DehumidificationControl cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/DehumidificationControl/SupportedGeneratedCommands { "value": [] }
@@ -24389,11 +24174,12 @@ ucl/by-unid/<UNID>/<EP>/DehumidificationControl/SupportedGeneratedCommands { "va
 
 To update all DehumidificationControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Commands/WriteAttributes' -m  '{ "RHDehumidificationSetpoint": <RH_DEHUMIDIFICATION_SETPOINT_VALUE> ,"RelativeHumidityMode": <RELATIVE_HUMIDITY_MODE_VALUE> ,"DehumidificationLockout": <DEHUMIDIFICATION_LOCKOUT_VALUE> ,"DehumidificationHysteresis": <DEHUMIDIFICATION_HYSTERESIS_VALUE> ,"DehumidificationMaxCool": <DEHUMIDIFICATION_MAX_COOL_VALUE> ,"RelativeHumidityDisplay": <RELATIVE_HUMIDITY_DISPLAY_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -24440,13 +24226,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Commands/Write
 
 To force read all DehumidificationControl attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the DehumidificationControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DehumidificationControl/Commands/ForceReadAttributes' -m  '{ "value": ["RelativeHumidity"] }'
 ```
 
@@ -24503,15 +24289,19 @@ The following attribute topics are used to retrieve the ThermostatUserInterfaceC
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TemperatureDisplayMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/TemperatureDisplayMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ThermostatUserInterfaceConfiguration/Attributes/TemperatureDisplayMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/TemperatureDisplayMode/Desired { "value": <DESIRED_TEMPERATURE_DISPLAY_MODE> }
-ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/TemperatureDisplayMode/Reported { "value": <REPORTED_TEMPERATURE_DISPLAY_MODE> }
+
+ucl/by-unid/<UNID>/ep0/ThermostatUserInterfaceConfiguration/Attributes/TemperatureDisplayMode/Desired { "value": <DESIRED_TEMPERATURE_DISPLAY_MODE>}
+ucl/by-unid/<UNID>/ep0/ThermostatUserInterfaceConfiguration/Attributes/TemperatureDisplayMode/Reported { "value": <REPORTED_TEMPERATURE_DISPLAY_MODE>}
+
 ```
 
 <br><br>
@@ -24543,15 +24333,19 @@ ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/Temperat
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for KeypadLockout attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/KeypadLockout/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ThermostatUserInterfaceConfiguration/Attributes/KeypadLockout/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/KeypadLockout/Desired { "value": <DESIRED_KEYPAD_LOCKOUT> }
-ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/KeypadLockout/Reported { "value": <REPORTED_KEYPAD_LOCKOUT> }
+
+ucl/by-unid/<UNID>/ep0/ThermostatUserInterfaceConfiguration/Attributes/KeypadLockout/Desired { "value": <DESIRED_KEYPAD_LOCKOUT>}
+ucl/by-unid/<UNID>/ep0/ThermostatUserInterfaceConfiguration/Attributes/KeypadLockout/Reported { "value": <REPORTED_KEYPAD_LOCKOUT>}
+
 ```
 
 <br><br>
@@ -24583,15 +24377,19 @@ ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/KeypadLo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ScheduleProgrammingVisibility attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/ScheduleProgrammingVisibility/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ThermostatUserInterfaceConfiguration/Attributes/ScheduleProgrammingVisibility/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/ScheduleProgrammingVisibility/Desired { "value": <DESIRED_SCHEDULE_PROGRAMMING_VISIBILITY> }
-ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/ScheduleProgrammingVisibility/Reported { "value": <REPORTED_SCHEDULE_PROGRAMMING_VISIBILITY> }
+
+ucl/by-unid/<UNID>/ep0/ThermostatUserInterfaceConfiguration/Attributes/ScheduleProgrammingVisibility/Desired { "value": <DESIRED_SCHEDULE_PROGRAMMING_VISIBILITY>}
+ucl/by-unid/<UNID>/ep0/ThermostatUserInterfaceConfiguration/Attributes/ScheduleProgrammingVisibility/Reported { "value": <REPORTED_SCHEDULE_PROGRAMMING_VISIBILITY>}
+
 ```
 
 <br><br>
@@ -24628,7 +24426,7 @@ ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/Schedule
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -24681,7 +24479,7 @@ ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Attributes/ClusterR
 
 To see supported commands for ThermostatUserInterfaceConfiguration cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/SupportedCommands { "value": [] }
@@ -24689,8 +24487,7 @@ ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/SupportedCommands {
 
 To see supported generated commands for ThermostatUserInterfaceConfiguration cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/SupportedGeneratedCommands { "value": [] }
@@ -24745,11 +24542,12 @@ ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/SupportedGeneratedC
 
 To update all ThermostatUserInterfaceConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Commands/WriteAttributes' -m  '{ "TemperatureDisplayMode": <TEMPERATURE_DISPLAY_MODE_VALUE> ,"KeypadLockout": <KEYPAD_LOCKOUT_VALUE> ,"ScheduleProgrammingVisibility": <SCHEDULE_PROGRAMMING_VISIBILITY_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -24791,13 +24589,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/C
 
 To force read all ThermostatUserInterfaceConfiguration attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ThermostatUserInterfaceConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ThermostatUserInterfaceConfiguration/Commands/ForceReadAttributes' -m  '{ "value": ["TemperatureDisplayMode"] }'
 ```
 
@@ -24854,15 +24652,19 @@ The following attribute topics are used to retrieve the ColorControl cluster sta
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentHue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentHue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/CurrentHue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentHue/Desired { "value": <DESIRED_CURRENT_HUE> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentHue/Reported { "value": <REPORTED_CURRENT_HUE> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentHue/Desired { "value": <DESIRED_CURRENT_HUE>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentHue/Reported { "value": <REPORTED_CURRENT_HUE>}
+
 ```
 
 <br><br>
@@ -24894,15 +24696,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentHue/Reported { "value": <
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentSaturation attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentSaturation/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/CurrentSaturation/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentSaturation/Desired { "value": <DESIRED_CURRENT_SATURATION> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentSaturation/Reported { "value": <REPORTED_CURRENT_SATURATION> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentSaturation/Desired { "value": <DESIRED_CURRENT_SATURATION>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentSaturation/Reported { "value": <REPORTED_CURRENT_SATURATION>}
+
 ```
 
 <br><br>
@@ -24934,15 +24740,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentSaturation/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RemainingTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/RemainingTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/RemainingTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/RemainingTime/Desired { "value": <DESIRED_REMAINING_TIME> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/RemainingTime/Reported { "value": <REPORTED_REMAINING_TIME> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/RemainingTime/Desired { "value": <DESIRED_REMAINING_TIME>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/RemainingTime/Reported { "value": <REPORTED_REMAINING_TIME>}
+
 ```
 
 <br><br>
@@ -24974,15 +24784,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/RemainingTime/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentX attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentX/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/CurrentX/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentX/Desired { "value": <DESIRED_CURRENTX> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentX/Reported { "value": <REPORTED_CURRENTX> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentX/Desired { "value": <DESIRED_CURRENTX>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentX/Reported { "value": <REPORTED_CURRENTX>}
+
 ```
 
 <br><br>
@@ -25014,15 +24828,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentX/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentY attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentY/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/CurrentY/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentY/Desired { "value": <DESIRED_CURRENTY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentY/Reported { "value": <REPORTED_CURRENTY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentY/Desired { "value": <DESIRED_CURRENTY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CurrentY/Reported { "value": <REPORTED_CURRENTY>}
+
 ```
 
 <br><br>
@@ -25054,15 +24872,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CurrentY/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DriftCompensation attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/DriftCompensation/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/DriftCompensation/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/DriftCompensation/Desired { "value": <DESIRED_DRIFT_COMPENSATION> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/DriftCompensation/Reported { "value": <REPORTED_DRIFT_COMPENSATION> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/DriftCompensation/Desired { "value": <DESIRED_DRIFT_COMPENSATION>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/DriftCompensation/Reported { "value": <REPORTED_DRIFT_COMPENSATION>}
+
 ```
 
 <br><br>
@@ -25094,15 +24916,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/DriftCompensation/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CompensationText attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CompensationText/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/CompensationText/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CompensationText/Desired { "value": <DESIRED_COMPENSATION_TEXT> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CompensationText/Reported { "value": <REPORTED_COMPENSATION_TEXT> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CompensationText/Desired { "value": <DESIRED_COMPENSATION_TEXT>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CompensationText/Reported { "value": <REPORTED_COMPENSATION_TEXT>}
+
 ```
 
 <br><br>
@@ -25134,15 +24960,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CompensationText/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorTemperatureMireds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTemperatureMireds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorTemperatureMireds/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTemperatureMireds/Desired { "value": <DESIRED_COLOR_TEMPERATURE_MIREDS> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTemperatureMireds/Reported { "value": <REPORTED_COLOR_TEMPERATURE_MIREDS> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorTemperatureMireds/Desired { "value": <DESIRED_COLOR_TEMPERATURE_MIREDS>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorTemperatureMireds/Reported { "value": <REPORTED_COLOR_TEMPERATURE_MIREDS>}
+
 ```
 
 <br><br>
@@ -25174,15 +25004,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTemperatureMireds/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorMode/Desired { "value": <DESIRED_COLOR_MODE> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorMode/Reported { "value": <REPORTED_COLOR_MODE> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorMode/Desired { "value": <DESIRED_COLOR_MODE>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorMode/Reported { "value": <REPORTED_COLOR_MODE>}
+
 ```
 
 <br><br>
@@ -25214,15 +25048,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorMode/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Options attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Options/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Options/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Options/Desired { "value": <DESIRED_OPTIONS> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Options/Reported { "value": <REPORTED_OPTIONS> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Options/Desired { "value": <DESIRED_OPTIONS>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Options/Reported { "value": <REPORTED_OPTIONS>}
+
 ```
 
 <br><br>
@@ -25254,15 +25092,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Options/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfPrimaries attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/NumberOfPrimaries/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/NumberOfPrimaries/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/NumberOfPrimaries/Desired { "value": <DESIRED_NUMBER_OF_PRIMARIES> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/NumberOfPrimaries/Reported { "value": <REPORTED_NUMBER_OF_PRIMARIES> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/NumberOfPrimaries/Desired { "value": <DESIRED_NUMBER_OF_PRIMARIES>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/NumberOfPrimaries/Reported { "value": <REPORTED_NUMBER_OF_PRIMARIES>}
+
 ```
 
 <br><br>
@@ -25294,15 +25136,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/NumberOfPrimaries/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary1X attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1X/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary1X/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1X/Desired { "value": <DESIRED_PRIMARY1X> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1X/Reported { "value": <REPORTED_PRIMARY1X> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary1X/Desired { "value": <DESIRED_PRIMARY1X>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary1X/Reported { "value": <REPORTED_PRIMARY1X>}
+
 ```
 
 <br><br>
@@ -25334,15 +25180,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1X/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary1Y attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Y/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary1Y/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Y/Desired { "value": <DESIRED_PRIMARY1Y> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Y/Reported { "value": <REPORTED_PRIMARY1Y> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary1Y/Desired { "value": <DESIRED_PRIMARY1Y>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary1Y/Reported { "value": <REPORTED_PRIMARY1Y>}
+
 ```
 
 <br><br>
@@ -25374,15 +25224,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Y/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary1Intensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Intensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary1Intensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Intensity/Desired { "value": <DESIRED_PRIMARY1_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Intensity/Reported { "value": <REPORTED_PRIMARY1_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary1Intensity/Desired { "value": <DESIRED_PRIMARY1_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary1Intensity/Reported { "value": <REPORTED_PRIMARY1_INTENSITY>}
+
 ```
 
 <br><br>
@@ -25414,15 +25268,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary1Intensity/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary2X attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2X/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary2X/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2X/Desired { "value": <DESIRED_PRIMARY2X> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2X/Reported { "value": <REPORTED_PRIMARY2X> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary2X/Desired { "value": <DESIRED_PRIMARY2X>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary2X/Reported { "value": <REPORTED_PRIMARY2X>}
+
 ```
 
 <br><br>
@@ -25454,15 +25312,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2X/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary2Y attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Y/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary2Y/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Y/Desired { "value": <DESIRED_PRIMARY2Y> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Y/Reported { "value": <REPORTED_PRIMARY2Y> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary2Y/Desired { "value": <DESIRED_PRIMARY2Y>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary2Y/Reported { "value": <REPORTED_PRIMARY2Y>}
+
 ```
 
 <br><br>
@@ -25494,15 +25356,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Y/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary2Intensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Intensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary2Intensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Intensity/Desired { "value": <DESIRED_PRIMARY2_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Intensity/Reported { "value": <REPORTED_PRIMARY2_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary2Intensity/Desired { "value": <DESIRED_PRIMARY2_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary2Intensity/Reported { "value": <REPORTED_PRIMARY2_INTENSITY>}
+
 ```
 
 <br><br>
@@ -25534,15 +25400,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary2Intensity/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary3X attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3X/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary3X/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3X/Desired { "value": <DESIRED_PRIMARY3X> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3X/Reported { "value": <REPORTED_PRIMARY3X> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary3X/Desired { "value": <DESIRED_PRIMARY3X>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary3X/Reported { "value": <REPORTED_PRIMARY3X>}
+
 ```
 
 <br><br>
@@ -25574,15 +25444,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3X/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary3Y attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Y/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary3Y/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Y/Desired { "value": <DESIRED_PRIMARY3Y> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Y/Reported { "value": <REPORTED_PRIMARY3Y> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary3Y/Desired { "value": <DESIRED_PRIMARY3Y>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary3Y/Reported { "value": <REPORTED_PRIMARY3Y>}
+
 ```
 
 <br><br>
@@ -25614,15 +25488,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Y/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary3Intensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Intensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary3Intensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Intensity/Desired { "value": <DESIRED_PRIMARY3_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Intensity/Reported { "value": <REPORTED_PRIMARY3_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary3Intensity/Desired { "value": <DESIRED_PRIMARY3_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary3Intensity/Reported { "value": <REPORTED_PRIMARY3_INTENSITY>}
+
 ```
 
 <br><br>
@@ -25654,15 +25532,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary3Intensity/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary4X attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4X/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary4X/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4X/Desired { "value": <DESIRED_PRIMARY4X> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4X/Reported { "value": <REPORTED_PRIMARY4X> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary4X/Desired { "value": <DESIRED_PRIMARY4X>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary4X/Reported { "value": <REPORTED_PRIMARY4X>}
+
 ```
 
 <br><br>
@@ -25694,15 +25576,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4X/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary4Y attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Y/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary4Y/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Y/Desired { "value": <DESIRED_PRIMARY4Y> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Y/Reported { "value": <REPORTED_PRIMARY4Y> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary4Y/Desired { "value": <DESIRED_PRIMARY4Y>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary4Y/Reported { "value": <REPORTED_PRIMARY4Y>}
+
 ```
 
 <br><br>
@@ -25734,15 +25620,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Y/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary4Intensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Intensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary4Intensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Intensity/Desired { "value": <DESIRED_PRIMARY4_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Intensity/Reported { "value": <REPORTED_PRIMARY4_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary4Intensity/Desired { "value": <DESIRED_PRIMARY4_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary4Intensity/Reported { "value": <REPORTED_PRIMARY4_INTENSITY>}
+
 ```
 
 <br><br>
@@ -25774,15 +25664,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary4Intensity/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary5X attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5X/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary5X/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5X/Desired { "value": <DESIRED_PRIMARY5X> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5X/Reported { "value": <REPORTED_PRIMARY5X> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary5X/Desired { "value": <DESIRED_PRIMARY5X>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary5X/Reported { "value": <REPORTED_PRIMARY5X>}
+
 ```
 
 <br><br>
@@ -25814,15 +25708,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5X/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary5Y attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Y/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary5Y/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Y/Desired { "value": <DESIRED_PRIMARY5Y> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Y/Reported { "value": <REPORTED_PRIMARY5Y> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary5Y/Desired { "value": <DESIRED_PRIMARY5Y>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary5Y/Reported { "value": <REPORTED_PRIMARY5Y>}
+
 ```
 
 <br><br>
@@ -25854,15 +25752,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Y/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary5Intensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Intensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary5Intensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Intensity/Desired { "value": <DESIRED_PRIMARY5_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Intensity/Reported { "value": <REPORTED_PRIMARY5_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary5Intensity/Desired { "value": <DESIRED_PRIMARY5_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary5Intensity/Reported { "value": <REPORTED_PRIMARY5_INTENSITY>}
+
 ```
 
 <br><br>
@@ -25894,15 +25796,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary5Intensity/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary6X attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6X/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary6X/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6X/Desired { "value": <DESIRED_PRIMARY6X> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6X/Reported { "value": <REPORTED_PRIMARY6X> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary6X/Desired { "value": <DESIRED_PRIMARY6X>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary6X/Reported { "value": <REPORTED_PRIMARY6X>}
+
 ```
 
 <br><br>
@@ -25934,15 +25840,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6X/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary6Y attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Y/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary6Y/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Y/Desired { "value": <DESIRED_PRIMARY6Y> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Y/Reported { "value": <REPORTED_PRIMARY6Y> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary6Y/Desired { "value": <DESIRED_PRIMARY6Y>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary6Y/Reported { "value": <REPORTED_PRIMARY6Y>}
+
 ```
 
 <br><br>
@@ -25974,15 +25884,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Y/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Primary6Intensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Intensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/Primary6Intensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Intensity/Desired { "value": <DESIRED_PRIMARY6_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Intensity/Reported { "value": <REPORTED_PRIMARY6_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary6Intensity/Desired { "value": <DESIRED_PRIMARY6_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/Primary6Intensity/Reported { "value": <REPORTED_PRIMARY6_INTENSITY>}
+
 ```
 
 <br><br>
@@ -26014,15 +25928,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/Primary6Intensity/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for WhitePointX attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointX/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/WhitePointX/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointX/Desired { "value": <DESIRED_WHITE_POINTX> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointX/Reported { "value": <REPORTED_WHITE_POINTX> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/WhitePointX/Desired { "value": <DESIRED_WHITE_POINTX>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/WhitePointX/Reported { "value": <REPORTED_WHITE_POINTX>}
+
 ```
 
 <br><br>
@@ -26054,15 +25972,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointX/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for WhitePointY attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointY/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/WhitePointY/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointY/Desired { "value": <DESIRED_WHITE_POINTY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointY/Reported { "value": <REPORTED_WHITE_POINTY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/WhitePointY/Desired { "value": <DESIRED_WHITE_POINTY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/WhitePointY/Reported { "value": <REPORTED_WHITE_POINTY>}
+
 ```
 
 <br><br>
@@ -26094,15 +26016,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/WhitePointY/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointRX attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRX/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointRX/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRX/Desired { "value": <DESIRED_COLOR_POINTRX> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRX/Reported { "value": <REPORTED_COLOR_POINTRX> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointRX/Desired { "value": <DESIRED_COLOR_POINTRX>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointRX/Reported { "value": <REPORTED_COLOR_POINTRX>}
+
 ```
 
 <br><br>
@@ -26134,15 +26060,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRX/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointRY attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRY/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointRY/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRY/Desired { "value": <DESIRED_COLOR_POINTRY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRY/Reported { "value": <REPORTED_COLOR_POINTRY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointRY/Desired { "value": <DESIRED_COLOR_POINTRY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointRY/Reported { "value": <REPORTED_COLOR_POINTRY>}
+
 ```
 
 <br><br>
@@ -26174,15 +26104,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRY/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointRIntensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRIntensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointRIntensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRIntensity/Desired { "value": <DESIRED_COLOR_POINTR_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRIntensity/Reported { "value": <REPORTED_COLOR_POINTR_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointRIntensity/Desired { "value": <DESIRED_COLOR_POINTR_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointRIntensity/Reported { "value": <REPORTED_COLOR_POINTR_INTENSITY>}
+
 ```
 
 <br><br>
@@ -26214,15 +26148,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointRIntensity/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointGX attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGX/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointGX/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGX/Desired { "value": <DESIRED_COLOR_POINTGX> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGX/Reported { "value": <REPORTED_COLOR_POINTGX> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointGX/Desired { "value": <DESIRED_COLOR_POINTGX>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointGX/Reported { "value": <REPORTED_COLOR_POINTGX>}
+
 ```
 
 <br><br>
@@ -26254,15 +26192,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGX/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointGY attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGY/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointGY/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGY/Desired { "value": <DESIRED_COLOR_POINTGY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGY/Reported { "value": <REPORTED_COLOR_POINTGY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointGY/Desired { "value": <DESIRED_COLOR_POINTGY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointGY/Reported { "value": <REPORTED_COLOR_POINTGY>}
+
 ```
 
 <br><br>
@@ -26294,15 +26236,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGY/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointGIntensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGIntensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointGIntensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGIntensity/Desired { "value": <DESIRED_COLOR_POINTG_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGIntensity/Reported { "value": <REPORTED_COLOR_POINTG_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointGIntensity/Desired { "value": <DESIRED_COLOR_POINTG_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointGIntensity/Reported { "value": <REPORTED_COLOR_POINTG_INTENSITY>}
+
 ```
 
 <br><br>
@@ -26334,15 +26280,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointGIntensity/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointBX attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBX/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointBX/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBX/Desired { "value": <DESIRED_COLOR_POINTBX> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBX/Reported { "value": <REPORTED_COLOR_POINTBX> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointBX/Desired { "value": <DESIRED_COLOR_POINTBX>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointBX/Reported { "value": <REPORTED_COLOR_POINTBX>}
+
 ```
 
 <br><br>
@@ -26374,15 +26324,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBX/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointBY attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBY/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointBY/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBY/Desired { "value": <DESIRED_COLOR_POINTBY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBY/Reported { "value": <REPORTED_COLOR_POINTBY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointBY/Desired { "value": <DESIRED_COLOR_POINTBY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointBY/Reported { "value": <REPORTED_COLOR_POINTBY>}
+
 ```
 
 <br><br>
@@ -26414,15 +26368,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBY/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorPointBIntensity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBIntensity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorPointBIntensity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBIntensity/Desired { "value": <DESIRED_COLOR_POINTB_INTENSITY> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBIntensity/Reported { "value": <REPORTED_COLOR_POINTB_INTENSITY> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointBIntensity/Desired { "value": <DESIRED_COLOR_POINTB_INTENSITY>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorPointBIntensity/Reported { "value": <REPORTED_COLOR_POINTB_INTENSITY>}
+
 ```
 
 <br><br>
@@ -26454,15 +26412,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorPointBIntensity/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnhancedCurrentHue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedCurrentHue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/EnhancedCurrentHue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedCurrentHue/Desired { "value": <DESIRED_ENHANCED_CURRENT_HUE> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedCurrentHue/Reported { "value": <REPORTED_ENHANCED_CURRENT_HUE> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/EnhancedCurrentHue/Desired { "value": <DESIRED_ENHANCED_CURRENT_HUE>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/EnhancedCurrentHue/Reported { "value": <REPORTED_ENHANCED_CURRENT_HUE>}
+
 ```
 
 <br><br>
@@ -26494,15 +26456,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedCurrentHue/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnhancedColorMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedColorMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/EnhancedColorMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedColorMode/Desired { "value": <DESIRED_ENHANCED_COLOR_MODE> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedColorMode/Reported { "value": <REPORTED_ENHANCED_COLOR_MODE> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/EnhancedColorMode/Desired { "value": <DESIRED_ENHANCED_COLOR_MODE>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/EnhancedColorMode/Reported { "value": <REPORTED_ENHANCED_COLOR_MODE>}
+
 ```
 
 <br><br>
@@ -26534,15 +26500,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/EnhancedColorMode/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorLoopActive attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopActive/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopActive/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopActive/Desired { "value": <DESIRED_COLOR_LOOP_ACTIVE> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopActive/Reported { "value": <REPORTED_COLOR_LOOP_ACTIVE> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopActive/Desired { "value": <DESIRED_COLOR_LOOP_ACTIVE>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopActive/Reported { "value": <REPORTED_COLOR_LOOP_ACTIVE>}
+
 ```
 
 <br><br>
@@ -26574,15 +26544,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopActive/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorLoopDirection attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopDirection/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopDirection/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopDirection/Desired { "value": <DESIRED_COLOR_LOOP_DIRECTION> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopDirection/Reported { "value": <REPORTED_COLOR_LOOP_DIRECTION> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopDirection/Desired { "value": <DESIRED_COLOR_LOOP_DIRECTION>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopDirection/Reported { "value": <REPORTED_COLOR_LOOP_DIRECTION>}
+
 ```
 
 <br><br>
@@ -26614,15 +26588,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopDirection/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorLoopTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopTime/Desired { "value": <DESIRED_COLOR_LOOP_TIME> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopTime/Reported { "value": <REPORTED_COLOR_LOOP_TIME> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopTime/Desired { "value": <DESIRED_COLOR_LOOP_TIME>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopTime/Reported { "value": <REPORTED_COLOR_LOOP_TIME>}
+
 ```
 
 <br><br>
@@ -26654,15 +26632,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopTime/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorLoopStartEnhancedHue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStartEnhancedHue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopStartEnhancedHue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStartEnhancedHue/Desired { "value": <DESIRED_COLOR_LOOP_START_ENHANCED_HUE> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStartEnhancedHue/Reported { "value": <REPORTED_COLOR_LOOP_START_ENHANCED_HUE> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopStartEnhancedHue/Desired { "value": <DESIRED_COLOR_LOOP_START_ENHANCED_HUE>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopStartEnhancedHue/Reported { "value": <REPORTED_COLOR_LOOP_START_ENHANCED_HUE>}
+
 ```
 
 <br><br>
@@ -26694,15 +26676,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStartEnhancedHue/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorLoopStoredEnhancedHue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStoredEnhancedHue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorLoopStoredEnhancedHue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Desired { "value": <DESIRED_COLOR_LOOP_STORED_ENHANCED_HUE> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Reported { "value": <REPORTED_COLOR_LOOP_STORED_ENHANCED_HUE> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Desired { "value": <DESIRED_COLOR_LOOP_STORED_ENHANCED_HUE>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Reported { "value": <REPORTED_COLOR_LOOP_STORED_ENHANCED_HUE>}
+
 ```
 
 <br><br>
@@ -26734,15 +26720,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorLoopStoredEnhancedHue/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorCapabilities attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorCapabilities/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorCapabilities/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorCapabilities/Desired { "value": <DESIRED_COLOR_CAPABILITIES> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorCapabilities/Reported { "value": <REPORTED_COLOR_CAPABILITIES> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorCapabilities/Desired { "value": <DESIRED_COLOR_CAPABILITIES>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorCapabilities/Reported { "value": <REPORTED_COLOR_CAPABILITIES>}
+
 ```
 
 <br><br>
@@ -26774,15 +26764,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorCapabilities/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorTempPhysicalMinMireds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMinMireds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorTempPhysicalMinMireds/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMinMireds/Desired { "value": <DESIRED_COLOR_TEMP_PHYSICAL_MIN_MIREDS> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMinMireds/Reported { "value": <REPORTED_COLOR_TEMP_PHYSICAL_MIN_MIREDS> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorTempPhysicalMinMireds/Desired { "value": <DESIRED_COLOR_TEMP_PHYSICAL_MIN_MIREDS>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorTempPhysicalMinMireds/Reported { "value": <REPORTED_COLOR_TEMP_PHYSICAL_MIN_MIREDS>}
+
 ```
 
 <br><br>
@@ -26814,15 +26808,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMinMireds/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ColorTempPhysicalMaxMireds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMaxMireds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/ColorTempPhysicalMaxMireds/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Desired { "value": <DESIRED_COLOR_TEMP_PHYSICAL_MAX_MIREDS> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Reported { "value": <REPORTED_COLOR_TEMP_PHYSICAL_MAX_MIREDS> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Desired { "value": <DESIRED_COLOR_TEMP_PHYSICAL_MAX_MIREDS>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Reported { "value": <REPORTED_COLOR_TEMP_PHYSICAL_MAX_MIREDS>}
+
 ```
 
 <br><br>
@@ -26854,15 +26852,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ColorTempPhysicalMaxMireds/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CoupleColorTempToLevelMinMireds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Desired { "value": <DESIRED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Reported { "value": <REPORTED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Desired { "value": <DESIRED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/Reported { "value": <REPORTED_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS>}
+
 ```
 
 <br><br>
@@ -26894,15 +26896,19 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/CoupleColorTempToLevelMinMireds/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for StartUpColorTemperatureMireds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/StartUpColorTemperatureMireds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ColorControl/Attributes/StartUpColorTemperatureMireds/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/StartUpColorTemperatureMireds/Desired { "value": <DESIRED_START_UP_COLOR_TEMPERATURE_MIREDS> }
-ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/StartUpColorTemperatureMireds/Reported { "value": <REPORTED_START_UP_COLOR_TEMPERATURE_MIREDS> }
+
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/StartUpColorTemperatureMireds/Desired { "value": <DESIRED_START_UP_COLOR_TEMPERATURE_MIREDS>}
+ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/StartUpColorTemperatureMireds/Reported { "value": <REPORTED_START_UP_COLOR_TEMPERATURE_MIREDS>}
+
 ```
 
 <br><br>
@@ -26939,7 +26945,7 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/StartUpColorTemperatureMireds/Re
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -27013,7 +27019,7 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/Attributes/ClusterRevision/Reported { "valu
 
 To see supported commands for ColorControl cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ColorControl/SupportedCommands { "value": ["MoveToHue","MoveHue","StepHue","MoveToSaturation","MoveSaturation","StepSaturation","MoveToHueAndSaturation","MoveToColor","MoveColor","StepColor","MoveToColorTemperature","EnhancedMoveToHue","EnhancedMoveHue","EnhancedStepHue","EnhancedMoveToHueAndSaturation","ColorLoopSet","StopMoveStep","MoveColorTemperature","StepColorTemperature","WriteAttributes", "ForceReadAttributes"] }
@@ -27021,8 +27027,7 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/SupportedCommands { "value": ["MoveToHue","
 
 To see supported generated commands for ColorControl cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ColorControl/SupportedGeneratedCommands { "value": [] }
@@ -27088,13 +27093,13 @@ ucl/by-unid/<UNID>/<EP>/ColorControl/SupportedGeneratedCommands { "value": [] }
 
 To send a ColorControl/MoveToHue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveToHue' -m  '{ "Hue": <HUE_VALUE>,"Direction": <DIRECTION_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveToHue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToHue'
 ```
 
@@ -27143,13 +27148,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToH
 
 To send a ColorControl/MoveHue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveHue' -m  '{ "MoveMode": <MOVE_MODE_VALUE>,"Rate": <RATE_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveHue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveHue'
 ```
 
@@ -27202,13 +27207,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveHue
 
 To send a ColorControl/StepHue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/StepHue' -m  '{ "StepMode": <STEP_MODE_VALUE>,"StepSize": <STEP_SIZE_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/StepHue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepHue'
 ```
 
@@ -27257,13 +27262,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepHue
 
 To send a ColorControl/MoveToSaturation command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveToSaturation' -m  '{ "Saturation": <SATURATION_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveToSaturation generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToSaturation'
 ```
 
@@ -27312,13 +27317,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToS
 
 To send a ColorControl/MoveSaturation command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveSaturation' -m  '{ "MoveMode": <MOVE_MODE_VALUE>,"Rate": <RATE_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveSaturation generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveSaturation'
 ```
 
@@ -27371,13 +27376,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveSat
 
 To send a ColorControl/StepSaturation command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/StepSaturation' -m  '{ "StepMode": <STEP_MODE_VALUE>,"StepSize": <STEP_SIZE_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/StepSaturation generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepSaturation'
 ```
 
@@ -27430,13 +27435,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepSat
 
 To send a ColorControl/MoveToHueAndSaturation command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveToHueAndSaturation' -m  '{ "Hue": <HUE_VALUE>,"Saturation": <SATURATION_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveToHueAndSaturation generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToHueAndSaturation'
 ```
 
@@ -27489,13 +27494,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToH
 
 To send a ColorControl/MoveToColor command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveToColor' -m  '{ "ColorX": <COLORX_VALUE>,"ColorY": <COLORY_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveToColor generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToColor'
 ```
 
@@ -27544,13 +27549,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToC
 
 To send a ColorControl/MoveColor command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveColor' -m  '{ "RateX": <RATEX_VALUE>,"RateY": <RATEY_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveColor generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveColor'
 ```
 
@@ -27603,13 +27608,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveCol
 
 To send a ColorControl/StepColor command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/StepColor' -m  '{ "StepX": <STEPX_VALUE>,"StepY": <STEPY_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/StepColor generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepColor'
 ```
 
@@ -27658,13 +27663,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepCol
 
 To send a ColorControl/MoveToColorTemperature command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveToColorTemperature' -m  '{ "ColorTemperatureMireds": <COLOR_TEMPERATURE_MIREDS_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveToColorTemperature generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToColorTemperature'
 ```
 
@@ -27717,13 +27722,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveToC
 
 To send a ColorControl/EnhancedMoveToHue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/EnhancedMoveToHue' -m  '{ "EnhancedHue": <ENHANCED_HUE_VALUE>,"Direction": <DIRECTION_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/EnhancedMoveToHue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/EnhancedMoveToHue'
 ```
 
@@ -27772,13 +27777,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/Enhance
 
 To send a ColorControl/EnhancedMoveHue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/EnhancedMoveHue' -m  '{ "MoveMode": <MOVE_MODE_VALUE>,"Rate": <RATE_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/EnhancedMoveHue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/EnhancedMoveHue'
 ```
 
@@ -27831,13 +27836,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/Enhance
 
 To send a ColorControl/EnhancedStepHue command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/EnhancedStepHue' -m  '{ "StepMode": <STEP_MODE_VALUE>,"StepSize": <STEP_SIZE_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/EnhancedStepHue generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/EnhancedStepHue'
 ```
 
@@ -27890,13 +27895,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/Enhance
 
 To send a ColorControl/EnhancedMoveToHueAndSaturation command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/EnhancedMoveToHueAndSaturation' -m  '{ "EnhancedHue": <ENHANCED_HUE_VALUE>,"Saturation": <SATURATION_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/EnhancedMoveToHueAndSaturation generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/EnhancedMoveToHueAndSaturation'
 ```
 
@@ -27957,13 +27962,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/Enhance
 
 To send a ColorControl/ColorLoopSet command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/ColorLoopSet' -m  '{ "UpdateFlags": <UPDATE_FLAGS_VALUE>,"Action": <ACTION_VALUE>,"Direction": <DIRECTION_VALUE>,"Time": <TIME_VALUE>,"StartHue": <START_HUE_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/ColorLoopSet generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/ColorLoopSet'
 ```
 
@@ -28004,13 +28009,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/ColorLo
 
 To send a ColorControl/StopMoveStep command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/StopMoveStep' -m  '{ "OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/StopMoveStep generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StopMoveStep'
 ```
 
@@ -28067,13 +28072,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StopMov
 
 To send a ColorControl/MoveColorTemperature command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/MoveColorTemperature' -m  '{ "MoveMode": <MOVE_MODE_VALUE>,"Rate": <RATE_VALUE>,"ColorTemperatureMinimumMireds": <COLOR_TEMPERATURE_MINIMUM_MIREDS_VALUE>,"ColorTemperatureMaximumMireds": <COLOR_TEMPERATURE_MAXIMUM_MIREDS_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/MoveColorTemperature generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveColorTemperature'
 ```
 
@@ -28134,13 +28139,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/MoveCol
 
 To send a ColorControl/StepColorTemperature command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/StepColorTemperature' -m  '{ "StepMode": <STEP_MODE_VALUE>,"StepSize": <STEP_SIZE_VALUE>,"TransitionTime": <TRANSITION_TIME_VALUE>,"ColorTemperatureMinimumMireds": <COLOR_TEMPERATURE_MINIMUM_MIREDS_VALUE>,"ColorTemperatureMaximumMireds": <COLOR_TEMPERATURE_MAXIMUM_MIREDS_VALUE>,"OptionsMask": <OPTIONS_MASK_VALUE>,"OptionsOverride": <OPTIONS_OVERRIDE_VALUE> }'
 ```
 
 To receive a ColorControl/StepColorTemperature generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepColorTemperature'
 ```
 
@@ -28212,11 +28217,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/GeneratedCommands/StepCol
 
 To update all ColorControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/WriteAttributes' -m  '{ "Options": <OPTIONS_VALUE> ,"WhitePointX": <WHITE_POINTX_VALUE> ,"WhitePointY": <WHITE_POINTY_VALUE> ,"ColorPointRX": <COLOR_POINTRX_VALUE> ,"ColorPointRY": <COLOR_POINTRY_VALUE> ,"ColorPointRIntensity": <COLOR_POINTR_INTENSITY_VALUE> ,"ColorPointGX": <COLOR_POINTGX_VALUE> ,"ColorPointGY": <COLOR_POINTGY_VALUE> ,"ColorPointGIntensity": <COLOR_POINTG_INTENSITY_VALUE> ,"ColorPointBX": <COLOR_POINTBX_VALUE> ,"ColorPointBY": <COLOR_POINTBY_VALUE> ,"ColorPointBIntensity": <COLOR_POINTB_INTENSITY_VALUE> ,"StartUpColorTemperatureMireds": <START_UP_COLOR_TEMPERATURE_MIREDS_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -28307,13 +28313,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/WriteAttributes'
 
 To force read all ColorControl attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ColorControl attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ColorControl/Commands/ForceReadAttributes' -m  '{ "value": ["CurrentHue"] }'
 ```
 
@@ -28370,15 +28376,19 @@ The following attribute topics are used to retrieve the BallastConfiguration clu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalMinLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMinLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/PhysicalMinLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMinLevel/Desired { "value": <DESIRED_PHYSICAL_MIN_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMinLevel/Reported { "value": <REPORTED_PHYSICAL_MIN_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PhysicalMinLevel/Desired { "value": <DESIRED_PHYSICAL_MIN_LEVEL>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PhysicalMinLevel/Reported { "value": <REPORTED_PHYSICAL_MIN_LEVEL>}
+
 ```
 
 <br><br>
@@ -28410,15 +28420,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMinLevel/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalMaxLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMaxLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/PhysicalMaxLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMaxLevel/Desired { "value": <DESIRED_PHYSICAL_MAX_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMaxLevel/Reported { "value": <REPORTED_PHYSICAL_MAX_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PhysicalMaxLevel/Desired { "value": <DESIRED_PHYSICAL_MAX_LEVEL>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PhysicalMaxLevel/Reported { "value": <REPORTED_PHYSICAL_MAX_LEVEL>}
+
 ```
 
 <br><br>
@@ -28450,15 +28464,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PhysicalMaxLevel/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BallastStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/BallastStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastStatus/Desired { "value": <DESIRED_BALLAST_STATUS> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastStatus/Reported { "value": <REPORTED_BALLAST_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/BallastStatus/Desired { "value": <DESIRED_BALLAST_STATUS>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/BallastStatus/Reported { "value": <REPORTED_BALLAST_STATUS>}
+
 ```
 
 <br><br>
@@ -28490,15 +28508,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastStatus/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MinLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/MinLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MinLevel/Desired { "value": <DESIRED_MIN_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MinLevel/Reported { "value": <REPORTED_MIN_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/MinLevel/Desired { "value": <DESIRED_MIN_LEVEL>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/MinLevel/Reported { "value": <REPORTED_MIN_LEVEL>}
+
 ```
 
 <br><br>
@@ -28530,15 +28552,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MinLevel/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MaxLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/MaxLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MaxLevel/Desired { "value": <DESIRED_MAX_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MaxLevel/Reported { "value": <REPORTED_MAX_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/MaxLevel/Desired { "value": <DESIRED_MAX_LEVEL>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/MaxLevel/Reported { "value": <REPORTED_MAX_LEVEL>}
+
 ```
 
 <br><br>
@@ -28570,15 +28596,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/MaxLevel/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerOnLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/PowerOnLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnLevel/Desired { "value": <DESIRED_POWER_ON_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnLevel/Reported { "value": <REPORTED_POWER_ON_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PowerOnLevel/Desired { "value": <DESIRED_POWER_ON_LEVEL>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PowerOnLevel/Reported { "value": <REPORTED_POWER_ON_LEVEL>}
+
 ```
 
 <br><br>
@@ -28610,15 +28640,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnLevel/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerOnFadeTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnFadeTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/PowerOnFadeTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnFadeTime/Desired { "value": <DESIRED_POWER_ON_FADE_TIME> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnFadeTime/Reported { "value": <REPORTED_POWER_ON_FADE_TIME> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PowerOnFadeTime/Desired { "value": <DESIRED_POWER_ON_FADE_TIME>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/PowerOnFadeTime/Reported { "value": <REPORTED_POWER_ON_FADE_TIME>}
+
 ```
 
 <br><br>
@@ -28650,15 +28684,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/PowerOnFadeTime/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for IntrinsicBallastFactor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/IntrinsicBallastFactor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/IntrinsicBallastFactor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/IntrinsicBallastFactor/Desired { "value": <DESIRED_INTRINSIC_BALLAST_FACTOR> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/IntrinsicBallastFactor/Reported { "value": <REPORTED_INTRINSIC_BALLAST_FACTOR> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/IntrinsicBallastFactor/Desired { "value": <DESIRED_INTRINSIC_BALLAST_FACTOR>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/IntrinsicBallastFactor/Reported { "value": <REPORTED_INTRINSIC_BALLAST_FACTOR>}
+
 ```
 
 <br><br>
@@ -28690,15 +28728,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/IntrinsicBallastFactor/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BallastFactorAdjustment attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastFactorAdjustment/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/BallastFactorAdjustment/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastFactorAdjustment/Desired { "value": <DESIRED_BALLAST_FACTOR_ADJUSTMENT> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastFactorAdjustment/Reported { "value": <REPORTED_BALLAST_FACTOR_ADJUSTMENT> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/BallastFactorAdjustment/Desired { "value": <DESIRED_BALLAST_FACTOR_ADJUSTMENT>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/BallastFactorAdjustment/Reported { "value": <REPORTED_BALLAST_FACTOR_ADJUSTMENT>}
+
 ```
 
 <br><br>
@@ -28730,15 +28772,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/BallastFactorAdjustment/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LampQuantity attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampQuantity/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/LampQuantity/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampQuantity/Desired { "value": <DESIRED_LAMP_QUANTITY> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampQuantity/Reported { "value": <REPORTED_LAMP_QUANTITY> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampQuantity/Desired { "value": <DESIRED_LAMP_QUANTITY>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampQuantity/Reported { "value": <REPORTED_LAMP_QUANTITY>}
+
 ```
 
 <br><br>
@@ -28770,15 +28816,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampQuantity/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LampType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/LampType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampType/Desired { "value": <DESIRED_LAMP_TYPE> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampType/Reported { "value": <REPORTED_LAMP_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampType/Desired { "value": <DESIRED_LAMP_TYPE>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampType/Reported { "value": <REPORTED_LAMP_TYPE>}
+
 ```
 
 <br><br>
@@ -28810,15 +28860,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampType/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LampManufacturer attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampManufacturer/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/LampManufacturer/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampManufacturer/Desired { "value": <DESIRED_LAMP_MANUFACTURER> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampManufacturer/Reported { "value": <REPORTED_LAMP_MANUFACTURER> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampManufacturer/Desired { "value": <DESIRED_LAMP_MANUFACTURER>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampManufacturer/Reported { "value": <REPORTED_LAMP_MANUFACTURER>}
+
 ```
 
 <br><br>
@@ -28850,15 +28904,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampManufacturer/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LampRatedHours attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampRatedHours/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/LampRatedHours/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampRatedHours/Desired { "value": <DESIRED_LAMP_RATED_HOURS> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampRatedHours/Reported { "value": <REPORTED_LAMP_RATED_HOURS> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampRatedHours/Desired { "value": <DESIRED_LAMP_RATED_HOURS>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampRatedHours/Reported { "value": <REPORTED_LAMP_RATED_HOURS>}
+
 ```
 
 <br><br>
@@ -28890,15 +28948,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampRatedHours/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LampBurnHours attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHours/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/LampBurnHours/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHours/Desired { "value": <DESIRED_LAMP_BURN_HOURS> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHours/Reported { "value": <REPORTED_LAMP_BURN_HOURS> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampBurnHours/Desired { "value": <DESIRED_LAMP_BURN_HOURS>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampBurnHours/Reported { "value": <REPORTED_LAMP_BURN_HOURS>}
+
 ```
 
 <br><br>
@@ -28930,15 +28992,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHours/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LampAlarmMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampAlarmMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/LampAlarmMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampAlarmMode/Desired { "value": <DESIRED_LAMP_ALARM_MODE> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampAlarmMode/Reported { "value": <REPORTED_LAMP_ALARM_MODE> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampAlarmMode/Desired { "value": <DESIRED_LAMP_ALARM_MODE>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampAlarmMode/Reported { "value": <REPORTED_LAMP_ALARM_MODE>}
+
 ```
 
 <br><br>
@@ -28970,15 +29036,19 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampAlarmMode/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LampBurnHoursTripPoint attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHoursTripPoint/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/BallastConfiguration/Attributes/LampBurnHoursTripPoint/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHoursTripPoint/Desired { "value": <DESIRED_LAMP_BURN_HOURS_TRIP_POINT> }
-ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHoursTripPoint/Reported { "value": <REPORTED_LAMP_BURN_HOURS_TRIP_POINT> }
+
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampBurnHoursTripPoint/Desired { "value": <DESIRED_LAMP_BURN_HOURS_TRIP_POINT>}
+ucl/by-unid/<UNID>/ep0/BallastConfiguration/Attributes/LampBurnHoursTripPoint/Reported { "value": <REPORTED_LAMP_BURN_HOURS_TRIP_POINT>}
+
 ```
 
 <br><br>
@@ -29015,7 +29085,7 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/LampBurnHoursTripPoint/R
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -29068,7 +29138,7 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Attributes/ClusterRevision/Reported
 
 To see supported commands for BallastConfiguration cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/BallastConfiguration/SupportedCommands { "value": [] }
@@ -29076,8 +29146,7 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/SupportedCommands { "value": [] }
 
 To see supported generated commands for BallastConfiguration cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/BallastConfiguration/SupportedGeneratedCommands { "value": [] }
@@ -29159,11 +29228,12 @@ ucl/by-unid/<UNID>/<EP>/BallastConfiguration/SupportedGeneratedCommands { "value
 
 To update all BallastConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Commands/WriteAttributes' -m  '{ "MinLevel": <MIN_LEVEL_VALUE> ,"MaxLevel": <MAX_LEVEL_VALUE> ,"PowerOnLevel": <POWER_ON_LEVEL_VALUE> ,"PowerOnFadeTime": <POWER_ON_FADE_TIME_VALUE> ,"IntrinsicBallastFactor": <INTRINSIC_BALLAST_FACTOR_VALUE> ,"BallastFactorAdjustment": <BALLAST_FACTOR_ADJUSTMENT_VALUE> ,"LampType": <LAMP_TYPE_VALUE> ,"LampManufacturer": <LAMP_MANUFACTURER_VALUE> ,"LampRatedHours": <LAMP_RATED_HOURS_VALUE> ,"LampBurnHours": <LAMP_BURN_HOURS_VALUE> ,"LampAlarmMode": <LAMP_ALARM_MODE_VALUE> ,"LampBurnHoursTripPoint": <LAMP_BURN_HOURS_TRIP_POINT_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -29218,13 +29288,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Commands/WriteAtt
 
 To force read all BallastConfiguration attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the BallastConfiguration attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/BallastConfiguration/Commands/ForceReadAttributes' -m  '{ "value": ["PhysicalMinLevel"] }'
 ```
 
@@ -29281,15 +29351,19 @@ The following attribute topics are used to retrieve the IlluminanceMeasurement c
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceMeasurement/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -29321,15 +29395,19 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MeasuredValue/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceMeasurement/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -29361,15 +29439,19 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MinMeasuredValue/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceMeasurement/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -29401,15 +29483,19 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/MaxMeasuredValue/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceMeasurement/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -29441,15 +29527,19 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/Tolerance/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LightSensorType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/LightSensorType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceMeasurement/Attributes/LightSensorType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/LightSensorType/Desired { "value": <DESIRED_LIGHT_SENSOR_TYPE> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/LightSensorType/Reported { "value": <REPORTED_LIGHT_SENSOR_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/LightSensorType/Desired { "value": <DESIRED_LIGHT_SENSOR_TYPE>}
+ucl/by-unid/<UNID>/ep0/IlluminanceMeasurement/Attributes/LightSensorType/Reported { "value": <REPORTED_LIGHT_SENSOR_TYPE>}
+
 ```
 
 <br><br>
@@ -29486,7 +29576,7 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/LightSensorType/Report
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -29539,7 +29629,7 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Attributes/ClusterRevision/Report
 
 To see supported commands for IlluminanceMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/SupportedCommands { "value": [] }
@@ -29547,8 +29637,7 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/SupportedCommands { "value": [] }
 
 To see supported generated commands for IlluminanceMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/SupportedGeneratedCommands { "value": [] }
@@ -29594,11 +29683,12 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/SupportedGeneratedCommands { "val
 
 To update all IlluminanceMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -29642,13 +29732,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Commands/WriteA
 
 To force read all IlluminanceMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the IlluminanceMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -29705,15 +29795,19 @@ The following attribute topics are used to retrieve the IlluminanceLevelSensing 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LevelStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LevelStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceLevelSensing/Attributes/LevelStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LevelStatus/Desired { "value": <DESIRED_LEVEL_STATUS> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LevelStatus/Reported { "value": <REPORTED_LEVEL_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceLevelSensing/Attributes/LevelStatus/Desired { "value": <DESIRED_LEVEL_STATUS>}
+ucl/by-unid/<UNID>/ep0/IlluminanceLevelSensing/Attributes/LevelStatus/Reported { "value": <REPORTED_LEVEL_STATUS>}
+
 ```
 
 <br><br>
@@ -29745,15 +29839,19 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LevelStatus/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LightSensorType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LightSensorType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceLevelSensing/Attributes/LightSensorType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LightSensorType/Desired { "value": <DESIRED_LIGHT_SENSOR_TYPE> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LightSensorType/Reported { "value": <REPORTED_LIGHT_SENSOR_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceLevelSensing/Attributes/LightSensorType/Desired { "value": <DESIRED_LIGHT_SENSOR_TYPE>}
+ucl/by-unid/<UNID>/ep0/IlluminanceLevelSensing/Attributes/LightSensorType/Reported { "value": <REPORTED_LIGHT_SENSOR_TYPE>}
+
 ```
 
 <br><br>
@@ -29785,15 +29883,19 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/LightSensorType/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for IlluminanceTargetLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/IlluminanceTargetLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IlluminanceLevelSensing/Attributes/IlluminanceTargetLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/IlluminanceTargetLevel/Desired { "value": <DESIRED_ILLUMINANCE_TARGET_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/IlluminanceTargetLevel/Reported { "value": <REPORTED_ILLUMINANCE_TARGET_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/IlluminanceLevelSensing/Attributes/IlluminanceTargetLevel/Desired { "value": <DESIRED_ILLUMINANCE_TARGET_LEVEL>}
+ucl/by-unid/<UNID>/ep0/IlluminanceLevelSensing/Attributes/IlluminanceTargetLevel/Reported { "value": <REPORTED_ILLUMINANCE_TARGET_LEVEL>}
+
 ```
 
 <br><br>
@@ -29830,7 +29932,7 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/IlluminanceTargetLeve
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -29883,7 +29985,7 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Attributes/ClusterRevision/Repor
 
 To see supported commands for IlluminanceLevelSensing cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/SupportedCommands { "value": [] }
@@ -29891,8 +29993,7 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/SupportedCommands { "value": [] 
 
 To see supported generated commands for IlluminanceLevelSensing cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/SupportedGeneratedCommands { "value": [] }
@@ -29941,11 +30042,12 @@ ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/SupportedGeneratedCommands { "va
 
 To update all IlluminanceLevelSensing attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Commands/WriteAttributes' -m  '{ "IlluminanceTargetLevel": <ILLUMINANCE_TARGET_LEVEL_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -29987,13 +30089,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Commands/Write
 
 To force read all IlluminanceLevelSensing attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the IlluminanceLevelSensing attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IlluminanceLevelSensing/Commands/ForceReadAttributes' -m  '{ "value": ["LevelStatus"] }'
 ```
 
@@ -30050,15 +30152,19 @@ The following attribute topics are used to retrieve the TemperatureMeasurement c
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/TemperatureMeasurement/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -30090,15 +30196,19 @@ ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MeasuredValue/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/TemperatureMeasurement/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -30130,15 +30240,19 @@ ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MinMeasuredValue/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/TemperatureMeasurement/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -30170,15 +30284,19 @@ ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/MaxMeasuredValue/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/TemperatureMeasurement/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/TemperatureMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -30215,7 +30333,7 @@ ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/Tolerance/Reported { "
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -30268,7 +30386,7 @@ ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Attributes/ClusterRevision/Report
 
 To see supported commands for TemperatureMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/SupportedCommands { "value": [] }
@@ -30276,8 +30394,7 @@ ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/SupportedCommands { "value": [] }
 
 To see supported generated commands for TemperatureMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/SupportedGeneratedCommands { "value": [] }
@@ -30323,11 +30440,12 @@ ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/SupportedGeneratedCommands { "val
 
 To update all TemperatureMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -30370,13 +30488,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Commands/WriteA
 
 To force read all TemperatureMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the TemperatureMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/TemperatureMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -30433,15 +30551,19 @@ The following attribute topics are used to retrieve the PressureMeasurement clus
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -30473,15 +30595,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MeasuredValue/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -30513,15 +30639,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinMeasuredValue/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -30553,15 +30683,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxMeasuredValue/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -30593,15 +30727,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Tolerance/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ScaledValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/ScaledValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledValue/Desired { "value": <DESIRED_SCALED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledValue/Reported { "value": <REPORTED_SCALED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/ScaledValue/Desired { "value": <DESIRED_SCALED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/ScaledValue/Reported { "value": <REPORTED_SCALED_VALUE>}
+
 ```
 
 <br><br>
@@ -30633,15 +30771,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledValue/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinScaledValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinScaledValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/MinScaledValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinScaledValue/Desired { "value": <DESIRED_MIN_SCALED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinScaledValue/Reported { "value": <REPORTED_MIN_SCALED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MinScaledValue/Desired { "value": <DESIRED_MIN_SCALED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MinScaledValue/Reported { "value": <REPORTED_MIN_SCALED_VALUE>}
+
 ```
 
 <br><br>
@@ -30673,15 +30815,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MinScaledValue/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxScaledValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxScaledValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/MaxScaledValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxScaledValue/Desired { "value": <DESIRED_MAX_SCALED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxScaledValue/Reported { "value": <REPORTED_MAX_SCALED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MaxScaledValue/Desired { "value": <DESIRED_MAX_SCALED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/MaxScaledValue/Reported { "value": <REPORTED_MAX_SCALED_VALUE>}
+
 ```
 
 <br><br>
@@ -30713,15 +30859,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/MaxScaledValue/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ScaledTolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledTolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/ScaledTolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledTolerance/Desired { "value": <DESIRED_SCALED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledTolerance/Reported { "value": <REPORTED_SCALED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/ScaledTolerance/Desired { "value": <DESIRED_SCALED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/ScaledTolerance/Reported { "value": <REPORTED_SCALED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -30753,15 +30903,19 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ScaledTolerance/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Scale attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Scale/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PressureMeasurement/Attributes/Scale/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Scale/Desired { "value": <DESIRED_SCALE> }
-ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Scale/Reported { "value": <REPORTED_SCALE> }
+
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/Scale/Desired { "value": <DESIRED_SCALE>}
+ucl/by-unid/<UNID>/ep0/PressureMeasurement/Attributes/Scale/Reported { "value": <REPORTED_SCALE>}
+
 ```
 
 <br><br>
@@ -30798,7 +30952,7 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/Scale/Reported { "value":
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -30851,7 +31005,7 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Attributes/ClusterRevision/Reported 
 
 To see supported commands for PressureMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PressureMeasurement/SupportedCommands { "value": [] }
@@ -30859,8 +31013,7 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/SupportedCommands { "value": [] }
 
 To see supported generated commands for PressureMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PressureMeasurement/SupportedGeneratedCommands { "value": [] }
@@ -30906,11 +31059,12 @@ ucl/by-unid/<UNID>/<EP>/PressureMeasurement/SupportedGeneratedCommands { "value"
 
 To update all PressureMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -30958,13 +31112,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Commands/WriteAttr
 
 To force read all PressureMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the PressureMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PressureMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -31021,15 +31175,19 @@ The following attribute topics are used to retrieve the FlowMeasurement cluster 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FlowMeasurement/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -31061,15 +31219,19 @@ ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MeasuredValue/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FlowMeasurement/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -31101,15 +31263,19 @@ ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MinMeasuredValue/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FlowMeasurement/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -31141,15 +31307,19 @@ ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/MaxMeasuredValue/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FlowMeasurement/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/FlowMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -31186,7 +31356,7 @@ ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/Tolerance/Reported { "value":
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -31239,7 +31409,7 @@ ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Attributes/ClusterRevision/Reported { "v
 
 To see supported commands for FlowMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/FlowMeasurement/SupportedCommands { "value": [] }
@@ -31247,8 +31417,7 @@ ucl/by-unid/<UNID>/<EP>/FlowMeasurement/SupportedCommands { "value": [] }
 
 To see supported generated commands for FlowMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/FlowMeasurement/SupportedGeneratedCommands { "value": [] }
@@ -31294,11 +31463,12 @@ ucl/by-unid/<UNID>/<EP>/FlowMeasurement/SupportedGeneratedCommands { "value": []
 
 To update all FlowMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -31341,13 +31511,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Commands/WriteAttribut
 
 To force read all FlowMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the FlowMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FlowMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -31404,15 +31574,19 @@ The following attribute topics are used to retrieve the RelativityHumidity clust
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/RelativityHumidity/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -31444,15 +31618,19 @@ ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MeasuredValue/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/RelativityHumidity/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -31484,15 +31662,19 @@ ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MinMeasuredValue/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/RelativityHumidity/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -31524,15 +31706,19 @@ ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/MaxMeasuredValue/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/RelativityHumidity/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/RelativityHumidity/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -31569,7 +31755,7 @@ ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/Tolerance/Reported { "valu
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -31622,7 +31808,7 @@ ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Attributes/ClusterRevision/Reported {
 
 To see supported commands for RelativityHumidity cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/RelativityHumidity/SupportedCommands { "value": [] }
@@ -31630,8 +31816,7 @@ ucl/by-unid/<UNID>/<EP>/RelativityHumidity/SupportedCommands { "value": [] }
 
 To see supported generated commands for RelativityHumidity cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/RelativityHumidity/SupportedGeneratedCommands { "value": [] }
@@ -31677,11 +31862,12 @@ ucl/by-unid/<UNID>/<EP>/RelativityHumidity/SupportedGeneratedCommands { "value":
 
 To update all RelativityHumidity attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -31724,13 +31910,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Commands/WriteAttri
 
 To force read all RelativityHumidity attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the RelativityHumidity attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/RelativityHumidity/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -31787,15 +31973,19 @@ The following attribute topics are used to retrieve the OccupancySensing cluster
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Occupancy attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/Occupancy/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/Occupancy/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/Occupancy/Desired { "value": <DESIRED_OCCUPANCY> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/Occupancy/Reported { "value": <REPORTED_OCCUPANCY> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/Occupancy/Desired { "value": <DESIRED_OCCUPANCY>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/Occupancy/Reported { "value": <REPORTED_OCCUPANCY>}
+
 ```
 
 <br><br>
@@ -31827,15 +32017,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/Occupancy/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OccupancySensorType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/OccupancySensorType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorType/Desired { "value": <DESIRED_OCCUPANCY_SENSOR_TYPE> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorType/Reported { "value": <REPORTED_OCCUPANCY_SENSOR_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/OccupancySensorType/Desired { "value": <DESIRED_OCCUPANCY_SENSOR_TYPE>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/OccupancySensorType/Reported { "value": <REPORTED_OCCUPANCY_SENSOR_TYPE>}
+
 ```
 
 <br><br>
@@ -31867,15 +32061,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorType/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OccupancySensorTypeBitmap attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorTypeBitmap/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/OccupancySensorTypeBitmap/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorTypeBitmap/Desired { "value": <DESIRED_OCCUPANCY_SENSOR_TYPE_BITMAP> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorTypeBitmap/Reported { "value": <REPORTED_OCCUPANCY_SENSOR_TYPE_BITMAP> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/OccupancySensorTypeBitmap/Desired { "value": <DESIRED_OCCUPANCY_SENSOR_TYPE_BITMAP>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/OccupancySensorTypeBitmap/Reported { "value": <REPORTED_OCCUPANCY_SENSOR_TYPE_BITMAP>}
+
 ```
 
 <br><br>
@@ -31907,15 +32105,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/OccupancySensorTypeBitmap/Re
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PIROccupiedToUnoccupiedDelay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIROccupiedToUnoccupiedDelay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/PIROccupiedToUnoccupiedDelay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIROccupiedToUnoccupiedDelay/Desired { "value": <DESIRED_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIROccupiedToUnoccupiedDelay/Reported { "value": <REPORTED_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PIROccupiedToUnoccupiedDelay/Desired { "value": <DESIRED_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PIROccupiedToUnoccupiedDelay/Reported { "value": <REPORTED_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY>}
+
 ```
 
 <br><br>
@@ -31947,15 +32149,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIROccupiedToUnoccupiedDelay
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PIRUnoccupiedToOccupiedDelay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedDelay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedDelay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedDelay/Desired { "value": <DESIRED_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedDelay/Reported { "value": <REPORTED_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedDelay/Desired { "value": <DESIRED_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedDelay/Reported { "value": <REPORTED_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY>}
+
 ```
 
 <br><br>
@@ -31987,15 +32193,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedDelay
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PIRUnoccupiedToOccupiedThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedThreshold/Desired { "value": <DESIRED_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedThreshold/Reported { "value": <REPORTED_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedThreshold/Desired { "value": <DESIRED_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedThreshold/Reported { "value": <REPORTED_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -32027,15 +32237,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PIRUnoccupiedToOccupiedThres
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UltrasonicOccupiedToUnoccupiedDelay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicOccupiedToUnoccupiedDelay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/UltrasonicOccupiedToUnoccupiedDelay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicOccupiedToUnoccupiedDelay/Desired { "value": <DESIRED_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicOccupiedToUnoccupiedDelay/Reported { "value": <REPORTED_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/UltrasonicOccupiedToUnoccupiedDelay/Desired { "value": <DESIRED_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/UltrasonicOccupiedToUnoccupiedDelay/Reported { "value": <REPORTED_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY>}
+
 ```
 
 <br><br>
@@ -32067,15 +32281,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicOccupiedToUnoccupi
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UltrasonicUnoccupiedToOccupiedDelay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedDelay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedDelay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedDelay/Desired { "value": <DESIRED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedDelay/Reported { "value": <REPORTED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedDelay/Desired { "value": <DESIRED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedDelay/Reported { "value": <REPORTED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY>}
+
 ```
 
 <br><br>
@@ -32107,15 +32325,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupi
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UltrasonicUnoccupiedToOccupiedThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedThreshold/Desired { "value": <DESIRED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedThreshold/Reported { "value": <REPORTED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedThreshold/Desired { "value": <DESIRED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupiedThreshold/Reported { "value": <REPORTED_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -32147,15 +32369,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/UltrasonicUnoccupiedToOccupi
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalContactOccupiedToUnoccupiedDelay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactOccupiedToUnoccupiedDelay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/PhysicalContactOccupiedToUnoccupiedDelay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactOccupiedToUnoccupiedDelay/Desired { "value": <DESIRED_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactOccupiedToUnoccupiedDelay/Reported { "value": <REPORTED_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PhysicalContactOccupiedToUnoccupiedDelay/Desired { "value": <DESIRED_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PhysicalContactOccupiedToUnoccupiedDelay/Reported { "value": <REPORTED_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY>}
+
 ```
 
 <br><br>
@@ -32187,15 +32413,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactOccupiedToUno
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalContactUnoccupiedToOccupiedDelay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedDelay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedDelay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedDelay/Desired { "value": <DESIRED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedDelay/Reported { "value": <REPORTED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedDelay/Desired { "value": <DESIRED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedDelay/Reported { "value": <REPORTED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY>}
+
 ```
 
 <br><br>
@@ -32227,15 +32457,19 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhysicalContactUnoccupiedToOccupiedThreshold attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedThreshold/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedThreshold/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedThreshold/Desired { "value": <DESIRED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD> }
-ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedThreshold/Reported { "value": <REPORTED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD> }
+
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedThreshold/Desired { "value": <DESIRED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD>}
+ucl/by-unid/<UNID>/ep0/OccupancySensing/Attributes/PhysicalContactUnoccupiedToOccupiedThreshold/Reported { "value": <REPORTED_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD>}
+
 ```
 
 <br><br>
@@ -32272,7 +32506,7 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/PhysicalContactUnoccupiedToO
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -32325,7 +32559,7 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/Attributes/ClusterRevision/Reported { "
 
 To see supported commands for OccupancySensing cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/OccupancySensing/SupportedCommands { "value": [] }
@@ -32333,8 +32567,7 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/SupportedCommands { "value": [] }
 
 To see supported generated commands for OccupancySensing cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/OccupancySensing/SupportedGeneratedCommands { "value": [] }
@@ -32407,11 +32640,12 @@ ucl/by-unid/<UNID>/<EP>/OccupancySensing/SupportedGeneratedCommands { "value": [
 
 To update all OccupancySensing attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Commands/WriteAttributes' -m  '{ "PIROccupiedToUnoccupiedDelay": <PIR_OCCUPIED_TO_UNOCCUPIED_DELAY_VALUE> ,"PIRUnoccupiedToOccupiedDelay": <PIR_UNOCCUPIED_TO_OCCUPIED_DELAY_VALUE> ,"PIRUnoccupiedToOccupiedThreshold": <PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_VALUE> ,"UltrasonicOccupiedToUnoccupiedDelay": <ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY_VALUE> ,"UltrasonicUnoccupiedToOccupiedDelay": <ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY_VALUE> ,"UltrasonicUnoccupiedToOccupiedThreshold": <ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_VALUE> ,"PhysicalContactOccupiedToUnoccupiedDelay": <PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY_VALUE> ,"PhysicalContactUnoccupiedToOccupiedDelay": <PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY_VALUE> ,"PhysicalContactUnoccupiedToOccupiedThreshold": <PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -32462,13 +32696,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Commands/WriteAttribu
 
 To force read all OccupancySensing attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the OccupancySensing attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/OccupancySensing/Commands/ForceReadAttributes' -m  '{ "value": ["Occupancy"] }'
 ```
 
@@ -32525,15 +32759,19 @@ The following attribute topics are used to retrieve the SoilMoisture cluster sta
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/SoilMoisture/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -32565,15 +32803,19 @@ ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MeasuredValue/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/SoilMoisture/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -32605,15 +32847,19 @@ ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MinMeasuredValue/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/SoilMoisture/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -32645,15 +32891,19 @@ ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/MaxMeasuredValue/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/SoilMoisture/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/SoilMoisture/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -32690,7 +32940,7 @@ ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/Tolerance/Reported { "value": <R
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -32743,7 +32993,7 @@ ucl/by-unid/<UNID>/<EP>/SoilMoisture/Attributes/ClusterRevision/Reported { "valu
 
 To see supported commands for SoilMoisture cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedCommands { "value": [] }
@@ -32751,8 +33001,7 @@ ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedCommands { "value": [] }
 
 To see supported generated commands for SoilMoisture cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedGeneratedCommands { "value": [] }
@@ -32798,11 +33047,12 @@ ucl/by-unid/<UNID>/<EP>/SoilMoisture/SupportedGeneratedCommands { "value": [] }
 
 To update all SoilMoisture attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -32845,13 +33095,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Commands/WriteAttributes'
 
 To force read all SoilMoisture attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the SoilMoisture attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SoilMoisture/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -32908,15 +33158,19 @@ The following attribute topics are used to retrieve the PhMeasurement cluster st
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PhMeasurement/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -32948,15 +33202,19 @@ ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MeasuredValue/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PhMeasurement/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -32988,15 +33246,19 @@ ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MinMeasuredValue/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PhMeasurement/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -33028,15 +33290,19 @@ ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/MaxMeasuredValue/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PhMeasurement/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/PhMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -33073,7 +33339,7 @@ ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/Tolerance/Reported { "value": <
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -33126,7 +33392,7 @@ ucl/by-unid/<UNID>/<EP>/PhMeasurement/Attributes/ClusterRevision/Reported { "val
 
 To see supported commands for PhMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PhMeasurement/SupportedCommands { "value": [] }
@@ -33134,8 +33400,7 @@ ucl/by-unid/<UNID>/<EP>/PhMeasurement/SupportedCommands { "value": [] }
 
 To see supported generated commands for PhMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PhMeasurement/SupportedGeneratedCommands { "value": [] }
@@ -33181,11 +33446,12 @@ ucl/by-unid/<UNID>/<EP>/PhMeasurement/SupportedGeneratedCommands { "value": [] }
 
 To update all PhMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -33228,13 +33494,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Commands/WriteAttributes
 
 To force read all PhMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the PhMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PhMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -33291,15 +33557,19 @@ The following attribute topics are used to retrieve the ElectricalConductivityMe
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalConductivityMeasurement/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -33331,15 +33601,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MeasuredVal
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalConductivityMeasurement/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -33371,15 +33645,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MinMeasured
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalConductivityMeasurement/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -33411,15 +33689,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/MaxMeasured
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalConductivityMeasurement/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/ElectricalConductivityMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -33456,7 +33738,7 @@ ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/Tolerance/R
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -33509,7 +33791,7 @@ ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Attributes/ClusterRevi
 
 To see supported commands for ElectricalConductivityMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/SupportedCommands { "value": [] }
@@ -33517,8 +33799,7 @@ ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/SupportedCommands { "v
 
 To see supported generated commands for ElectricalConductivityMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/SupportedGeneratedCommands { "value": [] }
@@ -33564,11 +33845,12 @@ ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/SupportedGeneratedComm
 
 To update all ElectricalConductivityMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -33611,13 +33893,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Comm
 
 To force read all ElectricalConductivityMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ElectricalConductivityMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalConductivityMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -33674,15 +33956,19 @@ The following attribute topics are used to retrieve the WindSpeedMeasurement clu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindSpeedMeasurement/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -33714,15 +34000,19 @@ ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MeasuredValue/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindSpeedMeasurement/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -33754,15 +34044,19 @@ ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MinMeasuredValue/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindSpeedMeasurement/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -33794,15 +34088,19 @@ ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/MaxMeasuredValue/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/WindSpeedMeasurement/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/WindSpeedMeasurement/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -33839,7 +34137,7 @@ ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/Tolerance/Reported { "va
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -33892,7 +34190,7 @@ ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Attributes/ClusterRevision/Reported
 
 To see supported commands for WindSpeedMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/SupportedCommands { "value": [] }
@@ -33900,8 +34198,7 @@ ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/SupportedCommands { "value": [] }
 
 To see supported generated commands for WindSpeedMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/SupportedGeneratedCommands { "value": [] }
@@ -33947,11 +34244,12 @@ ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/SupportedGeneratedCommands { "value
 
 To update all WindSpeedMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -33994,13 +34292,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Commands/WriteAtt
 
 To force read all WindSpeedMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the WindSpeedMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/WindSpeedMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -34057,15 +34355,19 @@ The following attribute topics are used to retrieve the CarbonMonoxide cluster s
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonMonoxide/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34097,15 +34399,19 @@ ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MeasuredValue/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonMonoxide/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34137,15 +34443,19 @@ ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MinMeasuredValue/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonMonoxide/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34177,15 +34487,19 @@ ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/MaxMeasuredValue/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonMonoxide/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/CarbonMonoxide/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -34222,7 +34536,7 @@ ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/Tolerance/Reported { "value": 
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -34275,7 +34589,7 @@ ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Attributes/ClusterRevision/Reported { "va
 
 To see supported commands for CarbonMonoxide cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/SupportedCommands { "value": [] }
@@ -34283,8 +34597,7 @@ ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/SupportedCommands { "value": [] }
 
 To see supported generated commands for CarbonMonoxide cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/SupportedGeneratedCommands { "value": [] }
@@ -34330,11 +34643,12 @@ ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/SupportedGeneratedCommands { "value": [] 
 
 To update all CarbonMonoxide attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -34377,13 +34691,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Commands/WriteAttribute
 
 To force read all CarbonMonoxide attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the CarbonMonoxide attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonMonoxide/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -34440,15 +34754,19 @@ The following attribute topics are used to retrieve the CarbonDioxide cluster st
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonDioxide/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34480,15 +34798,19 @@ ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MeasuredValue/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonDioxide/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34520,15 +34842,19 @@ ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MinMeasuredValue/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonDioxide/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34560,15 +34886,19 @@ ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/MaxMeasuredValue/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/CarbonDioxide/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/CarbonDioxide/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -34605,7 +34935,7 @@ ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/Tolerance/Reported { "value": <
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -34658,7 +34988,7 @@ ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Attributes/ClusterRevision/Reported { "val
 
 To see supported commands for CarbonDioxide cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedCommands { "value": [] }
@@ -34666,8 +34996,7 @@ ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedCommands { "value": [] }
 
 To see supported generated commands for CarbonDioxide cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedGeneratedCommands { "value": [] }
@@ -34713,11 +35042,12 @@ ucl/by-unid/<UNID>/<EP>/CarbonDioxide/SupportedGeneratedCommands { "value": [] }
 
 To update all CarbonDioxide attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -34760,13 +35090,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Commands/WriteAttributes
 
 To force read all CarbonDioxide attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the CarbonDioxide attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/CarbonDioxide/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -34823,15 +35153,19 @@ The following attribute topics are used to retrieve the PM25 cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PM25/Attributes/MeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/MeasuredValue/Desired { "value": <DESIRED_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/MeasuredValue/Reported { "value": <REPORTED_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34863,15 +35197,19 @@ ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MeasuredValue/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MinMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PM25/Attributes/MinMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/MinMeasuredValue/Desired { "value": <DESIRED_MIN_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/MinMeasuredValue/Reported { "value": <REPORTED_MIN_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34903,15 +35241,19 @@ ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MinMeasuredValue/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxMeasuredValue attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MaxMeasuredValue/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PM25/Attributes/MaxMeasuredValue/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE> }
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE> }
+
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/MaxMeasuredValue/Desired { "value": <DESIRED_MAX_MEASURED_VALUE>}
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/MaxMeasuredValue/Reported { "value": <REPORTED_MAX_MEASURED_VALUE>}
+
 ```
 
 <br><br>
@@ -34943,15 +35285,19 @@ ucl/by-unid/<UNID>/<EP>/PM25/Attributes/MaxMeasuredValue/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Tolerance attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/Tolerance/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/PM25/Attributes/Tolerance/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE> }
-ucl/by-unid/<UNID>/<EP>/PM25/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE> }
+
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/Tolerance/Desired { "value": <DESIRED_TOLERANCE>}
+ucl/by-unid/<UNID>/ep0/PM25/Attributes/Tolerance/Reported { "value": <REPORTED_TOLERANCE>}
+
 ```
 
 <br><br>
@@ -34988,7 +35334,7 @@ ucl/by-unid/<UNID>/<EP>/PM25/Attributes/Tolerance/Reported { "value": <REPORTED_
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PM25/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -35041,7 +35387,7 @@ ucl/by-unid/<UNID>/<EP>/PM25/Attributes/ClusterRevision/Reported { "value": <REP
 
 To see supported commands for PM25 cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PM25/SupportedCommands { "value": [] }
@@ -35049,8 +35395,7 @@ ucl/by-unid/<UNID>/<EP>/PM25/SupportedCommands { "value": [] }
 
 To see supported generated commands for PM25 cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/PM25/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/PM25/SupportedGeneratedCommands { "value": [] }
@@ -35096,11 +35441,12 @@ ucl/by-unid/<UNID>/<EP>/PM25/SupportedGeneratedCommands { "value": [] }
 
 To update all PM25 attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -35143,13 +35489,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Commands/WriteAttributes' -m  '{ 
 
 To force read all PM25 attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the PM25 attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/PM25/Commands/ForceReadAttributes' -m  '{ "value": ["MeasuredValue"] }'
 ```
 
@@ -35206,15 +35552,19 @@ The following attribute topics are used to retrieve the IASZone cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ZoneState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASZone/Attributes/ZoneState/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneState/Desired { "value": <DESIRED_ZONE_STATE> }
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneState/Reported { "value": <REPORTED_ZONE_STATE> }
+
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneState/Desired { "value": <DESIRED_ZONE_STATE>}
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneState/Reported { "value": <REPORTED_ZONE_STATE>}
+
 ```
 
 <br><br>
@@ -35246,15 +35596,19 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneState/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ZoneType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASZone/Attributes/ZoneType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneType/Desired { "value": <DESIRED_ZONE_TYPE> }
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneType/Reported { "value": <REPORTED_ZONE_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneType/Desired { "value": <DESIRED_ZONE_TYPE>}
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneType/Reported { "value": <REPORTED_ZONE_TYPE>}
+
 ```
 
 <br><br>
@@ -35286,15 +35640,19 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneType/Reported { "value": <REPORTE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ZoneStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASZone/Attributes/ZoneStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneStatus/Desired { "value": <DESIRED_ZONE_STATUS> }
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneStatus/Reported { "value": <REPORTED_ZONE_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneStatus/Desired { "value": <DESIRED_ZONE_STATUS>}
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneStatus/Reported { "value": <REPORTED_ZONE_STATUS>}
+
 ```
 
 <br><br>
@@ -35326,15 +35684,19 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneStatus/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for IASCIEAddress attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/IASCIEAddress/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASZone/Attributes/IASCIEAddress/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/IASCIEAddress/Desired { "value": <DESIRED_IASCIE_ADDRESS> }
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/IASCIEAddress/Reported { "value": <REPORTED_IASCIE_ADDRESS> }
+
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/IASCIEAddress/Desired { "value": <DESIRED_IASCIE_ADDRESS>}
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/IASCIEAddress/Reported { "value": <REPORTED_IASCIE_ADDRESS>}
+
 ```
 
 <br><br>
@@ -35366,15 +35728,19 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/IASCIEAddress/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ZoneID attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneID/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASZone/Attributes/ZoneID/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneID/Desired { "value": <DESIRED_ZONEID> }
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneID/Reported { "value": <REPORTED_ZONEID> }
+
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneID/Desired { "value": <DESIRED_ZONEID>}
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/ZoneID/Reported { "value": <REPORTED_ZONEID>}
+
 ```
 
 <br><br>
@@ -35406,15 +35772,19 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ZoneID/Reported { "value": <REPORTED_
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfZoneSensitivityLevelsSupported attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/NumberOfZoneSensitivityLevelsSupported/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASZone/Attributes/NumberOfZoneSensitivityLevelsSupported/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/NumberOfZoneSensitivityLevelsSupported/Desired { "value": <DESIRED_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED> }
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/NumberOfZoneSensitivityLevelsSupported/Reported { "value": <REPORTED_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED> }
+
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/NumberOfZoneSensitivityLevelsSupported/Desired { "value": <DESIRED_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED>}
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/NumberOfZoneSensitivityLevelsSupported/Reported { "value": <REPORTED_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED>}
+
 ```
 
 <br><br>
@@ -35446,15 +35816,19 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/NumberOfZoneSensitivityLevelsSupporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentZoneSensitivityLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/CurrentZoneSensitivityLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASZone/Attributes/CurrentZoneSensitivityLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/CurrentZoneSensitivityLevel/Desired { "value": <DESIRED_CURRENT_ZONE_SENSITIVITY_LEVEL> }
-ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/CurrentZoneSensitivityLevel/Reported { "value": <REPORTED_CURRENT_ZONE_SENSITIVITY_LEVEL> }
+
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/CurrentZoneSensitivityLevel/Desired { "value": <DESIRED_CURRENT_ZONE_SENSITIVITY_LEVEL>}
+ucl/by-unid/<UNID>/ep0/IASZone/Attributes/CurrentZoneSensitivityLevel/Reported { "value": <REPORTED_CURRENT_ZONE_SENSITIVITY_LEVEL>}
+
 ```
 
 <br><br>
@@ -35491,7 +35865,7 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/CurrentZoneSensitivityLevel/Reported 
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -35551,7 +35925,7 @@ ucl/by-unid/<UNID>/<EP>/IASZone/Attributes/ClusterRevision/Reported { "value": <
 
 To see supported commands for IASZone cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IASZone/SupportedCommands { "value": ["ZoneEnrollResponse","InitiateNormalOperationMode","InitiateTestMode","WriteAttributes", "ForceReadAttributes"] }
@@ -35559,8 +35933,7 @@ ucl/by-unid/<UNID>/<EP>/IASZone/SupportedCommands { "value": ["ZoneEnrollRespons
 
 To see supported generated commands for IASZone cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IASZone/SupportedGeneratedCommands { "value": ["ZoneStatusChangeNotification","ZoneEnrollRequest",] }
@@ -35614,13 +35987,13 @@ ucl/by-unid/<UNID>/<EP>/IASZone/SupportedGeneratedCommands { "value": ["ZoneStat
 
 To send a IASZone/ZoneEnrollResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/ZoneEnrollResponse' -m  '{ "EnrollResponseCode": <ENROLL_RESPONSE_CODE_VALUE>,"ZoneID": <ZONEID_VALUE> }'
 ```
 
 To receive a IASZone/ZoneEnrollResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/ZoneEnrollResponse'
 ```
 
@@ -35669,13 +36042,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/ZoneEnrollRe
 
 To send a IASZone/ZoneStatusChangeNotification command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/ZoneStatusChangeNotification' -m  '{ "ZoneStatus": <ZONE_STATUS_VALUE>,"ExtendedStatus": <EXTENDED_STATUS_VALUE>,"ZoneID": <ZONEID_VALUE>,"Delay": <DELAY_VALUE> }'
 ```
 
 To receive a IASZone/ZoneStatusChangeNotification generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/ZoneStatusChangeNotification'
 ```
 
@@ -35708,13 +36081,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/ZoneStatusCh
 
 To send a IASZone/InitiateNormalOperationMode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/InitiateNormalOperationMode' -m  '{  }'
 ```
 
 To receive a IASZone/InitiateNormalOperationMode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/InitiateNormalOperationMode'
 ```
 
@@ -35755,13 +36128,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/InitiateNorm
 
 To send a IASZone/ZoneEnrollRequest command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/ZoneEnrollRequest' -m  '{ "ZoneType": <ZONE_TYPE_VALUE>,"ManufacturerCode": <MANUFACTURER_CODE_VALUE> }'
 ```
 
 To receive a IASZone/ZoneEnrollRequest generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/ZoneEnrollRequest'
 ```
 
@@ -35802,13 +36175,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/ZoneEnrollRe
 
 To send a IASZone/InitiateTestMode command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/InitiateTestMode' -m  '{ "TestModeDuration": <TEST_MODE_DURATION_VALUE>,"CurrentZoneSensitivityLevel": <CURRENT_ZONE_SENSITIVITY_LEVEL_VALUE> }'
 ```
 
 To receive a IASZone/InitiateTestMode generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/InitiateTestMode'
 ```
 
@@ -35847,11 +36220,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/GeneratedCommands/InitiateTest
 
 To update all IASZone attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/WriteAttributes' -m  '{ "IASCIEAddress": <IASCIE_ADDRESS_VALUE> ,"CurrentZoneSensitivityLevel": <CURRENT_ZONE_SENSITIVITY_LEVEL_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -35897,13 +36271,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/WriteAttributes' -m  
 
 To force read all IASZone attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the IASZone attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASZone/Commands/ForceReadAttributes' -m  '{ "value": ["ZoneState"] }'
 ```
 
@@ -35960,15 +36334,19 @@ The following attribute topics are used to retrieve the IASWD cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxDuration attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Attributes/MaxDuration/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/IASWD/Attributes/MaxDuration/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/IASWD/Attributes/MaxDuration/Desired { "value": <DESIRED_MAX_DURATION> }
-ucl/by-unid/<UNID>/<EP>/IASWD/Attributes/MaxDuration/Reported { "value": <REPORTED_MAX_DURATION> }
+
+ucl/by-unid/<UNID>/ep0/IASWD/Attributes/MaxDuration/Desired { "value": <DESIRED_MAX_DURATION>}
+ucl/by-unid/<UNID>/ep0/IASWD/Attributes/MaxDuration/Reported { "value": <REPORTED_MAX_DURATION>}
+
 ```
 
 <br><br>
@@ -36005,7 +36383,7 @@ ucl/by-unid/<UNID>/<EP>/IASWD/Attributes/MaxDuration/Reported { "value": <REPORT
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IASWD/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -36062,7 +36440,7 @@ ucl/by-unid/<UNID>/<EP>/IASWD/Attributes/ClusterRevision/Reported { "value": <RE
 
 To see supported commands for IASWD cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IASWD/SupportedCommands { "value": ["StartWarning","Squawk","WriteAttributes", "ForceReadAttributes"] }
@@ -36070,8 +36448,7 @@ ucl/by-unid/<UNID>/<EP>/IASWD/SupportedCommands { "value": ["StartWarning","Squa
 
 To see supported generated commands for IASWD cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/IASWD/SupportedGeneratedCommands { "value": [] }
@@ -36133,13 +36510,13 @@ ucl/by-unid/<UNID>/<EP>/IASWD/SupportedGeneratedCommands { "value": [] }
 
 To send a IASWD/StartWarning command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Commands/StartWarning' -m  '{ "SirenConfiguration": <SIREN_CONFIGURATION_VALUE>,"WarningDuration": <WARNING_DURATION_VALUE>,"StrobeDutyCycle": <STROBE_DUTY_CYCLE_VALUE>,"StrobeLevel": <STROBE_LEVEL_VALUE> }'
 ```
 
 To receive a IASWD/StartWarning generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/GeneratedCommands/StartWarning'
 ```
 
@@ -36176,13 +36553,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/GeneratedCommands/StartWarning'
 
 To send a IASWD/Squawk command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Commands/Squawk' -m  '{ "SquawkConfiguration": <SQUAWK_CONFIGURATION_VALUE> }'
 ```
 
 To receive a IASWD/Squawk generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/GeneratedCommands/Squawk'
 ```
 
@@ -36218,11 +36595,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/GeneratedCommands/Squawk'
 
 To update all IASWD attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Commands/WriteAttributes' -m  '{ "MaxDuration": <MAX_DURATION_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -36262,13 +36640,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Commands/WriteAttributes' -m  '{
 
 To force read all IASWD attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the IASWD attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/IASWD/Commands/ForceReadAttributes' -m  '{ "value": ["MaxDuration"] }'
 ```
 
@@ -36325,15 +36703,19 @@ The following attribute topics are used to retrieve the Metering cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentSummationDelivered attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationDelivered/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentSummationDelivered/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationDelivered/Desired { "value": <DESIRED_CURRENT_SUMMATION_DELIVERED> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationDelivered/Reported { "value": <REPORTED_CURRENT_SUMMATION_DELIVERED> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentSummationDelivered/Desired { "value": <DESIRED_CURRENT_SUMMATION_DELIVERED>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentSummationDelivered/Reported { "value": <REPORTED_CURRENT_SUMMATION_DELIVERED>}
+
 ```
 
 <br><br>
@@ -36365,15 +36747,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationDelivered/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentSummationReceived attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationReceived/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentSummationReceived/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationReceived/Desired { "value": <DESIRED_CURRENT_SUMMATION_RECEIVED> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationReceived/Reported { "value": <REPORTED_CURRENT_SUMMATION_RECEIVED> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentSummationReceived/Desired { "value": <DESIRED_CURRENT_SUMMATION_RECEIVED>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentSummationReceived/Reported { "value": <REPORTED_CURRENT_SUMMATION_RECEIVED>}
+
 ```
 
 <br><br>
@@ -36405,15 +36791,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentSummationReceived/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentMaxDemandDelivered attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDelivered/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandDelivered/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDelivered/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_DELIVERED> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDelivered/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_DELIVERED> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandDelivered/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_DELIVERED>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandDelivered/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_DELIVERED>}
+
 ```
 
 <br><br>
@@ -36445,15 +36835,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDelivered/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentMaxDemandReceived attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceived/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandReceived/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceived/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_RECEIVED> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceived/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_RECEIVED> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandReceived/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_RECEIVED>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandReceived/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_RECEIVED>}
+
 ```
 
 <br><br>
@@ -36485,15 +36879,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceived/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerFactor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/PowerFactor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/PowerFactor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/PowerFactor/Desired { "value": <DESIRED_POWER_FACTOR> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/PowerFactor/Reported { "value": <REPORTED_POWER_FACTOR> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/PowerFactor/Desired { "value": <DESIRED_POWER_FACTOR>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/PowerFactor/Reported { "value": <REPORTED_POWER_FACTOR>}
+
 ```
 
 <br><br>
@@ -36525,15 +36923,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/PowerFactor/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReadingSnapShotTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/ReadingSnapShotTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/ReadingSnapShotTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/ReadingSnapShotTime/Desired { "value": <DESIRED_READING_SNAP_SHOT_TIME> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/ReadingSnapShotTime/Reported { "value": <REPORTED_READING_SNAP_SHOT_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/ReadingSnapShotTime/Desired { "value": <DESIRED_READING_SNAP_SHOT_TIME>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/ReadingSnapShotTime/Reported { "value": <REPORTED_READING_SNAP_SHOT_TIME>}
+
 ```
 
 <br><br>
@@ -36565,15 +36967,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/ReadingSnapShotTime/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentMaxDemandDeliveredTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDeliveredTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandDeliveredTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDeliveredTime/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_DELIVERED_TIME> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDeliveredTime/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_DELIVERED_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandDeliveredTime/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_DELIVERED_TIME>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandDeliveredTime/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_DELIVERED_TIME>}
+
 ```
 
 <br><br>
@@ -36605,15 +37011,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandDeliveredTime/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentMaxDemandReceivedTime attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceivedTime/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentMaxDemandReceivedTime/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceivedTime/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_RECEIVED_TIME> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceivedTime/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_RECEIVED_TIME> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandReceivedTime/Desired { "value": <DESIRED_CURRENT_MAX_DEMAND_RECEIVED_TIME>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentMaxDemandReceivedTime/Reported { "value": <REPORTED_CURRENT_MAX_DEMAND_RECEIVED_TIME>}
+
 ```
 
 <br><br>
@@ -36645,15 +37055,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentMaxDemandReceivedTime/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DefaultUpdatePeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DefaultUpdatePeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/DefaultUpdatePeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DefaultUpdatePeriod/Desired { "value": <DESIRED_DEFAULT_UPDATE_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DefaultUpdatePeriod/Reported { "value": <REPORTED_DEFAULT_UPDATE_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/DefaultUpdatePeriod/Desired { "value": <DESIRED_DEFAULT_UPDATE_PERIOD>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/DefaultUpdatePeriod/Reported { "value": <REPORTED_DEFAULT_UPDATE_PERIOD>}
+
 ```
 
 <br><br>
@@ -36685,15 +37099,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DefaultUpdatePeriod/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SupplyStatus attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SupplyStatus/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/SupplyStatus/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SupplyStatus/Desired { "value": <DESIRED_SUPPLY_STATUS> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SupplyStatus/Reported { "value": <REPORTED_SUPPLY_STATUS> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/SupplyStatus/Desired { "value": <DESIRED_SUPPLY_STATUS>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/SupplyStatus/Reported { "value": <REPORTED_SUPPLY_STATUS>}
+
 ```
 
 <br><br>
@@ -36725,15 +37143,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SupplyStatus/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentInletEnergyCarrierSummation attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentInletEnergyCarrierSummation/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentInletEnergyCarrierSummation/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentInletEnergyCarrierSummation/Desired { "value": <DESIRED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentInletEnergyCarrierSummation/Reported { "value": <REPORTED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentInletEnergyCarrierSummation/Desired { "value": <DESIRED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentInletEnergyCarrierSummation/Reported { "value": <REPORTED_CURRENT_INLET_ENERGY_CARRIER_SUMMATION>}
+
 ```
 
 <br><br>
@@ -36765,15 +37187,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentInletEnergyCarrierSummation/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentOutletEnergyCarrierSummation attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentOutletEnergyCarrierSummation/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/CurrentOutletEnergyCarrierSummation/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Desired { "value": <DESIRED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Reported { "value": <REPORTED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Desired { "value": <DESIRED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/CurrentOutletEnergyCarrierSummation/Reported { "value": <REPORTED_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION>}
+
 ```
 
 <br><br>
@@ -36805,15 +37231,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/CurrentOutletEnergyCarrierSummation/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for InletTemperature attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/InletTemperature/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/InletTemperature/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/InletTemperature/Desired { "value": <DESIRED_INLET_TEMPERATURE> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/InletTemperature/Reported { "value": <REPORTED_INLET_TEMPERATURE> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/InletTemperature/Desired { "value": <DESIRED_INLET_TEMPERATURE>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/InletTemperature/Reported { "value": <REPORTED_INLET_TEMPERATURE>}
+
 ```
 
 <br><br>
@@ -36845,15 +37275,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/InletTemperature/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for OutletTemperature attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/OutletTemperature/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/OutletTemperature/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/OutletTemperature/Desired { "value": <DESIRED_OUTLET_TEMPERATURE> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/OutletTemperature/Reported { "value": <REPORTED_OUTLET_TEMPERATURE> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/OutletTemperature/Desired { "value": <DESIRED_OUTLET_TEMPERATURE>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/OutletTemperature/Reported { "value": <REPORTED_OUTLET_TEMPERATURE>}
+
 ```
 
 <br><br>
@@ -36885,15 +37319,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/OutletTemperature/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UnitofMeasure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/UnitofMeasure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/UnitofMeasure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/UnitofMeasure/Desired { "value": <DESIRED_UNITOF_MEASURE> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/UnitofMeasure/Reported { "value": <REPORTED_UNITOF_MEASURE> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/UnitofMeasure/Desired { "value": <DESIRED_UNITOF_MEASURE>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/UnitofMeasure/Reported { "value": <REPORTED_UNITOF_MEASURE>}
+
 ```
 
 <br><br>
@@ -36925,15 +37363,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/UnitofMeasure/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Multiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Multiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/Multiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Multiplier/Desired { "value": <DESIRED_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Multiplier/Reported { "value": <REPORTED_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/Multiplier/Desired { "value": <DESIRED_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/Multiplier/Reported { "value": <REPORTED_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -36965,15 +37407,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Multiplier/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Divisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Divisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/Divisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Divisor/Desired { "value": <DESIRED_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Divisor/Reported { "value": <REPORTED_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/Divisor/Desired { "value": <DESIRED_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/Divisor/Reported { "value": <REPORTED_DIVISOR>}
+
 ```
 
 <br><br>
@@ -37005,15 +37451,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/Divisor/Reported { "value": <REPORTE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SummationFormatting attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SummationFormatting/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/SummationFormatting/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SummationFormatting/Desired { "value": <DESIRED_SUMMATION_FORMATTING> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SummationFormatting/Reported { "value": <REPORTED_SUMMATION_FORMATTING> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/SummationFormatting/Desired { "value": <DESIRED_SUMMATION_FORMATTING>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/SummationFormatting/Reported { "value": <REPORTED_SUMMATION_FORMATTING>}
+
 ```
 
 <br><br>
@@ -37045,15 +37495,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/SummationFormatting/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DemandFormatting attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DemandFormatting/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/DemandFormatting/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DemandFormatting/Desired { "value": <DESIRED_DEMAND_FORMATTING> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DemandFormatting/Reported { "value": <REPORTED_DEMAND_FORMATTING> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/DemandFormatting/Desired { "value": <DESIRED_DEMAND_FORMATTING>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/DemandFormatting/Reported { "value": <REPORTED_DEMAND_FORMATTING>}
+
 ```
 
 <br><br>
@@ -37085,15 +37539,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/DemandFormatting/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for HistoricalConsumptionFormatting attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/HistoricalConsumptionFormatting/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/HistoricalConsumptionFormatting/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/HistoricalConsumptionFormatting/Desired { "value": <DESIRED_HISTORICAL_CONSUMPTION_FORMATTING> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/HistoricalConsumptionFormatting/Reported { "value": <REPORTED_HISTORICAL_CONSUMPTION_FORMATTING> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/HistoricalConsumptionFormatting/Desired { "value": <DESIRED_HISTORICAL_CONSUMPTION_FORMATTING>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/HistoricalConsumptionFormatting/Reported { "value": <REPORTED_HISTORICAL_CONSUMPTION_FORMATTING>}
+
 ```
 
 <br><br>
@@ -37125,15 +37583,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/HistoricalConsumptionFormatting/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeteringDeviceType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/MeteringDeviceType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/MeteringDeviceType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/MeteringDeviceType/Desired { "value": <DESIRED_METERING_DEVICE_TYPE> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/MeteringDeviceType/Reported { "value": <REPORTED_METERING_DEVICE_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/MeteringDeviceType/Desired { "value": <DESIRED_METERING_DEVICE_TYPE>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/MeteringDeviceType/Reported { "value": <REPORTED_METERING_DEVICE_TYPE>}
+
 ```
 
 <br><br>
@@ -37165,15 +37627,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/MeteringDeviceType/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnergyCarrierUnitOfMeasure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierUnitOfMeasure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/EnergyCarrierUnitOfMeasure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierUnitOfMeasure/Desired { "value": <DESIRED_ENERGY_CARRIER_UNIT_OF_MEASURE> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierUnitOfMeasure/Reported { "value": <REPORTED_ENERGY_CARRIER_UNIT_OF_MEASURE> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/EnergyCarrierUnitOfMeasure/Desired { "value": <DESIRED_ENERGY_CARRIER_UNIT_OF_MEASURE>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/EnergyCarrierUnitOfMeasure/Reported { "value": <REPORTED_ENERGY_CARRIER_UNIT_OF_MEASURE>}
+
 ```
 
 <br><br>
@@ -37205,15 +37671,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierUnitOfMeasure/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnergyCarrierSummationFormatting attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierSummationFormatting/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/EnergyCarrierSummationFormatting/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierSummationFormatting/Desired { "value": <DESIRED_ENERGY_CARRIER_SUMMATION_FORMATTING> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierSummationFormatting/Reported { "value": <REPORTED_ENERGY_CARRIER_SUMMATION_FORMATTING> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/EnergyCarrierSummationFormatting/Desired { "value": <DESIRED_ENERGY_CARRIER_SUMMATION_FORMATTING>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/EnergyCarrierSummationFormatting/Reported { "value": <REPORTED_ENERGY_CARRIER_SUMMATION_FORMATTING>}
+
 ```
 
 <br><br>
@@ -37245,15 +37715,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierSummationFormatting/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EnergyCarrierDemandFormatting attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierDemandFormatting/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/EnergyCarrierDemandFormatting/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierDemandFormatting/Desired { "value": <DESIRED_ENERGY_CARRIER_DEMAND_FORMATTING> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierDemandFormatting/Reported { "value": <REPORTED_ENERGY_CARRIER_DEMAND_FORMATTING> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/EnergyCarrierDemandFormatting/Desired { "value": <DESIRED_ENERGY_CARRIER_DEMAND_FORMATTING>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/EnergyCarrierDemandFormatting/Reported { "value": <REPORTED_ENERGY_CARRIER_DEMAND_FORMATTING>}
+
 ```
 
 <br><br>
@@ -37285,15 +37759,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/EnergyCarrierDemandFormatting/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TemperatureUnitOfMeasure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureUnitOfMeasure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/TemperatureUnitOfMeasure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureUnitOfMeasure/Desired { "value": <DESIRED_TEMPERATURE_UNIT_OF_MEASURE> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureUnitOfMeasure/Reported { "value": <REPORTED_TEMPERATURE_UNIT_OF_MEASURE> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/TemperatureUnitOfMeasure/Desired { "value": <DESIRED_TEMPERATURE_UNIT_OF_MEASURE>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/TemperatureUnitOfMeasure/Reported { "value": <REPORTED_TEMPERATURE_UNIT_OF_MEASURE>}
+
 ```
 
 <br><br>
@@ -37325,15 +37803,19 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureUnitOfMeasure/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TemperatureFormatting attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureFormatting/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Metering/Attributes/TemperatureFormatting/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureFormatting/Desired { "value": <DESIRED_TEMPERATURE_FORMATTING> }
-ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureFormatting/Reported { "value": <REPORTED_TEMPERATURE_FORMATTING> }
+
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/TemperatureFormatting/Desired { "value": <DESIRED_TEMPERATURE_FORMATTING>}
+ucl/by-unid/<UNID>/ep0/Metering/Attributes/TemperatureFormatting/Reported { "value": <REPORTED_TEMPERATURE_FORMATTING>}
+
 ```
 
 <br><br>
@@ -37370,7 +37852,7 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/TemperatureFormatting/Reported { "va
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Metering/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -37423,7 +37905,7 @@ ucl/by-unid/<UNID>/<EP>/Metering/Attributes/ClusterRevision/Reported { "value": 
 
 To see supported commands for Metering cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Metering/SupportedCommands { "value": [] }
@@ -37431,8 +37913,7 @@ ucl/by-unid/<UNID>/<EP>/Metering/SupportedCommands { "value": [] }
 
 To see supported generated commands for Metering cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Metering/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Metering/SupportedGeneratedCommands { "value": [] }
@@ -37478,11 +37959,12 @@ ucl/by-unid/<UNID>/<EP>/Metering/SupportedGeneratedCommands { "value": [] }
 
 To update all Metering attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -37547,13 +38029,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Commands/WriteAttributes' -m 
 
 To force read all Metering attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Metering attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Metering/Commands/ForceReadAttributes' -m  '{ "value": ["CurrentSummationDelivered"] }'
 ```
 
@@ -37610,15 +38092,19 @@ The following attribute topics are used to retrieve the ElectricalMeasurement cl
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasurementType attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasurementType/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasurementType/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasurementType/Desired { "value": <DESIRED_MEASUREMENT_TYPE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasurementType/Reported { "value": <REPORTED_MEASUREMENT_TYPE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasurementType/Desired { "value": <DESIRED_MEASUREMENT_TYPE>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasurementType/Reported { "value": <REPORTED_MEASUREMENT_TYPE>}
+
 ```
 
 <br><br>
@@ -37650,15 +38136,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasurementType/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltage/Desired { "value": <DESIRED_DC_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltage/Reported { "value": <REPORTED_DC_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltage/Desired { "value": <DESIRED_DC_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltage/Reported { "value": <REPORTED_DC_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -37690,15 +38180,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltage/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCVoltageMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMin/Desired { "value": <DESIRED_DC_VOLTAGE_MIN> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMin/Reported { "value": <REPORTED_DC_VOLTAGE_MIN> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageMin/Desired { "value": <DESIRED_DC_VOLTAGE_MIN>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageMin/Reported { "value": <REPORTED_DC_VOLTAGE_MIN>}
+
 ```
 
 <br><br>
@@ -37730,15 +38224,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMin/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCVoltageMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMax/Desired { "value": <DESIRED_DC_VOLTAGE_MAX> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMax/Reported { "value": <REPORTED_DC_VOLTAGE_MAX> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageMax/Desired { "value": <DESIRED_DC_VOLTAGE_MAX>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageMax/Reported { "value": <REPORTED_DC_VOLTAGE_MAX>}
+
 ```
 
 <br><br>
@@ -37770,15 +38268,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMax/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrent/Desired { "value": <DESIRED_DC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrent/Reported { "value": <REPORTED_DC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrent/Desired { "value": <DESIRED_DC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrent/Reported { "value": <REPORTED_DC_CURRENT>}
+
 ```
 
 <br><br>
@@ -37810,15 +38312,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrent/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCCurrentMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMin/Desired { "value": <DESIRED_DC_CURRENT_MIN> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMin/Reported { "value": <REPORTED_DC_CURRENT_MIN> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentMin/Desired { "value": <DESIRED_DC_CURRENT_MIN>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentMin/Reported { "value": <REPORTED_DC_CURRENT_MIN>}
+
 ```
 
 <br><br>
@@ -37850,15 +38356,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMin/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCCurrentMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMax/Desired { "value": <DESIRED_DC_CURRENT_MAX> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMax/Reported { "value": <REPORTED_DC_CURRENT_MAX> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentMax/Desired { "value": <DESIRED_DC_CURRENT_MAX>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentMax/Reported { "value": <REPORTED_DC_CURRENT_MAX>}
+
 ```
 
 <br><br>
@@ -37890,15 +38400,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMax/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCPower attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPower/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPower/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPower/Desired { "value": <DESIRED_DC_POWER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPower/Reported { "value": <REPORTED_DC_POWER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPower/Desired { "value": <DESIRED_DC_POWER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPower/Reported { "value": <REPORTED_DC_POWER>}
+
 ```
 
 <br><br>
@@ -37930,15 +38444,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPower/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCPowerMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMin/Desired { "value": <DESIRED_DC_POWER_MIN> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMin/Reported { "value": <REPORTED_DC_POWER_MIN> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerMin/Desired { "value": <DESIRED_DC_POWER_MIN>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerMin/Reported { "value": <REPORTED_DC_POWER_MIN>}
+
 ```
 
 <br><br>
@@ -37970,15 +38488,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMin/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCPowerMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMax/Desired { "value": <DESIRED_DC_POWER_MAX> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMax/Reported { "value": <REPORTED_DC_POWER_MAX> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerMax/Desired { "value": <DESIRED_DC_POWER_MAX>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerMax/Reported { "value": <REPORTED_DC_POWER_MAX>}
+
 ```
 
 <br><br>
@@ -38010,15 +38532,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMax/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCVoltageMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Desired { "value": <DESIRED_DC_VOLTAGE_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Reported { "value": <REPORTED_DC_VOLTAGE_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Desired { "value": <DESIRED_DC_VOLTAGE_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Reported { "value": <REPORTED_DC_VOLTAGE_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -38050,15 +38576,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageMultiplier/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCVoltageDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageDivisor/Desired { "value": <DESIRED_DC_VOLTAGE_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageDivisor/Reported { "value": <REPORTED_DC_VOLTAGE_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageDivisor/Desired { "value": <DESIRED_DC_VOLTAGE_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageDivisor/Reported { "value": <REPORTED_DC_VOLTAGE_DIVISOR>}
+
 ```
 
 <br><br>
@@ -38090,15 +38620,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageDivisor/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCCurrentMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Desired { "value": <DESIRED_DC_CURRENT_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Reported { "value": <REPORTED_DC_CURRENT_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Desired { "value": <DESIRED_DC_CURRENT_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Reported { "value": <REPORTED_DC_CURRENT_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -38130,15 +38664,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentMultiplier/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCCurrentDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentDivisor/Desired { "value": <DESIRED_DC_CURRENT_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentDivisor/Reported { "value": <REPORTED_DC_CURRENT_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentDivisor/Desired { "value": <DESIRED_DC_CURRENT_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentDivisor/Reported { "value": <REPORTED_DC_CURRENT_DIVISOR>}
+
 ```
 
 <br><br>
@@ -38170,15 +38708,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentDivisor/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCPowerMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMultiplier/Desired { "value": <DESIRED_DC_POWER_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMultiplier/Reported { "value": <REPORTED_DC_POWER_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerMultiplier/Desired { "value": <DESIRED_DC_POWER_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerMultiplier/Reported { "value": <REPORTED_DC_POWER_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -38210,15 +38752,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerMultiplier/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCPowerDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCPowerDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerDivisor/Desired { "value": <DESIRED_DC_POWER_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerDivisor/Reported { "value": <REPORTED_DC_POWER_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerDivisor/Desired { "value": <DESIRED_DC_POWER_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCPowerDivisor/Reported { "value": <REPORTED_DC_POWER_DIVISOR>}
+
 ```
 
 <br><br>
@@ -38250,15 +38796,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCPowerDivisor/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACFrequency attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequency/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequency/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequency/Desired { "value": <DESIRED_AC_FREQUENCY> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequency/Reported { "value": <REPORTED_AC_FREQUENCY> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequency/Desired { "value": <DESIRED_AC_FREQUENCY>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequency/Reported { "value": <REPORTED_AC_FREQUENCY>}
+
 ```
 
 <br><br>
@@ -38290,15 +38840,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequency/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACFrequencyMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMin/Desired { "value": <DESIRED_AC_FREQUENCY_MIN> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMin/Reported { "value": <REPORTED_AC_FREQUENCY_MIN> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyMin/Desired { "value": <DESIRED_AC_FREQUENCY_MIN>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyMin/Reported { "value": <REPORTED_AC_FREQUENCY_MIN>}
+
 ```
 
 <br><br>
@@ -38330,15 +38884,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMin/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACFrequencyMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMax/Desired { "value": <DESIRED_AC_FREQUENCY_MAX> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMax/Reported { "value": <REPORTED_AC_FREQUENCY_MAX> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyMax/Desired { "value": <DESIRED_AC_FREQUENCY_MAX>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyMax/Reported { "value": <REPORTED_AC_FREQUENCY_MAX>}
+
 ```
 
 <br><br>
@@ -38370,15 +38928,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMax/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NeutralCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/NeutralCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/NeutralCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/NeutralCurrent/Desired { "value": <DESIRED_NEUTRAL_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/NeutralCurrent/Reported { "value": <REPORTED_NEUTRAL_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/NeutralCurrent/Desired { "value": <DESIRED_NEUTRAL_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/NeutralCurrent/Reported { "value": <REPORTED_NEUTRAL_CURRENT>}
+
 ```
 
 <br><br>
@@ -38410,15 +38972,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/NeutralCurrent/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TotalActivePower attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalActivePower/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/TotalActivePower/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalActivePower/Desired { "value": <DESIRED_TOTAL_ACTIVE_POWER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalActivePower/Reported { "value": <REPORTED_TOTAL_ACTIVE_POWER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/TotalActivePower/Desired { "value": <DESIRED_TOTAL_ACTIVE_POWER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/TotalActivePower/Reported { "value": <REPORTED_TOTAL_ACTIVE_POWER>}
+
 ```
 
 <br><br>
@@ -38450,15 +39016,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalActivePower/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TotalReactivePower attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalReactivePower/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/TotalReactivePower/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalReactivePower/Desired { "value": <DESIRED_TOTAL_REACTIVE_POWER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalReactivePower/Reported { "value": <REPORTED_TOTAL_REACTIVE_POWER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/TotalReactivePower/Desired { "value": <DESIRED_TOTAL_REACTIVE_POWER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/TotalReactivePower/Reported { "value": <REPORTED_TOTAL_REACTIVE_POWER>}
+
 ```
 
 <br><br>
@@ -38490,15 +39060,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalReactivePower/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TotalApparentPower attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalApparentPower/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/TotalApparentPower/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalApparentPower/Desired { "value": <DESIRED_TOTAL_APPARENT_POWER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalApparentPower/Reported { "value": <REPORTED_TOTAL_APPARENT_POWER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/TotalApparentPower/Desired { "value": <DESIRED_TOTAL_APPARENT_POWER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/TotalApparentPower/Reported { "value": <REPORTED_TOTAL_APPARENT_POWER>}
+
 ```
 
 <br><br>
@@ -38530,15 +39104,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/TotalApparentPower/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Measured1stHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Desired { "value": <DESIRED_MEASURED1ST_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Reported { "value": <REPORTED_MEASURED1ST_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Desired { "value": <DESIRED_MEASURED1ST_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured1stHarmonicCurrent/Reported { "value": <REPORTED_MEASURED1ST_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38570,15 +39148,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured1stHarmonicCurr
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Measured3rdHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Desired { "value": <DESIRED_MEASURED3RD_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Reported { "value": <REPORTED_MEASURED3RD_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Desired { "value": <DESIRED_MEASURED3RD_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurrent/Reported { "value": <REPORTED_MEASURED3RD_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38610,15 +39192,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured3rdHarmonicCurr
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Measured5thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED5TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED5TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED5TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured5thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED5TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38650,15 +39236,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured5thHarmonicCurr
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Measured7thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED7TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED7TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED7TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured7thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED7TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38690,15 +39280,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured7thHarmonicCurr
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Measured9thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED9TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED9TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED9TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured9thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED9TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38730,15 +39324,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured9thHarmonicCurr
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Measured11thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED11TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED11TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED11TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/Measured11thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED11TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38770,15 +39368,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/Measured11thHarmonicCur
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredPhase1stHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE1ST_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE1ST_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE1ST_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE1ST_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38810,15 +39412,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase1stHarmoni
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredPhase3rdHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE3RD_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE3RD_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE3RD_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE3RD_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38850,15 +39456,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase3rdHarmoni
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredPhase5thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE5TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE5TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE5TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE5TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38890,15 +39500,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase5thHarmoni
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredPhase7thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE7TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE7TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE7TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE7TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38930,15 +39544,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase7thHarmoni
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredPhase9thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE9TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE9TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE9TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE9TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -38970,15 +39588,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase9thHarmoni
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MeasuredPhase11thHarmonicCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE11TH_HARMONIC_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE11TH_HARMONIC_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Desired { "value": <DESIRED_MEASURED_PHASE11TH_HARMONIC_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmonicCurrent/Reported { "value": <REPORTED_MEASURED_PHASE11TH_HARMONIC_CURRENT>}
+
 ```
 
 <br><br>
@@ -39010,15 +39632,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/MeasuredPhase11thHarmon
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACFrequencyMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Desired { "value": <DESIRED_AC_FREQUENCY_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Reported { "value": <REPORTED_AC_FREQUENCY_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Desired { "value": <DESIRED_AC_FREQUENCY_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/Reported { "value": <REPORTED_AC_FREQUENCY_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -39050,15 +39676,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyMultiplier/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACFrequencyDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACFrequencyDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Desired { "value": <DESIRED_AC_FREQUENCY_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Reported { "value": <REPORTED_AC_FREQUENCY_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Desired { "value": <DESIRED_AC_FREQUENCY_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Reported { "value": <REPORTED_AC_FREQUENCY_DIVISOR>}
+
 ```
 
 <br><br>
@@ -39090,15 +39720,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACFrequencyDivisor/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerMultiplier/Desired { "value": <DESIRED_POWER_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerMultiplier/Reported { "value": <REPORTED_POWER_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerMultiplier/Desired { "value": <DESIRED_POWER_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerMultiplier/Reported { "value": <REPORTED_POWER_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -39130,15 +39764,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerMultiplier/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerDivisor/Desired { "value": <DESIRED_POWER_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerDivisor/Reported { "value": <REPORTED_POWER_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerDivisor/Desired { "value": <DESIRED_POWER_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerDivisor/Reported { "value": <REPORTED_POWER_DIVISOR>}
+
 ```
 
 <br><br>
@@ -39170,15 +39808,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerDivisor/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for HarmonicCurrentMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Desired { "value": <DESIRED_HARMONIC_CURRENT_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Reported { "value": <REPORTED_HARMONIC_CURRENT_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Desired { "value": <DESIRED_HARMONIC_CURRENT_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/HarmonicCurrentMultiplier/Reported { "value": <REPORTED_HARMONIC_CURRENT_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -39210,15 +39852,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/HarmonicCurrentMultipli
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PhaseHarmonicCurrentMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Desired { "value": <DESIRED_PHASE_HARMONIC_CURRENT_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Reported { "value": <REPORTED_PHASE_HARMONIC_CURRENT_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Desired { "value": <DESIRED_PHASE_HARMONIC_CURRENT_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMultiplier/Reported { "value": <REPORTED_PHASE_HARMONIC_CURRENT_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -39250,15 +39896,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PhaseHarmonicCurrentMul
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LineCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/LineCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrent/Desired { "value": <DESIRED_LINE_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrent/Reported { "value": <REPORTED_LINE_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/LineCurrent/Desired { "value": <DESIRED_LINE_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/LineCurrent/Reported { "value": <REPORTED_LINE_CURRENT>}
+
 ```
 
 <br><br>
@@ -39290,15 +39940,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrent/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActiveCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActiveCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrent/Desired { "value": <DESIRED_ACTIVE_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrent/Reported { "value": <REPORTED_ACTIVE_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActiveCurrent/Desired { "value": <DESIRED_ACTIVE_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActiveCurrent/Reported { "value": <REPORTED_ACTIVE_CURRENT>}
+
 ```
 
 <br><br>
@@ -39330,15 +39984,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrent/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReactiveCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactiveCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrent/Desired { "value": <DESIRED_REACTIVE_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrent/Reported { "value": <REPORTED_REACTIVE_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactiveCurrent/Desired { "value": <DESIRED_REACTIVE_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactiveCurrent/Reported { "value": <REPORTED_REACTIVE_CURRENT>}
+
 ```
 
 <br><br>
@@ -39370,15 +40028,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrent/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltage/Desired { "value": <DESIRED_RMS_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltage/Reported { "value": <REPORTED_RMS_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltage/Desired { "value": <DESIRED_RMS_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltage/Reported { "value": <REPORTED_RMS_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -39410,15 +40072,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltage/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMin/Desired { "value": <DESIRED_RMS_VOLTAGE_MIN> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMin/Reported { "value": <REPORTED_RMS_VOLTAGE_MIN> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMin/Desired { "value": <DESIRED_RMS_VOLTAGE_MIN>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMin/Reported { "value": <REPORTED_RMS_VOLTAGE_MIN>}
+
 ```
 
 <br><br>
@@ -39450,15 +40116,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMin/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMax/Desired { "value": <DESIRED_RMS_VOLTAGE_MAX> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMax/Reported { "value": <REPORTED_RMS_VOLTAGE_MAX> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMax/Desired { "value": <DESIRED_RMS_VOLTAGE_MAX>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMax/Reported { "value": <REPORTED_RMS_VOLTAGE_MAX>}
+
 ```
 
 <br><br>
@@ -39490,15 +40160,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMax/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrent/Desired { "value": <DESIRED_RMS_CURRENT> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrent/Reported { "value": <REPORTED_RMS_CURRENT> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrent/Desired { "value": <DESIRED_RMS_CURRENT>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrent/Reported { "value": <REPORTED_RMS_CURRENT>}
+
 ```
 
 <br><br>
@@ -39530,15 +40204,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrent/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMin/Desired { "value": <DESIRED_RMS_CURRENT_MIN> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMin/Reported { "value": <REPORTED_RMS_CURRENT_MIN> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMin/Desired { "value": <DESIRED_RMS_CURRENT_MIN>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMin/Reported { "value": <REPORTED_RMS_CURRENT_MIN>}
+
 ```
 
 <br><br>
@@ -39570,15 +40248,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMin/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMax/Desired { "value": <DESIRED_RMS_CURRENT_MAX> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMax/Reported { "value": <REPORTED_RMS_CURRENT_MAX> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMax/Desired { "value": <DESIRED_RMS_CURRENT_MAX>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMax/Reported { "value": <REPORTED_RMS_CURRENT_MAX>}
+
 ```
 
 <br><br>
@@ -39610,15 +40292,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMax/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePower attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePower/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePower/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePower/Desired { "value": <DESIRED_ACTIVE_POWER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePower/Reported { "value": <REPORTED_ACTIVE_POWER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePower/Desired { "value": <DESIRED_ACTIVE_POWER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePower/Reported { "value": <REPORTED_ACTIVE_POWER>}
+
 ```
 
 <br><br>
@@ -39650,15 +40336,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePower/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerMin attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMin/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMin/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMin/Desired { "value": <DESIRED_ACTIVE_POWER_MIN> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMin/Reported { "value": <REPORTED_ACTIVE_POWER_MIN> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMin/Desired { "value": <DESIRED_ACTIVE_POWER_MIN>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMin/Reported { "value": <REPORTED_ACTIVE_POWER_MIN>}
+
 ```
 
 <br><br>
@@ -39690,15 +40380,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMin/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerMax attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMax/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMax/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMax/Desired { "value": <DESIRED_ACTIVE_POWER_MAX> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMax/Reported { "value": <REPORTED_ACTIVE_POWER_MAX> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMax/Desired { "value": <DESIRED_ACTIVE_POWER_MAX>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMax/Reported { "value": <REPORTED_ACTIVE_POWER_MAX>}
+
 ```
 
 <br><br>
@@ -39730,15 +40424,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMax/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReactivePower attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePower/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactivePower/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePower/Desired { "value": <DESIRED_REACTIVE_POWER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePower/Reported { "value": <REPORTED_REACTIVE_POWER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactivePower/Desired { "value": <DESIRED_REACTIVE_POWER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactivePower/Reported { "value": <REPORTED_REACTIVE_POWER>}
+
 ```
 
 <br><br>
@@ -39770,15 +40468,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePower/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApparentPower attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPower/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ApparentPower/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPower/Desired { "value": <DESIRED_APPARENT_POWER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPower/Reported { "value": <REPORTED_APPARENT_POWER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ApparentPower/Desired { "value": <DESIRED_APPARENT_POWER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ApparentPower/Reported { "value": <REPORTED_APPARENT_POWER>}
+
 ```
 
 <br><br>
@@ -39810,15 +40512,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPower/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerFactor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerFactor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactor/Desired { "value": <DESIRED_POWER_FACTOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactor/Reported { "value": <REPORTED_POWER_FACTOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerFactor/Desired { "value": <DESIRED_POWER_FACTOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerFactor/Reported { "value": <REPORTED_POWER_FACTOR>}
+
 ```
 
 <br><br>
@@ -39850,15 +40556,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactor/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSVoltageMeasurementPeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Desired { "value": <DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Reported { "value": <REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Desired { "value": <DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/Reported { "value": <REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD>}
+
 ```
 
 <br><br>
@@ -39890,15 +40600,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasur
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSOverVoltageCounter attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER>}
+
 ```
 
 <br><br>
@@ -39930,15 +40644,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSUnderVoltageCounter attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER>}
+
 ```
 
 <br><br>
@@ -39970,15 +40688,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageC
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeOverVoltagePeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD>}
+
 ```
 
 <br><br>
@@ -40010,15 +40732,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePe
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeUnderVoltagePeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriod/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD>}
+
 ```
 
 <br><br>
@@ -40050,15 +40776,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltageP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSagPeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG_PERIOD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG_PERIOD>}
+
 ```
 
 <br><br>
@@ -40090,15 +40820,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriod/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSwellPeriod attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL_PERIOD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL_PERIOD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL_PERIOD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL_PERIOD>}
+
 ```
 
 <br><br>
@@ -40130,15 +40864,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriod/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACVoltageMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACVoltageMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Desired { "value": <DESIRED_AC_VOLTAGE_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Reported { "value": <REPORTED_AC_VOLTAGE_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Desired { "value": <DESIRED_AC_VOLTAGE_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Reported { "value": <REPORTED_AC_VOLTAGE_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -40170,15 +40908,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageMultiplier/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACVoltageDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACVoltageDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageDivisor/Desired { "value": <DESIRED_AC_VOLTAGE_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageDivisor/Reported { "value": <REPORTED_AC_VOLTAGE_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACVoltageDivisor/Desired { "value": <DESIRED_AC_VOLTAGE_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACVoltageDivisor/Reported { "value": <REPORTED_AC_VOLTAGE_DIVISOR>}
+
 ```
 
 <br><br>
@@ -40210,15 +40952,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageDivisor/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACCurrentMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACCurrentMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Desired { "value": <DESIRED_AC_CURRENT_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Reported { "value": <REPORTED_AC_CURRENT_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Desired { "value": <DESIRED_AC_CURRENT_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Reported { "value": <REPORTED_AC_CURRENT_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -40250,15 +40996,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentMultiplier/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACCurrentDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACCurrentDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentDivisor/Desired { "value": <DESIRED_AC_CURRENT_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentDivisor/Reported { "value": <REPORTED_AC_CURRENT_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACCurrentDivisor/Desired { "value": <DESIRED_AC_CURRENT_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACCurrentDivisor/Reported { "value": <REPORTED_AC_CURRENT_DIVISOR>}
+
 ```
 
 <br><br>
@@ -40290,15 +41040,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentDivisor/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACPowerMultiplier attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerMultiplier/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACPowerMultiplier/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerMultiplier/Desired { "value": <DESIRED_AC_POWER_MULTIPLIER> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerMultiplier/Reported { "value": <REPORTED_AC_POWER_MULTIPLIER> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACPowerMultiplier/Desired { "value": <DESIRED_AC_POWER_MULTIPLIER>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACPowerMultiplier/Reported { "value": <REPORTED_AC_POWER_MULTIPLIER>}
+
 ```
 
 <br><br>
@@ -40330,15 +41084,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerMultiplier/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACPowerDivisor attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerDivisor/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACPowerDivisor/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerDivisor/Desired { "value": <DESIRED_AC_POWER_DIVISOR> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerDivisor/Reported { "value": <REPORTED_AC_POWER_DIVISOR> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACPowerDivisor/Desired { "value": <DESIRED_AC_POWER_DIVISOR>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACPowerDivisor/Reported { "value": <REPORTED_AC_POWER_DIVISOR>}
+
 ```
 
 <br><br>
@@ -40370,15 +41128,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACPowerDivisor/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCOverloadAlarmsMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Desired { "value": <DESIRED_DC_OVERLOAD_ALARMS_MASK> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Reported { "value": <REPORTED_DC_OVERLOAD_ALARMS_MASK> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Desired { "value": <DESIRED_DC_OVERLOAD_ALARMS_MASK>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Reported { "value": <REPORTED_DC_OVERLOAD_ALARMS_MASK>}
+
 ```
 
 <br><br>
@@ -40410,15 +41172,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCOverloadAlarmsMask/Re
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCVoltageOverload attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageOverload/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCVoltageOverload/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageOverload/Desired { "value": <DESIRED_DC_VOLTAGE_OVERLOAD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageOverload/Reported { "value": <REPORTED_DC_VOLTAGE_OVERLOAD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageOverload/Desired { "value": <DESIRED_DC_VOLTAGE_OVERLOAD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCVoltageOverload/Reported { "value": <REPORTED_DC_VOLTAGE_OVERLOAD>}
+
 ```
 
 <br><br>
@@ -40450,15 +41216,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCVoltageOverload/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DCCurrentOverload attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentOverload/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/DCCurrentOverload/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentOverload/Desired { "value": <DESIRED_DC_CURRENT_OVERLOAD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentOverload/Reported { "value": <REPORTED_DC_CURRENT_OVERLOAD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentOverload/Desired { "value": <DESIRED_DC_CURRENT_OVERLOAD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/DCCurrentOverload/Reported { "value": <REPORTED_DC_CURRENT_OVERLOAD>}
+
 ```
 
 <br><br>
@@ -40490,15 +41260,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/DCCurrentOverload/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACAlarmsMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACAlarmsMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACAlarmsMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACAlarmsMask/Desired { "value": <DESIRED_AC_ALARMS_MASK> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACAlarmsMask/Reported { "value": <REPORTED_AC_ALARMS_MASK> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACAlarmsMask/Desired { "value": <DESIRED_AC_ALARMS_MASK>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACAlarmsMask/Reported { "value": <REPORTED_AC_ALARMS_MASK>}
+
 ```
 
 <br><br>
@@ -40530,15 +41304,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACAlarmsMask/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACVoltageOverload attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageOverload/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACVoltageOverload/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageOverload/Desired { "value": <DESIRED_AC_VOLTAGE_OVERLOAD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageOverload/Reported { "value": <REPORTED_AC_VOLTAGE_OVERLOAD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACVoltageOverload/Desired { "value": <DESIRED_AC_VOLTAGE_OVERLOAD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACVoltageOverload/Reported { "value": <REPORTED_AC_VOLTAGE_OVERLOAD>}
+
 ```
 
 <br><br>
@@ -40570,15 +41348,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACVoltageOverload/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACCurrentOverload attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentOverload/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACCurrentOverload/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentOverload/Desired { "value": <DESIRED_AC_CURRENT_OVERLOAD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentOverload/Reported { "value": <REPORTED_AC_CURRENT_OVERLOAD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACCurrentOverload/Desired { "value": <DESIRED_AC_CURRENT_OVERLOAD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACCurrentOverload/Reported { "value": <REPORTED_AC_CURRENT_OVERLOAD>}
+
 ```
 
 <br><br>
@@ -40610,15 +41392,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACCurrentOverload/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACActivePowerOverload attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACActivePowerOverload/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACActivePowerOverload/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACActivePowerOverload/Desired { "value": <DESIRED_AC_ACTIVE_POWER_OVERLOAD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACActivePowerOverload/Reported { "value": <REPORTED_AC_ACTIVE_POWER_OVERLOAD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACActivePowerOverload/Desired { "value": <DESIRED_AC_ACTIVE_POWER_OVERLOAD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACActivePowerOverload/Reported { "value": <REPORTED_AC_ACTIVE_POWER_OVERLOAD>}
+
 ```
 
 <br><br>
@@ -40650,15 +41436,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACActivePowerOverload/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ACReactivePowerOverload attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACReactivePowerOverload/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ACReactivePowerOverload/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Desired { "value": <DESIRED_AC_REACTIVE_POWER_OVERLOAD> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Reported { "value": <REPORTED_AC_REACTIVE_POWER_OVERLOAD> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Desired { "value": <DESIRED_AC_REACTIVE_POWER_OVERLOAD>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ACReactivePowerOverload/Reported { "value": <REPORTED_AC_REACTIVE_POWER_OVERLOAD>}
+
 ```
 
 <br><br>
@@ -40690,15 +41480,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ACReactivePowerOverload
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSOverVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -40730,15 +41524,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltage/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSUnderVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -40770,15 +41568,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeOverVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -40810,15 +41612,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeUnderVoltage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE>}
+
 ```
 
 <br><br>
@@ -40850,15 +41656,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltage/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSag attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSag/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSag/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSag/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSag/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSag/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSag/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG>}
+
 ```
 
 <br><br>
@@ -40890,15 +41700,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSag/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSwell attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwell/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwell/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwell/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwell/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwell/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwell/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL>}
+
 ```
 
 <br><br>
@@ -40930,15 +41744,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwell/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LineCurrentPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/LineCurrentPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhB/Desired { "value": <DESIRED_LINE_CURRENT_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhB/Reported { "value": <REPORTED_LINE_CURRENT_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/LineCurrentPhB/Desired { "value": <DESIRED_LINE_CURRENT_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/LineCurrentPhB/Reported { "value": <REPORTED_LINE_CURRENT_PHB>}
+
 ```
 
 <br><br>
@@ -40970,15 +41788,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhB/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActiveCurrentPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActiveCurrentPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Desired { "value": <DESIRED_ACTIVE_CURRENT_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Reported { "value": <REPORTED_ACTIVE_CURRENT_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Desired { "value": <DESIRED_ACTIVE_CURRENT_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Reported { "value": <REPORTED_ACTIVE_CURRENT_PHB>}
+
 ```
 
 <br><br>
@@ -41010,15 +41832,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhB/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReactiveCurrentPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Desired { "value": <DESIRED_REACTIVE_CURRENT_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Reported { "value": <REPORTED_REACTIVE_CURRENT_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Desired { "value": <DESIRED_REACTIVE_CURRENT_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Reported { "value": <REPORTED_REACTIVE_CURRENT_PHB>}
+
 ```
 
 <br><br>
@@ -41050,15 +41876,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhB/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltagePhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltagePhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhB/Desired { "value": <DESIRED_RMS_VOLTAGE_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhB/Reported { "value": <REPORTED_RMS_VOLTAGE_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhB/Desired { "value": <DESIRED_RMS_VOLTAGE_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhB/Reported { "value": <REPORTED_RMS_VOLTAGE_PHB>}
+
 ```
 
 <br><br>
@@ -41090,15 +41920,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhB/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageMinPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_MIN_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_MIN_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_MIN_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_MIN_PHB>}
+
 ```
 
 <br><br>
@@ -41130,15 +41964,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhB/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageMaxPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_MAX_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_MAX_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_MAX_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_MAX_PHB>}
+
 ```
 
 <br><br>
@@ -41170,15 +42008,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhB/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhB/Desired { "value": <DESIRED_RMS_CURRENT_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhB/Reported { "value": <REPORTED_RMS_CURRENT_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhB/Desired { "value": <DESIRED_RMS_CURRENT_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhB/Reported { "value": <REPORTED_RMS_CURRENT_PHB>}
+
 ```
 
 <br><br>
@@ -41210,15 +42052,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhB/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentMinPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Desired { "value": <DESIRED_RMS_CURRENT_MIN_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Reported { "value": <REPORTED_RMS_CURRENT_MIN_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Desired { "value": <DESIRED_RMS_CURRENT_MIN_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Reported { "value": <REPORTED_RMS_CURRENT_MIN_PHB>}
+
 ```
 
 <br><br>
@@ -41250,15 +42096,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhB/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentMaxPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Desired { "value": <DESIRED_RMS_CURRENT_MAX_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Reported { "value": <REPORTED_RMS_CURRENT_MAX_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Desired { "value": <DESIRED_RMS_CURRENT_MAX_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Reported { "value": <REPORTED_RMS_CURRENT_MAX_PHB>}
+
 ```
 
 <br><br>
@@ -41290,15 +42140,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhB/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhB/Desired { "value": <DESIRED_ACTIVE_POWER_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhB/Reported { "value": <REPORTED_ACTIVE_POWER_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerPhB/Desired { "value": <DESIRED_ACTIVE_POWER_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerPhB/Reported { "value": <REPORTED_ACTIVE_POWER_PHB>}
+
 ```
 
 <br><br>
@@ -41330,15 +42184,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhB/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerMinPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMinPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Desired { "value": <DESIRED_ACTIVE_POWER_MIN_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Reported { "value": <REPORTED_ACTIVE_POWER_MIN_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Desired { "value": <DESIRED_ACTIVE_POWER_MIN_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Reported { "value": <REPORTED_ACTIVE_POWER_MIN_PHB>}
+
 ```
 
 <br><br>
@@ -41370,15 +42228,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhB/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerMaxPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Desired { "value": <DESIRED_ACTIVE_POWER_MAX_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Reported { "value": <REPORTED_ACTIVE_POWER_MAX_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Desired { "value": <DESIRED_ACTIVE_POWER_MAX_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Reported { "value": <REPORTED_ACTIVE_POWER_MAX_PHB>}
+
 ```
 
 <br><br>
@@ -41410,15 +42272,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhB/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReactivePowerPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactivePowerPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhB/Desired { "value": <DESIRED_REACTIVE_POWER_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhB/Reported { "value": <REPORTED_REACTIVE_POWER_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhB/Desired { "value": <DESIRED_REACTIVE_POWER_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhB/Reported { "value": <REPORTED_REACTIVE_POWER_PHB>}
+
 ```
 
 <br><br>
@@ -41450,15 +42316,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhB/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApparentPowerPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ApparentPowerPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhB/Desired { "value": <DESIRED_APPARENT_POWER_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhB/Reported { "value": <REPORTED_APPARENT_POWER_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhB/Desired { "value": <DESIRED_APPARENT_POWER_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhB/Reported { "value": <REPORTED_APPARENT_POWER_PHB>}
+
 ```
 
 <br><br>
@@ -41490,15 +42360,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhB/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerFactorPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerFactorPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhB/Desired { "value": <DESIRED_POWER_FACTOR_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhB/Reported { "value": <REPORTED_POWER_FACTOR_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerFactorPhB/Desired { "value": <DESIRED_POWER_FACTOR_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerFactorPhB/Reported { "value": <REPORTED_POWER_FACTOR_PHB>}
+
 ```
 
 <br><br>
@@ -41530,15 +42404,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhB/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSVoltageMeasurementPeriodPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Desired { "value": <DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Reported { "value": <REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Desired { "value": <DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/Reported { "value": <REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB>}
+
 ```
 
 <br><br>
@@ -41570,15 +42448,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasur
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSOverVoltageCounterPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB>}
+
 ```
 
 <br><br>
@@ -41610,15 +42492,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSUnderVoltageCounterPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB>}
+
 ```
 
 <br><br>
@@ -41650,15 +42536,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageC
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeOverVoltagePeriodPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB>}
+
 ```
 
 <br><br>
@@ -41690,15 +42580,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePe
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeUnderVoltagePeriodPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhB/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB>}
+
 ```
 
 <br><br>
@@ -41730,15 +42624,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltageP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSagPeriodPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHB>}
+
 ```
 
 <br><br>
@@ -41770,15 +42668,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhB/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSwellPeriodPhB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHB> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHB> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHB>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhB/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHB>}
+
 ```
 
 <br><br>
@@ -41810,15 +42712,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPh
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LineCurrentPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/LineCurrentPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhC/Desired { "value": <DESIRED_LINE_CURRENT_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhC/Reported { "value": <REPORTED_LINE_CURRENT_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/LineCurrentPhC/Desired { "value": <DESIRED_LINE_CURRENT_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/LineCurrentPhC/Reported { "value": <REPORTED_LINE_CURRENT_PHC>}
+
 ```
 
 <br><br>
@@ -41850,15 +42756,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/LineCurrentPhC/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActiveCurrentPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActiveCurrentPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Desired { "value": <DESIRED_ACTIVE_CURRENT_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Reported { "value": <REPORTED_ACTIVE_CURRENT_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Desired { "value": <DESIRED_ACTIVE_CURRENT_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Reported { "value": <REPORTED_ACTIVE_CURRENT_PHC>}
+
 ```
 
 <br><br>
@@ -41890,15 +42800,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActiveCurrentPhC/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReactiveCurrentPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Desired { "value": <DESIRED_REACTIVE_CURRENT_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Reported { "value": <REPORTED_REACTIVE_CURRENT_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Desired { "value": <DESIRED_REACTIVE_CURRENT_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Reported { "value": <REPORTED_REACTIVE_CURRENT_PHC>}
+
 ```
 
 <br><br>
@@ -41930,15 +42844,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactiveCurrentPhC/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltagePhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltagePhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhC/Desired { "value": <DESIRED_RMS_VOLTAGE_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhC/Reported { "value": <REPORTED_RMS_VOLTAGE_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhC/Desired { "value": <DESIRED_RMS_VOLTAGE_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltagePhC/Reported { "value": <REPORTED_RMS_VOLTAGE_PHC>}
+
 ```
 
 <br><br>
@@ -41970,15 +42888,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltagePhC/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageMinPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_MIN_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_MIN_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_MIN_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_MIN_PHC>}
+
 ```
 
 <br><br>
@@ -42010,15 +42932,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMinPhC/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageMaxPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_MAX_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_MAX_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_MAX_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_MAX_PHC>}
+
 ```
 
 <br><br>
@@ -42050,15 +42976,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageMaxPhC/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhC/Desired { "value": <DESIRED_RMS_CURRENT_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhC/Reported { "value": <REPORTED_RMS_CURRENT_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhC/Desired { "value": <DESIRED_RMS_CURRENT_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentPhC/Reported { "value": <REPORTED_RMS_CURRENT_PHC>}
+
 ```
 
 <br><br>
@@ -42090,15 +43020,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentPhC/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentMinPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Desired { "value": <DESIRED_RMS_CURRENT_MIN_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Reported { "value": <REPORTED_RMS_CURRENT_MIN_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Desired { "value": <DESIRED_RMS_CURRENT_MIN_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Reported { "value": <REPORTED_RMS_CURRENT_MIN_PHC>}
+
 ```
 
 <br><br>
@@ -42130,15 +43064,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMinPhC/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSCurrentMaxPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Desired { "value": <DESIRED_RMS_CURRENT_MAX_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Reported { "value": <REPORTED_RMS_CURRENT_MAX_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Desired { "value": <DESIRED_RMS_CURRENT_MAX_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Reported { "value": <REPORTED_RMS_CURRENT_MAX_PHC>}
+
 ```
 
 <br><br>
@@ -42170,15 +43108,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSCurrentMaxPhC/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhC/Desired { "value": <DESIRED_ACTIVE_POWER_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhC/Reported { "value": <REPORTED_ACTIVE_POWER_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerPhC/Desired { "value": <DESIRED_ACTIVE_POWER_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerPhC/Reported { "value": <REPORTED_ACTIVE_POWER_PHC>}
+
 ```
 
 <br><br>
@@ -42210,15 +43152,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerPhC/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerMinPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMinPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Desired { "value": <DESIRED_ACTIVE_POWER_MIN_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Reported { "value": <REPORTED_ACTIVE_POWER_MIN_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Desired { "value": <DESIRED_ACTIVE_POWER_MIN_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Reported { "value": <REPORTED_ACTIVE_POWER_MIN_PHC>}
+
 ```
 
 <br><br>
@@ -42250,15 +43196,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMinPhC/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ActivePowerMaxPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Desired { "value": <DESIRED_ACTIVE_POWER_MAX_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Reported { "value": <REPORTED_ACTIVE_POWER_MAX_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Desired { "value": <DESIRED_ACTIVE_POWER_MAX_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Reported { "value": <REPORTED_ACTIVE_POWER_MAX_PHC>}
+
 ```
 
 <br><br>
@@ -42290,15 +43240,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ActivePowerMaxPhC/Repor
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReactivePowerPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ReactivePowerPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhC/Desired { "value": <DESIRED_REACTIVE_POWER_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhC/Reported { "value": <REPORTED_REACTIVE_POWER_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhC/Desired { "value": <DESIRED_REACTIVE_POWER_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ReactivePowerPhC/Reported { "value": <REPORTED_REACTIVE_POWER_PHC>}
+
 ```
 
 <br><br>
@@ -42330,15 +43284,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ReactivePowerPhC/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApparentPowerPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/ApparentPowerPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhC/Desired { "value": <DESIRED_APPARENT_POWER_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhC/Reported { "value": <REPORTED_APPARENT_POWER_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhC/Desired { "value": <DESIRED_APPARENT_POWER_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/ApparentPowerPhC/Reported { "value": <REPORTED_APPARENT_POWER_PHC>}
+
 ```
 
 <br><br>
@@ -42370,15 +43328,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ApparentPowerPhC/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerFactorPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/PowerFactorPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhC/Desired { "value": <DESIRED_POWER_FACTOR_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhC/Reported { "value": <REPORTED_POWER_FACTOR_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerFactorPhC/Desired { "value": <DESIRED_POWER_FACTOR_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/PowerFactorPhC/Reported { "value": <REPORTED_POWER_FACTOR_PHC>}
+
 ```
 
 <br><br>
@@ -42410,15 +43372,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/PowerFactorPhC/Reported
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSVoltageMeasurementPeriodPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Desired { "value": <DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Reported { "value": <REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Desired { "value": <DESIRED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/Reported { "value": <REPORTED_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC>}
+
 ```
 
 <br><br>
@@ -42450,15 +43416,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSVoltageMeasur
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSOverVoltageCounterPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Desired { "value": <DESIRED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/Reported { "value": <REPORTED_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC>}
+
 ```
 
 <br><br>
@@ -42490,15 +43460,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSOverVoltageCo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageRMSUnderVoltageCounterPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Desired { "value": <DESIRED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/Reported { "value": <REPORTED_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC>}
+
 ```
 
 <br><br>
@@ -42530,15 +43504,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/AverageRMSUnderVoltageC
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeOverVoltagePeriodPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Desired { "value": <DESIRED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/Reported { "value": <REPORTED_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC>}
+
 ```
 
 <br><br>
@@ -42570,15 +43548,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePe
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSExtremeUnderVoltagePeriodPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Desired { "value": <DESIRED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltagePeriodPhC/Reported { "value": <REPORTED_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC>}
+
 ```
 
 <br><br>
@@ -42610,15 +43592,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSExtremeUnderVoltageP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSagPeriodPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_SAG_PERIOD_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_SAG_PERIOD_PHC>}
+
 ```
 
 <br><br>
@@ -42650,15 +43636,19 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSagPeriodPhC/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RMSVoltageSwellPeriodPhC attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHC> }
-ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHC> }
+
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Desired { "value": <DESIRED_RMS_VOLTAGE_SWELL_PERIOD_PHC>}
+ucl/by-unid/<UNID>/ep0/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPhC/Reported { "value": <REPORTED_RMS_VOLTAGE_SWELL_PERIOD_PHC>}
+
 ```
 
 <br><br>
@@ -42695,7 +43685,7 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/RMSVoltageSwellPeriodPh
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -42754,7 +43744,7 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Attributes/ClusterRevision/Reporte
 
 To see supported commands for ElectricalMeasurement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/SupportedCommands { "value": ["GetProfileInfoResponse","GetMeasurementProfileResponse",] }
@@ -42762,8 +43752,7 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/SupportedCommands { "value": ["Get
 
 To see supported generated commands for ElectricalMeasurement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/SupportedGeneratedCommands { "value": ["GetProfileInfo","GetMeasurementProfile"] }
@@ -42828,13 +43817,13 @@ ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/SupportedGeneratedCommands { "valu
 
 To send a ElectricalMeasurement/GetProfileInfoResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/GetProfileInfoResponse' -m  '{ "ProfileCount": <PROFILE_COUNT_VALUE>,"ProfileIntervalPeriod": <PROFILE_INTERVAL_PERIOD_VALUE>,"MaxNumberOfIntervals": <MAX_NUMBER_OF_INTERVALS_VALUE>,"ListOfAttributes": <LIST_OF_ATTRIBUTES_VALUE> }'
 ```
 
 To receive a ElectricalMeasurement/GetProfileInfoResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommands/GetProfileInfoResponse'
 ```
 
@@ -42867,13 +43856,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommand
 
 To send a ElectricalMeasurement/GetProfileInfo command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/GetProfileInfo' -m  '{  }'
 ```
 
 To receive a ElectricalMeasurement/GetProfileInfo generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommands/GetProfileInfo'
 ```
 
@@ -42933,13 +43922,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommand
 
 To send a ElectricalMeasurement/GetMeasurementProfileResponse command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/GetMeasurementProfileResponse' -m  '{ "StartTime": <START_TIME_VALUE>,"Status": <STATUS_VALUE>,"ProfileIntervalPeriod": <PROFILE_INTERVAL_PERIOD_VALUE>,"NumberOfIntervalsDelivered": <NUMBER_OF_INTERVALS_DELIVERED_VALUE>,"AttributeId": <ATTRIBUTE_ID_VALUE>,"Intervals": <INTERVALS_VALUE> }'
 ```
 
 To receive a ElectricalMeasurement/GetMeasurementProfileResponse generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommands/GetMeasurementProfileResponse'
 ```
 
@@ -42984,13 +43973,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommand
 
 To send a ElectricalMeasurement/GetMeasurementProfile command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/GetMeasurementProfile' -m  '{ "AttributeID": <ATTRIBUTEID_VALUE>,"StartTime": <START_TIME_VALUE>,"NumberOfIntervals": <NUMBER_OF_INTERVALS_VALUE> }'
 ```
 
 To receive a ElectricalMeasurement/GetMeasurementProfile generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommands/GetMeasurementProfile'
 ```
 
@@ -43104,11 +44093,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/GeneratedCommand
 
 To update all ElectricalMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/WriteAttributes' -m  '{ "AverageRMSVoltageMeasurementPeriod": <AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_VALUE> ,"AverageRMSOverVoltageCounter": <AVERAGERMS_OVER_VOLTAGE_COUNTER_VALUE> ,"AverageRMSUnderVoltageCounter": <AVERAGERMS_UNDER_VOLTAGE_COUNTER_VALUE> ,"RMSExtremeOverVoltagePeriod": <RMS_EXTREME_OVER_VOLTAGE_PERIOD_VALUE> ,"RMSExtremeUnderVoltagePeriod": <RMS_EXTREME_UNDER_VOLTAGE_PERIOD_VALUE> ,"RMSVoltageSagPeriod": <RMS_VOLTAGE_SAG_PERIOD_VALUE> ,"RMSVoltageSwellPeriod": <RMS_VOLTAGE_SWELL_PERIOD_VALUE> ,"DCOverloadAlarmsMask": <DC_OVERLOAD_ALARMS_MASK_VALUE> ,"ACAlarmsMask": <AC_ALARMS_MASK_VALUE> ,"RMSExtremeOverVoltage": <RMS_EXTREME_OVER_VOLTAGE_VALUE> ,"RMSExtremeUnderVoltage": <RMS_EXTREME_UNDER_VOLTAGE_VALUE> ,"RMSVoltageSag": <RMS_VOLTAGE_SAG_VALUE> ,"RMSVoltageSwell": <RMS_VOLTAGE_SWELL_VALUE> ,"AverageRMSVoltageMeasurementPeriodPhB": <AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_VALUE> ,"AverageRMSOverVoltageCounterPhB": <AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_VALUE> ,"AverageRMSUnderVoltageCounterPhB": <AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_VALUE> ,"RMSExtremeOverVoltagePeriodPhB": <RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_VALUE> ,"RMSExtremeUnderVoltagePeriodPhB": <RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB_VALUE> ,"RMSVoltageSagPeriodPhB": <RMS_VOLTAGE_SAG_PERIOD_PHB_VALUE> ,"RMSVoltageSwellPeriodPhB": <RMS_VOLTAGE_SWELL_PERIOD_PHB_VALUE> ,"AverageRMSVoltageMeasurementPeriodPhC": <AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_VALUE> ,"AverageRMSOverVoltageCounterPhC": <AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_VALUE> ,"AverageRMSUnderVoltageCounterPhC": <AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_VALUE> ,"RMSExtremeOverVoltagePeriodPhC": <RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_VALUE> ,"RMSExtremeUnderVoltagePeriodPhC": <RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC_VALUE> ,"RMSVoltageSagPeriodPhC": <RMS_VOLTAGE_SAG_PERIOD_PHC_VALUE> ,"RMSVoltageSwellPeriodPhC": <RMS_VOLTAGE_SWELL_PERIOD_PHC_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -43274,13 +44264,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/WriteAt
 
 To force read all ElectricalMeasurement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ElectricalMeasurement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ElectricalMeasurement/Commands/ForceReadAttributes' -m  '{ "value": ["MeasurementType"] }'
 ```
 
@@ -43337,15 +44327,19 @@ The following attribute topics are used to retrieve the Diagnostics cluster stat
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NumberOfResets attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NumberOfResets/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/NumberOfResets/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NumberOfResets/Desired { "value": <DESIRED_NUMBER_OF_RESETS> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NumberOfResets/Reported { "value": <REPORTED_NUMBER_OF_RESETS> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NumberOfResets/Desired { "value": <DESIRED_NUMBER_OF_RESETS>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NumberOfResets/Reported { "value": <REPORTED_NUMBER_OF_RESETS>}
+
 ```
 
 <br><br>
@@ -43377,15 +44371,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NumberOfResets/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PersistentMemoryWrites attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PersistentMemoryWrites/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/PersistentMemoryWrites/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PersistentMemoryWrites/Desired { "value": <DESIRED_PERSISTENT_MEMORY_WRITES> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PersistentMemoryWrites/Reported { "value": <REPORTED_PERSISTENT_MEMORY_WRITES> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PersistentMemoryWrites/Desired { "value": <DESIRED_PERSISTENT_MEMORY_WRITES>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PersistentMemoryWrites/Reported { "value": <REPORTED_PERSISTENT_MEMORY_WRITES>}
+
 ```
 
 <br><br>
@@ -43417,15 +44415,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PersistentMemoryWrites/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MacRxBcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxBcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/MacRxBcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxBcast/Desired { "value": <DESIRED_MAC_RX_BCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxBcast/Reported { "value": <REPORTED_MAC_RX_BCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacRxBcast/Desired { "value": <DESIRED_MAC_RX_BCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacRxBcast/Reported { "value": <REPORTED_MAC_RX_BCAST>}
+
 ```
 
 <br><br>
@@ -43457,15 +44459,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxBcast/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MacTxBcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxBcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/MacTxBcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxBcast/Desired { "value": <DESIRED_MAC_TX_BCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxBcast/Reported { "value": <REPORTED_MAC_TX_BCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxBcast/Desired { "value": <DESIRED_MAC_TX_BCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxBcast/Reported { "value": <REPORTED_MAC_TX_BCAST>}
+
 ```
 
 <br><br>
@@ -43497,15 +44503,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxBcast/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MacRxUcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxUcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/MacRxUcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxUcast/Desired { "value": <DESIRED_MAC_RX_UCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxUcast/Reported { "value": <REPORTED_MAC_RX_UCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacRxUcast/Desired { "value": <DESIRED_MAC_RX_UCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacRxUcast/Reported { "value": <REPORTED_MAC_RX_UCAST>}
+
 ```
 
 <br><br>
@@ -43537,15 +44547,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacRxUcast/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MacTxUcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/MacTxUcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcast/Desired { "value": <DESIRED_MAC_TX_UCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcast/Reported { "value": <REPORTED_MAC_TX_UCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxUcast/Desired { "value": <DESIRED_MAC_TX_UCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxUcast/Reported { "value": <REPORTED_MAC_TX_UCAST>}
+
 ```
 
 <br><br>
@@ -43577,15 +44591,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcast/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MacTxUcastRetry attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastRetry/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/MacTxUcastRetry/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastRetry/Desired { "value": <DESIRED_MAC_TX_UCAST_RETRY> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastRetry/Reported { "value": <REPORTED_MAC_TX_UCAST_RETRY> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxUcastRetry/Desired { "value": <DESIRED_MAC_TX_UCAST_RETRY>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxUcastRetry/Reported { "value": <REPORTED_MAC_TX_UCAST_RETRY>}
+
 ```
 
 <br><br>
@@ -43617,15 +44635,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastRetry/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MacTxUcastFail attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastFail/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/MacTxUcastFail/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastFail/Desired { "value": <DESIRED_MAC_TX_UCAST_FAIL> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastFail/Reported { "value": <REPORTED_MAC_TX_UCAST_FAIL> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxUcastFail/Desired { "value": <DESIRED_MAC_TX_UCAST_FAIL>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/MacTxUcastFail/Reported { "value": <REPORTED_MAC_TX_UCAST_FAIL>}
+
 ```
 
 <br><br>
@@ -43657,15 +44679,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/MacTxUcastFail/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSRxBcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxBcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSRxBcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxBcast/Desired { "value": <DESIRED_APS_RX_BCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxBcast/Reported { "value": <REPORTED_APS_RX_BCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSRxBcast/Desired { "value": <DESIRED_APS_RX_BCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSRxBcast/Reported { "value": <REPORTED_APS_RX_BCAST>}
+
 ```
 
 <br><br>
@@ -43697,15 +44723,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxBcast/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSTxBcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxBcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSTxBcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxBcast/Desired { "value": <DESIRED_APS_TX_BCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxBcast/Reported { "value": <REPORTED_APS_TX_BCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxBcast/Desired { "value": <DESIRED_APS_TX_BCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxBcast/Reported { "value": <REPORTED_APS_TX_BCAST>}
+
 ```
 
 <br><br>
@@ -43737,15 +44767,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxBcast/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSRxUcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxUcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSRxUcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxUcast/Desired { "value": <DESIRED_APS_RX_UCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxUcast/Reported { "value": <REPORTED_APS_RX_UCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSRxUcast/Desired { "value": <DESIRED_APS_RX_UCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSRxUcast/Reported { "value": <REPORTED_APS_RX_UCAST>}
+
 ```
 
 <br><br>
@@ -43777,15 +44811,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSRxUcast/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSTxUcastSuccess attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastSuccess/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSTxUcastSuccess/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastSuccess/Desired { "value": <DESIRED_APS_TX_UCAST_SUCCESS> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastSuccess/Reported { "value": <REPORTED_APS_TX_UCAST_SUCCESS> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxUcastSuccess/Desired { "value": <DESIRED_APS_TX_UCAST_SUCCESS>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxUcastSuccess/Reported { "value": <REPORTED_APS_TX_UCAST_SUCCESS>}
+
 ```
 
 <br><br>
@@ -43817,15 +44855,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastSuccess/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSTxUcastRetry attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastRetry/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSTxUcastRetry/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastRetry/Desired { "value": <DESIRED_APS_TX_UCAST_RETRY> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastRetry/Reported { "value": <REPORTED_APS_TX_UCAST_RETRY> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxUcastRetry/Desired { "value": <DESIRED_APS_TX_UCAST_RETRY>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxUcastRetry/Reported { "value": <REPORTED_APS_TX_UCAST_RETRY>}
+
 ```
 
 <br><br>
@@ -43857,15 +44899,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastRetry/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSTxUcastFail attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastFail/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSTxUcastFail/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastFail/Desired { "value": <DESIRED_APS_TX_UCAST_FAIL> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastFail/Reported { "value": <REPORTED_APS_TX_UCAST_FAIL> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxUcastFail/Desired { "value": <DESIRED_APS_TX_UCAST_FAIL>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSTxUcastFail/Reported { "value": <REPORTED_APS_TX_UCAST_FAIL>}
+
 ```
 
 <br><br>
@@ -43897,15 +44943,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSTxUcastFail/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RouteDiscInitiated attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RouteDiscInitiated/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/RouteDiscInitiated/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RouteDiscInitiated/Desired { "value": <DESIRED_ROUTE_DISC_INITIATED> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RouteDiscInitiated/Reported { "value": <REPORTED_ROUTE_DISC_INITIATED> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/RouteDiscInitiated/Desired { "value": <DESIRED_ROUTE_DISC_INITIATED>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/RouteDiscInitiated/Reported { "value": <REPORTED_ROUTE_DISC_INITIATED>}
+
 ```
 
 <br><br>
@@ -43937,15 +44987,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RouteDiscInitiated/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NeighborAdded attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborAdded/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/NeighborAdded/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborAdded/Desired { "value": <DESIRED_NEIGHBOR_ADDED> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborAdded/Reported { "value": <REPORTED_NEIGHBOR_ADDED> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NeighborAdded/Desired { "value": <DESIRED_NEIGHBOR_ADDED>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NeighborAdded/Reported { "value": <REPORTED_NEIGHBOR_ADDED>}
+
 ```
 
 <br><br>
@@ -43977,15 +45031,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborAdded/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NeighborRemoved attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborRemoved/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/NeighborRemoved/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborRemoved/Desired { "value": <DESIRED_NEIGHBOR_REMOVED> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborRemoved/Reported { "value": <REPORTED_NEIGHBOR_REMOVED> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NeighborRemoved/Desired { "value": <DESIRED_NEIGHBOR_REMOVED>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NeighborRemoved/Reported { "value": <REPORTED_NEIGHBOR_REMOVED>}
+
 ```
 
 <br><br>
@@ -44017,15 +45075,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborRemoved/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NeighborStale attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborStale/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/NeighborStale/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborStale/Desired { "value": <DESIRED_NEIGHBOR_STALE> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborStale/Reported { "value": <REPORTED_NEIGHBOR_STALE> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NeighborStale/Desired { "value": <DESIRED_NEIGHBOR_STALE>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NeighborStale/Reported { "value": <REPORTED_NEIGHBOR_STALE>}
+
 ```
 
 <br><br>
@@ -44057,15 +45119,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NeighborStale/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for JoinIndication attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/JoinIndication/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/JoinIndication/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/JoinIndication/Desired { "value": <DESIRED_JOIN_INDICATION> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/JoinIndication/Reported { "value": <REPORTED_JOIN_INDICATION> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/JoinIndication/Desired { "value": <DESIRED_JOIN_INDICATION>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/JoinIndication/Reported { "value": <REPORTED_JOIN_INDICATION>}
+
 ```
 
 <br><br>
@@ -44097,15 +45163,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/JoinIndication/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ChildMoved attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/ChildMoved/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/ChildMoved/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/ChildMoved/Desired { "value": <DESIRED_CHILD_MOVED> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/ChildMoved/Reported { "value": <REPORTED_CHILD_MOVED> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/ChildMoved/Desired { "value": <DESIRED_CHILD_MOVED>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/ChildMoved/Reported { "value": <REPORTED_CHILD_MOVED>}
+
 ```
 
 <br><br>
@@ -44137,15 +45207,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/ChildMoved/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NWKFCFailure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKFCFailure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/NWKFCFailure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKFCFailure/Desired { "value": <DESIRED_NWKFC_FAILURE> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKFCFailure/Reported { "value": <REPORTED_NWKFC_FAILURE> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NWKFCFailure/Desired { "value": <DESIRED_NWKFC_FAILURE>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NWKFCFailure/Reported { "value": <REPORTED_NWKFC_FAILURE>}
+
 ```
 
 <br><br>
@@ -44177,15 +45251,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKFCFailure/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSFCFailure attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSFCFailure/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSFCFailure/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSFCFailure/Desired { "value": <DESIRED_APSFC_FAILURE> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSFCFailure/Reported { "value": <REPORTED_APSFC_FAILURE> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSFCFailure/Desired { "value": <DESIRED_APSFC_FAILURE>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSFCFailure/Reported { "value": <REPORTED_APSFC_FAILURE>}
+
 ```
 
 <br><br>
@@ -44217,15 +45295,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSFCFailure/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSUnauthorizedKey attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSUnauthorizedKey/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSUnauthorizedKey/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSUnauthorizedKey/Desired { "value": <DESIRED_APS_UNAUTHORIZED_KEY> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSUnauthorizedKey/Reported { "value": <REPORTED_APS_UNAUTHORIZED_KEY> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSUnauthorizedKey/Desired { "value": <DESIRED_APS_UNAUTHORIZED_KEY>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSUnauthorizedKey/Reported { "value": <REPORTED_APS_UNAUTHORIZED_KEY>}
+
 ```
 
 <br><br>
@@ -44257,15 +45339,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSUnauthorizedKey/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NWKDecryptFailures attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKDecryptFailures/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/NWKDecryptFailures/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKDecryptFailures/Desired { "value": <DESIRED_NWK_DECRYPT_FAILURES> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKDecryptFailures/Reported { "value": <REPORTED_NWK_DECRYPT_FAILURES> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NWKDecryptFailures/Desired { "value": <DESIRED_NWK_DECRYPT_FAILURES>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/NWKDecryptFailures/Reported { "value": <REPORTED_NWK_DECRYPT_FAILURES>}
+
 ```
 
 <br><br>
@@ -44297,15 +45383,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/NWKDecryptFailures/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for APSDecryptFailures attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSDecryptFailures/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/APSDecryptFailures/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSDecryptFailures/Desired { "value": <DESIRED_APS_DECRYPT_FAILURES> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSDecryptFailures/Reported { "value": <REPORTED_APS_DECRYPT_FAILURES> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSDecryptFailures/Desired { "value": <DESIRED_APS_DECRYPT_FAILURES>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/APSDecryptFailures/Reported { "value": <REPORTED_APS_DECRYPT_FAILURES>}
+
 ```
 
 <br><br>
@@ -44337,15 +45427,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/APSDecryptFailures/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PacketBufferAllocateFailures attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketBufferAllocateFailures/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/PacketBufferAllocateFailures/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketBufferAllocateFailures/Desired { "value": <DESIRED_PACKET_BUFFER_ALLOCATE_FAILURES> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketBufferAllocateFailures/Reported { "value": <REPORTED_PACKET_BUFFER_ALLOCATE_FAILURES> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PacketBufferAllocateFailures/Desired { "value": <DESIRED_PACKET_BUFFER_ALLOCATE_FAILURES>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PacketBufferAllocateFailures/Reported { "value": <REPORTED_PACKET_BUFFER_ALLOCATE_FAILURES>}
+
 ```
 
 <br><br>
@@ -44377,15 +45471,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketBufferAllocateFailures/Repo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RelayedUcast attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RelayedUcast/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/RelayedUcast/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RelayedUcast/Desired { "value": <DESIRED_RELAYED_UCAST> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RelayedUcast/Reported { "value": <REPORTED_RELAYED_UCAST> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/RelayedUcast/Desired { "value": <DESIRED_RELAYED_UCAST>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/RelayedUcast/Reported { "value": <REPORTED_RELAYED_UCAST>}
+
 ```
 
 <br><br>
@@ -44417,15 +45515,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/RelayedUcast/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PHYToMACQueueLimitReached attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PHYToMACQueueLimitReached/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/PHYToMACQueueLimitReached/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PHYToMACQueueLimitReached/Desired { "value": <DESIRED_PHY_TOMAC_QUEUE_LIMIT_REACHED> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PHYToMACQueueLimitReached/Reported { "value": <REPORTED_PHY_TOMAC_QUEUE_LIMIT_REACHED> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PHYToMACQueueLimitReached/Desired { "value": <DESIRED_PHY_TOMAC_QUEUE_LIMIT_REACHED>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PHYToMACQueueLimitReached/Reported { "value": <REPORTED_PHY_TOMAC_QUEUE_LIMIT_REACHED>}
+
 ```
 
 <br><br>
@@ -44457,15 +45559,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PHYToMACQueueLimitReached/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PacketValidateDropCount attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketValidateDropCount/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/PacketValidateDropCount/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketValidateDropCount/Desired { "value": <DESIRED_PACKET_VALIDATE_DROP_COUNT> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketValidateDropCount/Reported { "value": <REPORTED_PACKET_VALIDATE_DROP_COUNT> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PacketValidateDropCount/Desired { "value": <DESIRED_PACKET_VALIDATE_DROP_COUNT>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/PacketValidateDropCount/Reported { "value": <REPORTED_PACKET_VALIDATE_DROP_COUNT>}
+
 ```
 
 <br><br>
@@ -44497,15 +45603,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/PacketValidateDropCount/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageMACRetryPerAPSMessageSent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Desired { "value": <DESIRED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Reported { "value": <REPORTED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Desired { "value": <DESIRED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/Reported { "value": <REPORTED_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT>}
+
 ```
 
 <br><br>
@@ -44537,15 +45647,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LastMessageLQI attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageLQI/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/LastMessageLQI/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageLQI/Desired { "value": <DESIRED_LAST_MESSAGELQI> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageLQI/Reported { "value": <REPORTED_LAST_MESSAGELQI> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/LastMessageLQI/Desired { "value": <DESIRED_LAST_MESSAGELQI>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/LastMessageLQI/Reported { "value": <REPORTED_LAST_MESSAGELQI>}
+
 ```
 
 <br><br>
@@ -44577,15 +45691,19 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageLQI/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for LastMessageRSSI attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageRSSI/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Diagnostics/Attributes/LastMessageRSSI/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageRSSI/Desired { "value": <DESIRED_LAST_MESSAGERSSI> }
-ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageRSSI/Reported { "value": <REPORTED_LAST_MESSAGERSSI> }
+
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/LastMessageRSSI/Desired { "value": <DESIRED_LAST_MESSAGERSSI>}
+ucl/by-unid/<UNID>/ep0/Diagnostics/Attributes/LastMessageRSSI/Reported { "value": <REPORTED_LAST_MESSAGERSSI>}
+
 ```
 
 <br><br>
@@ -44622,7 +45740,7 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/LastMessageRSSI/Reported { "value
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -44675,7 +45793,7 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/Attributes/ClusterRevision/Reported { "value
 
 To see supported commands for Diagnostics cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Diagnostics/SupportedCommands { "value": [] }
@@ -44683,8 +45801,7 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/SupportedCommands { "value": [] }
 
 To see supported generated commands for Diagnostics cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Diagnostics/SupportedGeneratedCommands { "value": [] }
@@ -44730,11 +45847,12 @@ ucl/by-unid/<UNID>/<EP>/Diagnostics/SupportedGeneratedCommands { "value": [] }
 
 To update all Diagnostics attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -44805,13 +45923,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Commands/WriteAttributes' 
 
 To force read all Diagnostics attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Diagnostics attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Diagnostics/Commands/ForceReadAttributes' -m  '{ "value": ["NumberOfResets"] }'
 ```
 
@@ -44868,15 +45986,19 @@ The following attribute topics are used to retrieve the ProtocolController-RFTel
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for TxReportEnabled attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/+'
+
 # Example output
-ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Desired { "value": <DESIRED_TX_REPORT_ENABLED> }
-ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Reported { "value": <REPORTED_TX_REPORT_ENABLED> }
+
+ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Desired { "value": <DESIRED_TX_REPORT_ENABLED>}
+ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Reported { "value": <REPORTED_TX_REPORT_ENABLED>}
+
 ```
 
 <br><br>
@@ -44908,15 +46030,19 @@ ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Rep
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PTIEnabled attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/PTIEnabled/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ProtocolController/RFTelemetry/Attributes/PTIEnabled/+'
+
 # Example output
-ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/PTIEnabled/Desired { "value": <DESIRED_PTI_ENABLED> }
-ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/PTIEnabled/Reported { "value": <REPORTED_PTI_ENABLED> }
+
+ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/PTIEnabled/Desired { "value": <DESIRED_PTI_ENABLED>}
+ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/PTIEnabled/Reported { "value": <REPORTED_PTI_ENABLED>}
+
 ```
 
 <br><br>
@@ -44953,7 +46079,7 @@ ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Attributes/PTIEnabled/Reported
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/RFTelemetry/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ProtocolController/RFTelemetry/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -45009,7 +46135,7 @@ ucl/by-unid/<UNID>/<EP>/ProtocolController/RFTelemetry/Attributes/ClusterRevisio
 
 To see supported commands for ProtocolController-RFTelemetry cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/SupportedCommands { "value": ["TxReport","WriteAttributes", "ForceReadAttributes"] }
@@ -45017,8 +46143,7 @@ ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/SupportedCommands { "value": [
 
 To see supported generated commands for ProtocolController-RFTelemetry cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/SupportedGeneratedCommands { "value": [] }
@@ -45146,13 +46271,13 @@ ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/SupportedGeneratedCommands { "
 
 To send a ProtocolController/RFTelemetry/TxReport command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/Commands/TxReport' -m  '{ "SourceUNID": <SOURCEUNID_VALUE>,"DestinationUNID": <DESTINATIONUNID_VALUE>,"TransmissionSuccessful": <TRANSMISSION_SUCCESSFUL_VALUE>,"TransmissionTimeMs": <TRANSMISSION_TIME_MS_VALUE>,"TxPowerdBm": <TX_POWERD_BM_VALUE>,"TxChannel": <TX_CHANNEL_VALUE>,"RoutingAttempts": <ROUTING_ATTEMPTS_VALUE>,"RouteChanged": <ROUTE_CHANGED_VALUE>,"TransmissionSpeed": <TRANSMISSION_SPEED_VALUE>,"MeasuredNoiseFloordBm": <MEASURED_NOISE_FLOORD_BM_VALUE>,"LastRouteRepeaters": <LAST_ROUTE_REPEATERS_VALUE>,"IncomingRSSIRepeaters": <INCOMINGRSSI_REPEATERS_VALUE>,"AckRSSI": <ACKRSSI_VALUE>,"AckChannel": <ACK_CHANNEL_VALUE>,"LastRouteFailedLinkFunctionalUNID": <LAST_ROUTE_FAILED_LINK_FUNCTIONALUNID_VALUE>,"LastRouteFailedLinkNonFunctionalUNID": <LAST_ROUTE_FAILED_LINK_NON_FUNCTIONALUNID_VALUE>,"DestinationAckTxPowerdBm": <DESTINATION_ACK_TX_POWERD_BM_VALUE>,"DestinationAckMeasuredRSSI": <DESTINATION_ACK_MEASUREDRSSI_VALUE>,"DestinationAckMeasuredNoiseFloor": <DESTINATION_ACK_MEASURED_NOISE_FLOOR_VALUE> }'
 ```
 
 To receive a ProtocolController/RFTelemetry/TxReport generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/GeneratedCommands/TxReport'
 ```
 
@@ -45191,11 +46316,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/RFTelemetry/GeneratedCom
 
 To update all ProtocolController/RFTelemetry attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/RFTelemetry/Commands/WriteAttributes' -m  '{ "TxReportEnabled": <TX_REPORT_ENABLED_VALUE> ,"PTIEnabled": <PTI_ENABLED_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -45236,13 +46362,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/RFTelemetry/Command
 
 To force read all ProtocolController/RFTelemetry attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/RFTelemetry/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ProtocolController/RFTelemetry attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/RFTelemetry/Commands/ForceReadAttributes' -m  '{ "value": ["TxReportEnabled"] }'
 ```
 
@@ -45302,15 +46428,198 @@ The following attribute topics are used to retrieve the State cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for EndpointIdList attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/State/Attributes/EndpointIdList/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/State/Attributes/EndpointIdList/+'
+
 # Example output
-ucl/by-unid/<UNID>/State/Attributes/EndpointIdList/Desired { "value": <DESIRED_ENDPOINT_ID_LIST> }
-ucl/by-unid/<UNID>/State/Attributes/EndpointIdList/Reported { "value": <REPORTED_ENDPOINT_ID_LIST> }
+
+ucl/by-unid/<UNID>/State/Attributes/EndpointIdList/Desired { "value": [<DESIRED_ENDPOINT_ID_LIST>,<DESIRED_ENDPOINT_ID_LIST>]}
+ucl/by-unid/<UNID>/State/Attributes/EndpointIdList/Reported { "value": [<REPORTED_ENDPOINT_ID_LIST>,<REPORTED_ENDPOINT_ID_LIST>]}
+
+```
+
+<br><br>
+
+\subsection state_attr_network_status State/NetworkStatus Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/State/Attributes/NetworkStatus/Reported
+[PREFIX]/State/Attributes/NetworkStatus/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "State Cluster NetworkStatus Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "NodeStateNetworkStatus"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for NetworkStatus attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/State/Attributes/NetworkStatus/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/State/Attributes/NetworkStatus/Desired { "value": <DESIRED_NETWORK_STATUS>}
+ucl/by-unid/<UNID>/State/Attributes/NetworkStatus/Reported { "value": <REPORTED_NETWORK_STATUS>}
+
+```
+
+<br><br>
+
+\subsection state_attr_security State/Security Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/State/Attributes/Security/Reported
+[PREFIX]/State/Attributes/Security/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "State Cluster Security Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "NodeStateSecurity"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Security attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/State/Attributes/Security/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/State/Attributes/Security/Desired { "value": <DESIRED_SECURITY>}
+ucl/by-unid/<UNID>/State/Attributes/Security/Reported { "value": <REPORTED_SECURITY>}
+
+```
+
+<br><br>
+
+\subsection state_attr_maximum_command_delay State/MaximumCommandDelay Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/State/Attributes/MaximumCommandDelay/Reported
+[PREFIX]/State/Attributes/MaximumCommandDelay/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "State Cluster MaximumCommandDelay Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for MaximumCommandDelay attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/State/Attributes/MaximumCommandDelay/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/State/Attributes/MaximumCommandDelay/Desired { "value": <DESIRED_MAXIMUM_COMMAND_DELAY>}
+ucl/by-unid/<UNID>/State/Attributes/MaximumCommandDelay/Reported { "value": <REPORTED_MAXIMUM_COMMAND_DELAY>}
+
+```
+
+<br><br>
+
+\subsection state_attr_network_list State/NetworkList Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/State/Attributes/NetworkList/Reported
+[PREFIX]/State/Attributes/NetworkList/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "State Cluster NetworkList Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for NetworkList attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/State/Attributes/NetworkList/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/State/Attributes/NetworkList/Desired { "value": [<DESIRED_NETWORK_LIST>,<DESIRED_NETWORK_LIST>]}
+ucl/by-unid/<UNID>/State/Attributes/NetworkList/Reported { "value": [<REPORTED_NETWORK_LIST>,<REPORTED_NETWORK_LIST>]}
+
 ```
 
 <br><br>
@@ -45347,7 +46656,7 @@ ucl/by-unid/<UNID>/State/Attributes/EndpointIdList/Reported { "value": <REPORTED
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/State/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/State/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -45389,6 +46698,7 @@ ucl/by-unid/<UNID>/<EP>/State/Attributes/ClusterRevision/Reported { "value": <RE
               "RemoveOffline",
               "DiscoverNeighbors",
               "Interview",
+              "DiscoverSecurity",
               "WriteAttributes",
               "ForceReadAttributes"
             ]
@@ -45406,16 +46716,15 @@ ucl/by-unid/<UNID>/<EP>/State/Attributes/ClusterRevision/Reported { "value": <RE
 
 To see supported commands for State cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/State/SupportedCommands'
 # Example output
-ucl/by-unid/<UNID>/State/SupportedCommands { "value": ["Remove","RemoveOffline","DiscoverNeighbors","Interview","WriteAttributes", "ForceReadAttributes"] }
+ucl/by-unid/<UNID>/State/SupportedCommands { "value": ["Remove","RemoveOffline","DiscoverNeighbors","Interview","DiscoverSecurity","WriteAttributes", "ForceReadAttributes"] }
 ```
 
 To see supported generated commands for State cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/State/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/State/SupportedGeneratedCommands { "value": [] }
@@ -45461,13 +46770,13 @@ ucl/by-unid/<UNID>/State/SupportedGeneratedCommands { "value": [] }
 
 To send a State/Remove command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/State/Commands/Remove' -m  '{  }'
 ```
 
 To receive a State/Remove generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/Remove'
 ```
 
@@ -45500,13 +46809,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/Remove'
 
 To send a State/RemoveOffline command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/State/Commands/RemoveOffline' -m  '{  }'
 ```
 
 To receive a State/RemoveOffline generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/RemoveOffline'
 ```
 
@@ -45539,13 +46848,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/RemoveOffline'
 
 To send a State/DiscoverNeighbors command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/State/Commands/DiscoverNeighbors' -m  '{  }'
 ```
 
 To receive a State/DiscoverNeighbors generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/DiscoverNeighbors'
 ```
 
@@ -45578,14 +46887,53 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/DiscoverNeighbors'
 
 To send a State/Interview command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/State/Commands/Interview' -m  '{  }'
 ```
 
 To receive a State/Interview generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/Interview'
+```
+
+<br><br>
+
+\subsection state_discover_security_cmd State/DiscoverSecurity Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/State/Commands/DiscoverSecurity
+[PREFIX]/State/GeneratedCommands/DiscoverSecurity
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "State Cluster DiscoverSecurity Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a State/DiscoverSecurity command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/State/Commands/DiscoverSecurity' -m  '{  }'
+```
+
+To receive a State/DiscoverSecurity generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/DiscoverSecurity'
 ```
 
 <br><br>
@@ -45617,11 +46965,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/State/GeneratedCommands/Interview'
 
 To update all State attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/State/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -45646,7 +46995,11 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/State/Commands/WriteAttributes' -m  '{
       "items": {
         "type": "string",
         "enum": [
-          "EndpointIdList"
+          "EndpointIdList",
+          "NetworkStatus",
+          "Security",
+          "MaximumCommandDelay",
+          "NetworkList"
         ]
       }
     }
@@ -45661,13 +47014,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/State/Commands/WriteAttributes' -m  '{
 
 To force read all State attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/State/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the State attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/State/Commands/ForceReadAttributes' -m  '{ "value": ["EndpointIdList"] }'
 ```
 
@@ -45724,15 +47077,19 @@ The following attribute topics are used to retrieve the Binding cluster state.
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BindingTableFull attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTableFull/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Binding/Attributes/BindingTableFull/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTableFull/Desired { "value": <DESIRED_BINDING_TABLE_FULL> }
-ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTableFull/Reported { "value": <REPORTED_BINDING_TABLE_FULL> }
+
+ucl/by-unid/<UNID>/ep0/Binding/Attributes/BindingTableFull/Desired { "value": <DESIRED_BINDING_TABLE_FULL>}
+ucl/by-unid/<UNID>/ep0/Binding/Attributes/BindingTableFull/Reported { "value": <REPORTED_BINDING_TABLE_FULL>}
+
 ```
 
 <br><br>
@@ -45767,15 +47124,19 @@ ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTableFull/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BindableClusterList attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindableClusterList/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Binding/Attributes/BindableClusterList/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindableClusterList/Desired { "value": <DESIRED_BINDABLE_CLUSTER_LIST> }
-ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindableClusterList/Reported { "value": <REPORTED_BINDABLE_CLUSTER_LIST> }
+
+ucl/by-unid/<UNID>/ep0/Binding/Attributes/BindableClusterList/Desired { "value": [<DESIRED_BINDABLE_CLUSTER_LIST>,<DESIRED_BINDABLE_CLUSTER_LIST>]}
+ucl/by-unid/<UNID>/ep0/Binding/Attributes/BindableClusterList/Reported { "value": [<REPORTED_BINDABLE_CLUSTER_LIST>,<REPORTED_BINDABLE_CLUSTER_LIST>]}
+
 ```
 
 <br><br>
@@ -45810,15 +47171,19 @@ ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindableClusterList/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BindingTable attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTable/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Binding/Attributes/BindingTable/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTable/Desired { "value": <DESIRED_BINDING_TABLE> }
-ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTable/Reported { "value": <REPORTED_BINDING_TABLE> }
+
+ucl/by-unid/<UNID>/ep0/Binding/Attributes/BindingTable/Desired { "value": [<DESIRED_BINDING_TABLE>,<DESIRED_BINDING_TABLE>]}
+ucl/by-unid/<UNID>/ep0/Binding/Attributes/BindingTable/Reported { "value": [<REPORTED_BINDING_TABLE>,<REPORTED_BINDING_TABLE>]}
+
 ```
 
 <br><br>
@@ -45855,7 +47220,7 @@ ucl/by-unid/<UNID>/<EP>/Binding/Attributes/BindingTable/Reported { "value": <REP
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Binding/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -45914,7 +47279,7 @@ ucl/by-unid/<UNID>/<EP>/Binding/Attributes/ClusterRevision/Reported { "value": <
 
 To see supported commands for Binding cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Binding/SupportedCommands { "value": ["Bind","Unbind","BindToProtocolController","UnbindFromProtocolController","WriteAttributes", "ForceReadAttributes"] }
@@ -45922,8 +47287,7 @@ ucl/by-unid/<UNID>/<EP>/Binding/SupportedCommands { "value": ["Bind","Unbind","B
 
 To see supported generated commands for Binding cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/Binding/SupportedGeneratedCommands { "value": [] }
@@ -45981,13 +47345,13 @@ ucl/by-unid/<UNID>/<EP>/Binding/SupportedGeneratedCommands { "value": [] }
 
 To send a Binding/Bind command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/Bind' -m  '{ "ClusterName": <CLUSTER_NAME_VALUE>,"DestinationUnid": <DESTINATION_UNID_VALUE>,"DestinationEp": <DESTINATION_EP_VALUE> }'
 ```
 
 To receive a Binding/Bind generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/Bind'
 ```
 
@@ -46032,13 +47396,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/Bind'
 
 To send a Binding/Unbind command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/Unbind' -m  '{ "ClusterName": <CLUSTER_NAME_VALUE>,"DestinationUnid": <DESTINATION_UNID_VALUE>,"DestinationEp": <DESTINATION_EP_VALUE> }'
 ```
 
 To receive a Binding/Unbind generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/Unbind'
 ```
 
@@ -46075,13 +47439,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/Unbind'
 
 To send a Binding/BindToProtocolController command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/BindToProtocolController' -m  '{ "ClusterName": <CLUSTER_NAME_VALUE> }'
 ```
 
 To receive a Binding/BindToProtocolController generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/BindToProtocolController'
 ```
 
@@ -46118,13 +47482,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/BindToProtoc
 
 To send a Binding/UnbindFromProtocolController command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/UnbindFromProtocolController' -m  '{ "ClusterName": <CLUSTER_NAME_VALUE> }'
 ```
 
 To receive a Binding/UnbindFromProtocolController generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/UnbindFromProtocolController'
 ```
 
@@ -46157,11 +47521,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Binding/GeneratedCommands/UnbindFromPr
 
 To update all Binding attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -46203,13 +47568,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/WriteAttributes' -m  
 
 To force read all Binding attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the Binding attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Binding/Commands/ForceReadAttributes' -m  '{ "value": ["BindingTableFull"] }'
 ```
 
@@ -46266,15 +47631,19 @@ The following attribute topics are used to retrieve the SystemMetrics cluster st
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReportingIntervalSeconds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/ReportingIntervalSeconds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/ReportingIntervalSeconds/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/ReportingIntervalSeconds/Desired { "value": <DESIRED_REPORTING_INTERVAL_SECONDS> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/ReportingIntervalSeconds/Reported { "value": <REPORTED_REPORTING_INTERVAL_SECONDS> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/ReportingIntervalSeconds/Desired { "value": <DESIRED_REPORTING_INTERVAL_SECONDS>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/ReportingIntervalSeconds/Reported { "value": <REPORTED_REPORTING_INTERVAL_SECONDS>}
+
 ```
 
 <br><br>
@@ -46309,15 +47678,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/ReportingIntervalSeconds/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CPUUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/CPUUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUUsagePercent/Desired { "value": <DESIRED_CPU_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUUsagePercent/Reported { "value": <REPORTED_CPU_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUUsagePercent/Desired { "value": [<DESIRED_CPU_USAGE_PERCENT>,<DESIRED_CPU_USAGE_PERCENT>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUUsagePercent/Reported { "value": [<REPORTED_CPU_USAGE_PERCENT>,<REPORTED_CPU_USAGE_PERCENT>]}
+
 ```
 
 <br><br>
@@ -46352,15 +47725,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUUsagePercent/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CPUFrequencyMHz attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUFrequencyMHz/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/CPUFrequencyMHz/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUFrequencyMHz/Desired { "value": <DESIRED_CPU_FREQUENCYM_HZ> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUFrequencyMHz/Reported { "value": <REPORTED_CPU_FREQUENCYM_HZ> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUFrequencyMHz/Desired { "value": [<DESIRED_CPU_FREQUENCYM_HZ>,<DESIRED_CPU_FREQUENCYM_HZ>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUFrequencyMHz/Reported { "value": [<REPORTED_CPU_FREQUENCYM_HZ>,<REPORTED_CPU_FREQUENCYM_HZ>]}
+
 ```
 
 <br><br>
@@ -46395,15 +47772,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUFrequencyMHz/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CPUAverageUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUAverageUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/CPUAverageUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUAverageUsagePercent/Desired { "value": <DESIRED_CPU_AVERAGE_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUAverageUsagePercent/Reported { "value": <REPORTED_CPU_AVERAGE_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUAverageUsagePercent/Desired { "value": [<DESIRED_CPU_AVERAGE_USAGE_PERCENT>,<DESIRED_CPU_AVERAGE_USAGE_PERCENT>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUAverageUsagePercent/Reported { "value": [<REPORTED_CPU_AVERAGE_USAGE_PERCENT>,<REPORTED_CPU_AVERAGE_USAGE_PERCENT>]}
+
 ```
 
 <br><br>
@@ -46438,15 +47819,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUAverageUsagePercent/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CPUMinUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMinUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/CPUMinUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMinUsagePercent/Desired { "value": <DESIRED_CPU_MIN_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMinUsagePercent/Reported { "value": <REPORTED_CPU_MIN_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMinUsagePercent/Desired { "value": [<DESIRED_CPU_MIN_USAGE_PERCENT>,<DESIRED_CPU_MIN_USAGE_PERCENT>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMinUsagePercent/Reported { "value": [<REPORTED_CPU_MIN_USAGE_PERCENT>,<REPORTED_CPU_MIN_USAGE_PERCENT>]}
+
 ```
 
 <br><br>
@@ -46481,15 +47866,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMinUsagePercent/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CPUMaxUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMaxUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/CPUMaxUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMaxUsagePercent/Desired { "value": <DESIRED_CPU_MAX_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMaxUsagePercent/Reported { "value": <REPORTED_CPU_MAX_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMaxUsagePercent/Desired { "value": [<DESIRED_CPU_MAX_USAGE_PERCENT>,<DESIRED_CPU_MAX_USAGE_PERCENT>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMaxUsagePercent/Reported { "value": [<REPORTED_CPU_MAX_USAGE_PERCENT>,<REPORTED_CPU_MAX_USAGE_PERCENT>]}
+
 ```
 
 <br><br>
@@ -46521,15 +47910,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/CPUMaxUsagePercent/Reported { "value
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RAMTotalMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMTotalMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/RAMTotalMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMTotalMB/Desired { "value": <DESIRED_RAM_TOTALMB> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMTotalMB/Reported { "value": <REPORTED_RAM_TOTALMB> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMTotalMB/Desired { "value": <DESIRED_RAM_TOTALMB>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMTotalMB/Reported { "value": <REPORTED_RAM_TOTALMB>}
+
 ```
 
 <br><br>
@@ -46561,15 +47954,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMTotalMB/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RAMFreeMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMFreeMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/RAMFreeMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMFreeMB/Desired { "value": <DESIRED_RAM_FREEMB> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMFreeMB/Reported { "value": <REPORTED_RAM_FREEMB> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMFreeMB/Desired { "value": <DESIRED_RAM_FREEMB>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMFreeMB/Reported { "value": <REPORTED_RAM_FREEMB>}
+
 ```
 
 <br><br>
@@ -46601,15 +47998,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMFreeMB/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for RAMAvailableMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMAvailableMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/RAMAvailableMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMAvailableMB/Desired { "value": <DESIRED_RAM_AVAILABLEMB> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMAvailableMB/Reported { "value": <REPORTED_RAM_AVAILABLEMB> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMAvailableMB/Desired { "value": <DESIRED_RAM_AVAILABLEMB>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMAvailableMB/Reported { "value": <REPORTED_RAM_AVAILABLEMB>}
+
 ```
 
 <br><br>
@@ -46641,15 +48042,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/RAMAvailableMB/Reported { "value": <
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SWAPMemoryTotalMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryTotalMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/SWAPMemoryTotalMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryTotalMB/Desired { "value": <DESIRED_SWAP_MEMORY_TOTALMB> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryTotalMB/Reported { "value": <REPORTED_SWAP_MEMORY_TOTALMB> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryTotalMB/Desired { "value": <DESIRED_SWAP_MEMORY_TOTALMB>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryTotalMB/Reported { "value": <REPORTED_SWAP_MEMORY_TOTALMB>}
+
 ```
 
 <br><br>
@@ -46681,15 +48086,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryTotalMB/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SWAPMemoryUsedMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryUsedMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/SWAPMemoryUsedMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryUsedMB/Desired { "value": <DESIRED_SWAP_MEMORY_USEDMB> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryUsedMB/Reported { "value": <REPORTED_SWAP_MEMORY_USEDMB> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryUsedMB/Desired { "value": <DESIRED_SWAP_MEMORY_USEDMB>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryUsedMB/Reported { "value": <REPORTED_SWAP_MEMORY_USEDMB>}
+
 ```
 
 <br><br>
@@ -46721,15 +48130,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/SWAPMemoryUsedMB/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for VirtualMemoryTotalMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryTotalMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/VirtualMemoryTotalMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryTotalMB/Desired { "value": <DESIRED_VIRTUAL_MEMORY_TOTALMB> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryTotalMB/Reported { "value": <REPORTED_VIRTUAL_MEMORY_TOTALMB> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryTotalMB/Desired { "value": <DESIRED_VIRTUAL_MEMORY_TOTALMB>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryTotalMB/Reported { "value": <REPORTED_VIRTUAL_MEMORY_TOTALMB>}
+
 ```
 
 <br><br>
@@ -46761,15 +48174,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryTotalMB/Reported { "val
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for VirtualMemoryUsedMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryUsedMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/VirtualMemoryUsedMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryUsedMB/Desired { "value": <DESIRED_VIRTUAL_MEMORY_USEDMB> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryUsedMB/Reported { "value": <REPORTED_VIRTUAL_MEMORY_USEDMB> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryUsedMB/Desired { "value": <DESIRED_VIRTUAL_MEMORY_USEDMB>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryUsedMB/Reported { "value": <REPORTED_VIRTUAL_MEMORY_USEDMB>}
+
 ```
 
 <br><br>
@@ -46804,15 +48221,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/VirtualMemoryUsedMB/Reported { "valu
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DisksUsage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksUsage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/DisksUsage/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksUsage/Desired { "value": <DESIRED_DISKS_USAGE> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksUsage/Reported { "value": <REPORTED_DISKS_USAGE> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksUsage/Desired { "value": [<DESIRED_DISKS_USAGE>,<DESIRED_DISKS_USAGE>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksUsage/Reported { "value": [<REPORTED_DISKS_USAGE>,<REPORTED_DISKS_USAGE>]}
+
 ```
 
 <br><br>
@@ -46847,15 +48268,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksUsage/Reported { "value": <REPO
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for DisksCounters attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksCounters/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/DisksCounters/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksCounters/Desired { "value": <DESIRED_DISKS_COUNTERS> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksCounters/Reported { "value": <REPORTED_DISKS_COUNTERS> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksCounters/Desired { "value": [<DESIRED_DISKS_COUNTERS>,<DESIRED_DISKS_COUNTERS>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksCounters/Reported { "value": [<REPORTED_DISKS_COUNTERS>,<REPORTED_DISKS_COUNTERS>]}
+
 ```
 
 <br><br>
@@ -46890,15 +48315,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/DisksCounters/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NetworkInterfacesData attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/NetworkInterfacesData/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/NetworkInterfacesData/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/NetworkInterfacesData/Desired { "value": <DESIRED_NETWORK_INTERFACES_DATA> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/NetworkInterfacesData/Reported { "value": <REPORTED_NETWORK_INTERFACES_DATA> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/NetworkInterfacesData/Desired { "value": [<DESIRED_NETWORK_INTERFACES_DATA>,<DESIRED_NETWORK_INTERFACES_DATA>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/NetworkInterfacesData/Reported { "value": [<REPORTED_NETWORK_INTERFACES_DATA>,<REPORTED_NETWORK_INTERFACES_DATA>]}
+
 ```
 
 <br><br>
@@ -46933,15 +48362,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/NetworkInterfacesData/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for WirelessNetworkInterfacesData attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/WirelessNetworkInterfacesData/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/WirelessNetworkInterfacesData/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/WirelessNetworkInterfacesData/Desired { "value": <DESIRED_WIRELESS_NETWORK_INTERFACES_DATA> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/WirelessNetworkInterfacesData/Reported { "value": <REPORTED_WIRELESS_NETWORK_INTERFACES_DATA> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/WirelessNetworkInterfacesData/Desired { "value": [<DESIRED_WIRELESS_NETWORK_INTERFACES_DATA>,<DESIRED_WIRELESS_NETWORK_INTERFACES_DATA>]}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/WirelessNetworkInterfacesData/Reported { "value": [<REPORTED_WIRELESS_NETWORK_INTERFACES_DATA>,<REPORTED_WIRELESS_NETWORK_INTERFACES_DATA>]}
+
 ```
 
 <br><br>
@@ -46973,15 +48406,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/WirelessNetworkInterfacesData/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Hostname attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/Hostname/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/Hostname/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/Hostname/Desired { "value": <DESIRED_HOSTNAME> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/Hostname/Reported { "value": <REPORTED_HOSTNAME> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/Hostname/Desired { "value": <DESIRED_HOSTNAME>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/Hostname/Reported { "value": <REPORTED_HOSTNAME>}
+
 ```
 
 <br><br>
@@ -47013,15 +48450,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/Hostname/Reported { "value": <REPORT
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for FQDN attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/FQDN/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/FQDN/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/FQDN/Desired { "value": <DESIRED_FQDN> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/FQDN/Reported { "value": <REPORTED_FQDN> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/FQDN/Desired { "value": <DESIRED_FQDN>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/FQDN/Reported { "value": <REPORTED_FQDN>}
+
 ```
 
 <br><br>
@@ -47053,15 +48494,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/FQDN/Reported { "value": <REPORTED_F
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UptimeMinutes attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/UptimeMinutes/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/UptimeMinutes/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/UptimeMinutes/Desired { "value": <DESIRED_UPTIME_MINUTES> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/UptimeMinutes/Reported { "value": <REPORTED_UPTIME_MINUTES> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/UptimeMinutes/Desired { "value": <DESIRED_UPTIME_MINUTES>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/UptimeMinutes/Reported { "value": <REPORTED_UPTIME_MINUTES>}
+
 ```
 
 <br><br>
@@ -47093,15 +48538,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/UptimeMinutes/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CurrentTemperatureCelcius attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/CurrentTemperatureCelcius/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/CurrentTemperatureCelcius/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CurrentTemperatureCelcius/Desired { "value": <DESIRED_CURRENT_TEMPERATURE_CELCIUS> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/CurrentTemperatureCelcius/Reported { "value": <REPORTED_CURRENT_TEMPERATURE_CELCIUS> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CurrentTemperatureCelcius/Desired { "value": <DESIRED_CURRENT_TEMPERATURE_CELCIUS>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/CurrentTemperatureCelcius/Reported { "value": <REPORTED_CURRENT_TEMPERATURE_CELCIUS>}
+
 ```
 
 <br><br>
@@ -47133,15 +48582,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/CurrentTemperatureCelcius/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AverageTemperatureCelcius attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/AverageTemperatureCelcius/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/AverageTemperatureCelcius/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/AverageTemperatureCelcius/Desired { "value": <DESIRED_AVERAGE_TEMPERATURE_CELCIUS> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/AverageTemperatureCelcius/Reported { "value": <REPORTED_AVERAGE_TEMPERATURE_CELCIUS> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/AverageTemperatureCelcius/Desired { "value": <DESIRED_AVERAGE_TEMPERATURE_CELCIUS>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/AverageTemperatureCelcius/Reported { "value": <REPORTED_AVERAGE_TEMPERATURE_CELCIUS>}
+
 ```
 
 <br><br>
@@ -47173,15 +48626,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/AverageTemperatureCelcius/Reported {
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MinTemperatureCelcius attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/MinTemperatureCelcius/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/MinTemperatureCelcius/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/MinTemperatureCelcius/Desired { "value": <DESIRED_MIN_TEMPERATURE_CELCIUS> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/MinTemperatureCelcius/Reported { "value": <REPORTED_MIN_TEMPERATURE_CELCIUS> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/MinTemperatureCelcius/Desired { "value": <DESIRED_MIN_TEMPERATURE_CELCIUS>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/MinTemperatureCelcius/Reported { "value": <REPORTED_MIN_TEMPERATURE_CELCIUS>}
+
 ```
 
 <br><br>
@@ -47213,15 +48670,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/MinTemperatureCelcius/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MaxTemperatureCelcius attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/MaxTemperatureCelcius/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/MaxTemperatureCelcius/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/MaxTemperatureCelcius/Desired { "value": <DESIRED_MAX_TEMPERATURE_CELCIUS> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/MaxTemperatureCelcius/Reported { "value": <REPORTED_MAX_TEMPERATURE_CELCIUS> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/MaxTemperatureCelcius/Desired { "value": <DESIRED_MAX_TEMPERATURE_CELCIUS>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/MaxTemperatureCelcius/Reported { "value": <REPORTED_MAX_TEMPERATURE_CELCIUS>}
+
 ```
 
 <br><br>
@@ -47253,15 +48714,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/MaxTemperatureCelcius/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PowerPlugged attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/PowerPlugged/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/PowerPlugged/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/PowerPlugged/Desired { "value": <DESIRED_POWER_PLUGGED> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/PowerPlugged/Reported { "value": <REPORTED_POWER_PLUGGED> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/PowerPlugged/Desired { "value": <DESIRED_POWER_PLUGGED>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/PowerPlugged/Reported { "value": <REPORTED_POWER_PLUGGED>}
+
 ```
 
 <br><br>
@@ -47293,15 +48758,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/PowerPlugged/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for BatteryPercentage attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/BatteryPercentage/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/BatteryPercentage/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/BatteryPercentage/Desired { "value": <DESIRED_BATTERY_PERCENTAGE> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/BatteryPercentage/Reported { "value": <REPORTED_BATTERY_PERCENTAGE> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/BatteryPercentage/Desired { "value": <DESIRED_BATTERY_PERCENTAGE>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/BatteryPercentage/Reported { "value": <REPORTED_BATTERY_PERCENTAGE>}
+
 ```
 
 <br><br>
@@ -47333,15 +48802,19 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/BatteryPercentage/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SystemInterrupts attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/Attributes/SystemInterrupts/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/SystemMetrics/Attributes/SystemInterrupts/+'
+
 # Example output
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/SystemInterrupts/Desired { "value": <DESIRED_SYSTEM_INTERRUPTS> }
-ucl/by-unid/<UNID>/SystemMetrics/Attributes/SystemInterrupts/Reported { "value": <REPORTED_SYSTEM_INTERRUPTS> }
+
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/SystemInterrupts/Desired { "value": <DESIRED_SYSTEM_INTERRUPTS>}
+ucl/by-unid/<UNID>/SystemMetrics/Attributes/SystemInterrupts/Reported { "value": <REPORTED_SYSTEM_INTERRUPTS>}
+
 ```
 
 <br><br>
@@ -47378,7 +48851,7 @@ ucl/by-unid/<UNID>/SystemMetrics/Attributes/SystemInterrupts/Reported { "value":
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/SystemMetrics/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/SystemMetrics/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -47431,7 +48904,7 @@ ucl/by-unid/<UNID>/<EP>/SystemMetrics/Attributes/ClusterRevision/Reported { "val
 
 To see supported commands for SystemMetrics cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/SystemMetrics/SupportedCommands { "value": [] }
@@ -47439,8 +48912,7 @@ ucl/by-unid/<UNID>/SystemMetrics/SupportedCommands { "value": [] }
 
 To see supported generated commands for SystemMetrics cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/SystemMetrics/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/SystemMetrics/SupportedGeneratedCommands { "value": [] }
@@ -47489,11 +48961,12 @@ ucl/by-unid/<UNID>/SystemMetrics/SupportedGeneratedCommands { "value": [] }
 
 To update all SystemMetrics attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SystemMetrics/Commands/WriteAttributes' -m  '{ "ReportingIntervalSeconds": <REPORTING_INTERVAL_SECONDS_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -47559,13 +49032,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SystemMetrics/Commands/WriteAttributes
 
 To force read all SystemMetrics attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SystemMetrics/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the SystemMetrics attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/SystemMetrics/Commands/ForceReadAttributes' -m  '{ "value": ["ReportingIntervalSeconds"] }'
 ```
 
@@ -47622,15 +49095,19 @@ The following attribute topics are used to retrieve the ApplicationMonitoring cl
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationName attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationName/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationName/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationName/Desired { "value": <DESIRED_APPLICATION_NAME> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationName/Reported { "value": <REPORTED_APPLICATION_NAME> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationName/Desired { "value": <DESIRED_APPLICATION_NAME>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationName/Reported { "value": <REPORTED_APPLICATION_NAME>}
+
 ```
 
 <br><br>
@@ -47662,15 +49139,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationName/Reported { "
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationVersion attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationVersion/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationVersion/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationVersion/Desired { "value": <DESIRED_APPLICATION_VERSION> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationVersion/Reported { "value": <REPORTED_APPLICATION_VERSION> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationVersion/Desired { "value": <DESIRED_APPLICATION_VERSION>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationVersion/Reported { "value": <REPORTED_APPLICATION_VERSION>}
+
 ```
 
 <br><br>
@@ -47702,15 +49183,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationVersion/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationConnected attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationConnected/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationConnected/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationConnected/Desired { "value": <DESIRED_APPLICATION_CONNECTED> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationConnected/Reported { "value": <REPORTED_APPLICATION_CONNECTED> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationConnected/Desired { "value": <DESIRED_APPLICATION_CONNECTED>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationConnected/Reported { "value": <REPORTED_APPLICATION_CONNECTED>}
+
 ```
 
 <br><br>
@@ -47745,15 +49230,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationConnected/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationMQTTTopics attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/Desired { "value": <DESIRED_APPLICATIONMQTT_TOPICS> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/Reported { "value": <REPORTED_APPLICATIONMQTT_TOPICS> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/Desired { "value": [<DESIRED_APPLICATIONMQTT_TOPICS>,<DESIRED_APPLICATIONMQTT_TOPICS>]}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/Reported { "value": [<REPORTED_APPLICATIONMQTT_TOPICS>,<REPORTED_APPLICATIONMQTT_TOPICS>]}
+
 ```
 
 <br><br>
@@ -47785,15 +49274,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for UptimeMinutes attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/UptimeMinutes/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/UptimeMinutes/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/UptimeMinutes/Desired { "value": <DESIRED_UPTIME_MINUTES> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/UptimeMinutes/Reported { "value": <REPORTED_UPTIME_MINUTES> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/UptimeMinutes/Desired { "value": <DESIRED_UPTIME_MINUTES>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/UptimeMinutes/Reported { "value": <REPORTED_UPTIME_MINUTES>}
+
 ```
 
 <br><br>
@@ -47825,15 +49318,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/UptimeMinutes/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ProcessId attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ProcessId/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ProcessId/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ProcessId/Desired { "value": <DESIRED_PROCESS_ID> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ProcessId/Reported { "value": <REPORTED_PROCESS_ID> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ProcessId/Desired { "value": <DESIRED_PROCESS_ID>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ProcessId/Reported { "value": <REPORTED_PROCESS_ID>}
+
 ```
 
 <br><br>
@@ -47865,15 +49362,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ProcessId/Reported { "value"
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Hostname attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/Hostname/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/Hostname/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/Hostname/Desired { "value": <DESIRED_HOSTNAME> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/Hostname/Reported { "value": <REPORTED_HOSTNAME> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/Hostname/Desired { "value": <DESIRED_HOSTNAME>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/Hostname/Reported { "value": <REPORTED_HOSTNAME>}
+
 ```
 
 <br><br>
@@ -47905,15 +49406,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/Hostname/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for FQDN attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/FQDN/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/FQDN/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/FQDN/Desired { "value": <DESIRED_FQDN> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/FQDN/Reported { "value": <REPORTED_FQDN> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/FQDN/Desired { "value": <DESIRED_FQDN>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/FQDN/Reported { "value": <REPORTED_FQDN>}
+
 ```
 
 <br><br>
@@ -47945,15 +49450,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/FQDN/Reported { "value": <RE
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTLoggingEnabled attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingEnabled/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTLoggingEnabled/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingEnabled/Desired { "value": <DESIRED_MQTT_LOGGING_ENABLED> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingEnabled/Reported { "value": <REPORTED_MQTT_LOGGING_ENABLED> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingEnabled/Desired { "value": <DESIRED_MQTT_LOGGING_ENABLED>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingEnabled/Reported { "value": <REPORTED_MQTT_LOGGING_ENABLED>}
+
 ```
 
 <br><br>
@@ -47985,15 +49494,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingEnabled/Reported 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTLoggingLevel attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingLevel/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTLoggingLevel/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingLevel/Desired { "value": <DESIRED_MQTT_LOGGING_LEVEL> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingLevel/Reported { "value": <REPORTED_MQTT_LOGGING_LEVEL> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingLevel/Desired { "value": <DESIRED_MQTT_LOGGING_LEVEL>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingLevel/Reported { "value": <REPORTED_MQTT_LOGGING_LEVEL>}
+
 ```
 
 <br><br>
@@ -48025,15 +49538,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTLoggingLevel/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTStatisticsReportingIntervalSeconds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTStatisticsReportingIntervalSeconds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTStatisticsReportingIntervalSeconds/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTStatisticsReportingIntervalSeconds/Desired { "value": <DESIRED_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTStatisticsReportingIntervalSeconds/Reported { "value": <REPORTED_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTStatisticsReportingIntervalSeconds/Desired { "value": <DESIRED_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTStatisticsReportingIntervalSeconds/Reported { "value": <REPORTED_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS>}
+
 ```
 
 <br><br>
@@ -48065,15 +49582,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTStatisticsReportingInter
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTMessagesSent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesSent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTMessagesSent/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesSent/Desired { "value": <DESIRED_MQTT_MESSAGES_SENT> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesSent/Reported { "value": <REPORTED_MQTT_MESSAGES_SENT> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesSent/Desired { "value": <DESIRED_MQTT_MESSAGES_SENT>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesSent/Reported { "value": <REPORTED_MQTT_MESSAGES_SENT>}
+
 ```
 
 <br><br>
@@ -48105,15 +49626,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesSent/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTMessagesReceived attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesReceived/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTMessagesReceived/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesReceived/Desired { "value": <DESIRED_MQTT_MESSAGES_RECEIVED> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesReceived/Reported { "value": <REPORTED_MQTT_MESSAGES_RECEIVED> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesReceived/Desired { "value": <DESIRED_MQTT_MESSAGES_RECEIVED>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesReceived/Reported { "value": <REPORTED_MQTT_MESSAGES_RECEIVED>}
+
 ```
 
 <br><br>
@@ -48145,15 +49670,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMessagesReceived/Reporte
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTSubscriptionCount attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTSubscriptionCount/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTSubscriptionCount/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTSubscriptionCount/Desired { "value": <DESIRED_MQTT_SUBSCRIPTION_COUNT> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTSubscriptionCount/Reported { "value": <REPORTED_MQTT_SUBSCRIPTION_COUNT> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTSubscriptionCount/Desired { "value": <DESIRED_MQTT_SUBSCRIPTION_COUNT>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTSubscriptionCount/Reported { "value": <REPORTED_MQTT_SUBSCRIPTION_COUNT>}
+
 ```
 
 <br><br>
@@ -48185,15 +49714,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTSubscriptionCount/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTAverageDeliveryTimeSeconds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTAverageDeliveryTimeSeconds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTAverageDeliveryTimeSeconds/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTAverageDeliveryTimeSeconds/Desired { "value": <DESIRED_MQTT_AVERAGE_DELIVERY_TIME_SECONDS> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTAverageDeliveryTimeSeconds/Reported { "value": <REPORTED_MQTT_AVERAGE_DELIVERY_TIME_SECONDS> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTAverageDeliveryTimeSeconds/Desired { "value": <DESIRED_MQTT_AVERAGE_DELIVERY_TIME_SECONDS>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTAverageDeliveryTimeSeconds/Reported { "value": <REPORTED_MQTT_AVERAGE_DELIVERY_TIME_SECONDS>}
+
 ```
 
 <br><br>
@@ -48225,15 +49758,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTAverageDeliveryTimeSecon
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTMinDeliveryTimeSeconds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMinDeliveryTimeSeconds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTMinDeliveryTimeSeconds/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMinDeliveryTimeSeconds/Desired { "value": <DESIRED_MQTT_MIN_DELIVERY_TIME_SECONDS> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMinDeliveryTimeSeconds/Reported { "value": <REPORTED_MQTT_MIN_DELIVERY_TIME_SECONDS> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMinDeliveryTimeSeconds/Desired { "value": <DESIRED_MQTT_MIN_DELIVERY_TIME_SECONDS>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMinDeliveryTimeSeconds/Reported { "value": <REPORTED_MQTT_MIN_DELIVERY_TIME_SECONDS>}
+
 ```
 
 <br><br>
@@ -48265,15 +49802,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMinDeliveryTimeSeconds/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for MQTTMaxDeliveryTimeSeconds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMaxDeliveryTimeSeconds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/MQTTMaxDeliveryTimeSeconds/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMaxDeliveryTimeSeconds/Desired { "value": <DESIRED_MQTT_MAX_DELIVERY_TIME_SECONDS> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMaxDeliveryTimeSeconds/Reported { "value": <REPORTED_MQTT_MAX_DELIVERY_TIME_SECONDS> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMaxDeliveryTimeSeconds/Desired { "value": <DESIRED_MQTT_MAX_DELIVERY_TIME_SECONDS>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMaxDeliveryTimeSeconds/Reported { "value": <REPORTED_MQTT_MAX_DELIVERY_TIME_SECONDS>}
+
 ```
 
 <br><br>
@@ -48305,15 +49846,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/MQTTMaxDeliveryTimeSeconds/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationStatisticsReportingIntervalSeconds attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationStatisticsReportingIntervalSeconds/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationStatisticsReportingIntervalSeconds/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationStatisticsReportingIntervalSeconds/Desired { "value": <DESIRED_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationStatisticsReportingIntervalSeconds/Reported { "value": <REPORTED_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationStatisticsReportingIntervalSeconds/Desired { "value": <DESIRED_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationStatisticsReportingIntervalSeconds/Reported { "value": <REPORTED_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS>}
+
 ```
 
 <br><br>
@@ -48345,15 +49890,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationStatisticsReporti
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationCPUUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_USAGE_PERCENT>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_USAGE_PERCENT>}
+
 ```
 
 <br><br>
@@ -48385,15 +49934,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationCPUAverageUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_AVERAGE_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_AVERAGE_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_AVERAGE_USAGE_PERCENT>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_AVERAGE_USAGE_PERCENT>}
+
 ```
 
 <br><br>
@@ -48425,15 +49978,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePe
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationCPUMinUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_MIN_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_MIN_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_MIN_USAGE_PERCENT>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_MIN_USAGE_PERCENT>}
+
 ```
 
 <br><br>
@@ -48465,15 +50022,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercen
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationCPUMaxUsagePercent attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_MAX_USAGE_PERCENT> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_MAX_USAGE_PERCENT> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent/Desired { "value": <DESIRED_APPLICATIONCPU_MAX_USAGE_PERCENT>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent/Reported { "value": <REPORTED_APPLICATIONCPU_MAX_USAGE_PERCENT>}
+
 ```
 
 <br><br>
@@ -48505,15 +50066,19 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercen
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ApplicationRAMUsageMB attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/+'
+
 # Example output
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/Desired { "value": <DESIRED_APPLICATIONRAM_USAGEMB> }
-ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/Reported { "value": <REPORTED_APPLICATIONRAM_USAGEMB> }
+
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/Desired { "value": <DESIRED_APPLICATIONRAM_USAGEMB>}
+ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/Reported { "value": <REPORTED_APPLICATIONRAM_USAGEMB>}
+
 ```
 
 <br><br>
@@ -48550,7 +50115,7 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/Report
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ApplicationMonitoring/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ApplicationMonitoring/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -48606,7 +50171,7 @@ ucl/by-unid/<UNID>/<EP>/ApplicationMonitoring/Attributes/ClusterRevision/Reporte
 
 To see supported commands for ApplicationMonitoring cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/ApplicationMonitoring/SupportedCommands { "value": ["LogEntry","WriteAttributes", "ForceReadAttributes"] }
@@ -48614,8 +50179,7 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/SupportedCommands { "value": ["LogEntry
 
 To see supported generated commands for ApplicationMonitoring cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/ApplicationMonitoring/SupportedGeneratedCommands { "value": [] }
@@ -48677,13 +50241,13 @@ ucl/by-unid/<UNID>/ApplicationMonitoring/SupportedGeneratedCommands { "value": [
 
 To send a ApplicationMonitoring/LogEntry command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/Commands/LogEntry' -m  '{ "Timestamp": <TIMESTAMP_VALUE>,"LogLevel": <LOG_LEVEL_VALUE>,"LogTag": <LOG_TAG_VALUE>,"LogMessage": <LOG_MESSAGE_VALUE> }'
 ```
 
 To receive a ApplicationMonitoring/LogEntry generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/GeneratedCommands/LogEntry'
 ```
 
@@ -48728,11 +50292,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/ApplicationMonitoring/GeneratedCommands/Log
 
 To update all ApplicationMonitoring attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ApplicationMonitoring/Commands/WriteAttributes' -m  '{ "MQTTLoggingEnabled": <MQTT_LOGGING_ENABLED_VALUE> ,"MQTTLoggingLevel": <MQTT_LOGGING_LEVEL_VALUE> ,"MQTTStatisticsReportingIntervalSeconds": <MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS_VALUE> ,"ApplicationStatisticsReportingIntervalSeconds": <APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS_VALUE> , }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -48794,13 +50359,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ApplicationMonitoring/Commands/WriteAt
 
 To force read all ApplicationMonitoring attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ApplicationMonitoring/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ApplicationMonitoring attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ApplicationMonitoring/Commands/ForceReadAttributes' -m  '{ "value": ["ApplicationName"] }'
 ```
 
@@ -48857,15 +50422,19 @@ The following attribute topics are used to retrieve the NameAndLocation cluster 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Name attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Name/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/NameAndLocation/Attributes/Name/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Name/Desired { "value": <DESIRED_NAME> }
-ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Name/Reported { "value": <REPORTED_NAME> }
+
+ucl/by-unid/<UNID>/ep0/NameAndLocation/Attributes/Name/Desired { "value": <DESIRED_NAME>}
+ucl/by-unid/<UNID>/ep0/NameAndLocation/Attributes/Name/Reported { "value": <REPORTED_NAME>}
+
 ```
 
 <br><br>
@@ -48897,15 +50466,19 @@ ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Name/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Location attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Location/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/NameAndLocation/Attributes/Location/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Location/Desired { "value": <DESIRED_LOCATION> }
-ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Location/Reported { "value": <REPORTED_LOCATION> }
+
+ucl/by-unid/<UNID>/ep0/NameAndLocation/Attributes/Location/Desired { "value": <DESIRED_LOCATION>}
+ucl/by-unid/<UNID>/ep0/NameAndLocation/Attributes/Location/Reported { "value": <REPORTED_LOCATION>}
+
 ```
 
 <br><br>
@@ -48942,7 +50515,7 @@ ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/Location/Reported { "value": 
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -48995,7 +50568,7 @@ ucl/by-unid/<UNID>/<EP>/NameAndLocation/Attributes/ClusterRevision/Reported { "v
 
 To see supported commands for NameAndLocation cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/NameAndLocation/SupportedCommands { "value": [] }
@@ -49003,8 +50576,7 @@ ucl/by-unid/<UNID>/<EP>/NameAndLocation/SupportedCommands { "value": [] }
 
 To see supported generated commands for NameAndLocation cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/NameAndLocation/SupportedGeneratedCommands { "value": [] }
@@ -49056,11 +50628,12 @@ ucl/by-unid/<UNID>/<EP>/NameAndLocation/SupportedGeneratedCommands { "value": []
 
 To update all NameAndLocation attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/Commands/WriteAttributes' -m  '{ "Name": <NAME_VALUE> ,"Location": <LOCATION_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -49101,13 +50674,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/Commands/WriteAttribut
 
 To force read all NameAndLocation attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the NameAndLocation attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/NameAndLocation/Commands/ForceReadAttributes' -m  '{ "value": ["Name"] }'
 ```
 
@@ -49167,15 +50740,19 @@ The following attribute topics are used to retrieve the ConfigurationParameters 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ConfigurationParameters attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ConfigurationParameters/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ConfigurationParameters/Attributes/ConfigurationParameters/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ConfigurationParameters/Desired { "value": <DESIRED_CONFIGURATION_PARAMETERS> }
-ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ConfigurationParameters/Reported { "value": <REPORTED_CONFIGURATION_PARAMETERS> }
+
+ucl/by-unid/<UNID>/ep0/ConfigurationParameters/Attributes/ConfigurationParameters/Desired { "value": [<DESIRED_CONFIGURATION_PARAMETERS>,<DESIRED_CONFIGURATION_PARAMETERS>]}
+ucl/by-unid/<UNID>/ep0/ConfigurationParameters/Attributes/ConfigurationParameters/Reported { "value": [<REPORTED_CONFIGURATION_PARAMETERS>,<REPORTED_CONFIGURATION_PARAMETERS>]}
+
 ```
 
 <br><br>
@@ -49212,7 +50789,7 @@ ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ConfigurationParamete
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -49271,7 +50848,7 @@ ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Attributes/ClusterRevision/Repor
 
 To see supported commands for ConfigurationParameters cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedCommands { "value": ["DiscoverParameter","DefaultResetAllParameters","SetParameter","DiscoverParameterRange","WriteAttributes", "ForceReadAttributes"] }
@@ -49279,8 +50856,7 @@ ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedCommands { "value": ["D
 
 To see supported generated commands for ConfigurationParameters cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedGeneratedCommands { "value": [] }
@@ -49330,13 +50906,13 @@ ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/SupportedGeneratedCommands { "va
 
 To send a ConfigurationParameters/DiscoverParameter command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/DiscoverParameter' -m  '{ "ParameterId": <PARAMETER_ID_VALUE> }'
 ```
 
 To receive a ConfigurationParameters/DiscoverParameter generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedCommands/DiscoverParameter'
 ```
 
@@ -49369,13 +50945,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedComma
 
 To send a ConfigurationParameters/DefaultResetAllParameters command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/DefaultResetAllParameters' -m  '{  }'
 ```
 
 To receive a ConfigurationParameters/DefaultResetAllParameters generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedCommands/DefaultResetAllParameters'
 ```
 
@@ -49416,13 +50992,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedComma
 
 To send a ConfigurationParameters/SetParameter command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/SetParameter' -m  '{ "ParameterId": <PARAMETER_ID_VALUE>,"Value": <VALUE_VALUE> }'
 ```
 
 To receive a ConfigurationParameters/SetParameter generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedCommands/SetParameter'
 ```
 
@@ -49463,13 +51039,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedComma
 
 To send a ConfigurationParameters/DiscoverParameterRange command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/DiscoverParameterRange' -m  '{ "FirstParameterId": <FIRST_PARAMETER_ID_VALUE>,"LastParameterId": <LAST_PARAMETER_ID_VALUE> }'
 ```
 
 To receive a ConfigurationParameters/DiscoverParameterRange generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedCommands/DiscoverParameterRange'
 ```
 
@@ -49502,11 +51078,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/GeneratedComma
 
 To update all ConfigurationParameters attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -49546,13 +51123,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/Write
 
 To force read all ConfigurationParameters attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ConfigurationParameters attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/ForceReadAttributes' -m  '{ "value": ["ConfigurationParameters"] }'
 ```
 
@@ -49609,15 +51186,19 @@ The following attribute topics are used to retrieve the AoXLocator cluster state
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ReportingMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ReportingMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/ReportingMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ReportingMode/Desired { "value": <DESIRED_REPORTING_MODE> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ReportingMode/Reported { "value": <REPORTED_REPORTING_MODE> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/ReportingMode/Desired { "value": <DESIRED_REPORTING_MODE>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/ReportingMode/Reported { "value": <REPORTED_REPORTING_MODE>}
+
 ```
 
 <br><br>
@@ -49649,15 +51230,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ReportingMode/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PositionAndOrientationValid attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientationValid/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/PositionAndOrientationValid/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientationValid/Desired { "value": <DESIRED_POSITION_AND_ORIENTATION_VALID> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientationValid/Reported { "value": <REPORTED_POSITION_AND_ORIENTATION_VALID> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/PositionAndOrientationValid/Desired { "value": <DESIRED_POSITION_AND_ORIENTATION_VALID>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/PositionAndOrientationValid/Reported { "value": <REPORTED_POSITION_AND_ORIENTATION_VALID>}
+
 ```
 
 <br><br>
@@ -49689,15 +51274,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientationValid/Report
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PositionAndOrientation attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientation/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/PositionAndOrientation/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientation/Desired { "value": <DESIRED_POSITION_AND_ORIENTATION> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientation/Reported { "value": <REPORTED_POSITION_AND_ORIENTATION> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/PositionAndOrientation/Desired { "value": <DESIRED_POSITION_AND_ORIENTATION>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/PositionAndOrientation/Reported { "value": <REPORTED_POSITION_AND_ORIENTATION>}
+
 ```
 
 <br><br>
@@ -49732,15 +51321,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PositionAndOrientation/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AzimuthMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AzimuthMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AzimuthMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AzimuthMask/Desired { "value": <DESIRED_AZIMUTH_MASK> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AzimuthMask/Reported { "value": <REPORTED_AZIMUTH_MASK> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AzimuthMask/Desired { "value": [<DESIRED_AZIMUTH_MASK>,<DESIRED_AZIMUTH_MASK>]}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AzimuthMask/Reported { "value": [<REPORTED_AZIMUTH_MASK>,<REPORTED_AZIMUTH_MASK>]}
+
 ```
 
 <br><br>
@@ -49775,15 +51368,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AzimuthMask/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for ElevationMask attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ElevationMask/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/ElevationMask/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ElevationMask/Desired { "value": <DESIRED_ELEVATION_MASK> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ElevationMask/Reported { "value": <REPORTED_ELEVATION_MASK> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/ElevationMask/Desired { "value": [<DESIRED_ELEVATION_MASK>,<DESIRED_ELEVATION_MASK>]}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/ElevationMask/Reported { "value": [<REPORTED_ELEVATION_MASK>,<REPORTED_ELEVATION_MASK>]}
+
 ```
 
 <br><br>
@@ -49818,15 +51415,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ElevationMask/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AllowList attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AllowList/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AllowList/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AllowList/Desired { "value": <DESIRED_ALLOW_LIST> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AllowList/Reported { "value": <REPORTED_ALLOW_LIST> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AllowList/Desired { "value": [<DESIRED_ALLOW_LIST>,<DESIRED_ALLOW_LIST>]}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AllowList/Reported { "value": [<REPORTED_ALLOW_LIST>,<REPORTED_ALLOW_LIST>]}
+
 ```
 
 <br><br>
@@ -49858,15 +51459,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AllowList/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AoXMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AoXMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AoXMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AoXMode/Desired { "value": <DESIRED_AOX_MODE> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AoXMode/Reported { "value": <REPORTED_AOX_MODE> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AoXMode/Desired { "value": <DESIRED_AOX_MODE>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AoXMode/Reported { "value": <REPORTED_AOX_MODE>}
+
 ```
 
 <br><br>
@@ -49898,15 +51503,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AoXMode/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AntennaMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AntennaMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaMode/Desired { "value": <DESIRED_ANTENNA_MODE> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaMode/Reported { "value": <REPORTED_ANTENNA_MODE> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AntennaMode/Desired { "value": <DESIRED_ANTENNA_MODE>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AntennaMode/Reported { "value": <REPORTED_ANTENNA_MODE>}
+
 ```
 
 <br><br>
@@ -49941,15 +51550,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaMode/Reported { "value": <R
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AntennaArray attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaArray/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AntennaArray/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaArray/Desired { "value": <DESIRED_ANTENNA_ARRAY> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaArray/Reported { "value": <REPORTED_ANTENNA_ARRAY> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AntennaArray/Desired { "value": [<DESIRED_ANTENNA_ARRAY>,<DESIRED_ANTENNA_ARRAY>]}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AntennaArray/Reported { "value": [<REPORTED_ANTENNA_ARRAY>,<REPORTED_ANTENNA_ARRAY>]}
+
 ```
 
 <br><br>
@@ -49981,15 +51594,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AntennaArray/Reported { "value": <
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for PeriodSamples attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PeriodSamples/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/PeriodSamples/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PeriodSamples/Desired { "value": <DESIRED_PERIOD_SAMPLES> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PeriodSamples/Reported { "value": <REPORTED_PERIOD_SAMPLES> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/PeriodSamples/Desired { "value": <DESIRED_PERIOD_SAMPLES>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/PeriodSamples/Reported { "value": <REPORTED_PERIOD_SAMPLES>}
+
 ```
 
 <br><br>
@@ -50021,15 +51638,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/PeriodSamples/Reported { "value": 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AngleFiltering attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFiltering/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AngleFiltering/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFiltering/Desired { "value": <DESIRED_ANGLE_FILTERING> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFiltering/Reported { "value": <REPORTED_ANGLE_FILTERING> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleFiltering/Desired { "value": <DESIRED_ANGLE_FILTERING>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleFiltering/Reported { "value": <REPORTED_ANGLE_FILTERING>}
+
 ```
 
 <br><br>
@@ -50061,15 +51682,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFiltering/Reported { "value":
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AngleFilteringWeight attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFilteringWeight/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AngleFilteringWeight/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFilteringWeight/Desired { "value": <DESIRED_ANGLE_FILTERING_WEIGHT> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFilteringWeight/Reported { "value": <REPORTED_ANGLE_FILTERING_WEIGHT> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleFilteringWeight/Desired { "value": <DESIRED_ANGLE_FILTERING_WEIGHT>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleFilteringWeight/Reported { "value": <REPORTED_ANGLE_FILTERING_WEIGHT>}
+
 ```
 
 <br><br>
@@ -50101,15 +51726,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleFilteringWeight/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AngleCorrectionTimeout attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionTimeout/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AngleCorrectionTimeout/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionTimeout/Desired { "value": <DESIRED_ANGLE_CORRECTION_TIMEOUT> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionTimeout/Reported { "value": <REPORTED_ANGLE_CORRECTION_TIMEOUT> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleCorrectionTimeout/Desired { "value": <DESIRED_ANGLE_CORRECTION_TIMEOUT>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleCorrectionTimeout/Reported { "value": <REPORTED_ANGLE_CORRECTION_TIMEOUT>}
+
 ```
 
 <br><br>
@@ -50141,15 +51770,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionTimeout/Reported { 
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for AngleCorrectionDelay attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionDelay/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/AngleCorrectionDelay/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionDelay/Desired { "value": <DESIRED_ANGLE_CORRECTION_DELAY> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionDelay/Reported { "value": <REPORTED_ANGLE_CORRECTION_DELAY> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleCorrectionDelay/Desired { "value": <DESIRED_ANGLE_CORRECTION_DELAY>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/AngleCorrectionDelay/Reported { "value": <REPORTED_ANGLE_CORRECTION_DELAY>}
+
 ```
 
 <br><br>
@@ -50181,15 +51814,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/AngleCorrectionDelay/Reported { "v
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CTEMode attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTEMode/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/CTEMode/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTEMode/Desired { "value": <DESIRED_CTE_MODE> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTEMode/Reported { "value": <REPORTED_CTE_MODE> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/CTEMode/Desired { "value": <DESIRED_CTE_MODE>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/CTEMode/Reported { "value": <REPORTED_CTE_MODE>}
+
 ```
 
 <br><br>
@@ -50221,15 +51858,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTEMode/Reported { "value": <REPOR
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CTESamplingInterval attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTESamplingInterval/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/CTESamplingInterval/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTESamplingInterval/Desired { "value": <DESIRED_CTE_SAMPLING_INTERVAL> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTESamplingInterval/Reported { "value": <REPORTED_CTE_SAMPLING_INTERVAL> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/CTESamplingInterval/Desired { "value": <DESIRED_CTE_SAMPLING_INTERVAL>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/CTESamplingInterval/Reported { "value": <REPORTED_CTE_SAMPLING_INTERVAL>}
+
 ```
 
 <br><br>
@@ -50261,15 +51902,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTESamplingInterval/Reported { "va
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for CTELength attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTELength/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/CTELength/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTELength/Desired { "value": <DESIRED_CTE_LENGTH> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTELength/Reported { "value": <REPORTED_CTE_LENGTH> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/CTELength/Desired { "value": <DESIRED_CTE_LENGTH>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/CTELength/Reported { "value": <REPORTED_CTE_LENGTH>}
+
 ```
 
 <br><br>
@@ -50301,15 +51946,19 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/CTELength/Reported { "value": <REP
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for SlotDuration attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/SlotDuration/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXLocator/Attributes/SlotDuration/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/SlotDuration/Desired { "value": <DESIRED_SLOT_DURATION> }
-ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/SlotDuration/Reported { "value": <REPORTED_SLOT_DURATION> }
+
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/SlotDuration/Desired { "value": <DESIRED_SLOT_DURATION>}
+ucl/by-unid/<UNID>/ep0/AoXLocator/Attributes/SlotDuration/Reported { "value": <REPORTED_SLOT_DURATION>}
+
 ```
 
 <br><br>
@@ -50346,7 +51995,7 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/SlotDuration/Reported { "value": <
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -50404,7 +52053,7 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/Attributes/ClusterRevision/Reported { "value"
 
 To see supported commands for AoXLocator cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/AoXLocator/SupportedCommands { "value": ["IQReport","AngleReport","AngleCorrection","WriteAttributes", "ForceReadAttributes"] }
@@ -50412,8 +52061,7 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/SupportedCommands { "value": ["IQReport","Ang
 
 To see supported generated commands for AoXLocator cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/AoXLocator/SupportedGeneratedCommands { "value": [] }
@@ -50482,13 +52130,13 @@ ucl/by-unid/<UNID>/<EP>/AoXLocator/SupportedGeneratedCommands { "value": [] }
 
 To send a AoXLocator/IQReport command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Commands/IQReport' -m  '{ "TagUnid": <TAG_UNID_VALUE>,"Channel": <CHANNEL_VALUE>,"RSSI": <RSSI_VALUE>,"Samples": <SAMPLES_VALUE>,"Sequence": <SEQUENCE_VALUE> }'
 ```
 
 To receive a AoXLocator/IQReport generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/GeneratedCommands/IQReport'
 ```
 
@@ -50537,13 +52185,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/GeneratedCommands/IQReport'
 
 To send a AoXLocator/AngleReport command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Commands/AngleReport' -m  '{ "TagUnid": <TAG_UNID_VALUE>,"Direction": <DIRECTION_VALUE>,"Deviation": <DEVIATION_VALUE>,"Sequence": <SEQUENCE_VALUE> }'
 ```
 
 To receive a AoXLocator/AngleReport generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/GeneratedCommands/AngleReport'
 ```
 
@@ -50592,13 +52240,13 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/GeneratedCommands/AngleRepo
 
 To send a AoXLocator/AngleCorrection command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Commands/AngleCorrection' -m  '{ "TagUnid": <TAG_UNID_VALUE>,"Direction": <DIRECTION_VALUE>,"Deviation": <DEVIATION_VALUE>,"Sequence": <SEQUENCE_VALUE> }'
 ```
 
 To receive a AoXLocator/AngleCorrection generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/GeneratedCommands/AngleCorrection'
 ```
 
@@ -50685,11 +52333,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/GeneratedCommands/AngleCorr
 
 To update all AoXLocator attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Commands/WriteAttributes' -m  '{ "ReportingMode": <REPORTING_MODE_VALUE> ,"PositionAndOrientationValid": <POSITION_AND_ORIENTATION_VALID_VALUE> ,"PositionAndOrientation": <POSITION_AND_ORIENTATION_VALUE> ,"AzimuthMask": <AZIMUTH_MASK_VALUE> ,"ElevationMask": <ELEVATION_MASK_VALUE> ,"AllowList": <ALLOW_LIST_VALUE> ,"AoXMode": <AOX_MODE_VALUE> ,"AntennaMode": <ANTENNA_MODE_VALUE> ,"AntennaArray": <ANTENNA_ARRAY_VALUE> ,"PeriodSamples": <PERIOD_SAMPLES_VALUE> ,"AngleFiltering": <ANGLE_FILTERING_VALUE> ,"AngleFilteringWeight": <ANGLE_FILTERING_WEIGHT_VALUE> ,"AngleCorrectionTimeout": <ANGLE_CORRECTION_TIMEOUT_VALUE> ,"AngleCorrectionDelay": <ANGLE_CORRECTION_DELAY_VALUE> ,"CTEMode": <CTE_MODE_VALUE> ,"CTESamplingInterval": <CTE_SAMPLING_INTERVAL_VALUE> ,"CTELength": <CTE_LENGTH_VALUE> ,"SlotDuration": <SLOT_DURATION_VALUE>  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -50746,13 +52395,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Commands/WriteAttributes' -
 
 To force read all AoXLocator attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the AoXLocator attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXLocator/Commands/ForceReadAttributes' -m  '{ "value": ["ReportingMode"] }'
 ```
 
@@ -50809,15 +52458,19 @@ The following attribute topics are used to retrieve the AoXPositionEstimation cl
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for Position attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Attributes/Position/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/AoXPositionEstimation/Attributes/Position/+'
+
 # Example output
-ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Attributes/Position/Desired { "value": <DESIRED_POSITION> }
-ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Attributes/Position/Reported { "value": <REPORTED_POSITION> }
+
+ucl/by-unid/<UNID>/ep0/AoXPositionEstimation/Attributes/Position/Desired { "value": <DESIRED_POSITION>}
+ucl/by-unid/<UNID>/ep0/AoXPositionEstimation/Attributes/Position/Reported { "value": <REPORTED_POSITION>}
+
 ```
 
 <br><br>
@@ -50854,7 +52507,7 @@ ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Attributes/Position/Reported { "va
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -50907,7 +52560,7 @@ ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Attributes/ClusterRevision/Reporte
 
 To see supported commands for AoXPositionEstimation cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/SupportedCommands { "value": [] }
@@ -50915,8 +52568,7 @@ ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/SupportedCommands { "value": [] }
 
 To see supported generated commands for AoXPositionEstimation cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/SupportedGeneratedCommands { "value": [] }
@@ -50962,11 +52614,12 @@ ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/SupportedGeneratedCommands { "valu
 
 To update all AoXPositionEstimation attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -51006,13 +52659,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Commands/WriteAt
 
 To force read all AoXPositionEstimation attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the AoXPositionEstimation attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/AoXPositionEstimation/Commands/ForceReadAttributes' -m  '{ "value": ["Position"] }'
 ```
 
@@ -51069,15 +52722,19 @@ The following attribute topics are used to retrieve the ProtocolController-Netwo
 }
 ```
 
+
 **Example Mosquitto CLI Tool Usage**
 
 To see desired/reported value for NetworkManagementState attribute under the by-unid topic space:
 
-```
-mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/+'
+```console
+mosquitto_sub -t 'ucl/by-unid/+/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/+'
+
 # Example output
-ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Desired { "value": <DESIRED_NETWORK_MANAGEMENT_STATE> }
-ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Reported { "value": <REPORTED_NETWORK_MANAGEMENT_STATE> }
+
+ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Desired { "value": <DESIRED_NETWORK_MANAGEMENT_STATE>}
+ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Reported { "value": <REPORTED_NETWORK_MANAGEMENT_STATE>}
+
 ```
 
 <br><br>
@@ -51114,7 +52771,7 @@ ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Attributes/NetworkManage
 
 To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/Attributes/ClusterRevision/+'
 # Example output
 ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
@@ -51170,7 +52827,7 @@ ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/Attributes/ClusterR
 
 To see supported commands for ProtocolController-NetworkManagement cluster under the by-unid topic space:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/SupportedCommands'
 # Example output
 ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/SupportedCommands { "value": ["Write","WriteAttributes", "ForceReadAttributes"] }
@@ -51178,8 +52835,7 @@ ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/SupportedCommands { "val
 
 To see supported generated commands for ProtocolController-NetworkManagement cluster under the by-unid topic space:
 
-```
-
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/SupportedGeneratedCommands'
 # Example output
 ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/SupportedGeneratedCommands { "value": [] }
@@ -51225,13 +52881,13 @@ ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/SupportedGeneratedComman
 
 To send a ProtocolController/NetworkManagement/Write command under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Commands/Write' -m  '{  }'
 ```
 
 To receive a ProtocolController/NetworkManagement/Write generated command from a UNID/endpoint:
 
-```
+```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/GeneratedCommands/Write'
 ```
 
@@ -51264,11 +52920,12 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/ProtocolController/NetworkManagement/Genera
 
 To update all ProtocolController/NetworkManagement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/Commands/WriteAttributes' -m  '{  }'
 ```
 
-> NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update.
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
 
 <br><br>
 
@@ -51308,13 +52965,13 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
 
 To force read all ProtocolController/NetworkManagement attributes under the by-unid topic space (by sending an empty array):
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/Commands/ForceReadAttributes' -m  '{ "value": [] }'
 ```
 
 To force read one of the ProtocolController/NetworkManagement attributes under the by-unid topic space:
 
-```
+```console
 mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/Commands/ForceReadAttributes' -m  '{ "value": ["NetworkManagementState"] }'
 ```
 
@@ -51701,6 +53358,45 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
 
 <!-- -->
 <!-- END OF Struct SExtensionFieldSetList Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Struct SSceneTable Section -->
+<!-- -->
+\section struct_s_scene_table SSceneTable Struct
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SSceneTable Struct Properties",
+  "type": "object",
+  "properties": {
+    "SceneID": {
+      "type": "integer"
+    }
+    "GroupID": {
+      "type": "integer"
+    }
+    "SceneName": {
+      "type": "string"
+    }
+    "TransitionTime": {
+      "type": "integer"
+    }
+    "TransitionTime100ms": {
+      "type": "integer"
+    }
+    "SceneTableExtensions": {
+      "type": "string"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Struct SSceneTable Section -->
 <!-- -->
 
 <br><br>
@@ -53692,7 +55388,8 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
     "Online interviewing",
     "Online non-functional",
     "Unavailable",
-    "Offline"
+    "Offline",
+    "Commisioning Started"
   ]
 }
 ```
@@ -53719,7 +55416,8 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
     "Z-Wave S2 Unauthenticated",
     "Z-Wave S2 Authenticated",
     "Z-Wave S2 Access Control",
-    "Zigbee Z3"
+    "Zigbee Z3",
+    "Matter"
   ]
 }
 ```
@@ -57042,3 +58740,221 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ProtocolController/NetworkManagement/C
 
 <br><br>
 
+<!-- -->
+<!-- START OF Bitmap map16 Section -->
+<!-- -->
+\section enum_map16 map16 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map16 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map16 Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap map24 Section -->
+<!-- -->
+\section enum_map24 map24 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map24 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map24 Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap map32 Section -->
+<!-- -->
+\section enum_map32 map32 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map32 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map32 Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap map40 Section -->
+<!-- -->
+\section enum_map40 map40 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map40 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map40 Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap map48 Section -->
+<!-- -->
+\section enum_map48 map48 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map48 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map48 Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap map56 Section -->
+<!-- -->
+\section enum_map56 map56 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map56 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map56 Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap map64 Section -->
+<!-- -->
+\section enum_map64 map64 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map64 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map64 Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap map8 Section -->
+<!-- -->
+\section enum_map8 map8 Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "map8 Enum Properties",
+  "type": "object",
+  "properties": {
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap map8 Section -->
+<!-- -->
+
+<br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- Page about arrays-->
+<!-- -->
+<!-- -->
+\page ucl_monotonous_arrays UCL Array Attributes
+
+ZAP and DotDot do not always support very well attributes that are arrays
+consisting of several elements, as for example the Group or Scene Tables.
+In such cases, the UCL specifications have defined how to publish and interpret
+the values of such attributes.
+
+The Unify library provides limited support for Attributes that are array.
+Protocol Controller and/or IoT Services may have to add manual code
+to handle these cases.
+
+The following attributes are supported as arrays in the Unify Library.
+
+| Cluster  |  Attribute    |  Example topic |
+|----------|---------------|----------------|
+| State | EndpointIdList | ucl/by-unid/zw-12345678-0001/State/Attributes/EndpointIdList/Reported |
+| State | NetworkList | ucl/by-unid/zw-12345678-0001/State/Attributes/NetworkList/Reported |
+| Binding | BindableClusterList | ucl/by-unid/zw-12345678-0001/ep0/Binding/Attributes/BindableClusterList/Reported |
+| SystemMetrics | CPUUsagePercent | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/CPUUsagePercent/Reported |
+| SystemMetrics | CPUFrequencyMHz | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/CPUFrequencyMHz/Reported |
+| SystemMetrics | CPUAverageUsagePercent | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/CPUAverageUsagePercent/Reported |
+| SystemMetrics | CPUMinUsagePercent | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/CPUMinUsagePercent/Reported |
+| SystemMetrics | CPUMaxUsagePercent | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/CPUMaxUsagePercent/Reported |
+| ApplicationMonitoring | ApplicationMQTTTopics | ucl/by-unid/zw-12345678-0001/ApplicationMonitoring/Attributes/ApplicationMQTTTopics/Reported |
+| AoXLocator | AllowList | ucl/by-unid/zw-12345678-0001/ep0/AoXLocator/Attributes/AllowList/Reported |
+| AoXLocator | AntennaArray | ucl/by-unid/zw-12345678-0001/ep0/AoXLocator/Attributes/AntennaArray/Reported |
+
+
+The following attributes are partially or not supported as arrays in the
+Unify Library. It is because these arrays contains objects themselves.
+For attributes not present in either lists (e.g. Group Table),
+refer to the Unify Specification.
+
+| Cluster  |  Attribute    |  Example topic |
+|----------|---------------|----------------|
+| Scenes | SceneTable | ucl/by-unid/zw-12345678-0001/ep0/Scenes/Attributes/SceneTable/Reported |
+| Binding | BindingTable | ucl/by-unid/zw-12345678-0001/ep0/Binding/Attributes/BindingTable/Reported |
+| SystemMetrics | DisksUsage | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/DisksUsage/Reported |
+| SystemMetrics | DisksCounters | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/DisksCounters/Reported |
+| SystemMetrics | NetworkInterfacesData | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/NetworkInterfacesData/Reported |
+| SystemMetrics | WirelessNetworkInterfacesData | ucl/by-unid/zw-12345678-0001/SystemMetrics/Attributes/WirelessNetworkInterfacesData/Reported |
+| ConfigurationParameters | ConfigurationParameters | ucl/by-unid/zw-12345678-0001/ep0/ConfigurationParameters/Attributes/ConfigurationParameters/Reported |
+| AoXLocator | AzimuthMask | ucl/by-unid/zw-12345678-0001/ep0/AoXLocator/Attributes/AzimuthMask/Reported |
+| AoXLocator | ElevationMask | ucl/by-unid/zw-12345678-0001/ep0/AoXLocator/Attributes/ElevationMask/Reported |

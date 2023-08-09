@@ -41,7 +41,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -332,7 +332,7 @@ increment this value.</p></td>
 <td><p>Read/report the current network management state and its associated parameters</p></td>
 </tr>
 <tr class="row-odd"><td><p>ucl/by-unid/+/ProtocolController/NetworkManagement/Write</p></td>
-<td><p>Attempt to change the the network management state with additional/optional state parameters</p></td>
+<td><p>Attempt to change the network management state with additional/optional state parameters</p></td>
 </tr>
 </tbody>
 </table>
@@ -936,6 +936,59 @@ protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw
 == When the operation is completed ==
 
 protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online functional&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service"/>
+</p>
+</section>
+<section id="discoversecurity-command">
+<h4><span class="section-number">3.3.2.10. </span>DiscoverSecurity Command<a class="headerlink" href="#discoversecurity-command" title="Permalink to this heading"></a></h4>
+<p>The node state topic comprises a Security field. If some Protocol Controllers
+are able to verify which security a node is running with, the DiscoverSecurity
+Command will instruct it to check that the security is correct.
+Other operations may be paused while a Protocol Controller performs a Security
+verification.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-8958740940b96072346694b901f5c0b68e063533.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Initiating a Network Management command (DiscoverSecurity) on a node itself (4)
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller&quot; as protocol_controller
+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/+/Commands/+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Commands/+
+
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State/SupportedCommands
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online functional&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Authenticated&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;:[&quot;DiscoverSecurity&quot;,&quot;Interview&quot;]}&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+rnote over iot_service, protocol_controller: IoT Service wants to verify if zw-1234\n runs with Security = Z-Wave S2 Authenticated
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/State/Commands/DiscoverSecurity
+
+== Security Discovery starts ==
+
+== When the operation is completed ==
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online interviewing&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
 &amp; mqtt_broker -&gt; iot_service"/>
 </p>
 </section>

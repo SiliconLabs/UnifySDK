@@ -47,6 +47,9 @@ static const std::vector<attribute_schema_t> zcl_additional_attribute_schema = {
   //         ZCL Level cluster attributes
   /////////////////////////////////////////////////////////////////////
   {DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,   "ZCL Level Last Non Zero Level",   ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,   U8_STORAGE_TYPE},
+  //         ZCL Group cluster attributes
+  {DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,   "ZCL Group ID",   ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,   U16_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,   "Name",   DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,   C_STRING_STORAGE_TYPE},
 };
 // clang-format on
 
@@ -86,7 +89,9 @@ attribute_store_storage_type_t
   } else if ((attribute_type_string == "PumpOperationMode")
              || (attribute_type_string == "PumpControlMode")
              || (attribute_type_string == "IasZoneType")
-             || (attribute_type_string == "LoggingLevelEnum")) {
+             || (attribute_type_string == "LoggingLevelEnum")
+             || (attribute_type_string == "NodeStateSecurity")
+             || (attribute_type_string == "NodeStateNetworkStatus")) {
     storage_type = ENUM_STORAGE_TYPE;
   }
   return storage_type;
@@ -3115,318 +3120,6 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME,
       "ZCL Time ValidUntilTime",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // EUI64 // EUI64 // EUI64
-    std::string attribute_type_string           = "EUI64";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade UpgradeServerID, "
-                     "type:  EUI64 // EUI64");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_SERVERID,
-      "ZCL OTAUpgrade UpgradeServerID",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint32 // uint32 // uint32_t
-    std::string attribute_type_string           = "uint32_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade FileOffset, "
-                     "type:  uint32 // uint32_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_FILE_OFFSET,
-      "ZCL OTAUpgrade FileOffset",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint32 // uint32 // uint32_t
-    std::string attribute_type_string           = "uint32_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade CurrentFileVersion, "
-                     "type:  uint32 // uint32_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_FILE_VERSION,
-      "ZCL OTAUpgrade CurrentFileVersion",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint16 // uint16 // uint16_t
-    std::string attribute_type_string           = "uint16_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade CurrentZigBeeStackVersion, "
-                     "type:  uint16 // uint16_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION,
-      "ZCL OTAUpgrade CurrentZigBeeStackVersion",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint32 // uint32 // uint32_t
-    std::string attribute_type_string           = "uint32_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade DownloadedFileVersion, "
-                     "type:  uint32 // uint32_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_FILE_VERSION,
-      "ZCL OTAUpgrade DownloadedFileVersion",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint16 // uint16 // uint16_t
-    std::string attribute_type_string           = "uint16_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade DownloadedZigBeeStackVersion, "
-                     "type:  uint16 // uint16_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION,
-      "ZCL OTAUpgrade DownloadedZigBeeStackVersion",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // enum8 // enum8 // uint8_t
-    std::string attribute_type_string           = "uint8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade ImageUpgradeStatus, "
-                     "type:  enum8 // uint8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_UPGRADE_STATUS,
-      "ZCL OTAUpgrade ImageUpgradeStatus",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint16 // uint16 // uint16_t
-    std::string attribute_type_string           = "uint16_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade ManufacturerID, "
-                     "type:  uint16 // uint16_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MANUFACTURERID,
-      "ZCL OTAUpgrade ManufacturerID",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint16 // uint16 // uint16_t
-    std::string attribute_type_string           = "uint16_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade ImageTypeID, "
-                     "type:  uint16 // uint16_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_TYPEID,
-      "ZCL OTAUpgrade ImageTypeID",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint16 // uint16 // uint16_t
-    std::string attribute_type_string           = "uint16_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade MinimumBlockPeriod, "
-                     "type:  uint16 // uint16_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_MINIMUM_BLOCK_PERIOD,
-      "ZCL OTAUpgrade MinimumBlockPeriod",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // uint32 // uint32 // uint32_t
-    std::string attribute_type_string           = "uint32_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade ImageStamp, "
-                     "type:  uint32 // uint32_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_IMAGE_STAMP,
-      "ZCL OTAUpgrade ImageStamp",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // enum8 // enum8 // uint8_t
-    std::string attribute_type_string           = "uint8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade UpgradeActivationPolicy, "
-                     "type:  enum8 // uint8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY,
-      "ZCL OTAUpgrade UpgradeActivationPolicy",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // enum8 // enum8 // uint8_t
-    std::string attribute_type_string           = "uint8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL OTAUpgrade UpgradeTimeoutPolicy, "
-                     "type:  enum8 // uint8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY,
-      "ZCL OTAUpgrade UpgradeTimeoutPolicy",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }
@@ -15547,6 +15240,102 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_STATE_ENDPOINT_ID_LIST,
       "ZCL State EndpointIdList",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // NodeStateNetworkStatus // NodeStateNetworkStatus // NodeStateNetworkStatus
+    std::string attribute_type_string           = "NodeStateNetworkStatus";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL State NetworkStatus, "
+                     "type:  NodeStateNetworkStatus // NodeStateNetworkStatus");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
+      "ZCL State NetworkStatus",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // NodeStateSecurity // NodeStateSecurity // NodeStateSecurity
+    std::string attribute_type_string           = "NodeStateSecurity";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL State Security, "
+                     "type:  NodeStateSecurity // NodeStateSecurity");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_STATE_SECURITY,
+      "ZCL State Security",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL State MaximumCommandDelay, "
+                     "type:  uint32 // uint32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY,
+      "ZCL State MaximumCommandDelay",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // string // string // const char*
+    std::string attribute_type_string           = "const char*";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = C_STRING_STORAGE_TYPE;
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL State NetworkList, "
+                     "type:  string // const char*");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_LIST,
+      "ZCL State NetworkList",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }

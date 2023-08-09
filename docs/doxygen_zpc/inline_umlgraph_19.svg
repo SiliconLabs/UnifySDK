@@ -1,229 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="579px" preserveAspectRatio="none" style="width:452px;height:579px;background:#FFFFFF;" version="1.1" viewBox="0 0 452 579" width="452px" zoomAndPan="magnify"><defs/><g><!--MD5=[a98e9cc913f85863ce16a73ec1684677]
-cluster Z-Wave TX Process--><polygon fill="#FFFFFF" points="49.5075,13.462,257.5075,13.462,264.5075,45.8621,371.5075,45.8621,371.5075,444.462,49.5075,444.462,49.5075,13.462" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="49.5075" x2="264.5075" y1="45.8621" y2="45.8621"/><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="202" x="53.5075" y="35.9001">Z-Wave TX Process</text><!--MD5=[5ded4fd95eb069f04e4ebb4dbd70e9ee]
-cluster Z-Wave API--><polygon fill="#FFFFFF" points="277.5075,477.462,403.5075,477.462,410.5075,509.8621,435.5075,509.8621,435.5075,572.462,277.5075,572.462,277.5075,477.462" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="277.5075" x2="410.5075" y1="509.8621" y2="509.8621"/><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="120" x="281.5075" y="499.9001">Z-Wave API</text><ellipse cx="133.5075" cy="154.462" fill="#797777" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#DEDEDE" height="34.4001" rx="12.5" ry="12.5" style="stroke:#480509;stroke-width:2.0;" width="163" x="110.0075" y="226.462"/><text fill="#000000" font-family="Verdana" font-size="12" lengthAdjust="spacing" textLength="143" x="120.0075" y="247.6101">ZWAVE_TX_STATE_IDLE</text><polygon fill="#DEDEDE" points="210.5075,315.462,222.5075,327.462,210.5075,339.462,198.5075,327.462,210.5075,315.462" style="stroke:#480509;stroke-width:2.0;"/><rect fill="#DEDEDE" height="34.4001" rx="12.5" ry="12.5" style="stroke:#480509;stroke-width:2.0;" width="291" x="65.0075" y="394.462"/><text fill="#000000" font-family="Verdana" font-size="12" lengthAdjust="spacing" textLength="271" x="75.0075" y="415.6101">ZWAVE_TX_STATE_TRANSMISSION_ONGOING</text><rect fill="#DEDEDE" height="34.4001" rx="12.5" ry="12.5" style="stroke:#480509;stroke-width:2.0;" width="192" x="163.5075" y="137.462"/><text fill="#000000" font-family="Verdana" font-size="12" lengthAdjust="spacing" textLength="172" x="173.5075" y="158.6101">ZWAVE_TX_STATE_BACKOFF</text><polygon fill="#DEDEDE" points="233.5075,58.462,245.5075,70.462,233.5075,82.462,221.5075,70.462,233.5075,58.462" style="stroke:#480509;stroke-width:2.0;"/><polygon fill="#DEDEDE" points="91.5075,142.462,103.5075,154.462,91.5075,166.462,79.5075,154.462,91.5075,142.462" style="stroke:#480509;stroke-width:2.0;"/><rect fill="#DEDEDE" height="34.4001" rx="12.5" ry="12.5" style="stroke:#480509;stroke-width:2.0;" width="125" x="294.0075" y="522.462"/><text fill="#000000" font-family="Verdana" font-size="12" lengthAdjust="spacing" textLength="105" x="304.0075" y="543.6101">zwapi_send_data()</text><!--MD5=[597499a8e5480d9b18588d5bc8f238f4]
-link start to ZWAVE_TX_STATE_IDLE--><path d="M138.6575,163.182 C147.3475,176.222 165.1975,203.002 177.7475,221.822 " fill="none" id="start-to-ZWAVE_TX_STATE_IDLE" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="180.8075,226.422,179.1434,216.7148,178.034,222.2618,172.487,221.1524,180.8075,226.422" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="13" x="167.5075" y="202.6809">init</text><!--MD5=[845bfc854b3eaa6708cb0cf737b6f72c]
-link ZWAVE_TX_STATE_IDLE to #73--><path d="M190.2575,260.832 C189.9475,270.982 190.3875,284.192 193.5075,295.462 C195.4575,302.482 199.2575,309.662 202.7675,315.342 " fill="none" id="ZWAVE_TX_STATE_IDLE-to-#73" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="205.6075,319.722,204.082,309.992,202.8936,315.5226,197.363,314.3342,205.6075,319.722" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="72" x="118.5256" y="311.7268">Queue empty?</text><!--MD5=[cd6faff70fd1ec0088d3227e875107fa]
-link #73 to ZWAVE_TX_STATE_IDLE--><path d="M208.4075,317.402 C205.5375,305.022 200.3075,282.432 196.4175,265.662 " fill="none" id="#73-to-ZWAVE_TX_STATE_IDLE" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="195.2575,260.662,193.392,270.3326,196.386,265.533,201.1855,268.527,195.2575,260.662" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="19" x="204.5075" y="291.6809">Yes</text><!--MD5=[f3894f6c9043b39b4f2b85d282d874f3]
-link #73 to ZWAVE_TX_STATE_TRANSMISSION_ONGOING--><path d="M210.5075,339.522 C210.5075,352.172 210.5075,373.172 210.5075,389.052 " fill="none" id="#73-to-ZWAVE_TX_STATE_TRANSMISSION_ONGOING" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="210.5075,394.222,214.5075,385.222,210.5075,389.222,206.5075,385.222,210.5075,394.222" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="14" x="211.5075" y="370.6809">No</text><!--MD5=[e6cbdfd556aa8e4e8b67b5f9beef93d9]
-link ZWAVE_TX_STATE_TRANSMISSION_ONGOING to zwapi_send_data()--><path d="M229.2975,428.672 C256.0175,451.732 304.9375,493.952 333.6975,518.782 " fill="none" id="ZWAVE_TX_STATE_TRANSMISSION_ONGOING-to-zwapi_send_data()" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="337.7875,522.312,333.5739,513.41,333.9973,519.051,328.3563,519.4744,337.7875,522.312" style="stroke:#000000;stroke-width:1.0;"/><!--MD5=[4f6d896fde6dcbc7e3cb759f4228fba6]
-link zwapi_send_data() to ZWAVE_TX_STATE_BACKOFF--><path d="M362.8675,522.442 C371.6775,498.782 386.5075,452.942 386.5075,412.462 C386.5075,242.462 386.5075,242.462 386.5075,242.462 C386.5075,208.332 354.8975,186.602 323.2175,173.392 " fill="none" id="zwapi_send_data()-to-ZWAVE_TX_STATE_BACKOFF" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="318.5475,171.502,325.3995,178.5766,323.1849,173.3713,328.3903,171.1567,318.5475,171.502" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="19" x="387.5075" y="331.1809">Yes</text><!--MD5=[c7eb3fe45df2aaf65c952e1e69cc16fc]
-link ZWAVE_TX_STATE_BACKOFF to #84--><path d="M248.1375,137.302 C244.4675,131.332 240.7675,124.332 238.5075,117.462 C235.3875,107.982 234.1175,96.872 233.6375,87.942 " fill="none" id="ZWAVE_TX_STATE_BACKOFF-to-#84" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="233.4275,82.702,229.7904,91.8547,233.6273,87.698,237.784,91.535,233.4275,82.702" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="187" x="25.9569" y="97.0422">Backoff timer expired/answer received</text><!--MD5=[1e382a4d83912e7c0c93496388857a68]
-link #84 to ZWAVE_TX_STATE_BACKOFF--><path d="M236.1875,79.932 C240.0675,92.162 247.3775,115.192 252.7775,132.232 " fill="none" id="#84-to-ZWAVE_TX_STATE_BACKOFF" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="254.3875,137.312,255.4776,127.5237,252.875,132.5463,247.8524,129.9437,254.3875,137.312" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="19" x="248.5075" y="113.6809">wait</text><!--MD5=[498e84e145aeb4244dfdcb225bbd9b5d]
-link #84 to #87--><path d="M226.0175,75.162 C206.8475,84.732 154.6575,111.332 113.5075,137.462 C109.7775,139.832 105.8375,142.602 102.3375,145.172 " fill="none" id="#84-to-#87" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="97.9075,148.482,107.5125,146.304,101.9144,145.4912,102.7272,139.893,97.9075,148.482" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="61" x="11" y="132.3924">Child frame?</text><!--MD5=[6932d099e6c4598c41bbcb6bfbf2c981]
-link #87 to ZWAVE_TX_STATE_TRANSMISSION_ONGOING--><path d="M90.4575,165.702 C88.8775,184.952 87.2575,227.572 99.5075,260.462 C119.2275,313.412 163.6075,363.842 189.8875,390.602 " fill="none" id="#87-to-ZWAVE_TX_STATE_TRANSMISSION_ONGOING" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="193.6275,394.382,190.1105,385.1825,190.0991,390.8394,184.4423,390.8279,193.6275,394.382" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="19" x="116.5075" y="291.6809">Yes</text><!--MD5=[a294968b4d1c0c0db2b9c731d0053cca]
-link #87 to ZWAVE_TX_STATE_IDLE--><path d="M96.5875,161.862 C104.7875,171.982 121.7275,191.992 138.5075,206.462 C145.4775,212.472 153.4675,218.352 161.1075,223.562 " fill="none" id="#87-to-ZWAVE_TX_STATE_IDLE" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="165.2975,226.382,160.0807,218.0283,161.1549,223.5822,155.601,224.6564,165.2975,226.382" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacing" textLength="14" x="139.5075" y="202.6809">No</text><!--MD5=[656225c28bb8155c2dc78e859c848f0f]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="595px" preserveAspectRatio="none" style="width:1409px;height:595px;background:#FFFFFF;" version="1.1" viewBox="0 0 1409 595" width="1409px" zoomAndPan="magnify"><defs><filter height="300%" id="f1oulv5oo1bmn6" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="672.5" cy="16" fill="#000000" filter="url(#f1oulv5oo1bmn6)" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><g id="IDLE"><rect fill="#FEFECE" filter="url(#f1oulv5oo1bmn6)" height="65.6001" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="104" x="620.5" y="87"/><line style="stroke:#A80036;stroke-width:1.5;" x1="620.5" x2="724.5" y1="113.7999" y2="113.7999"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="657" y="105.0059">IDLE</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="625.5" y="129.948">Reported: IDLE</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="625.5" y="144.3481">Desired: IDLE</text></g><g id="ONGOING"><rect fill="#FEFECE" filter="url(#f1oulv5oo1bmn6)" height="65.6001" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="134" x="606.5" y="230"/><line style="stroke:#A80036;stroke-width:1.5;" x1="606.5" x2="740.5" y1="256.7999" y2="256.7999"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="639.5" y="248.0059">ONGOING</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="611.5" y="272.948">Reported: ONGOING</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="611.5" y="287.3481">Desired: IDLE</text></g><g id="WAITING_FOR_ACTIVATION"><rect fill="#FEFECE" filter="url(#f1oulv5oo1bmn6)" height="65.6001" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="237" x="354" y="373"/><line style="stroke:#A80036;stroke-width:1.5;" x1="354" x2="591" y1="399.7999" y2="399.7999"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="377.5" y="391.0059">WAITING_FOR_ACTIVATION</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="217" x="359" y="415.948">Reported: WAITING_FOR_ACTIVATION</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="359" y="430.3481">Desired: IDLE</text></g><g id="ACTIVATION_TIMEOUT"><rect fill="#FEFECE" filter="url(#f1oulv5oo1bmn6)" height="65.6001" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="229" x="7" y="516"/><line style="stroke:#A80036;stroke-width:1.5;" x1="7" x2="236" y1="542.7999" y2="542.7999"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="43.5" y="534.0059">ACTIVATION_TIMEOUT</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="12" y="558.948">Reported: Undefined</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="209" x="12" y="573.3481">Desired: WAITING_FOR_ACTIVATION</text></g><g id="WAITING_FOR_REBOOT"><rect fill="#FEFECE" filter="url(#f1oulv5oo1bmn6)" height="65.6001" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="216" x="917.5" y="373"/><line style="stroke:#A80036;stroke-width:1.5;" x1="917.5" x2="1133.5" y1="399.7999" y2="399.7999"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="943" y="391.0059">WAITING_FOR_REBOOT</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="196" x="922.5" y="415.948">Reported: WAITING_FOR_REBOOT</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="922.5" y="430.3481">Desired: IDLE</text></g><!--MD5=[9c5673dd9f569fe24504060ab78be963]
+link *start to IDLE--><path d="M672.5,26.05 C672.5,38.55 672.5,61.82 672.5,81.95 " fill="none" id="*start-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="672.5,87,676.5,78,672.5,82,668.5,78,672.5,87" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d41842302ca67f5a37a90af18a619068]
+link IDLE to ONGOING--><path d="M620.31,141.33 C593.32,155.22 568.48,175.53 581.5,200 C586.96,210.27 594.96,219.14 604.01,226.7 " fill="none" id="IDLE-to-ONGOING" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="607.94,229.87,603.4227,221.1182,604.0398,226.7413,598.4168,227.3585,607.94,229.87" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135" x="582.5" y="196.077">Initiate firmware update</text><!--MD5=[02c83846398aa9de016ff26a10596df8]
+link ONGOING to IDLE--><path d="M709.51,229.8 C720.49,216.07 728.3,199.44 722.5,183 C719.32,173.98 714.2,165.3 708.43,157.45 " fill="none" id="ONGOING-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="705.17,153.17,707.4468,162.7521,708.2019,157.1458,713.8082,157.901,705.17,153.17" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="280" x="725.5" y="196.077">Update either success or fail. No reboot needed.</text><!--MD5=[bf95208068f958690ce858b1af1bfb4c]
+link ONGOING to ONGOING--><path d="M740.7,249.91 C760.31,250.37 775.5,254.73 775.5,263 C775.5,270.5 763.02,274.78 746.09,275.86 " fill="none" id="ONGOING-to-ONGOING" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="740.7,276.09,749.863,279.701,745.6954,275.8759,749.5205,271.7083,740.7,276.09" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="205" x="781.5" y="267.577">End node responds and frame valid</text><!--MD5=[d2901a3a9c03b31757dd22a897fdbe5d]
+link ONGOING to WAITING_FOR_ACTIVATION--><path d="M621.64,296.06 C606.89,305.47 590.92,315.94 576.5,326 C556.79,339.75 535.58,355.66 517.48,369.58 " fill="none" id="ONGOING-to-WAITING_FOR_ACTIVATION" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="513.43,372.7,522.9976,370.3631,517.3867,369.6432,518.1067,364.0323,513.43,372.7" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="269" x="577.5" y="339.077">Update done and end node supports activation</text><!--MD5=[1237bf9c4002173552d2807bb0d74fc2]
+link WAITING_FOR_ACTIVATION to ACTIVATION_TIMEOUT--><path d="M392.41,439.17 C336.72,461.54 262.61,491.32 205.98,514.07 " fill="none" id="WAITING_FOR_ACTIVATION-to-ACTIVATION_TIMEOUT" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="201.24,515.97,211.0819,516.3414,205.8824,514.113,208.1107,508.9136,201.24,515.97" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140" x="319.5" y="482.077">Set apply timer callback</text><!--MD5=[b4ddb5706a554f2c916c35528d22b45d]
+link ACTIVATION_TIMEOUT to IDLE--><path d="M106,515.99 C86.02,469.6 58.32,383.01 98.5,326 C218.93,155.11 495.34,125.89 615.25,121.46 " fill="none" id="ACTIVATION_TIMEOUT-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="620.5,121.27,611.3682,117.5807,615.5029,121.4413,611.6423,125.576,620.5,121.27" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="445" x="99.5" y="339.077">Get rule triggerred to send Activtion command. Update either success or fail.</text><!--MD5=[0fc91e6b99cd5b1182cd2cbce0dd14a2]
+link ONGOING to WAITING_FOR_REBOOT--><path d="M740.9,285.6 C774.46,296.83 815.46,311.26 851.5,326 C867.88,332.7 871.43,335.6 887.5,343 C907.27,352.11 928.69,361.81 948.64,370.78 " fill="none" id="ONGOING-to-WAITING_FOR_REBOOT" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="953.4,372.92,946.8342,365.579,948.8404,370.8682,943.5512,372.8744,953.4,372.92" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="245" x="888.5" y="339.077">Update done and end node requires reboot</text><!--MD5=[5137197dd438a057b6bb28e1cf836452]
+link WAITING_FOR_REBOOT to IDLE--><path d="M1109.37,372.91 C1120.99,364.89 1131.38,355.04 1138.5,343 C1184.33,265.58 1092.67,227.54 1014.5,183 C966.8,155.82 814.16,135.96 729.83,126.74 " fill="none" id="WAITING_FOR_REBOOT-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="724.63,126.18,733.1426,131.1333,729.6005,126.7228,734.011,123.1806,724.63,126.18" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="251" x="1150.5" y="267.577">Reboot done. Update either success or fail.</text><!--MD5=[2aad6749a3e4b2d2cd09f9c36375a0aa]
 @startuml inline_umlgraph_19.svg
-' Style for the diagram
-!theme plain
-skinparam ActivityBackgroundColor #DEDEDE
-skinparam ActivityBorderColor #480509
-skinparam ActivityBorderThickness 2
-skinparam ActivityFontColor #000000
-skinparam ActivityStartColor #797777
-
-partition "Z-Wave TX Process" {
-  (*) - ->[init] ZWAVE_TX_STATE_IDLE
-  if "Queue empty?" then
-    - ->[Yes] ZWAVE_TX_STATE_IDLE
-  else
-    - ->[No] ZWAVE_TX_STATE_TRANSMISSION_ONGOING
-  endif
-}
-
-partition "Z-Wave API" {
-  - -> zwapi_send_data()
-}
-
-partition "Z-Wave TX Process" {
-  - ->[Yes] ZWAVE_TX_STATE_BACKOFF
-  if "Backoff timer expired/answer received" then
-    if "Child frame?" then
-      - ->[Yes] ZWAVE_TX_STATE_TRANSMISSION_ONGOING
-    else
-      - ->[No] ZWAVE_TX_STATE_IDLE
-    endif
-  else
-    - ->[wait] ZWAVE_TX_STATE_BACKOFF
-endif
-}
-@enduml
-
-@startuml inline_umlgraph_19.svg
-
-
-
-
-
-
-
-<style>
-  root {
-    BackgroundColor white
-    FontColor black
-    FontName Verdana
-    HyperLinkColor blue
-    LineColor black
-    LineThickness 1
-    Margin 5
-  }
-  caption {
-    LineThickness 0
-  }
-  footer {
-    LineThickness 0
-  }
-  header {
-    LineThickness 0
-  }
-  node {
-    MaximumWidth 300
-  }
-  title {
-    FontSize 22
-    LineThickness 0
-  }
-</style>
-
-skinparam ArrowLollipopColor black
-skinparam BackgroundColor white
-skinparam DefaultFontName Verdana
-skinparam DefaultMonospacedFontName Courier
-skinparam LifelineStrategy nosolid
-skinparam ParticipantPadding 10
-skinparam SequenceLifeLineBorderColor black
-skinparam Shadowing false
-skinparam UseBetaStyle true
-
-skinparam Activity {
-  BackgroundColor white
-  BarColor black
-  BorderColor black
-  FontColor black
-  FontName Verdana
-}
-skinparam Boundary {
-  FontColor black
-}
-skinparam Box {
-  Padding 5
-}
-skinparam CircledCharacter {
-  FontColor black
-  FontName Courier
-  Radius 9
-}
-skinparam Class {
-  BackgroundColor white
-  BorderColor black
-  FontColor black
-  FontName Verdana
-}
-skinparam ClassAttribute {
-  FontColor black
-  FontName Verdana
-}
-skinparam ClassStereotype {
-  FontColor black
-  FontName Verdana
-}
-skinparam Footer {
-  FontColor black
-  FontName Verdana
-}
-skinparam Header {
-  FontColor black
-  FontName Verdana
-}
-skinparam Hyperlink {
-  Color blue
-}
-skinparam IconPackage {
-  Color black
-  BackgroundColor white
-}
-skinparam IconPrivate {
-  Color black
-  BackgroundColor white
-}
-skinparam IconProtected {
-  Color black
-  BackgroundColor white
-}
-skinparam IconPublic {
-  Color black
-  BackgroundColor white
-}
-skinparam Note {
-  FontColor black
-  FontName Verdana
-}
-skinparam Object {
-  BorderColor black
-}
-skinparam Package {
-  BorderColor black
-  FontColor black
-  FontName Verdana
-}
-skinparam State {
-  BackgroundColor white
-  BorderColor black
-}
-skinparam StereotypeA {
-  BackgroundColor white
-  BorderColor black
-}
-skinparam StereotypeC {
-  BackgroundColor white
-  BorderColor black
-}
-skinparam StereotypeE {
-  BackgroundColor white
-  BorderColor black
-}
-skinparam StereotypeI {
-  BackgroundColor white
-  BorderColor black
-}
-skinparam StereotypeN {
-  BackgroundColor white
-  BorderColor black
-}
-skinparam UseCaseStereoType {
-  FontColor black
-  FontName Verdana
-}
-skinparam ActivityBackgroundColor #DEDEDE
-skinparam ActivityBorderColor #480509
-skinparam ActivityBorderThickness 2
-skinparam ActivityFontColor #000000
-skinparam ActivityStartColor #797777
-
-partition "Z-Wave TX Process" {
-  (*) - ->[init] ZWAVE_TX_STATE_IDLE
-  if "Queue empty?" then
-    - ->[Yes] ZWAVE_TX_STATE_IDLE
-  else
-    - ->[No] ZWAVE_TX_STATE_TRANSMISSION_ONGOING
-  endif
-}
-
-partition "Z-Wave API" {
-  - -> zwapi_send_data()
-}
-
-partition "Z-Wave TX Process" {
-  - ->[Yes] ZWAVE_TX_STATE_BACKOFF
-  if "Backoff timer expired/answer received" then
-    if "Child frame?" then
-      - ->[Yes] ZWAVE_TX_STATE_TRANSMISSION_ONGOING
-    else
-      - ->[No] ZWAVE_TX_STATE_IDLE
-    endif
-  else
-    - ->[wait] ZWAVE_TX_STATE_BACKOFF
-endif
-}
+[*] - -> IDLE
+IDLE - -> ONGOING : Initiate firmware update
+IDLE: Reported: IDLE
+IDLE: Desired: IDLE
+ONGOING - -> ONGOING : End node responds and frame valid
+ONGOING: Reported: ONGOING
+ONGOING: Desired: IDLE
+ONGOING - -> WAITING_FOR_ACTIVATION : Update done and end node supports activation
+WAITING_FOR_ACTIVATION - -> ACTIVATION_TIMEOUT: Set apply timer callback
+ACTIVATION_TIMEOUT - -> IDLE : Get rule triggerred to send Activtion command. Update either success or fail.
+WAITING_FOR_ACTIVATION: Reported: WAITING_FOR_ACTIVATION
+WAITING_FOR_ACTIVATION: Desired: IDLE
+ACTIVATION_TIMEOUT: Reported: Undefined
+ACTIVATION_TIMEOUT: Desired: WAITING_FOR_ACTIVATION
+ONGOING - -> WAITING_FOR_REBOOT : Update done and end node requires reboot
+WAITING_FOR_REBOOT: Reported: WAITING_FOR_REBOOT
+WAITING_FOR_REBOOT: Desired: IDLE
+WAITING_FOR_REBOOT - -> IDLE : Reboot done. Update either success or fail.
+ONGOING - -> IDLE : Update either success or fail. No reboot needed.
 @enduml
 
 PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)

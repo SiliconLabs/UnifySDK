@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -158,7 +158,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga37e62fc99515ab2f454c274075d96035"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a Command Class / Command pair that we want to make sure to receive via Associations.  <a href="group__agi__command__class.html#ga37e62fc99515ab2f454c274075d96035">More...</a><br /></td></tr>
 <tr class="separator:ga37e62fc99515ab2f454c274075d96035"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadf5ce7825b9ecdaa8a17f67c02cf98ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__agi__command__class.html#gadf5ce7825b9ecdaa8a17f67c02cf98ce">zwave_command_class_agi_group_contains_listeners</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__node__id__definitions.html#ga092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>, <a class="el" href="group__zwave__command__class__association__types.html#gae21b908b2b1b88902cc885a23582f399">association_group_id_t</a> group_id)</td></tr>
-<tr class="memdesc:gadf5ce7825b9ecdaa8a17f67c02cf98ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a Group ID sends some Command Class/Command information that we want to listen to (and therefore should establish an association)  <a href="group__agi__command__class.html#gadf5ce7825b9ecdaa8a17f67c02cf98ce">More...</a><br /></td></tr>
+<tr class="memdesc:gadf5ce7825b9ecdaa8a17f67c02cf98ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a Group ID under a NodeID/Endpoint sends some commands that we want to receive.  <a href="group__agi__command__class.html#gadf5ce7825b9ecdaa8a17f67c02cf98ce">More...</a><br /></td></tr>
 <tr class="separator:gadf5ce7825b9ecdaa8a17f67c02cf98ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -480,15 +480,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Verifies if a Group ID sends some Command Class/Command information that we want to listen to (and therefore should establish an association) </p>
+<p>Verifies if a Group ID under a NodeID/Endpoint sends some commands that we want to receive. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">node_id</td><td>Command Class Identifier </td></tr>
-    <tr><td class="paramname">command</td><td>Command Identifier</td></tr>
+    <tr><td class="paramname">node_id</td><td>NodeID of the Z-Wave Node </td></tr>
+    <tr><td class="paramname">endpoint_id</td><td>Endpoint ID under which the group is located </td></tr>
+    <tr><td class="paramname">group_id</td><td>Group ID to check</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if association must be established false if we do not particularly have to make an association </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if association should be established because we want to receive commands from that group, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -604,7 +605,7 @@ SL_STATUS_FAIL if an error occurred </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:03 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -129,8 +129,7 @@ def desired_Cx (desired_Xmax - desired_Xmin)
 // We assume Warm White on Z-Wave is at 3000K
 // We assume Cold White on Z-Wave is at 5000K
 ////////////////////////////////////////////////////////////////
-scope 100 chain_reaction(0) clear_desired(0) {
-
+scope 100 chain_reaction(1) clear_desired(0) {
   // ZCL -> ZCL
   // Color mode will be toggled by incoming ZCL commands, or by scenes.
   // At start, we try to based it on the reported state of the node.
@@ -138,14 +137,21 @@ scope 100 chain_reaction(0) clear_desired(0) {
   r'zbCOLOR_MODE =
     if (fn_are_all_defined(d'zbENHANCED_COLOR_MODE) & (d'zbENHANCED_COLOR_MODE<3)) d'zbENHANCED_COLOR_MODE
     if (fn_are_all_defined(d'zbCOLOR_MODE)) d'zbCOLOR_MODE
-    if (e_zw_RED) 0 if (e_zw_WARM_WHITE) 2 undefined
+    if (e_zw_RED & (r_zw_RED)>0) 0
+    if (e_zw_BLUE & (r_zw_BLUE)>0) 0
+    if (e_zw_GREEN & (r_zw_GREEN)>0) 0
+    if (e_zw_WARM_WHITE & (r_zw_WARM_WHITE)>0) 2
+    if (e_zw_COLD_WHITE & (r_zw_COLD_WHITE)>0) 2
+    undefined
   d'zbCOLOR_MODE =
     if (fn_are_all_defined(d'zbENHANCED_COLOR_MODE) & (d'zbENHANCED_COLOR_MODE<3)) d'zbENHANCED_COLOR_MODE
     undefined
   r'zbENHANCED_COLOR_MODE =
     if (fn_are_all_defined(d'zbENHANCED_COLOR_MODE)) d'zbENHANCED_COLOR_MODE
     if (e_zw_RED) 0 if (e_zw_WARM_WHITE) 2 undefined
+}
 
+scope 100 chain_reaction(0) clear_desired(0) {
   // ZCL to Z-Wave
   // Light temperature, only if color mode is 2:
   // We do a linear fit where warm = 0 at 5000K and warm = zbLEVEL at 4000K or lower

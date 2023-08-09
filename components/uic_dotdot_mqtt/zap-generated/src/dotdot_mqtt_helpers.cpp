@@ -3171,6 +3171,7 @@ const std::map<uint32_t, std::string> node_state_network_status_enum_id_to_strin
   { 2, "Online non-functional" },
   { 3, "Unavailable" },
   { 4, "Offline" },
+  { 5, "Commisioning Started" },
 };
 
 // String to enum map for NodeStateNetworkStatus
@@ -3180,6 +3181,7 @@ const std::map<std::string, uint32_t> node_state_network_status_enum_string_to_i
   { "Online non-functional", 2 },
   { "Unavailable", 3 },
   { "Offline", 4 },
+  { "Commisioning Started", 5 },
 };
 
 std::string node_state_network_status_get_enum_value_name(
@@ -3215,6 +3217,7 @@ const std::map<uint32_t, std::string> node_state_security_enum_id_to_string_map 
   { 3, "Z-Wave S2 Authenticated" },
   { 4, "Z-Wave S2 Access Control" },
   { 5, "Zigbee Z3" },
+  { 6, "Matter" },
 };
 
 // String to enum map for NodeStateSecurity
@@ -3225,6 +3228,7 @@ const std::map<std::string, uint32_t> node_state_security_enum_string_to_id_map 
   { "Z-Wave S2 Authenticated", 3 },
   { "Z-Wave S2 Access Control", 4 },
   { "Zigbee Z3", 5 },
+  { "Matter", 6 },
 };
 
 std::string node_state_security_get_enum_value_name(
@@ -5994,87 +5998,6 @@ std::string get_enum_value_name(
     if (9 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: timevalid_until_time instead of this: time_valid_until_time
       return time_valid_until_time_get_enum_value_name(value);
-    }
-  #endif
-  }
-
-  if (25 == cluster_id) {
-  #ifdef OTA_UPGRADE_UPGRADE_SERVERID_ENUM_NAME_AVAILABLE
-    if (0 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_serverid instead of this: ota_upgrade_upgrade_serverid
-      return ota_upgrade_upgrade_serverid_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_FILE_OFFSET_ENUM_NAME_AVAILABLE
-    if (1 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradefile_offset instead of this: ota_upgrade_file_offset
-      return ota_upgrade_file_offset_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_CURRENT_FILE_VERSION_ENUM_NAME_AVAILABLE
-    if (2 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_file_version instead of this: ota_upgrade_current_file_version
-      return ota_upgrade_current_file_version_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
-    if (3 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_zig_bee_stack_version instead of this: ota_upgrade_current_zig_bee_stack_version
-      return ota_upgrade_current_zig_bee_stack_version_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_DOWNLOADED_FILE_VERSION_ENUM_NAME_AVAILABLE
-    if (4 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_file_version instead of this: ota_upgrade_downloaded_file_version
-      return ota_upgrade_downloaded_file_version_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
-    if (5 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_zig_bee_stack_version instead of this: ota_upgrade_downloaded_zig_bee_stack_version
-      return ota_upgrade_downloaded_zig_bee_stack_version_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_IMAGE_UPGRADE_STATUS_ENUM_NAME_AVAILABLE
-    if (6 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_upgrade_status instead of this: ota_upgrade_image_upgrade_status
-      return ota_upgrade_image_upgrade_status_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_MANUFACTURERID_ENUM_NAME_AVAILABLE
-    if (7 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademanufacturerid instead of this: ota_upgrade_manufacturerid
-      return ota_upgrade_manufacturerid_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_IMAGE_TYPEID_ENUM_NAME_AVAILABLE
-    if (8 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_typeid instead of this: ota_upgrade_image_typeid
-      return ota_upgrade_image_typeid_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_MINIMUM_BLOCK_PERIOD_ENUM_NAME_AVAILABLE
-    if (9 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademinimum_block_period instead of this: ota_upgrade_minimum_block_period
-      return ota_upgrade_minimum_block_period_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_IMAGE_STAMP_ENUM_NAME_AVAILABLE
-    if (10 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_stamp instead of this: ota_upgrade_image_stamp
-      return ota_upgrade_image_stamp_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY_ENUM_NAME_AVAILABLE
-    if (11 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_activation_policy instead of this: ota_upgrade_upgrade_activation_policy
-      return ota_upgrade_upgrade_activation_policy_get_enum_value_name(value);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_ENUM_NAME_AVAILABLE
-    if (12 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_timeout_policy instead of this: ota_upgrade_upgrade_timeout_policy
-      return ota_upgrade_upgrade_timeout_policy_get_enum_value_name(value);
     }
   #endif
   }
@@ -9206,6 +9129,30 @@ std::string get_enum_value_name(
       return state_endpoint_id_list_get_enum_value_name(value);
     }
   #endif
+  #ifdef STATE_NETWORK_STATUS_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statenetwork_status instead of this: state_network_status
+      return state_network_status_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef STATE_SECURITY_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statesecurity instead of this: state_security
+      return state_security_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef STATE_MAXIMUM_COMMAND_DELAY_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statemaximum_command_delay instead of this: state_maximum_command_delay
+      return state_maximum_command_delay_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef STATE_NETWORK_LIST_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statenetwork_list instead of this: state_network_list
+      return state_network_list_get_enum_value_name(value);
+    }
+  #endif
   }
 
   if (64771 == cluster_id) {
@@ -10480,87 +10427,6 @@ uint32_t get_enum_name_value(
     if (9 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: timevalid_until_time instead of this: time_valid_until_time
       return time_valid_until_time_get_enum_value_number(name);
-    }
-  #endif
-  }
-
-  if (25 == cluster_id) {
-  #ifdef OTA_UPGRADE_UPGRADE_SERVERID_ENUM_NAME_AVAILABLE
-    if (0 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_serverid instead of this: ota_upgrade_upgrade_serverid
-      return ota_upgrade_upgrade_serverid_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_FILE_OFFSET_ENUM_NAME_AVAILABLE
-    if (1 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradefile_offset instead of this: ota_upgrade_file_offset
-      return ota_upgrade_file_offset_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_CURRENT_FILE_VERSION_ENUM_NAME_AVAILABLE
-    if (2 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_file_version instead of this: ota_upgrade_current_file_version
-      return ota_upgrade_current_file_version_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_CURRENT_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
-    if (3 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradecurrent_zig_bee_stack_version instead of this: ota_upgrade_current_zig_bee_stack_version
-      return ota_upgrade_current_zig_bee_stack_version_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_DOWNLOADED_FILE_VERSION_ENUM_NAME_AVAILABLE
-    if (4 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_file_version instead of this: ota_upgrade_downloaded_file_version
-      return ota_upgrade_downloaded_file_version_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_DOWNLOADED_ZIG_BEE_STACK_VERSION_ENUM_NAME_AVAILABLE
-    if (5 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradedownloaded_zig_bee_stack_version instead of this: ota_upgrade_downloaded_zig_bee_stack_version
-      return ota_upgrade_downloaded_zig_bee_stack_version_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_IMAGE_UPGRADE_STATUS_ENUM_NAME_AVAILABLE
-    if (6 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_upgrade_status instead of this: ota_upgrade_image_upgrade_status
-      return ota_upgrade_image_upgrade_status_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_MANUFACTURERID_ENUM_NAME_AVAILABLE
-    if (7 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademanufacturerid instead of this: ota_upgrade_manufacturerid
-      return ota_upgrade_manufacturerid_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_IMAGE_TYPEID_ENUM_NAME_AVAILABLE
-    if (8 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_typeid instead of this: ota_upgrade_image_typeid
-      return ota_upgrade_image_typeid_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_MINIMUM_BLOCK_PERIOD_ENUM_NAME_AVAILABLE
-    if (9 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgrademinimum_block_period instead of this: ota_upgrade_minimum_block_period
-      return ota_upgrade_minimum_block_period_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_IMAGE_STAMP_ENUM_NAME_AVAILABLE
-    if (10 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeimage_stamp instead of this: ota_upgrade_image_stamp
-      return ota_upgrade_image_stamp_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY_ENUM_NAME_AVAILABLE
-    if (11 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_activation_policy instead of this: ota_upgrade_upgrade_activation_policy
-      return ota_upgrade_upgrade_activation_policy_get_enum_value_number(name);
-    }
-  #endif
-  #ifdef OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_ENUM_NAME_AVAILABLE
-    if (12 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: ota_upgradeupgrade_timeout_policy instead of this: ota_upgrade_upgrade_timeout_policy
-      return ota_upgrade_upgrade_timeout_policy_get_enum_value_number(name);
     }
   #endif
   }
@@ -13690,6 +13556,30 @@ uint32_t get_enum_name_value(
     if (0 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: stateendpoint_id_list instead of this: state_endpoint_id_list
       return state_endpoint_id_list_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef STATE_NETWORK_STATUS_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statenetwork_status instead of this: state_network_status
+      return state_network_status_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef STATE_SECURITY_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statesecurity instead of this: state_security
+      return state_security_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef STATE_MAXIMUM_COMMAND_DELAY_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statemaximum_command_delay instead of this: state_maximum_command_delay
+      return state_maximum_command_delay_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef STATE_NETWORK_LIST_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: statenetwork_list instead of this: state_network_list
+      return state_network_list_get_enum_value_number(name);
     }
   #endif
   }

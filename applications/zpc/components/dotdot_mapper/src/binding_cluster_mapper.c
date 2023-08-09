@@ -14,6 +14,7 @@
 
 // ZPC Components
 #include "attribute_store_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "zpc_attribute_store.h"
 #include "zwave_utils.h"
@@ -26,7 +27,7 @@
 #include "sl_log.h"
 
 // Interfaces
-#include "ucl_definitions.h"
+
 
 #define LOG_TAG "binding_cluster_mapper"
 
@@ -159,12 +160,12 @@ static void on_network_status_update(attribute_store_node_t network_status_node,
     return;
   }
 
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE;
   attribute_store_get_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));
 
-  if (NODE_STATE_TOPIC_STATE_INCLUDED != network_status) {
+  if (ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL != network_status) {
     return;
   }
 
@@ -202,7 +203,7 @@ bool binding_cluster_mapper_init(void)
   // Here we listen to AGI information to publish which commands are generated
   // by nodes, in case we have a binding/association towards them.
   attribute_store_register_callback_by_type_and_state(&on_network_status_update,
-                                                      ATTRIBUTE_NETWORK_STATUS,
+                                                      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                                       REPORTED_ATTRIBUTE);
 
   return true;

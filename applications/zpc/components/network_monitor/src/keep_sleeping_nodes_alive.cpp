@@ -26,7 +26,8 @@
 #include "attribute_resolver.h"
 #include "sl_log.h"
 #include "ctimer.h"
-#include "ucl_definitions.h"
+
+#include "unify_dotdot_attribute_store_node_state.h"
 
 // ZPC Components
 #include "attribute_store_type_registration.h"
@@ -129,7 +130,7 @@ static void keep_alive_nop_node([[maybe_unused]] void *user)
  */
 static sl_status_t
   get_node_state_and_operating_mode(attribute_store_node_t network_status_node,
-                                    node_state_topic_state_t *network_status,
+                                    NodeStateNetworkStatus *network_status,
                                     attribute_store_node_t *node_id_node,
                                     zwave_operating_mode_t *operating_mode)
 {
@@ -147,7 +148,7 @@ static sl_status_t
   sl_status_t res
     = attribute_store_get_reported(network_status_node,
                                    network_status,
-                                   sizeof(node_state_topic_state_t));
+                                   sizeof(NodeStateNetworkStatus));
 
   if (res != SL_STATUS_OK) {
     sl_log_error(LOG_TAG,
@@ -197,7 +198,7 @@ static void keep_awake(attribute_store_node_t node_id_node)
 * @brief callback triggered when the networkstatus changes of a given node. when
   the change is not equal to updated it will:
 * - add the node to the keep alive list, when network_status ==
-    NODE_STATE_TOPIC_INTERVIEWING && operating_mode == OPERATING_MODE_NL
+    ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING && operating_mode == OPERATING_MODE_NL
 * - remove the node from the keep alive list, when above test is false
 */
 static void
@@ -208,7 +209,7 @@ static void
     return;
   }
 
-  node_state_topic_state_t network_status;
+  NodeStateNetworkStatus network_status;
   attribute_store_node_t node_id_node;
   zwave_operating_mode_t operating_mode;
 
@@ -231,7 +232,7 @@ static void
                operating_mode,
                network_status);
 
-  if ((network_status == NODE_STATE_TOPIC_INTERVIEWING)
+  if ((network_status == ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING)
       && (operating_mode == OPERATING_MODE_NL)) {
     if (true == is_node_or_parent_paused(node_id_node)) {
       attribute_resolver_set_resolution_resumption_listener(node_id_node,
@@ -262,7 +263,7 @@ void initialize_keep_alive_for_sleeping_nodes()
 {
   attribute_store_register_callback_by_type_and_state(
     keep_alive_network_status_update,
-    ATTRIBUTE_NETWORK_STATUS,
+    DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
     REPORTED_ATTRIBUTE);
 
   attribute_store_register_callback_by_type(&on_node_id_deleted,

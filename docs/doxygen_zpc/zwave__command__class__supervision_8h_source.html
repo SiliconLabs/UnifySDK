@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__supervision_8h_
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  uint16_t data_length,</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keyword">const</span> uint8_t *<a class="code" href="group__ctimer.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>,</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keyword">const</span> <a class="code" href="structzwave__tx__options.html">zwave_tx_options_t</a> *tx_options,</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keyword">const</span> <a class="code" href="group__zwave__tx__options__qos__priority.html#gabfbc700a89ba6dce9c1f38fa3ed41789">on_zwave_tx_send_data_complete_t</a> on_supervision_complete,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keyword">const</span> <a class="code" href="group__zwave__tx.html#gabfbc700a89ba6dce9c1f38fa3ed41789">on_zwave_tx_send_data_complete_t</a> on_supervision_complete,</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordtype">void</span> *user,</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <a class="code" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> *session);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
@@ -155,11 +155,11 @@ $(document).ready(function(){initNavTree('zwave__command__class__supervision_8h_
 <div class="ttc" id="agroup__zwave__command__class__supervision__handler_html_gaeaff3d9d85a38b52f67f91ea41163a72"><div class="ttname"><a href="group__zwave__command__class__supervision__handler.html#gaeaff3d9d85a38b52f67f91ea41163a72">zwave_command_class_supervision_init</a></div><div class="ttdeci">sl_status_t zwave_command_class_supervision_init(void)</div><div class="ttdoc">Setup fixture for the Supervision Command Class.</div><div class="ttdef"><b>Definition:</b> zwave_command_class_supervision.c:355</div></div>
 <div class="ttc" id="agroup__zwave__command__class__supervision__handler_html_gafdbc9d899a2873c8e26d4c94c418488c"><div class="ttname"><a href="group__zwave__command__class__supervision__handler.html#gafdbc9d899a2873c8e26d4c94c418488c">zwave_command_class_supervision_close_session_by_tx_session</a></div><div class="ttdeci">sl_status_t zwave_command_class_supervision_close_session_by_tx_session(zwave_tx_session_id_t tx_session_id)</div><div class="ttdoc">Close a supervision session based on the Z-Wave Tx session ID.</div></div>
 <div class="ttc" id="agroup__zwave__node__id__definitions_html_gad2b01997b1abb48bc7a1877551536935"><div class="ttname"><a href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a></div><div class="ttdeci">uint16_t zwave_node_id_t</div><div class="ttdoc">Z-Wave NodeID type.</div><div class="ttdef"><b>Definition:</b> zwave_node_id_definitions.h:84</div></div>
-<div class="ttc" id="agroup__zwave__tx__interface_html_ga1938ab567086a053bb3fbd0cddae43c2"><div class="ttname"><a href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a></div><div class="ttdeci">void * zwave_tx_session_id_t</div><div class="ttdoc">Handle that can be used for aborting ongoing transmissions or identifying TX Queue elements.</div><div class="ttdef"><b>Definition:</b> zwave_tx_definitions.h:54</div></div>
-<div class="ttc" id="agroup__zwave__tx__options__qos__priority_html_gabfbc700a89ba6dce9c1f38fa3ed41789"><div class="ttname"><a href="group__zwave__tx__options__qos__priority.html#gabfbc700a89ba6dce9c1f38fa3ed41789">on_zwave_tx_send_data_complete_t</a></div><div class="ttdeci">void(* on_zwave_tx_send_data_complete_t)(uint8_t status, const zwapi_tx_report_t *tx_info, void *user)</div><div class="ttdef"><b>Definition:</b> zwave_tx.h:201</div></div>
+<div class="ttc" id="agroup__zwave__tx__interface_html_ga1938ab567086a053bb3fbd0cddae43c2"><div class="ttname"><a href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a></div><div class="ttdeci">void * zwave_tx_session_id_t</div><div class="ttdoc">Handle that can be used for aborting ongoing transmissions or identifying TX Queue elements.</div><div class="ttdef"><b>Definition:</b> zwave_tx_definitions.h:77</div></div>
+<div class="ttc" id="agroup__zwave__tx_html_gabfbc700a89ba6dce9c1f38fa3ed41789"><div class="ttname"><a href="group__zwave__tx.html#gabfbc700a89ba6dce9c1f38fa3ed41789">on_zwave_tx_send_data_complete_t</a></div><div class="ttdeci">void(* on_zwave_tx_send_data_complete_t)(uint8_t status, const zwapi_tx_report_t *tx_info, void *user)</div><div class="ttdoc">Function signature for callbacks invoked when send data has completed.</div><div class="ttdef"><b>Definition:</b> zwave_tx.h:168</div></div>
 <div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
 <div class="ttc" id="astructzwave__controller__connection__info_html"><div class="ttname"><a href="structzwave__controller__connection__info.html">zwave_controller_connection_info</a></div><div class="ttdoc">Structure holding information about the source and destination when transmitting and receiving Z-Wave...</div><div class="ttdef"><b>Definition:</b> zwave_controller_connection_info.h:87</div></div>
-<div class="ttc" id="astructzwave__tx__options_html"><div class="ttname"><a href="structzwave__tx__options.html">zwave_tx_options</a></div><div class="ttdef"><b>Definition:</b> zwave_tx_definitions.h:103</div></div>
+<div class="ttc" id="astructzwave__tx__options_html"><div class="ttname"><a href="structzwave__tx__options.html">zwave_tx_options</a></div><div class="ttdef"><b>Definition:</b> zwave_tx_definitions.h:126</div></div>
 <div class="ttc" id="azpc__attribute__store__test__helper_8h_html_a8571121ca4b060a8eaca9b120d728ac8"><div class="ttname"><a href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a></div><div class="ttdeci">const zwave_node_id_t node_id</div></div>
 <div class="ttc" id="azwave__controller__connection__info_8h_html"><div class="ttname"><a href="zwave__controller__connection__info_8h.html">zwave_controller_connection_info.h</a></div></div>
 <div class="ttc" id="azwave__rx_8h_html"><div class="ttname"><a href="zwave__rx_8h.html">zwave_rx.h</a></div></div>
@@ -170,7 +170,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__supervision_8h_
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_6ebbdbf23914ef85dcaf406f7830aebb.html">include</a></li><li class="navelem"><a class="el" href="zwave__command__class__supervision_8h.html">zwave_command_class_supervision.h</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:51 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:56 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

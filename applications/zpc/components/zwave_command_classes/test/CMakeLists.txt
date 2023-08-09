@@ -326,6 +326,20 @@ target_add_unittest(
   zpc_attribute_resolver_mock
   zwave_network_management_mock)
 
+# Door Lock Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_door_lock_test
+  SOURCES
+  zwave_command_class_door_lock_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+)
+
 # Alarm Sensor Command Class test
 target_add_unittest(
   zwave_command_classes
@@ -683,3 +697,19 @@ target_add_unittest(
   zwave_handlers
   uic_attribute_store
   zpc_attribute_store_test_helper)
+
+
+# User Code Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_user_code_test
+  SOURCES
+  zwave_command_class_user_code_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  )

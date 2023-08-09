@@ -1,8 +1,16 @@
 # ZigPC Release Notes
 
-## [1.3.2] - June 2023
+## [1.4.0] - August 2023
 
-* No changes
+### Added (1.4.0)
+
+* Added options to configure the Zigbee network parameters on startup
+
+### Changed (1.4.0)
+
+* JSON handling bugfixes
+* Network management improvements
+* Ease of use updates for adding new or custom clusters
 
 ## [1.3.1] - March 2023
 
@@ -163,11 +171,14 @@ devices after ZigPC reboots
 | When performing network-steering, the device can either fail node addition or node interview partially.                                               | In the device's EmberCLI, enter the commands `network leave` and `keys clear` then retry.   |
 | When excluding devices, the protocol UNID is not removed from the node's SmartStart entry. This will cause the ZigPC to refuse to re-include the node.| Clear the ZigPC UNID from the SmartStart entry using the Dev UI.                            |
 | ZigPC only supports "Remove" and "Idle" PC state change requests via the Node List view in DevUI. "Add" and "Reset" options are not supported.        | To add nodes to the Zigbee network, using the Smartstart DSK process outlined in the readme.|
-| ZigPC can fail at initialization if the NCP image is based on GSDK 4.1 without ADDRESS_TABLE being set to 32                                          | Set macro `EMBER_ADDRESS_TABLE_SIZE=32` in NCP studio project before building NCP image.    |
+| ZigPC can fail at initialization if the NCP image is based on an SLC project without ADDRESS_TABLE being set to 32                                    | Set macro `EMBER_ADDRESS_TABLE_SIZE=32` in NCP studio project before building NCP image.    |
 | ZigPC can fail at initialization if the NCP image is based on a different version of the GeckoSDK than ZigPC                                          | Update the NCP image to the same GeckoSDK version as the one used to compile the ZigPC.     |
-| ZigPC sends the default response to a sleepy check-in command instead of the expected acknowledge message                                             | Disable the poll control cluster when managing sleepy devices to use the default behaviour. |
 | ZigPC may take longer than expected to perform an OTA upgrade                                                                                         | Minimize the size of the image and leave sufficient time to update end devices.             |
 | When running in a multiprotocol setup, permission issues may cause the setup to fail                                                                  | Use 'sudo' when running both ZigPC and the Zigbeed applications to ensure compatibility     |
+| When adding multiple nodes in sequence using SmartStart, it is possible for node addition to fail at discovery                                        | Add multiple entries in one single command or allow discovery to complete on each operation |
+| When adding a sleepy device with the PollControl cluster, it is possible the CheckInInterval attribute will not appear on MQTT                        | Use the debug CLI to manage the CheckInInterval attribute when necessary                    |
+| Intermittently, the default network parameters will be used when specifying the parameters from the command line.                                     | Use the debug CLI to manually manage the network parameters                                 |
+| When bindings are created independent of the protocol controller (through Find and Bind, for example), the bindings will not be reported on MQTT      | Manually request the bindings on the CLI to view bindings not created using ZigPC           |
 
 ### Zigbee Devices Used for Testing
 

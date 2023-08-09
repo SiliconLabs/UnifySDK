@@ -8,8 +8,6 @@ var dir_1233302668cfc38a9302dcaeddaa7aed =
       [ "RequestQueue", "classzigpc_1_1gateway_1_1RequestQueue.html", "classzigpc_1_1gateway_1_1RequestQueue" ],
       [ "Entry", "classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html", "classzigpc_1_1gateway_1_1RequestQueue_1_1Entry" ],
       [ "NetworkInitRequest", "classzigpc_1_1gateway_1_1NetworkInitRequest.html", "classzigpc_1_1gateway_1_1NetworkInitRequest" ],
-      [ "PermitJoinRequest", "classzigpc_1_1gateway_1_1PermitJoinRequest.html", "classzigpc_1_1gateway_1_1PermitJoinRequest" ],
-      [ "AddInstallCodeRequest", "classzigpc_1_1gateway_1_1AddInstallCodeRequest.html", "classzigpc_1_1gateway_1_1AddInstallCodeRequest" ],
       [ "DiscoverDeviceRequest", "classzigpc_1_1gateway_1_1DiscoverDeviceRequest.html", "classzigpc_1_1gateway_1_1DiscoverDeviceRequest" ],
       [ "DiscoverEndpointRequest", "classzigpc_1_1gateway_1_1DiscoverEndpointRequest.html", "classzigpc_1_1gateway_1_1DiscoverEndpointRequest" ],
       [ "DeviceRemoveRequest", "classzigpc_1_1gateway_1_1DeviceRemoveRequest.html", "classzigpc_1_1gateway_1_1DeviceRemoveRequest" ],

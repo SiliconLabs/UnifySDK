@@ -91,14 +91,29 @@ void setUp()
 
 void test_attribute_timeouts_test()
 {
+  TEST_ASSERT_FALSE(
+    attribute_timeout_is_callback_active(node_2, &update_node_reported_value));
+  TEST_ASSERT_FALSE(
+    attribute_timeout_is_callback_active(node_2, &update_node_desired_value));
+
   value = 20;
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     attribute_timeout_set_callback(node_2, 1000, &update_node_reported_value));
 
+  TEST_ASSERT_TRUE(
+    attribute_timeout_is_callback_active(node_2, &update_node_reported_value));
+  TEST_ASSERT_FALSE(
+    attribute_timeout_is_callback_active(node_2, &update_node_desired_value));
+
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     attribute_timeout_set_callback(node_2, 3000, &update_node_desired_value));
+
+  TEST_ASSERT_TRUE(
+    attribute_timeout_is_callback_active(node_2, &update_node_reported_value));
+  TEST_ASSERT_TRUE(
+    attribute_timeout_is_callback_active(node_2, &update_node_desired_value));
 
   // Get the timer running
   contiki_test_helper_run(0);
@@ -129,6 +144,11 @@ void test_attribute_timeouts_test()
   TEST_ASSERT_EQUAL(value, read_value);
   attribute_store_get_reported(node_2, &read_value, sizeof(read_value));
   TEST_ASSERT_EQUAL(value, read_value);
+
+    TEST_ASSERT_FALSE(
+    attribute_timeout_is_callback_active(node_2, &update_node_reported_value));
+  TEST_ASSERT_FALSE(
+    attribute_timeout_is_callback_active(node_2, &update_node_desired_value));
 }
 
 void test_attribute_timeouts_test_delete_nodes()

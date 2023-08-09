@@ -12,12 +12,10 @@
  *****************************************************************************/
 #include "zcl_scenes_cluster_server.h"
 #include "zcl_cluster_servers_helpers.hpp"
-#include "zcl_group_cluster_server.h"
 
 // ZPC Components
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store_network_helper.h"
-#include "zpc_dotdot_mqtt_group_dispatch.h"
 
 // Unify components
 #include "unify_dotdot_defined_attribute_types.h"
@@ -29,6 +27,7 @@
 #include "uic_mqtt.h"
 #include "sl_log.h"
 #include "unify_dotdot_attribute_store_helpers.h"
+#include "unify_dotdot_attribute_store_group_cluster.h"
 #include "dotdot_attribute_id_definitions.h"
 #include "dotdot_mqtt_parsing_helpers.hpp"
 
@@ -399,11 +398,15 @@ static void save_extension_fieldset_to_attribute_store(
  */
 static void publish_scene_table(attribute_store_node_t scene_table_node)
 {
+  if (false == attribute_store_node_exists(scene_table_node)) {
+    return;
+  }
+
   sl_log_debug(LOG_TAG,
                "Publishing the Scene Table for Attribute ID %d",
                scene_table_node);
   // Read the network status, do not publish if it is not online functional:
-  if (get_network_status(scene_table_node) != NODE_STATE_TOPIC_STATE_INCLUDED) {
+  if (unify_attribute_store_node_state_get_status(scene_table_node) != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
     sl_log_debug(LOG_TAG,
                  "Not online functional for Attribute ID %d",
                  scene_table_node);
@@ -599,6 +602,9 @@ static void on_scene_data_updated(attribute_store_node_t updated_node,
     = attribute_store_get_first_child_by_type(endpoint_id_node,
                                               ATTRIBUTE(SCENE_TABLE));
 
+  if (false == attribute_store_node_exists(scene_table_node)) {
+    return;
+  }
   attribute_timeout_set_callback(scene_table_node, 15, &publish_scene_table);
 }
 
@@ -617,11 +623,10 @@ static void on_network_status_update(attribute_store_node_t network_status_node,
   }
 
   // Read the network status, do not publish if it is not online functional:
-  if (get_network_status(network_status_node)
-      != NODE_STATE_TOPIC_STATE_INCLUDED) {
+  if (unify_attribute_store_node_state_get_status(network_status_node)
+      != ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
     return;
   }
-
   // Go up and find the UNID/Endpoint and its network status.
   unid_t unid;
   if (SL_STATUS_OK
@@ -1185,13 +1190,23 @@ static void on_group_add_scene_command_received(const char *topic,
       return;
     }
 
-    // Leverage the service provided by our ZPC dotdot MQTT group dispatch.
-    zpc_dotdot_mqtt_group_dispatch(group_id,
-                                   SCENES_CLUSTER_NAME,
-                                   topic_elements.back().c_str(),
-                                   message,
-                                   message_length,
-                                   &on_add_scene_command_received);
+    // Leverage the service provided by our the UIC MQTT group dispatch.
+    group_dispatch_t group_dispatch
+      = uic_mqtt_dotdot_get_group_dispatch_callback();
+    if (group_dispatch != nullptr) {
+      group_dispatch(group_id,
+                     SCENES_CLUSTER_NAME,
+                     topic_elements.back().c_str(),
+                     message,
+                     message_length,
+                     &on_add_scene_command_received);
+    } else {
+      sl_log_debug(LOG_TAG,
+                   "No MQTT dispatch function available. Add Scene "
+                   "command will not be dispatched to individual "
+                   "members automatically.");
+    }
+
   } catch (const std::exception &e) {
     sl_log_debug(LOG_TAG,
                  "Unable to parse MQTT Topic. Exception: %s\n",
@@ -1220,7 +1235,7 @@ sl_status_t zcl_scenes_cluster_server_init()
 
   // Make sure to publish the scene table when a node becomes available.
   attribute_store_register_callback_by_type_and_state(&on_network_status_update,
-                                                      ATTRIBUTE_NETWORK_STATUS,
+                                                      DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                                       REPORTED_ATTRIBUTE);
 
   // Callback for Dotdot MQTT commands

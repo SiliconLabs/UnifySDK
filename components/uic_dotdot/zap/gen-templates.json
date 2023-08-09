@@ -1,43 +1,42 @@
 {
-  "name": "Unify Dotdot Shared",
-  "version": "UnifyShared-dotdot-v1",
-  "override": "addon-override.js",
-  "helpers": ["addon-helper.js"],
-  "templates": [
-    {
-      "path": "zap-types.zapt",
-      "name": "ZCL types",
-      "output": "include/zap-types.h"
-    },
-    {
-      "path": "dotdot_cluster_command_id_definitions.h.zapt",
-      "name": "ZCL Cluster Command ID definitions",
-      "output": "include/dotdot_cluster_command_id_definitions.h"
-    },
-    {
-      "path": "dotdot_cluster_id_definitions.h.zapt",
-      "name": "ZCL Cluster ID definitions",
-      "output": "include/dotdot_cluster_id_definitions.h"
-    },
-    {
-      "path": "dotdot_cluster_id_definitions.c.zapt",
-      "name": "ZCL Cluster ID implementation",
-      "output": "src/dotdot_cluster_id_definitions.c"
-    },
-    {
-      "path": "dotdot_attribute_id_definitions.h.zapt",
-      "name": "ZCL Attribute ID definitions",
-      "output": "include/dotdot_attribute_id_definitions.h"
-    },
-    {
-      "path": "dotdot_attribute_id_definitions.c.zapt",
-      "name": "ZCL Attribute ID implementation",
-      "output": "src/dotdot_attribute_id_definitions.c"
-    },
-    {
-      "path": "readme_ucl_mqtt_reference.md.zapt",
-      "name": "UCL MQTT Reference Guide",
-      "output": "readme_ucl_mqtt_reference.md"
-    }
-  ]
+    "name": "Unify Dotdot Shared",
+    "version": "UnifyShared-dotdot-v1",
+    "override": "addon-override.js",
+    "helpers": ["addon-helper.js", "addon-base-helper.js"],
+    "templates": [{
+            "path": "zap-types.zapt",
+            "name": "ZCL types",
+            "output": "include/zap-types.h"
+        },
+        {
+            "path": "dotdot_cluster_command_id_definitions.h.zapt",
+            "name": "ZCL Cluster Command ID definitions",
+            "output": "include/dotdot_cluster_command_id_definitions.h"
+        },
+        {
+            "path": "dotdot_cluster_id_definitions.h.zapt",
+            "name": "ZCL Cluster ID definitions",
+            "output": "include/dotdot_cluster_id_definitions.h"
+        },
+        {
+            "path": "dotdot_cluster_id_definitions.c.zapt",
+            "name": "ZCL Cluster ID implementation",
+            "output": "src/dotdot_cluster_id_definitions.c"
+        },
+        {
+            "path": "dotdot_attribute_id_definitions.h.zapt",
+            "name": "ZCL Attribute ID definitions",
+            "output": "include/dotdot_attribute_id_definitions.h"
+        },
+        {
+            "path": "dotdot_attribute_id_definitions.c.zapt",
+            "name": "ZCL Attribute ID implementation",
+            "output": "src/dotdot_attribute_id_definitions.c"
+        },
+        {
+            "path": "readme_ucl_mqtt_reference.md.zapt",
+            "name": "UCL MQTT Reference Guide",
+            "output": "readme_ucl_mqtt_reference.md"
+        }
+    ]
 }

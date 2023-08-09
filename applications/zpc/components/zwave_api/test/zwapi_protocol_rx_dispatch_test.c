@@ -447,3 +447,21 @@ void test_zwapi_protocol_rx_dispatch_promiscuous_appplication_handler()
 
   TEST_ASSERT_EQUAL(0x04, received_node_id);
 }
+
+void test_zwapi_protocol_rx_dispatch_zwave_api_started_overflow()
+{
+  // Manually add our callback:
+  test_zwapi_callbacks.zwapi_started = &zwapi_zwave_api_started_test_function;
+  zwave_api_get_callbacks_IgnoreAndReturn(&test_zwapi_callbacks);
+
+  uint8_t frame[(2 * REQUEST_BUFFER_SIZE)] = {22, 0x00, 0x0A};
+  // Fill everything after with 0xFF. The length first will be interpreted as 255.
+  // Z-Wave API buffer is only 180 bytes.
+  memset(&frame[3], 0xFF, ((2 * REQUEST_BUFFER_SIZE) - 3) * sizeof(uint8_t));
+
+  // No crash!
+  zwapi_set_awaiting_zwave_api_started_Expect(false);
+  zwave_api_protocol_rx_dispatch(frame, sizeof(frame));
+
+  TEST_ASSERT_EQUAL(1, zwapi_zwave_api_started_test_function_call_count);
+}

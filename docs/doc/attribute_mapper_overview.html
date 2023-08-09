@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unify Attribute Mapper Overview &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/attribute_mapper_overview.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.4.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="unify-attribute-mapper-overview">
+<h1>Unify Attribute Mapper Overview<a class="headerlink" href="#unify-attribute-mapper-overview" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>In the UnifySDK, Attribute Mapper is a component that offers a text file based system
+that allows to define Attribute relations, allowing automatic rules and
+attribute manipulations using assignments based on text script files.</p>
+<p>Attribute Mapper during the Initialization phase, loads the UAM files for the given path and
+parses the UAM files into AST trees and then evaluates the assignments, and creates dependencies.</p>
+<p class="plantuml">
+<img src="../_images/plantuml-19b3cf4e8b4f63a0b9d1bc9c562b23d3e6c2b36a.png" alt=" title Relationships - Class Diagram
+
+ title Attribute mapper
+
+ class ast::MapperEngine
+ class ast::UAMGrammer
+ class ast::eval
+ class ast::dep_eval
+ class Attribute_mapper_process
+
+ ast::MapperEngine &lt;|-down- ast::UAMGrammer : AST
+ ast::MapperEngine &lt;|-down- ast::eval : optional value
+ ast::MapperEngine &lt;|-down- ast::dep_eval : dependencies
+ ast::MapperEngine &lt;|-up-   Attribute_mapper_process:  on_attribute_updated()"/>
+</p>
+</section>
+<section id="attribute-mapper-components">
+<h2>Attribute Mapper Components<a class="headerlink" href="#attribute-mapper-components" title="Permalink to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Attribute_mapper_process</td>
+<td>This component is based on the Contiki process model and helps the mapper in arbitrating when to make calculations based on attribute updates.</td>
+</tr>
+<tr>
+<td>Attribute_mapper_engine</td>
+<td>The purpose of the mapping engine is to define relations between attributes in the attribute store.<br> In general, the relation between the Z-Wave attribute and the Zigbee attributes.</td>
+</tr>
+<tr>
+<td>Attribute_mapper_grammar</td>
+<td>This Components contains the definition of two grammar that is used by the UAM parser.<br>Skipper grammar and Main UAM grammar.</td>
+</tr>
+<tr>
+<td>Attribute_mapper_parser</td>
+<td>This component Parses strings/text into Abstract Syntax Trees using Skipper grammar to exclude white spaces and comments and<br> UAM grammar to parse the mapper logic.</td>
+</tr>
+<tr>
+<td>Attribute_mapper_ast</td>
+<td>This component contains all the data structures which make up the attribute mapping AST.<br> All UAM files are parsed into these structures.</td>
+</tr>
+<tr>
+<td>Atrribute_mapper evaluators</td>
+<td>This component walks through the AST to perform the evaluation of the expressions.<br> There are multiple evaluators in attribute mapper like <br> &nbsp; &nbsp; &nbsp; &nbsp;1) The attribute path evaluator evaluates a full attribute path and returns the matching attribute store attribute for that attribute path.<br>  &nbsp; &nbsp; &nbsp; &nbsp;2) The attribute dependency evaluator goes through an AST starting with an expression and builds a list of dependencies.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attribute-mapper-process">
+<h2>Attribute Mapper Process<a class="headerlink" href="#attribute-mapper-process" title="Permalink to this heading"></a></h2>
+<p>This Contiki process gets the events from the attribute store, like desired or reported attribute updates.
+This process also checks whether the mapping is paused or allowed and, based on that, processes the update and sends it to the attribute mapper engine.
+In general, the attribute updates are queued for processing, but attribute Creation and deletion are processed immediately.</p>
+</section>
+<section id="attribute-mapper-engine">
+<h2>Attribute Mapper Engine<a class="headerlink" href="#attribute-mapper-engine" title="Permalink to this heading"></a></h2>
+<p>The purpose of the mapping engine is to define relations between attributes in the
+attribute store. In general used to define relations from UCL (which is ZCL based) attributes to stack based attributes and vice versa. The actions performed by the mapping engine are quite
+similar to the actions performed by a compiler. A compiler parses a text
+document and builds an Abstract Syntax Tree(AST). The AST is then optimized
+and the AST nodes are translated into machine opcodes. In the attribute
+mapper, we are not translating AST nodes to opcodes but instead, we are keeping
+the AST in memory. The mapping engine only interacts with the attribute store.</p>
+<p>The mapping engine uses several C++ classes to perform its tasks.</p>
+<ol class="arabic simple">
+<li><p>The ast::UAMGrammar class defines how we translate a text document into our ast using the boost spirit framework.</p></li>
+<li><p>The ast::dep_eval class is used to build a graph of relations between attributes.</p></li>
+<li><p>ast::eval class is used to evaluate expressions when a change in an attribute value occurs</p></li>
+</ol>
+<p>When an attribute is updated, the mapper engine gets the destination for the attribute and then gets a list of assignments based on the destination, and run assignments in below order</p>
+<ol class="arabic simple">
+<li><p>The highest priority assignment if the destination exists</p></li>
+<li><p>All of them from low to high priority if the destination does not exist</p></li>
+</ol>
+<p>In Attribute Mapper, the three types of assignments are</p>
+<ol class="arabic simple">
+<li><p>Instance assignment, which will verify if an attribute path with a certain value exists</p></li>
+<li><p>Clearance assignment, which will undefine a value respecting the scope priorities</p></li>
+<li><p>Regular assignment, which updates the value respecting the scope priorities</p></li>
+</ol>
+</section>
+<section id="attribute-mapper-parser-and-grammer">
+<h2>Attribute Mapper Parser and Grammer<a class="headerlink" href="#attribute-mapper-parser-and-grammer" title="Permalink to this heading"></a></h2>
+<section id="main-parser">
+<h3>Main Parser<a class="headerlink" href="#main-parser" title="Permalink to this heading"></a></h3>
+<p>This parser is only used to parse the UAM files into AST structures.
+Actual parser logic is defined in attribute_mapper_grammar</p>
+</section>
+<section id="skipper-parser">
+<h3>Skipper Parser<a class="headerlink" href="#skipper-parser" title="Permalink to this heading"></a></h3>
+<p>This parser is used to parse whitespaces and comments.</p>
+</section>
+<section id="main-uam-grammar">
+<h3>Main UAM Grammar<a class="headerlink" href="#main-uam-grammar" title="Permalink to this heading"></a></h3>
+<p>This is closely coupled with data types in the AST. This component acts as a grammar definition and does not in itself produce anything.But when used with the boost::qi:parse_phrase function a text document can be transformed into a AST data structure.
+For details on how this works see:
+(<a class="reference external" href="https://www.boost.org/doc/libs/1_76_0/libs/spirit/doc/html/spirit/qi/tutorials/employee___parsing_into_structs.html">https://www.boost.org/doc/libs/1_76_0/libs/spirit/doc/html/spirit/qi/tutorials/employee___parsing_into_structs.html</a>)</p>
+<p>Rules are used by the main parser. The tokens produced by the parser must be compatible with destination struct
+Parser operators: (<a class="reference external" href="https://www.boost.org/doc/libs/1_80_0/libs/spirit/doc/html/spirit/qi/reference/operator.html">https://www.boost.org/doc/libs/1_80_0/libs/spirit/doc/html/spirit/qi/reference/operator.html</a>)</p>
+<p>More details on UAM Grammer are described in <a class="reference internal" href="how_to_write_uam_files.html"><span class="doc std std-doc">How to Write UAM files</span></a></p>
+</section>
+</section>
+<section id="attribute-mapper-ast">
+<h2>Attribute Mapper AST<a class="headerlink" href="#attribute-mapper-ast" title="Permalink to this heading"></a></h2>
+<p>This component holds all the data structures into which the UAM files are parsed. Few of them are:</p>
+<ol class="arabic simple">
+<li><p>ENUMS of operators, Operands and structures of Operations, Expression, and conditions.</p></li>
+<li><p>Attribute struct holds the Attribute Type and Attribute path <br>
+      r: reported,    d: desired,   e: exists</p></li>
+<li><p>Assignment Struct holds the Assignment type along with LHS and RHS <br>
+    0 - regular,   1 - instance,   2 - clearance assignments</p></li>
+<li><p>They also hold built-in-functions</p></li>
+<li><p>They also hold the Scope settings, which help to set the Priority and define multiple rules for the same attribute in different priorities.</p></li>
+</ol>
+</section>
+<section id="attribute-mapper-evaluators">
+<h2>Attribute Mapper Evaluators<a class="headerlink" href="#attribute-mapper-evaluators" title="Permalink to this heading"></a></h2>
+<p>The evaluator walks through the Abstract Syntax Tress. Usually, the evaluator is used to evaluate a top-level expression, but this can also be applied to other AST nodes.</p>
+<p>The evaluation is done in a context such that all attribute paths will be evaluated relative to the context (a common parent node in the attribute store). The AST evaluator returns a std::optional because evaluation is not always possible if the needed attribute is not found within the context. If the evaluation context is an invalid attribute all evaluations involving an attribute will return no value.</p>
+<p>The AST evaluators are implemented as a functor (a function object). So, it allows us to use the boost::apply_visitor, which can
+evaluate the boost::variant objects using functors, through the operator() overloading. The use of the boost::apply_visitor is
+boost::apply_visitor( functor, variant ), this will call the appropriateoperator() overloading for the data type in the variant.
+See <a class="reference external" href="https://www.boost.org/doc/libs/1_76_0/doc/html/boost/apply_visitor.html">https://www.boost.org/doc/libs/1_76_0/doc/html/boost/apply_visitor.html</a>  for further details.</p>
+<section id="dependency-evaluator">
+<h3>Dependency Evaluator<a class="headerlink" href="#dependency-evaluator" title="Permalink to this heading"></a></h3>
+<p>This evaluator goes through an AST starting with an expression and builds a list of attribute IDs that are used if the expression is to be evaluated. Note that this evaluator accumulates a list of dependencies. i.e. each instance of this class should only be used once. Otherwise, the result will be a combined set of dependencies for each expression this evaluator has been applied on.</p>
+</section>
+<section id="attribute-path-evaluator">
+<h3>Attribute Path Evaluator<a class="headerlink" href="#attribute-path-evaluator" title="Permalink to this heading"></a></h3>
+<p>This evaluator values a full attribute path and returns the matching attribute store attribute for that attribute path in the context.</p>
+</section>
+<section id="attribute-mapper-path-match-evaluator">
+<h3>Attribute Mapper Path Match Evaluator<a class="headerlink" href="#attribute-mapper-path-match-evaluator" title="Permalink to this heading"></a></h3>
+<p>Let’s say you have an attribute and a common parent type. If you have to check if your attribute/common parent type could be matching the attribute path of an expression.</p>
+<p>For example, a.b[0].c, cheks if these is an attribute of type c, with the parent of type b with value 0, and the grand-parent of type a, and the grand-grand parent of type “common_parent_type”</p>
+</section>
+</section>
+<section id="attribute-mapper-example">
+<h2>Attribute Mapper Example<a class="headerlink" href="#attribute-mapper-example" title="Permalink to this heading"></a></h2>
+<p>An example of a simple mapping is the relation between the ZigBee attribute OnOff.value and the Z-Wave attribute binary_switch.value, if desired OnOff.value is updated the binary_switch.value should be updated. The same applies to the reported
+value in the reverse direction.</p>
+<p>So in a meta-description, we could describe this behavior with the following:</p>
+<ol class="arabic simple">
+<li><p>r’OnOff_Value = r’BinarySwitch_Value</p></li>
+<li><p>d’BinarySwitch_Value = d’OnOff_Value</p></li>
+</ol>
+<p>This means when the reported value of BinarySwitch_Value changes we would like to update the reported value of OnOff_Value. We will also create the OnOff_Value if it does not exist (this will only happen with reported values).
+For the desired value we update BinarySwitch_Value if OnOff_Value changes.</p>
+<p>The AST of the rule set is stored in memory because when an attribute changes, we should locate dependencies using the AST. The value of each AST node can be calculated in the context of an attribute node. Let’s look at the example where an attribute is updated and the node type of that attribute is a leaf node in the AST. Then we need to try to re-calculate the value of all AST nodes that depends on the updated node. The update may lead to the writing of another attribute. In the example above an update leads to an update of the OnOff value. There could be cases where some node in the AST cannot be evaluated in a given context, for example, if one attribute depends on two other attributes but only one of them is defined. Then the AST will not be fully evaluated in the given context (the node does not support all the required command classes). In this case, the update will not lead to an attribute write.</p>
+<section id="example-of-multiple-mappings-in-uam">
+<h3>Example of Multiple Mappings in UAM<a class="headerlink" href="#example-of-multiple-mappings-in-uam" title="Permalink to this heading"></a></h3>
+<p>Let’s take a fictive example of some ZigBee LED color command class. On the Zigbee side colors are defined as RGBW on the Z-Wave side the color may be in RGBW or may be in just RGB.</p>
+<p>A mapping could look like this</p>
+<p>zbColorW = zwColor[W] or ((zwColor[R] + zwColor[G] + zwColor[B])*1000 ) / 3333</p>
+<p>Here we would pursue the relation using zwColor[W] first if that is not possible we would fall back to ((zwColor[R] + zwColor[G] + zwColor[B])*1000) /3333</p>
+</section>
+</section>
+<section id="ast-helper-components">
+<h2>AST Helper Components<a class="headerlink" href="#ast-helper-components" title="Permalink to this heading"></a></h2>
+<section id="ast-complexity-counter">
+<h3>AST Complexity Counter<a class="headerlink" href="#ast-complexity-counter" title="Permalink to this heading"></a></h3>
+<p>Complexity Counter helps in calculating the complexity by counting the number of nodes in the AST.</p>
+</section>
+<section id="ast-test-framework">
+<h3>AST Test Framework<a class="headerlink" href="#ast-test-framework" title="Permalink to this heading"></a></h3>
+<p>This component helps us to test the rules and run tests for the AST trees.</p>
+</section>
+<section id="ast-printer">
+<h3>AST Printer<a class="headerlink" href="#ast-printer" title="Permalink to this heading"></a></h3>
+<p>This component helps to print the operations and path in the AST</p>
+</section>
+<section id="ast-cyclic-dependency-checker">
+<h3>AST Cyclic Dependency Checker<a class="headerlink" href="#ast-cyclic-dependency-checker" title="Permalink to this heading"></a></h3>
+<p>This component helps to identify any cyclic dependencies that are formed in the AST tree.
+Note: At present, this feature is disabled due to incomplete functionality.</p>
+</section>
+<section id="ast-reducer">
+<h3>AST Reducer<a class="headerlink" href="#ast-reducer" title="Permalink to this heading"></a></h3>
+<p>AST evaluator which outputs a copy of the ast in reduced form. AST reducer works by going through the AST and trying to evaluate operands with a normal value evaluator which has an undefined context. This means that the evaluator will only succeed if the operand is a constant, it does not depend on an attribute
+Note: At present, this feature is disabled due to incomplete functionality.</p>
+</section>
+</section>
+<section id="example-mapping-between-z-wave-and-dotdot">
+<h2>Example Mapping between Z-Wave and DotDot<a class="headerlink" href="#example-mapping-between-z-wave-and-dotdot" title="Permalink to this heading"></a></h2>
+<p>To establish a map that reports data on DotDot, we usually need to set
+reported value of the DotDot attribute to match the reported value or the
+Z-Wave Attribute.</p>
+<p>DotDot attributes, once set, are detected and published automatically on MQTT.
+This map will for example publish an OnOff attribute for a Binary Switch
+value.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>//<span class="w"> </span>Binary<span class="w"> </span>switch<span class="w"> </span>Command<span class="w"> </span>Class
+<span class="w">  </span>def<span class="w"> </span>zwCOMMAND_CLASS_SWITCH_BINARY_VERSION<span class="w"> </span>0x2501
+<span class="w">  </span>def<span class="w"> </span>zwSWITCH_BINARY_STATE<span class="w"> </span>0x2502
+<span class="w">  </span>def<span class="w"> </span>zwSWITCH_BINARY_VALUE<span class="w"> </span>0x2503
+
+<span class="w">  </span>//<span class="w"> </span>OnOff<span class="w"> </span>Cluster
+<span class="w">  </span>def<span class="w"> </span>zbON_OFF_CLUSTER_SWITCH<span class="w"> </span>0x00060000
+
+<span class="w">  </span>scope<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span>//<span class="w"> </span>Linking<span class="w"> </span>reported<span class="w"> </span>attributes<span class="w"> </span>zwave<span class="w"> </span>-&gt;<span class="w"> </span>zigbee
+<span class="w">  </span>r<span class="s1">&#39;zbON_OFF_CLUSTER_SWITCH = r&#39;</span>zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE
+</pre></div>
+</div>
+<p>Given that, only the reported is mapped, if an MQTT client tries to set the
+DotDot OnOff attribute with a command, nothing will happen on the Z-Wave
+side.</p>
+<p>To make Z-Wave value updates based on DotDot commands, the desired value
+change of a dotdot attribute should be mapped to an update of the desired
+Z-Wave value:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>//<span class="w"> </span>Linking<span class="w"> </span>desired<span class="w"> </span>attributes<span class="w"> </span>zigbee<span class="w"> </span>-&gt;<span class="w"> </span>zwave
+<span class="w">  </span>d<span class="s1">&#39;zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE = d&#39;</span>zbON_OFF_CLUSTER_SWITCH
+</pre></div>
+</div>
+</section>
+<section id="guide-for-the-development-of-uam-files">
+<h2>Guide for the development of UAM files<a class="headerlink" href="#guide-for-the-development-of-uam-files" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Refer <a class="reference internal" href="how_to_write_uam_files.html"><span class="doc std std-doc">How to Write UAM files</span></a>  to get more details abouthow  write UAM files and UAM grammar and scope settings.</p></li>
+<li><p>Further examples of UAM implementation of Command class etc are explained in detail in ZPC Documentation.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

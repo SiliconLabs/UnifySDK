@@ -44,9 +44,12 @@ using equivalent_assignments_t = std::
 
 /**
  * @brief Map of equivalent assignments associated with a destination attributes.
+ * Associates an attribute and its value type to a list of assigments
+ * The tuple represents: destination, value_type, assignment type
  */
 using assignments_to_run_t
-  = std::map<attribute_store::attribute, equivalent_assignments_t>;
+  = std::map<std::tuple<attribute_store::attribute, char, int>,
+             equivalent_assignments_t>;
 
 /**
  * @brief assignment_properties_t keeps track of various
@@ -253,6 +256,7 @@ class MapperEngine
    * Returns INVALID_NODE if the destination
    *
    * @param assignment     The assignment to look for a destination
+   * @param original_node  Original attribute that was updated
    * @returns Attribute Store node
    */
   attribute_store::attribute get_assigment_potential_destination(
@@ -279,6 +283,7 @@ class MapperEngine
    *
    * @param assignments_to_check    List of assigment to execute
    * @param assigment_destination   Destination attribute
+   * @param original_node           Original attribute that triggered these assignments
    */
   void run_assignments(equivalent_assignments_t assignments_to_check,
                        attribute_store::attribute assigment_destination,
@@ -286,15 +291,64 @@ class MapperEngine
   /**
    * @brief Runs a single assigment and verifies if a value was applied.
    *
-   * @param assignment              
-   * @param assigment_destination
-   * @param original_node
-   * @return true
-   * @return false
+   * @param assignment              Pointer to the assignment
+   * @param assigment_destination   Destination attribute for the assignment
+   * @param original_node           Original node that triggered the assignment evaluation
+   * @return true if a value was applied to the left-hand side
+   * @return false otherwise
    */
   bool run_assignment(std::shared_ptr<ast::assignment> assignment,
                       attribute_store::attribute assigment_destination,
                       attribute_store::attribute original_node);
+
+  /**
+   * @brief Applies a regular assigment
+   *
+   * @param common_parent       Common parent Attribute for the assignment
+   * @param destination         Destination Attribute for the assignment
+   * @param original_node       Original node that triggered the assignment evaluation
+   * @param settings            Score settings associated with the assignment
+   * @param evaluated_value     Evaluated value from the right-hand side of the assignment
+   * @param assignment          Pointer to the assignment
+   * @return true if a value was applied to the left-hand side
+   * @return false otherwise
+   */
+  bool
+    apply_regular_assignment(attribute_store::attribute common_parent,
+                             attribute_store::attribute destination,
+                             attribute_store::attribute original_node,
+                             const ast::scope_settings_t &settings,
+                             result_type_t evaluated_value,
+                             std::shared_ptr<ast::assignment> assignment) const;
+
+  /**
+   * @brief Applies an instance assigment, which will verify if an attribute path
+   * with a certain value exists.
+   *
+   * @param common_parent       Common parent Attribute for the assignment
+   * @param evaluated_value     Evaluated value from the right-hand side of the assignment
+   * @param assignment          Pointer to the assignment
+   * @param chain_reaction      Chain reaction setting from the scope
+   * @return true if a value was applied to the left-hand side
+   * @return false otherwise
+   */
+  bool apply_instance_assignment(attribute_store::attribute common_parent,
+                                 float evaluated_value,
+                                 std::shared_ptr<ast::assignment> assignment,
+                                 bool chain_reaction);
+
+  /**
+   * @brief Applies a clearance assigment, which may undefine values.
+   *
+   * @param common_parent       Common parent Attribute for the assignment
+   * @param evaluated_value     Evaluated value from the right-hand side of the assignment
+   * @param assignment          Pointer to the assignment
+   * @return true if a value was applied to the left-hand side
+   * @return false otherwise
+   */
+  bool apply_clearance_assignment(attribute_store::attribute common_parent,
+                                  float evaluated_value,
+                                  std::shared_ptr<ast::assignment> assignment);
 
   //Lookup table for which assignments depend on which attributes
   std::multimap<ast::attribute_dependency_t, std::shared_ptr<ast::assignment>>

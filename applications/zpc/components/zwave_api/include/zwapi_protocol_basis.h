@@ -130,7 +130,7 @@ typedef enum {
  * @returns returns SL_STATUS_OK if operation was executed successfully,
  * SL_STATUS_FAIL otherwise.
  *
- * @zgw_name ZW_SetRFReceiveMode
+ * aka ZW_SetRFReceiveMode
  */
 sl_status_t zwapi_set_rf_receive_mode(uint8_t mode);
 
@@ -166,13 +166,13 @@ sl_status_t zwapi_set_rf_receive_mode(uint8_t mode);
  * Timeout: 65 s
  * Exception recovery: Resume normal operation, no recovery needed
  *
- * @serial_tx{REQ | 0x12 | destNode | txOptions | funcID}
+ * Tx: {REQ | 0x12 | destNode | txOptions | funcID}
  *
- * @serial_rx{RES | 0x12 | retVal}
+ * Rx: {RES | 0x12 | retVal}
  *
- * @serial_rx{REQ | 0x12 | funcID | txStatus}
+ * Rx: {REQ | 0x12 | funcID | txStatus}
  *
- * @zgw_name ZW_SendNodeInformation
+ * aka ZW_SendNodeInformation
  */
 sl_status_t zwapi_send_node_information(zwave_node_id_t destNode,
                                         uint8_t txOptions,
@@ -186,7 +186,7 @@ sl_status_t zwapi_send_node_information(zwave_node_id_t destNode,
  *
  * @returns the Library type ZW_LIB_xxx
  *
- * @zgw_name ZW_Version
+ * aka ZW_Version
  */
 uint8_t zwapi_get_zw_library_version(uint8_t *dst);
 
@@ -199,7 +199,7 @@ uint8_t zwapi_get_zw_library_version(uint8_t *dst);
  * @returns Z-Wave library type:
  *   - @ref zwapi_library_type_t
  *
- * @zgw_name ZW_Type_Library
+ * aka ZW_Type_Library
  */
 uint8_t zwapi_get_zw_library_type(void);
 
@@ -218,11 +218,11 @@ uint8_t zwapi_get_zw_library_type(void);
  * the power level should always be set back to NORMAL_POWER when the testing is
  * done.
  *
- * @serial_tx{REQ | 0x17 | powerLevel}
+ * Tx: {REQ | 0x17 | powerLevel}
  *
- * @serial_rx{RES | 0x17 | retVal}
+ * Rx: {RES | 0x17 | retVal}
  *
- * @zgw_name ZW_RFPowerLevelSet
+ * aka ZW_RFPowerLevelSet
  */
 rf_power_level_t zwapi_set_rf_power_level(rf_power_level_t powerLevel);
 
@@ -234,11 +234,11 @@ rf_power_level_t zwapi_set_rf_power_level(rf_power_level_t powerLevel);
  *
  * \note This function should only be used in an install/test link situation.
  *
- * @serial_tx{REQ | 0xBA}
+ * Tx: {REQ | 0xBA}
  *
- * @serial_rx{RES | 0xBA | powerlevel}
+ * Rx: {RES | 0xBA | powerlevel}
  *
- * @zgw_name ZW_RFPowerLevelGet
+ * aka ZW_RFPowerLevelGet
  */
 rf_power_level_t zwapi_get_rf_power_level(void);
 
@@ -273,11 +273,11 @@ sl_status_t zwapi_set_tx_status_reporting(bool enable);
  *
  * @note This API is available as of serial API version 7
  *
- * @serial_tx{REQ | 0x0B | 0x04 | NormalTxPower | Measured0dBmPower}
+ * Tx: {REQ | 0x0B | 0x04 | NormalTxPower | Measured0dBmPower}
  *
- * @serial_rx{RES | 0x0B | 0x04 | CmdRes}
+ * Rx: {RES | 0x0B | 0x04 | CmdRes}
  *
- * @zgw_name ZW_TXPowerLevelSet
+ * aka ZW_TXPowerLevelSet
  */
 sl_status_t zwapi_set_tx_power_level(tx_power_level_t zw_txpowerlevel);
 
@@ -295,11 +295,11 @@ sl_status_t zwapi_set_tx_power_level(tx_power_level_t zw_txpowerlevel);
  *
  * @note This API is available as of serial API version 7
  *
- * @serial_tx{REQ | 0x0B | 0x08}
+ * Tx: {REQ | 0x0B | 0x08}
  *
- * @serial_rx{RES | 0x0B | 0x08 | NormalTxPower | Measured0dBmPower}
+ * Rx: {RES | 0x0B | 0x08 | NormalTxPower | Measured0dBmPower}
  *
- * @zgw_name ZW_TXPowerLevelGet
+ * aka ZW_TXPowerLevelGet
  */
 tx_power_level_t zwapi_get_tx_power_level(void);
 /**
@@ -315,11 +315,11 @@ tx_power_level_t zwapi_get_tx_power_level(void);
  *
  * @note This API is available as of serial API version 7
  *
- * @serial_tx{REQ | 0x0B | 0x03 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}
+ * Tx: {REQ | 0x0B | 0x03 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}
  *
- * @serial_rx{RES | 0x0B | 0x03 | CmdRes}
+ * Rx: {RES | 0x0B | 0x03 | CmdRes}
  *
- * @zgw_name ZW_MAXLRTXPowerLevelSet 
+ * aka ZW_MAXLRTXPowerLevelSet
  */
 sl_status_t zwapi_set_max_lr_tx_power_level(int16_t level);
 /**
@@ -331,11 +331,11 @@ sl_status_t zwapi_set_max_lr_tx_power_level(int16_t level);
  *
  * @note This API is available as of serial API version 7
  *
- * @serial_tx{REQ | 0x0B | 0x05}
+ * Tx: {REQ | 0x0B | 0x05}
  *
- * @serial_rx{RES | 0x0B | 0x05 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}
+ * Rx: {RES | 0x0B | 0x05 | Max Long Range TX Powerlevel MSB | Max Long Range TX Powerlevel LSB}
  *
- * @zgw_name ZW_MAXLRTXPowerLevelGet 
+ * aka ZW_MAXLRTXPowerLevelGet
  */
 int16_t zwapi_get_max_lr_tx_power_level(void);
 
@@ -346,11 +346,11 @@ int16_t zwapi_get_max_lr_tx_power_level(void);
  * @returns SL_STATUS_OK the RF region was set successfully.
  * @returns SL_STATUS_FAIL the RF region was *not* set.
  *
- * @serial_tx{REQ | 0x0B | 0x40 | RFRegion}
+ * Tx: {REQ | 0x0B | 0x40 | RFRegion}
  *
- * @serial_rx{RES | 0x0B | 0x40 | CmdRes}
+ * Rx: {RES | 0x0B | 0x40 | CmdRes}
  *
- * @zgw_name ZW_RFRegionSet
+ * aka ZW_RFRegionSet
  */
 sl_status_t zwapi_set_rf_region(zwave_rf_region_t rfregion);
 
@@ -360,11 +360,11 @@ sl_status_t zwapi_set_rf_region(zwave_rf_region_t rfregion);
  * @returns zwapi_rf_region_t the RF region currently in effect. REGION_UNDEFINED if
  * unable to get RF region.
  *
- * @serial_tx{REQ | 0x0B | 0x20}
+ * Tx: {REQ | 0x0B | 0x20}
  *
- * @serial_rx{RES | 0x0B | 0x20 | RFRegion}
+ * Rx: {RES | 0x0B | 0x20 | RFRegion}
  *
- * @zgw_name ZW_RFRegionGet
+ * aka ZW_RFRegionGet
  */
 zwave_rf_region_t zwapi_get_rf_region(void);
 
@@ -423,7 +423,7 @@ sl_status_t zwapi_get_lr_maximum_payload_size(uint8_t *maximum_size);
  * @param basetype zwave_node_id_basetype_t the basetype to be set, NODEID_8BITS or NODEID_16BITS
  * @returns SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.
  *
- * @zgw_name SerialAPI_GetLRNodeList
+ * aka SerialAPI_GetLRNodeList
  */
 sl_status_t zwapi_set_node_id_basetype(zwave_node_id_basetype_t basetype);
 
@@ -445,9 +445,9 @@ zwave_node_id_basetype_t zwapi_get_node_id_basetype();
  * @note Recent Z-Wave versions (at least 6.80 and 7.00) will return
  * FUNC_ID_SERIAL_API_STARTED once restarted.
  *
- * @serial_tx{REQ | 0x08}
+ * Tx: {REQ | 0x08}
  *
- * @zgw_name ZW_SoftReset
+ * aka ZW_SoftReset
  */
 sl_status_t zwapi_soft_reset(void);
 
@@ -476,7 +476,7 @@ sl_status_t zwapi_soft_reset(void);
  * Timeout: 200 ms
  * Exception recovery: Resume normal operation, no recovery needed
  *
- * @zgw_name ZW_SendTestFrame
+ * aka ZW_SendTestFrame
  */
 sl_status_t zwapi_send_test_frame(zwave_node_id_t node_id,
                                   rf_power_level_t power_level,
@@ -491,11 +491,11 @@ sl_status_t zwapi_send_test_frame(zwave_node_id_t node_id,
  *
  * The function returns a mask telling which protocol function is currently running
  *
- * @serial_tx{REQ | 0xBF}
+ * Tx: {REQ | 0xBF}
  *
- * @serial_rx{RES | 0xBF | retVal}
+ * Rx: {RES | 0xBF | retVal}
  *
- * @zgw_name ZW_GetProtocolStatus
+ * aka ZW_GetProtocolStatus
  */
 uint8_t zwapi_get_zw_protocol_status(void);
 
@@ -504,7 +504,7 @@ uint8_t zwapi_get_zw_protocol_status(void);
  *
  * @returns SL_STATUS_OK or SL_STATUS_FAIL
  *
- * @zgw_name ZW_WatchDogEnable
+ * aka ZW_WatchDogEnable
  */
 sl_status_t zwapi_enable_watchdog();
 
@@ -513,7 +513,7 @@ sl_status_t zwapi_enable_watchdog();
  *
  * @returns SL_STATUS_OK or SL_STATUS_FAIL
  *
- * @zgw_name ZW_WatchDogDisable
+ * aka ZW_WatchDogDisable
  */
 sl_status_t zwapi_disable_watchdog();
 
@@ -522,9 +522,9 @@ sl_status_t zwapi_disable_watchdog();
  *
  * @returns SL_STATUS_OK or SL_STATUS_FAIL
  *
- * @serial_tx{REQ | 0xD2}
+ * Tx: {REQ | 0xD2}
  *
- * @zgw_name SerialAPI_WatchdogStart
+ * aka SerialAPI_WatchdogStart
  */
 sl_status_t zwapi_start_watchdog();
 
@@ -537,11 +537,11 @@ sl_status_t zwapi_start_watchdog();
  * random_buffer. Max number is 32.
  * @returns SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.
  *
- * @serial_tx{REQ | 0x1C | noRandomBytes}
+ * Tx: {REQ | 0x1C | noRandomBytes}
  *
- * @serial_rx{RES | 0x1C | randomGenerationSuccess | noRandomBytesGenerated | randombytes[]}
+ * Rx: {RES | 0x1C | randomGenerationSuccess | noRandomBytesGenerated | randombytes[]}
  *
- * @zgw_name ZW_GetRandomWord (ZW_GetRandomArray)
+ * aka ZW_GetRandomWord (ZW_GetRandomArray)
  */
 sl_status_t zwapi_get_random_word(uint8_t *random_buffer,
                                   uint8_t number_of_random_bytes);
@@ -554,10 +554,10 @@ sl_status_t zwapi_get_random_word(uint8_t *random_buffer,
  * copied. Nothing is copied if SL_STATUS_FAIL is returned.
  * @returns SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.
  *
- * @serial_tx{HOST->ZW: REQ | 0x1D}
- * @serial_tx{ZW->HOST: RES | 0x1D | rndNo}
+ * Tx: {HOST->ZW: REQ | 0x1D}
+ * Tx: {ZW->HOST: RES | 0x1D | rndNo}
  *
- * @zgw_name ZW_Random(ZW_GetRandomArray)
+ * aka ZW_Random(ZW_GetRandomArray)
  */
 sl_status_t zwapi_get_random_byte(uint8_t *user_byte);
 
@@ -576,11 +576,11 @@ sl_status_t zwapi_get_random_byte(uint8_t *user_byte);
  *
  * @note Recommend not to call this function more than once every 4 seconds.
  *
- * @serial_tx{REQ | 0x5E}
+ * Tx: {REQ | 0x5E}
  *
- * @serial_rx{RES | 0x5E | retVal}
+ * Rx: {RES | 0x5E | retVal}
  *
- * @zgw_name ZW_ExploreRequestInclusion
+ * aka ZW_ExploreRequestInclusion
  */
 sl_status_t zwapi_explore_request_inclusion();
 
@@ -599,11 +599,11 @@ sl_status_t zwapi_explore_request_inclusion();
  * @returns SL_STATUS_OK if the Exclusion request queued for transmission
  * @returns SL_STATUS_FAIL if the node  is not in learn mode
  *
- * @serial_tx{REQ | 0x5E}
+ * Tx: {REQ | 0x5E}
  *
- * @serial_rx{RES | 0x5E | retVal}
+ * Rx: {RES | 0x5E | retVal}
  *
- * @zgw_name ZW_ExploreRequestExclusion
+ * aka ZW_ExploreRequestExclusion
  */
 sl_status_t zwapi_explore_request_exclusion();
 
@@ -613,11 +613,11 @@ sl_status_t zwapi_explore_request_exclusion();
  * @param rssi_values pointer to array where RSSI values are stored.
  * @param values_length length in bytes of the rssi_values array
  *
- * @serial_tx{(no arguments)}
+ * Tx: {(no arguments)}
  *
- * @serial_rx{RES | RSSI Ch0 | RSSI Ch1 | RSSI Ch2 (3CH systems only)}
+ * Rx: {RES | RSSI Ch0 | RSSI Ch1 | RSSI Ch2 (3CH systems only)}
  *
- * @zgw_name ZW_GetBackgroundRSSI
+ * aka ZW_GetBackgroundRSSI
  */
 sl_status_t zwapi_get_background_rssi(uint8_t *rssi_values,
                                       uint8_t *values_length);
@@ -632,7 +632,7 @@ sl_status_t zwapi_get_background_rssi(uint8_t *rssi_values,
  * @param nodeParm the Device parameter buffer
  * @param parmLength the number of Device parameter bytes
  *
- * @zgw_name SerialAPI_ApplicationNodeInformation
+ * aka SerialAPI_ApplicationNodeInformation
  */
 sl_status_t zwapi_set_application_node_information(uint8_t listening,
                                                    node_type_t node_type,
@@ -650,7 +650,7 @@ sl_status_t zwapi_set_application_node_information(uint8_t listening,
  * @param lr_node_list array of type zwave_nodemask_t
  * @returns SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.
  *
- * @zgw_name SerialAPI_GetLRNodeList
+ * aka SerialAPI_GetLRNodeList
  */
 sl_status_t zwapi_get_long_range_nodes(uint16_t *number_of_bytes,
                                        zwave_nodemask_t lr_node_list);
@@ -669,7 +669,7 @@ sl_status_t zwapi_get_full_node_list(zwave_nodemask_t node_list);
  * @param lr_channel The Z-Wave Long Range radio channel currecntly in use
  * @returns SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.
  *
- * @zgw_name GetLongRangeChannel
+ * aka GetLongRangeChannel
  */
 sl_status_t zwapi_get_long_range_channel(uint8_t *lr_channel);
 
@@ -679,7 +679,7 @@ sl_status_t zwapi_get_long_range_channel(uint8_t *lr_channel);
  * @param lr_channel The value intended to set for current Z-Wave Long Range radio channel
  * @returns SL_STATUS_OK in case of success, SL_STATUS_FAIL otherwise.
  *
- * @zgw_name SetLongRangeChannel
+ * aka SetLongRangeChannel
  */
 sl_status_t zwapi_set_long_range_channel(uint8_t lr_channel);
 
@@ -688,7 +688,7 @@ sl_status_t zwapi_set_long_range_channel(uint8_t lr_channel);
  *
  * @returns SL_STATUS_OK or SL_STATUS_FAIL.
  *
- * @zgw_name ZW_AutoProgrammingEnable
+ * aka ZW_AutoProgrammingEnable
  */
 sl_status_t zwapi_enable_auto_program_mode(void);
 
@@ -697,7 +697,7 @@ sl_status_t zwapi_enable_auto_program_mode(void);
  *
  * @returns True or False
  *
- * @zgw_name SerialAPI_SupportsLR
+ * aka SerialAPI_SupportsLR
  */
 bool zwapi_supports_long_range();
 

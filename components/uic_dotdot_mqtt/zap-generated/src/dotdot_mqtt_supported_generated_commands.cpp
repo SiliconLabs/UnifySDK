@@ -622,79 +622,6 @@ void uic_mqtt_dotdot_time_publish_supported_generated_commands(
 
 /**
  * @brief Sends/Publishes a the SupportedGenerated commands for
- * the OTAUpgrade cluster for a UNID/Endpoint
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/SupportedGeneratedCommands
- *
- * @param unid      The UNID of the node on behalf of which the advertisment is made
- * 
- * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
- * 
- * @param command_list      Struct pointer with the fields value indicating if
- *                          individual commands can be generated.
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_supported_generated_commands(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_supported_commands_t *command_list)
-{
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint);
-  topic +=  "/OTAUpgrade/SupportedGeneratedCommands";
-
-  // Assemble of vector of strings for the Supported Commands:
-  std::vector<std::string> command_vector;
-  if (command_list->image_notify == true) {
-    command_vector.emplace_back("ImageNotify");
-  }
-  if (command_list->query_next_image_request == true) {
-    command_vector.emplace_back("QueryNextImageRequest");
-  }
-  if (command_list->query_next_image_response == true) {
-    command_vector.emplace_back("QueryNextImageResponse");
-  }
-  if (command_list->image_block_request == true) {
-    command_vector.emplace_back("ImageBlockRequest");
-  }
-  if (command_list->image_page_request == true) {
-    command_vector.emplace_back("ImagePageRequest");
-  }
-  if (command_list->image_block_response == true) {
-    command_vector.emplace_back("ImageBlockResponse");
-  }
-  if (command_list->upgrade_end_request == true) {
-    command_vector.emplace_back("UpgradeEndRequest");
-  }
-  if (command_list->upgrade_end_response == true) {
-    command_vector.emplace_back("UpgradeEndResponse");
-  }
-  if (command_list->query_device_specific_file_request == true) {
-    command_vector.emplace_back("QueryDeviceSpecificFileRequest");
-  }
-  if (command_list->query_device_specific_file_response == true) {
-    command_vector.emplace_back("QueryDeviceSpecificFileResponse");
-  }
-  if (command_list->write_attributes == true) {
-    command_vector.emplace_back("WriteAttributes");
-  }
-
-  // JSONify, then Stringify
-  nlohmann::json json_payload;
-  json_payload["value"] = command_vector;
-  std::string string_payload = json_payload.dump();
-
-  // Publish to MQTT
-  uic_mqtt_publish(topic.c_str(),
-                   string_payload.c_str(),
-                   string_payload.length(),
-                   true);
-
-}
-
-
-/**
- * @brief Sends/Publishes a the SupportedGenerated commands for
  * the PollControl cluster for a UNID/Endpoint
  *
  * Publication will be made at the following topic
@@ -2417,6 +2344,9 @@ void uic_mqtt_dotdot_state_publish_supported_generated_commands(
   }
   if (command_list->interview == true) {
     command_vector.emplace_back("Interview");
+  }
+  if (command_list->discover_security == true) {
+    command_vector.emplace_back("DiscoverSecurity");
   }
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");

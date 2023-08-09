@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -351,7 +351,6 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">my_node_id</td><td></td></tr>
-    <tr><td class="paramname">max_fragment_size</td><td>Maximum fragment size that can be transmitted by layers below </td></tr>
     <tr><td class="paramname">upper_layer_command_handler</td><td>The Upper layer function which will be called with data after stiching all the fragments received <a class="el" href="group__transport__service.html#ga159581aeb8673e9ada5e323edb5a5376">upper_layer_command_handler_t</a> </td></tr>
     <tr><td class="paramname">send_data</td><td>Lower layer send_data call which Transport Service should use to send any Transport Service frames if needed <a class="el" href="group__transport__service.html#ga08d9a01057b0bbc641a3b61ab5efe623">send_data_t</a> </td></tr>
   </table>
@@ -408,8 +407,8 @@ Functions</h2></td></tr>
 <p>This function will assemble and handle the request of new frames to complete the receiving of larger payloads with Transport service protocol</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">source</td><td>Source node id </td></tr>
-    <tr><td class="paramname">dest</td><td>Destination node id </td></tr>
+    <tr><td class="paramname">source</td><td>Source NodeID </td></tr>
+    <tr><td class="paramname">dest</td><td>Destination NodeID </td></tr>
     <tr><td class="paramname">rx_type</td><td>If frame is singlecast, broadcast or multicast <a class="el" href="group__transport__service.html#ga2ef83d72d1511b89d9496ab3f65b8a10">receive_type</a> </td></tr>
     <tr><td class="paramname">frame_data</td><td>frame data </td></tr>
     <tr><td class="paramname">frame_length</td><td>frame length</td></tr>
@@ -478,10 +477,11 @@ Functions</h2></td></tr>
 <p>This function will break the data payload and send it with Transport service protocol</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">source</td><td>Source node id </td></tr>
-    <tr><td class="paramname">dest</td><td>Destination node id </td></tr>
+    <tr><td class="paramname">source</td><td>Source NodeID </td></tr>
+    <tr><td class="paramname">dest</td><td>Destination NodeID </td></tr>
     <tr><td class="paramname">payload</td><td>Payload </td></tr>
     <tr><td class="paramname">payload_len</td><td>Length of payload. layers below </td></tr>
+    <tr><td class="paramname">max_frame_len</td><td>Maximum number of bytes that can be sent to the destination NodeID at once </td></tr>
     <tr><td class="paramname">on_send_complete</td><td>Transport service calls this callback to notify upper layers of completion of transmit of whole payload <a class="el" href="group__transport__service.html#gabc0cbf54038394962aa27bd464ffbd5d">on_transport_service_send_data_complete_t</a> </td></tr>
   </table>
   </dd>
@@ -494,7 +494,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

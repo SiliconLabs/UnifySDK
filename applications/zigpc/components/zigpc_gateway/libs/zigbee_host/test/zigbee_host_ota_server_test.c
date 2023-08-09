@@ -69,7 +69,7 @@ void test_ota_image_add_sanity(void)
   char *ota_path = "./image.ota";
 
   // ARRANGE
-  emAfOtaStorageAddImageFile_ExpectAndReturn(ota_path,
+  sli_zigbee_af_ota_storage_add_image_file_ExpectAndReturn(ota_path,
                                              EMBER_AF_OTA_STORAGE_SUCCESS);
 
   // ACT
@@ -84,7 +84,7 @@ void test_ota_image_add_error(void)
   char *ota_path = "./image.ota";
 
   // ARRANGE
-  emAfOtaStorageAddImageFile_ExpectAndReturn(ota_path,
+  sli_zigbee_af_ota_storage_add_image_file_ExpectAndReturn(ota_path,
                                              EMBER_AF_OTA_STORAGE_ERROR);
 
   // ACT

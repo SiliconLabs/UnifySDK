@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -76,7 +76,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
@@ -262,6 +261,12 @@ argument or config file option.</p>
 interface with the Z-Wave module to the path provided. If the file exists, the
 log will be appended to this file, otherwise, the file will be created. The
 ZPC will not handle log rotation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scripts/serial_decode_zpc.py</span></code> can be used to parse this serial log file to better
+human readble format</p>
+<p>Usage:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python serial_decode_zpc.py serial_log.txt</span>
+</pre></div>
+</div>
 </section>
 <section id="using-mqtt-explorer-to-monitor-messages">
 <h3>Using MQTT Explorer to Monitor Messages<a class="headerlink" href="#using-mqtt-explorer-to-monitor-messages" title="Permalink to this heading"></a></h3>

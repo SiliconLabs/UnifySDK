@@ -18,7 +18,7 @@
  *
  * Initializing this component will enable:
  * 1. The @ref attribute_store to verify that DotDot Attributes are written/saved correctly
- * 2. Generic components like the @ref attribute_mapper to interpret data their operations.
+ * 2. Generic components like the @ref unify_attribute_mapper to interpret data their operations.
  *
  * @{
  */

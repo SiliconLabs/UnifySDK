@@ -49,14 +49,14 @@ typedef enum {
  * @returns integer file descriptor for the serial device.
  * the value will be greater than 0 if successful.
  *
- * @zgw_name ConInit
+ * aka ConInit
  */
 int zwapi_connection_init(const char *serial_port);
 
 /**
  * @brief Close the zwapi_connection to the Z-Wave module.
  *
- * @zgw_name ConDestroy
+ * aka ConDestroy
  */
 void zwapi_connection_shutdown();
 
@@ -86,7 +86,7 @@ int zwapi_connection_restart();
  *  - @b DATA as it says
  *  - @b Chksum is a XOR checksum taken on all BYTEs from Len to last DATA byte
  *
- * @zgw_name ConTxFrame
+ * aka ConTxFrame
  */
 void zwapi_connection_tx(
   uint8_t cmd, uint8_t type, const uint8_t *Buf, uint8_t len, bool ack_needed);
@@ -96,7 +96,7 @@ void zwapi_connection_tx(
  * Should be frequently called by main loop.
  * @returns The current connection state. Refer to zwapi_connection_status_t values
  *
- * @zgw_name ConUpdate
+ * aka ConUpdate
  */
 zwapi_connection_status_t zwapi_connection_refresh();
 
@@ -113,7 +113,7 @@ int zwapi_connection_get_last_rx_frame(uint8_t *user_buffer,
  * @brief make the zwapi_connection_status types human readable.
  * @returns A string representation of a zwapi_connection_status_t value
  *
- * @zgw_name ConTypeToStr
+ * aka ConTypeToStr
  */
 const char *zwapi_connection_status_to_string(zwapi_connection_status_t t);
 

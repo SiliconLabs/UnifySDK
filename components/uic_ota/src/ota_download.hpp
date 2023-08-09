@@ -155,6 +155,7 @@ void info_callback(const char *topic,
  * image file.
  * @param image_ready_cb callback for when image is ready for over the air
  * transfer.
+ * @param timeout_s      Timeout in seconds
  */
 void get(const std::string &image_key,
          const std::string &subscribe_topic,

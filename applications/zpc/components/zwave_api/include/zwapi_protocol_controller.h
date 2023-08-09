@@ -346,7 +346,7 @@ typedef struct zwapi_node_info_header {
  * @note Called in replication mode when a command from the sender has been
  * processed.
  *
- * @zgw_name ZW_ReplicationReceiveComplete
+ * aka ZW_ReplicationReceiveComplete
  */
 sl_status_t zwapi_replication_receive_complete(void);
 
@@ -364,7 +364,7 @@ sl_status_t zwapi_replication_receive_complete(void);
  *
  * @note Used when the controller is replication mode
  *
- * @zgw_name ZW_ReplicationSend
+ * aka ZW_ReplicationSend
  */
 sl_status_t zwapi_send_controller_replication(zwave_node_id_t destNodeID,
                                               const uint8_t *pData,
@@ -378,7 +378,7 @@ sl_status_t zwapi_send_controller_replication(zwave_node_id_t destNodeID,
  * @param node_id it the Node ID
  * @param node_info_header is the Node info buffer
  *
- * @zgw_name ZW_GetNodeProtocolInfo
+ * aka ZW_GetNodeProtocolInfo
  */
 sl_status_t zwapi_get_protocol_info(zwave_node_id_t node_id,
                                     zwapi_node_info_header_t *node_info_header);
@@ -395,7 +395,7 @@ sl_status_t zwapi_get_protocol_info(zwave_node_id_t node_id,
  * route destination node and transmit the return routes to the Routing End
  * Node.
  *
- * @zgw_name ZW_AssignReturnRoute
+ * aka ZW_AssignReturnRoute
  */
 sl_status_t zwapi_assign_return_route(zwave_node_id_t bSrcNodeID,
                                       zwave_node_id_t bDstNodeID,
@@ -411,7 +411,7 @@ sl_status_t zwapi_assign_return_route(zwave_node_id_t bSrcNodeID,
  *
  * Transmits "NULL" routes to the Routing End Node.
  *
- * @zgw_name ZW_DeleteReturnRoute
+ * aka ZW_DeleteReturnRoute
  */
 sl_status_t zwapi_delete_return_route(zwave_node_id_t nodeID,
                                       void (*completedFunc)(uint8_t bStatus));
@@ -421,7 +421,7 @@ sl_status_t zwapi_delete_return_route(zwave_node_id_t nodeID,
  *
  * @param completedFunc is the Command completed call back function
  *
- * @zgw_name ZW_SetDefault
+ * aka ZW_SetDefault
  */
 sl_status_t zwapi_set_default(void (*completedFunc)(void));
 
@@ -432,7 +432,7 @@ sl_status_t zwapi_set_default(void (*completedFunc)(void));
  *
  * @returns returns  true if node in failed node table, else false
  *
- * @zgw_name ZW_isFailedNode
+ * aka ZW_isFailedNode
  */
 bool zwapi_is_node_failed(zwave_node_id_t nodeID);
 
@@ -464,7 +464,7 @@ bool zwapi_is_node_failed(zwave_node_id_t nodeID);
  *    nodes list
  *  - @ref ZW_FAILED_NODE_NOT_REMOVED The failed node was not removed
  *
- * @zgw_name ZW_RemoveFailedNode
+ * aka ZW_RemoveFailedNode
  */
 uint8_t zwapi_remove_failed_node(zwave_node_id_t NodeID,
                                  void (*completedFunc)(uint8_t));
@@ -504,7 +504,7 @@ uint8_t zwapi_remove_failed_node(zwave_node_id_t NodeID,
  *  - @ref ZW_FAILED_NODE_REPLACE_DONE The failed node has been replaced.
  *  - @ref ZW_FAILED_NODE_REPLACE_FAILED The failed node has not been replaced.
  *
- * @zgw_name ZW_ReplaceFailedNode
+ * aka ZW_ReplaceFailedNode
  */
 uint8_t zwapi_replace_failed_node(zwave_node_id_t bNodeID,
                                   bool bNormalPower,
@@ -524,7 +524,7 @@ uint8_t zwapi_replace_failed_node(zwave_node_id_t bNodeID,
  * @returns SL_STATUS_FAIL if failed (e.g. if the target is not a static
  * controller)
  *
- * @zgw_name ZW_SetSUCNodeID
+ * aka ZW_SetSUCNodeID
  */
 sl_status_t zwapi_set_suc_node_id(zwave_node_id_t nodeID,
                                   uint8_t SUCState,
@@ -537,7 +537,7 @@ sl_status_t zwapi_set_suc_node_id(zwave_node_id_t nodeID,
  *
  * @returns returns the  SUC node ID, and ZERO if no SUC available
  *
- * @zgw_name ZW_GetSUCNodeID
+ * aka ZW_GetSUCNodeID
  */
 zwave_node_id_t zwapi_get_suc_node_id(void);
 
@@ -582,13 +582,13 @@ zwave_node_id_t zwapi_get_suc_node_id(void);
  *
  * Timeout: 65 s. Exception recovery: Resume normal operation, no recovery needed.
  *
- * @serial_tx{REQ | 0x53 | funcID}
+ * Tx: {REQ | 0x53 | funcID}
  *
- * @serial_rx{RES | 0x53 | retVal}
+ * Rx: {RES | 0x53 | retVal}
  *
- * @serial_rx{REQ | 0x53 | funcID | txStatus}
+ * Rx: {REQ | 0x53 | funcID | txStatus}
  *
- * @zgw_name ZW_RequestNetWorkUpdate
+ * aka ZW_RequestNetWorkUpdate
  */
 sl_status_t
   zwapi_request_network_update(void (*completedFunc)(uint8_t txStatus));
@@ -606,7 +606,7 @@ sl_status_t
  * from the Static Update Controller (SUC) Node and
  * transmit the return routes to the Routing End Node.
  *
- * @zgw_name ZW_AssignSUCReturnRoute
+ * aka ZW_AssignSUCReturnRoute
  */
 sl_status_t
   zwapi_assign_suc_return_route(zwave_node_id_t bSrcNodeID,
@@ -624,7 +624,7 @@ sl_status_t
  *
  * Transmit "NULL" routes to the Routing End Node.
  *
- * @zgw_name ZW_DeleteSUCReturnRoute
+ * aka ZW_DeleteSUCReturnRoute
  */
 sl_status_t
   zwapi_delete_suc_return_route(zwave_node_id_t bNodeID,
@@ -638,7 +638,7 @@ sl_status_t
  *
  * @returns SL_STATUS_OK (neighbor discovery started) or SL_STATUS_FAIL
  *
- * @zgw_name ZW_RequestNodeNeighborUpdate
+ * aka ZW_RequestNodeNeighborUpdate
  */
 sl_status_t zwapi_request_neighbor_update(zwave_node_id_t bNodeID,
                                           void (*completedFunc)(uint8_t));
@@ -650,7 +650,7 @@ sl_status_t zwapi_request_neighbor_update(zwave_node_id_t bNodeID,
  * @returns true when the controller is a primary controller in the network
  * @returns false when the controller is a secondary controller in the network.
  *
- * @zgw_name ZW_IsPrimaryCtrl
+ * aka ZW_IsPrimaryCtrl
  */
 bool zwapi_is_node_primary_ctrl(void);
 
@@ -666,7 +666,7 @@ bool zwapi_is_node_primary_ctrl(void);
  * @param completedFunc Callback function.
  * @returns SL_STATUS_OK or SL_STATUS_FAIL.
  *
- * @zgw_name ZW_CreateNewPrimaryCtrl
+ * aka ZW_CreateNewPrimaryCtrl
  */
 sl_status_t zwapi_create_new_primary_ctrl(uint8_t bMode,
                                           void (*completedFunc)(LEARN_INFO *));
@@ -689,7 +689,7 @@ sl_status_t zwapi_create_new_primary_ctrl(uint8_t bMode,
  *   = CONTROLLER_IS_SUC :
  *   = NO_NODES_INCLUDED :
  *
- * @zgw_name ZW_GetControllerCapabilities
+ * aka ZW_GetControllerCapabilities
  */
 uint8_t zwapi_get_controller_capabilities(void);
 
@@ -702,7 +702,7 @@ uint8_t zwapi_get_controller_capabilities(void);
  * nodeinformation.
  * @returns SL_STATUS_OK or SL_STATUS_FAIL.
  *
- * @zgw_name ZW_RequestNodeInfo
+ * aka ZW_RequestNodeInfo
  */
 sl_status_t zwapi_request_node_info(zwave_node_id_t node_id);
 
@@ -722,7 +722,7 @@ sl_status_t zwapi_request_node_info(zwave_node_id_t node_id);
  * @returns SL_STATUS_OK    if the requested operation was accepted and has started
  * @returns SL_STATUS_FAIL  if the requested operation has not been started
  *
- * @zgw_name ZW_SetLearnMode
+ * aka ZW_SetLearnMode
  */
 sl_status_t zwapi_set_learn_mode(uint8_t mode,
                                  void (*completedFunc)(LEARN_INFO *));
@@ -743,7 +743,7 @@ sl_status_t zwapi_set_learn_mode(uint8_t mode,
  * results.
  * @returns SL_STATUS_OK or SL_STATUS_FAIL.
  *
- * @zgw_name ZW_AddNodeToNetwork
+ * aka ZW_AddNodeToNetwork
  */
 sl_status_t zwapi_add_node_to_network(uint8_t bMode,
                                       void (*completedFunc)(LEARN_INFO *));
@@ -762,7 +762,7 @@ sl_status_t zwapi_add_node_to_network(uint8_t bMode,
  * results.
  * @returns SL_STATUS_OK or SL_STATUS_FAIL.
  *
- * @zgw_name ZW_RemoveNodeFromNetwork
+ * aka ZW_RemoveNodeFromNetwork
  */
 sl_status_t zwapi_remove_node_from_network(uint8_t bMode,
                                            void (*completedFunc)(LEARN_INFO *));
@@ -780,7 +780,7 @@ sl_status_t zwapi_remove_node_from_network(uint8_t bMode,
  * results.
  * @returns SL_STATUS_OK or SL_STATUS_FAIL.
  *
- * @zgw_name ZW_ControllerChange
+ * aka ZW_ControllerChange
  */
 sl_status_t
   zwapi_transfer_primary_ctrl_role(uint8_t bMode,
@@ -802,7 +802,7 @@ sl_status_t
  * TRANSMIT_OPTION_EXPLORE flag and maximum number of source routing attempts
  * value (maxRouteTries)
  *
- * @zgw_name ZW_SetRoutingMAX
+ * aka ZW_SetRoutingMAX
  */
 sl_status_t zwapi_set_max_source_route(uint8_t maxRouteTries);
 
@@ -845,12 +845,12 @@ sl_status_t zwapi_set_max_source_route(uint8_t maxRouteTries);
  * - <tt>2, 3, 0, 0, ZW_PRIORITY_ROUTE_SPEED_40K</tt> &rarr; 40K route through
  *   repeaters 2 and 3
  *
- * @serial_tx{REQ | 0x92 | bNodeID}
+ * Tx: {REQ | 0x92 | bNodeID}
  *
- * @serial_rx{RES | 0x92 | bNodeID | retVal | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}
+ * Rx: {RES | 0x92 | bNodeID | retVal | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}
  *
- * @zgw_name ZW_GetPriorityRoute
- * @zgw_name ZW_GetLastWorkingRoute
+ * aka ZW_GetPriorityRoute
+ * aka ZW_GetLastWorkingRoute
  */
 uint8_t zwapi_get_priority_route(zwave_node_id_t bNodeID,
                                  uint8_t *pPriorityRoute);
@@ -884,12 +884,12 @@ uint8_t zwapi_get_priority_route(zwave_node_id_t bNodeID,
  * - <tt>2, 3, 4, 0, ZW_PRIORITY_ROUTE_SPEED_9600</tt> &rarr; 9600 Priority
  *   route through repeaters 2, 3 and 4
  *
- * @serial_tx{REQ | 0x93 | bNodeID | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}
+ * Tx: {REQ | 0x93 | bNodeID | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}
  *
- * @serial_rx{RES | 0x93 | bNodeID | retVal}
+ * Rx: {RES | 0x93 | bNodeID | retVal}
  *
- * @zgw_name ZW_SetPriorityRoute
- * @zgw_name ZW_SetLastWorkingRoute
+ * aka ZW_SetPriorityRoute
+ * aka ZW_SetLastWorkingRoute
  */
 sl_status_t zwapi_set_priority_route(zwave_node_id_t bNodeID,
                                      uint8_t *pPriorityRoute);
@@ -900,10 +900,10 @@ sl_status_t zwapi_set_priority_route(zwave_node_id_t bNodeID,
  * @param node NodeID of the virtual node to set to Learn Mode. Use 0 (zero) if new node
  * is to be learned
  * @param mode learn mode. One of:
- *  - @ref VIRTUAL_NODE_LEARN_MODE_DISABLE Disable
- *  - @ref VIRTUAL_NODE_LEARN_MODE_ENABLE Enable
- *  - @ref VIRTUAL_NODE_LEARN_MODE_ADD Create New Virtual End Node
- *  - @ref VIRTUAL_NODE_LEARN_MODE_REMOVE Remove Virtual End Node
+ *  - @ref VIRTUAL_END_NODE_LEARN_MODE_DISABLE Disable
+ *  - @ref VIRTUAL_END_NODE_LEARN_MODE_ENABLE Enable
+ *  - @ref VIRTUAL_END_NODE_LEARN_MODE_ADD Create New Virtual End Node
+ *  - @ref VIRTUAL_END_NODE_LEARN_MODE_REMOVE Remove Virtual End Node
  * @param learnFunc callback function for the Node learn mode process
  * @returns SL_STATUS_OK if successful.
  * @returns SL_STATUS_FAIL if node is invalid or controller is primary.
@@ -915,7 +915,7 @@ sl_status_t zwapi_set_priority_route(zwave_node_id_t bNodeID,
  * The learnFunc is called when the received assign command has been handled.
  * The newID parameter is the learned Node ID.
  *
- * @zgw_name ZW_SetSlaveLearnMode
+ * aka ZW_SetSlaveLearnMode
  */
 sl_status_t zwapi_set_virtual_node_to_learn_mode(
   zwave_node_id_t node,
@@ -931,7 +931,7 @@ sl_status_t zwapi_set_virtual_node_to_learn_mode(
  * nodemask is to be copied.
  * @return SL_STATUS_OK or SL_STATUS_FAIL
  *
- * @zgw_name ZW_GetVirtualNodes
+ * aka ZW_GetVirtualNodes
  */
 sl_status_t zwapi_get_virtual_nodes(zwave_nodemask_t nodeMask);
 
@@ -954,7 +954,7 @@ sl_status_t zwapi_get_virtual_nodes(zwave_nodemask_t nodeMask);
  *   - ZW_GET_ROUTING_INFO_40K  - Return nodes supporting 40k
  *   - ZW_GET_ROUTING_INFO_100K - Return nodes supporting 100k
  *
- * @zgw_name ZW_GetRoutingInfo_old
+ * aka ZW_GetRoutingInfo_old
  */
 sl_status_t zwapi_get_old_routing_info(zwave_node_id_t bNodeID,
                                        uint8_t *buf,
@@ -973,7 +973,7 @@ sl_status_t zwapi_get_old_routing_info(zwave_node_id_t bNodeID,
  * @returns SL_STATUS_FAIL potentially attempting to disable a running SUC, not
  * allowed.
  *
- * @zgw_name ZW_EnableSUC
+ * aka ZW_EnableSUC
  */
 sl_status_t zwapi_enable_suc(uint8_t state, uint8_t capabilities);
 
@@ -993,7 +993,7 @@ sl_status_t zwapi_enable_suc(uint8_t state, uint8_t capabilities);
  * @note This should be called after receiving a application_controller_update_function
  * with a whitelisted DSK.
  *
- * @zgw_name ZW_AddNodeToNetworkSmartStart
+ * aka ZW_AddNodeToNetworkSmartStart
  */
 sl_status_t zwapi_add_smartstart_node_to_network(
   uint8_t bMode, const uint8_t *dsk, void (*completedFunc)(LEARN_INFO *));
@@ -1010,7 +1010,7 @@ sl_status_t zwapi_add_smartstart_node_to_network(
  *
  * This takes effect for all virtual nodes, regardless of dstNode value.
  *
- * @zgw_name SerialAPI_ApplicationSlaveNodeInformation
+ * aka SerialAPI_ApplicationSlaveNodeInformation
  */
 sl_status_t zwapi_set_virtual_node_application_node_information(
   zwave_node_id_t dstNode,

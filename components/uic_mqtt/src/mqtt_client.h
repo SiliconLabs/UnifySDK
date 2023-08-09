@@ -395,7 +395,7 @@ void mqtt_client_after_connect_callback_set(
 /**
  * @brief Returns the MQTT Client ID in use by the Client instance.
  *
- * @param instance A pointer to an mqtt_client instance.
+ * @param client_instance A pointer to an mqtt_client instance.
  * @returns C String containing the Client ID. NULL if the instance is not in use.
  */
 const char *mqtt_client_get_client_id(const mqtt_client_t client_instance);

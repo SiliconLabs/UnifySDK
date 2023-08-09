@@ -81,3 +81,13 @@ target_add_unittest(
   dotdot_mqtt_helpers_test.cpp
   DEPENDS
   uic_mqtt_stub)
+
+# Test Additional Cluster/Attribute/Value names
+target_add_unittest(
+  uic_dotdot_mqtt_shared
+  NAME
+  uic_dotdot_mqtt_additional_value_names_test
+  SOURCES
+  uic_dotdot_mqtt_additional_value_names_test.cpp
+  DEPENDS
+  uic_dotdot)

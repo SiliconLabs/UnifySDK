@@ -189,8 +189,9 @@ a particular log_tag):
 
 ## Using Zigbee Network Analyzer to Monitor PAN
 
-The "Network Analyzer" perspective in Silicon Labs Simplicity Studio IDE v5 can
-be used to analyze the traffic on the Zigbee PAN.
+The "Network Analyzer" perspective in Silicon Labs
+[Simplicity Studio](https://www.silabs.com/developers/simplicity-studio) IDE v5
+can be used to analyze the traffic on the Zigbee PAN.
 
 Network activity can be observed based on the UCL commands relayed by ZigPC.
 
@@ -202,14 +203,16 @@ a host computer.
 
 ### Detecting Devices in Simplicity Studio
 
-Devices in Simplicity Studio can be detected using any of the following methods:
+Devices in [Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
+can be detected using any of the following methods:
 
 #### Connection via Ethernet Interface
 
 If the host computer and one of the Zigbee devices are connected via Ethernet (using
 a Wireless Starter Kit for example:
 <https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit>),
-Simplicity Studio can capture network traffic using this interface. Either an
+[Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
+can capture network traffic using this interface. Either an
 end device or the gateway radio can be connected via Ethernet to perform network
 capture (since the serial USB connection, which ZigPC uses, can run
 independently of the Ethernet connection services).
@@ -275,7 +278,7 @@ Look for the following pattern:
 Extract the NWK key value ( `ZZ ZZ ZZ ...` sequence in the log above) and add
 it as a Network Analyzer Security Key using the following instructions:
 
-1. Open Simplicity Studio v5.
+1. Open [Simplicity Studio](https://www.silabs.com/developers/simplicity-studio) v5.
 2. Click from the top menu: Window -> Preferences.
 3. From the left sidebar, select: Network Analyzer -> Decoding -> Security Keys.
 4. Add a New Entry and insert the NWK key as the Key value.
@@ -295,10 +298,13 @@ Code based DSK:
 
 ### Adding custom clusters
 
-It is possible to add custom ZCL info to ZigPC to add natively unsupported 
-clusters or to override the functionality of default clusters. This step must 
+It is possible to add custom ZCL info to ZigPC to add natively unsupported
+clusters or to override the functionality of default clusters. This step must
 be run at compilation time in order to properly include the necessary MQTT
 topics and other related ZCL information.
+
+Please note, there has been limited testing on custom clusters and more changes
+may be needed to support custom applications.
 
 * Step 1: Adding the custom cluster to the Unify framework
 
@@ -316,41 +322,23 @@ templates will generate for the new cluster by adding the name to:
 Specifically, the 'SUPPORTED\_CLUSTERS' and 'SUPPORTED\_CLUSTER\_ATTRIBUTES'
 lists must reference the new cluster.
 
-* Step 3: Adding the custom clusters in the zigbeeHost gateway level
-
-ZigPC uses a custom zigbeeHost layer to manage the zigbee stack. Ensure that
-this layer can also access the new ZCL cluster by modifying the slcp file
-in 'uic/applications/zigpc/components/zigpc\_gateway/libs/zigbee\_host/src/libzigbee\_host.slcp'
-Add the new cluster in the same format as all the existing clusters at this layer.
-
-*Step 4: Re-generate all ZAP templates
+*Step 3: Re-generate all ZAP templates
 
 Unify uses ZAP to generate ZCL cluster information (as discussed in step #2).
 Make sure that zap can find the library by modifying its configuration file.
 
-Alternatively, compile with the cmake option 'ZAP_GENERATE' set to 'ON' to
+Alternatively, compile with the cmake option 'ZAP\_GENERATE' set to 'ON' to
 automatically re-generate zap output files as part of the compilation process.
 
 Re-generate all zap output in the top level uic for the following components:
-uic_dotdot, uic_dotdot_mqtt, unify_dotdot_attribute_store
+uic\_dotdot, uic\_dotdot\_mqtt, unify\_dotdot\_attribute\_store
 
 Re-generate all zap output in the zigpc level for the following components:
-command_mapper, zcl_util, zcl_command_parser, zcl_profiles, attribute_management
+command\_mapper, zcl\_util, zcl\_command\_parser, zcl\_profiles, attribute\_management
 
 Please take a look at [https://github.com/SiliconLabs/zap] for more detailed
 information.
 
-* Step 5: Re-generate the zigbee_host
+* Step 4:
 
-Re-generate the zigbee_host slcp, in the autogen folder. Set the
-STUDIO_ADAPTER_PATH to point to zap, which should already be configured
-to point to the custom xml. Otherwise, it will be necessary to edit the
-zap-config of the zigbee_host folder.
-
-Please read [https://siliconlabs.github.io/slc-specification/1.0/] and 
-[https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf]
-for more information on using the slc_cli.
-
-* Step 6:
-
-Compile ZigPC as normal. ZigPC should now support your custom cluster
+Compile ZigPC as normal. ZigPC should now support your custom cluster.

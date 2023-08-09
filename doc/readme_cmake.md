@@ -262,6 +262,6 @@ python -m pip install cmake_format
 
 To auto-format a CMake file run the command:
 
-``` bash
+``` bash
 python -m cmake_format -i ./<some dir>/CMakeLists.txt
 ```

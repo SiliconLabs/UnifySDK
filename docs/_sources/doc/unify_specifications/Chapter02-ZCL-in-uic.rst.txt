@@ -306,7 +306,7 @@ Controller are using.
 ProtocolControllers MUST publish this information for all clusters of all
 nodes they advertise.
 
-See the the ZCL Cluster Library |ZCL2019| for Cluster
+See the ZCL Cluster Library |ZCL2019| for Cluster
 revision details.
 
 The JSON value type for the ClusterRevision attribute MUST be an integer.

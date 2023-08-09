@@ -5,6 +5,9 @@ var group__attribute__mapper__engine =
     ] ],
     [ "MapperEngine", "classMapperEngine.html", [
       [ "add_expression", "classMapperEngine.html#a9d90a71af2f7809eef7d3a636edc78f2", null ],
+      [ "apply_clearance_assignment", "classMapperEngine.html#a7a64e5bbbe739f6d2cb7674daee4566f", null ],
+      [ "apply_instance_assignment", "classMapperEngine.html#a06eb313d3e223c5183a052a3e8fbe28c", null ],
+      [ "apply_regular_assignment", "classMapperEngine.html#ab7efda3bc18a9660637f7559a1024585", null ],
       [ "assignment_matches_destination", "classMapperEngine.html#a5f7445804f00f882b027d0d75ca8fc1d", null ],
       [ "get_assigment_potential_destination", "classMapperEngine.html#ad760ef887ffed523f4c290c11dbe46bb", null ],
       [ "get_destination_for_attribute", "classMapperEngine.html#ac7bd4f2fad327ac372685d361f1a74a6", null ],
@@ -25,6 +28,6 @@ var group__attribute__mapper__engine =
       [ "relations", "classMapperEngine.html#af122c9ca8dd2666fdd220a900cd90beb", null ]
     ] ],
     [ "assignment_properties_t", "group__attribute__mapper__engine.html#ga8464bd651a8a81b4945ae593ff47661c", null ],
-    [ "assignments_to_run_t", "group__attribute__mapper__engine.html#gaa05df914b34c1ce2fd2f17be82265494", null ],
+    [ "assignments_to_run_t", "group__attribute__mapper__engine.html#ga48d8ceb6fb6814122865d274026d7469", null ],
     [ "equivalent_assignments_t", "group__attribute__mapper__engine.html#gaeaad976733ee1551c5313cb5a712e8a0", null ]
 ];

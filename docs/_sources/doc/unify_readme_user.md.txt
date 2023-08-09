@@ -9,7 +9,7 @@ Details about each application can be found in the application specific user gui
 Normally, the Unify components should be run as a service. When the Debian packages
 are installed they automatically enables themselves as systemd services.
 
-The the components can be started and stopped using the `systemctl` command (see systemctl
+the components can be started and stopped using the `systemctl` command (see systemctl
 linux manual for details).
 
 ```bash
@@ -17,7 +17,7 @@ sudo systemctl start uic-<component-name>
 sudo systemctl stop uic-<component-name>
 ```
 
-To see the logs of the the components when it runs as a service, use the following command:
+To see the logs of the components when it runs as a service, use the following command:
 
 ```bash
 journalctl -u uic-<component-name>.service

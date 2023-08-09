@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -112,10 +112,10 @@ Functions</h2></td></tr>
 <tr class="memitem:gaca81e0c2fa13985834fdd26ef39bbaa3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__callbacks.html#gaca81e0c2fa13985834fdd26ef39bbaa3">attribute_resolver_callbacks_reset</a> ()</td></tr>
 <tr class="memdesc:gaca81e0c2fa13985834fdd26ef39bbaa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the resources to keep track of ongoing resolutions and process send_data callbacks.  <a href="group__zpc__attribute__resolver__callbacks.html#gaca81e0c2fa13985834fdd26ef39bbaa3">More...</a><br /></td></tr>
 <tr class="separator:gaca81e0c2fa13985834fdd26ef39bbaa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae00539432000f51f17d1b7741ddcb8ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__callbacks.html#gae00539432000f51f17d1b7741ddcb8ac">on_resolver_zwave_send_data_complete</a> (uint8_t status, const <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
+<tr class="memitem:gae00539432000f51f17d1b7741ddcb8ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__callbacks.html#gae00539432000f51f17d1b7741ddcb8ac">on_resolver_zwave_send_data_complete</a> (uint8_t status, const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
 <tr class="memdesc:gae00539432000f51f17d1b7741ddcb8ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send_data callback for transmissions that did not use Supervision encapsulation.  <a href="group__zpc__attribute__resolver__callbacks.html#gae00539432000f51f17d1b7741ddcb8ac">More...</a><br /></td></tr>
 <tr class="separator:gae00539432000f51f17d1b7741ddcb8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa07fbb13c7f4f061192accb2d607e5a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__callbacks.html#gaa07fbb13c7f4f061192accb2d607e5a6">on_resolver_zwave_supervision_complete</a> (uint8_t supervision_status, const <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
+<tr class="memitem:gaa07fbb13c7f4f061192accb2d607e5a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__callbacks.html#gaa07fbb13c7f4f061192accb2d607e5a6">on_resolver_zwave_supervision_complete</a> (uint8_t supervision_status, const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
 <tr class="memdesc:gaa07fbb13c7f4f061192accb2d607e5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send_data callback for transmissions that used Supervision encapsulation.  <a href="group__zpc__attribute__resolver__callbacks.html#gaa07fbb13c7f4f061192accb2d607e5a6">More...</a><br /></td></tr>
 <tr class="separator:gaa07fbb13c7f4f061192accb2d607e5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaedfe2d05000418de39a6c7ea025acd43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__callbacks.html#gaedfe2d05000418de39a6c7ea025acd43">add_node_in_resolution_list</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> new_node, <a class="el" href="attribute__resolver__rule_8h.html#a6ae323c64b845f108a676a0731e6d6ea">resolver_rule_type_t</a> rule_type)</td></tr>
@@ -316,7 +316,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
           <td class="paramname"><em>tx_info</em>, </td>
         </tr>
         <tr>
@@ -337,7 +337,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">status</td><td>Indicates how the transmission operation was completed. Refer for <a class="el" href="group__zwapi__transmit__complete__codes.html">Z-Wave API send_data return codes</a> for details. </td></tr>
-    <tr><td class="paramname">tx_info</td><td>zwapi_tx_report_t reported by the <a class="el" href="group__zwave__api.html">Z-Wave API</a>. It contains transmission details, refer to <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a>. </td></tr>
+    <tr><td class="paramname">tx_info</td><td>zwapi_tx_report_t reported by the <a class="el" href="group__zwave__api.html">Z-Wave API</a>. It contains transmission details, refer to <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a>. </td></tr>
     <tr><td class="paramname">user</td><td>User pointer provided in from this component. Must be a resolution_map_t pointer </td></tr>
   </table>
   </dd>
@@ -360,7 +360,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
           <td class="paramname"><em>tx_info</em>, </td>
         </tr>
         <tr>
@@ -381,7 +381,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">supervision_status</td><td>Supervision status returned by the node. </td></tr>
-    <tr><td class="paramname">tx_info</td><td>zwapi_tx_report_t reported by the <a class="el" href="group__zwave__api.html">Z-Wave API</a>. It contains transmission details, refer to <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a>. </td></tr>
+    <tr><td class="paramname">tx_info</td><td>zwapi_tx_report_t reported by the <a class="el" href="group__zwave__api.html">Z-Wave API</a>. It contains transmission details, refer to <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a>. </td></tr>
     <tr><td class="paramname">user</td><td>User pointer provided in from this component. Must be a resolution_map_t pointer </td></tr>
   </table>
   </dd>
@@ -420,7 +420,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

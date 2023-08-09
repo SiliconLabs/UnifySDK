@@ -1,7 +1,9 @@
 var unify__dotdot__attribute__store__command__callbacks__level_8c =
 [
     [ "dotdot_set_level_current_level_and_on_off_transition_time", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#ad8ddfefa953421ec9f82d67575da591c", null ],
+    [ "get_max_frequency", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a8d493bcbd32c543b14feaec745515c78", null ],
     [ "get_max_level", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a2f39ca48cd835ab8919f5ff012708b8d", null ],
+    [ "get_min_frequency", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a643301a435385251905ceb6932038e36", null ],
     [ "get_min_level", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a5a7b25e0183861ac7482cd0928f9286f", null ],
     [ "level_cluster_mapper_init", "group__level__cluster__mapper.html#gad8b17107de6e37a08808a8b41878e3d2", null ],
     [ "level_cluster_mapper_move", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a566dc6fc82a729180b611aac1fc3c7e5", null ],
@@ -12,9 +14,12 @@ var unify__dotdot__attribute__store__command__callbacks__level_8c =
     [ "level_cluster_mapper_step_with_on_off", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a2d439a3551b6b60000a8238171dc12e5", null ],
     [ "level_cluster_mapper_stop", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a226e8755daef6f4996e5af58e1f537ec", null ],
     [ "level_cluster_mapper_stop_with_on_off", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a2a98f2e9159d6c3334086e6387217735", null ],
+    [ "level_move_to_closest_frequency_command", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a763fb545990255a0d2f9d1c663371d4f", null ],
     [ "on_remaining_time_reported_update", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#ab5e491991a34be6570eaeb659c6457e5", null ],
     [ "validated_level_value", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a7a03ba34b42525cc20997d14d0898b14", null ],
+    [ "DEFAULT_MAX_FREQUENCY", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a8979039f1537820b57b65347845774fb", null ],
     [ "DEFAULT_MAX_LEVEL", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#af72fc56fb075eb3f83cd534da5ad5a82", null ],
+    [ "DEFAULT_MIN_FREQUENCY", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a679a25ad16f16b481687ce5ea68f45ab", null ],
     [ "DEFAULT_MIN_LEVEL", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#aa9f2f356a6f79a8d1ff103fa1784b331", null ],
     [ "DEFAULT_MOVE_RATE", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a072b75b960e24b385d7c29cb323493c7", null ],
     [ "LOG_TAG", "unify__dotdot__attribute__store__command__callbacks__level_8c.html#a529405535e56b42ae280045d0356e2ac", null ],

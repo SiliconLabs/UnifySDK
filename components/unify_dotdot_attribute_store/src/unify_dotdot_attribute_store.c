@@ -16,9 +16,13 @@
 #include "unify_dotdot_attribute_store_write_attributes_command_callbacks.h"
 #include "unify_dotdot_attribute_store_force_read_attributes_command_callbacks.h"
 #include "unify_dotdot_attribute_store_attribute_publisher.h"
+#include "unify_dotdot_attribute_store_node_state.h"
+#include "unify_dotdot_attribute_store_group_cluster.h"
+#include "process.h"
 
 // Private variable avoiding to try to register duplicate attributes to the attribute store.
 static bool attribute_store_registration_done = false;
+
 
 sl_status_t unify_dotdot_attribute_store_init()
 {
@@ -43,6 +47,10 @@ sl_status_t unify_dotdot_attribute_store_init()
 
   // Register callbacks for attribute publications
   init_status |= unify_dotdot_attribute_store_attribute_publisher_init();
+
+  // Special clusters
+  init_status |= unify_dotdot_attribute_store_node_state_init();
+  init_status |= unify_dotdot_attribute_store_group_cluster_init();
 
   return init_status;
 }

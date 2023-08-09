@@ -25,10 +25,11 @@
 #include "attribute_store_fixt.h"
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 #include "sl_log.h"
 
 // Interfaces
-#include "ucl_definitions.h"
+
 #include "zwave_command_class_version_types.h"
 #include "zwave_command_class_configuration_types.h"
 
@@ -448,9 +449,9 @@ void test_configuration_publishing_attributes_on_update_after_network_status_upd
     EXPECTED_BASE_TOPIC,
     1);
 
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 
@@ -475,9 +476,9 @@ void test_configuration_publishing_attributes_on_update_after_network_status_upd
                                      0);
 
   // Change back the network status
-  network_status = NODE_STATE_TOPIC_STATE_OFFLINE;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 

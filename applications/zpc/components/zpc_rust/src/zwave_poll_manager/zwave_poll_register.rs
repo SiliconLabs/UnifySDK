@@ -37,9 +37,9 @@ const ATTRIBUTE_ZWAVEPLUS_INFO_Z_WAVE_VERSION: AttributeTypeId = (0x5E << 8) | 0
 const ATTRIBUTE_HOME_ID: AttributeTypeId = 0x2;
 const ATTRIBUTE_ENDPOINT_ID: AttributeTypeId = 0x4;
 
-//< This represents the Network Status of a node. node_state_topic_state_t
-const ATTRIBUTE_NETWORK_STATUS: AttributeTypeId = 0x000D;
-const NODE_STATE_TOPIC_STATE_INCLUDED: u8 = 1;
+//< This represents the Network Status of a node. NodeStateNetworkStatus
+const DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS: AttributeTypeId = 0x000D;
+const ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL: u8 = 1;
 
 struct PollRegister {
     poll_map: Option<AttributePollMap>,
@@ -80,10 +80,10 @@ impl PollRegister {
         }
 
         // Additional verifications, node has to be Online functional.
-        event.attribute.type_of() == ATTRIBUTE_NETWORK_STATUS
+        event.attribute.type_of() == DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS
             && event.event_type == AttributeEventType::ATTRIBUTE_UPDATED
             && event.value_state == AttributeValueState::REPORTED_ATTRIBUTE
-            && event.attribute.get_reported::<u8>() == Ok(NODE_STATE_TOPIC_STATE_INCLUDED)
+            && event.attribute.get_reported::<u8>() == Ok(ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL)
             && is_in_home_id
     }
 

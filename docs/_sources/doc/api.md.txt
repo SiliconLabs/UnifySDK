@@ -1,6 +1,6 @@
 # API documentation
 
-Find the programming API's of various components at the the following links:
+Find the programming API's of various components at the following links:
 
 ## Unify Library Doxygen
 

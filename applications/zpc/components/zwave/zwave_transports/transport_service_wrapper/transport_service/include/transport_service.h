@@ -88,8 +88,6 @@ typedef void (*upper_layer_command_handler_t)(ts_node_id_t source,
  * @brief Initialize the Transport Service
  *
  * @param my_node_id
- * @param max_fragment_size Maximum fragment size that can be transmitted by
- *                          layers below
  * @param upper_layer_command_handler The Upper layer function which will be
  *                                    called with data
  *                                    after stiching all the fragments received
@@ -118,11 +116,13 @@ typedef enum {
  * This function will break the data payload and send it with Transport service
  * protocol
  *
- * @param source            Source node id
- * @param dest              Destination node id
+ * @param source            Source NodeID
+ * @param dest              Destination NodeID
  * @param payload           Payload
  * @param payload_len       Length of payload.
  *                          layers below
+ * @param max_frame_len     Maximum number of bytes that can be sent to the
+ *                          destination NodeID at once
  * @param on_send_complete  Transport service calls this callback to notify
  *                          upper layers of completion of transmit of whole
  *                          payload
@@ -142,8 +142,8 @@ transport_service_send_data_return_code_t transport_service_send_data(
  * This function will assemble and handle the request of new frames to complete
  * the receiving of larger payloads with Transport service protocol
  *
- * @param source          Source node id
- * @param dest            Destination node id
+ * @param source          Source NodeID
+ * @param dest            Destination NodeID
  * @param rx_type         If frame is singlecast, broadcast or multicast
  *                        \ref receive_type
  * @param frame_data      frame data

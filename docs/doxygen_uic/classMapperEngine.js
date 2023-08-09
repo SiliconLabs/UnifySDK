@@ -1,6 +1,9 @@
 var classMapperEngine =
 [
     [ "add_expression", "classMapperEngine.html#a9d90a71af2f7809eef7d3a636edc78f2", null ],
+    [ "apply_clearance_assignment", "classMapperEngine.html#a7a64e5bbbe739f6d2cb7674daee4566f", null ],
+    [ "apply_instance_assignment", "classMapperEngine.html#a06eb313d3e223c5183a052a3e8fbe28c", null ],
+    [ "apply_regular_assignment", "classMapperEngine.html#ab7efda3bc18a9660637f7559a1024585", null ],
     [ "assignment_matches_destination", "classMapperEngine.html#a5f7445804f00f882b027d0d75ca8fc1d", null ],
     [ "get_assigment_potential_destination", "classMapperEngine.html#ad760ef887ffed523f4c290c11dbe46bb", null ],
     [ "get_destination_for_attribute", "classMapperEngine.html#ac7bd4f2fad327ac372685d361f1a74a6", null ],

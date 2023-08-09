@@ -1885,7 +1885,7 @@ const zcl_attribute_t ias_zone_attribute_list[] = {
   {
     ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
     ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_TYPE, // attribute_id
-    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM16, // type
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
     false, // is_reportable
     "ZoneType", // attribute_name
     "", // desired_payload

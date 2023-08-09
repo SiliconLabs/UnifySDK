@@ -6,6 +6,8 @@
 #include "zigpc_gateway.h"
 #include "zigpc_ucl.hpp"
 #include "zigpc_binding_request.h"
+#include "zigpc_datastore.hpp"
+#include <algorithm>
 
 
 static const char LOG_TAG[] = "zigpc_binding_request";
@@ -45,10 +47,22 @@ void zigpc_binding_parse_bind_cmd(
         return;
     }
 
-    status = zigbee_uint_to_eui64(binding.dest_address, dest_eui_array);
+    status = zigbee_uint_to_eui64(binding.dest_address, dest_eui_array);    
     if(SL_STATUS_OK != status)
     {
         sl_log_warning(LOG_TAG, "Error parsing destination address");
+        return;
+    }
+
+    
+    // check if the destination exist in the datastore :
+    if(!zigpc_datastore_is_device_contained(binding.dest_address)){
+        status = SL_STATUS_NOT_FOUND;
+    }
+    
+    if(SL_STATUS_OK != status)
+    {
+        sl_log_warning(LOG_TAG, "Endpoint Destination not found");
         return;
     }
 

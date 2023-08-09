@@ -910,96 +910,6 @@ static sl_status_t uic_mqtt_dotdot_time_force_read_attributes_callback (
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
-// Start of cluster OTAUpgrade
-////////////////////////////////////////////////////////////////////////////////
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback (
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_ota_upgrade_updated_state_t attribute_list) {
-
-  if (false == is_force_read_attributes_enabled()){
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_ota_upgrade_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  // Go and undefine everything that needs to be read again:
-  if (true == attribute_list.upgrade_serverid) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_upgrade_serverid_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::UpgradeServerID under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.file_offset) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_file_offset_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::FileOffset under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.current_file_version) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_current_file_version_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::CurrentFileVersion under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.current_zig_bee_stack_version) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_current_zig_bee_stack_version_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::CurrentZigBeeStackVersion under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.downloaded_file_version) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_downloaded_file_version_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::DownloadedFileVersion under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.downloaded_zig_bee_stack_version) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_downloaded_zig_bee_stack_version_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::DownloadedZigBeeStackVersion under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.image_upgrade_status) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_image_upgrade_status_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::ImageUpgradeStatus under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.manufacturerid) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_manufacturerid_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::ManufacturerID under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.image_typeid) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_image_typeid_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::ImageTypeID under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.minimum_block_period) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_minimum_block_period_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::MinimumBlockPeriod under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.image_stamp) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_image_stamp_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::ImageStamp under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.upgrade_activation_policy) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_upgrade_activation_policy_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::UpgradeActivationPolicy under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.upgrade_timeout_policy) {
-    if (SL_STATUS_OK == dotdot_ota_upgrade_upgrade_timeout_policy_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of OTAUpgrade::UpgradeTimeoutPolicy under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
 // Start of cluster PollControl
 ////////////////////////////////////////////////////////////////////////////////
 static sl_status_t uic_mqtt_dotdot_poll_control_force_read_attributes_callback (
@@ -4285,71 +4195,6 @@ static sl_status_t uic_mqtt_dotdot_diagnostics_force_read_attributes_callback (
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
-// Start of cluster ProtocolController-RFTelemetry
-////////////////////////////////////////////////////////////////////////////////
-static sl_status_t uic_mqtt_dotdot_protocol_controller_rf_telemetry_force_read_attributes_callback (
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_protocol_controller_rf_telemetry_updated_state_t attribute_list) {
-
-  if (false == is_force_read_attributes_enabled()){
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_protocol_controller_rf_telemetry_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  // Go and undefine everything that needs to be read again:
-  if (true == attribute_list.tx_report_enabled) {
-    if (SL_STATUS_OK == dotdot_protocol_controller_rf_telemetry_tx_report_enabled_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ProtocolController-RFTelemetry::TxReportEnabled under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.pti_enabled) {
-    if (SL_STATUS_OK == dotdot_protocol_controller_rf_telemetry_pti_enabled_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ProtocolController-RFTelemetry::PTIEnabled under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
-// Start of cluster State
-////////////////////////////////////////////////////////////////////////////////
-static sl_status_t uic_mqtt_dotdot_state_force_read_attributes_callback (
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_state_updated_state_t attribute_list) {
-
-  if (false == is_force_read_attributes_enabled()){
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_state_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  // Go and undefine everything that needs to be read again:
-  if (true == attribute_list.endpoint_id_list) {
-    if (SL_STATUS_OK == dotdot_state_endpoint_id_list_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of State::EndpointIdList under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
 // Start of cluster Binding
 ////////////////////////////////////////////////////////////////////////////////
 static sl_status_t uic_mqtt_dotdot_binding_force_read_attributes_callback (
@@ -4385,306 +4230,6 @@ static sl_status_t uic_mqtt_dotdot_binding_force_read_attributes_callback (
   if (true == attribute_list.binding_table) {
     if (SL_STATUS_OK == dotdot_binding_binding_table_undefine_reported(unid, endpoint_id)) {
       sl_log_debug(LOG_TAG, "Undefined Reported value of Binding::BindingTable under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
-// Start of cluster SystemMetrics
-////////////////////////////////////////////////////////////////////////////////
-static sl_status_t uic_mqtt_dotdot_system_metrics_force_read_attributes_callback (
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_system_metrics_updated_state_t attribute_list) {
-
-  if (false == is_force_read_attributes_enabled()){
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_system_metrics_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  // Go and undefine everything that needs to be read again:
-  if (true == attribute_list.reporting_interval_seconds) {
-    if (SL_STATUS_OK == dotdot_system_metrics_reporting_interval_seconds_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::ReportingIntervalSeconds under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.cpu_usage_percent) {
-    if (SL_STATUS_OK == dotdot_system_metrics_cpu_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::CPUUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.cpu_frequencym_hz) {
-    if (SL_STATUS_OK == dotdot_system_metrics_cpu_frequencym_hz_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::CPUFrequencyMHz under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.cpu_average_usage_percent) {
-    if (SL_STATUS_OK == dotdot_system_metrics_cpu_average_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::CPUAverageUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.cpu_min_usage_percent) {
-    if (SL_STATUS_OK == dotdot_system_metrics_cpu_min_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::CPUMinUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.cpu_max_usage_percent) {
-    if (SL_STATUS_OK == dotdot_system_metrics_cpu_max_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::CPUMaxUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.ram_totalmb) {
-    if (SL_STATUS_OK == dotdot_system_metrics_ram_totalmb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::RAMTotalMB under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.ram_freemb) {
-    if (SL_STATUS_OK == dotdot_system_metrics_ram_freemb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::RAMFreeMB under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.ram_availablemb) {
-    if (SL_STATUS_OK == dotdot_system_metrics_ram_availablemb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::RAMAvailableMB under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.swap_memory_totalmb) {
-    if (SL_STATUS_OK == dotdot_system_metrics_swap_memory_totalmb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::SWAPMemoryTotalMB under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.swap_memory_usedmb) {
-    if (SL_STATUS_OK == dotdot_system_metrics_swap_memory_usedmb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::SWAPMemoryUsedMB under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.virtual_memory_totalmb) {
-    if (SL_STATUS_OK == dotdot_system_metrics_virtual_memory_totalmb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::VirtualMemoryTotalMB under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.virtual_memory_usedmb) {
-    if (SL_STATUS_OK == dotdot_system_metrics_virtual_memory_usedmb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::VirtualMemoryUsedMB under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.disks_usage) {
-    if (SL_STATUS_OK == dotdot_system_metrics_disks_usage_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::DisksUsage under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.disks_counters) {
-    if (SL_STATUS_OK == dotdot_system_metrics_disks_counters_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::DisksCounters under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.network_interfaces_data) {
-    if (SL_STATUS_OK == dotdot_system_metrics_network_interfaces_data_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::NetworkInterfacesData under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.wireless_network_interfaces_data) {
-    if (SL_STATUS_OK == dotdot_system_metrics_wireless_network_interfaces_data_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::WirelessNetworkInterfacesData under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.hostname) {
-    if (SL_STATUS_OK == dotdot_system_metrics_hostname_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::Hostname under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.fqdn) {
-    if (SL_STATUS_OK == dotdot_system_metrics_fqdn_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::FQDN under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.uptime_minutes) {
-    if (SL_STATUS_OK == dotdot_system_metrics_uptime_minutes_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::UptimeMinutes under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.current_temperature_celcius) {
-    if (SL_STATUS_OK == dotdot_system_metrics_current_temperature_celcius_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::CurrentTemperatureCelcius under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.average_temperature_celcius) {
-    if (SL_STATUS_OK == dotdot_system_metrics_average_temperature_celcius_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::AverageTemperatureCelcius under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.min_temperature_celcius) {
-    if (SL_STATUS_OK == dotdot_system_metrics_min_temperature_celcius_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::MinTemperatureCelcius under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.max_temperature_celcius) {
-    if (SL_STATUS_OK == dotdot_system_metrics_max_temperature_celcius_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::MaxTemperatureCelcius under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.power_plugged) {
-    if (SL_STATUS_OK == dotdot_system_metrics_power_plugged_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::PowerPlugged under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.battery_percentage) {
-    if (SL_STATUS_OK == dotdot_system_metrics_battery_percentage_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::BatteryPercentage under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.system_interrupts) {
-    if (SL_STATUS_OK == dotdot_system_metrics_system_interrupts_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of SystemMetrics::SystemInterrupts under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
-// Start of cluster ApplicationMonitoring
-////////////////////////////////////////////////////////////////////////////////
-static sl_status_t uic_mqtt_dotdot_application_monitoring_force_read_attributes_callback (
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_application_monitoring_updated_state_t attribute_list) {
-
-  if (false == is_force_read_attributes_enabled()){
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_application_monitoring_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  // Go and undefine everything that needs to be read again:
-  if (true == attribute_list.application_name) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_application_name_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationName under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.application_version) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_application_version_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationVersion under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.application_connected) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_application_connected_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationConnected under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.applicationmqtt_topics) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_applicationmqtt_topics_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationMQTTTopics under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.uptime_minutes) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_uptime_minutes_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::UptimeMinutes under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.process_id) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_process_id_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ProcessId under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.hostname) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_hostname_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::Hostname under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.fqdn) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_fqdn_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::FQDN under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_logging_enabled) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_logging_enabled_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTLoggingEnabled under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_logging_level) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_logging_level_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTLoggingLevel under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_statistics_reporting_interval_seconds) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTStatisticsReportingIntervalSeconds under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_messages_sent) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_messages_sent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTMessagesSent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_messages_received) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_messages_received_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTMessagesReceived under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_subscription_count) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_subscription_count_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTSubscriptionCount under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_average_delivery_time_seconds) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_average_delivery_time_seconds_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTAverageDeliveryTimeSeconds under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_min_delivery_time_seconds) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_min_delivery_time_seconds_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTMinDeliveryTimeSeconds under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.mqtt_max_delivery_time_seconds) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_mqtt_max_delivery_time_seconds_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::MQTTMaxDeliveryTimeSeconds under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.application_statistics_reporting_interval_seconds) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_application_statistics_reporting_interval_seconds_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationStatisticsReportingIntervalSeconds under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.applicationcpu_usage_percent) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_applicationcpu_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationCPUUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.applicationcpu_average_usage_percent) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_applicationcpu_average_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationCPUAverageUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.applicationcpu_min_usage_percent) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_applicationcpu_min_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationCPUMinUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.applicationcpu_max_usage_percent) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_applicationcpu_max_usage_percent_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationCPUMaxUsagePercent under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  if (true == attribute_list.applicationram_usagemb) {
-    if (SL_STATUS_OK == dotdot_application_monitoring_applicationram_usagemb_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ApplicationMonitoring::ApplicationRAMUsageMB under %s - Endpoint %d", unid, endpoint_id);
     }
   }
   return SL_STATUS_OK;
@@ -4899,36 +4444,6 @@ static sl_status_t uic_mqtt_dotdot_aox_position_estimation_force_read_attributes
   }
   return SL_STATUS_OK;
 }
-////////////////////////////////////////////////////////////////////////////////
-// Start of cluster ProtocolController-NetworkManagement
-////////////////////////////////////////////////////////////////////////////////
-static sl_status_t uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback (
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_protocol_controller_network_management_updated_state_t attribute_list) {
-
-  if (false == is_force_read_attributes_enabled()){
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_protocol_controller_network_management_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  // Go and undefine everything that needs to be read again:
-  if (true == attribute_list.network_management_state) {
-    if (SL_STATUS_OK == dotdot_protocol_controller_network_management_network_management_state_undefine_reported(unid, endpoint_id)) {
-      sl_log_debug(LOG_TAG, "Undefined Reported value of ProtocolController-NetworkManagement::NetworkManagementState under %s - Endpoint %d", unid, endpoint_id);
-    }
-  }
-  return SL_STATUS_OK;
-}
 // clang-format on
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -4959,8 +4474,6 @@ sl_status_t
   uic_mqtt_dotdot_set_alarms_force_read_attributes_callback(&uic_mqtt_dotdot_alarms_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_time_force_read_attributes_callback(&uic_mqtt_dotdot_time_force_read_attributes_callback);
-  
-  uic_mqtt_dotdot_set_ota_upgrade_force_read_attributes_callback(&uic_mqtt_dotdot_ota_upgrade_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_poll_control_force_read_attributes_callback(&uic_mqtt_dotdot_poll_control_force_read_attributes_callback);
   
@@ -5024,16 +4537,12 @@ sl_status_t
   
   uic_mqtt_dotdot_set_diagnostics_force_read_attributes_callback(&uic_mqtt_dotdot_diagnostics_force_read_attributes_callback);
   
-  uic_mqtt_dotdot_set_protocol_controller_rf_telemetry_force_read_attributes_callback(&uic_mqtt_dotdot_protocol_controller_rf_telemetry_force_read_attributes_callback);
-  
-  uic_mqtt_dotdot_set_state_force_read_attributes_callback(&uic_mqtt_dotdot_state_force_read_attributes_callback);
-  
+
+
   uic_mqtt_dotdot_set_binding_force_read_attributes_callback(&uic_mqtt_dotdot_binding_force_read_attributes_callback);
   
-  uic_mqtt_dotdot_set_system_metrics_force_read_attributes_callback(&uic_mqtt_dotdot_system_metrics_force_read_attributes_callback);
-  
-  uic_mqtt_dotdot_set_application_monitoring_force_read_attributes_callback(&uic_mqtt_dotdot_application_monitoring_force_read_attributes_callback);
-  
+
+
   uic_mqtt_dotdot_set_name_and_location_force_read_attributes_callback(&uic_mqtt_dotdot_name_and_location_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_configuration_parameters_force_read_attributes_callback(&uic_mqtt_dotdot_configuration_parameters_force_read_attributes_callback);
@@ -5042,8 +4551,7 @@ sl_status_t
   
   uic_mqtt_dotdot_set_aox_position_estimation_force_read_attributes_callback(&uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback);
   
-  uic_mqtt_dotdot_set_protocol_controller_network_management_force_read_attributes_callback(&uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback);
-  
+
   // clang-format on
 
   return SL_STATUS_OK;

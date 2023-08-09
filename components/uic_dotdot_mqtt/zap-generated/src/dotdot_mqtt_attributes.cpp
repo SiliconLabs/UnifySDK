@@ -8349,8 +8349,15 @@ static void uic_mqtt_dotdot_on_scenes_scene_table_attribute_update(
 // Start parsing value
       auto &scene_table_json = json_payload.at("value");
       for (size_t i = 0; i < scene_table_json.size(); i++) {
-        scene_table.push_back(scene_table_json.at(i).get<SSceneTable>());
-          }
+        SSceneTable element = {};
+        element.SceneID = scene_table_json.at(i).at("SceneID").get<uint16_t>();
+        element.GroupID = scene_table_json.at(i).at("GroupID").get<uint16_t>();
+        element.SceneName = scene_table_json.at(i).at("SceneName").get_ptr<const std::string*>()->c_str();
+        element.TransitionTime = scene_table_json.at(i).at("TransitionTime").get<uint16_t>();
+        element.TransitionTime100ms = scene_table_json.at(i).at("TransitionTime100ms").get<uint8_t>();
+        element.SceneTableExtensions = scene_table_json.at(i).at("SceneTableExtensions").get_ptr<const std::string*>()->c_str();
+        scene_table.push_back(element);
+      }
       // Take our vector and pack it into the updated state
       scene_table_count = scene_table.size();
 
@@ -11110,1162 +11117,6 @@ void uic_mqtt_dotdot_time_attribute_last_set_time_callback_set(const uic_mqtt_do
 void uic_mqtt_dotdot_time_attribute_valid_until_time_callback_set(const uic_mqtt_dotdot_time_attribute_valid_until_time_callback_t callback)
 {
   uic_mqtt_dotdot_time_attribute_valid_until_time_callback = callback;
-}
-
-// End of supported cluster.
-
-///////////////////////////////////////////////////////////////////////////////
-// Callback pointers for OTAUpgrade
-///////////////////////////////////////////////////////////////////////////////
-static uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback = nullptr;
-static uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback_t uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback = nullptr;
-
-///////////////////////////////////////////////////////////////////////////////
-// Attribute update handlers for OTAUpgrade
-///////////////////////////////////////////////////////////////////////////////
-static void uic_mqtt_dotdot_on_ota_upgrade_upgrade_serverid_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  EUI64 upgrade_serverid = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::UpgradeServerID: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      upgrade_serverid = json_payload.at("value").get<EUI64>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    upgrade_serverid
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_file_offset_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint32_t file_offset = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::FileOffset: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      file_offset = json_payload.at("value").get<uint32_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    file_offset
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_current_file_version_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint32_t current_file_version = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::CurrentFileVersion: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      current_file_version = json_payload.at("value").get<uint32_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    current_file_version
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_current_zig_bee_stack_version_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint16_t current_zig_bee_stack_version = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::CurrentZigBeeStackVersion: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      current_zig_bee_stack_version = json_payload.at("value").get<uint16_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    current_zig_bee_stack_version
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_downloaded_file_version_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint32_t downloaded_file_version = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::DownloadedFileVersion: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      downloaded_file_version = json_payload.at("value").get<uint32_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    downloaded_file_version
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_downloaded_zig_bee_stack_version_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint16_t downloaded_zig_bee_stack_version = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::DownloadedZigBeeStackVersion: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      downloaded_zig_bee_stack_version = json_payload.at("value").get<uint16_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    downloaded_zig_bee_stack_version
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_image_upgrade_status_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint8_t image_upgrade_status = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::ImageUpgradeStatus: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      uint32_t tmp = get_enum_decimal_value<OTAUpgradeImageUpgradeStatus>("value", json_payload);
-      if (tmp == numeric_limits<OTAUpgradeImageUpgradeStatus>::max()) {
-      #ifdef OTA_UPGRADE_IMAGE_UPGRADE_STATUS_ENUM_NAME_AVAILABLE
-        tmp = ota_upgrade_image_upgrade_status_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(IMAGE_UPGRADE_STATUS_ENUM_NAME_AVAILABLE)
-        tmp = image_upgrade_status_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      image_upgrade_status = static_cast<uint8_t>(tmp);
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    image_upgrade_status
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_manufacturerid_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint16_t manufacturerid = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::ManufacturerID: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      manufacturerid = json_payload.at("value").get<uint16_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    manufacturerid
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_image_typeid_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint16_t image_typeid = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::ImageTypeID: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      image_typeid = json_payload.at("value").get<uint16_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    image_typeid
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_minimum_block_period_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint16_t minimum_block_period = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::MinimumBlockPeriod: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      minimum_block_period = json_payload.at("value").get<uint16_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    minimum_block_period
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_image_stamp_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint32_t image_stamp = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::ImageStamp: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      image_stamp = json_payload.at("value").get<uint32_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    image_stamp
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_upgrade_activation_policy_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint8_t upgrade_activation_policy = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::UpgradeActivationPolicy: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      uint32_t tmp = get_enum_decimal_value<OTAUpgradeUpgradeActivationPolicy>("value", json_payload);
-      if (tmp == numeric_limits<OTAUpgradeUpgradeActivationPolicy>::max()) {
-      #ifdef OTA_UPGRADE_UPGRADE_ACTIVATION_POLICY_ENUM_NAME_AVAILABLE
-        tmp = ota_upgrade_upgrade_activation_policy_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(UPGRADE_ACTIVATION_POLICY_ENUM_NAME_AVAILABLE)
-        tmp = upgrade_activation_policy_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      upgrade_activation_policy = static_cast<uint8_t>(tmp);
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    upgrade_activation_policy
-  );
-
-}
-static void uic_mqtt_dotdot_on_ota_upgrade_upgrade_timeout_policy_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint8_t upgrade_timeout_policy = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "OTAUpgrade::UpgradeTimeoutPolicy: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      uint32_t tmp = get_enum_decimal_value<OTAUpgradeUpgradeTimeoutPolicy>("value", json_payload);
-      if (tmp == numeric_limits<OTAUpgradeUpgradeTimeoutPolicy>::max()) {
-      #ifdef OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_ENUM_NAME_AVAILABLE
-        tmp = ota_upgrade_upgrade_timeout_policy_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(UPGRADE_TIMEOUT_POLICY_ENUM_NAME_AVAILABLE)
-        tmp = upgrade_timeout_policy_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      upgrade_timeout_policy = static_cast<uint8_t>(tmp);
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    upgrade_timeout_policy
-  );
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// Attribute init functions for OTAUpgrade
-///////////////////////////////////////////////////////////////////////////////
-sl_status_t uic_mqtt_dotdot_ota_upgrade_attributes_init()
-{
-  std::string base_topic = "ucl/by-unid/+/+/";
-
-  std::string subscription_topic;
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/UpgradeServerID/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_upgrade_serverid_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/FileOffset/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_file_offset_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/CurrentFileVersion/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_current_file_version_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/CurrentZigBeeStackVersion/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_current_zig_bee_stack_version_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/DownloadedFileVersion/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_downloaded_file_version_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/DownloadedZigBeeStackVersion/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_downloaded_zig_bee_stack_version_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/ImageUpgradeStatus/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_image_upgrade_status_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/ManufacturerID/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_manufacturerid_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/ImageTypeID/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_image_typeid_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/MinimumBlockPeriod/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_minimum_block_period_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/ImageStamp/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_image_stamp_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/UpgradeActivationPolicy/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_upgrade_activation_policy_attribute_update);
-  }
-  if(uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback) {
-    subscription_topic = base_topic + "OTAUpgrade/Attributes/UpgradeTimeoutPolicy/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_ota_upgrade_upgrade_timeout_policy_attribute_update);
-  }
-
-  return SL_STATUS_OK;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Callback setters and getters for OTAUpgrade
-///////////////////////////////////////////////////////////////////////////////
-void uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_serverid_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_file_offset_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_current_file_version_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_current_zig_bee_stack_version_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_file_version_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_downloaded_zig_bee_stack_version_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_image_upgrade_status_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_manufacturerid_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_image_typeid_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_minimum_block_period_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_image_stamp_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_activation_policy_callback = callback;
-}
-void uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback_set(const uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback_t callback)
-{
-  uic_mqtt_dotdot_ota_upgrade_attribute_upgrade_timeout_policy_callback = callback;
 }
 
 // End of supported cluster.
@@ -56346,6 +55197,10 @@ void uic_mqtt_dotdot_protocol_controller_rf_telemetry_attribute_pti_enabled_call
 // Callback pointers for State
 ///////////////////////////////////////////////////////////////////////////////
 static uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback_t uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback = nullptr;
+static uic_mqtt_dotdot_state_attribute_network_status_callback_t uic_mqtt_dotdot_state_attribute_network_status_callback = nullptr;
+static uic_mqtt_dotdot_state_attribute_security_callback_t uic_mqtt_dotdot_state_attribute_security_callback = nullptr;
+static uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback_t uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback = nullptr;
+static uic_mqtt_dotdot_state_attribute_network_list_callback_t uic_mqtt_dotdot_state_attribute_network_list_callback = nullptr;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update handlers for State
@@ -56433,6 +55288,333 @@ static void uic_mqtt_dotdot_on_state_endpoint_id_list_attribute_update(
   );
 
 }
+static void uic_mqtt_dotdot_on_state_network_status_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_state_attribute_network_status_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  NodeStateNetworkStatus network_status = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "State::NetworkStatus: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      uint32_t tmp = get_enum_decimal_value<NodeStateNetworkStatus>("value", json_payload);
+      if (tmp == numeric_limits<NodeStateNetworkStatus>::max()) {
+      #ifdef STATE_NETWORK_STATUS_ENUM_NAME_AVAILABLE
+        tmp = state_network_status_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #elif defined(NETWORK_STATUS_ENUM_NAME_AVAILABLE)
+        tmp = network_status_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #endif
+      }
+      network_status = static_cast<NodeStateNetworkStatus>(tmp);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_state_attribute_network_status_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    network_status
+  );
+
+}
+static void uic_mqtt_dotdot_on_state_security_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_state_attribute_security_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  NodeStateSecurity security = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "State::Security: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      uint32_t tmp = get_enum_decimal_value<NodeStateSecurity>("value", json_payload);
+      if (tmp == numeric_limits<NodeStateSecurity>::max()) {
+      #ifdef STATE_SECURITY_ENUM_NAME_AVAILABLE
+        tmp = state_security_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #elif defined(SECURITY_ENUM_NAME_AVAILABLE)
+        tmp = security_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #endif
+      }
+      security = static_cast<NodeStateSecurity>(tmp);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_state_attribute_security_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    security
+  );
+
+}
+static void uic_mqtt_dotdot_on_state_maximum_command_delay_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint32_t maximum_command_delay = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "State::MaximumCommandDelay: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      maximum_command_delay = json_payload.at("value").get<uint32_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    maximum_command_delay
+  );
+
+}
+static void uic_mqtt_dotdot_on_state_network_list_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_state_attribute_network_list_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  std::vector<const char*> network_list;
+  size_t network_list_count = 0;
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "State::NetworkList: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      auto &network_list_json = json_payload.at("value");
+      for (size_t i = 0; i < network_list_json.size(); i++) {
+        network_list.push_back(network_list_json.at(i).get_ptr<const std::string*>()->c_str());
+      }
+      // Take our vector and pack it into the updated state
+      network_list_count = network_list.size();
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_state_attribute_network_list_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    network_list_count,
+    network_list.data()
+  );
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute init functions for State
@@ -56446,6 +55628,22 @@ sl_status_t uic_mqtt_dotdot_state_attributes_init()
     subscription_topic = base_topic + "State/Attributes/EndpointIdList/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_state_endpoint_id_list_attribute_update);
   }
+  if(uic_mqtt_dotdot_state_attribute_network_status_callback) {
+    subscription_topic = base_topic + "State/Attributes/NetworkStatus/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_state_network_status_attribute_update);
+  }
+  if(uic_mqtt_dotdot_state_attribute_security_callback) {
+    subscription_topic = base_topic + "State/Attributes/Security/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_state_security_attribute_update);
+  }
+  if(uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback) {
+    subscription_topic = base_topic + "State/Attributes/MaximumCommandDelay/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_state_maximum_command_delay_attribute_update);
+  }
+  if(uic_mqtt_dotdot_state_attribute_network_list_callback) {
+    subscription_topic = base_topic + "State/Attributes/NetworkList/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_state_network_list_attribute_update);
+  }
 
   return SL_STATUS_OK;
 }
@@ -56457,6 +55655,22 @@ sl_status_t uic_mqtt_dotdot_state_attributes_init()
 void uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback_set(const uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback_t callback)
 {
   uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback = callback;
+}
+void uic_mqtt_dotdot_state_attribute_network_status_callback_set(const uic_mqtt_dotdot_state_attribute_network_status_callback_t callback)
+{
+  uic_mqtt_dotdot_state_attribute_network_status_callback = callback;
+}
+void uic_mqtt_dotdot_state_attribute_security_callback_set(const uic_mqtt_dotdot_state_attribute_security_callback_t callback)
+{
+  uic_mqtt_dotdot_state_attribute_security_callback = callback;
+}
+void uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback_set(const uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback_t callback)
+{
+  uic_mqtt_dotdot_state_attribute_maximum_command_delay_callback = callback;
+}
+void uic_mqtt_dotdot_state_attribute_network_list_callback_set(const uic_mqtt_dotdot_state_attribute_network_list_callback_t callback)
+{
+  uic_mqtt_dotdot_state_attribute_network_list_callback = callback;
 }
 
 // End of supported cluster.

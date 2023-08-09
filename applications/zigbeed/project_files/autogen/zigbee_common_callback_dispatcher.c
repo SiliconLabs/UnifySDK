@@ -20,19 +20,19 @@
 #include "zigbee_app_framework_common.h"
 #include "zigbee_common_callback_dispatcher.h"
 
-void emAfEventInit(void)
+void sli_zigbee_af_event_init(void)
 {
 }
 
-void emAfLocalDataInit(void)
+void sli_zigbee_af_local_data_init(void)
 {
 }
 
-void emAfInitDone(void)
+void sli_zigbee_af_initDone(void)
 {
 }
 
 
-void emAfTick(void)
+void sli_zigbee_af_tick(void)
 {
 }

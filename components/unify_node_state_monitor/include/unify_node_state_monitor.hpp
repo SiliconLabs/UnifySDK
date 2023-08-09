@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /**
- * @defgroup unify_node_state_monitor
+ * @defgroup unify_node_state_monitor Unify Node State Monitor
  * @ingroup unify_components
  * @brief Monitors when Unify nodes are added, removed, or failing
  *
@@ -65,7 +65,7 @@ class cluster
   /**
    * @brief Construct a new cluster object.
    *
-   * @param cluster_name ZCL Cluster ID.
+   * @param name ZCL Cluster Name.
    */
   explicit cluster(const std::string &name) :
     cluster_name(name) {};
@@ -136,7 +136,7 @@ class node
    * When creating a new node, the state is set to
    * ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE.
    *
-   * @param unid UNID of the node.
+   * @param _unid UNID of the node.
    */
   explicit node(const std::string &_unid) : unid(_unid)
   {
@@ -203,7 +203,7 @@ class node_state_monitor_interface
 
 /**
  * The role of the node state monitor is to subscribe to the
- * ucl/by-unid/<unid>/State topic. It will check when nodes a are changing
+ * ucl/by-unid/&lt;unid&gt;/State topic. It will check when nodes a are changing
  * state, and create \ref node object, populated with \ref endpoint, state and
  * security information. When a new node is found / deleted or updated a
  * callback is fired containing the node object. The node state monitor should

@@ -576,7 +576,8 @@ automatically.
   // EPC Configuration for the Unify DotDot Attribute Store
   static const unify_dotdot_attribute_store_configuration_t epc_configuration
     = {.get_endpoint_node_function = &attribute_store_network_helper_get_endpoint_node,
-       .get_unid_endpoint_function   = &attribute_store_network_helper_get_unid_endpoint_from_node,
+       .get_unid_endpoint_function  = &attribute_store_network_helper_get_unid_endpoint_from_node,
+       .get_unid_function  = &attribute_store_network_helper_get_unid_from_node,
        .update_attribute_desired_values_on_commands = true,
        .clear_reported_on_desired_updates           = true,
        .automatic_deduction_of_supported_commands   = true,

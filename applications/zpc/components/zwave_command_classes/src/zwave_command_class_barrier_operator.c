@@ -225,7 +225,7 @@ static sl_status_t zwave_command_class_barrier_operator_signal_get(
  */
 static sl_status_t zwave_command_class_barrier_operator_handle_set(
   const zwave_controller_connection_info_t *connection_info,
-  const uint8_t *frame_data,
+  const uint8_t *frame,
   uint16_t frame_length)
 {
   if (frame_length <= TARGET_VALUE_INDEX) {
@@ -236,7 +236,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_set(
   zwave_unid_from_node_id(connection_info->remote.node_id, node_unid);
   dotdot_endpoint_id_t endpoint_id = connection_info->remote.endpoint_id;
 
-  barrier_operator_state_t target_value = frame_data[TARGET_VALUE_INDEX];
+  barrier_operator_state_t target_value = frame[TARGET_VALUE_INDEX];
 
   const uic_mqtt_dotdot_barrier_control_command_go_to_percent_fields_t target
     = {.percent_open = target_value};
@@ -264,7 +264,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_set(
  */
 static sl_status_t zwave_command_class_barrier_operator_handle_report(
   const zwave_controller_connection_info_t *connection_info,
-  const uint8_t *frame_data,
+  const uint8_t *frame,
   uint16_t frame_length)
 {
   // We expect to have at least 5 byte of value
@@ -278,7 +278,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_report(
 
   // Type
   barrier_operator_state_t state = 0;
-  state                          = frame_data[STATE_INDEX];
+  state                          = frame[STATE_INDEX];
 
   attribute_store_set_child_reported(endpoint_node,
                                      ATTRIBUTE(STATE),
@@ -309,7 +309,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_report(
  */
 static sl_status_t zwave_command_class_barrier_operator_handle_signal_report(
   const zwave_controller_connection_info_t *connection_info,
-  const uint8_t *frame_data,
+  const uint8_t *frame,
   uint16_t frame_length)
 {
   if (frame_length <= SUBSYSTEM_STATE_INDEX) {
@@ -322,7 +322,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_signal_report(
 
   // Subsystem Type
   barrier_operator_subsystem_type_t type = 0;
-  type                                   = frame_data[SUBSYSTEM_TYPE_INDEX];
+  type                                   = frame[SUBSYSTEM_TYPE_INDEX];
 
   attribute_store_node_t type_node
     = attribute_store_get_node_child_by_value(endpoint_node,
@@ -333,7 +333,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_signal_report(
                                               0);
   // Subsystem State
   barrier_operator_subsystem_state_t subsystem_state_value
-    = frame_data[SUBSYSTEM_STATE_INDEX];
+    = frame[SUBSYSTEM_STATE_INDEX];
 
   attribute_store_set_child_reported(type_node,
                                      ATTRIBUTE(SUBSYSTEM_STATE),
@@ -353,7 +353,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_signal_report(
  */
 static sl_status_t zwave_command_class_barrier_operator_handle_supported_report(
   const zwave_controller_connection_info_t *connection_info,
-  const uint8_t *frame_data,
+  const uint8_t *frame,
   uint16_t frame_length)
 {
   // Find the Endpoint
@@ -380,7 +380,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_supported_report(
   barrier_operator_subsystem_type_t type = 0;
   for (uint8_t byte = 0; byte < number_of_bytes; byte++) {
     for (uint8_t bit = 0; bit < 8; bit++) {
-      if (frame_data[byte + SUPPORTED_REPORT_BITMASK_INDEX] & (1 << bit)) {
+      if (frame[byte + SUPPORTED_REPORT_BITMASK_INDEX] & (1 << bit)) {
         type = (byte * 8) + bit + 1;
         attribute_store_node_t type_node
           = attribute_store_emplace(endpoint_node,
@@ -400,7 +400,7 @@ static sl_status_t zwave_command_class_barrier_operator_handle_supported_report(
   attribute_store_set_node_attribute_value(
     bitmask_node,
     REPORTED_ATTRIBUTE,
-    &frame_data[SUPPORTED_REPORT_BITMASK_INDEX],
+    &frame[SUPPORTED_REPORT_BITMASK_INDEX],
     number_of_bytes);
 
   return SL_STATUS_OK;

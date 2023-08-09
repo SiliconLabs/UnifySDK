@@ -163,7 +163,6 @@ class built_in_function_check
 extern "C" {
 #endif
 
-/** @} end attribute_mapper_built_in_functions */
 #ifdef __cplusplus
 }
 #endif

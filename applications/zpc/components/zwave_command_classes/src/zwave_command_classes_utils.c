@@ -260,14 +260,6 @@ zwave_role_type_t get_zwave_node_role_type(zwave_node_id_t node_id)
   return role_type;
 }
 
-/**
- * @brief Verifies if a Node is a Portable End Node. (PS / PEN Role type)
- *
- * @param node  The Attribute Store node for the Endpoint ID 0 which
- *                       which needs a wake up configuration
- * @returns true if the Role type of the node is ROLE_TYPE_END_NODE_PORTABLE,
- *          false otherwise
- */
 bool is_portable_end_node(attribute_store_node_t node)
 {
   zwave_node_id_t node_id = 0;

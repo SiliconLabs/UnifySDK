@@ -1,5 +1,7 @@
 # UPTI WRITER Release Notes
 
+## [1.4.0] - Aug 2023
+
 ## [1.3.2] - Jun 2023
 
 ## [1.3.1] - Mar 2023

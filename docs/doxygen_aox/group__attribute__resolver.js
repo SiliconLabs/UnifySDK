@@ -9,6 +9,7 @@ var group__attribute__resolver =
       [ "send", "structattribute__resolver__config__t.html#a991636363f24d6288b34571985836cb9", null ],
       [ "send_init", "structattribute__resolver__config__t.html#ae3b2ac5dbea7bab9d30444ac7f95bb8e", null ]
     ] ],
+    [ "MAX_FRAME_LEN", "group__attribute__resolver.html#gae480dcd4682b4ad7442fdd1db297083e", null ],
     [ "attribute_resolver_callback_t", "group__attribute__resolver.html#gab969c331fd29e45a9e9f2b82635c6bff", null ],
     [ "attribute_resolver_function_t", "group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc", null ],
     [ "attribute_resolver_clear_resolution_listener", "group__attribute__resolver.html#ga6520e27d300cc764c9281905c486c67c", null ],

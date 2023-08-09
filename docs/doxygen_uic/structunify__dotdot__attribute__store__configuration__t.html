@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework Lib
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -104,6 +104,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6710b96e984c514dabf12c41bf939a41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__dotdot__attribute__store.html#ga765a48c9ef85bba9d59cd174ccfa3992">unid_fetching_function_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#a6710b96e984c514dabf12c41bf939a41">get_unid_endpoint_function</a></td></tr>
 <tr class="memdesc:a6710b96e984c514dabf12c41bf939a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">unid_fetching_function_t function that outputs UNID/Endpoints based on a Attribute Store node. The attribute Store node may be located at any depth under the endpoint node.  <a href="structunify__dotdot__attribute__store__configuration__t.html#a6710b96e984c514dabf12c41bf939a41">More...</a><br /></td></tr>
 <tr class="separator:a6710b96e984c514dabf12c41bf939a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad130f25d9948d0ab5641a5e8b18ec6fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__dotdot__attribute__store.html#ga5c78ae816c0163f71f886988d3a5dd5c">unid_only_fetching_function_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#ad130f25d9948d0ab5641a5e8b18ec6fa">get_unid_function</a></td></tr>
+<tr class="memdesc:ad130f25d9948d0ab5641a5e8b18ec6fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">unid_only_fetching_function_t function that outputs UNID based on a Attribute Store node. This function will be used on in cases when we do not have any endpoint, but need to read UNIDs. This is used by the node state component.  <a href="structunify__dotdot__attribute__store__configuration__t.html#ad130f25d9948d0ab5641a5e8b18ec6fa">More...</a><br /></td></tr>
+<tr class="separator:ad130f25d9948d0ab5641a5e8b18ec6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada898a522cd2245b7809a4cf1aeedfa4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#ada898a522cd2245b7809a4cf1aeedfa4">update_attribute_desired_values_on_commands</a></td></tr>
 <tr class="memdesc:ada898a522cd2245b7809a4cf1aeedfa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables the automatic updating of ZCL attribute desired values upon MQTT command reception.  <a href="structunify__dotdot__attribute__store__configuration__t.html#ada898a522cd2245b7809a4cf1aeedfa4">More...</a><br /></td></tr>
 <tr class="separator:ada898a522cd2245b7809a4cf1aeedfa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,9 +122,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a68f92fdc8e148d418586d6adfd88b65b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#a68f92fdc8e148d418586d6adfd88b65b">write_attributes_enabled</a></td></tr>
 <tr class="memdesc:a68f92fdc8e148d418586d6adfd88b65b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables the automatic publishing of ZCL Attributes values to MQTT.  <a href="structunify__dotdot__attribute__store__configuration__t.html#a68f92fdc8e148d418586d6adfd88b65b">More...</a><br /></td></tr>
 <tr class="separator:a68f92fdc8e148d418586d6adfd88b65b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae7a4468d47ee9ddd1d0d2b749df8f2c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#aae7a4468d47ee9ddd1d0d2b749df8f2c">publish_attribute_values_to_mqtt</a></td></tr>
-<tr class="memdesc:aae7a4468d47ee9ddd1d0d2b749df8f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables the automatic publishing of ZCL Attributes values to MQTT.  <a href="structunify__dotdot__attribute__store__configuration__t.html#aae7a4468d47ee9ddd1d0d2b749df8f2c">More...</a><br /></td></tr>
-<tr class="separator:aae7a4468d47ee9ddd1d0d2b749df8f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cafb96dc04c9422bc02384bfd3b095d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#a8cafb96dc04c9422bc02384bfd3b095d">publish_desired_attribute_values_to_mqtt</a></td></tr>
+<tr class="memdesc:a8cafb96dc04c9422bc02384bfd3b095d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables the automatic publishing of ZCL Attributes desired values to MQTT.  <a href="structunify__dotdot__attribute__store__configuration__t.html#a8cafb96dc04c9422bc02384bfd3b095d">More...</a><br /></td></tr>
+<tr class="separator:a8cafb96dc04c9422bc02384bfd3b095d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4495879634a32fad90bbf5ac5ca8a8e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#a4495879634a32fad90bbf5ac5ca8a8e0">publish_reported_attribute_values_to_mqtt</a></td></tr>
+<tr class="memdesc:a4495879634a32fad90bbf5ac5ca8a8e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables the automatic publishing of ZCL Attributes reported values to MQTT.  <a href="structunify__dotdot__attribute__store__configuration__t.html#a4495879634a32fad90bbf5ac5ca8a8e0">More...</a><br /></td></tr>
+<tr class="separator:a4495879634a32fad90bbf5ac5ca8a8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76588c3bb6ed0f492147af2b808ace60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#a76588c3bb6ed0f492147af2b808ace60">node_type</a></td></tr>
+<tr class="memdesc:a76588c3bb6ed0f492147af2b808ace60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of an node attribute.  <a href="structunify__dotdot__attribute__store__configuration__t.html#a76588c3bb6ed0f492147af2b808ace60">More...</a><br /></td></tr>
+<tr class="separator:a76588c3bb6ed0f492147af2b808ace60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed44bbd221133575352586368f529c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#a4ed44bbd221133575352586368f529c7">endpoint_type</a></td></tr>
+<tr class="memdesc:a4ed44bbd221133575352586368f529c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of an endpoint attribute.  <a href="structunify__dotdot__attribute__store__configuration__t.html#a4ed44bbd221133575352586368f529c7">More...</a><br /></td></tr>
+<tr class="separator:a4ed44bbd221133575352586368f529c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration structure for the Unify DotDot Attribute Store component. </p>
@@ -155,6 +167,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Instructs if the component should clear reported values when setting a new desired values. It can e.g. used in combination with the Attribute Resolver to force reading the state of an attribute after issuing a command Note that this has no effect if <a class="el" href="structunify__dotdot__attribute__store__configuration__t.html#ada898a522cd2245b7809a4cf1aeedfa4">update_attribute_desired_values_on_commands</a> is set to false. </p>
+
+</div>
+</div>
+<a id="a4ed44bbd221133575352586368f529c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed44bbd221133575352586368f529c7">&#9670;&nbsp;</a></span>endpoint_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> unify_dotdot_attribute_store_configuration_t::endpoint_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type of an endpoint attribute. </p>
 
 </div>
 </div>
@@ -206,19 +234,67 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aae7a4468d47ee9ddd1d0d2b749df8f2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae7a4468d47ee9ddd1d0d2b749df8f2c">&#9670;&nbsp;</a></span>publish_attribute_values_to_mqtt</h2>
+<a id="ad130f25d9948d0ab5641a5e8b18ec6fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad130f25d9948d0ab5641a5e8b18ec6fa">&#9670;&nbsp;</a></span>get_unid_function</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool unify_dotdot_attribute_store_configuration_t::publish_attribute_values_to_mqtt</td>
+          <td class="memname"><a class="el" href="group__unify__dotdot__attribute__store.html#ga5c78ae816c0163f71f886988d3a5dd5c">unid_only_fetching_function_t</a> unify_dotdot_attribute_store_configuration_t::get_unid_function</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enables or disables the automatic publishing of ZCL Attributes values to MQTT. </p>
+<p>unid_only_fetching_function_t function that outputs UNID based on a Attribute Store node. This function will be used on in cases when we do not have any endpoint, but need to read UNIDs. This is used by the node state component. </p>
+
+</div>
+</div>
+<a id="a76588c3bb6ed0f492147af2b808ace60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76588c3bb6ed0f492147af2b808ace60">&#9670;&nbsp;</a></span>node_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> unify_dotdot_attribute_store_configuration_t::node_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type of an node attribute. </p>
+
+</div>
+</div>
+<a id="a8cafb96dc04c9422bc02384bfd3b095d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cafb96dc04c9422bc02384bfd3b095d">&#9670;&nbsp;</a></span>publish_desired_attribute_values_to_mqtt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool unify_dotdot_attribute_store_configuration_t::publish_desired_attribute_values_to_mqtt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables or disables the automatic publishing of ZCL Attributes desired values to MQTT. </p>
+
+</div>
+</div>
+<a id="a4495879634a32fad90bbf5ac5ca8a8e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4495879634a32fad90bbf5ac5ca8a8e0">&#9670;&nbsp;</a></span>publish_reported_attribute_values_to_mqtt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool unify_dotdot_attribute_store_configuration_t::publish_reported_attribute_values_to_mqtt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables or disables the automatic publishing of ZCL Attributes reported values to MQTT. </p>
 
 </div>
 </div>
@@ -263,7 +339,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structunify__dotdot__attribute__store__configuration__t.html">unify_dotdot_attribute_store_configuration_t</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:59 for Unify Framework Lib by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:04 for Unify Framework Lib by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

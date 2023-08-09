@@ -35,14 +35,14 @@ extern "C" {
  * @brief Initialize the serial port to 115200 BAUD 8N1
  * @returns the file descriptor for the serial device.
  *
- * @zgw_name SerialInit
+ * aka SerialInit
  */
 int zwapi_serial_init(const char *serial_port);
 
 /**
  * @brief De-Initialize the serial port.
  *
- * @zgw_name SerialClose
+ * aka SerialClose
  */
 void zwapi_serial_close(void);
 
@@ -50,7 +50,7 @@ void zwapi_serial_close(void);
  * @brief Closes and re-initialize the last open serial port.
  * @returns the file descriptor for the serial device.
  *
- * @zgw_name SerialRestart
+ * aka SerialRestart
  */
 int zwapi_serial_restart(void);
 
@@ -60,14 +60,14 @@ int zwapi_serial_restart(void);
  * @returns 0 if no characters are available, otherwise this returns 1
  * (length of the read data)
  *
- * @zgw_name SerialGetByte
+ * aka SerialGetByte
  */
 int zwapi_serial_get_byte(uint8_t *c);
 
 /**
  * @brief Write a byte to serial port device.
  *
- * @zgw_name SerialPutByte
+ * aka SerialPutByte
  */
 void zwapi_serial_put_byte(uint8_t c);
 
@@ -78,7 +78,7 @@ void zwapi_serial_put_byte(uint8_t c);
  * @param len length of buffer.
  * @returns The length of the data copied in the buffer.
  *
- * @zgw_name SerialGetBuffer
+ * aka SerialGetBuffer
  */
 int zwapi_serial_get_buffer(uint8_t *c, int len);
 
@@ -88,7 +88,7 @@ int zwapi_serial_get_buffer(uint8_t *c, int len);
  * @param c buffer with data to write to serial port.
  * @param len length of data in buffer.
  *
- * @zgw_name SerialPutBuffer
+ * aka SerialPutBuffer
  */
 void zwapi_serial_put_buffer(uint8_t *c, int len);
 
@@ -98,7 +98,7 @@ void zwapi_serial_put_buffer(uint8_t *c, int len);
  *
  * @returns true if the file is available, false if not or if an error occurred.
  *
- * @zgw_name SerialCheck
+ * aka SerialCheck
  */
 bool zwapi_serial_is_file_available(void);
 
@@ -108,7 +108,7 @@ bool zwapi_serial_is_file_available(void);
  * This function calls tcdrain, which waits that the TTY buffer data has been
  * written to the hardware.
  *
- * @zgw_name SerialFlush
+ * aka SerialFlush
  */
 void zwapi_serial_drain_buffer(void);
 

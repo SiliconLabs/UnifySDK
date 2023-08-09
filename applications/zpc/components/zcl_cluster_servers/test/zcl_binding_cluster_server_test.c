@@ -17,7 +17,7 @@
 #include "dotdot_cluster_id_definitions.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zwave_command_class_association_types.h"
-#include "ucl_definitions.h"
+
 
 // Test helpers
 #include "zpc_attribute_store_test_helper.h"
@@ -27,6 +27,7 @@
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 
 // Mocks
 #include "dotdot_mqtt_mock.h"
@@ -174,9 +175,9 @@ void test_binding_cluster_server_test_publish_attributes_after_network_status_up
     UCL_MQTT_PUBLISH_TYPE_REPORTED,
     SL_STATUS_OK);
 
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 }
@@ -198,10 +199,10 @@ void test_binding_cluster_server_test_publish_attributes_after_group_command_lis
                                      &group_count,
                                      sizeof(group_count));
 
-  node_state_topic_state_t network_status
-    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  NodeStateNetworkStatus network_status
+    = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
   // Set the network status to online functional, it will publish
@@ -237,9 +238,9 @@ void test_binding_cluster_server_test_publish_attributes_after_group_command_lis
     UCL_MQTT_PUBLISH_TYPE_REPORTED,
     SL_STATUS_OK);
 
-  network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 
@@ -280,9 +281,9 @@ void test_binding_cluster_server_no_publish_for_zpc()
                                      &group_count,
                                      sizeof(group_count));
 
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(zpc_node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 
@@ -316,9 +317,9 @@ void test_binding_cluster_server_no_valid_unid()
                                      &group_count,
                                      sizeof(group_count));
 
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(root_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 
@@ -847,9 +848,9 @@ void test_binding_cluster_server_bind_multiple_groups_and_publish()
     UCL_MQTT_PUBLISH_TYPE_REPORTED,
     SL_STATUS_OK);
 
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_child_reported(node_id_node,
-                                     ATTRIBUTE_NETWORK_STATUS,
+                                     DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                      &network_status,
                                      sizeof(network_status));
 }

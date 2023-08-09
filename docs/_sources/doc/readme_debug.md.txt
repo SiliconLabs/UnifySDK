@@ -181,6 +181,14 @@ interface with the Z-Wave module to the path provided. If the file exists, the
 log will be appended to this file, otherwise, the file will be created. The
 ZPC will not handle log rotation.
 
+`scripts/serial_decode_zpc.py` can be used to parse this serial log file to better
+human readble format
+
+Usage:
+
+```console
+python serial_decode_zpc.py serial_log.txt
+```
 ### Using MQTT Explorer to Monitor Messages
 
 You can publish MQTT message and observe the MQTT messages stored in the broker

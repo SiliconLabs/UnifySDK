@@ -11,15 +11,16 @@
 // Includes from this component
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store_type_registration.h"
 #include "zpc_attribute_store_register_default_attribute_type_data.h"
-
+#include "unify_dotdot_defined_attribute_types.h"
 // Generic includes
 #include <string.h>
 
 // Interfaces
-#include "ucl_definitions.h"
+
 
 // Includes from ZPC components
 #include "zwave_network_management.h"
@@ -33,17 +34,22 @@
 #define LOG_TAG "zpc_attribute_store"
 
 // ZPC Configuration for the Unify DotDot Attribute Store
-static const unify_dotdot_attribute_store_configuration_t zpc_configuration
-  = {.get_endpoint_node_function
-     = &attribute_store_network_helper_get_endpoint_node,
-     .get_unid_endpoint_function
-     = &attribute_store_network_helper_get_unid_endpoint_from_node,
-     .update_attribute_desired_values_on_commands = true,
-     .clear_reported_on_desired_updates           = false,
-     .automatic_deduction_of_supported_commands   = true,
-     .force_read_attributes_enabled               = false,
-     .write_attributes_enabled                    = true,
-     .publish_attribute_values_to_mqtt            = true};
+const unify_dotdot_attribute_store_configuration_t zpc_configuration = {
+  .get_endpoint_node_function
+  = &attribute_store_network_helper_get_endpoint_node,
+  .get_unid_endpoint_function
+  = &attribute_store_network_helper_get_unid_endpoint_from_node,
+  .get_unid_function = &attribute_store_network_helper_get_unid_from_node,
+  .update_attribute_desired_values_on_commands = true,
+  .clear_reported_on_desired_updates           = false,
+  .automatic_deduction_of_supported_commands   = true,
+  .force_read_attributes_enabled               = true,
+  .write_attributes_enabled                    = true,
+  .publish_desired_attribute_values_to_mqtt    = true,
+  .publish_reported_attribute_values_to_mqtt   = true,
+  .node_type                                   = ATTRIBUTE_NODE_ID,
+  .endpoint_type                               = ATTRIBUTE_ENDPOINT_ID,
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Private functions
@@ -62,8 +68,8 @@ static const unify_dotdot_attribute_store_configuration_t zpc_configuration
  */
 static void zpc_attribute_store_update_all_network_statuses(
   attribute_store_node_t home_id_node,
-  node_state_topic_state_t old_value,
-  node_state_topic_state_t new_value)
+  NodeStateNetworkStatus old_value,
+  NodeStateNetworkStatus new_value)
 {
   // Find all NodeIDs in that network
   uint32_t node_id_index = 0;
@@ -77,9 +83,9 @@ static void zpc_attribute_store_update_all_network_statuses(
     // Transition the network status from old value to new value:
     attribute_store_node_t network_status_node
       = attribute_store_get_node_child_by_value(node_id_node,
-                                                ATTRIBUTE_NETWORK_STATUS,
+                                                DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS,
                                                 REPORTED_ATTRIBUTE,
-                                                &old_value,
+                                                (uint8_t*)(&old_value),
                                                 sizeof(old_value),
                                                 0);
     attribute_store_set_reported(network_status_node,
@@ -153,8 +159,8 @@ static sl_status_t invoke_update_callbacks_in_network()
   // First off, find all network statuses and set them from "included" to "Unavailable"
   zpc_attribute_store_update_all_network_statuses(
     home_id,
-    NODE_STATE_TOPIC_STATE_INCLUDED,
-    NODE_STATE_TOPIC_STATE_UNAVAILABLE);
+    ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL,
+    ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE);
 
   sl_status_t refresh
     = attribute_store_refresh_node_and_children_callbacks(home_id);
@@ -169,8 +175,8 @@ static sl_status_t invoke_update_callbacks_in_network()
   // Set all nodes as Included, ready to be operated
   zpc_attribute_store_update_all_network_statuses(
     home_id,
-    NODE_STATE_TOPIC_STATE_UNAVAILABLE,
-    NODE_STATE_TOPIC_STATE_INCLUDED);
+    ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE,
+    ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL);
 
   sl_log_info(LOG_TAG,
               "Refreshed callbacks on Attribute Node %d, "

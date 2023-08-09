@@ -57,7 +57,10 @@ uint32_t zwapi_nvm_open(void)
     if (response_buffer[IDX_DATA] == ZWAVE_API_NVM_RETURN_CODE_OK) {
       nvm_length = response_buffer[IDX_DATA + 2] << 8;
       nvm_length = nvm_length | response_buffer[IDX_DATA + 3];
-      if (nvm_length != 0) {
+      if (nvm_length == 0){
+    	  /*Fix for 800s nvm that is 0x10000 bytes long and therefore overflows the 2 bytes in the frame */
+    	  nvm_length = 0x10000;
+      } else {
         /* FIXME: 700 series return 1 more byte than the size of the NVM, it seems */
         nvm_length += 1;
       }

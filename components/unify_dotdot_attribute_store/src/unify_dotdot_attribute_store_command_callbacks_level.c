@@ -38,6 +38,8 @@ const uint8_t DEFAULT_MOVE_RATE = 0xFF;
 // ZigBee default values for Level::MinLevel and Level::MaxLevel
 const uint8_t DEFAULT_MIN_LEVEL = 0x00;
 const uint8_t DEFAULT_MAX_LEVEL = 0xFF;
+const uint8_t DEFAULT_MIN_FREQUENCY = 0x00;
+const uint8_t DEFAULT_MAX_FREQUENCY = 0x00;
 
 /**
  * @brief Finds the Level::MinLevel value for a UNID/ep
@@ -68,6 +70,40 @@ static uint8_t get_max_level(dotdot_unid_t unid, dotdot_endpoint_id_t endpoint)
     return dotdot_get_level_max_level(unid, endpoint, REPORTED_ATTRIBUTE);
   } else {
     return DEFAULT_MAX_LEVEL;
+  }
+}
+
+/**
+ * @brief Finds the Level::MinFrequency value for a UNID/ep
+ *
+ * @param unid          UNID of the node we want to get the information for
+ * @param endpoint      Endpoint of the node we want to get the information for
+ * @return uint16_t MinFrequency value to use
+ */
+static uint16_t get_min_frequency(dotdot_unid_t unid,
+                                  dotdot_endpoint_id_t endpoint)
+{
+  if (dotdot_is_supported_level_min_frequency(unid, endpoint)) {
+    return dotdot_get_level_min_frequency(unid, endpoint, REPORTED_ATTRIBUTE);
+  } else {
+    return DEFAULT_MIN_FREQUENCY;
+  }
+}
+
+/**
+ * @brief Finds the Level::MaxFrequency value for a UNID/ep
+ *
+ * @param unid          UNID of the node we want to get the information for
+ * @param endpoint      Endpoint of the node we want to get the information for
+ * @return uint16_t MaxFrequency value to use
+ */
+static uint16_t get_max_frequency(dotdot_unid_t unid,
+                                  dotdot_endpoint_id_t endpoint)
+{
+  if (dotdot_is_supported_level_max_frequency(unid, endpoint)) {
+    return dotdot_get_level_max_frequency(unid, endpoint, REPORTED_ATTRIBUTE);
+  } else {
+    return DEFAULT_MAX_FREQUENCY;
   }
 }
 
@@ -576,6 +612,49 @@ sl_status_t level_cluster_mapper_stop_with_on_off(
   return SL_STATUS_OK;
 }
 
+static sl_status_t level_move_to_closest_frequency_command(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uint16_t frequency)
+{
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_supported_level_current_frequency(unid, endpoint)
+               ? SL_STATUS_OK
+               : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Align desired values:
+  if (dotdot_is_supported_level_current_frequency(unid, endpoint)
+      && (is_desired_value_update_on_commands_enabled())) {
+    uint16_t min_frequency = get_min_frequency(unid, endpoint);
+    uint16_t max_frequency = get_max_frequency(unid, endpoint);
+    if (frequency < min_frequency) {
+      frequency = min_frequency;
+    } else if (frequency > max_frequency) {
+      frequency = max_frequency;
+    }
+
+    sl_log_debug(LOG_TAG,
+                 "Updating ZCL desired values after "
+                 "Level:MoveToClosestFrequency command");
+    dotdot_set_level_current_frequency(unid,
+                                       endpoint,
+                                       DESIRED_ATTRIBUTE,
+                                       frequency);
+    if (is_clear_reported_enabled()) {
+      sl_log_debug(LOG_TAG, "Clearing Level:CurrentFrequency reported value");
+      dotdot_level_current_frequency_undefine_reported(unid, endpoint);
+    }
+  }
+
+  return SL_STATUS_OK;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Init and teardown functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -603,6 +682,9 @@ void level_cluster_mapper_init()
 
   uic_mqtt_dotdot_level_stop_with_on_off_callback_set(
     &level_cluster_mapper_stop_with_on_off);
+
+  uic_mqtt_dotdot_level_move_to_closest_frequency_callback_set(
+    &level_move_to_closest_frequency_command);
 
   attribute_store_register_callback_by_type_and_state(
     &on_remaining_time_reported_update,

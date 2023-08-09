@@ -79,12 +79,10 @@ bool zwave_security_validation_is_security_valid_for_support(
       return false;
     }
 
-    /// TODO: UIC-1102 Wait for the 2021D spec release to be in force for cert to re-activate this.
-    //if (connection->encapsulation
-    //    == zwave_controller_get_highest_encapsulation(remote_node_keys)) {
-    // return true;
-    //}
-    return true;
+    if (connection->encapsulation
+        == zwave_controller_get_highest_encapsulation(remote_node_keys)) {
+      return true;
+    }
   }
 
   // If we get here, we reject!

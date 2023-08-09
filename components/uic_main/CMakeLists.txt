@@ -24,7 +24,6 @@ else()
     uic_config
     uic_mqtt
     uic_stdin
-    uic_contiki_platform
     uic_contiki_platform)
 endif()
 

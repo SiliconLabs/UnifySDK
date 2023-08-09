@@ -14,7 +14,7 @@
 #include "sl_status.h"
 #include "ucl_mqtt.h"
 #include "ucl_network_management.h"
-#include "ucl_node_state.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 
 PROCESS_NAME(ucl_network_management_process);
 
@@ -22,7 +22,6 @@ sl_status_t ucl_mqtt_setup_fixt(void)
 {
   // Start the processes
   process_start(&ucl_network_management_process, NULL);
-  process_start(&ucl_node_state_process, NULL);
 
   return SL_STATUS_OK;
 }

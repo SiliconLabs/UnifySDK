@@ -1,6 +1,6 @@
 include(FetchContent)
-find_package(GeckoSDK 4.2.2 REQUIRED)
-find_package(CPCD 4.2.2 REQUIRED)
+find_package(GeckoSDK 4.3.0 REQUIRED)
+find_package(CPCD 4.3.0 REQUIRED)
 
 set(FETCHCONTENT_QUIET False)
 set(CMAKE_INSTALL_DEFAULT_COMPONENT_NAME uic-otbr)
@@ -33,10 +33,21 @@ file(COPY ${POSIX_CONFIG_HEADERS} DESTINATION ${openthread_SOURCE_DIR}/src/posix
 # Set CPCD_SOURCE_DIR to source path exported from FetchContent in FindCPCD
 set(CPCD_SOURCE_DIR ${cpcd_SOURCE_DIR} CACHE STRING "Root path to cpc daemon source files")
 
+# Set project options for CPC as RCP vendor implementation
+set(OT_POSIX_CONFIG_RCP_BUS "VENDOR" CACHE STRING "RCP bus type")
+set(OT_POSIX_CONFIG_RCP_VENDOR_INTERFACE "${SILABS_POSIX_CONFIG_PATH}/cpc_interface.cpp" CACHE STRING "Name of vendor interface source file")
+
+# Temporarily remove call to cpc FindModule
+# and link directly to cpc after add_subdirectory
+#set(OT_POSIX_CONFIG_RCP_VENDOR_DEPS_PACKAGE "SilabsRcpDeps" CACHE STRING "Name of vendor interface module file")
+#list(APPEND CMAKE_MODULE_PATH "${SILABS_POSIX_CONFIG_PATH}")
+
+# Include rules for vendor API/CLI extension
+set(OT_CLI_VENDOR_EXTENSION "${SILABS_POSIX_CONFIG_PATH}/posix_vendor_cli.cmake" CACHE STRING "Name of cli extension cmake file")
+
 # Compilation settings defined
 set(OT_CONFIG openthread-core-silabs-posix-config.h CACHE STRING "Project-specific openthread config file")
 set(OT_MULTIPAN_RCP ON CACHE BOOL "enable multi-PAN RCP")
-set(OT_POSIX_CONFIG_RCP_BUS "CPC" CACHE STRING "RCP bus type")
 set(OT_DIAGNOSTIC ON CACHE BOOL "enable diagnostic support")
 set(OT_PACKAGE_NAME "SL-OPENTHREAD" CACHE STRING "OpenThread Package Name")
 set(OT_FULL_LOGS OFF CACHE BOOL "Enable debug level logging" FORCE)
@@ -49,6 +60,11 @@ endif()
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
 
 add_subdirectory(${ot-br-posix_SOURCE_DIR} ${ot-br-posix_BINARY_DIR})
+
+# Link vendor interface library directly to cpc
+# as cpc is generated before otbr subdirectory 
+target_link_libraries(rcp-vendor-intf PUBLIC cpc)
+target_include_directories(rcp-vendor-intf PUBLIC ${cpcd_SOURCE_DIR}/lib)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/prerm.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/prerm.in)

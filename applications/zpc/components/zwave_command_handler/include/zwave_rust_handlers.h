@@ -3,7 +3,7 @@
 #include "sl_status.h"
 
 /**
- * @brief Setup fixture for @ref rust command_classes.
+ * @brief Setup fixture for Rust Command Classes
  *
  * This setup function will call the setup/initialization functions for
  * all command classes defined in rust. see rust project rust_command_classes
@@ -14,7 +14,7 @@
 sl_status_t zwave_command_class_init_rust_handlers();
 
 /**
- * @brief Setup fixture for @ref rust command_classes - legacy edition.
+ * @brief Setup fixture for Rust Command Classes - legacy edition.
  *
  * This setup function will call the setup/initialization functions for
  * all command classes defined in rust. see rust project rust_command_classes

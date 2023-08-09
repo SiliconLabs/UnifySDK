@@ -12,7 +12,7 @@
  *****************************************************************************/
 //Include from this component
 #include "zcl_cluster_servers.h"
-#include "zcl_group_cluster_server.hpp"
+#include "zcl_cluster_servers_helpers.hpp"
 
 //Includes from other components
 #include "attribute_store.h"
@@ -22,7 +22,7 @@
 
 // Interfaces
 #include "zwave_controller_types.h"
-#include "ucl_definitions.h"
+#include "zap-types.h"
 
 //Generic includes
 #include <string>
@@ -55,17 +55,17 @@ sl_status_t
  * @param node     Attribute store node under the NodeID for which we want
  * to read the network status.
  */
-node_state_topic_state_t get_network_status(attribute_store_node_t node)
+NodeStateNetworkStatus get_network_status(attribute_store_node_t node)
 {
   // Default to UNAVAILABLE if the value is undefined in the attribute store
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  NodeStateNetworkStatus network_status = ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE;
 
   attribute_store_node_t node_id_node
     = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_NODE_ID);
 
   attribute_store_node_t network_status_node
     = attribute_store_get_first_child_by_type(node_id_node,
-                                              ATTRIBUTE_NETWORK_STATUS);
+                                              DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
   attribute_store_get_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));

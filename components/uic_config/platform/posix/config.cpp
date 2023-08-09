@@ -255,12 +255,18 @@ class Config
       } else if (vm.count("dump-config")) {
         dump_requested = true;
       } else if (vm.count("conf")) {
-        std::cout << "Using confg file: " << vm["conf"].as<std::string>()
+        std::cout << "Checking for config file: " << vm["conf"].as<std::string>()
                   << std::endl;
         const std::string config_file(vm["conf"].as<std::string>());
         std::ifstream istrm(config_file);
         if (istrm) {
+          std::cout << "Using config file: " << config_file << std::endl;
           po::store(yaml_parser::parse(istrm, general), vm);
+        }
+        else 
+        {
+          std::cout << "Warning! config file [" << config_file << "] not found!"
+                    " using default configurations" << std::endl; 
         }
       }
       // Parse config file

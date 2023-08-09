@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -206,17 +206,17 @@ Changing Log Levels</h2>
 </p>
 <h1><a class="anchor" id="autotoc_md34"></a>
 Using Zigbee Network Analyzer to Monitor PAN</h1>
-<p>The "Network Analyzer" perspective in Silicon Labs Simplicity Studio IDE v5 can be used to analyze the traffic on the Zigbee PAN.</p>
+<p>The "Network Analyzer" perspective in Silicon Labs <a href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a> IDE v5 can be used to analyze the traffic on the Zigbee PAN.</p>
 <p>Network activity can be observed based on the UCL commands relayed by ZigPC.</p>
 <h2><a class="anchor" id="autotoc_md35"></a>
 Installing Simplicity Studio v5</h2>
 <p>If you have not done so already, download Simplicity Studio v5 from <a href="https://www.silabs.com/products/development-tools/software/simplicity-studio">https://www.silabs.com/products/development-tools/software/simplicity-studio</a> on a host computer.</p>
 <h2><a class="anchor" id="autotoc_md36"></a>
 Detecting Devices in Simplicity Studio</h2>
-<p>Devices in Simplicity Studio can be detected using any of the following methods:</p>
+<p>Devices in <a href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a> can be detected using any of the following methods:</p>
 <h3><a class="anchor" id="autotoc_md37"></a>
 Connection via Ethernet Interface</h3>
-<p>If the host computer and one of the Zigbee devices are connected via Ethernet (using a Wireless Starter Kit for example: <a href="https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit">https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit</a>), Simplicity Studio can capture network traffic using this interface. Either an end device or the gateway radio can be connected via Ethernet to perform network capture (since the serial USB connection, which ZigPC uses, can run independently of the Ethernet connection services).</p>
+<p>If the host computer and one of the Zigbee devices are connected via Ethernet (using a Wireless Starter Kit for example: <a href="https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit">https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit</a>), <a href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a> can capture network traffic using this interface. Either an end device or the gateway radio can be connected via Ethernet to perform network capture (since the serial USB connection, which ZigPC uses, can run independently of the Ethernet connection services).</p>
 <p>Instructions:</p>
 <ol type="1">
 <li>Ensure that the radio is assigned an IP address (static or dynamic).</li>
@@ -252,7 +252,7 @@ Decrypting Network Traffic in Simplicity Studio</h2>
 <div class="fragment"><div class="line">[DEBUG] NWK Key:: ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ</div>
 </div><!-- fragment --><p>Extract the NWK key value ( <code>ZZ ZZ ZZ ...</code> sequence in the log above) and add it as a Network Analyzer Security Key using the following instructions:</p>
 <ol type="1">
-<li>Open Simplicity Studio v5.</li>
+<li>Open <a href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a> v5.</li>
 <li>Click from the top menu: Window -&gt; Preferences.</li>
 <li>From the left sidebar, select: Network Analyzer -&gt; Decoding -&gt; Security Keys.</li>
 <li>Add a New Entry and insert the NWK key as the Key value.</li>
@@ -265,6 +265,7 @@ Decrypting Network Traffic in Simplicity Studio</h2>
 <h2><a class="anchor" id="autotoc_md41"></a>
 Adding custom clusters</h2>
 <p>It is possible to add custom ZCL info to ZigPC to add natively unsupported clusters or to override the functionality of default clusters. This step must be run at compilation time in order to properly include the necessary MQTT topics and other related ZCL information.</p>
+<p>Please note, there has been limited testing on custom clusters and more changes may be needed to support custom applications.</p>
 <ul>
 <li>Step 1: Adding the custom cluster to the Unify framework</li>
 </ul>
@@ -273,32 +274,23 @@ Adding custom clusters</h2>
 <li>Step 2: Adding the custom cluster in the ZigPC</li>
 </ul>
 <p>ZigPC generates ZCL-cluster code and structures using ZAP. Ensure that the ZAP templates will generate for the new cluster by adding the name to: 'uic/applications/zigpc/components/zcl_util/zap/addon-helper.js Specifically, the 'SUPPORTED_CLUSTERS' and 'SUPPORTED_CLUSTER_ATTRIBUTES' lists must reference the new cluster.</p>
-<ul>
-<li>Step 3: Adding the custom clusters in the zigbeeHost gateway level</li>
-</ul>
-<p>ZigPC uses a custom zigbeeHost layer to manage the zigbee stack. Ensure that this layer can also access the new ZCL cluster by modifying the slcp file in 'uic/applications/zigpc/components/zigpc_gateway/libs/zigbee_host/src/libzigbee_host.slcp' Add the new cluster in the same format as all the existing clusters at this layer.</p>
-<p>*Step 4: Re-generate all ZAP templates</p>
+<p>*Step 3: Re-generate all ZAP templates</p>
 <p>Unify uses ZAP to generate ZCL cluster information (as discussed in step #2). Make sure that zap can find the library by modifying its configuration file.</p>
 <p>Alternatively, compile with the cmake option 'ZAP_GENERATE' set to 'ON' to automatically re-generate zap output files as part of the compilation process.</p>
 <p>Re-generate all zap output in the top level uic for the following components: uic_dotdot, <a class="el" href="namespaceuic__dotdot__mqtt.html">uic_dotdot_mqtt</a>, unify_dotdot_attribute_store</p>
 <p>Re-generate all zap output in the zigpc level for the following components: command_mapper, zcl_util, zcl_command_parser, zcl_profiles, attribute_management</p>
 <p>Please take a look at [<a href="https://github.com/SiliconLabs/zap">https://github.com/SiliconLabs/zap</a>] for more detailed information.</p>
 <ul>
-<li>Step 5: Re-generate the zigbee_host</li>
+<li>Step 4:</li>
 </ul>
-<p>Re-generate the zigbee_host slcp, in the autogen folder. Set the STUDIO_ADAPTER_PATH to point to zap, which should already be configured to point to the custom xml. Otherwise, it will be necessary to edit the zap-config of the zigbee_host folder.</p>
-<p>Please read [<a href="https://siliconlabs.github.io/slc-specification/1.0/">https://siliconlabs.github.io/slc-specification/1.0/</a>] and [<a href="https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf">https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf</a>] for more information on using the slc_cli.</p>
-<ul>
-<li>Step 6:</li>
-</ul>
-<p>Compile ZigPC as normal. ZigPC should now support your custom cluster </p>
+<p>Compile ZigPC as normal. ZigPC should now support your custom cluster. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:49 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:55 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

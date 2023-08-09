@@ -57,7 +57,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 find_package(Python3 REQUIRED)
 
-# This function declares a cmake target for a given rust build target. Name of the
+# This function declares a cmake target for a given Rust build target. Name of the
 # cmake target: <rust_name>. note: Cmake target names that are equal
 # to the filename of output file are not permitted.
 function(add_cmake_target CARGO_META CARGO_META_PACKAGE BUILD_TARGET)
@@ -89,14 +89,14 @@ function(add_cmake_target CARGO_META CARGO_META_PACKAGE BUILD_TARGET)
     PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE
                IMPORTED_NO_SONAME TRUE
                IMPORTED_LOCATION "${OUT_FILE}"
-               # rust project dont really have include directories.
+               # Rust project dont really have include directories.
                # assume that if we have c-headers. they will be in ./include
                INTERFACE_INCLUDE_DIRECTORIES
                $<BUILD_INTERFACE:${TARGET_SRC}/include>
                INTERFACE_LINK_LIBRARIES "pthread;dl")
 endfunction()
 
-# set cargo build arguments params: 
+# set cargo build arguments params:
 # --locked   only build specific versions
 # defined in Cargo.lock file. the goal is to get more deterministic builds
 # --target   specify the target triple to build for.
@@ -107,10 +107,10 @@ set(CARGO_ARGS
 
 set(APP_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV})
 
-# This function configures a build-process that builds the given manifest_path. 
+# This function configures a build-process that builds the given manifest_path.
 # Every declaration of this function builds in a separate process. This has some
 # performance implications, as dependencies that are required in multiple build
-# processes will be build double. Therefore, be cautious with having a fine
+# processes will be built twice. Therefore, be cautious with having a fine
 # granularity of build processes. It will degrade the build performance.
 #
 # arguments:
@@ -129,12 +129,12 @@ function(cargo_build)
   endif()
 
   # Get the meta-data corresponding the target. Used to configure the rest of
-  # the rust target.
+  # the Rust target.
   if(NOT EXISTS ${CARGO_MANIFEST_PATH}/Cargo.toml)
     message(FATAL_ERROR "Did not find cargo manifest in ${CARGO_MANIFEST_PATH}")
   endif()
   rust_workspace_metadata(${CARGO_MANIFEST_PATH} CARGO_META)
-  message(DEBUG "Added a rust build-target ${CARGO_NAME}")
+  message(DEBUG "Added a Rust build-target ${CARGO_NAME}")
 
   set(CARGO_BIN_DIR ${CMAKE_BINARY_DIR}/cargo/${CARGO_NAME})
   set(${CARGO_NAME}_ENV
@@ -176,9 +176,9 @@ function(cargo_build)
   endif()
 endfunction()
 
-# With this function you can import rust projects, that are part of the rust
-# build process, into cmake. From this point on wards they can be used like any
-# other cmake build target. 
+# With this function you can import Rust projects, that are part of the Rust
+# build process, into cmake. From this point onwards they can be used like any
+# other cmake build target.
 function(cargo_as_cmake_target BUILD_TARGET CARGO_NAME)
   if(NOT BUILD_TARGET OR NOT CARGO_NAME)
     message(FATAL_ERROR "missing arguments in cargo_as_cmake_target(${ARGN})")

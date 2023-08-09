@@ -246,14 +246,14 @@ static void on_zwave_api_started()
  * Bit addressing can be used by setting the endpoint value directly (1 bit
  * bit addressing and 7 bits endpoint identifier)
  *
- * @param connection       Connection object describing the source and
+ * @param info             Pointer to connection object describing the source and
  *                         destination. If either the source or destination
- *                         endpoints ID are not null, the frame will
+ *                         endpoints ID are not 0, the frame will
  *                         be Multi Channel encapsulated.
  * @param data_length      Length of the frame to send
  * @param data             Points to the payload to send
  * @param tx_options       Transmit options to use.
- * @param on_multi_channel_complete Callback function that will be called when
+ * @param on_send_data_complete     Callback function that will be called when
  *                                  the send operation has completed
  * @param user             User pointer passed in argument of the on_send_complete
  *                         callback function

@@ -1,5 +1,5 @@
-find_package(GeckoSDK 4.2.0 REQUIRED)
-find_package(CPCD 4.2.0 REQUIRED)
+find_package(GeckoSDK 4.3.0 REQUIRED)
+find_package(CPCD 4.3.0 REQUIRED)
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
@@ -16,7 +16,7 @@ set(BT_HOST_EMPTY_SRC_FILES
   ${EXPORT_DIR}/app/bluetooth/common_host/iostream_mock/sl_iostream_handles.c
   ${EXPORT_DIR}/app/bluetooth/common_host/app_signal/app_signal_posix.c
   ${EXPORT_DIR}/app/bluetooth/common_host/app_sleep/app_sleep.c
-  ${EXPORT_DIR}/app/bluetooth/common_host/host_comm/host_comm.c
+  ${EXPORT_DIR}/app/bluetooth/common_host/host_comm/host_comm_posix.c
   ${EXPORT_DIR}/app/bluetooth/common_host/ncp_host/ncp_host.c
   ${EXPORT_DIR}/app/bluetooth/common_host/tcp/tcp_posix.c
   ${EXPORT_DIR}/app/bluetooth/common_host/uart/uart_posix.c
@@ -93,7 +93,7 @@ target_compile_definitions(bt_host_empty PRIVATE
 )
 
 set_source_files_properties(
-  ${EXPORT_DIR}/app/bluetooth/common_host/host_comm/host_comm.c
+  ${EXPORT_DIR}/app/bluetooth/common_host/host_comm/host_comm_posix.c
   PROPERTIES COMPILE_FLAGS -Wno-stringop-truncation
 )
 

@@ -16,6 +16,7 @@ function supportedCluster(clusterName) {
     case "TouchlinkCommissioning": return false
     case "IASACE": return false
     case "Commissioning": return false
+    case "OTAUpgrade": return false
     default: return true
   }
 }
@@ -121,6 +122,7 @@ function isStruct(type) {
     case 'DiskIOCounters' : return true
     case 'DiskUsageData': return true
     case 'NetworkManagementState': return true
+    case 'SSceneTable': return true
     default: return false
   }
 }
@@ -132,6 +134,7 @@ function isMonotonousArray(label) {
     case 'BindingTable': return true
     // State cluster:
     case 'EndpointIdList': return true
+    case 'NetworkList': return true
     // AoXLocator cluster:
     case 'AzimuthMask': return true
     case 'ElevationMask': return true
@@ -285,6 +288,16 @@ function asAttributeUndefineDesiredFunction(parentLabel, label) {
     "_" + asSnakeCaseLower(label) + "_undefine_desired"
 }
 
+function asAttributeIsReportedDefinedFunction(parentLabel, label) {
+  return "dotdot_" + asSnakeCaseLower(parentLabel) +
+    "_" + asSnakeCaseLower(label) + "_is_reported_defined"
+}
+
+function asAttributeIsDesiredDefinedFunction(parentLabel, label) {
+  return "dotdot_" + asSnakeCaseLower(parentLabel) +
+    "_" + asSnakeCaseLower(label) + "_is_desired_defined"
+}
+
 function asCommandCallback(zclCommand) {
   return dotdot_prefix() + "_" + asSnakeCaseLower(zclCommand.parent.label) +
     "_" + asSnakeCaseLower(zclCommand.label) + "_callback"
@@ -399,6 +412,8 @@ exports.asAttributeSetFunction = asAttributeSetFunction
 exports.asAttributeIsSupportedFunction = asAttributeIsSupportedFunction
 exports.asAttributeUndefineReportedFunction = asAttributeUndefineReportedFunction
 exports.asAttributeUndefineDesiredFunction = asAttributeUndefineDesiredFunction
+exports.asAttributeIsReportedDefinedFunction = asAttributeIsReportedDefinedFunction
+exports.asAttributeIsDesiredDefinedFunction = asAttributeIsDesiredDefinedFunction
 exports.asAttributeCreateFunction = asAttributeCreateFunction
 exports.asJSONType = asJSONType
 exports.attributeID = attributeID

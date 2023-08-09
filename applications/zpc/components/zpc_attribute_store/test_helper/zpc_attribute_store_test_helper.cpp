@@ -14,6 +14,7 @@
 #include "attribute_store_fixt.h"
 #include "attribute_store.h"
 #include "attribute_store_defined_attribute_types.h"
+#include "unify_dotdot_attribute_store.h"
 #include "attribute.hpp"
 #include "zwave_unid.h"
 #include "zwave_controller_types.h"
@@ -34,8 +35,12 @@ attribute_store_node_t node_id_node         = ATTRIBUTE_STORE_INVALID_NODE;
 attribute_store_node_t endpoint_id_node     = ATTRIBUTE_STORE_INVALID_NODE;
 attribute_store_node_t zpc_endpoint_id_node = ATTRIBUTE_STORE_INVALID_NODE;
 
+extern const unify_dotdot_attribute_store_configuration_t zpc_configuration;
+
 void zpc_attribute_store_test_helper_create_network()
 {
+  unify_dotdot_attribute_store_set_configuration(&zpc_configuration);
+
   // Configure the UNID module to know our UNID.
   zwave_unid_set_home_id(home_id);
   zwave_unid_from_node_id(zpc_node_id, zpc_unid);

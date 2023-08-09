@@ -46,6 +46,7 @@ var group__zigpc__datastore =
     [ "zigpc_datastore_get_device_count", "group__zigpc__datastore.html#ga8ee04fb1508ad97e9684da9849355f93", null ],
     [ "zigpc_datastore_get_endpoint_count", "group__zigpc__datastore.html#ga391d5794187cae767f2ea09fb537d62c", null ],
     [ "zigpc_datastore_get_group_count", "group__zigpc__datastore.html#gacc7a68f0ecef07d009358e7a209c97b4", null ],
+    [ "zigpc_datastore_is_device_contained", "group__zigpc__datastore.html#ga1ee7cda80bc6ecfb8f0475b7486bf7fd", null ],
     [ "zigpc_datastore_log_device", "group__zigpc__datastore.html#gae33b407282326663a602402b9bebe4fe", null ],
     [ "zigpc_datastore_log_device_disc_state", "group__zigpc__datastore.html#ga0822f4a939808dd1a10ff40c573fe8d3", null ],
     [ "zigpc_datastore_log_network", "group__zigpc__datastore.html#ga7b4f7016ba9cb9bbc74ac99c01f745c2", null ],

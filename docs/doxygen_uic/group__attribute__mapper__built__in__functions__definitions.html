@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework Lib
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -127,6 +127,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ga4a95d7c23d4b96003a4a1ce8958f8b84"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__built__in__functions__definitions.html#ga4a95d7c23d4b96003a4a1ce8958f8b84">ast::is_any_undefined</a> (std::vector&lt; <a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&gt; &amp;results)</td></tr>
 <tr class="memdesc:ga4a95d7c23d4b96003a4a1ce8958f8b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any of the expressions are defined (i.e. have a result)  <a href="group__attribute__mapper__built__in__functions__definitions.html#ga4a95d7c23d4b96003a4a1ce8958f8b84">More...</a><br /></td></tr>
 <tr class="separator:ga4a95d7c23d4b96003a4a1ce8958f8b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__attribute__mapper__built__in__functions__definitions.html#gabcfcdb83e6dc25df0b00121a463d5a39">ast::log10</a> (std::vector&lt; <a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&gt; &amp;results)</td></tr>
+<tr class="memdesc:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the log10 of the first defined argument.  <a href="group__attribute__mapper__built__in__functions__definitions.html#gabcfcdb83e6dc25df0b00121a463d5a39">More...</a><br /></td></tr>
+<tr class="separator:gabcfcdb83e6dc25df0b00121a463d5a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Built-in functions that can be invoked directly from UAM map files. </p>
@@ -350,6 +354,43 @@ false if any expressions is undefined (does not have a value) </dd></dl>
 
 </div>
 </div>
+<a id="gabcfcdb83e6dc25df0b00121a463d5a39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabcfcdb83e6dc25df0b00121a463d5a39">&#9670;&nbsp;</a></span>log10()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt;T&gt; ast::log10 </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceast.html#afc9be5211520e5b06d2bebd7ee8695f9">eval_result_type</a>&lt; T &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>results</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the log10 of the first defined argument. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the result. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">results</td><td>Vector of expressions results. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>undefined value if if all expressions are undefined (do not have a value) </dd>
+<dd>
+log10 value otherwise </dd></dl>
+
+</div>
+</div>
 <a id="gaaac955c991500381e8c1936e307e1ade"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaaac955c991500381e8c1936e307e1ade">&#9670;&nbsp;</a></span>max_value()</h2>
 
@@ -425,7 +466,7 @@ template&lt;typename T &gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:49 for Unify Framework Lib by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:54 for Unify Framework Lib by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -2,6 +2,7 @@ var classUAMGrammar =
 [
     [ "UAMGrammar", "classUAMGrammar.html#a1e1e90b8d8b20c772dc87803a7c33441", null ],
     [ "assignment_rule", "classUAMGrammar.html#afddb3af98cc7d8e49f7b7ca5754158bb", null ],
+    [ "assignment_type_rule", "classUAMGrammar.html#a2cb9045ed1220d1cd76d02192485371b", null ],
     [ "attribute_path_element_rule", "classUAMGrammar.html#ae91ddc3ca12dc13dabb132d118338f35", null ],
     [ "attribute_rule", "classUAMGrammar.html#a3415242e28753b7dc3edb30d898285a9", null ],
     [ "built_in_function_rule", "classUAMGrammar.html#af20adfb28bfc1dd9108ff12a05f00fd2", null ],

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -125,14 +125,8 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_current_utc_current_time()
 : <a class="el" href="ota__time_8h.html#a91c55ef0d4c4ab2d1170e6fbf5f7fa97">ota_time.h</a>
 </li>
-<li>get_default_endpoint_node()
-: <a class="el" href="unify__dotdot__attribute__store__configuration_8c.html#a76a99e131e8eea5648227177dec0a252">unify_dotdot_attribute_store_configuration.c</a>
-</li>
 <li>get_default_max_key_attribute()
 : <a class="el" href="zwave__command__class__central__scene_8c.html#a5ca9c0c18843f1614c50243302209bdf">zwave_command_class_central_scene.c</a>
-</li>
-<li>get_default_unid_endpoint()
-: <a class="el" href="unify__dotdot__attribute__store__configuration_8c.html#ae68e4ca81ae35f17f21293f75ee0c0ac">unify_dotdot_attribute_store_configuration.c</a>
 </li>
 <li>get_device_id()
 : <a class="el" href="device__id_8h.html#a231482c6d0e377e8842b842c97be8f99">device_id.h</a>
@@ -164,6 +158,18 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 </li>
 <li>get_indicator_value0()
 : <a class="el" href="zwave__command__class__indicator_8c.html#aa23691cb712a61ad87039173e84d4232">zwave_command_class_indicator.c</a>
+</li>
+<li>get_installed_closed_limit_lift()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#a845a2c01b08052912b7aa1a2ae5a65fd">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
+</li>
+<li>get_installed_closed_limit_tilt()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#ab1acec6659f741af3fdc0bd4da4d3832">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
+</li>
+<li>get_installed_open_limit_lift()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#aa0cad98644aa4e4d73f4501137aed73b">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
+</li>
+<li>get_installed_open_limit_tilt()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#a178ab25fd9ded49c52ab37084f158bb4">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
 </li>
 <li>get_json_payload_for_alarms_alarm_command()
 : <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga867180f7be072ff32087807f7349b003">dotdot_mqtt_command_helpers.hpp</a>
@@ -567,36 +573,6 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_json_payload_for_on_off_toggle_command()
 : <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga2d6b945df90e8d0a059ccbb7c87a064a">dotdot_mqtt_command_helpers.hpp</a>
 </li>
-<li>get_json_payload_for_ota_upgrade_image_block_request_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#gaa9fbf5376bb1923ff49d6a23f8afbeb5">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_image_block_response_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#gabef73522cf1d448c0bbea702a8bea43c">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_image_notify_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#gaf579a2ca07cc135e51df5a7f341f1d79">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_image_page_request_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga97b5dcafbc11fae4938fd8e8a9077760">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_query_device_specific_file_request_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga79474bac80ff71bc9dfd28b6b3157d4f">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_query_device_specific_file_response_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga2fbe706c623ed84e2688600a6d62f13b">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_query_next_image_request_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga13b8a4e33f520a70010cc3e1e32d56f7">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_query_next_image_response_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga45a876a0f32215a37cde41c229f509bb">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_upgrade_end_request_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#gaddff290eb44f872efbbaa0d0dde371fd">dotdot_mqtt_command_helpers.hpp</a>
-</li>
-<li>get_json_payload_for_ota_upgrade_upgrade_end_response_command()
-: <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga0cf06a2ff95a175d6b43c4835f4cd27e">dotdot_mqtt_command_helpers.hpp</a>
-</li>
 <li>get_json_payload_for_poll_control_check_in_command()
 : <a class="el" href="group__dotdot__mqtt__command__helpers.html#gaf0604377fbda4a9e3f260f9a408c6ec2">dotdot_mqtt_command_helpers.hpp</a>
 </li>
@@ -678,6 +654,9 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_json_payload_for_state_discover_neighbors_command()
 : <a class="el" href="group__dotdot__mqtt__command__helpers.html#ga62b952b0b4e4cab9764699a355e7171d">dotdot_mqtt_command_helpers.hpp</a>
 </li>
+<li>get_json_payload_for_state_discover_security_command()
+: <a class="el" href="group__dotdot__mqtt__command__helpers.html#gac19708c50cf23d87f6cef5d335ac15d4">dotdot_mqtt_command_helpers.hpp</a>
+</li>
 <li>get_json_payload_for_state_interview_command()
 : <a class="el" href="group__dotdot__mqtt__command__helpers.html#gac36ca82e382c1232c8dc535ec0e4266b">dotdot_mqtt_command_helpers.hpp</a>
 </li>
@@ -741,6 +720,12 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_log_record_response_event_type_get_enum_value_number_c()
 : <a class="el" href="group__dotdot__mqtt__helpers.html#ga779ca1f313cb1eba780b2450fdc45218">dotdot_mqtt_helpers.h</a>
 </li>
+<li>get_long_poll_interval_min()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__poll__control_8c.html#a0d71fc0f2a39ebf5d5b591874aa55199">unify_dotdot_attribute_store_command_callbacks_poll_control.c</a>
+</li>
+<li>get_max_frequency()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#a8d493bcbd32c543b14feaec745515c78">unify_dotdot_attribute_store_command_callbacks_level.c</a>
+</li>
 <li>get_max_level()
 : <a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#a2f39ca48cd835ab8919f5ff012708b8d">unify_dotdot_attribute_store_command_callbacks_level.c</a>
 </li>
@@ -759,11 +744,11 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_measurement_profile_response_status_get_enum_value_number_c()
 : <a class="el" href="group__dotdot__mqtt__helpers.html#ga8f73da83ccd7a49d396099f6fc8dd62b">dotdot_mqtt_helpers.h</a>
 </li>
+<li>get_min_frequency()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#a643301a435385251905ceb6932038e36">unify_dotdot_attribute_store_command_callbacks_level.c</a>
+</li>
 <li>get_min_level()
 : <a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#a5a7b25e0183861ac7482cd0928f9286f">unify_dotdot_attribute_store_command_callbacks_level.c</a>
-</li>
-<li>get_network_status()
-: <a class="el" href="group__zcl__cluster__servers__helpers.html#gad5f17fd89958050e70b1abc2d45b233e">zcl_cluster_servers_helpers.hpp</a>
 </li>
 <li>get_next_missing_offset()
 : <a class="el" href="transport__service_8c.html#affd944193a83bcd8f404cc2274f933d8">transport_service.c</a>
@@ -776,9 +761,6 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 </li>
 <li>get_node_max_frame_size()
 : <a class="el" href="zwave__s0__transport_8c.html#aeb22afea5af0dc149f03d08edb74a44a">zwave_s0_transport.c</a>
-</li>
-<li>get_node_network_status()
-: <a class="el" href="group__ucl__node__state.html#ga5e4f4d8fb92990fbe9cedf84bccbcb50">ucl_node_state.h</a>
 </li>
 <li>get_number_of_groups()
 : <a class="el" href="group__zwave__association__toolbox.html#ga8ea6af3c4096eed22e4474e67f428fe3">zwave_association_toolbox.h</a>
@@ -794,8 +776,8 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 : <a class="el" href="uic__stdin__command__handler_8h.html#a4dc9830db2ca50f0789db94665f08bf4">uic_stdin_command_handler.h</a>
 </li>
 <li>get_reports_to_follow()
-: <a class="el" href="group__command__classes__utils.html#ga602693931f1bb21a72aebe825ff94bd7">zwave_command_classes_utils.c</a>
-, <a class="el" href="group__command__classes__utils.html#ga602693931f1bb21a72aebe825ff94bd7">zwave_command_classes_utils.h</a>
+: <a class="el" href="group__command__classes__utils.html#ga602693931f1bb21a72aebe825ff94bd7">zwave_command_classes_utils.h</a>
+, <a class="el" href="group__command__classes__utils.html#ga602693931f1bb21a72aebe825ff94bd7">zwave_command_classes_utils.c</a>
 </li>
 <li>get_rx_session_by_nodes()
 : <a class="el" href="zwave__s0__transport_8c.html#a488fb7aea3d322c624b8f35f26cc46a5">zwave_s0_transport.c</a>
@@ -1329,39 +1311,6 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_uic_mqtt_dotdot_on_off_write_attributes_callback()
 : <a class="el" href="group__dotdot__mqtt__hpp.html#gaee234dca64ed987420b2a8971486b530">dotdot_mqtt.hpp</a>
 </li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_image_block_request_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gafb5cfd07e939ab5a9ae0cc0df228f8d2">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_image_block_response_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gaa2c1e51b9b994bc7ee2979fd3b8d8c9d">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_image_notify_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gab47bec9f185f73577ef3b56cedd8c2fa">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_image_page_request_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gaa2c4e2119176ecae5e568318dbf81387">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gae86b646c92804286b2c980b8fa1286ca">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#ga5fb06726ef07bac79852166491a629bc">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gaf6613e2c1f90a5ba753b80a324127f66">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#ga718dc8c44f07784e81c80c47186e4650">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gac47389bb6ffbd5c6b66275f2e37e2d09">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gac0f23bde6636504f352ac94d99e00038">dotdot_mqtt.hpp</a>
-</li>
-<li>get_uic_mqtt_dotdot_ota_upgrade_write_attributes_callback()
-: <a class="el" href="group__dotdot__mqtt__hpp.html#gaac8a2d5094cf1cd4ced80d7546784e39">dotdot_mqtt.hpp</a>
-</li>
 <li>get_uic_mqtt_dotdot_ph_measurement_write_attributes_callback()
 : <a class="el" href="group__dotdot__mqtt__hpp.html#ga7e3b569ffd7d9c9e55157c5f3ef35882">dotdot_mqtt.hpp</a>
 </li>
@@ -1479,6 +1428,9 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_uic_mqtt_dotdot_state_discover_neighbors_callback()
 : <a class="el" href="group__dotdot__mqtt__hpp.html#ga8cb07b1e2021194d3b13cb9a06996990">dotdot_mqtt.hpp</a>
 </li>
+<li>get_uic_mqtt_dotdot_state_discover_security_callback()
+: <a class="el" href="group__dotdot__mqtt__hpp.html#ga9f345e7469937ba16530fb5a2cb2b522">dotdot_mqtt.hpp</a>
+</li>
 <li>get_uic_mqtt_dotdot_state_interview_callback()
 : <a class="el" href="group__dotdot__mqtt__hpp.html#ga523b8313a17b1718dfef2194bc8c9613">dotdot_mqtt.hpp</a>
 </li>
@@ -1558,6 +1510,15 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 : <a class="el" href="group__command__classes__utils.html#ga22eef0dea00ab9f526c038009481e814">zwave_command_classes_utils.h</a>
 , <a class="el" href="group__command__classes__utils.html#ga22eef0dea00ab9f526c038009481e814">zwave_command_classes_utils.c</a>
 </li>
+<li>get_user_code_capabilities_node()
+: <a class="el" href="zwave__command__class__user__code_8c.html#a66e5cf57742ff857e566aa153cced09f">zwave_command_class_user_code.c</a>
+</li>
+<li>get_user_code_data_node()
+: <a class="el" href="zwave__command__class__user__code_8c.html#a8496f07f3edc07cf184f5ca3c7f3f23c">zwave_command_class_user_code.c</a>
+</li>
+<li>get_user_id_node()
+: <a class="el" href="zwave__command__class__user__code_8c.html#ab161fcc64adafae5a7aa3d0d6ab00adb">zwave_command_class_user_code.c</a>
+</li>
 <li>get_utc_time_string_from_utc_time()
 : <a class="el" href="ota__time_8hpp.html#af0c6d4bcdf574dab1afeb1da8b72c1e9">ota_time.hpp</a>
 </li>
@@ -1580,6 +1541,18 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 : <a class="el" href="group__command__classes__utils.html#gaf1fbb6a0e57bf5218e97120ed7adc966">zwave_command_classes_utils.h</a>
 , <a class="el" href="group__command__classes__utils.html#gaf1fbb6a0e57bf5218e97120ed7adc966">zwave_command_classes_utils.c</a>
 </li>
+<li>go_to_lift_percentage_command()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#a3165506c55d0c66aa15729c0a4cd57ac">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
+</li>
+<li>go_to_lift_value_command()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#aa0e064d53e094c8d5ff50aeffbb5845f">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
+</li>
+<li>go_to_tilt_percentage_command()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#a20f547555e4b18e4df3c0f45312538cb">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
+</li>
+<li>go_to_tilt_value_command()
+: <a class="el" href="unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html#a0930aca7c77022b9ad8a5fffadb9684f">unify_dotdot_attribute_store_command_callbacks_window_covering.c</a>
+</li>
 <li>groups_cluster_write_attributes_callback()
 : <a class="el" href="unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a3a45767b3f27dc91b93886c0cf995f51">unify_dotdot_attribute_store_write_attributes_command_callbacks.c</a>
 </li>
@@ -1589,7 +1562,7 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:08 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:14 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

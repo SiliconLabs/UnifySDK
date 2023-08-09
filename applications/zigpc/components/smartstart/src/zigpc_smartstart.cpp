@@ -120,7 +120,8 @@ void zigpc_smartstart_on_list_update(bool entries_pending_inclusion)
         stored_dsk_entries.insert({key, dsk_content});
         status = zigpc_net_mgmt_add_node(dsk_content.eui64,
                                          dsk_content.install_code,
-                                         dsk_content.install_code_length);
+                                         dsk_content.install_code_length,
+                                         false);
         if (status != SL_STATUS_OK) {
           sl_log_warning(LOG_TAG,
                          "Failed to add DSK-based Install Code: 0x%X",

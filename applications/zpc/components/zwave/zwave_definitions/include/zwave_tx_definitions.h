@@ -18,7 +18,7 @@
 
 /**
  * @defgroup zwave_tx_options_qos_priority Z-Wave TX Options QoS priority
- * @ingroup zwave_tx_interface
+ * @ingroup zwave_tx
  * @brief QoS Priority for Z-Wave TX Options
  *
  * The QoS Priority is used to determine the order of frames being sent.
@@ -30,6 +30,29 @@
  * situation.
  * @{
  */
+
+/// Maximum QoS priority for \ref zwave_tx_options_t qos_priority.
+/// Nothing is more important than these frames.
+#define ZWAVE_TX_QOS_MAX_PRIORITY 0xFFFFFF00
+/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
+/// when sending timing critical frames.
+#define ZWAVE_TX_QOS_RECOMMENDED_TIMING_CRITICAL_PRIORITY 0x0FFFFFFF
+/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
+/// for replying to incoming Get type commands.
+#define ZWAVE_TX_QOS_RECOMMENDED_GET_ANSWER_PRIORITY 0x00FFFFFF
+/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
+/// for issuing probing commands (node interview).
+#define ZWAVE_TX_QOS_RECOMMENDED_NODE_INTERVIEW_PRIORITY 0x0000FFFF
+/// Recommended QoS priority for \ref zwave_tx_options_t qos_priority
+/// for state polling of a node (e.g. verifying its On/off state
+/// if it does not report to the Lifeline).
+#define ZWAVE_TX_QOS_RECOMMENDED_POLLING_PRIORITY 0x00000FFF
+/// Minimum QoS priority for \ref zwave_tx_options_t qos_priority.
+#define ZWAVE_TX_QOS_MIN_PRIORITY 0x00000000
+
+/// Recommended QoS gap between frames to accomodate for parent/child frames
+#define ZWAVE_TX_RECOMMENDED_QOS_GAP 10
+/** @} end zwave_tx_options_qos_priority */
 
 /**
  * @defgroup zwave_tx_interface Z-Wave TX Interface
@@ -134,6 +157,9 @@ typedef struct zwave_tx_options {
   /// and used only by Z-Wave Transports.
   zwave_tx_transport_options_t transport;
 } zwave_tx_options_t;
+
+/** @} end zwave_tx_options_qos_priority */
+
 #ifdef __cplusplus
 }
 #endif

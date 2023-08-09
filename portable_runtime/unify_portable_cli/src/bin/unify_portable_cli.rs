@@ -34,11 +34,12 @@ struct Args {
 enum Commands {
     /// Command for flash an application to the connected device.
     /// One of the --app-path or --app-name argument is mandatory.
-    /// Available option for --app-name are: switch-on-off, multilevel-sensor, serial-api
+    /// The available options for --app-name are:
+    /// multilevel-sensor, power-strip, sensor-pir, serial-api, switch-on-off, wall-controller
     /// Two arguments can be specified optionally before the subcommand from the main
     /// arguments: `--serial-no` and `--zwave-rf-region`.
-    /// In case of serial number is not specified, the choice will be prompted.
-    /// In case of rf region is not specified, the default EU region frequency will be used.
+    /// In case the serial number is not specified, the choice will be prompted.
+    /// In case the rf region is not specified, the default EU region frequency will be used.
     FlashApp {
         #[clap(short = 'p', long, forbid_empty_values = true)]
         /// Relative file path to be flashed. App_path or app_name is mandatory. Example: unify_portable_cli.exe flash-app -s 440262138 -p zwave_soc_switch_on_off-brd2603a-us.hex
@@ -53,7 +54,8 @@ enum Commands {
         chip_type: Option<String>,
     },
     /// Command for read DSK (Device Specific Key) value for Smart Start.
-    /// In case of only one device is connected, serial-no argument is optional.
+    /// If the serial number is not specified, you will be prompted to select
+    /// one of the connnected devices.
     ReadDsk {
         #[clap(short = 'c', long, forbid_empty_values = false)]
         /// Chip type. If you not give any then the default: ZGM230.
@@ -61,6 +63,10 @@ enum Commands {
     },
     /// Lists the info of the connected devices.
     /// With boardSerial[0] can identify physically the board. With serialNumber you can flash.
+    ListDevicesRaw {
+    },
+    /// Lists serial number, board number, configured transmit region,
+    /// and installed application for each device.
     ListDevices {
     }
 }
@@ -70,6 +76,9 @@ enum AppName {
    SwitchOnOff,
    MultilevelSensor,
    SerialAPI,
+   SensorPIR,
+   WallController,
+   PowerStrip,
 }
 
 fn main() {
@@ -104,15 +113,6 @@ fn main() {
         }
         Some(Commands::ReadDsk { chip_type }) => {
 
-            let mut proc_type = String::from("ZGM230");
-            if chip_type.is_none() {
-                // Set default value, if not set any.
-               println!("Chip type is not given as parameter. Using default ZGM230.");
-            }
-            else {
-                proc_type.push_str(&chip_type.clone().unwrap());
-            }
-
             silink_sn = match get_serial_no(parsed_args.serial_no) {
                 Ok(sn) => sn.to_string(),
                 Err(e) => {
@@ -121,7 +121,7 @@ fn main() {
                 }
             };
 
-            match read_dsk(&silink_sn, &proc_type) {
+            match read_dsk(&silink_sn, chip_type.as_deref()) {
                 Ok(dsk) => print_dsk(&dsk),
                 Err(e) => {
                   eprintln!("{}", e);
@@ -131,19 +131,29 @@ fn main() {
 
             process::exit(exitcode::OK);
         }
-        Some(Commands::ListDevices {}) => {
-
-            let silink_result = silink_inspect();
-            if silink_result.is_err() {
-                eprintln!("Failed to start Silink!");
-            } else {
-
-                let silink_result_tmp = silink_result.unwrap();
-                let silink_result_string = String::from_utf8_lossy(&silink_result_tmp.stdout);
-                println!("{}", silink_result_string);
+        Some(Commands::ListDevicesRaw {}) => {
+            match silink_inspect() {
+                Err(error) => {
+                    eprintln!("{}", error);
+                    process::exit(exitcode::UNAVAILABLE)
+                }
+                Ok(silink_result_string) => {
+                    println!("{}", silink_result_string);
+                    process::exit(exitcode::OK);
+                }
             }
-
-            process::exit(exitcode::OK);
+        }
+        Some(Commands::ListDevices {}) => {
+            match silink_inspect() {
+                Err(error) => {
+                    eprintln!("{}", error);
+                    process::exit(exitcode::UNAVAILABLE);
+                }
+                Ok(silink_result_string) => {
+                    list_devices(&silink_result_string, true);
+                    process::exit(exitcode::OK);
+                }
+            }
         }
         None => {
             // Intentionally blank block
@@ -198,18 +208,39 @@ fn main() {
             eprintln!("Could not find any connected devices. Please verify that you have a Silabs device connected!");
             process::exit(exitcode::USAGE);
         } else if device_count == 1 {
-            println!("Attempting to automap the connected device...");
-        } else {
-            eprintln!("Multiple devices detected and no device string was given.");
-            eprintln!("Please provide the device serial number of the controller device eg. '-s 440262195'.");
-            eprintln!("Here is a list of connected devices:");
-            let silink_result = silink_inspect();
-            if silink_result.is_err() {
-                eprintln!("Failed to start Silink!");
+            let silink_result_string = silink_inspect().unwrap();
+            let device = &list_devices(&silink_result_string, false)[0];
+            if device.application_name.as_ref().unwrap().eq(&"unknown") ||
+                device.application_name.as_ref().unwrap().eq(&"serial_api_controller") {
+                println!("Identified as {} Serial API Controller ", device.serial_number);
             } else {
-                silink_result.unwrap();
+                eprintln!("Found a connected device, but could not identify it as Serial API Controller.");
+                eprintln!("Try resetting or re-flashing it!");
+                process::exit(exitcode::UNAVAILABLE);
             }
-            process::exit(exitcode::USAGE);
+        } else {
+            println!("Attempting to identify the Serial API Controller...");
+            let silink_result_string = silink_inspect().unwrap();
+            let devices = list_devices(&silink_result_string, false);
+            match devices.iter().find(|device|
+                device.application_name.is_some() &&
+                device.application_name.as_ref().unwrap().eq(&"serial_api_controller")
+            ) {
+                None => {
+                    eprintln!("Identification failed.");
+                    silink_sn = match get_serial_no(parsed_args.serial_no) {
+                        Ok(sn) => sn,
+                        Err(e) => {
+                            eprintln!("{}", e);
+                            process::exit(exitcode::NOINPUT);
+                        }
+                    };
+                },
+                Some(device) => {
+                    println!("Identified {} as a controller.", device.serial_number);
+                    silink_sn = device.serial_number.clone();
+                }
+            }
         }
     }
 
@@ -228,7 +259,7 @@ fn main() {
     let unify_zip_exists = identify_unify_debian_packages();
     if unify_zip_exists.is_err() {
         let unify_release_url = "https://github.com/SiliconLabs/UnifySDK/releases";
-        let example_package = "unify_1.1.1_x86_64.zip".to_string();
+        let example_package = "unify_1.3.1_x86_64.zip".to_string();
         eprintln!(
             "Could not find Unify zip file in the docker-files directory!\n\
                    You can find the Unify packages here: {}.\n\
@@ -270,7 +301,11 @@ fn handle_flash_app_command(app_path: Option<String>, app_name:  Option<AppName>
 
     let final_app_path;
     match get_app_firmware_path(app_path.clone(), app_name.clone()) {
-        Ok(p) => final_app_path = p,
+        Ok(p) => if does_file_exists(p.clone()) {
+                    final_app_path = p
+                  } else {
+                    return Err("Firmware not found")
+                  },
         Err(e) => return Err(e),
     }
 
@@ -280,22 +315,18 @@ fn handle_flash_app_command(app_path: Option<String>, app_name:  Option<AppName>
         Err(e) => return Err(e),
     }
 
-    let proc_type;
     if chip.is_none() {
-        // Set default value, if not set any.
-        proc_type = String::from("ZGM230");
         println!("Processor type is not given as parameter. Using default ZGM230.");
-    } else {
-        proc_type = String::from(&chip.clone().unwrap());
     }
 
     let region = get_region(zwave_rf_region);
 
-    println!("Flash application under from {}", final_app_path);
-    flash_device(&final_app_path, &silink_sn, &proc_type, region).expect("Failed to flash!");
+    println!("Flash application from {}", final_app_path);
+    flash_device(&final_app_path, &silink_sn,
+        &chip.clone().unwrap_or((&"ZGM230S").to_string()), region)?;
 
     // Read DSK value
-    match read_dsk(&silink_sn, &proc_type){
+    match read_dsk(&silink_sn, chip.as_deref()){
         Ok(dsk) => print_dsk(&dsk),
         Err(e) => {
             eprintln!("{}", e);
@@ -311,6 +342,9 @@ fn get_app_firmware_path(app_path: Option<String>, app_name:  Option<AppName>) -
     app_rul_map.insert(AppName::SwitchOnOff, "resources/app-binaries/zwave_soc_switch_on_off-brd2603a-eu.hex");
     app_rul_map.insert(AppName::MultilevelSensor, "resources/app-binaries/zwave_soc_multilevel_sensor-brd2603a-eu.hex");
     app_rul_map.insert(AppName::SerialAPI, "resources/app-binaries/zwave_ncp_serial_api_controller-brd2603a-eu.hex");
+    app_rul_map.insert(AppName::SensorPIR, "resources/app-binaries/zwave_soc_sensor_pir-brd2603a-eu.hex");
+    app_rul_map.insert(AppName::WallController, "resources/app-binaries/zwave_soc_wall_controller-brd2603a-eu.hex");
+    app_rul_map.insert(AppName::PowerStrip, "resources/app-binaries/zwave_soc_power_strip-brd2603a-eu.hex");
 
     if app_name.is_some() {
         let file_path = app_rul_map.get(&app_name.unwrap()).expect("Failed to get file path from AppName!");
@@ -328,65 +362,47 @@ fn get_serial_no(serial_no: Option<i32>) -> Result<String, &'static str> {
     if serial_no != None {
         return Ok(serial_no.unwrap().to_string());
     } else {
-        println!("Serial number is not specified.");
+        println!("Serial number is not specified.\n");
 
-        let silink_result = silink_inspect();
-        if silink_result.is_err() {
-            return Err("Failed to start Silink!");
-        } else {
+        match silink_inspect() {
+            Ok(silink_result_string) => {
+                let vec_parsed = list_devices(&silink_result_string, true);
+                if vec_parsed.len() == 0 {
+                return Err("Found no connected boards!\nPlease check the board's connection and try again.");
+                }
 
-            let silink_result_tmp = silink_result.unwrap();
-            let silink_result_string = String::from_utf8_lossy(&silink_result_tmp.stdout);
+                // TODO: Check input
+                let mut line = String::new();
+                println!("\nPlease select a device.");
+                println!("Note that the device's number may change when multiple boards are connected!");
+                println!("Type 0, 1, ... or x to cancel:");
+                std::io::stdin().read_line(&mut line).unwrap();
 
-            let vec_parsed = get_serialnum(&silink_result_string);
-            if vec_parsed.len() == 0 {
-              return Err("Found no connected boards!\nPlease check the board's connection and try again.");
+                if line.trim() == "x" {
+                    return Err("");
+                }
+
+                match line.trim().parse::<usize>() {
+                    Ok(n) => match vec_parsed.into_iter().enumerate().find(|(index, _)| index == &n ) {
+                        Some(n_get) => Ok(n_get.1.serial_number.to_owned()),
+                        None => Err("No board found matching that number!")
+                    },
+                    Err(_) => Err("Unrecognized input!")
+                }
             }
-
-            // TODO: Check input
-            let mut line = String::new();
-            println!("Please enter the number of the device to flash.");
-            eprintln!("Be aware that the Device no. is not always the same when multiple boards are connected!!!");
-            println!("Press 0, 1, ... or x to cancel:");
-            std::io::stdin().read_line(&mut line).unwrap();
-
-            if line.trim() == "x" {
-                return Err("");
-            }
-
-            match line.trim().parse::<usize>() {
-                Ok(n) => match vec_parsed.get(n) {
-                    Some(n_get) => Ok(n_get.to_string()),
-                    None => Err("No board found matching that number!")
-                },
-                Err(_) => Err("Unrecognized input!")
-            }
+            Err(error) => Err(error)
         }
     }
 }
 
-fn get_region(zwave_rf_region: Option<String>) -> i8 {
-    if zwave_rf_region.is_none(){
-        println!("RF region not given as parameter. Using default EU.");
-        return 0x00;
-    } else {
-        let mut rf_region_map: HashMap<String, i8> = HashMap::new();
-        rf_region_map.insert("EU".to_string(), 0);
-        rf_region_map.insert("US".to_string(), 1);
-        rf_region_map.insert("US_LR".to_string(), 9);
-        rf_region_map.insert("ANZ".to_string(), 2);
-        rf_region_map.insert("HK".to_string(), 3);
-        rf_region_map.insert("MA".to_string(), 4);
-        rf_region_map.insert("IN".to_string(), 5);
-        rf_region_map.insert("IS".to_string(), 6);
-        rf_region_map.insert("RU".to_string(), 7);
-        rf_region_map.insert("CN".to_string(), 8);
-        rf_region_map.insert("JP".to_string(), 32);
-        rf_region_map.insert("KR".to_string(), 7);
-
-        match rf_region_map.get(&zwave_rf_region.unwrap()) {
-            Some(r) => return *r,
-            None => return 0x00,
+fn get_region(zwave_rf_region: Option<String>) -> i16 {
+    match zwave_rf_region {
+        None => {
+            println!("RF region not given as parameter. Using default EU.");
+            0i16
+        },
+        Some(region) => {
+            *REGIONS.get_by_right(&region as &str).unwrap_or(&0i16)
         }
     }
 }

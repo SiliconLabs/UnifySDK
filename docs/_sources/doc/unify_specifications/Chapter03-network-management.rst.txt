@@ -205,7 +205,7 @@ MQTT Topics and Parameters
   * - ucl/by-unid/+/ProtocolController/NetworkManagement
     - Read/report the current network management state and its associated parameters
   * - ucl/by-unid/+/ProtocolController/NetworkManagement/Write
-    - Attempt to change the the network management state with additional/optional state parameters
+    - Attempt to change the network management state with additional/optional state parameters
 
 The State value and additional parameters are part of the MQTT publish
 message payload. The state parameter indicates if the actual Protocol
@@ -854,6 +854,63 @@ interview is completed:
 
   protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/State \n<font color=#00003C><b>{ "NetworkStatus": "Online functional", \n<font color=#00003C><b>"Security": "Z-Wave S2 Access Control", \n<font color=#00003C><b>"MaximumCommandDelay": 5 }</b>
   & mqtt_broker -> iot_service
+
+
+DiscoverSecurity Command
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The node state topic comprises a Security field. If some Protocol Controllers
+are able to verify which security a node is running with, the DiscoverSecurity
+Command will instruct it to check that the security is correct.
+Other operations may be paused while a Protocol Controller performs a Security
+verification.
+
+.. uml::
+
+  ' Allows to do simultaneous transmissions
+  !pragma teoz true
+
+  ' Style for the diagram
+  !theme plain
+  skinparam LegendBackgroundColor #F0F0F0
+
+  title Initiating a Network Management command (DiscoverSecurity) on a node itself (4)
+
+  legend top
+  <font color=#0039FB>MQTT Subscription</font>
+  <font color=#00003C>Retained MQTT Publication</font>
+  <font color=#6C2A0D>Unretained MQTT Publication</font>
+  endlegend
+
+  ' List of participants
+  participant "IoT Service" as iot_service
+  participant "MQTT Broker" as mqtt_broker
+  participant "Protocol Controller" as protocol_controller
+
+  protocol_controller -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/+/Commands/+
+  protocol_controller -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/State/Commands/+
+
+  iot_service -> mqtt_broker: <font color=#0039FB>ucl/unid/+/State
+  iot_service -> mqtt_broker: <font color=#0039FB>ucl/unid/+/State/SupportedCommands
+
+  protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/State \n<font color=#00003C><b>{ "NetworkStatus": "Online functional", \n<font color=#00003C><b>"Security": "Z-Wave S2 Authenticated", \n<font color=#00003C><b>"MaximumCommandDelay": 5 }</b>
+  & mqtt_broker -> iot_service
+
+  protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/State/SupportedCommands \n<font color=#00003C><b>{ "value":["DiscoverSecurity","Interview"]}</b>
+  & mqtt_broker -> iot_service
+
+  rnote over iot_service, protocol_controller: IoT Service wants to verify if zw-1234\n runs with Security = Z-Wave S2 Authenticated
+
+  iot_service -> mqtt_broker
+  & mqtt_broker -> protocol_controller : <font color=#6C2A0D>ucl/by-unid/zw-1234/State/Commands/DiscoverSecurity
+
+  == Security Discovery starts ==
+
+  == When the operation is completed ==
+
+  protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/State \n<font color=#00003C><b>{ "NetworkStatus": "Online interviewing", \n<font color=#00003C><b>"Security": "Z-Wave S2 Access Control", \n<font color=#00003C><b>"MaximumCommandDelay": 5 }</b>
+  & mqtt_broker -> iot_service
+
 
 
 SmartStart Management

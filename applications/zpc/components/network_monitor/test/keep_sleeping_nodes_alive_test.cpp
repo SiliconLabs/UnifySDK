@@ -27,10 +27,11 @@ extern "C" {
 #include "attribute_store_defined_attribute_types.h"
 #include "zwave_node_id_definitions.h"
 #include "zwave_generic_types.h"
-#include "ucl_definitions.h"
+
 #include "contiki_test_helper.h"
 #include "zwave_controller_utils_mock.h"
 #include "zpc_attribute_store_test_helper.h"
+#include "unify_dotdot_attribute_store_node_state.h"
 
 // Unify includes
 #include "datastore.h"
@@ -84,8 +85,8 @@ static void init_network(attribute &node_id_node, bool set_op_mode = true)
       .set_reported(optional_protocol);
   }
 
-  node_state_topic_state_t state = NODE_STATE_TOPIC_INTERVIEWING;
-  attribute network_status = node_id_node.add_node(ATTRIBUTE_NETWORK_STATUS);
+  NodeStateNetworkStatus state = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
+  attribute network_status = node_id_node.add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
   network_status.set_reported(state);
 }
 
@@ -142,8 +143,8 @@ void test_attribute_deleted_on_state_change()
   init_network(node_id_node);
 
   attribute network_status
-    = node_id_node.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-  node_state_topic_state_t state = NODE_STATE_TOPIC_STATE_OFFLINE;
+    = node_id_node.child_by_type(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  NodeStateNetworkStatus state = ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE;
 
   network_status.set_reported(state);
 
@@ -157,8 +158,8 @@ void test_nodes_that_are_not_wake_up_are_ignored()
   init_network(node_id_node, false);
 
   attribute network_status
-    = node_id_node.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-  node_state_topic_state_t state = NODE_STATE_TOPIC_INTERVIEWING;
+    = node_id_node.child_by_type(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS);
+  NodeStateNetworkStatus state = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
 
   network_status.set_reported(state);
 

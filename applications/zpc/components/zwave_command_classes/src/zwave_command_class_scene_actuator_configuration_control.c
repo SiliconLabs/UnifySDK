@@ -46,9 +46,9 @@
 /**
  * @brief Prepares a Scene Actuator Configuration Set Command.
  *
- * @param node          Attribute Store node to resolve (Actuator Scene ID)
- * @param frame         Pointer at which frame data can be written.
- * @param frame_length  Pointer at which the frame data length can be written.
+ * @param scene_id_node   Attribute Store node to resolve (Actuator Scene ID)
+ * @param frame           Pointer at which frame data can be written.
+ * @param frame_length    Pointer at which the frame data length can be written.
  *
  * @returns sl_status_t following the \ref attribute_resolver_function_t return codes.
  */
@@ -206,9 +206,9 @@ static void on_version_attribute_update(attribute_store_node_t updated_node,
  * @brief Decides what to do after we've sent a Scene Actuator Configuration
  *        Set Command.
  *
- * @param node          Attribute Store node that was resolved
- * @param rule_type     The type of rule that was applied (Set/Get)
- * @param event         The outcome of the resolution.
+ * @param scene_id_node     Attribute Store node that was resolved
+ * @param rule_type         The type of rule that was applied (Set/Get)
+ * @param event             The outcome of the resolution.
  */
 static void on_scene_actuator_configuration_set_send_data_complete(
   attribute_store_node_t scene_id_node,

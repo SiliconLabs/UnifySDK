@@ -131,7 +131,7 @@ could advertise it like this:
     }
   }
 
-The ``PositionAndOrientation`` represents the the location of the NCP radio
+The ``PositionAndOrientation`` represents the location of the NCP radio
 for the AoX locator. CoordinateX, CoordinateY, CoordinateZ are cartesian
 coordinates, in meters. OrientationX, OrientationY and OrientationZ are the
 axis rotation (Euler angles) in degrees.
@@ -291,7 +291,7 @@ MQTT broker, and performs the following actions:
      ``ucl/by-unid/+/+/AoXLocator/Attributes/+/Reported``
   b. Optionally adjusts the configuration issuing WriteAttributes Command
      ``ucl/by-unid/+/+/AoXLocator/Commands/WriteAttributes``
-    
+
 2. Listen to incoming IQReport or AngleReports by subscribing to:
    ``ucl/by-unid/+/+/AoXLocator/GeneratedCommands/+``
 

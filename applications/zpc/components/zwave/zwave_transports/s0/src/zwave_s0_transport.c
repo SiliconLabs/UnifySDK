@@ -85,12 +85,11 @@
  */
 #define S0_MAC_SIZE 8
 
-
-// 3 bytes: commandClassIdentifier, commandIdentifier, commandByte is payload in 
+// 3 bytes: commandClassIdentifier, commandIdentifier, commandByte is payload in
 // ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME
 
 //  (sizeof(ZW_SECURITY_MESSAGE_ENCAPSULATION_1BYTE_FRAME) - 3)
-//  23 - 3 
+//  23 - 3
 #define S0_ENCAP_HEADER_LEN 20
 
 #ifndef UNUSED
@@ -396,21 +395,18 @@ static uint8_t authkey[16];
 static uint8_t enckeyz[16];
 static uint8_t authkeyz[16];
 
-/**
- * Set the network key
- */
-void s0_set_key(const uint8_t *netkey)
+void s0_set_key(const uint8_t *network_key)
 {
   uint8_t p[16];
   uint8_t temp[16] = {0};
 
-  if (memcmp(netkey, temp, 16) == 0) {
+  if (memcmp(network_key, temp, 16) == 0) {
     sl_log_debug(LOG_TAG, "Setting S0 key with 0x00 16 times.\n");
   } else {
     sl_log_debug(LOG_TAG, "Setting S0 key to the network key.\n");
   }
 
-  memcpy(aes_key, netkey, 16);
+  memcpy(aes_key, network_key, 16);
   memset(p, 0x55, 16);
   aes_encrypt(p, authkey);
   memset(p, 0xAA, 16);

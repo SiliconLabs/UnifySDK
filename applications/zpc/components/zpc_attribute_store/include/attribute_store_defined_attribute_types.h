@@ -34,8 +34,8 @@
 #include "attribute_store.h"
 #endif
 
-///< Set the proper name for the Root,
-DEFINE_ATTRIBUTE(ATTRIBUTE_STORE_ROOT, 0x0001)
+#include "uic_attribute_definitions.h"
+#include "unify_dotdot_defined_attribute_types.h"
 
 /**
  * @brief Type of a node in the attribute store.
@@ -69,8 +69,6 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_ROLE_TYPE, 0x000A)
 DEFINE_ATTRIBUTE(ATTRIBUTE_NODE_NAME, 0x000B)
 ///< This represents the location assigned to a node. This is a string
 DEFINE_ATTRIBUTE(ATTRIBUTE_NODE_LOCATION, 0x000C)
-///< This represents the Network Status of a node. node_state_topic_state_t
-DEFINE_ATTRIBUTE(ATTRIBUTE_NETWORK_STATUS, 0x000D)
 ///< This represents a timestamp (in seconds!) of the last time when we received and/or
 ///successfully transmitted a frame towards a node. storage type of the
 ///timestamp is clock_time_t
@@ -187,6 +185,84 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BASIC_DURATION,
 ///< This is an attribute that remembers if we asked for Basic Support.
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BASIC_PROBE_STATUS,
                  ((COMMAND_CLASS_BASIC << 8) | 0x04))
+
+//Door Lock Command Class
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CAPABILITIES,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x0d))
+
+///< This represents the Supported Operation type Bit Mask
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CAPABILITIES_OPERATION_TYPE_BITMASK,
+  ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x0e))
+
+///< This represents the Supported Door Lock Mode
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CAPABILITIES_LOCK_MODE,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x0f))
+
+///< This represents the Supported Outside Handle Modes Bitmask
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_DOOR_LOOK_CAPABILITIES_OUTSIDE_HANDLE_MODES_BITMASK,
+  ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x10))
+
+///< This represents the Supported Inside Handle Modes Bitmask
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_DOOR_LOOK_CAPABILITIES_INSIDE_HANDLE_MODES_BITMASK,
+  ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x11))
+
+///< This represents the Supported door components
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_DOOR_LOOK_CAPABILITIES_DOOR_COMPONENT_BITMASK,
+  ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x12))
+
+///< This represents the ARS
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOOK_CAPABILITIES_ARS,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x13))
+
+///< This represents the HRS
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOOK_CAPABILITIES_HRS,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x14))
+
+///< This represents the TAS
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOOK_CAPABILITIES_TAS,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x15))
+
+///< This represents the BTBS
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOOK_CAPABILITIES_BTBS,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x16))
+
+///< This represents the Configuration
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CONFIGURATION,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x17))
+
+///< This represents the Configuration Auto-Relock
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CONFIGURATION_AUTO_RELOCK,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x18))
+
+///< This represents the Configuration Hold Release Time
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CONFIGURATION_HOLD_RELEASE_TIME,
+  ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x19))
+
+///< This represents the Configuration BTB
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CONFIGURATION_BTB,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x1a))
+
+///< This represents the Configuration TA
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_CONFIGURATION_TA,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x1b))
+
+///< This represents Operation Report
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_OPERATION_REPORT,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x1c))
+
+///< This represents the Operation Report Target Mode
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_OPERATION_REPORT_TARGET_MODE,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x1d))
+
+///< This represents the Operation Report Duration
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_OPERATION_REPORT_DURATION,
+                 ((COMMAND_CLASS_DOOR_LOCK << 8) | 0x1e))
 
 ///////////////////////////////////
 // Binary Switch Command Class
@@ -748,10 +824,63 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_TRANSPORT_SERVICE_VERSION,
                  ((COMMAND_CLASS_TRANSPORT_SERVICE << 8) | 0x01))
 
 /////////////////////////////////////////////////
+// User Code Command Class
+///< This represents the version of the User Code Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_VERSION,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x01))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_DATA,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x02))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_NUMBER_OF_USERS,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x03))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_DELETE_ALL_REQUESTED,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x04))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_USER_ID,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x05))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_CODE,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x06))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_USER_ID_STATUS,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x07))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_ADMIN_CODE,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x08))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_CAPABILITIES,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x09))
+
+// Supported flags are saved sequentially in this attribute, from the
+// order of finding them in the USER_CODE_CAPABILITIES_REPORT
+// So it'll be bit 0 : AC Support / bit 1 : ACD Support / bit 2:  Res
+//             bit 3 : UCC Support / bit 4 : MUCR Support / bit 5: MUCS Support
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_SUPPORTED_FLAGS,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x0A))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_SUPPORTED_USER_ID_STATUS,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x0B))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_SUPPORTED_KEYPAD_MODES,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x0C))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_SUPPORTED_KEYS,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x0D))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_CHECKSUM,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x0E))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_USER_CODE_KEYPAD_MODE,
+                 ((COMMAND_CLASS_USER_CODE << 8) | 0x0F))
+
+/////////////////////////////////////////////////
 // Powerlevel Command Class
 ///< This represents the version of the Powerlevel Command class.
 /// zwave_cc_version_t
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_COMMAND_CLASS_POWERLEVEL_VERSION,
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_POWERLEVEL_VERSION,
                  ((COMMAND_CLASS_POWERLEVEL << 8) | 0x01))
 
 /////////////////////////////////////////////////
@@ -879,12 +1008,6 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_INDICATOR_TIMEOUT, 0x87F0)
 
 // ZigBee specific attributes
 // Suggested range (ZigBee Cluster ID (2 bytes) <<16) | Zigbee attribute ID (2 bytes)
-
-// Group Cluster
-///< This represents a Group identifier. uint16_t
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
-///< This represents a Group name. String representation with Null termination.
-DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
 
 #endif  //ATTRIBUTE_AUTO_GENERATED
 #endif  //ATTRIBUTE_STORE_TYPES_H

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ ProtocolController-NetworkManagement/NetworkManagementState Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for NetworkManagementState attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Desired { &quot;value&quot;: &lt;DESIRED_NETWORK_MANAGEMENT_STATE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Reported { &quot;value&quot;: &lt;REPORTED_NETWORK_MANAGEMENT_STATE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Desired { &quot;value&quot;: &lt;DESIRED_NETWORK_MANAGEMENT_STATE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ProtocolController/NetworkManagement/Attributes/NetworkManagementState/Reported { &quot;value&quot;: &lt;REPORTED_NETWORK_MANAGEMENT_STATE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -239,7 +241,7 @@ ProtocolController/NetworkManagement/WriteAttributes Command</h2>
 <p>To update all ProtocolController/NetworkManagement attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/ProtocolController/NetworkManagement/Commands/WriteAttributes&#39; -m  &#39;{  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -283,7 +285,7 @@ ProtocolController/NetworkManagement/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:41 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -103,13 +103,13 @@ Details about each application can be found in the application specific user gui
 <h2>Running Using Systemd<a class="headerlink" href="#running-using-systemd" title="Permalink to this heading"></a></h2>
 <p>Normally, the Unify components should be run as a service. When the Debian packages
 are installed they automatically enables themselves as systemd services.</p>
-<p>The the components can be started and stopped using the <code class="docutils literal notranslate"><span class="pre">systemctl</span></code> command (see systemctl
+<p>the components can be started and stopped using the <code class="docutils literal notranslate"><span class="pre">systemctl</span></code> command (see systemctl
 linux manual for details).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>uic-&lt;component-name&gt;
 sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>uic-&lt;component-name&gt;
 </pre></div>
 </div>
-<p>To see the logs of the the components when it runs as a service, use the following command:</p>
+<p>To see the logs of the components when it runs as a service, use the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>journalctl<span class="w"> </span>-u<span class="w"> </span>uic-&lt;component-name&gt;.service
 </pre></div>
 </div>

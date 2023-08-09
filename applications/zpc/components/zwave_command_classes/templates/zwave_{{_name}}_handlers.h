@@ -134,6 +134,20 @@ sl_status_t  zwave_{{_name}}_handle_report_command_override(
 {{/cmd_type}}
 
 {{#cmd_type "_GET"}}
+
+/**
+ * @brief Auto-generated function for {{_name}}
+ *
+ * This function provide automatic handling of the  {{_name}} command.
+ * @param _node Attribute to genrate the set frame from.
+ * @param frame Pointer to frame data which should be written into
+ * @param frame_len Length of the generated frame. I this is 0 on exit the auto
+ * generated code is executed otherwise it is not.
+ * @return Return code to send to the resolver.
+
+ */
+sl_status_t zwave_{{_name}}(
+  attribute_store_node_t _node, uint8_t *frame, uint16_t *frame_len);
 /**
  * @brief Override function for {{_name}}
  *
@@ -151,6 +165,20 @@ sl_status_t zwave_{{_name}}_override(
 {{/cmd_type}}
 
 {{#cmd_type "_SET"}}
+/**
+ * @brief Auto-generated function for {{_name}}
+ *
+ * This function provide automatic handling of the  {{_name}} command.
+ * @param _node Attribute to genrate the set frame from.
+ * @param frame Pointer to frame data which should be written into
+ * @param frame_len Length of the generated frame. I this is 0 on exit the auto
+ * generated code is executed otherwise it is not.
+ * @return Return code to send to the resolver.
+
+ */
+
+sl_status_t zwave_{{_name}}(
+  attribute_store_node_t _node, uint8_t *frame, uint16_t *frame_len);
 /**
  * @brief Override function for {{_name}}
  *

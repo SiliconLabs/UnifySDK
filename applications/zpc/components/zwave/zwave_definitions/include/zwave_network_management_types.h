@@ -12,9 +12,9 @@
  *****************************************************************************/
 
 /**
- * @defgroup zwave_controller_types Z-Wave Network Management Types
- * @ingroup zwave_controller_component
- * @brief Z-Wave Controller shared type definitions
+ * @defgroup zwave_network_management_types Z-Wave Network Management Types
+ * @ingroup zwave_definitions
+ * @brief Z-Wave Network Management shared type definitions
  **
  * @{
  */
@@ -137,42 +137,22 @@ typedef enum {
   /** Add mode state.
    * Direct range/NWI, S2, SmartStart, Proxy Inclusion, or Proxy Replace.
    *
-   * Waiting for protocol to assign node ID and home ID to the new node.
-   *
-   * On \ref NM_EV_ADD_PROTOCOL_DONE, send an ADD_NODE_STOP to
-   * protocol.  On \ref NM_EV_ADD_NODE_STATUS_DONE, register the new
-   * node in \ref node_db and go to \ref NM_WAIT_FOR_SECURE_ADD.  If
-   * GW is handling inclusion, start security processing the new node
-   * (S2 or S0 inclusion).  Otherwise, start a 2 s timer and go to \ref
-   * NM_PREPARE_SUC_INCLISION.
+   * Waiting for the Z-Wave Protocol to assign NodeID and HomeID to the node
+   * being included
    */
   NM_WAIT_FOR_PROTOCOL,
 
-  /** Learn mode state (exclusion).  Also used if GW is processing DEFAULT_SET.
+  /** Reset state. Also used as part of Network Exclusion
    *
-   * Waiting for NetworkManagement_mdns_exited() to be called from
-   * \ref ZIP_Router.  Post \ref ZIP_EVENT_RESET to \ref ZIP_Router
-   * and call SendReplyWhenNetworkIsUpdated() to go to \ref
-   * NM_WAITING_FOR_PROBE.  SendReplyWhenNetworkIsUpdated() sets up a
-   * trigger to bring NMS back to \ref NM_IDLE when the gateway reset
-   * is completed.
-   *
-   * \note When changing to this state, we MUST call rd_exit() to advance
-   * the state machine.
+   * The Network Management engine will now wait for the Z-Wave Controller to
+   * reset, leave its network and start a new network.
    */
   NM_SET_DEFAULT,
   /** Learn mode state.
    *
+   * The Z-Wave Network Management state machine is in Learn Mode.
+   * (awaiting inclusion, exclusion, or controller replication)
    * GW is processing LEARN_SET, waiting for protocol.
-   *
-   * On callback (LearnModeStatus()) with LEARN_MODE_STARTED, go to \ref
-   * NM_LEARN_MODE_STARTED, Lock RD probe machine, invalidate
-   * MyNodeID, and start S2 learn-mode state machine.
-   *
-   * Can be canceled or time out.  This will trigger a partial
-   * re-initialization of the gateway (ApplicationInitNIF()), unlock RD
-   * probe.  ResetState() from nm_send_reply() with the
-   * LEARN_MODE_FAILED will bring NMS back to \ref NM_IDLE.
    */
   NM_LEARN_MODE,
 
@@ -193,15 +173,9 @@ typedef enum {
   NM_LEARN_MODE_STARTED,
 
   /** Add mode state.
-   * Direct range/NWI, S2, SmartStart, Proxy Inclusion, Proxy Replace.
    *
-   * Waiting for the S2 inclusion state machine to complete.  On \ref
-   * NM_EV_SECURITY_DONE, go to \ref NM_WAIT_FOR_PROBE_AFTER_ADD and
-   * start probe.
-   *
-   * If SmartStart security fails, start a
-   * #SMART_START_SELF_DESTRUCT_TIMEOUT sec. timer and go to
-   * #NM_WAIT_FOR_SELF_DESTRUCT.
+   * The Protocol has now included a node in the network, we are waiting for the
+   * S0 or S2 Bootstrapping to complete or time out.
    */
   NM_WAIT_FOR_SECURE_ADD,
 
@@ -238,18 +212,16 @@ typedef enum {
    *
    * The gateway has received #LEARN_MODE_DONE from protocol.
    *
-   * In case of inclusion, Network Management is waiting for S2/S0
-   * learn mode to complete.  On \ref NM_EV_SECURITY_DONE, go to \ref
-   * NM_WAIT_FOR_MDNS and call rd_exit() to reset the gateway for a
-   * new network.
+   * In case of inclusion, Network Management is waiting for S2/S0 bootstrapping
+   * to complete.
    *
-   * In case of #NM_EV_ADD_SECURITY_KEY_CHALLENGE, accept.
+   * In case of NM_EV_ADD_SECURITY_KEY_CHALLENGE, accept.
    * In case of NM_EV_LEARN_SET/DISABLE, abort S2.
    *
    * In case of exclusion, controller replication, and controller
-   * shift, #NM_EV_SECURITY_DONE is triggered synchronously in NMS and
-   * state is changed synchronously when #LEARN_MODE_DONE is
-   * received to either #NM_SET_DEFAULT or #NM_WAIT_FOR_MDNS.
+   * shift, NM_EV_SECURITY_DONE is triggered synchronously in NMS and
+   * state is changed synchronously when LEARN_MODE_DONE is
+   * received to NM_SET_DEFAULT
    */
   NM_WAIT_FOR_SECURE_LEARN,
 
@@ -269,7 +241,7 @@ typedef enum {
    * Proxy Replace.
    *
    * Wait for timeout to let protocol finish up its add by sending a
-   * transfer end to SUC. Then go to \ref NM_WIAT_FOR_SUC_INCLUSION
+   * transfer end to SUC. Then go to NM_WIAT_FOR_SUC_INCLUSION
    * and request handover.
    */
   NM_PREPARE_SUC_INCLISION,
@@ -305,7 +277,7 @@ typedef enum {
    * result, before doing ZW_RemoveFailed().
    *
    * The NOP is sent before entering this state.  Now the gateway
-   * waits for protocol callback nop_send_done() to trigger \ref
+   * waits for protocol callback nop_send_done() to trigger
    * NM_EV_TX_DONE_SELF_DESTRUCT.  Then we start a timer, call
    * ZW_RemoveFailedNode() and go to \ref
    * NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL.
@@ -315,10 +287,9 @@ typedef enum {
   /** Add mode state.
    * SmartStart.
    *
-   * Waiting for protocol to complete the ZW_RemoveFailedNode() (or
-   * for timeout).  Protocol callback RemoveSelfDestructStatus()
-   * triggers sending status to unsolicited destinations with
-   * #ResetState() callback.  Timeout calls #ResetState() directly.
+   * Waiting for the Z-Wave API module to check that the node has left
+   * the network after a failed S2 bootstrapping attempt following a SmartStart
+   * inclusion
    */
   NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL,
   /** Failed node remove state.

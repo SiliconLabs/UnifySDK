@@ -21,7 +21,7 @@
  * as well as from command line (arguments).
  * Command line arguments overrides the configurations from the config file.
  *
- * Config variables are registed to the config system though the config_add_xxx
+ * Config variables are registered to the config system though the config_add_xxx
  * functions. When all variables have been registed the parsing of command line
  * arguments and the configuration file is done using the function \ref config_parse.
  * After this the value of each configuration variable may be retrived using the

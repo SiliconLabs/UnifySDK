@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -374,6 +374,23 @@ the NetworkManagement state <code class="docutils literal notranslate"><span cla
 <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;DEVICE_UNID&gt;/ProtocolController/NetworkManagement</span></code></p></li>
 </ul>
 </section>
+</section>
+<section id="zigbee-network-parameters">
+<h3>Zigbee Network Parameters<a class="headerlink" href="#zigbee-network-parameters" title="Permalink to this heading"></a></h3>
+<p>The parameters for the Zigbee network can be set in 2 ways:</p>
+<ul class="simple">
+<li><p>Using the default network parameters</p></li>
+<li><p>Specifying the PANID, channel and radio power in the configuration</p></li>
+</ul>
+<p>Using the default network parameters as in the standard Z3GatewayHost
+application requires no additional input.</p>
+<p>Optionally, the user may configure the radio parameters at the command line or
+in the zigpc configuration file. The “zigpc.use_network_args” flag must be set
+to “true” (or 1). The user must then supply the “zigpc.network_panid”,
+“zigpc.network_channel” and “zigpc.network_radio_power”. Please note, that
+ALL arguments must be supplied when the “use_network_args” option is set.</p>
+<p>Running zigpc with the –help option will also describe how to use these
+settings.</p>
 </section>
 <section id="device-state-updates">
 <h3>Device State Updates<a class="headerlink" href="#device-state-updates" title="Permalink to this heading"></a></h3>
@@ -1138,7 +1155,7 @@ to.</p>
 <section id="building-ncp-fw-images-using-studio">
 <h4>Building NCP FW Images Using Studio<a class="headerlink" href="#building-ncp-fw-images-using-studio" title="Permalink to this heading"></a></h4>
 <p>Follow section 2 from the following application note to build a NCP application
-using the Simplicity Studio IDE:
+using the <a class="reference external" href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a> IDE:
 <a class="reference external" href="https://www.silabs.com/documents/public/application-notes/an1010-customized-ncp.pdf">AN1010: Building a Customized NCP Application</a></p>
 </section>
 </section>

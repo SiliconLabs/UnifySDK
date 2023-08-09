@@ -35,7 +35,7 @@ extern "C" {
 /**
  * Callback for entering a new network.
  * Refer to @ref zwave_controller_callbacks_t
- * @ref zwave_controller_callbacks_t.on_new_network_entered for parameter description
+ * @ref zwave_controller_callbacks_t on_new_network_entered for parameter description
  */
 void zwave_command_handler_on_new_network_entered(
   zwave_home_id_t home_id,
@@ -46,7 +46,7 @@ void zwave_command_handler_on_new_network_entered(
 /**
  * Callback for receiving a Z-Wave frame.
  * Refer to @ref zwave_controller_callbacks_t
- * @ref zwave_controller_callbacks_t.on_frame_received for parameter description
+ * @ref zwave_controller_callbacks_t on_frame_received for parameter description
  */
 void zwave_command_handler_on_frame_received(
   const zwave_controller_connection_info_t *connection_info,

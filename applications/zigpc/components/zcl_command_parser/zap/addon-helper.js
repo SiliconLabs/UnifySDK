@@ -3,7 +3,7 @@ const baseAddonHelper = require('../../zcl_util/zap/addon-helper')
 const COMPONENT_PREFIX = "zigpc_zclcmdparse"
 
 const component_cmdparser_prefix = () => {
-  return COMPONENT_PREFIX
+    return COMPONENT_PREFIX
 }
 
 /**
@@ -16,36 +16,36 @@ let unique_parents = {}
 
 
 function zcl_commands_filtered_reset() {
-  unique_parents = {}
+    unique_parents = {}
 }
 
 function zcl_commands_filtered_add() {
-  if ((this.index != null) && (this.count != null) && (this.parent != null)) {
-    const parent_label = this.parent.label || null
-    if (parent_label != null) {
-      if (unique_parents[parent_label] == null) {
-        unique_parents[parent_label] = {
-          firstIndex: this.index,
-          lastIndex: this.index
+    if ((this.index != null) && (this.count != null) && (this.parent != null)) {
+        const parent_label = this.parent.label || null
+        if (parent_label != null) {
+            if (unique_parents[parent_label] == null) {
+                unique_parents[parent_label] = {
+                    firstIndex: this.index,
+                    lastIndex: this.index
+                }
+            }
+            if (this.index < unique_parents[parent_label].firstIndex) {
+                unique_parents[parent_label].firstIndex = this.index
+            }
+            if (this.index > unique_parents[parent_label].lastIndex) {
+                unique_parents[parent_label].lastIndex = this.index
+            }
         }
-      }
-      if (this.index < unique_parents[parent_label].firstIndex) {
-        unique_parents[parent_label].firstIndex = this.index
-      }
-      if (this.index > unique_parents[parent_label].lastIndex) {
-        unique_parents[parent_label].lastIndex = this.index
-      }
     }
-  }
 }
 
-function zcl_commands_filtered_first (options) {
-  if ((this.index != null) && (this.count != null) && (this.parent != null)) {
-    const parent_label = this.parent.label || null
-    if ((parent_label != null) && (this.index === unique_parents[parent_label].firstIndex)) {
-      return options.fn(this)
+function zcl_commands_filtered_first(options) {
+    if ((this.index != null) && (this.count != null) && (this.parent != null)) {
+        const parent_label = this.parent.label || null
+        if ((parent_label != null) && (this.index === unique_parents[parent_label].firstIndex)) {
+            return options.fn(this)
+        }
     }
-  }
 }
 
 /**
@@ -54,18 +54,17 @@ function zcl_commands_filtered_first (options) {
  * @param {*} options
  * @returns
  */
-function zcl_commands_filtered_last (options) {
-  if ((this.index != null) && (this.count != null) && (this.parent != null)) {
-    const parent_label = this.parent.label || null
-    if ((parent_label != null) && (this.index === unique_parents[parent_label].lastIndex)) {
-      return options.fn(this)
+function zcl_commands_filtered_last(options) {
+    if ((this.index != null) && (this.count != null) && (this.parent != null)) {
+        const parent_label = this.parent.label || null
+        if ((parent_label != null) && (this.index === unique_parents[parent_label].lastIndex)) {
+            return options.fn(this)
+        }
     }
-  }
 }
+
 exports.component_cmdparser_prefix = component_cmdparser_prefix
 exports.component_zigpc_zcl_prefix = baseAddonHelper.component_zigpc_zcl_prefix
-exports.zcl_type_map_set_item = baseAddonHelper.zcl_type_map_set_item
-exports.zcl_type_map_get_item = baseAddonHelper.zcl_type_map_get_item
 
 exports.zcl_commands_filtered_reset = zcl_commands_filtered_reset
 exports.zcl_commands_filtered_add = zcl_commands_filtered_add

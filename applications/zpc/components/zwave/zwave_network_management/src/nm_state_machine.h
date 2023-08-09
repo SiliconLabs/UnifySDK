@@ -113,7 +113,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data);
  * Sub-state flag for the Network Management State machine.
  *
  * The ZW_LEARN_MODE_RETURN_INTERVIEW_STATUS was set on the
- * #LEARN_MODE_SET command, i.e., #LEARN_MODE_INTERVIEW_COMPLETED is
+ * LEARN_MODE_SET command, i.e., LEARN_MODE_INTERVIEW_COMPLETED is
  * requested.
  * \ingroup NW_CMD_handler
  * \see Learn Mode Set Command (Network Management Basic Node Command
@@ -123,7 +123,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data);
 /**
  * Sub-state flag for the Network Management State machine.
  *
- * The LEARN_MODE_NWI was set on the #LEARN_MODE_SET command.
+ * The LEARN_MODE_NWI was set on the LEARN_MODE_SET command.
  *
  * \see Learn Mode Set Command (Network Management Basic Node Command
  * Class).
@@ -133,7 +133,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data);
 /**
  * Sub-state flag for the Network Management State machine.
  *
- * The LEARN_MODE_NWE was set on the #LEARN_MODE_SET command.
+ * The LEARN_MODE_NWE was set on the LEARN_MODE_SET command.
  *
  * \see Learn Mode Set Command (Network Management Basic Node Command
  * Class).

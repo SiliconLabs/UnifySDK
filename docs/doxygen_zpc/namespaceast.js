@@ -33,6 +33,11 @@ var namespaceast =
     [ "operand", "namespaceast.html#a853a6aa17efe898ec921b127af0ada6c", null ],
     [ "scope_settings_t", "namespaceast.html#aef0d3c13d88a76613ad4519f04810f4b", null ],
     [ "value_type_t", "namespaceast.html#a94a74eef22bd0db806b70da094c8ffab", null ],
+    [ "AssignmentType", "namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01", [
+      [ "REGULAR", "namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01a5f945141c4e13754a6fc23500d025eb4", null ],
+      [ "INSTANCE", "namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01a7a8b06d47b1d4fd5933348ca8613f1df", null ],
+      [ "CLEARANCE", "namespaceast.html#a5ace4d117a90fb4a9aa004b203963c01aa39a3e888f0031d1da8f8dacc47ab263", null ]
+    ] ],
     [ "operator_ids", "namespaceast.html#a103453ee4c6f922adfc20d135c7f4689", [
       [ "operator_plus", "namespaceast.html#a103453ee4c6f922adfc20d135c7f4689ab1c75fd3802ae603c4a17a6e60e7c497", null ],
       [ "operator_minus", "namespaceast.html#a103453ee4c6f922adfc20d135c7f4689a50b2c841949046e1deb68f0f18ec8c5d", null ],
@@ -59,6 +64,7 @@ var namespaceast =
     [ "get_built_in_functions", "namespaceast.html#a05ef82a09426afdaee7a9f96377d8e8f", null ],
     [ "is_any_defined", "group__attribute__mapper__built__in__functions__definitions.html#ga5b82463b6aaf77a4794ae28e61df2a69", null ],
     [ "is_any_undefined", "group__attribute__mapper__built__in__functions__definitions.html#ga4a95d7c23d4b96003a4a1ce8958f8b84", null ],
+    [ "log10", "group__attribute__mapper__built__in__functions__definitions.html#gabcfcdb83e6dc25df0b00121a463d5a39", null ],
     [ "max_value", "group__attribute__mapper__built__in__functions__definitions.html#gaaac955c991500381e8c1936e307e1ade", null ],
     [ "min_value", "group__attribute__mapper__built__in__functions__definitions.html#ga187ca116b35491398fa1e281cde3ecd6", null ],
     [ "operator<<", "namespaceast.html#a310c610cce1679dac6fa449183bfbe7d", null ],

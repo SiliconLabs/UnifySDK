@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -120,10 +120,135 @@ State/EndpointIdList Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EndpointIdList attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/State/Attributes/EndpointIdList/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/State/Attributes/EndpointIdList/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/EndpointIdList/Desired { &quot;value&quot;: &lt;DESIRED_ENDPOINT_ID_LIST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/EndpointIdList/Reported { &quot;value&quot;: &lt;REPORTED_ENDPOINT_ID_LIST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/EndpointIdList/Desired { &quot;value&quot;: [&lt;DESIRED_ENDPOINT_ID_LIST&gt;,&lt;DESIRED_ENDPOINT_ID_LIST&gt;]}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/EndpointIdList/Reported { &quot;value&quot;: [&lt;REPORTED_ENDPOINT_ID_LIST&gt;,&lt;REPORTED_ENDPOINT_ID_LIST&gt;]}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
+<h2><a class="anchor" id="state_attr_network_status"></a>
+State/NetworkStatus Attribute</h2>
+<p><b>MQTT Topic Pattern:</b></p>
+<div class="fragment"><div class="line">[PREFIX]/State/Attributes/NetworkStatus/Reported</div>
+<div class="line">[PREFIX]/State/Attributes/NetworkStatus/Desired</div>
+</div><!-- fragment --><p><b>MQTT Payload JSON Schema:</b></p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;State Cluster NetworkStatus Attribute Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">    &quot;value&quot;: {</div>
+<div class="line">      &quot;type&quot;: &quot;NodeStateNetworkStatus&quot;</div>
+<div class="line">    }</div>
+<div class="line">  },</div>
+<div class="line">  &quot;required&quot;: [</div>
+<div class="line">    &quot;value&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
+<p>To see desired/reported value for NetworkStatus attribute under the by-unid topic space:</p>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/State/Attributes/NetworkStatus/+&#39;</div>
+<div class="line"> </div>
+<div class="line"># Example output</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/NetworkStatus/Desired { &quot;value&quot;: &lt;DESIRED_NETWORK_STATUS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/NetworkStatus/Reported { &quot;value&quot;: &lt;REPORTED_NETWORK_STATUS&gt;}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
+<h2><a class="anchor" id="state_attr_security"></a>
+State/Security Attribute</h2>
+<p><b>MQTT Topic Pattern:</b></p>
+<div class="fragment"><div class="line">[PREFIX]/State/Attributes/Security/Reported</div>
+<div class="line">[PREFIX]/State/Attributes/Security/Desired</div>
+</div><!-- fragment --><p><b>MQTT Payload JSON Schema:</b></p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;State Cluster Security Attribute Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">    &quot;value&quot;: {</div>
+<div class="line">      &quot;type&quot;: &quot;NodeStateSecurity&quot;</div>
+<div class="line">    }</div>
+<div class="line">  },</div>
+<div class="line">  &quot;required&quot;: [</div>
+<div class="line">    &quot;value&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
+<p>To see desired/reported value for Security attribute under the by-unid topic space:</p>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/State/Attributes/Security/+&#39;</div>
+<div class="line"> </div>
+<div class="line"># Example output</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/Security/Desired { &quot;value&quot;: &lt;DESIRED_SECURITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/Security/Reported { &quot;value&quot;: &lt;REPORTED_SECURITY&gt;}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
+<h2><a class="anchor" id="state_attr_maximum_command_delay"></a>
+State/MaximumCommandDelay Attribute</h2>
+<p><b>MQTT Topic Pattern:</b></p>
+<div class="fragment"><div class="line">[PREFIX]/State/Attributes/MaximumCommandDelay/Reported</div>
+<div class="line">[PREFIX]/State/Attributes/MaximumCommandDelay/Desired</div>
+</div><!-- fragment --><p><b>MQTT Payload JSON Schema:</b></p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;State Cluster MaximumCommandDelay Attribute Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">    &quot;value&quot;: {</div>
+<div class="line">      &quot;type&quot;: &quot;integer&quot;</div>
+<div class="line">    }</div>
+<div class="line">  },</div>
+<div class="line">  &quot;required&quot;: [</div>
+<div class="line">    &quot;value&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
+<p>To see desired/reported value for MaximumCommandDelay attribute under the by-unid topic space:</p>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/State/Attributes/MaximumCommandDelay/+&#39;</div>
+<div class="line"> </div>
+<div class="line"># Example output</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/MaximumCommandDelay/Desired { &quot;value&quot;: &lt;DESIRED_MAXIMUM_COMMAND_DELAY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/MaximumCommandDelay/Reported { &quot;value&quot;: &lt;REPORTED_MAXIMUM_COMMAND_DELAY&gt;}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
+<h2><a class="anchor" id="state_attr_network_list"></a>
+State/NetworkList Attribute</h2>
+<p><b>MQTT Topic Pattern:</b></p>
+<div class="fragment"><div class="line">[PREFIX]/State/Attributes/NetworkList/Reported</div>
+<div class="line">[PREFIX]/State/Attributes/NetworkList/Desired</div>
+</div><!-- fragment --><p><b>MQTT Payload JSON Schema:</b></p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;State Cluster NetworkList Attribute Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">    &quot;value&quot;: {</div>
+<div class="line">      &quot;type&quot;: &quot;array&quot;,</div>
+<div class="line">      &quot;items&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;string&quot;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  },</div>
+<div class="line">  &quot;required&quot;: [</div>
+<div class="line">    &quot;value&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
+<p>To see desired/reported value for NetworkList attribute under the by-unid topic space:</p>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/State/Attributes/NetworkList/+&#39;</div>
+<div class="line"> </div>
+<div class="line"># Example output</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/NetworkList/Desired { &quot;value&quot;: [&lt;DESIRED_NETWORK_LIST&gt;,&lt;DESIRED_NETWORK_LIST&gt;]}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/Attributes/NetworkList/Reported { &quot;value&quot;: [&lt;REPORTED_NETWORK_LIST&gt;,&lt;REPORTED_NETWORK_LIST&gt;]}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -175,6 +300,7 @@ State Command Support</h1>
 <div class="line">              &quot;RemoveOffline&quot;,</div>
 <div class="line">              &quot;DiscoverNeighbors&quot;,</div>
 <div class="line">              &quot;Interview&quot;,</div>
+<div class="line">              &quot;DiscoverSecurity&quot;,</div>
 <div class="line">              &quot;WriteAttributes&quot;,</div>
 <div class="line">              &quot;ForceReadAttributes&quot;</div>
 <div class="line">            ]</div>
@@ -190,7 +316,7 @@ State Command Support</h1>
 <p>To see supported commands for State cluster under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/State/SupportedCommands&#39;</div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/State/SupportedCommands { &quot;value&quot;: [&quot;Remove&quot;,&quot;RemoveOffline&quot;,&quot;DiscoverNeighbors&quot;,&quot;Interview&quot;,&quot;WriteAttributes&quot;, &quot;ForceReadAttributes&quot;] }</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/State/SupportedCommands { &quot;value&quot;: [&quot;Remove&quot;,&quot;RemoveOffline&quot;,&quot;DiscoverNeighbors&quot;,&quot;Interview&quot;,&quot;DiscoverSecurity&quot;,&quot;WriteAttributes&quot;, &quot;ForceReadAttributes&quot;] }</div>
 </div><!-- fragment --><p>To see supported generated commands for State cluster under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/State/SupportedGeneratedCommands&#39;</div>
 <div class="line"># Example output</div>
@@ -295,6 +421,29 @@ State/Interview Command</h2>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
+<h2><a class="anchor" id="state_discover_security_cmd"></a>
+State/DiscoverSecurity Command</h2>
+<p><b>MQTT Topic Pattern:</b></p>
+<div class="fragment"><div class="line">[PREFIX]/State/Commands/DiscoverSecurity</div>
+<div class="line">[PREFIX]/State/GeneratedCommands/DiscoverSecurity</div>
+</div><!-- fragment --><p><b>MQTT Payload JSON Schema:</b></p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;State Cluster DiscoverSecurity Command Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">  },</div>
+<div class="line">  &quot;required&quot;: [</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
+<p>To send a State/DiscoverSecurity command under the by-unid topic space:</p>
+<div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/State/Commands/DiscoverSecurity&#39; -m  &#39;{  }&#39;</div>
+</div><!-- fragment --><p>To receive a State/DiscoverSecurity generated command from a UNID/endpoint:</p>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/State/GeneratedCommands/DiscoverSecurity&#39;</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
 <h2><a class="anchor" id="state_write_attr_cmd"></a>
 State/WriteAttributes Command</h2>
 <p><b>MQTT Topic Pattern:</b></p>
@@ -314,7 +463,7 @@ State/WriteAttributes Command</h2>
 <p>To update all State attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/State/Commands/WriteAttributes&#39; -m  &#39;{  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -334,7 +483,11 @@ State/ForceReadAttributes Command</h2>
 <div class="line">      &quot;items&quot;: {</div>
 <div class="line">        &quot;type&quot;: &quot;string&quot;,</div>
 <div class="line">        &quot;enum&quot;: [</div>
-<div class="line">          &quot;EndpointIdList&quot;</div>
+<div class="line">          &quot;EndpointIdList&quot;,</div>
+<div class="line">          &quot;NetworkStatus&quot;,</div>
+<div class="line">          &quot;Security&quot;,</div>
+<div class="line">          &quot;MaximumCommandDelay&quot;,</div>
+<div class="line">          &quot;NetworkList&quot;</div>
 <div class="line">        ]</div>
 <div class="line">      }</div>
 <div class="line">    }</div>
@@ -358,7 +511,7 @@ State/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:41 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

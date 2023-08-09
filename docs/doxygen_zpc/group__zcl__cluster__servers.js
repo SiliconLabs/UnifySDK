@@ -1,7 +1,7 @@
 var group__zcl__cluster__servers =
 [
-    [ "ZCL Group Cluster server", "group__zcl__group__cluster__server.html", "group__zcl__group__cluster__server" ],
     [ "ZCL Configuration Parameter cluster", "group__configuration__parameter__cluster__server.html", "group__configuration__parameter__cluster__server" ],
+    [ "User Code Cluster Server", "group__user__code__cluster__server.html", "group__user__code__cluster__server" ],
     [ "ZCL Clusters helpers", "group__zcl__cluster__servers__helpers.html", "group__zcl__cluster__servers__helpers" ],
     [ "ZCL RF Telemetry Cluster server", "group__zcl__rf__telemetry__cluster__server.html", "group__zcl__rf__telemetry__cluster__server" ],
     [ "ZCL Scenes cluster server", "group__zcl__scenes__cluster__server.html", "group__zcl__scenes__cluster__server" ],

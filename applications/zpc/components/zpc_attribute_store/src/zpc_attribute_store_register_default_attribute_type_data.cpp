@@ -32,7 +32,7 @@ sl_status_t zpc_attribute_store_register_default_attribute_type_data()
 
   sl_status_t status = SL_STATUS_OK;
 
-  for (auto &a: attributes) {
+  for (const auto &a: attributes) {
     if (false == attribute_store_is_type_registered(a.first)) {
       status
         |= attribute_store_register_type(a.first,

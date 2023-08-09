@@ -877,236 +877,6 @@ static sl_status_t uic_mqtt_dotdot_alarms_reset_alarm_log_callback_func(
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_ota_upgrade_image_notify_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_image_notify_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    ImageNotifyPayloadType payload_type,
-
-    uint8_t query_jitter,
-
-    uint16_t manufacturer_code,
-
-    uint16_t image_type,
-
-    uint32_t new_file_version
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_image_notify_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t field_control,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t current_file_version,
-
-    uint16_t hardware_version
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t image_size
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t field_control,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t file_offset,
-
-    uint8_t maximum_data_size,
-
-    EUI64 request_node_address,
-
-    uint16_t minimum_block_period
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t field_control,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t file_offset,
-
-    uint8_t maximum_data_size,
-
-    uint16_t page_size,
-
-    uint16_t response_spacing,
-
-    EUI64 request_node_address
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t file_offset,
-
-    const char* image_data,
-
-    uint32_t current_time,
-
-    uint32_t request_time,
-
-    uint16_t minimum_block_period
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint16_t manufacturer_code,
-
-    OTAImageType image_type,
-
-    uint32_t file_version,
-
-    UTC current_time,
-
-    UTC upgrade_time
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    EUI64 request_node_address,
-
-    uint16_t manufacturer_code,
-
-    OTADeviceSpecificImageType image_type,
-
-    uint32_t file_version,
-
-    uint16_t current_zigbee_stack_version
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
-static unsigned int uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_func(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type,
-    zclStatus status,
-
-    uint16_t manufacturer_code,
-
-    OTADeviceSpecificImageType image_type,
-
-    uint32_t file_version,
-
-    uint32_t image_size
-
-) {
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_count++;
-  num_command_callbacks++;
-  return SL_STATUS_OK;
-}
-
 static unsigned int uic_mqtt_dotdot_poll_control_check_in_callback_count;
 static sl_status_t uic_mqtt_dotdot_poll_control_check_in_callback_func(
     dotdot_unid_t unid,
@@ -2889,6 +2659,17 @@ static sl_status_t uic_mqtt_dotdot_state_interview_callback_func(
   return SL_STATUS_OK;
 }
 
+static unsigned int uic_mqtt_dotdot_state_discover_security_callback_count;
+static sl_status_t uic_mqtt_dotdot_state_discover_security_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_state_discover_security_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
 static unsigned int uic_mqtt_dotdot_binding_bind_callback_count;
 static sl_status_t uic_mqtt_dotdot_binding_bind_callback_func(
     dotdot_unid_t unid,
@@ -3207,26 +2988,6 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_alarms_reset_alarm_log_callback_set(&uic_mqtt_dotdot_alarms_reset_alarm_log_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_image_notify_callback_set(&uic_mqtt_dotdot_ota_upgrade_image_notify_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_set(&uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_set(&uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_set(&uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_set(&uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_set(&uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_set(&uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_set(&uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_set(&uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_func);
-  num_callbacks++;
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_set(&uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_func);
-  num_callbacks++;
   uic_mqtt_dotdot_poll_control_check_in_callback_set(&uic_mqtt_dotdot_poll_control_check_in_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_poll_control_check_in_response_callback_set(&uic_mqtt_dotdot_poll_control_check_in_response_callback_func);
@@ -3447,6 +3208,8 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_state_interview_callback_set(&uic_mqtt_dotdot_state_interview_callback_func);
   num_callbacks++;
+  uic_mqtt_dotdot_state_discover_security_callback_set(&uic_mqtt_dotdot_state_discover_security_callback_func);
+  num_callbacks++;
   uic_mqtt_dotdot_binding_bind_callback_set(&uic_mqtt_dotdot_binding_bind_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_binding_unbind_callback_set(&uic_mqtt_dotdot_binding_unbind_callback_func);
@@ -3544,17 +3307,6 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_alarms_reset_alarm_log_callback_clear();
   uic_mqtt_dotdot_clear_alarms_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_time_write_attributes_callbacks();
-  uic_mqtt_dotdot_ota_upgrade_image_notify_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_clear();
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_clear();
-  uic_mqtt_dotdot_clear_ota_upgrade_write_attributes_callbacks();
   uic_mqtt_dotdot_poll_control_check_in_callback_clear();
   uic_mqtt_dotdot_poll_control_check_in_response_callback_clear();
   uic_mqtt_dotdot_poll_control_fast_poll_stop_callback_clear();
@@ -3697,6 +3449,7 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_state_remove_offline_callback_clear();
   uic_mqtt_dotdot_state_discover_neighbors_callback_clear();
   uic_mqtt_dotdot_state_interview_callback_clear();
+  uic_mqtt_dotdot_state_discover_security_callback_clear();
   uic_mqtt_dotdot_clear_state_write_attributes_callbacks();
   uic_mqtt_dotdot_binding_bind_callback_clear();
   uic_mqtt_dotdot_binding_unbind_callback_clear();
@@ -3779,16 +3532,6 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_alarms_get_alarm_response_callback_count = 0;
   uic_mqtt_dotdot_alarms_get_alarm_callback_count = 0;
   uic_mqtt_dotdot_alarms_reset_alarm_log_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_image_notify_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_request_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_query_next_image_response_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_image_block_request_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_image_page_request_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_image_block_response_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_request_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_upgrade_end_response_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_request_callback_count = 0;
-  uic_mqtt_dotdot_ota_upgrade_query_device_specific_file_response_callback_count = 0;
   uic_mqtt_dotdot_poll_control_check_in_callback_count = 0;
   uic_mqtt_dotdot_poll_control_check_in_response_callback_count = 0;
   uic_mqtt_dotdot_poll_control_fast_poll_stop_callback_count = 0;
@@ -3899,6 +3642,7 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_state_remove_offline_callback_count = 0;
   uic_mqtt_dotdot_state_discover_neighbors_callback_count = 0;
   uic_mqtt_dotdot_state_interview_callback_count = 0;
+  uic_mqtt_dotdot_state_discover_security_callback_count = 0;
   uic_mqtt_dotdot_binding_bind_callback_count = 0;
   uic_mqtt_dotdot_binding_unbind_callback_count = 0;
   uic_mqtt_dotdot_binding_bind_to_protocol_controller_callback_count = 0;

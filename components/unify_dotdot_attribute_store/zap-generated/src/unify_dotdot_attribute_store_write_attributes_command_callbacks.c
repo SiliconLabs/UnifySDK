@@ -626,36 +626,6 @@ static sl_status_t time_cluster_write_attributes_callback(
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
-// Start of cluster OTAUpgrade
-////////////////////////////////////////////////////////////////////////////////
-// WriteAttribute Callbacks ota_upgrade
-static sl_status_t ota_upgrade_cluster_write_attributes_callback(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_ota_upgrade_state_t attributes,
-  uic_mqtt_dotdot_ota_upgrade_updated_state_t updated_attributes)
-{
-  if (false == is_write_attributes_enabled()) {
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_ota_upgrade_writable_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  sl_log_debug(LOG_TAG,
-               "ota_upgrade: Incoming WriteAttributes command for %s, endpoint %d.\n",
-               unid,
-               endpoint_id);
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
 // Start of cluster PollControl
 ////////////////////////////////////////////////////////////////////////////////
 // WriteAttribute Callbacks poll_control
@@ -2617,9 +2587,6 @@ sl_status_t
   
   uic_mqtt_dotdot_set_time_write_attributes_callback(
     &time_cluster_write_attributes_callback);
-  
-  uic_mqtt_dotdot_set_ota_upgrade_write_attributes_callback(
-    &ota_upgrade_cluster_write_attributes_callback);
   
   uic_mqtt_dotdot_set_poll_control_write_attributes_callback(
     &poll_control_cluster_write_attributes_callback);

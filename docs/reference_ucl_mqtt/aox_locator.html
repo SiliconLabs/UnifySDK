@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ AoXLocator/ReportingMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ReportingMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/ReportingMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/ReportingMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/ReportingMode/Desired { &quot;value&quot;: &lt;DESIRED_REPORTING_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/ReportingMode/Reported { &quot;value&quot;: &lt;REPORTED_REPORTING_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/ReportingMode/Desired { &quot;value&quot;: &lt;DESIRED_REPORTING_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/ReportingMode/Reported { &quot;value&quot;: &lt;REPORTED_REPORTING_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ AoXLocator/PositionAndOrientationValid Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PositionAndOrientationValid attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PositionAndOrientationValid/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/PositionAndOrientationValid/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PositionAndOrientationValid/Desired { &quot;value&quot;: &lt;DESIRED_POSITION_AND_ORIENTATION_VALID&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PositionAndOrientationValid/Reported { &quot;value&quot;: &lt;REPORTED_POSITION_AND_ORIENTATION_VALID&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/PositionAndOrientationValid/Desired { &quot;value&quot;: &lt;DESIRED_POSITION_AND_ORIENTATION_VALID&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/PositionAndOrientationValid/Reported { &quot;value&quot;: &lt;REPORTED_POSITION_AND_ORIENTATION_VALID&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ AoXLocator/PositionAndOrientation Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PositionAndOrientation attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PositionAndOrientation/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/PositionAndOrientation/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PositionAndOrientation/Desired { &quot;value&quot;: &lt;DESIRED_POSITION_AND_ORIENTATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PositionAndOrientation/Reported { &quot;value&quot;: &lt;REPORTED_POSITION_AND_ORIENTATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/PositionAndOrientation/Desired { &quot;value&quot;: &lt;DESIRED_POSITION_AND_ORIENTATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/PositionAndOrientation/Reported { &quot;value&quot;: &lt;REPORTED_POSITION_AND_ORIENTATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -204,10 +210,12 @@ AoXLocator/AzimuthMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AzimuthMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AzimuthMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AzimuthMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AzimuthMask/Desired { &quot;value&quot;: &lt;DESIRED_AZIMUTH_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AzimuthMask/Reported { &quot;value&quot;: &lt;REPORTED_AZIMUTH_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AzimuthMask/Desired { &quot;value&quot;: [&lt;DESIRED_AZIMUTH_MASK&gt;,&lt;DESIRED_AZIMUTH_MASK&gt;]}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AzimuthMask/Reported { &quot;value&quot;: [&lt;REPORTED_AZIMUTH_MASK&gt;,&lt;REPORTED_AZIMUTH_MASK&gt;]}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -235,10 +243,12 @@ AoXLocator/ElevationMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ElevationMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/ElevationMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/ElevationMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/ElevationMask/Desired { &quot;value&quot;: &lt;DESIRED_ELEVATION_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/ElevationMask/Reported { &quot;value&quot;: &lt;REPORTED_ELEVATION_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/ElevationMask/Desired { &quot;value&quot;: [&lt;DESIRED_ELEVATION_MASK&gt;,&lt;DESIRED_ELEVATION_MASK&gt;]}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/ElevationMask/Reported { &quot;value&quot;: [&lt;REPORTED_ELEVATION_MASK&gt;,&lt;REPORTED_ELEVATION_MASK&gt;]}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -266,10 +276,12 @@ AoXLocator/AllowList Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AllowList attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AllowList/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AllowList/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AllowList/Desired { &quot;value&quot;: &lt;DESIRED_ALLOW_LIST&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AllowList/Reported { &quot;value&quot;: &lt;REPORTED_ALLOW_LIST&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AllowList/Desired { &quot;value&quot;: [&lt;DESIRED_ALLOW_LIST&gt;,&lt;DESIRED_ALLOW_LIST&gt;]}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AllowList/Reported { &quot;value&quot;: [&lt;REPORTED_ALLOW_LIST&gt;,&lt;REPORTED_ALLOW_LIST&gt;]}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -294,10 +306,12 @@ AoXLocator/AoXMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AoXMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AoXMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AoXMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AoXMode/Desired { &quot;value&quot;: &lt;DESIRED_AOX_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AoXMode/Reported { &quot;value&quot;: &lt;REPORTED_AOX_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AoXMode/Desired { &quot;value&quot;: &lt;DESIRED_AOX_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AoXMode/Reported { &quot;value&quot;: &lt;REPORTED_AOX_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -322,10 +336,12 @@ AoXLocator/AntennaMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AntennaMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AntennaMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AntennaMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AntennaMode/Desired { &quot;value&quot;: &lt;DESIRED_ANTENNA_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AntennaMode/Reported { &quot;value&quot;: &lt;REPORTED_ANTENNA_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AntennaMode/Desired { &quot;value&quot;: &lt;DESIRED_ANTENNA_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AntennaMode/Reported { &quot;value&quot;: &lt;REPORTED_ANTENNA_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -353,10 +369,12 @@ AoXLocator/AntennaArray Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AntennaArray attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AntennaArray/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AntennaArray/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AntennaArray/Desired { &quot;value&quot;: &lt;DESIRED_ANTENNA_ARRAY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AntennaArray/Reported { &quot;value&quot;: &lt;REPORTED_ANTENNA_ARRAY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AntennaArray/Desired { &quot;value&quot;: [&lt;DESIRED_ANTENNA_ARRAY&gt;,&lt;DESIRED_ANTENNA_ARRAY&gt;]}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AntennaArray/Reported { &quot;value&quot;: [&lt;REPORTED_ANTENNA_ARRAY&gt;,&lt;REPORTED_ANTENNA_ARRAY&gt;]}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -381,10 +399,12 @@ AoXLocator/PeriodSamples Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PeriodSamples attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PeriodSamples/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/PeriodSamples/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PeriodSamples/Desired { &quot;value&quot;: &lt;DESIRED_PERIOD_SAMPLES&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/PeriodSamples/Reported { &quot;value&quot;: &lt;REPORTED_PERIOD_SAMPLES&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/PeriodSamples/Desired { &quot;value&quot;: &lt;DESIRED_PERIOD_SAMPLES&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/PeriodSamples/Reported { &quot;value&quot;: &lt;REPORTED_PERIOD_SAMPLES&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -409,10 +429,12 @@ AoXLocator/AngleFiltering Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AngleFiltering attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleFiltering/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AngleFiltering/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleFiltering/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_FILTERING&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleFiltering/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_FILTERING&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleFiltering/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_FILTERING&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleFiltering/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_FILTERING&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -437,10 +459,12 @@ AoXLocator/AngleFilteringWeight Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AngleFilteringWeight attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleFilteringWeight/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AngleFilteringWeight/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleFilteringWeight/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_FILTERING_WEIGHT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleFilteringWeight/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_FILTERING_WEIGHT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleFilteringWeight/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_FILTERING_WEIGHT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleFilteringWeight/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_FILTERING_WEIGHT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -465,10 +489,12 @@ AoXLocator/AngleCorrectionTimeout Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AngleCorrectionTimeout attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleCorrectionTimeout/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AngleCorrectionTimeout/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleCorrectionTimeout/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_CORRECTION_TIMEOUT&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleCorrectionTimeout/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_CORRECTION_TIMEOUT&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleCorrectionTimeout/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_CORRECTION_TIMEOUT&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleCorrectionTimeout/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_CORRECTION_TIMEOUT&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -493,10 +519,12 @@ AoXLocator/AngleCorrectionDelay Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AngleCorrectionDelay attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleCorrectionDelay/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/AngleCorrectionDelay/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleCorrectionDelay/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_CORRECTION_DELAY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/AngleCorrectionDelay/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_CORRECTION_DELAY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleCorrectionDelay/Desired { &quot;value&quot;: &lt;DESIRED_ANGLE_CORRECTION_DELAY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/AngleCorrectionDelay/Reported { &quot;value&quot;: &lt;REPORTED_ANGLE_CORRECTION_DELAY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -521,10 +549,12 @@ AoXLocator/CTEMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CTEMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTEMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/CTEMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTEMode/Desired { &quot;value&quot;: &lt;DESIRED_CTE_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTEMode/Reported { &quot;value&quot;: &lt;REPORTED_CTE_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/CTEMode/Desired { &quot;value&quot;: &lt;DESIRED_CTE_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/CTEMode/Reported { &quot;value&quot;: &lt;REPORTED_CTE_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -549,10 +579,12 @@ AoXLocator/CTESamplingInterval Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CTESamplingInterval attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTESamplingInterval/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/CTESamplingInterval/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTESamplingInterval/Desired { &quot;value&quot;: &lt;DESIRED_CTE_SAMPLING_INTERVAL&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTESamplingInterval/Reported { &quot;value&quot;: &lt;REPORTED_CTE_SAMPLING_INTERVAL&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/CTESamplingInterval/Desired { &quot;value&quot;: &lt;DESIRED_CTE_SAMPLING_INTERVAL&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/CTESamplingInterval/Reported { &quot;value&quot;: &lt;REPORTED_CTE_SAMPLING_INTERVAL&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -577,10 +609,12 @@ AoXLocator/CTELength Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for CTELength attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTELength/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/CTELength/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTELength/Desired { &quot;value&quot;: &lt;DESIRED_CTE_LENGTH&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/CTELength/Reported { &quot;value&quot;: &lt;REPORTED_CTE_LENGTH&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/CTELength/Desired { &quot;value&quot;: &lt;DESIRED_CTE_LENGTH&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/CTELength/Reported { &quot;value&quot;: &lt;REPORTED_CTE_LENGTH&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -605,10 +639,12 @@ AoXLocator/SlotDuration Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for SlotDuration attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/SlotDuration/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/AoXLocator/Attributes/SlotDuration/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/SlotDuration/Desired { &quot;value&quot;: &lt;DESIRED_SLOT_DURATION&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Attributes/SlotDuration/Reported { &quot;value&quot;: &lt;REPORTED_SLOT_DURATION&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/SlotDuration/Desired { &quot;value&quot;: &lt;DESIRED_SLOT_DURATION&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/AoXLocator/Attributes/SlotDuration/Reported { &quot;value&quot;: &lt;REPORTED_SLOT_DURATION&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -884,7 +920,7 @@ AoXLocator/WriteAttributes Command</h2>
 <p>To update all AoXLocator attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/AoXLocator/Commands/WriteAttributes&#39; -m  &#39;{ &quot;ReportingMode&quot;: &lt;REPORTING_MODE_VALUE&gt; ,&quot;PositionAndOrientationValid&quot;: &lt;POSITION_AND_ORIENTATION_VALID_VALUE&gt; ,&quot;PositionAndOrientation&quot;: &lt;POSITION_AND_ORIENTATION_VALUE&gt; ,&quot;AzimuthMask&quot;: &lt;AZIMUTH_MASK_VALUE&gt; ,&quot;ElevationMask&quot;: &lt;ELEVATION_MASK_VALUE&gt; ,&quot;AllowList&quot;: &lt;ALLOW_LIST_VALUE&gt; ,&quot;AoXMode&quot;: &lt;AOX_MODE_VALUE&gt; ,&quot;AntennaMode&quot;: &lt;ANTENNA_MODE_VALUE&gt; ,&quot;AntennaArray&quot;: &lt;ANTENNA_ARRAY_VALUE&gt; ,&quot;PeriodSamples&quot;: &lt;PERIOD_SAMPLES_VALUE&gt; ,&quot;AngleFiltering&quot;: &lt;ANGLE_FILTERING_VALUE&gt; ,&quot;AngleFilteringWeight&quot;: &lt;ANGLE_FILTERING_WEIGHT_VALUE&gt; ,&quot;AngleCorrectionTimeout&quot;: &lt;ANGLE_CORRECTION_TIMEOUT_VALUE&gt; ,&quot;AngleCorrectionDelay&quot;: &lt;ANGLE_CORRECTION_DELAY_VALUE&gt; ,&quot;CTEMode&quot;: &lt;CTE_MODE_VALUE&gt; ,&quot;CTESamplingInterval&quot;: &lt;CTE_SAMPLING_INTERVAL_VALUE&gt; ,&quot;CTELength&quot;: &lt;CTE_LENGTH_VALUE&gt; ,&quot;SlotDuration&quot;: &lt;SLOT_DURATION_VALUE&gt;  }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -945,7 +981,7 @@ AoXLocator/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:41 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

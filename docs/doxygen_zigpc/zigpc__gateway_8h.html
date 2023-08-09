@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -121,9 +121,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gab170cdf1b427f9c324ed2c050f36f521"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gab170cdf1b427f9c324ed2c050f36f521">zigpc_gateway_install_code_is_valid</a> (const uint8_t *install_code, uint8_t install_code_length)</td></tr>
 <tr class="memdesc:gab170cdf1b427f9c324ed2c050f36f521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate if install code can be accepted by EmberAf layer.  <a href="group__zigpc__gateway.html#gab170cdf1b427f9c324ed2c050f36f521">More...</a><br /></td></tr>
 <tr class="separator:gab170cdf1b427f9c324ed2c050f36f521"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaddae89c536ca2647bfdf8b9c024896a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gaddae89c536ca2647bfdf8b9c024896a6">zigpc_gateway_add_node_install_code</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length)</td></tr>
-<tr class="memdesc:gaddae89c536ca2647bfdf8b9c024896a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to add a node to the Zigbee Network using the Z3 Install Code Method.  <a href="group__zigpc__gateway.html#gaddae89c536ca2647bfdf8b9c024896a6">More...</a><br /></td></tr>
-<tr class="separator:gaddae89c536ca2647bfdf8b9c024896a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4d2d017337309e43ce7eaeff7f95b40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gaa4d2d017337309e43ce7eaeff7f95b40">zigpc_gateway_add_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length, bool is_well_known_key_add)</td></tr>
+<tr class="memdesc:gaa4d2d017337309e43ce7eaeff7f95b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to add a node to the Zigbee Network using the Z3 Install Code Method.  <a href="group__zigpc__gateway.html#gaa4d2d017337309e43ce7eaeff7f95b40">More...</a><br /></td></tr>
+<tr class="separator:gaa4d2d017337309e43ce7eaeff7f95b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeea7caf0b81c569c2b10deeeebe1acf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html#gaeea7caf0b81c569c2b10deeeebe1acf5">zigpc_gateway_remove_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
 <tr class="memdesc:gaeea7caf0b81c569c2b10deeeebe1acf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to remove node on the Zigbee Network. If the node is not on the Zigbee network, no device remove success events will be sent to listening components.  <a href="group__zigpc__gateway.html#gaeea7caf0b81c569c2b10deeeebe1acf5">More...</a><br /></td></tr>
 <tr class="separator:gaeea7caf0b81c569c2b10deeeebe1acf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,7 +172,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d9c8a1816f4ea9a94746c6de1ae8e276.html">zigpc_gateway</a></li><li class="navelem"><a class="el" href="dir_45c38fe99d58d8952b90f5a9e29b1a86.html">include</a></li><li class="navelem"><a class="el" href="zigpc__gateway_8h.html">zigpc_gateway.h</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:47 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:53 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -9,5 +9,7 @@ var zcl__util_8h =
     [ "zigpc_zcl_frame_fill_data_array", "group__zigpc__zcl__util.html#gaa47bc7ae3bb00aa6bef9443fc2c02964", null ],
     [ "zigpc_zcl_frame_init_command", "group__zigpc__zcl__util.html#gac1f0477c5a1f90ad1ce1a78497657de8", null ],
     [ "zigpc_zcl_get_data_type_size", "group__zigpc__zcl__util.html#ga760d88319d072b0f12ac9865903d64f0", null ],
+    [ "zigpc_zcl_get_number_supported_clusters", "group__zigpc__zcl__util.html#gaea3d4853235d70f168e5b98411365ea9", null ],
+    [ "zigpc_zcl_get_supported_cluster_list", "group__zigpc__zcl__util.html#ga78f8afdb7955cf1aff854e9cd05e3084", null ],
     [ "zigpc_zcl_get_type_size", "group__zigpc__zcl__util.html#ga6fa85accf025b453fa8b711716103dae", null ]
 ];

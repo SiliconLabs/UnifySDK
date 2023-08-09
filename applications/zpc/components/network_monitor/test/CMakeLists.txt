@@ -12,7 +12,7 @@ target_add_unittest(
   SOURCES
   zwave_network_monitor_test.c
   DEPENDS
-  ucl_definitions
+
   zwave_definitions
   uic_contiki_stub
   zpc_attribute_store_test_helper
@@ -69,7 +69,7 @@ target_add_unittest(
   failing_node_monitor_test.c
   DEPENDS
   zwave_controller_mock
-  ucl_definitions
+
   zwave_definitions
   uic_contiki_stub
   zpc_attribute_store_test_helper

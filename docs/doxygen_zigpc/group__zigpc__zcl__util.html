@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -138,6 +138,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga6fa85accf025b453fa8b711716103dae"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga6fa85accf025b453fa8b711716103dae">zigpc_zcl_get_type_size</a> (<a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a> type)</td></tr>
 <tr class="memdesc:ga6fa85accf025b453fa8b711716103dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_zcl_get_type_size - retrieve the size (in bytes) of a given ZCL type  <a href="group__zigpc__zcl__util.html#ga6fa85accf025b453fa8b711716103dae">More...</a><br /></td></tr>
 <tr class="separator:ga6fa85accf025b453fa8b711716103dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaea3d4853235d70f168e5b98411365ea9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#gaea3d4853235d70f168e5b98411365ea9">zigpc_zcl_get_number_supported_clusters</a> ()</td></tr>
+<tr class="memdesc:gaea3d4853235d70f168e5b98411365ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_zcl_get_number_supported_clusters  <a href="group__zigpc__zcl__util.html#gaea3d4853235d70f168e5b98411365ea9">More...</a><br /></td></tr>
+<tr class="separator:gaea3d4853235d70f168e5b98411365ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga78f8afdb7955cf1aff854e9cd05e3084"><td class="memItemLeft" align="right" valign="top">const uint16_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga78f8afdb7955cf1aff854e9cd05e3084">zigpc_zcl_get_supported_cluster_list</a> ()</td></tr>
+<tr class="memdesc:ga78f8afdb7955cf1aff854e9cd05e3084"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_zcl_get_supported_cluster_list  <a href="group__zigpc__zcl__util.html#ga78f8afdb7955cf1aff854e9cd05e3084">More...</a><br /></td></tr>
+<tr class="separator:ga78f8afdb7955cf1aff854e9cd05e3084"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>This component contains definitions and behaviours that is used to manipulate ZCL data types. </p>
@@ -399,6 +405,46 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gaea3d4853235d70f168e5b98411365ea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaea3d4853235d70f168e5b98411365ea9">&#9670;&nbsp;</a></span>zigpc_zcl_get_number_supported_clusters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t zigpc_zcl_get_number_supported_clusters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_zcl_get_number_supported_clusters </p>
+<dl class="section return"><dt>Returns</dt><dd>the number of unique supported ZCL clusters </dd></dl>
+
+</div>
+</div>
+<a id="ga78f8afdb7955cf1aff854e9cd05e3084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78f8afdb7955cf1aff854e9cd05e3084">&#9670;&nbsp;</a></span>zigpc_zcl_get_supported_cluster_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t* zigpc_zcl_get_supported_cluster_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_zcl_get_supported_cluster_list </p>
+<dl class="section return"><dt>Returns</dt><dd>a const pointer to the static list of the ID's of supported clusters </dd></dl>
+
+</div>
+</div>
 <a id="ga6fa85accf025b453fa8b711716103dae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga6fa85accf025b453fa8b711716103dae">&#9670;&nbsp;</a></span>zigpc_zcl_get_type_size()</h2>
 
@@ -431,7 +477,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:49 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:55 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

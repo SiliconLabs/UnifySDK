@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AoX Applications
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -86,6 +86,7 @@ $(document).ready(function(){initNavTree('group__attribute__resolver.html',''); 
   <div class="summary">
 <a href="#files">Files</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -109,6 +110,11 @@ Files</h2></td></tr>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structattribute__resolver__config__t.html">attribute_resolver_config_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gae480dcd4682b4ad7442fdd1db297083e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gae480dcd4682b4ad7442fdd1db297083e">MAX_FRAME_LEN</a>&#160;&#160;&#160;255</td></tr>
+<tr class="separator:gae480dcd4682b4ad7442fdd1db297083e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -183,6 +189,22 @@ Functions</h2></td></tr>
 <li>A rule on how to bring the attribute desired value to the reported value. This typically maps to sending a SET command. Several rules could map to the same set command. In other words, if multiple attributes exist in the set. When the SET command is executed, it is filled with the desired value of the attribute that make up the set command.</li>
 <li>A rule on how to trigger a reported updated of an attribute, i.e., if the attribute is unresolved. This rule typically maps to a GET command. </li>
 </ul>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="gae480dcd4682b4ad7442fdd1db297083e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae480dcd4682b4ad7442fdd1db297083e">&#9670;&nbsp;</a></span>MAX_FRAME_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_FRAME_LEN&#160;&#160;&#160;255</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Maximum size of the buffer that allows to copy rule frames </p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="gab969c331fd29e45a9e9f2b82635c6bff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab969c331fd29e45a9e9f2b82635c6bff">&#9670;&nbsp;</a></span>attribute_resolver_callback_t</h2>
@@ -792,7 +814,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:48 for AoX Applications by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:54 for AoX Applications by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

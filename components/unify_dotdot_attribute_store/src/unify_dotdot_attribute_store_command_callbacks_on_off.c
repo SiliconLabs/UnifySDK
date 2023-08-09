@@ -189,10 +189,24 @@ sl_status_t on_off_cluster_toggle_command(
     }
   }
 
-  if (dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE)) {
-    on_off_cluster_off_command(unid, endpoint, callback_type);
-  } else {
-    on_off_cluster_on_command(unid, endpoint, callback_type);
+  if (is_desired_value_update_on_commands_enabled()) {
+    sl_log_debug(LOG_TAG,
+                 "Updating ZCL desired values after OnOff::Toggle command");
+
+    if (dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE)) {
+      on_off_cluster_off_command(unid, endpoint, callback_type);
+    } else {
+      on_off_cluster_on_command(unid, endpoint, callback_type);
+    }
+
+    if (is_clear_reported_enabled()) {
+      sl_log_debug(LOG_TAG, "Clearing OnOff::Toggle reported value");
+      dotdot_on_off_on_off_undefine_reported(unid, endpoint);
+    }
+
+    if (dotdot_is_supported_on_off_on_time(unid, endpoint)) {
+      dotdot_set_on_off_on_time(unid, endpoint, REPORTED_ATTRIBUTE, 0);
+    }
   }
 
   return SL_STATUS_OK;

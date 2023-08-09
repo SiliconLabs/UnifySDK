@@ -63,6 +63,7 @@ dotdot_unid_t expected_unid               = TEST_UNID;
 dotdot_endpoint_id_t expected_endpoint_id = 23;
 attribute_store_node_t expected_node_id   = ATTRIBUTE_STORE_INVALID_NODE;
 unify_dotdot_attribute_store_configuration_t test_configuration = {};
+static mqtt_message_callback_t group_command_dispatch           = NULL;
 
 // These declarations are for unity to include tests from other source file into
 // test runner. target_add_unittest() function does not run tests from other
@@ -107,7 +108,10 @@ void test_level_step_with_on_off_command();
 void test_level_stop_with_on_off_command();
 void test_level_current_level_validation();
 void test_level_remaining_time_countdown();
+void test_level_set_frequency();
 void test_door_lock_lock_unlock_command();
+void test_door_lock_toggle_command();
+void test_door_lock_unlock_with_timeout_command();
 void test_identify_no_get_endpoint_function_registered();
 void test_identify_identify_query_command_support();
 void test_identify_identify_query_command_clear_reported();
@@ -119,6 +123,7 @@ void test_identify_publish_no_get_unid_function_registered();
 void test_identify_publish_reported_value();
 void test_identify_publish_desired_value();
 void test_identify_unretain_published_values();
+void test_poll_control_set_long_poll_interval_command();
 void test_thermostat_no_get_endpoint_function_registered();
 void test_thermostat_setpoint_raise_or_lower_command_support();
 void test_thermostat_setpoint_raise_or_lower_command_update_desired();
@@ -126,6 +131,13 @@ void test_thermostat_setpoint_raise_or_lower_command_clear_reported();
 void test_thermostat_publish_reported_value();
 void test_thermostat_publish_desired_value();
 void test_thermostat_unretain_published_values();
+void test_window_covering_up_or_open_command();
+void test_window_covering_down_or_close_command();
+void test_window_covering_stop_command();
+void test_window_covering_go_to_lift_value_command();
+void test_window_covering_go_to_lift_percentage_command();
+void test_window_covering_go_to_tilt_value_command();
+void test_window_covering_go_to_tilt_percentage_command();
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
@@ -190,6 +202,19 @@ sl_status_t test_get_unid_endpoint(attribute_store_node_t node,
   return SL_STATUS_OK;
 }
 
+// Stub functions
+static void uic_mqtt_subscribe_stub(const char *topic,
+                                    mqtt_message_callback_t callback,
+                                    int cmock_num_calls)
+{
+  if (strcmp("ucl/by-group/+/Groups/Commands/+", topic) == 0) {
+    group_command_dispatch = callback;
+  } else {
+    sl_log_debug("uic_mqtt_subscribe_stub", "Subscription to topic: %s", topic);
+    TEST_FAIL_MESSAGE("Subscription to an unexpected topic.");
+  }
+}
+
 /// Called before each and every test
 void setUp()
 {
@@ -210,6 +235,9 @@ void setUp()
 {{/if}}
 {{/zcl_clusters}}
   // clang-format on
+
+  group_command_dispatch = NULL;
+  uic_mqtt_subscribe_Stub(&uic_mqtt_subscribe_stub);
 
   // Call init
   TEST_ASSERT_EQUAL(SL_STATUS_OK, unify_dotdot_attribute_store_init());

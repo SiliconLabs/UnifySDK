@@ -46,7 +46,6 @@ typedef enum {
   ZIGPC_DS_TYPE_CLUSTER_RECEIVED_COMMAND  = (NODE_TYPE_OFFSET + 0x80),
   ZIGPC_DS_TYPE_GROUP_REPORTED            = (NODE_TYPE_OFFSET + 0x100),
   ZIGPC_DS_TYPE_GROUP_DESIRED             = (NODE_TYPE_OFFSET + 0x200),
-  ZIGPC_DS_TYPE_BINDING                   = (NODE_TYPE_OFFSET + 0x400),
 } zigpc_datastore_node_type_t;
 
 #ifdef __cplusplus

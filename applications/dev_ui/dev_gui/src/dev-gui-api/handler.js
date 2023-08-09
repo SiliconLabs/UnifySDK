@@ -12,6 +12,7 @@ let state = {
     updateNodeList: true
 };
 let queue = new Map();
+let measurementClusterList = ["CarbonDioxide", "CarbonMonoxide", "RelativityHumidity", "SoilMoisture", "PM25"];
 
 async function runQueueHandler() {
     while (true) {
@@ -61,7 +62,7 @@ exports.processCluster = (topic, message) => {
         let endpoint = initEp(node, ep);
         let payload = message.toString() === "" ? null : JSON.parse(message);
         payload = payload && payload.value !== undefined ? payload.value : payload;
-        if (clusterType.endsWith("Measurement")) {
+        if (clusterType.endsWith("Measurement") || measurementClusterList.indexOf(clusterType) > -1) {
             if (!endpoint.Measurements[clusterType])
                 endpoint.Measurements[clusterType] = {};
             initProp(endpoint.Measurements[clusterType], path, payload);

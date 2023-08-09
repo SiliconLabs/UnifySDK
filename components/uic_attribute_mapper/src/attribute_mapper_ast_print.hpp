@@ -77,7 +77,6 @@ class print
     const char *op_str[] = {"+",
                             "-",
                             "==",
-                            "!=",
                             "*",
                             "/",
                             "&",
@@ -88,6 +87,7 @@ class print
                             "or",
                             "%",
                             "**",
+                            "!=",
                             "<=",
                             ">="};
     _out << op_str[x.operator_] << ' ';
@@ -108,6 +108,12 @@ class print
 
   inline void operator()(const assignment &a)
   {
+    if (a.type == AssignmentType::INSTANCE) {
+      _out << "i:";
+    } else if (a.type == AssignmentType::CLEARANCE) {
+      _out << "c:";
+    }
+
     (*this)(a.lhs);
     _out << " = ";
     (*this)(a.rhs);

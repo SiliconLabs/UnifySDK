@@ -95,7 +95,7 @@ Install them using (change name as required ) :
 sudo dpkg -i uic-dev-gui_*_arm64.deb uic-gms_*_arm64.deb uic-image-provider_*_arm64.deb uic-upvl_*_arm64.deb uic-zigpc_*_arm64.deb
 ```
 
-See user guide for more info :[README.md](https://github.com/SiliconLabs/UnifySDK/blob/main/README.md)
+See user guide for more info : /projects/UIC/repos/uic/browse/doc/readme_user.md
 
 For future MQTT Explorer use, add those lines to /etc/mosquitto/mosquitto.conf
 
@@ -125,8 +125,13 @@ If you want to reduce build time, you can specifically build a specific componen
 ninja zigpc #Builds zigpc application
 ```
 
-## Getting the NCP WSTK going :
-Since Simplicity Studio adds time to this process, we will try to skip its usage. Be aware that you can generate new firmware with specific cluster using Simplicity Studio or by modifying the slcp file and then generating using the slc tool.
+## Getting the NCP WSTK going
+
+Since [Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
+adds time to this process, we will try to skip its usage. Be aware that you can
+generate new firmware with specific cluster using
+[Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
+or by modifying the slcp file and then generating using the slc tool.
 
 Thus, we will use the slc command line tool to create the firmware for the ncp.
 
@@ -144,22 +149,24 @@ The Boatloader is under gecko-sdk/platform/bootloader/sample-apps/bootloader-sto
 
 In order to get the .s37 executable for the boatloader and the zigbee application :
 
-```shell
+```console
 slc generate ncp-uart-hw.slcp --with <BOARD_IDENTIFIER> -np -d output/cd output
 make -f ncp-uart-hw.Makefile
 ```
+
 Example board identifier
 Thunderboard sense 2  : brd4166a
->Note : To synchronise the device and the gateway address table. add under define in the \<NCP-NAME\>.slcp
+> Note : To synchronise the device and the gateway address table. add under define in the \<NCP-NAME\>.slcp
+
 ```shell
   - name: "EMBER_ADDRESS_TABLE_SIZE"
     value: "32"
 ```
 This value must match EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE in zigpc/components/zigpc_gateway/libs/zigbee_host/gen/config
 
-Once you have both .s37 files, flash using simplicity commander / simplicity studio
+Once you have both .s37 files, flash using simplicity commander / [Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
 
-###Troubleshooting NCP issues and versioning
+### Troubleshooting NCP issues and versioning
 
 There are some common issues faced when updating to a new version of ZigPC or
 a new version of the GeckoSDK
@@ -192,7 +199,7 @@ as usual. However, if only remote access is possible, ZigPC can be used to
 update the NCP firmware as described in the User Guide (section 'Updating NCP
 Firmware'
 
-#### Issue #2: addressTable mismatch
+####Issue #2: addressTable mismatch
 
 When running the ZigPC, its possible for the gateway to fail to start with an
 error describing:

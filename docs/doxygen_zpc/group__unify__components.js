@@ -20,10 +20,10 @@ var group__unify__components =
     [ "OTA (Over-the-Air) Image Listener", "group__image__listener.html", null ],
     [ "Unify SmartStart Management", "group__unify__smartstart__management.html", null ],
     [ "Unify Stdin", "group__uic__stdin.html", "group__uic__stdin" ],
-    [ "Unify_application_monitoring", "group__unify__application__monitoring.html", "group__unify__application__monitoring" ],
+    [ "Unify Application Monitoring", "group__unify__application__monitoring.html", "group__unify__application__monitoring" ],
     [ "Attribute Poll Engine", "group__attribute__poll.html", "group__attribute__poll" ],
     [ "Unify DotDot Attribute Store", "group__unify__dotdot__attribute__store.html", "group__unify__dotdot__attribute__store" ],
-    [ "Unify_node_state_monitor", "group__unify__node__state__monitor.html", null ],
+    [ "Unify Node State Monitor", "group__unify__node__state__monitor.html", null ],
     [ "Unify Validator component", "group__uic__validator.html", "group__uic__validator" ],
     [ "Unify definitions", "group__unify__definitions.html", "group__unify__definitions" ]
 ];

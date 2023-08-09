@@ -95,7 +95,6 @@ class dep_eval_path
   /**
    * @brief Construct a new dep eval path object
    *
-   * @param global_context Not currently used
    * @param value_type Desired or reported
    */
   dep_eval_path(value_type_t value_type);

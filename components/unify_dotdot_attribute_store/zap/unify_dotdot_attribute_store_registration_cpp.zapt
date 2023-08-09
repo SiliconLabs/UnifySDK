@@ -47,6 +47,9 @@ static const std::vector<attribute_schema_t> zcl_additional_attribute_schema = {
   //         ZCL Level cluster attributes
   /////////////////////////////////////////////////////////////////////
   {DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,   "ZCL Level Last Non Zero Level",   ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,   U8_STORAGE_TYPE},
+  //         ZCL Group cluster attributes
+  {DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,   "ZCL Group ID",   ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,   U16_STORAGE_TYPE},
+  {DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,   "Name",   DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,   C_STRING_STORAGE_TYPE},
 };
 // clang-format on
 
@@ -86,7 +89,9 @@ attribute_store_storage_type_t
   } else if ((attribute_type_string == "PumpOperationMode")
              || (attribute_type_string == "PumpControlMode")
              || (attribute_type_string == "IasZoneType")
-             || (attribute_type_string == "LoggingLevelEnum")) {
+             || (attribute_type_string == "LoggingLevelEnum")
+             || (attribute_type_string == "NodeStateSecurity")
+             || (attribute_type_string == "NodeStateNetworkStatus")) {
     storage_type = ENUM_STORAGE_TYPE;
   }
   return storage_type;

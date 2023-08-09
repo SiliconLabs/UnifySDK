@@ -20,7 +20,7 @@
 
 
 // NCP Init
-void emAfNcpInit(bool memoryAllocation);
+void sli_zb_af_ncp_init(bool memoryAllocation);
 void emberAfPluginAddressTableNcpInitCallback(bool memoryAllocation);
 void emberAfPluginNcpConfigurationNcpInitCallback(bool memoryAllocation);
 void emberAfNcpInitCallback(bool memoryAllocation);

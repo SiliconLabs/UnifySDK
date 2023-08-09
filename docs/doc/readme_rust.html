@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.3.2
+                ver_1.4.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -86,7 +86,6 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#nix-experimental">Nix (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
@@ -198,7 +197,7 @@ the overall concept
 <a class="reference external" href="https://docs.rust-embedded.org/book/interoperability/c-with-rust.html">here</a>.
 In short, we want to create a small wrapper project that imports the c symbols
 so that they can referenced correctly in Rust. Next to that, we need to tell the
-rust compiler how to link towards these symbols. We have tooling in place that
+Rust compiler how to link towards these symbols. We have tooling in place that
 generates this symbol definitions for you.</p>
 <section id="declare-a-cargo-build">
 <h3>1. Declare a cargo build<a class="headerlink" href="#declare-a-cargo-build" title="Permalink to this heading"></a></h3>
@@ -215,7 +214,7 @@ towards as followed:</p></li>
 </ul>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// these exports are only used when an exe is compiled. e.g.</span>
 <span class="n">integration</span><span class="w"> </span><span class="c1">// tests or final binaries!</span>
-<span class="fm">println!</span><span class="p">(</span><span class="s">&quot;cargo:rustc-link-lib=dylib=uic_log&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="fm">println!</span><span class="p">(</span><span class="s">&quot;cargo:rustc-link-lib=dylib=uic_log&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Alternatively, we have a ninja importer. Which can read an build.ninja file and
@@ -245,23 +244,23 @@ interface with C.</p>
 </section>
 <section id="rust-to-c-c">
 <h2>Rust to C/C++<a class="headerlink" href="#rust-to-c-c" title="Permalink to this heading"></a></h2>
-<p>Linking of rust libraries inside C is also possible. An example is the
+<p>Linking of Rust libraries inside C is also possible. An example is the
 <code class="docutils literal notranslate"><span class="pre">rust_command_classes</span></code> project. The following steps need to be executed to
 successfully link Rust libraries to C:</p>
 <ul class="simple">
-<li><p>Make sure the rust project is know to cmake. You do this by calling function
-<code class="docutils literal notranslate"><span class="pre">cargo_build</span></code> for your rust project. See the in code documentation for more
+<li><p>Make sure the Rust project is know to cmake. You do this by calling function
+<code class="docutils literal notranslate"><span class="pre">cargo_build</span></code> for your Rust project. See the in code documentation for more
 information about the usage of this command.</p></li>
-<li><p>Declare your rust project as a static native library. Add the following to
+<li><p>Declare your Rust project as a static native library. Add the following to
 your <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file:</p></li>
 </ul>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[lib] crate-type = [&quot;staticlib&quot;]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>In cmake, add a dependency to your rust project. You want to add it to the
+<li><p>In cmake, add a dependency to your Rust project. You want to add it to the
 target_link_libraries list in cmake. use the name <code class="docutils literal notranslate"><span class="pre">&lt;rust_project&gt;</span></code> to
-reference to the rust project. For example:</p></li>
+reference to the Rust project. For example:</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">target_link_libraries(</span> <span class="pre">zpc</span> <span class="pre">...</span> <span class="pre">rust_command_handlers)</span> </code></p>
 <blockquote>

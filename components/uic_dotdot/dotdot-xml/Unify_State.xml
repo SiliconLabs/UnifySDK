@@ -20,6 +20,7 @@ This is a manufacturer specific cluster, representing a Node State in our networ
       <type:enumeration value="02" name="Online non-functional" />
       <type:enumeration value="03" name="Unavailable" />
       <type:enumeration value="04" name="Offline" />
+      <type:enumeration value="05" name="Commisioning Started" />
     </restriction>
   </type:type>
 
@@ -32,6 +33,7 @@ This is a manufacturer specific cluster, representing a Node State in our networ
       <type:enumeration value="03" name="Z-Wave S2 Authenticated" />
       <type:enumeration value="04" name="Z-Wave S2 Access Control" />
       <type:enumeration value="05" name="Zigbee Z3" />
+      <type:enumeration value="06" name="Matter" />
     </restriction>
   </type:type>
 
@@ -39,6 +41,17 @@ This is a manufacturer specific cluster, representing a Node State in our networ
 
     <attributes>
       <attribute id="0000" name="EndpointIdList" array="true" type="uint8"/>
+      <attribute id="0001" name="NetworkStatus" required="true" type="NodeStateNetworkStatus"/>
+      <attribute id="0002" name="Security" required="true" type="NodeStateSecurity"/>
+      <attribute id="0003" name="MaximumCommandDelay" required="true" type="uint32">
+        <restriction>
+          <type:minInclusive value="0" />
+          <type:maxInclusive value="4294967295" />
+          <type:special value="FFFFFFFE" name="infinite" />
+          <type:special value="FFFFFFFF" name="unknown" />
+        </restriction>
+      </attribute>
+      <attribute id="0004" name="NetworkList" array="true" type="string"/>
     </attributes>
 
 
@@ -65,6 +78,11 @@ This is a manufacturer specific cluster, representing a Node State in our networ
         <!-- 	This command is used to instruct a Protocol
           Controller to interview a node,
           i.e. discover all its capabilities and states.  -->
+      </command>
+      <command id="05" name="DiscoverSecurity">
+        <!-- 	This command is used to instruct a Protocol
+          Controller to check on which security keys/access control a
+          node operates -->
       </command>
     </commands>
   </server>

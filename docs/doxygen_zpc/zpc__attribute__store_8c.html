@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -93,11 +93,12 @@ $(document).ready(function(){initNavTree('zpc__attribute__store_8c.html',''); in
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="zpc__attribute__store_8h_source.html">zpc_attribute_store.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zpc__attribute__store__network__helper_8h_source.html">zpc_attribute_store_network_helper.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="unify__dotdot__attribute__store__node__state_8h_source.html">unify_dotdot_attribute_store_node_state.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store__defined__attribute__types_8h_source.html">attribute_store_defined_attribute_types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zpc__attribute__store__type__registration_8h_source.html">zpc_attribute_store_type_registration.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zpc__attribute__store__register__default__attribute__type__data_8h_source.html">zpc_attribute_store_register_default_attribute_type_data.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="unify__dotdot__defined__attribute__types_8h_source.html">unify_dotdot_defined_attribute_types.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="ucl__definitions_8h_source.html">ucl_definitions.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__network__management_8h_source.html">zwave_network_management.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store__helper_8h_source.html">attribute_store_helper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store__configuration_8h_source.html">attribute_store_configuration.h</a>&quot;</code><br />
@@ -111,9 +112,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a78448575395f9b85aff5200fb1d9ce16"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#a78448575395f9b85aff5200fb1d9ce16">zpc_attribute_store_update_all_network_statuses</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#aabcfbf97deef75c5e5c0445f80b21f1b">home_id_node</a>, node_state_topic_state_t old_value, node_state_topic_state_t new_value)</td></tr>
-<tr class="memdesc:a78448575395f9b85aff5200fb1d9ce16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all NodeIDs network statuses with one value and change them to a new one.  <a href="zpc__attribute__store_8c.html#a78448575395f9b85aff5200fb1d9ce16">More...</a><br /></td></tr>
-<tr class="separator:a78448575395f9b85aff5200fb1d9ce16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2dbb1711b833bfd0158e22dabc8243"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#aac2dbb1711b833bfd0158e22dabc8243">zpc_attribute_store_update_all_network_statuses</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#aabcfbf97deef75c5e5c0445f80b21f1b">home_id_node</a>, <a class="el" href="group__zap.html#gabd1e1243e24397faefcbb311d2538b27">NodeStateNetworkStatus</a> old_value, <a class="el" href="group__zap.html#gabd1e1243e24397faefcbb311d2538b27">NodeStateNetworkStatus</a> new_value)</td></tr>
+<tr class="memdesc:aac2dbb1711b833bfd0158e22dabc8243"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all NodeIDs network statuses with one value and change them to a new one.  <a href="zpc__attribute__store_8c.html#aac2dbb1711b833bfd0158e22dabc8243">More...</a><br /></td></tr>
+<tr class="separator:aac2dbb1711b833bfd0158e22dabc8243"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaabb0477455a85ee31737f3d503acd3b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">is_zpc_unid</a> (const <a class="el" href="group__zwave__unid.html#gae80c42e828f74022c10bf530a612d22e">unid_t</a> unid)</td></tr>
 <tr class="memdesc:gaabb0477455a85ee31737f3d503acd3b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if a UNID is the ZPC's UNID.  <a href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">More...</a><br /></td></tr>
 <tr class="separator:gaabb0477455a85ee31737f3d503acd3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +135,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a36f9d1e546ef8d8747dff0625dea82d4"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structunify__dotdot__attribute__store__configuration__t.html">unify_dotdot_attribute_store_configuration_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#a36f9d1e546ef8d8747dff0625dea82d4">zpc_configuration</a></td></tr>
+<tr class="memitem:a36f9d1e546ef8d8747dff0625dea82d4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structunify__dotdot__attribute__store__configuration__t.html">unify_dotdot_attribute_store_configuration_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#a36f9d1e546ef8d8747dff0625dea82d4">zpc_configuration</a></td></tr>
 <tr class="separator:a36f9d1e546ef8d8747dff0625dea82d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -178,8 +179,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a78448575395f9b85aff5200fb1d9ce16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78448575395f9b85aff5200fb1d9ce16">&#9670;&nbsp;</a></span>zpc_attribute_store_update_all_network_statuses()</h2>
+<a id="aac2dbb1711b833bfd0158e22dabc8243"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac2dbb1711b833bfd0158e22dabc8243">&#9670;&nbsp;</a></span>zpc_attribute_store_update_all_network_statuses()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -196,13 +197,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">node_state_topic_state_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zap.html#gabd1e1243e24397faefcbb311d2538b27">NodeStateNetworkStatus</a>&#160;</td>
           <td class="paramname"><em>old_value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">node_state_topic_state_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zap.html#gabd1e1243e24397faefcbb311d2538b27">NodeStateNetworkStatus</a>&#160;</td>
           <td class="paramname"><em>new_value</em>&#160;</td>
         </tr>
         <tr>
@@ -237,32 +238,31 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const <a class="el" href="structunify__dotdot__attribute__store__configuration__t.html">unify_dotdot_attribute_store_configuration_t</a> zpc_configuration</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {.get_endpoint_node_function</div>
-<div class="line">     = &amp;<a class="code" href="group__zpc__attribute__store__network__helpers.html#gae4d15b8e0c61c88d94c8f342bd2014fc">attribute_store_network_helper_get_endpoint_node</a>,</div>
-<div class="line">     .get_unid_endpoint_function</div>
-<div class="line">     = &amp;<a class="code" href="group__zpc__attribute__store__network__helpers.html#gafae8b9288ffd88bbbe138edf03680b14">attribute_store_network_helper_get_unid_endpoint_from_node</a>,</div>
-<div class="line">     .update_attribute_desired_values_on_commands = <span class="keyword">true</span>,</div>
-<div class="line">     .clear_reported_on_desired_updates           = <span class="keyword">false</span>,</div>
-<div class="line">     .automatic_deduction_of_supported_commands   = <span class="keyword">true</span>,</div>
-<div class="line">     .force_read_attributes_enabled               = <span class="keyword">false</span>,</div>
-<div class="line">     .write_attributes_enabled                    = <span class="keyword">true</span>,</div>
-<div class="line">     .publish_attribute_values_to_mqtt            = <span class="keyword">true</span>}</div>
-<div class="ttc" id="agroup__zpc__attribute__store__network__helpers_html_gae4d15b8e0c61c88d94c8f342bd2014fc"><div class="ttname"><a href="group__zpc__attribute__store__network__helpers.html#gae4d15b8e0c61c88d94c8f342bd2014fc">attribute_store_network_helper_get_endpoint_node</a></div><div class="ttdeci">attribute_store_node_t attribute_store_network_helper_get_endpoint_node(const unid_t node_unid, zwave_endpoint_id_t endpoint_id)</div><div class="ttdoc">Take a UNID/endpoint combination and returns its attribute store node.</div><div class="ttdef"><b>Definition:</b> zpc_attribute_store_network_helper.c:197</div></div>
-<div class="ttc" id="agroup__zpc__attribute__store__network__helpers_html_gafae8b9288ffd88bbbe138edf03680b14"><div class="ttname"><a href="group__zpc__attribute__store__network__helpers.html#gafae8b9288ffd88bbbe138edf03680b14">attribute_store_network_helper_get_unid_endpoint_from_node</a></div><div class="ttdeci">sl_status_t attribute_store_network_helper_get_unid_endpoint_from_node(attribute_store_node_t node, unid_t unid, zwave_endpoint_id_t *endpoint_id)</div><div class="ttdoc">Traverse the tree up from a node and find under which UNID/endpoints it is.</div><div class="ttdef"><b>Definition:</b> zpc_attribute_store_network_helper.c:227</div></div>
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">  .get_endpoint_node_function</div>
+<div class="line">  = &amp;<a class="code" href="group__zpc__attribute__store__network__helpers.html#gae4d15b8e0c61c88d94c8f342bd2014fc">attribute_store_network_helper_get_endpoint_node</a>,</div>
+<div class="line">  .get_unid_endpoint_function</div>
+<div class="line">  = &amp;<a class="code" href="group__zpc__attribute__store__network__helpers.html#gafae8b9288ffd88bbbe138edf03680b14">attribute_store_network_helper_get_unid_endpoint_from_node</a>,</div>
+<div class="line">  .get_unid_function = &amp;<a class="code" href="group__zpc__attribute__store__network__helpers.html#gadca32f16d205120c5b1377322987f9c0">attribute_store_network_helper_get_unid_from_node</a>,</div>
+<div class="line">  .update_attribute_desired_values_on_commands = <span class="keyword">true</span>,</div>
+<div class="line">  .clear_reported_on_desired_updates           = <span class="keyword">false</span>,</div>
+<div class="line">  .automatic_deduction_of_supported_commands   = <span class="keyword">true</span>,</div>
+<div class="line">  .force_read_attributes_enabled               = <span class="keyword">true</span>,</div>
+<div class="line">  .write_attributes_enabled                    = <span class="keyword">true</span>,</div>
+<div class="line">  .publish_desired_attribute_values_to_mqtt    = <span class="keyword">true</span>,</div>
+<div class="line">  .publish_reported_attribute_values_to_mqtt   = <span class="keyword">true</span>,</div>
+<div class="line">  .node_type                                   = ATTRIBUTE_NODE_ID,</div>
+<div class="line">  .endpoint_type                               = ATTRIBUTE_ENDPOINT_ID,</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__zpc__attribute__store__network__helpers_html_gadca32f16d205120c5b1377322987f9c0"><div class="ttname"><a href="group__zpc__attribute__store__network__helpers.html#gadca32f16d205120c5b1377322987f9c0">attribute_store_network_helper_get_unid_from_node</a></div><div class="ttdeci">sl_status_t attribute_store_network_helper_get_unid_from_node(attribute_store_node_t node, unid_t unid)</div><div class="ttdoc">Traverse up the tree from a node and finds under which UNID it is.</div><div class="ttdef"><b>Definition:</b> zpc_attribute_store_network_helper.c:280</div></div>
+<div class="ttc" id="agroup__zpc__attribute__store__network__helpers_html_gae4d15b8e0c61c88d94c8f342bd2014fc"><div class="ttname"><a href="group__zpc__attribute__store__network__helpers.html#gae4d15b8e0c61c88d94c8f342bd2014fc">attribute_store_network_helper_get_endpoint_node</a></div><div class="ttdeci">attribute_store_node_t attribute_store_network_helper_get_endpoint_node(const unid_t node_unid, zwave_endpoint_id_t endpoint_id)</div><div class="ttdoc">Take a UNID/endpoint combination and returns its attribute store node.</div><div class="ttdef"><b>Definition:</b> zpc_attribute_store_network_helper.c:199</div></div>
+<div class="ttc" id="agroup__zpc__attribute__store__network__helpers_html_gafae8b9288ffd88bbbe138edf03680b14"><div class="ttname"><a href="group__zpc__attribute__store__network__helpers.html#gafae8b9288ffd88bbbe138edf03680b14">attribute_store_network_helper_get_unid_endpoint_from_node</a></div><div class="ttdeci">sl_status_t attribute_store_network_helper_get_unid_endpoint_from_node(attribute_store_node_t node, unid_t unid, zwave_endpoint_id_t *endpoint_id)</div><div class="ttdoc">Traverse the tree up from a node and find under which UNID/endpoints it is.</div><div class="ttdef"><b>Definition:</b> zpc_attribute_store_network_helper.c:229</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -272,7 +272,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_20462f6d7be47578489ee94c8a2b0b2b.html">zpc_attribute_store</a></li><li class="navelem"><a class="el" href="dir_d05a7313d6cef34ba22a32cf13babf65.html">src</a></li><li class="navelem"><a class="el" href="zpc__attribute__store_8c.html">zpc_attribute_store.c</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:54 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:59 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

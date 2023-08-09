@@ -1,0 +1,116 @@
+/******************************************************************************
+ * # ForceReadAttribute Links
+ ******************************************************************************
+ * This map makes sure to undefine reported values on the Z-Wave side
+ * if somebody undefined reported values on the UCL side.
+ *****************************************************************************/
+
+// OnOff Cluster
+def zbON_OFF 0x00060000
+def r_zb_on_off_undefined (e'zbON_OFF & fn_are_all_undefined(r'zbON_OFF))
+
+// Level Cluster
+def zbLEVEL_CLUSTER_LEVEL   0x00080000
+def r_zb_level_undefined (e'zbLEVEL_CLUSTER_LEVEL & fn_are_all_undefined(r'zbLEVEL_CLUSTER_LEVEL))
+
+// ColorControl Cluster
+def zbCURRENT_HUE               0x03000000
+def r_zb_hue_undefined (e'zbCURRENT_HUE & fn_are_all_undefined(r'zbCURRENT_HUE))
+def zbCURRENT_SATURATION        0x03000001
+def r_zb_saturation_undefined (e'zbCURRENT_SATURATION & fn_are_all_undefined(r'zbCURRENT_SATURATION))
+def zbCOLOR_TEMPERATURE         0x03000007
+def r_zb_color_temp_undefined (e'zbCOLOR_TEMPERATURE & fn_are_all_undefined(r'zbCOLOR_TEMPERATURE))
+
+// DoorLock Cluster
+def zbDOOR_LOCK_CLUSTER_LOCK_STATE 0x01010000
+def r_zb_lock_state_undefined (e'zbDOOR_LOCK_CLUSTER_LOCK_STATE & fn_are_all_undefined(r'zbDOOR_LOCK_CLUSTER_LOCK_STATE))
+
+// Thermostat Cluster
+def zb_OccupiedCoolingSetpoint              0x02010011
+def r_zb_OccupiedCoolingSetpoint_undefined (e'zb_OccupiedCoolingSetpoint & fn_are_all_undefined(r'zb_OccupiedCoolingSetpoint))
+def zb_OccupiedHeatingSetpoint              0x02010012
+def r_zb_OccupiedHeatingSetpoint_undefined (e'zb_OccupiedHeatingSetpoint & fn_are_all_undefined(r'zb_OccupiedHeatingSetpoint))
+def zb_SystemMode                           0x0201001c
+def r_zb_SystemMode_undefined (e'zb_SystemMode & fn_are_all_undefined(r'zb_SystemMode))
+
+// Identify Cluster
+def DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME 0x00030000
+def r_zb_identify_undefined (e'DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME & fn_are_all_undefined(r'DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME))
+
+// Barrier Control cluster
+def zb_BARRIER_POSITION 0x0103000a
+def r_zb_barrier_position_undefined (e'zb_BARRIER_POSITION & fn_are_all_undefined(r'zb_BARRIER_POSITION))
+
+// Basic Command Class
+def zwBASIC_CURRENT_VALUE  0x2002
+
+// Binary Switch Command Class
+def zwSWITCH_BINARY_STATE 0x2502
+def zwSWITCH_BINARY_VALUE 0x2503
+
+// Multilevel Switch Command Class
+def zwMULTILEVEL_STATE  0x2602
+def zwVALUE             0x2603
+
+// Color Switch Command Class
+def zw_COLOR_STATE          0x3303
+def zw_COLOR_COMPONENT_ID   0x3304
+def zw_COLOR_VALUE           0x3305
+
+// Door Lock Command Class
+def zw_DOOR_LOCK_MODE 0x6207
+
+//Thermostat Setpoint/Mode Command Classes
+def zwTHERMOSTAT_SETPOINT_TYPE              0x4303
+def zwTHERMOSTAT_SETPOINT_VALUE             0x4304
+def zwTHERMOSTAT_MODE                       0x4002
+
+// Indicator Command Class
+def zwINDICATOR_INDICATOR_VALUE 0x8702
+def zwINDICATOR_INDICATOR_ID 0x8703
+def zwINDICATOR_PROPERTY_ID 0x8704
+
+// Barrier Operator Command Class
+def zw_BARRIER_OPERATOR_STATE 0x6603
+
+// Clearance assignments are run first, to avoid that regular assignments heal
+// values too fast.
+scope 0 clear_desired(0) chain_reaction(0) {
+
+  // OnOff dependencies
+  c:r'zwBASIC_CURRENT_VALUE = if (r_zb_on_off_undefined) 1 undefined
+  c:r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE = if (r_zb_on_off_undefined) 1 undefined
+  c:r'zwMULTILEVEL_STATE.zwVALUE = if (r_zb_on_off_undefined) 1 undefined
+
+  // Level dependencies
+  c:r'zwMULTILEVEL_STATE.zwVALUE = if (r_zb_level_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[0].zw_COLOR_VALUE = if (r_zb_level_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[1].zw_COLOR_VALUE = if (r_zb_level_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[2].zw_COLOR_VALUE = if (r_zb_level_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[3].zw_COLOR_VALUE = if (r_zb_level_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[4].zw_COLOR_VALUE = if (r_zb_level_undefined) 1 undefined
+
+  // ColorControl dependencies
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[0].zw_COLOR_VALUE = if (r_zb_color_temp_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[1].zw_COLOR_VALUE = if (r_zb_color_temp_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[2].zw_COLOR_VALUE = if (r_zb_hue_undefined | r_zb_saturation_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[3].zw_COLOR_VALUE = if (r_zb_hue_undefined | r_zb_saturation_undefined) 1 undefined
+  c:r'zw_COLOR_STATE.zw_COLOR_COMPONENT_ID[4].zw_COLOR_VALUE = if (r_zb_hue_undefined | r_zb_saturation_undefined) 1 undefined
+
+  // Door Lock dependencies
+  c:r'zw_DOOR_LOCK_MODE = if (r_zb_lock_state_undefined) 1 undefined
+
+  // Thermostat dependencies
+  c:r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE = if (r_zb_OccupiedHeatingSetpoint_undefined) 1 undefined
+  c:r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE = if (r_zb_OccupiedCoolingSetpoint_undefined) 1 undefined
+  c:r'zwTHERMOSTAT_MODE = if (r_zb_SystemMode_undefined) 1 undefined
+
+  // Identify
+  c:r'zwINDICATOR_INDICATOR_ID[0x50].zwINDICATOR_PROPERTY_ID[3].zwINDICATOR_INDICATOR_VALUE = if (r_zb_identify_undefined) 1 undefined
+  c:r'zwINDICATOR_INDICATOR_ID[0x50].zwINDICATOR_PROPERTY_ID[4].zwINDICATOR_INDICATOR_VALUE = if (r_zb_identify_undefined) 1 undefined
+  c:r'zwINDICATOR_INDICATOR_ID[0x50].zwINDICATOR_PROPERTY_ID[5].zwINDICATOR_INDICATOR_VALUE = if (r_zb_identify_undefined) 1 undefined
+
+   // Barrier operator
+   c:r'zw_BARRIER_OPERATOR_STATE = if (r_zb_barrier_position_undefined) 1 undefined
+}
+

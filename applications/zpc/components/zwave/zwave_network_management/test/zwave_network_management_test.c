@@ -938,7 +938,7 @@ void smart_start_common()
                     zwave_network_management_get_state());
 
   // The S2 library will now send the DSK on the node beeing included
-  // but with the the first two bytes blanked out.
+  // but with the first two bytes blanked out.
 }
 
 void test_zwave_network_management_add_node_smartstart_wrong_dsk_self_destruct()

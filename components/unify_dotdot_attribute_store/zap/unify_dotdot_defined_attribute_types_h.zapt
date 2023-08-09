@@ -57,5 +57,11 @@ DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TRANSITION_TIME_100MS,
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL_LAST_NON_ZERO_VALUE,
                  0x00080f01)
 
+// Group Cluster
+///< This represents a Group identifier. uint16_t
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
+///< This represents a Group name. String representation with Null termination.
+DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
+
 #endif // UNIFY_DOTDOT_DEFINED_ATTRIBUTE_TYPES_H
 /** @} end unify_dotdot_defined_attribute_types */

@@ -61,7 +61,7 @@ extern "C" {
  * @param group_id        Association Group to which the
  * @param frame           Pointer to the frame data. The Command Class and Command
  *                        sent to a group MUST have been registered with
- *                        @ref zwave_command_class_association_add_group_commands
+ *                        @ref zwave_command_class_agi_add_group_commands
  * @param frame_size      Size of the payload carried by the Frame pointer.
  * @param supporting      Set to true if the frame we send is supported
  *                        (i.e sent at our highest security level).

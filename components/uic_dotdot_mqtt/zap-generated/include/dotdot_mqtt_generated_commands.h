@@ -1376,238 +1376,6 @@ void uic_mqtt_dotdot_time_publish_generated_write_attributes_command(
 );
 
 /**
- * @brief Publishes an incoming/generated ImageNotify command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImageNotify
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_notify_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_notify_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated QueryNextImageRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryNextImageRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_next_image_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_next_image_request_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated QueryNextImageResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryNextImageResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_next_image_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_next_image_response_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated ImageBlockRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImageBlockRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_block_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_block_request_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated ImagePageRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImagePageRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_page_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_page_request_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated ImageBlockResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/ImageBlockResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_image_block_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_image_block_response_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated UpgradeEndRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/UpgradeEndRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_upgrade_end_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_upgrade_end_request_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated UpgradeEndResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/UpgradeEndResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_upgrade_end_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_upgrade_end_response_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated QueryDeviceSpecificFileRequest command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileRequest
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_device_specific_file_request_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_device_specific_file_request_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated QueryDeviceSpecificFileResponse command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/QueryDeviceSpecificFileResponse
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_query_device_specific_file_response_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_ota_upgrade_command_query_device_specific_file_response_fields_t *fields
-  
-);
-
-/**
- * @brief Publishes an incoming/generated WriteAttributes command for
- * the OTAUpgrade cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/OTAUpgrade/GeneratedCommands/WriteAttributes
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * @param attribute_values  Values to assign to the attributes
- * @param attribute_list    List of attributes that are written
- */
-void uic_mqtt_dotdot_ota_upgrade_publish_generated_write_attributes_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  uic_mqtt_dotdot_ota_upgrade_state_t attribute_values,
-  uic_mqtt_dotdot_ota_upgrade_updated_state_t attribute_list
-);
-
-/**
  * @brief Publishes an incoming/generated CheckIn command for
  * the PollControl cluster.
  *
@@ -4537,6 +4305,20 @@ void uic_mqtt_dotdot_state_publish_generated_discover_neighbors_command(
  * 
  */
 void uic_mqtt_dotdot_state_publish_generated_interview_command(
+  const dotdot_unid_t unid
+);
+/**
+ * @brief Publishes an incoming/generated DiscoverSecurity command for
+ * the State cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/State/GeneratedCommands/DiscoverSecurity
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_generated_discover_security_command(
   const dotdot_unid_t unid
 );
 

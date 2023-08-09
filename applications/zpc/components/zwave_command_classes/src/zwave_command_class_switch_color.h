@@ -39,8 +39,6 @@ extern "C" {
  * @param state_node         Attribute Store node for the Color Switch State
  * @param child_node_type    Type of children to run the function on
  * @param function           Function to run on all children
- *
- * @return SL_STATUS_OK on success, any other error code for an error.
  */
 void zwave_command_class_switch_color_invoke_on_all_attributes(
   attribute_store_node_t state_node,
@@ -54,8 +52,6 @@ void zwave_command_class_switch_color_invoke_on_all_attributes(
  * @param state_node         Attribute Store node for the Color Switch State
  * @param child_node_type    Type of children to run the function on
  * @param function           Function to run on all children
- *
- * @return SL_STATUS_OK on success, any other error code for an error.
  */
 void zwave_command_class_switch_color_invoke_on_all_attributes_with_return_value(
   attribute_store_node_t state_node,

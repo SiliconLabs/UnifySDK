@@ -179,6 +179,7 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Thermostat Setpoint            |       3 |         |       x | N/A                         | Partial Control: <br>1. No discovery of ambiguous types in v1-v2 <br>2. Only a few setpoints can be configured. <br>3. Precision/size fields in the set are determined <br>automatically by the controller.  |
 | Time                           |       1 |       x |         | Unencrypted                 |         |
 | Transport Service              |       2 |       x |       x | Unencrypted                 |         |
+| User Code                      |       2 |         |       x | N/A                         | Partial Control |
 | Version                        |       3 |       x |       x | Network Scheme              |         |
 | Wake Up                        |       3 |         |       x | N/A                         |         |
 | Z-Wave Plus Info               |       2 |       x |       x | Unencrypted                 |         |
@@ -1047,6 +1048,12 @@ Note that Amount is processed as a int8_t value, so the acceptable range is
 [-128..127], so from -12.8 to +12.7
 
 ## SmartStart Information
+
+SmartStart enabled products can be added into a Z-Wave network by scanning the
+Z-Wave QR Code present on the product with a controller providing
+SmartStart inclusion. No further action is required and the SmartStart product
+will be added automatically within 10 minutes of being switched on in the
+network vicinity.
 
 The ZPC supports including other nodes using SmartStart. Detailed
 steps to manipulate the SmartStart list are also given in the

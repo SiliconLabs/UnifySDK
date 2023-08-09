@@ -80,7 +80,7 @@ typedef uint32_t attribute_store_type_t;
  * Some Attribute IDs are color-coded for readability
  * and they do not represent any difference between nodes apart from
  * their attribute type value.
- * \image html attribute_store_representation.png "Attribute store tree example"
+ * \image html attribute_store_example_representation.png "Attribute store tree example"
  *
  */
 
@@ -477,6 +477,18 @@ bool attribute_store_node_exists(attribute_store_node_t node);
  */
 bool attribute_store_is_node_a_child(attribute_store_node_t node,
                                      attribute_store_node_t possible_parent);
+
+/**
+ * @brief Checks the size of the REPORTED or DESIRED value for a node.
+ *
+ * @param node              The identifier of the node to check one of its value sizes
+ * @param value_state       The attribute_store_node_value_state_t
+ *                          value state to check.
+ *                          (Desired or Reported)
+ * @returns a size if the node exists, 0 if the node does not exist
+ */
+uint8_t attribute_store_get_node_value_size(
+  attribute_store_node_t node, attribute_store_node_value_state_t value_state);
 
 /**
  * @brief Invoking update of callbacks for the given node and all children nodes

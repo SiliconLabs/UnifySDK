@@ -36,7 +36,7 @@ The dumped file can be used as a starting point a config file.
 Configuration file example:
 
 ```bash
-$ zpc --dump-config
+pi@unify:~$ zpc --dump-config
 # Unify sample conf file
 
 log:
@@ -109,10 +109,10 @@ Note that the default permissions for the ZPC database file located in
 created upon installation). If you run the zpc as another user,
 select a different database location.
 
-For example,
+For example:
 
-```bash
-zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --zpc.datastore_file mydatabase.db --mapdir rules
+```console
+pi@unify:~$ zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --zpc.datastore_file mydatabase.db --mapdir rules
 ```
 
 ## Updating the NCP firmware
@@ -128,8 +128,8 @@ There are two command line options to be aware of, `--zpc.ncp_version` and
 SerialAPI and exit immediately. This can be used to determine if the firmware
 should be applied or not.
 
-```bash
-zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
+```console
+pi@unify:~$ zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
 # Unify build: ver_1.0.2_cert-196-g7d2caffd
 2022-Jan-05 14:48:25.728069 <i> [uic_component_fixtures] Completed: Unify Signal Handler
 2022-Jan-05 14:48:25.728548 <i> [uic_component_fixtures] Completed: Unify MQTT Client
@@ -143,11 +143,11 @@ zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
 `--zpc.ncp_update` performs a firmware update and exits the application when the
 update is completed.
 
-```bash
-zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
+```console
+pi@unify:~$ zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
 ```
 
-If the firmware update succeeds the the exit code of the zpc will be _2_ and if
+If the firmware update succeeds, the exit code of the zpc will be _2_ and if
 the update fails the exit code will be _1_.
 
 ---
@@ -162,11 +162,11 @@ functional serial API. In this case the device can be flashed manually using the
 XModem tool _sx_ from the Debian package lrzsx:
 
 ```bash
-  sudo apt install lrzsz
-  stty -F /dev/ttyUSB0 115200
-  echo 1 > /dev/ttyUSB0
-  sx ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl < /dev/ttyUSB0 > /dev/ttyUSB0
-  echo 2 > /dev/ttyUSB0
+sudo apt install lrzsz
+stty -F /dev/ttyUSB0 115200
+echo 1 > /dev/ttyUSB0
+sx ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl < /dev/ttyUSB0 > /dev/ttyUSB0
+echo 2 > /dev/ttyUSB0
 ```
 
 ## Performing Firmware Updates of End Devices
@@ -595,11 +595,18 @@ to add new maps. Follow the instructions in this [guide](how_to_write_uam_files_
 
 ## Migrating to ZPC from Z/IP Gateway
 
-This section describes how to migrate to a ZPC from a Z/IP gateway. If migration
-from a third-party gateway is desired, the first step in the migration process
-is to migrate to a Z/IP Gateway.
+It is possible to migrate from a Z/IP Gateway or other vendor gateway setup
+that uses a Z-Wave module to a ZPC.
 
-To successfully migrate, the following Z/IP Gateway SDK tools are needed.
+This section describes how to migrate to a ZPC from a Z/IP gateway.
+Migrating from a Z/IP Gateway or other vendor gateway should work in a similar
+fashion.
+
+### Z-Wave Module/hardware migration
+
+If you intend to reuse the same Z-Wave module, you can skip this section altogether.
+If you need to migrate to a new Z-Wave module, the following Z/IP Gateway
+SDK tools are needed:
 
 * `zw_programmer` Is required for programming new firmware on the Z-Wave modules
   and for reading and writing the Z-Wave controller module NVM.
@@ -607,27 +614,69 @@ To successfully migrate, the following Z/IP Gateway SDK tools are needed.
   protocol versions. The tool can be used to migrate from a 500 series Z-Wave
   chip to a 700 series chip.
 
-You can get Z/IP Gateway through Simplicity Studio. Read the Z/IP Gateway SDK
-user guide on how to compile and install the Z/IP gateway on your platform.
+You can get Z/IP Gateway through [Simplicity Studio](https://www.silabs.com/developers/simplicity-studio).
+Read the Z/IP Gateway SDK user guide on how to compile and install the
+Z/IP gateway on your platform.
 
 For Z-Wave Long Range support, the ZPC requires a Z-Wave API controller version
 7.16 or higher. For details about migrating between protocol versions, see the
 Z/IP Gateway manual, _Migration Support Tools_
 
 To ensure that the ZPC is working correctly, it must have access to the network
-encryption keys as well as information about which security keys have been
-granted to each node in the network. The Z/IP Gateway stores the encryption keys
-in the right place in the module NVM for the ZPC to read.
+encryption keys, which are located in the NVM of the Z-Wave Module.
 
-In general, the ZPC will query all network information from the nodes in the
-network on the first boot, but it needs to know which network keys have been
-granted to the nodes in the network. The Unify Framework contains the tool
-`zpc_database_tool`; which can be used for manipulating the ZPC database.
-zpc_database_tool can import/export the ZPC database from/to a JSON file.
+### Starting the ZPC on a previous Z-Wave network
+
+#### Without database migration
+
+The ZPC will attempt to query all network information from the
+nodes in the network when it first boots. This procedure may not work reliably,
+especially the network key discovery for each node, as it is a time out based
+discovery.
+
+Without additional preparation, the ZPC will attempt to communicate with each node
+in the network, perform the 2 operations one after another:
+
+* Discover the Granted S0/S2 Security keys
+* Interview the node and discovery its Command Classes, capabilities and state.
+
+Sleeping nodes will be marked as offline until they issue a Wake Up Notification
+to the ZPC. When receiving the Wake Up Notification, the ZPC will perform the
+security key discovery and interview.
+
+Sleeping nodes not configured to send Wake Up Notifications to the NodeID
+of the Z-Wave module in which the ZPC was booted will never recover.
+In this case, nodes should be excluded and re-included into the network,
+if the ZPC must be able to control them.
+
+Discovering the Granted S0/S2 Security keys is time out based and may fail
+in case of network traffic / congestion. In this case, it is possible to
+instruct the ZPC to try again, using the DiscoverSecurity command under
+the state topic. For example, for UNID `zw-D2422D68-0009`, it would be
+
+```mqtt
+ucl/by-unid/zw-D2422D68-0009/State/Commands/DiscoverSecurity - {}
+```
+
+Likewise, if the interview fails in some way, it is possible to initiate
+it again using the following topic:
+
+```mqtt
+ucl/by-unid/zw-D2422D68-0009/State/Commands/Interview - {}
+```
+
+#### With database migration
+
+The ZPC can use some help, receiving some known information about the
+nodes in its network before booting and discovering it for the first time.
+It will make the first boot quicker and more reliable.
+
+The Unify SDK contains a tool named `zpc_database_tool`; which can be used for
+manipulating the ZPC database. `zpc_database_tool` can import/export the ZPC
+database from/to a JSON file.
 The easiest way to set the granted key information is to do the following:
 
-1. Migrate the Z-Wave controller using the Z/IP Gateway SDK tools as described
-   above.
+1. Migrate the hardware/Z-Wave module if needed
 2. Start the ZPC with the migrated Z-Wave controller module but with an empty
    database file. `zpc --zpc.datastore_file datastore.db`
 3. Shut down the ZPC by typing `exit` on the console. The ZPC will now have
@@ -636,7 +685,7 @@ The easiest way to set the granted key information is to do the following:
    `zpc_database_tool --zpc.datastore_file datastore.db --export datastore.json`
 5. Open and edit the JSON file and locate the following attributes under each
    ATTRIBUTE_NODE_ID object:
-   * ATTRIBUTE_NETWORK_STATUS must be set to "reported": "00"
+   * DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS must be set to "reported": "00"
    * ATTRIBUTE_KEX_FAIL_TYPE should be set to "reported": "00"
    * ATTRIBUTE_S2_DSK this is optional but should be set to the DSK of the node.
    * ATTRIBUTE_NODE_IS_S2_CAPABLE should only be defined if the node supports
@@ -692,7 +741,7 @@ The easiest way to set the granted key information is to do the following:
               ]
             },
             {
-              "type": "ATTRIBUTE_NETWORK_STATUS",
+              "type": "DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS",
               "reported": "01"
             },
             {
@@ -715,7 +764,7 @@ The easiest way to set the granted key information is to do the following:
               ]
             },
             {
-              "type": "ATTRIBUTE_NETWORK_STATUS",
+              "type": "DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS",
               "reported": "01"
             },
             {
@@ -763,11 +812,10 @@ The ZPC provides a subset of Z-Wave features compared to the Z/IP Gateway.
 * Does not control all Command Classes fully, but only provides partial control
   Z-Wave Command Classes where the ZPC provides partial control include:
 
-* Switch Multilevel, version 4,
-* Multilevel Sensor, version 11,
-* Thermostat Mode, version 3,
-* Thermostat Setpoint, version 3 and
-* Notification, version 11.
+  * Multilevel Sensor, version 11,
+  * Thermostat Mode, version 3,
+  * Thermostat Setpoint, version 3 and
+  * Notification, version 11.
 
 ## Performing Backup and Restore
 
@@ -796,7 +844,7 @@ will be made in a new version, the ZPC datastore version will be incremented.
 The ZPC will automatically refuse to start if it detects a version mismatch
 between its ZPC datastore version and the version written in the datastore file.
 
-```text
+```console
 <E> [datastore_fixt] Datastore version: 1 in datastore file is non compatible
 with the ZPC datastore version: 2. Please convert your ZPC datastore using the
 ZPC datastore tools
@@ -909,7 +957,9 @@ how_to_implement_new_zwave_command_classes.md
      another Z-Wave device in the gateway and see if the gateway responds to these
      changes. A way to modify the state is to open MQTT explorer and publish a
      command to a cluster for a particular node.
-  2. As last resort, try to restart the Unify gateway.
+  2. Check if the Protocol Controller and the different components are up and
+     running using the ApplicationMonitoring page.
+  3. As last resort, try to restart the Unify gateway.
 
 * _How do I run the ZPC in isolation?_
 

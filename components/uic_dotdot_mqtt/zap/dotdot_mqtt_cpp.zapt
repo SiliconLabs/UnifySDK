@@ -36,6 +36,7 @@
 #include "dotdot_mqtt_parsing_helpers.hpp"
 #include "dotdot_mqtt_attributes.h"
 #include "dotdot_mqtt_translators.h"
+#include "dotdot_mqtt_additional_value_names.hpp"
 
 #include <nlohmann/json.hpp>
 
@@ -505,7 +506,10 @@ sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLow
     {{#if_is_enum type}}
     #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
     jsn["value"].push_back({{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)value[i]));
+    #elif defined({{asSnakeCaseUpper type}}_ENUM_NAME_AVAILABLE)
+    jsn["value"].push_back({{asSnakeCaseLower type}}_get_enum_value_name((uint32_t)value[i]));
     #else
+    sl_log_warning(LOG_TAG,"Warning: Enum name not available for {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}. Using number instead.");
     jsn["value"].push_back(static_cast<{{chooseTypeOrEnumName type parent.label label}}>(value[i]));
     #endif
     {{else}}
@@ -544,7 +548,10 @@ sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLow
   {{#if_is_enum type}}
   #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
   jsn["value"] = {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)value);
+  #elif defined({{asSnakeCaseUpper type}}_ENUM_NAME_AVAILABLE)
+  jsn["value"] = {{asSnakeCaseLower type}}_get_enum_value_name((uint32_t)value);
   #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}. Using number instead.");
   jsn["value"] = static_cast<{{chooseTypeOrEnumName type parent.label label}}>(value);
   #endif
   {{else}}
@@ -566,7 +573,11 @@ sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLow
   {{/zcl_struct_items_by_struct_name}}
   jsn["value"]= json_object;
          {{else}}
-  jsn["value"] = value;
+  if (true == uic_dotdot_has_attribute_value_a_name({{parent.code}},{{code}},value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name({{parent.code}},{{code}},value);
+  }else{
+    jsn["value"] = value;
+  }
          {{/if}}
         {{/if}}
       {{/if_is_bitmap}}

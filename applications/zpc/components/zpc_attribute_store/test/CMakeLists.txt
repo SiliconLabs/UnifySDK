@@ -12,7 +12,7 @@ target_include_directories(
   PUBLIC "$<TARGET_PROPERTY:unify,INTERFACE_INCLUDE_DIRECTORIES>"
          "$<TARGET_PROPERTY:zpc_utils,INTERFACE_INCLUDE_DIRECTORIES>")
 target_link_libraries(zpc_attribute_store_network_helper_mock
-                      PUBLIC ucl_definitions)
+                      )
 
 # Attribute store network helper Unit Test
 target_add_unittest(

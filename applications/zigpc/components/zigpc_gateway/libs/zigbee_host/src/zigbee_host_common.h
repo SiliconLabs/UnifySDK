@@ -17,6 +17,7 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "sl_service_function.h"
 #include "app/framework/include/af-types.h"
 #include "app/framework/plugin/debug-print/sl_zigbee_debug_print.h"
 #include "zigbee_host.h"
@@ -106,5 +107,21 @@ void emAfPluginGatewayInterfaceTrustCenterJoinHandler(
  *@param eui64:  EUI64 of the device that left.
  */
 void emAfPluginGatewayInterfaceTrustCenterLeaveHandler(const EmberEUI64 eui64);
+
+EmberAfStatus
+  emberAfClusterServiceCallback(sl_service_opcode_t opcode,
+                                sl_service_function_context_t *context);
+/**
+ * @brief Register the cluster callbacks for a given cluster list
+ *
+ * @param cluster_list: the list of supported clusters as an array of ID's
+ * @param cluster_list_size: the size of the supported cluster list
+ *
+ * @return EMBER_SUCCESS if able to properly register the service callbacks for
+ * the given cluster
+ */
+EmberStatus zigbeeHostRegisterClusters(
+              const uint16_t *cluster_list,
+              unsigned int cluster_list_size );
 
 #endif  // ZIGBEE_HOST_COMMON_H

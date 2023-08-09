@@ -145,78 +145,31 @@ NetworkInitRequest::NetworkInitRequest(void) :
 
 EmberStatus NetworkInitRequest::invoke(void)
 {
-  EmberStatus status = zigbeeHostTrustCenterInit();
+  
 
-  sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_GATEWAY "Network Init EmberAfStatus: 0x%X",
-         status);
+  const zigpc_config_t* config = zigpc_get_config();
 
-  return status;
-}
+  bool use_network_args = config->use_network_args;
+  EmberStatus status = EMBER_ERR_FATAL;
 
-PermitJoinRequest::PermitJoinRequest(bool enable_joins) :
-  RequestQueue::Entry("Permit Join Control"), enable_joins(enable_joins)
-{}
+  if(use_network_args)
+  {
 
-EmberStatus PermitJoinRequest::invoke(void)
-{
-  EmberStatus status = EMBER_SUCCESS;
+    const zigpc_config_t *config = zigpc_get_config();
 
-  if (this->enable_joins) {
-    const zigpc_config_t *conf = zigpc_get_config();
-    if (conf->tc_use_well_known_key == true) {
-      EmberEUI64 wildcardEui64
-        = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-      EmberKeyData centralizedKey = zigbeeHostGetTrustCenterWellKownKey();
-      status
-        = zigbeeHostTrustCenterAddLinkKey(wildcardEui64, &centralizedKey, true);
-      sl_log(LOG_TAG,
-             (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-             LOG_PREFIX_GATEWAY "Well-known link key add EmberAfStatus: 0x%X",
-             status);
-    }
-    status = zigbeeHostTrustCenterJoinOpen(true);
-    zigpc_gateway_command_print_nwk_key();
-  } else {
-    status = zigbeeHostTrustCenterJoinClose();
+    status = zigbeeHostTrustCenterInitWithArgs(
+            config->network_pan_id,
+            config->network_radio_power,
+            config->network_channel);
+  }
+  else
+  {
+    status = zigbeeHostTrustCenterInit();
   }
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_GATEWAY "%sable permit-join EmberAfStatus: 0x%X",
-         (this->enable_joins) ? "En" : "Dis",
-         status);
-
-  return status;
-}
-
-AddInstallCodeRequest::AddInstallCodeRequest(
-  const zigbee_eui64_t eui64,
-  const zigbee_install_code_t install_code,
-  uint8_t install_code_length) :
-  RequestQueue::Entry("Add Install Code"),
-  install_code_length(install_code_length)
-{
-  std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
-  std::copy(install_code,
-            install_code + sizeof(zigbee_install_code_t),
-            this->install_code);
-}
-
-EmberStatus AddInstallCodeRequest::invoke(void)
-{
-  zigbee_eui64_t eui64_le;
-  zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status
-    = zigbeeHostTrustCenterAddDeviceInstallCode(eui64_le,
-                                                this->install_code,
-                                                this->install_code_length);
-
-  sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_EUI64 "Add install-code EmberAfStatus: 0x%X",
-         zigbee_eui64_to_uint(this->eui64),
+         LOG_PREFIX_GATEWAY "Network Init EmberAfStatus: 0x%X",
          status);
 
   return status;

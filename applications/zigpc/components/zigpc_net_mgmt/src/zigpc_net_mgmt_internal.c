@@ -101,13 +101,15 @@ sl_status_t zigpc_net_mgmt_init_complete(
 sl_status_t zigpc_net_mgmt_hdl_idle_add_request( 
   const zigbee_eui64_t eui64,
   const zigbee_install_code_t install_code,
-  uint8_t install_code_length)
+  uint8_t install_code_length,
+  bool is_well_known_key_add)
 {
     sl_status_t status = 
-        zigpc_gateway_add_node_install_code(
+        zigpc_gateway_add_node(
             eui64,
             install_code,
-            install_code_length);
+            install_code_length,
+            is_well_known_key_add);
 
     enum zigpc_net_mgmt_fsm_state next_supported_states[] = 
     {
@@ -115,7 +117,6 @@ sl_status_t zigpc_net_mgmt_hdl_idle_add_request(
         ZIGPC_NET_MGMT_FSM_STATE_MIN_VAL
     };
 
-    
     zigpc_net_mgmt_notify_state_update(
             ZIGPC_NET_MGMT_FSM_STATE_NODE_ADD, 
             next_supported_states);

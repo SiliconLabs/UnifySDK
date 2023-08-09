@@ -56,21 +56,21 @@ sl_status_t attribute_start_transition(attribute_store_node_t node,
 
 /**
  * @brief Start attribute transition with a fixed step, target value and interval.
- * 
+ *
  * This function starts an attribute transition on the desired or reported value
  * of an attribute attribute. The target value, step and interval is given up front.
- * The transition can be canceled using @ref{attribute_stop_transition}.
- * 
+ * The transition can be canceled using @ref attribute_stop_transition.
+ *
  * The transition is signed such that it can be both upwards or downwards. If the
  * value is changed such that the step would move the value away from the target value,
  * the transition will stop. Then transition will always end on the target value.
- * 
+ *
  * @param node          Attribute node to start the transition on
  * @param value_type    Move the DESIRED or REPORTED value.
  * @param target_value  Target value to reach
  * @param step          Which step ot take in the transition
  * @param step_interval Number of ms beteween each step
- * @return sl_status_t 
+ * @return sl_status_t
  */
 sl_status_t attribute_start_fixed_transition(
   attribute_store_node_t node,

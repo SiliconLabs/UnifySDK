@@ -97,7 +97,7 @@ extern "C" {
  * @brief Checks if we had a long tx/rx inactivity that would result in
  * an NL node falling asleep.
  *
- * @param node_id         Attribute Store Node for the NodeID
+ * @param node_id_node    Attribute Store Node for the NodeID
  * @param inactive_time   time span in seconds of the node being inactive
  *
  * @returns true if the last tx/rx is too old and we should consider the node

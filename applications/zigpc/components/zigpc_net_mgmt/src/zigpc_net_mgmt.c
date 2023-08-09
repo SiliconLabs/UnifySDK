@@ -89,18 +89,22 @@ sl_status_t zigpc_netmgmt_network_permit_joins(bool enable)
 
 sl_status_t zigpc_net_mgmt_add_node(const zigbee_eui64_t eui64,
                                     const zigbee_install_code_t install_code,
-                                    const uint8_t install_code_length)
+                                    const uint8_t install_code_length,
+                                    bool is_well_known_key_add)
 {
   sl_status_t status = SL_STATUS_OK;
   if (eui64 == NULL) {
     status = SL_STATUS_NULL_POINTER;
   } else {
+  // Identify if its a WELL KNOW KEY.
+  // Using pre-coded well known key recognition.
   
     status = 
         zigpc_net_mgmt_hdl_idle_add_request( 
             eui64,
             install_code,
-            install_code_length);
+            install_code_length,
+            is_well_known_key_add);
   }
 
 

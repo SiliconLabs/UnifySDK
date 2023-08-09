@@ -1161,7 +1161,8 @@ var zap_types_8h =
       [ "ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING", "group__zap.html#ggabd1e1243e24397faefcbb311d2538b27a4296c8baa036d30156b92308cb103fa2", null ],
       [ "ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_NON_FUNCTIONAL", "group__zap.html#ggabd1e1243e24397faefcbb311d2538b27acf29ea28fd74125ce368156067219ac9", null ],
       [ "ZCL_NODE_STATE_NETWORK_STATUS_UNAVAILABLE", "group__zap.html#ggabd1e1243e24397faefcbb311d2538b27a1d8b4ba0bb67aaa08ca0f019a00d31b9", null ],
-      [ "ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE", "group__zap.html#ggabd1e1243e24397faefcbb311d2538b27a5a52953b7c39355d17c9ca0dbf493a89", null ]
+      [ "ZCL_NODE_STATE_NETWORK_STATUS_OFFLINE", "group__zap.html#ggabd1e1243e24397faefcbb311d2538b27a5a52953b7c39355d17c9ca0dbf493a89", null ],
+      [ "ZCL_NODE_STATE_NETWORK_STATUS_COMMISIONING_STARTED", "group__zap.html#ggabd1e1243e24397faefcbb311d2538b27a6b28b2ecc908f2fe8b5935f16d36c5c4", null ]
     ] ],
     [ "NodeStateSecurity", "group__zap.html#ga950745e386b167a3a1e533c7136833df", [
       [ "ZCL_NODE_STATE_SECURITY_NONE", "group__zap.html#gga950745e386b167a3a1e533c7136833dfaedb74b4d2fa349a1d0f36640577cb28d", null ],
@@ -1169,7 +1170,8 @@ var zap_types_8h =
       [ "ZCL_NODE_STATE_SECURITY_Z_WAVE_S2_UNAUTHENTICATED", "group__zap.html#gga950745e386b167a3a1e533c7136833dfa8334990f243297f7e23ad4be474fe73c", null ],
       [ "ZCL_NODE_STATE_SECURITY_Z_WAVE_S2_AUTHENTICATED", "group__zap.html#gga950745e386b167a3a1e533c7136833dfa8476eee622896dddfede61a31fc79eb9", null ],
       [ "ZCL_NODE_STATE_SECURITY_Z_WAVE_S2_ACCESS_CONTROL", "group__zap.html#gga950745e386b167a3a1e533c7136833dfa3bafd9ea8cc389bf4c45c9bf31084874", null ],
-      [ "ZCL_NODE_STATE_SECURITY_ZIGBEE_Z3", "group__zap.html#gga950745e386b167a3a1e533c7136833dfac1ff8a0049d3b7ef763aa5c21f13607c", null ]
+      [ "ZCL_NODE_STATE_SECURITY_ZIGBEE_Z3", "group__zap.html#gga950745e386b167a3a1e533c7136833dfac1ff8a0049d3b7ef763aa5c21f13607c", null ],
+      [ "ZCL_NODE_STATE_SECURITY_MATTER", "group__zap.html#gga950745e386b167a3a1e533c7136833dfa1e879f8086d0f0c7d3316c030b7268d9", null ]
     ] ],
     [ "OccupancySensingOccupancySensorType", "group__zap.html#ga457da3c8d169bfbdcc1febf6f972b6e8", [
       [ "ZCL_OCCUPANCY_SENSING_OCCUPANCY_SENSOR_TYPE_PIR", "group__zap.html#gga457da3c8d169bfbdcc1febf6f972b6e8aad0dfea1c2394d66e35451fd2785dd30", null ],

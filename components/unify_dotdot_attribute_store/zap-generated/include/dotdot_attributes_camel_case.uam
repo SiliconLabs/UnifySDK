@@ -758,6 +758,10 @@ def zb_PTIEnabled 0xfd010001
 
 // This represents short CamelCase labels the attributes in the DotDot State cluster
 def zb_EndpointIdList 0xfd020000
+def zb_NetworkStatus 0xfd020001
+def zb_Security 0xfd020002
+def zb_MaximumCommandDelay 0xfd020003
+def zb_NetworkList 0xfd020004
 
 // This represents short CamelCase labels the attributes in the DotDot Binding cluster
 def zb_BindingTableFull 0xfd030000

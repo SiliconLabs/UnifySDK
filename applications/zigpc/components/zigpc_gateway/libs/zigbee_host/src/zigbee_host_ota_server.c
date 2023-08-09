@@ -142,7 +142,7 @@ EmberStatus zigbeeHostAddOtaImage(const char *filename)
     return EMBER_BAD_ARGUMENT;
   }
 
-  EmberAfOtaStorageStatus status = emAfOtaStorageAddImageFile(filename);
+  EmberAfOtaStorageStatus status = sli_zigbee_af_ota_storage_add_image_file(filename);
 
   return (status == EMBER_AF_OTA_STORAGE_SUCCESS) ? EMBER_SUCCESS
                                                   : EMBER_ERR_FATAL;

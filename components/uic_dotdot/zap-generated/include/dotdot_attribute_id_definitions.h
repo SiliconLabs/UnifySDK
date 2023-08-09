@@ -761,6 +761,10 @@ typedef enum {
 #define DOTDOT_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
 // Definitions for cluster: State
 #define DOTDOT_STATE_ENDPOINT_ID_LIST_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+#define DOTDOT_STATE_NETWORK_STATUS_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_STATE_SECURITY_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_STATE_MAXIMUM_COMMAND_DELAY_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
+#define DOTDOT_STATE_NETWORK_LIST_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x4)
 // Definitions for cluster: Binding
 #define DOTDOT_BINDING_BINDING_TABLE_FULL_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
 #define DOTDOT_BINDING_BINDABLE_CLUSTER_LIST_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)

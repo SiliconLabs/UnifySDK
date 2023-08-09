@@ -1,7 +1,6 @@
-find_package(GeckoSDK 4.2.2 REQUIRED)
+find_package(GeckoSDK 4.3.0 REQUIRED)
 
 add_subdirectory(components)
-add_subdirectory(applications)
 
 add_executable(zigpc main.c)
 

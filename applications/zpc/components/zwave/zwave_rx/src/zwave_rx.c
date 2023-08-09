@@ -116,6 +116,7 @@ sl_status_t zwave_rx_init(const char *serial_port,
     = zwave_rx_application_command_handler_bridge;
   zwave_rx_zwapi_callbacks.zwapi_started = zwave_rx_zwave_api_started;
   zwave_rx_zwapi_callbacks.poll_request  = zwave_rx_poll_request;
+  bool soft_reset_needed = false;
   // Initialize our Z-Wave API.
   sl_status_t command_status
     = zwapi_init(serial_port, serial_port_fd, &zwave_rx_zwapi_callbacks);
@@ -194,9 +195,7 @@ sl_status_t zwave_rx_init(const char *serial_port,
       return SL_STATUS_FAIL;
     } else {
       sl_log_info(LOG_TAG, "Applying soft reset of the Z-Wave Module\n");
-      zwapi_soft_reset();
-      // Wait for Z-Wave API started
-      zwave_rx_wait_for_zwave_api_to_be_ready();
+      soft_reset_needed = true;
     }
   }
 
@@ -214,13 +213,21 @@ sl_status_t zwave_rx_init(const char *serial_port,
         LOG_TAG,
         "Success setting Z-Wave module Max Long Range transmit power: %d",
         max_lr_tx_power_dbm);
+      sl_log_info(LOG_TAG, "Applying soft reset of the Z-Wave Module\n");
+     soft_reset_needed = true;
     }
+
     sl_log_debug(
       LOG_TAG,
       "Current Z-Wave module Max Long Range transmit power in dbm: %d",
       zwapi_get_max_lr_tx_power_level());
   }
 
+  if (true == soft_reset_needed) {
+     zwapi_soft_reset();
+     // Wait for Z-Wave API started
+     zwave_rx_wait_for_zwave_api_to_be_ready();
+  }
   // Try to set the node ID basetype to 16 bits disregarding the RF region
   command_status = zwapi_set_node_id_basetype(NODEID_16BITS);
   if (command_status != SL_STATUS_OK) {

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -117,10 +117,12 @@ PumpConfigurationAndControl/MaxPressure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxPressure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxPressure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxPressure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxPressure/Desired { &quot;value&quot;: &lt;DESIRED_MAX_PRESSURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxPressure/Reported { &quot;value&quot;: &lt;REPORTED_MAX_PRESSURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxPressure/Desired { &quot;value&quot;: &lt;DESIRED_MAX_PRESSURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxPressure/Reported { &quot;value&quot;: &lt;REPORTED_MAX_PRESSURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -145,10 +147,12 @@ PumpConfigurationAndControl/MaxSpeed Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxSpeed attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxSpeed/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxSpeed/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxSpeed/Desired { &quot;value&quot;: &lt;DESIRED_MAX_SPEED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxSpeed/Reported { &quot;value&quot;: &lt;REPORTED_MAX_SPEED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxSpeed/Desired { &quot;value&quot;: &lt;DESIRED_MAX_SPEED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxSpeed/Reported { &quot;value&quot;: &lt;REPORTED_MAX_SPEED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -173,10 +177,12 @@ PumpConfigurationAndControl/MaxFlow Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxFlow attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxFlow/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxFlow/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxFlow/Desired { &quot;value&quot;: &lt;DESIRED_MAX_FLOW&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxFlow/Reported { &quot;value&quot;: &lt;REPORTED_MAX_FLOW&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxFlow/Desired { &quot;value&quot;: &lt;DESIRED_MAX_FLOW&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxFlow/Reported { &quot;value&quot;: &lt;REPORTED_MAX_FLOW&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -201,10 +207,12 @@ PumpConfigurationAndControl/MinConstPressure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinConstPressure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstPressure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstPressure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstPressure/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_PRESSURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstPressure/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_PRESSURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstPressure/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_PRESSURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstPressure/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_PRESSURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -229,10 +237,12 @@ PumpConfigurationAndControl/MaxConstPressure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxConstPressure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstPressure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstPressure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstPressure/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_PRESSURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstPressure/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_PRESSURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstPressure/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_PRESSURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstPressure/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_PRESSURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -257,10 +267,12 @@ PumpConfigurationAndControl/MinCompPressure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinCompPressure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinCompPressure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinCompPressure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinCompPressure/Desired { &quot;value&quot;: &lt;DESIRED_MIN_COMP_PRESSURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinCompPressure/Reported { &quot;value&quot;: &lt;REPORTED_MIN_COMP_PRESSURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinCompPressure/Desired { &quot;value&quot;: &lt;DESIRED_MIN_COMP_PRESSURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinCompPressure/Reported { &quot;value&quot;: &lt;REPORTED_MIN_COMP_PRESSURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -285,10 +297,12 @@ PumpConfigurationAndControl/MaxCompPressure Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxCompPressure attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxCompPressure/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxCompPressure/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxCompPressure/Desired { &quot;value&quot;: &lt;DESIRED_MAX_COMP_PRESSURE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxCompPressure/Reported { &quot;value&quot;: &lt;REPORTED_MAX_COMP_PRESSURE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxCompPressure/Desired { &quot;value&quot;: &lt;DESIRED_MAX_COMP_PRESSURE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxCompPressure/Reported { &quot;value&quot;: &lt;REPORTED_MAX_COMP_PRESSURE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -313,10 +327,12 @@ PumpConfigurationAndControl/MinConstSpeed Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinConstSpeed attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstSpeed/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstSpeed/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstSpeed/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_SPEED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstSpeed/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_SPEED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstSpeed/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_SPEED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstSpeed/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_SPEED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -341,10 +357,12 @@ PumpConfigurationAndControl/MaxConstSpeed Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxConstSpeed attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstSpeed/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstSpeed/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_SPEED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_SPEED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_SPEED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstSpeed/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_SPEED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -369,10 +387,12 @@ PumpConfigurationAndControl/MinConstFlow Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinConstFlow attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstFlow/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstFlow/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstFlow/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_FLOW&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstFlow/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_FLOW&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstFlow/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_FLOW&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstFlow/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_FLOW&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -397,10 +417,12 @@ PumpConfigurationAndControl/MaxConstFlow Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxConstFlow attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstFlow/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstFlow/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstFlow/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_FLOW&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstFlow/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_FLOW&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstFlow/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_FLOW&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstFlow/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_FLOW&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -425,10 +447,12 @@ PumpConfigurationAndControl/MinConstTemp Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MinConstTemp attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstTemp/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MinConstTemp/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstTemp/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_TEMP&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MinConstTemp/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_TEMP&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstTemp/Desired { &quot;value&quot;: &lt;DESIRED_MIN_CONST_TEMP&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MinConstTemp/Reported { &quot;value&quot;: &lt;REPORTED_MIN_CONST_TEMP&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -453,10 +477,12 @@ PumpConfigurationAndControl/MaxConstTemp Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for MaxConstTemp attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstTemp/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/MaxConstTemp/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstTemp/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_TEMP&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/MaxConstTemp/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_TEMP&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstTemp/Desired { &quot;value&quot;: &lt;DESIRED_MAX_CONST_TEMP&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/MaxConstTemp/Reported { &quot;value&quot;: &lt;REPORTED_MAX_CONST_TEMP&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -481,10 +507,12 @@ PumpConfigurationAndControl/PumpStatus Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for PumpStatus attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/PumpStatus/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/PumpStatus/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/PumpStatus/Desired { &quot;value&quot;: &lt;DESIRED_PUMP_STATUS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/PumpStatus/Reported { &quot;value&quot;: &lt;REPORTED_PUMP_STATUS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/PumpStatus/Desired { &quot;value&quot;: &lt;DESIRED_PUMP_STATUS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/PumpStatus/Reported { &quot;value&quot;: &lt;REPORTED_PUMP_STATUS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -509,10 +537,12 @@ PumpConfigurationAndControl/EffectiveOperationMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EffectiveOperationMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Desired { &quot;value&quot;: &lt;DESIRED_EFFECTIVE_OPERATION_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Reported { &quot;value&quot;: &lt;REPORTED_EFFECTIVE_OPERATION_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Desired { &quot;value&quot;: &lt;DESIRED_EFFECTIVE_OPERATION_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/EffectiveOperationMode/Reported { &quot;value&quot;: &lt;REPORTED_EFFECTIVE_OPERATION_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -537,10 +567,12 @@ PumpConfigurationAndControl/EffectiveControlMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for EffectiveControlMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/EffectiveControlMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/EffectiveControlMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Desired { &quot;value&quot;: &lt;DESIRED_EFFECTIVE_CONTROL_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Reported { &quot;value&quot;: &lt;REPORTED_EFFECTIVE_CONTROL_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Desired { &quot;value&quot;: &lt;DESIRED_EFFECTIVE_CONTROL_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/EffectiveControlMode/Reported { &quot;value&quot;: &lt;REPORTED_EFFECTIVE_CONTROL_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -565,10 +597,12 @@ PumpConfigurationAndControl/Capacity Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Capacity attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Capacity/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/Capacity/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Capacity/Desired { &quot;value&quot;: &lt;DESIRED_CAPACITY&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Capacity/Reported { &quot;value&quot;: &lt;REPORTED_CAPACITY&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/Capacity/Desired { &quot;value&quot;: &lt;DESIRED_CAPACITY&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/Capacity/Reported { &quot;value&quot;: &lt;REPORTED_CAPACITY&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -593,10 +627,12 @@ PumpConfigurationAndControl/Speed Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Speed attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Speed/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/Speed/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Speed/Desired { &quot;value&quot;: &lt;DESIRED_SPEED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Speed/Reported { &quot;value&quot;: &lt;REPORTED_SPEED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/Speed/Desired { &quot;value&quot;: &lt;DESIRED_SPEED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/Speed/Reported { &quot;value&quot;: &lt;REPORTED_SPEED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -621,10 +657,12 @@ PumpConfigurationAndControl/LifetimeRunningHours Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LifetimeRunningHours attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Desired { &quot;value&quot;: &lt;DESIRED_LIFETIME_RUNNING_HOURS&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Reported { &quot;value&quot;: &lt;REPORTED_LIFETIME_RUNNING_HOURS&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Desired { &quot;value&quot;: &lt;DESIRED_LIFETIME_RUNNING_HOURS&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/LifetimeRunningHours/Reported { &quot;value&quot;: &lt;REPORTED_LIFETIME_RUNNING_HOURS&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -649,10 +687,12 @@ PumpConfigurationAndControl/Power Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for Power attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Power/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/Power/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Power/Desired { &quot;value&quot;: &lt;DESIRED_POWER&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/Power/Reported { &quot;value&quot;: &lt;REPORTED_POWER&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/Power/Desired { &quot;value&quot;: &lt;DESIRED_POWER&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/Power/Reported { &quot;value&quot;: &lt;REPORTED_POWER&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -677,10 +717,12 @@ PumpConfigurationAndControl/LifetimeEnergyConsumed Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for LifetimeEnergyConsumed attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Desired { &quot;value&quot;: &lt;DESIRED_LIFETIME_ENERGY_CONSUMED&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Reported { &quot;value&quot;: &lt;REPORTED_LIFETIME_ENERGY_CONSUMED&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Desired { &quot;value&quot;: &lt;DESIRED_LIFETIME_ENERGY_CONSUMED&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/LifetimeEnergyConsumed/Reported { &quot;value&quot;: &lt;REPORTED_LIFETIME_ENERGY_CONSUMED&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -705,10 +747,12 @@ PumpConfigurationAndControl/OperationMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for OperationMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/OperationMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/OperationMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/OperationMode/Desired { &quot;value&quot;: &lt;DESIRED_OPERATION_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/OperationMode/Reported { &quot;value&quot;: &lt;REPORTED_OPERATION_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/OperationMode/Desired { &quot;value&quot;: &lt;DESIRED_OPERATION_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/OperationMode/Reported { &quot;value&quot;: &lt;REPORTED_OPERATION_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -733,10 +777,12 @@ PumpConfigurationAndControl/ControlMode Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for ControlMode attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/ControlMode/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/ControlMode/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/ControlMode/Desired { &quot;value&quot;: &lt;DESIRED_CONTROL_MODE&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/ControlMode/Reported { &quot;value&quot;: &lt;REPORTED_CONTROL_MODE&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/ControlMode/Desired { &quot;value&quot;: &lt;DESIRED_CONTROL_MODE&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/ControlMode/Reported { &quot;value&quot;: &lt;REPORTED_CONTROL_MODE&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -761,10 +807,12 @@ PumpConfigurationAndControl/AlarmMask Attribute</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Example Mosquitto CLI Tool Usage</b></p>
 <p>To see desired/reported value for AlarmMask attribute under the by-unid topic space:</p>
-<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/AlarmMask/+&#39;</div>
+<div class="fragment"><div class="line">mosquitto_sub -t &#39;ucl/by-unid/+/+/PumpConfigurationAndControl/Attributes/AlarmMask/+&#39;</div>
+<div class="line"> </div>
 <div class="line"># Example output</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_ALARM_MASK&gt; }</div>
-<div class="line">ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Attributes/AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_ALARM_MASK&gt; }</div>
+<div class="line"> </div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/AlarmMask/Desired { &quot;value&quot;: &lt;DESIRED_ALARM_MASK&gt;}</div>
+<div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/PumpConfigurationAndControl/Attributes/AlarmMask/Reported { &quot;value&quot;: &lt;REPORTED_ALARM_MASK&gt;}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
@@ -869,7 +917,7 @@ PumpConfigurationAndControl/WriteAttributes Command</h2>
 <p>To update all PumpConfigurationAndControl attributes under the by-unid topic space:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t &#39;ucl/by-unid/&lt;UNID&gt;/&lt;EP&gt;/PumpConfigurationAndControl/Commands/WriteAttributes&#39; -m  &#39;{ &quot;LifetimeRunningHours&quot;: &lt;LIFETIME_RUNNING_HOURS_VALUE&gt; ,&quot;Power&quot;: &lt;POWER_VALUE&gt; ,&quot;OperationMode&quot;: &lt;OPERATION_MODE_VALUE&gt; ,&quot;ControlMode&quot;: &lt;CONTROL_MODE_VALUE&gt; , }&#39;</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>NOTE: Attribute values can be written one at a time as well by only including the desired JSON key to update. </p>
+<p>NOTE: Specify only the list of attributes to write in this command. Unspecified attributes will not be updated. </p>
 </blockquote>
 <p><br  />
 <br  />
@@ -936,7 +984,7 @@ PumpConfigurationAndControl/ForceReadAttributes Command</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:40 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

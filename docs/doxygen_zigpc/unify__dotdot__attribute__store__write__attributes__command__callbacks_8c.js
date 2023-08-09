@@ -32,7 +32,6 @@ var unify__dotdot__attribute__store__write__attributes__command__callbacks_8c =
     [ "name_and_location_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a7498e8eec600adb8123a9cc2b8888881", null ],
     [ "occupancy_sensing_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#aed086860c982e1a1a2b6b5d7f6f3471d", null ],
     [ "on_off_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a2c938c145fd8a7295607c5adac14254d", null ],
-    [ "ota_upgrade_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a2982e5bf9c3aba94c3a9fa199f995d0b", null ],
     [ "ph_measurement_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a398d2ae83ab681a012dee6a4f12a8abb", null ],
     [ "pm25_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#aaaa8c8bb6e3052b7a5764ba8da2ce711", null ],
     [ "poll_control_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a5fac4e6630b109fcd273f918ca75c5dc", null ],

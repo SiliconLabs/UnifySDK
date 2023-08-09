@@ -129,7 +129,7 @@ void test_zigpc_net_mgmt_fsm_should_handle_valid_state_transitions(void)
   add_node_data.node_add_request.install_code_length = TEST_INSTALL_CODE_LEN;
 
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
-  zigpc_gateway_add_node_install_code_ExpectWithArrayAndReturn(
+  zigpc_gateway_add_node_ExpectWithArrayAndReturn(
     add_node_data.node_add_request.eui64,
     sizeof(zigbee_eui64_t),
     add_node_data.node_add_request.install_code,
@@ -184,7 +184,7 @@ void test_zigpc_net_mgmt_fsm_node_add_request_should_call_gateway_api(void)
   fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
 
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
-  zigpc_gateway_add_node_install_code_IgnoreAndReturn(SL_STATUS_OK);
+  zigpc_gateway_add_node_IgnoreAndReturn(SL_STATUS_OK);
 
   // ACT
   sl_status_t test_status

@@ -201,7 +201,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name">info</span>
-      <span class="command-handler">emAfCliInfoCommand</span>
+      <span class="command-handler">sli_zigbee_af_cli_info_command</span>
     </div>
     <div class="command-info">
       <div class="help">Prints information about the network state, clusters, and endpoints.</div>
@@ -232,7 +232,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header">
       <span class="command-name">bsend</span>
         <span class="command-argument">u8</span>
-      <span class="command-handler">emAfCliBsendCommand</span>
+      <span class="command-handler">sli_zigbee_af_cli_bsend_command</span>
     </div>
     <div class="command-info">
       <div class="help">Sends a message.</div>
@@ -388,7 +388,7 @@ Example syntax (.slcc or .slcp) for populating this file:
       <span class="command-name">raw</span>
         <span class="command-argument">u16</span>
         <span class="command-argument">hex</span>
-      <span class="command-handler">emAfCliRawCommand</span>
+      <span class="command-handler">sli_zigbee_af_cli_raw_command</span>
     </div>
     <div class="command-info">
       <div class="help">Creates a message by specifying the raw bytes. Use the send command to send the message once it has been created. Ex: raw 0x000F {00 0A 00 11 22 33 44 55} sends a message to cluster 15 (0x000F) of length 8 which includes the ZCL header.</div>
@@ -445,7 +445,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header">
       <span class="command-name">send-using-multicast-binding</span>
         <span class="command-argument">u8</span>
-      <span class="command-handler">emAfCliSendUsingMulticastBindingCommand</span>
+      <span class="command-handler">sli_zigbee_af_cli_send_using_multicast_binding_command</span>
     </div>
     <div class="command-info">
       <div class="help">When sending using a binding, specifies whether a multicast binding should be used.</div>
@@ -472,7 +472,7 @@ Example syntax (.slcc or .slcp) for populating this file:
         <span class="command-argument">u16</span>
         <span class="command-argument">u8</span>
         <span class="command-argument">u8</span>
-      <span class="command-handler">emAfCliTimesyncCommand</span>
+      <span class="command-handler">sli_zigbee_af_cli_timesync_command</span>
     </div>
     <div class="command-info">
       <div class="help">Sends a read attr for the time of the device specified. It sets a flag so when it gets the response it writes the time to its own time attr.</div>
@@ -1598,7 +1598,7 @@ Example syntax (.slcc or .slcp) for populating this file:
       <span class="command-name"> network-creator-security set-joining-link-key</span>
         <span class="command-argument">hex</span>
         <span class="command-argument">hex</span>
-      <span class="command-handler">emAfPluginNetworkCreatorSecuritySetJoiningLinkKeyCommand</span>
+      <span class="command-handler">sli_zigbee_af_network_creator_security_set_joining_link_key_command</span>
     </div>
     <div class="command-info">
       <div class="help">Sets the link key that a specific joining device will use when joining the network. This command can be also be used to add install code-derived link keys. If all FFs are entered for the EUI64 for the joining device, then this link key will be used for all joining devices without a joining key entry.</div>
@@ -1625,7 +1625,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> network-creator-security clear-joining-link-keys</span>
-      <span class="command-handler">emAfPluginNetworkCreatorSecurityClearJoiningLinkKeyCommand</span>
+      <span class="command-handler">sli_zigbee_af_network_creator_security_clear_joining_link_key_command</span>
     </div>
     <div class="command-info">
       <div class="help">Clears all of the joining link keys stored in the stack.</div>
@@ -1640,7 +1640,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> network-creator-security open-network</span>
-      <span class="command-handler">emAfPluginNetworkCreatorSecurityOpenOrCloseNetworkCommand</span>
+      <span class="command-handler">sli_zigbee_af_network_creator_security_open_or_close_network_command</span>
     </div>
     <div class="command-info">
       <div class="help">Opens the network for joining.</div>
@@ -1655,7 +1655,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> network-creator-security close-network</span>
-      <span class="command-handler">emAfPluginNetworkCreatorSecurityOpenOrCloseNetworkCommand</span>
+      <span class="command-handler">sli_zigbee_af_network_creator_security_open_or_close_network_command</span>
     </div>
     <div class="command-info">
       <div class="help">Closes the network for joining.</div>
@@ -1672,7 +1672,7 @@ Example syntax (.slcc or .slcp) for populating this file:
       <span class="command-name"> network-creator-security open-with-key</span>
         <span class="command-argument">hex</span>
         <span class="command-argument">hex</span>
-      <span class="command-handler">emAfPluginNetworkCreatorSecurityOpenNetworkWithKeyCommand</span>
+      <span class="command-handler">sli_zigbee_af_network_creator_security_open_network_with_key_command</span>
     </div>
     <div class="command-info">
       <div class="help">Opens the network that would only allow the node with the specified EUI and link key pair to join.</div>
@@ -1700,7 +1700,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header">
       <span class="command-name"> network-creator-security set-distributed-key</span>
         <span class="command-argument">hex</span>
-      <span class="command-handler">emAfPluginNetworkCreatorSecurityConfigureDistributedKey</span>
+      <span class="command-handler">sli_zigbee_af_network_creator_security_configure_distributed_key</span>
     </div>
     <div class="command-info">
       <div class="help">Sets the TC Link key for a distributed network.</div>
@@ -1925,7 +1925,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> ota-server policy print</span>
-      <span class="command-handler">emAfOtaServerPolicyPrint</span>
+      <span class="command-handler">sli_zigbee_af_ota_server_policy_print</span>
     </div>
     <div class="command-info">
       <div class="help">Prints the polices used by the OTA Server Policy component.</div>
@@ -2103,7 +2103,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> ota-storage-common printImages</span>
-      <span class="command-handler">emAfOtaPrintAllImages</span>
+      <span class="command-handler">sli_zigbee_af_ota_print_all_images</span>
     </div>
     <div class="command-info">
       <div class="help">Prints the images.</div>
@@ -2119,7 +2119,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header">
       <span class="command-name"> ota-storage-common delete</span>
         <span class="command-argument">u8</span>
-      <span class="command-handler">emAfOtaImageDelete</span>
+      <span class="command-handler">sli_zigbee_af_ota_image_delete</span>
     </div>
     <div class="command-info">
       <div class="help">Deletes the image at the specified index.</div>
@@ -2143,7 +2143,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> ota-storage-common reload</span>
-      <span class="command-handler">emAfOtaReloadStorageDevice</span>
+      <span class="command-handler">sli_zigbee_af_ota_reload_storage_device</span>
     </div>
     <div class="command-info">
       <div class="help">Reload the storage device.</div>
@@ -2158,7 +2158,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> ota-storage-common storage-info</span>
-      <span class="command-handler">emAfOtaStorageInfoPrint</span>
+      <span class="command-handler">sli_zigbee_af_ota_storage_info_print</span>
     </div>
     <div class="command-info">
       <div class="help">Prints information about the storage device.</div>
@@ -2175,7 +2175,7 @@ Example syntax (.slcc or .slcp) for populating this file:
       <span class="command-name"> ota-storage-common data-print</span>
         <span class="command-argument">u8</span>
         <span class="command-argument">u32</span>
-      <span class="command-handler">emAfOtaStorageDataPrint</span>
+      <span class="command-handler">sli_zigbee_af_ota_storage_data_print</span>
     </div>
     <div class="command-info">
       <div class="help">Prints arbitrary bytes of the OTA image on disk.</div>
@@ -2213,7 +2213,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> reporting print</span>
-      <span class="command-handler">emAfPluginReportingCliPrint</span>
+      <span class="command-handler">sli_zigbee_af_reporting_cli_print</span>
     </div>
     <div class="command-info">
       <div class="help">Prints the report table.</div>
@@ -2228,7 +2228,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> reporting clear</span>
-      <span class="command-handler">emAfPluginReportingCliClear</span>
+      <span class="command-handler">sli_zigbee_af_reporting_cli_clear</span>
     </div>
     <div class="command-info">
       <div class="help">Clears all entries from the report table.</div>
@@ -2244,7 +2244,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header">
       <span class="command-name"> reporting remove</span>
         <span class="command-argument">u8</span>
-      <span class="command-handler">emAfPluginReportingCliRemove</span>
+      <span class="command-handler">sli_zigbee_af_reporting_cli_remove</span>
     </div>
     <div class="command-info">
       <div class="help">Removes an entry from the report table.</div>
@@ -2275,7 +2275,7 @@ Example syntax (.slcc or .slcp) for populating this file:
         <span class="command-argument">u16</span>
         <span class="command-argument">u16</span>
         <span class="command-argument">u32</span>
-      <span class="command-handler">emAfPluginReportingCliAdd</span>
+      <span class="command-handler">sli_zigbee_af_reporting_cli_add</span>
     </div>
     <div class="command-info">
       <div class="help">Adds a new entry to the report table.</div>
@@ -2317,7 +2317,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> reporting clear-last-report-time</span>
-      <span class="command-handler">emAfPluginReportingCliClearLastReportTime</span>
+      <span class="command-handler">sli_zigbee_af_reporting_cli_clear_last_report_time</span>
     </div>
     <div class="command-info">
       <div class="help">Clears the last report time of attributes.</div>
@@ -2332,7 +2332,7 @@ Example syntax (.slcc or .slcp) for populating this file:
     <div class="command-header-bar"></div>
     <div class="command-header">
       <span class="command-name"> reporting test-timing</span>
-      <span class="command-handler">emAfPluginReportingCliTestTiming</span>
+      <span class="command-handler">sli_zigbee_af_reporting_cli_test_timing</span>
     </div>
     <div class="command-info">
       <div class="help">FOR TESTING PURPOSES - gather timing metrics for reporting table operations.</div>

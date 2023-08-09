@@ -32,7 +32,6 @@
 
 #include "sl_status.h"
 #include "attribute_store.h"
-
 #include "uic_typedefs.h"
 
 /**
@@ -50,6 +49,19 @@ typedef sl_status_t (*unid_fetching_function_t)(
   attribute_store_node_t node, char *unid, dotdot_endpoint_id_t *endpoint_id);
 
 /**
+ * @brief Function signature that retrieves a the UNID value
+ * associated to a given Attribute Store node
+ */
+typedef sl_status_t (*unid_only_fetching_function_t)(
+  attribute_store_node_t node, char *unid);
+
+/**
+ * @brief Function signature for callbacks that indicate that the configuration
+ * of the component was just updated
+ */
+typedef void (*configuration_udpate_callback_t)(void);
+
+/**
  * @brief Configuration structure for the Unify DotDot Attribute Store component
  */
 typedef struct {
@@ -61,6 +73,11 @@ typedef struct {
   /// based on a Attribute Store node. The attribute Store node may be located
   /// at any depth under the endpoint node.
   unid_fetching_function_t get_unid_endpoint_function;
+  /// @brief unid_only_fetching_function_t function that outputs UNID
+  /// based on a Attribute Store node. This function will be used on in cases
+  /// when we do not have any endpoint, but need to read UNIDs. This is used
+  /// by the node state component.
+  unid_only_fetching_function_t get_unid_function;
   /// @brief Enables or disables the automatic updating of ZCL attribute desired
   /// values upon MQTT command reception
   bool update_attribute_desired_values_on_commands;
@@ -82,9 +99,19 @@ typedef struct {
   /// values to MQTT
   bool write_attributes_enabled;
   /// @brief Enables or disables the automatic publishing of ZCL Attributes
-  /// values to MQTT
-  bool publish_attribute_values_to_mqtt;
+  /// desired values to MQTT
+  bool publish_desired_attribute_values_to_mqtt;
+  /// @brief Enables or disables the automatic publishing of ZCL Attributes
+  /// reported values to MQTT
+  bool publish_reported_attribute_values_to_mqtt;
+  /// Type of an node attribute
+  attribute_store_type_t node_type;
+  /// Type of an endpoint attribute
+  attribute_store_type_t endpoint_type;
 } unify_dotdot_attribute_store_configuration_t;
+
+// Maximum size of a UNID string.
+#define MAXIMUM_UNID_SIZE 100
 
 #ifdef __cplusplus
 extern "C" {
@@ -105,6 +132,15 @@ sl_status_t unify_dotdot_attribute_store_init();
  */
 void unify_dotdot_attribute_store_set_configuration(
   const unify_dotdot_attribute_store_configuration_t *configuration);
+
+/**
+ * @brief Register a callback to be invoked when the Unify Dotdot Attribute
+ * Store component configuration has been updated.
+ *
+ * @param callback    Function to invoke.
+ */
+void unify_dotdot_attribute_store_set_configuration_update_callback(
+  configuration_udpate_callback_t callback);
 
 #ifdef __cplusplus
 }

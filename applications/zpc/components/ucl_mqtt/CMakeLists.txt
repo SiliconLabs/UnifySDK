@@ -8,11 +8,13 @@ find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 add_library(
   ucl_mqtt
   src/ucl_mqtt.c src/ucl_mqtt_node_interview.c src/ucl_network_management.cpp
-  src/ucl_nm_neighbor_discovery.cpp src/ucl_node_state.cpp)
+  src/ucl_nm_neighbor_discovery.cpp
+  src/zpc_node_state.cpp
+  )
 
 target_link_libraries(
   ucl_mqtt
-  PUBLIC ucl_definitions zwave_definitions
+  PUBLIC zwave_definitions
   PRIVATE unify zpc_attribute_store)
 
 target_include_directories(

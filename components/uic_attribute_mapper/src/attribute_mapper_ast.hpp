@@ -165,10 +165,12 @@ struct attribute_path_subscript {
 /**
  * @brief Attribute
  *
- * This is the representation of an attribute. The type can be
+ * This is the representation of an attribute.
+ * @param value_type The type can be
  * r: reported
  * d: desired
  * e: exists
+ * @param attribute_path Path for the attribute in the Attribute Store
  *
  * The attribute path consits of atleast one path element
  */
@@ -185,12 +187,20 @@ struct attribute {
  * Example:
  *
  * r'53422 = r'321 + 3
- *
+ * i:r'53422[2] = r'2
+ * c:r'53422[2] = if (r'2) 1 0
  */
 struct assignment {
+  // Type of assignment.
+  // 0 - regular assignment
+  // 1 - instance assignment
+  // 2 - clearance assignment
+  int type;
   ast::attribute lhs;  ///< left hand side of the assignment
   expression rhs;      ///< right hand side of the assignment
 };
+
+enum AssignmentType { REGULAR, INSTANCE, CLEARANCE };
 
 /**
  * @brief Built-in function invokation
@@ -253,7 +263,7 @@ bool operator==(const function_invokation &a, const function_invokation &b);
 BOOST_FUSION_ADAPT_STRUCT(ast::signed_, sign, operand_)
 BOOST_FUSION_ADAPT_STRUCT(ast::operation, operator_, operand_)
 BOOST_FUSION_ADAPT_STRUCT(ast::expression, first, rest)
-BOOST_FUSION_ADAPT_STRUCT(ast::assignment, lhs, rhs)
+BOOST_FUSION_ADAPT_STRUCT(ast::assignment, type, lhs, rhs)
 BOOST_FUSION_ADAPT_STRUCT(ast::condition, cond_value, cond_true, cond_false)
 BOOST_FUSION_ADAPT_STRUCT(ast::attribute, value_type, attribute_path)
 BOOST_FUSION_ADAPT_STRUCT(ast::attribute_path_subscript, identifier, index)

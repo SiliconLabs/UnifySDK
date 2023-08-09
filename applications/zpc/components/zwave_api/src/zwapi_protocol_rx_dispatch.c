@@ -636,9 +636,10 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
       if (zwave_api_get_callbacks()->zwapi_started != NULL) {
         uint8_t data_length
           = len - IDX_DATA - 1;  //-1 to strip off the checksum field
-        for (i = 0; i < data_length; i++) {
-          zwapi_command_buffer[i] = pData[IDX_DATA + i];
+        if (data_length > sizeof(zwapi_command_buffer)) {
+          data_length = sizeof(zwapi_command_buffer);
         }
+        memcpy(zwapi_command_buffer, &pData[IDX_DATA], data_length);
         zwave_api_get_callbacks()->zwapi_started(zwapi_command_buffer,
                                                  data_length);
       }

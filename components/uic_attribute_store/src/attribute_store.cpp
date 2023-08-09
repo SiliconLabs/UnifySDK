@@ -971,7 +971,7 @@ bool attribute_store_is_node_a_child(attribute_store_node_t id,
     return false;
   }
 
-  attribute_store_node *node = attribute_store_get_node_from_id(id);
+  const attribute_store_node *node = attribute_store_get_node_from_id(id);
 
   if (node == nullptr) {
     return false;
@@ -985,6 +985,29 @@ bool attribute_store_is_node_a_child(attribute_store_node_t id,
   }
 
   return false;
+}
+
+uint8_t attribute_store_get_node_value_size(
+  attribute_store_node_t id, attribute_store_node_value_state_t value_state)
+{
+  if (root_node == nullptr) {
+    log_attribute_store_not_initialized();
+    return 0;
+  }
+
+  const attribute_store_node *node = attribute_store_get_node_from_id(id);
+
+  if (node == nullptr) {
+    return 0;
+  }
+
+  if (value_state == REPORTED_ATTRIBUTE) {
+    return static_cast<uint8_t>(node->reported_value.size());
+  } else if (value_state == DESIRED_ATTRIBUTE) {
+    return static_cast<uint8_t>(node->desired_value.size());
+  }
+
+  return 0;
 }
 
 attribute_store_node_t

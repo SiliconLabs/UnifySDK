@@ -38,6 +38,8 @@ struct zigbeeHostOpts {
   char *serialPort;
   char *otaPath;
   struct zigbeeHostCallbacks *callbacks;
+  const uint16_t *supportedClusterList;
+  unsigned int supportedClusterListSize;
 };
 
 /**********************************/
@@ -92,7 +94,7 @@ void zigbeeHostCommandPrintInfo(void);
 
 /**
  * @brief Sends a command to the geck-sdk
- * 
+ *
  * @param array Null terminated array containing the command
  */
 void zigbeeHostSendSlCliCommand(char* array);
@@ -115,17 +117,17 @@ void zigbeeHostClearCounters(void);
 
 /**
  * @brief get count of active neighbors
- * 
+ *
  * @return uint8_t number of active neighbors in the neighbors adresse table
  */
 uint8_t zigbeeHostGetNeighborCount();
 
 /**
  * @brief Get a specific neighbor from the neighbor address table
- * 
+ *
  * @param index index of the neighbor
  * @param eui64 Destination eui64 to copy data to
- * @return EmberStatus 
+ * @return EmberStatus
  */
 EmberStatus zigbeeHostGetNeighborEUI64(uint8_t index,EmberEUI64 eui64);
 
@@ -135,6 +137,11 @@ EmberStatus zigbeeHostGetNeighborEUI64(uint8_t index,EmberEUI64 eui64);
  * @return EmberStatus EMBER_SUCCESS or error
  */
 EmberStatus zigbeeHostTrustCenterInit(void);
+
+EmberStatus zigbeeHostTrustCenterInitWithArgs(
+        uint16_t pan_id,
+        int8_t radio_tx_power,
+        uint8_t channel);
 
 /**
  * @brief Add new EUI64 to NodeId mapping to the EmberAf address-table plugin.
@@ -347,9 +354,9 @@ EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
  * @param sourceEndpoint      Identifier of the endpoint on the Zigbee end device.
  * @param clusterId           Identifier corresponding to the ZCL cluster.
  * @param groupId             Identifier for the groupId (if multicast binding)
- * @param destEui64           Destination address for the binding 
+ * @param destEui64           Destination address for the binding
  * @param destEndpoint        Destination endpoint for the binding
- * @param isBindRequest       True if a binding request, otherwise an unbinding request 
+ * @param isBindRequest       True if a binding request, otherwise an unbinding request
  * @return EmberStatus        EMBER_SUCCESS if message is sent successfully,
  * EMBER_NOT_FOUND if the end device EUI64 is not found.
  */

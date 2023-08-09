@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -121,9 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1166ef0471b5613436b42c0cf2bc27a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a session ID is in the queue.  <a href="classzwave__tx__queue.html#a1166ef0471b5613436b42c0cf2bc27a4">More...</a><br /></td></tr>
 <tr class="separator:a1166ef0471b5613436b42c0cf2bc27a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa087a1047c404b96466556f04ef26749"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzwave__tx__queue.html#aa087a1047c404b96466556f04ef26749">get_highest_priority_child</a> (<a class="el" href="group__zwave__tx__queue.html#ga956589e2cca04b50c92b2c679d3b3857">zwave_tx_queue_element_t</a> *element, const <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id) const</td></tr>
-<tr class="memdesc:aa087a1047c404b96466556f04ef26749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the child in the queue with the the highest priority.  <a href="classzwave__tx__queue.html#aa087a1047c404b96466556f04ef26749">More...</a><br /></td></tr>
+<tr class="memdesc:aa087a1047c404b96466556f04ef26749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the child in the queue with the highest priority.  <a href="classzwave__tx__queue.html#aa087a1047c404b96466556f04ef26749">More...</a><br /></td></tr>
 <tr class="separator:aa087a1047c404b96466556f04ef26749"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac19e2788a1b2183c101553999d0e5d20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzwave__tx__queue.html#ac19e2788a1b2183c101553999d0e5d20">set_transmissions_results</a> (const <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id, uint8_t status, <a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_status)</td></tr>
+<tr class="memitem:ac19e2788a1b2183c101553999d0e5d20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzwave__tx__queue.html#ac19e2788a1b2183c101553999d0e5d20">set_transmissions_results</a> (const <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id, uint8_t status, <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_status)</td></tr>
 <tr class="memdesc:ac19e2788a1b2183c101553999d0e5d20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets <a class="el" href="group__zwave__api.html">Z-Wave API</a> transmission results for an element in the queue.  <a href="classzwave__tx__queue.html#ac19e2788a1b2183c101553999d0e5d20">More...</a><br /></td></tr>
 <tr class="separator:ac19e2788a1b2183c101553999d0e5d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab49e5d38a4e3467eaa32fb073bec14d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzwave__tx__queue.html#ab49e5d38a4e3467eaa32fb073bec14d1">decrement_expected_responses</a> (const <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id)</td></tr>
@@ -583,7 +583,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Find the child in the queue with the the highest priority. </p>
+<p>Find the child in the queue with the highest priority. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">element</td><td>Variable where to copy the data from the child element identified by the session_id </td></tr>
@@ -789,7 +789,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwapi__transmit__complete__codes.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *&#160;</td>
           <td class="paramname"><em>tx_status</em>&#160;</td>
         </tr>
         <tr>
@@ -946,7 +946,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classzwave__tx__queue.html">zwave_tx_queue</a></li>
-    <li class="footer">Generated on Wed Jun 7 2023 10:14:07 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:13 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

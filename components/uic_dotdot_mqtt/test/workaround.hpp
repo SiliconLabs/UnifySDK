@@ -14,6 +14,7 @@
 #include <nlohmann/json.hpp>
 #include "dotdot_mqtt_helpers.hpp"
 #include "dotdot_mqtt_parsing_helpers.hpp"
+#include "dotdot_mqtt_additional_value_names.hpp"
 #include "uic_typedefs.h"
 #endif
 #endif

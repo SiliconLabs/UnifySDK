@@ -18,6 +18,7 @@
 // Includes from other components
 #include "zwave_controller.h"
 #include "zwave_controller_callbacks.h"
+#include "zwave_controller_storage.h"
 #include "zwave_controller_keyset.h"
 #include "zwave_controller_utils.h"
 #include "zwave_security_validation.h"
@@ -141,9 +142,14 @@ sl_status_t zwave_command_handler_dispatch(
 ///////////////////////////////////////////////////////////////////////////////
 sl_status_t zwave_command_handler_init(void)
 {
-  // When we start up, verify that our NIF is set correctly
-  /// FIXME: granted keys and kexfail must be fetched properly
+  /// We will assume all keys if the Z-Wave Controller storage can't find our own keys.
   zwave_keyset_t my_granted_keys = 0x87;
+  if (SL_STATUS_OK
+      != zwave_controller_storage_get_node_granted_keys(
+        zwave_network_management_get_node_id(),
+        &my_granted_keys)) {
+    sl_log_warning(LOG_TAG, "Cannot read Z-Wave Controller's granted keys");
+  };
   zwave_kex_fail_type_t kex_fail = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE;
 
   zwave_command_handler_on_new_network_entered(

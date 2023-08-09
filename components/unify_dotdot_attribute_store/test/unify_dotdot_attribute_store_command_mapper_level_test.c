@@ -940,7 +940,7 @@ void test_level_current_level_validation()
 
 void test_level_remaining_time_countdown()
 {
-  // Create some IdentifyTime attribute
+  // Create some RemainingTime attribute
   attribute_store_node_t node
     = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_REMAINING_TIME,
                                attribute_store_get_root());
@@ -968,4 +968,71 @@ void test_level_remaining_time_countdown()
   // Delete the node to tinker a bit with the attribute transitions module.
   attribute_store_delete_node(node);
   contiki_test_helper_run(100);
+}
+
+void test_level_set_frequency()
+{
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  test_configuration.update_attribute_desired_values_on_commands = true;
+  test_configuration.automatic_deduction_of_supported_commands   = true;
+  test_configuration.clear_reported_on_desired_updates           = true;
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  uic_mqtt_dotdot_level_move_to_closest_frequency_callback_t
+    set_closest_frequency_command
+    = get_uic_mqtt_dotdot_level_move_to_closest_frequency_callback();
+  TEST_ASSERT_NOT_NULL(set_closest_frequency_command);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    set_closest_frequency_command(expected_unid,
+                                  expected_endpoint_id,
+                                  UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+                                  0));
+
+  attribute_store_node_t node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_FREQUENCY,
+                               attribute_store_get_root());
+
+  // Cap the max to 100
+  dotdot_create_level_max_frequency(expected_unid, expected_endpoint_id);
+  dotdot_set_level_max_frequency(expected_unid,
+                                 expected_endpoint_id,
+                                 REPORTED_ATTRIBUTE,
+                                 100);
+  // Cap the min to 20
+  dotdot_create_level_min_frequency(expected_unid, expected_endpoint_id);
+  dotdot_set_level_min_frequency(expected_unid,
+                                 expected_endpoint_id,
+                                 REPORTED_ATTRIBUTE,
+                                 20);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    set_closest_frequency_command(expected_unid,
+                                  expected_endpoint_id,
+                                  UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                  30));
+
+  TEST_ASSERT_EQUAL(30, attribute_store_get_desired_number(node));
+
+  // Try higher than max
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    set_closest_frequency_command(expected_unid,
+                                  expected_endpoint_id,
+                                  UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                  300));
+
+  TEST_ASSERT_EQUAL(100, attribute_store_get_desired_number(node));
+
+  // Try lower than min
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    set_closest_frequency_command(expected_unid,
+                                  expected_endpoint_id,
+                                  UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                                  10));
+
+  TEST_ASSERT_EQUAL(20, attribute_store_get_desired_number(node));
 }

@@ -1,4 +1,4 @@
-add_library(zigpc_config src/zigpc_config.c)
+add_library(zigpc_config src/zigpc_config.c src/zigpc_config_validate.cpp)
 target_include_directories(zigpc_config PUBLIC include)
 target_link_libraries(zigpc_config PRIVATE unify)
 

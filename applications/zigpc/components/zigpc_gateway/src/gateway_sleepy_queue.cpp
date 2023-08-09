@@ -30,16 +30,11 @@ sl_status_t zigpc_gateway_store_sleepy_frame(gateway_frame_t frame)
 {
   sl_status_t status = SL_STATUS_OK;
 
-  if (frame.eui64 != NULL) {
-    char eui64_cstr[ZIGBEE_EUI64_HEX_STR_LENGTH];
-    zigbee_eui64_to_str(frame.eui64, eui64_cstr, ZIGBEE_EUI64_HEX_STR_LENGTH);
-    std::string eui64_str(eui64_cstr);
-
-    sleepy_device_map[eui64_str].push(frame);
-
-    status = SL_STATUS_OK;
-  } else {
-    status = SL_STATUS_FAIL;
+  char eui64_cstr[ZIGBEE_EUI64_HEX_STR_LENGTH];
+  status = zigbee_eui64_to_str(frame.eui64, eui64_cstr, ZIGBEE_EUI64_HEX_STR_LENGTH);
+  std::string eui64_str(eui64_cstr);
+  if (status == SL_STATUS_OK){
+  sleepy_device_map[eui64_str].push(frame);
   }
 
   return status;

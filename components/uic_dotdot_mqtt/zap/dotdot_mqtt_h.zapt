@@ -425,6 +425,13 @@ typedef void (*group_dispatch_t)(uint16_t group_id,
  */
 void {{dotdot_prefix}}_set_group_dispatch_callback(group_dispatch_t callback);
 
+/**
+ * @brief Gets the Group dispatch callback
+ *
+ * @returns Pointer to the registered group dispatch function. Note: may be NULL
+ */
+group_dispatch_t {{dotdot_prefix}}_get_group_dispatch_callback();
+
 
 #ifdef __cplusplus
 }

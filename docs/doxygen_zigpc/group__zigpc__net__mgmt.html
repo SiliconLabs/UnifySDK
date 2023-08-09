@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -142,9 +142,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga678175109b10fb1376eae2e610097433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga678175109b10fb1376eae2e610097433">zigpc_netmgmt_network_permit_joins</a> (bool enable)</td></tr>
 <tr class="memdesc:ga678175109b10fb1376eae2e610097433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to enable/disable permitting Zigbee devices to join the network.  <a href="group__zigpc__net__mgmt.html#ga678175109b10fb1376eae2e610097433">More...</a><br /></td></tr>
 <tr class="separator:ga678175109b10fb1376eae2e610097433"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9ce4ef77782dbe443ccf8287b939acc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga9ce4ef77782dbe443ccf8287b939acc2">zigpc_net_mgmt_add_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length)</td></tr>
-<tr class="memdesc:ga9ce4ef77782dbe443ccf8287b939acc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to add a new end device to the Zigbee PAN using Z3 Install Code Method.  <a href="group__zigpc__net__mgmt.html#ga9ce4ef77782dbe443ccf8287b939acc2">More...</a><br /></td></tr>
-<tr class="separator:ga9ce4ef77782dbe443ccf8287b939acc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga837547f53a0cf275be8f037c3bacf2cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga837547f53a0cf275be8f037c3bacf2cf">zigpc_net_mgmt_add_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length, bool is_well_known_key_add)</td></tr>
+<tr class="memdesc:ga837547f53a0cf275be8f037c3bacf2cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to add a new end device to the Zigbee PAN.  <a href="group__zigpc__net__mgmt.html#ga837547f53a0cf275be8f037c3bacf2cf">More...</a><br /></td></tr>
+<tr class="separator:ga837547f53a0cf275be8f037c3bacf2cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga68a052a418455f87b473f09ac5e29137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga68a052a418455f87b473f09ac5e29137">zigpc_net_mgmt_remove_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
 <tr class="memdesc:ga68a052a418455f87b473f09ac5e29137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to remove a node already on the network. This request can only be fullfilled if the FSM is in an idle state. The request, if successful, will transition the FSM to the "remove node" state. If the node is not on the network, or if the interview process has not completed, a node interview timeout will expire which will transition back the FSM to the idle state.  <a href="group__zigpc__net__mgmt.html#ga68a052a418455f87b473f09ac5e29137">More...</a><br /></td></tr>
 <tr class="separator:ga68a052a418455f87b473f09ac5e29137"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,8 +198,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga9ce4ef77782dbe443ccf8287b939acc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9ce4ef77782dbe443ccf8287b939acc2">&#9670;&nbsp;</a></span>zigpc_net_mgmt_add_node()</h2>
+<a id="ga837547f53a0cf275be8f037c3bacf2cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga837547f53a0cf275be8f037c3bacf2cf">&#9670;&nbsp;</a></span>zigpc_net_mgmt_add_node()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +220,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>install_code_length</em>&#160;</td>
+          <td class="paramname"><em>install_code_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_well_known_key_add</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -230,12 +236,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Request to add a new end device to the Zigbee PAN using Z3 Install Code Method. </p>
+<p>Request to add a new end device to the Zigbee PAN. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node_eui64</td><td>To be added End Device </td></tr>
     <tr><td class="paramname">install_code</td><td>Install code buffer </td></tr>
     <tr><td class="paramname">install_code_length</td><td>Install code length </td></tr>
+    <tr><td class="paramname">is_well_known_key_add</td><td>if True : use well known joining method, if false : use install code method </td></tr>
   </table>
   </dd>
 </dl>
@@ -323,7 +330,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:49 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:55:55 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

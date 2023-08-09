@@ -1,6 +1,6 @@
 # Fetch dependencies if forced
 if(FETCH_GSDK MATCHES ON)
-  find_package(GeckoSDK 4.2.2 REQUIRED)
+  find_package(GeckoSDK 4.3.0 REQUIRED)
 endif()
 
 # Build options will determine if the applications will be included and build
@@ -14,11 +14,11 @@ else()
 endif()
 
 ## Example applications/components
-if((BUILD_UIC_DEMO MATCHES ON) OR (BUILD_EPC MATCHES ON))
+if((BUILD_UIC_DEMO MATCHES ON) OR (BUILD_EPC MATCHES ON) OR (BUILD_EMD MATCHES ON))
   add_subdirectory(examples)
-  message(STATUS "UIC Demo and/or EPC will build")
+  message(STATUS "UIC Demo, Example MQTT Device (EMD) and/or EPC will build")
 else()
-  message(STATUS "UIC Demo and/or EPC will NOT build")
+  message(STATUS "UIC Demo, Example MQTT Device (EMD) and/or EPC will NOT build")
 endif()
 
 ## IoT services

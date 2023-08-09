@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">1.4.0</span>
    </div>
   </td>
  </tr>
@@ -191,8 +191,8 @@ Functions</h2></td></tr>
 <p>An empty set will result in an ASSOCIATION_MARKER bytestream.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td>Source Association Set </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td>Destination Association Bytes </td></tr>
   </table>
   </dd>
 </dl>
@@ -228,8 +228,8 @@ Functions</h2></td></tr>
 <p>Converts a bytestream from the attribute store to a set of associations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td>Source Association Bytes </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td>Destination Association Sets </td></tr>
   </table>
   </dd>
 </dl>
@@ -266,8 +266,8 @@ Functions</h2></td></tr>
 <p>An empty set will result in an empty bytestream.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td>Source Association Set </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td>Destination Association Bytes </td></tr>
   </table>
   </dd>
 </dl>
@@ -303,8 +303,8 @@ Functions</h2></td></tr>
 <p>Converts a bytestream from the attribute store to a set of NodeID associations. Everything after the MARKER will be ignored. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td>Source Association Bytes </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">target</td><td>Destination Association Set </td></tr>
   </table>
   </dd>
 </dl>
@@ -346,9 +346,9 @@ Functions</h2></td></tr>
 <p>Merge set_1 and set_2. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">set_1</td><td></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">set_2</td><td></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">result,set</td><td>that have set_1 and set_2 elements </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">set_1</td><td>The first Association Set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">set_2</td><td>The second Association Set </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>Set that contains both set_1 and set_2 elements </td></tr>
   </table>
   </dd>
 </dl>
@@ -390,9 +390,9 @@ Functions</h2></td></tr>
 <p>Substract set_1 from set_2. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">set_1</td><td></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">set_2</td><td></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">result,set</td><td>that have set_2 elements that are not in set_1 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">set_1</td><td>The first Association Set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">set_2</td><td>The second Association Set </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>Set that contains set_2 elements that are not in set_1 </td></tr>
   </table>
   </dd>
 </dl>
@@ -404,7 +404,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 7 2023 10:13:57 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Aug 9 2023 15:56:02 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -17,6 +17,7 @@ target_add_unittest(
   EXCLUDE
   zigpc_gateway_process.c
   DEPENDS
+
   zigbee_host_mock
   zigpc_datastore_mock
   uic_contiki_stub)

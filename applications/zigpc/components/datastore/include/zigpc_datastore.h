@@ -282,6 +282,14 @@ sl_status_t zigpc_datastore_create_device(const zigbee_eui64_t eui64);
  */
 sl_status_t zigpc_datastore_read_device(const zigbee_eui64_t eui64,
                                         zigpc_device_data_t *const data);
+/**
+ * @brief Check is the datastore contains a device entity
+ * 
+ * @param device_eui64 
+ * @return True if the device is found, false otherwise
+ * 
+ */
+bool zigpc_datastore_is_device_contained(zigbee_eui64_uint_t device_eui64);
 
 /**
  * @brief Write data to a persisted device entity.

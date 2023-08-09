@@ -1,11 +1,12 @@
-let supportedClusters = [
+const supportedClusters = [
     "AoXLocator",
     "AoXPositionEstimation",
     "BarrierControl",
     "Basic",
     "Binding",
     "ColorControl",
-    "ConcentrationMeasurement",
+    "CarbonDioxide",
+    "CarbonMonoxide",
     "ConfigurationParameters",
     "DoorLock",
     "ElectricalConductivityMeasurement",
@@ -20,23 +21,25 @@ let supportedClusters = [
     "OccupancySensing",
     "OnOff",
     "PhMeasurement",
+    "PM25",
     "PressureMeasurement",
     "ProtocolController-NetworkManagement",
     "ProtocolController-RFTelemetry",
+    "RelativityHumidity",
     "Scenes",
+    "SoilMoisture",
     "SystemMetrics",
     "TemperatureMeasurement",
     "Thermostat",
-    "WaterContentMeasurement",
     "WindSpeedMeasurement",
     "WindowCovering",
     "PowerConfiguration"
 ];
 
-const enums = new Set();
-const enumList = {};
-const bitmaps = new Set();
-const bitmapList = {};
+let enums = new Set();
+let enumList = {};
+let bitmaps = new Set();
+let bitmapList = {};
 const unifyClusters = ["ProtocolController-RFTelemetry", "ProtocolController-NetworkManagement", "NameAndLocation", "AoXLocator", "AoXPositionEstimation", "ConfigurationParameters", "SystemMetrics", "Binding"];
 const clusterArrayAttributes = [
     "Groups.GetGroupMembership.GroupList",
@@ -75,6 +78,19 @@ const clusterArrayAttributes = [
     "ElectricalMeasurement.GetMeasurementProfileResponse.Intervals",
     "Binding.BindableClusterList",
     "Binding.BindingTable"
+];
+
+const inheritsFromUint = ["CCMinMiredsField",
+    "CCMaxMiredsField",
+    "DrlkPINUserID",
+    "DrlkRFIDUserID",
+    "DrlkTotalUserID",
+    "DrlkWeekDayScheduleID",
+    "DrlkYearDayScheduleID",
+    "DrlkHolidayScheduleID",
+    "OTAImageType",
+    "SGroupId",
+    "TLRangeBeginEnd"
 ];
 
 function initEnums(enumType, name, value) {
@@ -206,6 +222,7 @@ function castType(arg) {
             {
                 if (enums.has(arg)) return "enum";
                 if (bitmaps.has(arg)) return "bitmap";
+                if (inheritsFromUint.indexOf(arg) > -1) return "number";
                 return "struct";
             }
     }

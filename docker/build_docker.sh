@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+set -o pipefail
 
 # Build docker image
 if [ "$#" -lt 2 ]; then
@@ -19,6 +21,14 @@ tag=$2
 docker_args=""
 if [ "$#" -gt 2 ]; then
 	docker_args="${@:3}"
+fi
+
+echo "info: Make sure that LFS assets are in tree before building"
+git lfs version || echo "warning: Please install git-lfs"
+count=$(git lfs status --porcelain  | grep '^D' | wc -l  || echo 0)
+if [ "0" != "$count" ] ; then
+    echo "warning: Attempt to fetch LFS assets from online"
+    git lfs pull
 fi
 
 # Build docker image

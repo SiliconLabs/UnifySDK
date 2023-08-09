@@ -11,6 +11,7 @@
  *
  *****************************************************************************/
 #include "on_off_cluster_basic_mapper.h"
+#include "unify_dotdot_attribute_store.h"
 #include "unity.h"
 
 // Unify components
@@ -70,11 +71,11 @@ void test_on_onoff_attribute_created_due_to_basic_value()
 {
   // set the network status of
   attribute_store_node_t network_status_node
-    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
-  uint8_t test_online_network_status = 0x01;
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, node_id_node);
+  NodeStateNetworkStatus test_online_network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_node_attribute_value(network_status_node,
                                            REPORTED_ATTRIBUTE,
-                                           &test_online_network_status,
+                                           (uint8_t*)&test_online_network_status,
                                            sizeof(test_online_network_status));
   uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, endpoint_id);
   uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
