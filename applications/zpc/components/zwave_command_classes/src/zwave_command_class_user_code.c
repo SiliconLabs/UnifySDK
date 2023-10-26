@@ -980,7 +980,7 @@ static void zwave_command_class_user_code_on_code_update(
   }
 
   if (attribute_store_is_desired_defined(updated_node) == false) {
-    uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t fields =
+    uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t fields =
       {
         .userid = (DrlkPINUserID) user_id,
         .user_status = (DrlkUserStatus) user_status,
@@ -988,7 +988,7 @@ static void zwave_command_class_user_code_on_code_update(
         .code = pin_code
       };
 
-    uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
+    uic_mqtt_dotdot_door_lock_publish_generated_get_pin_code_response_command(
       node_unid, endpoint_id, &fields);
   }
 }
