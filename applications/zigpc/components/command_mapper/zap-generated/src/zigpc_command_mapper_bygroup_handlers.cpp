@@ -2269,6 +2269,30 @@ void zigpc_command_mapper_bygroup_door_lock_clear_allrfid_codes_handler(
     0,
     nullptr
   );
+/**
+ * @brief DotDot MQTT by-group handler for DoorLock/GetAllPINCodes command.
+ *
+ * @param group_id  UCL group identifier.
+
+ */
+void zigpc_command_mapper_bygroup_door_lock_get_allpin_codes_handler(
+  const dotdot_group_id_t group_id
+) {
+
+
+
+
+  zigpc_command_mapper_send_multicast(
+    group_id,
+    ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_ALLPIN_CODES,
+    0,
+    nullptr
+  );
+
+}
+
 
 }
 
@@ -4075,6 +4099,7 @@ sl_status_t zigpc_command_mapper_mqtt_bygroup_handlers_init(void)
   uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback_set(zigpc_command_mapper_bygroup_door_lock_getrfid_code_handler);
   uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback_set(zigpc_command_mapper_bygroup_door_lock_clearrfid_code_handler);
   uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_set(zigpc_command_mapper_bygroup_door_lock_clear_allrfid_codes_handler);
+  uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_set(zigpc_command_mapper_bygroup_door_lock_get_allpin_codes_handler);
   uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_set(zigpc_command_mapper_bygroup_door_lock_get_allpin_codes_handler);
   uic_mqtt_dotdot_by_group_thermostat_write_attributes_callback_set(zigpc_command_mapper_bygroup_thermostat_write_attributes_handler);
   uic_mqtt_dotdot_by_group_thermostat_setpoint_raise_or_lower_callback_set(zigpc_command_mapper_bygroup_thermostat_setpoint_raise_or_lower_handler);
