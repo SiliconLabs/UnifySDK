@@ -549,6 +549,8 @@ applicable to this document can be found in the LICENSE.md file.
         </fields>
       </command>
       <command id="19" name="ClearAllRFIDCodes" />
+      <!-- Unify Z-Wave Extension -->
+      <command id="80" name="GetAllPINCodes" />
     </commands>
   </server>
   <client>
