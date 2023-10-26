@@ -622,6 +622,10 @@ static uic_mqtt_dotdot_door_lock_programming_event_notification_callback_t test_
 uic_mqtt_dotdot_door_lock_programming_event_notification_callback_t get_uic_mqtt_dotdot_door_lock_programming_event_notification_callback(){
   return test_uic_mqtt_dotdot_door_lock_programming_event_notification_callback;
 }
+static uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback = NULL;
+uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t get_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback(){
+  return test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback;
+}
 static uic_mqtt_dotdot_window_covering_force_read_attributes_callback_t test_uic_mqtt_dotdot_window_covering_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_window_covering_write_attributes_callback_t test_uic_mqtt_dotdot_window_covering_write_attributes_callback = NULL;
 
@@ -2063,6 +2067,11 @@ void uic_mqtt_dotdot_door_lock_programming_event_notification_callback_set_stub(
 {
   test_uic_mqtt_dotdot_door_lock_programming_event_notification_callback = callback;
 }
+void uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set_stub(
+  const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback = callback;
+}
 void set_uic_mqtt_dotdot_window_covering_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_window_covering_force_read_attributes_callback_t callback, int cmock_num_calls)
 {
@@ -3229,6 +3238,9 @@ void setUp()
   test_uic_mqtt_dotdot_door_lock_programming_event_notification_callback = NULL;
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_set_Stub(
     &uic_mqtt_dotdot_door_lock_programming_event_notification_callback_set_stub);
+  test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback = NULL;
+  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set_Stub(
+    &uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set_stub);
   test_uic_mqtt_dotdot_window_covering_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_window_covering_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_window_covering_force_read_attributes_callback_stub);
@@ -6193,6 +6205,13 @@ void test_automatic_deduction_of_supported_commands()
         local_time_value,
       
         data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
       
       ));
   }
@@ -9178,6 +9197,13 @@ void test_automatic_deduction_of_supported_commands()
         local_time_value,
       
         data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
       
       ));
   }

@@ -22681,6 +22681,8 @@ static std::set<uic_mqtt_dotdot_door_lock_operating_event_notification_callback_
 static std::set<uic_mqtt_dotdot_door_lock_operating_event_notification_callback_t> uic_mqtt_dotdot_door_lock_generated_operating_event_notification_callback;
 static std::set<uic_mqtt_dotdot_door_lock_programming_event_notification_callback_t> uic_mqtt_dotdot_door_lock_programming_event_notification_callback;
 static std::set<uic_mqtt_dotdot_door_lock_programming_event_notification_callback_t> uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback;
+static std::set<uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t> uic_mqtt_dotdot_door_lock_get_allpin_codes_callback;
+static std::set<uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t> uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback;
 static std::set<uic_mqtt_dotdot_door_lock_write_attributes_callback_t> uic_mqtt_dotdot_door_lock_write_attributes_callback;
 static std::set<uic_mqtt_dotdot_door_lock_force_read_attributes_callback_t> uic_mqtt_dotdot_door_lock_force_read_attributes_callback;
 
@@ -24466,6 +24468,39 @@ void uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback
 void uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback_clear()
 {
   uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback.clear();
+}
+void uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_door_lock_get_allpin_codes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback)
+{
+  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_clear()
+{
+  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t>& get_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback()
+{
+  return uic_mqtt_dotdot_door_lock_get_allpin_codes_callback;
+}
+
+void uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback_set(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback)
+{
+  uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback_clear()
+{
+  uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback.clear();
 }
 
 void uic_mqtt_dotdot_set_door_lock_write_attributes_callback(
@@ -31561,6 +31596,109 @@ static void uic_mqtt_dotdot_on_generated_door_lock_programming_event_notificatio
 }
 
 
+// Callback function for incoming publications on ucl/by-unid/+/+/DoorLock/Commands/GetAllPINCodes
+void uic_mqtt_dotdot_on_door_lock_get_allpin_codes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_door_lock_get_allpin_codes_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "GetAllPINCodes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetAllPINCodes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetAllPINCodes", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_door_lock_get_allpin_codes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/DoorLock/GeneratedCommands/GetAllPINCodes
+static void uic_mqtt_dotdot_on_generated_door_lock_get_allpin_codes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "GetAllPINCodes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetAllPINCodes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetAllPINCodes", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
 // Callback function for incoming publications on ucl/by-unid/+/+/DoorLock/Commands/WriteAttributes
 void uic_mqtt_dotdot_on_door_lock_WriteAttributes(
   const char *topic,
@@ -35223,6 +35361,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_init()
   if (!uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback.empty()) {
     subscription_topic = base_topic + "DoorLock/GeneratedCommands/ProgrammingEventNotification";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_door_lock_programming_event_notification);
+  }
+  if (!uic_mqtt_dotdot_door_lock_get_allpin_codes_callback.empty()) {
+    subscription_topic = base_topic + "DoorLock/Commands/GetAllPINCodes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_door_lock_get_allpin_codes);
+  }
+  if (!uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback.empty()) {
+    subscription_topic = base_topic + "DoorLock/GeneratedCommands/GetAllPINCodes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_door_lock_get_allpin_codes);
   }
 
   // Init the attributes for that cluster
@@ -97568,6 +97714,20 @@ static inline bool uic_mqtt_dotdot_door_lock_programming_event_notification_is_s
 
   return false;
 }
+static inline bool uic_mqtt_dotdot_door_lock_get_allpin_codes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_door_lock_get_allpin_codes_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 static inline bool uic_mqtt_dotdot_door_lock_write_attributes_is_supported(
   const dotdot_unid_t unid,
@@ -97995,6 +98155,13 @@ void uic_mqtt_dotdot_door_lock_publish_supported_commands(
     }
     first_command = false;
     ss << R"("ProgrammingEventNotification")";
+  }
+  if (uic_mqtt_dotdot_door_lock_get_allpin_codes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("GetAllPINCodes")";
   }
 
   // Check for a WriteAttributes Callback
@@ -109837,6 +110004,38 @@ void uic_mqtt_dotdot_door_lock_publish_generated_programming_event_notification_
   std::string payload =
     get_json_payload_for_door_lock_programming_event_notification_command(
     fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetAllPINCodes command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/GetAllPINCodes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_get_allpin_codes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/GetAllPINCodes";
+
+  std::string payload =
+    get_json_payload_for_door_lock_get_allpin_codes_command(
+    );
 
   // Publish our command
   uic_mqtt_publish(topic.c_str(),

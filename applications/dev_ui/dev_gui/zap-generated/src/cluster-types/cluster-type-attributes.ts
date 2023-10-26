@@ -7274,6 +7274,13 @@ export let ClusterTypeAttrs: any = {
                     isArray: false,
                   }
               ]              
+            },
+            {
+              id: 128,
+              name: "GetAllPINCodes",
+              required: false,
+              fields: [
+              ]              
             }
         ] 
       }

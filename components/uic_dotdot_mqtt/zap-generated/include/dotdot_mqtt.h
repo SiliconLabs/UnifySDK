@@ -9931,6 +9931,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_programming_event_notification_c
     const char* data
 
 );
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
 
 typedef struct {
   uint8_t lock_state;
@@ -12697,6 +12702,46 @@ void uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback
  * +/DoorLock/GeneratedCommands/programming_event_notification is received.
  */
 void uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/get_allpin_codes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/get_allpin_codes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/get_allpin_codes is received.
+ */
+void uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_allpin_codes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback_set(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_allpin_codes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/get_allpin_codes is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_allpin_codes_callback_clear();
 
 /**
  * @brief Setup a callback for WriteAttribute to be called when a

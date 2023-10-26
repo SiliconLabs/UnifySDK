@@ -488,6 +488,7 @@ typedef struct _uic_mqtt_dotdot_door_lock_supported_commands_ {
   bool clear_allrfid_codes_response;
   bool operating_event_notification;
   bool programming_event_notification;
+  bool get_allpin_codes;
   bool write_attributes;
 } uic_mqtt_dotdot_door_lock_supported_commands_t;
 

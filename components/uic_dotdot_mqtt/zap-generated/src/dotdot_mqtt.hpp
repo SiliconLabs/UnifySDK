@@ -2783,6 +2783,25 @@ void uic_mqtt_dotdot_on_door_lock_programming_event_notification(
 // clang-format on
 
 /**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/GetAllPINCodes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t> &get_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/GetAllPINCodes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_get_allpin_codes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
  * @brief Retrieves the container with callback pointers for by-unid
  * /Commands/WriteAttributes messages
  *

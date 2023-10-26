@@ -7842,6 +7842,25 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
           }
 
 
+std::string get_json_payload_for_door_lock_get_allpin_codes_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
 /**
  * @brief JSON parser for ::WriteAttributes command arguments.
  *

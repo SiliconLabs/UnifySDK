@@ -14083,6 +14083,7 @@ ucl/by-unid/<UNID>/<EP>/DoorLock/Attributes/ClusterRevision/Reported { "value": 
               "ClearAllRFIDCodesResponse",
               "OperatingEventNotification",
               "ProgrammingEventNotification",
+              "GetAllPINCodes",
               "WriteAttributes",
               "ForceReadAttributes"
             ]
@@ -14103,7 +14104,7 @@ To see supported commands for DoorLock cluster under the by-unid topic space:
 ```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedCommands'
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedCommands { "value": ["LockDoor","UnlockDoor","Toggle","UnlockWithTimeout","GetLogRecord","SetPINCode","GetPINCode","ClearPINCode","ClearAllPINCodes","SetUserStatus","GetUserStatus","SetWeekdaySchedule","GetWeekdaySchedule","ClearWeekdaySchedule","SetYearDaySchedule","GetYearDaySchedule","ClearYearDaySchedule","SetHolidaySchedule","GetHolidaySchedule","ClearHolidaySchedule","SetUserType","GetUserType","SetRFIDCode","GetRFIDCode","ClearRFIDCode","ClearAllRFIDCodes",] }
+ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedCommands { "value": ["LockDoor","UnlockDoor","Toggle","UnlockWithTimeout","GetLogRecord","SetPINCode","GetPINCode","ClearPINCode","ClearAllPINCodes","SetUserStatus","GetUserStatus","SetWeekdaySchedule","GetWeekdaySchedule","ClearWeekdaySchedule","SetYearDaySchedule","GetYearDaySchedule","ClearYearDaySchedule","SetHolidaySchedule","GetHolidaySchedule","ClearHolidaySchedule","SetUserType","GetUserType","SetRFIDCode","GetRFIDCode","ClearRFIDCode","ClearAllRFIDCodes","GetAllPINCodes","WriteAttributes", "ForceReadAttributes"] }
 ```
 
 To see supported generated commands for DoorLock cluster under the by-unid topic space:
@@ -14111,7 +14112,7 @@ To see supported generated commands for DoorLock cluster under the by-unid topic
 ```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedGeneratedCommands'
 # Example output
-ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedGeneratedCommands { "value": ["LockDoorResponse","UnlockDoorResponse","ToggleResponse","UnlockWithTimeoutResponse","GetLogRecordResponse","SetPINCodeResponse","GetPINCodeResponse","ClearPINCodeResponse","ClearAllPINCodesResponse","SetUserStatusResponse","GetUserStatusResponse","SetWeekdayScheduleResponse","GetWeekdayScheduleResponse","ClearWeekdayScheduleResponse","SetYearDayScheduleResponse","GetYearDayScheduleResponse","ClearYearDayScheduleResponse","SetHolidayScheduleResponse","GetHolidayScheduleResponse","ClearHolidayScheduleResponse","SetUserTypeResponse","GetUserTypeResponse","SetRFIDCodeResponse","GetRFIDCodeResponse","ClearRFIDCodeResponse","ClearAllRFIDCodesResponse","OperatingEventNotification","ProgrammingEventNotification"] }
+ucl/by-unid/<UNID>/<EP>/DoorLock/SupportedGeneratedCommands { "value": ["LockDoorResponse","UnlockDoorResponse","ToggleResponse","UnlockWithTimeoutResponse","GetLogRecordResponse","SetPINCodeResponse","GetPINCodeResponse","ClearPINCodeResponse","ClearAllPINCodesResponse","SetUserStatusResponse","GetUserStatusResponse","SetWeekdayScheduleResponse","GetWeekdayScheduleResponse","ClearWeekdayScheduleResponse","SetYearDayScheduleResponse","GetYearDayScheduleResponse","ClearYearDayScheduleResponse","SetHolidayScheduleResponse","GetHolidayScheduleResponse","ClearHolidayScheduleResponse","SetUserTypeResponse","GetUserTypeResponse","SetRFIDCodeResponse","GetRFIDCodeResponse","ClearRFIDCodeResponse","ClearAllRFIDCodesResponse","OperatingEventNotification","ProgrammingEventNotification",] }
 ```
 
 <!-- -->
@@ -16701,6 +16702,45 @@ To receive a DoorLock/ProgrammingEventNotification generated command from a UNID
 
 ```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ProgrammingEventNotification'
+```
+
+<br><br>
+
+\subsection door_lock_get_allpin_codes_cmd DoorLock/GetAllPINCodes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/DoorLock/Commands/GetAllPINCodes
+[PREFIX]/DoorLock/GeneratedCommands/GetAllPINCodes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DoorLock Cluster GetAllPINCodes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a DoorLock/GetAllPINCodes command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/Commands/GetAllPINCodes' -m  '{  }'
+```
+
+To receive a DoorLock/GetAllPINCodes generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/GetAllPINCodes'
 ```
 
 <br><br>

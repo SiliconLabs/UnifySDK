@@ -3454,6 +3454,19 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
 
 
 /**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock GetAllPINCodes command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_get_allpin_codes_command(
+  
+);
+
+
+
+
+/**
  * @brief JSON parser for DoorLock WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.

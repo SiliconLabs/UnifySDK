@@ -194,6 +194,7 @@ static uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_t uic_mqt
 static uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_operating_event_notification_callback_t uic_mqtt_dotdot_by_group_door_lock_operating_event_notification_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_t uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_t uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback_t uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback = nullptr;
 
 
@@ -1145,6 +1146,12 @@ void uic_mqtt_dotdot_by_group_door_lock_operating_event_notification_callback_se
 void uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_set(const uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback = callback;
 }
 
 void uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback_set(
@@ -13547,6 +13554,80 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification
 
 }
 
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetAllPINCodes
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_allpin_codes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback != nullptr) {
+
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "GetAllPINCodes");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetAllPINCodes", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetAllPINCodes", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback(
+        group_id
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "GetAllPINCodes",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_get_allpin_codes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "GetAllPINCodes: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
 static void uic_mqtt_dotdot_on_by_group_door_lock_WriteAttributes(
   const char *topic,
   const char *message,
@@ -13840,6 +13921,10 @@ sl_status_t uic_mqtt_dotdot_by_group_door_lock_init()
   if (uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ProgrammingEventNotification";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/GetAllPINCodes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_allpin_codes);
   }
 
   return SL_STATUS_OK;
@@ -22541,6 +22626,7 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllRFIDCodesResponse", uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/OperatingEventNotification", uic_mqtt_dotdot_on_by_group_door_lock_operating_event_notification);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ProgrammingEventNotification", uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetAllPINCodes", uic_mqtt_dotdot_on_by_group_door_lock_get_allpin_codes);
 
     uic_mqtt_subscribe("ucl/by-group/+/WindowCovering/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_window_covering_WriteAttributes);
     uic_mqtt_subscribe("ucl/by-group/+/WindowCovering/Commands/UpOrOpen", uic_mqtt_dotdot_on_by_group_window_covering_up_or_open);

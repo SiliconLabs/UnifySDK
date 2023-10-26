@@ -4371,6 +4371,37 @@ void uic_mqtt_dotdot_door_lock_publish_programming_event_notification_command_to
   
 );
 /**
+ * @brief Sends/Publishes a GetAllPINCodes command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/GetAllPINCodes
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_allpin_codes_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a GetAllPINCodes command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/GetAllPINCodes
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_allpin_codes_command_to_group(
+  uint16_t destination_group_id
+);
+/**
  * @brief Sends/Publishes a UpOrOpen command for
  * the WindowCovering cluster to a destination.
  *

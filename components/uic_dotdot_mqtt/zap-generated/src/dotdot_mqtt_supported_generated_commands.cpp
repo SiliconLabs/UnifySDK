@@ -908,6 +908,9 @@ void uic_mqtt_dotdot_door_lock_publish_supported_generated_commands(
   if (command_list->programming_event_notification == true) {
     command_vector.emplace_back("ProgrammingEventNotification");
   }
+  if (command_list->get_allpin_codes == true) {
+    command_vector.emplace_back("GetAllPINCodes");
+  }
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");
   }

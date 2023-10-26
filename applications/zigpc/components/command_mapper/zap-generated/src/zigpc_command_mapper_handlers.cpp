@@ -4252,6 +4252,50 @@ sl_status_t zigpc_command_mapper_door_lock_clear_allrfid_codes_handler(
   return SL_STATUS_OK;
 }
 
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/GetAllPINCodes command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_get_allpin_codes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  sl_status_t status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+    return status;
+  }
+
+
+
+
+  if (status == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_ALLPIN_CODES,
+      0,
+      nullptr
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
 /******************
  * DotDot MQTT Command Handlers for Thermostat cluster
  ******************/
@@ -8053,6 +8097,9 @@ sl_status_t zigpc_command_mapper_register_dotdot_mqtt_handlers(void)
   );
   uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_set(
     zigpc_command_mapper_door_lock_clear_allrfid_codes_handler
+  );
+  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set(
+    zigpc_command_mapper_door_lock_get_allpin_codes_handler
   );
   uic_mqtt_dotdot_set_thermostat_write_attributes_callback(
     zigpc_command_mapper_thermostat_write_attributes_handler
