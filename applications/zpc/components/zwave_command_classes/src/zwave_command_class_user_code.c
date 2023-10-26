@@ -24,8 +24,11 @@
 #include "zwave_controller_utils.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "zpc_attribute_resolver.h"
+#include "zwave_command_class_user_code_types.h"
 
 // Includes from Unify Components
+#include "dotdot_mqtt.h"
+#include "dotdot_mqtt_generated_commands.h"
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_resolver.h"
@@ -875,6 +878,19 @@ static void zwave_command_class_user_code_on_number_of_users_update(
   attribute_store_node_t endpoint_node
     = attribute_store_get_first_parent_with_type(updated_node,
                                                  ATTRIBUTE_ENDPOINT_ID);
+  attribute_store_node_t version_node
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
+  // We need to check the version of the supporting node:
+  zwave_cc_version_t supporting_node_version = 0;
+  attribute_store_get_reported(version_node,
+                               &supporting_node_version,
+                               sizeof(supporting_node_version));
+  if (supporting_node_version == 1) {
+    sl_log_debug(LOG_TAG, "Skip creating User ID nodes for CC UserCode V1.");
+    return;
+  }
+
   attribute_store_node_t data_node
     = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(DATA));
 
@@ -903,6 +919,78 @@ static void zwave_command_class_user_code_on_capabilities_created(
   attribute_store_add_if_missing(node,
                                  capabilities_attributes,
                                  COUNT_OF(capabilities_attributes));
+}
+
+static void zwave_command_class_user_code_on_code_update(
+  attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+
+  // Get pin code value
+  char pin_code [ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {0};
+  attribute_store_get_reported_string(updated_node,
+                                      pin_code,
+                                      ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  attribute_store_node_t user_id_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE(USER_ID));
+  // get user id value
+  uint16_t user_id = 0;
+  attribute_store_get_reported(user_id_node, &user_id, sizeof(user_id));
+
+  attribute_store_node_t endpoint_id_node
+    = attribute_store_get_first_parent_with_type(user_id_node,
+                                                 ATTRIBUTE_ENDPOINT_ID);
+  zwave_endpoint_id_t endpoint_id = 0;
+  attribute_store_get_reported(endpoint_id_node, &endpoint_id, sizeof(endpoint_id));
+
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(endpoint_id_node,
+                                                 ATTRIBUTE_NODE_ID);
+  zwave_node_id_t node_id = 0;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+
+  unid_t node_unid;
+  zwave_unid_from_node_id(node_id, node_unid);
+
+  attribute_store_node_t status_node
+    = attribute_store_get_first_child_by_type(user_id_node,
+                                              ATTRIBUTE(USER_ID_STATUS));
+  uint8_t ustatus = 0;
+  attribute_store_get_reported(status_node, &ustatus, sizeof(ustatus));
+  DrlkUserStatus user_status = 0;
+  switch (ustatus) {
+    case USER_STATUS_AVAILABLE:
+      user_status = ZCL_DRLK_USER_STATUS_AVAILABLE;
+      break;
+    case USER_STATUS_ENABLED:
+      user_status = ZCL_DRLK_USER_STATUS_OCCUPIED_ENABLED;
+      break;
+    case USER_STATUS_DISABLED:
+      user_status = ZCL_DRLK_USER_STATUS_OCCUPIED_DISABLED;
+      break;
+    case USER_STATUS_MESSAGING:
+      user_status = ZCL_DRLK_USER_STATUS_OCCUPIED_ENABLED;
+      break;
+    case USER_STATUS_PASSAGE_MODE:
+      user_status = ZCL_DRLK_USER_STATUS_OCCUPIED_DISABLED;
+      break;
+  }
+
+  if (attribute_store_is_desired_defined(updated_node) == false) {
+    uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t fields =
+      {
+        .userid = (DrlkPINUserID) user_id,
+        .user_status = (DrlkUserStatus) user_status,
+        .user_type = (DrlkUserType) ZCL_DRLK_USER_TYPE_UNRESTRICTED_USER,
+        .code = pin_code
+      };
+
+    uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
+      node_unid, endpoint_id, &fields);
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1067,6 +1155,10 @@ static sl_status_t
   memcpy(user_code, &frame[4], user_code_length);
   user_code[user_code_length] = '\0';
   attribute_store_set_reported_string(user_code_node, user_code);
+  if (user_code_node != ATTRIBUTE_STORE_INVALID_NODE) {
+    zwave_command_class_user_code_on_code_update(user_code_node,
+                                                 ATTRIBUTE_UPDATED);
+  }
   attribute_store_undefine_desired(user_code_node);
 
   return SL_STATUS_OK;
@@ -1167,6 +1259,10 @@ static sl_status_t handle_extended_user_code_report(
     }
 
     attribute_store_set_reported_string(user_code_node, user_code);
+    if (user_code_node != ATTRIBUTE_STORE_INVALID_NODE) {
+      zwave_command_class_user_code_on_code_update(user_code_node,
+                                                 ATTRIBUTE_UPDATED);
+    }
     attribute_store_undefine_desired(user_code_node);
 
     j += 4 + user_code_length;

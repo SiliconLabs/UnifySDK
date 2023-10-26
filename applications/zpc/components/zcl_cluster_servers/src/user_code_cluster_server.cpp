@@ -195,6 +195,22 @@ static sl_status_t
                                               (uint8_t *)&user_id,
                                               sizeof(uint16_t),
                                               0);
+  uint16_t number_of_users = 0;
+  attribute_store_get_child_reported(user_code_data,
+                                     ATTRIBUTE(NUMBER_OF_USERS),
+                                     &number_of_users,
+                                     sizeof(number_of_users));
+
+  if ((user_id > 0) && (user_id <= number_of_users)) {
+    if (user_id_node == ATTRIBUTE_STORE_INVALID_NODE) {
+      user_id_node = attribute_store_emplace(user_code_data,
+                                             ATTRIBUTE(USER_ID),
+                                             &user_id,
+                                             sizeof(user_id));
+    }
+  } else {
+    return SL_STATUS_FAIL;
+  }
 
   attribute_store_node_t user_code_node
     = attribute_store_get_first_child_by_type(user_id_node, ATTRIBUTE(CODE));
@@ -203,6 +219,82 @@ static sl_status_t
 
   return attribute_store_node_exists(user_code_node) ? SL_STATUS_OK
                                                      : SL_STATUS_FAIL;
+}
+
+/**
+ * @brief Checks if the User ID node matches what we expect and undefines
+ * the User Code data underneath.
+ *
+ * @param user_id_node  Attribute Store node for the User ID.
+ */
+static void undefine_user_code(attribute_store_node_t user_id_node)
+{
+  if (attribute_store_get_node_type(user_id_node) != ATTRIBUTE(USER_ID)) {
+    return;
+  }
+
+  // Set the user code to nothing:
+  attribute_store_node_t user_code_node
+    = attribute_store_get_first_child_by_type(user_id_node, ATTRIBUTE(CODE));
+
+  attribute_store_undefine_desired(user_code_node);
+  attribute_store_undefine_reported(user_code_node);
+
+  attribute_store_node_t user_id_status_node
+    = attribute_store_get_first_child_by_type(user_id_node,
+                                              ATTRIBUTE(USER_ID_STATUS));
+
+  attribute_store_undefine_desired(user_id_status_node);
+  attribute_store_undefine_reported(user_id_status_node);
+}
+
+/**
+ * @brief Navigates under the endpoint node and undefines all the
+ * known user code data.
+ *
+ * @param node  Attribute Store node for the Endpoint.
+ */
+static void undefine_all_user_codes(attribute_store_node_t endpoint_node)
+{
+  attribute_store_node_t data_node
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(DATA));
+
+  attribute_store_walk_tree(data_node, &undefine_user_code);
+}
+
+sl_status_t get_all_pin_codes_command(dotdot_unid_t unid,
+                                      dotdot_endpoint_id_t endpoint,
+                                      uic_mqtt_dotdot_callback_call_type_t call_type)
+{
+  attribute_store_node_t user_code_data
+    = get_user_code_data_node(unid, endpoint);
+
+  // Now that we know that the command is supported, return here if it is
+  // a support check type of call.
+  if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == call_type) {
+    return attribute_store_node_exists(user_code_data) ? SL_STATUS_OK
+                                                       : SL_STATUS_FAIL;
+  }
+
+  attribute_store_node_t endpoint_node
+    = attribute_store_network_helper_get_endpoint_node(unid, endpoint);
+
+  attribute_store_node_t data_node
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(DATA));
+
+  uint16_t number_of_users = 0;
+  attribute_store_get_child_reported(user_code_data,
+                                     ATTRIBUTE(NUMBER_OF_USERS),
+                                     &number_of_users,
+                                     sizeof(number_of_users));
+
+  for (uint16_t i = 1; (i <= number_of_users) && (i != 0); i++) {
+    attribute_store_emplace(data_node, ATTRIBUTE(USER_ID), &i, sizeof(i));
+  }
+
+  undefine_all_user_codes(endpoint_node);
+
+  return SL_STATUS_OK;
 }
 
 static sl_status_t
@@ -291,6 +383,7 @@ sl_status_t user_code_cluster_server_init()
   // Register the callback for handling commands from IoT service
   uic_mqtt_dotdot_door_lock_setpin_code_callback_set(&set_pin_code_command);
   uic_mqtt_dotdot_door_lock_getpin_code_callback_set(&get_pin_code_command);
+  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set(&get_all_pin_codes_command);
   uic_mqtt_dotdot_door_lock_clearpin_code_callback_set(&clear_pin_code_command);
   uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_set(
     &clear_all_pin_codes_command);
