@@ -156,7 +156,7 @@ zpc/build: zpc/configure build
 zpc/test: ${build_dir}/applications/zpc/components/zwave_command_classes/test/
 	ctest --test-dir ${<}
 
-zpc/default: zpc/configure zpc/build
+zpc/default: zpc/configure zpc/build zpc/test
 	@date -u
 
 ### @rootfs is faster than docker for env check
