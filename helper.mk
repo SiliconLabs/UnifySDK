@@ -25,6 +25,7 @@ packages+=nlohmann-json3-dev
 # TODO: remove for offline build
 packages+=curl wget python3-pip
 packages+=time
+packages+=yarnpkg
 
 rust_url?=https://sh.rustup.rs
 RUST_VERSION?=1.65.0
