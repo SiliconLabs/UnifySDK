@@ -1,0 +1,75 @@
+@startuml
+
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam shadowing false
+skinparam ArrowColor #000000
+
+skinparam ObjectBackgroundColor #DEDEDE
+skinparam ObjectBorderColor #480509
+skinparam ObjectBorderThickness 2
+skinparam ObjectFontColor #000000
+
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+
+title Attribute Store tree representation
+
+object HomeID #fffae6
+HomeID : Attribute Type = ATTRIBUTE_HOME_ID
+HomeID : value = Desired: [], Reported: [FB E6 8C CE]
+
+object "NodeID" as NodeID_1 #f2ffe6
+NodeID_1 : Attribute Type = ATTRIBUTE_NODE_ID
+NodeID_1 : value = Desired: [], Reported: [03]
+
+object "Endpoint" as endpoint_1 #e6fff7
+endpoint_1 : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+endpoint_1 : value = Desired: [], Reported: [00]
+
+object "Attribute" as attribute_1 #FFFFFF
+attribute_1 : Attribute Type = CONFIGURED_DEFAULT_VOLUME
+attribute_1 : value = Desired: [00], Reported: [64]
+
+object "Attribute" as attribute_2 #FFFFFF
+attribute_2 : Attribute Type = CONFIGURED_DEFAULT_TONE_IDENTIFIER
+attribute_2 : value = Desired: [00], Reported: [04]
+
+object "Attribute" as attribute_3 #FFFFFF
+attribute_3 : Attribute Type = TONES_NUMBER
+attribute_3 : value = Desired: [00], Reported: [1E]
+
+object "Attribute" as attribute_4 #FFFFFF
+attribute_4 : Attribute Type = TONE_INFO_IDENTIFIER
+attribute_4 : value = Desired: [00], Reported: [04]
+
+object "Attribute" as sub_attribute_1 #FFFFFF
+sub_attribute_1 : Attribute Type = TONE_INFO_DURATION
+sub_attribute_1 : value = Desired: [00], Reported: [0F]
+
+object "Attribute" as sub_attribute_2 #FFFFFF
+sub_attribute_2 : Attribute Type = TONE_INFO_NAME
+sub_attribute_2 : value = Desired: [00], Reported: ["04 Electric Apartment Buzzer"]
+
+object "Attribute" as attribute_5 #FFFFFF
+attribute_5 : Attribute Type = PLAY
+attribute_5 : value = Desired: [01], Reported: [00]
+
+
+
+HomeID *-- NodeID_1
+NodeID_1 *-- endpoint_1
+endpoint_1 *-- attribute_1
+endpoint_1 *-- attribute_2
+endpoint_1 *-- attribute_3
+endpoint_1 *-- attribute_4
+endpoint_1 *-- attribute_5
+attribute_4 *-- sub_attribute_1
+attribute_4 *-- sub_attribute_2
+
+
+
+
+@enduml
