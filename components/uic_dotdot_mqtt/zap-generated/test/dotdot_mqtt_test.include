@@ -1770,13 +1770,13 @@ static sl_status_t uic_mqtt_dotdot_door_lock_programming_event_notification_call
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_count++;
+  uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
@@ -3117,7 +3117,7 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_set(&uic_mqtt_dotdot_door_lock_programming_event_notification_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_set(&uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_func);
+  uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_set(&uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_window_covering_up_or_open_callback_set(&uic_mqtt_dotdot_window_covering_up_or_open_callback_func);
   num_callbacks++;
@@ -3381,7 +3381,7 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_clear();
   uic_mqtt_dotdot_door_lock_operating_event_notification_callback_clear();
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_clear();
-  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_clear();
   uic_mqtt_dotdot_clear_door_lock_write_attributes_callbacks();
   uic_mqtt_dotdot_window_covering_up_or_open_callback_clear();
   uic_mqtt_dotdot_window_covering_down_or_close_callback_clear();
@@ -3605,7 +3605,7 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_count = 0;
   uic_mqtt_dotdot_door_lock_operating_event_notification_callback_count = 0;
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_count = 0;
   uic_mqtt_dotdot_window_covering_up_or_open_callback_count = 0;
   uic_mqtt_dotdot_window_covering_down_or_close_callback_count = 0;
   uic_mqtt_dotdot_window_covering_stop_callback_count = 0;

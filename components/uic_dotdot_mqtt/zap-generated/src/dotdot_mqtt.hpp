@@ -2788,14 +2788,14 @@ void uic_mqtt_dotdot_on_door_lock_programming_event_notification(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_get_allpin_codes_callback_t> &get_uic_mqtt_dotdot_door_lock_get_allpin_codes_callback();
+std::set<uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback_t> &get_uic_mqtt_dotdot_door_lock_get_all_pin_codes_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/GetAllPINCodes
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_get_allpin_codes(
+void uic_mqtt_dotdot_on_door_lock_get_all_pin_codes(
   const char *topic,
   const char *message,
   const size_t message_length);

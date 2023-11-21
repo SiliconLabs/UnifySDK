@@ -16706,7 +16706,7 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/Programming
 
 <br><br>
 
-\subsection door_lock_get_allpin_codes_cmd DoorLock/GetAllPINCodes Command
+\subsection door_lock_get_all_pin_codes_cmd DoorLock/GetAllPINCodes Command
 
 **MQTT Topic Pattern:**
 

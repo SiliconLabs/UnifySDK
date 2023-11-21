@@ -2233,7 +2233,7 @@ void uic_mqtt_dotdot_parse_door_lock_getpin_code(
  */
 std::string get_json_payload_for_door_lock_getpin_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 );
 
@@ -3459,7 +3459,7 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_get_allpin_codes_command(
+std::string get_json_payload_for_door_lock_get_all_pin_codes_command(
   
 );
 

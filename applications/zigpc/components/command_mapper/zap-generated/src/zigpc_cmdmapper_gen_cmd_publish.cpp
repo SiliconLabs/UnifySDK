@@ -316,14 +316,14 @@ static void zigpc_command_mapper_publish_door_lock_getpin_code_response(
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t fields = {
+  uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t fields = {
     (uint16_t) data->door_lock_getpin_code_response.userid,
     (DrlkUserStatus) data->door_lock_getpin_code_response.user_status,
     (DrlkUserType) data->door_lock_getpin_code_response.user_type,
     (const char*) data->door_lock_getpin_code_response.code
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_get_pin_code_response_command(
     unid.c_str(),
     endpoint_id,
     &fields

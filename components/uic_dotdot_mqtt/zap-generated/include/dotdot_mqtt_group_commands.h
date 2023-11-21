@@ -1405,7 +1405,7 @@ void uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback_set(const uic_mqtt_
  */
 typedef void (*uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
 );
 
 /**
@@ -2057,17 +2057,17 @@ void uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_
 /**
  * @brief Callback signature for by-group DoorLock::GetAllPINCodes command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_all_pin_codes_callback_t)(
     const dotdot_group_id_t group_id
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/get_allpin_codes is received.
+ * ucl/by-group/+/DoorLock/get_all_pin_codes is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_allpin_codes_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_get_all_pin_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_all_pin_codes_callback_t callback);
 
 typedef void (*uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback_t)(
     const dotdot_group_id_t group_id,
