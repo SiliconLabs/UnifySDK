@@ -670,6 +670,8 @@ static sl_status_t zwave_command_class_user_code_set(
     }
 
     *frame_length = 4 + user_code_size;
+    attribute_store_undefine_desired(user_code_node);
+    attribute_store_undefine_reported(user_code_node);
     return SL_STATUS_OK;
   }
 
