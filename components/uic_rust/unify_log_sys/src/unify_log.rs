@@ -27,6 +27,7 @@ impl std::fmt::Display for sl_log_level_t {
         match self {
             sl_log_level_t::SL_LOG_DEBUG => write!(f, "SL_LOG_DEBUG"),
             sl_log_level_t::SL_LOG_INFO => write!(f, "SL_LOG_INFO"),
+            sl_log_level_t::SL_LOG_NOTICE => write!(f, "SL_LOG_NOTICE"),
             sl_log_level_t::SL_LOG_WARNING => write!(f, "SL_LOG_WARNING"),
             sl_log_level_t::SL_LOG_ERROR => write!(f, "SL_LOG_ERROR"),
             sl_log_level_t::SL_LOG_CRITICAL => write!(f, "SL_LOG_CRITICAL"),
@@ -107,6 +108,10 @@ macro_rules! log_critical {
     ($($args:expr),*) => {
         log_critical_fn(APP_NAME, format!($($args),*));
     };
+}
+
+pub fn log_notice_fn(log_tag: &str, message: String) {
+    print_log(log_tag, sl_log_level::SL_LOG_NOTICE, &message);
 }
 
 pub fn log_debug_fn(log_tag: &str, message: String) {

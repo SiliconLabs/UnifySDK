@@ -38,6 +38,7 @@ extern "C" {
 typedef enum sl_log_level {
   SL_LOG_DEBUG,
   SL_LOG_INFO,
+  SL_LOG_NOTICE,
   SL_LOG_WARNING,
   SL_LOG_ERROR,
   SL_LOG_CRITICAL
@@ -74,6 +75,11 @@ typedef enum sl_log_level {
 void sl_log_set_level(sl_log_level_t level);
 
 /**
+ * @brief Get current log level.
+ */
+sl_log_level_t sl_log_get_level();
+
+/**
  * @brief Set log level for a given tag.
  *
  * This level will override the log level set in \ref sl_log_set_level
@@ -100,6 +106,7 @@ void sl_log_unset_tag_level(const char *tag);
  * @param level string representation of sl_log_level_t, supported values are:
  *              "d", "debug"
  *              "i", "info"
+ *              "n", "notice"
  *              "w", "warning"
  *              "e", "error"
  *              "c", "critical"
@@ -133,6 +140,8 @@ void sl_log(const char *const tag,
   sl_log(tag, SL_LOG_DEBUG, fmtstr, ##__VA_ARGS__)
 #define sl_log_info(tag, fmtstr, ...) \
   sl_log(tag, SL_LOG_INFO, fmtstr, ##__VA_ARGS__)
+#define sl_log_notice(tag, fmtstr, ...) \
+  sl_log(tag, SL_LOG_NOTICE, fmtstr, ##__VA_ARGS__)
 #define sl_log_warning(tag, fmtstr, ...) \
   sl_log(tag, SL_LOG_WARNING, fmtstr, ##__VA_ARGS__)
 #define sl_log_error(tag, fmtstr, ...) \

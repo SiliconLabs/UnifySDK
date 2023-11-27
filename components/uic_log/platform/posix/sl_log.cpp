@@ -15,6 +15,10 @@
 #include <iomanip>
 #include <vector>
 #include <unordered_map>
+#ifdef BOOST_LOG_USE_NATIVE_SYSLOG
+#include <syslog.h>
+#include <unistd.h>
+#endif
 
 // A whole bunch of includes from boost for logging
 #include <boost/log/core.hpp>
@@ -32,6 +36,9 @@
 #include <boost/log/attributes/value_extraction.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/support/date_time.hpp>
+#include <boost/log/sinks/syslog_backend.hpp>
+#include <boost/log/attributes/current_process_id.hpp>
+#include <boost/log/attributes/current_process_name.hpp>
 
 #include <boost/phoenix/bind.hpp>
 
@@ -42,8 +49,13 @@
 #include "config.h"
 #include "sl_status.h"
 
+#ifdef BOOST_LOG_USE_NATIVE_SYSLOG
+static char process_name[48] = {0};
+#endif
+
 // Boost logging namespaces
 namespace logging  = boost::log;
+namespace sinks    = boost::log::sinks;
 namespace src      = boost::log::sources;
 namespace attrs    = boost::log::attributes;
 namespace expr     = boost::log::expressions;
@@ -65,11 +77,11 @@ static std::locale
 BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", sl_log_level_t)
 BOOST_LOG_ATTRIBUTE_KEYWORD(tag_attr, "Tag", std::string)
 
-const std::vector<std::string> log_level_short = {"d", "i", "W", "E", "C"};
+const std::vector<std::string> log_level_short = {"d", "i", "n", "W", "E", "C"};
 const std::vector<std::string> log_level_long
-  = {"debug", "info", "Warning", "Error", "CRITICAL"};
+  = {"debug", "info", "notice", "Warning", "Error", "CRITICAL"};
 const std::vector<std::string> log_level_color
-  = {"\033[34;1m", "\033[32;1m", "\033[33;1m", "\033[31;1m", "\033[37;41;1m"};
+  = {"\033[34;1m", "\033[32;1m", "\033[36;1m", "\033[33;1m", "\033[31;1m", "\033[37;41;1m"};
 
 // sl_log_level_t to string representation used by boost::log
 std::ostream &operator<<(std::ostream &strm, sl_log_level_t level)
@@ -135,6 +147,51 @@ class sl_log_singleton
     }
     sink->set_filter(
       phoenix::bind(&sl_log_filter, severity.or_none(), tag_attr.or_none()));
+
+      logging::core::get()->add_global_attribute("ProcessName", boost::log::attributes::current_process_name());
+
+      // Create a syslog sink
+      boost::shared_ptr< sinks::synchronous_sink< sinks::syslog_backend > > backend(
+        new sinks::synchronous_sink< sinks::syslog_backend >(
+#ifdef BOOST_LOG_USE_NATIVE_SYSLOG
+          keywords::use_impl = sinks::syslog::native,
+#else
+          keywords::use_impl = sinks::syslog::udp_socket_based,
+#endif
+          keywords::facility = sinks::syslog::local4
+      ));
+
+      sinks::syslog::custom_severity_mapping< sl_log_level_t > mapping("Severity");
+
+      mapping[SL_LOG_DEBUG]    = sinks::syslog::debug;
+      mapping[SL_LOG_INFO]     = sinks::syslog::info;
+      mapping[SL_LOG_NOTICE]   = sinks::syslog::notice;
+      mapping[SL_LOG_WARNING]  = sinks::syslog::warning;
+      mapping[SL_LOG_ERROR]    = sinks::syslog::error;
+      mapping[SL_LOG_CRITICAL] = sinks::syslog::critical;
+
+      backend->locked_backend()->set_severity_mapper(mapping);
+
+      //backend->set_formatter(&syslog_formatter);
+      backend->set_formatter(
+#ifdef BOOST_LOG_USE_NATIVE_SYSLOG
+        boost::log::parse_formatter(": [%Tag%] %Message%")
+#else
+        boost::log::parse_formatter("%ProcessName%[" + std::to_string(getpid()) + "] %Level%: [%Tag%] %Message%")
+#endif
+      );
+
+      backend->set_filter(
+        phoenix::bind(&sl_log_filter, severity.or_none(), tag_attr.or_none()));
+
+      // Add the sink to the core
+      logging::core::get()->add_sink(backend);
+
+#ifdef BOOST_LOG_USE_NATIVE_SYSLOG
+      // we must pass pointer to global scope char[]
+      strncpy(process_name, boost::log::aux::get_process_name().c_str(), 47);
+      ::openlog(process_name, LOG_PID, LOG_LOCAL4);
+#endif
   }
 };
 static sl_log_singleton singletron;
@@ -142,15 +199,19 @@ static sl_log_singleton singletron;
 void sl_log_set_level(sl_log_level_t level)
 {
   log_level = level;
-  sl_log_debug(LOG_TAG,
+  sl_log_notice(LOG_TAG,
                "Setting log level to %s\n",
                log_level_long.at(level).c_str());
+}
+
+sl_log_level_t sl_log_get_level() {
+  return log_level;
 }
 
 void sl_log_set_tag_level(const char *tag, sl_log_level_t level)
 {
   log_levels[tag] = level;
-  sl_log_debug(LOG_TAG,
+  sl_log_notice(LOG_TAG,
                "Setting log level for '%s' to %s",
                tag,
                log_level_long.at(level).c_str());
@@ -159,7 +220,7 @@ void sl_log_set_tag_level(const char *tag, sl_log_level_t level)
 void sl_log_unset_tag_level(const char *tag)
 {
   log_levels.erase(tag);
-  sl_log_debug(LOG_TAG, "Unsetting log level for '%s'\n", tag);
+  sl_log_notice(LOG_TAG, "Unsetting log level for '%s'\n", tag);
 }
 
 sl_status_t sl_log_level_from_string(const char *level, sl_log_level_t *result)
@@ -170,6 +231,8 @@ sl_status_t sl_log_level_from_string(const char *level, sl_log_level_t *result)
     *result = SL_LOG_DEBUG;
   } else if (level_lower == "i" || level_lower == "info") {
     *result = SL_LOG_INFO;
+  } else if (level_lower == "n" || level_lower == "notice") {
+    *result = SL_LOG_NOTICE;
   } else if (level_lower == "w" || level_lower == "warning") {
     *result = SL_LOG_WARNING;
   } else if (level_lower == "e" || level_lower == "error") {

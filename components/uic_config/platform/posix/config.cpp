@@ -58,7 +58,7 @@ class Config
             "precedence over the options and values in config file")
   {
     this->config_add(CONFIG_KEY_LOG_LEVEL,
-                     "Log Level (d,i,w,e,c)",
+                     "Log Level (d,i,n,w,e,c)",
                      std::string("i"));
     this->config_add(
       CONFIG_KEY_LOG_TAG_LEVEL,

@@ -56,4 +56,10 @@ void test_log_level()
   sl_log_warning("mytag", "this shouldn't be logged");
   sl_log_error("mytag", "This should be logged 8");
   sl_log_critical("mytag", "This should be logged 9");
+
+  sl_log_set_tag_level("mytag", SL_LOG_NOTICE);
+  sl_log_set_level(SL_LOG_NOTICE);
+  sl_log_notice("mytag", "this should be logged 12");
+  sl_log_set_level(SL_LOG_WARNING);
+  sl_log_notice("mytag", "this shouldn't be logged 13");
 }

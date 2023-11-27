@@ -1,4 +1,5 @@
 add_definitions(-DBOOST_LOG_DYN_LINK)
+add_definitions(-DBOOST_LOG_USE_NATIVE_SYSLOG)
 set(Boost_USE_MULTITHREADED ON)
 
 find_package(Boost COMPONENTS log log_setup REQUIRED)

@@ -53,8 +53,8 @@ static command_map_t commands
   = {{"help", {" :Prints help", handle_help}},
      {"exit", {" :Exit the application", handle_exit}},
      {"log_level",
-      {COLOR_START "d|i|w|e|c" COLOR_END " :Set log level - "
-                   "DEBUG | INFO | WARNING | ERROR | CRITICAL",
+      {COLOR_START "d|i|n|w|e|c" COLOR_END " :Set log level - "
+                   "DEBUG | INFO | NOTICE | WARNING | ERROR | CRITICAL",
        handle_set_log_level}}};
 
 // The prompt string for the command line interface
@@ -124,6 +124,8 @@ static sl_status_t handle_set_log_level(const handle_args_t &arg)
       return SL_LOG_DEBUG;
     } else if (level == "i") {
       return SL_LOG_INFO;
+    } else if (level == "n") {
+      return SL_LOG_NOTICE;
     } else if (level == "w") {
       return SL_LOG_WARNING;
     } else if (level == "e") {
@@ -131,7 +133,7 @@ static sl_status_t handle_set_log_level(const handle_args_t &arg)
     } else if (level == "c") {
       return SL_LOG_CRITICAL;
     } else {
-      throw std::invalid_argument("Invalid argument, expected d,i,w,e, or c");
+      throw std::invalid_argument("Invalid argument, expected d,i,n,w,e, or c");
     }
   };
   try {
