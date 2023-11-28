@@ -205,12 +205,20 @@ static sl_status_t zwave_command_class_meter_get(attribute_store_node_t node,
   attribute_store_node_t scale_node
     = attribute_store_get_first_parent_with_type(rate_type_node,
                                                  ATTRIBUTE(SCALE));
+  zwave_cc_version_t supporting_node_version
+    = zwave_command_class_get_version_from_node(node, COMMAND_CLASS_METER);
+
   meter_scale_t scale = 0;
   attribute_store_get_reported(scale_node, &scale, sizeof(scale));
 
   ZW_METER_GET_V5_FRAME *get_frame = (ZW_METER_GET_V5_FRAME *)frame;
   get_frame->cmdClass              = COMMAND_CLASS_METER_V6;
   get_frame->cmd                   = METER_GET;
+
+  if (supporting_node_version == 1) {
+    *frame_length = sizeof(ZW_METER_GET_FRAME);
+    return SL_STATUS_OK;
+  }
 
   // Insert the rate type into the frame:
   get_frame->properties1 = (uint8_t)(rate_type << 6);
@@ -220,6 +228,11 @@ static sl_status_t zwave_command_class_meter_get(attribute_store_node_t node,
   } else {
     get_frame->properties1 |= ((7 & 0xFF) << 3);
     get_frame->scale2 = (uint8_t)(scale - 8);
+  }
+
+  if (supporting_node_version <= 3) {
+    *frame_length = sizeof(ZW_METER_GET_V3_FRAME);
+    return SL_STATUS_OK;
   }
 
   *frame_length = sizeof(ZW_METER_GET_V5_FRAME);
@@ -244,12 +257,10 @@ static sl_status_t zwave_command_class_meter_supported_get(
     = zwave_command_class_get_version_from_node(node, COMMAND_CLASS_METER);
 
   if (supporting_node_version == 1) {
-    ZW_METER_GET_V5_FRAME *get_frame = (ZW_METER_GET_V5_FRAME *)frame;
-    get_frame->cmdClass              = COMMAND_CLASS_METER_V6;
+    ZW_METER_GET_FRAME *get_frame    = (ZW_METER_GET_FRAME *)frame;
+    get_frame->cmdClass              = COMMAND_CLASS_METER;
     get_frame->cmd                   = METER_GET;
-    get_frame->properties1           = 0;
-    get_frame->scale2                = 0;
-    *frame_length                    = sizeof(ZW_METER_GET_V5_FRAME);
+    *frame_length                    = sizeof(ZW_METER_GET_FRAME);
     return SL_STATUS_OK;
   }
 
