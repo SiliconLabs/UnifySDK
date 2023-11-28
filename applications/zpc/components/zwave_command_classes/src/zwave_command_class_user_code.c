@@ -326,13 +326,38 @@ static bool is_mucr_supported(attribute_store_node_t endpoint_node)
 static sl_status_t zwave_command_class_user_code_number_get(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
-  (void)node;  // unused.
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
+  attribute_store_node_t version_node
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
+  // We need to check the version of the supporting node:
+  zwave_cc_version_t supporting_node_version = 0;
+  attribute_store_get_reported(version_node,
+                               &supporting_node_version,
+                               sizeof(supporting_node_version));
+
+  if (supporting_node_version == 0) {
+    // Wait to know the supporting node version
+    *frame_length = 0;
+    return SL_STATUS_IS_WAITING;
+  }
+
+  if (supporting_node_version == 1) {
+    ZW_USERS_NUMBER_GET_FRAME *get_frame
+      = (ZW_USERS_NUMBER_GET_FRAME *)frame;
+  get_frame->cmdClass = COMMAND_CLASS_USER_CODE;
+  get_frame->cmd      = USERS_NUMBER_GET;
+  *frame_length       = sizeof(ZW_USERS_NUMBER_GET_FRAME);
+  }
+  else {
   // This is a static payload.
   ZW_USERS_NUMBER_GET_V2_FRAME *get_frame
     = (ZW_USERS_NUMBER_GET_V2_FRAME *)frame;
   get_frame->cmdClass = COMMAND_CLASS_USER_CODE_V2;
   get_frame->cmd      = USERS_NUMBER_GET_V2;
   *frame_length       = sizeof(ZW_USERS_NUMBER_GET_V2_FRAME);
+  }
   return SL_STATUS_OK;
 }
 
@@ -378,8 +403,8 @@ static sl_status_t zwave_command_class_user_code_get(
       *frame_length = 0;
       return SL_STATUS_ALREADY_EXISTS;
     }
-    frame[0]      = COMMAND_CLASS_USER_CODE_V2;
-    frame[1]      = USER_CODE_GET_V2;
+    frame[0]      = COMMAND_CLASS_USER_CODE;
+    frame[1]      = USER_CODE_GET;
     frame[2]      = (uint8_t)user_id;
     *frame_length = 3;
     return SL_STATUS_OK;
@@ -540,7 +565,30 @@ static sl_status_t zwave_command_class_user_code_admin_code_get(
 static sl_status_t zwave_command_class_user_code_keypad_mode_get(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
-  (void)node;  // unused.
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
+  attribute_store_node_t version_node
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
+  // We need to check the version of the supporting node:
+  zwave_cc_version_t supporting_node_version = 0;
+  attribute_store_get_reported(version_node,
+                               &supporting_node_version,
+                               sizeof(supporting_node_version));
+
+  if (supporting_node_version == 0) {
+    // Wait to know the supporting node version
+    *frame_length = 0;
+    return SL_STATUS_IS_WAITING;
+  }
+
+  if (supporting_node_version == 1) {
+    sl_log_warning(LOG_TAG, "Keypad Mode attribute found for v1 node. Deleting");
+    attribute_store_delete_node(node);
+    *frame_length = 0;
+    return SL_STATUS_ALREADY_EXISTS;
+  }
+
   zwave_minimum_frame_t *get_frame = (zwave_minimum_frame_t *)frame;
   get_frame->command_class         = COMMAND_CLASS_USER_CODE_V2;
   get_frame->command               = USER_CODE_KEYPAD_MODE_GET_V2;
@@ -560,6 +608,30 @@ static sl_status_t zwave_command_class_user_code_keypad_mode_get(
 static sl_status_t zwave_command_class_user_code_keypad_mode_set(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
+  attribute_store_node_t version_node
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
+  // We need to check the version of the supporting node:
+  zwave_cc_version_t supporting_node_version = 0;
+  attribute_store_get_reported(version_node,
+                               &supporting_node_version,
+                               sizeof(supporting_node_version));
+
+  if (supporting_node_version == 0) {
+    // Wait to know the supporting node version
+    *frame_length = 0;
+    return SL_STATUS_IS_WAITING;
+  }
+
+  if (supporting_node_version == 1) {
+    sl_log_warning(LOG_TAG, "Keypad mode attribute found for v1 node. Deleting");
+    attribute_store_delete_node(node);
+    *frame_length = 0;
+    return SL_STATUS_ALREADY_EXISTS;
+  }
+
   ZW_USER_CODE_KEYPAD_MODE_SET_V2_FRAME *set_frame
     = (ZW_USER_CODE_KEYPAD_MODE_SET_V2_FRAME *)frame;
   set_frame->cmdClass = COMMAND_CLASS_USER_CODE_V2;
@@ -653,8 +725,8 @@ static sl_status_t zwave_command_class_user_code_set(
                                               &user_id_status,
                                               sizeof(user_id_status));
 
-    frame[0] = COMMAND_CLASS_USER_CODE_V2;
-    frame[1] = USER_CODE_SET_V2;
+    frame[0] = COMMAND_CLASS_USER_CODE;
+    frame[1] = USER_CODE_SET;
     frame[2] = (uint8_t)user_id;
     frame[3] = user_id_status;
     if (user_id_status == 0) {
@@ -788,8 +860,8 @@ static sl_status_t zwave_command_class_user_code_delete_all(
   if (supporting_node_version == 1) {
     ZW_USER_CODE_SET_4BYTE_FRAME *set_frame
       = (ZW_USER_CODE_SET_4BYTE_FRAME *)frame;
-    set_frame->cmdClass       = COMMAND_CLASS_USER_CODE_V2;
-    set_frame->cmd            = USER_CODE_SET_V2;
+    set_frame->cmdClass       = COMMAND_CLASS_USER_CODE;
+    set_frame->cmd            = USER_CODE_SET;
     set_frame->userIdentifier = 0;
     set_frame->userIdStatus   = 0;
     set_frame->userCode1      = 0;
