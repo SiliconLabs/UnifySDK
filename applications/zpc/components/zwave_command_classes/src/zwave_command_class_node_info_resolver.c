@@ -33,6 +33,7 @@
 #include "zwave_unid.h"
 #include "zwave_security_validation.h"
 #include "zwave_utils.h"
+#include "zpc_attribute_resolver.h"
 
 #include "sl_log.h"
 #define LOG_TAG "zwave_command_class_node_info_resolver"
@@ -329,6 +330,74 @@ static void on_node_information_update(zwave_node_id_t node_id,
                                      sizeof(node_info->specific_device_class));
 }
 
+static void on_secure_node_info_no_response(attribute_store_node_t secure_nif_node)
+{
+  uint8_t nif[ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH];
+  uint8_t nif_length = 0;
+
+  if (SL_STATUS_OK
+        == attribute_store_get_node_attribute_value(secure_nif_node,
+                                                    REPORTED_ATTRIBUTE,
+                                                    nif,
+                                                    &nif_length)) {
+    if (nif_length != 0) {
+      return;
+    }
+  }
+
+  sl_log_warning(LOG_TAG, "Failed to get Secure NIF Attribute ID %d", secure_nif_node);
+
+  // Are we trying to resolve our own NIF?
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(secure_nif_node, ATTRIBUTE_NODE_ID);
+
+  if (get_zpc_node_id_node() == node_id_node) {
+    return;
+  }
+
+  // Find the Endpoint ID for who we want the NIF.
+  zwave_endpoint_id_t endpoint_id = 0;
+  attribute_store_node_t endpoint_id_node
+    = attribute_store_get_first_parent_with_type(secure_nif_node, ATTRIBUTE_ENDPOINT_ID);
+  if (endpoint_id_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    return;
+  }
+  if (SL_STATUS_OK
+      != attribute_store_get_reported(endpoint_id_node,
+                                      &endpoint_id,
+                                      sizeof(zwave_endpoint_id_t))) {
+    // Abort if no Endpoint ID data was retrieved.
+    return;
+  }
+
+  // If Multi Channel endpoint
+  if (endpoint_id > 0) {
+    attribute_store_node_t non_secure_nif_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
+
+    if ((non_secure_nif_node != ATTRIBUTE_STORE_INVALID_NODE)
+        && (SL_STATUS_OK
+            == attribute_store_get_node_attribute_value(non_secure_nif_node,
+                                                        REPORTED_ATTRIBUTE,
+                                                        nif,
+                                                        &nif_length))) {
+      uint8_t j=0;
+      for (uint8_t i=0; i<nif_length; i++) {
+        if (nif[i] != COMMAND_CLASS_SECURITY && nif[i] != COMMAND_CLASS_SECURITY_2) {
+          nif[j++] = nif[i];
+        }
+      }
+      nif_length = j;
+
+      // The implicit rule that all non-secure command classes for an End Point
+      // must be controllable securely is still in effect,
+      // if the endpoint is reported secure.
+      attribute_store_set_reported(secure_nif_node, nif, nif_length);
+    }
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Public interface functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -357,6 +426,11 @@ sl_status_t zwave_command_class_node_info_resolver_init()
 
   attribute_store_register_callback_by_type(&on_granted_security_key_update,
                                             ATTRIBUTE_GRANTED_SECURITY_KEYS);
+
+  // Attribute Resolver give up listener:
+  attribute_resolver_set_resolution_give_up_listener(
+    ATTRIBUTE_ZWAVE_SECURE_NIF,
+    &on_secure_node_info_no_response);
 
   return SL_STATUS_OK;
 }
