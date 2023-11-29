@@ -354,6 +354,23 @@ static sl_status_t
     = attribute_store_get_first_child_by_type(
       ep_node,
       ATTRIBUTE(SUPPORTED_NOTIFICATION_TYPES));
+  // Delete notification_types_node when there are no supported notification types.
+  if (number_of_supported_notification_types == 0) {
+    sl_status_t status
+      = attribute_store_delete_node(supported_notification_types_node);
+    if (status != SL_STATUS_OK) {
+      sl_log_debug(LOG_TAG,
+                   "Failed to remove node %u",
+                   supported_notification_types_node);
+    }
+    return SL_STATUS_OK;
+  }
+  if (supported_notification_types_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    sl_log_info(LOG_TAG,
+                "Failed to find node %u",
+                supported_notification_types_node);
+    return SL_STATUS_FAIL;
+  }
   attribute_store_set_node_attribute_value(
     supported_notification_types_node,
     REPORTED_ATTRIBUTE,
