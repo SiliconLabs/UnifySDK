@@ -12970,7 +12970,10 @@
         <param key="0x00" name="Color Component ID" type="BYTE" />
         <param key="0x01" name="Value" type="BYTE" />
       </variant_group>
-      <param key="0x02" name="Duration" type="BYTE" />
+      <param key="0x02" name="Duration" type="BYTE">
+        <bitflag key="0x01" flagname="Instantly" flagmask="0x00" />
+        <bitflag key="0x02" flagname="Default" flagmask="0xFF" />
+      </param>
     </cmd>
     <cmd key="0x06" name="SWITCH_COLOR_START_LEVEL_CHANGE" help="Color Switch Start Level Change" support_mode="RX">
       <param key="0x00" name="Properties1" type="STRUCT_BYTE">
@@ -12998,10 +13001,10 @@
       <param key="0x00" name="Color Component ID" type="BYTE" />
       <param key="0x01" name="Current Value" type="BYTE" />
       <param key="0x02" name="Target Value" type="BYTE" />
-      <param key="0x03" name="Duration" type="CONST">
-        <const key="0x00" flagname="Already at the Target Value" flagmask="0x00" />
-        <const key="0x01" flagname="Unknown duration" flagmask="0xFE" />
-        <const key="0x02" flagname="Reserved" flagmask="0xFF" />
+      <param key="0x03" name="Duration" type="BYTE">
+        <bitflag key="0x00" flagname="Already at the Target Value" flagmask="0x00" />
+        <bitflag key="0x01" flagname="Unknown duration" flagmask="0xFE" />
+        <bitflag key="0x02" flagname="Reserved" flagmask="0xFF" />
       </param>
     </cmd>
     <cmd key="0x05" name="SWITCH_COLOR_SET" help="Color Switch Set" support_mode="RX">
@@ -13013,9 +13016,9 @@
         <param key="0x00" name="Color Component ID" type="BYTE" />
         <param key="0x01" name="Value" type="BYTE" />
       </variant_group>
-      <param key="0x02" name="Duration" type="CONST">
-        <const key="0x00" flagname="Instantly" flagmask="0x00" />
-        <const key="0x01" flagname="Default" flagmask="0xFF" />
+      <param key="0x02" name="Duration" type="BYTE">
+        <bitflag key="0x01" flagname="Instantly" flagmask="0x00" />
+        <bitflag key="0x02" flagname="Default" flagmask="0xFF" />
       </param>
     </cmd>
     <cmd key="0x06" name="SWITCH_COLOR_START_LEVEL_CHANGE" help="Color Switch Start Level Change" support_mode="RX">
@@ -13027,9 +13030,9 @@
       </param>
       <param key="0x01" name="Color Component ID" type="BYTE" />
       <param key="0x02" name="Start Level" type="BYTE" />
-      <param key="0x03" name="Duration" type="CONST">
-        <const key="0x00" flagname="Instantly" flagmask="0x00" />
-        <const key="0x01" flagname="Default" flagmask="0xFF" />
+      <param key="0x03" name="Duration" type="BYTE">
+        <bitflag key="0x01" flagname="Instantly" flagmask="0x00" />
+        <bitflag key="0x02" flagname="Default" flagmask="0xFF" />
       </param>
     </cmd>
     <cmd key="0x07" name="SWITCH_COLOR_STOP_LEVEL_CHANGE" help="Color Switch Stop Level Change" support_mode="RX">

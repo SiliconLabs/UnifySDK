@@ -327,9 +327,7 @@ fn switch_color_set(state_node: Attribute) -> Result<(sl_status_t, Vec<u8>), Att
             reserved: 0,
         },
         vg1: colors,
-        // FIXME: UIC-1926 This SwitchColorSetFrame wants a SwitchColorSetDurationEnum for
-        // the duration, which prevents me to use my duration found in the attribute store.
-        duration: SwitchColorSetDurationEnum::Instantly,
+        duration: _duration as u8,
     };
 
     Ok((SL_STATUS_OK, set_frame.into()))
