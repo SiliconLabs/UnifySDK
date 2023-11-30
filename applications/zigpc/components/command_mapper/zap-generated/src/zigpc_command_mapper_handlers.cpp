@@ -4245,7 +4245,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_all_pin_codes_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t status = SL_STATUS_NOT_AVAILABLE;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
     status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
@@ -4271,7 +4271,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_all_pin_codes_handler(
   }
 
   // Always return SL_STATUS_OK if being called normally.
-  return SL_STATUS_OK;
+  return status;
 }
 
 /**
