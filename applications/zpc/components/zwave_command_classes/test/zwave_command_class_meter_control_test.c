@@ -255,7 +255,7 @@ void test_meter_supported_get_v1()
 {
   // Simulate a version 1 node.
   attribute_store_node_t version_node = attribute_store_add_node(
-    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_METER_V5),
+    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_METER),
     endpoint_id_node);
 
   const zwave_cc_version_t version = 1;
@@ -270,7 +270,7 @@ void test_meter_supported_get_v1()
                       received_frame,
                       &received_frame_size);
 
-  const uint8_t expected_frame[] = {COMMAND_CLASS_METER_V5, METER_GET, 0, 0};
+  const uint8_t expected_frame[] = {COMMAND_CLASS_METER, METER_GET};
   TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
@@ -307,6 +307,15 @@ void test_meter_supported_get_v2()
 
 void test_meter_get_low_scale()
 {
+  // Simulate a version 2 node.
+  attribute_store_node_t version_node = attribute_store_add_node(
+    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_METER_V2),
+    endpoint_id_node);
+
+  const zwave_cc_version_t version = 2;
+  attribute_store_set_reported(version_node, &version, sizeof(version));
+
+
   attribute_store_node_t meter_type_node
     = attribute_store_add_node(ATTRIBUTE(TYPE), endpoint_id_node);
   const meter_type_t type = 3;
@@ -328,7 +337,7 @@ void test_meter_get_low_scale()
     meter_get(value_node, received_frame, &received_frame_size));
 
   const uint8_t expected_frame[]
-    = {COMMAND_CLASS_METER_V5, METER_GET, (rate_type << 6) | (scale << 3), 0};
+    = {COMMAND_CLASS_METER_V2, METER_GET_V2, (rate_type << 6) | (scale << 3)};
   TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
@@ -337,6 +346,14 @@ void test_meter_get_low_scale()
 
 void test_meter_get_high_scale()
 {
+  // Simulate a version 4 node.
+  attribute_store_node_t version_node = attribute_store_add_node(
+    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_METER_V4),
+    endpoint_id_node);
+
+  const zwave_cc_version_t version = 4;
+  attribute_store_set_reported(version_node, &version, sizeof(version));
+
   attribute_store_node_t meter_type_node
     = attribute_store_add_node(ATTRIBUTE(TYPE), endpoint_id_node);
   const meter_type_t type = 1;
