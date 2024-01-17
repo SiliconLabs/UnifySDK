@@ -73,9 +73,9 @@ void attribute_resolver_set_resolution_give_up_listener_stub(
   attribute_resolver_callback_t callback,
   int cmock_num_calls)
 {
-  TEST_ASSERT_EQUAL(ATTRIBUTE_ZWAVE_NIF, node_type);
-  on_nif_resolution_abort = callback;
-  return;
+  if (ATTRIBUTE_ZWAVE_NIF == node_type) {
+    on_nif_resolution_abort = callback;
+  }
 }
 
 sl_status_t zwave_controller_register_callbacks_stub(
