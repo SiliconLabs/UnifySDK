@@ -44,6 +44,7 @@
 static attribute_resolver_function_t resolve_secure_node_info = NULL;
 static attribute_resolver_function_t resolve_node_info        = NULL;
 static attribute_resolver_callback_t on_nif_resolution_abort  = NULL;
+static attribute_resolver_callback_t on_secure_nif_resolution_abort  = NULL;
 
 static const zwave_controller_callbacks_t *controller_callbacks = NULL;
 
@@ -75,6 +76,8 @@ void attribute_resolver_set_resolution_give_up_listener_stub(
 {
   if (ATTRIBUTE_ZWAVE_NIF == node_type) {
     on_nif_resolution_abort = callback;
+  } else if (ATTRIBUTE_ZWAVE_SECURE_NIF == node_type) {
+    on_secure_nif_resolution_abort = callback;
   }
 }
 
@@ -474,4 +477,78 @@ void test_on_nif_resolution_aborted()
   TEST_ASSERT_EQUAL(true, attribute_store_node_exists(nif_0_node));
   on_nif_resolution_abort(nif_2_node);
   TEST_ASSERT_EQUAL(false, attribute_store_node_exists(nif_2_node));
+}
+
+void test_on_secure_nif_resolution_aborted()
+{
+  TEST_ASSERT_NOT_NULL(on_secure_nif_resolution_abort);
+
+  // Add 2 NIFs, one under endpoint 0 and one under endpoint 2
+  zwave_endpoint_id_t endpoint_id_value = 0;
+  attribute_store_node_t endpoint_0_node
+    = attribute_store_emplace(node_id_node,
+                              ATTRIBUTE_ENDPOINT_ID,
+                              &endpoint_id_value,
+                              sizeof(endpoint_id_value));
+  attribute_store_node_t secure_nif_0_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_SECURE_NIF, endpoint_0_node);
+  endpoint_id_value = 2;
+  attribute_store_node_t endpoint_2_node
+    = attribute_store_emplace(node_id_node,
+                              ATTRIBUTE_ENDPOINT_ID,
+                              &endpoint_id_value,
+                              sizeof(endpoint_id_value));
+  attribute_store_node_t secure_nif_2_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_SECURE_NIF, endpoint_2_node);
+
+  endpoint_id_value = 12;
+  attribute_store_node_t endpoint_12_node
+    = attribute_store_emplace(node_id_node,
+                              ATTRIBUTE_ENDPOINT_ID,
+                              &endpoint_id_value,
+                              sizeof(endpoint_id_value));
+
+  // Setup a NIF without it's Secure NIF counter part
+  attribute_store_node_t secure_nif_12_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_SECURE_NIF, endpoint_12_node);
+  uint8_t command_class_list_u8[] = {0x9F, 0x98, 0x25};
+  uint8_t nif_length              = sizeof(command_class_list_u8);
+  attribute_store_node_t nif_12_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_12_node);
+  zwave_controller_get_highest_encapsulation_ExpectAndReturn(
+    0,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED);
+  zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0,
+    true);
+  attribute_store_set_reported(nif_12_node, command_class_list_u8, nif_length);
+
+  // Now check what happens when endpoint 0 NIF cannot be resolved:
+  on_secure_nif_resolution_abort(secure_nif_0_node);
+  TEST_ASSERT_EQUAL(true, attribute_store_node_exists(secure_nif_0_node));
+  on_secure_nif_resolution_abort(secure_nif_2_node);
+  TEST_ASSERT_EQUAL(true, attribute_store_node_exists(secure_nif_2_node));
+
+  on_secure_nif_resolution_abort(secure_nif_12_node);
+  TEST_ASSERT_EQUAL(true, attribute_store_node_exists(nif_12_node));
+  TEST_ASSERT_EQUAL(true, attribute_store_node_exists(secure_nif_12_node));
+
+  // We expect all command classes without 0x9F or 0x98
+  uint8_t command_class_list_result_u8[]   = {0xff};
+  uint8_t secure_nif_length_result         = 0;
+  uint8_t command_class_list_expected_u8[] = {0x25};
+  uint8_t secure_nif_length_expected = sizeof(command_class_list_expected_u8);
+
+  sl_status_t result
+    = attribute_store_get_node_attribute_value(secure_nif_12_node,
+                                               REPORTED_ATTRIBUTE,
+                                               command_class_list_result_u8,
+                                               &secure_nif_length_result);
+
+  TEST_ASSERT_EQUAL(secure_nif_length_expected, secure_nif_length_result);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, result);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(command_class_list_expected_u8,
+                                command_class_list_result_u8,
+                                secure_nif_length_expected);
 }
