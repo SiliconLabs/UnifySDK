@@ -335,14 +335,13 @@ static void on_secure_node_info_no_response(attribute_store_node_t secure_nif_no
   uint8_t nif[ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH];
   uint8_t nif_length = 0;
 
-  if (SL_STATUS_OK
-        == attribute_store_get_node_attribute_value(secure_nif_node,
-                                                    REPORTED_ATTRIBUTE,
-                                                    nif,
-                                                    &nif_length)) {
-    if (nif_length != 0) {
+  if ((SL_STATUS_OK
+       == attribute_store_get_node_attribute_value(secure_nif_node,
+						   REPORTED_ATTRIBUTE,
+						   nif,
+						   &nif_length))
+      && (nif_length != 0)) {
       return;
-    }
   }
 
   sl_log_warning(LOG_TAG, "Failed to get Secure NIF Attribute ID %d", secure_nif_node);
@@ -371,30 +370,31 @@ static void on_secure_node_info_no_response(attribute_store_node_t secure_nif_no
   }
 
   // If Multi Channel endpoint
-  if (endpoint_id > 0) {
-    attribute_store_node_t non_secure_nif_node
+  if (endpoint_id <= 0) {
+    return;
+  }
+  attribute_store_node_t non_secure_nif_node
     = attribute_store_get_first_child_by_type(endpoint_id_node,
                                               ATTRIBUTE_ZWAVE_NIF);
 
-    if ((non_secure_nif_node != ATTRIBUTE_STORE_INVALID_NODE)
-        && (SL_STATUS_OK
-            == attribute_store_get_node_attribute_value(non_secure_nif_node,
-                                                        REPORTED_ATTRIBUTE,
-                                                        nif,
-                                                        &nif_length))) {
-      uint8_t j=0;
-      for (uint8_t i=0; i<nif_length; i++) {
-        if (nif[i] != COMMAND_CLASS_SECURITY && nif[i] != COMMAND_CLASS_SECURITY_2) {
-          nif[j++] = nif[i];
-        }
+  if ((non_secure_nif_node != ATTRIBUTE_STORE_INVALID_NODE)
+      && (SL_STATUS_OK
+	  == attribute_store_get_node_attribute_value(non_secure_nif_node,
+						      REPORTED_ATTRIBUTE,
+						      nif,
+						      &nif_length))) {
+    uint8_t j = 0;
+    for (uint8_t i=0; i<nif_length; i++) {
+      if (nif[i] != COMMAND_CLASS_SECURITY && nif[i] != COMMAND_CLASS_SECURITY_2) {
+	nif[j++] = nif[i];
       }
-      nif_length = j;
-
-      // The implicit rule that all non-secure command classes for an End Point
-      // must be controllable securely is still in effect,
-      // if the endpoint is reported secure.
-      attribute_store_set_reported(secure_nif_node, nif, nif_length);
     }
+    nif_length = j;
+    
+    // The implicit rule that all non-secure command classes for an End Point
+    // must be controllable securely is still in effect,
+    // if the endpoint is reported secure.
+    attribute_store_set_reported(secure_nif_node, nif, nif_length);
   }
 }
 
