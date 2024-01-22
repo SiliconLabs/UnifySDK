@@ -31,6 +31,7 @@
 #include "ZW_classcmd.h"
 #include "zwave_utils.h"
 #include "zwave_controller_types.h"
+#include "zwave_command_class_color_switch_types.h"
 
 // Test helpers
 #include "zpc_attribute_store_test_helper.h"
@@ -47,6 +48,7 @@
 
 // Static variables
 static zpc_resolver_event_notification_function_t on_send_complete = NULL;
+static attribute_timeout_callback_t switch_color_undefine_reported = NULL;
 
 // Stub functions
 static sl_status_t register_send_event_handler_stub(
@@ -62,10 +64,23 @@ static sl_status_t register_send_event_handler_stub(
   return SL_STATUS_OK;
 }
 
+static sl_status_t attribute_timeout_set_callback_stub(
+  attribute_store_node_t node,
+  clock_time_t duration,
+  attribute_timeout_callback_t callback_function,
+  int cmock_num_calls)
+{
+  TEST_ASSERT_EQUAL(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_STATE, attribute_store_get_node_type(node));
+  switch_color_undefine_reported = callback_function;
+  return SL_STATUS_OK;
+}
+
+
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
   on_send_complete = NULL;
+  switch_color_undefine_reported = NULL;
 
   datastore_init(":memory:");
   attribute_store_init();
@@ -155,10 +170,93 @@ void test_zwave_command_class_on_send_complete()
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(value_1_node, REPORTED_ATTRIBUTE));
 
+  // Test without duration
+  on_send_complete(state_node,
+                   RESOLVER_SET_RULE,
+                   FRAME_SENT_EVENT_OK_NO_SUPERVISION);
+
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(value_2_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(value_2_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(value_1_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(value_1_node, DESIRED_ATTRIBUTE));
+
+  // Test with duration
+  value = 0;
+  attribute_store_set_reported(value_1_node, &value, sizeof(value));
+  value = 1;
+  attribute_store_set_desired(value_1_node, &value, sizeof(value));
+  value = 2;
+  attribute_store_set_reported(value_2_node, &value, sizeof(value));
+  value = 3;
+  attribute_store_set_desired(value_2_node, &value, sizeof(value));
+
+  color_component_id_duration_t duration_value = 20;
+  attribute_store_node_t duration_node
+    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_DURATION,
+                               state_node);
+  attribute_store_set_desired(duration_node, &duration_value, sizeof(duration_value));
+  
+  attribute_timeout_set_callback_ExpectAndReturn(
+    state_node,
+    zwave_duration_to_time(duration_value) + PROBE_BACK_OFF,
+    NULL,
+    SL_STATUS_OK);
+  attribute_timeout_set_callback_IgnoreArg_callback_function();
+  attribute_timeout_set_callback_Stub(&attribute_timeout_set_callback_stub);
+
+  on_send_complete(state_node,
+                   RESOLVER_SET_RULE,
+                   FRAME_SENT_EVENT_OK_NO_SUPERVISION);
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(value_2_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(value_1_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(duration_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(duration_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(value_1_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(value_2_node, REPORTED_ATTRIBUTE));
+
   on_send_complete(state_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_SUPERVISION_NO_SUPPORT);
 
   TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(value_1_node, REPORTED_ATTRIBUTE));
+}
+
+void test_switch_color_undefine_reported_happy_case()
+{
+  //
+  TEST_ASSERT_NOT_NULL(switch_color_undefine_reported);
+
+  const int COLOR_VALUE_COUNT = 3;
+
+  for (int i = 0; i < COLOR_VALUE_COUNT; i++) {
+    attribute_store_node_t color_value_node
+      = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_VALUE,
+                                 endpoint_id_node);
+
+    attribute_store_set_reported(color_value_node, &i, sizeof(i));
+  }
+
+  switch_color_undefine_reported(endpoint_id_node);
+
+  for (int i = 0; i < COLOR_VALUE_COUNT; i++) {
+    int j;
+    attribute_store_node_t color_value_node
+      = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_VALUE,
+                                 endpoint_id_node);
+
+    TEST_ASSERT_EQUAL(
+      SL_STATUS_FAIL,
+      attribute_store_get_reported(color_value_node, &j, sizeof(j)));
+  }
 }
