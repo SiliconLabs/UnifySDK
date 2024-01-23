@@ -37,9 +37,9 @@
 
 #define LOG_TAG "zwave_command_class_switch_color"
 
-[[maybe_unused]]
-static void set_desired_duration(attribute_store_node_t state_node,
-                                 uint32_t duration)
+static void set_duration(attribute_store_node_t state_node,
+                         attribute_store_node_value_state_t state,
+                         uint32_t duration)
 {
   attribute_store_node_t duration_node
     = attribute_store_get_first_child_by_type(
@@ -47,21 +47,7 @@ static void set_desired_duration(attribute_store_node_t state_node,
       ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_DURATION);
 
   attribute_store_set_node_attribute_value(duration_node,
-                                           DESIRED_ATTRIBUTE,
-                                           (uint8_t *)&duration,
-                                           sizeof(duration));
-}
-
-static void set_reported_duration(attribute_store_node_t state_node,
-                                  uint32_t duration)
-{
-  attribute_store_node_t duration_node
-    = attribute_store_get_first_child_by_type(
-      state_node,
-      ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_DURATION);
-
-  attribute_store_set_node_attribute_value(duration_node,
-                                           REPORTED_ATTRIBUTE,
+                                           state,
                                            (uint8_t *)&duration,
                                            sizeof(duration));
 }
@@ -80,15 +66,7 @@ static void
   while (component_node != ATTRIBUTE_STORE_INVALID_NODE) {
     index += 1;
 
-    attribute_store_node_t duration_node
-      = attribute_store_get_first_child_by_type(
-        component_node,
-        ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_DURATION);
-
-    attribute_store_set_node_attribute_value(duration_node,
-                                             value_state,
-                                             (uint8_t *)&duration,
-                                             sizeof(duration));
+    set_duration(component_node, value_state, duration);
 
     component_node = attribute_store_get_node_child_by_type(
       state_node,
@@ -166,7 +144,7 @@ static void
         state_node,
         ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_VALUE,
         &attribute_store_undefine_desired);
-      set_reported_duration(state_node, 0);
+      set_duration(state_node, REPORTED_ATTRIBUTE, 0);
       attribute_store_undefine_desired(duration_node);
       break;
 
