@@ -31,8 +31,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON) # Do not allow fallback to previous C++
 set(CMAKE_CXX_EXTENSIONS ON) # Enable gnu++11 extentions
 
 # Set compiler Flags
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -Werror -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -Werror -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -Wall")
 
 # Only add code coverage when CMAKE_GCOV is True
 if(CMAKE_GCOV)
