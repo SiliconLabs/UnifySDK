@@ -1804,10 +1804,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_get_pin_code_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 );
 /**
@@ -2641,6 +2641,23 @@ void uic_mqtt_dotdot_door_lock_publish_generated_programming_event_notification_
   const dotdot_endpoint_id_t endpoint,
   const uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t *fields
   
+);
+/**
+ * @brief Publishes an incoming/generated GetAllPINCodes command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/GetAllPINCodes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_get_all_pin_codes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
 );
 
 /**

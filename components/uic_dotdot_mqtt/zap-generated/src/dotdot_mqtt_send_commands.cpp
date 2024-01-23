@@ -5354,7 +5354,7 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_command_to_group(
 void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -5390,7 +5390,7 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command(
  */
 void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 ){
   // Create the topic
@@ -8344,6 +8344,72 @@ void uic_mqtt_dotdot_door_lock_publish_programming_event_notification_command_to
   std::string payload =
     get_json_payload_for_door_lock_programming_event_notification_command(
     fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a GetAllPINCodes command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/GetAllPINCodes
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_all_pin_codes_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "DoorLock/Commands/GetAllPINCodes";
+
+
+  std::string payload =
+    get_json_payload_for_door_lock_get_all_pin_codes_command(
+    );
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a GetAllPINCodes command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/GetAllPINCodes
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_all_pin_codes_command_to_group(
+  uint16_t destination_group_id
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/DoorLock/Commands/GetAllPINCodes";
+
+  std::string payload =
+    get_json_payload_for_door_lock_get_all_pin_codes_command(
+    );
 
   sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
