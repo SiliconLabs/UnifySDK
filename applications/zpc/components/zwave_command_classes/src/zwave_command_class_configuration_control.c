@@ -723,6 +723,16 @@ static sl_status_t
   if (frame_length >= (current_index + 2)) {
     next_id = (configuration_parameter_id_t)((frame[current_index] << 8)
                                              | frame[current_index + 1]);
+    if (next_id == parameter_id) {
+      sl_log_debug(LOG_TAG,
+                   "NodeID %d:%d reports that next parameter number %d"
+                   "equals the current one %d, ignoring.",
+                   info->remote.node_id,
+                   info->remote.endpoint_id,
+                   next_id,
+                   parameter_id);
+      next_id = 0;
+    }
     // Indicate the next parameter to search for:
     attribute_store_set_desired(next_id_node, &next_id, sizeof(next_id));
     // Set the reported, then undefine it so the resolver tries a new get immediately.
